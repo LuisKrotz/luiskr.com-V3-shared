@@ -10,13 +10,35 @@ import { register } from 'register-service-worker'
 import { devError, devInfo } from '@core/devlog.js'
 
 /**
+ * Drops every service worker registered for this origin outside production.
+ * A registration left behind by an earlier production visit (or a preview
+ * served on the same port) keeps intercepting dev requests and replays
+ * stale precached chunk URLs — dynamic imports then reject on every load
+ * and the global handler surfaces the generic failure notification.
+ */
+const unregisterStaleWorkers = (): void => {
+  navigator.serviceWorker
+    ?.getRegistrations()
+    .then((registrations) => {
+      for (const registration of registrations) {
+        void registration.unregister()
+      }
+    })
+    .catch(() => {})
+}
+
+/**
  * Registers `<base>service-worker.js` on window load when `env.PROD` is set.
  * Exported (and env-injected) so the prod-only branch is exercisable in
  * tests — `import.meta.env` does not exist outside Vite.
  * @param {object} env - Vite env object ({PROD, BASE_URL})
  */
 export const registerServiceWorker = (env: { PROD?: boolean; BASE_URL?: string }): void => {
-  if (!env?.PROD) return
+  if (!env?.PROD) {
+    unregisterStaleWorkers()
+
+    return
+  }
 
   window.addEventListener('load', () => {
     register(`${env.BASE_URL}service-worker.js`, {
