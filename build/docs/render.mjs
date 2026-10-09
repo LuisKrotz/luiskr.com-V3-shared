@@ -167,26 +167,97 @@ const renderJsonArray = (arr, depth) => {
 }
 
 /**
+ * A flat grandchild (all-scalar object) → compact inline `key value` pairs
+ * for pivot cells — the coverage group shape (total/covered/skipped/pct)
+ * stays on one readable line instead of nesting a dl inside a td.
+ */
+const renderJsonCellGroup = (g) =>
+  Object.entries(g)
+    .map(
+      ([k, s]) =>
+        `<span class="docs-json-kv"><span class="docs-json-k">${escapeHtml(k)}</span>${renderJsonScalar(k, s)}</span>`
+    )
+    .join('')
+
+/**
+ * Uniform object-of-objects → a pivot table: outer keys become row headers,
+ * the shared inner keys become columns, scalar grandchildren become typed
+ * cells and flat groups compact stat pairs. This is the coverage-summary
+ * shape (file → lines/statements/functions/branches → numbers) — a table
+ * reads far better than a vertical ladder of nested definition lists.
+ * Returns null when the shape is not uniform so callers fall back to <dl>.
+ */
+const renderJsonPivot = (entries) => {
+  const cols = entries.length && isJsonObject(entries[0][1]) ? Object.keys(entries[0][1]) : []
+
+  if (cols.length < 2) return null
+
+  const uniform = entries.every(([, v]) => {
+    if (!isJsonObject(v)) return false
+
+    const keys = Object.keys(v)
+
+    return (
+      keys.length === cols.length &&
+      keys.every((k) => cols.includes(k)) &&
+      Object.values(v).every(
+        (g) =>
+          !isJsonObject(g) || Object.values(g).every((s) => s === null || typeof s !== 'object')
+      )
+    )
+  })
+
+  if (!uniform) return null
+
+  const head = `<thead><tr><th scope="col" class="docs-json-pivot-head"></th>${cols
+    .slice(0, JSON_COL_CAP)
+    .map((c) => `<th scope="col">${escapeHtml(c)}</th>`)
+    .join('')}</tr></thead>`
+
+  const body = entries
+    .map(
+      ([k, v]) =>
+        `<tr><th scope="row">${escapeHtml(k)}</th>${cols
+          .slice(0, JSON_COL_CAP)
+          .map((c) => {
+            const g = v[c]
+
+            return `<td>${isJsonObject(g) ? renderJsonCellGroup(g) : renderJsonScalar(c, g)}</td>`
+          })
+          .join('')}</tr>`
+    )
+    .join('')
+
+  return `<table class="docs-json-table docs-json-pivot">${head}<tbody>${body}</tbody></table>`
+}
+
+/**
  * Objects → key/field rows; nested objects recurse into their own section
  * so a coverage-summary reads file → metrics → numbers instead of braces.
+ * Uniform report objects pivot into a real table first.
  */
 const renderJsonObject = (obj, depth) => {
   const entries = Object.entries(obj)
 
   if (!entries.length) return '<p class="docs-json-empty">{}</p>'
 
-  const rows = entries
-    .slice(0, JSON_ROW_CAP)
-    .map(
-      ([k, v]) =>
-        `<div class="docs-json-row"><dt>${escapeHtml(k)}</dt><dd>${renderJsonValue(k, v, depth + 1)}</dd></div>`
-    )
-    .join('')
+  const shown = entries.slice(0, JSON_ROW_CAP)
 
   const more =
     entries.length > JSON_ROW_CAP
       ? `<p class="docs-json-more">… ${entries.length - JSON_ROW_CAP} more entries</p>`
       : ''
+
+  const pivot = renderJsonPivot(shown)
+
+  if (pivot) return `${pivot}${more}`
+
+  const rows = shown
+    .map(
+      ([k, v]) =>
+        `<div class="docs-json-row"><dt>${escapeHtml(k)}</dt><dd>${renderJsonValue(k, v, depth + 1)}</dd></div>`
+    )
+    .join('')
 
   return `<dl class="docs-json-obj">${rows}</dl>${more}`
 }
