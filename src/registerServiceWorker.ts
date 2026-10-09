@@ -17,8 +17,11 @@ import { devError, devInfo } from '@core/devlog.js'
  * and the global handler surfaces the generic failure notification.
  */
 const unregisterStaleWorkers = (): void => {
-  navigator.serviceWorker
-    ?.getRegistrations()
+  const sw = typeof navigator === TYPE_STRINGS.UNDEFINED ? undefined : navigator.serviceWorker
+
+  if (!sw || typeof sw.getRegistrations !== TYPE_STRINGS.FUNCTION) return
+
+  sw.getRegistrations()
     .then((registrations) => {
       for (const registration of registrations) {
         void registration.unregister()
