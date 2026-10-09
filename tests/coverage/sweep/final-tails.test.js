@@ -191,15 +191,19 @@ describe('final tails', () => {
     const initSpy = jest
       .spyOn(EarthBackground.prototype, 'init')
       .mockRejectedValue(new Error('boot-fail'))
+    const canvas = document.createElement(HTML_TAGS.CANVAS)
     const c = {
       _earthBg: null,
       _earthReady: false,
+      _earthFailed: false,
       _isInitializingEarth: false,
-      _getCanvasEl: () => document.createElement(HTML_TAGS.CANVAS),
+      _canvasEl: canvas,
+      _getCanvasEl: () => canvas,
       $: () => null,
       _updateLoader: jest.fn(),
       _applyPersistedSettings: jest.fn(),
       _syncPanel: jest.fn(),
+      _updateDom: jest.fn(),
       _dismissLoader: jest.fn(),
     }
 
@@ -207,7 +211,9 @@ describe('final tails', () => {
     await flush(100)
 
     expect(c._earthReady).toBe(true)
+    expect(c._earthFailed).toBe(true)
     expect(c._isInitializingEarth).toBe(false)
+    expect(c._updateDom).toHaveBeenCalled()
     expect(c._dismissLoader).toHaveBeenCalled()
 
     initSpy.mockRestore()

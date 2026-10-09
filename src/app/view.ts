@@ -8,6 +8,8 @@ import { STATE_CLASSES } from '@core/tokens/classes/state.js'
 import { VIEW_TAGS } from '@core/tokens/elements/views.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
+import { devError } from '@core/devlog.js'
+import { notifyLoadFailed } from '@core/utils/notify.js'
 import store from '@core/store.js'
 import router from '@core/router/router.js'
 import type { RouteDescriptor } from '@core/router/router.js'
@@ -71,18 +73,28 @@ export async function flipAppView(
   const reduced = store.getters.getReducedMotion()
   const toTag = c.currentViewTag
 
-  if (toTag === VIEW_TAGS.VIEW_HOME) {
-    await import('@website/views/home/Home.js')
-  } else if (toTag === VIEW_TAGS.VIEW_LEGAL) {
-    await import('@website/views/legal/Legal.js')
-  } else if (toTag === VIEW_TAGS.VIEW_PROJECT) {
-    await import('@website/views/project/Project.js')
-  } else if (toTag === VIEW_TAGS.VIEW_NOT_FOUND) {
-    await import('@website/views/not-found/NotFound.js')
-  } else if (toTag === VIEW_TAGS.VIEW_SPACE_PLAYGROUND) {
-    await import('@earth/SpacePlayground.js')
-  } else if (toTag === VIEW_TAGS.VIEW_DOCS) {
-    await import('@docs/Docs.js')
+  try {
+    if (toTag === VIEW_TAGS.VIEW_HOME) {
+      await import('@website/views/home/Home.js')
+    } else if (toTag === VIEW_TAGS.VIEW_LEGAL) {
+      await import('@website/views/legal/Legal.js')
+    } else if (toTag === VIEW_TAGS.VIEW_PROJECT) {
+      await import('@website/views/project/Project.js')
+    } else if (toTag === VIEW_TAGS.VIEW_NOT_FOUND) {
+      await import('@website/views/not-found/NotFound.js')
+    } else if (toTag === VIEW_TAGS.VIEW_SPACE_PLAYGROUND) {
+      await import('@earth/SpacePlayground.js')
+    } else if (toTag === VIEW_TAGS.VIEW_DOCS) {
+      await import('@docs/Docs.js')
+    }
+  } catch (err) {
+    // Chunk fetch failed (offline, stale deploy/SW): keep the current view
+    // mounted — swapping in an undefined tag would render a blank void.
+    devError('[view] view chunk import failed:', err)
+
+    notifyLoadFailed()
+
+    return
   }
 
   if (reduced || !outlet.firstElementChild) {
