@@ -358,7 +358,7 @@ describe('AppNav tails', () => {
       title: TEST_TEXT.HEADING,
       about: { description: TEST_TEXT.BODY },
       contact: TEST_TEXT.BODY,
-      scrollup: TEST_TEXT.BODY,
+      featured: TEST_TEXT.BODY,
       related: TEST_TEXT.BODY,
       menu: TEST_TEXT.BODY,
       close: TEST_TEXT.BODY,

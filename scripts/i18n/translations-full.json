@@ -16,7 +16,7 @@
         "refuse": "No, thanks."
       },
       "related": "Related",
-      "scrollup": "Scroll up",
+      "featured": "Selected work",
       "title": "Luis Krötz",
       "preferences": "Preferences",
       "language": "Language",
@@ -4143,7 +4143,7 @@
         "refuse": "Prefiro não."
       },
       "related": "Relacionados",
-      "scrollup": "Voltar ao topo",
+      "featured": "Trabalhos selecionados",
       "title": "Luis Krötz",
       "preferences": "Preferências",
       "language": "Idioma",
@@ -8192,7 +8192,7 @@
         "refuse": "No, gracias."
       },
       "related": "Relacionados",
-      "scrollup": "Volver arriba",
+      "featured": "Trabajo seleccionado",
       "title": "Luis Krötz",
       "preferences": "Preferencias",
       "language": "Idioma",
@@ -12239,7 +12239,7 @@
         "refuse": "Nein, danke."
       },
       "related": "Verwandte Projekte",
-      "scrollup": "Nach oben",
+      "featured": "Ausgewählte Arbeiten",
       "title": "Luis Krötz",
       "preferences": "Einstellungen",
       "language": "Sprache",
@@ -16290,7 +16290,7 @@
       "language": "Schproch",
       "preferences": "Einstelunge",
       "related": "Ähnlichs",
-      "scrollup": "Nuf",
+      "featured": "Selected work",
       "title": "Luis Krötz",
       "pref": {
         "title": "Einstelunge",
@@ -20339,7 +20339,7 @@
       "language": "Idioma",
       "preferences": "Preferencias",
       "related": "Relacionados",
-      "scrollup": "Arriba",
+      "featured": "Trabajo seleccionado",
       "title": "Luis Krötz",
       "pref": {
         "title": "Preferencias",
@@ -24386,7 +24386,7 @@
       "language": "Lengua",
       "preferences": "Preferencias",
       "related": "Otros",
-      "scrollup": "Arriba",
+      "featured": "Selected work",
       "title": "Luis Krötz",
       "pref": {
         "title": "Preferencias",
@@ -28433,7 +28433,7 @@
       "language": "Ñe'ẽ",
       "preferences": "Oñembopyahu",
       "related": "Ambue tembi'apo",
-      "scrollup": "Yvate",
+      "featured": "Selected work",
       "title": "Luis Krötz",
       "pref": {
         "title": "Oñembopyahu",
@@ -32456,7 +32456,7 @@
       "language": "Lingua",
       "preferences": "Preferenze",
       "related": "Correlati",
-      "scrollup": "Su",
+      "featured": "Lavori selezionati",
       "title": "Luis Krötz",
       "pref": {
         "title": "Preferenze",
@@ -36497,7 +36497,7 @@
       "language": "Язык",
       "preferences": "Настройки",
       "related": "Похожее",
-      "scrollup": "Наверх",
+      "featured": "Selected work",
       "title": "Luis Krötz",
       "pref": {
         "title": "Настройки",
@@ -40538,7 +40538,7 @@
       "language": "Langue",
       "preferences": "Préférences",
       "related": "Connexes",
-      "scrollup": "Haut de page",
+      "featured": "Travaux sélectionnés",
       "title": "Luis Krötz",
       "pref": {
         "title": "Préférences",
@@ -44579,7 +44579,7 @@
       "language": "Lengua",
       "preferences": "Preferense",
       "related": "Simili",
-      "scrollup": "Sü",
+      "featured": "Selected work",
       "title": "Luis Krötz",
       "pref": {
         "title": "Preferense",

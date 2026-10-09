@@ -8,7 +8,8 @@ core/sass/
 │   ├── _variables.scss   $color-*, $space-* Fibonacci scale, $cms-*
 │   ├── _mixins.scss      to-rem(), media helpers
 │   ├── _fonts.scss       .ttl-* type scale
-│   ├── _placeholders.scss %MAXAREA, %RESETBTN, %SKEL_DARK_SURFACE, …
+│   ├── _placeholders.scss %MAXAREA, %RESETBTN, %SKEL_DARK_SURFACE,
+│   │                     %LK_LINK (animated text-link underline), …
 │   ├── _structure.scss   :root CSS custom properties (--bg-*, --skel-*,
 │   │                     --grey-*, --shadow-*, --space-*, --radius-*)
 │   └── _grid-overlay.scss

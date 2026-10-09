@@ -21,6 +21,18 @@ because it is indexed).
 | `earth/scene/post-nodes.ts` · `earth/settings.ts` · `earth/runtime/state.ts` · `earth/runtime/screenshot.ts` | Post-fx node builders, settings snapshot, state bag, screenshot              |
 | `space-playground.scss`                                                                                      | View stylesheet (panel, HUD, loader)                                         |
 
+## Asset serving
+
+Textures (`textures/earth/*`, `textures/space/*`) and `music/*.ogg` live in
+the module's `public/` dir. The root `modulePublicPlugin`
+(`shared/scripts/build/module-public.mjs` — invoked from `vite.config.js`)
+serves module `public/` trees at their canonical prefix
+`/experiments/earth-playground/…` **and** at the site root (`/textures/…`,
+`/music/…`) — the root mount keeps the legacy URL scheme used by older
+bundles/deploys resolving, and `closeBundle` mirrors both path sets into
+`dist/` so production behaves identically. A 404 on either scheme therefore
+means a missing file or stale `dist`, not a path bug.
+
 ## Loader contract
 
 The loader must reach 100% only when the first frame is **presented**, not when

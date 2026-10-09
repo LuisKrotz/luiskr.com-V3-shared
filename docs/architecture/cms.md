@@ -99,6 +99,13 @@ seeded from `database.json` — the full dashboard works with no auth and no
 network. The alias lives only inside the `CMS_MOCK` branch of `vite.config.js`,
 so production builds are untouched.
 
+Dev routing note: the alias target must include the `.ts` extension — a bare
+`firebase-mock` specifier resolves to a sibling `.js` that doesn't exist and
+vends a transform error → error overlay + HMR reload loop (the page
+"blinks"). `/cms` (no trailing slash) gets a dev-only `301 → /cms/` rewrite
+in `vite.config.js` so the directory index serves `cms/index.html` instead
+of the `cms/index.ts` barrel, and relative `src="./main.ts"` keeps resolving.
+
 ## Media Converter (localhost only)
 
 A batch converter that produces every CDN variant the site consumes, matching
