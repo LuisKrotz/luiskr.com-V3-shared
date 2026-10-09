@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import { NOT_FOUND_CLASSES } from '@core/tokens/classes/legal.js'
 import { ROUTE_PATHS } from '@core/tokens/routes/paths.js'
+import { TRANSLATION_KEYS } from '@core/tokens/routes/translation-keys.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
@@ -22,6 +23,7 @@ export default {
   pages: {
     [NOT_FOUND_CLASSES.NOT_FOUND]: en.pages[NOT_FOUND_CLASSES.NOT_FOUND],
     [ROUTE_PATHS.EARTH_PLAYGROUND_SEGMENT]: en.pages[ROUTE_PATHS.EARTH_PLAYGROUND_SEGMENT],
+    [TRANSLATION_KEYS.STAR_FIELD]: en.pages[TRANSLATION_KEYS.STAR_FIELD],
     HOME: {
       archive: en.pages.HOME.archive,
       explore: en.pages.HOME.explore,

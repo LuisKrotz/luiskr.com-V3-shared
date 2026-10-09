@@ -100,3 +100,8 @@ start on the shared clock instead of a delay after its own trigger.
 ### `FIT`
 
 `fit` — sizing/fit field name used by media layout contracts.
+
+### `WARP`
+
+`warp` — DrawText liquid-warp flag: keeps per-char spans after the
+reveal and bends them toward the pointer on hover.

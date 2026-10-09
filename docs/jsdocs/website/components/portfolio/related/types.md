@@ -21,8 +21,8 @@ A social row in the related footer — `network` names the service
 ### (module scope)
 
 The components/related DB node as consumed by <portfolio-related> —
-`projects` may arrive keyed-object or array from Firebase, `path` is the
-portfolio base route, `socials`/`note`/`title` the footer copy.
+`projects`/`socials` may arrive keyed-object or array from Firebase,
+`path` is the portfolio base route, `note`/`title` the footer copy.
 
 ### (module scope)
 

@@ -13,6 +13,18 @@
 
 Draws text.
 
+### `_warpSession`
+
+Active liquid-warp session (pointer inside the element); see draw-text/warp.ts.
+
+### `_warpListeners`
+
+Pointer listeners installed by setupWarp — stored for detachWarp.
+
+### `_warpActive`
+
+True between pointerenter and pointerleave while warp is armed.
+
 ### `text`
 
 Setter/getter — the text content to animate.

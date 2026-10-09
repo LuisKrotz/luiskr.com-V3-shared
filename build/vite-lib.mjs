@@ -33,6 +33,7 @@ export const MODULE_ALIASES = {
   '@cms': `${REPO}cms`,
   '@earth': `${REPO}experiments/earth-playground`,
   '@docs': `${REPO}experiments/docs`,
+  '@star': `${REPO}experiments/star-field`,
 }
 
 /** Runtime specifiers that must never be inlined into a module bundle. */
@@ -42,6 +43,7 @@ const EXTERNALS = [
   /^@cms($|\/)/,
   /^@earth($|\/)/,
   /^@docs($|\/)/,
+  /^@star($|\/)/,
   /^@($|\/)/,
   /^virtual:/,
   /^three($|\/)/,

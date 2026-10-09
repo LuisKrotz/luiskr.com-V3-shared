@@ -68,6 +68,7 @@ export const moduleNameMapper = {
   '^@cms/(.*)$': path.join(REPO_ROOT, 'cms/$1'),
   '^@earth/(.*)$': path.join(REPO_ROOT, 'experiments/earth-playground/$1'),
   '^@docs/(.*)$': path.join(REPO_ROOT, 'experiments/docs/$1'),
+  '^@star/(.*)$': path.join(REPO_ROOT, 'experiments/star-field/$1'),
   '^@/(.*)$': path.join(REPO_ROOT, 'shared/src/$1'),
   // three.js is GPU-bound — replaced by chainable auto-mocks so the Earth
   // background engine can run its full lifecycle in tests.

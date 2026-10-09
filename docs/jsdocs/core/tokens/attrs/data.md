@@ -107,6 +107,10 @@ the token contract immutable at runtime.
 
 `data-path` — manifest path stamped on docs tree/grid buttons.
 
+### `DATA_BODY`
+
+`data-body` — star-field body id bound by navigator rows + pick meshes.
+
 ### `DATA_WIRED`
 
 Marks a docs-content box whose delegated link handler is attached.

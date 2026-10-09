@@ -64,9 +64,25 @@ Analytics event name for copy-guard attempts.
 
 JSON-LD description for the portal root/folder pages.
 
+### `LOADER_TITLE`
+
+Boot-loader overlay copy — mirrors the space playground's system
+ boot sequence with docs-context wording (English-only portal).
+
+### `DOCS_LOADER_PCT`
+
+Staged boot-loader progress marks — the manifest is inlined at build
+time so real fetch percentages don't exist; discrete stage numbers
+keep the bar honest (manifest scanned → scene mounted → file fetched
+→ portal usable).
+
 ### `DOCS_UNITS`
 
 Unit tokens used by docs layout/scene math.
+
+### `GL_STRIP_TIME_SCALE`
+
+gl-strip thread-field drift — 1/16 real-time so lines barely move
 
 ### `FOLDER_HASH_MOD`
 
@@ -95,8 +111,22 @@ radial-tree geometry shared with the wasm worker op
 
 ### `SCENE_ROTATE_SPEED`
 
-slow backdrop motion — autorotate deg/frame-ish + node pulse
+slow backdrop motion — autorotate deg/frame-ish + node pulse.
+ Speeds run at 1/16 of the original values so the graph reads as a
+ calm ambient layer, not a spinner.
 
 ### `SCENE_DIR_OPACITY`
 
 node/edge alpha — kept faint so the graph stays a backdrop layer
+
+### `SCENE_ACTIVE_OPACITY`
+
+active-location highlight — the node matching the open docsPath pops
+ to near-full alpha with a larger pulse; ancestor dirs along its path
+ lift a notch above the base dir alpha so the branch reads.
+
+### `SCENE_INTRO_TURN`
+
+intro settle — a first (unrestored) mount eases the whole graph in
+ from SCENE_INTRO_TURN radians over SCENE_INTRO_MS, then hands off to
+ the ambient autorotate. Restored poses skip the intro entirely.

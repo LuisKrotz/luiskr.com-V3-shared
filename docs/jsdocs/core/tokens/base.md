@@ -140,6 +140,11 @@ BEM block fragment "b lang glass" — composed by the token groups below into fu
 BEM block fragment `docs` — docs-portal class names + route segment compose
 from this single declaration (zero-hardcoding rule 9).
 
+### `_B_SF`
+
+BEM block fragment `sf` — star-field experiment class names compose from
+this single declaration (zero-hardcoding rule 9).
+
 ### `_B_SKELETON_ABOUT`
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
@@ -412,6 +417,11 @@ Token key "k terms of use" — single source for the repeated literal.
 ### `_K_EARTH_PLAYGROUND`
 
 Shared key token `earthPlayground` — single source for a literal repeated across modules
+(zero-hardcoding rule 5).
+
+### `_K_STAR_FIELD`
+
+Shared key token `starField` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).
 
 ### `_K_ABOUT_SECTION`

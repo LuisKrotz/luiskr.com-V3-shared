@@ -22,6 +22,12 @@ worker script path and the pool-size caps — mobile SoCs thermal-throttle
 under wide pools so the cap is tighter than desktop; the cores fallback
 covers engines without navigator.hardwareConcurrency.
 
+### `REPLY_TIMEOUT_MS`
+
+Dispatch reply deadline — a worker that never posts back (broken
+script, uncaught handler throw, wedged wasm) drops the whole worker
+after this so callers land on their JS fallback instead of hanging.
+
 ### `WASM_CSS`
 
 Dynamic-CSS injector tokens — the managed <style> node's sole rule is

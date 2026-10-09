@@ -167,6 +167,11 @@ Set by destroy(); checked after every await so a mid-load dispose
 
 Mirrors the store's reduced-motion flag; freezes the loop.
 
+### `failed`
+
+Set when bootstrap threw or bailed before the scene assembled — the
+ host swaps in the CSS fallback surface instead of a dead canvas.
+
 ### `isDarkTheme`
 
 UI theme flag — stored for the sun-rotation feature (not yet wired).

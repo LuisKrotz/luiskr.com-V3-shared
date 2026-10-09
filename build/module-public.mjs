@@ -27,6 +27,7 @@ export const MODULE_PUBLIC_MOUNTS = Object.freeze([
   { dir: 'website/public', at: '/' },
   { dir: 'core/public', at: '/' },
   { dir: 'experiments/earth-playground/public', at: '/experiments/earth-playground' },
+  { dir: 'experiments/star-field/public', at: '/experiments/star-field' },
   // Legacy root mount: bundles deployed before the module-public layout
   // request /textures/earth/* and /music/* (no prefix). Serving the same
   // dir at the root keeps stale cached bundles working on dev and on the

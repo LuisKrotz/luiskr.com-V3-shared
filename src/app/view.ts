@@ -84,6 +84,8 @@ export async function flipAppView(
       await import('@website/views/not-found/NotFound.js')
     } else if (toTag === VIEW_TAGS.VIEW_SPACE_PLAYGROUND) {
       await import('@earth/SpacePlayground.js')
+    } else if (toTag === VIEW_TAGS.VIEW_STAR_FIELD) {
+      await import('@star/StarField.js')
     } else if (toTag === VIEW_TAGS.VIEW_DOCS) {
       await import('@docs/Docs.js')
     }

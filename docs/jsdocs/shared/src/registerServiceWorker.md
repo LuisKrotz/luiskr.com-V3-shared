@@ -9,6 +9,14 @@ Registers the Workbox-generated service worker in production
 
 ## Members
 
+### `unregisterStaleWorkers`
+
+Drops every service worker registered for this origin outside production.
+A registration left behind by an earlier production visit (or a preview
+served on the same port) keeps intercepting dev requests and replays
+stale precached chunk URLs — dynamic imports then reject on every load
+and the global handler surfaces the generic failure notification.
+
 ### `registerServiceWorker`
 
 Registers `<base>service-worker.js` on window load when `env.PROD` is set.

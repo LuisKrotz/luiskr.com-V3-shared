@@ -47,6 +47,17 @@ otherwise drop to the body.
 
 Document-level istanbul key-nav disposer while a report is open.
 
+### `_docsReady`
+
+Boot-loader lifecycle — the overlay stays up until the portal's first
+usable state: manifest resolved, the architecture scene mount
+attempted (success or WebGL fallback), and any in-flight file payload
+settled. Mirrors the space playground's `_earthReady` contract.
+
+### `_loaderMsg`
+
+Current boot stage copy + percent rendered inside the loader.
+
 ### `rootsAsNodes`
 
 Manifest roots reshaped as dir-nodes for the treeview.
@@ -136,6 +147,22 @@ Lifecycle: store sub + path resolution + guards.
 ### (module scope)
 
 Lifecycle: (re)mounts the GL strip, scene and viewer content.
+
+### `_updateLoader`
+
+Mirrors a boot stage into the loader overlay (delegates to loader.ts).
+
+### `_dismissLoader`
+
+Fades + removes the loader overlay (delegates to loader.ts).
+
+### (module scope)
+
+Advances or dismisses the boot loader based on the just-rendered
+state: a file fetch in flight reports the file stage and waits;
+anything else means the portal is usable — mark ready, report the
+final stage, and fade the overlay out. A failed payload fetch (null)
+still counts as settled so the loader can never strand the page.
 
 ### (module scope)
 

@@ -13,6 +13,7 @@ Three.js WebGPU/WebGL visuals, Vite (rolldown) build.
 | [translations-i18n.md](guides/translations-i18n.md)   | Translation DB schema, stale-while-revalidate, fallback chain, locales   |
 | [website.md](architecture/website.md)                 | Public site shell, components, Shadow DOM styling, skeletons, dialogs    |
 | [playground.md](architecture/playground.md)           | Earth Playground view, WebGPU scene, loader contract, controls           |
+| [star-field.md](architecture/star-field.md)           | Star Field exploration — catalog bodies, lazy dossiers, nav drawer       |
 | [webgl-canvas.md](architecture/webgl-canvas.md)       | Shared WebGL/canvas utilities, context pool, lifecycle, CSS fallbacks    |
 | [cms.md](architecture/cms.md)                         | CMS bundle, authentication, editors, Firebase writes, media conventions  |
 | [data-model.md](architecture/data-model.md)           | Firebase `translations/` tree, node shapes, invariants                   |
