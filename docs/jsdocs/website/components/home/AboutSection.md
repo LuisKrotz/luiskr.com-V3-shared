@@ -13,6 +13,18 @@
 
 The AboutSection — section class.
 
+### `_glitch`
+
+Active TV-glitch session on the portrait — see about/glitch.ts.
+
+### (module scope)
+
+Binds the portrait glitch handlers once the shadow root exists.
+
+### (module scope)
+
+Stops any running glitch loop when the element leaves the DOM.
+
 ### `aboutTranslations`
 
 Setter/getter — the about-page translation node pushed by the parent view.

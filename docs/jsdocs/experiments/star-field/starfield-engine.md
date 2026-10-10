@@ -37,10 +37,22 @@ blanks the scene.
 
 ### `selectBody`
 
-Flies the camera to a catalog body. Called by the host for both nav
-picks and canvas raycast picks — `onSelect` is only fired by the
-pointer path (picking.ts) so selection never loops.
-- `@param` id Catalog body id.
+Flies the camera to a body — catalog slugs resolve through the
+anchors map; registry ids (`star-NNNNNN`…) resolve through the
+shard index to their true heliocentric position. Called by the host
+for both nav picks and canvas raycast picks — `onSelect` is only
+fired by the pointer path (picking.ts) so selection never loops.
+- `@param` id Catalog body id or registry id.
+
+### `rotateView`
+
+Arrow-key orbit — rotates the camera around the controls target in
+screen-intuitive steps: left/right change azimuth, up/down change
+polar (clamped off the poles). Pure spherical math on the offset
+vector — no three types needed, and any running fly-to is cancelled
+so manual control wins.
+- `@param` dAzimuth Azimuth delta in radians (left = -, right = +).
+- `@param` dPolar Polar delta in radians (down = -, up = +).
 
 ### `flyHome`
 

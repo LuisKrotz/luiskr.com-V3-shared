@@ -103,6 +103,17 @@
 | [`job.ts`](cms/media-convert/job.md) | — |
 | [`render.tsx`](cms/media-convert/render.md) | — |
 
+## CMS
+
+*Admin bundle — editors for every database node.*
+
+| File | What it does |
+|---|---|
+| [`firebase_app.js`](cms/node_modules/.vite/deps/firebase_app.md) | — |
+| [`firebase_auth.js`](cms/node_modules/.vite/deps/firebase_auth.md) | — |
+| [`firebase_database.js`](cms/node_modules/.vite/deps/firebase_database.md) | — |
+| [`index.esm-XkCFwuiC.js`](cms/node_modules/.vite/deps/index.esm-XkCFwuiC.md) | — |
+
 ## CMS / playground editor
 
 *Earth-playground labels, defaults and route slugs editor.*
@@ -172,6 +183,17 @@
 | [`cms-components-cmsmediaconverter.test.js`](cms/tests/components/cms-components-cmsmediaconverter.test.md) | Split from cms-components.test.js — covers the "CmsMediaConverter" describe. |
 | [`cms-components-cmsportfoliolist.test.js`](cms/tests/components/cms-components-cmsportfoliolist.test.md) | Split from cms-components.test.js — covers the "CmsPortfolioList" describe. |
 | [`cms-components-cmsprojectslist.test.js`](cms/tests/components/cms-components-cmsprojectslist.test.md) | Split from cms-components.test.js — covers the "CmsProjectsList" describe. |
+
+## CMS
+
+*Admin bundle — editors for every database node.*
+
+| File | What it does |
+|---|---|
+| [`cms-main-auth-fail-tails.test.js`](cms/tests/coverage/app/cms-main-auth-fail-tails.test.md) | Coverage tails for cms/main.ts — the boot catch arm: when |
+| [`cms-main-prod-tails.test.js`](cms/tests/coverage/app/cms-main-prod-tails.test.md) | Coverage tails for cms/main.ts — the `env.PROD` arm: a |
+| [`cms-main-watchdog-armed-tails.test.js`](cms/tests/coverage/app/cms-main-watchdog-armed-tails.test.md) | Coverage tails for cms/main.ts — the watchdog's disarmed |
+| [`cms-main-watchdog-idle-tails.test.js`](cms/tests/coverage/app/cms-main-watchdog-idle-tails.test.md) | Coverage tails for cms/main.ts — the boot watchdog's armed |
 
 ## CMS
 
@@ -444,6 +466,7 @@
 |---|---|
 | [`canvas-misc-tails.test.js`](core/tests/coverage/canvas/infra/canvas-misc-tails.test.md) | Split from coverage-tails-7.test.js — covers the "canvas misc tails" describe. |
 | [`canvas-tails.test.js`](core/tests/coverage/canvas/infra/canvas-tails.test.md) | Split from coverage-tails-7.test.js — covers the "canvas tails" describe. |
+| [`dom-font-tails.test.js`](core/tests/coverage/canvas/infra/dom-font-tails.test.md) | Coverage tails for core/utils/canvas/dom-font.ts — the |
 | [`flag-webgl-image-tails.test.js`](core/tests/coverage/canvas/infra/flag-webgl-image-tails.test.md) | Split from coverage-tails-7.test.js — covers the "flag-webgl image tails" describe. |
 | [`gl-lifecycle-tails-lifecycle-leftover-arms.test.js`](core/tests/coverage/canvas/infra/gl-lifecycle-tails-lifecycle-leftover-arms.test.md) | Split from gl-lifecycle-tails.test.js — covers the "lifecycle leftover arms" describe. |
 | [`gl-lifecycle-tails-menubackgroundwebgl-lifecycle.test.js`](core/tests/coverage/canvas/infra/gl-lifecycle-tails-menubackgroundwebgl-lifecycle.test.md) | Split from gl-lifecycle-tails.test.js — covers the "MenuBackgroundWebGL lifecycle" describe. |
@@ -461,6 +484,7 @@
 | File | What it does |
 |---|---|
 | [`intro-loader-tails-2.test.js`](core/tests/coverage/canvas/loaders/intro-loader-tails-2.test.md) | Split from coverage-tails-4.test.js — covers the "intro-loader tails 2" describe. |
+| [`intro-loader-tails-3.test.js`](core/tests/coverage/canvas/loaders/intro-loader-tails-3.test.md) | Coverage tails for the intro-loader fallback arms: a loader |
 | [`intro-loader-tails.test.js`](core/tests/coverage/canvas/loaders/intro-loader-tails.test.md) | Split from coverage-tails-2.test.js — covers the "intro-loader tails" describe. |
 | [`menu-software-renderer-tails.test.js`](core/tests/coverage/canvas/loaders/menu-software-renderer-tails.test.md) | Coverage tail for the software-rasterizer rejection in |
 | [`skeleton-measure-tails.test.js`](core/tests/coverage/canvas/loaders/skeleton-measure-tails.test.md) | Coverage tails for skeleton measure/init edges: host-bounds |
@@ -516,6 +540,7 @@
 |---|---|
 | [`firebase-mock-tails-test-js.test.js`](core/tests/coverage/firebase/firebase-mock-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "firebase-mock tails" describe. |
 | [`firebase-mock-tails.test.js`](core/tests/coverage/firebase/firebase-mock-tails.test.md) | Split from coverage-tails-4.test.js — covers the "firebase-mock tails" describe. |
+| [`firebase-redirect-tails.test.js`](core/tests/coverage/firebase/firebase-redirect-tails.test.md) | Coverage tails for core/firebase.ts — the completed-redirect |
 
 ## Core engine
 
@@ -1083,6 +1108,7 @@
 | File | What it does |
 |---|---|
 | [`auth.ts`](core/tokens/strings/auth.md) | Firebase Auth error-code string tokens — token group. |
+| [`canvas.ts`](core/tokens/strings/canvas.md) | Canvas 2D composite-mode and channel-mask string tokens — |
 | [`chars.ts`](core/tokens/strings/chars.md) | Punctuation, unit and single-character string tokens — |
 | [`css.ts`](core/tokens/strings/css.md) | CSS-token string tokens (var() references, tokenizer kinds) — |
 | [`debug.ts`](core/tokens/strings/debug.md) | URL `debug` parameter vocabulary |
@@ -1124,6 +1150,7 @@
 | [`media.ts`](core/utils/media.md) | Media-URL builders — the single place where CDN filename |
 | [`notify.ts`](core/utils/notify.md) | User-facing notification service |
 | [`schema.ts`](core/utils/schema.md) | JSON-LD structured-data builders (Schema.org entities for |
+| [`service-worker.ts`](core/utils/service-worker.md) | — |
 | [`string.ts`](core/utils/string.md) | Small pure string transforms — HTML stripping for |
 
 ## Core engine
@@ -1133,6 +1160,7 @@
 | File | What it does |
 |---|---|
 | [`css-color.ts`](core/utils/canvas/css-color.md) | Shared CSS-color parser for the canvas widgets — converts |
+| [`dom-font.ts`](core/utils/canvas/dom-font.md) | DOM-faithful canvas font helpers shared by every effect that |
 | [`gl-lifecycle.ts`](core/utils/canvas/gl-lifecycle.md) | Shared context-loss + release plumbing for the quad-based |
 | [`gl-program.ts`](core/utils/canvas/gl-program.md) | Shared WebGL boilerplate for the canvas widgets — every |
 | [`webgl-mode.ts`](core/utils/canvas/webgl-mode.md) | Single choke point for WebGL availability |
@@ -1144,7 +1172,7 @@
 
 | File | What it does |
 |---|---|
-| [`intro-loader.ts`](core/utils/canvas/loaders/intro-loader.md) | Boot loader overlay: types the spec-sheet lines |
+| [`intro-loader.ts`](core/utils/canvas/loaders/intro-loader.md) | Boot loader overlay — same visual language as the |
 | [`menu-background-webgl.ts`](core/utils/canvas/loaders/menu-background-webgl.md) | Fullscreen WebGL background for the nav menu overlay: an |
 | [`skeleton-webgl.ts`](core/utils/canvas/loaders/skeleton-webgl.md) | WebGL skeleton/shimmer layer for loading states: a shared |
 
@@ -1690,12 +1718,30 @@
 | [`catalog.ts`](experiments/star-field/engine/catalog.md) | The star-field body catalog — one static SFBodyDef per |
 | [`fly.ts`](experiments/star-field/engine/fly.md) | Camera fly-to tween for the star-field engine — when a body |
 | [`frame.ts`](experiments/star-field/engine/frame.md) | Per-frame + per-resize behavior for the star-field engine: |
+| [`materials.ts`](experiments/star-field/engine/materials.md) | Material-parameter hygiene for the body builders |
 | [`picking.ts`](experiments/star-field/engine/picking.md) | Pointer picking for the star-field canvas: pointerdown |
+| [`rand.ts`](experiments/star-field/engine/rand.md) | Deterministic seeded RNG for the star-field engine — the |
+| [`registry.ts`](experiments/star-field/engine/registry.md) | Deep-catalog registry — the addressable index over the |
 | [`renderer-setup.ts`](experiments/star-field/engine/renderer-setup.md) | Renderer creation for the star-field engine — same contract |
+| [`scale.ts`](experiments/star-field/engine/scale.md) | Multi-tier astronomical scale model for the star-field |
 | [`scene.ts`](experiments/star-field/engine/scene.md) | Scene-graph foundation for the star-field engine: the |
 | [`screenshot.ts`](experiments/star-field/engine/screenshot.md) | PNG capture for the star-field engine: renders one frame, |
+| [`spiral.ts`](experiments/star-field/engine/spiral.md) | Spiral-galaxy surface — two-layer composite: a tilted |
+| [`star-cloud.ts`](experiments/star-field/engine/star-cloud.md) | Real-catalogue deep field — decodes |
 | [`state.ts`](experiments/star-field/engine/state.md) | Factory for the star-field engine state bag — one mutable |
 | [`types.ts`](experiments/star-field/engine/types.md) | Shared types for the star-field engine — the static body |
+
+## Entry points
+
+*Boot surfaces: what the user sees first on each bundle.*
+
+| File | What it does |
+|---|---|
+| [`belt.ts`](experiments/star-field/engine/bodies/belt.md) | Small-body annulus renderer — asteroid belt and Kuiper |
+| [`black-hole.ts`](experiments/star-field/engine/bodies/black-hole.md) | Sagittarius A* renderer — a layered relativistic object |
+| [`deep-sky.ts`](experiments/star-field/engine/bodies/deep-sky.md) | Real-imagery surface for deep-sky bodies — nebulae, star |
+| [`mask.ts`](experiments/star-field/engine/bodies/mask.md) | Photo-texture edge feathering for deep-sky billboards. |
+| [`structures.ts`](experiments/star-field/engine/bodies/structures.md) | Cosmic-hierarchy bodies — boundary spheres + member |
 
 ## Entry points
 
@@ -1726,6 +1772,7 @@
 |---|---|
 | [`starfield-component-tails.test.js`](experiments/star-field/tests/coverage/starfield/component/starfield-component-tails.test.md) | Coverage tails for &lt;view-star-field&gt; — the rare component |
 | [`starfield-reeval-tails.test.js`](experiments/star-field/tests/coverage/starfield/component/starfield-reeval-tails.test.md) | Coverage tail for StarField.tsx module evaluation — the |
+| [`starfield-route-tails.test.js`](experiments/star-field/tests/coverage/starfield/component/starfield-route-tails.test.md) | Coverage tails for &lt;view-star-field&gt; route/deep-link |
 
 ## Entry points
 
@@ -1733,8 +1780,12 @@
 
 | File | What it does |
 |---|---|
+| [`registry-guard-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/registry-guard-tails.test.md) | Coverage tails for the defensive arms of |
 | [`star-engine-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/star-engine-tails.test.md) | Coverage tails for the star-field engine internals — the |
+| [`starfield-bodies-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-bodies-tails.test.md) | Coverage tails for the photographic bodies layer — |
+| [`starfield-catalog-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-catalog-tails.test.md) | Coverage tails for the catalog placement helpers — |
 | [`starfield-engine-wiring-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-engine-wiring-tails.test.md) | Coverage tails for starfield-engine.ts — the facade arms |
+| [`starfield-scene-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-scene-tails.test.md) | Coverage tails for the engine internals that need a |
 
 ## Entry points
 
@@ -1744,6 +1795,14 @@
 |---|---|
 | [`star-boot-tails.test.js`](experiments/star-field/tests/coverage/starfield/star/star-boot-tails.test.md) | Coverage tails for star/boot.ts — the engine-event wiring |
 | [`star-render-mock-tails.test.js`](experiments/star-field/tests/coverage/starfield/star/star-render-mock-tails.test.md) | Coverage tails for star/render.tsx — the catalog-mock arms: |
+
+## Entry points
+
+*Boot surfaces: what the user sees first on each bundle.*
+
+| File | What it does |
+|---|---|
+| [`starfield-registry-tails.test.js`](experiments/star-field/tests/coverage/starfield/starfield-registry-tails.test.md) | Coverage tails for the 139k registry surface on |
 
 ## Entry points
 
@@ -1763,6 +1822,7 @@
 | [`star-dossier.test.js`](experiments/star-field/tests/starfield/star-dossier.test.md) | Lazy dossier loader — fetchDossier caches per body id and |
 | [`star-field-component.test.js`](experiments/star-field/tests/starfield/star-field-component.test.md) | Full lifecycle for the real &lt;view-star-field&gt; element — |
 | [`star-i18n.test.js`](experiments/star-field/tests/starfield/star-i18n.test.md) | Star-field label loading — the SWR fetch of |
+| [`star-registry.test.js`](experiments/star-field/tests/starfield/star-registry.test.md) | Deep-catalog registry — id grammar, manifest/shard lazy |
 | [`star-render.test.js`](experiments/star-field/tests/starfield/star-render.test.md) | renderStarField branch coverage — loader shown/hidden, CSS |
 | [`starfield-engine.test.js`](experiments/star-field/tests/starfield/starfield-engine.test.md) | StarFieldEngine facade — init() always resolves (success, |
 
@@ -1945,6 +2005,14 @@
 
 | File | What it does |
 |---|---|
+| [`glitch.ts`](website/components/home/about/glitch.md) | — |
+
+## Entry points
+
+*Boot surfaces: what the user sees first on each bundle.*
+
+| File | What it does |
+|---|---|
 | [`carousel.ts`](website/components/home/awards/carousel.md) | Carousel wiring for &lt;awards-mentions&gt;: configures the |
 | [`data.ts`](website/components/home/awards/data.md) | Data helpers for &lt;awards-mentions&gt;: the legal-links list |
 | [`render.tsx`](website/components/home/awards/render.md) | JSX template for &lt;awards-mentions&gt; — the footer band with |
@@ -1955,6 +2023,7 @@
 
 | File | What it does |
 |---|---|
+| [`burn.ts`](website/components/home/mosaic/burn.md) | — |
 | [`events.ts`](website/components/home/mosaic/events.md) | — |
 | [`interactions.ts`](website/components/home/mosaic/interactions.md) | — |
 | [`layout.ts`](website/components/home/mosaic/layout.md) | — |
@@ -1991,7 +2060,6 @@
 | [`sheet.ts`](website/components/media/draw-text/sheet.md) | — |
 | [`trigger.ts`](website/components/media/draw-text/trigger.md) | — |
 | [`types.ts`](website/components/media/draw-text/types.md) | — |
-| [`warp.ts`](website/components/media/draw-text/warp.md) | — |
 
 ## Entry points
 
@@ -2246,6 +2314,8 @@
 
 | File | What it does |
 |---|---|
+| [`about-glitch-crop.test.js`](website/tests/coverage/components/home/about-glitch-crop.test.md) | Framing-fidelity tests for website/components/home/about/glitch.ts — |
+| [`about-glitch-tails.test.js`](website/tests/coverage/components/home/about-glitch-tails.test.md) | Coverage tails for website/components/home/about/glitch.ts — |
 | [`aboutsection-tails.test.js`](website/tests/coverage/components/home/aboutsection-tails.test.md) | Coverage tails for AboutSection's side-info column: |
 | [`awards-desc-fallback-tails.test.js`](website/tests/coverage/components/home/awards-desc-fallback-tails.test.md) | Covers the `|| DOCS_STRINGS.DESC_FALLBACK` arm in the awards |
 | [`awardsmentions-tails-2.test.js`](website/tests/coverage/components/home/awardsmentions-tails-2.test.md) | Split from coverage-tails-6.test.js — covers the "AwardsMentions tails 2" describe. |
@@ -2255,6 +2325,8 @@
 | [`home-tails-2.test.js`](website/tests/coverage/components/home/home-tails-2.test.md) | Split from coverage-tails-5.test.js — covers the "Home tails 2" describe. |
 | [`homemosaic-tails-2.test.js`](website/tests/coverage/components/home/homemosaic-tails-2.test.md) | Split from coverage-tails-6.test.js — covers the "HomeMosaic tails 2" describe. |
 | [`homemosaic-tails.test.js`](website/tests/coverage/components/home/homemosaic-tails.test.md) | Split from coverage-tails-3.test.js — covers the "HomeMosaic tails" describe. |
+| [`mosaic-burn-letters.test.js`](website/tests/coverage/components/home/mosaic-burn-letters.test.md) | Per-letter combustion tests for website/components/home/mosaic/burn.ts — |
+| [`mosaic-burn-tails.test.js`](website/tests/coverage/components/home/mosaic-burn-tails.test.md) | Coverage tails for website/components/home/mosaic/burn.ts — |
 | [`mosaic-onclick-missing-detail-tails.test.js`](website/tests/coverage/components/home/mosaic-onclick-missing-detail-tails.test.md) | Coverage tail for components/home/mosaic/interactions.ts — |
 | [`mosaic-projecthref-tails.test.js`](website/tests/coverage/components/home/mosaic-projecthref-tails.test.md) | Coverage tails for components/home/mosaic/interactions.ts — |
 
@@ -2268,7 +2340,6 @@
 | [`draw-text-nested-tags.test.js`](website/tests/coverage/components/media/draw-text-nested-tags.test.md) | — |
 | [`draw-text-ordered-tails.test.js`](website/tests/coverage/components/media/draw-text-ordered-tails.test.md) | Coverage tail for the ordered-reveal session in |
 | [`draw-text-render-tails.test.js`](website/tests/coverage/components/media/draw-text-render-tails.test.md) | Split from coverage-tails-7.test.js — covers the "draw-text render tails" describe. |
-| [`draw-text-warp-tails.test.js`](website/tests/coverage/components/media/draw-text-warp-tails.test.md) | Coverage tails for draw-text/warp.ts — the cursor-following |
 
 ## Entry points
 

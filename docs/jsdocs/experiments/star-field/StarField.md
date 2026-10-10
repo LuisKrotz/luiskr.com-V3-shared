@@ -13,6 +13,19 @@
 
 Pre-built id → display-name lookup for live announcements.
 
+### `_TIP_BY_ID`
+
+Pre-built id → `{name} · {dist}` hover tooltip text lookup.
+
+### `_DIST_BY_ID`
+
+Pre-built id → distance-label lookup for tooltip upgrades.
+
+### `_ARROW_DELTAS`
+
+Arrow-key → view-rotation delta map — left/right change azimuth,
+up/down change polar (up lifts the camera = negative polar step).
+
 ### `StarField`
 
 The StarField — a full-viewport explorable star chart.
@@ -35,7 +48,7 @@ Lifecycle: destroys the engine and unbinds the Escape handler.
 
 ### (module scope)
 
-Re-fetches labels when the store pushes a locale change.
+Re-fetches labels + re-derives the open dossier on locale change.
 
 ### `_loadTranslations`
 
@@ -59,11 +72,43 @@ Hides the loading overlay after the first usable frame.
 
 ### `_bindKeys`
 
-Binds the Escape-key dismisser (closes panel, then the drawer).
+Binds the document-level keyboard map — Escape dismisses (panel,
+then drawer) and the arrow keys orbit the camera, so the chart is
+fully navigable without pointer input even when nothing inside the
+view holds focus.
+
+### `_setSearch`
+
+Search-filter setter — re-renders the navigator list narrowed to
+bodies whose catalog name or id contains the query (case-folded),
+so 66+ bodies stay browsable. Non-trivial queries also fire the
+incremental registry search over the 139k catalogue; the query
+guard keeps a slow earlier response from overwriting a newer one.
+- `@param` q Raw input value from the drawer search field.
+
+### `_ensureRegistry`
+
+Lazily resolves the registry manifest — fired the first time the
+drawer opens or a search starts, so the 139k index metadata costs
+nothing for users who never browse the catalogue.
+
+### `_loadMoreRegistry`
+
+Incremental catalogue browsing — fetches the next 1,000-record
+shard for a kind and appends it to the drawer's loaded list. Each
+shard is one ~100 KB fetch; records accumulate so "load more"
+never refetches earlier pages.
+- `@param` kind Registry kind (`star`/`exoplanet`/`dso`).
 
 ### `_toggleNav`
 
-Toggles the navigator drawer open/closed.
+Opens the drawer and starts the manifest fetch in one gesture.
+
+### `_matchesSearch`
+
+Drawer filter predicate — matches on catalog name or id; an empty
+query passes everything.
+- `@param` def Catalog entry under test.
 
 ### `_selectBody`
 
@@ -74,6 +119,35 @@ loads the dossier panel and flies the camera to the body.
 ### `_closePanel`
 
 Closes the dossier panel and clears the selection.
+
+### `_baseStarPath`
+
+Current-route base path — the star-field URL minus a trailing
+`/<body>` segment, so deep-link navigation always composes from the
+chart root rather than stacking body segments.
+- `@returns` The chart base path in the active locale.
+
+### `_syncUrl`
+
+Keeps the address bar in sync with the selection — selecting pushes
+`…/<body>` so Back returns to the chart, closing returns to the base
+chart URL. Skips when the current route already carries the target
+so the param-change echo (`onRouteParamChange`) cannot loop.
+- `@param` id Newly selected body id, or null after close.
+
+### `onRouteParamChange`
+
+Router param echo — same-view navigation delivers the new descriptor
+here: a valid `body` param selects it (idempotent on repeat), its
+absence closes the panel. Unknown ids degrade to the plain chart so
+stale or hand-typed URLs never break the view.
+- `@param` _route The destination descriptor (unused — reads
+
+### `_applyDeepLink`
+
+Deep-link entry — after the engine reports ready, selects the body
+named in the URL (flies the camera + opens the dossier). Falls back
+silently to the overview chart on unknown ids.
 
 ### `_takeScreenshot`
 
@@ -89,6 +163,24 @@ Hover announce — updates the aria-live HUD text when the pointer
 crosses a body so screen readers and the HUD chip both learn it.
 - `@param` id Hovered body id, or null on leaving.
 
-### `_announce`
+### `_syncTip`
+
+Tooltip label sync — writes `{name} · {dist}` into the leader-line
+tooltip and shows it while a body is hovered; hides it on leave.
+Direct DOM writes (like the live region) so per-frame tracking never
+triggers a full re-render.
+- `@param` id Hovered body id, or null on leaving.
+- `@param` text Resolved display text (for the early-return guard).
+
+### `_handleHoverMove`
+
+Per-frame hover tracking — the engine reports the hovered body's
+projected canvas-space pixel position every tick; the tooltip root
+is translate-positioned so the leader line + label orbit with it.
+- `@param` id Hovered body id.
+- `@param` x Canvas-space x in px.
+- `@param` y Canvas-space y in px.
+
+### (module scope)
 
 Announces a selection through the same live region.

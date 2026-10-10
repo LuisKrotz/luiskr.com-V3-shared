@@ -25,6 +25,10 @@ Form control attribute tokens — token group. Covers the
 
 `type="text"` — plain text input.
 
+### `SEARCH`
+
+`type="search"` — filter/search input (directory browse).
+
 ### `CHECKBOX`
 
 `type="checkbox"` — boolean toggles in preferences/CMS rows.

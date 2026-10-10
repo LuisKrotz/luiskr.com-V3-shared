@@ -15,15 +15,18 @@ The ViewAdminLogin — admin login class.
 
 ### (module scope)
 
-Lifecycle: binds the login button.
-
-### (module scope)
-
-Wires the Google sign-in button click.
+Surfaces a broken OAuth round-trip: signInWithGoogle marks the
+session before the redirect navigation; still seeing the marker when
+this view mounts means the return leg restored no session (blocked
+third-party storage, strict tracking prevention). Without this the
+flow loops silently — click → Google → back → login → repeat.
 
 ### `handleGoogleLogin`
 
 Runs the Firebase Google OAuth popup flow; errors surface in the UI.
+The button's JSX `onClick` is the single handler — the render pass
+re-attaches it on every fresh node, so no manual rebind step exists
+(a second listener would double-fire the popup request).
 
 ### (module scope)
 
