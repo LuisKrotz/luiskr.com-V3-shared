@@ -5,11 +5,13 @@
 import fs from 'fs'
 import path from 'path'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
+import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
+import { readSassDeep } from '@tests/fixtures/sass-resolve.js'
 
-const ROOT = path.resolve('core/sass/components')
-const internals = fs.readFileSync(path.join(ROOT, 'internals/internals.scss'), 'utf8')
-const mediaFigure = fs.readFileSync(path.join(ROOT, 'media/media-figure.scss'), 'utf8')
-const carouselHost = fs.readFileSync(path.join(ROOT, 'carousel/carousel-host.scss'), 'utf8')
+const ROOT = path.join(ROOT_DIR, 'core/sass/components')
+const internals = readSassDeep(path.join(ROOT, 'internals/internals.scss'))
+const mediaFigure = readSassDeep(path.join(ROOT, 'media/media-figure.scss'))
+const carouselHost = readSassDeep(path.join(ROOT, 'carousel/carousel-host.scss'))
 
 const strip = (s) => s.replace(/\/\/[^\n]*/g, '').replace(/\/\*[\s\S]*?\*\//g, '')
 const _ic = strip(internals)
@@ -23,7 +25,7 @@ describe('no runtime JS style injection in MediaFigure', () => {
   let mfJS
 
   beforeAll(() => {
-    mfJS = fs.readFileSync(path.resolve('website/components/media/MediaFigure.tsx'), 'utf8')
+    mfJS = fs.readFileSync(path.join(ROOT_DIR, 'website/components/media/MediaFigure.tsx'), 'utf8')
   })
 
   test('imports media-figure.scss?inline', () => {

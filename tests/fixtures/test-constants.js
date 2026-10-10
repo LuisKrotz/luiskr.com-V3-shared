@@ -7,6 +7,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'node:url'
+import { readSassDeep } from './sass-resolve.js'
 
 // Repo root resolved from this file's location, not process.cwd() — module
 // suites also run standalone from their own folder (`cd website && yarn test`),
@@ -14,11 +15,14 @@ import { fileURLToPath } from 'node:url'
 export const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
 // ─── SCSS file contents (cached once at module load) ──────────────────────────
-const readScss = (name) => fs.readFileSync(path.join(ROOT_DIR, name), 'utf-8')
+// Manifest-aware read — split sheets (draw-text.scss, app.scss, …) inline
+// their `@import` partials so assertions see the effective stylesheet.
+const readScss = (name) => readSassDeep(path.join(ROOT_DIR, name))
 
 export const SCSS = {
   about: readScss('core/sass/components/home/about.scss'),
   app: readScss('core/sass/components/shell/app.scss'),
+  navShell: readScss('core/sass/components/shell/app/nav-shell.scss'),
   awardsCarousel: readScss('core/sass/components/carousel/awards-carousel.scss'),
   awardsFooter: readScss('core/sass/components/home/awards-footer.scss'),
   carouselHost: readScss('core/sass/components/carousel/carousel-host.scss'),

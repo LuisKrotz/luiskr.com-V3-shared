@@ -9,7 +9,7 @@
 import { describe, test, expect } from '@jest/globals'
 import fs from 'node:fs'
 import path from 'node:path'
-import { TEST_PROJECTS } from '@tests/fixtures/test-constants.js'
+import { TEST_PROJECTS, ROOT_DIR } from '@tests/fixtures/test-constants.js'
 import { ROUTE_STRINGS } from '@core/tokens/strings/routes.js'
 import { ROUTE_PATHS } from '@core/tokens/routes/paths.js'
 import { WINDOW_EVENTS } from '@core/tokens/events/dom.js'
@@ -19,7 +19,7 @@ const SAMPLE_PROJECT_MELISSA = 'melissa'
 const SAMPLE_PROJECT_METCHA = TEST_PROJECTS.METCHA
 
 describe('Lighthouse CI configuration', () => {
-  const configPath = path.resolve('lighthouserc.cjs')
+  const configPath = path.join(ROOT_DIR, 'lighthouserc.cjs')
 
   test('lighthouserc.cjs exists', () => {
     expect(fs.existsSync(configPath)).toBe(true)

@@ -8,27 +8,7 @@
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { register } from 'register-service-worker'
 import { devError, devInfo } from '@core/devlog.js'
-
-/**
- * Drops every service worker registered for this origin outside production.
- * A registration left behind by an earlier production visit (or a preview
- * served on the same port) keeps intercepting dev requests and replays
- * stale precached chunk URLs — dynamic imports then reject on every load
- * and the global handler surfaces the generic failure notification.
- */
-const unregisterStaleWorkers = (): void => {
-  const sw = typeof navigator === TYPE_STRINGS.UNDEFINED ? undefined : navigator.serviceWorker
-
-  if (!sw || typeof sw.getRegistrations !== TYPE_STRINGS.FUNCTION) return
-
-  sw.getRegistrations()
-    .then((registrations) => {
-      for (const registration of registrations) {
-        void registration.unregister()
-      }
-    })
-    .catch(() => {})
-}
+import { dropStaleServiceWorkers } from '@core/utils/service-worker.js'
 
 /**
  * Registers `<base>service-worker.js` on window load when `env.PROD` is set.
@@ -38,7 +18,7 @@ const unregisterStaleWorkers = (): void => {
  */
 export const registerServiceWorker = (env: { PROD?: boolean; BASE_URL?: string }): void => {
   if (!env?.PROD) {
-    unregisterStaleWorkers()
+    dropStaleServiceWorkers()
 
     return
   }

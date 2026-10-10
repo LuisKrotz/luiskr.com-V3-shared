@@ -2,13 +2,14 @@
  * @file shadow-dom-css-vars-carousel-host-scss-redeclares-css-vars-for-nested-media-figu.test.js
  * @description Split from shadow-dom-css-vars.test.js — covers the "carousel-host.scss redeclares CSS vars for nested media-figure" describe.
  */
-import fs from 'fs'
 import path from 'path'
+import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
+import { readSassDeep } from '@tests/fixtures/sass-resolve.js'
 
-const ROOT = path.resolve('core/sass/components')
-const internals = fs.readFileSync(path.join(ROOT, 'internals/internals.scss'), 'utf8')
-const mediaFigure = fs.readFileSync(path.join(ROOT, 'media/media-figure.scss'), 'utf8')
-const carouselHost = fs.readFileSync(path.join(ROOT, 'carousel/carousel-host.scss'), 'utf8')
+const ROOT = path.join(ROOT_DIR, 'core/sass/components')
+const internals = readSassDeep(path.join(ROOT, 'internals/internals.scss'))
+const mediaFigure = readSassDeep(path.join(ROOT, 'media/media-figure.scss'))
+const carouselHost = readSassDeep(path.join(ROOT, 'carousel/carousel-host.scss'))
 
 const strip = (s) => s.replace(/\/\/[^\n]*/g, '').replace(/\/\*[\s\S]*?\*\//g, '')
 const _ic = strip(internals)
@@ -47,22 +48,22 @@ describe('carousel-host.scss redeclares CSS vars for nested media-figure', () =>
     expect(chc).toMatch(/layout-768[\s\S]*?--mf-h:\s*calc\(70vh/)
   })
   test('1024px --mf-w is $space-6xl', () => {
-    expect(chc).toMatch(/layout-1024[\s\S]*?--mf-w:\s*#\{\s*to-rem\(\$space-6xl\)/)
+    expect(chc).toMatch(/layout-1024[\s\S]*?--mf-w:\s*var\(--space-6xl\)/)
   })
   test('1024px --mf-h is $space-7xl', () => {
-    expect(chc).toMatch(/layout-1024[\s\S]*?--mf-h:\s*#\{\s*to-rem\(\$space-7xl\)/)
+    expect(chc).toMatch(/layout-1024[\s\S]*?--mf-h:\s*var\(--space-7xl\)/)
   })
   test('1440px --mf-w is $space-7xl', () => {
-    expect(chc).toMatch(/layout-1440[\s\S]*?--mf-w:\s*#\{\s*to-rem\(\$space-7xl\)/)
+    expect(chc).toMatch(/layout-1440[\s\S]*?--mf-w:\s*var\(--space-7xl\)/)
   })
   test('1440px --mf-h is $space-8xl', () => {
-    expect(chc).toMatch(/layout-1440[\s\S]*?--mf-h:\s*#\{\s*to-rem\(\$space-8xl\)/)
+    expect(chc).toMatch(/layout-1440[\s\S]*?--mf-h:\s*var\(--space-8xl\)/)
   })
   test('2560px --mf-w is $space-8xl', () => {
-    expect(chc).toMatch(/layout-2560[\s\S]*?--mf-w:\s*#\{\s*to-rem\(\$space-8xl\)/)
+    expect(chc).toMatch(/layout-2560[\s\S]*?--mf-w:\s*var\(--space-8xl\)/)
   })
   test('2560px --mf-h is $space-9xl', () => {
-    expect(chc).toMatch(/layout-2560[\s\S]*?--mf-h:\s*#\{\s*to-rem\(\$space-9xl\)/)
+    expect(chc).toMatch(/layout-2560[\s\S]*?--mf-h:\s*var\(--space-9xl\)/)
   })
   test('landscape variant sets --mf-w vw cap at 1024px', () => {
     expect(chc).toMatch(/landscape[\s\S]*?media-figure[\s\S]*?--mf-w:\s*calc\(100vw/)
@@ -81,22 +82,22 @@ describe('carousel-host.scss redeclares CSS vars for nested media-figure', () =>
   })
   test('small variant --mf-w at 1440px is $space-6xl', () => {
     expect(chc).toMatch(
-      /small[\s\S]*?media-figure[\s\S]*?layout-1440[\s\S]*?--mf-w:\s*#\{\s*to-rem\(\$space-6xl\)/
+      /small[\s\S]*?media-figure[\s\S]*?layout-1440[\s\S]*?--mf-w:\s*var\(--space-6xl\)/
     )
   })
   test('small variant --mf-h at 1440px is $space-8xl', () => {
     expect(chc).toMatch(
-      /small[\s\S]*?media-figure[\s\S]*?layout-1440[\s\S]*?--mf-h:\s*#\{\s*to-rem\(\$space-8xl\)/
+      /small[\s\S]*?media-figure[\s\S]*?layout-1440[\s\S]*?--mf-h:\s*var\(--space-8xl\)/
     )
   })
   test('small variant --mf-w at 2560px is $space-7xl', () => {
     expect(chc).toMatch(
-      /small[\s\S]*?media-figure[\s\S]*?layout-2560[\s\S]*?--mf-w:\s*#\{\s*to-rem\(\$space-7xl\)/
+      /small[\s\S]*?media-figure[\s\S]*?layout-2560[\s\S]*?--mf-w:\s*var\(--space-7xl\)/
     )
   })
   test('small variant --mf-h at 2560px is $space-9xl', () => {
     expect(chc).toMatch(
-      /small[\s\S]*?media-figure[\s\S]*?layout-2560[\s\S]*?--mf-h:\s*#\{\s*to-rem\(\$space-9xl\)/
+      /small[\s\S]*?media-figure[\s\S]*?layout-2560[\s\S]*?--mf-h:\s*var\(--space-9xl\)/
     )
   })
   test(':host has display: block', () => {

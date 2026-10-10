@@ -17,6 +17,7 @@ import { COMMON_SELECTORS } from '@core/tokens/selectors/common.js'
 import { STATE_CLASSES } from '@core/tokens/classes/state.js'
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { NAV_SELECTORS } from '@core/tokens/selectors/nav.js'
+import { readSassDeep } from '@tests/fixtures/sass-resolve.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 
 const root = '/home/luis/projects/luiskr.com-V3'
@@ -24,7 +25,8 @@ const readSass = (rel) => {
   try {
     const abs = resolve(root, rel)
     if (!existsSync(abs)) return ''
-    return readFileSync(abs, 'utf-8')
+    // Deep-read: manifests `@import` partials — rules live in the split.
+    return readSassDeep(abs)
   } catch {
     return ''
   }
@@ -362,8 +364,10 @@ describe('SASS/CSS Structure & Style Isolation', () => {
     })
 
     test('variables.scss is imported by other SASS files, not duplicated', () => {
-      const main = readSass('core/sass/components/shell/app.scss')
-      const base = readSass('core/sass/base/_structure.scss')
+      // Shallow read — imports are usage, not duplication; inlining
+      // partials would count the imported tokens twice.
+      const main = readFileSync(resolve(root, 'core/sass/components/shell/app.scss'), 'utf-8')
+      const base = readFileSync(resolve(root, 'core/sass/base/_structure.scss'), 'utf-8')
       // Variables should be centralized (imported) not defined in multiple places
       const mainHasVarDefs = (main.match(/\$[a-z-]+\s*:/g) || []).length
       const baseHasVarDefs = (base.match(/\$[a-z-]+\s*:/g) || []).length

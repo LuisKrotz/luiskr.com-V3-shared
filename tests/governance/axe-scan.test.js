@@ -32,7 +32,7 @@ import '@website/components/carousel/AwardsCarousel.js'
 import '@website/components/media/DrawText.js'
 import store from '@core/store.js'
 import { CMS_KEYS, CSS_STRINGS, LOCALES, ROUTE_NAMES, ROUTE_PREFIXES } from '@core/constants.js'
-import { TEST_AWARDS, TEST_PROJECTS, TEST_TEXT } from '@tests/fixtures/test-constants.js'
+import { TEST_AWARDS, TEST_PROJECTS, TEST_TEXT, ROOT_DIR } from '@tests/fixtures/test-constants.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { COMMON_ATTRS } from '@core/tokens/attrs/common.js'
 import { LANG_MUTATIONS, MODAL_MUTATIONS } from '@core/tokens/events/mutations.js'
@@ -43,7 +43,7 @@ import { MEDIA_ATTRS } from '@core/tokens/attrs/media.js'
 import { COVER_DIMENSIONS } from '@core/tokens/media/dimensions.js'
 import { STATE_STRINGS } from '@core/tokens/strings/state.js'
 
-const REPORT_DIR = path.resolve('experiments/docs/reports')
+const REPORT_DIR = path.join(ROOT_DIR, 'experiments/docs/reports')
 const REPORT_FILE = path.join(REPORT_DIR, 'axe-report.json')
 // Lighthouse asserts accessibility = 1.0 — every binary audit must pass — so
 // the test gate fails on 'moderate' too (heading-order, landmark issues),
@@ -331,7 +331,7 @@ describe('Axe Accessibility Scan — WCAG 2.x (axe-core)', () => {
 
   describe('6. Static Shell (dist/index.html when built)', () => {
     test('document shell has no critical/serious violations', async () => {
-      const indexPath = path.resolve('dist', 'index.html')
+      const indexPath = path.join(ROOT_DIR, 'dist', 'index.html')
       if (!fs.existsSync(indexPath)) return
 
       const html = fs.readFileSync(indexPath, 'utf-8')
