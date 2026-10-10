@@ -58,6 +58,9 @@ const MIME = {
 /**
  * Connect middleware serving one module `public/` dir at a mount prefix.
  * Misses and path-traversal attempts fall through to `next()`.
+ * Implements single-range byte serving (`Accept-Ranges` + `206`) — media
+ * elements probe ranges to discover stream duration and to seek; without
+ * them Chrome shows only the buffered seconds and never seeks.
  * @param {string} dirAbs Absolute source directory.
  * @returns {import('connect').NextHandleFunction} Static-file handler.
  */
@@ -69,10 +72,56 @@ const serveMount = (dirAbs) => (req, res, next) => {
 
   if (!file.startsWith(dirAbs) || !fs.existsSync(file) || !fs.statSync(file).isFile()) return next()
 
+  const size = fs.statSync(file).size
+
   res.setHeader(
     'Content-Type',
     MIME[path.extname(file).toLowerCase()] || 'application/octet-stream'
   )
+  res.setHeader('Accept-Ranges', 'bytes')
+
+  // Single-range form only — `bytes=a-b`, open `a-`, suffix `-b`. A
+  // malformed or out-of-file range answers 416 per RFC 9110.
+  const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '')
+
+  if (range && (range[1] !== '' || range[2] !== '')) {
+    let start = range[1] === '' ? 0 : parseInt(range[1], 10)
+    let end = range[2] === '' ? size - 1 : parseInt(range[2], 10)
+
+    // Suffix form `bytes=-N` — the last N bytes of the file.
+    if (range[1] === '') {
+      start = Math.max(0, size - end)
+      end = size - 1
+    }
+
+    end = Math.min(end, size - 1)
+
+    if (start > end || start >= size) {
+      res.statusCode = 416
+      res.setHeader('Content-Range', `bytes */${size}`)
+      res.end()
+      return
+    }
+
+    res.statusCode = 206
+    res.setHeader('Content-Range', `bytes ${start}-${end}/${size}`)
+    res.setHeader('Content-Length', end - start + 1)
+
+    if (req.method === 'HEAD') {
+      res.end()
+      return
+    }
+
+    fs.createReadStream(file, { start, end }).pipe(res)
+    return
+  }
+
+  res.setHeader('Content-Length', size)
+
+  if (req.method === 'HEAD') {
+    res.end()
+    return
+  }
 
   fs.createReadStream(file).pipe(res)
 }

@@ -15,10 +15,17 @@ import { TRANSLATION_KEYS } from '@core/tokens/routes/translation-keys.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
-const en = JSON.parse(readFileSync(path.join(root, 'database.json'), 'utf8')).translations.en
+const translations = JSON.parse(readFileSync(path.join(root, 'database.json'), 'utf8')).translations
+
+const en = translations.en
 
 export default {
   APP: en.APP,
+  // Mirrors the plugin's loaderLocales — all locales' loader nodes, so the
+  // boot loader can localize stage copy before i18n chunks resolve.
+  loaderLocales: Object.fromEntries(
+    Object.entries(translations).map(([loc, t]) => [loc, t.APP.loader])
+  ),
   components: en.components,
   pages: {
     [NOT_FOUND_CLASSES.NOT_FOUND]: en.pages[NOT_FOUND_CLASSES.NOT_FOUND],

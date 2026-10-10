@@ -39,6 +39,12 @@ export const i18nFallbackPlugin = ({ root }) => {
 
       const snapshot = {
         APP: en.APP,
+        // Every locale's loader node — the boot loader runs before the
+        // per-locale chunks resolve, so its copy must be inlined for ALL
+        // languages, not just English.
+        loaderLocales: Object.fromEntries(
+          Object.entries(db.translations).map(([loc, t]) => [loc, t.APP.loader])
+        ),
         components: en.components,
         pages: {
           'not-found': en.pages['not-found'],
