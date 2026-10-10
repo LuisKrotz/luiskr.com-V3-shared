@@ -128,14 +128,34 @@ additionally hides itself unless `location.hostname` is localhost.
 | `GET /jobs/:id`          | poll `{status,total,done,current,results}`                |
 | `GET /jobs/:id/zip`      | all outputs as one ZIP                                    |
 | `DELETE /jobs/:id`       | cleanup (also auto-pruned after 1 h)                      |
+| `GET /tools`             | `{platform,tools,missing,manager,plan}` status report     |
+| `POST /tools/install`    | run the detected manager's install plan, then re-probe    |
 
 **Pipeline** (`scripts/media-convert/pipeline.js`) mirrors `tasks/image/` + `tasks/video/` exactly:
 4 mozjpeg variants per image (`-mozjpg-uncompressed`, `-50`, `-75`,
 `-mozjpg3-MSSIM-tuned-kodak` q25+blur) and 6 outputs per video (`mp4`,
 `mp4-scaledown-2x.mp4`, posters + `-thumb.jpg` of both). Prefers
-`convert`/`cjpeg` when installed, falls back to ffmpeg. Folder structure is
+ImageMagick/`cjpeg` when installed, falls back to ffmpeg. Folder structure is
 preserved into the ZIP (`scripts/media-convert/zip.js` is a dependency-free
 ZIP writer).
+
+**Cross-platform toolchain** — tool presence is probed with `-version`
+spawns (not POSIX `which`), so detection works on Linux/macOS/Windows. On
+Windows the ImageMagick entrypoint is `magick convert …` — bare `convert`
+is Microsoft's filesystem tool and correctly reports absent.
+`scripts/media-convert/install.js` detects the platform package manager
+(brew → winget/choco → apt/dnf/pacman/zypper/apk), maps missing tools to
+package names, and splits the plan into runnable commands (user-space
+managers) vs. copyable manual commands (sudo managers cannot take a
+password without a tty).
+
+**Guided setup panel** — `CmsMediaConverter` probes `GET /tools` on mount
+and renders a status card above the dropzone whenever tools are missing:
+per-tool found/missing badges (required ffmpeg/ffprobe vs. optional
+ImageMagick/cjpeg), the plan's commands, an "Install via \<manager\>"
+button for runnable plans, a "Re-check" button, and the install output
+log. Hidden entirely when every tool is present or the endpoint 404s
+(older dev server).
 
 **Client** — `CmsMediaConverter` collects drops via
 `webkitGetAsEntry` traversal, uploads sequentially with per-file progress,

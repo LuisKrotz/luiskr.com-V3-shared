@@ -67,36 +67,57 @@ const probeVideo = async (file) => {
   return { codec: codec.trim(), width: parseInt(w, 10) || 0, pixFmt: pixFmt.trim() }
 }
 
-const which = async (cmd) =>
+// Every tool accepts -version — probing it works on all platforms and
+// avoids POSIX `which` (Windows has no `which`; `where` is cmd-only and
+// its exit code is unreliable through spawn). On win32 `convert` resolves
+// to Microsoft's built-in filesystem converter, which fails -version →
+// reported absent and ImageMagick's `magick` entrypoint is used instead.
+export const hasTool = async (cmd, args = ['-version']) =>
   new Promise((resolve) => {
-    const p = spawn('which', [cmd])
+    const p = spawn(cmd, args, { stdio: ['ignore', 'ignore', 'ignore'] })
+    p.on('error', () => resolve(false))
     p.on('close', (code) => resolve(code === 0))
   })
 
 let TOOLS = null
 
-export async function detectTools() {
-  if (!TOOLS) {
-    const [ffmpeg, ffprobe, convert, cjpeg] = await Promise.all([
-      which('ffmpeg'),
-      which('ffprobe'),
-      which('convert'),
-      which('cjpeg'),
+export async function detectTools(force = false) {
+  if (!TOOLS || force) {
+    const [ffmpeg, ffprobe, convert, cjpeg, magick] = await Promise.all([
+      hasTool('ffmpeg'),
+      hasTool('ffprobe'),
+      hasTool('convert'),
+      hasTool('cjpeg'),
+      hasTool('magick'),
     ])
-    TOOLS = { ffmpeg, ffprobe, convert, cjpeg }
-    if (!ffmpeg)
-      throw new Error('ffmpeg is required for media conversion but was not found on PATH')
+    TOOLS = { ffmpeg, ffprobe, convert, cjpeg, magick }
   }
   return TOOLS
 }
+
+/**
+ * ImageMagick invocation for the platform: `magick convert …` is the
+ * modern entrypoint on every OS and the only correct one on Windows —
+ * where bare `convert` is Microsoft's filesystem tool, never ImageMagick.
+ * @param t Tool map from detectTools().
+ * @param args Arguments for the `convert` subcommand.
+ * @returns {Promise<void>} resolves when the conversion exits 0.
+ */
+function imgMagick(t, args) {
+  if (t.magick) return run('magick', ['convert', ...args])
+  return run('convert', args)
+}
+
+/** True when an ImageMagick binary is usable on this platform. */
+const imOk = (t) => t.magick || t.convert
 
 /** Single JPEG encode honoring the task scripts' tools when present. */
 async function jpeg(src, dest, quality, { blur = false } = {}) {
   const t = await detectTools()
 
-  if (blur && t.convert) {
+  if (blur && imOk(t)) {
     // tasks/image/25 + tasks/video/mozjpg-25+blur.sh
-    await run('convert', [
+    await imgMagick(t, [
       src,
       '-quality',
       String(quality),
@@ -109,9 +130,11 @@ async function jpeg(src, dest, quality, { blur = false } = {}) {
     return
   }
 
-  if (t.cjpeg && t.convert) {
+  if (t.cjpeg && imOk(t)) {
     // tasks/image/{50,75,100}: convert src pnm:- | cjpeg -quality N
-    const c1 = spawn('convert', [src, 'pnm:-'], { stdio: ['ignore', 'pipe', 'pipe'] })
+    const c1 = t.magick
+      ? spawn('magick', ['convert', src, 'pnm:-'], { stdio: ['ignore', 'pipe', 'pipe'] })
+      : spawn('convert', [src, 'pnm:-'], { stdio: ['ignore', 'pipe', 'pipe'] })
     const c2 = spawn('cjpeg', ['-quality', String(quality)], { stdio: ['pipe', 'pipe', 'pipe'] })
     c1.stdout.pipe(c2.stdin)
     const fs = await import('node:fs')
@@ -250,6 +273,11 @@ export async function convertVideo(inFile, outDir, baseName) {
 }
 
 export async function convertFile(inFile, outDir) {
+  const t = await detectTools()
+
+  if (!t.ffmpeg)
+    throw new Error('ffmpeg is required for media conversion but was not found on PATH')
+
   const ext = path.extname(inFile).toLowerCase()
   const baseName = path.basename(inFile, ext)
 

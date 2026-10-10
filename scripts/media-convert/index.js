@@ -11,6 +11,8 @@
  *   GET    /jobs/:id           → { status,total,done,current,results }
  *   GET    /jobs/:id/zip       → application/zip             all outputs
  *   DELETE /jobs/:id           → 204                          cleanup temp dir
+ *   GET    /tools              → { platform,tools,missing,manager,plan }
+ *   POST   /tools/install      → { ok,log,report }            run install plan
  */
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
@@ -18,6 +20,7 @@ import os from 'node:os'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import { convertFile, isSupported, detectTools } from './pipeline.js'
+import { toolsReport, installTools } from './install.js'
 import { buildZip } from './zip.js'
 
 const PREFIX = '/api/media-convert'
@@ -114,6 +117,16 @@ async function handle(req, res, next) {
   const seg = sub.split('/').filter(Boolean)
 
   try {
+    // GET /tools — per-platform tool status + install plan for the GUI
+    if (req.method === 'GET' && sub === '/tools') {
+      return json(res, 200, await toolsReport())
+    }
+
+    // POST /tools/install — run the detected manager's plan, re-probe after
+    if (req.method === 'POST' && sub === '/tools/install') {
+      return json(res, 200, await installTools())
+    }
+
     // POST /jobs — create job
     if (req.method === 'POST' && sub === '/jobs') {
       const id = crypto.randomBytes(9).toString('base64url')
@@ -215,7 +228,8 @@ export function mediaConvertPlugin() {
     detectTools()
       .then((t) =>
         console.log(
-          `[media-convert] ready — ffmpeg:${t.ffmpeg} convert:${t.convert} cjpeg:${t.cjpeg}`
+          `[media-convert] ready — ffmpeg:${t.ffmpeg} ffprobe:${t.ffprobe} ` +
+            `imagemagick:${t.magick || t.convert} cjpeg:${t.cjpeg}`
         )
       )
       .catch((e) => console.warn(`[media-convert] ${e.message}`))
