@@ -7,8 +7,10 @@
  *   1. console-scan   forbidden console.* callsites (debug leftovers)
  *   2. typecheck      tsc --noEmit over all .ts/.tsx sources
  *   3. eslint         all module areas (style governance, token rules)
- *   4. jest coverage  every module's suite incl. axe a11y scan + style
- *                     governance; writes experiments/docs/reports/ + <module>/reports/coverage/
+ *   4. stored gates   every submodule's recorded gate result +
+ *                     coverage summary — modules gate themselves at
+ *                     commit/push; a missing/stale stamp falls back to
+ *                     running that module's suite with coverage
  *   5. coverage-gate  per-file 100% on statements/branches/functions/lines
  *                     in every module
  *   6. security-scan  Snyk (SNYK_TOKEN) / yarn audit fallback
@@ -31,7 +33,7 @@ const STEPS = {
   typecheck: 'yarn tsc --noEmit',
   lint: 'yarn eslint shared core website cms experiments --max-warnings=0',
   stylelint: 'yarn stylelint "{shared,core,website,cms,experiments}/**/*.scss" --max-warnings=0',
-  test: 'node shared/scripts/test/run-modules.mjs --coverage',
+  test: 'node shared/scripts/verify/scope-gates.mjs links',
   'coverage-gate': 'node shared/scripts/verify/coverage-gate.mjs',
   'security-scan': 'node shared/scripts/verify/security-scan.mjs',
 }

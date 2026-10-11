@@ -3,9 +3,19 @@
 #   1. prettier --write on every staged file (autofix, then re-stage)
 #   2. TypeScript typecheck only. Tests and coverage belong to later gates.
 #
-# Installed by shared/scripts/install-hooks.sh → .git/hooks/pre-commit
+# Runs in two contexts:
+#   • superproject root — scoped typecheck across touched module areas;
+#     bare gitlink bumps (link:<path>) typecheck nothing — the module's
+#     own hooks already gated that commit.
+#   • inside a module (submodule) — formats staged files and typechecks
+#     only that module's tsconfig.
+#
+# Installed by shared/scripts/install-hooks.mjs → <repo>/.git/hooks/pre-commit
+# (and into every submodule's hooks dir).
 
 set -euo pipefail
+
+SUPER="$(git rev-parse --show-superproject-working-tree 2>/dev/null || true)"
 
 cd "$(git rev-parse --show-toplevel)"
 
@@ -18,9 +28,21 @@ if [[ -n "$STAGED" ]]; then
   # exceed E2BIG on mega-commits (thousands of staged paths), and the
   # `yarn` wrapper makes it worse by re-spawning with the full env.
   # Calling the local binary directly is both safer and faster.
-  PRETTIER_BIN="$PWD/node_modules/.bin/prettier"
+  PRETTIER_BIN="$SUPER${SUPER:+/}node_modules/.bin/prettier"
+  [[ -x "$PRETTIER_BIN" ]] || PRETTIER_BIN="$PWD/node_modules/.bin/prettier"
   print -r -- "$STAGED" | xargs -s 65536 "$PRETTIER_BIN" --write --ignore-unknown
   print -r -- "$STAGED" | xargs -s 65536 git add --
+fi
+
+# ── 2. Typecheck ──────────────────────────────────────────────────────────────
+if [[ -n "$SUPER" ]]; then
+  # Module context — only this module's own tsconfig; sibling modules and
+  # the superproject belong to their own hooks/gates.
+  echo "── pre-commit: module typecheck ($(basename "$PWD")) ──"
+  if [[ -f tsconfig.json ]] && git diff --cached --name-only | grep -qE '\.(ts|tsx)$'; then
+    yarn tsc -p tsconfig.json --noEmit
+  fi
+  exit 0
 fi
 
 echo "── pre-commit: scoped TypeScript typecheck ──"
@@ -31,9 +53,11 @@ SCOPES="$(node shared/scripts/verify/scope-gates.mjs areas --staged)"
 if [[ -n "$SCOPES" ]]; then
   for scope in ${(s: :)SCOPES}; do
     case "$scope" in
+      link:*) ;; # gitlink bump — the module's own commit was already gated
       app)   yarn tsc --noEmit ;;
       earth) yarn tsc -p "experiments/earth-playground/tsconfig.json" --noEmit ;;
       docs)  yarn tsc -p "experiments/docs/tsconfig.json" --noEmit ;;
+      star-field) yarn tsc -p "experiments/star-field/tsconfig.json" --noEmit ;;
       *)     yarn tsc -p "$scope/tsconfig.json" --noEmit ;;
     esac
   done

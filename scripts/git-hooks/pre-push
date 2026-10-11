@@ -1,16 +1,52 @@
 #!/usr/bin/env zsh
-# luiskr.com pre-push gate — scoped by module. Commits are diffed against the
-# push range (origin/main fallback: HEAD~1); every touched module area gets
-# only its own gates: scoped tsc, eslint, stylelint, and the Jest slice that
-# exercises it. CMS never runs a11y/Lighthouse; experiments never watch
-# Lighthouse performance — the contract lives in shared/scripts/verify/scope-gates.mjs.
+# luiskr.com pre-push gate — scoped by module, split across two contexts:
 #
-# Installed by shared/scripts/install-hooks.sh → .git/hooks/pre-push
+#   • inside a module (submodule) — runs THAT module's full gate set
+#     (scoped tsc, eslint, stylelint, jest + governance) via the
+#     superproject's shared/scripts/verify/scope-gates.mjs, then stamps
+#     reports/gate-result.json so the parent never re-runs it.
+#   • superproject root — diffs the push range; bare gitlink bumps
+#     (link:<path>) validate the module's stored gate result instead of
+#     re-running, and fall back to the real gates when the stamp is
+#     missing or points at another commit.
+#
+# CMS never runs a11y/Lighthouse; experiments never watch Lighthouse
+# performance — the contract lives in shared/scripts/verify/scope-gates.mjs.
+#
+# Installed by shared/scripts/install-hooks.mjs → <repo>/.git/hooks/pre-push
+# (and into every submodule's hooks dir).
 
 set -euo pipefail
 
+SUPER="$(git rev-parse --show-superproject-working-tree 2>/dev/null || true)"
+
 cd "$(git rev-parse --show-toplevel)"
 
+# ── Module context ────────────────────────────────────────────────────────────
+if [[ -n "$SUPER" ]]; then
+  SG="$SUPER/shared/scripts/verify/scope-gates.mjs"
+  REL="${PWD#$SUPER/}"
+  SCOPE="$(node "$SG" scope "$REL")"
+
+  echo "── pre-push: module gates for ${SCOPE:-$REL} ──"
+  if [[ -n "$SCOPE" ]]; then
+    # 'self' skips when HEAD already carries a passing stamp — a re-push
+    # of gated commits never re-runs the suite.
+    node "$SG" self "$SCOPE"
+  else
+    # Module outside the gate registry (e.g. star-field before mapping):
+    # still run its own suite so pushes never ship unverified code.
+    if [[ -f jest.config.mjs ]]; then
+      node --experimental-vm-modules --disable-warning=ExperimentalWarning \
+        "$SUPER/node_modules/jest/bin/jest.js" --config jest.config.mjs
+    fi
+  fi
+
+  command -v git-lfs >/dev/null 2>&1 && git lfs pre-push "$@"
+  exit 0
+fi
+
+# ── Superproject context ──────────────────────────────────────────────────────
 # Resolve the push range: prefer upstream tracking ref, then origin/main,
 # then a single-parent diff, then the full workspace.
 RANGE=""
@@ -42,3 +78,5 @@ if [[ -n "$SCOPES" ]]; then
 else
   node shared/scripts/verify/scope-gates.mjs run --all
 fi
+
+command -v git-lfs >/dev/null 2>&1 && git lfs pre-push "$@"
