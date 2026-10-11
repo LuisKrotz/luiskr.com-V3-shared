@@ -10,7 +10,7 @@ const WEBGL_POOL_OBSERVER: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/motion/gpu.ts:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/motion/gpu.ts#L50)
+Defined in: core/tokens/motion/gpu.ts:50
 
 WebGL-pool visibility observer tuning — a 1% intersection suffices to
 count a canvas as visible (any pixel restores it; the rootMargin

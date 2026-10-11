@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/controls](../README.md) / SpAction
 
-Defined in: [experiments/earth-playground/space/controls.ts:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/controls.ts#L62)
+Defined in: experiments/earth-playground/space/controls.ts:62
 
 A group-level action button (reset view, screenshot, copy settings).
 
@@ -16,7 +16,7 @@ A group-level action button (reset view, screenshot, copy settings).
 label: string;
 ```
 
-Defined in: [experiments/earth-playground/space/controls.ts:64](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/controls.ts#L64)
+Defined in: experiments/earth-playground/space/controls.ts:64
 
 Translation key for the button label.
 
@@ -28,7 +28,7 @@ Translation key for the button label.
 action: string;
 ```
 
-Defined in: [experiments/earth-playground/space/controls.ts:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/controls.ts#L66)
+Defined in: experiments/earth-playground/space/controls.ts:66
 
 SP_ACTIONS token dispatched on click.
 
@@ -40,6 +40,6 @@ SP_ACTIONS token dispatched on click.
 optional pressed?: boolean;
 ```
 
-Defined in: [experiments/earth-playground/space/controls.ts:68](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/controls.ts#L68)
+Defined in: experiments/earth-playground/space/controls.ts:68
 
 Initial aria-pressed state for toggle-style actions.

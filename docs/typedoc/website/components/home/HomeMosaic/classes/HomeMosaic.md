@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/home/HomeMosaic](../README.md) / HomeMosaic
 
-Defined in: [website/components/home/HomeMosaic.tsx:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L45)
+Defined in: website/components/home/HomeMosaic.tsx:45
 
 The HomeMosaic — mosaic class.
 
@@ -20,7 +20,7 @@ The HomeMosaic — mosaic class.
 new HomeMosaic(): HomeMosaic;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:56](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L56)
+Defined in: website/components/home/HomeMosaic.tsx:56
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:56](https://github.com/LuisK
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -54,7 +54,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +76,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +97,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +115,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +131,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +151,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +167,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 _processedItems: MosaicItem[] = [];
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:46](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L46)
+Defined in: website/components/home/HomeMosaic.tsx:46
 
 ***
 
@@ -193,7 +193,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:46](https://github.com/LuisK
 _translations: MosaicTranslations | null = null;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L47)
+Defined in: website/components/home/HomeMosaic.tsx:47
 
 ***
 
@@ -203,7 +203,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:47](https://github.com/LuisK
 hoveredIdx: number | null = null;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L48)
+Defined in: website/components/home/HomeMosaic.tsx:48
 
 ***
 
@@ -213,7 +213,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:48](https://github.com/LuisK
 touchIdx: number | null = null;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:49](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L49)
+Defined in: website/components/home/HomeMosaic.tsx:49
 
 ***
 
@@ -223,7 +223,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:49](https://github.com/LuisK
 cards: MosaicCardStyle[] = [];
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L50)
+Defined in: website/components/home/HomeMosaic.tsx:50
 
 ***
 
@@ -233,7 +233,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:50](https://github.com/LuisK
 containerH: string;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L51)
+Defined in: website/components/home/HomeMosaic.tsx:51
 
 ***
 
@@ -243,7 +243,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:51](https://github.com/LuisK
 bottomHMap: Record<number, number> = {};
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:52](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L52)
+Defined in: website/components/home/HomeMosaic.tsx:52
 
 ***
 
@@ -253,7 +253,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:52](https://github.com/LuisK
 ext: string = MEDIA.EXT;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:53](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L53)
+Defined in: website/components/home/HomeMosaic.tsx:53
 
 ***
 
@@ -263,7 +263,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:53](https://github.com/LuisK
 _rafId: number | null = null;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:54](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L54)
+Defined in: website/components/home/HomeMosaic.tsx:54
 
 ***
 
@@ -4324,7 +4324,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get processedItems(): MosaicItem[];
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:71](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L71)
+Defined in: website/components/home/HomeMosaic.tsx:71
 
 ##### Returns
 
@@ -4336,7 +4336,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:71](https://github.com/LuisK
 set processedItems(val): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L62)
+Defined in: website/components/home/HomeMosaic.tsx:62
 
 Setter/getter — layout-ready project items pushed by the view.
 
@@ -4360,7 +4360,7 @@ Setter/getter — layout-ready project items pushed by the view.
 get translations(): MosaicTranslations | null;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:85](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L85)
+Defined in: website/components/home/HomeMosaic.tsx:85
 
 ##### Returns
 
@@ -4372,7 +4372,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:85](https://github.com/LuisK
 set translations(val): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L77)
+Defined in: website/components/home/HomeMosaic.tsx:77
 
 Setter/getter — locale strings for card labels.
 
@@ -4396,7 +4396,7 @@ Setter/getter — locale strings for card labels.
 get hasTouch(): boolean;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:91](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L91)
+Defined in: website/components/home/HomeMosaic.tsx:91
 
 Whether the session is touch-input (disables hover previews).
 
@@ -4414,7 +4414,7 @@ Whether the session is touch-input (disables hover previews).
 get storage(): string;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:97](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L97)
+Defined in: website/components/home/HomeMosaic.tsx:97
 
 CDN base URL for card media.
 
@@ -4432,7 +4432,7 @@ CDN base URL for card media.
 get skeletonH(): string;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:116](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L116)
+Defined in: website/components/home/HomeMosaic.tsx:116
 
 Height of the skeleton placeholder area.
 
@@ -4616,7 +4616,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4638,7 +4638,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: [core/Component.ts:116](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L116)
+Defined in: core/Component.ts:116
 
 #### Parameters
 
@@ -4662,7 +4662,7 @@ Defined in: [core/Component.ts:116](https://github.com/LuisKrotz/luiskr.com-V3/b
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4696,7 +4696,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4721,7 +4721,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4745,7 +4745,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4782,7 +4782,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4825,7 +4825,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4875,7 +4875,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4906,7 +4906,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4929,7 +4929,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4954,7 +4954,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4988,7 +4988,7 @@ Render result from render().
 _packSkeleton(): object;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:108](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L108)
+Defined in: website/components/home/HomeMosaic.tsx:108
 
 Packs skeleton tiles with the same lowest-column algorithm as
 quickLayout(), using the real featured pattern (first
@@ -5020,7 +5020,7 @@ height: number;
 onMounted(): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:120](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L120)
+Defined in: website/components/home/HomeMosaic.tsx:120
 
 #### Returns
 
@@ -5038,7 +5038,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:120](https://github.com/Luis
 onDestroy(): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:124](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L124)
+Defined in: website/components/home/HomeMosaic.tsx:124
 
 #### Returns
 
@@ -5056,7 +5056,7 @@ Defined in: [website/components/home/HomeMosaic.tsx:124](https://github.com/Luis
 scheduleLayout(): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:130](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L130)
+Defined in: website/components/home/HomeMosaic.tsx:130
 
 Debounced re-layout (resize/data changes).
 
@@ -5072,7 +5072,7 @@ Debounced re-layout (resize/data changes).
 quickLayout(): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:139](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L139)
+Defined in: website/components/home/HomeMosaic.tsx:139
 
 Synchronous layout pass for urgent repaints (data arrival, resize,
 hover expansion). Same packing math as layout() but skips the WASM
@@ -5090,7 +5090,7 @@ round-trip so the DOM never waits on a worker.
 layout(): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:145](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L145)
+Defined in: website/components/home/HomeMosaic.tsx:145
 
 Full masonry pass: measures, assigns columns, positions cards via WASM math.
 
@@ -5106,7 +5106,7 @@ Full masonry pass: measures, assigns columns, positions cards via WASM math.
 _applyCardStyles(): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:151](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L151)
+Defined in: website/components/home/HomeMosaic.tsx:151
 
 Writes computed card positions/sizes into DOM styles.
 
@@ -5122,7 +5122,7 @@ Writes computed card positions/sizes into DOM styles.
 onHover(i): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:159](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L159)
+Defined in: website/components/home/HomeMosaic.tsx:159
 
 Pointer-enter: expands the card's details region — see
 mosaic-interactions.ts for the two-pass measurement flow.
@@ -5145,7 +5145,7 @@ mosaic-interactions.ts for the two-pass measurement flow.
 onLeave(): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:165](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L165)
+Defined in: website/components/home/HomeMosaic.tsx:165
 
 Pointer-leave: clears hover state.
 
@@ -5161,7 +5161,7 @@ Pointer-leave: clears hover state.
 onClick(item, i): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:173](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L173)
+Defined in: website/components/home/HomeMosaic.tsx:173
 
 Card activation — see mosaic-interactions.ts for the desktop-nav /
 two-tap-on-touch split.
@@ -5188,7 +5188,7 @@ two-tap-on-touch split.
 skeletonStyle(box): string;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:179](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L179)
+Defined in: website/components/home/HomeMosaic.tsx:179
 
 Style object for one skeleton placeholder box.
 
@@ -5210,7 +5210,7 @@ Style object for one skeleton placeholder box.
 render(): Element;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:185](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L185)
+Defined in: website/components/home/HomeMosaic.tsx:185
 
 JSX template for the component's shadow DOM.
 
@@ -5230,7 +5230,7 @@ JSX template for the component's shadow DOM.
 onUpdated(): void;
 ```
 
-Defined in: [website/components/home/HomeMosaic.tsx:189](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/HomeMosaic.tsx#L189)
+Defined in: website/components/home/HomeMosaic.tsx:189
 
 #### Returns
 

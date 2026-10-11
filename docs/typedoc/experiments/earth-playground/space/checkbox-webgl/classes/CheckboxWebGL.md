@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/checkbox-webgl](../README.md) / CheckboxWebGL
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:16](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L16)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:16
 
 Canvas-2D checkbox widget — see file header for the render/loop design.
 
@@ -20,7 +20,7 @@ new CheckboxWebGL(
 ): CheckboxWebGL;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:28](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L28)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:28
 
 #### Parameters
 
@@ -48,7 +48,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:28](https://gi
 canvas: HTMLCanvasElement | null;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:17](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L17)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:17
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:17](https://gi
 isChecked: boolean;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:18](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L18)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:18
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:18](https://gi
 onToggle: ((_checked) => void) | null;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:19](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L19)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:19
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:19](https://gi
 animId: number | null;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:20](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L20)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:20
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:20](https://gi
 progress: number;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:21](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L21)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:21
 
 ***
 
@@ -98,7 +98,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:21](https://gi
 targetP: number;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:22](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L22)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:22
 
 ***
 
@@ -108,7 +108,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:22](https://gi
 startTime: number;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:23](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L23)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:23
 
 ***
 
@@ -118,7 +118,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:23](https://gi
 pulseTime: number = 0;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:24](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L24)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:24
 
 ***
 
@@ -128,7 +128,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:24](https://gi
 ctx2d: CanvasRenderingContext2D | null = null;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L25)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:25
 
 ***
 
@@ -138,7 +138,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:25](https://gi
 _ink: string | null = null;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L26)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:26
 
 ## Methods
 
@@ -148,7 +148,7 @@ Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:26](https://gi
 setChecked(val): void;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:52](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L52)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:52
 
 Sets the checked state (animates the transition).
 
@@ -170,7 +170,7 @@ Sets the checked state (animates the transition).
 init(): void;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L90)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:90
 
 Sizes the backing store to 20 CSS px × devicePixelRatio (capped at 2× —
 beyond that the extra pixels are invisible on a 20px control) and
@@ -189,7 +189,7 @@ the label still communicates state.
 destroy(): void;
 ```
 
-Defined in: [experiments/earth-playground/space/checkbox-webgl.ts:213](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/checkbox-webgl.ts#L213)
+Defined in: experiments/earth-playground/space/checkbox-webgl.ts:213
 
 Stops the loop and releases the canvas resources.
 

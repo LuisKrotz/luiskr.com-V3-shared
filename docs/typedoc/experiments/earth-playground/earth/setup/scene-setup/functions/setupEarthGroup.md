@@ -8,7 +8,7 @@
 function setupEarthGroup(s, deps): Promise<boolean>;
 ```
 
-Defined in: [experiments/earth-playground/earth/setup/scene-setup.ts:164](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/setup/scene-setup.ts#L164)
+Defined in: experiments/earth-playground/earth/setup/scene-setup.ts:164
 
 The 4-shell Earth group (see earth/meshes.ts). Anisotropy is maxed at
 the renderer's supported level (clamped fallback 4) — equirect maps

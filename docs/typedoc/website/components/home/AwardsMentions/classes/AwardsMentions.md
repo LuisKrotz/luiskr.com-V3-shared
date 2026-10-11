@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/home/AwardsMentions](../README.md) / AwardsMentions
 
-Defined in: [website/components/home/AwardsMentions.tsx:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L39)
+Defined in: website/components/home/AwardsMentions.tsx:39
 
 The AwardsMentions — mentions class.
 
@@ -20,7 +20,7 @@ The AwardsMentions — mentions class.
 new AwardsMentions(): AwardsMentions;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L48)
+Defined in: website/components/home/AwardsMentions.tsx:48
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:48](https://github.com/L
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -54,7 +54,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +76,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +97,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +115,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +131,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +151,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +167,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 _title: string;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L40)
+Defined in: website/components/home/AwardsMentions.tsx:40
 
 ***
 
@@ -193,7 +193,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:40](https://github.com/L
 _items: unknown[] | null = null;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L43)
+Defined in: website/components/home/AwardsMentions.tsx:43
 
 ***
 
@@ -203,7 +203,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:43](https://github.com/L
 _lastLocale: string | null = null;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:44](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L44)
+Defined in: website/components/home/AwardsMentions.tsx:44
 
 ***
 
@@ -213,7 +213,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:44](https://github.com/L
 _duration: number = 10000;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L45)
+Defined in: website/components/home/AwardsMentions.tsx:45
 
 ***
 
@@ -223,7 +223,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:45](https://github.com/L
 _autoplayEverStarted: boolean = false;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:46](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L46)
+Defined in: website/components/home/AwardsMentions.tsx:46
 
 ***
 
@@ -4266,7 +4266,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get title(): string;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L67)
+Defined in: website/components/home/AwardsMentions.tsx:67
 
 The **`HTMLElement.title`** property represents the title of the element: the text usually displayed in a 'tooltip' popup when the mouse is over the node.
 
@@ -4282,7 +4282,7 @@ The **`HTMLElement.title`** property represents the title of the element: the te
 set title(val): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:54](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L54)
+Defined in: website/components/home/AwardsMentions.tsx:54
 
 Setter/getter — section heading text.
 
@@ -4314,7 +4314,7 @@ The **`HTMLElement.title`** property represents the title of the element: the te
 get items(): unknown[] | null;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:91](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L91)
+Defined in: website/components/home/AwardsMentions.tsx:91
 
 ##### Returns
 
@@ -4326,7 +4326,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:91](https://github.com/L
 set items(val): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:73](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L73)
+Defined in: website/components/home/AwardsMentions.tsx:73
 
 Setter/getter — award/mention entries for the carousel.
 
@@ -4350,7 +4350,7 @@ Setter/getter — award/mention entries for the carousel.
 get legalLinks(): LegalLink[];
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:97](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L97)
+Defined in: website/components/home/AwardsMentions.tsx:97
 
 Legal-page links for the footer row (see awards/data.ts).
 
@@ -4534,7 +4534,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4556,7 +4556,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onDestroy(): void;
 ```
 
-Defined in: [core/Component.ts:117](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L117)
+Defined in: core/Component.ts:117
 
 #### Returns
 
@@ -4574,7 +4574,7 @@ Defined in: [core/Component.ts:117](https://github.com/LuisKrotz/luiskr.com-V3/b
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4608,7 +4608,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4633,7 +4633,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4657,7 +4657,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4694,7 +4694,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4737,7 +4737,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4787,7 +4787,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4818,7 +4818,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4841,7 +4841,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4866,7 +4866,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4900,7 +4900,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:101](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L101)
+Defined in: website/components/home/AwardsMentions.tsx:101
 
 #### Returns
 
@@ -4918,7 +4918,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:101](https://github.com/
 onStoreUpdate(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L113)
+Defined in: website/components/home/AwardsMentions.tsx:113
 
 #### Returns
 
@@ -4936,7 +4936,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:113](https://github.com/
 _ensureData(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:127](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L127)
+Defined in: website/components/home/AwardsMentions.tsx:127
 
 Loads the mentions + legal-links nodes when missing (SWR).
 
@@ -4952,7 +4952,7 @@ Loads the mentions + legal-links nodes when missing (SWR).
 onUpdated(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:131](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L131)
+Defined in: website/components/home/AwardsMentions.tsx:131
 
 #### Returns
 
@@ -4970,7 +4970,7 @@ Defined in: [website/components/home/AwardsMentions.tsx:131](https://github.com/
 _setupCarousel(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:137](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L137)
+Defined in: website/components/home/AwardsMentions.tsx:137
 
 Builds the auto-advance loop (see awards/carousel.ts).
 
@@ -4986,7 +4986,7 @@ Builds the auto-advance loop (see awards/carousel.ts).
 _showProgress(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:143](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L143)
+Defined in: website/components/home/AwardsMentions.tsx:143
 
 Shows the circular progress indicator for the current slide.
 
@@ -5002,7 +5002,7 @@ Shows the circular progress indicator for the current slide.
 _hideProgress(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:149](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L149)
+Defined in: website/components/home/AwardsMentions.tsx:149
 
 Hides the progress arc (paused/hover).
 
@@ -5018,7 +5018,7 @@ Hides the progress arc (paused/hover).
 _restartProgressAnimation(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:155](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L155)
+Defined in: website/components/home/AwardsMentions.tsx:155
 
 Resets the SVG progress arc so the next slide's timer animates from zero.
 
@@ -5034,7 +5034,7 @@ Resets the SVG progress arc so the next slide's timer animates from zero.
 _bindLinks(): void;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:161](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L161)
+Defined in: website/components/home/AwardsMentions.tsx:161
 
 Wires internal links through the SPA router.
 
@@ -5050,7 +5050,7 @@ Wires internal links through the SPA router.
 render(): Element;
 ```
 
-Defined in: [website/components/home/AwardsMentions.tsx:185](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/AwardsMentions.tsx#L185)
+Defined in: website/components/home/AwardsMentions.tsx:185
 
 JSX template for the component's shadow DOM.
 

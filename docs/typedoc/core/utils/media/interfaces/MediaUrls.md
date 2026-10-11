@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / MediaUrls
 
-Defined in: [core/utils/media.ts:30](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/media.ts#L30)
+Defined in: core/utils/media.ts:30
 
 Resolved media URL triple — the full-quality `source`, the progressive
 `thumb` (mozjpeg small variant or video poster frame), and the `isVideo`
@@ -18,7 +18,7 @@ discriminator echoed back so consumers don't re-inspect the item.
 source: string;
 ```
 
-Defined in: [core/utils/media.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/media.ts#L31)
+Defined in: core/utils/media.ts:31
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [core/utils/media.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/
 thumb: string;
 ```
 
-Defined in: [core/utils/media.ts:32](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/media.ts#L32)
+Defined in: core/utils/media.ts:32
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [core/utils/media.ts:32](https://github.com/LuisKrotz/luiskr.com-V3/
 isVideo: boolean;
 ```
 
-Defined in: [core/utils/media.ts:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/media.ts#L33)
+Defined in: core/utils/media.ts:33

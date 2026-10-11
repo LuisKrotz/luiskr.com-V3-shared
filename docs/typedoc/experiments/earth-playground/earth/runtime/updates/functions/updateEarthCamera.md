@@ -8,7 +8,7 @@
 function updateEarthCamera(s, __namedParameters?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/updates.ts:82](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/updates.ts#L82)
+Defined in: experiments/earth-playground/earth/runtime/updates.ts:82
 
 Camera tweaks. `fov` needs updateProjectionMatrix() to rebuild the
 frustum; orbit flags write straight into OrbitControls.

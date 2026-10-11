@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/portfolio/Related](../README.md) / PortfolioRelated
 
-Defined in: [website/components/portfolio/Related.tsx:28](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L28)
+Defined in: website/components/portfolio/Related.tsx:28
 
 The PortfolioRelated — related class.
 
@@ -20,7 +20,7 @@ The PortfolioRelated — related class.
 new PortfolioRelated(): PortfolioRelated;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L43)
+Defined in: website/components/portfolio/Related.tsx:43
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [website/components/portfolio/Related.tsx:43](https://github.com/Lui
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -54,7 +54,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +76,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +97,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +115,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +131,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +151,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +167,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 translations: RelatedTranslations = {};
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:29](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L29)
+Defined in: website/components/portfolio/Related.tsx:29
 
 ***
 
@@ -193,7 +193,7 @@ Defined in: [website/components/portfolio/Related.tsx:29](https://github.com/Lui
 homePortfolio: HomeItem[] = [];
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L31)
+Defined in: website/components/portfolio/Related.tsx:31
 
 ***
 
@@ -203,7 +203,7 @@ Defined in: [website/components/portfolio/Related.tsx:31](https://github.com/Lui
 _unsubRouter: (() => void) | null = null;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L33)
+Defined in: website/components/portfolio/Related.tsx:33
 
 ***
 
@@ -213,7 +213,7 @@ Defined in: [website/components/portfolio/Related.tsx:33](https://github.com/Lui
 _noteOpen: boolean = false;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L35)
+Defined in: website/components/portfolio/Related.tsx:35
 
 ***
 
@@ -223,7 +223,7 @@ Defined in: [website/components/portfolio/Related.tsx:35](https://github.com/Lui
 _noteTruncated: boolean = false;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:37](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L37)
+Defined in: website/components/portfolio/Related.tsx:37
 
 ***
 
@@ -233,7 +233,7 @@ Defined in: [website/components/portfolio/Related.tsx:37](https://github.com/Lui
 _noteEl: Element | null = null;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L39)
+Defined in: website/components/portfolio/Related.tsx:39
 
 ***
 
@@ -243,7 +243,7 @@ Defined in: [website/components/portfolio/Related.tsx:39](https://github.com/Lui
 _noteRO: ResizeObserver | null = null;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L41)
+Defined in: website/components/portfolio/Related.tsx:41
 
 ***
 
@@ -4304,7 +4304,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get storage(): string;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L103)
+Defined in: website/components/portfolio/Related.tsx:103
 
 CDN base URL for project media.
 
@@ -4322,7 +4322,7 @@ CDN base URL for project media.
 get projectsList(): RelatedCard[];
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:112](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L112)
+Defined in: website/components/portfolio/Related.tsx:112
 
 Maps the DB `related.projects` rows into display-ready cards — see
 related/match.ts for the fuzzy link/image/title join against the
@@ -4508,7 +4508,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4530,7 +4530,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4564,7 +4564,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4589,7 +4589,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4613,7 +4613,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4650,7 +4650,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4693,7 +4693,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4743,7 +4743,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4774,7 +4774,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4797,7 +4797,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4822,7 +4822,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4856,7 +4856,7 @@ Render result from render().
 _toggleNote(): void;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:49](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L49)
+Defined in: website/components/portfolio/Related.tsx:49
 
 Toggles the clamped footer disclaimer between one-line and full text.
 
@@ -4872,7 +4872,7 @@ Toggles the clamped footer disclaimer between one-line and full text.
 _measureNote(): void;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:61](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L61)
+Defined in: website/components/portfolio/Related.tsx:61
 
 Detects whether the clamped note actually overflows — CSS cannot
 detect line-clamp truncation, so scrollHeight vs clientHeight does
@@ -4892,7 +4892,7 @@ is unclamped by definition, and the affordance hides anyway).
 _watchNoteTruncation(): void;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:80](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L80)
+Defined in: website/components/portfolio/Related.tsx:80
 
 Binds a ResizeObserver to the note button so font loads, viewport
 resizes and locale swaps re-evaluate truncation. The element is
@@ -4911,7 +4911,7 @@ node identity changes instead of watching a detached element.
 onMounted(): void;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:122](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L122)
+Defined in: website/components/portfolio/Related.tsx:122
 
 Lifecycle: seeds translations from the store (they may already be
 loaded by the view), kicks the SWR fetch for the two DB nodes it
@@ -4934,7 +4934,7 @@ re-runs the fuzzy match against the new page's related list.
 onDestroy(): void;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:137](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L137)
+Defined in: website/components/portfolio/Related.tsx:137
 
 Lifecycle: removes the router subscription + the note observer.
 
@@ -4954,7 +4954,7 @@ Lifecycle: removes the router subscription + the note observer.
 onStoreUpdate(): void;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:151](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L151)
+Defined in: website/components/portfolio/Related.tsx:151
 
 #### Returns
 
@@ -4972,7 +4972,7 @@ Defined in: [website/components/portfolio/Related.tsx:151](https://github.com/Lu
 onUpdated(): void;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:159](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L159)
+Defined in: website/components/portfolio/Related.tsx:159
 
 #### Returns
 
@@ -4990,7 +4990,7 @@ Defined in: [website/components/portfolio/Related.tsx:159](https://github.com/Lu
 fetchData(): void;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:168](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L168)
+Defined in: website/components/portfolio/Related.tsx:168
 
 Fires two SWR reads in parallel: the home page node (for the
 portfoliolist join table) and the components/related node — see
@@ -5008,7 +5008,7 @@ related/data.ts.
 render(): Element;
 ```
 
-Defined in: [website/components/portfolio/Related.tsx:174](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/Related.tsx#L174)
+Defined in: website/components/portfolio/Related.tsx:174
 
 JSX template for the component's shadow DOM.
 

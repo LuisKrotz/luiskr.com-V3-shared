@@ -8,7 +8,7 @@
 function slugify(text): string;
 ```
 
-Defined in: [core/utils/string.ts:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/string.ts#L66)
+Defined in: core/utils/string.ts:66
 
 Converts a string into a clean, URL-safe and DOM-id-safe slug.
 Pipeline: lowercase → drop non-word/non-space/non-dash chars → collapse

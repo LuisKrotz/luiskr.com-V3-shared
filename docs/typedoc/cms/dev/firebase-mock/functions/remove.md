@@ -8,9 +8,9 @@
 function remove(r): Promise<void>;
 ```
 
-Defined in: [cms/dev/firebase-mock.ts:92](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/dev/firebase-mock.ts#L92)
+Defined in: cms/dev/firebase-mock.ts:126
 
-Mock of firebase/database `remove()` — logs the delete, persists nothing.
+Mock of firebase/database `remove()` — tombstones the key in the overlay.
 
 ## Parameters
 

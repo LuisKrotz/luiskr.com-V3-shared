@@ -18,8 +18,8 @@ const EARTH_TEXTURES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/playground/textures.ts:15](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/playground/textures.ts#L15)
+Defined in: core/tokens/playground/textures.ts:15
 
-Public-URL paths for the Earth Playground texture set (served from `public/experiments/earth-playground/textures/earth/`). NASA-visible-earth style maps: day albedo, night city lights, ocean specular mask, bump/normal, cloud layer, star field backdrop, moon albedo + lunar displacement (LDEM). Sole declaration site — consumers import members
+Public-URL paths for the Earth Playground texture set (served from `experiments/earth-playground/public/textures/earth/`). NASA-visible-earth style maps: day albedo, night city lights, ocean specular mask, bump/normal, cloud layer, star field backdrop, moon albedo + lunar displacement (LDEM). Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals
 (zero-hardcoding rule).

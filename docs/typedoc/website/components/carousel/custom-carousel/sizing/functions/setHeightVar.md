@@ -8,7 +8,7 @@
 function setHeightVar(c): void;
 ```
 
-Defined in: [website/components/carousel/custom-carousel/sizing.ts:202](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/custom-carousel/sizing.ts#L202)
+Defined in: website/components/carousel/custom-carousel/sizing.ts:202
 
 Publishes --carousel-item-height on the enclosing <section>: the first
 item's intrinsic ratio applied to the host width ((h/w)·hostW), capped

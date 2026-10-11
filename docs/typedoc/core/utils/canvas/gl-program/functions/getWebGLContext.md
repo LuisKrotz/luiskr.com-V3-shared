@@ -8,7 +8,7 @@
 function getWebGLContext(canvas, attrs?): WebGLRenderingContext | null;
 ```
 
-Defined in: [core/utils/canvas/gl-program.ts:20](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/gl-program.ts#L20)
+Defined in: core/utils/canvas/gl-program.ts:20
 
 Probes the canvas for a WebGL context — prefers `webgl`, falls back to
 `experimental-webgl`. Returns null when the browser has no GL support or

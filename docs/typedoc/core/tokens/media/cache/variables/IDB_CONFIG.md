@@ -16,7 +16,7 @@ const IDB_CONFIG: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/media/cache.ts:11](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/media/cache.ts#L11)
+Defined in: core/tokens/media/cache.ts:11
 
 IndexedDB media disk-cache + network cache-mode tokens. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

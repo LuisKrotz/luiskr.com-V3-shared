@@ -8,7 +8,7 @@
 function patchMediaExpanded(): void;
 ```
 
-Defined in: [core/safari/patches/media-expanded.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/patches/media-expanded.ts#L25)
+Defined in: core/safari/patches/media-expanded.ts:25
 
 Installs the MediaExpanded patch once the element registers: wraps
 `onMounted` to (a) bind click + touchend on every close target —

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / LangState
 
-Defined in: [core/store/state.ts:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L35)
+Defined in: core/store/state.ts:35
 
 The locale slice of StoreState: fetched dictionary nodes (components,
 app, slugs) plus the DB path grammar and resolved locale code.
@@ -19,7 +19,7 @@ readers must treat falsy as "load pending", never as "empty".
 components: unknown;
 ```
 
-Defined in: [core/store/state.ts:36](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L36)
+Defined in: core/store/state.ts:36
 
 ***
 
@@ -29,7 +29,7 @@ Defined in: [core/store/state.ts:36](https://github.com/LuisKrotz/luiskr.com-V3/
 app: Record<string, unknown> | null;
 ```
 
-Defined in: [core/store/state.ts:37](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L37)
+Defined in: core/store/state.ts:37
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [core/store/state.ts:37](https://github.com/LuisKrotz/luiskr.com-V3/
 slugs: Record<string, unknown> | null;
 ```
 
-Defined in: [core/store/state.ts:38](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L38)
+Defined in: core/store/state.ts:38
 
 ***
 
@@ -49,7 +49,7 @@ Defined in: [core/store/state.ts:38](https://github.com/LuisKrotz/luiskr.com-V3/
 carousel: Record<string, unknown>;
 ```
 
-Defined in: [core/store/state.ts:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L39)
+Defined in: core/store/state.ts:39
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: [core/store/state.ts:39](https://github.com/LuisKrotz/luiskr.com-V3/
 statsHud: Record<string, unknown>;
 ```
 
-Defined in: [core/store/state.ts:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L40)
+Defined in: core/store/state.ts:40
 
 ***
 
@@ -69,7 +69,7 @@ Defined in: [core/store/state.ts:40](https://github.com/LuisKrotz/luiskr.com-V3/
 database: string;
 ```
 
-Defined in: [core/store/state.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L41)
+Defined in: core/store/state.ts:41
 
 ***
 
@@ -79,7 +79,7 @@ Defined in: [core/store/state.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/
 locale: string;
 ```
 
-Defined in: [core/store/state.ts:42](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L42)
+Defined in: core/store/state.ts:42
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: [core/store/state.ts:42](https://github.com/LuisKrotz/luiskr.com-V3/
 pagesPath: string;
 ```
 
-Defined in: [core/store/state.ts:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L43)
+Defined in: core/store/state.ts:43
 
 ***
 
@@ -99,4 +99,4 @@ Defined in: [core/store/state.ts:43](https://github.com/LuisKrotz/luiskr.com-V3/
 projectPath: string;
 ```
 
-Defined in: [core/store/state.ts:44](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L44)
+Defined in: core/store/state.ts:44

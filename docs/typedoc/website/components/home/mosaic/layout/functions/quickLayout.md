@@ -8,7 +8,7 @@
 function quickLayout(host): void;
 ```
 
-Defined in: [website/components/home/mosaic/layout.ts:42](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/layout.ts#L42)
+Defined in: website/components/home/mosaic/layout.ts:42
 
 Synchronous layout pass for urgent repaints. Same packing math as
 layout() but skips the WASM round-trip so the DOM never waits on a

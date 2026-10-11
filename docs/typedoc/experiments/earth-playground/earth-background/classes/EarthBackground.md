@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/earth-playground/earth-background](../README.md) / EarthBackground
 
-Defined in: [experiments/earth-playground/earth-background.ts:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L62)
+Defined in: experiments/earth-playground/earth-background.ts:62
 
 Owns the full WebGPU/WebGL Earth scene: renderer, camera rig, sun+moon
 lighting, the textured Earth group (surface/clouds/atmosphere shells), and
@@ -19,7 +19,7 @@ grade → vignette → film grain).
 new EarthBackground(canvas, __namedParameters?): EarthBackground;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L66)
+Defined in: experiments/earth-playground/earth-background.ts:66
 
 #### Parameters
 
@@ -43,6 +43,25 @@ Defined in: [experiments/earth-playground/earth-background.ts:66](https://github
 
 ## Accessors
 
+### failed
+
+#### Get Signature
+
+```ts
+get failed(): boolean;
+```
+
+Defined in: experiments/earth-playground/earth-background.ts:103
+
+True when bootstrap bailed or threw before the scene assembled — hosts
+should swap in the CSS fallback surface instead of a dead canvas.
+
+##### Returns
+
+`boolean`
+
+***
+
 ### settings
 
 #### Get Signature
@@ -51,7 +70,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:66](https://github
 get settings(): object;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:177](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L177)
+Defined in: experiments/earth-playground/earth-background.ts:194
 
 Snapshot of every tunable, shaped exactly like DEFAULT_SP_GUI so the
 playground control panel can render sliders without knowing which
@@ -571,7 +590,7 @@ INCLINATION: number;
 init(): Promise<void>;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:81](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L81)
+Defined in: experiments/earth-playground/earth-background.ts:81
 
 #### Returns
 
@@ -585,7 +604,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:81](https://github
 setReducedMotion(reduced): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:95](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L95)
+Defined in: experiments/earth-playground/earth-background.ts:112
 
 Pause/resume the render loop for prefers-reduced-motion. The last frame
 stays on screen (preserveDrawingBuffer), so pausing never blanks the
@@ -609,7 +628,7 @@ background — motion just stops.
 setTheme(isDark): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:114](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L114)
+Defined in: experiments/earth-playground/earth-background.ts:131
 
 Store the UI theme for the sun-rotation theme feature (not yet wired
 into the scene — kept as public API for the playground controls).
@@ -632,7 +651,7 @@ into the scene — kept as public API for the playground controls).
 setVisible(visible): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:123](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L123)
+Defined in: experiments/earth-playground/earth-background.ts:140
 
 Show/hide the canvas and stop the loop while hidden — the playground
 page is the only consumer, so hiding releases GPU work entirely.
@@ -655,7 +674,7 @@ page is the only consumer, so hiding releases GPU work entirely.
 takeScreenshot(): Promise<void>;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:144](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L144)
+Defined in: experiments/earth-playground/earth-background.ts:161
 
 Renders one frame at 2× resolutionScale and downloads it as PNG.
 Temporarily bumps pixel ratio → resize → render → capture → restore,
@@ -673,7 +692,7 @@ so the saved image is sharper than the live viewport.
 destroy(): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:154](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L154)
+Defined in: experiments/earth-playground/earth-background.ts:171
 
 Tears down the engine: stops RAF, unbinds resize, releases the
 renderer's GPU context and the controls' DOM listeners. Idempotent —
@@ -692,7 +711,7 @@ disposed after each await and bail).
 updateBloom(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:201](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L201)
+Defined in: experiments/earth-playground/earth-background.ts:218
 
 #### Parameters
 
@@ -726,7 +745,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:201](https://githu
 updateColorGrading(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:207](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L207)
+Defined in: experiments/earth-playground/earth-background.ts:224
 
 #### Parameters
 
@@ -760,7 +779,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:207](https://githu
 updateCamera(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:213](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L213)
+Defined in: experiments/earth-playground/earth-background.ts:230
 
 #### Parameters
 
@@ -790,7 +809,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:213](https://githu
 updateEarth(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:217](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L217)
+Defined in: experiments/earth-playground/earth-background.ts:234
 
 #### Parameters
 
@@ -816,7 +835,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:217](https://githu
 updateEarthMaterial(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:221](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L221)
+Defined in: experiments/earth-playground/earth-background.ts:238
 
 #### Parameters
 
@@ -854,7 +873,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:221](https://githu
 updateVignette(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:233](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L233)
+Defined in: experiments/earth-playground/earth-background.ts:250
 
 #### Parameters
 
@@ -884,7 +903,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:233](https://githu
 updateChromatic(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:237](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L237)
+Defined in: experiments/earth-playground/earth-background.ts:254
 
 #### Parameters
 
@@ -914,7 +933,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:237](https://githu
 updateRender(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:241](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L241)
+Defined in: experiments/earth-playground/earth-background.ts:258
 
 #### Parameters
 
@@ -936,7 +955,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:241](https://githu
 updateFilm(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:245](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L245)
+Defined in: experiments/earth-playground/earth-background.ts:262
 
 #### Parameters
 
@@ -962,7 +981,7 @@ Defined in: [experiments/earth-playground/earth-background.ts:245](https://githu
 updateSun(o?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:249](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L249)
+Defined in: experiments/earth-playground/earth-background.ts:266
 
 #### Parameters
 
@@ -1005,7 +1024,7 @@ getCameraState():
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L257)
+Defined in: experiments/earth-playground/earth-background.ts:274
 
 Current camera position + orbit target, rounded to 2 decimals — used
 to persist/restore the view in the playground's settings snapshot.
@@ -1034,7 +1053,7 @@ to persist/restore the view in the playground's settings snapshot.
 resetView(): void;
 ```
 
-Defined in: [experiments/earth-playground/earth-background.ts:266](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth-background.ts#L266)
+Defined in: experiments/earth-playground/earth-background.ts:283
 
 Restore the default framing: OrbitControls.reset() replays saveState()
 (captured at bootstrap), then fov/position/target are pinned to

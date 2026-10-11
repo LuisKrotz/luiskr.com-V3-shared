@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/runtime/state](../README.md) / EarthMoonState
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L40)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:40
 
 Moon orbit settings driven by the control panel.
 
@@ -16,7 +16,7 @@ Moon orbit settings driven by the control panel.
 enabled: boolean;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:42](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L42)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:42
 
 Whether the moon layer is rendered at all.
 
@@ -28,7 +28,7 @@ Whether the moon layer is rendered at all.
 speed: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:44](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L44)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:44
 
 Orbit angular speed.
 
@@ -40,7 +40,7 @@ Orbit angular speed.
 distance: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:46](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L46)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:46
 
 Orbit radius in world units.
 
@@ -52,7 +52,7 @@ Orbit radius in world units.
 inclination: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L48)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:48
 
 Orbit plane inclination (rad).
 
@@ -64,6 +64,6 @@ Orbit plane inclination (rad).
 angle: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L50)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:50
 
 Current orbit angle (rad).

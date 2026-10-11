@@ -12,7 +12,7 @@ function buildMediaUrls(
 ): MediaUrls;
 ```
 
-Defined in: [core/utils/media.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/media.ts#L113)
+Defined in: core/utils/media.ts:113
 
 Constructs media URLs for images and videos following the project's
 compression pipeline. URL grammar:

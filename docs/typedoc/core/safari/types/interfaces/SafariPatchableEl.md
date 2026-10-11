@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/safari/types](../README.md) / SafariPatchableEl
 
-Defined in: [core/safari/types.ts:10](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L10)
+Defined in: core/safari/types.ts:10
 
 Structural surface the Safari patches rely on (BaseComponent subclasses).
 
@@ -20,7 +20,7 @@ Structural surface the Safari patches rely on (BaseComponent subclasses).
 optional classes?: string[];
 ```
 
-Defined in: [core/safari/types.ts:11](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L11)
+Defined in: core/safari/types.ts:11
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [core/safari/types.ts:11](https://github.com/LuisKrotz/luiskr.com-V3
 optional autoPlay?: boolean;
 ```
 
-Defined in: [core/safari/types.ts:12](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L12)
+Defined in: core/safari/types.ts:12
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [core/safari/types.ts:12](https://github.com/LuisKrotz/luiskr.com-V3
 optional isVideo?: boolean;
 ```
 
-Defined in: [core/safari/types.ts:13](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L13)
+Defined in: core/safari/types.ts:13
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [core/safari/types.ts:13](https://github.com/LuisKrotz/luiskr.com-V3
 optional isLoaded?: boolean;
 ```
 
-Defined in: [core/safari/types.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L14)
+Defined in: core/safari/types.ts:14
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [core/safari/types.ts:14](https://github.com/LuisKrotz/luiskr.com-V3
 optional mediaHeight?: number;
 ```
 
-Defined in: [core/safari/types.ts:15](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L15)
+Defined in: core/safari/types.ts:15
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [core/safari/types.ts:15](https://github.com/LuisKrotz/luiskr.com-V3
 optional mediaWidth?: number;
 ```
 
-Defined in: [core/safari/types.ts:16](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L16)
+Defined in: core/safari/types.ts:16
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [core/safari/types.ts:16](https://github.com/LuisKrotz/luiskr.com-V3
 optional mediaSrc?: string;
 ```
 
-Defined in: [core/safari/types.ts:17](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L17)
+Defined in: core/safari/types.ts:17
 
 ***
 
@@ -90,7 +90,7 @@ Defined in: [core/safari/types.ts:17](https://github.com/LuisKrotz/luiskr.com-V3
 optional highResSrc?: string;
 ```
 
-Defined in: [core/safari/types.ts:18](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L18)
+Defined in: core/safari/types.ts:18
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [core/safari/types.ts:18](https://github.com/LuisKrotz/luiskr.com-V3
 optional isIntersecting?: boolean;
 ```
 
-Defined in: [core/safari/types.ts:19](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L19)
+Defined in: core/safari/types.ts:19
 
 ***
 
@@ -110,7 +110,7 @@ Defined in: [core/safari/types.ts:19](https://github.com/LuisKrotz/luiskr.com-V3
 optional canExpand?: boolean;
 ```
 
-Defined in: [core/safari/types.ts:20](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L20)
+Defined in: core/safari/types.ts:20
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: [core/safari/types.ts:20](https://github.com/LuisKrotz/luiskr.com-V3
 optional video?: string[];
 ```
 
-Defined in: [core/safari/types.ts:21](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L21)
+Defined in: core/safari/types.ts:21
 
 ***
 
@@ -130,7 +130,7 @@ Defined in: [core/safari/types.ts:21](https://github.com/LuisKrotz/luiskr.com-V3
 optional observer?: IntersectionObserver | null;
 ```
 
-Defined in: [core/safari/types.ts:22](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L22)
+Defined in: core/safari/types.ts:22
 
 ***
 
@@ -140,7 +140,7 @@ Defined in: [core/safari/types.ts:22](https://github.com/LuisKrotz/luiskr.com-V3
 optional imgObserver?: IntersectionObserver | null;
 ```
 
-Defined in: [core/safari/types.ts:23](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L23)
+Defined in: core/safari/types.ts:23
 
 ***
 
@@ -150,7 +150,7 @@ Defined in: [core/safari/types.ts:23](https://github.com/LuisKrotz/luiskr.com-V3
 optional source?: string;
 ```
 
-Defined in: [core/safari/types.ts:24](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L24)
+Defined in: core/safari/types.ts:24
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: [core/safari/types.ts:24](https://github.com/LuisKrotz/luiskr.com-V3
 shadowRoot: ShadowRoot | null;
 ```
 
-Defined in: [core/safari/types.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L25)
+Defined in: core/safari/types.ts:25
 
 The **`Element.shadowRoot`** read-only property represents the shadow root hosted by the element.
 
@@ -178,7 +178,7 @@ The **`Element.shadowRoot`** read-only property represents the shadow root hoste
 optional _isMounted?: boolean;
 ```
 
-Defined in: [core/safari/types.ts:37](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L37)
+Defined in: core/safari/types.ts:37
 
 ***
 
@@ -4867,7 +4867,7 @@ HTMLElement.style
 $(_selector): HTMLElement | null;
 ```
 
-Defined in: [core/safari/types.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L26)
+Defined in: core/safari/types.ts:26
 
 #### Parameters
 
@@ -4887,7 +4887,7 @@ Defined in: [core/safari/types.ts:26](https://github.com/LuisKrotz/luiskr.com-V3
 $$(_selector): HTMLElement[];
 ```
 
-Defined in: [core/safari/types.ts:27](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L27)
+Defined in: core/safari/types.ts:27
 
 #### Parameters
 
@@ -4912,7 +4912,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/safari/types.ts:28](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L28)
+Defined in: core/safari/types.ts:28
 
 #### Parameters
 
@@ -4944,7 +4944,7 @@ Defined in: [core/safari/types.ts:28](https://github.com/LuisKrotz/luiskr.com-V3
 optional openModal(): void;
 ```
 
-Defined in: [core/safari/types.ts:34](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L34)
+Defined in: core/safari/types.ts:34
 
 #### Returns
 
@@ -4958,7 +4958,7 @@ Defined in: [core/safari/types.ts:34](https://github.com/LuisKrotz/luiskr.com-V3
 optional loadHighRes(): void;
 ```
 
-Defined in: [core/safari/types.ts:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L35)
+Defined in: core/safari/types.ts:35
 
 #### Returns
 
@@ -4972,7 +4972,7 @@ Defined in: [core/safari/types.ts:35](https://github.com/LuisKrotz/luiskr.com-V3
 optional startClose(): void;
 ```
 
-Defined in: [core/safari/types.ts:36](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L36)
+Defined in: core/safari/types.ts:36
 
 #### Returns
 
@@ -4986,7 +4986,7 @@ Defined in: [core/safari/types.ts:36](https://github.com/LuisKrotz/luiskr.com-V3
 _updateDom(): void;
 ```
 
-Defined in: [core/safari/types.ts:38](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/types.ts#L38)
+Defined in: core/safari/types.ts:38
 
 #### Returns
 

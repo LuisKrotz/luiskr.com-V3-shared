@@ -8,7 +8,7 @@
 function onStoreUpdate(host): void;
 ```
 
-Defined in: [website/components/carousel/custom-carousel/lifecycle.ts:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/custom-carousel/lifecycle.ts#L51)
+Defined in: website/components/carousel/custom-carousel/lifecycle.ts:51
 
 Store change → propagate reduced-motion to both arrows and gate
 autoplay on reduced-motion / open-modal. The resume arm requires BOTH

@@ -8,7 +8,7 @@
 function takeEarthScreenshot(s): Promise<void>;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/screenshot.ts:16](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/screenshot.ts#L16)
+Defined in: experiments/earth-playground/earth/runtime/screenshot.ts:16
 
 Renders one frame at 2× resolutionScale and downloads it as PNG.
 

@@ -8,7 +8,7 @@
 function paintThemeSlider2D(ctx, state): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:22](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/paint-2d.ts#L22)
+Defined in: core/utils/canvas/widgets/theme-slider/paint-2d.ts:22
 
 paints theme slider2 d.
 

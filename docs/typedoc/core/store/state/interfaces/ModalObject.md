@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / ModalObject
 
-Defined in: [core/store/state.ts:76](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L76)
+Defined in: core/store/state.ts:76
 
 Expand-modal descriptor written by MediaExpanded and read by the modal
 component: `open` drives mount/visibility, `class` carries the figure's
@@ -19,7 +19,7 @@ the carousel translateX offset at open time.
 transform: number;
 ```
 
-Defined in: [core/store/state.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L77)
+Defined in: core/store/state.ts:77
 
 ***
 
@@ -29,7 +29,7 @@ Defined in: [core/store/state.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/
 class: string;
 ```
 
-Defined in: [core/store/state.ts:78](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L78)
+Defined in: core/store/state.ts:78
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [core/store/state.ts:78](https://github.com/LuisKrotz/luiskr.com-V3/
 open: boolean;
 ```
 
-Defined in: [core/store/state.ts:79](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L79)
+Defined in: core/store/state.ts:79
 
 ***
 
@@ -49,4 +49,4 @@ Defined in: [core/store/state.ts:79](https://github.com/LuisKrotz/luiskr.com-V3/
 media: ModalMedia | null;
 ```
 
-Defined in: [core/store/state.ts:80](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L80)
+Defined in: core/store/state.ts:80

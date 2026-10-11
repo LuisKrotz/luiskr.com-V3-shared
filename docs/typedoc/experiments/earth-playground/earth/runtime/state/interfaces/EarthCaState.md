@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/runtime/state](../README.md) / EarthCaState
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:73](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L73)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:73
 
 Chromatic-aberration post-pass settings.
 
@@ -16,7 +16,7 @@ Chromatic-aberration post-pass settings.
 enabled: boolean;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:74](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L74)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:74
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [experiments/earth-playground/earth/runtime/state.ts:74](https://git
 strength: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:76](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L76)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:76
 
 RGB channel split magnitude.
 
@@ -38,6 +38,6 @@ RGB channel split magnitude.
 scale: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:78](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L78)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:78
 
 Effect radial scale.

@@ -12,7 +12,7 @@ function drawFlag(
 ): boolean;
 ```
 
-Defined in: [core/utils/canvas/widgets/flag/draw.ts:17](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/flag/draw.ts#L17)
+Defined in: core/utils/canvas/widgets/flag/draw.ts:17
 
 Renders one wave-shader frame for a flag (or its split pair for dual
 flags like en-GB/en-US hybrids) onto the shared canvas, then blits

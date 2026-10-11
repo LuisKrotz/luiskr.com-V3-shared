@@ -14,7 +14,7 @@ const SWITCH_TYPES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/theme/switches.ts:13](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/theme/switches.ts#L13)
+Defined in: core/tokens/theme/switches.ts:13
 
 Switch slider context types. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

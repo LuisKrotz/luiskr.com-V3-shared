@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [shared/src/app/types](../README.md) / AppTranslations
 
-Defined in: [shared/src/app/types.ts:12](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/app/types.ts#L12)
+Defined in: shared/src/app/types.ts:12
 
 Shape of the translations/<locale>/APP dictionary node.
 
@@ -22,7 +22,7 @@ Shape of the translations/<locale>/APP dictionary node.
 optional actions?: object;
 ```
 
-Defined in: [shared/src/app/types.ts:13](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/app/types.ts#L13)
+Defined in: shared/src/app/types.ts:13
 
 #### click?
 
@@ -44,7 +44,7 @@ optional tap?: string;
 optional pref?: Record<string, unknown>;
 ```
 
-Defined in: [shared/src/app/types.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/app/types.ts#L14)
+Defined in: shared/src/app/types.ts:14
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [shared/src/app/types.ts:14](https://github.com/LuisKrotz/luiskr.com
 optional carousel?: Record<string, unknown>;
 ```
 
-Defined in: [shared/src/app/types.ts:15](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/app/types.ts#L15)
+Defined in: shared/src/app/types.ts:15
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [shared/src/app/types.ts:15](https://github.com/LuisKrotz/luiskr.com
 optional statsHud?: Record<string, unknown>;
 ```
 
-Defined in: [shared/src/app/types.ts:16](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/app/types.ts#L16)
+Defined in: shared/src/app/types.ts:16

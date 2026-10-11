@@ -8,7 +8,7 @@
 function bindControls(c): void;
 ```
 
-Defined in: [website/components/carousel/custom-carousel/arrows.ts:24](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/custom-carousel/arrows.ts#L24)
+Defined in: website/components/carousel/custom-carousel/arrows.ts:24
 
 Wires every carousel control: prev/next clicks + hover (hover stops
 autoplay permanently — pointer over a control is intent to drive),

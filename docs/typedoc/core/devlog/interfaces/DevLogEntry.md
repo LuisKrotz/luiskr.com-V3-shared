@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../README.md) / [core/devlog](../README.md) / DevLogEntry
 
-Defined in: [core/devlog.ts:13](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/devlog.ts#L13)
+Defined in: core/devlog.ts:13
 
 One buffered diagnostic entry.
 
@@ -16,7 +16,7 @@ One buffered diagnostic entry.
 t: number;
 ```
 
-Defined in: [core/devlog.ts:15](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/devlog.ts#L15)
+Defined in: core/devlog.ts:15
 
 Unix-ms timestamp of the call.
 
@@ -28,7 +28,7 @@ Unix-ms timestamp of the call.
 level: string;
 ```
 
-Defined in: [core/devlog.ts:17](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/devlog.ts#L17)
+Defined in: core/devlog.ts:17
 
 'warn' | 'error' | 'info' — from LOG_LEVELS.
 
@@ -40,6 +40,6 @@ Defined in: [core/devlog.ts:17](https://github.com/LuisKrotz/luiskr.com-V3/blob/
 parts: unknown[];
 ```
 
-Defined in: [core/devlog.ts:19](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/devlog.ts#L19)
+Defined in: core/devlog.ts:19
 
 The original call arguments, unserialized.

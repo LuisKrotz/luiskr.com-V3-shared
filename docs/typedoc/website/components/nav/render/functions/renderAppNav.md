@@ -10,12 +10,12 @@ function renderAppNav(nav):
   | Element;
 ```
 
-Defined in: [website/components/nav/render.tsx:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/render.tsx#L43)
+Defined in: website/components/nav/render.tsx:43
 
 Renders the <app-nav> template: logo, burger strip, and the fullscreen
 menu overlay. Returns '' while the media-expand modal is open — an empty
 render wipes the nav DOM so its z-index/focus can never compete with the
-modal chrome. The CTA label chain (contact → scroll-up at page bottom →
+modal chrome. The CTA label chain (contact → selected work at page bottom →
 related on project routes) mirrors the menu item order.
 
 ## Parameters

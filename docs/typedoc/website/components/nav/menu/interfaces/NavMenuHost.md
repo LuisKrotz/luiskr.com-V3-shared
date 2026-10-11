@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/menu](../README.md) / NavMenuHost
 
-Defined in: [website/components/nav/menu.tsx:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L25)
+Defined in: website/components/nav/menu.tsx:25
 
 Host surface the menu helpers need (satisfied by AppNav).
 
@@ -20,7 +20,7 @@ Host surface the menu helpers need (satisfied by AppNav).
 _navFlags: FlagWebGL[];
 ```
 
-Defined in: [website/components/nav/flag.tsx:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/flag.tsx#L25)
+Defined in: website/components/nav/flag.tsx:25
 
 Live flag widgets (max one — the menu flag).
 
@@ -36,7 +36,7 @@ Live flag widgets (max one — the menu flag).
 _menuFlagCanvasEl: HTMLCanvasElement | null;
 ```
 
-Defined in: [website/components/nav/flag.tsx:27](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/flag.tsx#L27)
+Defined in: website/components/nav/flag.tsx:27
 
 Persistent per-locale flag canvas; rebuilt on locale change.
 
@@ -52,7 +52,7 @@ Persistent per-locale flag canvas; rebuilt on locale change.
 _menuFlagLang: string | null;
 ```
 
-Defined in: [website/components/nav/flag.tsx:29](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/flag.tsx#L29)
+Defined in: website/components/nav/flag.tsx:29
 
 Locale the current flag canvas was built for.
 
@@ -68,7 +68,7 @@ Locale the current flag canvas was built for.
 readonly locale: string;
 ```
 
-Defined in: [website/components/nav/flag.tsx:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/flag.tsx#L31)
+Defined in: website/components/nav/flag.tsx:31
 
 Active locale code.
 
@@ -213,7 +213,7 @@ readonly currentLang:
   | null;
 ```
 
-Defined in: [website/components/nav/flag.tsx:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/flag.tsx#L33)
+Defined in: website/components/nav/flag.tsx:33
 
 The active LANG_OPTIONS entry (code + label + flag cc).
 
@@ -229,7 +229,7 @@ The active LANG_OPTIONS entry (code + label + flag cc).
 _menuOpen: boolean;
 ```
 
-Defined in: [website/components/nav/menu.tsx:27](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L27)
+Defined in: website/components/nav/menu.tsx:27
 
 Menu overlay open flag.
 
@@ -241,7 +241,7 @@ Menu overlay open flag.
 _menuClosing: boolean;
 ```
 
-Defined in: [website/components/nav/menu.tsx:29](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L29)
+Defined in: website/components/nav/menu.tsx:29
 
 Close animation in flight — guards double-close.
 
@@ -253,7 +253,7 @@ Close animation in flight — guards double-close.
 _menuSettled: boolean;
 ```
 
-Defined in: [website/components/nav/menu.tsx:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L31)
+Defined in: website/components/nav/menu.tsx:31
 
 Open animation completed — close X may snap to drawn state.
 
@@ -265,7 +265,7 @@ Open animation completed — close X may snap to drawn state.
 _menuSettleTimer: number | null;
 ```
 
-Defined in: [website/components/nav/menu.tsx:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L33)
+Defined in: website/components/nav/menu.tsx:33
 
 Settle-delay timer handle; cleared on destroy/close.
 
@@ -279,7 +279,7 @@ _menuBg:
   | null;
 ```
 
-Defined in: [website/components/nav/menu.tsx:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L35)
+Defined in: website/components/nav/menu.tsx:35
 
 Live menu-background widget over the fullscreen canvas.
 
@@ -293,7 +293,7 @@ _menuCloseBtn:
   | null;
 ```
 
-Defined in: [website/components/nav/menu.tsx:37](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L37)
+Defined in: website/components/nav/menu.tsx:37
 
 Live close-X widget.
 
@@ -307,7 +307,7 @@ _burgerBtn:
   | null;
 ```
 
-Defined in: [website/components/nav/menu.tsx:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L39)
+Defined in: website/components/nav/menu.tsx:39
 
 Live burger widget.
 
@@ -319,7 +319,7 @@ Live burger widget.
 _burgerCanvasEl: HTMLCanvasElement | null;
 ```
 
-Defined in: [website/components/nav/menu.tsx:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L41)
+Defined in: website/components/nav/menu.tsx:41
 
 Persistent burger canvas (survives re-renders).
 
@@ -331,7 +331,7 @@ Persistent burger canvas (survives re-renders).
 _menuCanvasEl: HTMLCanvasElement | null;
 ```
 
-Defined in: [website/components/nav/menu.tsx:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L43)
+Defined in: website/components/nav/menu.tsx:43
 
 Persistent menu background canvas.
 
@@ -343,7 +343,7 @@ Persistent menu background canvas.
 _menuCloseCanvasEl: HTMLCanvasElement | null;
 ```
 
-Defined in: [website/components/nav/menu.tsx:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L45)
+Defined in: website/components/nav/menu.tsx:45
 
 Persistent close-X canvas.
 
@@ -355,7 +355,7 @@ Persistent close-X canvas.
 _onDark: boolean;
 ```
 
-Defined in: [website/components/nav/menu.tsx:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L47)
+Defined in: website/components/nav/menu.tsx:47
 
 True while the nav floats over a dark band (contrast variant).
 
@@ -367,7 +367,7 @@ True while the nav floats over a dark band (contrast variant).
 $(selector): Element | null;
 ```
 
-Defined in: [website/components/nav/menu.tsx:49](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L49)
+Defined in: website/components/nav/menu.tsx:49
 
 Shadow-scoped querySelector.
 
@@ -389,7 +389,7 @@ Shadow-scoped querySelector.
 _updateDom(): void;
 ```
 
-Defined in: [website/components/nav/menu.tsx:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L51)
+Defined in: website/components/nav/menu.tsx:51
 
 Triggers a template re-render.
 

@@ -8,7 +8,7 @@
 function updateAppModalState(c): void;
 ```
 
-Defined in: [shared/src/app/modal.ts:20](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/app/modal.ts#L20)
+Defined in: shared/src/app/modal.ts:20
 
 Updates app modal state.
 

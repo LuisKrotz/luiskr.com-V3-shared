@@ -216,6 +216,12 @@ Re-exports [SKELETON_CLASSES](skeleton/variables/SKELETON_CLASSES.md)
 
 ***
 
+### SF\_CLASSES
+
+Re-exports [SF_CLASSES](starfield/variables/SF_CLASSES.md)
+
+***
+
 ### STATE\_CLASSES
 
 Re-exports [STATE_CLASSES](state/variables/STATE_CLASSES.md)

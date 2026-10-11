@@ -8,7 +8,7 @@
 function createMutations(store): MutationMap;
 ```
 
-Defined in: [core/store/mutations.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/mutations.ts#L25)
+Defined in: core/store/mutations.ts:25
 
 Builds the mutation map bound to `store`. Domain groups are spread into
 one flat map — key collisions would silently overwrite, so each group

@@ -12,10 +12,11 @@ const WASM_POOL: Readonly<{
   DESKTOP_MIN: 2;
   DESKTOP_MAX: 4;
   FALLBACK_CORES: 2;
+  REPLY_TIMEOUT_MS: 8000;
 }>;
 ```
 
-Defined in: [core/tokens/data/wasm.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/data/wasm.ts#L41)
+Defined in: core/tokens/data/wasm.ts:41
 
 Frozen worker-pool sizing + asset tokens. Sole declaration site for the
 worker script path and the pool-size caps — mobile SoCs thermal-throttle

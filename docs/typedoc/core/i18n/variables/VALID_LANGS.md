@@ -24,7 +24,7 @@ const VALID_LANGS: readonly (
   | "ga")[];
 ```
 
-Defined in: [core/i18n.ts:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/i18n.ts#L67)
+Defined in: core/i18n.ts:67
 
 Ordered list of routable locale codes — drives `detectLangFromPath` and
 the CMS locale switcher. Order matches LANG_OPTIONS (picker order).

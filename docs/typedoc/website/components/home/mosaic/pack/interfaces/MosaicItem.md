@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/pack](../README.md) / MosaicItem
 
-Defined in: [website/components/home/mosaic/pack.ts:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L35)
+Defined in: website/components/home/mosaic/pack.ts:35
 
 One project tile as consumed by the packer.
 
@@ -16,7 +16,7 @@ One project tile as consumed by the packer.
 optional link?: string;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:37](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L37)
+Defined in: website/components/home/mosaic/pack.ts:37
 
 Route the card links to.
 
@@ -28,7 +28,7 @@ Route the card links to.
 optional image?: string;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L39)
+Defined in: website/components/home/mosaic/pack.ts:39
 
 Cover image stem.
 
@@ -40,7 +40,7 @@ Cover image stem.
 optional label?: string;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L41)
+Defined in: website/components/home/mosaic/pack.ts:41
 
 Accessible label.
 
@@ -52,7 +52,7 @@ Accessible label.
 optional title?: string;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L43)
+Defined in: website/components/home/mosaic/pack.ts:43
 
 Card heading.
 
@@ -64,7 +64,7 @@ Card heading.
 optional description?: string;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L45)
+Defined in: website/components/home/mosaic/pack.ts:45
 
 Expanded-panel text.
 
@@ -76,6 +76,6 @@ Expanded-panel text.
 optional featured?: boolean;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L47)
+Defined in: website/components/home/mosaic/pack.ts:47
 
 Featured tiles span 2 columns (on multi-column layouts).

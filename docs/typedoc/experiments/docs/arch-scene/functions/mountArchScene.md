@@ -13,7 +13,7 @@ function mountArchScene(
 ): ArchSceneHandle | null;
 ```
 
-Defined in: [experiments/docs/arch-scene.ts:214](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/arch-scene.ts#L214)
+Defined in: experiments/docs/arch-scene.ts:223
 
 Mounts the architecture scene on `canvas`.
 

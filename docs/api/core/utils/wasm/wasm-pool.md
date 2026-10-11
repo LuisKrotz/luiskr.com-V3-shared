@@ -13,6 +13,14 @@ Round-robin dispatcher over a lazily-spawned pool of
 
 In-flight dispatch entry — the resolve that completes the caller's Promise.
 
+### `worker`
+
+Worker the task was posted to — an errored worker drops its tasks.
+
+### `timeout`
+
+Reply deadline — cleared on resolve, drops the worker on expiry.
+
 ### `_isMobile`
 
 Coarse mobile detection — UA regex suffices here; precision isn't worth the parser.
@@ -59,6 +67,15 @@ Worker `message` handler — resolves the pending task matching the
 reply's correlation id and drops it from the map. Replies without an
 id are ignored (broadcast/telemetry messages).
 - `@param` e The worker MessageEvent.
+
+### (module scope)
+
+Drops a dead worker — script parse/CSP failure (`error` event) or a
+reply that never arrives (`REPLY_TIMEOUT_MS`). The worker is
+terminated, removed from the round-robin and every task it was
+holding resolves null so callers hit their JS fallback path rather
+than awaiting a reply that can never come.
+- `@param` worker The worker to drop.
 
 ### (module scope)
 

@@ -8,7 +8,7 @@
 function init(host): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/switch-slider/init.ts:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/switch-slider/init.ts#L47)
+Defined in: core/utils/canvas/widgets/switch-slider/init.ts:47
 
 Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
 

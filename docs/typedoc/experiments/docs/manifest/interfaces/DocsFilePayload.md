@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/docs/manifest](../README.md) / DocsFilePayload
 
-Defined in: [experiments/docs/manifest.ts:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L50)
+Defined in: experiments/docs/manifest.ts:50
 
 Rendered payload returned by /docs-content/<id>.json.
 
@@ -16,7 +16,7 @@ Rendered payload returned by /docs-content/<id>.json.
 name: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L51)
+Defined in: experiments/docs/manifest.ts:51
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [experiments/docs/manifest.ts:51](https://github.com/LuisKrotz/luisk
 path: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:52](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L52)
+Defined in: experiments/docs/manifest.ts:52
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [experiments/docs/manifest.ts:52](https://github.com/LuisKrotz/luisk
 format: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:53](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L53)
+Defined in: experiments/docs/manifest.ts:53
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [experiments/docs/manifest.ts:53](https://github.com/LuisKrotz/luisk
 html: string | null;
 ```
 
-Defined in: [experiments/docs/manifest.ts:54](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L54)
+Defined in: experiments/docs/manifest.ts:54
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [experiments/docs/manifest.ts:54](https://github.com/LuisKrotz/luisk
 media: string | null;
 ```
 
-Defined in: [experiments/docs/manifest.ts:55](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L55)
+Defined in: experiments/docs/manifest.ts:55
 
 ***
 
@@ -66,4 +66,4 @@ Defined in: [experiments/docs/manifest.ts:55](https://github.com/LuisKrotz/luisk
 mtime: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:56](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L56)
+Defined in: experiments/docs/manifest.ts:56

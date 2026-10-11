@@ -12,7 +12,7 @@ function updateAppViewContent(
 ): void;
 ```
 
-Defined in: [shared/src/app/view.ts:27](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/app/view.ts#L27)
+Defined in: shared/src/app/view.ts:29
 
 Route-change reconciliation for the view outlet: when the target view
 tag equals the mounted one (and the element is actually defined), the

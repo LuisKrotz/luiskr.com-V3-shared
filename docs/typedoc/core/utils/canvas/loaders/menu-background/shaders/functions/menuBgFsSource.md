@@ -8,7 +8,7 @@
 function menuBgFsSource(hasDeriv): string;
 ```
 
-Defined in: [core/utils/canvas/loaders/menu-background/shaders.ts:109](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/menu-background/shaders.ts#L109)
+Defined in: core/utils/canvas/loaders/menu-background/shaders.ts:109
 
 Full FS source for the current GL capability set.
 

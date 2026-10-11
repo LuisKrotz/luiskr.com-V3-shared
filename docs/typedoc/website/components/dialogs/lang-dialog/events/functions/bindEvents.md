@@ -8,7 +8,7 @@
 function bindEvents(host): void;
 ```
 
-Defined in: [website/components/dialogs/lang-dialog/events.ts:101](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/dialogs/lang-dialog/events.ts#L101)
+Defined in: website/components/dialogs/lang-dialog/events.ts:101
 
 Binds option clicks, backdrop click and keyboard dismissal.
 

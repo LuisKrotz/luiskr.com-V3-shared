@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/types](../README.md) / AxeReport
 
-Defined in: [cms/deploy-info/types.ts:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/deploy-info/types.ts#L40)
+Defined in: cms/deploy-info/types.ts:40
 
 Shape of the axe-scan report — `engine` names the axe-core version and
 `surfaces` lists each mounted DOM surface with its violations (id, impact, help)
@@ -18,7 +18,7 @@ so the CMS tab can render them grouped by page area.
 optional engine?: string;
 ```
 
-Defined in: [cms/deploy-info/types.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/deploy-info/types.ts#L41)
+Defined in: cms/deploy-info/types.ts:41
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [cms/deploy-info/types.ts:41](https://github.com/LuisKrotz/luiskr.co
 optional totals?: Record<string, number>;
 ```
 
-Defined in: [cms/deploy-info/types.ts:42](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/deploy-info/types.ts#L42)
+Defined in: cms/deploy-info/types.ts:42
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [cms/deploy-info/types.ts:42](https://github.com/LuisKrotz/luiskr.co
 optional surfaces?: object[];
 ```
 
-Defined in: [cms/deploy-info/types.ts:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/deploy-info/types.ts#L43)
+Defined in: cms/deploy-info/types.ts:43
 
 #### surface
 

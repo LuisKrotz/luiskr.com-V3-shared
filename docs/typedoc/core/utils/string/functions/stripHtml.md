@@ -8,7 +8,7 @@
 function stripHtml(str): string;
 ```
 
-Defined in: [core/utils/string.ts:21](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/string.ts#L21)
+Defined in: core/utils/string.ts:21
 
 Strips HTML tags iteratively to prevent malformed or nested tags from leaking.
 A single `replace(/<[^>]*>/)` pass can leave a reconstructed tag behind

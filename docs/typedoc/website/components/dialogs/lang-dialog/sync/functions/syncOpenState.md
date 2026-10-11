@@ -8,7 +8,7 @@
 function syncOpenState(host): void;
 ```
 
-Defined in: [website/components/dialogs/lang-dialog/sync.ts:12](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/dialogs/lang-dialog/sync.ts#L12)
+Defined in: website/components/dialogs/lang-dialog/sync.ts:12
 
 Reflects the open flag into DOM state (classes, genie enter/leave).
 

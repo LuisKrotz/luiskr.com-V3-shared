@@ -12,7 +12,7 @@ function onClick(
 ): void;
 ```
 
-Defined in: [website/components/home/mosaic/interactions.ts:141](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/interactions.ts#L141)
+Defined in: website/components/home/mosaic/interactions.ts:149
 
 Card activation. Desktop: straight to the project route. Touch:
 first tap expands the details (records bottomH so the wall reflows),

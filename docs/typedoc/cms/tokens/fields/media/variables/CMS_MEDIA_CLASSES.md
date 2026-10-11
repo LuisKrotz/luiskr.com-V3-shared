@@ -22,10 +22,18 @@ const CMS_MEDIA_CLASSES: Readonly<{
   CMS_SPINNER: "cms-spinner";
   CMS_PROGRESS: "cms-progress";
   CMS_ERROR_TEXT: "cms-error-text";
+  CMS_TOOLS_PANEL: "cms-media-tools";
+  CMS_TOOLS_ROW: "cms-media-tools-row";
+  CMS_TOOLS_NAME: "cms-media-tools-name";
+  CMS_TOOLS_STATE: "cms-media-tools-state";
+  CMS_TOOLS_STATE_OK: "cms-media-tools-state cms-media-tools-state--ok";
+  CMS_TOOLS_STATE_MISSING: "cms-media-tools-state cms-media-tools-state--missing";
+  CMS_TOOLS_LOG: "cms-media-tools-log";
+  CMS_TOOLS_CMD: "cms-media-tools-cmd";
 }>;
 ```
 
-Defined in: [cms/tokens/fields/media.ts:15](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/tokens/fields/media.ts#L15)
+Defined in: cms/tokens/fields/media.ts:15
 
 Frozen cms media class-name map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

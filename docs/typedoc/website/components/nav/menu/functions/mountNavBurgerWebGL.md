@@ -8,7 +8,7 @@
 function mountNavBurgerWebGL(host): void;
 ```
 
-Defined in: [website/components/nav/menu.tsx:179](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L179)
+Defined in: website/components/nav/menu.tsx:179
 
 Attaches BurgerButtonWebGL to the persistent burger canvas — or tears
 it down when the canvas left the DOM (menu states that remove the

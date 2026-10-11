@@ -8,7 +8,7 @@
 function scheduleTeleport(host, targetIdx): void;
 ```
 
-Defined in: [website/components/carousel/awards-carousel/nav.ts:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/awards-carousel/nav.ts#L66)
+Defined in: website/components/carousel/awards-carousel/nav.ts:66
 
 Clone→real teleport for the infinite loop: waits TELEPORT_DELAY (420ms,
 just past the smooth-scroll duration) so the clone finishes animating

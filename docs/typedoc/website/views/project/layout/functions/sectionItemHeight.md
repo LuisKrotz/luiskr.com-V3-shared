@@ -8,7 +8,7 @@
 function sectionItemHeight(c, section): string;
 ```
 
-Defined in: [website/views/project/layout.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/layout.ts#L26)
+Defined in: website/views/project/layout.ts:26
 
 Per-section CSS height: the FIRST media item's intrinsic ratio applied
 to the viewport width — min(100vw·h/w, SKELETON_ITEM_HEIGHT). Emitting

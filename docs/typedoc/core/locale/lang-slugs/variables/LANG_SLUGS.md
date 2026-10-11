@@ -8,7 +8,7 @@
 const LANG_SLUGS: Record<string, LangSlugMap>;
 ```
 
-Defined in: [core/locale/lang-slugs.ts:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/locale/lang-slugs.ts#L35)
+Defined in: core/locale/lang-slugs.ts:36
 
 Localized route slugs per locale — the path segments after the locale
 prefix. English is canonical/un-prefixed; every other locale maps its

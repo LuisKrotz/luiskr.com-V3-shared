@@ -8,7 +8,7 @@
 function createJob(host): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/job.ts:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/job.ts#L35)
+Defined in: cms/media-convert/job.ts:35
 
 POSTs an empty job to the dev server and stores the returned id on the
 host — every subsequent request hangs off host.jobId.

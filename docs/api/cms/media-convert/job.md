@@ -79,6 +79,22 @@ under the dev middleware, so a 404 there means "not running dev").
 
 ### (module scope)
 
+GETs the dev server's toolchain report (detected ffmpeg/ImageMagick/
+cjpeg + the per-platform install plan) and stores it on the host — the
+render layer turns it into the guided-setup panel. A missing/failed
+endpoint just hides the panel (older dev server, preview off).
+- `@param` host The CmsMediaConverter element.
+
+### (module scope)
+
+POSTs the server's install plan (detected package manager runs the
+package commands, then re-probes) and stores the refreshed report plus
+the collected stdout/stderr log for the setup panel's log view. The
+installing flag disables both buttons while the spawn runs.
+- `@param` host The CmsMediaConverter element.
+
+### (module scope)
+
 Full pipeline orchestrator: create → upload → convert, flipping
 host.phase at each stage and re-rendering. Errors land on the ERROR
 phase with the server's message so the UI shows the real failure.

@@ -11,6 +11,6 @@ const LABEL_TEXT: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/strings/text.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/strings/text.ts#L26)
+Defined in: core/tokens/strings/text.ts:25
 
 labels text.

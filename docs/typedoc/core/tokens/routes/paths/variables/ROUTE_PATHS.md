@@ -22,12 +22,14 @@ const ROUTE_PATHS: Readonly<{
   EARTH_PLAYGROUND_SEGMENT: "earth-playground";
   SPACE_PLAYGROUND: "/space-playground";
   SPACE_PLAYGROUND_SEGMENT: "space-playground";
+  STAR_FIELD: "/star-field-experiment";
+  STAR_FIELD_SEGMENT: "star-field-experiment";
   DOCS: "/docs";
   DOCS_SEGMENT: "docs";
 }>;
 ```
 
-Defined in: [core/tokens/routes/paths.ts:17](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/routes/paths.ts#L17)
+Defined in: core/tokens/routes/paths.ts:17
 
 Frozen public-route map — canonical (English) URL paths. `*_SEGMENT`
 variants exist for string-contains matching when the leading slash would

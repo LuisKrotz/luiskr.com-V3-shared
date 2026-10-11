@@ -16,5 +16,7 @@
 - [askNotifyPermission](functions/askNotifyPermission.md)
 - [deleteJob](functions/deleteJob.md)
 - [errText](functions/errText.md)
+- [fetchTools](functions/fetchTools.md)
+- [installTools](functions/installTools.md)
 - [run](functions/run.md)
 - [reset](functions/reset.md)

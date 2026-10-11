@@ -8,7 +8,7 @@
 function parseTokens(text): DrawToken[];
 ```
 
-Defined in: [website/components/media/draw-text/render.ts:30](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/draw-text/render.ts#L30)
+Defined in: website/components/media/draw-text/render.ts:30
 
 Tokenizes the text into word/space/br/inline-tag chunks. Words split
 at spaces and each character gets a global index `ci`. Spaces and

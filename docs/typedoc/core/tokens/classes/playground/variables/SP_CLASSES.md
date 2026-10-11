@@ -29,6 +29,7 @@ const SP_CLASSES: Readonly<{
   SP_PANEL_BODY: "sp-panel-body";
   SP_PANEL_COLLAPSED: "sp-panel--collapsed";
   SP_CANVAS: "sp-canvas";
+  SP_FALLBACK: "sp-fallback";
   SP_GROUP: "sp-panel-group";
   SP_GROUP_COLLAPSED: "sp-panel-group--collapsed";
   SP_GROUP_HEADER: "sp-panel-group-header";
@@ -60,7 +61,7 @@ const SP_CLASSES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/classes/playground.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/classes/playground.ts#L14)
+Defined in: core/tokens/classes/playground.ts:14
 
 Frozen sp class-name map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the

@@ -10,4 +10,5 @@
 - [renderConverting](functions/renderConverting.md)
 - [renderDone](functions/renderDone.md)
 - [renderError](functions/renderError.md)
+- [renderTools](functions/renderTools.md)
 - [renderMediaConverter](functions/renderMediaConverter.md)

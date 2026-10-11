@@ -12,9 +12,9 @@
   a compile-time token, function, mixin, or placeholder consumed by the component sheets.</p>
   <nav aria-label="Files"><ul>
       <li><a href="#file-core-sass-base-_mixins-scss">core/sass/base/_mixins.scss</a> (29)</li>
-      <li><a href="#file-core-sass-base-_placeholders-scss">core/sass/base/_placeholders.scss</a> (3)</li>
+      <li><a href="#file-core-sass-base-_placeholders-scss">core/sass/base/_placeholders.scss</a> (5)</li>
       <li><a href="#file-core-sass-base-_variables-scss">core/sass/base/_variables.scss</a> (147)</li>
-      <li><a href="#file-core-sass-components-carousel-awards-carousel-scss">core/sass/components/carousel/awards-carousel.scss</a> (3)</li>
+      <li><a href="#file-core-sass-components-carousel-awards-carousel-_base-scss">core/sass/components/carousel/awards-carousel/_base.scss</a> (3)</li>
       <li><a href="#file-core-sass-components-carousel-carousel-scss">core/sass/components/carousel/carousel.scss</a> (6)</li>
   </ul></nav>
   <section id="file-core-sass-base-_mixins-scss">
@@ -274,6 +274,22 @@
     <h3><code>SKEL_DARK_SURFACE</code> <span class="sd-kind">placeholder</span></h3>
     <pre class="sd-sig"><code>%SKEL_DARK_SURFACE {</code></pre>
     <p>Dark-surface skeleton palette — redefines --skel-bg-*/--skel-ink as color-mix() lifts of --bg-dark toward white. The vars are redeclared (not derived from --skel-surface) because color-mix() inside a custom property resolves at the declaration site — descendants would otherwise inherit the :root light-surface values.</p>
+    
+    
+    
+  </article>
+    <article class="sd-item sd-item--placeholder" id="placeholder-TTL_BASE">
+    <h3><code>TTL_BASE</code> <span class="sd-kind">placeholder</span></h3>
+    <pre class="sd-sig"><code>%TTL_BASE {</code></pre>
+    <p>Shared title font — every .ttl-* level.</p>
+    
+    
+    
+  </article>
+    <article class="sd-item sd-item--placeholder" id="placeholder-TXT_BASE">
+    <h3><code>TXT_BASE</code> <span class="sd-kind">placeholder</span></h3>
+    <pre class="sd-sig"><code>%TXT_BASE {</code></pre>
+    <p>Shared body-text font — every .txt-* level.</p>
     
     
     
@@ -1458,8 +1474,8 @@
     
   </article>
   </section>
-  <section id="file-core-sass-components-carousel-awards-carousel-scss">
-    <h2>core/sass/components/carousel/awards-carousel.scss</h2>
+  <section id="file-core-sass-components-carousel-awards-carousel-_base-scss">
+    <h2>core/sass/components/carousel/awards-carousel/_base.scss</h2>
     <article class="sd-item sd-item--variable" id="variable-awc-dot-size">
     <h3><code>awc-dot-size</code> <span class="sd-kind">variable</span></h3>
     <pre class="sd-sig"><code>$awc-dot-size: to-rem($space-md);</code></pre>

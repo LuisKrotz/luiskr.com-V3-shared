@@ -8,6 +8,6 @@
 const _B_AWARDS_FOOTER_PROGRESS: "awards-footer-progress";
 ```
 
-Defined in: [core/tokens/base.ts:220](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/base.ts#L220)
+Defined in: core/tokens/base.ts:225
 
 BEM block fragment "b awards footer progress" — composed by the token groups below into full class names.

@@ -14,7 +14,7 @@ const PREFETCH_CONFIG: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/motion/prefetch.ts:11](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/motion/prefetch.ts#L11)
+Defined in: core/tokens/motion/prefetch.ts:11
 
 Predictive-prefetch tuning tokens. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

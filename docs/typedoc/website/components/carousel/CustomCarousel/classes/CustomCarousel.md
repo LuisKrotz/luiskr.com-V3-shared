@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/carousel/CustomCarousel](../README.md) / CustomCarousel
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L63)
+Defined in: website/components/carousel/CustomCarousel.tsx:63
 
 <custom-carousel> element — the full-featured infinite carousel: media
 slides (image/video via <media-figure>), clone-ended wrap, WebGL
@@ -25,7 +25,7 @@ mode that drops all chrome when ≤2 items fit. Behavior delegates to
 new CustomCarousel(): CustomCarousel;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:125](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L125)
+Defined in: website/components/carousel/CustomCarousel.tsx:125
 
 #### Returns
 
@@ -43,7 +43,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:125](https://github.
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -59,7 +59,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -81,7 +81,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -102,7 +102,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -120,7 +120,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -136,7 +136,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -156,7 +156,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -172,7 +172,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -188,7 +188,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 _items: CarouselItem[] = [];
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:65](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L65)
+Defined in: website/components/carousel/CustomCarousel.tsx:65
 
 Slide descriptors {src, size:[w,h], label, class, isVideo, canExpand}.
 
@@ -200,7 +200,7 @@ Slide descriptors {src, size:[w,h], label, class, isVideo, canExpand}.
 _folder: string = ATTR_VALUES.EMPTY;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L67)
+Defined in: website/components/carousel/CustomCarousel.tsx:67
 
 CDN folder prefix prepended to each item's src.
 
@@ -212,7 +212,7 @@ CDN folder prefix prepended to each item's src.
 _forceActive: boolean = false;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:69](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L69)
+Defined in: website/components/carousel/CustomCarousel.tsx:69
 
 Host-forced active flag — keeps the carousel live even when side-by-side would fit.
 
@@ -226,7 +226,7 @@ _prevArrow:
   | null = null;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:71](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L71)
+Defined in: website/components/carousel/CustomCarousel.tsx:71
 
 Live CarouselArrowWebGL widgets (null until viewport entry).
 
@@ -240,7 +240,7 @@ _nextArrow:
   | null = null;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:72](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L72)
+Defined in: website/components/carousel/CustomCarousel.tsx:72
 
 ***
 
@@ -250,7 +250,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:72](https://github.c
 currentIndex: number = 0;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:74](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L74)
+Defined in: website/components/carousel/CustomCarousel.tsx:74
 
 Logical index into items (0..len-1; clone positions never stored).
 
@@ -262,7 +262,7 @@ Logical index into items (0..len-1; clone positions never stored).
 autoplayRunning: boolean = false;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:79](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L79)
+Defined in: website/components/carousel/CustomCarousel.tsx:79
 
 RAF cycle active flag.
 
@@ -274,7 +274,7 @@ RAF cycle active flag.
 autoplayStart: number = 0;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:81](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L81)
+Defined in: website/components/carousel/CustomCarousel.tsx:81
 
 performance.now() the current dwell cycle started at.
 
@@ -286,7 +286,7 @@ performance.now() the current dwell cycle started at.
 autoplayElapsed: number = 0;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L83)
+Defined in: website/components/carousel/CustomCarousel.tsx:83
 
 Accumulated ms into the cycle — survives pause→resume.
 
@@ -298,7 +298,7 @@ Accumulated ms into the cycle — survives pause→resume.
 ringProgress: number = 0;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:86](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L86)
+Defined in: website/components/carousel/CustomCarousel.tsx:86
 
 0–1 fraction of the autoplay cycle — drives both the SVG ring and
  the WebGL arrows' progress arc.
@@ -311,7 +311,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:86](https://github.c
 rafId: number | null = null;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:88](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L88)
+Defined in: website/components/carousel/CustomCarousel.tsx:88
 
 Autoplay RAF handle — cancelled by _stopAutoplay.
 
@@ -323,7 +323,7 @@ Autoplay RAF handle — cancelled by _stopAutoplay.
 scrollTimeout: number | null = null;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L90)
+Defined in: website/components/carousel/CustomCarousel.tsx:90
 
 Scroll debounce — _checkInfiniteLoop runs 150ms after the last event.
 
@@ -335,7 +335,7 @@ Scroll debounce — _checkInfiniteLoop runs 150ms after the last event.
 teleportTimer: number | null = null;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:92](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L92)
+Defined in: website/components/carousel/CustomCarousel.tsx:92
 
 Pending clone→real instant jump (CAROUSEL_TIMING.TELEPORT_DELAY).
 
@@ -347,7 +347,7 @@ Pending clone→real instant jump (CAROUSEL_TIMING.TELEPORT_DELAY).
 isNavigating: boolean = false;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:95](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L95)
+Defined in: website/components/carousel/CustomCarousel.tsx:95
 
 True while a programmatic scroll is animating — suppresses the
  scroll-handler teleport so the goTo-driven clone jump isn't undone.
@@ -360,7 +360,7 @@ True while a programmatic scroll is animating — suppresses the
 touchStartX: number = 0;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:97](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L97)
+Defined in: website/components/carousel/CustomCarousel.tsx:97
 
 Swipe origin X for the threshold check in the touchend handler.
 
@@ -372,7 +372,7 @@ Swipe origin X for the threshold check in the touchend handler.
 slideLoaded: boolean[] = [];
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L100)
+Defined in: website/components/carousel/CustomCarousel.tsx:100
 
 Per-index lazy flag: media src assigned only for slides near the
  active one (±2 positions, wrapping).
@@ -385,7 +385,7 @@ Per-index lazy flag: media src assigned only for slides near the
 circumference: number = CAROUSEL_LAYOUT.CIRCUMFERENCE;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:102](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L102)
+Defined in: website/components/carousel/CustomCarousel.tsx:102
 
 2πr of the progress ring — used as stroke-dasharray/dashoffset.
 
@@ -397,7 +397,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:102](https://github.
 isFullyVisible: boolean = false;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:104](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L104)
+Defined in: website/components/carousel/CustomCarousel.tsx:104
 
 ≥50% visible — the autoplay gate.
 
@@ -409,7 +409,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:104](https://github.
 isEnteredViewport: boolean = false;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L106)
+Defined in: website/components/carousel/CustomCarousel.tsx:106
 
 Any viewport visibility ever observed.
 
@@ -421,7 +421,7 @@ Any viewport visibility ever observed.
 observer: IntersectionObserver | null = null;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:108](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L108)
+Defined in: website/components/carousel/CustomCarousel.tsx:108
 
 IntersectionObserver driving the visibility flags + lazy media.
 
@@ -433,7 +433,7 @@ IntersectionObserver driving the visibility flags + lazy media.
 _isSideBySide: boolean = false;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:110](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L110)
+Defined in: website/components/carousel/CustomCarousel.tsx:110
 
 True when ≤2 items fit side-by-side at ≥960px — no carousel chrome.
 
@@ -445,7 +445,7 @@ True when ≤2 items fit side-by-side at ≥960px — no carousel chrome.
 _fitObserver: ResizeObserver | null = null;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:112](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L112)
+Defined in: website/components/carousel/CustomCarousel.tsx:112
 
 ResizeObserver on the host for _measureFit re-runs.
 
@@ -457,7 +457,7 @@ ResizeObserver on the host for _measureFit re-runs.
 _lastObservedWidth: number = 0;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:114](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L114)
+Defined in: website/components/carousel/CustomCarousel.tsx:114
 
 Last width the fit observer saw — dedups sub-pixel RO noise.
 
@@ -469,7 +469,7 @@ Last width the fit observer saw — dedups sub-pixel RO noise.
 _autoplayPermanentlyStopped: boolean = false;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:116](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L116)
+Defined in: website/components/carousel/CustomCarousel.tsx:116
 
 Latched by any user interaction — autoplay never resumes after.
 
@@ -481,7 +481,7 @@ Latched by any user interaction — autoplay never resumes after.
 _isRegressing: boolean = false;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:118](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L118)
+Defined in: website/components/carousel/CustomCarousel.tsx:118
 
 Ring regress animation in flight (drains progress on stop).
 
@@ -493,7 +493,7 @@ Ring regress animation in flight (drains progress on stop).
 isMobile: boolean;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:120](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L120)
+Defined in: website/components/carousel/CustomCarousel.tsx:120
 
 Viewport under the mobile breakpoint at construct time.
 
@@ -4556,7 +4556,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get items(): CarouselItem[];
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:179](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L179)
+Defined in: website/components/carousel/CustomCarousel.tsx:179
 
 ##### Returns
 
@@ -4568,7 +4568,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:179](https://github.
 set items(val): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:133](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L133)
+Defined in: website/components/carousel/CustomCarousel.tsx:133
 
 Setter/getter — slide data (media + labels).
 
@@ -4592,7 +4592,7 @@ Setter/getter — slide data (media + labels).
 get folder(): string;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:189](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L189)
+Defined in: website/components/carousel/CustomCarousel.tsx:189
 
 ##### Returns
 
@@ -4604,7 +4604,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:189](https://github.
 set folder(val): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:185](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L185)
+Defined in: website/components/carousel/CustomCarousel.tsx:185
 
 Setter/getter — CDN media folder prefix for slide assets.
 
@@ -4628,7 +4628,7 @@ Setter/getter — CDN media folder prefix for slide assets.
 get forceActive(): unknown;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:205](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L205)
+Defined in: website/components/carousel/CustomCarousel.tsx:205
 
 ##### Returns
 
@@ -4640,7 +4640,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:205](https://github.
 set forceActive(val): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:195](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L195)
+Defined in: website/components/carousel/CustomCarousel.tsx:195
 
 Setter/getter — forces the autoplay/running state on.
 
@@ -4664,7 +4664,7 @@ Setter/getter — forces the autoplay/running state on.
 get isActive(): boolean;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:211](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L211)
+Defined in: website/components/carousel/CustomCarousel.tsx:211
 
 Whether the carousel is currently auto-advancing.
 
@@ -4848,7 +4848,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4870,7 +4870,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onUpdated(): void;
 ```
 
-Defined in: [core/Component.ts:115](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L115)
+Defined in: core/Component.ts:115
 
 #### Returns
 
@@ -4888,7 +4888,7 @@ Defined in: [core/Component.ts:115](https://github.com/LuisKrotz/luiskr.com-V3/b
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4922,7 +4922,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4947,7 +4947,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4971,7 +4971,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -5008,7 +5008,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -5051,7 +5051,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -5101,7 +5101,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -5132,7 +5132,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -5155,7 +5155,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5180,7 +5180,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -5214,7 +5214,7 @@ Render result from render().
 configure(o): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:155](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L155)
+Defined in: website/components/carousel/CustomCarousel.tsx:155
 
 Batch-assigns items/folder/forceActive with a single render — the
 setter chain would otherwise re-render per property. Re-applying the
@@ -5249,7 +5249,7 @@ may call it freely from render/update paths.
 onMounted(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:217](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L217)
+Defined in: website/components/carousel/CustomCarousel.tsx:217
 
 #### Returns
 
@@ -5267,7 +5267,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:217](https://github.
 onUnmounted(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:222](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L222)
+Defined in: website/components/carousel/CustomCarousel.tsx:222
 
 Extra unmount hook the Safari patch calls — releases the fit observer early.
 
@@ -5283,7 +5283,7 @@ Extra unmount hook the Safari patch calls — releases the fit observer early.
 onStoreUpdate(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:226](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L226)
+Defined in: website/components/carousel/CustomCarousel.tsx:226
 
 #### Returns
 
@@ -5301,7 +5301,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:226](https://github.
 _setupAfterRender(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:232](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L232)
+Defined in: website/components/carousel/CustomCarousel.tsx:232
 
 Post-render setup: measures, binds controls, starts observers.
 
@@ -5317,7 +5317,7 @@ Post-render setup: measures, binds controls, starts observers.
 _startFitObserver(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:252](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L252)
+Defined in: website/components/carousel/CustomCarousel.tsx:252
 
 ResizeObserver that re-fits slides when the container size changes.
 
@@ -5333,7 +5333,7 @@ ResizeObserver that re-fits slides when the container size changes.
 _measureFit(observedWidth?): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:264](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L264)
+Defined in: website/components/carousel/CustomCarousel.tsx:264
 
 Decides whether the items fit side-by-side (no carousel chrome) or
 need the scroll track. Side-by-side requires: exactly ≤2 items, no
@@ -5360,7 +5360,7 @@ per item approximates the flex gap.
 _onResize(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:270](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L270)
+Defined in: website/components/carousel/CustomCarousel.tsx:270
 
 Window-resize handler: re-fits and re-measures.
 
@@ -5376,7 +5376,7 @@ Window-resize handler: re-fits and re-measures.
 _setHeightVar(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:280](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L280)
+Defined in: website/components/carousel/CustomCarousel.tsx:280
 
 Publishes --carousel-item-height on the enclosing <section> so all
 slides share one height. Source: the first item's intrinsic ratio
@@ -5395,7 +5395,7 @@ aspect-correct without waiting for image decode.
 _bindControls(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:286](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L286)
+Defined in: website/components/carousel/CustomCarousel.tsx:286
 
 Wires prev/next/dot controls and mounts the WebGL arrows.
 
@@ -5411,7 +5411,7 @@ Wires prev/next/dot controls and mounts the WebGL arrows.
 _mountWebGLArrows(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:292](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L292)
+Defined in: website/components/carousel/CustomCarousel.tsx:292
 
 Creates the CarouselArrowWebGL widgets on the prev/next canvases.
 
@@ -5427,7 +5427,7 @@ Creates the CarouselArrowWebGL widgets on the prev/next canvases.
 _destroyWebGLArrows(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:298](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L298)
+Defined in: website/components/carousel/CustomCarousel.tsx:298
 
 Destroys the WebGL arrow widgets.
 
@@ -5443,7 +5443,7 @@ Destroys the WebGL arrow widgets.
 onDestroy(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:302](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L302)
+Defined in: website/components/carousel/CustomCarousel.tsx:302
 
 #### Returns
 
@@ -5461,7 +5461,7 @@ Defined in: [website/components/carousel/CustomCarousel.tsx:302](https://github.
 _markAdjacentLoaded(centerIdx): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:312](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L312)
+Defined in: website/components/carousel/CustomCarousel.tsx:312
 
 Lazy-load window: marks slides within 2 positions of the active index
 as loadable — distance is measured on the ring (min of direct vs
@@ -5486,7 +5486,7 @@ and vice versa. The two explicit edge lines cover len<3 edge cases.
 goTo(idx): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L324)
+Defined in: website/components/carousel/CustomCarousel.tsx:324
 
 Navigate to slide idx — accepts out-of-range idx (idx<0 or idx≥len) by
 scrolling to the CLONE slide at that edge, then scheduling an instant
@@ -5513,7 +5513,7 @@ handler's own teleport until the animation settles (~400ms).
 _updateActiveClasses(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:330](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L330)
+Defined in: website/components/carousel/CustomCarousel.tsx:330
 
 Toggles -active classes on the active slide/dot pair.
 
@@ -5529,7 +5529,7 @@ Toggles -active classes on the active slide/dot pair.
 _scrollToElement(el): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:336](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L336)
+Defined in: website/components/carousel/CustomCarousel.tsx:336
 
 Smooth-scrolls the track to a slide element.
 
@@ -5551,7 +5551,7 @@ Smooth-scrolls the track to a slide element.
 _scheduleTeleport(targetIdx): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:342](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L342)
+Defined in: website/components/carousel/CustomCarousel.tsx:342
 
 Schedules the invisible jump from a clone to its real slide.
 
@@ -5573,7 +5573,7 @@ Schedules the invisible jump from a clone to its real slide.
 _scrollToSlide(idx): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:348](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L348)
+Defined in: website/components/carousel/CustomCarousel.tsx:348
 
 Smooth-scrolls to slide idx.
 
@@ -5595,7 +5595,7 @@ Smooth-scrolls to slide idx.
 _jumpToSlide(idx, smooth?): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:354](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L354)
+Defined in: website/components/carousel/CustomCarousel.tsx:354
 
 Instant position jump — used for the clone teleports.
 
@@ -5621,7 +5621,7 @@ Instant position jump — used for the clone teleports.
 onScroll(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:360](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L360)
+Defined in: website/components/carousel/CustomCarousel.tsx:360
 
 Scroll handler: detects when the track lands on a clone edge to teleport.
 
@@ -5637,7 +5637,7 @@ Scroll handler: detects when the track lands on a clone edge to teleport.
 _checkInfiniteLoop(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:366](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L366)
+Defined in: website/components/carousel/CustomCarousel.tsx:366
 
 Teleports between clone and real slides at track edges — the infinite-loop trick.
 
@@ -5653,7 +5653,7 @@ Teleports between clone and real slides at track edges — the infinite-loop tri
 onPrevClick(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:372](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L372)
+Defined in: website/components/carousel/CustomCarousel.tsx:372
 
 Prev-arrow click.
 
@@ -5669,7 +5669,7 @@ Prev-arrow click.
 onNextClick(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:378](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L378)
+Defined in: website/components/carousel/CustomCarousel.tsx:378
 
 Next-arrow click.
 
@@ -5685,7 +5685,7 @@ Next-arrow click.
 onDotClick(idx): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:384](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L384)
+Defined in: website/components/carousel/CustomCarousel.tsx:384
 
 Dot-navigation click to a specific slide.
 
@@ -5707,7 +5707,7 @@ Dot-navigation click to a specific slide.
 _setupIntersectionObserver(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:390](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L390)
+Defined in: website/components/carousel/CustomCarousel.tsx:390
 
 Observes slides for lazy media loading + autoplay pausing when offscreen.
 
@@ -5723,7 +5723,7 @@ Observes slides for lazy media loading + autoplay pausing when offscreen.
 _startAutoplay(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:399](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L399)
+Defined in: website/components/carousel/CustomCarousel.tsx:399
 
 Starts/resumes the autoplay RAF cycle. autoplayStart is backdated by
 the accumulated elapsed so a pause→resume continues mid-cycle rather
@@ -5741,7 +5741,7 @@ than restarting the countdown — the ring picks up where it drained to.
 _stopAutoplay(permanently?): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:404](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L404)
+Defined in: website/components/carousel/CustomCarousel.tsx:404
 
 Stops autoplay; `permanently` latches _autoplayPermanentlyStopped so no resume follows a user gesture.
 
@@ -5763,7 +5763,7 @@ Stops autoplay; `permanently` latches _autoplayPermanentlyStopped so no resume f
 _regressRingToZero(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:409](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L409)
+Defined in: website/components/carousel/CustomCarousel.tsx:409
 
 Animates ringProgress back to 0 (drain effect when autoplay stops).
 
@@ -5779,7 +5779,7 @@ Animates ringProgress back to 0 (drain effect when autoplay stops).
 _tick(timestamp): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:414](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L414)
+Defined in: website/components/carousel/CustomCarousel.tsx:414
 
 Autoplay RAF frame — advances the ring clock, flips slides on cycle end.
 
@@ -5801,7 +5801,7 @@ Autoplay RAF frame — advances the ring clock, flips slides on cycle end.
 _updateRingDom(): void;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:419](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L419)
+Defined in: website/components/carousel/CustomCarousel.tsx:419
 
 Writes ringProgress into the SVG dashoffset + arrow widget arc.
 
@@ -5819,7 +5819,7 @@ renderSlide(item):
   | null;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:428](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L428)
+Defined in: website/components/carousel/CustomCarousel.tsx:428
 
 One slide's inner content — a <media-figure> with the item's CDN src
 (folder + src), intrinsic size for aspect-ratio layout, and the
@@ -5845,7 +5845,7 @@ expand/video/label flags. Returns null for placeholder entries.
 render(): Element;
 ```
 
-Defined in: [website/components/carousel/CustomCarousel.tsx:436](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/CustomCarousel.tsx#L436)
+Defined in: website/components/carousel/CustomCarousel.tsx:436
 
 JSX template — see carousel-render.tsx for the active/inactive
 shapes (clone slides, dots, ring buttons).

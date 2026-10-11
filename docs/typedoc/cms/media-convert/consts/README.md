@@ -7,6 +7,7 @@
 ## Interfaces
 
 - [QueueItem](interfaces/QueueItem.md)
+- [ToolsReport](interfaces/ToolsReport.md)
 - [JobResult](interfaces/JobResult.md)
 - [JobStatus](interfaces/JobStatus.md)
 
@@ -17,3 +18,4 @@
 - [POLL\_MS](variables/POLL_MS.md)
 - [MIME\_HINT](variables/MIME_HINT.md)
 - [EMPTY](variables/EMPTY.md)
+- [TOOL\_ROWS](variables/TOOL_ROWS.md)

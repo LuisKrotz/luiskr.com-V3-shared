@@ -8,7 +8,7 @@
 function startSpacePositionLoop(c): void;
 ```
 
-Defined in: [experiments/earth-playground/space/wiring.ts:156](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/wiring.ts#L156)
+Defined in: experiments/earth-playground/space/wiring.ts:156
 
 Starts the rAF loop mirroring camera position/target into the panel
 readout each frame — cheap textContent writes, skipped entirely while

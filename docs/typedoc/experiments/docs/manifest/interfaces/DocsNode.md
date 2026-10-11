@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/docs/manifest](../README.md) / DocsNode
 
-Defined in: [experiments/docs/manifest.ts:18](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L18)
+Defined in: experiments/docs/manifest.ts:18
 
 One manifest node — dir carries children, file carries format/size/id.
 
@@ -16,7 +16,7 @@ One manifest node — dir carries children, file carries format/size/id.
 type: "dir" | "file";
 ```
 
-Defined in: [experiments/docs/manifest.ts:19](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L19)
+Defined in: experiments/docs/manifest.ts:19
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [experiments/docs/manifest.ts:19](https://github.com/LuisKrotz/luisk
 name: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:20](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L20)
+Defined in: experiments/docs/manifest.ts:20
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [experiments/docs/manifest.ts:20](https://github.com/LuisKrotz/luisk
 path: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:21](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L21)
+Defined in: experiments/docs/manifest.ts:21
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [experiments/docs/manifest.ts:21](https://github.com/LuisKrotz/luisk
 optional children?: DocsNode[];
 ```
 
-Defined in: [experiments/docs/manifest.ts:22](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L22)
+Defined in: experiments/docs/manifest.ts:22
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [experiments/docs/manifest.ts:22](https://github.com/LuisKrotz/luisk
 optional id?: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:23](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L23)
+Defined in: experiments/docs/manifest.ts:23
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: [experiments/docs/manifest.ts:23](https://github.com/LuisKrotz/luisk
 optional format?: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:24](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L24)
+Defined in: experiments/docs/manifest.ts:24
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [experiments/docs/manifest.ts:24](https://github.com/LuisKrotz/luisk
 optional size?: number;
 ```
 
-Defined in: [experiments/docs/manifest.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L25)
+Defined in: experiments/docs/manifest.ts:25
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [experiments/docs/manifest.ts:25](https://github.com/LuisKrotz/luisk
 optional mtime?: string;
 ```
 
-Defined in: [experiments/docs/manifest.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L26)
+Defined in: experiments/docs/manifest.ts:26
 
 ***
 
@@ -96,4 +96,4 @@ Defined in: [experiments/docs/manifest.ts:26](https://github.com/LuisKrotz/luisk
 optional embedded?: boolean;
 ```
 
-Defined in: [experiments/docs/manifest.ts:27](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L27)
+Defined in: experiments/docs/manifest.ts:27

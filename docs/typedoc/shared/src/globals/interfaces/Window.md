@@ -22,6 +22,16 @@ The **`Window`** interface represents a window containing a DOM document; the do
 
 ## Properties
 
+### router?
+
+```ts
+optional router?: Router;
+```
+
+Defined in: shared/src/globals.d.ts:43
+
+***
+
 ### onbeforexrselect
 
 ```ts
@@ -40,16 +50,6 @@ at the time the input device's primary action is triggered.
 ```ts
 GlobalEventHandlers.onbeforexrselect
 ```
-
-***
-
-### router?
-
-```ts
-optional router?: Router;
-```
-
-Defined in: [shared/src/globals.d.ts:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L43)
 
 ***
 

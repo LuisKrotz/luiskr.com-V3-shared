@@ -6,8 +6,7 @@
 
 ```ts
 const NAV_TEXT: Readonly<{
-  SCROLL_UP: "Back to Top";
-  SCROLL_UP_ALT: "Scroll up";
+  SELECTED_WORK: "Selected work";
   CONTACT: "Contact";
   RELATED: "Related";
   ABOUT: "About";
@@ -17,7 +16,7 @@ const NAV_TEXT: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/strings/text.ts:12](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/strings/text.ts#L12)
+Defined in: core/tokens/strings/text.ts:12
 
 Non-localized UI text tokens (units, dev-facing labels) Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

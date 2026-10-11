@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/widgets/theme-slider/paint-2d](../README.md) / ThemeSliderPaintState
 
-Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:11](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/paint-2d.ts#L11)
+Defined in: core/utils/canvas/widgets/theme-slider/paint-2d.ts:11
 
 Everything the 2D paint pass needs from the slider instance.
 
@@ -16,7 +16,7 @@ Everything the 2D paint pass needs from the slider instance.
 width: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:12](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/paint-2d.ts#L12)
+Defined in: core/utils/canvas/widgets/theme-slider/paint-2d.ts:12
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:12](https://gith
 height: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:13](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/paint-2d.ts#L13)
+Defined in: core/utils/canvas/widgets/theme-slider/paint-2d.ts:13
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:13](https://gith
 currentP: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/paint-2d.ts#L14)
+Defined in: core/utils/canvas/widgets/theme-slider/paint-2d.ts:14
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:14](https://gith
 knobX: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:15](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/paint-2d.ts#L15)
+Defined in: core/utils/canvas/widgets/theme-slider/paint-2d.ts:15
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:15](https://gith
 startTime: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/theme-slider/paint-2d.ts:16](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/paint-2d.ts#L16)
+Defined in: core/utils/canvas/widgets/theme-slider/paint-2d.ts:16

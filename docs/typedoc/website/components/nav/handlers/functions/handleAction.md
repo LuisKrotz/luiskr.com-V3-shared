@@ -8,9 +8,11 @@
 function handleAction(host, e?): void;
 ```
 
-Defined in: [website/components/nav/handlers.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/handlers.ts#L83)
+Defined in: website/components/nav/handlers.ts:87
 
-Contact/CTA click: routes to the localized contact slug.
+Contact/CTA click: near the document bottom the entry becomes "selected
+work" — home scrolls back to the mosaic (top), internals navigate to the
+localized home route; otherwise it scrolls to the contact slug/footer.
 
 ## Parameters
 

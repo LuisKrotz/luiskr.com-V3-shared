@@ -8,7 +8,7 @@
 function buildMoonLod(THREE): Promise<LOD<Object3DEventMap>>;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:144](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L144)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:144
 
 Moon as a 3-level LOD sphere (radius 5, half Earth's visual size at
 10× distance — exaggerated vs the real 0.27× so it reads at a glance).

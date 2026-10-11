@@ -13,7 +13,7 @@ function attachCopyGuard(
 ): GuardDisposer;
 ```
 
-Defined in: [experiments/docs/copy-guard.ts:64](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/copy-guard.ts#L64)
+Defined in: experiments/docs/copy-guard.ts:64
 
 Wires every guard listener onto `root` (typically the viewer container
 or the component shadow root). `isProtected` gates interception so the

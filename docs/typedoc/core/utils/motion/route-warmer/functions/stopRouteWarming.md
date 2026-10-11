@@ -8,7 +8,7 @@
 function stopRouteWarming(): void;
 ```
 
-Defined in: [core/utils/motion/route-warmer.ts:65](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/motion/route-warmer.ts#L65)
+Defined in: core/utils/motion/route-warmer.ts:65
 
 Halts the idle warm chain — any pending scheduled imports are skipped.
 

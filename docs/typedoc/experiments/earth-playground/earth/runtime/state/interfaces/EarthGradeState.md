@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/runtime/state](../README.md) / EarthGradeState
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:98](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L98)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:98
 
 Color-grade post-pass settings.
 
@@ -16,7 +16,7 @@ Color-grade post-pass settings.
 contrast: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L100)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:100
 
 Contrast multiplier around mid-gray.
 
@@ -28,7 +28,7 @@ Contrast multiplier around mid-gray.
 saturation: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:102](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L102)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:102
 
 Saturation multiplier (1 = unchanged).
 
@@ -40,7 +40,7 @@ Saturation multiplier (1 = unchanged).
 blackLevel: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:104](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L104)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:104
 
 Lift applied to the black point.
 
@@ -52,6 +52,6 @@ Lift applied to the black point.
 blueGreenBoost: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L106)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:106
 
 Extra blue/green channel gain for the oceanic palette.

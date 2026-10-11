@@ -17,11 +17,12 @@ const ROUTE_NAMES: Readonly<{
   ADMIN_LOGIN: "Admin Login";
   CMS_DASHBOARD: "CMS Dashboard";
   EARTH_PLAYGROUND: "Earth Playground";
+  STAR_FIELD: "Star Field";
   DOCS: "In-depth project docs";
 }>;
 ```
 
-Defined in: [core/tokens/routes/names.ts:11](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/routes/names.ts#L11)
+Defined in: core/tokens/routes/names.ts:11
 
 Route name + localized title-prefix tokens. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

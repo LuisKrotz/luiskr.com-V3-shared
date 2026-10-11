@@ -8,6 +8,6 @@
 const _B_EXPAND_MODAL_MEDIA_FIGURE: "expand-modal-media-figure";
 ```
 
-Defined in: [core/tokens/base.ts:263](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/base.ts#L263)
+Defined in: core/tokens/base.ts:268
 
 BEM block fragment "b expand modal media figure" — composed by the token groups below into full class names.

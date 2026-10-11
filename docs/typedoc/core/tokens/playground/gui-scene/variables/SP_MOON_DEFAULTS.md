@@ -13,7 +13,7 @@ const SP_MOON_DEFAULTS: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/playground/gui-scene.ts:13](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/playground/gui-scene.ts#L13)
+Defined in: core/tokens/playground/gui-scene.ts:13
 
 Scene-subsystem start values for the Earth Playground. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

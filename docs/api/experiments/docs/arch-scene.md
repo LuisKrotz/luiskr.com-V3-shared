@@ -13,6 +13,13 @@ Interactive three.js visualization of the docs manifest —
 
 Live scene resources — destroy() frees renderer + listeners.
 
+### `setActive`
+
+Highlights the node matching `path` — the current docs location.
+Safe to call before the async graph build lands; the highlight
+applies to whatever nodes exist and is re-applied when they arrive.
+- `@param` _path Manifest path of the active location ('' = portal root).
+
 ### (module scope)
 
 A flattened manifest node with its ring depth and ring angle.
@@ -90,6 +97,18 @@ Serializes camera pose + interaction flag into sessionStorage.
 ### `lineGeo`
 
 Edge geometry — assigned inside buildGraph, disposed in destroy().
+
+### `activePath`
+
+Docs path currently highlighted — '' matches the portal-root node.
+
+### `applyActive`
+
+Paints the active-location highlight onto live nodes: the exact path
+match pops to SCENE_ACTIVE_OPACITY with a larger pulse scale, and
+ancestor dirs on its branch lift to SCENE_ANCESTOR_OPACITY so the
+route's lineage reads on the map. Everything else keeps the faint
+backdrop alpha stored on userData at build time.
 
 ### `buildGraph`
 

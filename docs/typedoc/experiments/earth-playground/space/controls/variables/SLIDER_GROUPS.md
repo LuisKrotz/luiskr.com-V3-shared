@@ -8,7 +8,7 @@
 const SLIDER_GROUPS: readonly SpGroup[];
 ```
 
-Defined in: [experiments/earth-playground/space/controls.ts:105](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/controls.ts#L105)
+Defined in: experiments/earth-playground/space/controls.ts:105
 
 Declarative control schema — the panel renders straight from this so a
 new engine knob needs no JSX change. Per control:

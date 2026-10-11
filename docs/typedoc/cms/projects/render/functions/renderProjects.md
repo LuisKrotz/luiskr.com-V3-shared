@@ -8,7 +8,7 @@
 function renderProjects(host): HTMLElement | DocumentFragment | SVGElement;
 ```
 
-Defined in: [cms/projects/render.tsx:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/render.tsx#L25)
+Defined in: cms/projects/render.tsx:25
 
 Renders projects.
 

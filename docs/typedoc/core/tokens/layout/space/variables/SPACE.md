@@ -26,7 +26,7 @@ const SPACE: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/layout/space.ts:12](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/layout/space.ts#L12)
+Defined in: core/tokens/layout/space.ts:12
 
 Fibonacci spacing scale (unitless. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

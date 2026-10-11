@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/projects/CmsProjectsList](../README.md) / CmsProjectsList
 
-Defined in: [cms/projects/CmsProjectsList.tsx:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L40)
+Defined in: cms/projects/CmsProjectsList.tsx:40
 
 The CmsProjectsList — projects list class.
 
@@ -20,7 +20,7 @@ The CmsProjectsList — projects list class.
 new CmsProjectsList(): CmsProjectsList;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L48)
+Defined in: cms/projects/CmsProjectsList.tsx:48
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:48](https://github.com/LuisKrotz/l
 languages: readonly string[] = VALID_LANGS;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L41)
+Defined in: cms/projects/CmsProjectsList.tsx:41
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:41](https://github.com/LuisKrotz/l
 selectedLang: string = LOCALES.EN;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:42](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L42)
+Defined in: cms/projects/CmsProjectsList.tsx:42
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:42](https://github.com/LuisKrotz/l
 projectKeys: string[] = [];
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L43)
+Defined in: cms/projects/CmsProjectsList.tsx:43
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:43](https://github.com/LuisKrotz/l
 selectedProjectKey: string = '';
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:44](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L44)
+Defined in: cms/projects/CmsProjectsList.tsx:44
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:44](https://github.com/LuisKrotz/l
 currentProject: CmsProject | null = null;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L45)
+Defined in: cms/projects/CmsProjectsList.tsx:45
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:45](https://github.com/LuisKrotz/l
 saving: boolean = false;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:46](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L46)
+Defined in: cms/projects/CmsProjectsList.tsx:46
 
 ***
 
@@ -98,7 +98,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:46](https://github.com/LuisKrotz/l
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -114,7 +114,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -136,7 +136,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -157,7 +157,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -175,7 +175,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -191,7 +191,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -211,7 +211,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -227,7 +227,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -4460,7 +4460,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 onMounted(): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:54](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L54)
+Defined in: cms/projects/CmsProjectsList.tsx:54
 
 Lifecycle: loads the project keys + data.
 
@@ -4480,7 +4480,7 @@ Lifecycle: loads the project keys + data.
 onUpdated(): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:60](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L60)
+Defined in: cms/projects/CmsProjectsList.tsx:60
 
 Lifecycle: re-binds after render.
 
@@ -4500,7 +4500,7 @@ Lifecycle: re-binds after render.
 loadProjectKeys(): Promise<void>;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:65](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L65)
+Defined in: cms/projects/CmsProjectsList.tsx:65
 
 #### Returns
 
@@ -4514,7 +4514,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:65](https://github.com/LuisKrotz/l
 loadProjectData(): Promise<void>;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:68](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L68)
+Defined in: cms/projects/CmsProjectsList.tsx:68
 
 #### Returns
 
@@ -4528,7 +4528,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:68](https://github.com/LuisKrotz/l
 createProjectPrompt(): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:71](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L71)
+Defined in: cms/projects/CmsProjectsList.tsx:71
 
 #### Returns
 
@@ -4542,7 +4542,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:71](https://github.com/LuisKrotz/l
 deleteProject(): Promise<void>;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:74](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L74)
+Defined in: cms/projects/CmsProjectsList.tsx:74
 
 #### Returns
 
@@ -4556,7 +4556,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:74](https://github.com/LuisKrotz/l
 saveProjectData(): Promise<void>;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L77)
+Defined in: cms/projects/CmsProjectsList.tsx:77
 
 #### Returns
 
@@ -4570,7 +4570,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:77](https://github.com/LuisKrotz/l
 _normalizeSection(s): CmsSection;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:82](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L82)
+Defined in: cms/projects/CmsProjectsList.tsx:82
 
 #### Parameters
 
@@ -4590,7 +4590,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:82](https://github.com/LuisKrotz/l
 _ensureSectionShape(sIdx): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:85](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L85)
+Defined in: cms/projects/CmsProjectsList.tsx:85
 
 #### Parameters
 
@@ -4610,7 +4610,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:85](https://github.com/LuisKrotz/l
 addSection(): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:88](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L88)
+Defined in: cms/projects/CmsProjectsList.tsx:88
 
 #### Returns
 
@@ -4624,7 +4624,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:88](https://github.com/LuisKrotz/l
 removeSection(sIdx): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:91](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L91)
+Defined in: cms/projects/CmsProjectsList.tsx:91
 
 #### Parameters
 
@@ -4644,7 +4644,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:91](https://github.com/LuisKrotz/l
 moveSection(sIdx, dir): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:94](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L94)
+Defined in: cms/projects/CmsProjectsList.tsx:94
 
 #### Parameters
 
@@ -4668,7 +4668,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:94](https://github.com/LuisKrotz/l
 addSectionText(sIdx): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:97](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L97)
+Defined in: cms/projects/CmsProjectsList.tsx:97
 
 #### Parameters
 
@@ -4688,7 +4688,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:97](https://github.com/LuisKrotz/l
 removeSectionText(sIdx, tIdx): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L100)
+Defined in: cms/projects/CmsProjectsList.tsx:100
 
 #### Parameters
 
@@ -4712,7 +4712,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:100](https://github.com/LuisKrotz/
 addSectionMedia(sIdx): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L103)
+Defined in: cms/projects/CmsProjectsList.tsx:103
 
 #### Parameters
 
@@ -4732,7 +4732,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:103](https://github.com/LuisKrotz/
 removeSectionMedia(sIdx, mIdx): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L106)
+Defined in: cms/projects/CmsProjectsList.tsx:106
 
 #### Parameters
 
@@ -4756,7 +4756,7 @@ Defined in: [cms/projects/CmsProjectsList.tsx:106](https://github.com/LuisKrotz/
 _notify(msg): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:112](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L112)
+Defined in: cms/projects/CmsProjectsList.tsx:112
 
 Fires a cms-notification toast.
 
@@ -4782,7 +4782,7 @@ _renderSection(
 ): HTMLElement | DocumentFragment | SVGElement;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:120](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L120)
+Defined in: cms/projects/CmsProjectsList.tsx:120
 
 Section card JSX (delegate — @cms/projects/section-render.tsx).
 
@@ -4812,7 +4812,7 @@ Section card JSX (delegate — @cms/projects/section-render.tsx).
 _bindEvents(): void;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:126](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L126)
+Defined in: cms/projects/CmsProjectsList.tsx:126
 
 Events wiring (delegate — @cms/projects/events.ts).
 
@@ -4828,7 +4828,7 @@ Events wiring (delegate — @cms/projects/events.ts).
 render(): HTMLElement | DocumentFragment | SVGElement;
 ```
 
-Defined in: [cms/projects/CmsProjectsList.tsx:132](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/CmsProjectsList.tsx#L132)
+Defined in: cms/projects/CmsProjectsList.tsx:132
 
 JSX template (delegate — @cms/projects/render.tsx).
 
@@ -4848,7 +4848,7 @@ JSX template (delegate — @cms/projects/render.tsx).
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4870,7 +4870,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: [core/Component.ts:116](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L116)
+Defined in: core/Component.ts:116
 
 #### Parameters
 
@@ -4894,7 +4894,7 @@ Defined in: [core/Component.ts:116](https://github.com/LuisKrotz/luiskr.com-V3/b
 optional onDestroy(): void;
 ```
 
-Defined in: [core/Component.ts:117](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L117)
+Defined in: core/Component.ts:117
 
 #### Returns
 
@@ -4912,7 +4912,7 @@ Defined in: [core/Component.ts:117](https://github.com/LuisKrotz/luiskr.com-V3/b
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4946,7 +4946,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4971,7 +4971,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4995,7 +4995,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -5032,7 +5032,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -5075,7 +5075,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -5125,7 +5125,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -5156,7 +5156,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -5179,7 +5179,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5204,7 +5204,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:

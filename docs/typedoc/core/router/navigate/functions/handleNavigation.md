@@ -12,7 +12,7 @@ function handleNavigation(
 ): Promise<void>;
 ```
 
-Defined in: [core/router/navigate.ts:130](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/router/navigate.ts#L130)
+Defined in: core/router/navigate.ts:130
 
 Full navigation pipeline — the space-playground chunk is preloaded
 when navigated to, since it's excluded from the idle route warmer

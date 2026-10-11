@@ -8,7 +8,7 @@
 function bindThemeSliderEvents(s): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/theme-slider/events.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/events.ts#L14)
+Defined in: core/utils/canvas/widgets/theme-slider/events.ts:14
 
 Wires pointer/click/keyboard handlers onto the slider's canvas.
 

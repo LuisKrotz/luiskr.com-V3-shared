@@ -8,7 +8,7 @@
 function fetchFirebaseDb(path): Promise<DbSnapshot>;
 ```
 
-Defined in: [core/firebase.ts:188](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/firebase.ts#L188)
+Defined in: core/firebase.ts:313
 
 Lightweight HTTP REST reader for the Realtime Database: GETs
 `<db>/<path>.json` and wraps the payload in a snapshot-shaped

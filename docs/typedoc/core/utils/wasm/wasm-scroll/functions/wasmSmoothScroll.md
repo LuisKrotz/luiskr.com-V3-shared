@@ -8,7 +8,7 @@
 function wasmSmoothScroll(options?): void;
 ```
 
-Defined in: [core/utils/wasm/wasm-scroll.ts:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-scroll.ts#L48)
+Defined in: core/utils/wasm/wasm-scroll.ts:48
 
 Smoothly scrolls a container (or the window) to a target element or
 numeric offset. Target resolution order: `element` (bounding rect

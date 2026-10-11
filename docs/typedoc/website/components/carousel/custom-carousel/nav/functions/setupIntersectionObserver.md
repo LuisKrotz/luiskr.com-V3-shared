@@ -8,7 +8,7 @@
 function setupIntersectionObserver(c): void;
 ```
 
-Defined in: [website/components/carousel/custom-carousel/nav.ts:356](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/custom-carousel/nav.ts#L356)
+Defined in: website/components/carousel/custom-carousel/nav.ts:356
 
 IntersectionObserver wiring — entry: adds the in-view class and mounts
 the WebGL arrows; exit: destroys the arrows (their GL contexts are

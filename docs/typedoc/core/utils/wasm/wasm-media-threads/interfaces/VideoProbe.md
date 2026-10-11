@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-media-threads](../README.md) / VideoProbe
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:34](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L34)
+Defined in: core/utils/wasm/wasm-media-threads.ts:34
 
 Result of the lightweight header probe — filled by the worker.
 
@@ -24,7 +24,7 @@ Worker may attach extra diagnostics — forward-compatible.
 optional codec?: string;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:36](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L36)
+Defined in: core/utils/wasm/wasm-media-threads.ts:36
 
 Detected codec string (e.g. 'avc1.42E01E'), when parseable.
 
@@ -36,7 +36,7 @@ Detected codec string (e.g. 'avc1.42E01E'), when parseable.
 optional size?: number;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:38](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L38)
+Defined in: core/utils/wasm/wasm-media-threads.ts:38
 
 Total byte size, when the server reports Content-Length/ranges.
 
@@ -48,6 +48,6 @@ Total byte size, when the server reports Content-Length/ranges.
 optional rangeSupported?: boolean;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L40)
+Defined in: core/utils/wasm/wasm-media-threads.ts:40
 
 Whether the server honored the Range request (206 vs 200).

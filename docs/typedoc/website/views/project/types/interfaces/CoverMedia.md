@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/views/project/types](../README.md) / CoverMedia
 
-Defined in: [website/views/project/types.ts:28](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L28)
+Defined in: website/views/project/types.ts:28
 
 The project cover — like ProjectMediaItem but always present when the
 project has hero media; `size` [w,h] reserves the box so the skeleton shows the
@@ -18,7 +18,7 @@ final aspect ratio before bytes arrive.
 src: string;
 ```
 
-Defined in: [website/views/project/types.ts:29](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L29)
+Defined in: website/views/project/types.ts:29
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [website/views/project/types.ts:29](https://github.com/LuisKrotz/lui
 size: number[];
 ```
 
-Defined in: [website/views/project/types.ts:30](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L30)
+Defined in: website/views/project/types.ts:30
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [website/views/project/types.ts:30](https://github.com/LuisKrotz/lui
 optional isVideo?: boolean;
 ```
 
-Defined in: [website/views/project/types.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L31)
+Defined in: website/views/project/types.ts:31
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [website/views/project/types.ts:31](https://github.com/LuisKrotz/lui
 optional label?: string;
 ```
 
-Defined in: [website/views/project/types.ts:32](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L32)
+Defined in: website/views/project/types.ts:32

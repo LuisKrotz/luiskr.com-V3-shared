@@ -235,6 +235,15 @@
 
 | File | What it does |
 |---|---|
+| [`cmsmediaconverter-offhost-tails.test.js`](cms/tests/coverage/media/cmsmediaconverter-offhost-tails.test.md) | Coverage tails for the non-localhost arm — the module is |
+| [`cmsmediaconverter-tools-tails.test.js`](cms/tests/coverage/media/cmsmediaconverter-tools-tails.test.md) | Coverage tails for the media-converter guided toolchain |
+
+## CMS
+
+*Admin bundle — editors for every database node.*
+
+| File | What it does |
+|---|---|
 | [`cms-deep-coverage-adminlogin-branches.test.js`](cms/tests/deep-coverage/cms-deep-coverage-adminlogin-branches.test.md) | Split from cms-deep-coverage.test.js — covers the "AdminLogin branches" describe. |
 | [`cms-deep-coverage-cmsabouteditor-dom-events.test.js`](cms/tests/deep-coverage/cms-deep-coverage-cmsabouteditor-dom-events.test.md) | Split from cms-deep-coverage.test.js — covers the "CmsAboutEditor DOM events" describe. |
 | [`cms-deep-coverage-cmsabouteditor.test.js`](cms/tests/deep-coverage/cms-deep-coverage-cmsabouteditor.test.md) | Split from cms-deep-coverage.test.js — covers the "CmsAboutEditor" describe. |
@@ -538,8 +547,11 @@
 
 | File | What it does |
 |---|---|
+| [`firebase-auth-timeout-tails.test.js`](core/tests/coverage/firebase/firebase-auth-timeout-tails.test.md) | Coverage tails for core/firebase.ts — the bounded |
 | [`firebase-mock-tails-test-js.test.js`](core/tests/coverage/firebase/firebase-mock-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "firebase-mock tails" describe. |
 | [`firebase-mock-tails.test.js`](core/tests/coverage/firebase/firebase-mock-tails.test.md) | Split from coverage-tails-4.test.js — covers the "firebase-mock tails" describe. |
+| [`firebase-redirect-error-tails.test.js`](core/tests/coverage/firebase/firebase-redirect-error-tails.test.md) | Coverage tails for core/firebase.ts — the REJECTED |
+| [`firebase-redirect-event-tails.test.js`](core/tests/coverage/firebase/firebase-redirect-event-tails.test.md) | Coverage tails for core/firebase.ts — the null-redirect- |
 | [`firebase-redirect-tails.test.js`](core/tests/coverage/firebase/firebase-redirect-tails.test.md) | Coverage tails for core/firebase.ts — the completed-redirect |
 
 ## Core engine
@@ -1716,6 +1728,7 @@
 | [`bodies-scene.ts`](experiments/star-field/engine/bodies-scene.md) | Scene-graph builder for the star-field catalog — turns each |
 | [`bootstrap.ts`](experiments/star-field/engine/bootstrap.md) | Async scene assembly for the star-field engine |
 | [`catalog.ts`](experiments/star-field/engine/catalog.md) | The star-field body catalog — one static SFBodyDef per |
+| [`fallback-stars.ts`](experiments/star-field/engine/fallback-stars.md) | Static 2D-canvas starfield for the no-WebGL fallback — |
 | [`fly.ts`](experiments/star-field/engine/fly.md) | Camera fly-to tween for the star-field engine — when a body |
 | [`frame.ts`](experiments/star-field/engine/frame.md) | Per-frame + per-resize behavior for the star-field engine: |
 | [`materials.ts`](experiments/star-field/engine/materials.md) | Material-parameter hygiene for the body builders |
@@ -1741,6 +1754,7 @@
 | [`black-hole.ts`](experiments/star-field/engine/bodies/black-hole.md) | Sagittarius A* renderer — a layered relativistic object |
 | [`deep-sky.ts`](experiments/star-field/engine/bodies/deep-sky.md) | Real-imagery surface for deep-sky bodies — nebulae, star |
 | [`mask.ts`](experiments/star-field/engine/bodies/mask.md) | Photo-texture edge feathering for deep-sky billboards. |
+| [`procedural.ts`](experiments/star-field/engine/bodies/procedural.md) | Seeded canvas texture generation for bodies with no real |
 | [`structures.ts`](experiments/star-field/engine/bodies/structures.md) | Cosmic-hierarchy bodies — boundary spheres + member |
 
 ## Entry points
@@ -1785,7 +1799,11 @@
 | [`starfield-bodies-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-bodies-tails.test.md) | Coverage tails for the photographic bodies layer — |
 | [`starfield-catalog-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-catalog-tails.test.md) | Coverage tails for the catalog placement helpers — |
 | [`starfield-engine-wiring-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-engine-wiring-tails.test.md) | Coverage tails for starfield-engine.ts — the facade arms |
+| [`starfield-fallback-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-fallback-tails.test.md) | Coverage tails for the no-WebGL fallback surface — |
+| [`starfield-follow-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-follow-tails.test.md) | Coverage tails for frame.ts's orbit-follow — while a |
+| [`starfield-procedural-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-procedural-tails.test.md) | Coverage tails for the procedural imagery layer — |
 | [`starfield-scene-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-scene-tails.test.md) | Coverage tails for the engine internals that need a |
+| [`starfield-visual-pass-tails.test.js`](experiments/star-field/tests/coverage/starfield/engine/starfield-visual-pass-tails.test.md) | Coverage tails for the visual-quality pass added to the |
 
 ## Entry points
 

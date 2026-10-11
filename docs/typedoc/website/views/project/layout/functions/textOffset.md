@@ -12,7 +12,7 @@ function textOffset(
 ): number;
 ```
 
-Defined in: [website/views/project/layout.ts:71](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/layout.ts#L71)
+Defined in: website/views/project/layout.ts:71
 
 Start offset for the text run at index `idx`: cumulative real chars of
 the preceding items × the per-char delay, plus the per-index step — so

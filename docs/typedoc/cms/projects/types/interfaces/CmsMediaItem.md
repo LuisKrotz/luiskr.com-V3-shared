@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/projects/types](../README.md) / CmsMediaItem
 
-Defined in: [cms/projects/types.ts:10](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/types.ts#L10)
+Defined in: cms/projects/types.ts:10
 
 One media row in the CMS project editor.
 
@@ -16,7 +16,7 @@ One media row in the CMS project editor.
 src: string;
 ```
 
-Defined in: [cms/projects/types.ts:12](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/types.ts#L12)
+Defined in: cms/projects/types.ts:12
 
 Extensionless CDN stem (resolved by the gcs() helper for previews).
 
@@ -28,7 +28,7 @@ Extensionless CDN stem (resolved by the gcs() helper for previews).
 label: string;
 ```
 
-Defined in: [cms/projects/types.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/types.ts#L14)
+Defined in: cms/projects/types.ts:14
 
 Alt/label text shown in the editor + emitted as media labels.
 
@@ -40,7 +40,7 @@ Alt/label text shown in the editor + emitted as media labels.
 isVideo: boolean;
 ```
 
-Defined in: [cms/projects/types.ts:16](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/types.ts#L16)
+Defined in: cms/projects/types.ts:16
 
 Whether the media is a video (drives poster-URL resolution).
 
@@ -52,6 +52,6 @@ Whether the media is a video (drives poster-URL resolution).
 size: number[];
 ```
 
-Defined in: [cms/projects/types.ts:18](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/projects/types.ts#L18)
+Defined in: cms/projects/types.ts:18
 
 Intrinsic [w,h] for aspect-ratio layouts.

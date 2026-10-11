@@ -8,7 +8,7 @@
 function bindEvents(host): void;
 ```
 
-Defined in: [cms/footer/events.ts:13](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/footer/events.ts#L13)
+Defined in: cms/footer/events.ts:13
 
 Wires the whole form.
 

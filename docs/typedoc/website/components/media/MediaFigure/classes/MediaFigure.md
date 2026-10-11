@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/media/MediaFigure](../README.md) / MediaFigure
 
-Defined in: [website/components/media/MediaFigure.tsx:32](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L32)
+Defined in: website/components/media/MediaFigure.tsx:32
 
 The MediaFigure — figure class.
 
@@ -20,7 +20,7 @@ The MediaFigure — figure class.
 new MediaFigure(): MediaFigure;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:55](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L55)
+Defined in: website/components/media/MediaFigure.tsx:55
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [website/components/media/MediaFigure.tsx:55](https://github.com/Lui
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -54,7 +54,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +76,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +97,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +115,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +131,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +151,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +167,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 thumbSrc: string = ATTR_VALUES.EMPTY;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:46](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L46)
+Defined in: website/components/media/MediaFigure.tsx:46
 
 ***
 
@@ -193,7 +193,7 @@ Defined in: [website/components/media/MediaFigure.tsx:46](https://github.com/Lui
 highResSrc: string = ATTR_VALUES.EMPTY;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L47)
+Defined in: website/components/media/MediaFigure.tsx:47
 
 ***
 
@@ -203,7 +203,7 @@ Defined in: [website/components/media/MediaFigure.tsx:47](https://github.com/Lui
 isLoaded: boolean = false;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L48)
+Defined in: website/components/media/MediaFigure.tsx:48
 
 ***
 
@@ -213,7 +213,7 @@ Defined in: [website/components/media/MediaFigure.tsx:48](https://github.com/Lui
 poster: string[] = [];
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:49](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L49)
+Defined in: website/components/media/MediaFigure.tsx:49
 
 ***
 
@@ -223,7 +223,7 @@ Defined in: [website/components/media/MediaFigure.tsx:49](https://github.com/Lui
 video: string[] = [];
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L50)
+Defined in: website/components/media/MediaFigure.tsx:50
 
 ***
 
@@ -233,7 +233,7 @@ Defined in: [website/components/media/MediaFigure.tsx:50](https://github.com/Lui
 observer: IntersectionObserver | null = null;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L51)
+Defined in: website/components/media/MediaFigure.tsx:51
 
 ***
 
@@ -243,7 +243,7 @@ Defined in: [website/components/media/MediaFigure.tsx:51](https://github.com/Lui
 imgObserver: IntersectionObserver | null = null;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:52](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L52)
+Defined in: website/components/media/MediaFigure.tsx:52
 
 ***
 
@@ -253,7 +253,7 @@ Defined in: [website/components/media/MediaFigure.tsx:52](https://github.com/Lui
 isIntersecting: boolean = false;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:53](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L53)
+Defined in: website/components/media/MediaFigure.tsx:53
 
 ***
 
@@ -4322,7 +4322,7 @@ get static observedAttributes(): (
   | "auto-play")[];
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L33)
+Defined in: website/components/media/MediaFigure.tsx:33
 
 ##### Returns
 
@@ -4346,7 +4346,7 @@ Defined in: [website/components/media/MediaFigure.tsx:33](https://github.com/Lui
 get canExpand(): boolean;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:61](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L61)
+Defined in: website/components/media/MediaFigure.tsx:61
 
 Whether the figure may open the expand modal.
 
@@ -4364,7 +4364,7 @@ Whether the figure may open the expand modal.
 get isVideo(): boolean;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L70)
+Defined in: website/components/media/MediaFigure.tsx:70
 
 Whether the media is a video.
 
@@ -4382,7 +4382,7 @@ Whether the media is a video.
 get autoPlay(): boolean;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:79](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L79)
+Defined in: website/components/media/MediaFigure.tsx:79
 
 Whether the video should autoplay.
 
@@ -4400,7 +4400,7 @@ Whether the video should autoplay.
 get mediaWidth(): number;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:88](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L88)
+Defined in: website/components/media/MediaFigure.tsx:88
 
 Declared media width attribute.
 
@@ -4418,7 +4418,7 @@ Declared media width attribute.
 get mediaHeight(): number;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:97](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L97)
+Defined in: website/components/media/MediaFigure.tsx:97
 
 Declared media height attribute.
 
@@ -4436,7 +4436,7 @@ Declared media height attribute.
 get label(): string;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L106)
+Defined in: website/components/media/MediaFigure.tsx:106
 
 Caption label.
 
@@ -4454,7 +4454,7 @@ Caption label.
 get mediaSrc(): string;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:112](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L112)
+Defined in: website/components/media/MediaFigure.tsx:112
 
 Base media path on the CDN.
 
@@ -4472,7 +4472,7 @@ Base media path on the CDN.
 get classes(): string;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:118](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L118)
+Defined in: website/components/media/MediaFigure.tsx:118
 
 Extra host classes passed through the attribute.
 
@@ -4490,7 +4490,7 @@ Extra host classes passed through the attribute.
 get displayWidth(): number;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:128](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L128)
+Defined in: website/components/media/MediaFigure.tsx:128
 
 Rendered display width. Videos are capped at FHD_WIDTH (1920): the
 player can't visually exceed 1080p, so decode/GPU budgets stay
@@ -4511,7 +4511,7 @@ the CDN serves the right variant instead.
 get displayHeight(): number;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:141](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L141)
+Defined in: website/components/media/MediaFigure.tsx:141
 
 Rendered display height — pairs with displayWidth's FHD cap:
 aspect-preserving downscale via calcAspectScaled (h·(MAX/w)) so the
@@ -4531,7 +4531,7 @@ layout box never stretches when the video is >1080p.
 get videoSrcMain(): string;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:151](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L151)
+Defined in: website/components/media/MediaFigure.tsx:151
 
 Primary video source URL.
 
@@ -4549,7 +4549,7 @@ Primary video source URL.
 get videoSrcFallback(): string;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:157](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L157)
+Defined in: website/components/media/MediaFigure.tsx:157
 
 Fallback (scaled) video source for constrained devices.
 
@@ -4733,7 +4733,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onUpdated(): void;
 ```
 
-Defined in: [core/Component.ts:115](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L115)
+Defined in: core/Component.ts:115
 
 #### Returns
 
@@ -4751,7 +4751,7 @@ Defined in: [core/Component.ts:115](https://github.com/LuisKrotz/luiskr.com-V3/b
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4785,7 +4785,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4810,7 +4810,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4834,7 +4834,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4871,7 +4871,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4914,7 +4914,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4964,7 +4964,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4995,7 +4995,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -5018,7 +5018,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5043,7 +5043,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -5077,7 +5077,7 @@ Render result from render().
 onInit(): void;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:161](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L161)
+Defined in: website/components/media/MediaFigure.tsx:161
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -5099,7 +5099,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 onMounted(): void;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:165](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L165)
+Defined in: website/components/media/MediaFigure.tsx:165
 
 #### Returns
 
@@ -5117,7 +5117,7 @@ Defined in: [website/components/media/MediaFigure.tsx:165](https://github.com/Lu
 _ensureVideoSource(vid): void;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:171](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L171)
+Defined in: website/components/media/MediaFigure.tsx:171
 
 Sets the <source> src on a video element when it becomes playable.
 
@@ -5139,7 +5139,7 @@ Sets the <source> src on a video element when it becomes playable.
 onDestroy(): void;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:175](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L175)
+Defined in: website/components/media/MediaFigure.tsx:175
 
 #### Returns
 
@@ -5157,7 +5157,7 @@ Defined in: [website/components/media/MediaFigure.tsx:175](https://github.com/Lu
 onStoreUpdate(): void;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:189](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L189)
+Defined in: website/components/media/MediaFigure.tsx:189
 
 #### Returns
 
@@ -5175,7 +5175,7 @@ Defined in: [website/components/media/MediaFigure.tsx:189](https://github.com/Lu
 playVideo(target): void;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:195](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L195)
+Defined in: website/components/media/MediaFigure.tsx:195
 
 Starts muted playback honoring reduced-motion/autoplay prefs.
 
@@ -5197,7 +5197,7 @@ Starts muted playback honoring reduced-motion/autoplay prefs.
 pauseVideo(target): void;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:201](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L201)
+Defined in: website/components/media/MediaFigure.tsx:201
 
 Pauses playback (offscreen or pref change).
 
@@ -5219,7 +5219,7 @@ Pauses playback (offscreen or pref change).
 placeholder(w, h): string;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:207](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L207)
+Defined in: website/components/media/MediaFigure.tsx:207
 
 Zero-CLS SVG placeholder data-URI at the media's aspect (see media-load.ts).
 
@@ -5245,7 +5245,7 @@ Zero-CLS SVG placeholder data-URI at the media's aspect (see media-load.ts).
 loadHighRes(): Promise<void>;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:213](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L213)
+Defined in: website/components/media/MediaFigure.tsx:213
 
 Thumb → high-res preload swap (see media-load.ts).
 
@@ -5261,7 +5261,7 @@ Thumb → high-res preload swap (see media-load.ts).
 slugify(text): string;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:219](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L219)
+Defined in: website/components/media/MediaFigure.tsx:219
 
 Slugifies a caption for the alt/ARIA text.
 
@@ -5283,7 +5283,7 @@ Slugifies a caption for the alt/ARIA text.
 openModal(): void;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:225](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L225)
+Defined in: website/components/media/MediaFigure.tsx:225
 
 Opens the expand modal with this media's descriptor via the store.
 
@@ -5299,7 +5299,7 @@ Opens the expand modal with this media's descriptor via the store.
 render(): Element;
 ```
 
-Defined in: [website/components/media/MediaFigure.tsx:238](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/MediaFigure.tsx#L238)
+Defined in: website/components/media/MediaFigure.tsx:238
 
 JSX template — a layered stack the CSS crossfades:
   1. placeholder <img>  SVG data-URI at exact aspect (zero-CLS)

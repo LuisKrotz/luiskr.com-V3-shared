@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / StoreGetters
 
-Defined in: [core/store/state.ts:148](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L148)
+Defined in: core/store/state.ts:148
 
 The getter facade — components read state exclusively through these
 accessors so the StoreState layout can evolve without touching every
@@ -20,7 +20,7 @@ call-site compatibility.
 getTheme: () => string;
 ```
 
-Defined in: [core/store/state.ts:149](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L149)
+Defined in: core/store/state.ts:149
 
 #### Returns
 
@@ -34,7 +34,7 @@ Defined in: [core/store/state.ts:149](https://github.com/LuisKrotz/luiskr.com-V3
 getEffectiveTheme: () => string;
 ```
 
-Defined in: [core/store/state.ts:150](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L150)
+Defined in: core/store/state.ts:150
 
 #### Returns
 
@@ -48,7 +48,7 @@ Defined in: [core/store/state.ts:150](https://github.com/LuisKrotz/luiskr.com-V3
 getPreferencesOpen: () => boolean;
 ```
 
-Defined in: [core/store/state.ts:151](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L151)
+Defined in: core/store/state.ts:151
 
 #### Returns
 
@@ -62,7 +62,7 @@ Defined in: [core/store/state.ts:151](https://github.com/LuisKrotz/luiskr.com-V3
 getLangDialogOpen: () => boolean;
 ```
 
-Defined in: [core/store/state.ts:152](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L152)
+Defined in: core/store/state.ts:152
 
 #### Returns
 
@@ -81,7 +81,7 @@ getModalOrigin: () =>
   | null;
 ```
 
-Defined in: [core/store/state.ts:153](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L153)
+Defined in: core/store/state.ts:153
 
 #### Returns
 
@@ -99,7 +99,7 @@ Defined in: [core/store/state.ts:153](https://github.com/LuisKrotz/luiskr.com-V3
 getReducedMotion: () => boolean;
 ```
 
-Defined in: [core/store/state.ts:154](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L154)
+Defined in: core/store/state.ts:154
 
 #### Returns
 
@@ -113,7 +113,7 @@ Defined in: [core/store/state.ts:154](https://github.com/LuisKrotz/luiskr.com-V3
 getVideoAutoplay: () => boolean;
 ```
 
-Defined in: [core/store/state.ts:155](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L155)
+Defined in: core/store/state.ts:155
 
 #### Returns
 
@@ -127,7 +127,7 @@ Defined in: [core/store/state.ts:155](https://github.com/LuisKrotz/luiskr.com-V3
 getStatsForNerds: () => boolean;
 ```
 
-Defined in: [core/store/state.ts:156](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L156)
+Defined in: core/store/state.ts:156
 
 #### Returns
 
@@ -141,7 +141,7 @@ Defined in: [core/store/state.ts:156](https://github.com/LuisKrotz/luiskr.com-V3
 getShowGrid: () => boolean;
 ```
 
-Defined in: [core/store/state.ts:157](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L157)
+Defined in: core/store/state.ts:157
 
 #### Returns
 
@@ -155,7 +155,7 @@ Defined in: [core/store/state.ts:157](https://github.com/LuisKrotz/luiskr.com-V3
 getMentions: () => MentionsState;
 ```
 
-Defined in: [core/store/state.ts:158](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L158)
+Defined in: core/store/state.ts:158
 
 #### Returns
 
@@ -169,7 +169,7 @@ Defined in: [core/store/state.ts:158](https://github.com/LuisKrotz/luiskr.com-V3
 getClickOrTap: () => string;
 ```
 
-Defined in: [core/store/state.ts:159](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L159)
+Defined in: core/store/state.ts:159
 
 #### Returns
 
@@ -183,7 +183,7 @@ Defined in: [core/store/state.ts:159](https://github.com/LuisKrotz/luiskr.com-V3
 getInputMethod: () => string;
 ```
 
-Defined in: [core/store/state.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L160)
+Defined in: core/store/state.ts:160
 
 #### Returns
 
@@ -197,7 +197,7 @@ Defined in: [core/store/state.ts:160](https://github.com/LuisKrotz/luiskr.com-V3
 getHover: () => boolean;
 ```
 
-Defined in: [core/store/state.ts:161](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L161)
+Defined in: core/store/state.ts:161
 
 #### Returns
 
@@ -211,7 +211,7 @@ Defined in: [core/store/state.ts:161](https://github.com/LuisKrotz/luiskr.com-V3
 getlang: () => LangState;
 ```
 
-Defined in: [core/store/state.ts:162](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L162)
+Defined in: core/store/state.ts:162
 
 #### Returns
 
@@ -225,7 +225,7 @@ Defined in: [core/store/state.ts:162](https://github.com/LuisKrotz/luiskr.com-V3
 getLang: () => string;
 ```
 
-Defined in: [core/store/state.ts:163](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L163)
+Defined in: core/store/state.ts:163
 
 #### Returns
 
@@ -239,7 +239,7 @@ Defined in: [core/store/state.ts:163](https://github.com/LuisKrotz/luiskr.com-V3
 getCarouselLang: () => Record<string, unknown>;
 ```
 
-Defined in: [core/store/state.ts:164](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L164)
+Defined in: core/store/state.ts:164
 
 #### Returns
 
@@ -253,7 +253,7 @@ Defined in: [core/store/state.ts:164](https://github.com/LuisKrotz/luiskr.com-V3
 getStatsHudLang: () => Record<string, unknown>;
 ```
 
-Defined in: [core/store/state.ts:165](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L165)
+Defined in: core/store/state.ts:165
 
 #### Returns
 
@@ -267,7 +267,7 @@ Defined in: [core/store/state.ts:165](https://github.com/LuisKrotz/luiskr.com-V3
 getMarqueeAmount: () => number;
 ```
 
-Defined in: [core/store/state.ts:166](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L166)
+Defined in: core/store/state.ts:166
 
 #### Returns
 
@@ -281,7 +281,7 @@ Defined in: [core/store/state.ts:166](https://github.com/LuisKrotz/luiskr.com-V3
 getModal: () => ModalObject;
 ```
 
-Defined in: [core/store/state.ts:167](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L167)
+Defined in: core/store/state.ts:167
 
 #### Returns
 
@@ -295,7 +295,7 @@ Defined in: [core/store/state.ts:167](https://github.com/LuisKrotz/luiskr.com-V3
 getOnMouseMove: () => PagePos;
 ```
 
-Defined in: [core/store/state.ts:168](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L168)
+Defined in: core/store/state.ts:168
 
 #### Returns
 
@@ -309,7 +309,7 @@ Defined in: [core/store/state.ts:168](https://github.com/LuisKrotz/luiskr.com-V3
 getStorage: () => string;
 ```
 
-Defined in: [core/store/state.ts:169](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L169)
+Defined in: core/store/state.ts:169
 
 #### Returns
 
@@ -323,7 +323,7 @@ Defined in: [core/store/state.ts:169](https://github.com/LuisKrotz/luiskr.com-V3
 getTouch: () => boolean;
 ```
 
-Defined in: [core/store/state.ts:170](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L170)
+Defined in: core/store/state.ts:170
 
 #### Returns
 
@@ -337,7 +337,7 @@ Defined in: [core/store/state.ts:170](https://github.com/LuisKrotz/luiskr.com-V3
 getPortfolioList: () => unknown[];
 ```
 
-Defined in: [core/store/state.ts:171](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L171)
+Defined in: core/store/state.ts:171
 
 #### Returns
 
@@ -351,7 +351,7 @@ Defined in: [core/store/state.ts:171](https://github.com/LuisKrotz/luiskr.com-V3
 getPortfoliolist: () => unknown[];
 ```
 
-Defined in: [core/store/state.ts:172](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/store/state.ts#L172)
+Defined in: core/store/state.ts:172
 
 #### Returns
 

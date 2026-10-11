@@ -20,6 +20,11 @@ grade → vignette → film grain).
 
 All mutable engine state — see earth/state.ts.
 
+### `failed`
+
+True when bootstrap bailed or threw before the scene assembled — hosts
+should swap in the CSS fallback surface instead of a dead canvas.
+
 ### `setReducedMotion`
 
 Pause/resume the render loop for prefers-reduced-motion. The last frame

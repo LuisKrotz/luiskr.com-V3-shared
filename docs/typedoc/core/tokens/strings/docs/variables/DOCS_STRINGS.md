@@ -27,10 +27,18 @@ const DOCS_STRINGS: Readonly<{
   INDEX_FILE: "index.html";
   EVENT_COPY_ATTEMPT: "docs_copy_attempt";
   SCHEMA_DESCRIPTION: "Source code, documentation and quality reports for luiskr.com — browsable and indexable.";
+  LOADER_TITLE: "Docs system boot";
+  LOADER_MSG_INIT: "Opening the documentation archive";
+  LOADER_MSG_MANIFEST: "Indexing modules and reports";
+  LOADER_MSG_SCENE: "Mounting the architecture graph";
+  LOADER_MSG_FILE: "Loading the document payload";
+  LOADER_MSG_READY: "Portal online";
+  MERMAID_LOADING: "Rendering diagram…";
+  SCENE_HINT: "Architecture map — drag to orbit, click a node to navigate";
 }>;
 ```
 
-Defined in: [core/tokens/strings/docs.ts:15](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/strings/docs.ts#L15)
+Defined in: core/tokens/strings/docs.ts:15
 
 Frozen docs string map — sole declaration site for these tokens;
 consumers read members and never re-declare the strings

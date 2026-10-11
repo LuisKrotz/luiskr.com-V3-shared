@@ -8,7 +8,7 @@
 function calcResponsivePadding(vw): number;
 ```
 
-Defined in: [core/utils/wasm/wasm-layout.ts:262](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-layout.ts#L262)
+Defined in: core/utils/wasm/wasm-layout.ts:262
 
 Fibonacci-scaled outer page padding per viewport breakpoint (13→144) —
 padding grows with screen real estate so content never hugs wide edges.

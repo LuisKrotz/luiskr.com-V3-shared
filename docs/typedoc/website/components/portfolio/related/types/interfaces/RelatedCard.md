@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/portfolio/related/types](../README.md) / RelatedCard
 
-Defined in: [website/components/portfolio/related/types.ts:61](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L61)
+Defined in: website/components/portfolio/related/types.ts:61
 
 The resolved display card — every field concrete (no optionals) because
 hydration already merged the pointer row with its home-list data. `fullPath` is
@@ -18,7 +18,7 @@ the computed route to the project page.
 page: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L62)
+Defined in: website/components/portfolio/related/types.ts:62
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [website/components/portfolio/related/types.ts:62](https://github.co
 link: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L63)
+Defined in: website/components/portfolio/related/types.ts:63
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [website/components/portfolio/related/types.ts:63](https://github.co
 fullPath: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:64](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L64)
+Defined in: website/components/portfolio/related/types.ts:64
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [website/components/portfolio/related/types.ts:64](https://github.co
 featured: boolean;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:65](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L65)
+Defined in: website/components/portfolio/related/types.ts:65
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [website/components/portfolio/related/types.ts:65](https://github.co
 imageSrc: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L66)
+Defined in: website/components/portfolio/related/types.ts:66
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [website/components/portfolio/related/types.ts:66](https://github.co
 description: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L67)
+Defined in: website/components/portfolio/related/types.ts:67

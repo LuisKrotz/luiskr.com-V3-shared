@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/views/project/types](../README.md) / ProjectTranslations
 
-Defined in: [website/views/project/types.ts:46](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L46)
+Defined in: website/views/project/types.ts:46
 
 The project's translation node — `title`, `noindex` SEO flag,
 `folder` CDN prefix, `cover`, and `sections` (array of SectionChild arrays).
@@ -24,7 +24,7 @@ Index signature preserves CMS fields the view doesn't consume.
 optional title?: string;
 ```
 
-Defined in: [website/views/project/types.ts:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L47)
+Defined in: website/views/project/types.ts:47
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [website/views/project/types.ts:47](https://github.com/LuisKrotz/lui
 optional noindex?: boolean;
 ```
 
-Defined in: [website/views/project/types.ts:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L48)
+Defined in: website/views/project/types.ts:48
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [website/views/project/types.ts:48](https://github.com/LuisKrotz/lui
 optional folder?: string;
 ```
 
-Defined in: [website/views/project/types.ts:49](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L49)
+Defined in: website/views/project/types.ts:49
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [website/views/project/types.ts:49](https://github.com/LuisKrotz/lui
 optional cover?: CoverMedia;
 ```
 
-Defined in: [website/views/project/types.ts:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L50)
+Defined in: website/views/project/types.ts:50
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [website/views/project/types.ts:50](https://github.com/LuisKrotz/lui
 optional sections?: SectionChild[][];
 ```
 
-Defined in: [website/views/project/types.ts:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/types.ts#L51)
+Defined in: website/views/project/types.ts:51

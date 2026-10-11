@@ -15,7 +15,7 @@ const MICRODATA_VALUES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/attrs/microdata.ts:34](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/attrs/microdata.ts#L34)
+Defined in: core/tokens/attrs/microdata.ts:34
 
 Frozen microdata value map — Schema.org type URLs (`itemtype` values)
 and property names (`itemprop` values) used by the docs portal markup.

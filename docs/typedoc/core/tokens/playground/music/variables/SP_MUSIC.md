@@ -12,7 +12,7 @@ const SP_MUSIC: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/playground/music.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/playground/music.ts#L14)
+Defined in: core/tokens/playground/music.ts:14
 
 Ambient soundtrack for the Earth Playground. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

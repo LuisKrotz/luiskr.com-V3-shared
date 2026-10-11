@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-css](../README.md) / WasmSkeletonStyle
 
-Defined in: [core/utils/wasm/wasm-css.ts:23](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-css.ts#L23)
+Defined in: core/utils/wasm/wasm-css.ts:23
 
 Skeleton-placeholder style tuple produced by calcWasmSkeletonStyle.
 
@@ -16,7 +16,7 @@ Skeleton-placeholder style tuple produced by calcWasmSkeletonStyle.
 width: string;
 ```
 
-Defined in: [core/utils/wasm/wasm-css.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-css.ts#L25)
+Defined in: core/utils/wasm/wasm-css.ts:25
 
 CSS width — `${n}px` for numeric input, passthrough for strings.
 
@@ -28,7 +28,7 @@ CSS width — `${n}px` for numeric input, passthrough for strings.
 height: string;
 ```
 
-Defined in: [core/utils/wasm/wasm-css.ts:27](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-css.ts#L27)
+Defined in: core/utils/wasm/wasm-css.ts:27
 
 CSS height — `${n}px` for numeric input, passthrough for strings.
 
@@ -40,7 +40,7 @@ CSS height — `${n}px` for numeric input, passthrough for strings.
 borderRadius: string;
 ```
 
-Defined in: [core/utils/wasm/wasm-css.ts:29](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-css.ts#L29)
+Defined in: core/utils/wasm/wasm-css.ts:29
 
 CSS border-radius — a var() token reference.
 
@@ -52,6 +52,6 @@ CSS border-radius — a var() token reference.
 display: string;
 ```
 
-Defined in: [core/utils/wasm/wasm-css.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-css.ts#L31)
+Defined in: core/utils/wasm/wasm-css.ts:31
 
 CSS display — inline-block so the placeholder participates in text flow.

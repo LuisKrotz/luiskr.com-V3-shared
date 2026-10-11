@@ -8,7 +8,7 @@
 function escapeHtml(str): string;
 ```
 
-Defined in: [core/utils/string.ts:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/string.ts#L45)
+Defined in: core/utils/string.ts:45
 
 Escapes HTML-significant characters for safe insertion into innerHTML or
 double-quoted attributes. `&` must be replaced first so the entities

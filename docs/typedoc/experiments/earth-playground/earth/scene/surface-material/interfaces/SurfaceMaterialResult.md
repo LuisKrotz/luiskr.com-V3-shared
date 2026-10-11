@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/scene/surface-material](../README.md) / SurfaceMaterialResult
 
-Defined in: [experiments/earth-playground/earth/scene/surface-material.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/surface-material.ts#L41)
+Defined in: experiments/earth-playground/earth/scene/surface-material.ts:41
 
 The built material plus the uniforms/nodes other shells reuse.
 
@@ -16,7 +16,7 @@ The built material plus the uniforms/nodes other shells reuse.
 mat: MeshPhysicalNodeMaterial;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/surface-material.ts:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/surface-material.ts#L43)
+Defined in: experiments/earth-playground/earth/scene/surface-material.ts:43
 
 The configured physical node material for the Earth mesh.
 
@@ -28,7 +28,7 @@ The configured physical node material for the Earth mesh.
 earthMatUniforms: Record<string, UniformNode<"float", number>>;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/surface-material.ts:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/surface-material.ts#L45)
+Defined in: experiments/earth-playground/earth/scene/surface-material.ts:45
 
 Slider-bound uniforms (GUI writes straight into .value).
 
@@ -40,7 +40,7 @@ Slider-bound uniforms (GUI writes straight into .value).
 shared: object;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/surface-material.ts:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/surface-material.ts#L47)
+Defined in: experiments/earth-playground/earth/scene/surface-material.ts:47
 
 Lighting terms shared with the cloud/atmosphere shells so the day/night/eclipse model stays consistent.
 

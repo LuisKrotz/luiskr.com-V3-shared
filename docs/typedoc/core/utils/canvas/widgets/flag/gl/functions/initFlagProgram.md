@@ -8,7 +8,7 @@
 function initFlagProgram(renderer, gl): boolean;
 ```
 
-Defined in: [core/utils/canvas/widgets/flag/gl.ts:102](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/flag/gl.ts#L102)
+Defined in: core/utils/canvas/widgets/flag/gl.ts:102
 
 Compiles the wave vertex/fragment shaders and resolves uniform locations.
 

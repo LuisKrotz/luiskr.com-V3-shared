@@ -8,7 +8,7 @@
 function renderCanvas2D(host): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/theme-slider/render.ts:107](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/theme-slider/render.ts#L107)
+Defined in: core/utils/canvas/widgets/theme-slider/render.ts:107
 
 Canvas2D fallback renderer — mirrors the shader's composition.
 NOTE: `host.ctx` is never assigned in this class — _triggerFallback()

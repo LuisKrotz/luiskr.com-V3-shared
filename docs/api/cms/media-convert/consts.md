@@ -41,6 +41,37 @@ The picked File payload (PUT body).
 
 Path relative to the job root — sent as the x-file-path header.
 
+### `TOOL_ROWS`
+
+Tool rows rendered by the setup panel — [label, tools-map keys]. Order
+is display order; required entries block conversion when missing.
+`imagemagick` collapses the platform split: `magick` (win32/IM7) or
+`convert` (POSIX/IM6) both satisfy it.
+
+### (module scope)
+
+Server payload from GET /api/media-convert/tools (shared/scripts/media-convert/install.js).
+
+### (module scope)
+
+OS the dev server runs on ('linux'|'darwin'|'win32').
+
+### (module scope)
+
+Per-binary presence flags keyed by executable name.
+
+### (module scope)
+
+Missing-tool groups (ffmpeg, imagemagick, cjpeg).
+
+### (module scope)
+
+Detected package manager (or null when none found).
+
+### (module scope)
+
+Install plan — runnable commands vs. manual guidance.
+
 ### (module scope)
 
 Per-file outcome reported by the conversion server.

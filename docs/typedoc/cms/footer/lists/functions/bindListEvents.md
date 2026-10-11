@@ -13,7 +13,7 @@ function bindListEvents(
 ): void;
 ```
 
-Defined in: [cms/footer/lists.ts:135](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/footer/lists.ts#L135)
+Defined in: cms/footer/lists.ts:135
 
 Wires add/remove/move/input handlers for a rendered list.
 

@@ -10,7 +10,7 @@ const A11Y_CLASSES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/classes/a11y.ts:11](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/classes/a11y.ts#L11)
+Defined in: core/tokens/classes/a11y.ts:11
 
 Accessibility-only class tokens. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

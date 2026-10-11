@@ -8,7 +8,7 @@
 function run(host): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/job.ts:215](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/job.ts#L215)
+Defined in: cms/media-convert/job.ts:263
 
 Full pipeline orchestrator: create → upload → convert, flipping
 host.phase at each stage and re-rendering. Errors land on the ERROR

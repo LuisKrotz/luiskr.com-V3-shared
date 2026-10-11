@@ -8,7 +8,7 @@
 function buildEarthShells(__namedParameters): Promise<EarthShellsResult>;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:57](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L57)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:57
 
 Builds the 4-shell Earth group, all in TSL so the same node graph
 compiles to WGSL (WebGPU) or GLSL (WebGL fallback):

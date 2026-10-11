@@ -8,7 +8,7 @@
 function renderSpacePlayground(host): Element;
 ```
 
-Defined in: [experiments/earth-playground/space/render.tsx:30](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/render.tsx#L30)
+Defined in: experiments/earth-playground/space/render.tsx:29
 
 Renders space playground.
 

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/views/project/Project](../README.md) / ViewProject
 
-Defined in: [website/views/project/Project.tsx:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L39)
+Defined in: website/views/project/Project.tsx:39
 
 The ViewProject — project class.
 
@@ -20,7 +20,7 @@ The ViewProject — project class.
 new ViewProject(): ViewProject;
 ```
 
-Defined in: [website/views/project/Project.tsx:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L45)
+Defined in: website/views/project/Project.tsx:45
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [website/views/project/Project.tsx:45](https://github.com/LuisKrotz/
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -54,7 +54,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +76,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +97,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +115,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +131,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +151,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +167,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -185,7 +185,7 @@ translations:
   | null = null;
 ```
 
-Defined in: [website/views/project/Project.tsx:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L40)
+Defined in: website/views/project/Project.tsx:40
 
 ***
 
@@ -195,7 +195,7 @@ Defined in: [website/views/project/Project.tsx:40](https://github.com/LuisKrotz/
 projectSlug: string = ATTR_VALUES.EMPTY;
 ```
 
-Defined in: [website/views/project/Project.tsx:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L41)
+Defined in: website/views/project/Project.tsx:41
 
 ***
 
@@ -205,7 +205,7 @@ Defined in: [website/views/project/Project.tsx:41](https://github.com/LuisKrotz/
 _lastLocale: string | null = null;
 ```
 
-Defined in: [website/views/project/Project.tsx:42](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L42)
+Defined in: website/views/project/Project.tsx:42
 
 ***
 
@@ -215,7 +215,7 @@ Defined in: [website/views/project/Project.tsx:42](https://github.com/LuisKrotz/
 _bindIdle: number | null = null;
 ```
 
-Defined in: [website/views/project/Project.tsx:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L43)
+Defined in: website/views/project/Project.tsx:43
 
 ***
 
@@ -4276,7 +4276,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get modal(): ModalObject;
 ```
 
-Defined in: [website/views/project/Project.tsx:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L51)
+Defined in: website/views/project/Project.tsx:51
 
 The store's modal descriptor.
 
@@ -4460,7 +4460,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4482,7 +4482,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4516,7 +4516,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4541,7 +4541,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4565,7 +4565,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4602,7 +4602,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4645,7 +4645,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4695,7 +4695,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4726,7 +4726,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4749,7 +4749,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4774,7 +4774,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4808,7 +4808,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:57](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L57)
+Defined in: website/views/project/Project.tsx:57
 
 Lifecycle: loads project data and binds observers.
 
@@ -4828,7 +4828,7 @@ Lifecycle: loads project data and binds observers.
 onDestroy(): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L67)
+Defined in: website/views/project/Project.tsx:67
 
 Lifecycle: tears down listeners + WebGL close widget.
 
@@ -4848,7 +4848,7 @@ Lifecycle: tears down listeners + WebGL close widget.
 updateRobotsMeta(noindex): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:73](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L73)
+Defined in: website/views/project/Project.tsx:73
 
 Toggles the noindex meta for draft/hidden projects.
 
@@ -4870,7 +4870,7 @@ Toggles the noindex meta for draft/hidden projects.
 sectionItemHeight(section): string;
 ```
 
-Defined in: [website/views/project/Project.tsx:84](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L84)
+Defined in: website/views/project/Project.tsx:84
 
 Reserves a section's media height BEFORE the carousel mounts: the
 same formula the carousel uses — first item's aspect ratio × 100vw,
@@ -4896,7 +4896,7 @@ when the real carousel takes over.
 onRouteParamChange(to): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L90)
+Defined in: website/views/project/Project.tsx:90
 
 Router hook — project→project navigations reload data without remounting.
 
@@ -4919,7 +4919,7 @@ Router hook — project→project navigations reload data without remounting.
 onStoreUpdate(): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:96](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L96)
+Defined in: website/views/project/Project.tsx:96
 
 Re-syncs modal DOM + reloads on locale change.
 
@@ -4939,7 +4939,7 @@ Re-syncs modal DOM + reloads on locale change.
 _updateModalDOM(): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:105](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L105)
+Defined in: website/views/project/Project.tsx:105
 
 Syncs the expand dialog imperatively (store → DOM, no re-render —
 re-rendering would destroy every mounted carousel). See
@@ -4957,7 +4957,7 @@ project/modal-dom.tsx.
 initProject(): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:111](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L111)
+Defined in: website/views/project/Project.tsx:111
 
 Initializes the resolved project record for the current route.
 
@@ -4973,7 +4973,7 @@ Initializes the resolved project record for the current route.
 loadData(wait?): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:117](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L117)
+Defined in: website/views/project/Project.tsx:117
 
 Fetches the project node for the route's slug via SWR (optionally deferred).
 
@@ -4995,7 +4995,7 @@ Fetches the project node for the route's slug via SWR (optionally deferred).
 textDelay(items): number;
 ```
 
-Defined in: [website/views/project/Project.tsx:127](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L127)
+Defined in: website/views/project/Project.tsx:127
 
 Per-character delay that makes the whole text block land in a fixed
 1500ms budget: delay = 1500ms ÷ totalChars (via calcDrawTextDelay),
@@ -5020,7 +5020,7 @@ window — long copy gets fast chars, short copy gets deliberate ones.
 textOffset(items, idx): number;
 ```
 
-Defined in: [website/views/project/Project.tsx:137](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L137)
+Defined in: website/views/project/Project.tsx:137
 
 Cumulative start offset for the idx-th paragraph: sums the character
 count of every preceding paragraph × the shared per-char delay, so
@@ -5049,7 +5049,7 @@ one continuous type-in across <h3>/<p> boundaries.
 isLandscapeGroup(group): boolean;
 ```
 
-Defined in: [website/views/project/Project.tsx:143](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L143)
+Defined in: website/views/project/Project.tsx:143
 
 Whether a media group renders in landscape layout.
 
@@ -5071,7 +5071,7 @@ Whether a media group renders in landscape layout.
 checkAutoOpenModal(): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:153](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L153)
+Defined in: website/views/project/Project.tsx:153
 
 Deep-link opener: /portfolio/<project>/<media-slug> URLs (written by
 MediaFigure.openModal) resolve the slug against every media item's
@@ -5090,7 +5090,7 @@ expanded image lands back on the expanded view.
 _bindCarousels(): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:159](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L159)
+Defined in: website/views/project/Project.tsx:159
 
 Initializes the section carousels after render.
 
@@ -5106,7 +5106,7 @@ Initializes the section carousels after render.
 render(): Element;
 ```
 
-Defined in: [website/views/project/Project.tsx:165](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L165)
+Defined in: website/views/project/Project.tsx:165
 
 JSX template for the view's shadow DOM.
 
@@ -5126,7 +5126,7 @@ JSX template for the view's shadow DOM.
 onUpdated(): void;
 ```
 
-Defined in: [website/views/project/Project.tsx:171](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/Project.tsx#L171)
+Defined in: website/views/project/Project.tsx:171
 
 Lifecycle: re-binds carousels/modal after re-render.
 

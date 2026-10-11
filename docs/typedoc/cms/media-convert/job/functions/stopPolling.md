@@ -8,7 +8,7 @@
 function stopPolling(host): void;
 ```
 
-Defined in: [cms/media-convert/job.ts:22](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/job.ts#L22)
+Defined in: cms/media-convert/job.ts:22
 
 Cancels the pending poll timer — called before every new poll schedule
 and on reset so only one timer is ever armed.

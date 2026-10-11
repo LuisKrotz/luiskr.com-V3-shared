@@ -8,7 +8,7 @@
 function renderHome(view): Element;
 ```
 
-Defined in: [website/views/home/render.tsx:16](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/home/render.tsx#L16)
+Defined in: website/views/home/render.tsx:16
 
 Renders home.
 

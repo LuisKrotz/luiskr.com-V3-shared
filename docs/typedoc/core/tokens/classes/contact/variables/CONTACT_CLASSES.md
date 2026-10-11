@@ -16,7 +16,7 @@ const CONTACT_CLASSES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/classes/contact.ts:13](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/classes/contact.ts#L13)
+Defined in: core/tokens/classes/contact.ts:13
 
 Contact-section classes: `contact` block (title), `contact-social`
 block (profile links + separator), `contact-other` block (secondary

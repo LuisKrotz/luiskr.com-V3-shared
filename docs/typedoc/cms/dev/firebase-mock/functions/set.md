@@ -8,10 +8,10 @@
 function set(r, v): Promise<void>;
 ```
 
-Defined in: [cms/dev/firebase-mock.ts:89](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/dev/firebase-mock.ts#L89)
+Defined in: cms/dev/firebase-mock.ts:119
 
-Mock of firebase/database `set()` — logs the write; nothing persists so
-dev sessions stay reproducible against the committed snapshot.
+Mock of firebase/database `set()` — persists the write to the local
+overlay via the dev middleware, so CMS edits survive reloads.
 
 ## Parameters
 

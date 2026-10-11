@@ -8,7 +8,7 @@
 function getDocsManifest(): DocsManifest;
 ```
 
-Defined in: [experiments/docs/manifest.ts:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/manifest.ts#L62)
+Defined in: experiments/docs/manifest.ts:62
 
 The scanned manifest — the vite plugin + jest stub always emit one.
 

@@ -12,7 +12,7 @@ function removeItem(
 ): void;
 ```
 
-Defined in: [cms/footer/lists.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/footer/lists.ts#L26)
+Defined in: cms/footer/lists.ts:26
 
 Removes an item by index and re-renders.
 

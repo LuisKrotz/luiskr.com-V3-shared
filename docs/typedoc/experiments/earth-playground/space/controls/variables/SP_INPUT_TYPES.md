@@ -11,6 +11,6 @@ const SP_INPUT_TYPES: Readonly<{
 }>;
 ```
 
-Defined in: [experiments/earth-playground/space/controls.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/controls.ts#L90)
+Defined in: experiments/earth-playground/space/controls.ts:90
 
 Input-type discriminator shared with the panel renderer/binder.

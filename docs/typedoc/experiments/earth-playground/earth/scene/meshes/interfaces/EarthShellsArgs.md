@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/scene/meshes](../README.md) / EarthShellsArgs
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:24](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L24)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:24
 
 Everything the Earth builder needs from the engine instance.
 
@@ -16,7 +16,7 @@ Everything the Earth builder needs from the engine instance.
 THREE: __module;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L25)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:25
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [experiments/earth-playground/earth/scene/meshes.ts:25](https://gith
 TSL: __module;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L26)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:26
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [experiments/earth-playground/earth/scene/meshes.ts:26](https://gith
 mats: object;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:27](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L27)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:27
 
 #### MeshPhysicalNodeMaterial
 
@@ -58,7 +58,7 @@ MeshBasicNodeMaterial: typeof MeshBasicNodeMaterial;
 maxAniso: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L31)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:31
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [experiments/earth-playground/earth/scene/meshes.ts:31](https://gith
 loader: TextureLoader | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:32](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L32)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:32
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [experiments/earth-playground/earth/scene/meshes.ts:32](https://gith
 sunDir: UniformNode<"vec3", Vector3> | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L33)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:33
 
 ***
 
@@ -88,4 +88,4 @@ Defined in: [experiments/earth-playground/earth/scene/meshes.ts:33](https://gith
 moonPos: UniformNode<"vec3", Vector3> | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:34](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L34)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:34

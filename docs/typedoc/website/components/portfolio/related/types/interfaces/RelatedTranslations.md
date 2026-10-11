@@ -4,11 +4,11 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/portfolio/related/types](../README.md) / RelatedTranslations
 
-Defined in: [website/components/portfolio/related/types.ts:36](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L36)
+Defined in: website/components/portfolio/related/types.ts:36
 
 The components/related DB node as consumed by <portfolio-related> —
-`projects` may arrive keyed-object or array from Firebase, `path` is the
-portfolio base route, `socials`/`note`/`title` the footer copy.
+`projects`/`socials` may arrive keyed-object or array from Firebase,
+`path` is the portfolio base route, `note`/`title` the footer copy.
 
 ## Properties
 
@@ -18,7 +18,7 @@ portfolio base route, `socials`/`note`/`title` the footer copy.
 optional title?: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:37](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L37)
+Defined in: website/components/portfolio/related/types.ts:37
 
 ***
 
@@ -30,7 +30,7 @@ optional projects?:
   | RelatedProject[];
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:38](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L38)
+Defined in: website/components/portfolio/related/types.ts:38
 
 ***
 
@@ -40,17 +40,19 @@ Defined in: [website/components/portfolio/related/types.ts:38](https://github.co
 optional path?: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L39)
+Defined in: website/components/portfolio/related/types.ts:39
 
 ***
 
 ### socials?
 
 ```ts
-optional socials?: RelatedSocial[];
+optional socials?: 
+  | Record<string, RelatedSocial>
+  | RelatedSocial[];
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L40)
+Defined in: website/components/portfolio/related/types.ts:40
 
 ***
 
@@ -60,4 +62,4 @@ Defined in: [website/components/portfolio/related/types.ts:40](https://github.co
 optional note?: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L41)
+Defined in: website/components/portfolio/related/types.ts:41

@@ -14,7 +14,7 @@ const MEDIA_QUERIES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/primitives.ts:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/primitives.ts#L33)
+Defined in: core/tokens/primitives.ts:33
 
 Frozen media media-query map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

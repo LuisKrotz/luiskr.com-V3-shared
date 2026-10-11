@@ -8,7 +8,7 @@
 function updateEarthVignette(s, __namedParameters?): void;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/updates.ts:153](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/updates.ts#L153)
+Defined in: experiments/earth-playground/earth/runtime/updates.ts:153
 
 Vignette tweaks — enabled collapses darkness to 0 (same zero-cost
 toggle pattern as bloom).

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-media-threads](../README.md) / MediaSegment
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L62)
+Defined in: core/utils/wasm/wasm-media-threads.ts:62
 
 One byte-range fetch request for parallel segment download.
 
@@ -16,7 +16,7 @@ One byte-range fetch request for parallel segment download.
 url: string;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:64](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L64)
+Defined in: core/utils/wasm/wasm-media-threads.ts:64
 
 URL of the resource (same file, different ranges).
 
@@ -28,7 +28,7 @@ URL of the resource (same file, different ranges).
 optional byteStart?: number;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L66)
+Defined in: core/utils/wasm/wasm-media-threads.ts:66
 
 Inclusive start offset — defaults to 0 when omitted.
 
@@ -40,6 +40,6 @@ Inclusive start offset — defaults to 0 when omitted.
 optional byteEnd?: number | null;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:68](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L68)
+Defined in: core/utils/wasm/wasm-media-threads.ts:68
 
 Exclusive end offset — null fetches to EOF.

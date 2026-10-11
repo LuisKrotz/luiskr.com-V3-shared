@@ -35,6 +35,17 @@ Renders done.
 Renders error.
 - `@param` host — the host component
 
+### `renderTools`
+
+Renders the guided toolchain-setup panel — hidden while the report is
+unfetched or every tool is present. Required tools (ffmpeg/ffprobe)
+block conversion; optional ones (ImageMagick, cjpeg) fall back to
+ffmpeg encoders, so their state badge reads optional rather than ✗.
+The install plan shows the detected manager's copyable commands; the
+Install button only appears when the plan can run without a root shell
+(brew/winget/choco) — sudo managers get manual commands instead.
+- `@param` host — the host component
+
 ### `renderMediaConverter`
 
 Renders media converter.

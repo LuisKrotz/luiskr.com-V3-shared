@@ -13,6 +13,6 @@ const NOTIFY_UI_KEYS: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/data/ui-keys.ts:147](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/data/ui-keys.ts#L147)
+Defined in: core/tokens/data/ui-keys.ts:147
 
 Notifies ui keys.

@@ -12,7 +12,7 @@ function renderArrowButton(
 ): Element;
 ```
 
-Defined in: [website/components/carousel/custom-carousel/render.tsx:102](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/custom-carousel/render.tsx#L102)
+Defined in: website/components/carousel/custom-carousel/render.tsx:102
 
 One prev/next control button: a WebGL arrow canvas behind an SVG
 autoplay progress ring (stroke-dashoffset driven by the carousel's

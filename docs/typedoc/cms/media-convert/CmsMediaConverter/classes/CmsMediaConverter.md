@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/CmsMediaConverter](../README.md) / CmsMediaConverter
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:56](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L56)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:59
 
 The CmsMediaConverter component.
 
@@ -20,7 +20,7 @@ The CmsMediaConverter component.
 new CmsMediaConverter(): CmsMediaConverter;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L66)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:72
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:66](https://github.com/Luis
 phase: string = PHASE.IDLE;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:57](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L57)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:60
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:57](https://github.com/Luis
 queue: QueueItem[] = [];
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:58](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L58)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:61
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:58](https://github.com/Luis
 jobId: string | null = null;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:59](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L59)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:62
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:59](https://github.com/Luis
 uploaded: number = 0;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:60](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L60)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:63
 
 ***
 
@@ -78,7 +78,37 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:60](https://github.com/Luis
 status: JobStatus | null = null;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:61](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L61)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:64
+
+***
+
+### tools
+
+```ts
+tools: ToolsReport | null = null;
+```
+
+Defined in: cms/media-convert/CmsMediaConverter.tsx:65
+
+***
+
+### toolsInstalling
+
+```ts
+toolsInstalling: boolean = false;
+```
+
+Defined in: cms/media-convert/CmsMediaConverter.tsx:66
+
+***
+
+### installLog
+
+```ts
+installLog: string = CHAR_STRINGS.EMPTY;
+```
+
+Defined in: cms/media-convert/CmsMediaConverter.tsx:67
 
 ***
 
@@ -88,7 +118,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:61](https://github.com/Luis
 dragging: boolean = false;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L62)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:68
 
 ***
 
@@ -98,7 +128,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:62](https://github.com/Luis
 error: string = CHAR_STRINGS.EMPTY;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L63)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:69
 
 ***
 
@@ -108,7 +138,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:63](https://github.com/Luis
 _pollTimer: number | null = null;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:64](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L64)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:70
 
 ***
 
@@ -118,7 +148,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:64](https://github.com/Luis
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -134,7 +164,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -156,7 +186,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -177,7 +207,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -195,7 +225,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -211,7 +241,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -231,7 +261,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -247,7 +277,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -4480,9 +4510,9 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 onMounted(): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:72](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L72)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:78
 
-Lifecycle: binds drop-zone + input events.
+Lifecycle: binds drop-zone + input events, probes the dev-server toolchain.
 
 #### Returns
 
@@ -4500,7 +4530,7 @@ Lifecycle: binds drop-zone + input events.
 onDestroy(): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:78](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L78)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:85
 
 Lifecycle: stops polling + revokes object URLs.
 
@@ -4520,7 +4550,7 @@ Lifecycle: stops polling + revokes object URLs.
 _stopPolling(): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:85](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L85)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:92
 
 Clears the job-status poll interval.
 
@@ -4536,7 +4566,7 @@ Clears the job-status poll interval.
 _notify(msg): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:91](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L91)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:98
 
 Fires a cms-notification toast.
 
@@ -4558,7 +4588,7 @@ Fires a cms-notification toast.
 _collectDrop(dataTransfer): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:98](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L98)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:105
 
 #### Parameters
 
@@ -4578,7 +4608,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:98](https://github.com/Luis
 _collectInput(input): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:101](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L101)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:108
 
 #### Parameters
 
@@ -4598,7 +4628,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:101](https://github.com/Lui
 _createJob(): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:104](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L104)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:111
 
 #### Returns
 
@@ -4612,7 +4642,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:104](https://github.com/Lui
 _uploadAll(): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:107](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L107)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:114
 
 #### Returns
 
@@ -4626,7 +4656,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:107](https://github.com/Lui
 _startConvert(): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:110](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L110)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:117
 
 #### Returns
 
@@ -4640,7 +4670,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:110](https://github.com/Lui
 _poll(): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L113)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:120
 
 #### Returns
 
@@ -4654,7 +4684,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:113](https://github.com/Lui
 _finish(): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:116](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L116)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:123
 
 #### Returns
 
@@ -4668,7 +4698,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:116](https://github.com/Lui
 _systemNotify(title, body): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:119](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L119)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:126
 
 #### Parameters
 
@@ -4692,7 +4722,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:119](https://github.com/Lui
 _askNotifyPermission(): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:122](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L122)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:129
 
 #### Returns
 
@@ -4706,7 +4736,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:122](https://github.com/Lui
 _deleteJob(): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:125](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L125)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:132
 
 #### Returns
 
@@ -4720,7 +4750,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:125](https://github.com/Lui
 _errText(res, fallback): Promise<string>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:128](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L128)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:135
 
 #### Parameters
 
@@ -4738,13 +4768,41 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:128](https://github.com/Lui
 
 ***
 
+### \_fetchTools()
+
+```ts
+_fetchTools(): Promise<void>;
+```
+
+Defined in: cms/media-convert/CmsMediaConverter.tsx:138
+
+#### Returns
+
+`Promise`\<`void`\>
+
+***
+
+### \_installTools()
+
+```ts
+_installTools(): Promise<void>;
+```
+
+Defined in: cms/media-convert/CmsMediaConverter.tsx:141
+
+#### Returns
+
+`Promise`\<`void`\>
+
+***
+
 ### \_run()
 
 ```ts
 _run(): Promise<void>;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:131](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L131)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:144
 
 #### Returns
 
@@ -4758,7 +4816,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:131](https://github.com/Lui
 _reset(): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:134](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L134)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:147
 
 #### Returns
 
@@ -4772,7 +4830,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:134](https://github.com/Lui
 _bindEvents(): void;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:137](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L137)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:150
 
 #### Returns
 
@@ -4786,7 +4844,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:137](https://github.com/Lui
 _renderIdle(): Element;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:140](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L140)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:153
 
 #### Returns
 
@@ -4800,7 +4858,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:140](https://github.com/Lui
 _renderConverting(): Element;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:143](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L143)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:156
 
 #### Returns
 
@@ -4814,7 +4872,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:143](https://github.com/Lui
 _renderDone(): Element;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:146](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L146)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:159
 
 #### Returns
 
@@ -4828,11 +4886,28 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:146](https://github.com/Lui
 _renderError(): Element;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:149](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L149)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:162
 
 #### Returns
 
 [`Element`](../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+
+***
+
+### \_renderTools()
+
+```ts
+_renderTools(): 
+  | Element
+  | null;
+```
+
+Defined in: cms/media-convert/CmsMediaConverter.tsx:165
+
+#### Returns
+
+  \| [`Element`](../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+  \| `null`
 
 ***
 
@@ -4842,7 +4917,7 @@ Defined in: [cms/media-convert/CmsMediaConverter.tsx:149](https://github.com/Lui
 render(): Element;
 ```
 
-Defined in: [cms/media-convert/CmsMediaConverter.tsx:155](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/CmsMediaConverter.tsx#L155)
+Defined in: cms/media-convert/CmsMediaConverter.tsx:171
 
 JSX template for the current phase (delegate — media-convert/render.tsx).
 
@@ -4862,7 +4937,7 @@ JSX template for the current phase (delegate — media-convert/render.tsx).
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4884,7 +4959,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onUpdated(): void;
 ```
 
-Defined in: [core/Component.ts:115](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L115)
+Defined in: core/Component.ts:115
 
 #### Returns
 
@@ -4902,7 +4977,7 @@ Defined in: [core/Component.ts:115](https://github.com/LuisKrotz/luiskr.com-V3/b
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: [core/Component.ts:116](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L116)
+Defined in: core/Component.ts:116
 
 #### Parameters
 
@@ -4926,7 +5001,7 @@ Defined in: [core/Component.ts:116](https://github.com/LuisKrotz/luiskr.com-V3/b
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4960,7 +5035,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4985,7 +5060,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -5009,7 +5084,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -5046,7 +5121,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -5089,7 +5164,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -5139,7 +5214,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -5170,7 +5245,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -5193,7 +5268,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5218,7 +5293,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:

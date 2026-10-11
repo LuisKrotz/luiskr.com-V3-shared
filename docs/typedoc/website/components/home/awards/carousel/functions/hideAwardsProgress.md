@@ -8,7 +8,7 @@
 function hideAwardsProgress(el): void;
 ```
 
-Defined in: [website/components/home/awards/carousel.ts:64](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/awards/carousel.ts#L64)
+Defined in: website/components/home/awards/carousel.ts:64
 
 Hides the progress arc (paused/hover).
 

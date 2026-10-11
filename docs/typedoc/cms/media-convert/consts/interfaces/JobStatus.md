@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/consts](../README.md) / JobStatus
 
-Defined in: [cms/media-convert/consts.ts:55](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/consts.ts#L55)
+Defined in: cms/media-convert/consts.ts:87
 
 Job-status payload polled from GET /jobs/:id.
 
@@ -16,7 +16,7 @@ Job-status payload polled from GET /jobs/:id.
 optional status?: string;
 ```
 
-Defined in: [cms/media-convert/consts.ts:57](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/consts.ts#L57)
+Defined in: cms/media-convert/consts.ts:89
 
 Server phase string ('running'|'uploading'|terminal).
 
@@ -28,7 +28,7 @@ Server phase string ('running'|'uploading'|terminal).
 optional error?: string;
 ```
 
-Defined in: [cms/media-convert/consts.ts:59](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/consts.ts#L59)
+Defined in: cms/media-convert/consts.ts:91
 
 Server-side error message when failed.
 
@@ -40,7 +40,7 @@ Server-side error message when failed.
 optional current?: string;
 ```
 
-Defined in: [cms/media-convert/consts.ts:61](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/consts.ts#L61)
+Defined in: cms/media-convert/consts.ts:93
 
 Currently-processing file path (progress display).
 
@@ -52,7 +52,7 @@ Currently-processing file path (progress display).
 optional done?: number;
 ```
 
-Defined in: [cms/media-convert/consts.ts:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/consts.ts#L63)
+Defined in: cms/media-convert/consts.ts:95
 
 Files completed so far.
 
@@ -64,7 +64,7 @@ Files completed so far.
 optional total?: number;
 ```
 
-Defined in: [cms/media-convert/consts.ts:65](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/consts.ts#L65)
+Defined in: cms/media-convert/consts.ts:97
 
 Total files in the job.
 
@@ -76,6 +76,6 @@ Total files in the job.
 optional results?: JobResult[];
 ```
 
-Defined in: [cms/media-convert/consts.ts:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/media-convert/consts.ts#L67)
+Defined in: cms/media-convert/consts.ts:99
 
 Per-file results once the job settles.

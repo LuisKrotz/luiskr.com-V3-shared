@@ -17,7 +17,7 @@ const JSX_PROPS: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/jsx/props.ts:68](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/jsx/props.ts#L68)
+Defined in: core/tokens/jsx/props.ts:68
 
 Special prop names handled by `h()` before the generic setAttribute
 fallback — event prefix detection, ref callbacks, sanitized HTML

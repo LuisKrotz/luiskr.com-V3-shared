@@ -8,7 +8,7 @@
 function updateRobotsMeta(noindex): void;
 ```
 
-Defined in: [website/views/project/data.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/data.ts#L31)
+Defined in: website/views/project/data.ts:31
 
 Toggles the noindex meta for draft/hidden projects.
 

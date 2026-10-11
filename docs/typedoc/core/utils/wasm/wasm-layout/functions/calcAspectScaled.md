@@ -12,7 +12,7 @@ function calcAspectScaled(
 ): number;
 ```
 
-Defined in: [core/utils/wasm/wasm-layout.ts:275](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-layout.ts#L275)
+Defined in: core/utils/wasm/wasm-layout.ts:275
 
 Height rescaled for a width capped at maxW, preserving aspect ratio:
 height·(maxW/width) — only shrinks; widths under maxW return height

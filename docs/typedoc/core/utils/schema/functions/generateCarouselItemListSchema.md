@@ -8,7 +8,7 @@
 function generateCarouselItemListSchema(items?, baseUrl?): Record<string, unknown> | null;
 ```
 
-Defined in: [core/utils/schema.ts:74](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/schema.ts#L74)
+Defined in: core/utils/schema.ts:74
 
 Generates an ItemList matching Google Carousel rich results guidelines —
 `position` is 1-based per the spec, and `image` is only emitted when the

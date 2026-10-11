@@ -12,7 +12,7 @@ function calcAspectScaled(
 ): number;
 ```
 
-Defined in: [core/utils/aspect.ts:18](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/aspect.ts#L18)
+Defined in: core/utils/aspect.ts:18
 
 Calculates aspect-ratio scaled height while preserving proportions.
 Formula: `height_out = (h/w) × maxWidth` — the intrinsic ratio (h/w)

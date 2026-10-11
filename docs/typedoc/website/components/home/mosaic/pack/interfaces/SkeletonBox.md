@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/pack](../README.md) / SkeletonBox
 
-Defined in: [website/components/home/mosaic/pack.ts:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L63)
+Defined in: website/components/home/mosaic/pack.ts:63
 
 A packed skeleton placeholder rect (CSS px).
 
@@ -16,7 +16,7 @@ A packed skeleton placeholder rect (CSS px).
 top: number;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:65](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L65)
+Defined in: website/components/home/mosaic/pack.ts:65
 
 Top edge within the wall.
 
@@ -28,7 +28,7 @@ Top edge within the wall.
 left: number;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L67)
+Defined in: website/components/home/mosaic/pack.ts:67
 
 Left edge within the wall.
 
@@ -40,7 +40,7 @@ Left edge within the wall.
 w: number;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:69](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L69)
+Defined in: website/components/home/mosaic/pack.ts:69
 
 Placeholder width.
 
@@ -52,6 +52,6 @@ Placeholder width.
 h: number;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:71](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L71)
+Defined in: website/components/home/mosaic/pack.ts:71
 
 Placeholder height.

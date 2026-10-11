@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/runtime/state](../README.md) / EarthBloomState
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L62)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:62
 
 Bloom post-pass settings.
 
@@ -16,7 +16,7 @@ Bloom post-pass settings.
 enabled: boolean;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L63)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:63
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [experiments/earth-playground/earth/runtime/state.ts:63](https://git
 strength: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:65](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L65)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:65
 
 Bloom intensity multiplier.
 
@@ -38,7 +38,7 @@ Bloom intensity multiplier.
 radius: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L67)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:67
 
 Bloom kernel radius.
 
@@ -50,6 +50,6 @@ Bloom kernel radius.
 threshold: number;
 ```
 
-Defined in: [experiments/earth-playground/earth/runtime/state.ts:69](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/runtime/state.ts#L69)
+Defined in: experiments/earth-playground/earth/runtime/state.ts:69
 
 Luminance threshold above which pixels bleed.

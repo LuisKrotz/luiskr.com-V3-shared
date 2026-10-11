@@ -20,10 +20,14 @@ const THEME_CSS_PROPS: Readonly<{
   COLOR_ACCENT: "--color-accent";
   COLOR_ACCENT_CONTRAST: "--color-accent-contrast";
   FOCUS_RING: "--focus-ring";
+  BURN_CORE: "--burn-core";
+  BURN_MID: "--burn-mid";
+  BURN_EDGE: "--burn-edge";
+  BURN_SCORCH: "--burn-scorch";
 }>;
 ```
 
-Defined in: [core/tokens/css/theme.ts:12](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/css/theme.ts#L12)
+Defined in: core/tokens/css/theme.ts:12
 
 Theme/ink CSS custom-property names. Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

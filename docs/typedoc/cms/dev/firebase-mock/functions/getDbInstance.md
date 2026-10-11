@@ -10,7 +10,7 @@ function getDbInstance(): Promise<{
 }>;
 ```
 
-Defined in: [cms/dev/firebase-mock.ts:123](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/dev/firebase-mock.ts#L123)
+Defined in: cms/dev/firebase-mock.ts:165
 
 Mock getDbInstance — returns the marker handle (no SDK).
 

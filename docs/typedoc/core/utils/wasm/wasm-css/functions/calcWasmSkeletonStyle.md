@@ -12,7 +12,7 @@ function calcWasmSkeletonStyle(
 ): WasmSkeletonStyle;
 ```
 
-Defined in: [core/utils/wasm/wasm-css.ts:155](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-css.ts#L155)
+Defined in: core/utils/wasm/wasm-css.ts:155
 
 Convenience wrapper over wasmCSS.calcWasmSkeletonStyle — the historical
 free-function API kept so call sites stay on the old import.

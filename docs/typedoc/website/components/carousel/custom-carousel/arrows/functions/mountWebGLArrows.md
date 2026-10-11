@@ -8,7 +8,7 @@
 function mountWebGLArrows(c): void;
 ```
 
-Defined in: [website/components/carousel/custom-carousel/arrows.ts:105](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/custom-carousel/arrows.ts#L105)
+Defined in: website/components/carousel/custom-carousel/arrows.ts:105
 
 Mounts the CarouselArrowWebGL widgets on the prev/next button canvases.
 Idempotent per canvas: a live widget whose canvas was replaced by a

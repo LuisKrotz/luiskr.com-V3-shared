@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/docs/Docs](../README.md) / ViewDocs
 
-Defined in: [experiments/docs/Docs.tsx:55](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L55)
+Defined in: experiments/docs/Docs.tsx:56
 
 The ViewDocs — docs portal route element.
 
@@ -20,7 +20,7 @@ The ViewDocs — docs portal route element.
 new ViewDocs(): ViewDocs;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:94](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L94)
+Defined in: experiments/docs/Docs.tsx:107
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [experiments/docs/Docs.tsx:94](https://github.com/LuisKrotz/luiskr.c
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -54,7 +54,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +76,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +97,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +115,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +131,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +151,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +167,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 docsPath: string = CHAR_STRINGS.EMPTY;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:57](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L57)
+Defined in: experiments/docs/Docs.tsx:58
 
 Current '/docs/<path>' suffix from the route param.
 
@@ -195,7 +195,7 @@ Current '/docs/<path>' suffix from the route param.
 node: DocsNode | null = null;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:60](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L60)
+Defined in: experiments/docs/Docs.tsx:61
 
 Resolved manifest node for docsPath (null at the portal root).
 
@@ -209,7 +209,7 @@ filePayload:
   | null = null;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L63)
+Defined in: experiments/docs/Docs.tsx:64
 
 Open file payload state.
 
@@ -221,7 +221,7 @@ Open file payload state.
 fileLoading: boolean = false;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L66)
+Defined in: experiments/docs/Docs.tsx:67
 
 File fetch in flight.
 
@@ -233,9 +233,46 @@ File fetch in flight.
 navOpen: boolean = false;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:72](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L72)
+Defined in: experiments/docs/Docs.tsx:73
 
 Mobile nav-panel open state (the tree collapses under a toggle <1024).
+
+***
+
+### \_docsReady
+
+```ts
+_docsReady: boolean = false;
+```
+
+Defined in: experiments/docs/Docs.tsx:101
+
+Boot-loader lifecycle — the overlay stays up until the portal's first
+usable state: manifest resolved, the architecture scene mount
+attempted (success or WebGL fallback), and any in-flight file payload
+settled. Mirrors the space playground's `_earthReady` contract.
+
+***
+
+### \_loaderMsg
+
+```ts
+_loaderMsg: string = DOCS_STRINGS.LOADER_MSG_INIT;
+```
+
+Defined in: experiments/docs/Docs.tsx:104
+
+Current boot stage copy + percent rendered inside the loader.
+
+***
+
+### \_loaderPct
+
+```ts
+_loaderPct: number = 0;
+```
+
+Defined in: experiments/docs/Docs.tsx:105
 
 ***
 
@@ -4462,7 +4499,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4484,7 +4521,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: [core/Component.ts:116](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L116)
+Defined in: core/Component.ts:116
 
 #### Parameters
 
@@ -4508,7 +4545,7 @@ Defined in: [core/Component.ts:116](https://github.com/LuisKrotz/luiskr.com-V3/b
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4542,7 +4579,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4567,7 +4604,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4591,7 +4628,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4628,7 +4665,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4671,7 +4708,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4721,7 +4758,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4752,7 +4789,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4775,7 +4812,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4800,7 +4837,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4834,7 +4871,7 @@ Render result from render().
 rootsAsNodes(): DocsNode[];
 ```
 
-Defined in: [experiments/docs/Docs.tsx:99](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L99)
+Defined in: experiments/docs/Docs.tsx:112
 
 Manifest roots reshaped as dir-nodes for the treeview.
 
@@ -4850,7 +4887,7 @@ Manifest roots reshaped as dir-nodes for the treeview.
 generatedAt(): string;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:109](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L109)
+Defined in: experiments/docs/Docs.tsx:122
 
 ISO generated stamp shown under the title.
 
@@ -4866,7 +4903,7 @@ ISO generated stamp shown under the title.
 isDirOpen(path): boolean;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:114](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L114)
+Defined in: experiments/docs/Docs.tsx:127
 
 Whether a dir path is expanded in the treeview.
 
@@ -4888,7 +4925,7 @@ Whether a dir path is expanded in the treeview.
 isProtectedView(): boolean;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:119](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L119)
+Defined in: experiments/docs/Docs.tsx:132
 
 Whether the open file sits under a protected source-module root.
 
@@ -4904,7 +4941,7 @@ Whether the open file sits under a protected source-module root.
 navigateDocs(subPath): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:133](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L133)
+Defined in: experiments/docs/Docs.tsx:146
 
 Navigates within the portal — a bare path resolves against /docs.
 
@@ -4928,7 +4965,7 @@ Manifest-relative path ('' → portal root).
 pickNode(node): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:143](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L143)
+Defined in: experiments/docs/Docs.tsx:156
 
 Grid/tree click — dirs toggle expansion AND navigate so the grid lands
 on the folder; files navigate straight to their file route.
@@ -4951,7 +4988,7 @@ on the folder; files navigate straight to their file route.
 pickTreeNode(node): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:155](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L155)
+Defined in: experiments/docs/Docs.tsx:168
 
 Tree-row click — clicking an already-expanded dir collapses it (and,
 when the viewer sits inside that folder, navigates back to its parent
@@ -4976,7 +5013,7 @@ and navigates; files navigate.
 closeFile(): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:177](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L177)
+Defined in: experiments/docs/Docs.tsx:190
 
 Back button — navigates to the file's parent folder (or the root).
 
@@ -4992,7 +5029,7 @@ Back button — navigates to the file's parent folder (or the root).
 toggleNav(): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:184](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L184)
+Defined in: experiments/docs/Docs.tsx:197
 
 Mobile "browse" toggle — shows/hides the tree panel on small screens.
 
@@ -5008,7 +5045,7 @@ Mobile "browse" toggle — shows/hides the tree panel on small screens.
 toggleDir(path): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:191](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L191)
+Defined in: experiments/docs/Docs.tsx:204
 
 Expands or collapses a dir in place (keyboard left/right) without navigating.
 
@@ -5030,7 +5067,7 @@ Expands or collapses a dir in place (keyboard left/right) without navigating.
 onTreeKey(e): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:214](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L214)
+Defined in: experiments/docs/Docs.tsx:227
 
 ARIA treeview keys on the nav: ↑/↓ move between visible rows, → opens
 a closed dir (or descends into an open one), ← closes an open dir (or
@@ -5054,7 +5091,7 @@ focuses the parent). Enter/Space stay native button activation.
 onGridKey(e): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:271](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L271)
+Defined in: experiments/docs/Docs.tsx:284
 
 Arrow-key roving on the folder grid — ←/→/↑/↓ step between cards in
 DOM order (the grid's column count is layout-derived, so linear
@@ -5078,7 +5115,7 @@ traversal is the robust choice on every breakpoint).
 onViewKey(e): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:300](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L300)
+Defined in: experiments/docs/Docs.tsx:313
 
 Host-level keys — Escape backs out of the open file (or closes the
 mobile nav panel) without leaving the portal.
@@ -5101,7 +5138,7 @@ mobile nav panel) without leaving the portal.
 onCrumbKey(e): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:316](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L316)
+Defined in: experiments/docs/Docs.tsx:329
 
 Editable-breadcrumb commit — Enter navigates to the typed path,
 Escape restores the input to the live path.
@@ -5124,7 +5161,7 @@ Escape restores the input to the live path.
 onRouteParamChange(to?): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:336](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L336)
+Defined in: experiments/docs/Docs.tsx:349
 
 Same-tag navigation (file → sibling): resolves the new path without
 tearing down GL/observability state.
@@ -5147,7 +5184,7 @@ tearing down GL/observability state.
 onMounted(): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:341](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L341)
+Defined in: experiments/docs/Docs.tsx:354
 
 Lifecycle: store sub + path resolution + guards.
 
@@ -5167,7 +5204,7 @@ Lifecycle: store sub + path resolution + guards.
 onUpdated(): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:355](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L355)
+Defined in: experiments/docs/Docs.tsx:370
 
 Lifecycle: (re)mounts the GL strip, scene and viewer content.
 
@@ -5181,13 +5218,55 @@ Lifecycle: (re)mounts the GL strip, scene and viewer content.
 
 ***
 
+### \_updateLoader()
+
+```ts
+_updateLoader(msg, pct): void;
+```
+
+Defined in: experiments/docs/Docs.tsx:424
+
+Mirrors a boot stage into the loader overlay (delegates to loader.ts).
+
+#### Parameters
+
+##### msg
+
+`string`
+
+##### pct
+
+`number`
+
+#### Returns
+
+`void`
+
+***
+
+### \_dismissLoader()
+
+```ts
+_dismissLoader(): void;
+```
+
+Defined in: experiments/docs/Docs.tsx:429
+
+Fades + removes the loader overlay (delegates to loader.ts).
+
+#### Returns
+
+`void`
+
+***
+
 ### onDestroy()
 
 ```ts
 onDestroy(): void;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:435](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L435)
+Defined in: experiments/docs/Docs.tsx:495
 
 Lifecycle: disposes guard + GL surfaces.
 
@@ -5207,7 +5286,7 @@ Lifecycle: disposes guard + GL surfaces.
 render(): HTMLElement;
 ```
 
-Defined in: [experiments/docs/Docs.tsx:606](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/Docs.tsx#L606)
+Defined in: experiments/docs/Docs.tsx:668
 
 JSX template — lives in render.tsx.
 

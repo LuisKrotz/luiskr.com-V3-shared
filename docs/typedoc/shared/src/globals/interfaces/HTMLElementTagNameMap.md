@@ -14,7 +14,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:43099
 app-nav: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L47)
+Defined in: shared/src/globals.d.ts:47
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [shared/src/globals.d.ts:47](https://github.com/LuisKrotz/luiskr.com
 home-mosaic: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L48)
+Defined in: shared/src/globals.d.ts:48
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [shared/src/globals.d.ts:48](https://github.com/LuisKrotz/luiskr.com
 awards-carousel: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:49](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L49)
+Defined in: shared/src/globals.d.ts:49
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [shared/src/globals.d.ts:49](https://github.com/LuisKrotz/luiskr.com
 custom-carousel: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L50)
+Defined in: shared/src/globals.d.ts:50
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [shared/src/globals.d.ts:50](https://github.com/LuisKrotz/luiskr.com
 media-figure: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L51)
+Defined in: shared/src/globals.d.ts:51
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [shared/src/globals.d.ts:51](https://github.com/LuisKrotz/luiskr.com
 media-expanded: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:52](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L52)
+Defined in: shared/src/globals.d.ts:52
 
 ***
 
@@ -74,7 +74,7 @@ Defined in: [shared/src/globals.d.ts:52](https://github.com/LuisKrotz/luiskr.com
 draw-text: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:53](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L53)
+Defined in: shared/src/globals.d.ts:53
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [shared/src/globals.d.ts:53](https://github.com/LuisKrotz/luiskr.com
 portfolio-related: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:54](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L54)
+Defined in: shared/src/globals.d.ts:54
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: [shared/src/globals.d.ts:54](https://github.com/LuisKrotz/luiskr.com
 about-section: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:55](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L55)
+Defined in: shared/src/globals.d.ts:55
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [shared/src/globals.d.ts:55](https://github.com/LuisKrotz/luiskr.com
 contact-section: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:56](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L56)
+Defined in: shared/src/globals.d.ts:56
 
 ***
 
@@ -114,7 +114,7 @@ Defined in: [shared/src/globals.d.ts:56](https://github.com/LuisKrotz/luiskr.com
 awards-mentions: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:57](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L57)
+Defined in: shared/src/globals.d.ts:57
 
 ***
 
@@ -124,7 +124,7 @@ Defined in: [shared/src/globals.d.ts:57](https://github.com/LuisKrotz/luiskr.com
 site-toast: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:58](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L58)
+Defined in: shared/src/globals.d.ts:58
 
 ***
 
@@ -134,7 +134,7 @@ Defined in: [shared/src/globals.d.ts:58](https://github.com/LuisKrotz/luiskr.com
 preferences-modal: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:59](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L59)
+Defined in: shared/src/globals.d.ts:59
 
 ***
 
@@ -144,7 +144,7 @@ Defined in: [shared/src/globals.d.ts:59](https://github.com/LuisKrotz/luiskr.com
 lang-dialog: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:60](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L60)
+Defined in: shared/src/globals.d.ts:60
 
 ***
 
@@ -154,7 +154,7 @@ Defined in: [shared/src/globals.d.ts:60](https://github.com/LuisKrotz/luiskr.com
 expand-modal: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:61](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L61)
+Defined in: shared/src/globals.d.ts:61
 
 ***
 
@@ -164,7 +164,7 @@ Defined in: [shared/src/globals.d.ts:61](https://github.com/LuisKrotz/luiskr.com
 internal-footer: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L62)
+Defined in: shared/src/globals.d.ts:62
 
 ***
 
@@ -174,7 +174,7 @@ Defined in: [shared/src/globals.d.ts:62](https://github.com/LuisKrotz/luiskr.com
 view-admin-login: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L63)
+Defined in: shared/src/globals.d.ts:63
 
 ***
 
@@ -184,7 +184,7 @@ Defined in: [shared/src/globals.d.ts:63](https://github.com/LuisKrotz/luiskr.com
 view-cms-dashboard: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:64](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L64)
+Defined in: shared/src/globals.d.ts:64
 
 ***
 
@@ -194,7 +194,7 @@ Defined in: [shared/src/globals.d.ts:64](https://github.com/LuisKrotz/luiskr.com
 cms-portfolio-list: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:65](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L65)
+Defined in: shared/src/globals.d.ts:65
 
 ***
 
@@ -204,7 +204,7 @@ Defined in: [shared/src/globals.d.ts:65](https://github.com/LuisKrotz/luiskr.com
 cms-projects-list: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:66](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L66)
+Defined in: shared/src/globals.d.ts:66
 
 ***
 
@@ -214,7 +214,7 @@ Defined in: [shared/src/globals.d.ts:66](https://github.com/LuisKrotz/luiskr.com
 cms-about-editor: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:67](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L67)
+Defined in: shared/src/globals.d.ts:67
 
 ***
 
@@ -224,7 +224,7 @@ Defined in: [shared/src/globals.d.ts:67](https://github.com/LuisKrotz/luiskr.com
 cms-footer-editor: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:68](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L68)
+Defined in: shared/src/globals.d.ts:68
 
 ***
 
@@ -234,7 +234,7 @@ Defined in: [shared/src/globals.d.ts:68](https://github.com/LuisKrotz/luiskr.com
 cms-lang-editor: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:69](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L69)
+Defined in: shared/src/globals.d.ts:69
 
 ***
 
@@ -244,7 +244,7 @@ Defined in: [shared/src/globals.d.ts:69](https://github.com/LuisKrotz/luiskr.com
 cms-playground-editor: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L70)
+Defined in: shared/src/globals.d.ts:70
 
 ***
 
@@ -254,7 +254,7 @@ Defined in: [shared/src/globals.d.ts:70](https://github.com/LuisKrotz/luiskr.com
 cms-media-converter: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:71](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L71)
+Defined in: shared/src/globals.d.ts:71
 
 ***
 
@@ -264,7 +264,7 @@ Defined in: [shared/src/globals.d.ts:71](https://github.com/LuisKrotz/luiskr.com
 cms-deploy-info: HTMLElement;
 ```
 
-Defined in: [shared/src/globals.d.ts:72](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/globals.d.ts#L72)
+Defined in: shared/src/globals.d.ts:72
 
 ***
 

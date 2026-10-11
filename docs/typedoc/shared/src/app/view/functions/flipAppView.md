@@ -12,7 +12,7 @@ function flipAppView(
 ): Promise<void>;
 ```
 
-Defined in: [shared/src/app/view.ts:63](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/shared/src/app/view.ts#L63)
+Defined in: shared/src/app/view.ts:65
 
 View swap: lazy-imports the target view's chunk (each import is in its
 own branch so bundlers keep per-route code-splitting), then either

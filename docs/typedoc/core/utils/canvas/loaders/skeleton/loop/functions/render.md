@@ -12,7 +12,7 @@ function render(
 ): void;
 ```
 
-Defined in: [core/utils/canvas/loaders/skeleton/loop.ts:74](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/skeleton/loop.ts#L74)
+Defined in: core/utils/canvas/loaders/skeleton/loop.ts:74
 
 Renders a frame via the shared renderer.
 

@@ -20,7 +20,7 @@ The CmsMediaConverter component.
 
 ### (module scope)
 
-Lifecycle: binds drop-zone + input events.
+Lifecycle: binds drop-zone + input events, probes the dev-server toolchain.
 
 ### (module scope)
 

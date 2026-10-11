@@ -11,9 +11,22 @@ Dev-only offline stub for Firebase Auth + RTDB. Enabled by
 
 ### (module scope)
 
-Fetches and caches the committed `database.json` snapshot once per
-session — the mock's entire "remote" state.
+Fetches and caches the merged database view once per session — the
+dev server merges the committed `database.json` with the gitignored
+`cms/dev/mock-db.json` overlay behind `/__cms-db`, so CMS edits
+persist across reloads. Falls back to the plain snapshot when the
+middleware isn't mounted (e.g. a stale server without CMS_MOCK).
 - `@returns` The parsed database object.
+
+### (module scope)
+
+Persists one write through the dev middleware — POSTs the RTDB-style
+op (`set`/`update`/`remove`) to `/__cms-db`, then drops the cached
+snapshot so the next read re-merges base + overlay. Silent no-op when
+the middleware isn't mounted.
+- `@param` op RTDB operation name.
+- `@param` path Slash-separated DB path.
+- `@param` value Written payload (unused for remove).
 
 ### (module scope)
 
@@ -50,18 +63,18 @@ snapshot and returns the SDK-shaped {exists, val} result.
 
 ### `set`
 
-Mock of firebase/database `set()` — logs the write; nothing persists so
-dev sessions stay reproducible against the committed snapshot.
+Mock of firebase/database `set()` — persists the write to the local
+overlay via the dev middleware, so CMS edits survive reloads.
 - `@param` r Target ref.
 - `@param` v Value that would be written.
 
 ### `remove`
 
-Mock of firebase/database `remove()` — logs the delete, persists nothing.
+Mock of firebase/database `remove()` — tombstones the key in the overlay.
 
 ### `update`
 
-Mock of firebase/database `update()` — logs the patch, persists nothing.
+Mock of firebase/database `update()` — shallow-merges the patch into the overlay.
 
 ### `getDatabase`
 

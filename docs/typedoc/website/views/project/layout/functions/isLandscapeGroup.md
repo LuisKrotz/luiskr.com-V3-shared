@@ -8,7 +8,7 @@
 function isLandscapeGroup(c, group): boolean;
 ```
 
-Defined in: [website/views/project/layout.ts:94](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/project/layout.ts#L94)
+Defined in: website/views/project/layout.ts:94
 
 Whether a media group is all-landscape — those can't pair side-by-side
 in the two-up layout, so they force the carousel into scroll mode.

@@ -11,6 +11,6 @@ const DEV_LOG: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/data/log.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/data/log.ts#L25)
+Defined in: core/tokens/data/log.ts:25
 
 The DEV_LOG constant — buffer sizing + the devtools inspection key.

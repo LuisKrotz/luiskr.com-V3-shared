@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/earth/settings](../README.md) / EarthSettingsState
 
-Defined in: [experiments/earth-playground/earth/settings.ts:21](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L21)
+Defined in: experiments/earth-playground/earth/settings.ts:21
 
 The mutable engine state the snapshot reads — mirrors the private
  fields on EarthBackground; everything nullable covers pre-bootstrap.
@@ -24,7 +24,7 @@ cg:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:22](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L22)
+Defined in: experiments/earth-playground/earth/settings.ts:22
 
 ***
 
@@ -42,7 +42,7 @@ moonCfg:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:23](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L23)
+Defined in: experiments/earth-playground/earth/settings.ts:23
 
 ***
 
@@ -59,7 +59,7 @@ bloom_:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:30](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L30)
+Defined in: experiments/earth-playground/earth/settings.ts:30
 
 ***
 
@@ -75,7 +75,7 @@ vig:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L31)
+Defined in: experiments/earth-playground/earth/settings.ts:31
 
 ***
 
@@ -91,7 +91,7 @@ ca:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:32](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L32)
+Defined in: experiments/earth-playground/earth/settings.ts:32
 
 ***
 
@@ -106,7 +106,7 @@ film:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L33)
+Defined in: experiments/earth-playground/earth/settings.ts:33
 
 ***
 
@@ -121,7 +121,7 @@ earth_:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:34](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L34)
+Defined in: experiments/earth-playground/earth/settings.ts:34
 
 ***
 
@@ -140,7 +140,7 @@ sun:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L35)
+Defined in: experiments/earth-playground/earth/settings.ts:35
 
 ***
 
@@ -150,7 +150,7 @@ Defined in: [experiments/earth-playground/earth/settings.ts:35](https://github.c
 earthMatUniforms: Record<string, UniformNode<"float", number>> | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L43)
+Defined in: experiments/earth-playground/earth/settings.ts:43
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: [experiments/earth-playground/earth/settings.ts:43](https://github.c
 camera: PerspectiveCamera | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:44](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L44)
+Defined in: experiments/earth-playground/earth/settings.ts:44
 
 ***
 
@@ -170,7 +170,7 @@ Defined in: [experiments/earth-playground/earth/settings.ts:44](https://github.c
 controls: OrbitControls | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L45)
+Defined in: experiments/earth-playground/earth/settings.ts:45
 
 ***
 
@@ -180,7 +180,7 @@ Defined in: [experiments/earth-playground/earth/settings.ts:45](https://github.c
 render: object;
 ```
 
-Defined in: [experiments/earth-playground/earth/settings.ts:46](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/settings.ts#L46)
+Defined in: experiments/earth-playground/earth/settings.ts:46
 
 #### resolutionScale
 

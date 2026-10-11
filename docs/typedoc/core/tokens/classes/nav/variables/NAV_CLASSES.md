@@ -22,13 +22,13 @@ const NAV_CLASSES: Readonly<{
   NAV_LANG_OPEN_BTN: "nav-lang-open-btn";
   NAV_FLAG_WRAPPER: "nav-flag-wrapper";
   NAV_BACK: "back";
-  NAV_SCROLL_UP: "scroll-up";
+  NAV_SELECTED_WORK: "selected-work";
   NAV_SCROLL_DOWN: "scroll-down";
   NAV_ACTIVE: "active";
 }>;
 ```
 
-Defined in: [core/tokens/classes/nav.ts:20](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/classes/nav.ts#L20)
+Defined in: core/tokens/classes/nav.ts:20
 
 Frozen nav class-name map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the

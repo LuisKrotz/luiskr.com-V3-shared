@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/widgets/close-button](../README.md) / CloseButtonWebGL
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:29](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L29)
+Defined in: core/utils/canvas/widgets/close-button.ts:29
 
 WebGL Animated Close Button
 Features:
@@ -22,7 +22,7 @@ Features:
 new CloseButtonWebGL(canvas, onClickAction?): CloseButtonWebGL;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:74](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L74)
+Defined in: core/utils/canvas/widgets/close-button.ts:74
 
 #### Parameters
 
@@ -52,7 +52,7 @@ forwarded after each click (the
 canvas: HTMLCanvasElement;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:30](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L30)
+Defined in: core/utils/canvas/widgets/close-button.ts:30
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:30](https://github.com/Lu
 onClickAction: (() => void) | null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L31)
+Defined in: core/utils/canvas/widgets/close-button.ts:31
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:31](https://github.com/Lu
 width: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:32](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L32)
+Defined in: core/utils/canvas/widgets/close-button.ts:32
 
 ***
 
@@ -82,7 +82,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:32](https://github.com/Lu
 height: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L33)
+Defined in: core/utils/canvas/widgets/close-button.ts:33
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:33](https://github.com/Lu
 isHovered: boolean;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:34](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L34)
+Defined in: core/utils/canvas/widgets/close-button.ts:34
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:34](https://github.com/Lu
 hoverLevel: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L35)
+Defined in: core/utils/canvas/widgets/close-button.ts:35
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:35](https://github.com/Lu
 drawProgress: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:36](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L36)
+Defined in: core/utils/canvas/widgets/close-button.ts:36
 
 ***
 
@@ -122,7 +122,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:36](https://github.com/Lu
 rotation: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:37](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L37)
+Defined in: core/utils/canvas/widgets/close-button.ts:37
 
 ***
 
@@ -132,7 +132,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:37](https://github.com/Lu
 clickTime: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:38](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L38)
+Defined in: core/utils/canvas/widgets/close-button.ts:38
 
 ***
 
@@ -142,7 +142,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:38](https://github.com/Lu
 useWebGL: boolean;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L39)
+Defined in: core/utils/canvas/widgets/close-button.ts:39
 
 ***
 
@@ -152,7 +152,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:39](https://github.com/Lu
 animId: number | null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L40)
+Defined in: core/utils/canvas/widgets/close-button.ts:40
 
 ***
 
@@ -162,7 +162,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:40](https://github.com/Lu
 startTime: number;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L41)
+Defined in: core/utils/canvas/widgets/close-button.ts:41
 
 ***
 
@@ -172,7 +172,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:41](https://github.com/Lu
 gl: WebGLRenderingContext | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:42](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L42)
+Defined in: core/utils/canvas/widgets/close-button.ts:42
 
 ***
 
@@ -182,7 +182,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:42](https://github.com/Lu
 program: WebGLProgram | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:43](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L43)
+Defined in: core/utils/canvas/widgets/close-button.ts:43
 
 ***
 
@@ -192,7 +192,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:43](https://github.com/Lu
 quadBuffer: WebGLBuffer | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:44](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L44)
+Defined in: core/utils/canvas/widgets/close-button.ts:44
 
 ***
 
@@ -202,7 +202,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:44](https://github.com/Lu
 uResolution: WebGLUniformLocation | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:45](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L45)
+Defined in: core/utils/canvas/widgets/close-button.ts:45
 
 ***
 
@@ -212,7 +212,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:45](https://github.com/Lu
 uTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:46](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L46)
+Defined in: core/utils/canvas/widgets/close-button.ts:46
 
 ***
 
@@ -222,7 +222,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:46](https://github.com/Lu
 uLiquid: WebGLUniformLocation | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:47](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L47)
+Defined in: core/utils/canvas/widgets/close-button.ts:47
 
 ***
 
@@ -232,7 +232,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:47](https://github.com/Lu
 uDraw: WebGLUniformLocation | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L48)
+Defined in: core/utils/canvas/widgets/close-button.ts:48
 
 ***
 
@@ -242,7 +242,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:48](https://github.com/Lu
 uRot: WebGLUniformLocation | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:49](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L49)
+Defined in: core/utils/canvas/widgets/close-button.ts:49
 
 ***
 
@@ -252,7 +252,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:49](https://github.com/Lu
 uClickTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L50)
+Defined in: core/utils/canvas/widgets/close-button.ts:50
 
 ***
 
@@ -262,7 +262,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:50](https://github.com/Lu
 aPos: number = 0;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L51)
+Defined in: core/utils/canvas/widgets/close-button.ts:51
 
 ***
 
@@ -272,7 +272,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:51](https://github.com/Lu
 _ro: ResizeObserver | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:52](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L52)
+Defined in: core/utils/canvas/widgets/close-button.ts:52
 
 ***
 
@@ -282,7 +282,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:52](https://github.com/Lu
 _onContextLost: EventListener | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:53](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L53)
+Defined in: core/utils/canvas/widgets/close-button.ts:53
 
 ***
 
@@ -292,7 +292,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:53](https://github.com/Lu
 _purged: boolean = false;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:54](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L54)
+Defined in: core/utils/canvas/widgets/close-button.ts:54
 
 ***
 
@@ -302,7 +302,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:54](https://github.com/Lu
 boundTarget: Element | null = null;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:55](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L55)
+Defined in: core/utils/canvas/widgets/close-button.ts:55
 
 ## Methods
 
@@ -312,7 +312,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:55](https://github.com/Lu
 onMouseEnter(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:56](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L56)
+Defined in: core/utils/canvas/widgets/close-button.ts:56
 
 #### Returns
 
@@ -326,7 +326,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:56](https://github.com/Lu
 onMouseLeave(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:59](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L59)
+Defined in: core/utils/canvas/widgets/close-button.ts:59
 
 #### Returns
 
@@ -340,7 +340,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:59](https://github.com/Lu
 onClick(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:62](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L62)
+Defined in: core/utils/canvas/widgets/close-button.ts:62
 
 #### Returns
 
@@ -354,7 +354,7 @@ Defined in: [core/utils/canvas/widgets/close-button.ts:62](https://github.com/Lu
 init(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:111](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L111)
+Defined in: core/utils/canvas/widgets/close-button.ts:111
 
 Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
 
@@ -370,7 +370,7 @@ Boot sequence: GL init → event binding → render start; fully degrades to the
 initWebGL(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:117](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L117)
+Defined in: core/utils/canvas/widgets/close-button.ts:117
 
 Creates the WebGL context, compiles the shader program and sets up uniforms/buffers; falls back on any failure.
 
@@ -386,7 +386,7 @@ Creates the WebGL context, compiles the shader program and sets up uniforms/buff
 bindEvents(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:126](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L126)
+Defined in: core/utils/canvas/widgets/close-button.ts:126
 
 Wires hover + click on the parent button (not the canvas) — the canvas
 is a decorative overlay so interaction belongs to the semantic button.
@@ -404,7 +404,7 @@ boundTarget is remembered for destroy().
 setHover(hovered): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:140](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L140)
+Defined in: core/utils/canvas/widgets/close-button.ts:140
 
 Updates hover state — the shader renders the hover accent when true.
 
@@ -426,7 +426,7 @@ Updates hover state — the shader renders the hover accent when true.
 triggerClick(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:149](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L149)
+Defined in: core/utils/canvas/widgets/close-button.ts:149
 
 Records the click timestamp — the shader reads u_click_time to expand
 the shockwave ring over its 0.4s window. The onClickAction callback is
@@ -444,7 +444,7 @@ invoked separately by the click handler, not here.
 setReducedMotion(isReduced): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:157](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L157)
+Defined in: core/utils/canvas/widgets/close-button.ts:157
 
 Applies prefers-reduced-motion: swaps the animation loop for one
 static frame render, or restarts the loop when motion is re-allowed.
@@ -467,7 +467,7 @@ static frame render, or restarts the loop when motion is re-allowed.
 _renderStatic(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:169](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L169)
+Defined in: core/utils/canvas/widgets/close-button.ts:169
 
 Draws one settled frame with the X fully drawn — used under reduced
 motion or when the loop is stopped.
@@ -484,7 +484,7 @@ motion or when the loop is stopped.
 animate(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:175](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L175)
+Defined in: core/utils/canvas/widgets/close-button.ts:175
 
 Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
@@ -500,7 +500,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 _renderWebGL(now): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:181](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L181)
+Defined in: core/utils/canvas/widgets/close-button.ts:181
 
 Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 
@@ -522,7 +522,7 @@ Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 purge(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:190](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L190)
+Defined in: core/utils/canvas/widgets/close-button.ts:190
 
 webglPool hook — offscreen: stops the loop and force-loses the GL
 context so offscreen widgets hold no context slots; restore()
@@ -540,7 +540,7 @@ rebuilds the program on re-entry.
 restore(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:209](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L209)
+Defined in: core/utils/canvas/widgets/close-button.ts:209
 
 Recreates the GL context + program and resumes the loop after a purge.
 
@@ -556,7 +556,7 @@ Recreates the GL context + program and resumes the loop after a purge.
 destroy(): void;
 ```
 
-Defined in: [core/utils/canvas/widgets/close-button.ts:233](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/widgets/close-button.ts#L233)
+Defined in: core/utils/canvas/widgets/close-button.ts:233
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/scene/meshes](../README.md) / EarthShellsResult
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:38](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L38)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:38
 
 What buildEarthShells hands back for the engine to assign.
 
@@ -16,7 +16,7 @@ What buildEarthShells hands back for the engine to assign.
 group: Group;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:39](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L39)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:39
 
 ***
 
@@ -28,7 +28,7 @@ cloudsMesh:
   | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:40](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L40)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:40
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [experiments/earth-playground/earth/scene/meshes.ts:40](https://gith
 earthMatUniforms: Record<string, UniformNode<"float", number>> | null;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/meshes.ts:41](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/meshes.ts#L41)
+Defined in: experiments/earth-playground/earth/scene/meshes.ts:41

@@ -8,7 +8,7 @@
 function folderSvg(name, isDir?): SVGElement;
 ```
 
-Defined in: [experiments/docs/folder-svg.tsx:95](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/folder-svg.tsx#L95)
+Defined in: experiments/docs/folder-svg.tsx:95
 
 Deterministic animated folder SVG for a manifest node name.
 

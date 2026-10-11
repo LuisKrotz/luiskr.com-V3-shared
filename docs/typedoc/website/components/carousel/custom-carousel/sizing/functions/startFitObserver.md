@@ -8,7 +8,7 @@
 function startFitObserver(c): void;
 ```
 
-Defined in: [website/components/carousel/custom-carousel/sizing.ts:28](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/carousel/custom-carousel/sizing.ts#L28)
+Defined in: website/components/carousel/custom-carousel/sizing.ts:28
 
 Wires a ResizeObserver on the host that re-runs _measureFit on width
 changes. Reports under FIT_EPS_PX of the last width are dropped —

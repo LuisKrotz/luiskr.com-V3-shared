@@ -8,7 +8,7 @@
 function renderSpAction(act, t): Element;
 ```
 
-Defined in: [experiments/earth-playground/space/panel-render.tsx:87](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/space/panel-render.tsx#L87)
+Defined in: experiments/earth-playground/space/panel-render.tsx:87
 
 One group-level action button (reset view / screenshot / copy settings).
 

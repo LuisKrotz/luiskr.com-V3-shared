@@ -6,6 +6,7 @@
 
 ```ts
 const DOCS_UNITS: Readonly<{
+  GL_STRIP_TIME_SCALE: 0.0625;
   FOLDER_HASH_MOD: 9973;
   TAP_SLOP_PX: 10;
   LABEL_W: 256;
@@ -22,15 +23,24 @@ const DOCS_UNITS: Readonly<{
   SCENE_DEPTH_STEP: 9;
   SCENE_Y_STEP: 4;
   SCENE_Y_WAVE: 1.5;
-  SCENE_ROTATE_SPEED: 0.15;
-  SCENE_PULSE_SPEED: 0.35;
+  SCENE_ROTATE_SPEED: 0.005;
+  SCENE_PULSE_SPEED: 0.021875;
   SCENE_PULSE_AMP: 0.05;
-  SCENE_DIR_OPACITY: 0.34;
-  SCENE_FILE_OPACITY: 0.18;
-  SCENE_LINE_OPACITY: 0.14;
+  SCENE_DIR_RADIUS: 1.15;
+  SCENE_FILE_RADIUS: 0.55;
+  SCENE_DIR_OPACITY: 0.5;
+  SCENE_FILE_OPACITY: 0.28;
+  SCENE_LINE_OPACITY: 0.22;
+  SCENE_ACTIVE_OPACITY: 0.95;
+  SCENE_ANCESTOR_OPACITY: 0.55;
+  SCENE_ACTIVE_SCALE: 1.8;
+  SCENE_INTRO_TURN: number;
+  SCENE_INTRO_MS: 11000;
+  SCENE_CAMERA_FIT: 1.15;
+  SCENE_CAMERA_LIFT: 0.8;
 }>;
 ```
 
-Defined in: [core/tokens/strings/docs.ts:54](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/strings/docs.ts#L54)
+Defined in: core/tokens/strings/docs.ts:80
 
 Unit tokens used by docs layout/scene math.

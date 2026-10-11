@@ -9,6 +9,10 @@ CMS bundle entry — completely separate from the public site
 
 ## Members
 
+### `_BOOT_GRACE_MS`
+
+Boot grace window — auth-listener silence past this mounts the login.
+
 ### `mountView`
 
 Swaps the CMS root's child for the given element tag (idempotent).

@@ -8,7 +8,7 @@
 function updateSwitchesUI(host): void;
 ```
 
-Defined in: [website/components/dialogs/preferences/sync.ts:61](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/dialogs/preferences/sync.ts#L61)
+Defined in: website/components/dialogs/preferences/sync.ts:61
 
 Syncs each switch widget + its DOM twin with its pref value.
 

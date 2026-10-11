@@ -8,7 +8,7 @@
 type JSXComponent<P> = (_props) => Node | DocumentFragment | null;
 ```
 
-Defined in: [core/jsx.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/jsx.ts#L26)
+Defined in: core/jsx.ts:26
 
 Functional component tag — receives `{...props, children}` and returns a node.
 

@@ -8,7 +8,7 @@
 function patchMediaFigure(): void;
 ```
 
-Defined in: [core/safari/patches/media-figure.ts:35](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/safari/patches/media-figure.ts#L35)
+Defined in: core/safari/patches/media-figure.ts:35
 
 Installs the MediaFigure patch once the element registers:
  - `_renderInitial` is wrapped to inject the safari-media stylesheet

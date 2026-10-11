@@ -13,7 +13,7 @@ const FLAG_CLASSES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/classes/flags.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/classes/flags.ts#L14)
+Defined in: core/tokens/classes/flags.ts:14
 
 Language-flag classes — `flag-img`/`flag-split` for the SVG flag images,
 `flag-canvas`/`flag-canvas--nav` for the WebGL/2D-drawn flag surfaces in

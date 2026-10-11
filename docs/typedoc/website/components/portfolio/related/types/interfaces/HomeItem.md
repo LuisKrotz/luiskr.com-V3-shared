@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/portfolio/related/types](../README.md) / HomeItem
 
-Defined in: [website/components/portfolio/related/types.ts:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L48)
+Defined in: website/components/portfolio/related/types.ts:48
 
 A home portfoliolist row used to hydrate related pointers — `link` is the
 join key, `image`/`label`/`title`/`description` fill the card.
@@ -17,7 +17,7 @@ join key, `image`/`label`/`title`/`description` fill the card.
 optional link?: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:49](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L49)
+Defined in: website/components/portfolio/related/types.ts:49
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [website/components/portfolio/related/types.ts:49](https://github.co
 optional image?: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:50](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L50)
+Defined in: website/components/portfolio/related/types.ts:50
 
 ***
 
@@ -37,7 +37,7 @@ Defined in: [website/components/portfolio/related/types.ts:50](https://github.co
 optional label?: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:51](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L51)
+Defined in: website/components/portfolio/related/types.ts:51
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: [website/components/portfolio/related/types.ts:51](https://github.co
 optional title?: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:52](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L52)
+Defined in: website/components/portfolio/related/types.ts:52
 
 ***
 
@@ -57,4 +57,4 @@ Defined in: [website/components/portfolio/related/types.ts:52](https://github.co
 optional description?: string;
 ```
 
-Defined in: [website/components/portfolio/related/types.ts:53](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/portfolio/related/types.ts#L53)
+Defined in: website/components/portfolio/related/types.ts:53

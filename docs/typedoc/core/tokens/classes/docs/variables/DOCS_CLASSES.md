@@ -35,15 +35,31 @@ const DOCS_CLASSES: Readonly<{
   DOCS_FRAME: "docs-frame";
   DOCS_SCENE: "docs-scene";
   DOCS_SCENE_OFF: "docs-scene-off";
+  DOCS_SCENE_HINT: "docs-scene-hint";
   DOCS_NAV_TOGGLE: "docs-nav-toggle";
   DOCS_NAV_OPEN: "docs-nav-open";
   DOCS_PROTECTED: "docs-protected";
   DOCS_MERMAID: "docs-mermaid";
+  DOCS_MERMAID_LOADING: "docs-mermaid-loading";
   DOCS_FOOTER_NOTE: "docs-footer-note";
+  DOCS_LOADER: "docs-loader";
+  DOCS_LOADER_GLOW: "docs-loader-glow";
+  DOCS_LOADER_GRID: "docs-loader-grid";
+  DOCS_LOADER_CONTENT: "docs-loader-content";
+  DOCS_LOADER_SPINNER_OUTER: "docs-loader-spinner-outer";
+  DOCS_LOADER_SPINNER_INNER: "docs-loader-spinner-inner";
+  DOCS_LOADER_COUNTER: "docs-loader-counter";
+  DOCS_LOADER_PERCENT: "docs-loader-percent";
+  DOCS_LOADER_VAL: "docs-loader-val";
+  DOCS_LOADER_SYM: "docs-loader-sym";
+  DOCS_LOADER_TITLE: "docs-loader-title";
+  DOCS_LOADER_MSG: "docs-loader-msg";
+  DOCS_LOADER_BAR: "docs-loader-bar";
+  DOCS_LOADER_BAR_FILL: "docs-loader-bar-fill";
 }>;
 ```
 
-Defined in: [core/tokens/classes/docs.ts:14](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/classes/docs.ts#L14)
+Defined in: core/tokens/classes/docs.ts:14
 
 Frozen docs class-name map — sole declaration site for these tokens;
 consumers read members and never re-declare the strings

@@ -8,7 +8,7 @@
 function buildAtmosShells(__namedParameters): AtmosShellsResult;
 ```
 
-Defined in: [experiments/earth-playground/earth/scene/atmos-shells.ts:44](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/earth-playground/earth/scene/atmos-shells.ts#L44)
+Defined in: experiments/earth-playground/earth/scene/atmos-shells.ts:44
 
 Builds both atmosphere shells sharing one scattering model:
   atmosMesh — BackSide additive shell (10.2u): the camera looks

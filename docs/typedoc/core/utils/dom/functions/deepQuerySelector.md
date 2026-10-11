@@ -8,7 +8,7 @@
 function deepQuerySelector(selector, root?): Element | null;
 ```
 
-Defined in: [core/utils/dom.ts:28](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/dom.ts#L28)
+Defined in: core/utils/dom.ts:28
 
 Depth-first search for the FIRST element matching `selector`, descending
 through every nested shadow root it passes. Order matches the visual

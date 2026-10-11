@@ -8,7 +8,7 @@
 function packMosaicSkeleton(vw): object;
 ```
 
-Defined in: [website/components/home/mosaic/pack.ts:214](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/home/mosaic/pack.ts#L214)
+Defined in: website/components/home/mosaic/pack.ts:214
 
 Skeleton variant: packs placeholder tiles (no items needed — featured
 count + aspect cycle come from SKELETON/LAYOUT tokens) so the loading

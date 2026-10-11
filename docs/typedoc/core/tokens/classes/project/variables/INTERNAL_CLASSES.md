@@ -20,6 +20,7 @@ const INTERNAL_CLASSES: Readonly<{
   INTERNAL_FOOTER_TITLE: "internal-footer-title";
   INTERNAL_FOOTER_RELATED: "internal-footer-related";
   INTERNAL_FOOTER_ITEMS: "internal-footer-items";
+  INTERNAL_FOOTER_ITEMS_DIVIDER: "internal-footer-items-divider";
   INTERNAL_FOOTER_ITEMS_LINK: "internal-footer-items-link";
   INTERNAL_FOOTER_ITEMS_SEP: "internal-footer-items-separator";
   INTERNAL_FOOTER_ITEMS_NOTE: "internal-footer-items-note";
@@ -33,7 +34,7 @@ const INTERNAL_CLASSES: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/classes/project.ts:23](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/classes/project.ts#L23)
+Defined in: core/tokens/classes/project.ts:23
 
 Internals (project-detail) page classes on the `internal-*` block family:
 `internal` root, `internal-main` item grid, `internal-description` prose

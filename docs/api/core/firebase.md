@@ -69,12 +69,46 @@ via signInWithRedirect, which navigates away and never resolves.
 
 Signs the CMS user out via the lazily-loaded auth SDK.
 
+### `_AUTH_INIT_TIMEOUT_MS`
+
+Upper bound on Firebase auth bootstrap — the SDK's own init can hang.
+
+### `_AUTH_EVENT_TIMEOUT_MS`
+
+Upper bound on the redirect-event wait — the iframe relay can stall.
+
+### `recordAuthFailure`
+
+Persists the OAuth-return failure code for the login view and consumes
+the redirect marker — storage itself may be the blocker, so every write
+is guarded.
+- `@param` code Firebase-style error code (or a synthetic `auth/*` code).
+
+### `flagAuthError`
+
+Persists an "auth failed but not via the OAuth return" signal used to
+distinguish a null getRedirectResult with an outstanding marker (event
+lost to blocked third-party storage) from a plain first visit.
+- `@param` code Firebase-style error code.
+
+### `raceTimeout`
+
+Races a promise against a timeout that rejects with a synthetic auth code.
+
 ### (module scope)
 
 Subscribes to auth state after lazily loading firebase/auth.
 First resolves a pending redirect sign-in (the signInWithGoogle popup
 fallback) so the callback fires with the fresh session on return — a
 failed redirect logs the error and falls through to the normal listener.
+
+Both the SDK init and the redirect-event wait are bounded: when
+third-party storage is blocked (the firebaseapp.com auth iframe can't
+persist/relay the OAuth event) the SDK promises never settle, which
+previously left the page hanging with the stale redirect marker. On a
+timeout or failure the real diagnosis is recorded for the login view,
+while a best-effort background subscribe still wires the listener so a
+late-arriving event can still sign in.
 - `@param` callback Invoked with the User (or null on sign-out) on every auth transition.
 - `@returns` {Promise<Function>} the SDK's unsubscribe function
 

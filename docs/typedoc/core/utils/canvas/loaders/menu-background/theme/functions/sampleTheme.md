@@ -8,7 +8,7 @@
 function sampleTheme(host): void;
 ```
 
-Defined in: [core/utils/canvas/loaders/menu-background/theme.ts:20](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/menu-background/theme.ts#L20)
+Defined in: core/utils/canvas/loaders/menu-background/theme.ts:20
 
 Reads the --menu-ink / --menu-ink-2 custom properties from the canvas
 element and converts them into shader ink colors. Sampling the canvas

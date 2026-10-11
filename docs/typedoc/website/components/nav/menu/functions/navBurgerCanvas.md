@@ -8,7 +8,7 @@
 function navBurgerCanvas(host, label): HTMLCanvasElement;
 ```
 
-Defined in: [website/components/nav/menu.tsx:64](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/menu.tsx#L64)
+Defined in: website/components/nav/menu.tsx:64
 
 The burger icon's canvas element — lazily created once and kept for
 the component's lifetime so its WebGL context is never churned by

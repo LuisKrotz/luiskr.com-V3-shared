@@ -15,3 +15,7 @@ Frozen docs class-name map — sole declaration site for these tokens;
 consumers read members and never re-declare the strings
 (zero-hardcoding rules 4–5). Object.freeze makes the token contract
 immutable at runtime.
+
+### `DOCS_LOADER`
+
+Boot loader overlay — stays up until the portal's first usable state.

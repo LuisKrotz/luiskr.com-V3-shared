@@ -4,12 +4,11 @@
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/loaders/intro-loader](../README.md) / IntroLoader
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:23](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L23)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:45
 
-Command-Line & Spec-Driven Intro Loader
-
-Establishes the Software Engineer identity before transitioning into the UX/UI.
-Displays a bold centered percentage load counter and rapid spec terminal sequence.
+Experiments-style intro loader — spinner ring + percent + stage readout
++ progress bar over a glow veil. The stage text steps through the
+locale's `loader.stages` (site assets/pages copy) as progress climbs.
 
 ## Constructors
 
@@ -19,7 +18,7 @@ Displays a bold centered percentage load counter and rapid spec terminal sequenc
 new IntroLoader(rootContainer?, onComplete?): IntroLoader;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:33](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L33)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:57
 
 #### Parameters
 
@@ -43,7 +42,7 @@ Defined in: [core/utils/canvas/loaders/intro-loader.ts:33](https://github.com/Lu
 rootContainer: HTMLElement;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:24](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L24)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:46
 
 ***
 
@@ -53,7 +52,7 @@ Defined in: [core/utils/canvas/loaders/intro-loader.ts:24](https://github.com/Lu
 onComplete: (() => void) | null;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L25)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:47
 
 ***
 
@@ -63,7 +62,7 @@ Defined in: [core/utils/canvas/loaders/intro-loader.ts:25](https://github.com/Lu
 container: HTMLElement | null = null;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L26)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:48
 
 ***
 
@@ -73,17 +72,27 @@ Defined in: [core/utils/canvas/loaders/intro-loader.ts:26](https://github.com/Lu
 percentEl: HTMLElement | null = null;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:27](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L27)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:49
 
 ***
 
-### terminalEl
+### msgEl
 
 ```ts
-terminalEl: HTMLElement | null = null;
+msgEl: HTMLElement | null = null;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:28](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L28)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:50
+
+***
+
+### barEl
+
+```ts
+barEl: HTMLElement | null = null;
+```
+
+Defined in: core/utils/canvas/loaders/intro-loader.ts:51
 
 ***
 
@@ -93,7 +102,7 @@ Defined in: [core/utils/canvas/loaders/intro-loader.ts:28](https://github.com/Lu
 progress: number = 0;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:29](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L29)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:52
 
 ***
 
@@ -103,7 +112,7 @@ Defined in: [core/utils/canvas/loaders/intro-loader.ts:29](https://github.com/Lu
 animId: number | null = null;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:30](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L30)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:53
 
 ***
 
@@ -113,7 +122,17 @@ Defined in: [core/utils/canvas/loaders/intro-loader.ts:30](https://github.com/Lu
 startTime: number;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:31](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L31)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:54
+
+***
+
+### copy
+
+```ts
+copy: LoaderCopy;
+```
+
+Defined in: core/utils/canvas/loaders/intro-loader.ts:55
 
 ## Methods
 
@@ -123,9 +142,9 @@ Defined in: [core/utils/canvas/loaders/intro-loader.ts:31](https://github.com/Lu
 init(): void;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:44](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L44)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:69
 
-Builds the overlay DOM + starts the line sequence.
+Builds the overlay DOM + starts the progress sequence.
 
 #### Returns
 
@@ -139,9 +158,9 @@ Builds the overlay DOM + starts the line sequence.
 runAnimation(): void;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:86](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L86)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:142
 
-Steps through the spec lines with the decode-in effect.
+Steps percent + the localized stage line across the boot budget.
 
 #### Returns
 
@@ -155,7 +174,7 @@ Steps through the spec lines with the decode-in effect.
 finish(): void;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:127](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L127)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:181
 
 Completes the loader: fades the overlay and calls onComplete.
 
@@ -171,9 +190,9 @@ Completes the loader: fades the overlay and calls onComplete.
 destroy(): void;
 ```
 
-Defined in: [core/utils/canvas/loaders/intro-loader.ts:144](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/canvas/loaders/intro-loader.ts#L144)
+Defined in: core/utils/canvas/loaders/intro-loader.ts:198
 
-Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
+Releases the rAF handle and removes the overlay so it can be GC'd.
 
 #### Returns
 

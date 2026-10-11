@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/AppNav](../README.md) / AppNav
 
-Defined in: [website/components/nav/AppNav.tsx:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L90)
+Defined in: website/components/nav/AppNav.tsx:101
 
 <app-nav> — persistent top bar (logo, burger, locale flag, preferences
 trigger) plus the fullscreen menu overlay. Owns four WebGL widgets
@@ -24,7 +24,7 @@ widget for the element's lifetime.
 new AppNav(): AppNav;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:151](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L151)
+Defined in: website/components/nav/AppNav.tsx:162
 
 #### Returns
 
@@ -42,7 +42,7 @@ Defined in: [website/components/nav/AppNav.tsx:151](https://github.com/LuisKrotz
 protected _componentStyles: string;
 ```
 
-Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L70)
+Defined in: core/Component.ts:70
 
 `?inline` SCSS text injected once per shadow root.
 
@@ -58,7 +58,7 @@ Defined in: [core/Component.ts:70](https://github.com/LuisKrotz/luiskr.com-V3/bl
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:77](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L77)
+Defined in: core/Component.ts:77
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -80,7 +80,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: [core/Component.ts:83](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L83)
+Defined in: core/Component.ts:83
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -101,7 +101,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false;
 ```
 
-Defined in: [core/Component.ts:90](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L90)
+Defined in: core/Component.ts:90
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -119,7 +119,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: [core/Component.ts:93](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L93)
+Defined in: core/Component.ts:93
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -135,7 +135,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: [core/Component.ts:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L100)
+Defined in: core/Component.ts:100
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -155,7 +155,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: [core/Component.ts:103](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L103)
+Defined in: core/Component.ts:103
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -171,7 +171,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {};
 ```
 
-Defined in: [core/Component.ts:106](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L106)
+Defined in: core/Component.ts:106
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -187,7 +187,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 _translations: AppNavTranslations | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:92](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L92)
+Defined in: website/components/nav/AppNav.tsx:103
 
 APP dictionary pushed by <app-root>; null until first fetch lands.
 
@@ -199,7 +199,7 @@ APP dictionary pushed by <app-root>; null until first fetch lands.
 _translationsLocale: string | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:94](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L94)
+Defined in: website/components/nav/AppNav.tsx:105
 
 Locale the pushed `_translations` were fetched for — the getter returns null on mismatch so stale copy never renders mid-switch.
 
@@ -211,7 +211,7 @@ Locale the pushed `_translations` were fetched for — the getter returns null o
 activeSection: string = SECTIONS.HOME;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:96](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L96)
+Defined in: website/components/nav/AppNav.tsx:107
 
 Home anchor the scroll position sits in — drives nav-active styles.
 
@@ -223,9 +223,9 @@ Home anchor the scroll position sits in — drives nav-active styles.
 onBottom: boolean = false;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:98](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L98)
+Defined in: website/components/nav/AppNav.tsx:109
 
-Within 200px of document bottom — flips CTA to "scroll up".
+Within 200px of document bottom — flips CTA to "selected work".
 
 ***
 
@@ -235,7 +235,7 @@ Within 200px of document bottom — flips CTA to "scroll up".
 _navFlags: FlagWebGL[] = [];
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:100](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L100)
+Defined in: website/components/nav/AppNav.tsx:111
 
 Live FlagWebGL widgets (currently max one — the menu flag).
 
@@ -247,7 +247,7 @@ Live FlagWebGL widgets (currently max one — the menu flag).
 _onDark: boolean = false;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:102](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L102)
+Defined in: website/components/nav/AppNav.tsx:113
 
 True while the nav floats over a dark section — drives the --on-dark variant for contrast inversion.
 
@@ -259,7 +259,7 @@ True while the nav floats over a dark section — drives the --on-dark variant f
 _menuOpen: boolean = false;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:109](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L109)
+Defined in: website/components/nav/AppNav.tsx:120
 
 Menu overlay is open.
 
@@ -271,7 +271,7 @@ Menu overlay is open.
 _menuClosing: boolean = false;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:111](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L111)
+Defined in: website/components/nav/AppNav.tsx:122
 
 Close animation in flight — blocks re-entry/double-close.
 
@@ -283,7 +283,7 @@ Close animation in flight — blocks re-entry/double-close.
 _menuSettled: boolean = false;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L113)
+Defined in: website/components/nav/AppNav.tsx:124
 
 Open animation completed — close X can snap to drawn state on reopen.
 
@@ -295,7 +295,7 @@ Open animation completed — close X can snap to drawn state on reopen.
 _menuSettleTimer: number | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:115](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L115)
+Defined in: website/components/nav/AppNav.tsx:126
 
 Handle for the settle delay; cleared on destroy so no timer outlives the element.
 
@@ -309,7 +309,7 @@ _menuBg:
   | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:118](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L118)
+Defined in: website/components/nav/AppNav.tsx:129
 
 MenuBackgroundWebGL instance — owns the fullscreen contour canvas.
 
@@ -323,7 +323,7 @@ _menuCloseBtn:
   | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:120](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L120)
+Defined in: website/components/nav/AppNav.tsx:131
 
 CloseButtonWebGL on the menu's X.
 
@@ -337,7 +337,7 @@ _burgerBtn:
   | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:122](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L122)
+Defined in: website/components/nav/AppNav.tsx:133
 
 BurgerButtonWebGL on the persistent burger canvas.
 
@@ -349,7 +349,7 @@ BurgerButtonWebGL on the persistent burger canvas.
 _burgerCanvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:127](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L127)
+Defined in: website/components/nav/AppNav.tsx:138
 
 Burger button canvas host.
 
@@ -361,7 +361,7 @@ Burger button canvas host.
 _menuCanvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:129](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L129)
+Defined in: website/components/nav/AppNav.tsx:140
 
 Fullscreen menu background canvas host.
 
@@ -373,7 +373,7 @@ Fullscreen menu background canvas host.
 _menuCloseCanvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:131](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L131)
+Defined in: website/components/nav/AppNav.tsx:142
 
 Menu close-X canvas host.
 
@@ -385,7 +385,7 @@ Menu close-X canvas host.
 _menuFlagCanvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:133](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L133)
+Defined in: website/components/nav/AppNav.tsx:144
 
 Menu flag canvas + the locale it was built for (rebuilt on change).
 
@@ -397,7 +397,7 @@ Menu flag canvas + the locale it was built for (rebuilt on change).
 _menuFlagLang: string | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:134](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L134)
+Defined in: website/components/nav/AppNav.tsx:145
 
 ***
 
@@ -416,7 +416,7 @@ _navStoreSig:
   | null = null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L142)
+Defined in: website/components/nav/AppNav.tsx:153
 
 Snapshot of the store inputs the template actually consumes —
 compared in onStoreUpdate so unrelated commits (dialog open/close,
@@ -4482,7 +4482,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get translations(): AppNavTranslations | null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:165](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L165)
+Defined in: website/components/nav/AppNav.tsx:176
 
 ##### Returns
 
@@ -4494,7 +4494,7 @@ Defined in: [website/components/nav/AppNav.tsx:165](https://github.com/LuisKrotz
 set translations(val): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:157](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L157)
+Defined in: website/components/nav/AppNav.tsx:168
 
 Setter/getter — the APP translation dictionary pushed by <app-root>.
 
@@ -4520,7 +4520,7 @@ get currentRoute():
   | null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:175](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L175)
+Defined in: website/components/nav/AppNav.tsx:186
 
 The router's active route descriptor.
 
@@ -4539,7 +4539,7 @@ The router's active route descriptor.
 get isHomePage(): boolean;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:181](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L181)
+Defined in: website/components/nav/AppNav.tsx:192
 
 True on home/about/contact routes (nav shows section links).
 
@@ -4557,7 +4557,7 @@ True on home/about/contact routes (nav shows section links).
 get isPlaygroundPage(): boolean;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:198](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L198)
+Defined in: website/components/nav/AppNav.tsx:209
 
 True on the playground route (nav renders in its alternate variant).
 Three checks, in order: the resolved route name (fast path), the raw
@@ -4571,6 +4571,63 @@ before the first navigation resolves), and the precomputed set of all
 
 ***
 
+### isEarthPlaygroundPage
+
+#### Get Signature
+
+```ts
+get isEarthPlaygroundPage(): boolean;
+```
+
+Defined in: website/components/nav/AppNav.tsx:219
+
+True on the earth-playground route — checks the resolved route name
+first (the URL may not have resolved when the getter first fires),
+then falls back to a last-segment scan against canonical and localized
+slugs.
+
+##### Returns
+
+`boolean`
+
+***
+
+### isStarFieldPage
+
+#### Get Signature
+
+```ts
+get isStarFieldPage(): boolean;
+```
+
+Defined in: website/components/nav/AppNav.tsx:234
+
+True on the star-field experiment route — same resolution order.
+
+##### Returns
+
+`boolean`
+
+***
+
+### \_lastPathSegment
+
+#### Get Signature
+
+```ts
+get _lastPathSegment(): string;
+```
+
+Defined in: website/components/nav/AppNav.tsx:245
+
+Last non-empty URL path segment — shared by the playground checks.
+
+##### Returns
+
+`string`
+
+***
+
 ### locale
 
 #### Get Signature
@@ -4579,7 +4636,7 @@ before the first navigation resolves), and the precomputed set of all
 get locale(): string;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:221](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L221)
+Defined in: website/components/nav/AppNav.tsx:256
 
 Active locale code.
 
@@ -4726,7 +4783,7 @@ get currentLang():
   | null;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:227](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L227)
+Defined in: website/components/nav/AppNav.tsx:262
 
 The active LANG_OPTIONS entry (code + label + flag).
 
@@ -4872,7 +4929,7 @@ The active LANG_OPTIONS entry (code + label + flag).
 get currentLangLabel(): string;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:233](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L233)
+Defined in: website/components/nav/AppNav.tsx:268
 
 Display label for the active locale in the flag button.
 
@@ -5056,7 +5113,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: [core/Component.ts:113](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L113)
+Defined in: core/Component.ts:113
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -5078,7 +5135,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 setState(updater): void;
 ```
 
-Defined in: [core/Component.ts:142](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L142)
+Defined in: core/Component.ts:142
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -5112,7 +5169,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:160](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L160)
+Defined in: core/Component.ts:160
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -5137,7 +5194,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: [core/Component.ts:176](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L176)
+Defined in: core/Component.ts:176
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -5161,7 +5218,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: [core/Component.ts:192](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L192)
+Defined in: core/Component.ts:192
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -5198,7 +5255,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: [core/Component.ts:203](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L203)
+Defined in: core/Component.ts:203
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -5241,7 +5298,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: [core/Component.ts:218](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L218)
+Defined in: core/Component.ts:218
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -5291,7 +5348,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: [core/Component.ts:239](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L239)
+Defined in: core/Component.ts:239
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -5322,7 +5379,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: [core/Component.ts:257](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L257)
+Defined in: core/Component.ts:257
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -5345,7 +5402,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: [core/Component.ts:324](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L324)
+Defined in: core/Component.ts:324
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5370,7 +5427,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: [core/Component.ts:351](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/Component.ts#L351)
+Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -5404,7 +5461,7 @@ Render result from render().
 _flagCanvas(): HTMLCanvasElement;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:243](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L243)
+Defined in: website/components/nav/AppNav.tsx:278
 
 Returns the persistent flag canvas for the current locale, rebuilding
 it only when the locale changed. The element survives re-renders so
@@ -5424,7 +5481,7 @@ renderLocaleFlag():
   | Element;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:249](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L249)
+Defined in: website/components/nav/AppNav.tsx:284
 
 Mounts the FlagWebGL widget onto the nav flag button (theme + reduced-motion aware).
 
@@ -5441,7 +5498,7 @@ Mounts the FlagWebGL widget onto the nav flag button (theme + reduced-motion awa
 onMounted(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:255](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L255)
+Defined in: website/components/nav/AppNav.tsx:290
 
 Lifecycle: wires store subscription, scroll/nav event listeners, router subscription and mounts the WebGL nav widgets.
 
@@ -5461,7 +5518,7 @@ Lifecycle: wires store subscription, scroll/nav event listeners, router subscrip
 onUpdated(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:273](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L273)
+Defined in: website/components/nav/AppNav.tsx:308
 
 Lifecycle: after re-render, re-mounts WebGL widgets that the new DOM replaced.
 
@@ -5481,7 +5538,7 @@ Lifecycle: after re-render, re-mounts WebGL widgets that the new DOM replaced.
 onDestroy(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:285](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L285)
+Defined in: website/components/nav/AppNav.tsx:320
 
 Lifecycle: destroys the burger/menu/flag GL widgets and unbinds listeners.
 
@@ -5501,7 +5558,7 @@ Lifecycle: destroys the burger/menu/flag GL widgets and unbinds listeners.
 _mountNavFlag(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:315](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L315)
+Defined in: website/components/nav/AppNav.tsx:350
 
 Creates the FlagWebGL instance on the flag button's canvas.
 
@@ -5517,7 +5574,7 @@ Creates the FlagWebGL instance on the flag button's canvas.
 _destroyNavFlag(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:321](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L321)
+Defined in: website/components/nav/AppNav.tsx:356
 
 Tears down the FlagWebGL instance.
 
@@ -5533,7 +5590,7 @@ Tears down the FlagWebGL instance.
 subscribeRouter(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:327](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L327)
+Defined in: website/components/nav/AppNav.tsx:362
 
 Subscribes to route changes so nav state/links refresh per page.
 
@@ -5549,7 +5606,7 @@ Subscribes to route changes so nav state/links refresh per page.
 onStoreUpdate(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:347](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L347)
+Defined in: website/components/nav/AppNav.tsx:382
 
 Store change → re-render only when a value the template consumes
 actually moved: the locale, the live dictionaries `appText` resolves
@@ -5578,7 +5635,7 @@ they freeze without waiting for a rebuild.
 updateScrollState(activeSection, onBottom): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:384](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L384)
+Defined in: website/components/nav/AppNav.tsx:419
 
 Receives active-section + near-bottom flags from <app-root>'s scroll tracker and toggles the --on-dark variant.
 
@@ -5604,7 +5661,7 @@ Receives active-section + near-bottom flags from <app-root>'s scroll tracker and
 _bindEvents(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:400](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L400)
+Defined in: website/components/nav/AppNav.tsx:435
 
 Binds click/scroll/menu-toggle handlers inside the shadow root.
 
@@ -5620,7 +5677,7 @@ Binds click/scroll/menu-toggle handlers inside the shadow root.
 scrollToTop(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:415](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L415)
+Defined in: website/components/nav/AppNav.tsx:450
 
 Smooth-scrolls the window back to the top.
 
@@ -5636,7 +5693,7 @@ Smooth-scrolls the window back to the top.
 goToAbout(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:421](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L421)
+Defined in: website/components/nav/AppNav.tsx:456
 
 Navigates to (or scrolls to) the about section — route-aware.
 
@@ -5652,7 +5709,7 @@ Navigates to (or scrolls to) the about section — route-aware.
 scrollToContact(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:427](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L427)
+Defined in: website/components/nav/AppNav.tsx:462
 
 Navigates to (or scrolls to) the contact footer — route-aware.
 
@@ -5668,7 +5725,7 @@ Navigates to (or scrolls to) the contact footer — route-aware.
 handleLogo(e?): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:433](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L433)
+Defined in: website/components/nav/AppNav.tsx:468
 
 Logo click: navigates home, or scrolls top when already on home.
 
@@ -5690,7 +5747,7 @@ Logo click: navigates home, or scrolls top when already on home.
 handleAbout(e?): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:439](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L439)
+Defined in: website/components/nav/AppNav.tsx:474
 
 About link click: routes to the localized about slug.
 
@@ -5712,7 +5769,7 @@ About link click: routes to the localized about slug.
 handleAction(e?): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:445](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L445)
+Defined in: website/components/nav/AppNav.tsx:480
 
 Contact/CTA click: routes to the localized contact slug.
 
@@ -5734,7 +5791,7 @@ Contact/CTA click: routes to the localized contact slug.
 _captureOrigin(e?): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:454](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L454)
+Defined in: website/components/nav/AppNav.tsx:489
 
 Records the clicked button's center point in store.modalOrigin — the
 preferences/lang dialogs read it to zoom their "genie" open animation
@@ -5758,7 +5815,7 @@ out from the trigger instead of from screen center.
 handlePreferences(e?): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:460](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L460)
+Defined in: website/components/nav/AppNav.tsx:495
 
 Opens the preferences modal (fires open-preferences-modal after capturing origin).
 
@@ -5780,7 +5837,7 @@ Opens the preferences modal (fires open-preferences-modal after capturing origin
 handleLang(e?): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:466](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L466)
+Defined in: website/components/nav/AppNav.tsx:501
 
 Opens the language dialog (fires open-lang-dialog after capturing origin).
 
@@ -5804,7 +5861,7 @@ render():
   | Element;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:474](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L474)
+Defined in: website/components/nav/AppNav.tsx:509
 
 JSX template: logo button, burger, and the fullscreen menu overlay —
 the markup lives in nav-render.tsx; this delegates with `this`.
@@ -5826,7 +5883,7 @@ the markup lives in nav-render.tsx; this delegates with `this`.
 _burgerCanvas(label): HTMLCanvasElement;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:479](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L479)
+Defined in: website/components/nav/AppNav.tsx:514
 
 Persistent burger canvas (aria-labeled) — created once, survives re-renders so its GL context does.
 
@@ -5848,7 +5905,7 @@ Persistent burger canvas (aria-labeled) — created once, survives re-renders so
 _menuCanvas(): HTMLCanvasElement;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:485](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L485)
+Defined in: website/components/nav/AppNav.tsx:520
 
 Canvas JSX for the WebGL menu background.
 
@@ -5864,7 +5921,7 @@ Canvas JSX for the WebGL menu background.
 _menuCloseCanvas(): HTMLCanvasElement;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:491](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L491)
+Defined in: website/components/nav/AppNav.tsx:526
 
 Canvas JSX for the WebGL menu close (X) icon.
 
@@ -5880,7 +5937,7 @@ Canvas JSX for the WebGL menu close (X) icon.
 _toggleMenu(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:497](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L497)
+Defined in: website/components/nav/AppNav.tsx:532
 
 Opens/closes the fullscreen menu overlay.
 
@@ -5896,7 +5953,7 @@ Opens/closes the fullscreen menu overlay.
 _openMenu(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:503](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L503)
+Defined in: website/components/nav/AppNav.tsx:538
 
 Opens the menu (see nav-menu.ts for the state machine).
 
@@ -5912,7 +5969,7 @@ Opens the menu (see nav-menu.ts for the state machine).
 _mountMenuWebGL(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:509](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L509)
+Defined in: website/components/nav/AppNav.tsx:544
 
 Binds the WebGL layers to the persistent menu canvases.
 
@@ -5928,7 +5985,7 @@ Binds the WebGL layers to the persistent menu canvases.
 _mountBurgerWebGL(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:515](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L515)
+Defined in: website/components/nav/AppNav.tsx:550
 
 Attaches BurgerButtonWebGL to the persistent burger canvas.
 
@@ -5944,7 +6001,7 @@ Attaches BurgerButtonWebGL to the persistent burger canvas.
 _closeMenu(): void;
 ```
 
-Defined in: [website/components/nav/AppNav.tsx:524](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/nav/AppNav.tsx#L524)
+Defined in: website/components/nav/AppNav.tsx:559
 
 Closes the menu through the full dissolve cycle (see nav-menu.ts).
 The _menuClosing guard makes double-close (Esc + click) a no-op.

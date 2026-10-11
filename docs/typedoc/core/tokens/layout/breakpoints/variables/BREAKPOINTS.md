@@ -26,7 +26,7 @@ const BREAKPOINTS: Readonly<{
 }>;
 ```
 
-Defined in: [core/tokens/layout/breakpoints.ts:11](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/layout/breakpoints.ts#L11)
+Defined in: core/tokens/layout/breakpoints.ts:11
 
 Responsive breakpoint registry (px). Sole declaration site — consumers import members
 from this frozen map rather than re-declaring the literals

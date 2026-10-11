@@ -10,7 +10,7 @@ function renderLangDialog(host):
   | null;
 ```
 
-Defined in: [website/components/dialogs/lang-dialog/render.tsx:75](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/dialogs/lang-dialog/render.tsx#L75)
+Defined in: website/components/dialogs/lang-dialog/render.tsx:75
 
 JSX template.
 

@@ -17,6 +17,11 @@ Pre-computed set of every locale's localized earth-playground slug —
 so all 16 locales' `earthPlayground` values are flattened once at module
 load rather than re-built per check.
 
+### `_STAR_FIELD_SLUGS`
+
+Same slug set for the star-field experiment — separate `starField` key so
+each playground page suppresses only its own menu item.
+
 ### (module scope)
 
 The slice of the APP translation dictionary the nav template reads —
@@ -45,7 +50,7 @@ Home anchor the scroll position sits in — drives nav-active styles.
 
 ### `onBottom`
 
-Within 200px of document bottom — flips CTA to "scroll up".
+Within 200px of document bottom — flips CTA to "selected work".
 
 ### `_navFlags`
 
@@ -125,6 +130,21 @@ Three checks, in order: the resolved route name (fast path), the raw
 last URL segment vs the canonical English segments (covers the window
 before the first navigation resolves), and the precomputed set of all
 16 locales' localized playground slugs.
+
+### `isEarthPlaygroundPage`
+
+True on the earth-playground route — checks the resolved route name
+first (the URL may not have resolved when the getter first fires),
+then falls back to a last-segment scan against canonical and localized
+slugs.
+
+### `isStarFieldPage`
+
+True on the star-field experiment route — same resolution order.
+
+### `_lastPathSegment`
+
+Last non-empty URL path segment — shared by the playground checks.
 
 ### `locale`
 

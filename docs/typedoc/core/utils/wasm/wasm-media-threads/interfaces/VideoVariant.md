@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-media-threads](../README.md) / VideoVariant
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:22](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L22)
+Defined in: core/utils/wasm/wasm-media-threads.ts:22
 
 One candidate rendition of a video — URL plus optional quality metadata.
 
@@ -16,7 +16,7 @@ One candidate rendition of a video — URL plus optional quality metadata.
 url: string;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:24](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L24)
+Defined in: core/utils/wasm/wasm-media-threads.ts:24
 
 CDN URL of this rendition.
 
@@ -28,7 +28,7 @@ CDN URL of this rendition.
 optional quality?: string;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L26)
+Defined in: core/utils/wasm/wasm-media-threads.ts:26
 
 Quality label ('360p', '720p', …) — informational for the worker.
 
@@ -40,7 +40,7 @@ Quality label ('360p', '720p', …) — informational for the worker.
 optional width?: number;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:28](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L28)
+Defined in: core/utils/wasm/wasm-media-threads.ts:28
 
 Rendition pixel width — drives the GPU-upload resize hint.
 
@@ -52,6 +52,6 @@ Rendition pixel width — drives the GPU-upload resize hint.
 optional height?: number;
 ```
 
-Defined in: [core/utils/wasm/wasm-media-threads.ts:30](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/utils/wasm/wasm-media-threads.ts#L30)
+Defined in: core/utils/wasm/wasm-media-threads.ts:30
 
 Rendition pixel height — drives the GPU-upload resize hint.

@@ -8,7 +8,7 @@
 function processedItems(view): PortfolioItem[];
 ```
 
-Defined in: [website/views/home/data.ts:48](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/views/home/data.ts#L48)
+Defined in: website/views/home/data.ts:48
 
 Projects list reshaped for the mosaic. The DB stores portfoliolist
 as either an array or a keyed object (locale-dependent), so both

@@ -8,7 +8,7 @@
 function attachCoverageNav(box): (() => void) | null;
 ```
 
-Defined in: [experiments/docs/coverage-nav.ts:182](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/experiments/docs/coverage-nav.ts#L182)
+Defined in: experiments/docs/coverage-nav.ts:182
 
 Wires the istanbul report contract when `box` holds a coverage report.
 

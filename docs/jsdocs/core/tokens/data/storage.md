@@ -27,3 +27,11 @@ CMS OAuth-redirect marker (session-scoped) — set just before the
 signInWithRedirect navigation; still present when the login mounts
 means the return leg couldn't restore a session (blocked storage),
 so the login surfaces the failure instead of silently re-prompting.
+
+### `CMS_AUTH_ERROR`
+
+CMS OAuth-return error code (session-scoped) — written when
+getRedirectResult rejects after the redirect leg, so the login view
+can show the real Firebase code (auth/unauthorized-domain,
+auth/network-request-failed, …) instead of only guessing "browser
+blocked storage".

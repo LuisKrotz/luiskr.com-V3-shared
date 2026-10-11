@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/draw-text/types](../README.md) / DrawToken
 
-Defined in: [website/components/media/draw-text/types.ts:20](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/draw-text/types.ts#L20)
+Defined in: website/components/media/draw-text/types.ts:20
 
 A node of the draw-text token tree — `type` discriminates text vs markup
 chunks; `chars` holds the staggered glyphs, `tag`/`attrStr`/`inner` carry parsed
@@ -18,7 +18,7 @@ markup, `chunks` nests child tokens so recursion walks one uniform shape.
 type: string;
 ```
 
-Defined in: [website/components/media/draw-text/types.ts:21](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/draw-text/types.ts#L21)
+Defined in: website/components/media/draw-text/types.ts:21
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [website/components/media/draw-text/types.ts:21](https://github.com/
 optional chars?: DrawChar[];
 ```
 
-Defined in: [website/components/media/draw-text/types.ts:22](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/draw-text/types.ts#L22)
+Defined in: website/components/media/draw-text/types.ts:22
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [website/components/media/draw-text/types.ts:22](https://github.com/
 optional tag?: string;
 ```
 
-Defined in: [website/components/media/draw-text/types.ts:23](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/draw-text/types.ts#L23)
+Defined in: website/components/media/draw-text/types.ts:23
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [website/components/media/draw-text/types.ts:23](https://github.com/
 optional attrStr?: string;
 ```
 
-Defined in: [website/components/media/draw-text/types.ts:24](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/draw-text/types.ts#L24)
+Defined in: website/components/media/draw-text/types.ts:24
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [website/components/media/draw-text/types.ts:24](https://github.com/
 optional inner?: string;
 ```
 
-Defined in: [website/components/media/draw-text/types.ts:25](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/draw-text/types.ts#L25)
+Defined in: website/components/media/draw-text/types.ts:25
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [website/components/media/draw-text/types.ts:25](https://github.com/
 optional chunks?: DrawToken[];
 ```
 
-Defined in: [website/components/media/draw-text/types.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/website/components/media/draw-text/types.ts#L26)
+Defined in: website/components/media/draw-text/types.ts:26

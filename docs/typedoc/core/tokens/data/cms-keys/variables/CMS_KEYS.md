@@ -19,12 +19,13 @@ const CMS_KEYS: Readonly<{
   PORTFOLIOLIST: "portfoliolist";
   MEDIA: "media";
   EARTH_PLAYGROUND: "earthPlayground";
+  STAR_FIELD: "starField";
   SOURCE_CODE: "source-code";
   PREFERENCES_MODAL: "preferences-modal";
 }>;
 ```
 
-Defined in: [core/tokens/data/cms-keys.ts:26](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/core/tokens/data/cms-keys.ts#L26)
+Defined in: core/tokens/data/cms-keys.ts:27
 
 Frozen cms key map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token

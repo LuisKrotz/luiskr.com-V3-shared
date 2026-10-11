@@ -13,6 +13,6 @@ const CMS_LIST_PREFIXES: Readonly<{
 }>;
 ```
 
-Defined in: [cms/tokens.ts:73](https://github.com/LuisKrotz/luiskr.com-V3/blob/9eeffce09b8f1b5d7b918bf7a393a7229dd71a78/cms/tokens.ts#L73)
+Defined in: cms/tokens.ts:73
 
 Class-prefix conventions for the editable channel lists in the footer/about editors.
