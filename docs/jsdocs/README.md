@@ -2463,6 +2463,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`homemosaic-tails.test.js`](website/tests/coverage/components/home/homemosaic-tails.test.md)                                       | Split from coverage-tails-3.test.js — covers the "HomeMosaic tails" describe.       |
 | [`mosaic-burn-letters.test.js`](website/tests/coverage/components/home/mosaic-burn-letters.test.md)                                 | Per-letter combustion tests for website/components/home/mosaic/burn.ts —            |
 | [`mosaic-burn-tails.test.js`](website/tests/coverage/components/home/mosaic-burn-tails.test.md)                                     | Coverage tails for website/components/home/mosaic/burn.ts —                         |
+| [`mosaic-burn-word-boxes-tails.test.js`](website/tests/coverage/components/home/mosaic-burn-word-boxes-tails.test.md)               | Coverage tails for mosaic/burn/paper.js — the DOM Range                             |
 | [`mosaic-onclick-missing-detail-tails.test.js`](website/tests/coverage/components/home/mosaic-onclick-missing-detail-tails.test.md) | Coverage tail for components/home/mosaic/interactions.ts —                          |
 | [`mosaic-projecthref-tails.test.js`](website/tests/coverage/components/home/mosaic-projecthref-tails.test.md)                       | Coverage tails for components/home/mosaic/interactions.ts —                         |
 

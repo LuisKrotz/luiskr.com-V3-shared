@@ -16,11 +16,48 @@ properties are absent (older stylesheet, non-themed host).
 
 - `@returns` The four-stop combustion ink ramp.
 
+### (module scope)
+
+Word box for DOM-faithful rasterization — the word's position inside the
+title element in CSS px (`y` is the word fragment's bottom edge; the
+caller subtracts the descent to land on the baseline).
+
+### `text`
+
+The raw (pre-transform) word as it appears in the text node.
+
+### `x`
+
+Left edge of the word fragment relative to the title box.
+
+### `y`
+
+Bottom edge of the word fragment relative to the title box.
+
+### `titleWordBoxes`
+
+Reads each word's rendered box straight from the DOM via Range rects —
+the browser's own line-breaking is the wrap authority. Canvas
+`measureText` metrics drift sub-pixel from the layout engine
+(letter-spacing accumulation, shaping/hinting differences): the drift
+used to push the wrap loop a word early, the extra line drew ABOVE the
+bottom-anchored paper's top edge, and the visible title collapsed to
+its last word — burning only that fragment (the "title cut to its last
+word" bug). Positioning each word at its DOM fragment makes phantom
+wraps impossible and also reproduces justified/aligned spacing for
+free. Returns null when the API or a usable text node is absent.
+
+- `@param` title The h2 element holding the title text.
+- `@returns` Per-word boxes in title-relative CSS px, or null to fall back.
+
 ### `rasterizeTitle`
 
-Rasterizes the h2 text into the paper canvas. Canvas can't line-wrap,
-so words are measured and packed into lines matching the DOM box, then
-drawn bottom-anchored like the overlay's `align-items: flex-end`.
+Rasterizes the h2 text into the paper canvas. Words are drawn at their
+DOM Range fragment positions (see {@link titleWordBoxes}), so the raster
+is pixel-faithful to the rendered title — same wraps, same spacing.
+Engines without Range fall back to a measured word-pack matching the
+DOM box, drawn bottom-anchored like the overlay's `align-items:
+flex-end`.
 
 `cssW`/`cssH` are the title box in CSS px while the paper's backing
 store is device px (cssW × dpr): canvas font and measureText units are
