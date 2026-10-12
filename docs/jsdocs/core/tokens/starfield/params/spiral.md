@@ -1,0 +1,287 @@
+# `core/tokens/starfield/params/spiral.ts`
+
+Procedural spiral-galaxy point-cloud parameters — the
+
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/starfield/params/spiral.ts`              |
+| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+
+## Members
+
+### `COUNT_MAX`
+
+Per-galaxy particle count ceiling — `spiralDisc.count` may ask less.
+
+### `MOBILE_DIVISOR`
+
+Mobile particle divisor — caps GPU buffers on small viewports.
+
+### `MOBILE_WIDTH`
+
+Viewport width (px) below which the mobile divisor applies.
+
+### `VOLUMETRIC_OPACITY`
+
+Volumetric galaxies (the Milky Way) are viewed from inside — keep
+the particle layer faint and thin so it reads as a stellar disc/band
+instead of an opaque glowing ball that fills half the screen.
+
+### `VOLUMETRIC_PX`
+
+Near-field point size (world units) — the floor while the camera is
+embedded in the disc. When the camera pulls back, updateGalaxyClouds
+grows the size linearly with distance so every point keeps at least
+`VOLUMETRIC_PX_SCREEN` screen pixels — real stars are point sources
+whose apparent size floors at one pixel, so the spiral arms resolve
+from outside instead of vanishing into sub-pixel dust.
+
+### `VOLUMETRIC_PX_SCREEN`
+
+Minimum apparent point size (device px) once the camera leaves the
+disc. The shared soft-glow map keeps only ~1/3 of a point's sprite
+lit, so this is set well above 1px for the lit core — not the sprite
+edge — to stay resolved at galactic range.
+
+### `VOLUMETRIC_FAR_GAIN`
+
+Far-field opacity gain — as the camera pulls clear of the disc the
+fade drives opacity from VOLUMETRIC_OPACITY up to
+VOLUMETRIC_OPACITY·(1+GAIN), so the spiral's arms read at galactic
+range where 400k points would otherwise thin into a uniform wash.
+
+### `VOLUMETRIC_ARM_JITTER`
+
+Arm angular jitter (rad) for the embedded volumetric disc — tighter
+than photo-fallback spirals because the whole 400k-point field must
+carry the arm lanes alone (no imagery underneath to do the work).
+
+### `VOLUMETRIC_COUNT_MAX`
+
+Volumetric particle ceiling — `spiralDisc.count` may ask less.
+
+### `INNER_SPIN_R`
+
+Rotating inner-disc fraction (× radius) — volumetric galaxies split
+their particle fill at this radius: the inner region carries the
+`spin` revolution around the galactic centre while the outer disc
+(which contains the carved heliocentric bubble) stays put so the
+Sun's exclusion zone never sweeps stars through the solar system.
+Real galactic rotation is differential anyway — inner material laps
+the rim, so a spinning core inside a still outer disc is the honest
+read. 0.3 keeps the rotors well inside the Sun's 0.51 ring.
+
+### `ROTOR_DIFF`
+
+Differential-rotation factor — the inner-disc rotor spins at
+ROTOR_DIFF× the whole-disc rate inside the rotating frame, so the
+core laps the rim the way real flat rotation curves do (inner
+material completes more revolutions per unit time).
+
+### `DUST_COUNT`
+
+Volumetric dust lanes — the Great Rift. Large soft dark points laid
+along the arm gaps with NORMAL blending so they absorb the lit disc
+behind them; additive blending can't darken, so dust gets its own
+cloud at a fraction of the star budget.
+
+### `DUST_PX`
+
+Dust point size (world units) — fat soft occluders, not pinpricks.
+
+### `DUST_OPACITY`
+
+Dust alpha — high enough to visibly rift the band, low enough to keep it translucent.
+
+### `DUST_R_MIN`
+
+Lane bands sit at these radius fractions of the disc.
+
+### `DUST_JITTER`
+
+Lane angular scatter (rad) around the mid-gap line.
+
+### `DUST_R`
+
+Dust grain color — near-black with a warm cast (dust reddens).
+
+### `GOLDEN`
+
+Golden-ratio spiral geometry — real galactic arms are logarithmic
+spirals, and a log spiral whose radius grows by φ per quarter-turn
+has the constant golden pitch atan(2·ln φ/π) ≈ 17.03°. ARM_LOG_B is
+that spiral's θ-coefficient (θ = B·ln r) so arm curvature follows
+the same Fibonacci growth seen in phyllotaxis instead of a linear
+wind; ARM_LOG_R0 is the nominal arm-origin radius (θ = 0 there,
+just outside the bulge) and ARM_LOG_RMIN floors the log so
+bulge-overlapping points wrap gracefully rather than diverging.
+
+### `GOLDEN_ANGLE`
+
+Golden angle ≈ 137.5° (2π·(2−φ)) — the divergence angle that keeps
+successive structures maximally non-repeating; phases the arm sway
+and spur offsets so no two arms share a rhythm.
+
+### `ARM_PITCH_TIGHT`
+
+Pitch tightening — ARM_LOG_B keeps the golden reference value (the
+spiral whose radius grows by φ per quarter-turn, pitch ≈17°). The
+applied winding multiplies it by this factor: <1 loosens the arms
+(fewer turns, bolder sweeps), >1 coils them. 0.85 lands the Milky
+Way at ~0.9 turn per arm — arms that sweep instead of stacking
+into ring-grooves (≥1.4 turns reads as concentric circles).
+
+### `ARM_PITCH_VAR`
+
+Per-arm pitch variation — each lane winds at its own rate: the
+golden coefficient is perturbed by ±ARM_PITCH_VAR with a
+golden-angle phase per arm index, so no two arms draw as parallel
+copies (real spirals are asymmetric — the MW's Perseus and
+Scutum–Centaurus arms have measurably different pitch angles).
+
+### `ARM_LUM_VAR`
+
+Per-arm luminance variation — deterministic dimming per arm index
+(golden-angle-keyed sinusoid in [0,1]) so arms differ in brightness
+the way real major/minor arm pairs do instead of identical stripes.
+
+### `ARM_SWAY_FREQ`
+
+Arm path wobble — a slow sinusoidal sway on the arm angle
+(freq·radius ≈ 2.5 full waves, each arm phase-offset by the golden
+angle) so arm lanes meander like real flocculent spirals instead of
+drawing as perfect geometric curves.
+
+### `ARM_SWAY_CORE`
+
+Sway radius scaling — arm meander starts at ARM_SWAY_CORE× the
+amplitude near the bulge (the inner disc is resonance-locked, so
+its lanes run smoother) and reaches full amplitude at the rim where
+flocculent turbulence dominates.
+
+### `KNOT_LOBES`
+
+Star-forming knots — per-point brightness modulation along each arm
+(azimuthal lobes drifting with ln r) breaks uniform lanes into
+glowing OB-association/H-II clumps; KNOT_DEPTH is the max dimming.
+
+### `KNOT_POW`
+
+Sparse hot-knot shaping — `max(0, sin)^KNOT_POW` isolates discrete
+star-forming regions along a lane (a high exponent turns the
+continuous ripple into separated bright clumps instead of a smooth
+wave); KNOT_HOT_* is the additive blue-white emission those OB
+associations and H-II nebulae contribute on top of the arm color.
+
+### `HII_FRAC`
+
+H-II region tint + fraction — HII_FRAC of hot knots glow
+hydrogen-alpha pink instead of OB blue-white, the emission-nebula
+beads real spiral arms are strung with (Orion, Eta Carinae, M8/20).
+
+### `BAR_X`
+
+Galactic bar — the Milky Way is a barred spiral: bulge points
+stretch ×BAR_X along a seeded in-plane axis (each galaxy's tilt is
+derived by a golden-fraction hash of its seed — no extra RNG
+stream, so worker/local parity is preserved).
+
+### `LANE_MIX`
+
+On-lane blue shift — points near an arm's spine (small scatter
+draw) blend toward this blue-white tint, the young disc population
+real spirals show along their arms; scattered inter-arm points keep
+the warm ramp. LANE_SCATTER_INV normalizes the three-die scatter
+draw (range ±1.5) to a 0–1 lane distance.
+
+### `LUM_JITTER`
+
+Per-point luminance grain — ±LUM_JITTER brightness scatter (drawn
+from a triangular distribution so most points sit near the mean)
+keeps arm lanes granular like resolved stellar populations rather
+than a painted uniform stripe.
+
+### `DISC_SPREAD`
+
+Disc overshoot + rim dissolve — arm points spread to
+radius×DISC_SPREAD while brightness rolls to zero from
+EDGE_FADE_START outward, so the disc edge vaporizes into
+intergalactic dark instead of cutting a hard ring.
+
+### `ARM_JITTER`
+
+Arm angular jitter (rad) on photo-fallback spiral fills.
+
+### `ARM_JITTER_CORE`
+
+Organic arm scatter — real spiral arms hold together at the core and
+dissolve into flocculent wisps at the rim. The per-point jitter is
+scaled from CORE×jitter at r=0 to RIM×jitter at r=radius, and
+ARM_SPUR_FRAC of disc points drop into the inter-arm gaps with an
+extra ARM_SPUR_JITTER spread — the branching feather lanes between
+main arms that keep the pattern fibrous instead of geometric.
+
+### `BULGE`
+
+Fraction of points inside the central bulge (rest go to the arms).
+
+### `CORE_PHOTO`
+
+Core-glow sprite opacity over the photographic disc (whisper bloom).
+
+### `CORE_GLOW`
+
+Core-glow sprite opacity on the procedural fallback disc.
+
+### `CORE_R`
+
+Per-point color ramp — hot amber bulge → dusty pale-violet rim,
+matching the real Milky Way's warm dust lane palette (pure blue
+edges read as a grey fog from inside the disc).
+
+### `HALO_RADIUS`
+
+Stellar-halo radius (× disc radius) for `spiralDisc.halo` layers.
+
+### `HALO_DIM`
+
+Halo brightness floor — real stellar halos are ~1% of the disc's
+light; undimmed points render as a giant fuzzy ball that washes
+out the arms. Multiplies every halo vertex's color.
+
+### `ELLIPSE_RADIAL`
+
+Elliptical-dwarf distribution — radial profile length (× radius),
+vertical squash, and the core→rim brightness ramp.
+
+### `ELLIPSE_EDGE`
+
+Rim fade start — fraction of the filled volume's outer extent where
+per-point brightness begins its smooth roll-off to zero. Without it
+the density cutoff reads as a hard ball boundary instead of a haze
+that dissolves into the sky.
+
+### `SUN_BUBBLE`
+
+Heliocentric exclusion bubble (chart units) carved out of a
+`spiralDisc.bubble` galaxy's particle fill around the solar system —
+keeps random disc stars from overlapping the Sun/planet meshes while
+staying far smaller than the ~267-unit galactocentric gap, so the
+Sun still reads as embedded in the disc. Sized past the shrunken
+Kuiper edge (~30 units under SOLAR_SCALE) with margin.
+
+### `BUBBLE_KEEP`
+
+Local-bubble sparsity — the carved neighborhood isn't truly empty
+(the real Local Bubble is underdense, not hollow): BUBBLE_KEEP of
+in-bubble points stay at BUBBLE_DIM brightness, so the solar
+region shows a sparse faint scatter instead of a scrubbed hole.
+
+### `SEED_STEP`
+
+Per-point Fibonacci hash step — the Knuth multiplicative constant
+2³²/φ scatters sequential point indices across the seed space so
+each vertex owns an independent deterministic LCG stream. That makes
+every buffer fill partitionable by index range — the same job runs
+chunked across the multi-worker WASM pool on several threads and
+bit-identically in the main-thread fallback.

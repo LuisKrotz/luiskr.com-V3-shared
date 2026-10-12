@@ -2,9 +2,9 @@
 
 Shared types for the star-field engine — the static body
 
-| | |
-|---|---|
-| **Source** | `src/experiments/star-field/engine/types.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments/star-field/engine/types.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -98,6 +98,19 @@ SF_COLORS hex for procedural material/emissive tint.
 
 ### (module scope)
 
+Limb tint override (SF_COLORS hex) — the fresnel mixes toward this
+at the silhouette instead of the default hot `STAR_RIM`. A darker
+rim produces limb darkening on resolved star discs (the Sun):
+we see deeper hotter layers at centre, cooler gas at the limb.
+
+### (module scope)
+
+Corona activity scale (1 = quiet star) — stretches prominences,
+adds eruption plumes and sunspots, and enlarges the corona sprite.
+The Sun runs above 1 so its surface reads as an active photosphere.
+
+### (module scope)
+
 Secondary texture for translucent shells (Venus atmosphere, Saturn ring).
 
 ### (module scope)
@@ -115,6 +128,12 @@ Grayscale elevation map — bumpMap gives terrain real depth relief.
 ### (module scope)
 
 Night-lights emissive map — glows only where the map is lit.
+
+### (module scope)
+
+Atmosphere rim shell (0 = off) — a fresnel-limb translucent sphere
+just past the surface whose tint migrates day→dusk→night with the
+sun direction (Earth); the value scales the shell's opacity.
 
 ### (module scope)
 
@@ -138,6 +157,10 @@ for dwarf-spheroidal members that have no spiral structure.
 ### (module scope)
 
 Disc-thickness multiplier on `SF_SPIRAL.THIN`.
+
+### (module scope)
+
+Arm angular jitter (rad) — overrides `SF_SPIRAL.ARM_JITTER`.
 
 ### (module scope)
 
@@ -196,7 +219,7 @@ orbit this body's mesh; purely visual, no dossier of their own.
 ### (module scope)
 
 Same conic rule as `SFBodyDef.ecc` — radial distance modulates
- around the circular pivot sweep.
+around the circular pivot sweep.
 
 ### (module scope)
 
@@ -301,6 +324,24 @@ Persistent canvas the host owns (replaced on renderer retry).
 
 three.js WebGPURenderer (WebGPU or forced-WebGL backend).
 
+### `world`
+
+Floating-origin world root — every catalog body, cloud and rider
+parents under this group instead of the scene directly. The follow
+step counter-translates it so the followed anchor sits at the world
+origin: rider-mounted bodies translate up to ~16k units/s on the
+galactic ring, which would otherwise push all coordinates to ~6.7M
+where float32 quantization (±0.5 units) visibly jitters every mesh.
+Skybox and lights stay on the scene at the origin — the pin point —
+so they always enclose/light whatever the camera follows.
+
+### `sunLight`
+
+Sun stand-in point light — created in the scene at the origin (the
+pin point), then re-parented onto the Sun anchor once bodies build
+so it keeps illuminating from the Sun's real position whichever
+body the floating origin currently pins.
+
 ### `nodes`
 
 id → runtime body node record.
@@ -312,6 +353,15 @@ id → center Object3D the camera targets (equals mesh for most).
 ### `pickables`
 
 Pickable meshes for raycasting.
+
+### `dayNight`
+
+Day/night shader registry — bodies with sun-direction-dependent
+shading (night-lights emissive gating, atmosphere rim shells).
+Each frame `updateDayNight` writes `dir = normalize(sunPos −
+bodyPos)` into the shared vector the material's TSL uniform wraps,
+so lights stay dark on the lit hemisphere and the rim migrates
+with the terminator.
 
 ### `approached`
 
@@ -371,9 +421,28 @@ Elapsed scene time (seconds) — drives orbits/spins.
 
 Camera hover state — last picked body id for the HUD.
 
+### `hint`
+
+Navigator-hover position hint — while the pointer (or focus) rests
+on a catalog row the engine reports the body's projected screen
+position every tick, edge-clamped so the hint works at any zoom
+level. Plain data, resolved per tick in `trackHover`: catalog ids
+carry their `anchor` (live world position) and registry rows carry
+their shard `rec` (resolved via `registryWorldPos` in the pinned
+frame). Null when no nav row is hovered; takes precedence over
+`hoverId` (the pointer is on the drawer, not the canvas).
+
 ### `selectedId`
 
 Selected body id (panel open).
+
+### `followId`
+
+Camera-follow anchor — which catalog id the camera rides with when
+no fly tween runs. Selections set it to the picked body; the solar
+overview sets it to the Sun so the chart holds the solar system
+while it orbits inside the galactic disc — without marking a
+dossier selection. Null = free camera.
 
 ### (module scope)
 
@@ -383,7 +452,10 @@ Lifecycle callbacks from the host.
 
 Per-frame hover tracking — fires every tick while a body is hovered
 with its projected canvas-space pixel position, so the tooltip and
-its leader line follow orbiting bodies without DOM thrash.
+its leader line follow orbiting bodies without DOM thrash. `edge`
+marks the projected point as clamped to the canvas edge (object
+off-screen or behind) and `angle` carries the outward direction in
+degrees for the leader-line arrow.
 
 ### (module scope)
 
@@ -404,6 +476,22 @@ The pickable mesh/sprite — carries `userData.bodyId`.
 ### `spinner`
 
 Spin target (mesh or its inner group) for self-rotation.
+
+### (module scope)
+
+Inertial axis lock — a group between the orbit pivot and the mesh
+carrying `rotation.z = tilt` and counter-rotated on Y each frame.
+Without it the pivot's orbital Y-rotation precesses the spin axis
+with the body's position (perpetual solstice); the lock keeps the
+axis fixed in the parent frame so the terminator sweeps the
+hemispheres over the orbit — real seasons. Only set on directly
+orbiting tilted bodies.
+
+### (module scope)
+
+Differential-rotation subgroup — a volumetric galaxy's inner-disc
+Points cloud; tickFrame spins it at ROTOR_DIFF× the whole-disc rate
+so the core laps the rim the way real rotation curves do.
 
 ### `satPivots`
 
@@ -441,17 +529,24 @@ Start time (performance.now snapshot).
 
 Camera position at tween start.
 
-### `toPos`
+### `offset`
 
-Camera destination.
+Approach offset — destination sits this vector away from the body.
 
 ### `fromTgt`
 
 Controls target at tween start.
 
-### `toTgt`
+### `track`
 
-Controls target destination (body center).
+Live body-position getter — rider-mounted anchors keep moving while
+the tween runs, so the destination is re-resolved every frame; a
+static snapshot would land the camera where the body was at arm
+time. Returns null when the anchor is gone (dest frozen at last).
+
+### `last`
+
+Last resolved body position — destination anchor when track yields null.
 
 ### (module scope)
 

@@ -2,9 +2,9 @@
 
 localStorage/sessionStorage key tokens split by scope —
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/data/storage.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/data/storage.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -35,3 +35,19 @@ getRedirectResult rejects after the redirect leg, so the login view
 can show the real Firebase code (auth/unauthorized-domain,
 auth/network-request-failed, …) instead of only guessing "browser
 blocked storage".
+
+### `CMS_AUTH_POPUP_ERROR`
+
+CMS popup-leg error code (session-scoped) — the real Firebase code
+that made signInWithPopup fail and triggered the redirect fallback
+(e.g. auth/web-storage-unsupported). Persisted across the redirect
+navigation so the login view can name the ORIGINAL failure instead
+of only the synthetic no-redirect-event inference.
+
+### `CMS_AUTH_POPUP_DETAIL`
+
+CMS popup-leg error detail (session-scoped) — the full error message
+that accompanied CMS_AUTH_POPUP_ERROR. Firebase wraps backend
+rejections inside auth/internal-error (e.g. the 401 "Firebase App
+Check token is invalid" from createAuthUri), so the message carries
+the real cause that the bare code hides.

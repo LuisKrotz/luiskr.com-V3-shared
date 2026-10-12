@@ -1,0 +1,264 @@
+# `core/tokens/starfield/params/bodies.ts`
+
+Per-body feature tuning — the Sgr A* black-hole composite
+
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/starfield/params/bodies.ts`              |
+| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+
+## Members
+
+### `PHOTON_RING`
+
+Photon-sphere ring radius (× radius) — the bright thin ring.
+
+### `DISC_INNER`
+
+Accretion disc inner/outer radii (× radius).
+
+### `SWIRL_COUNT`
+
+Orbiting plasma particles inside the disc and their point size.
+
+### `JET_LEN`
+
+Bipolar jet: half-length and base radius (× radius).
+
+### `JET_TIP`
+
+Jet tip radius (× radius) — keeps the beam collimated.
+
+### `JET_OPACITY`
+
+Jet opacity — a whisper, not a lightsaber. Sgr A*'s outflow is
+radio-faint optically; at chart scale the beams only hint the disc
+poles. Vertex fade multiplies it to nothing by mid-beam.
+
+### `GLOW_SCALE`
+
+Warm glow sprite behind the hole (× radius) and its opacity — kept
+tight so the additive stack (disc + photon + jets + glow) doesn't
+wash the whole frame to cream at fly-in distance.
+
+### `PHOTON_TUBE`
+
+Photon-ring torus tube thickness (× radius) and opacity.
+
+### `DISC_OPACITY`
+
+Smooth accretion annulus opacity under the particle swirl.
+
+### `DISC_SEGMENTS`
+
+Ring tessellation of the accretion annulus mesh.
+
+### `DISC_LANE_FLOOR`
+
+Dust-lane math (disc node shader) — two detuned ring harmonics
+multiply into irregular dark absorption bands. `LANE_FLOOR` keeps
+the lanes translucent instead of cutting solid black; `LANE_AMP`
+is the modulation depth around it.
+
+### `DISC_LANE_ANG_A`
+
+Lane harmonic frequencies — angular/radial for wave A and B.
+
+### `DISC_CORE_EXP`
+
+Radial heat exponent — ISCO edge blinding, rim fading to dust.
+
+### `DISC_A_FLOOR`
+
+Alpha envelope — floor keeps the outer dust faintly lit.
+
+### `SWIRL_PUFF`
+
+Swirl vertical puff (× radius) and inner-thickness bias.
+
+### `SWIRL_CORE_R`
+
+Swirl vertex ramp — near-white at the ISCO edge dimming to amber at
+the rim, which is what produces the glowing-ring silhouette.
+
+### `SF_BELT`
+
+Small-body belts (asteroid + Kuiper) — the seeded Points annulus each
+`kind: belt` catalog entry renders. Radii live on the def itself
+(belt.inner/belt.outer); these tokens own particle size, opacity and
+the default vertical half-thickness fraction.
+
+### `PX`
+
+Particle sprite size in px — small enough to read as rubble.
+
+### `OPACITY`
+
+Overall belt opacity — translucent so orbits read through it.
+
+### `PUFF`
+
+Default vertical half-thickness as a fraction of the annulus width
+when the def omits `belt.puff` — real belts are thin but not flat.
+
+### `ALBEDO_JITTER`
+
+Per-particle brightness variation — vertex colors jitter ±this so
+the annulus reads as mixed albedos (dark C-types vs bright S-types)
+rather than a uniform dotted ring.
+
+### `GAP_FREQ`
+
+Kirkwood-style gap frequency for the asteroid belt — the density
+modulation `sin(r·GAP_FREQ)` carves resonance lanes; the Kuiper belt
+passes a def-level 0 to keep its smooth classical disc.
+
+### `GAP_DEPTH`
+
+Gap depth — fraction of particles rejected inside a lane (0–1).
+
+### `SF_LOD`
+
+Detail level-of-detail — secondary geometry (atmosphere shells, ring
+discs, satellite companions) renders only while the
+camera is within `PAD + size * SCALE` of the body's anchor, so distant
+bodies draw as a single primitive like a streaming game world.
+
+### `DEEP_REVEAL`
+
+Deep-tier reveal — while the camera sits inside the local bubble
+(this many chart units from the solar barycenter) black holes,
+external galaxies, dwarf galaxies and hierarchy shells do not draw
+at all: from the Sun's neighborhood the galactic centre is a radio
+point source, not a resolvable object. The volumetric Milky Way disc
+is exempt — it is the sky band the camera is embedded in. The value
+sits just past the neighborhood band edge (300 + 300) so one zoom
+tier out of home reveals the galactic hierarchy.
+
+### `SF_DETAIL`
+
+Photographic-surface tuning — the real-imagery rendering layer for
+planets and deep-sky objects. Photo masks feather a source image's
+rectangular edge into transparency so NASA/ESA stills composite into
+the black scene; `MASK_PX` caps the composite canvas (source images
+run 1–6k px but are viewed at tens of screen px). Ring UVs are
+remapped radially (`RING_V` samples the strip's center row) because
+RingGeometry ships planar UVs but the Saturn strip is radius-indexed.
+`HALO_SCALE` sizes the additive star-glow sprite against the body's
+drawn radius; `CLOUD_*`/`EMISSIVE_*` tune Earth's layered maps.
+
+### `MASK_PX`
+
+Composite canvas edge cap (px) for masked photo textures.
+
+### `MASK_INNER`
+
+Radial feather — the alpha ramp starts at this fraction of the
+half-extent and reaches zero at the corner, so the photo's square
+frame dissolves into space instead of showing a hard border. Under
+additive blending the mask is the ONLY edge control, so the inner
+two-fifths stays full-strength and the outer ~62% of every still is
+pure melt — galaxies and nebulae dissolve into the star field with
+no detectable rim.
+
+### `MASK_LOBE_DIST`
+
+Nebula lobe-mask scatter — distance band, lobe radius band, and the
+per-lobe alpha range (base + jitter).
+
+### `RING_V`
+
+V coordinate sampling the ring strip's center row (radius = U).
+
+### `RING_INNER`
+
+Saturn ring radii as body-radius multiples (matches ring texture).
+
+### `HALO_SCALE`
+
+Additive halo sprite diameter as a multiple of the star's radius —
+the eased tail (see `_HALO_T*` in procedural.ts) makes the outer
+third invisible, so 3.6 keeps the glow hugging the limb without
+ballooning into the bounded-ball look a wide linear ramp gives.
+
+### `CORONA_SCALE`
+
+Corona sprite diameter as a multiple of the star's radius — the
+prominence layer hugs the limb (the wide atmospheric glow belongs
+to the halo sprite), so it stays well under HALO_SCALE.
+
+### `HALO_OPACITY`
+
+Halo sprite opacity — kept under 1 so the limb stays crisp.
+
+### `POINT_RADIUS`
+
+Galactic-star photosphere clamp (world units) — at honest chart
+distances every star beyond the solar tier is an unresolvable point
+of light: 0.003 u subtends under a degree even at the nearest fly-to
+standoff, so no marker can render as a planet-like ball adjacent to
+another body. The authored `def.radius` still sizes the luminosity
+halo, the pick proxy and the fly-to standoff — only the sphere,
+its corona and its satellites shrink to the point.
+
+### `STAR_RIM_FALLOFF`
+
+Fresnel exponent on the luminous-sphere shader — how tightly the rim
+hugs the limb. ~2.2 keeps a bright core with a hot narrow bloom;
+satellites use the looser value so their small discs stay soft.
+
+### `CLOUD_SCALE`
+
+Earth's cloud shell rides this multiple above the surface sphere.
+
+### `EMISSIVE_INT`
+
+City-lights emissive on the night side — the map is black except
+lit land, so a moderate intensity glows only where the texture is.
+
+### `NIGHT_LO`
+
+Night-lights dusk band — `dot(worldNormal, sunDir)` smoothstep
+edges gating the emissive node: fully dark below NIGHT_LO, fully
+lit above NIGHT_HI, so city lights fade in through twilight and
+never glow on the lit hemisphere.
+
+### `ATMO_SCALE`
+
+Earth atmosphere rim shell — `ATMO_SCALE` lifts the fresnel shell
+just past the cloud deck, `ATMO_POW` tightens the limb falloff,
+`ATMO_ALPHA` the base opacity. `DAY_*`/`DUSK_*` are the
+`dot(worldNormal, sunDir)` smoothstep edges driving the day/dusk/
+night tint migration across the terminator.
+
+### `BUMP_SCALE`
+
+Terrain bump depth — the elevation map's grayscale gradient offsets
+the shading normal; at globe scale only a whisper of relief reads
+correctly (full-scale units would spike the limb into noise).
+
+### `SPARKLE_FRAC`
+
+Fraction of the galaxy particle budget kept for sparkle points.
+
+### `SPARKLE_PX`
+
+Sparkle point size (px) — slightly fatter than the dust field so
+foreground stars sparkle against the photo disc.
+
+### `PICK_MIN`
+
+Minimum pickable radius (world units) — a body sphere smaller than
+this subtends only a few pixels at the home camera, so an invisible
+proxy bubble rides inside its mesh for raycasts.
+
+### `PICK_PROXY`
+
+Pick-proxy radius multiplier — the invisible raycast sphere is
+PICK_PROXY × the body's true radius (never a fixed size), so honest
+stellar-scale bodies stay tappable without a fake giant bubble that
+would swallow neighbours at their real distances.
+
+### `GALAXY_DISC`
+
+Photo-disc diameter as a multiple of the catalog radius.
