@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 /**
  * @file gen-docs.mjs
- * @description Generates docs/api/*.md from the JSDoc in src/. For every
- * source file it extracts the @file/@description header plus each documented
- * member (class, method, function) and writes one markdown page per file,
- * grouped by directory, with an index page that includes an ASCII schematic
- * of how the code areas map onto UX surfaces.
+ * @description Generates docs/api/*.md from the JSDoc across the workspace —
+ * the app shell, every module's source, the experiments, the shared build
+ * and scripting tooling, the vendored local-modules and the desktop shell.
+ * For every source file (.ts/.tsx/.js/.mjs) it extracts the @file/@description
+ * header plus each documented member (class, method, function) and writes one
+ * markdown page per file, grouped by directory, with an index page that
+ * includes an ASCII schematic of how the code areas map onto UX surfaces.
  *
  * Usage: node scripts/docs/gen-docs.mjs
  * Output: docs/api/<area>/<file>.md + docs/api/README.md
@@ -19,11 +21,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 // gen-docs.mjs sits at shared/scripts/docs/ → ROOT is three levels up.
 const SRC_DIRS = [
   'shared/src',
+  'shared/build',
+  'shared/scripts',
   'core',
   'website',
   'cms',
   'experiments',
   'shared/local-modules',
+  'desktop',
 ].map((d) => join(ROOT, d))
 
 // `--out <dir>` overrides the destination (build emits docs/jsdocs; the
@@ -31,12 +36,12 @@ const SRC_DIRS = [
 const outArg = process.argv.indexOf('--out')
 const OUT = join(ROOT, outArg > -1 ? process.argv[outArg + 1] : 'shared/docs/api')
 
-/** Recursively collects .ts/.tsx/.js sources under dir (skipping .d.ts). */
+/** Recursively collects .ts/.tsx/.js/.mjs sources under dir (skipping .d.ts). */
 const walk = (dir) =>
   readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
     e.isDirectory()
       ? walk(join(dir, e.name))
-      : /\.(ts|tsx|js)$/.test(e.name) && !e.name.endsWith('.d.ts')
+      : /\.(ts|tsx|js|mjs)$/.test(e.name) && !e.name.endsWith('.d.ts')
         ? [join(dir, e.name)]
         : []
   )
@@ -140,6 +145,18 @@ const AREA_META = {
   },
   'cms/projects': { title: 'CMS / projects editor', ux: 'Per-project sections editor card.' },
   'cms/dev': { title: 'CMS / dev', ux: 'Offline dev mock — never shipped.' },
+  'shared/build': {
+    title: 'Shared / build plugins',
+    ux: 'Vite machinery every module build consumes — never shipped to a browser.',
+  },
+  'shared/scripts': {
+    title: 'Shared / tooling scripts',
+    ux: 'The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold.',
+  },
+  desktop: {
+    title: 'Desktop shell',
+    ux: 'Electron main/launcher/preload — wraps dist/ as an installable app.',
+  },
 }
 
 /** Longest-prefix AREA_META lookup so deeper module dirs inherit their parent's UX note. */
@@ -187,7 +204,7 @@ for (const [dir, entries] of areas) {
   mkdirSync(areaDir, { recursive: true })
 
   for (const { rel, header, members } of entries) {
-    const page = basename(rel).replace(/\.(ts|tsx|js)$/, '') + '.md'
+    const page = basename(rel).replace(/\.(ts|tsx|js|mjs)$/, '') + '.md'
     const lines = []
 
     lines.push(`# \`${rel}\``)
@@ -262,7 +279,7 @@ for (const [dir, entries] of areas) {
   idx.push('| File | What it does |')
   idx.push('|---|---|')
   for (const { rel, header } of entries) {
-    const page = `${dir ? `${dir}/` : ''}${basename(rel).replace(/\.(ts|tsx|js)$/, '')}.md`
+    const page = `${dir ? `${dir}/` : ''}${basename(rel).replace(/\.(ts|tsx|js|mjs)$/, '')}.md`
     idx.push(`| [\`${basename(rel)}\`](${page}) | ${esc(short(header?.desc || '—'))} |`)
   }
   idx.push('')

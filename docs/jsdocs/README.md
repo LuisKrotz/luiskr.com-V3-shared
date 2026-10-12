@@ -74,12 +74,13 @@ _Footer + legal links editor card._
 
 _Admin bundle — editors for every database node._
 
-| File                                   | What it does                                                   |
-| -------------------------------------- | -------------------------------------------------------------- |
-| [`index.ts`](cms/index.md)             | Barrel for the `cms` module — the admin bundle's public        |
-| [`main.ts`](cms/main.md)               | CMS bundle entry — completely separate from the public site    |
-| [`tokens.ts`](cms/tokens.md)           | CMS-restricted tokens, tags, classes, and actions.             |
-| [`vite.config.js`](cms/vite.config.md) | Library build for the `cms` module — admin editors, routes and |
+| File                                    | What it does                                                   |
+| --------------------------------------- | -------------------------------------------------------------- |
+| [`index.ts`](cms/index.md)              | Barrel for the `cms` module — the admin bundle's public        |
+| [`jest.config.mjs`](cms/jest.config.md) | —                                                              |
+| [`main.ts`](cms/main.md)                | CMS bundle entry — completely separate from the public site    |
+| [`tokens.ts`](cms/tokens.md)            | CMS-restricted tokens, tags, classes, and actions.             |
+| [`vite.config.js`](cms/vite.config.md)  | Library build for the `cms` module — admin editors, routes and |
 
 ## CMS / lang editor
 
@@ -331,6 +332,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`firebase.ts`](core/firebase.md)                   | Firebase client bootstrap — split between the site (read-only)           |
 | [`i18n.ts`](core/i18n.md)                           | Locale registry and URL-slug tables.                                     |
 | [`index.ts`](core/index.md)                         | Unified barrel export for the core layer                                 |
+| [`jest.config.mjs`](core/jest.config.md)            | —                                                                        |
 | [`jsx.ts`](core/jsx.md)                             | Zero-dependency native DOM JSX pragma.                                   |
 | [`predictive-loader.ts`](core/predictive-loader.md) | Intent-based predictive prefetching engine.                              |
 | [`store.ts`](core/store.md)                         | Framework-free reactive state container (tiny pub/sub).                  |
@@ -1371,6 +1373,16 @@ _Shared primitives every surface builds on — no direct UI._
 | [`wasm-pool.ts`](core/utils/wasm/wasm-pool.md)                   | Round-robin dispatcher over a lazily-spawned pool of                      |
 | [`wasm-scroll.ts`](core/utils/wasm/wasm-scroll.md)               | rAF-driven smooth scroller: animates window (or a container)              |
 
+## Desktop shell
+
+_Electron main/launcher/preload — wraps dist/ as an installable app._
+
+| File                                            | What it does                                         |
+| ----------------------------------------------- | ---------------------------------------------------- |
+| [`launcher-main.mjs`](desktop/launcher-main.md) | Electron launcher window for setup/run/verify/build. |
+| [`main.mjs`](desktop/main.md)                   | —                                                    |
+| [`preload.mjs`](desktop/preload.md)             | —                                                    |
+
 ## Entry points
 
 _Boot surfaces: what the user sees first on each bundle._
@@ -1385,6 +1397,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`folder-svg.tsx`](experiments/docs/folder-svg.md)    | Deterministic animated folder glyphs for the docs grid.         |
 | [`gl-strip.ts`](experiments/docs/gl-strip.md)         | WebGL thread-field backdrop for the docs navigation region.     |
 | [`index.ts`](experiments/docs/index.md)               | Barrel for the `docs` experiment module — the in-app            |
+| [`jest.config.mjs`](experiments/docs/jest.config.md)  | —                                                               |
 | [`loader.ts`](experiments/docs/loader.md)             | Boot-loader lifecycle for &lt;view-docs&gt; — mirrors the space |
 | [`manifest.ts`](experiments/docs/manifest.md)         | Build-time docs manifest access + path resolution.              |
 | [`mermaid.ts`](experiments/docs/mermaid.md)           | Mermaid diagram rendering for docs payloads — markdown          |
@@ -1581,6 +1594,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`dev.ts`](experiments/earth-playground/dev.md)                           | Standalone dev entry for the earth-playground experiment —        |
 | [`earth-background.ts`](experiments/earth-playground/earth-background.md) | Three.js WebGPU Earth background engine.                          |
 | [`index.ts`](experiments/earth-playground/index.md)                       | Barrel for the `earth-playground` experiment module — the         |
+| [`jest.config.mjs`](experiments/earth-playground/jest.config.md)          | —                                                                 |
 | [`vite.config.js`](experiments/earth-playground/vite.config.md)           | Library build for the `earth-playground` experiment — the         |
 
 ## Entry points
@@ -1720,6 +1734,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`StarField.tsx`](experiments/star-field/StarField.md)              | &lt;view-star-field&gt; — the star-field experiment route: a |
 | [`dev.ts`](experiments/star-field/dev.md)                           | Standalone dev entry for the star-field experiment —         |
 | [`index.ts`](experiments/star-field/index.md)                       | Barrel for the `star-field` experiment module — the          |
+| [`jest.config.mjs`](experiments/star-field/jest.config.md)          | —                                                            |
 | [`starfield-engine.ts`](experiments/star-field/starfield-engine.md) | Facade for the star-field three.js engine — owns the SFState |
 | [`vite.config.js`](experiments/star-field/vite.config.md)           | Library build for the `star-field` experiment                |
 
@@ -1923,6 +1938,29 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`star-render.test.js`](experiments/star-field/tests/starfield/star-render.test.md)                   | renderStarField branch coverage — loader shown/hidden, CSS    |
 | [`starfield-engine.test.js`](experiments/star-field/tests/starfield/starfield-engine.test.md)         | StarFieldEngine facade — init() always resolves (success,     |
 
+## Shared / build plugins
+
+_Vite machinery every module build consumes — never shipped to a browser._
+
+| File                                                 | What it does                                                  |
+| ---------------------------------------------------- | ------------------------------------------------------------- |
+| [`docs-portal.mjs`](shared/build/docs-portal.md)     | Docs portal pipeline plugin — `virtual:docs-manifest` carries |
+| [`es-targets.mjs`](shared/build/es-targets.md)       | The multi-engine build matrix: every ES tier the site ships,  |
+| [`i18n-virtual.mjs`](shared/build/i18n-virtual.md)   | —                                                             |
+| [`jsx-in-js.mjs`](shared/build/jsx-in-js.md)         | —                                                             |
+| [`module-public.mjs`](shared/build/module-public.md) | Multi-source public-asset merge for the modular workspace.    |
+| [`vite-lib.mjs`](shared/build/vite-lib.md)           | Shared factory for the per-module Vite library builds         |
+
+## Shared / build plugins
+
+_Vite machinery every module build consumes — never shipped to a browser._
+
+| File                                        | What it does                                          |
+| ------------------------------------------- | ----------------------------------------------------- |
+| [`redact.mjs`](shared/build/docs/redact.md) | Secret scrubbing for the public source-code viewer.   |
+| [`render.mjs`](shared/build/docs/render.md) | Build-time file → HTML renderers for the docs portal. |
+| [`scan.mjs`](shared/build/docs/scan.md)     | Filesystem → manifest tree for the docs portal.       |
+
 ## Entry points
 
 _Boot surfaces: what the user sees first on each bundle._
@@ -1983,6 +2021,95 @@ _Boot surfaces: what the user sees first on each bundle._
 | File                                                                      | What it does |
 | ------------------------------------------------------------------------- | ------------ |
 | [`sprintf.test.js`](shared/local-modules/sprintf-js/test/sprintf.test.md) | —            |
+
+## Shared / tooling scripts
+
+_The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
+
+| File                                                                   | What it does                                                     |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [`browser-loader.js`](shared/scripts/build/browser-loader.md)          | Runtime bundle dispatcher, inlined into dist/index.html by       |
+| [`build-locale-pages.mjs`](shared/scripts/build/build-locale-pages.md) | Emits per-locale, per-route static index.html files into         |
+| [`build-targets.mjs`](shared/scripts/build/build-targets.md)           | Multi-target build orchestrator.                                 |
+| [`build-wasm.js`](shared/scripts/build/build-wasm.md)                  | —                                                                |
+| [`build.mjs`](shared/scripts/build/build.md)                           | Production build orchestrator                                    |
+| [`deploy-info.mjs`](shared/scripts/build/deploy-info.md)               | Assembles `dist/deploy-info/` — the "last deploy" bundle the CMS |
+| [`generate-sitemap.js`](shared/scripts/build/generate-sitemap.md)      | —                                                                |
+
+## Shared / tooling scripts
+
+_The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
+
+| File                                                      | What it does                                                  |
+| --------------------------------------------------------- | ------------------------------------------------------------- |
+| [`gen-docs.mjs`](shared/scripts/docs/gen-docs.md)         | Generates docs/api/*.md from the JSDoc across the workspace — |
+| [`sassdoc-lite.mjs`](shared/scripts/docs/sassdoc-lite.md) | Security-focused replacement for the unmaintained `sassdoc`   |
+| [`sassdoc-vars.mjs`](shared/scripts/docs/sassdoc-vars.md) | —                                                             |
+
+## Shared / tooling scripts
+
+_The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
+
+| File                                                                                                   | What it does                                                                    |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| [`ast-string-extract.js`](shared/scripts/i18n/ast-string-extract.md)                                   | AST-based static analysis tool to detect repeated non-syntactic string literals |
+| [`patch-earth-playground-translations.js`](shared/scripts/i18n/patch-earth-playground-translations.md) | —                                                                               |
+| [`seed-translations.js`](shared/scripts/i18n/seed-translations.md)                                     | —                                                                               |
+| [`upload-earth-playground-firebase.js`](shared/scripts/i18n/upload-earth-playground-firebase.md)       | —                                                                               |
+
+## Shared / tooling scripts
+
+_The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
+
+| File                                                   | What it does                                              |
+| ------------------------------------------------------ | --------------------------------------------------------- |
+| [`install-hooks.mjs`](shared/scripts/install-hooks.md) | —                                                         |
+| [`module.mjs`](shared/scripts/module.md)               | —                                                         |
+| [`modules.mjs`](shared/scripts/modules.md)             | Single source of truth for the workspace module registry. |
+| [`setup.mjs`](shared/scripts/setup.md)                 | —                                                         |
+
+## Shared / tooling scripts
+
+_The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
+
+| File                                                      | What it does |
+| --------------------------------------------------------- | ------------ |
+| [`index.js`](shared/scripts/media-convert/index.md)       | —            |
+| [`install.js`](shared/scripts/media-convert/install.md)   | —            |
+| [`pipeline.js`](shared/scripts/media-convert/pipeline.md) | —            |
+| [`zip.js`](shared/scripts/media-convert/zip.md)           | —            |
+
+## Shared / tooling scripts
+
+_The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
+
+| File                                                              | What it does                                                         |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [`new-experiment.mjs`](shared/scripts/scaffold/new-experiment.md) | Scaffolds a new experiment workspace under experiments/&lt;name&gt;/ |
+
+## Shared / tooling scripts
+
+_The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
+
+| File                                                          | What it does                                                 |
+| ------------------------------------------------------------- | ------------------------------------------------------------ |
+| [`merge-coverage.mjs`](shared/scripts/test/merge-coverage.md) | Unions the raw coverage maps each module's Jest run wrote to |
+| [`run-modules.mjs`](shared/scripts/test/run-modules.md)       | Runs the Jest suite of every module workspace SEQUENTIALLY — |
+
+## Shared / tooling scripts
+
+_The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
+
+| File                                                             | What it does                                               |
+| ---------------------------------------------------------------- | ---------------------------------------------------------- |
+| [`console-scan.mjs`](shared/scripts/verify/console-scan.md)      | Scans every .ts/.tsx/.js file under src/ for console usage |
+| [`coverage-gaps.mjs`](shared/scripts/verify/coverage-gaps.md)    | —                                                          |
+| [`coverage-gate.mjs`](shared/scripts/verify/coverage-gate.md)    | Per-file coverage enforcement, per module                  |
+| [`scope-gates.mjs`](shared/scripts/verify/scope-gates.md)        | Scoped quality-gate runner for the module workspace        |
+| [`security-scan.mjs`](shared/scripts/verify/security-scan.md)    | Dependency vulnerability scan                              |
+| [`test-lighthouse.js`](shared/scripts/verify/test-lighthouse.md) | Backward-compatible Lighthouse entry point                 |
+| [`uncov.mjs`](shared/scripts/verify/uncov.md)                    | —                                                          |
+| [`verify.mjs`](shared/scripts/verify/verify.md)                  | Single quality gate shared by `prebuild` and the git       |
 
 ## Entry points
 
@@ -2241,11 +2368,12 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                       | What it does                                                 |
-| ------------------------------------------ | ------------------------------------------------------------ |
-| [`dev.ts`](website/dev.md)                 | Standalone dev entry for the website module — `yarn dev` in  |
-| [`index.ts`](website/index.md)             | Barrel for the `website` module — the public site's routable |
-| [`vite.config.js`](website/vite.config.md) | Library build for the `website` module — the public site's   |
+| File                                        | What it does                                                 |
+| ------------------------------------------- | ------------------------------------------------------------ |
+| [`dev.ts`](website/dev.md)                  | Standalone dev entry for the website module — `yarn dev` in  |
+| [`index.ts`](website/index.md)              | Barrel for the `website` module — the public site's routable |
+| [`jest.config.mjs`](website/jest.config.md) | —                                                            |
+| [`vite.config.js`](website/vite.config.md)  | Library build for the `website` module — the public site's   |
 
 ## Entry points
 

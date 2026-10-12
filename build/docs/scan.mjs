@@ -23,12 +23,25 @@ import { shouldExcludeFile } from './redact.mjs'
 /**
  * Publishable roots — `root` is the manifest namespace (also the docs URL
  * prefix), `dir` the on-disk folder, `label` the display heading shown in
- * the portal grid, `kind` the behavior class.
+ * the portal grid, `kind` the behavior class. `skip` is an optional
+ * top-level-only dir-name list excluded from that root's scan — used to
+ * keep already-published subtrees and heavy asset payloads out of a
+ * sibling root.
  */
 export const DOC_ROOTS = Object.freeze([
   { root: 'docs', dir: 'shared/docs', label: 'Documentation', kind: 'docs' },
   { root: 'reports', dir: 'experiments/docs/reports', label: 'Quality Reports', kind: 'reports' },
   { root: 'src', dir: 'shared/src', label: 'App Shell Source', kind: 'source' },
+  {
+    root: 'shared',
+    dir: 'shared',
+    label: 'Shared Module',
+    kind: 'source',
+    // shared/docs and shared/local-modules are published under their own
+    // dedicated roots ('docs', 'local-modules') — scanning them again here
+    // would double ~3.5k payload emissions.
+    skip: ['docs', 'local-modules'],
+  },
   { root: 'core', dir: 'core', label: 'Core Module', kind: 'source' },
   { root: 'website', dir: 'website', label: 'Website Module', kind: 'source' },
   { root: 'cms', dir: 'cms', label: 'CMS Module', kind: 'source' },
@@ -38,7 +51,18 @@ export const DOC_ROOTS = Object.freeze([
     label: 'Earth Playground',
     kind: 'source',
   },
+  {
+    root: 'starfield',
+    dir: 'experiments/star-field',
+    label: 'Star Field',
+    kind: 'source',
+    // public/ carries ~500 data/asset payloads (per-locale dossier JSONs,
+    // packed registry shards, 8k textures, NASA media) — reachable through
+    // the app itself; the portal stays source-and-comments focused.
+    skip: ['public'],
+  },
   { root: 'docs-exp', dir: 'experiments/docs', label: 'Docs Module', kind: 'source' },
+  { root: 'desktop', dir: 'desktop', label: 'Desktop Shell', kind: 'source' },
   {
     root: 'local-modules',
     dir: 'shared/local-modules',
@@ -74,6 +98,12 @@ export const DOC_ROOTS = Object.freeze([
     root: 'coverage-docs',
     dir: 'experiments/docs/reports/coverage',
     label: 'Coverage — Docs',
+    kind: 'coverage',
+  },
+  {
+    root: 'coverage-starfield',
+    dir: 'experiments/star-field/reports/coverage',
+    label: 'Coverage — Star Field',
     kind: 'coverage',
   },
 ])
@@ -130,12 +160,17 @@ const formatOf = (name) => FORMAT_BY_EXT[path.extname(name).slice(1).toLowerCase
  * Recursively scans one directory into manifest nodes. Hidden entries and
  * SKIP_DIRS are dropped before descent; files are sorted dirs-first, then
  * alphabetically, matching the site-wide recursive-traversal convention.
- * @param {string} absDir   Absolute directory being walked.
- * @param {string} baseDir  Absolute root dir (for relative ids).
- * @param {string} root     Manifest namespace ('docs'|'reports'|…).
+ * A root's optional `skip` list applies at the top level only — a module
+ * folder can exclude its own already-published subtrees (shared/docs,
+ * shared/local-modules) or asset payloads (star-field/public) without
+ * filtering same-named folders deeper in the tree (shared/scripts/docs).
+ * @param {string}        absDir    Absolute directory being walked.
+ * @param {string}        baseDir   Absolute root dir (for relative ids).
+ * @param {string}        root      Manifest namespace ('docs'|'reports'|…).
+ * @param {Array<string>} [topSkip] Top-level-only dir names to exclude.
  * @returns {Array<object>} Child nodes (dirs and files, stable order).
  */
-const scanDir = (absDir, baseDir, root) => {
+const scanDir = (absDir, baseDir, root, topSkip) => {
   const entries = fs.readdirSync(absDir, { withFileTypes: true })
 
   const dirs = []
@@ -147,7 +182,7 @@ const scanDir = (absDir, baseDir, root) => {
     const abs = path.join(absDir, entry.name)
 
     if (entry.isDirectory()) {
-      if (SKIP_DIRS.has(entry.name)) continue
+      if (SKIP_DIRS.has(entry.name) || topSkip?.includes(entry.name)) continue
 
       const children = scanDir(abs, baseDir, root)
 
@@ -194,12 +229,12 @@ export const scanManifest = (repoRoot) => {
 
   let latest = 0
 
-  for (const { root, dir, label, kind } of DOC_ROOTS) {
+  for (const { root, dir, label, kind, skip } of DOC_ROOTS) {
     const absDir = path.join(repoRoot, dir)
 
     if (!fs.existsSync(absDir)) continue
 
-    const children = scanDir(absDir, absDir, root)
+    const children = scanDir(absDir, absDir, root, skip)
 
     if (!children.length) continue
 
@@ -239,6 +274,10 @@ export const resolveFileId = (repoRoot, id) => {
   if (rel.split('/').some((seg) => seg === '..' || seg === '' || seg.startsWith('.'))) {
     return null
   }
+
+  // Honor the root's top-level skip so a guessed id cannot reach a subtree
+  // the manifest intentionally left unpublished.
+  if (decl.skip?.includes(rel.split('/')[0])) return null
 
   const absDir = path.resolve(repoRoot, decl.dir)
 

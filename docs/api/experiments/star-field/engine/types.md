@@ -260,9 +260,13 @@ are universal abbreviations so the string needs no translation.
 
 ### (module scope)
 
-Companion satellites orbiting this body's mesh — decorative by
-default; an entry carrying `id`/`name` registers as a pickable
-dossier body (the ISS close to Earth).
+Companion bodies orbiting this body's mesh — the representation for
+a galactic star's planetary system (TRAPPIST-1 b–h, Epsilon Eridani
+b) and for crafted orbiters (the ISS). Entries render inside the
+host's LOD `detail` set so a system's planets only resolve once the
+camera is inside the approach distance; `ecc`/`phase` carry the
+real conic. An entry carrying `id`/`name` registers as a pickable
+dossier body like any catalog world.
 
 ### (module scope)
 
@@ -666,6 +670,15 @@ star like every other sun in the neighborhood. Solar stars only.
 ### (module scope)
 
 Invisible pick bubble kept live while `farGlow` shows.
+
+### (module scope)
+
+Galactic-star far glyph — the flat point-glow sprite a point star
+wears at chart distances. updateLod hides it while the node's
+near-field group (real photosphere sphere + annulus halo + corona +
+flares, parked on `detail`) resolves on approach, so the star reads
+as an unresolvable point from range and as its spectral class up
+close.
 
 ### (module scope)
 
