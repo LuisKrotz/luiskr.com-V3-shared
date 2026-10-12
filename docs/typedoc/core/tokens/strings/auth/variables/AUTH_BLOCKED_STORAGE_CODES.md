@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/strings/auth](../README.md) / AUTH\_BLOCKED\_STORAGE\_CODES
 
 ```ts
-const AUTH_BLOCKED_STORAGE_CODES: readonly string[];
+const AUTH_BLOCKED_STORAGE_CODES: readonly string[]
 ```
 
-Defined in: core/tokens/strings/auth.ts:35
+Defined in: core/tokens/strings/auth.ts:43
 
 Codes whose root cause is blocked third-party site data — the
 firebaseapp.com auth iframe can't store/read the OAuth event. The login

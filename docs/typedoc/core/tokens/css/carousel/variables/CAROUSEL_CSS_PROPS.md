@@ -1,14 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/css/carousel](../README.md) / CAROUSEL\_CSS\_PROPS
 
 ```ts
 const CAROUSEL_CSS_PROPS: Readonly<{
-  CAROUSEL_ITEM_HEIGHT: "--carousel-item-height";
-  RANGE_PCT: "--range-pct";
-}>;
+  CAROUSEL_ITEM_HEIGHT: '--carousel-item-height'
+  CAROUSEL_MEDIA_HEIGHT: '--carousel-media-height'
+  CAROUSEL_LANDSCAPE_MEDIA_HEIGHT: '--carousel-landscape-media-height'
+  CAROUSEL_LANDSCAPE_MEDIA_WIDTH: '--carousel-landscape-media-width'
+  RANGE_PCT: '--range-pct'
+}>
 ```
 
 Defined in: core/tokens/css/carousel.ts:12

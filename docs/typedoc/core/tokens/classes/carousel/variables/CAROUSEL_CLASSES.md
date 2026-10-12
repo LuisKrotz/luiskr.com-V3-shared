@@ -1,39 +1,47 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/classes/carousel](../README.md) / CAROUSEL\_CLASSES
 
 ```ts
 const CAROUSEL_CLASSES: Readonly<{
-  CAROUSEL: "carousel";
-  CAROUSEL_CONTAINER: "carousel-container";
-  CAROUSEL_TRACK: "carousel-track";
-  CAROUSEL_SLIDE: "carousel-slide";
-  CAROUSEL_SLIDE_ACTIVE: "carousel-slide--active";
-  CAROUSEL_PREV: "carousel-prev";
-  CAROUSEL_NEXT: "carousel-next";
-  CAROUSEL_DOTS: "carousel-dots";
-  CAROUSEL_DOT: "carousel-dot";
-  CAROUSEL_DOT_ACTIVE: "carousel-dot--active";
-  CAROUSEL_IN_VIEW: "carousel--in-view";
-  CAROUSEL_FALLBACK: "carousel-fallback";
-  CAROUSEL_FALLBACK_SIDE: "carousel-fallback carousel-fallback--side";
-  CAROUSEL_CONTROLS: "carousel-controls";
-  CAROUSEL_INDICATORS: "carousel-indicators";
-  CAROUSEL_COUNTER: "carousel-counter";
-  CAROUSEL_BTN: "carousel-btn";
-  CAROUSEL_BTN_PREV: "carousel-btn carousel-btn--prev";
-  CAROUSEL_BTN_NEXT: "carousel-btn carousel-btn--next";
-  CAROUSEL_BTN_RING: "carousel-btn-ring";
-  CAROUSEL_BTN_RING_TRACK: "carousel-btn-ring-track";
-  CAROUSEL_BTN_RING_FILL: "carousel-btn-ring-fill";
-  CAROUSEL_BTN_ARROW: "carousel-btn-arrow";
-  CAROUSEL_BTN_CANVAS: "carousel-btn-canvas";
-  CAROUSEL_SLIDE_CLONE: "carousel-slide carousel-slide--clone";
-  CAROUSEL_SLIDE_CLONE_LAST: "carousel-slide carousel-slide--clone carousel-slide--clone-last";
-  CAROUSEL_SLIDE_CLONE_FIRST: "carousel-slide carousel-slide--clone carousel-slide--clone-first";
-}>;
+  CAROUSEL: 'carousel'
+  CAROUSEL_CONTAINER: 'carousel-container'
+  CAROUSEL_TRACK: 'carousel-track'
+  CAROUSEL_SLIDE: 'carousel-slide'
+  CAROUSEL_SLIDE_ACTIVE: 'carousel-slide--active'
+  CAROUSEL_PREV: 'carousel-prev'
+  CAROUSEL_NEXT: 'carousel-next'
+  CAROUSEL_DOTS: 'carousel-dots'
+  CAROUSEL_DOT: 'carousel-dot'
+  CAROUSEL_DOT_ACTIVE: 'carousel-dot--active'
+  CAROUSEL_IN_VIEW: 'carousel--in-view'
+  CAROUSEL_FALLBACK: 'carousel-fallback'
+  CAROUSEL_FALLBACK_SIDE: 'carousel-fallback carousel-fallback--side'
+  CAROUSEL_CONTROLS: 'carousel-controls'
+  CAROUSEL_INDICATORS: 'carousel-indicators'
+  CAROUSEL_COUNTER: 'carousel-counter'
+  CAROUSEL_BTN: 'carousel-btn'
+  CAROUSEL_BTN_PREV: 'carousel-btn carousel-btn--prev'
+  CAROUSEL_BTN_NEXT: 'carousel-btn carousel-btn--next'
+  CAROUSEL_BTN_RING: 'carousel-btn-ring'
+  CAROUSEL_BTN_RING_TRACK: 'carousel-btn-ring-track'
+  CAROUSEL_BTN_RING_FILL: 'carousel-btn-ring-fill'
+  CAROUSEL_BTN_ARROW: 'carousel-btn-arrow'
+  CAROUSEL_BTN_CANVAS: 'carousel-btn-canvas'
+  CAROUSEL_SLIDE_CLONE: 'carousel-slide carousel-slide--clone'
+  CAROUSEL_SLIDE_CLONE_LAST: 'carousel-slide carousel-slide--clone carousel-slide--clone-last'
+  CAROUSEL_SLIDE_CLONE_FIRST: 'carousel-slide carousel-slide--clone carousel-slide--clone-first'
+  CAROUSEL_RATIO_16_9: 'carousel--ratio-16-9'
+  CAROUSEL_RATIO_21_9: 'carousel--ratio-21-9'
+  CAROUSEL_RATIO_32_9: 'carousel--ratio-32-9'
+  CAROUSEL_MIXED: 'carousel--mixed'
+  CAROUSEL_SLIDE_MIXED_LANDSCAPE: 'carousel-slide--mixed-landscape'
+  CAROUSEL_SLIDE_PATTERN: 'carousel-slide-pattern'
+  CAROUSEL_PATTERN_TOP: 'carousel-slide-pattern--top'
+  CAROUSEL_PATTERN_BOTTOM: 'carousel-slide-pattern--bottom'
+}>
 ```
 
 Defined in: core/tokens/classes/carousel.ts:21

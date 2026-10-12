@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/canvas/dom-font](../README.md) / syncCanvasFont
 
 ```ts
-function syncCanvasFont(ctx, st): void;
+function syncCanvasFont(ctx, st): void
 ```
 
-Defined in: core/utils/canvas/dom-font.ts:67
+Defined in: core/utils/canvas/dom-font.ts:114
 
 Configures a 2D context so `fillText`/`measureText` reproduce the DOM
 element's typography exactly: shorthand font (style/weight/size/family)

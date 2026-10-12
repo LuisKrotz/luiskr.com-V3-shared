@@ -117,6 +117,58 @@ passes a def-level 0 to keep its smooth classical disc.
 
 Gap depth — fraction of particles rejected inside a lane (0–1).
 
+### `SF_BELT_ROCK`
+
+Belt hero rocks — seeded irregular meshes riding each belt so the
+annulus reads as real varied debris (ice, metal, carbon, stone, dust;
+fragments through large bodies) instead of uniform glowing points.
+Sizes are fractions of the annulus width; every rock owns a Keplerian
+pivot (`speed ∝ 1/√r`) plus a tumble rate, both riding the shared
+satPivots update.
+
+### `COUNT`
+
+Hero rocks per belt — enough variety to read at fly-in distance.
+
+### `SIZE_MIN`
+
+Rock radius as a fraction of annulus width — fragments at MIN,
+regular bodies in the mid band, BIG_FRAC of rocks promoted to the
+large-body range (Ceres-class stand-ins, still far under planets).
+
+### `BIG_FRAC`
+
+Large-body fraction + their size ceiling (× annulus width).
+
+### `FRAGMENT_FRAC`
+
+Collision-fragment fraction — tetrahedral shards, smallest rocks.
+
+### `JITTER`
+
+Vertex jitter — per-axis displacement fraction (0–1) applied to
+every vertex, so each rock is a unique irregular potato/shard
+instead of a sphere or a repeated cookie-cutter lump.
+
+### `JITTER_FRAG`
+
+Fragments deform harder — broken shards, not rounded potatoes.
+
+### `CLASS_STONE`
+
+Material-class mix — probabilities must sum to 1: ordinary
+stony (chondrite) dominates, carbonaceous + dusty bodies next,
+then ice and nickel-iron.
+
+### (module scope)
+
+(remainder → metal)
+
+### `SPIN_MIN`
+
+Tumble rates in rad/s — fragments spin fastest (collision
+fragments do); asteroid rotations run minutes-to-hours.
+
 ### `SF_LOD`
 
 Detail level-of-detail — secondary geometry (atmosphere shells, ring
@@ -134,6 +186,16 @@ point source, not a resolvable object. The volumetric Milky Way disc
 is exempt — it is the sky band the camera is embedded in. The value
 sits just past the neighborhood band edge (300 + 300) so one zoom
 tier out of home reveals the galactic hierarchy.
+
+### `SOLAR_FAR`
+
+Solar-tier collapse — beyond this heliocentric camera distance the
+whole planetary diagram (±150 units to the Kuiper rim) subtends too
+little to resolve, so every solar body hides and the Sun swaps its
+photosphere for the same flat point glow the neighborhood stars
+wear: from Proxima's range (~1 060 units) the real solar system is
+a single bright star, never a resolved cluster. The threshold sits
+well clear of the belt so normal fly-throughs never trigger it.
 
 ### `SF_DETAIL`
 
@@ -262,3 +324,68 @@ would swallow neighbours at their real distances.
 ### `GALAXY_DISC`
 
 Photo-disc diameter as a multiple of the catalog radius.
+
+### `SF_SPIKE`
+
+Diffraction-spike starburst — the telescope-optics cross that rides
+bright stars. Spikes are soft elliptical gradients (never stroked
+lines), seeded-rotated per star so no two crosses align. Kept as its
+own bag since the sprite is a separate layer from halo + corona.
+
+### `SPIKE_SCALE`
+
+Spike sprite diameter as a multiple of the star's authored radius —
+like the halo it tracks luminosity, not the clamped point sphere,
+so catalog giants throw longer crosses than dwarfs. Sits a step
+beyond HALO_SCALE so the spike tips pierce the glow edge.
+
+### `SPIKE_OPACITY`
+
+Sprite opacity — under HALO_OPACITY so it reads as optics, not gas.
+
+### `SPIKE_RAYS`
+
+Spike ray count — 6 throws the hexagonal cross of a real segmented
+mirror (JWST), plus a faint second cross at SPIKE_ROT2 for depth.
+
+### `SPIKE_ROT2`
+
+Second cross angular offset (radians fraction of a full turn).
+
+### `SPIKE_LEN2`
+
+Second cross reach multiplier vs the primary rays.
+
+### `SPIKE_THIN`
+
+Ray ellipse minor-axis width as a fraction of the half-sprite.
+
+### `SPIKE_CORE`
+
+Center knot radius as a fraction of the half-sprite.
+
+### `SPIKE_JITTER`
+
+Rotation jitter added to the seeded base angle (radians).
+
+### `SF_NEBULA_DEPTH`
+
+Nebula depth layering — a parallax echo + wide underlay glow composed
+under the photo sprite so a nebula reads as a volume of gas at
+different depths instead of one flat billboard.
+
+### `ECHO_SCALE`
+
+Echo layer scale multiplier over the photo sprite.
+
+### `ECHO_OPACITY`
+
+Echo layer opacity — ghost of the photo rotated off-axis.
+
+### `UNDER_SCALE`
+
+Underlay glow scale multiplier — the wide light-field behind.
+
+### `UNDER_OPACITY`
+
+Underlay glow opacity.

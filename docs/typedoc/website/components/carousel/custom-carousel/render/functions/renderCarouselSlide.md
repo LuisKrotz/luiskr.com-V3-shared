@@ -1,22 +1,20 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/render](../README.md) / renderCarouselSlide
 
 ```ts
-function renderCarouselSlide(item, folder): 
-  | Element
-  | null;
+function renderCarouselSlide(item, folder, isMixed?): Element | null
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:57
+Defined in: website/components/carousel/custom-carousel/render.tsx:84
 
 One slide's inner content — a <media-figure> with the item's CDN src
 (folder + src), intrinsic size for aspect-ratio layout, and the
-expand/video/label flags. Returns null for placeholder entries.
-`classes`/`class` are both set — the custom-element attribute and the
-rendered class list must match for the Safari CSS path.
+expand/video/label flags. For mixed carousels on mobile, landscape slides
+include a mirrored repetition pattern backdrop to compensate for height.
+Returns null for placeholder entries.
 
 ## Parameters
 
@@ -32,7 +30,13 @@ Slide descriptor, or null for empty slots.
 
 CDN folder prefix (e.g. 'projectslug/').
 
+### isMixed?
+
+`boolean` = `false`
+
+Whether the carousel contains both landscape and portrait items.
+
 ## Returns
 
-  \| [`Element`](../../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
-  \| `null`
+\| [`Element`](../../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+\| `null`

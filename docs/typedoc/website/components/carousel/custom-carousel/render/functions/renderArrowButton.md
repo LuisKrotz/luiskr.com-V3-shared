@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/render](../README.md) / renderArrowButton
 
 ```ts
-function renderArrowButton(
-   direction, 
-   lang, 
-   circumference
-): Element;
+function renderArrowButton(direction, lang, circumference): Element
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:102
+Defined in: website/components/carousel/custom-carousel/render.tsx:172
 
 One prev/next control button: a WebGL arrow canvas behind an SVG
 autoplay progress ring (stroke-dashoffset driven by the carousel's

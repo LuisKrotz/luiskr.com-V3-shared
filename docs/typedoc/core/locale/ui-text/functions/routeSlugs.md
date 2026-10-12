@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/locale/ui-text](../README.md) / routeSlugs
 
 ```ts
-function routeSlugs(lang): LangSlugMap;
+function routeSlugs(lang): LangSlugMap
 ```
 
-Defined in: core/locale/ui-text.ts:61
+Defined in: core/locale/ui-text.ts:62
 
 Route slugs for a locale: CMS-editable overrides (translations/<loc>/slugs,
 loaded into store.lang.slugs) merged over the build-time LANG_SLUGS defaults.

@@ -1,14 +1,15 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/loaders/intro-loader](../README.md) / IntroLoader
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:45
 
 Experiments-style intro loader — spinner ring + percent + stage readout
-+ progress bar over a glow veil. The stage text steps through the
-locale's `loader.stages` (site assets/pages copy) as progress climbs.
+
+- progress bar over a glow veil. The stage text steps through the
+  locale's `loader.stages` (site assets/pages copy) as progress climbs.
 
 ## Constructors
 
@@ -39,12 +40,12 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:57
 ### rootContainer
 
 ```ts
-rootContainer: HTMLElement;
+rootContainer: HTMLElement
 ```
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:46
 
-***
+---
 
 ### onComplete
 
@@ -54,7 +55,7 @@ onComplete: (() => void) | null;
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:47
 
-***
+---
 
 ### container
 
@@ -64,7 +65,7 @@ container: HTMLElement | null = null;
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:48
 
-***
+---
 
 ### percentEl
 
@@ -74,7 +75,7 @@ percentEl: HTMLElement | null = null;
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:49
 
-***
+---
 
 ### msgEl
 
@@ -84,7 +85,7 @@ msgEl: HTMLElement | null = null;
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:50
 
-***
+---
 
 ### barEl
 
@@ -94,17 +95,17 @@ barEl: HTMLElement | null = null;
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:51
 
-***
+---
 
 ### progress
 
 ```ts
-progress: number = 0;
+progress: number = 0
 ```
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:52
 
-***
+---
 
 ### animId
 
@@ -114,22 +115,22 @@ animId: number | null = null;
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:53
 
-***
+---
 
 ### startTime
 
 ```ts
-startTime: number;
+startTime: number
 ```
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:54
 
-***
+---
 
 ### copy
 
 ```ts
-copy: LoaderCopy;
+copy: LoaderCopy
 ```
 
 Defined in: core/utils/canvas/loaders/intro-loader.ts:55
@@ -150,7 +151,7 @@ Builds the overlay DOM + starts the progress sequence.
 
 `void`
 
-***
+---
 
 ### runAnimation()
 
@@ -158,7 +159,7 @@ Builds the overlay DOM + starts the progress sequence.
 runAnimation(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:142
+Defined in: core/utils/canvas/loaders/intro-loader.ts:158
 
 Steps percent + the localized stage line across the boot budget.
 
@@ -166,7 +167,7 @@ Steps percent + the localized stage line across the boot budget.
 
 `void`
 
-***
+---
 
 ### finish()
 
@@ -174,7 +175,7 @@ Steps percent + the localized stage line across the boot budget.
 finish(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:181
+Defined in: core/utils/canvas/loaders/intro-loader.ts:197
 
 Completes the loader: fades the overlay and calls onComplete.
 
@@ -182,7 +183,7 @@ Completes the loader: fades the overlay and calls onComplete.
 
 `void`
 
-***
+---
 
 ### destroy()
 
@@ -190,7 +191,7 @@ Completes the loader: fades the overlay and calls onComplete.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:198
+Defined in: core/utils/canvas/loaders/intro-loader.ts:214
 
 Releases the rAF handle and removes the overlay so it can be GC'd.
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/locale/ui-text](../README.md) / componentText
 
 ```ts
-function componentText(path): unknown;
+function componentText(path): unknown
 ```
 
-Defined in: core/locale/ui-text.ts:50
+Defined in: core/locale/ui-text.ts:51
 
 Same lookup for the components dictionary (store.lang.components).
 

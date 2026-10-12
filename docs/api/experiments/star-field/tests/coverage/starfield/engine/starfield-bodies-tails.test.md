@@ -23,6 +23,17 @@ Minimal loaded-texture stand-in — the mask only needs `image` +
 `colorSpace`; using a plain object keeps the auto-mock's Texture gap
 out of the test.
 
+### `fake2dFull`
+
+2d ctx extended with the transform/gradient calls spikeRay and
+rockTexture make on top of the shared fake2d surface.
+
+### `fakeGeo`
+
+Geometry stand-in with a real position attribute — the chain
+mock's `count` proxy coerces NaN so the crumple/UV-bake vertex
+loop would never iterate; four real verts let it run.
+
 ### `recNodes`
 
 Recording Mesh/Points stand-in — the chain proxy swallows the

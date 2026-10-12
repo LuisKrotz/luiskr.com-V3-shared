@@ -142,3 +142,32 @@ Directory rows rendered before the "load more" affordance.
 Camera stand-off (chart units) when flying to a registry object —
 point sources have no radius so the offset is fixed; the zoom
 clamp still bounds how close OrbitControls lets the camera get.
+
+### `BODY_CACHE`
+
+Lazy registry-body spawning — when a catalog record is selected its
+plain cloud point gets a real rendered body (textured star disc,
+procedural exoplanet, DSO speckle cloud) mounted at the record's
+heliocentric position on the Sun's pivot. BODY_CACHE caps the LRU
+set so browsing never accumulates meshes; the radius tunables size
+each spawned object for the fixed FLY_OFFSET standoff.
+
+### `BODY_STAR_R`
+
+Star sphere base radius (chart units) at magnitude 0.
+
+### `BODY_STAR_MAGK`
+
+Magnitude → radius slope: dimmer stars spawn smaller discs.
+
+### `BODY_STAR_MIN_R`
+
+Star sphere radius clamps (chart units).
+
+### `BODY_PLANET_R`
+
+Exoplanet sphere radius (chart units).
+
+### `BODY_DSO_R`
+
+DSO speckle-cloud radius + member count (galaxies/clusters).

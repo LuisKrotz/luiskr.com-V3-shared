@@ -639,11 +639,12 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                                               | What it does                                                                 |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [`dom-utils-tails.test.js`](core/tests/coverage/utils/dom-utils-tails.test.md)     | Split from coverage-tails-5.test.js — covers the "dom-utils tails" describe. |
-| [`media-tails.test.js`](core/tests/coverage/utils/media-tails.test.md)             | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
-| [`media-utils-tails.test.js`](core/tests/coverage/utils/media-utils-tails.test.md) | Split from coverage-tails.test.js — covers the "media utils tails" describe. |
+| File                                                                                   | What it does                                                                 |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [`dom-arm-guard-tails.test.js`](core/tests/coverage/utils/dom-arm-guard-tails.test.md) | Coverage tails for the residual-input guard in core/utils/dom.ts —           |
+| [`dom-utils-tails.test.js`](core/tests/coverage/utils/dom-utils-tails.test.md)         | Split from coverage-tails-5.test.js — covers the "dom-utils tails" describe. |
+| [`media-tails.test.js`](core/tests/coverage/utils/media-tails.test.md)                 | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
+| [`media-utils-tails.test.js`](core/tests/coverage/utils/media-utils-tails.test.md)     | Split from coverage-tails.test.js — covers the "media utils tails" describe. |
 
 ## Core engine
 
@@ -1117,9 +1118,11 @@ _Shared primitives every surface builds on — no direct UI._
 | [`bodies.ts`](core/tokens/starfield/params/bodies.md)   | Per-body feature tuning — the Sgr A* black-hole composite |
 | [`camera.ts`](core/tokens/starfield/params/camera.md)   | Camera-rig and navigation parameters — field of view,     |
 | [`catalog.ts`](core/tokens/starfield/params/catalog.md) | Catalog-facing parameters — well-known body ids and the   |
+| [`post.ts`](core/tokens/starfield/params/post.md)       | Post-processing chain tuning for the star-field engine —  |
 | [`scale.ts`](core/tokens/starfield/params/scale.md)     | Astronomical-scale and hierarchy-structure parameters —   |
 | [`scene.ts`](core/tokens/starfield/params/scene.md)     | Scene-shell and fallback parameters — the skybox radius,  |
 | [`spiral.ts`](core/tokens/starfield/params/spiral.md)   | Procedural spiral-galaxy point-cloud parameters — the     |
+| [`weather.ts`](core/tokens/starfield/params/weather.md) | Living-planet parameters — the procedural weather field   |
 | [`worker.ts`](core/tokens/starfield/params/worker.md)   | Worker-dispatch and deep-field layer parameters — the     |
 
 ## Core engine
@@ -1743,7 +1746,10 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`frame.ts`](experiments/star-field/engine/frame.md)                   | Per-frame orchestrator for the star-field engine: the       |
 | [`materials.ts`](experiments/star-field/engine/materials.md)           | Material-parameter hygiene for the body builders            |
 | [`picking.ts`](experiments/star-field/engine/picking.md)               | Pointer picking for the star-field canvas: pointerdown      |
+| [`post-nodes.ts`](experiments/star-field/engine/post-nodes.md)         | Custom TSL post nodes for the star-field RenderPipeline     |
+| [`post.ts`](experiments/star-field/engine/post.md)                     | Post-processing chain for the star-field engine —           |
 | [`rand.ts`](experiments/star-field/engine/rand.md)                     | Deterministic seeded RNG for the star-field engine — the    |
+| [`registry-body.ts`](experiments/star-field/engine/registry-body.md)   | Lazy registry-body spawner — the 139,563-record deep        |
 | [`registry.ts`](experiments/star-field/engine/registry.md)             | Deep-catalog registry — the addressable index over the      |
 | [`renderer-setup.ts`](experiments/star-field/engine/renderer-setup.md) | Renderer creation for the star-field engine — same contract |
 | [`scale.ts`](experiments/star-field/engine/scale.md)                   | Multi-tier astronomical scale model for the star-field      |
@@ -1760,6 +1766,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                  | What it does                                             |
 | --------------------------------------------------------------------- | -------------------------------------------------------- |
+| [`belt-rocks.ts`](experiments/star-field/engine/bodies/belt-rocks.md) | Hero asteroids for the two belts — COUNT individual      |
 | [`belt.ts`](experiments/star-field/engine/bodies/belt.md)             | Small-body annulus renderer — asteroid belt and Kuiper   |
 | [`black-hole.ts`](experiments/star-field/engine/bodies/black-hole.md) | Sagittarius A* renderer — a layered relativistic object  |
 | [`deep-sky.ts`](experiments/star-field/engine/bodies/deep-sky.md)     | Real-imagery surface for deep-sky bodies — nebulae, star |
@@ -1767,6 +1774,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`primitives.ts`](experiments/star-field/engine/bodies/primitives.md) | Per-body mesh builders for the scene-graph assembler in  |
 | [`procedural.ts`](experiments/star-field/engine/bodies/procedural.md) | Barrel for the seeded canvas texture generators — each   |
 | [`structures.ts`](experiments/star-field/engine/bodies/structures.md) | Cosmic-hierarchy bodies — boundary spheres + member      |
+| [`weather.ts`](experiments/star-field/engine/bodies/weather.md)       | Living-planet systems — everything that makes Earth (and |
 
 ## Entry points
 
@@ -1778,6 +1786,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`gas.ts`](experiments/star-field/engine/bodies/procedural/gas.md)                   | Seeded wispy nebula-gas texture for photo-less nebulae    |
 | [`halo.ts`](experiments/star-field/engine/bodies/procedural/halo.md)                 | Additive star-glow annulus texture — the halo sprite is   |
 | [`shared.ts`](experiments/star-field/engine/bodies/procedural/shared.md)             | Shared paint primitives for the seeded texture            |
+| [`spikes.ts`](experiments/star-field/engine/bodies/procedural/spikes.md)             | Seeded diffraction-spike starburst — the optical cross    |
 | [`star-surface.ts`](experiments/star-field/engine/bodies/procedural/star-surface.md) | Seeded equirect photosphere texture for luminous bodies — |
 | [`surface.ts`](experiments/star-field/engine/bodies/procedural/surface.md)           | Seeded equirect surface textures for untextured solid     |
 
@@ -1909,6 +1918,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`star-dossier.test.js`](experiments/star-field/tests/starfield/star-dossier.test.md)                 | Lazy dossier loader — fetchDossier caches per body id and     |
 | [`star-field-component.test.js`](experiments/star-field/tests/starfield/star-field-component.test.md) | Full lifecycle for the real &lt;view-star-field&gt; element — |
 | [`star-i18n.test.js`](experiments/star-field/tests/starfield/star-i18n.test.md)                       | Star-field label loading — the SWR fetch of                   |
+| [`star-registry-body.test.js`](experiments/star-field/tests/starfield/star-registry-body.test.md)     | Lazy registry-body spawner — the deep catalog's 139k          |
 | [`star-registry.test.js`](experiments/star-field/tests/starfield/star-registry.test.md)               | Deep-catalog registry — id grammar, manifest/shard lazy       |
 | [`star-render.test.js`](experiments/star-field/tests/starfield/star-render.test.md)                   | renderStarField branch coverage — loader shown/hidden, CSS    |
 | [`starfield-engine.test.js`](experiments/star-field/tests/starfield/starfield-engine.test.md)         | StarFieldEngine facade — init() always resolves (success,     |

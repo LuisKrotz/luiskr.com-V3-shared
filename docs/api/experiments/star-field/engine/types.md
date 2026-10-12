@@ -2,9 +2,9 @@
 
 Shared types for the star-field engine — the static body
 
-| | |
-|---|---|
-| **Source** | `src/experiments/star-field/engine/types.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments/star-field/engine/types.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -12,6 +12,10 @@ Shared types for the star-field engine — the static body
 ### (module scope)
 
 The TSL node-graph namespace (compiled to WGSL/GLSL by the renderer).
+
+### (module scope)
+
+The lazily-imported `three` module namespace.
 
 ### (module scope)
 
@@ -98,6 +102,19 @@ SF_COLORS hex for procedural material/emissive tint.
 
 ### (module scope)
 
+Limb tint override (SF_COLORS hex) — the fresnel mixes toward this
+at the silhouette instead of the default hot `STAR_RIM`. A darker
+rim produces limb darkening on resolved star discs (the Sun):
+we see deeper hotter layers at centre, cooler gas at the limb.
+
+### (module scope)
+
+Corona activity scale (1 = quiet star) — stretches prominences,
+adds eruption plumes and sunspots, and enlarges the corona sprite.
+The Sun runs above 1 so its surface reads as an active photosphere.
+
+### (module scope)
+
 Secondary texture for translucent shells (Venus atmosphere, Saturn ring).
 
 ### (module scope)
@@ -115,6 +132,12 @@ Grayscale elevation map — bumpMap gives terrain real depth relief.
 ### (module scope)
 
 Night-lights emissive map — glows only where the map is lit.
+
+### (module scope)
+
+Atmosphere rim shell (0 = off) — a fresnel-limb translucent sphere
+just past the surface whose tint migrates day→dusk→night with the
+sun direction (Earth); the value scales the shell's opacity.
 
 ### (module scope)
 
@@ -138,6 +161,10 @@ for dwarf-spheroidal members that have no spiral structure.
 ### (module scope)
 
 Disc-thickness multiplier on `SF_SPIRAL.THIN`.
+
+### (module scope)
+
+Arm angular jitter (rad) — overrides `SF_SPIRAL.ARM_JITTER`.
 
 ### (module scope)
 
@@ -182,6 +209,49 @@ Climate cycle — oscillates the surface material tint toward
 `SF_COLORS.EARTH_ICE` (glaciation winter→summer analogy); `period`
 in seconds.
 
+### (module scope)
+
+Procedural weather — replaces the static `cloudTexture` deck with
+the full `weather.ts` field: evolving coverage, jet streams, ITCZ
+monsoon band, hurricane vortices, seasonal snow lines, volcanic
+ash plumes and matching surface cloud shadows (Earth).
+
+### (module scope)
+
+Aurora shell — a thin rayed emission OVAL centered on the magnetic
+pole (not the spin pole), driven by the shared solar-wind uniform
+so solar storms light every aurora-bearing body at once (Earth,
+Jupiter, Saturn, Neptune). Pass `true` for the default Earth-green
+oxygen palette, or a config object for per-body physics:
+`color`/`colorLow` are the curtain-top/lower-edge emissions,
+`tilt` the magnetic dipole's offset from the spin axis (radians —
+Neptune's is ~0.82 rad ≈ 47°), `lat` the oval's |lat| center and
+`intensity` a brightness multiplier (Jupiter > Earth > Saturn >
+Neptune, matching real emitted power).
+
+### (module scope)
+
+False → boreal oval only (Earth); default shows both poles.
+
+### (module scope)
+
+Solar flares — limb prominence sprites on the photosphere edge that
+breathe and stretch outward with the shared solar-wind cycle (Sun).
+
+### (module scope)
+
+LEO constellation shell — `count` point glints sharing one inclined
+orbital plane at `orbit`× radius, sweeping as a unit (the Starlink
+swarm; `orbit` multiplies `def.radius`).
+
+### (module scope)
+
+Meteor strikes — airless cratered bodies still take impacts; a
+pooled flash sprite fires at a random surface point every
+`SF_METEOR.INTERVAL`-ish seconds (updateFx). For bodies whose
+dossier describes ongoing bombardment — the flash makes the
+crater record readable as a live process.
+
 ### `dist`
 
 Authored distance label for the hover tooltip — semi-major axis in
@@ -190,13 +260,32 @@ are universal abbreviations so the string needs no translation.
 
 ### (module scope)
 
-Decorative non-pickable satellites (companion stars, exoplanets) —
-orbit this body's mesh; purely visual, no dossier of their own.
+Companion satellites orbiting this body's mesh — decorative by
+default; an entry carrying `id`/`name` registers as a pickable
+dossier body (the ISS close to Earth).
+
+### (module scope)
+
+Dossier-backed pick id — when set, the companion registers as a
+real node (anchor + pick proxy) so a close-up click resolves to a
+lazy `public/data/<locale>/<id>.json` dossier like any catalog
+body. Anonymous companions stay decorative and unpickable.
+
+### (module scope)
+
+Display name for the dossier-backed companion.
+
+### (module scope)
+
+Crafted-station flag — renders the companion as a lit truss +
+solar-panel model (the ISS silhouette) instead of the default
+fresnel glow ball, so crewed orbiters read as built objects,
+not second moons.
 
 ### (module scope)
 
 Same conic rule as `SFBodyDef.ecc` — radial distance modulates
- around the circular pivot sweep.
+around the circular pivot sweep.
 
 ### (module scope)
 
@@ -301,6 +390,31 @@ Persistent canvas the host owns (replaced on renderer retry).
 
 three.js WebGPURenderer (WebGPU or forced-WebGL backend).
 
+### `pipeline`
+
+RenderPipeline post chain (scene → +bloom → vignette → film grain) —
+null when the pipeline failed to build or the backend rejected it;
+the frame loop falls back to `renderer.render(scene, camera)` in
+that case, losing post FX but never the scene.
+
+### `world`
+
+Floating-origin world root — every catalog body, cloud and rider
+parents under this group instead of the scene directly. The follow
+step counter-translates it so the followed anchor sits at the world
+origin: rider-mounted bodies translate up to ~16k units/s on the
+galactic ring, which would otherwise push all coordinates to ~6.7M
+where float32 quantization (±0.5 units) visibly jitters every mesh.
+Skybox and lights stay on the scene at the origin — the pin point —
+so they always enclose/light whatever the camera follows.
+
+### `sunLight`
+
+Sun stand-in point light — created in the scene at the origin (the
+pin point), then re-parented onto the Sun anchor once bodies build
+so it keeps illuminating from the Sun's real position whichever
+body the floating origin currently pins.
+
 ### `nodes`
 
 id → runtime body node record.
@@ -313,9 +427,32 @@ id → center Object3D the camera targets (equals mesh for most).
 
 Pickable meshes for raycasting.
 
+### `dayNight`
+
+Day/night shader registry — bodies with sun-direction-dependent
+shading (night-lights emissive gating, atmosphere rim shells).
+Each frame `updateDayNight` writes `dir = normalize(sunPos −
+bodyPos)` into the shared vector the material's TSL uniform wraps,
+so lights stay dark on the lit hemisphere and the rim migrates
+with the terminator.
+
 ### `approached`
 
 ids whose dossier was already prefetched — approach fires once.
+
+### `solarWind`
+
+Shared solar-wind uniform — `updateSolarWind` writes the 0–1+
+activity level each frame; aurora shells, the sun's flare sprites
+and the corona breathe with it so a storm visibly propagates from
+the Sun to every atmosphere-bearing planet. TSL uniform node
+(runtime `.value`), null until bootstrap creates it.
+
+### `fxTime`
+
+Shared scene-time uniform (scene seconds) — the weather field,
+aurora curtains and any other TSL effect reads this instead of
+baking `s.t` so a single per-frame write animates every shader.
 
 ### `starCloud`
 
@@ -326,6 +463,24 @@ state so destroy() can dispose its geometry/material.
 ### `starCloudLoading`
 
 Guard flag — the star-cloud fetch fires only once per boot.
+
+### `THREE`
+
+Post-boot handles kept for lazy registry-body spawns — the deep
+catalog's 139k records are plain cloud points until selected, when
+`registry-body.ts` builds a real textured mesh on demand. Bootstrap
+stashes the three module, node-material deps and the shared glow
+sprite here so spawn code never re-imports lazily-loaded modules.
+
+### `glowTex`
+
+Shared soft-disc sprite — registry halos reuse it, never own it.
+
+### `registryBodies`
+
+Spawned registry bodies (`star-NNNNNN`… → Object3D) mounted on the
+Sun's pivot — an LRU map capped at `SF_STAR_CLOUD.BODY_CACHE` so a
+long browsing session never accumulates 139k meshes.
 
 ### `fly`
 
@@ -371,9 +526,28 @@ Elapsed scene time (seconds) — drives orbits/spins.
 
 Camera hover state — last picked body id for the HUD.
 
+### `hint`
+
+Navigator-hover position hint — while the pointer (or focus) rests
+on a catalog row the engine reports the body's projected screen
+position every tick, edge-clamped so the hint works at any zoom
+level. Plain data, resolved per tick in `trackHover`: catalog ids
+carry their `anchor` (live world position) and registry rows carry
+their shard `rec` (resolved via `registryWorldPos` in the pinned
+frame). Null when no nav row is hovered; takes precedence over
+`hoverId` (the pointer is on the drawer, not the canvas).
+
 ### `selectedId`
 
 Selected body id (panel open).
+
+### `followId`
+
+Camera-follow anchor — which catalog id the camera rides with when
+no fly tween runs. Selections set it to the picked body; the solar
+overview sets it to the Sun so the chart holds the solar system
+while it orbits inside the galactic disc — without marking a
+dossier selection. Null = free camera.
 
 ### (module scope)
 
@@ -383,7 +557,10 @@ Lifecycle callbacks from the host.
 
 Per-frame hover tracking — fires every tick while a body is hovered
 with its projected canvas-space pixel position, so the tooltip and
-its leader line follow orbiting bodies without DOM thrash.
+its leader line follow orbiting bodies without DOM thrash. `edge`
+marks the projected point as clamped to the canvas edge (object
+off-screen or behind) and `angle` carries the outward direction in
+degrees for the leader-line arrow.
 
 ### (module scope)
 
@@ -405,6 +582,50 @@ The pickable mesh/sprite — carries `userData.bodyId`.
 
 Spin target (mesh or its inner group) for self-rotation.
 
+### (module scope)
+
+Inertial axis lock — a group between the orbit pivot and the mesh
+carrying `rotation.z = tilt` and counter-rotated on Y each frame.
+Without it the pivot's orbital Y-rotation precesses the spin axis
+with the body's position (perpetual solstice); the lock keeps the
+axis fixed in the parent frame so the terminator sweeps the
+hemispheres over the orbit — real seasons. Only set on directly
+orbiting tilted bodies.
+
+### (module scope)
+
+Differential-rotation subgroup — a volumetric galaxy's inner-disc
+Points cloud; tickFrame spins it at ROTOR_DIFF× the whole-disc rate
+so the core laps the rim the way real rotation curves do.
+
+### (module scope)
+
+Cloud-deck shell — Earth's cloud sphere rides inside `mesh` so it
+inherits surface spin; with `def.weather` the deck is the
+procedural field (jets/storms/snow evolve in the shader via the
+shared `fxTime` uniform), and updateFx still adds its legacy
+differential drift for static-texture decks.
+
+### (module scope)
+
+Solar limb flares — prominence sprites from `makeSolarFlares`;
+updateFx scales/opacities them by `solarWind × sin⁴(t·rate+phase)`
+so eruptions breathe and spike outward when a storm hits.
+
+### (module scope)
+
+Meteor flash pool — `SF_METEOR.POOL` sprites parented to the mesh,
+recycled across strikes so impact flashes never allocate per frame;
+`meteorNext` schedules the next strike (scene seconds).
+
+### `t0`
+
+Strike start time (scene seconds) — drives the fade curve.
+
+### (module scope)
+
+Next scheduled meteor strike time (scene seconds).
+
 ### `satPivots`
 
 Satellite pivots (decorative companions) — rotate per frame.
@@ -416,6 +637,11 @@ Satellite mesh riding the pivot — modulated when `ecc` is set.
 ### `orbit`
 
 Semi-major axis (chart units) + eccentricity for elliptical orbits.
+
+### (module scope)
+
+Self-tumble rate — belt hero rocks spin their own mesh on top of
+the orbit sweep so debris reads as tumbling rubble, not rails.
 
 ### (module scope)
 
@@ -431,6 +657,18 @@ breathes `material.opacity` so stars shimmer like live suns.
 
 ### (module scope)
 
+Interstellar-collapse glyph — a flat point-glow sprite riding the
+pivot beside the real mesh, plus its own pick proxy. updateLod
+shows them (and hides the sphere) once the camera passes
+SF_LOD.SOLAR_FAR so the whole solar tier reads as a single bright
+star like every other sun in the neighborhood. Solar stars only.
+
+### (module scope)
+
+Invisible pick bubble kept live while `farGlow` shows.
+
+### (module scope)
+
 Active camera fly-to tween — cubic ease-in-out over FLY_MS.
 
 ### `t0`
@@ -441,17 +679,24 @@ Start time (performance.now snapshot).
 
 Camera position at tween start.
 
-### `toPos`
+### `offset`
 
-Camera destination.
+Approach offset — destination sits this vector away from the body.
 
 ### `fromTgt`
 
 Controls target at tween start.
 
-### `toTgt`
+### `track`
 
-Controls target destination (body center).
+Live body-position getter — rider-mounted anchors keep moving while
+the tween runs, so the destination is re-resolved every frame; a
+static snapshot would land the camera where the body was at arm
+time. Returns null when the anchor is gone (dest frozen at last).
+
+### `last`
+
+Last resolved body position — destination anchor when track yields null.
 
 ### (module scope)
 

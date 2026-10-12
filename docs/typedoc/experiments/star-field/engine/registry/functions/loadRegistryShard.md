@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/registry](../README.md) / loadRegistryShard
 
 ```ts
-function loadRegistryShard(kind, shardIx): Promise<SFRegistryRecord[] | null>;
+function loadRegistryShard(kind, shardIx): Promise<SFRegistryRecord[] | null>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:129
+Defined in: experiments/star-field/engine/registry.ts:130
 
 Fetches (or returns the cached promise for) one 1,000-record shard —
 shards are the lazy-load unit so browsing the catalogue never pulls

@@ -1,6 +1,6 @@
 # `experiments/star-field/tests/coverage/starfield/engine/starfield-follow-tails.test.js`
 
-Coverage tails for frame.ts's orbit-follow — while a
+Coverage tails for frame.ts's floating-origin follow —
 
 |                |                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------- |
@@ -11,12 +11,18 @@ Coverage tails for frame.ts's orbit-follow — while a
 
 ### `makeCamera`
 
-Mock camera — only the fields followSelected/tickFrame touch.
+Mock camera — only the fields tickFrame touches.
 
 ### `makeControls`
 
 Mock OrbitControls — settable target + update spy.
 
+### `makeWorld`
+
+Mock floating-origin world root — a settable translation vector.
+
 ### `makeAnchor`
 
-Mock anchor whose world position is a fixed point.
+Mock anchor reporting a world position of `s.world.position + local`
+— the same composition real scene-graph nodes produce, so the pin
+converges instead of accumulating.

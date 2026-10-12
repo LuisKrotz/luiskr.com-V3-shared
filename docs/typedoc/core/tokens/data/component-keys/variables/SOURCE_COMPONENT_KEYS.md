@@ -1,17 +1,19 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/data/component-keys](../README.md) / SOURCE\_COMPONENT\_KEYS
 
 ```ts
 const SOURCE_COMPONENT_KEYS: Readonly<{
-  SOURCE_LABEL: "source-code.label";
-  SOURCE_LINK: "source-code.link";
-}>;
+  SOURCE_LABEL: 'source-code.label'
+  SOURCE_LINK: 'source-code.link'
+  SOURCE_CREDIT: 'source-code.credit'
+  SOURCE_RIGHTS: 'source-code.rights'
+}>
 ```
 
-Defined in: core/tokens/data/component-keys.ts:51
+Defined in: core/tokens/data/component-keys.ts:54
 
 Frozen source component key map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

@@ -2,12 +2,25 @@
 
 Public-URL paths for the Star Field experiment texture set
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/starfield/textures.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/starfield/textures.ts`                   |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### `IO`
+
+Moons — NASA-3D-Resources equirect global mosaics (Galileo/Cassini/
+Voyager basemaps). 1440×720 is the highest public distribution for
+most of these bodies; Phobos upgrades to the 5499px USGS map.
+
+### `CERES`
+
+Dwarf planets / small bodies — Ceres is the Dawn HAMO elliptical map
+(PIA20351, 4000px); Vesta the GeoHack Dawn mosaic; Phobos the USGS
+5499px map above; Bennu the 8k OSIRIS-REx-derived albedo; Ryugu the
+ONC albedo map. Asteroid albedos are grayscale — honest to the data.
 
 ### `NEBULA_CARINA`
 

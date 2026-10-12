@@ -1,18 +1,20 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/events/dom](../README.md) / POINTER\_EVENTS
 
 ```ts
 const POINTER_EVENTS: Readonly<{
-  POINTERDOWN: "pointerdown";
-  POINTERMOVE: "pointermove";
-  POINTERUP: "pointerup";
-  POINTERCANCEL: "pointercancel";
-  POINTERENTER: "pointerenter";
-  POINTERLEAVE: "pointerleave";
-}>;
+  POINTERDOWN: 'pointerdown'
+  POINTERMOVE: 'pointermove'
+  POINTERUP: 'pointerup'
+  POINTERCANCEL: 'pointercancel'
+  POINTERENTER: 'pointerenter'
+  POINTERLEAVE: 'pointerleave'
+  POINTEROVER: 'pointerover'
+  POINTEROUT: 'pointerout'
+}>
 ```
 
 Defined in: core/tokens/events/dom.ts:42

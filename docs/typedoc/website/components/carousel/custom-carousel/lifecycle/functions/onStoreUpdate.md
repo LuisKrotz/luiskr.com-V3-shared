@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/lifecycle](../README.md) / onStoreUpdate
 
 ```ts
-function onStoreUpdate(host): void;
+function onStoreUpdate(host): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/lifecycle.ts:51
+Defined in: website/components/carousel/custom-carousel/lifecycle.ts:45
 
 Store change → propagate reduced-motion to both arrows and gate
 autoplay on reduced-motion / open-modal. The resume arm requires BOTH

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/menu](../README.md) / navMenuCanvas
 
 ```ts
-function navMenuCanvas(host): HTMLCanvasElement;
+function navMenuCanvas(host): HTMLCanvasElement
 ```
 
-Defined in: website/components/nav/menu.tsx:90
+Defined in: website/components/nav/menu.tsx:92
 
 Canvas JSX for the WebGL menu background.
 

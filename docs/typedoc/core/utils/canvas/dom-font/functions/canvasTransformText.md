@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/canvas/dom-font](../README.md) / canvasTransformText
 
 ```ts
-function canvasTransformText(text, transform): string;
+function canvasTransformText(text, transform): string
 ```
 
-Defined in: core/utils/canvas/dom-font.ts:84
+Defined in: core/utils/canvas/dom-font.ts:131
 
 Applies a computed `text-transform` to raw text content. Canvas
 `fillText` draws strings verbatim — a title styled

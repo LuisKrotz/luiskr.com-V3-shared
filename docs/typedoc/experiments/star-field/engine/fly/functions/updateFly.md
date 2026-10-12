@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/fly](../README.md) / updateFly
 
 ```ts
-function updateFly(s): void;
+function updateFly(s): void
 ```
 
-Defined in: experiments/star-field/engine/fly.ts:80
+Defined in: experiments/star-field/engine/fly.ts:87
 
 Advances the active tween one frame — lerps camera position and the
 controls target along the eased progress; clears `s.fly` and fires

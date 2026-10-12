@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/awards/render](../README.md) / renderAwards
 
 ```ts
-function renderAwards(el): Element;
+function renderAwards(el): Element
 ```
 
-Defined in: website/components/home/awards/render.tsx:30
+Defined in: website/components/home/awards/render.tsx:46
 
 Renders awards.
 

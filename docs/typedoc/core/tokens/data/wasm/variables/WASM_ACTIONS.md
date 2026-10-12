@@ -1,16 +1,16 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/data/wasm](../README.md) / WASM\_ACTIONS
 
 ```ts
 const WASM_ACTIONS: Readonly<{
-[k: string]: string;
-}>;
+  [k: string]: string
+}>
 ```
 
-Defined in: core/tokens/data/wasm.ts:31
+Defined in: core/tokens/data/wasm.ts:37
 
 Frozen `{ NAME: 'NAME' }` action map built from `_WASM_ACTION_LIST` —
 workers dispatch on `type`, and self-keyed entries make typos

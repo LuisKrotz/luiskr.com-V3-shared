@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/figure/render](../README.md) / renderMediaFigure
 
 ```ts
-function renderMediaFigure(c): Element;
+function renderMediaFigure(c): Element
 ```
 
-Defined in: website/components/media/figure/render.tsx:22
+Defined in: website/components/media/figure/render.tsx:23
 
 Renders media figure.
 

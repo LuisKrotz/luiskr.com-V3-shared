@@ -2,9 +2,9 @@
 
 Star-field taxonomy + action tokens: the region groups the
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/starfield/kinds.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/starfield/kinds.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -43,6 +43,12 @@ Cosmic-hierarchy boundary shells + speckle volumes.
 Small-body annulus (asteroid belt, Kuiper belt) — a seeded Points
 disc between `belt.inner`/`belt.outer`; not raycast-pickable, the
 navigator still flies to it for the dossier.
+
+### `SATELLITE`
+
+Artificial companion (ISS-class orbiters) — registered only inside
+a host body's `satellites` list; gives the dossier badge a real
+label instead of falling through to the raw kind string.
 
 ### `SF_ACTIONS`
 

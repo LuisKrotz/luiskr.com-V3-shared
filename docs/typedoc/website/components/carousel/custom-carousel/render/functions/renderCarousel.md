@@ -1,21 +1,21 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/render](../README.md) / renderCarousel
 
 ```ts
-function renderCarousel(host): Element;
+function renderCarousel(host): Element
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:180
+Defined in: website/components/carousel/custom-carousel/render.tsx:250
 
 JSX template. Two shapes:
-  inactive (≤1 item, or items fit side-by-side) → a plain flex row,
-    no track/controls — media is already fully visible
-  active → track = [clone-last][items…][clone-first] + controls.
-    Clones are aria-hidden + inert — screen readers and tab order see
-    only the real slides; the teleport logic uses them for the wrap.
+inactive (≤1 item, or items fit side-by-side) → a plain flex row,
+no track/controls — media is already fully visible
+active → track = [clone-last][items…][clone-first] + controls.
+Clones are aria-hidden + inert — screen readers and tab order see
+only the real slides; the teleport logic uses them for the wrap.
 Each control button carries an SVG progress ring (dashoffset driven
 by _updateRingDom) behind a WebGL arrow canvas.
 

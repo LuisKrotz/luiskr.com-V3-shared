@@ -2,9 +2,9 @@
 
 Fullscreen menu overlay behavior for &lt;app-nav&gt;, extracted
 
-| | |
-|---|---|
-| **Source** | `src/website/components/nav/menu.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/nav/menu.tsx`                   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -16,6 +16,10 @@ Host surface the menu helpers need (satisfied by AppNav).
 ### `_menuOpen`
 
 Menu overlay open flag.
+
+### `_menuOpenedAt`
+
+performance.now() of the open transition — feeds the residual-input guard.
 
 ### `_menuClosing`
 
@@ -72,6 +76,7 @@ the component's lifetime so its WebGL context is never churned by
 re-renders (canvas recreation would force a fresh GL context). Each
 call also re-syncs the on-dark class and aria-label/expanded since
 those change without recreating the element.
+
 - `@param` host AppNav instance.
 - `@param` label aria-label for the burger (localized "menu").
 - `@returns` The persistent canvas element.

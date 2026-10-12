@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/burn](../README.md) / armCardBurn
 
 ```ts
-function armCardBurn(
-   host, 
-   i, 
-   item
-): void;
+function armCardBurn(host, i, item): void
 ```
 
-Defined in: website/components/home/mosaic/burn.ts:968
+Defined in: website/components/home/mosaic/burn.ts:77
 
 Arms the burn on card `i`: inserts the rewrite slot, then mounts the
 combustion canvas IMMEDIATELY — the user expects the dissolve the
@@ -29,13 +25,19 @@ entirely — the title swap happens instantly.
 
 [`HomeMosaic`](../../../HomeMosaic/classes/HomeMosaic.md)
 
+The <home-mosaic> component instance.
+
 ### i
 
 `number`
 
+The card index inside the mosaic data set.
+
 ### item
 
 [`MosaicItem`](../../pack/interfaces/MosaicItem.md)
+
+The card's mosaic item (label drives the rewrite slot).
 
 ## Returns
 

@@ -1,20 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/star-field/engine/bodies/deep-sky](../README.md) / makeGalaxyDisc
 
 ```ts
-function makeGalaxyDisc(
-   THREE, 
-   def, 
-   texMap, 
-   glowTex, 
-   localTilt?
-): Mesh;
+function makeGalaxyDisc(THREE, def, texMap, glowTex, localTilt?): Mesh
 ```
 
-Defined in: experiments/star-field/engine/bodies/deep-sky.ts:94
+Defined in: experiments/star-field/engine/bodies/deep-sky.ts:99
 
 Tilted photographic disc for an external galaxy — the real image on a
 plane lying in the body's disc plane, edge-feathered so it melts into

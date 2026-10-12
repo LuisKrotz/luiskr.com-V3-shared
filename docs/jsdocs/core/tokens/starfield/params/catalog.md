@@ -27,9 +27,20 @@ Halley's nucleus — icy dust, faint cyan-white.
 
 ISS truss — bright metallic white.
 
+### `ISS_PANEL`
+
+ISS solar arrays — the wings' burnished gold kapton over silicon.
+
 ### `ATMO_DAY`
 
 Earth atmosphere fresnel tints — day limb, terminator dusk, night.
+
+### `AURORA_JUPITER`
+
+Giant-planet aurora palettes — hydrogen-dominated upper atmospheres
+emit UV-blue curtains instead of Earth's oxygen green: Jupiter's
+powerful oval reads cyan-white, Saturn's a deep blue, Neptune's a
+faint violet (weak far-out field, 47°-tilted dipole).
 
 ### `DWARF_SPH`
 
@@ -47,6 +58,13 @@ Cosmic-hierarchy shells + member speckles.
 ### `ASTEROID_BELT`
 
 Small-body belts — rocky rubble grey-brown, Kuiper ice blue-white.
+
+### `ROCK_STONE`
+
+Belt hero-rock material classes — ordinary chondrite stone,
+carbonaceous black, nickel-iron sheen, cometary ice and regolith
+dust. Hero rocks pick one seeded class so the belt reads as mixed
+debris, not a single material.
 
 ### `STAR_BLUE`
 

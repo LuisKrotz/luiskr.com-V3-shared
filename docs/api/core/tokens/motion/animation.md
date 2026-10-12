@@ -2,9 +2,9 @@
 
 Easing curve + transition duration tokens — grouped subsets
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/motion/animation.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/motion/animation.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -56,6 +56,16 @@ Menu modal entrance settle time (ms) — longest item delay (0.76s) + item durat
 ### `DIALOG_LEAVE_DURATION`
 
 Dialog genie zoom-out duration (ms) — must match .pref-backdrop--leave transition
+
+### `MODAL_ARM_MS`
+
+Input-arm window after a modal mounts (ms). Overlays open synchronously
+inside the opening gesture's dispatch, so a residual press from that
+same gesture — the second click of an in-place double-click, or a
+mouseup retargeted onto the freshly mounted surface — lands inside the
+overlay and fires whatever control happens to sit under the cursor.
+Sized under the OS double-click threshold so a deliberate click on a
+visible control still passes once the user has actually seen the UI.
 
 ### `LOADER_FADE_MS`
 

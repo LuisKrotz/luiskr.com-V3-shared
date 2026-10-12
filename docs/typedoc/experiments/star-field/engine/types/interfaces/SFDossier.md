@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFDossier
 
-Defined in: experiments/star-field/engine/types.ts:216
+Defined in: experiments/star-field/engine/types.ts:317
 
 Lazy-loaded dossier JSON shape — `public/data/<locale>/<id>.json`.
 Facts render as a definition list; `history`/`sections` are prose;
@@ -20,42 +20,42 @@ curated gallery; `meta` carries the acquisition/translation signature.
 ### id
 
 ```ts
-id: string;
+id: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:217
+Defined in: experiments/star-field/engine/types.ts:318
 
-***
+---
 
 ### name
 
 ```ts
-name: string;
+name: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:218
+Defined in: experiments/star-field/engine/types.ts:319
 
-***
+---
 
 ### kind
 
 ```ts
-kind: string;
+kind: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:219
+Defined in: experiments/star-field/engine/types.ts:320
 
-***
+---
 
 ### tagline
 
 ```ts
-tagline: string;
+tagline: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:220
+Defined in: experiments/star-field/engine/types.ts:321
 
-***
+---
 
 ### facts
 
@@ -63,41 +63,41 @@ Defined in: experiments/star-field/engine/types.ts:220
 facts: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:221
+Defined in: experiments/star-field/engine/types.ts:322
 
 #### label
 
 ```ts
-label: string;
+label: string
 ```
 
 #### value
 
 ```ts
-value: string;
+value: string
 ```
 
-***
+---
 
 ### history
 
 ```ts
-history: string;
+history: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:222
+Defined in: experiments/star-field/engine/types.ts:323
 
-***
+---
 
 ### source
 
 ```ts
-source: string;
+source: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:223
+Defined in: experiments/star-field/engine/types.ts:324
 
-***
+---
 
 ### sections?
 
@@ -105,11 +105,11 @@ Defined in: experiments/star-field/engine/types.ts:223
 optional sections?: SFDossierSection[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:225
+Defined in: experiments/star-field/engine/types.ts:326
 
 Optional prose subsections for deep-history bodies.
 
-***
+---
 
 ### media?
 
@@ -117,7 +117,7 @@ Optional prose subsections for deep-history bodies.
 optional media?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:227
+Defined in: experiments/star-field/engine/types.ts:328
 
 Downloaded gallery — images, videos, audio recordings.
 
@@ -139,7 +139,7 @@ optional videos?: SFDossierMedia[];
 optional audio?: SFDossierMedia[];
 ```
 
-***
+---
 
 ### meta?
 
@@ -147,6 +147,6 @@ optional audio?: SFDossierMedia[];
 optional meta?: SFDossierMeta;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:233
+Defined in: experiments/star-field/engine/types.ts:334
 
 Acquisition/translation signature.

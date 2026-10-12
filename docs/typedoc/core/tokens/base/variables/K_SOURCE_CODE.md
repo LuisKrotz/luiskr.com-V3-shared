@@ -1,13 +1,13 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/tokens/base](../README.md) / \_K\_SOURCE\_CODE
 
 ```ts
-const _K_SOURCE_CODE: "source-code" = 'source-code';
+const _K_SOURCE_CODE: 'source-code' = 'source-code'
 ```
 
-Defined in: core/tokens/base.ts:452
+Defined in: core/tokens/base.ts:457
 
 Token key "k source code" — single source for the repeated literal.

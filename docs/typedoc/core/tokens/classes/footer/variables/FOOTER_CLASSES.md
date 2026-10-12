@@ -1,17 +1,20 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/classes/footer](../README.md) / FOOTER\_CLASSES
 
 ```ts
 const FOOTER_CLASSES: Readonly<{
-  FOOTER_SOURCE: "footer-source";
-  FOOTER_SOURCE_LINK: "footer-source-link";
-  FOOTER_DOCS: "footer-source-docs";
-  FOOTER_DOCS_LINK: "footer-source-docs-link";
-  FOOTER_DOCS_DESC: "footer-source-docs-desc";
-}>;
+  FOOTER_SOURCE: 'footer-source'
+  FOOTER_SOURCE_LINK: 'footer-source-link'
+  FOOTER_DOCS: 'footer-source-docs'
+  FOOTER_DOCS_LINK: 'footer-source-docs-link'
+  FOOTER_DOCS_DESC: 'footer-source-docs-desc'
+  FOOTER_DIVIDER: 'footer-source-divider'
+  FOOTER_CREDIT: 'footer-source-credit'
+  FOOTER_RIGHTS: 'footer-source-rights'
+}>
 ```
 
 Defined in: core/tokens/classes/footer.ts:14

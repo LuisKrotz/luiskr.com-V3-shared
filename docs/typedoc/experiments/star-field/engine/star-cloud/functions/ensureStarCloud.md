@@ -1,19 +1,22 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/star-cloud](../README.md) / ensureStarCloud
 
 ```ts
-function ensureStarCloud(s, THREE): void;
+function ensureStarCloud(s, THREE): void
 ```
 
-Defined in: experiments/star-field/engine/star-cloud.ts:177
+Defined in: experiments/star-field/engine/star-cloud.ts:227
 
 Lazy-loads the real star field once per boot — fired fire-and-forget
 from bootstrap after the body graph exists, so the 1.5 MB binary
 streams in the background and the cloud fades in on the disc when it
-decodes. No-ops on repeat calls, dispose, or fetch failure.
+decodes. The record decode dispatches chunked through the WASM worker
+pool (the raw payload rides structuredClone so the main thread keeps
+its buffer for the identical local fallback). No-ops on repeat calls,
+dispose, or fetch failure.
 
 ## Parameters
 

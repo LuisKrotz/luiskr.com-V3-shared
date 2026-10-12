@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/menu](../README.md) / NavMenuHost
 
@@ -28,12 +28,12 @@ Live flag widgets (max one — the menu flag).
 
 [`NavFlagHost`](../../flag/interfaces/NavFlagHost.md).[`_navFlags`](../../flag/interfaces/NavFlagHost.md#_navflags)
 
-***
+---
 
 ### \_menuFlagCanvasEl
 
 ```ts
-_menuFlagCanvasEl: HTMLCanvasElement | null;
+_menuFlagCanvasEl: HTMLCanvasElement | null
 ```
 
 Defined in: website/components/nav/flag.tsx:27
@@ -44,12 +44,12 @@ Persistent per-locale flag canvas; rebuilt on locale change.
 
 [`NavFlagHost`](../../flag/interfaces/NavFlagHost.md).[`_menuFlagCanvasEl`](../../flag/interfaces/NavFlagHost.md#_menuflagcanvasel)
 
-***
+---
 
 ### \_menuFlagLang
 
 ```ts
-_menuFlagLang: string | null;
+_menuFlagLang: string | null
 ```
 
 Defined in: website/components/nav/flag.tsx:29
@@ -60,7 +60,7 @@ Locale the current flag canvas was built for.
 
 [`NavFlagHost`](../../flag/interfaces/NavFlagHost.md).[`_menuFlagLang`](../../flag/interfaces/NavFlagHost.md#_menuflaglang)
 
-***
+---
 
 ### locale
 
@@ -76,12 +76,12 @@ Active locale code.
 
 [`NavFlagHost`](../../flag/interfaces/NavFlagHost.md).[`locale`](../../flag/interfaces/NavFlagHost.md#locale)
 
-***
+---
 
 ### currentLang
 
 ```ts
-readonly currentLang: 
+readonly currentLang:
   | {
   code: "en";
   label: string;
@@ -221,141 +221,153 @@ The active LANG_OPTIONS entry (code + label + flag cc).
 
 [`NavFlagHost`](../../flag/interfaces/NavFlagHost.md).[`currentLang`](../../flag/interfaces/NavFlagHost.md#currentlang)
 
-***
+---
 
 ### \_menuOpen
 
 ```ts
-_menuOpen: boolean;
+_menuOpen: boolean
 ```
 
 Defined in: website/components/nav/menu.tsx:27
 
 Menu overlay open flag.
 
-***
+---
 
-### \_menuClosing
+### \_menuOpenedAt
 
 ```ts
-_menuClosing: boolean;
+_menuOpenedAt: number
 ```
 
 Defined in: website/components/nav/menu.tsx:29
 
-Close animation in flight — guards double-close.
+performance.now() of the open transition — feeds the residual-input guard.
 
-***
+---
 
-### \_menuSettled
+### \_menuClosing
 
 ```ts
-_menuSettled: boolean;
+_menuClosing: boolean
 ```
 
 Defined in: website/components/nav/menu.tsx:31
 
-Open animation completed — close X may snap to drawn state.
+Close animation in flight — guards double-close.
 
-***
+---
 
-### \_menuSettleTimer
+### \_menuSettled
 
 ```ts
-_menuSettleTimer: number | null;
+_menuSettled: boolean
 ```
 
 Defined in: website/components/nav/menu.tsx:33
 
-Settle-delay timer handle; cleared on destroy/close.
+Open animation completed — close X may snap to drawn state.
 
-***
+---
 
-### \_menuBg
+### \_menuSettleTimer
 
 ```ts
-_menuBg: 
-  | MenuBackgroundWebGL
-  | null;
+_menuSettleTimer: number | null
 ```
 
 Defined in: website/components/nav/menu.tsx:35
 
-Live menu-background widget over the fullscreen canvas.
+Settle-delay timer handle; cleared on destroy/close.
 
-***
+---
 
-### \_menuCloseBtn
+### \_menuBg
 
 ```ts
-_menuCloseBtn: 
-  | CloseButtonWebGL
+_menuBg:
+  | MenuBackgroundWebGL
   | null;
 ```
 
 Defined in: website/components/nav/menu.tsx:37
 
-Live close-X widget.
+Live menu-background widget over the fullscreen canvas.
 
-***
+---
 
-### \_burgerBtn
+### \_menuCloseBtn
 
 ```ts
-_burgerBtn: 
-  | BurgerButtonWebGL
+_menuCloseBtn:
+  | CloseButtonWebGL
   | null;
 ```
 
 Defined in: website/components/nav/menu.tsx:39
 
-Live burger widget.
+Live close-X widget.
 
-***
+---
 
-### \_burgerCanvasEl
+### \_burgerBtn
 
 ```ts
-_burgerCanvasEl: HTMLCanvasElement | null;
+_burgerBtn:
+  | BurgerButtonWebGL
+  | null;
 ```
 
 Defined in: website/components/nav/menu.tsx:41
 
-Persistent burger canvas (survives re-renders).
+Live burger widget.
 
-***
+---
 
-### \_menuCanvasEl
+### \_burgerCanvasEl
 
 ```ts
-_menuCanvasEl: HTMLCanvasElement | null;
+_burgerCanvasEl: HTMLCanvasElement | null
 ```
 
 Defined in: website/components/nav/menu.tsx:43
 
-Persistent menu background canvas.
+Persistent burger canvas (survives re-renders).
 
-***
+---
 
-### \_menuCloseCanvasEl
+### \_menuCanvasEl
 
 ```ts
-_menuCloseCanvasEl: HTMLCanvasElement | null;
+_menuCanvasEl: HTMLCanvasElement | null
 ```
 
 Defined in: website/components/nav/menu.tsx:45
 
+Persistent menu background canvas.
+
+---
+
+### \_menuCloseCanvasEl
+
+```ts
+_menuCloseCanvasEl: HTMLCanvasElement | null
+```
+
+Defined in: website/components/nav/menu.tsx:47
+
 Persistent close-X canvas.
 
-***
+---
 
 ### \_onDark
 
 ```ts
-_onDark: boolean;
+_onDark: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:47
+Defined in: website/components/nav/menu.tsx:49
 
 True while the nav floats over a dark band (contrast variant).
 
@@ -367,7 +379,7 @@ True while the nav floats over a dark band (contrast variant).
 $(selector): Element | null;
 ```
 
-Defined in: website/components/nav/menu.tsx:49
+Defined in: website/components/nav/menu.tsx:51
 
 Shadow-scoped querySelector.
 
@@ -381,7 +393,7 @@ Shadow-scoped querySelector.
 
 `Element` \| `null`
 
-***
+---
 
 ### \_updateDom()
 
@@ -389,7 +401,7 @@ Shadow-scoped querySelector.
 _updateDom(): void;
 ```
 
-Defined in: website/components/nav/menu.tsx:51
+Defined in: website/components/nav/menu.tsx:53
 
 Triggers a template re-render.
 

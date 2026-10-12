@@ -57,6 +57,11 @@ from this fragment (zero-hardcoding rule 9).
 
 BEM block fragment "b media figure" — composed by the token groups below into full class names.
 
+### `_B_MEDIA_AUDIO_NOTE`
+
+BEM block fragment "b media audio note" — the figcaption strip noting the
+video's audio language; composed by the token groups below (rule 9).
+
 ### `_B_LANG_DIALOG`
 
 BEM block fragment "b lang dialog" — composed by the token groups below into full class names.

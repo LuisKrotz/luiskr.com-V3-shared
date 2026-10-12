@@ -1,6 +1,6 @@
 # `experiments/star-field/tests/coverage/starfield/engine/starfield-catalog-tails.test.js`
 
-Coverage tails for the catalog placement helpers —
+Coverage tails for the catalog scale/placement helpers —
 
 |                |                                                                                              |
 | -------------- | -------------------------------------------------------------------------------------------- |

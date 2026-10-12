@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFFly
 
-Defined in: experiments/star-field/engine/types.ts:372
+Defined in: experiments/star-field/engine/types.ts:627
 
 Active camera fly-to tween — cubic ease-in-out over FLY_MS.
 
@@ -13,134 +13,164 @@ Active camera fly-to tween — cubic ease-in-out over FLY_MS.
 ### t0
 
 ```ts
-t0: number;
+t0: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:374
+Defined in: experiments/star-field/engine/types.ts:629
 
 Start time (performance.now snapshot).
 
-***
+---
 
 ### fromPos
 
 ```ts
-fromPos: object;
+fromPos: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:376
+Defined in: experiments/star-field/engine/types.ts:631
 
 Camera position at tween start.
 
 #### x
 
 ```ts
-x: number;
+x: number
 ```
 
 #### y
 
 ```ts
-y: number;
+y: number
 ```
 
 #### z
 
 ```ts
-z: number;
+z: number
 ```
 
-***
+---
 
-### toPos
+### offset
 
 ```ts
-toPos: object;
+offset: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:378
+Defined in: experiments/star-field/engine/types.ts:633
 
-Camera destination.
+Approach offset — destination sits this vector away from the body.
 
 #### x
 
 ```ts
-x: number;
+x: number
 ```
 
 #### y
 
 ```ts
-y: number;
+y: number
 ```
 
 #### z
 
 ```ts
-z: number;
+z: number
 ```
 
-***
+---
 
 ### fromTgt
 
 ```ts
-fromTgt: object;
+fromTgt: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:380
+Defined in: experiments/star-field/engine/types.ts:635
 
 Controls target at tween start.
 
 #### x
 
 ```ts
-x: number;
+x: number
 ```
 
 #### y
 
 ```ts
-y: number;
+y: number
 ```
 
 #### z
 
 ```ts
-z: number;
+z: number
 ```
 
-***
+---
 
-### toTgt
+### track
 
 ```ts
-toTgt: object;
+track: () =>
+  | {
+  x: number;
+  y: number;
+  z: number;
+}
+  | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:382
+Defined in: experiments/star-field/engine/types.ts:642
 
-Controls target destination (body center).
+Live body-position getter — rider-mounted anchors keep moving while
+the tween runs, so the destination is re-resolved every frame; a
+static snapshot would land the camera where the body was at arm
+time. Returns null when the anchor is gone (dest frozen at last).
+
+#### Returns
+
+\| \{
+`x`: `number`;
+`y`: `number`;
+`z`: `number`;
+\}
+\| `null`
+
+---
+
+### last
+
+```ts
+last: object
+```
+
+Defined in: experiments/star-field/engine/types.ts:644
+
+Last resolved body position — destination anchor when track yields null.
 
 #### x
 
 ```ts
-x: number;
+x: number
 ```
 
 #### y
 
 ```ts
-y: number;
+y: number
 ```
 
 #### z
 
 ```ts
-z: number;
+z: number
 ```
 
-***
+---
 
 ### done?
 
@@ -148,7 +178,7 @@ z: number;
 optional done?: () => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:384
+Defined in: experiments/star-field/engine/types.ts:646
 
 Optional follow-up when the tween completes (fire onSelect).
 

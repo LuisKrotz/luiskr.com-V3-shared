@@ -1,17 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/events/dom](../README.md) / ANIMATION\_EVENTS
 
 ```ts
 const ANIMATION_EVENTS: Readonly<{
-  TRANSITIONEND: "transitionend";
-  ANIMATIONEND: "animationend";
-}>;
+  TRANSITIONEND: 'transitionend'
+  ANIMATIONEND: 'animationend'
+}>
 ```
 
-Defined in: core/tokens/events/dom.ts:127
+Defined in: core/tokens/events/dom.ts:129
 
 Frozen animation event-name map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/sizing](../README.md) / measureFit
 
 ```ts
-function measureFit(c, observedWidth?): void;
+function measureFit(c, observedWidth?): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:61
+Defined in: website/components/carousel/custom-carousel/sizing.ts:62
 
 Decides whether the items fit side-by-side (no carousel chrome) or need
 the scroll track. Side-by-side requires: ≤2 items, viewport

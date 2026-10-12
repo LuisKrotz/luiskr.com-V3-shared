@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/star/render](../README.md) / renderStarField
 
 ```ts
-function renderStarField(host): Element;
+function renderStarField(host): Element
 ```
 
-Defined in: experiments/star-field/star/render.tsx:207
+Defined in: experiments/star-field/star/render.tsx:211
 
 Renders the StarField view.
 

@@ -1,19 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/star-field/engine/bodies/structures](../README.md) / makeStructure
 
 ```ts
-function makeStructure(
-   THREE, 
-   deps, 
-   def, 
-   glowTex?
-): Object3D;
+function makeStructure(THREE, deps, def, glowTex?): Object3D
 ```
 
-Defined in: experiments/star-field/engine/bodies/structures.ts:177
+Defined in: experiments/star-field/engine/bodies/structures.ts:251
 
 Builds one hierarchy structure: a low-poly fresnel-rim boundary
 sphere plus the optional interior speckle volume. The rim material

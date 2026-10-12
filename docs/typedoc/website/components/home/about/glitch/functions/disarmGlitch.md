@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/about/glitch](../README.md) / disarmGlitch
 
 ```ts
-function disarmGlitch(host): void;
+function disarmGlitch(host): void
 ```
 
-Defined in: website/components/home/about/glitch.ts:694
+Defined in: website/components/home/about/glitch.ts:45
 
 Stops the loop and removes the overlay.
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/registry](../README.md) / searchRegistry
 
 ```ts
-function searchRegistry(query, limit?): Promise<SFRegistryRecord[]>;
+function searchRegistry(query, limit?): Promise<SFRegistryRecord[]>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:226
+Defined in: experiments/star-field/engine/registry.ts:227
 
 Incremental registry search — pulls shards sequentially and collects
 records whose display name or catalogue designation contains the

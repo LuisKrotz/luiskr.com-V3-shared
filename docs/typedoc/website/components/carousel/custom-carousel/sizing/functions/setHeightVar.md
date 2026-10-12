@@ -1,22 +1,19 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/sizing](../README.md) / setHeightVar
 
 ```ts
-function setHeightVar(c): void;
+function setHeightVar(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:202
+Defined in: website/components/carousel/custom-carousel/sizing.ts:351
 
-Publishes --carousel-item-height on the enclosing <section>: the first
-item's intrinsic ratio applied to the host width ((h/w)·hostW), capped
-at MAX_HEIGHT_VH — aspect-correct heights before image decode so slides
-never pop. When the item lacks a size the measured slide height is the
-fallback; a ≤0 result bails rather than writing a 0px var. The
-getPropertyValue read guards the setProperty — same-value writes would
-still dirty the style recalc.
+Publishes --carousel-item-height on the enclosing <section> and
+--carousel-media-height on the host: the aspect-corrected height
+ensuring all slides share one uniform height. In mixed carousels on
+mobile, the uniform height anchors to the shortest portrait item.
 
 ## Parameters
 

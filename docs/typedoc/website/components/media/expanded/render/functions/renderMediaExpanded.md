@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/expanded/render](../README.md) / renderMediaExpanded
 
 ```ts
-function renderMediaExpanded(el): Element;
+function renderMediaExpanded(el): Element
 ```
 
-Defined in: website/components/media/expanded/render.tsx:28
+Defined in: website/components/media/expanded/render.tsx:30
 
 Renders media expanded.
 

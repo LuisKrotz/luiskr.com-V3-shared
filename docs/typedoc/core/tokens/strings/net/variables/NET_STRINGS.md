@@ -1,27 +1,28 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/strings/net](../README.md) / NET\_STRINGS
 
 ```ts
 const NET_STRINGS: Readonly<{
-  SITE_URL: "https://luiskr.com";
-  GRAVATAR_BASE: "https://www.gravatar.com/avatar/";
-  GRAVATAR_HOSTNAME: "gravatar.com";
-  GRAVATAR_HOSTNAME_SUFFIX: ".gravatar.com";
-  HTTP_LOCALHOST: "http://localhost";
-  BLOB_COLON: "blob:";
-  IMAGE_PNG: "image/png";
-  METHOD_POST: "POST";
-  METHOD_PUT: "PUT";
-  METHOD_DELETE: "DELETE";
-  HEADER_FILE_PATH: "x-file-path";
-  HEADER_CONTENT_TYPE: "content-type";
-  MIME_OCTET_STREAM: "application/octet-stream";
-  JOB_RUNNING: "running";
-  JOB_UPLOADING: "uploading";
-}>;
+  SITE_URL: 'https://luiskr.com'
+  GRAVATAR_BASE: 'https://www.gravatar.com/avatar/'
+  GRAVATAR_HOSTNAME: 'gravatar.com'
+  GRAVATAR_HOSTNAME_SUFFIX: '.gravatar.com'
+  HTTP_LOCALHOST: 'http://localhost'
+  BLOB_COLON: 'blob:'
+  IMAGE_PNG: 'image/png'
+  METHOD_POST: 'POST'
+  METHOD_PUT: 'PUT'
+  METHOD_DELETE: 'DELETE'
+  HEADER_FILE_PATH: 'x-file-path'
+  HEADER_CONTENT_TYPE: 'content-type'
+  MIME_OCTET_STREAM: 'application/octet-stream'
+  MIME_JSON: 'application/json'
+  JOB_RUNNING: 'running'
+  JOB_UPLOADING: 'uploading'
+}>
 ```
 
 Defined in: core/tokens/strings/net.ts:13

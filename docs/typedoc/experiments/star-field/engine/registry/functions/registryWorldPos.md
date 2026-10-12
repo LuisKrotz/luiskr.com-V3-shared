@@ -1,20 +1,21 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/registry](../README.md) / registryWorldPos
 
 ```ts
-function registryWorldPos(s, rec): 
-  | {
-  x: number;
-  y: number;
-  z: number;
-}
-  | null;
+function registryWorldPos(
+  s,
+  rec
+): {
+  x: number
+  y: number
+  z: number
+} | null
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:265
+Defined in: experiments/star-field/engine/registry.ts:266
 
 World-space position of a registry record — delegates to the shared
 `sfGalacticVec` Cartesian path so fly-to lands exactly on the
@@ -38,11 +39,11 @@ The registry record.
 
 ## Returns
 
-  \| \{
-  `x`: `number`;
-  `y`: `number`;
-  `z`: `number`;
+\| \{
+`x`: `number`;
+`y`: `number`;
+`z`: `number`;
 \}
-  \| `null`
+\| `null`
 
 `{x,y,z}` world position, or null without a scene.

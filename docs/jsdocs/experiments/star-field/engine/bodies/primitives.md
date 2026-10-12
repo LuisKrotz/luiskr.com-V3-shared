@@ -124,10 +124,25 @@ Remap each vertex's u to its normalized radius (v rides the strip's
 center row) so the C/B/A ring bands and the Cassini gap land at
 their true radii instead of smearing into a solid plate.
 
+### `makeStation`
+
+Crafted-station silhouette — a crewed orbiter (the ISS) is not a ball
+of light: a long truss carries a pressurized-module core at centre and
+a pair of wide flat solar-array wings at the tips, all in lit
+MeshStandardMaterial so the station glints in sunlight and goes dark
+through eclipse instead of glowing. All proportions derive from
+`sat.radius` so the model shrinks with the solar tier.
+
+- `@param` THREE The three.js module.
+- `@param` sat Satellite def — `radius` is the core scale unit.
+- `@returns` The station group (caller positions it on its pivot).
+
 ### `makeSatellites`
 
 Decorative companion satellites — small unlit spheres on child pivots;
-`satPivots` returns the {pivot,speed,phase} records frame.ts rotates.
+`sat.station` swaps the glow ball for the crafted truss-and-panels
+model (ISS). `satPivots` returns the {pivot,speed,phase} records
+frame.ts rotates.
 
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors.

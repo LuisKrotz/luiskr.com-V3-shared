@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/locale/ui-text](../README.md) / appText
 
 ```ts
-function appText(path): unknown;
+function appText(path): unknown
 ```
 
-Defined in: core/locale/ui-text.ts:41
+Defined in: core/locale/ui-text.ts:42
 
 Resolves a UI string from the live APP dictionary (store.lang.app, loaded
 from Firebase for the current locale) with the English snapshot as fallback.

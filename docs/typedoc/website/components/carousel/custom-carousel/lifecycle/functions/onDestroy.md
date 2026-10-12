@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/lifecycle](../README.md) / onDestroy
 
 ```ts
-function onDestroy(host): void;
+function onDestroy(host): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/lifecycle.ts:68
+Defined in: website/components/carousel/custom-carousel/lifecycle.ts:62
 
 Teardown: autoplay clock, WebGL arrows, observers, timers — every async handle released so nothing fires after disconnect.
 

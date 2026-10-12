@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/menu](../README.md) / closeNavMenu
 
 ```ts
-function closeNavMenu(host): void;
+function closeNavMenu(host): void
 ```
 
-Defined in: website/components/nav/menu.tsx:206
+Defined in: website/components/nav/menu.tsx:213
 
 Closes the menu through the full dissolve cycle: adds the -closing
 class (CSS plays the item fade-out), releases the contour field so it

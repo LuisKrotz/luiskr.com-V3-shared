@@ -2,12 +2,22 @@
 
 &lt;view-admin-login&gt; — the CMS gate: a single Google OAuth
 
-| | |
-|---|---|
-| **Source** | `src/cms/routes/AdminLogin.tsx` |
+|                |                                       |
+| -------------- | ------------------------------------- |
+| **Source**     | `src/cms/routes/AdminLogin.tsx`       |
 | **UX surface** | Login screen and the dashboard shell. |
 
 ## Members
+
+### `unwrapAuthMessage`
+
+Unwraps a Firebase error's real cause: auth/internal-error embeds the
+backend rejection as a JSON string inside `message` (the App-Check 401
+from createAuthUri), so the inner `error.message` is what actually
+names the failure. Returns the raw text when it isn't wrapped JSON.
+
+- `@param` raw The SDK error message (possibly a JSON-encoded API error).
+- `@returns` The innermost human-readable message.
 
 ### `ViewAdminLogin`
 
@@ -16,10 +26,13 @@ The ViewAdminLogin — admin login class.
 ### (module scope)
 
 Surfaces a broken OAuth round-trip: signInWithGoogle marks the
-session before the redirect navigation; still seeing the marker when
-this view mounts means the return leg restored no session (blocked
-third-party storage, strict tracking prevention). Without this the
-flow loops silently — click → Google → back → login → repeat.
+session before the redirect navigation and preserves the popup-leg
+code; still seeing the marker when this view mounts means the
+return leg restored no session. The relay stores the event in the
+helper iframe's web storage, so browsers that partition or block
+third-party site data drop it — even with first-party cookies
+allowed. Without this the flow loops silently:
+click → Google → back → login → repeat.
 
 ### `handleGoogleLogin`
 

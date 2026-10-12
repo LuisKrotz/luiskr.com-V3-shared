@@ -1,30 +1,32 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/strings/state](../README.md) / STATE\_STRINGS
 
 ```ts
 const STATE_STRINGS: Readonly<{
-  NONE: "none";
-  BLOCK: "block";
-  AUTO: "auto";
-  SMOOTH: "smooth";
-  INSTANT: "instant";
-  TRUE: "true";
-  FALSE: "false";
-  GRANTED: "granted";
-  DENIED: "denied";
-  OPEN: "open";
-  FIXED: "fixed";
-  ABSOLUTE: "absolute";
-  RELATIVE: "relative";
-  HIDDEN: "hidden";
-  HIGH: "high";
-  DEFAULT: "default";
-  LANDSCAPE: "landscape";
-  SYSTEM: "system";
-}>;
+  NONE: 'none'
+  BLOCK: 'block'
+  AUTO: 'auto'
+  SMOOTH: 'smooth'
+  INSTANT: 'instant'
+  TRUE: 'true'
+  FALSE: 'false'
+  GRANTED: 'granted'
+  DENIED: 'denied'
+  OPEN: 'open'
+  FIXED: 'fixed'
+  ABSOLUTE: 'absolute'
+  RELATIVE: 'relative'
+  HIDDEN: 'hidden'
+  HIGH: 'high'
+  DEFAULT: 'default'
+  LANDSCAPE: 'landscape'
+  PORTRAIT: 'portrait'
+  MOBILE: 'mobile'
+  SYSTEM: 'system'
+}>
 ```
 
 Defined in: core/tokens/strings/state.ts:14

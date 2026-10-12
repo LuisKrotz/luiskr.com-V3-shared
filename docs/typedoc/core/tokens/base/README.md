@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / core/tokens/base
 
@@ -17,6 +17,7 @@
 - [\_B\_DRAW\_TEXT](variables/B_DRAW_TEXT.md)
 - [\_B\_HOME\_MOSAIC](variables/B_HOME_MOSAIC.md)
 - [\_B\_MEDIA\_FIGURE](variables/B_MEDIA_FIGURE.md)
+- [\_B\_MEDIA\_AUDIO\_NOTE](variables/B_MEDIA_AUDIO_NOTE.md)
 - [\_B\_LANG\_DIALOG](variables/B_LANG_DIALOG.md)
 - [\_B\_PROGRESS\_BAR](variables/B_PROGRESS_BAR.md)
 - [\_B\_SKELETON](variables/B_SKELETON.md)
@@ -106,6 +107,8 @@
 - [\_K\_PREFERENCES\_MODAL](variables/K_PREFERENCES_MODAL.md)
 - [\_K\_MEDIA](variables/K_MEDIA.md)
 - [\_K\_SOURCE\_CODE](variables/K_SOURCE_CODE.md)
+- [\_K\_CREDIT](variables/K_CREDIT.md)
+- [\_K\_RIGHTS](variables/K_RIGHTS.md)
 - [\_K\_VIEW\_OUTLET](variables/K_VIEW_OUTLET.md)
 - [\_K\_ROUTER\_LINK\_EXACT\_ACTIVE](variables/K_ROUTER_LINK_EXACT_ACTIVE.md)
 - [\_K\_SYSTEM](variables/K_SYSTEM.md)

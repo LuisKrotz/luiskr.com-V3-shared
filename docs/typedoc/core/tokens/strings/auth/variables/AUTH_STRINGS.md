@@ -1,21 +1,24 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/strings/auth](../README.md) / AUTH\_STRINGS
 
 ```ts
 const AUTH_STRINGS: Readonly<{
-  ERR_CANCELLED_POPUP: "auth/cancelled-popup-request";
-  ERR_POPUP_CLOSED: "auth/popup-closed-by-user";
-  ERR_POPUP_BLOCKED: "auth/popup-blocked";
-  ERR_INTERNAL: "auth/internal-error";
-  ERR_STORAGE_UNSUPPORTED: "auth/web-storage-unsupported";
-  ERR_ENV_UNSUPPORTED: "auth/operation-not-supported-in-this-environment";
-  ERR_AUTH_INIT_TIMEOUT: "auth/auth-init-timeout";
-  ERR_REDIRECT_EVENT_TIMEOUT: "auth/redirect-event-timeout";
-  ERR_NO_REDIRECT_EVENT: "auth/no-redirect-event";
-}>;
+  ERR_CANCELLED_POPUP: 'auth/cancelled-popup-request'
+  ERR_POPUP_CLOSED: 'auth/popup-closed-by-user'
+  ERR_POPUP_BLOCKED: 'auth/popup-blocked'
+  ERR_INTERNAL: 'auth/internal-error'
+  ERR_STORAGE_UNSUPPORTED: 'auth/web-storage-unsupported'
+  ERR_ENV_UNSUPPORTED: 'auth/operation-not-supported-in-this-environment'
+  ERR_AUTH_INIT_TIMEOUT: 'auth/auth-init-timeout'
+  ERR_REDIRECT_EVENT_TIMEOUT: 'auth/redirect-event-timeout'
+  ERR_NO_REDIRECT_EVENT: 'auth/no-redirect-event'
+  APPCHECK_MARKER: 'App Check'
+  APPCHECK_PROVIDER_ENTERPRISE: 'enterprise'
+  PROVIDER_GOOGLE: 'google.com'
+}>
 ```
 
 Defined in: core/tokens/strings/auth.ts:14

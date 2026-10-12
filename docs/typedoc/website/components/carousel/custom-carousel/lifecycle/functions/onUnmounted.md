@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/lifecycle](../README.md) / onUnmounted
 
 ```ts
-function onUnmounted(host): void;
+function onUnmounted(host): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/lifecycle.ts:37
+Defined in: website/components/carousel/custom-carousel/lifecycle.ts:31
 
 Disconnects the ResizeObserver tracking the host width.
 

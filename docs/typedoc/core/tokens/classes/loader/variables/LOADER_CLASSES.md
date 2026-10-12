@@ -1,22 +1,25 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/classes/loader](../README.md) / LOADER\_CLASSES
 
 ```ts
 const LOADER_CLASSES: Readonly<{
-  INTRO_LOADER: "intro-loader";
-  INTRO_LOADER_GLOW: "intro-loader-glow";
-  INTRO_LOADER_CONTENT: "intro-loader-content";
-  INTRO_LOADER_SPINNER: "intro-loader-spinner";
-  INTRO_LOADER_PERCENT: "intro-loader-percent";
-  INTRO_LOADER_TITLE: "intro-loader-title";
-  INTRO_LOADER_MSG: "intro-loader-msg";
-  INTRO_LOADER_BAR: "intro-loader-bar";
-  INTRO_LOADER_BAR_FILL: "intro-loader-bar-fill";
-  INTRO_LOADER_HIDDEN: "intro-loader--hidden";
-}>;
+  INTRO_LOADER: 'intro-loader'
+  INTRO_LOADER_GLOW: 'intro-loader-glow'
+  INTRO_LOADER_GRID: 'intro-loader-grid'
+  INTRO_LOADER_CONTENT: 'intro-loader-content'
+  INTRO_LOADER_SPINNER: 'intro-loader-spinner'
+  INTRO_LOADER_SPINNER_INNER: 'intro-loader-spinner-inner'
+  INTRO_LOADER_COUNTER: 'intro-loader-counter'
+  INTRO_LOADER_PERCENT: 'intro-loader-percent'
+  INTRO_LOADER_TITLE: 'intro-loader-title'
+  INTRO_LOADER_MSG: 'intro-loader-msg'
+  INTRO_LOADER_BAR: 'intro-loader-bar'
+  INTRO_LOADER_BAR_FILL: 'intro-loader-bar-fill'
+  INTRO_LOADER_HIDDEN: 'intro-loader--hidden'
+}>
 ```
 
 Defined in: core/tokens/classes/loader.ts:13

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/canvas/dom-font](../README.md) / applyFontExtras
 
 ```ts
-function applyFontExtras(ctx, st): void;
+function applyFontExtras(ctx, st): void
 ```
 
-Defined in: core/utils/canvas/dom-font.ts:29
+Defined in: core/utils/canvas/dom-font.ts:76
 
 Pushes the font axes the `ctx.font` shorthand cannot express — stretch,
 variant caps (small-caps), kerning, letter-spacing, OpenType feature and

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/registry](../README.md) / ensureRegistryManifest
 
 ```ts
-function ensureRegistryManifest(): Promise<SFRegistryManifest | null>;
+function ensureRegistryManifest(): Promise<SFRegistryManifest | null>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:100
+Defined in: experiments/star-field/engine/registry.ts:101
 
 Fetches the registry manifest once per session — the directory needs
 it for the per-kind counts and shard lists; selection paths don't

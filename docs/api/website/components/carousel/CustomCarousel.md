@@ -2,9 +2,9 @@
 
 &lt;custom-carousel&gt; — infinite-loop horizontal carousel used by
 
-| | |
-|---|---|
-| **Source** | `src/website/components/carousel/CustomCarousel.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/carousel/CustomCarousel.tsx`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -53,7 +53,7 @@ Accumulated ms into the cycle — survives pause→resume.
 ### `ringProgress`
 
 0–1 fraction of the autoplay cycle — drives both the SVG ring and
- the WebGL arrows' progress arc.
+the WebGL arrows' progress arc.
 
 ### `rafId`
 
@@ -70,7 +70,7 @@ Pending clone→real instant jump (CAROUSEL_TIMING.TELEPORT_DELAY).
 ### `isNavigating`
 
 True while a programmatic scroll is animating — suppresses the
- scroll-handler teleport so the goTo-driven clone jump isn't undone.
+scroll-handler teleport so the goTo-driven clone jump isn't undone.
 
 ### `touchStartX`
 
@@ -79,7 +79,7 @@ Swipe origin X for the threshold check in the touchend handler.
 ### `slideLoaded`
 
 Per-index lazy flag: media src assigned only for slides near the
- active one (±2 positions, wrapping).
+active one (±2 positions, wrapping).
 
 ### `circumference`
 
@@ -121,6 +121,22 @@ Ring regress animation in flight (drains progress on stop).
 
 Viewport under the mobile breakpoint at construct time.
 
+### `_landscapeRatio`
+
+Majority landscape aspect ratio key ('16:9' | '21:9' | '32:9') or null.
+
+### `_isMixed`
+
+Whether the carousel mixes both landscape and portrait media.
+
+### `landscapeRatio`
+
+Majority landscape aspect ratio key ('16:9' | '21:9' | '32:9') or null.
+
+### `isMixed`
+
+Whether the carousel mixes both landscape and portrait media.
+
 ### `items`
 
 Setter/getter — slide data (media + labels).
@@ -131,6 +147,7 @@ Batch-assigns items/folder/forceActive with a single render — the
 setter chain would otherwise re-render per property. Re-applying the
 same data (same array reference + same flags) is a no-op, so parents
 may call it freely from render/update paths.
+
 - `@param` {object} o
 - `@param` {Array} o.items
 - `@param` {string} o.folder

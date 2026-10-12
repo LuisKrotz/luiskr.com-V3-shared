@@ -2,9 +2,9 @@
 
 Carousel timing/geometry tokens — grouped subsets of
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/motion/carousel.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/motion/carousel.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -114,6 +114,30 @@ px subtracted from the viewport for landscape-item width caps — mirrors the la
 ### `MAX_HEIGHT_FALLBACK`
 
 Max slide height (px) used when window.innerHeight is unavailable (SSR/tests)
+
+### `RATIO_16_9`
+
+Numeric 16:9 aspect ratio
+
+### `RATIO_21_9`
+
+Numeric 21:9 aspect ratio
+
+### `RATIO_32_9`
+
+Numeric 32:9 aspect ratio
+
+### `ASPECT_RATIO_16_9`
+
+String token key for 16:9
+
+### `ASPECT_RATIO_21_9`
+
+String token key for 21:9
+
+### `ASPECT_RATIO_32_9`
+
+String token key for 32:9
 
 ### `CAROUSEL_LOADING`
 

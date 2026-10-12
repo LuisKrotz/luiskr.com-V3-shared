@@ -1,17 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/data/component-keys](../README.md) / SECTION\_COMPONENT\_KEYS
 
 ```ts
 const SECTION_COMPONENT_KEYS: Readonly<{
-  RELATED_TITLE: "related.title";
-  CONTACT_TITLE: "contact.title";
-}>;
+  RELATED_TITLE: 'related.title'
+  CONTACT_TITLE: 'contact.title'
+}>
 ```
 
-Defined in: core/tokens/data/component-keys.ts:61
+Defined in: core/tokens/data/component-keys.ts:73
 
 Frozen section component key map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

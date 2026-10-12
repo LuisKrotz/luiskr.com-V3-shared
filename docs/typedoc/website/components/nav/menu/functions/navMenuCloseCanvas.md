@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/menu](../README.md) / navMenuCloseCanvas
 
 ```ts
-function navMenuCloseCanvas(host): HTMLCanvasElement;
+function navMenuCloseCanvas(host): HTMLCanvasElement
 ```
 
-Defined in: website/components/nav/menu.tsx:101
+Defined in: website/components/nav/menu.tsx:103
 
 Canvas JSX for the WebGL menu close (X) icon.
 

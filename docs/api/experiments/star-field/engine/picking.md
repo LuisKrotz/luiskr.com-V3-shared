@@ -2,9 +2,9 @@
 
 Pointer picking for the star-field canvas: pointerdown
 
-| | |
-|---|---|
-| **Source** | `src/experiments/star-field/engine/picking.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments/star-field/engine/picking.ts`          |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -20,6 +20,7 @@ appears — raycast hits land on child detail (cloud shells, rings,
 halos, satellite pivots) that carry no id, so the owning body is the
 nearest tagged ancestor. Returns the id and whether the originally
 hit object was an oversized invisible pick proxy.
+
 - `@param` object The raycast hit object.
 - `@returns` `{ id, proxy }` or null when no ancestor carries a body id.
 
@@ -28,6 +29,7 @@ hit object was an oversized invisible pick proxy.
 Walks a hit object's ancestor chain — three.js raycasts don't cull
 `visible: false` objects, so a deep-tier body gated off by the LOD
 tier reveal would still hover/pick through its hidden pivot.
+
 - `@param` object The raycast hit object (may be a deep child).
 - `@returns` false when any ancestor is hidden.
 
@@ -37,8 +39,10 @@ Raycasts pickables at a pointer position — converts client coords into
 canvas-relative NDC, then intersects `s.pickables` recursively so shell
 children resolve to their body's mesh via userData walk-up. Hits that
 land on oversized invisible pick proxies lose to any real-mesh hit
-further down the ray, so clicking through a fat proxy bubble still
-selects the actual body underneath.
+further down the ray, and between OVERLAPPING proxies the smallest
+authored radius wins — a moon's tight bubble beats the giant planet
+bubble it orbits inside (the Moon stays clickable over Earth).
+
 - `@returns` The hit body id, or null.
 
 ### `RaycasterCtor`
@@ -56,4 +60,5 @@ test-mockable).
 Binds the pointer listeners on the render canvas: down records origin +
 cancels fly, up-within-threshold selects, move updates hover. Listeners
 live in state so destroy() can detach them all.
+
 - `@param` s Engine state.

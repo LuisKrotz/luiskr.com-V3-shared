@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFDossierFile
 
-Defined in: experiments/star-field/engine/types.ts:241
+Defined in: experiments/star-field/engine/types.ts:342
 
 Raw `public/data/<locale>/<id>.json` file shape — each locale folder
 ships one self-contained dossier per body so only the active language
@@ -19,58 +19,58 @@ downloads; `id`, `kind` and `source` are locale-neutral.
 ### id
 
 ```ts
-id: string;
+id: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:217
+Defined in: experiments/star-field/engine/types.ts:318
 
 #### Inherited from
 
 [`SFDossier`](SFDossier.md).[`id`](SFDossier.md#id)
 
-***
+---
 
 ### name
 
 ```ts
-name: string;
+name: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:218
+Defined in: experiments/star-field/engine/types.ts:319
 
 #### Inherited from
 
 [`SFDossier`](SFDossier.md).[`name`](SFDossier.md#name)
 
-***
+---
 
 ### kind
 
 ```ts
-kind: string;
+kind: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:219
+Defined in: experiments/star-field/engine/types.ts:320
 
 #### Inherited from
 
 [`SFDossier`](SFDossier.md).[`kind`](SFDossier.md#kind)
 
-***
+---
 
 ### tagline
 
 ```ts
-tagline: string;
+tagline: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:220
+Defined in: experiments/star-field/engine/types.ts:321
 
 #### Inherited from
 
 [`SFDossier`](SFDossier.md).[`tagline`](SFDossier.md#tagline)
 
-***
+---
 
 ### facts
 
@@ -78,53 +78,53 @@ Defined in: experiments/star-field/engine/types.ts:220
 facts: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:221
+Defined in: experiments/star-field/engine/types.ts:322
 
 #### label
 
 ```ts
-label: string;
+label: string
 ```
 
 #### value
 
 ```ts
-value: string;
+value: string
 ```
 
 #### Inherited from
 
 [`SFDossier`](SFDossier.md).[`facts`](SFDossier.md#facts)
 
-***
+---
 
 ### history
 
 ```ts
-history: string;
+history: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:222
+Defined in: experiments/star-field/engine/types.ts:323
 
 #### Inherited from
 
 [`SFDossier`](SFDossier.md).[`history`](SFDossier.md#history)
 
-***
+---
 
 ### source
 
 ```ts
-source: string;
+source: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:223
+Defined in: experiments/star-field/engine/types.ts:324
 
 #### Inherited from
 
 [`SFDossier`](SFDossier.md).[`source`](SFDossier.md#source)
 
-***
+---
 
 ### sections?
 
@@ -132,7 +132,7 @@ Defined in: experiments/star-field/engine/types.ts:223
 optional sections?: SFDossierSection[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:225
+Defined in: experiments/star-field/engine/types.ts:326
 
 Optional prose subsections for deep-history bodies.
 
@@ -140,7 +140,7 @@ Optional prose subsections for deep-history bodies.
 
 [`SFDossier`](SFDossier.md).[`sections`](SFDossier.md#sections)
 
-***
+---
 
 ### media?
 
@@ -148,7 +148,7 @@ Optional prose subsections for deep-history bodies.
 optional media?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:227
+Defined in: experiments/star-field/engine/types.ts:328
 
 Downloaded gallery — images, videos, audio recordings.
 
@@ -174,7 +174,7 @@ optional audio?: SFDossierMedia[];
 
 [`SFDossier`](SFDossier.md).[`media`](SFDossier.md#media)
 
-***
+---
 
 ### meta?
 
@@ -182,7 +182,7 @@ optional audio?: SFDossierMedia[];
 optional meta?: SFDossierMeta;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:233
+Defined in: experiments/star-field/engine/types.ts:334
 
 Acquisition/translation signature.
 
@@ -190,7 +190,7 @@ Acquisition/translation signature.
 
 [`SFDossier`](SFDossier.md).[`meta`](SFDossier.md#meta)
 
-***
+---
 
 ### namedStars?
 
@@ -198,7 +198,7 @@ Acquisition/translation signature.
 optional namedStars?: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:247
+Defined in: experiments/star-field/engine/types.ts:348
 
 Locale-neutral proper-named star table shipped inside
 `en/milky-way.json` — real HYG catalogue entries (heliocentric
@@ -207,47 +207,47 @@ light-years) kept for future labels and the browse index.
 #### name
 
 ```ts
-name: string;
+name: string
 ```
 
 #### x
 
 ```ts
-x: number;
+x: number
 ```
 
 #### y
 
 ```ts
-y: number;
+y: number
 ```
 
 #### z
 
 ```ts
-z: number;
+z: number
 ```
 
 #### mag
 
 ```ts
-mag: number;
+mag: number
 ```
 
 #### spect
 
 ```ts
-spect: string;
+spect: string
 ```
 
 #### con
 
 ```ts
-con: string;
+con: string
 ```
 
 #### dist\_ly
 
 ```ts
-dist_ly: number;
+dist_ly: number
 ```

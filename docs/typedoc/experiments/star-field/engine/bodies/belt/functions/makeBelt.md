@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/star-field/engine/bodies/belt](../README.md) / makeBelt
 
 ```ts
-function makeBelt(
-   THREE, 
-   def, 
-   glowTex
-): Points;
+function makeBelt(THREE, def, glowTex): Points
 ```
 
-Defined in: experiments/star-field/engine/bodies/belt.ts:44
+Defined in: experiments/star-field/engine/bodies/belt.ts:107
 
 Builds the seeded particle annulus for a `kind: belt` catalog entry —
 the asteroid belt between Mars and Jupiter, the Kuiper belt beyond
@@ -32,7 +28,7 @@ The three.js module.
 [`SFBodyDef`](../../../types/interfaces/SFBodyDef.md)
 
 Catalog entry — `def.belt` carries inner/outer/count/puff,
-  `def.color` tints the particles, `def.id` seeds the LCG.
+`def.color` tints the particles, `def.id` seeds the LCG.
 
 ### glowTex
 

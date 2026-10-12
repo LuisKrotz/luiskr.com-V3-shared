@@ -1,18 +1,18 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/tokens/base](../README.md) / SECTIONS
 
 ```ts
 const SECTIONS: Readonly<{
-  HOME: "home";
-  ABOUT: "about";
-  CONTACT: "contact";
-}>;
+  HOME: 'home'
+  ABOUT: 'about'
+  CONTACT: 'contact'
+}>
 ```
 
-Defined in: core/tokens/base.ts:512
+Defined in: core/tokens/base.ts:525
 
 Frozen sections map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token

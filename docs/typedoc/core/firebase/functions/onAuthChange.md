@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / [core/firebase](../README.md) / onAuthChange
 
 ```ts
-function onAuthChange(callback): Promise<Unsubscribe>;
+function onAuthChange(callback): Promise<Unsubscribe>
 ```
 
-Defined in: core/firebase.ts:222
+Defined in: core/firebase.ts:395
 
 Subscribes to auth state after lazily loading firebase/auth.
 First resolves a pending redirect sign-in (the signInWithGoogle popup

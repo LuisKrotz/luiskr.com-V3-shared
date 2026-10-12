@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/about/glitch](../README.md) / attachGlitch
 
 ```ts
-function attachGlitch(host): void;
+function attachGlitch(host): void
 ```
 
-Defined in: website/components/home/about/glitch.ts:716
+Defined in: website/components/home/about/glitch.ts:67
 
 Binds the always-on glitch: starts the arm poll immediately (the effect
 runs ambient interference as soon as the portrait decodes — no hover

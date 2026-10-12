@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/registry](../README.md) / loadRegistryRecord
 
 ```ts
-function loadRegistryRecord(id): Promise<SFRegistryRecord | null>;
+function loadRegistryRecord(id): Promise<SFRegistryRecord | null>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:167
+Defined in: experiments/star-field/engine/registry.ts:168
 
 Resolves a registry id to its full record — pure shard arithmetic
 (`shard = rank ÷ 1000`, `slot = rank mod 1000`), one fetch worst

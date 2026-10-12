@@ -47,3 +47,14 @@ substitutes the `{year}` placeholder with the current calendar year so
 the stored translation never goes stale.
 
 - `@returns` e.g. 'All rights reserved © Luis Krötz, 2026'
+
+### `rightsParts`
+
+Segmented copyright line for the site footers — the same resolved
+`rightsText()` split around the © glyph and the year so renderers can
+wrap those two tokens in emphasis markup without hardcoding where the
+translation places them. `post` carries any suffix after the year
+(empty today, kept for translation freedom); when either anchor is
+missing the whole line lands in `pre` and renders unsegmented.
+
+- `@returns` {pre, copy, mid, year, post} — render as

@@ -1,18 +1,17 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/sizing](../README.md) / onCarouselResize
 
 ```ts
-function onCarouselResize(c): void;
+function onCarouselResize(c): void
 ```
 
 Defined in: website/components/carousel/custom-carousel/sizing.ts:183
 
-Window-resize handler — refreshes the mobile flag against the
-side-by-side breakpoint (mobile is defined by "can't pair items", not
-by the generic 768 media breakpoint) and re-publishes the slide height.
+Window-resize handler — `isMobile` is a live getter so the resize path
+only re-publishes the slide height.
 
 ## Parameters
 

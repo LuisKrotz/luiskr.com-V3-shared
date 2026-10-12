@@ -1,23 +1,18 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/fly](../README.md) / startFly
 
 ```ts
-function startFly(
-   s, 
-   worldPos, 
-   offset, 
-   done?
-): void;
+function startFly(s, track, offset, done?): void
 ```
 
-Defined in: experiments/star-field/engine/fly.ts:28
+Defined in: experiments/star-field/engine/fly.ts:30
 
 Arms a fly-to tween: destination is `offset` units along the current
 camera→body direction (or straight above when the camera is too close
-to define a direction), target is the body world position.
+to define a direction), target tracks the body's live world position.
 
 ## Parameters
 
@@ -27,21 +22,19 @@ to define a direction), target is the body world position.
 
 Engine state.
 
-### worldPos
+### track
 
-Body center in world space {x,y,z}.
+() =>
+\| \{
+`x`: `number`;
+`y`: `number`;
+`z`: `number`;
+\}
+\| `null`
 
-#### x
-
-`number`
-
-#### y
-
-`number`
-
-#### z
-
-`number`
+Body world-position getter — re-resolved per frame so a
+moving (rider-mounted) anchor can't leave the camera landing on a
+stale spot; null return freezes the last destination.
 
 ### offset
 

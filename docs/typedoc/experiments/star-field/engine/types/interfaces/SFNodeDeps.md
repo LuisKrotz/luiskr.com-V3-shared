@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFNodeDeps
 
-Defined in: experiments/star-field/engine/types.ts:25
+Defined in: experiments/star-field/engine/types.ts:30
 
 Lazily-loaded node-material context — the renderer is WebGPURenderer
 (WebGPU or forced-WebGL backend), whose node pipeline rejects classic
@@ -18,27 +18,33 @@ ctor so the body builders stay pure/mockable.
 ### TSL
 
 ```ts
-TSL: __module;
+TSL: __module
 ```
 
-Defined in: experiments/star-field/engine/types.ts:27
+Defined in: experiments/star-field/engine/types.ts:32
 
 The `three/tsl` module namespace.
 
-***
+---
 
 ### mats
 
 ```ts
-mats: object;
+mats: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:29
+Defined in: experiments/star-field/engine/types.ts:34
 
 Node-material constructors re-exported by `three/webgpu`.
 
 #### MeshBasicNodeMaterial
 
 ```ts
-MeshBasicNodeMaterial: typeof MeshBasicNodeMaterial;
+MeshBasicNodeMaterial: typeof MeshBasicNodeMaterial
+```
+
+#### MeshStandardNodeMaterial?
+
+```ts
+optional MeshStandardNodeMaterial?: typeof MeshStandardNodeMaterial;
 ```

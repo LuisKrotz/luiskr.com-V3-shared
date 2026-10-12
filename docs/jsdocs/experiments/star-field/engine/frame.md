@@ -16,7 +16,8 @@ orbits — pivot.rotation.y = phase + t·ORBIT_SPEED·speed
 spins — spinner.rotation.y advances by SPIN_SPEED·spin·dt
 satellites — same orbit formula on child pivots
 fly — eased camera tween overrides manual control until done
-render — plain renderer.render (no post pipeline in this engine)
+render — RenderPipeline post chain when it built (bloom → vignette
+→ film grain), plain renderer.render otherwise
 
 - `@param` s Engine state.
 - `@param` now RAF timestamp in ms — falls back to performance.now.

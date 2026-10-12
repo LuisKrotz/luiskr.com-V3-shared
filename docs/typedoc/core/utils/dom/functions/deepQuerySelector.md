@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/dom](../README.md) / deepQuerySelector
 
 ```ts
-function deepQuerySelector(selector, root?): Element | null;
+function deepQuerySelector(selector, root?): Element | null
 ```
 
-Defined in: core/utils/dom.ts:28
+Defined in: core/utils/dom.ts:30
 
 Depth-first search for the FIRST element matching `selector`, descending
 through every nested shadow root it passes. Order matches the visual

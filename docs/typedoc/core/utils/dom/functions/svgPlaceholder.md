@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/dom](../README.md) / svgPlaceholder
 
 ```ts
-function svgPlaceholder(w?, h?): string;
+function svgPlaceholder(w?, h?): string
 ```
 
-Defined in: core/utils/dom.ts:98
+Defined in: core/utils/dom.ts:172
 
 Generates an ultra-lightweight inline SVG placeholder data URI with exact
 dimensions. An empty `<svg width height viewBox>` weighs ~110 bytes,

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/sizing](../README.md) / startFitObserver
 
 ```ts
-function startFitObserver(c): void;
+function startFitObserver(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:28
+Defined in: website/components/carousel/custom-carousel/sizing.ts:29
 
 Wires a ResizeObserver on the host that re-runs _measureFit on width
 changes. Reports under FIT_EPS_PX of the last width are dropped —

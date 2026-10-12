@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / [core/firebase](../README.md) / fetchFirebaseDb
 
 ```ts
-function fetchFirebaseDb(path): Promise<DbSnapshot>;
+function fetchFirebaseDb(path): Promise<DbSnapshot>
 ```
 
-Defined in: core/firebase.ts:313
+Defined in: core/firebase.ts:486
 
 Lightweight HTTP REST reader for the Realtime Database: GETs
 `<db>/<path>.json` and wraps the payload in a snapshot-shaped

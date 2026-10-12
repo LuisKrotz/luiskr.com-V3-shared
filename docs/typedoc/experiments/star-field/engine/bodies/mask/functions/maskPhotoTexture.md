@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/star-field/engine/bodies/mask](../README.md) / maskPhotoTexture
 
 ```ts
-function maskPhotoTexture(
-   THREE, 
-   tex, 
-   options?
-): Texture<unknown, TextureEventMap> | undefined;
+function maskPhotoTexture(THREE, tex, options?): Texture<unknown, TextureEventMap> | undefined
 ```
 
-Defined in: experiments/star-field/engine/bodies/mask.ts:54
+Defined in: experiments/star-field/engine/bodies/mask.ts:57
 
 Composites a loaded photo texture into a square-capped canvas whose
 alpha fades to zero past `MASK_INNER` of the half-extent. Aspect ratio

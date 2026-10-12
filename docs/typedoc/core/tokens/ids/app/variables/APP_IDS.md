@@ -1,17 +1,18 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/ids/app](../README.md) / APP\_IDS
 
 ```ts
 const APP_IDS: Readonly<{
-  APP: "app";
-  MAIN: "main";
-  MAIN_CONTENT: "main-content";
-  VIEW_OUTLET: "view-outlet";
-  SF_NAV_PANEL: "sf-nav-panel";
-}>;
+  APP: 'app'
+  MAIN: 'main'
+  MAIN_CONTENT: 'main-content'
+  VIEW_OUTLET: 'view-outlet'
+  SF_NAV_PANEL: 'sf-nav-panel'
+  SF_INSTRUCTIONS_PANEL: 'sf-instructions-panel'
+}>
 ```
 
 Defined in: core/tokens/ids/app.ts:13

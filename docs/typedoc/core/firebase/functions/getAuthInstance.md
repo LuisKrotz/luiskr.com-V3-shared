@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / [core/firebase](../README.md) / getAuthInstance
 
 ```ts
-function getAuthInstance(): Promise<Auth>;
+function getAuthInstance(): Promise<Auth>
 ```
 
-Defined in: core/firebase.ts:78
+Defined in: core/firebase.ts:179
 
 Lazily imports firebase/auth once and returns the shared Auth instance.
 Concurrent callers share _authPromise so the chunk is fetched exactly once.

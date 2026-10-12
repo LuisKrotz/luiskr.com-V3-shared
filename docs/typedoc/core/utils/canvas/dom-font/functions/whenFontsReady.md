@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/canvas/dom-font](../README.md) / whenFontsReady
 
 ```ts
-function whenFontsReady(onReady): void;
+function whenFontsReady(onReady): void
 ```
 
-Defined in: core/utils/canvas/dom-font.ts:104
+Defined in: core/utils/canvas/dom-font.ts:151
 
 Resolves once the document's webfonts have settled (`document.fonts.ready`)
 — canvas rasterizes with whatever font is loaded AT draw time, so a

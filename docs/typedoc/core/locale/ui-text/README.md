@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / core/locale/ui-text
 
@@ -9,3 +9,5 @@
 - [appText](functions/appText.md)
 - [componentText](functions/componentText.md)
 - [routeSlugs](functions/routeSlugs.md)
+- [rightsText](functions/rightsText.md)
+- [rightsParts](functions/rightsParts.md)

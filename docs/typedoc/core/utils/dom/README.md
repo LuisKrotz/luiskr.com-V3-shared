@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / core/utils/dom
 
@@ -8,4 +8,6 @@
 
 - [deepQuerySelector](functions/deepQuerySelector.md)
 - [deepQuerySelectorAll](functions/deepQuerySelectorAll.md)
+- [withinModalArmWindow](functions/withinModalArmWindow.md)
+- [armResidualInputGuard](functions/armResidualInputGuard.md)
 - [svgPlaceholder](functions/svgPlaceholder.md)

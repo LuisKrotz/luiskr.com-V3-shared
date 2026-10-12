@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/menu](../README.md) / toggleNavMenu
 
 ```ts
-function toggleNavMenu(host): void;
+function toggleNavMenu(host): void
 ```
 
-Defined in: website/components/nav/menu.tsx:112
+Defined in: website/components/nav/menu.tsx:114
 
 Opens/closes the fullscreen menu overlay.
 

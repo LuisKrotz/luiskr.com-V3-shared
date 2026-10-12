@@ -15,6 +15,10 @@ The TSL node-graph namespace (compiled to WGSL/GLSL by the renderer).
 
 ### (module scope)
 
+The lazily-imported `three` module namespace.
+
+### (module scope)
+
 Lazily-loaded node-material context — the renderer is WebGPURenderer
 (WebGPU or forced-WebGL backend), whose node pipeline rejects classic
 GLSL ShaderMaterials. Every custom-shaded surface (fresnel limbs,
@@ -205,6 +209,49 @@ Climate cycle — oscillates the surface material tint toward
 `SF_COLORS.EARTH_ICE` (glaciation winter→summer analogy); `period`
 in seconds.
 
+### (module scope)
+
+Procedural weather — replaces the static `cloudTexture` deck with
+the full `weather.ts` field: evolving coverage, jet streams, ITCZ
+monsoon band, hurricane vortices, seasonal snow lines, volcanic
+ash plumes and matching surface cloud shadows (Earth).
+
+### (module scope)
+
+Aurora shell — a thin rayed emission OVAL centered on the magnetic
+pole (not the spin pole), driven by the shared solar-wind uniform
+so solar storms light every aurora-bearing body at once (Earth,
+Jupiter, Saturn, Neptune). Pass `true` for the default Earth-green
+oxygen palette, or a config object for per-body physics:
+`color`/`colorLow` are the curtain-top/lower-edge emissions,
+`tilt` the magnetic dipole's offset from the spin axis (radians —
+Neptune's is ~0.82 rad ≈ 47°), `lat` the oval's |lat| center and
+`intensity` a brightness multiplier (Jupiter > Earth > Saturn >
+Neptune, matching real emitted power).
+
+### (module scope)
+
+False → boreal oval only (Earth); default shows both poles.
+
+### (module scope)
+
+Solar flares — limb prominence sprites on the photosphere edge that
+breathe and stretch outward with the shared solar-wind cycle (Sun).
+
+### (module scope)
+
+LEO constellation shell — `count` point glints sharing one inclined
+orbital plane at `orbit`× radius, sweeping as a unit (the Starlink
+swarm; `orbit` multiplies `def.radius`).
+
+### (module scope)
+
+Meteor strikes — airless cratered bodies still take impacts; a
+pooled flash sprite fires at a random surface point every
+`SF_METEOR.INTERVAL`-ish seconds (updateFx). For bodies whose
+dossier describes ongoing bombardment — the flash makes the
+crater record readable as a live process.
+
 ### `dist`
 
 Authored distance label for the hover tooltip — semi-major axis in
@@ -213,8 +260,27 @@ are universal abbreviations so the string needs no translation.
 
 ### (module scope)
 
-Decorative non-pickable satellites (companion stars, exoplanets) —
-orbit this body's mesh; purely visual, no dossier of their own.
+Companion satellites orbiting this body's mesh — decorative by
+default; an entry carrying `id`/`name` registers as a pickable
+dossier body (the ISS close to Earth).
+
+### (module scope)
+
+Dossier-backed pick id — when set, the companion registers as a
+real node (anchor + pick proxy) so a close-up click resolves to a
+lazy `public/data/<locale>/<id>.json` dossier like any catalog
+body. Anonymous companions stay decorative and unpickable.
+
+### (module scope)
+
+Display name for the dossier-backed companion.
+
+### (module scope)
+
+Crafted-station flag — renders the companion as a lit truss +
+solar-panel model (the ISS silhouette) instead of the default
+fresnel glow ball, so crewed orbiters read as built objects,
+not second moons.
 
 ### (module scope)
 
@@ -324,6 +390,13 @@ Persistent canvas the host owns (replaced on renderer retry).
 
 three.js WebGPURenderer (WebGPU or forced-WebGL backend).
 
+### `pipeline`
+
+RenderPipeline post chain (scene → +bloom → vignette → film grain) —
+null when the pipeline failed to build or the backend rejected it;
+the frame loop falls back to `renderer.render(scene, camera)` in
+that case, losing post FX but never the scene.
+
 ### `world`
 
 Floating-origin world root — every catalog body, cloud and rider
@@ -367,6 +440,20 @@ with the terminator.
 
 ids whose dossier was already prefetched — approach fires once.
 
+### `solarWind`
+
+Shared solar-wind uniform — `updateSolarWind` writes the 0–1+
+activity level each frame; aurora shells, the sun's flare sprites
+and the corona breathe with it so a storm visibly propagates from
+the Sun to every atmosphere-bearing planet. TSL uniform node
+(runtime `.value`), null until bootstrap creates it.
+
+### `fxTime`
+
+Shared scene-time uniform (scene seconds) — the weather field,
+aurora curtains and any other TSL effect reads this instead of
+baking `s.t` so a single per-frame write animates every shader.
+
 ### `starCloud`
 
 Real-star cloud Points (HYG catalogue field on the Milky Way disc)
@@ -376,6 +463,24 @@ state so destroy() can dispose its geometry/material.
 ### `starCloudLoading`
 
 Guard flag — the star-cloud fetch fires only once per boot.
+
+### `THREE`
+
+Post-boot handles kept for lazy registry-body spawns — the deep
+catalog's 139k records are plain cloud points until selected, when
+`registry-body.ts` builds a real textured mesh on demand. Bootstrap
+stashes the three module, node-material deps and the shared glow
+sprite here so spawn code never re-imports lazily-loaded modules.
+
+### `glowTex`
+
+Shared soft-disc sprite — registry halos reuse it, never own it.
+
+### `registryBodies`
+
+Spawned registry bodies (`star-NNNNNN`… → Object3D) mounted on the
+Sun's pivot — an LRU map capped at `SF_STAR_CLOUD.BODY_CACHE` so a
+long browsing session never accumulates 139k meshes.
 
 ### `fly`
 
@@ -493,6 +598,34 @@ Differential-rotation subgroup — a volumetric galaxy's inner-disc
 Points cloud; tickFrame spins it at ROTOR_DIFF× the whole-disc rate
 so the core laps the rim the way real rotation curves do.
 
+### (module scope)
+
+Cloud-deck shell — Earth's cloud sphere rides inside `mesh` so it
+inherits surface spin; with `def.weather` the deck is the
+procedural field (jets/storms/snow evolve in the shader via the
+shared `fxTime` uniform), and updateFx still adds its legacy
+differential drift for static-texture decks.
+
+### (module scope)
+
+Solar limb flares — prominence sprites from `makeSolarFlares`;
+updateFx scales/opacities them by `solarWind × sin⁴(t·rate+phase)`
+so eruptions breathe and spike outward when a storm hits.
+
+### (module scope)
+
+Meteor flash pool — `SF_METEOR.POOL` sprites parented to the mesh,
+recycled across strikes so impact flashes never allocate per frame;
+`meteorNext` schedules the next strike (scene seconds).
+
+### `t0`
+
+Strike start time (scene seconds) — drives the fade curve.
+
+### (module scope)
+
+Next scheduled meteor strike time (scene seconds).
+
 ### `satPivots`
 
 Satellite pivots (decorative companions) — rotate per frame.
@@ -507,6 +640,11 @@ Semi-major axis (chart units) + eccentricity for elliptical orbits.
 
 ### (module scope)
 
+Self-tumble rate — belt hero rocks spin their own mesh on top of
+the orbit sweep so debris reads as tumbling rubble, not rails.
+
+### (module scope)
+
 LOD-toggleable secondary geometry — atmosphere shells, ring discs,
 satellite pivots; frame.ts hides these
 beyond the detail distance so far bodies draw as one primitive.
@@ -516,6 +654,18 @@ beyond the detail distance so far bodies draw as one primitive.
 Star corona sprite — the seeded streamer texture from
 `procedural.coronaFor`; updateFx rotates `material.rotation` and
 breathes `material.opacity` so stars shimmer like live suns.
+
+### (module scope)
+
+Interstellar-collapse glyph — a flat point-glow sprite riding the
+pivot beside the real mesh, plus its own pick proxy. updateLod
+shows them (and hides the sphere) once the camera passes
+SF_LOD.SOLAR_FAR so the whole solar tier reads as a single bright
+star like every other sun in the neighborhood. Solar stars only.
+
+### (module scope)
+
+Invisible pick bubble kept live while `farGlow` shows.
 
 ### (module scope)
 

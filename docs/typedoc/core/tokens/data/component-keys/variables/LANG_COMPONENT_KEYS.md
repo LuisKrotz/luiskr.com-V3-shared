@@ -1,17 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/data/component-keys](../README.md) / LANG\_COMPONENT\_KEYS
 
 ```ts
 const LANG_COMPONENT_KEYS: Readonly<{
-  LANG_TITLE: "lang-dialog.title";
-  LANG_CLOSE: "lang-dialog.close";
-}>;
+  LANG_TITLE: 'lang-dialog.title'
+  LANG_CLOSE: 'lang-dialog.close'
+}>
 ```
 
-Defined in: core/tokens/data/component-keys.ts:22
+Defined in: core/tokens/data/component-keys.ts:24
 
 Frozen lang component key map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

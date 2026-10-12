@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / [core/firebase](../README.md) / signInWithGoogle
 
 ```ts
-function signInWithGoogle(): Promise<void | UserCredential>;
+function signInWithGoogle(): Promise<void | UserCredential>
 ```
 
-Defined in: core/firebase.ts:125
+Defined in: core/firebase.ts:230
 
 CMS login — Google OAuth popup. `prompt: 'select_account'` forces the
 account chooser so a CMS editor isn't silently signed into a wrong Google account.

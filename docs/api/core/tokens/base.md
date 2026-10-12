@@ -2,9 +2,9 @@
 
 Internal shared composites for the token modules — the
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/base.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/base.ts`                                 |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -56,6 +56,11 @@ from this fragment (zero-hardcoding rule 9).
 ### `_B_MEDIA_FIGURE`
 
 BEM block fragment "b media figure" — composed by the token groups below into full class names.
+
+### `_B_MEDIA_AUDIO_NOTE`
+
+BEM block fragment "b media audio note" — the figcaption strip noting the
+video's audio language; composed by the token groups below (rule 9).
 
 ### `_B_LANG_DIALOG`
 
@@ -444,6 +449,14 @@ Token key "k media" — single source for the repeated literal.
 ### `_K_SOURCE_CODE`
 
 Token key "k source code" — single source for the repeated literal.
+
+### `_K_CREDIT`
+
+Token key "k credit" — single source for the repeated literal.
+
+### `_K_RIGHTS`
+
+Token key "k rights" — single source for the repeated literal.
 
 ### `_K_VIEW_OUTLET`
 

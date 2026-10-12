@@ -1,17 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/events/dom](../README.md) / MEDIA\_EVENTS
 
 ```ts
 const MEDIA_EVENTS: Readonly<{
-  LOADEDDATA: "loadeddata";
-  ABORT: "abort";
-}>;
+  LOADEDDATA: 'loadeddata'
+  ABORT: 'abort'
+}>
 ```
 
-Defined in: core/tokens/events/dom.ts:117
+Defined in: core/tokens/events/dom.ts:119
 
 Frozen media event-name map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

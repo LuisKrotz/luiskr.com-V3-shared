@@ -56,6 +56,12 @@ Arm angular jitter (rad) for the embedded volumetric disc — tighter
 than photo-fallback spirals because the whole 400k-point field must
 carry the arm lanes alone (no imagery underneath to do the work).
 
+### `VOLUMETRIC_HALO`
+
+Stellar-halo fraction for the embedded disc — a small spherical
+globular-cluster population around the core gives the third
+spatial level (bulge → disc → halo) the flat disc alone lacks.
+
 ### `VOLUMETRIC_COUNT_MAX`
 
 Volumetric particle ceiling — `spiralDisc.count` may ask less.
@@ -207,6 +213,21 @@ Disc overshoot + rim dissolve — arm points spread to
 radius×DISC_SPREAD while brightness rolls to zero from
 EDGE_FADE_START outward, so the disc edge vaporizes into
 intergalactic dark instead of cutting a hard ring.
+
+### `DISC_FLARE`
+
+Disc flare — the real Milky Way's gas/star disc flares outward:
+vertical thickness grows linearly with radius (~1 + DISC_FLARE at
+the rim), which is what gives the edge-on view its rising wedge
+instead of a constant-thickness ribbon.
+
+### `DISC_WARP`
+
+Disc warp — the outer disc bends out of the midplane (the MW's
+integral-sign warp, ~3 kpc at the rim). Amplitude is a fraction of
+disc radius applied at (r/R)² · sin(angle − warpPhase); the phase
+is perpendicular to the bar, matching how the real warp sits
+roughly orthogonal to the bar's long axis.
 
 ### `ARM_JITTER`
 

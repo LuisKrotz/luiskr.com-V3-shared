@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFDossierMeta
 
-Defined in: experiments/star-field/engine/types.ts:189
+Defined in: experiments/star-field/engine/types.ts:290
 
 Provenance signature — when the dossier's source data was acquired
 and when this locale's translation was produced (ISO dates), plus
@@ -15,38 +15,38 @@ the reference URLs the facts were paraphrased from.
 ### acquired
 
 ```ts
-acquired: string;
+acquired: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:191
+Defined in: experiments/star-field/engine/types.ts:292
 
 ISO date the source data/media was downloaded.
 
-***
+---
 
 ### translated
 
 ```ts
-translated: string;
+translated: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:193
+Defined in: experiments/star-field/engine/types.ts:294
 
 ISO date this locale's text was translated/written.
 
-***
+---
 
 ### locale
 
 ```ts
-locale: string;
+locale: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:195
+Defined in: experiments/star-field/engine/types.ts:296
 
 The locale this file serves (`en` for the canonical file).
 
-***
+---
 
 ### refs?
 
@@ -54,6 +54,6 @@ The locale this file serves (`en` for the canonical file).
 optional refs?: string[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:197
+Defined in: experiments/star-field/engine/types.ts:298
 
 Reference URLs the dossier paraphrases (NASA/JPL/Trek/SVS/ESO).

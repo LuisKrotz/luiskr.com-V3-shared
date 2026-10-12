@@ -2,9 +2,9 @@
 
 &lt;app-nav&gt; — the persistent top navigation bar: logo, burger
 
-| | |
-|---|---|
-| **Source** | `src/website/components/nav/AppNav.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/nav/AppNav.tsx`                 |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -63,6 +63,10 @@ True while the nav floats over a dark section — drives the --on-dark variant f
 ### `_menuOpen`
 
 Menu overlay is open.
+
+### `_menuOpenedAt`
+
+performance.now() of the open transition — feeds the residual-input guard.
 
 ### `_menuClosing`
 
@@ -163,6 +167,7 @@ Display label for the active locale in the flag button.
 Returns the persistent flag canvas for the current locale, rebuilding
 it only when the locale changed. The element survives re-renders so
 the WebGL context is created once per language, not per render.
+
 - `@returns` {HTMLCanvasElement}
 
 ### `renderLocaleFlag`

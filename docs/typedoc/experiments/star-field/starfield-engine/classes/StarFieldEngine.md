@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/star-field/starfield-engine](../README.md) / StarFieldEngine
 
-Defined in: experiments/star-field/starfield-engine.ts:36
+Defined in: experiments/star-field/starfield-engine.ts:40
 
 Owns the full star-field scene: renderer, camera rig, skybox, catalog
 body graph, raycast picking, fly-to tweens and the RAF loop. The host
@@ -18,7 +18,7 @@ component reads `failed` to swap in the CSS fallback surface.
 new StarFieldEngine(canvas, events?): StarFieldEngine;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:40
+Defined in: experiments/star-field/starfield-engine.ts:44
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: experiments/star-field/starfield-engine.ts:40
 get failed(): boolean;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:69
+Defined in: experiments/star-field/starfield-engine.ts:73
 
 True when bootstrap bailed or threw before the scene assembled.
 
@@ -60,7 +60,7 @@ True when bootstrap bailed or threw before the scene assembled.
 init(): Promise<void>;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:49
+Defined in: experiments/star-field/starfield-engine.ts:53
 
 Async bootstrap — catches throws, marks failed when the scene never
 assembled (silent bailouts included), and always fires onReady so the
@@ -70,7 +70,7 @@ loader can never stick. Same contract as EarthBackground.init().
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### setReducedMotion()
 
@@ -78,7 +78,7 @@ loader can never stick. Same contract as EarthBackground.init().
 setReducedMotion(reduced): void;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:78
+Defined in: experiments/star-field/starfield-engine.ts:82
 
 Pause/resume the render loop for prefers-reduced-motion — the last
 frame stays on screen (preserveDrawingBuffer), so pausing never
@@ -94,7 +94,7 @@ blanks the scene.
 
 `void`
 
-***
+---
 
 ### selectBody()
 
@@ -102,7 +102,7 @@ blanks the scene.
 selectBody(id): void;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:102
+Defined in: experiments/star-field/starfield-engine.ts:106
 
 Flies the camera to a body — catalog slugs resolve through the
 anchors map; registry ids (`star-NNNNNN`…) resolve through the
@@ -122,7 +122,45 @@ Catalog body id or registry id.
 
 `void`
 
-***
+---
+
+### setHint()
+
+```ts
+setHint(id, rec?): void;
+```
+
+Defined in: experiments/star-field/starfield-engine.ts:171
+
+Navigator-hover position hint — arms the hint record for the row
+under the pointer/focus so `trackHover` reports the body's
+projected (edge-clamped) screen position every tick: the hint
+locates the object at any zoom level, on- or off-screen. Catalog
+ids store their anchor (live world position); registry rows store
+their shard record so the static shard point resolves in the
+pinned frame. Also echoes `onHover` so the tooltip label +
+aria-live announce populate the same way canvas hover does.
+Pass null to clear.
+
+#### Parameters
+
+##### id
+
+`string` \| `null`
+
+Hovered body id, or null to clear the hint.
+
+##### rec?
+
+[`SFRegistryRecord`](../../engine/registry/interfaces/SFRegistryRecord.md)
+
+Registry record when `id` is a shard id (star-NNNNNN…).
+
+#### Returns
+
+`void`
+
+---
 
 ### rotateView()
 
@@ -130,7 +168,7 @@ Catalog body id or registry id.
 rotateView(dAzimuth, dPolar): void;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:146
+Defined in: experiments/star-field/starfield-engine.ts:200
 
 Arrow-key orbit — rotates the camera around the controls target in
 screen-intuitive steps: left/right change azimuth, up/down change
@@ -156,7 +194,7 @@ Polar delta in radians (down = -, up = +).
 
 `void`
 
-***
+---
 
 ### deselect()
 
@@ -164,7 +202,7 @@ Polar delta in radians (down = -, up = +).
 deselect(): void;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:155
+Defined in: experiments/star-field/starfield-engine.ts:209
 
 Releases the selection without moving the camera — stops the
 per-frame orbit-follow when the dossier panel closes, so the chart
@@ -174,7 +212,7 @@ is no longer glued to the body the user dismissed.
 
 `void`
 
-***
+---
 
 ### flyHome()
 
@@ -182,15 +220,19 @@ is no longer glued to the body the user dismissed.
 flyHome(): void;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:160
+Defined in: experiments/star-field/starfield-engine.ts:221
 
-Returns the camera to the overview pose — the whole-chart vantage.
+Overview — glides to the solar-system vantage: the camera tracks the
+Sun anchor's live position (it rides the rotating galactic disc, so a
+fixed target would strand the view on empty space) at the HOME
+standoff, which frames the tier out to the Kuiper belt. Falls back
+to the scene origin only while anchors are unavailable.
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### takeScreenshot()
 
@@ -198,7 +240,7 @@ Returns the camera to the overview pose — the whole-chart vantage.
 takeScreenshot(): void;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:173
+Defined in: experiments/star-field/starfield-engine.ts:244
 
 Downloads the current frame as a PNG.
 
@@ -206,7 +248,7 @@ Downloads the current frame as a PNG.
 
 `void`
 
-***
+---
 
 ### destroy()
 
@@ -214,7 +256,7 @@ Downloads the current frame as a PNG.
 destroy(): void;
 ```
 
-Defined in: experiments/star-field/starfield-engine.ts:178
+Defined in: experiments/star-field/starfield-engine.ts:249
 
 Tears down listeners, RAF, controls and the renderer.
 

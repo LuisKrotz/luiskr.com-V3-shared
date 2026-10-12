@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/render](../README.md) / CarouselLang
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:39
+Defined in: website/components/carousel/custom-carousel/render.tsx:45
 
 Localized carousel control labels (store.lang.carousel).
 
@@ -13,33 +13,33 @@ Localized carousel control labels (store.lang.carousel).
 ### prev
 
 ```ts
-prev: string;
+prev: string
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:41
+Defined in: website/components/carousel/custom-carousel/render.tsx:47
 
 aria-label for the prev arrow.
 
-***
+---
 
 ### next
 
 ```ts
-next: string;
+next: string
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:43
+Defined in: website/components/carousel/custom-carousel/render.tsx:49
 
 aria-label for the next arrow.
 
-***
+---
 
 ### ofLabel
 
 ```ts
-ofLabel: string;
+ofLabel: string
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:45
+Defined in: website/components/carousel/custom-carousel/render.tsx:51
 
 Localized "of" joiner for the "N of M" counter.
