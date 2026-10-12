@@ -43,17 +43,20 @@ const MODULES = Object.fromEntries(
 )
 
 const only = process.argv.slice(2).filter((a) => !a.startsWith('--'))
-const entries = Object.entries(MODULES).filter(([n]) => !only.length || only.includes(n))
+const emit = Object.entries(MODULES).filter(([n]) => !only.length || only.includes(n))
 
 const runDir = (root) => path.join(ROOT, root, 'reports', 'coverage-run')
 const coverageDir = (root) => path.join(ROOT, root, 'reports', 'coverage')
 
-// Union every module's raw map — files absent from a given run simply
-// contribute their 0% placeholders, which merging keeps at 0%.
+// Union EVERY module's raw map regardless of `only` — cross-module hits are
+// real coverage (a website suite exercising a core util), so a scoped run
+// like `--coverage core` must still union the other modules' raw maps or the
+// re-emitted report silently drops their contributions. `only` only filters
+// which per-module reports are written below.
 const merged = createCoverageMap()
 const found = []
 
-for (const [name, { root }] of entries) {
+for (const [name, { root }] of Object.entries(MODULES)) {
   const file = path.join(runDir(root), 'coverage-final.json')
   if (!fs.existsSync(file)) {
     process.stderr.write(
@@ -73,7 +76,7 @@ if (!found.length) {
   process.exit(1)
 }
 
-for (const [name, { root, src }] of entries) {
+for (const [name, { root, src }] of emit) {
   const prefixes = src.map((d) => `${path.join(ROOT, d)}${path.sep}`)
   const filtered = createCoverageMap()
 
