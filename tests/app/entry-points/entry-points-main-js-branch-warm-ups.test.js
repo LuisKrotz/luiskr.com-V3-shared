@@ -91,21 +91,25 @@ describe('main.js branch warm-ups', () => {
   })
 
   test('missing #app container arms the mount retry loop', async () => {
+    // Fake timers keep this deterministic: the retry interval is bounded by
+    // a real-time 3s clear, and under parallel coverage workers the plain
+    // 80ms defer can be starved past it — leaving the loop dead before the
+    // container re-appears. Fake time advances the 20ms ticks in lockstep.
+    jest.useFakeTimers()
     jest.resetModules()
 
     document.getElementById(APP_IDS.APP)?.remove()
 
     await (await import('@/main.js')).bootPromise.catch(() => {})
-    await new Promise((resolve) => setTimeout(resolve, 80))
 
     const app = document.createElement(HTML_TAGS.DIV)
 
     app.id = APP_IDS.APP
     document.body.appendChild(app)
 
-    // The 20ms retry interval picks up the late-added container — poll
-    // rather than fixed-wait so parallel CPU contention can't flake it.
-    await waitFor(() => app.firstElementChild, 90000)
+    await jest.advanceTimersByTimeAsync(200)
+
+    jest.useRealTimers()
 
     expect(app.firstElementChild).toBeTruthy()
   })
