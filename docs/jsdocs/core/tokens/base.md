@@ -2,9 +2,9 @@
 
 Internal shared composites for the token modules — the
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/base.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/base.ts`                                 |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -444,6 +444,14 @@ Token key "k media" — single source for the repeated literal.
 ### `_K_SOURCE_CODE`
 
 Token key "k source code" — single source for the repeated literal.
+
+### `_K_CREDIT`
+
+Token key "k credit" — single source for the repeated literal.
+
+### `_K_RIGHTS`
+
+Token key "k rights" — single source for the repeated literal.
 
 ### `_K_VIEW_OUTLET`
 

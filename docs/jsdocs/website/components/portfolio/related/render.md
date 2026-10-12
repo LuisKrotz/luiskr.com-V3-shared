@@ -1,8 +1,8 @@
 # `website/components/portfolio/related/render.tsx`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/portfolio/related/render.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/portfolio/related/render.tsx`   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -22,6 +22,10 @@ One related-project card (link + cover + title/description).
 ### `renderSkeletonMosaic`
 
 Skeleton mosaic — tiles 1 and 3-6 carry the featured modifier so the shimmer matches the loaded layout.
+
+### `renderCreditBlock`
+
+Authorship block — animated hairline + self-made credit + copyright.
 
 ### `renderSocials`
 
