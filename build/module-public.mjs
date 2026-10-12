@@ -127,6 +127,41 @@ const serveMount = (dirAbs) => (req, res, next) => {
 }
 
 /**
+ * Recursively copies one mount tree into outDir. `.json` payloads are
+ * re-serialized without whitespace on the way out — sources stay
+ * human-readable for review while dist ships the minified form the
+ * dossier/i18n fetches actually download. Anything unparseable is copied
+ * verbatim so a hand-tuned fixture can never break the build. Binary and
+ * text assets pass through untouched.
+ * @param {string} src Absolute source directory.
+ * @param {string} dest Absolute destination directory.
+ */
+const copyMount = (src, dest) => {
+  fs.mkdirSync(dest, { recursive: true })
+
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const from = path.join(src, entry.name)
+    const to = path.join(dest, entry.name)
+
+    if (entry.isDirectory()) {
+      copyMount(from, to)
+      continue
+    }
+
+    if (entry.name.endsWith('.json')) {
+      try {
+        fs.writeFileSync(to, JSON.stringify(JSON.parse(fs.readFileSync(from, 'utf8'))))
+        continue
+      } catch {
+        /* malformed or non-UTF8 JSON — fall through to the verbatim copy */
+      }
+    }
+
+    fs.copyFileSync(from, to)
+  }
+}
+
+/**
  * Vite plugin merging every module `public/` into the served/built site.
  * @param {object} [opts] Options.
  * @param {boolean} [opts.copy] Force-copy into outDir on build (default: only
@@ -169,7 +204,7 @@ export const modulePublicPlugin = (opts = {}) => {
 
         if (!fs.existsSync(abs)) continue
 
-        fs.cpSync(abs, path.join(outDir, at.replace(/^\/+|\/+$/g, '')), { recursive: true })
+        copyMount(abs, path.join(outDir, at.replace(/^\/+|\/+$/g, '')))
       }
     },
   }
