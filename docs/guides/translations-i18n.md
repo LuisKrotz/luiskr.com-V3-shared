@@ -25,17 +25,15 @@ translations/<loc>/
 
 ## Load path
 
-```
-main.ts
-  └─► virtual:locale-bootstrap chunks   (per-locale, emitted by Vite plugin)
-        renders snapshot instantly — zero network wait
-
-        fetchFirebaseDb(path, { onUpdate })   core/utils/data/db.ts
-          ├─► stale → snapshot value (same as bootstrap)
-          └─► live  → Firebase realtime value
-                    • deep-equal (order-insensitive) → no re-render
-                    • live === null → keep snapshot (never wipe)
-                    • different → onUpdate() → view re-renders
+```mermaid
+flowchart LR
+    M["main.ts"] --> VC["virtual:locale-* chunks<br/>(Vite snapshot plugin)"]
+    VC --> R0["instant snapshot render<br/>zero network wait"]
+    VC --> DB["fetchFirebaseDb(path, onUpdate)<br/>core/utils/data/db.ts"]
+    DB -->|"stale"| R0
+    DB -->|"live value"| CMP{"deep-equal?<br/>(order-insensitive)"}
+    CMP -->|"same / null"| KEEP["keep snapshot<br/>never wipe, no re-render"]
+    CMP -->|"different"| UPD["onUpdate()<br/>view re-renders"]
 ```
 
 `App.tsx` subscribes `APP`, `components` and `slugs` once per locale; views

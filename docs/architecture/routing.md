@@ -65,18 +65,28 @@ store.state.lang.slugs        (set by App.tsx during locale load)
 
 ## View lifecycle
 
+```mermaid
+sequenceDiagram
+    participant R as router.ts
+    participant S as store
+    participant V as View element
+    participant P as Previous view
+
+    R->>R: navigate(path) → parse locale + route
+    R->>S: commit(SET_ROUTE)
+    R->>R: dynamic import(view chunk)
+    R->>V: new + append to &lt;main&gt;
+    V->>V: constructor → skeleton placeholders
+    V->>V: fetch DB node (pages/*, projects/*)
+    V->>V: render() → resolve() → skeleton fade + content-in
+    R->>P: disconnected → BaseComponent teardown
+    Note over P: scoped listeners removed,<br/>WebGL contexts released
 ```
-router.navigate(path)
-  → parse locale + route
-  → store.commit(MUTATIONS.SET_ROUTE)
-  → dynamic import(view module)
-  → new ViewElement() → appended to <main>
-      view constructor → skeleton placeholders
-      view fetches its DB node (pages/*, projects/*)
-      view.render() → resolve() → skeleton fade + content-in
-  → previous view disconnected → BaseComponent teardown
-      (scoped listeners removed, WebGL contexts released)
-```
+
+Locale-prefixed inbound paths resolve through `detectLangFromPath()`
+first, then the active locale's `slugs` table falls back to
+`LANG_SLUGS` defaults — outbound, `LangDialog` rewrites the current
+path into the target locale's slug via `routeSlugs(newLang)`.
 
 ## UX mapping
 

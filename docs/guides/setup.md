@@ -13,6 +13,15 @@ For a report-only check of your environment:
 yarn setup --check
 ```
 
+```mermaid
+flowchart LR
+    SETUP["yarn setup"] --> DEPS["platform deps check<br/>node · yarn · git · toolchain"]
+    DEPS --> INST["yarn install"]
+    INST --> HOOKS["yarn hooks:install<br/>pre-commit + pre-push"]
+    HOOKS --> DEV["yarn dev<br/>site + CMS / Firebase"]
+    CHECK["yarn setup --check"] --> DEPS
+```
+
 ---
 
 ## Required programs

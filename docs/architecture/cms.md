@@ -33,6 +33,20 @@ Every editor is self-contained in its feature folder: the `Cms*` facade
 holds state + lifecycle + delegates, behavior lives in sibling modules
 (`data` = Firebase load/save, `events` = input binding, `render` = JSX).
 
+```mermaid
+flowchart LR
+    BOOT["cms/main.ts"] --> AUTH{"Firebase auth<br/>listener"}
+    AUTH -->|signed out| LOGIN["AdminLogin<br/>email/password"]
+    AUTH -->|signed in| DASH["CmsDashboard<br/>tab shell"]
+    LOGIN -->|success| DASH
+    DASH --> ED["Cms*Editor<br/>facade"]
+    ED --> DATA["data.ts — load all locales'<br/>node, save active locale"]
+    ED --> EVT["events.ts — input<br/>binding"]
+    ED --> REN["render.ts — JSX"]
+    DATA -->|set(ref)| FB["translations/&lt;loc&gt;/<br/>Firebase RTDB"]
+    FB -.->|"live value<br/>next visit"| SITE["public site"]
+```
+
 ## Tabs → editors → DB nodes
 
 | Dashboard tab                         | Editor                | Reads / writes (`translations/<loc>/`)                                                                                                                           |

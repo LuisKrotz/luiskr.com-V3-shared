@@ -110,6 +110,19 @@ the CMS Deploy Info tab. Reports are gitignored.
 
 ## Verification pipeline
 
+```mermaid
+flowchart LR
+    VER["yarn verify"] --> C1["console-scan<br/>zero console.*"]
+    C1 --> C2["eslint<br/>zero errors"]
+    C2 --> C3["run-modules --coverage<br/>all suites + axe +<br/>contrast-aaa + governance"]
+    C3 --> C4["merge-coverage<br/>union per-module maps"]
+    C4 --> C5["coverage-gate<br/>100% per file"]
+    C5 --> C6["security-scan<br/>snyk / yarn audit"]
+    C6 --> OK["dist may build"]
+    HOOK["pre-commit"] --> SCOPED["scope-gates --staged<br/>(format → scoped tsc)"]
+    HOOK2["pre-push"] --> SCOPED2["scoped gates<br/>per push diff"]
+```
+
 `yarn verify` is the single quality gate — it runs, in order:
 
 1. `shared/scripts/verify/console-scan.mjs` — zero-console policy: **every** `console.*` callsite in the source modules (`shared/src|core|website|cms|experiments/**/*.ts|tsx|js`) is a violation (no allowlist). Diagnostics route through `core/devlog.ts` (`devWarn`/`devError`/`devInfo` — capped ring buffer, inspect in devtools via `__lkDevLog()`); report → `reports/console-scan.json`

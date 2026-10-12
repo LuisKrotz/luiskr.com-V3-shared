@@ -12,6 +12,30 @@ older-engine compatibility is delivered exclusively by this build matrix
 
 ## Multi-target matrix (`shared/build/es-targets.mjs`)
 
+```mermaid
+flowchart LR
+    BUILD["yarn build"] --> PRE{"prebuild:<br/>yarn verify"}
+    PRE -->|fail| STOP["no dist emitted"]
+    PRE -->|pass| MATRIX["build-targets.mjs<br/>12 vite builds, LK_TARGET per tier"]
+    MATRIX --> POLY["IIFE bundles per<br/>POLYFILLS group"]
+    MATRIX --> HTML["rewrite dist/index.html<br/>inline ES5 loader + __LK manifest"]
+    POLY --> HTML
+    HTML --> DIST["dist/v/&lt;tier&gt;/ + dist/index.html<br/>+ service worker + meta"]
+```
+
+Then at request time the inlined loader dispatches the visitor's engine:
+
+```mermaid
+flowchart TD
+    BOOT["browser-loader.js (ES5, inlined)"] --> LADDER{"feature ladder<br/>newest → oldest"}
+    LADDER -->|"probe passes<br/>(module + import() + syntax)"| TIER["inject tier css + bundle"]
+    LADDER -->|"no module support<br/>but ES2015 syntax"| IIFE["es2016 iife bundle"]
+    LADDER -->|"every tier fails<br/>(IE11-class)"| DEAD["please-update notice"]
+    TIER --> GATES{"polyfill guards<br/>POLYFILL_ORDER"}
+    GATES -->|"failing guards only"| PF["fetch es-core / fetch /<br/>webcomponents / io / ro / dom / cssvars"]
+    PF & IIFE --> APP["app boots"]
+```
+
 `yarn build` runs the complete `yarn verify` gate in `prebuild`, then
 `shared/scripts/build/build.mjs` orchestrates the production outputs:
 

@@ -28,6 +28,18 @@ The old flat `core/sass/*.scss` duplicate layer was deleted — it had drifted
 from the live `components/` copies (missing fixes) and was only reachable via
 a stale `Footer.tsx` import (now repointed to `components/internals.scss`).
 
+```mermaid
+flowchart LR
+    subgraph compile["Compile-time (base/ only)"]
+        VARS["_variables.scss<br/>$color-* · $space-* Fibonacci"]
+        MIX["_mixins.scss · _fonts.scss<br/>_placeholders.scss"]
+    end
+    VARS --> ROOT["_structure.scss<br/>:root --bg-* · --space-* · --radius-*"]
+    MIX --> ROOT
+    ROOT --> COMP["components/*.scss<br/>consume var(--*) only —<br/>never $vars, never literals"]
+    COMP --> HOST["shadow <style> per component<br/>(?inline import)"]
+```
+
 ## Rules (AGENTS.md, enforced by tests/governance/style-governance.test.js)
 
 1. **No raw colors** — `var(--*)`/tokens only; hex/`rgba()` literals only in

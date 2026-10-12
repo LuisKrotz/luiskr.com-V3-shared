@@ -5,6 +5,22 @@ views → shadow-DOM components.
 
 ## Components
 
+```mermaid
+sequenceDiagram
+    participant R as Router
+    participant V as View element
+    participant DB as Firebase/SWR
+    participant C as BaseComponent children
+
+    R->>V: mount → constructor emits skeleton placeholders
+    V->>DB: fetchFirebaseDb(pages/*, projects/*)
+    DB-->>V: snapshot now, live value later
+    V->>V: render() → resolve()
+    V->>C: append shadow-DOM children (?inline sheets)
+    R->>V: route away → disconnected()
+    V->>C: teardown — listeners, observers,<br/>WebGL contexts released
+```
+
 Each component is a `BaseComponent` subclass:
 
 ```js
@@ -106,12 +122,19 @@ title, related title, and project title.
 ## Text-link underline convention
 
 Inline text links across component sheets consume `%LK_LINK`
-(`core/sass/base/_placeholders.scss`): a tokenized `border-bottom` is the
-resting line (`:visited` recolors it to `var(--grey)` — border color is one
-of the few properties `:visited` may restyle), and on hover/focus the border
-fades out while a `::after` hairline runs a transform-only wipe cycle (exits
-right, regrows left — compositor-friendly, reduced-motion guarded). Block
-links add `width: fit-content` so the underline hugs the text.
+(`core/sass/base/_placeholders.scss`): the resting `border-bottom` is
+**transparent** — nav/footer/contact rows stay clean — and on hover/focus a
+`::after` hairline sweeps in once, left→right, via transform (compositor-
+friendly, reduced-motion guarded). Block links add `width: fit-content` so
+the line hugs the text.
+
+The exception is **in-content prose**: links inside `DrawText` copy —
+project write-ups, in-depth pages, git links — get a visible muted
+`--grey` resting underline, but only once the draw animation finishes:
+the resting border stays transparent while the per-character reveal runs
+and `.draw-text--done` fades it in (see `draw-text/_core.scss` +
+`_triggers.scss`), so a link line never renders ahead of its own glyphs.
+The hover sweep still strengthens the line at the same offset.
 
 ## Debug URL parameters
 

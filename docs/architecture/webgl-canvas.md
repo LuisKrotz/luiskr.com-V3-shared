@@ -39,6 +39,21 @@ fallback and the natural-aspect probe.
 `earth-background.ts` and `space/checkbox-webgl.ts` are **not** here — they
 are playground-owned and live in `experiments/earth-playground/`.
 
+## Widget lifecycle
+
+```mermaid
+flowchart LR
+    MNT["mount"] --> ACQ{"webglContext()<br/>via webgl-mode"}
+    ACQ -->|"fallback flag /<br/>no GL / software GL"| FB["is-fallback<br/>CSS presentation"]
+    ACQ -->|ok| POOL["webgl-pool.acquire()<br/>refcounted slot"]
+    POOL --> REN["render loop / on-demand paint"]
+    REN --> OBS{"IntersectionObserver"}
+    OBS -->|offscreen| PURGE["purge() — cancel RAF,<br/>loseContext, release slot"]
+    PURGE -->|re-enters| RST["restore() — rebuild<br/>context + program"] --> REN
+    REN --> DST["destroy() — delete buffers/<br/>programs, return slot"]
+    DST --> FB
+```
+
 ## Lifecycle rules
 
 - Contexts are pooled and reference-counted; a destroyed widget returns its

@@ -33,6 +33,21 @@ bundles/deploys resolving, and `closeBundle` mirrors both path sets into
 `dist/` so production behaves identically. A 404 on either scheme therefore
 means a missing file or stale `dist`, not a path bug.
 
+## Boot & render flow
+
+```mermaid
+flowchart TD
+    VIEW["SpacePlayground.tsx"] --> BOOTP["space/boot.ts<br/>progress → loader"]
+    BOOTP --> INIT["earth/setup/bootstrap.ts"]
+    INIT --> RND{"renderer-setup<br/>WebGPU adapter?"}
+    RND -->|no / init fails| CLONE["clone canvas →<br/>WebGL fallback retry"]
+    RND -->|yes| GPU["WebGPURenderer"]
+    CLONE & GPU --> SCENE["scene-setup + post-setup<br/>meshes · TSL graphs · post-fx"]
+    SCENE --> WIRE["space/wiring.ts<br/>bind panel controls"]
+    WIRE --> LOOP["earth/runtime/frame.ts<br/>RAF: updates + sun sync + render"]
+    LOOP -->|frame throws| FAIL["s.failed → loader swaps<br/>to static fallback"]
+```
+
 ## Loader contract
 
 The loader must reach 100% only when the first frame is **presented**, not when
