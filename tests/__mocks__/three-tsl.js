@@ -41,6 +41,7 @@ const NAMES = [
   'uv',
   'positionGeometry',
   'normalGeometry',
+  'normalLocal',
   'normalView',
   'normalWorld',
   'positionView',
@@ -64,6 +65,9 @@ const NAMES = [
   'attribute',
   'varying',
   'instanceIndex',
+  'mx_fractal_noise_float',
+  'mx_fractal_noise_vec3',
+  'rotate',
 ]
 
 const api = {}
@@ -111,6 +115,7 @@ export const {
   uv,
   positionGeometry,
   normalGeometry,
+  normalLocal,
   normalView,
   normalWorld,
   positionView,
@@ -134,4 +139,7 @@ export const {
   attribute,
   varying,
   instanceIndex,
+  mx_fractal_noise_float,
+  mx_fractal_noise_vec3,
+  rotate,
 } = api

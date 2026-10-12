@@ -55,6 +55,8 @@ export class RenderPipeline {
   render() {
     this.renderCalls += 1
   }
+
+  dispose() {}
 }
 
 export const MeshPhysicalNodeMaterial = chain()
