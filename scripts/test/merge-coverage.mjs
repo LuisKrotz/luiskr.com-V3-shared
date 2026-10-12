@@ -53,8 +53,13 @@ const coverageDir = (root) => path.join(ROOT, root, 'reports', 'coverage')
 // like `--coverage core` must still union the other modules' raw maps or the
 // re-emitted report silently drops their contributions. `only` only filters
 // which per-module reports are written below.
-const merged = createCoverageMap()
-const found = []
+//
+// Maps are merged PER FILE with a freshness check: istanbul unions by
+// statement/branch location, so a stale run that predates a source edit
+// would inject phantom uncovered locations from the old file shape. When
+// the maps disagree on a file's statement/branch/fn locations only the
+// freshest run's entry is valid; identical shapes merge normally.
+const rawMaps = []
 
 for (const [name, { root }] of Object.entries(MODULES)) {
   const file = path.join(runDir(root), 'coverage-final.json')
@@ -65,15 +70,55 @@ for (const [name, { root }] of Object.entries(MODULES)) {
     continue
   }
 
-  merged.merge(JSON.parse(fs.readFileSync(file, 'utf-8')))
-  found.push(name)
+  rawMaps.push({
+    name,
+    mtime: fs.statSync(file).mtimeMs,
+    data: JSON.parse(fs.readFileSync(file, 'utf-8')),
+  })
 }
 
-if (!found.length) {
+if (!rawMaps.length) {
   process.stderr.write(
     'merge-coverage: no module coverage maps found — run tests with --coverage first\n'
   )
   process.exit(1)
+}
+
+// Fingerprint of a file-coverage entry's location tables — two maps that
+// produced different location sets saw different versions of the source.
+const shapeOf = (fc) => JSON.stringify([fc.statementMap, fc.branchMap, fc.fnMap])
+
+const byFile = new Map()
+
+for (const { mtime, data } of rawMaps) {
+  for (const [file, fc] of Object.entries(data)) {
+    const inner = fc.data || fc
+    let list = byFile.get(file)
+
+    if (!list) {
+      list = []
+      byFile.set(file, list)
+    }
+
+    list.push({ mtime, fc: inner })
+  }
+}
+
+const merged = createCoverageMap()
+
+for (const [file, entries] of byFile) {
+  const newest = entries.reduce((a, b) => (b.mtime > a.mtime ? b : a))
+  const newestShape = shapeOf(newest.fc)
+
+  if (entries.every((e) => shapeOf(e.fc) === newestShape)) {
+    const union = createCoverageMap()
+
+    for (const e of entries) union.addFileCoverage(e.fc)
+
+    merged.addFileCoverage(union.fileCoverageFor(file))
+  } else {
+    merged.addFileCoverage(newest.fc)
+  }
 }
 
 for (const [name, { root, src }] of emit) {
@@ -81,7 +126,9 @@ for (const [name, { root, src }] of emit) {
   const filtered = createCoverageMap()
 
   for (const file of merged.files()) {
-    if (prefixes.some((p) => file.startsWith(p)))
+    // Skip entries for sources a stale run recorded but which no longer
+    // exist — their phantom 0% lines are unfixable by definition.
+    if (prefixes.some((p) => file.startsWith(p)) && fs.existsSync(file))
       filtered.addFileCoverage(merged.fileCoverageFor(file))
   }
 
