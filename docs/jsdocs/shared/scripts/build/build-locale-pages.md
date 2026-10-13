@@ -54,7 +54,7 @@ Per-locale lookup with English fallback (mirrors runtime appText).
 
 ### `routesFor`
 
-Route table: path-suffix → title factory.
+Route table: path-suffix → title + canonical-equivalent alternates path.
 
 ### `syncFirebaseRewrites`
 

@@ -119,6 +119,12 @@ const writeCompressed = (file, html) => {
 function localize(html, { bcpLang, ogLocale, title, description, url, alternates }) {
   let out = html
 
+  // Strip any previously injected og:locale + hreflang block — the standalone
+  // path feeds an already-localized dist/index.html back through localize(),
+  // and without this each run appends a duplicate alternates set.
+  out = out.replace(/<link rel="alternate"[^>]*>\s*/g, '')
+  out = out.replace(/<meta property="og:locale(?::alternate)?"[^>]*>\s*/g, '')
+
   // <html lang> + document title
   out = out.replace(/<html lang="[^"]*"/, `<html lang="${bcpLang}"`)
   out = out.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`)
@@ -153,10 +159,11 @@ function localize(html, { bcpLang, ogLocale, title, description, url, alternates
     `$1${ogLocale.toLowerCase()}$2`
   )
 
-  // JSON-LD: the Website entity carries the page URL + inLanguage; the
-  // Organization entity keeps its canonical root url.
+  // JSON-LD: the WebSite entity carries the page URL + inLanguage; the
+  // Organization entity keeps its canonical root url. Whitespace-tolerant
+  // so it matches both the pretty-printed shell block and compact graphs.
   out = out.replace(
-    /("@type":"Website","@id":"Page","url":")[^"]*(")/,
+    /("@type"\s*:\s*"WebSite"[^}]*?"url"\s*:\s*")[^"]*(")/,
     `$1${url}$2,"inLanguage":"${bcpLang}"`
   )
 
@@ -166,7 +173,9 @@ function localize(html, { bcpLang, ogLocale, title, description, url, alternates
     .join('\n')
   const inject = [
     `  <meta property="og:locale" content="${ogLocale}">`,
-    ...alternates.slice(1).map((a) => `  <meta property="og:locale:alternate" content="${a.og}">`),
+    ...alternates
+      .filter((a) => a.og !== ogLocale)
+      .map((a) => `  <meta property="og:locale:alternate" content="${a.og}">`),
     alt,
     `  <link rel="alternate" hreflang="x-default" href="${alternates[0].url}">`,
   ].join('\n')
@@ -210,16 +219,28 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     return v === undefined || v === null || v === '' ? get(en) : v
   }
 
-  // hreflang alternates — identical on every emitted page.
-  const alternates = VALID_LANGS.filter((loc) => LOCALE_TAGS[loc]).map((loc) => ({
-    bcp: LOCALE_TAGS[loc].bcp,
-    og: LOCALE_TAGS[loc].og,
-    url: loc === 'en' ? `${SITE_URL}/` : `${SITE_URL}/${loc}`,
-  }))
+  // hreflang alternates — built per route: every emitted page points its
+  // alternates at the *equivalent* route in each locale, never back to the
+  // locale root. `pathOf` returns the canonical path for a locale ('en'
+  // paths are unprefixed); alias pages map to their canonical equivalents
+  // (e.g. /br/earth-playground alternates → /br/<localized-earth-slug>).
+  const enSlugs = LANG_SLUGS.en || {}
+
+  const slugPath = (key) => (loc) =>
+    loc === 'en' ? `/${enSlugs[key]}` : `/${loc}/${LANG_SLUGS[loc]?.[key] || enSlugs[key]}`
+
+  const homePath = (loc) => (loc === 'en' ? '/' : `/${loc}`)
+
+  const alternatesFor = (pathOf) =>
+    VALID_LANGS.filter((loc) => LOCALE_TAGS[loc]).map((loc) => ({
+      bcp: LOCALE_TAGS[loc].bcp,
+      og: LOCALE_TAGS[loc].og,
+      url: `${SITE_URL}${pathOf(loc)}`,
+    }))
 
   let written = 0
 
-  /** Route table: path-suffix → title factory. */
+  /** Route table: path-suffix → title + canonical-equivalent alternates path. */
   const routesFor = (loc) => {
     const slugs = LANG_SLUGS[loc]
     const legal = t(loc, (x) => x.components?.['legal-footer']?.links) || legalEn
@@ -227,25 +248,51 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     const titleOf = (suffix) => (suffix ? `${BASE_TITLE} | ${suffix}` : BASE_TITLE)
     const pgTitle = () =>
       `${t(loc, (x) => x.APP?.earthPlayground) || 'Earth Playground'} | ${BASE_TITLE}`
+    const sfTitle = () => `${t(loc, (x) => x.APP?.starField) || 'Star Field'} | ${BASE_TITLE}`
 
-    const routes = [{ path: loc, title: BASE_TITLE }]
+    const routes = [{ path: loc, title: BASE_TITLE, alt: homePath }]
 
     if (slugs) {
       routes.push(
-        { path: `${loc}/${slugs.about}`, title: titleOf(t(loc, (x) => x.APP?.about?.description)) },
-        { path: `${loc}/${slugs.contact}`, title: titleOf(t(loc, (x) => x.APP?.contact)) },
-        { path: `${loc}/${slugs.privacy}`, title: titleOf(pageName(1)) },
-        { path: `${loc}/${slugs.gdpr}`, title: titleOf(pageName(2)) },
-        { path: `${loc}/${slugs.terms}`, title: titleOf(pageName(3)) },
-        { path: `${loc}/${slugs.earthPlayground}`, title: pgTitle() }
+        {
+          path: `${loc}/${slugs.about}`,
+          title: titleOf(t(loc, (x) => x.APP?.about?.description)),
+          alt: slugPath('about'),
+        },
+        {
+          path: `${loc}/${slugs.contact}`,
+          title: titleOf(t(loc, (x) => x.APP?.contact)),
+          alt: slugPath('contact'),
+        },
+        { path: `${loc}/${slugs.privacy}`, title: titleOf(pageName(1)), alt: slugPath('privacy') },
+        { path: `${loc}/${slugs.gdpr}`, title: titleOf(pageName(2)), alt: slugPath('gdpr') },
+        { path: `${loc}/${slugs.terms}`, title: titleOf(pageName(3)), alt: slugPath('terms') },
+        {
+          path: `${loc}/${slugs.earthPlayground}`,
+          title: pgTitle(),
+          alt: slugPath('earthPlayground'),
+        },
+        { path: `${loc}/${slugs.starField}`, title: sfTitle(), alt: slugPath('starField') }
       )
     }
 
-    // English playground segments under the locale prefix (sitemap parity).
+    // English playground segments under the locale prefix (sitemap parity) —
+    // alternates resolve to the canonical localized slugs.
     routes.push(
-      { path: `${loc}/earth-playground`, title: pgTitle() },
-      { path: `${loc}/space-playground`, title: pgTitle() }
+      { path: `${loc}/earth-playground`, title: pgTitle(), alt: slugPath('earthPlayground') },
+      { path: `${loc}/space-playground`, title: pgTitle(), alt: slugPath('earthPlayground') },
+      { path: `${loc}/star-field-experiment`, title: sfTitle(), alt: slugPath('starField') }
     )
+
+    // Localized portfolio — /<loc>/portfolio/<slug> renders the project view
+    // translated; media-modal deep links stay English-only.
+    for (const slug of Object.keys(en.projects || {})) {
+      routes.push({
+        path: `${loc}/portfolio/${slug}`,
+        title: titleOf(toDescription(t(loc, (x) => x.projects?.[slug]?.title) || slug, 80)),
+        alt: (loc2) => `${loc2 === 'en' ? '' : `/${loc2}`}/portfolio/${slug}`,
+      })
+    }
 
     return routes
   }
@@ -262,7 +309,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     title: BASE_TITLE,
     description: rootDescription,
     url: `${SITE_URL}/`,
-    alternates,
+    alternates: alternatesFor(homePath),
   })
 
   // ── Localized documents ───────────────────────────────────────────────────
@@ -282,7 +329,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         title: route.title,
         description,
         url: `${SITE_URL}/${route.path}`,
-        alternates,
+        alternates: alternatesFor(route.alt),
       })
 
       // Locales live under dist/langs/<loc>/… — firebase.json rewrites map
@@ -313,6 +360,14 @@ export function syncFirebaseRewrites() {
   const firebasePath = path.join(ROOT, 'firebase.json')
   const cfg = JSON.parse(fs.readFileSync(firebasePath, 'utf8'))
 
+  // Localized portfolio slugs — the /<loc>/portfolio/<slug> pages emitted by
+  // buildLocalePages need explicit rewrites (the `**` catch-all would serve
+  // the English shell instead).
+  const dbPath = path.join(ROOT, 'database.json')
+  const projectSlugs = fs.existsSync(dbPath)
+    ? Object.keys(JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations?.en?.projects || {})
+    : []
+
   const localeRoutes = []
 
   for (const loc of VALID_LANGS) {
@@ -326,8 +381,11 @@ export function syncFirebaseRewrites() {
       slugs.gdpr,
       slugs.terms,
       slugs.earthPlayground,
+      slugs.starField,
       'earth-playground',
       'space-playground',
+      'star-field-experiment',
+      ...projectSlugs.map((slug) => `portfolio/${slug}`),
     ].filter(Boolean)
 
     localeRoutes.push({ source: `/${loc}`, destination: `/langs/${loc}/index.html` })

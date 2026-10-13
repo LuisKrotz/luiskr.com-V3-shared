@@ -8,6 +8,20 @@ const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..
 
 const VALID_LANGS = Object.keys(LANG_SLUGS)
 
+// Locale-prefixed path detector — built from the actual locale codes so
+// single-word routes like /docs/** or /gdpr are never mistaken for a
+// locale prefix and dropped from the English sitemap.
+const LOCALE_PREFIX_RE = new RegExp(`^/(${VALID_LANGS.join('|')})(/|$)`)
+
+// Experience path segments (canonical + every localized slug) — used for
+// sitemap <priority> so immersive pages rank just under home roots.
+const EXPERIENCE_SEGMENTS = new Set()
+for (const slugs of Object.values(LANG_SLUGS)) {
+  EXPERIENCE_SEGMENTS.add(slugs.earthPlayground)
+  EXPERIENCE_SEGMENTS.add(slugs.starField)
+}
+EXPERIENCE_SEGMENTS.add('space-playground')
+
 function slugify(text) {
   return (text || '')
     .toString()
@@ -23,24 +37,32 @@ async function run() {
   const base = 'https://luiskr.com'
   const urlSet = new Set()
 
-  // Root
+  // Root + English home-section anchors (about/contact are localized slugs
+  // for en too — /about, /contact scroll the home view).
   urlSet.add('/')
 
-  // Legal routes (default English)
-  urlSet.add('/privacy-policy')
-  urlSet.add('/gdpr')
-  urlSet.add('/terms-of-use')
+  const enSlugs = LANG_SLUGS.en || {}
 
-  // Earth / Space Playground (default English)
+  for (const key of ['about', 'contact', 'privacy', 'gdpr', 'terms']) {
+    if (enSlugs[key]) urlSet.add(`/${enSlugs[key]}`)
+  }
+
+  // Earth / Space Playground + Star Field (canonical English segments)
   urlSet.add('/earth-playground')
   urlSet.add('/space-playground')
+  urlSet.add('/star-field-experiment')
 
-  // Localized routes from LANG_SLUGS
+  // Localized routes from LANG_SLUGS — each locale's real slug values,
+  // plus the English playground/star segments the router also accepts
+  // under a locale prefix. English-segment legal aliases (e.g.
+  // /br/privacy-policy) resolve in the router but stay unlisted: the
+  // localized slug is the canonical crawl target.
   for (const lang of VALID_LANGS) {
     if (lang === 'en') continue
     urlSet.add(`/${lang}`)
     urlSet.add(`/${lang}/earth-playground`)
     urlSet.add(`/${lang}/space-playground`)
+    urlSet.add(`/${lang}/star-field-experiment`)
     const slugs = LANG_SLUGS[lang]
     if (slugs) {
       if (slugs.privacy) urlSet.add(`/${lang}/${slugs.privacy}`)
@@ -48,6 +70,8 @@ async function run() {
       if (slugs.terms) urlSet.add(`/${lang}/${slugs.terms}`)
       if (slugs.about) urlSet.add(`/${lang}/${slugs.about}`)
       if (slugs.contact) urlSet.add(`/${lang}/${slugs.contact}`)
+      if (slugs.earthPlayground) urlSet.add(`/${lang}/${slugs.earthPlayground}`)
+      if (slugs.starField) urlSet.add(`/${lang}/${slugs.starField}`)
     }
   }
 
@@ -70,8 +94,10 @@ async function run() {
   }
 
   // Portfolio routes & media modal URLs
+  const projectSlugs = []
   for (const [projectSlug, projectData] of Object.entries(data || {})) {
     urlSet.add(`/portfolio/${projectSlug}`)
+    projectSlugs.push(projectSlug)
     if (projectData && projectData.sections) {
       for (const section of projectData.sections) {
         if (Array.isArray(section)) {
@@ -108,6 +134,29 @@ async function run() {
     urlSet.add(`/portfolio/${alias}`)
   }
 
+  // Localized portfolio — /<loc>/portfolio/<slug> renders the same project
+  // view in the locale's language. Media-modal deep links stay English-only
+  // (the modal slugs derive from English labels).
+  for (const lang of VALID_LANGS) {
+    if (lang === 'en') continue
+    for (const projectSlug of projectSlugs) {
+      urlSet.add(`/${lang}/portfolio/${projectSlug}`)
+    }
+  }
+
+  // Star Field catalog deep links — /star-field-experiment/<body> opens the
+  // dossier for each authored body. Body ids are catalog identifiers and
+  // stay English-canonical (localized dossiers resolve inside the SPA).
+  const starBodiesDir = path.join(REPO_ROOT, 'experiments', 'star-field', 'public', 'data', 'en')
+
+  if (fs.existsSync(starBodiesDir)) {
+    for (const file of fs.readdirSync(starBodiesDir)) {
+      if (file.endsWith('.json')) {
+        urlSet.add(`/star-field-experiment/${file.replace(/\.json$/, '')}`)
+      }
+    }
+  }
+
   // Docs portal — English-only SPA; every publishable manifest file is a
   // crawlable '/docs/<root>/<relpath>' route (files only — dirs resolve to
   // the same portal page, and media payloads render inline in the viewer).
@@ -134,14 +183,19 @@ async function run() {
 
   const META_DIR = 'website/public/meta'
   const now = new Date().toISOString().split('T')[0] + 'T00:00:00+00:00'
-  const priorityOf = (u) =>
-    u === '/' || /^\/[a-z-]+$/.test(u)
-      ? '1.0'
-      : u.includes('/earth-playground') || u.includes('/space-playground')
-        ? '0.9'
-        : u.startsWith('/portfolio/') && u.split('/').length > 3
-          ? '0.6'
-          : '0.8'
+  const priorityOf = (u) => {
+    const segs = u.split('/').filter(Boolean)
+
+    if (u === '/' || (segs.length === 1 && VALID_LANGS.includes(segs[0]))) return '1.0'
+
+    if (EXPERIENCE_SEGMENTS.has(segs[segs.length - 1])) return '0.9'
+
+    if (u.includes('/portfolio/') && segs.length > 3) return '0.6'
+
+    if (segs.length > 2) return '0.7'
+
+    return '0.8'
+  }
 
   /** Emits one `<urlset>` document for `urls`. */
   const sitemapDoc = (urls) => {
@@ -155,13 +209,30 @@ async function run() {
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${items}\n</urlset>\n`
   }
 
-  /** URLs owned by one locale — `/<loc>` plus its localized + playground routes. */
+  /** URLs owned by one locale — `/<loc>` plus its localized, playground and portfolio routes. */
   const localeUrlsOf = (loc) => {
-    const own = [`/${loc}`, `/${loc}/earth-playground`, `/${loc}/space-playground`]
+    const own = [
+      `/${loc}`,
+      `/${loc}/earth-playground`,
+      `/${loc}/space-playground`,
+      `/${loc}/star-field-experiment`,
+    ]
     const slugs = LANG_SLUGS[loc] || {}
 
-    for (const key of ['privacy', 'gdpr', 'terms', 'about', 'contact']) {
+    for (const key of [
+      'privacy',
+      'gdpr',
+      'terms',
+      'about',
+      'contact',
+      'earthPlayground',
+      'starField',
+    ]) {
       if (slugs[key]) own.push(`/${loc}/${slugs[key]}`)
+    }
+
+    for (const projectSlug of projectSlugs) {
+      own.push(`/${loc}/portfolio/${projectSlug}`)
     }
 
     return own.sort()
@@ -171,7 +242,7 @@ async function run() {
   // English gets the unprefixed surface (/, /portfolio/**, /docs/** — the docs
   // portal is English-only by design); every other locale sitemap lists only
   // its own /<loc>/… routes. sitemap.xml becomes the index document.
-  const sharedUrls = allUrls.filter((u) => !/^\/[a-z]{2,5}(\/|$)/.test(u) || u === '/')
+  const sharedUrls = allUrls.filter((u) => u === '/' || !LOCALE_PREFIX_RE.test(u))
   const enUrls = sharedUrls
   const translations = fs.existsSync('database.json')
     ? JSON.parse(fs.readFileSync('database.json', 'utf-8')).translations || {}
@@ -230,7 +301,7 @@ async function run() {
     fs.mkdirSync(locDir, { recursive: true })
     fs.writeFileSync(
       path.join(locDir, 'robots.txt'),
-      `User-agent: *\nDisallow: /cms/\nDisallow: /admin\n\nSitemap: ${base}/sitemap-${loc}.xml\n`,
+      `User-agent: *\nDisallow: /cms\nDisallow: /admin\nDisallow: /langs/\n\nSitemap: ${base}/sitemap-${loc}.xml\n`,
       'utf-8'
     )
     fs.writeFileSync(
