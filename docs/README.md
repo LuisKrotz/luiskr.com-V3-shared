@@ -6,25 +6,27 @@ Three.js WebGPU/WebGL visuals, Vite (rolldown) build.
 
 ## Reading map
 
-| Document                                              | Covers                                                                    |
-| ----------------------------------------------------- | ------------------------------------------------------------------------- |
-| [modules.md](modules.md)                              | The whole-repo story — every module, the request lifecycle, docs pipeline |
-| [architecture.md](architecture/architecture.md)       | Repository layout, module ownership, entry points, bundle separation      |
-| [routing.md](architecture/routing.md)                 | Hash-free SPA router, locale prefixes, route slugs, dynamic view loading  |
-| [translations-i18n.md](guides/translations-i18n.md)   | Translation DB schema, stale-while-revalidate, fallback chain, locales    |
-| [website.md](architecture/website.md)                 | Public site shell, components, Shadow DOM styling, skeletons, dialogs     |
-| [playground.md](architecture/playground.md)           | Earth Playground view, WebGPU scene, loader contract, controls            |
-| [star-field.md](architecture/star-field.md)           | Star Field exploration — catalog bodies, lazy dossiers, nav drawer        |
-| [webgl-canvas.md](architecture/webgl-canvas.md)       | Shared WebGL/canvas utilities, context pool, lifecycle, CSS fallbacks     |
-| [cms.md](architecture/cms.md)                         | CMS bundle, authentication, editors, Firebase writes, media conventions   |
-| [data-model.md](architecture/data-model.md)           | Firebase `translations/` tree, node shapes, invariants                    |
-| [styling-governance.md](guides/styling-governance.md) | Sass layers, design tokens, `AGENTS.md` rules enforced by tests           |
-| [build.md](guides/build.md)                           | Vite config, snapshot plugin, compat bundle, terser pitfalls              |
-| [testing.md](guides/testing.md)                       | Jest suites, governance tests, Lighthouse workflow                        |
-| [api/](api/README.md)                                 | Generated per-file docs from JSDoc — `yarn docs:api`                      |
-| [jsdocs/](jsdocs/)                                    | Generated JSDoc site — `yarn docs:jsdocs` (also runs in `yarn build`)     |
-| [typedoc/](typedoc/)                                  | TypeDoc API reference (TS/TSX) — `yarn docs:typedoc`                      |
-| [sassdoc/](sassdoc/)                                  | SassDoc token/mixin reference (`///` comments) — `yarn docs:sassdoc`      |
+| Document                                                         | Covers                                                                    |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [modules.md](modules.md)                                         | The whole-repo story — every module, the request lifecycle, docs pipeline |
+| [architecture.md](architecture/architecture.md)                  | Repository layout, module ownership, entry points, bundle separation      |
+| [routing.md](architecture/routing.md)                            | Hash-free SPA router, locale prefixes, route slugs, dynamic view loading  |
+| [translations-i18n.md](guides/translations-i18n.md)              | Translation DB schema, stale-while-revalidate, fallback chain, locales    |
+| [website.md](architecture/website.md)                            | Public site shell, components, Shadow DOM styling, skeletons, dialogs     |
+| [playground.md](architecture/playground.md)                      | Earth Playground view, WebGPU scene, loader contract, controls            |
+| [star-field.md](architecture/star-field.md)                      | Star Field exploration — catalog bodies, lazy dossiers, nav drawer        |
+| [webgl-canvas.md](architecture/webgl-canvas.md)                  | Shared WebGL/canvas utilities, context pool, lifecycle, CSS fallbacks     |
+| [animations/](animations/README.md)                              | Every animation system + compute placement (GPU/WASM/CPU policy)          |
+| [physics-simulations/](animations/physics-simulations/README.md) | Orbits, differential rotation, solar wind, pulsation, climate, LOD        |
+| [cms.md](architecture/cms.md)                                    | CMS bundle, authentication, editors, Firebase writes, media conventions   |
+| [data-model.md](architecture/data-model.md)                      | Firebase `translations/` tree, node shapes, invariants                    |
+| [styling-governance.md](guides/styling-governance.md)            | Sass layers, design tokens, `AGENTS.md` rules enforced by tests           |
+| [build.md](guides/build.md)                                      | Vite config, snapshot plugin, compat bundle, terser pitfalls              |
+| [testing.md](guides/testing.md)                                  | Jest suites, governance tests, Lighthouse workflow                        |
+| [api/](api/README.md)                                            | Generated per-file docs from JSDoc — `yarn docs:api`                      |
+| [jsdocs/](jsdocs/)                                               | Generated JSDoc site — `yarn docs:jsdocs` (also runs in `yarn build`)     |
+| [typedoc/](typedoc/)                                             | TypeDoc API reference (TS/TSX) — `yarn docs:typedoc`                      |
+| [sassdoc/](sassdoc/)                                             | SassDoc token/mixin reference (`///` comments) — `yarn docs:sassdoc`      |
 
 ## Module stories
 

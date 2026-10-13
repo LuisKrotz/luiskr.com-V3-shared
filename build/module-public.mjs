@@ -2,7 +2,7 @@
  * @file module-public.mjs
  * @description Multi-source public-asset merge for the modular workspace.
  * Every module owns its own `public/` folder (website assets + SEO meta,
- * core WASM/worker payloads, earth-playground textures + music). Vite's
+ * core WASM/worker payloads, star-field data shards). Vite's
  * `publicDir` accepts a single directory, so this plugin fans the module
  * mounts out to their URL prefixes in both modes:
  *   - dev: `configureServer` middlewares serve each mount at its URL prefix;
@@ -26,13 +26,7 @@ const REPO = fileURLToPath(new URL('../..', import.meta.url))
 export const MODULE_PUBLIC_MOUNTS = Object.freeze([
   { dir: 'website/public', at: '/' },
   { dir: 'core/public', at: '/' },
-  { dir: 'experiments/earth-playground/public', at: '/experiments/earth-playground' },
   { dir: 'experiments/star-field/public', at: '/experiments/star-field' },
-  // Legacy root mount: bundles deployed before the module-public layout
-  // request /textures/earth/* and /music/* (no prefix). Serving the same
-  // dir at the root keeps stale cached bundles working on dev and on the
-  // next deploy instead of falling through to the SPA index.html.
-  { dir: 'experiments/earth-playground/public', at: '/' },
 ])
 
 /** Minimal content-type table for the dev middleware (build copies need none). */
