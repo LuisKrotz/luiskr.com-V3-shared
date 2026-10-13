@@ -29,6 +29,45 @@ export const MODULE_PUBLIC_MOUNTS = Object.freeze([
   { dir: 'experiments/star-field/public', at: '/experiments/star-field' },
 ])
 
+/**
+ * firebase.json hosting rewrites — `/robots.txt` → `/meta/robots.txt`
+ * and friends. Firebase evaluates these at hosting level, so plain
+ * `vite dev`/`vite preview` never saw them (Lighthouse fetched the SPA
+ * index.html as robots.txt). Reading the config keeps the rewrite
+ * table single-sourced; glob sources (`/**` SPA catch-alls) are
+ * excluded — the SPA fallback already owns those.
+ * @returns {{ source: string, destination: string }[]} Plain path rewrites.
+ */
+const firebaseRewrites = () => {
+  try {
+    const cfg = JSON.parse(fs.readFileSync(path.join(REPO, 'firebase.json'), 'utf8'))
+
+    return (cfg.hosting?.rewrites ?? []).filter(
+      (r) => !r.source.includes('*') && !r.destination.includes('index.html')
+    )
+  } catch {
+    return []
+  }
+}
+
+/**
+ * Connect middleware applying the firebase rewrites — rewrites
+ * `req.url` to the destination so a later `serveMount` answers the
+ * mapped file. Registered before the mounts.
+ * @returns {import('connect').NextHandleFunction} Rewrite handler.
+ */
+const rewriteMount = () => {
+  const table = new Map(firebaseRewrites().map((r) => [r.source, r.destination]))
+
+  return (req, _res, next) => {
+    const mapped = table.get((req.url || '/').split('?')[0])
+
+    if (mapped) req.url = mapped
+
+    next()
+  }
+}
+
 /** Minimal content-type table for the dev middleware (build copies need none). */
 const MIME = {
   '.wasm': 'application/wasm',
@@ -176,6 +215,10 @@ export const modulePublicPlugin = (opts = {}) => {
       // registration lets `/scripts/workers/wasm-worker.js` fall through
       // to index.html (200 text/html), which silently breaks every
       // `new Worker(...)` call. Misses and traversals still `next()`.
+      // Rewrites go first so `/robots.txt` resolves to `/meta/robots.txt`
+      // before the '/' mounts or the SPA fallback answer it.
+      server.middlewares.use(rewriteMount())
+
       for (const { dir, at } of MODULE_PUBLIC_MOUNTS) {
         const abs = path.join(REPO, dir)
 
@@ -199,6 +242,24 @@ export const modulePublicPlugin = (opts = {}) => {
         if (!fs.existsSync(abs)) continue
 
         copyMount(abs, path.join(outDir, at.replace(/^\/+|\/+$/g, '')))
+      }
+
+      // Materialize firebase rewrites — firebase.json maps root URLs
+      // (/robots.txt, /sitemap*.xml, /llms.txt …) onto public/meta/*
+      // payloads, but `vite preview` (and any non-firebase static host)
+      // has no rewrite engine: every miss falls through to the SPA
+      // index.html, which is how Lighthouse got an HTML "robots.txt"
+      // and failed its SEO audit. Copying each destination to its
+      // source path makes the artifact self-serving; hosting still
+      // resolves the same content via the rewrite.
+      for (const { source, destination } of firebaseRewrites()) {
+        const from = path.join(outDir, destination.replace(/^\/+/, ''))
+        const to = path.join(outDir, source.replace(/^\/+/, ''))
+
+        if (!fs.existsSync(from) || fs.existsSync(to)) continue
+
+        fs.mkdirSync(path.dirname(to), { recursive: true })
+        fs.copyFileSync(from, to)
       }
     },
   }
