@@ -264,6 +264,12 @@ three layers:
   shell one step past the cloud deck — bright scattering blue on the day
   limb, an amber dusk band through the terminator, dim deep blue on the
   night limb; opacity also thins where the air is unlit.
+- **Near-Earth satellites** (`makeConstellation` + `constellation.id`):
+  the Starlink-class glint shell is a dossier-backed pick target — an
+  invisible proxy bubble at the jittered outer radius registers the
+  swarm's own node/anchor, so clicking the dot annulus opens the
+  `near-earth-satellites` dossier while the proxy still loses to
+  Earth's real mesh (and to the ISS bubble inside it) along the ray.
 
 ```mermaid
 flowchart TD
