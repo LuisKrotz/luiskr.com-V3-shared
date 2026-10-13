@@ -50,6 +50,23 @@ classic GLSL ShaderMaterials.
 - `@param` rimTint Limb color (hot rim for stars, muted for moons).
 - `@param` falloff Fresnel exponent — higher keeps a tight bright core.
 
+### `irregularGeometry`
+
+Triaxial rubble-pile geometry for `def.irregular` bodies — a detail-4
+icosahedron crumpled by seeded value noise so the silhouette dimples
+like a captured asteroid instead of reading as a hydrostatic ball.
+Every vertex sits on the sphere (r = def.radius); the displacement
+`d = 1 + vnoise(unit·octaves)·amp` pushes it along its own normal,
+then `axes` stretches the solid into the body's true triaxial
+proportions (Phobos ≈ 27×22×18 km → [1, 0.81, 0.67]). Per-vertex
+spherical UVs (u = atan2 longitude, v = asin latitude) are baked
+from the PRE-stretch unit direction so an equirect map still wraps
+pole-to-pole without smearing across the crumpled facets.
+
+- `@param` THREE The three.js module.
+- `@param` def Catalog entry — `irregular` carries amp + optional axes.
+- `@returns` Crumpled geometry with spherical UVs + smooth normals.
+
 ### `makeSphere`
 
 Sphere + material for a solid body — textured when the catalog maps one,

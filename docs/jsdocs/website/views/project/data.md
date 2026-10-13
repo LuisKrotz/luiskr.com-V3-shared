@@ -2,9 +2,9 @@
 
 Data plumbing for &lt;view-project&gt;: slug resolution from the
 
-| | |
-|---|---|
-| **Source** | `src/website/views/project/data.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/views/project/data.ts`                     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -12,6 +12,12 @@ Data plumbing for &lt;view-project&gt;: slug resolution from the
 ### `updateRobotsMeta`
 
 Toggles the noindex meta for draft/hidden projects.
+
+### `firstParagraph`
+
+Recursively finds the first paragraph string inside a project's nested
+`sections` payload (paragraphs and expandable media items are interleaved
+two levels deep — media objects are skipped, only text qualifies).
 
 ### `resolveProjectSlug`
 

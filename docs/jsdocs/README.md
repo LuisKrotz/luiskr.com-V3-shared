@@ -57,6 +57,14 @@ _Offline dev mock — never shipped._
 | ---------------------------------------------- | ---------------------------------------------- |
 | [`firebase-mock.ts`](cms/dev/firebase-mock.md) | Dev-only offline stub for Firebase Auth + RTDB |
 
+## CMS
+
+_Admin bundle — editors for every database node._
+
+| File                        | What it does |
+| --------------------------- | ------------ |
+| [`cms.js`](cms/dist/cms.md) | —            |
+
 ## CMS / footer editor
 
 _Footer + legal links editor card._
@@ -359,6 +367,22 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
+| File                           | What it does |
+| ------------------------------ | ------------ |
+| [`core.js`](core/dist/core.md) | —            |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
+| File                                                         | What it does |
+| ------------------------------------------------------------ | ------------ |
+| [`wasm-worker.js`](core/dist/scripts/workers/wasm-worker.md) | —            |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
 | File                                                         | What it does                                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [`cssvars.ts`](core/legacy-polyfills/cssvars.md)             | CSS custom-properties ponyfill for IE11 / old EdgeHTML —     |
@@ -647,6 +671,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`dom-utils-tails.test.js`](core/tests/coverage/utils/dom-utils-tails.test.md)         | Split from coverage-tails-5.test.js — covers the "dom-utils tails" describe. |
 | [`media-tails.test.js`](core/tests/coverage/utils/media-tails.test.md)                 | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
 | [`media-utils-tails.test.js`](core/tests/coverage/utils/media-utils-tails.test.md)     | Split from coverage-tails.test.js — covers the "media utils tails" describe. |
+| [`string-tails.test.js`](core/tests/coverage/utils/string-tails.test.md)               | Coverage tails for core/utils/string.ts — iterated HTML                      |
 
 ## Core engine
 
@@ -1073,7 +1098,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`gui-scene.ts`](core/tokens/playground/gui-scene.md) | Scene-subsystem start values for the Earth Playground —       |
 | [`music.ts`](core/tokens/playground/music.md)         | Ambient soundtrack for the Earth Playground — OGG first       |
 | [`params.ts`](core/tokens/playground/params.md)       | `data-param` values on playground sliders/checkboxes split by |
-| [`textures.ts`](core/tokens/playground/textures.md)   | Public-URL paths for the Earth Playground texture set (served |
+| [`textures.ts`](core/tokens/playground/textures.md)   | CDN URLs for the Earth Playground texture set — every map     |
 
 ## Core engine
 
@@ -1109,7 +1134,7 @@ _Shared primitives every surface builds on — no direct UI._
 | -------------------------------------------------- | ---------------------------------------------------------- |
 | [`kinds.ts`](core/tokens/starfield/kinds.md)       | Star-field taxonomy + action tokens: the region groups the |
 | [`params.ts`](core/tokens/starfield/params.md)     | Star-field engine parameters — camera rig, fly-to tween    |
-| [`textures.ts`](core/tokens/starfield/textures.md) | Public-URL paths for the Star Field experiment texture set |
+| [`textures.ts`](core/tokens/starfield/textures.md) | CDN URLs for the Star Field experiment texture set —       |
 
 ## Core engine
 
@@ -1404,6 +1429,14 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`render.tsx`](experiments/docs/render.md)            | JSX template for &lt;view-docs&gt; — extracted from Docs.tsx.   |
 | [`telemetry.ts`](experiments/docs/telemetry.md)       | Copy-attempt telemetry for the docs source viewer.              |
 | [`vite.config.js`](experiments/docs/vite.config.md)   | Library build for the `docs` experiment — the in-app            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                       | What it does |
+| ------------------------------------------ | ------------ |
+| [`docs.js`](experiments/docs/dist/docs.md) | —            |
 
 ## Entry points
 
@@ -1789,6 +1822,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                 | What it does                                              |
 | ------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| [`cluster.ts`](experiments/star-field/engine/bodies/procedural/cluster.md)           | Seeded globular-cluster starfield texture — the no-photo  |
 | [`corona.ts`](experiments/star-field/engine/bodies/procedural/corona.md)             | Seeded star-corona sprite — the "alive" layer that turns  |
 | [`gas.ts`](experiments/star-field/engine/bodies/procedural/gas.md)                   | Seeded wispy nebula-gas texture for photo-less nebulae    |
 | [`halo.ts`](experiments/star-field/engine/bodies/procedural/halo.md)                 | Additive star-glow annulus texture — the halo sprite is   |
@@ -2366,6 +2400,14 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`index.ts`](website/index.md)              | Barrel for the `website` module — the public site's routable |
 | [`jest.config.mjs`](website/jest.config.md) | —                                                            |
 | [`vite.config.js`](website/vite.config.md)  | Library build for the `website` module — the public site's   |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                    | What it does |
+| --------------------------------------- | ------------ |
+| [`website.js`](website/dist/website.md) | —            |
 
 ## Entry points
 

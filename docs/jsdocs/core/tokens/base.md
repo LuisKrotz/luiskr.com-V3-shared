@@ -419,6 +419,10 @@ Token key "k privacy policy" — single source for the repeated literal.
 
 Token key "k terms of use" — single source for the repeated literal.
 
+### `_K_LICENSE`
+
+Token key "k license" — single source for the repeated literal.
+
 ### `_K_EARTH_PLAYGROUND`
 
 Shared key token `earthPlayground` — single source for a literal repeated across modules

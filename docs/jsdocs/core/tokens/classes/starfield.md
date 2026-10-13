@@ -31,6 +31,10 @@ Label flips left of the marker — right-edge clamps keep it readable.
 
 Label drops below the marker — top-edge clamps keep it on-canvas.
 
+### `SF_NAV_PIN`
+
+Sticky pinned strip inside the scrolling panel (head + search).
+
 ### `SF_NAV_DISCLAIMER`
 
 In-drawer scale disclaimer — mobile home for the honesty note.

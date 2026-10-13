@@ -2,9 +2,9 @@
 
 Data loading for &lt;view-home&gt;: three SWR sources fetched
 
-| | |
-|---|---|
-| **Source** | `src/website/views/home/data.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/views/home/data.ts`                        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -22,6 +22,14 @@ Projects list reshaped for the mosaic. The DB stores portfoliolist
 as either an array or a keyed object (locale-dependent), so both
 shapes normalize to an array; each item gets a computed `featured`
 flag driving the 2-column span in the masonry layout.
+
+### `emitHomeJsonLd`
+
+Base route graph (Org + WebSite + WebPage) composed with the
+portfolio ItemList — replaces the graph syncDocumentHead emitted so
+the WebPage entity survives alongside the carousel data. Called again
+when the localized bio lands so WebPage.description carries the real
+text instead of the parse-time site fallback.
 
 ### `applyHomeSnapshot`
 

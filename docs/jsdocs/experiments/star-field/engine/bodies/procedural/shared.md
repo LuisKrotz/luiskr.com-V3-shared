@@ -79,3 +79,14 @@ into the canvas at a point.
 - `@param` r Blob radius px.
 - `@param` inner Inner-stop css color.
 - `@param` outer Outer-stop css color (usually alpha 0).
+
+### `vnoise`
+
+Cheap value-noise 3d for vertex displacement — a three-octave hash of
+detuned sines (fundamental 0.55 + octave 0.3 + octave 0.15, wavenumber
+ratios ~2.7 and ~4.4) approximating band-limited fbm without a real
+gradient-noise import. Output stays in ≈[-1,1]; callers scale by their
+crumple amplitude so rock/moon silhouettes dimple deterministically.
+
+- `@param` x Sample x. @param y Sample y. @param z Sample z.
+- `@returns` Signed noise value ≈[-1,1].

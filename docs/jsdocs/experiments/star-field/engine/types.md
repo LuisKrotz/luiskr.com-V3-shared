@@ -82,6 +82,15 @@ Starting angle on the orbit (radians).
 
 ### (module scope)
 
+Orbital inclination about the parent's x-axis (radians) — tilts the
+whole orbit plane, not the body. Real multi-planet systems share
+near-coplanar planes but are never perfectly aligned; small nonzero
+values break the edge-on straight-line illusion while still reading
+as a resonant chain. Written to `pivot.rotation.x` at build so it
+survives the per-frame `rotation.y` orbit sweep.
+
+### (module scope)
+
 Orbital eccentricity 0–1 — when set, the pivot still sweeps the
 angle uniformly but the mesh's radial distance follows the conic
 `r = a(1−e²)/(1+e·cos θ)` so the body draws a visible ellipse
@@ -251,6 +260,25 @@ pooled flash sprite fires at a random surface point every
 `SF_METEOR.INTERVAL`-ish seconds (updateFx). For bodies whose
 dossier describes ongoing bombardment — the flash makes the
 crater record readable as a live process.
+
+### (module scope)
+
+Irregular rubble-pile body — replaces the perfect SphereGeometry
+with a seeded noise-crumpled icosahedron: each vertex displaces
+along its own normal by `vnoise(unit+offset)·amp·radius` and the
+whole solid stretches along `axes` (triaxial proportions, default
+seeded mild). For moons whose dossier JSON describes a lumpy
+captured asteroid (Phobos, Deimos) rather than a hydrostatic ball —
+the silhouette carries the physics (tidal stripping, rubble
+re-accretion) the sphere could never show.
+
+### `amp`
+
+Crumple depth as a fraction of the body radius (0–1).
+
+### (module scope)
+
+Triaxial proportions [x, y, z] — the body's three radii normalized to x=1 (Phobos ≈ [1, 0.81, 0.67]).
 
 ### `dist`
 
@@ -588,6 +616,17 @@ Spin target (mesh or its inner group) for self-rotation.
 
 ### (module scope)
 
+Body-system center — the group that carries the orbit radius
+(`position.x = def.orbit`) and hosts everything that must share the
+body's location but NOT its orientation: the axis-lock group, the
+bare mesh, satellite pivots and constellation swarms. It never
+rotates itself, so children orbit the body's center in the pivot
+frame instead of inheriting surface spin or lock counter-rotation.
+For orbiting bodies this is also the eccentric-orbit target —
+frame.ts rewrites its `position.x` with the conic radius.
+
+### (module scope)
+
 Inertial axis lock — a group between the orbit pivot and the mesh
 carrying `rotation.z = tilt` and counter-rotated on Y each frame.
 Without it the pivot's orbital Y-rotation precesses the spin axis
@@ -679,6 +718,26 @@ near-field group (real photosphere sphere + annulus halo + corona +
 flares, parked on `detail`) resolves on approach, so the star reads
 as an unresolvable point from range and as its spectral class up
 close.
+
+### (module scope)
+
+Living-nebula animation record — parked on the sprite's userData by
+`makeNebulaSprite` (`SF_USER_NEBULA`) and lifted here so updateFx
+can churn the depth layers each frame.
+
+### (module scope)
+
+Living-nebula fx record — the per-layer swirl state for a deep-sky
+sprite. Each entry owns one SpriteMaterial (primary photo, rotated
+echo ghost, or wide underlay glow); `rate` is rad/scene-second (the
+echo's is negative → counter-rotating shear), `phase` the seeded
+start angle, `opBase` the resting opacity the shimmer wave scales.
+`baseScale` captures the aspect-corrected sprite scale so the whole
+sprite can breathe without losing the photo's aspect.
+
+### `phase`
+
+Seeded phase offset for the whole-sprite breathing wave.
 
 ### (module scope)
 

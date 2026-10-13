@@ -42,6 +42,13 @@ emit UV-blue curtains instead of Earth's oxygen green: Jupiter's
 powerful oval reads cyan-white, Saturn's a deep blue, Neptune's a
 faint violet (weak far-out field, 47°-tilted dipole).
 
+### `TRAPPIST_B`
+
+Per-world tints for the seven-planet chain — shared color made every
+member read as the same ball. Inner pair scorched rock, mid worlds
+through the volatile line into the habitable-zone teal/ocean slate,
+outermost icy.
+
 ### `DWARF_SPH`
 
 Dwarf-galaxy tints — spheroidals get a warm old-population wash,

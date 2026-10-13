@@ -18,6 +18,17 @@ config so a moved folder only ever changes here and in the root config.
 
 Runtime specifiers that must never be inlined into a module bundle.
 
+### `hostContextSafeLogger`
+
+Vite logger that drops the lightningcss :host-context() notice only.
+lightningcss's selector parser doesn't know :host-context() yet — the
+emitted CSS is byte-identical correct (rules pass through untouched, and
+errorRecovery keeps them in the output), so the "not recognized" notice is
+pure log noise. Filter exactly that pattern; every other warning keeps
+surfacing.
+
+- `@returns` {import('vite').Logger} Logger with the host-context warning filtered.
+
 ### `moduleConfig`
 
 Builds a Vite library config for one module folder.

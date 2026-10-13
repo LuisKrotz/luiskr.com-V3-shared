@@ -47,13 +47,6 @@ Flat shading — stone/carbon keep facets, ice/dust stay smooth.
 The five belt material classes, mirroring real asteroid taxonomy —
 stony chondrites dominate, carbonaceous next, dust/ice/metal trail.
 
-### `vnoise`
-
-Cheap value-noise 3d for vertex displacement — layered sin/cos hash
-so rock silhouettes crumple without needing a full fbm import.
-
-- `@param` x Sample x. @param y Sample y. @param z Sample z.
-
 ### `rockTexture`
 
 Paints one material-class texture: base fill + per-class features —

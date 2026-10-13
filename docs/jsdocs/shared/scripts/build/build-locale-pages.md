@@ -9,6 +9,12 @@ Emits per-locale, per-route static index.html files into
 
 ## Members
 
+### `slugify`
+
+Media-slug transform — MUST match generate-sitemap.js's slugify byte for
+byte: emitted /portfolio/<slug>/<media> file names have to line up with
+the URLs the sitemap already lists (diacritics fold to ASCII).
+
 ### `esc`
 
 Escape a string for use inside an HTML attribute or text node.
@@ -19,6 +25,18 @@ Strips markup from a translated rich-text string and compacts it into a
 meta-description-sized plain-text snippet (≤160 chars, cut at a word
 boundary). &nbsp; entities decode to regular spaces so the tag can sit
 in a content attribute.
+
+### `breadcrumbEntity`
+
+Ordered crumbs → BreadcrumbList entity (positions are 1-based per spec).
+
+### `videoEntity`
+
+VideoObject for one media descriptor — mp4 contentUrl + poster thumb.
+
+### (module scope)
+
+Recursively yields every sections node that carries a `src`.
 
 ### `writeCompressed`
 
@@ -34,8 +52,11 @@ Rewrites the English shell into a localized document.
 - `@param` {string} o.ogLocale - og:locale value (xx_YY)
 - `@param` {string} o.title - document + social title
 - `@param` {string} o.description - meta description text
-- `@param` {string} o.url - canonical absolute URL for this page
+- `@param` {string} o.url - this page's absolute URL
+- `@param` {string} [o.canonicalUrl] - canonical/og:url override for alias pages
 - `@param` {Array<{bcp:string,url:string}>} o.alternates - hreflang rows
+- `@param` {string} [o.image] - route-specific share image (project cover /
+- `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
 
 ### `buildLocalePages`
 
@@ -52,9 +73,40 @@ returned so the caller can run its own compress/SW-stamp pass.
 
 Per-locale lookup with English fallback (mirrors runtime appText).
 
+### `firstPara`
+
+Recursively finds the first paragraph string inside a nested sections payload.
+
+### `projectEntities`
+
+Full rich-media graph for one project page — Article + media
+ItemList (entries deep-link to the emitted /portfolio/<p>/<media>
+URLs; the SPA serves every labelled media slug) + one VideoObject
+per video. Mirrors runtime generateProjectSchema.
+
+### `projectImageOf`
+
+Cover share-image for a project — uncompressed jpg or video poster.
+
+### `homeEntities`
+
+Carousel ItemList for locale home pages — portfolio tiles → covers.
+
+### `pageNameFromTitle`
+
+Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names.
+
+### `mediaRowsOf`
+
+Expandable-media {slug,label,media} rows of a project — mirrors generate-sitemap's walk.
+
 ### `routesFor`
 
-Route table: path-suffix → title + canonical-equivalent alternates path.
+Route table: relative path → title, localized description,
+canonical-equivalent alternates path, optional canonical override.
+`path` is the emitted file path relative to its base (en → dist/,
+others → dist/langs/); en home yields '' — dist/index.html is
+already written by the root pass.
 
 ### `syncFirebaseRewrites`
 

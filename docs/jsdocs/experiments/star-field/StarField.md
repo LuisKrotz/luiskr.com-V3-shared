@@ -224,5 +224,9 @@ Announces a selection through the same live region.
 
 ### (module scope)
 
-Re-renders the component template while preserving focus and cursor
-position if the search input was active, preventing autocomplete blur.
+Re-renders the component template while preserving three pieces of
+transient UI state that the wholesale shadow-DOM rebuild would drop:
+the search input's focus and cursor (autocomplete blur), and the
+navigator panel's scroll offset — without the carry, any state
+change (selection, dossier load, manifest arrival) bounces the
+drawer list back to its top.

@@ -1,6 +1,6 @@
 # `core/tokens/starfield/textures.ts`
 
-Public-URL paths for the Star Field experiment texture set
+CDN URLs for the Star Field experiment texture set —
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
@@ -8,6 +8,15 @@ Public-URL paths for the Star Field experiment texture set
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### `_SF_TEX`
+
+CDN root the Star Field texture set uploads under.
+
+### `SF_TEXTURES`
+
+CDN URLs for the full Star Field texture set — sole declaration site;
+consumers import members rather than re-declaring the literals.
 
 ### `IO`
 
@@ -26,7 +35,7 @@ ONC albedo map. Asteroid albedos are grayscale — honest to the data.
 
 Real-photography billboards — NASA/Hubble/ESA imagery on the
 deep-sky bodies (nebulae, star clusters, external galaxies). All
-self-hosted under `public/textures/`; additive/masked compositing
+served from the CDN bucket; additive/masked compositing
 hides the rectangular edge so the photo reads as the object.
 
 ### `SF_DATA_BASE`

@@ -372,7 +372,11 @@ Rotation jitter added to the seeded base angle (radians).
 
 Nebula depth layering — a parallax echo + wide underlay glow composed
 under the photo sprite so a nebula reads as a volume of gas at
-different depths instead of one flat billboard.
+different depths instead of one flat billboard. The *_RATE/_FREQ/_WAVE
+members drive the ambient-life pass in updateFx: each layer swirls
+(SpriteMaterial.rotation is a UV-space turn, so the feathered photo
+churns in place rather than orbiting) and breathes opacity on detuned
+sines; rates are seeded from the body id so no two nebulae churn alike.
 
 ### `ECHO_SCALE`
 
@@ -389,3 +393,29 @@ Underlay glow scale multiplier — the wide light-field behind.
 ### `UNDER_OPACITY`
 
 Underlay glow opacity.
+
+### `SWIRL_MIN`
+
+Slowest layer swirl rate (rad/scene-second) — real nebular flows
+move at ~10 km/s over light-year spans, so the chart suggests the
+churn with sub-centi-radian rotation rather than a visible spin.
+
+### `SWIRL_SPREAD`
+
+Seeded spread added to SWIRL_MIN — per-nebula swirl variance.
+
+### `ECHO_RATE`
+
+Echo counter-rotation factor — negative sign makes the ghost layer shear against the photo.
+
+### `UNDER_RATE`
+
+Underlay drift factor — the widest layer barely turns.
+
+### `OP_WAVE`
+
+Opacity shimmer amplitude (fraction of opBase) + detuned frequency.
+
+### `BREATHE_AMP`
+
+Whole-sprite breathing — ±fraction scale swell like gas pressure waves.

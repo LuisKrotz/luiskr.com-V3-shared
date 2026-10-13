@@ -51,6 +51,13 @@ Skybox sphere radius — wraps the whole multi-tier chart (the
 observable-universe shell clamps at ~46k units, the skybox must sit
 beyond it or the panorama would clip through the boundary).
 
+### `ROCK_DETAIL`
+
+Icosahedron subdivision detail for irregular bodies (Phobos-class
+rubble moons) — detail 4 ≈ 5k triangles, matching the 48-segment
+sphere's vertex density so a crumpled moon stays smooth between
+dimples while still reading faceted at the silhouette.
+
 ### `AMBIENT_INT`
 
 Fill-light intensity — kept low so the sun point light owns the
