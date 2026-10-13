@@ -4,3 +4,6 @@ reports/
 /coverage/
 *.log
 .DS_Store
+
+# i18n migration scratch state
+scripts/i18n/work/
