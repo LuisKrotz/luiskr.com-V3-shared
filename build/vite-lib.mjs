@@ -13,7 +13,7 @@
  * the emitted graph mirrors the workspace layout exactly.
  */
 
-import { defineConfig } from 'vite'
+import { defineConfig, createLogger } from 'vite'
 import { fileURLToPath } from 'node:url'
 import { modulePublicPlugin } from './module-public.mjs'
 import { i18nBootPlugin, i18nFallbackPlugin } from './i18n-virtual.mjs'
@@ -53,6 +53,29 @@ const EXTERNALS = [
 ]
 
 /**
+ * Vite logger that drops the lightningcss :host-context() notice only.
+ * lightningcss's selector parser doesn't know :host-context() yet — the
+ * emitted CSS is byte-identical correct (rules pass through untouched, and
+ * errorRecovery keeps them in the output), so the "not recognized" notice is
+ * pure log noise. Filter exactly that pattern; every other warning keeps
+ * surfacing.
+ * @returns {import('vite').Logger} Logger with the host-context warning filtered.
+ */
+export const hostContextSafeLogger = () => {
+  const logger = createLogger()
+  const warn = logger.warn
+
+  logger.warn = (msg, opts) => {
+    if (typeof msg === 'string' && msg.includes('host-context') && msg.includes('pseudo-class'))
+      return
+
+    warn(msg, opts)
+  }
+
+  return logger
+}
+
+/**
  * Builds a Vite library config for one module folder.
  * @param {object} opts Options.
  * @param {string} opts.dir Absolute path of the module folder.
@@ -78,10 +101,12 @@ export const moduleConfig = ({ dir, name, entry = 'index.ts', target = 'esnext' 
     ],
     esbuild: { ...SHARED_ESBUILD },
     resolve: { alias: { ...MODULE_ALIASES } },
+    customLogger: hostContextSafeLogger(),
     css: {
       preprocessorOptions: {
         scss: { silenceDeprecations: ['import', 'global-builtin', 'legacy-js-api'] },
       },
+      lightningcss: { errorRecovery: true },
     },
     build: {
       target,
