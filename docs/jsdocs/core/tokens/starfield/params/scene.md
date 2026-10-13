@@ -53,20 +53,30 @@ beyond it or the panorama would clip through the boundary).
 
 ### `SPHERE_SEGMENTS`
 
-Sphere tessellation — 128×64 ≈ 16k triangles per body, the ultra
+Sphere tessellation — 256×128 ≈ 65k triangles per body, the ultra
 tier: at this density a planet's limb holds a smooth arc even at
 full-screen zoom and the terminator never facets under refraction
 in the fresnel shells. Catalog bodies stay resident (~150 meshes ≈
-2.4M tris is trivially GPU-bound territory) while registry bodies
-ride the LRU spawn/evict path, so the budget holds.
+9.8M tris, still trivially GPU-bound territory) while registry
+bodies ride the LRU spawn/evict path, so the budget holds.
 
 ### `ROCK_DETAIL`
 
 Icosahedron subdivision detail for irregular bodies (Phobos-class
-rubble moons, comet nuclei, asteroids) — detail 6 ≈ 82k triangles:
-the crumpled silhouette stays continuous under glancing light, no
-facet flash at the terminator. Only `def.irregular` bodies pay the
+rubble moons, comet nuclei, catalog asteroids) — detail 7 ≈ 328k
+triangles: the crumpled silhouette stays continuous under glancing
+light at any zoom, no facet flash at the terminator and no visible
+polygon edges from afar. Only `def.irregular` bodies pay the
 density — a dozen catalog bodies at most.
+
+### `ROCK_MID_FREQ`
+
+Mid/micro relief octaves for irregular bodies — a single low-
+frequency noise pass makes every body a smooth blob, so `vnoise`
+stacks three octaves: the macro crumple (1×) sets the silhouette,
+`ROCK_MID_FREQ ×` adds the lumpy potato bumps real asteroids and
+rubble moons carry, and `ROCK_FINE_FREQ ×` grains the surface at
+regolith scale (amplitudes are fractions of `irregular.amp`).
 
 ### `AMBIENT_INT`
 

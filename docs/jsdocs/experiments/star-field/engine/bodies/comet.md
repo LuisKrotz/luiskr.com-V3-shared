@@ -9,6 +9,12 @@ Comet builder — a `SF_KINDS.COMET` body is a dark
 
 ## Members
 
+### `SF_USER_GAS_TILT`
+
+userData key stashing a gas plane's fixed z-tilt — updateFx reads it
+to un-rotate the camera vector back into the frame where the streak
+axis is local +x before solving the cylindrical-billboard roll.
+
 ### `TAIL_W`
 
 Tail gradient canvas — long narrow streak, alpha fades along +x.
@@ -18,14 +24,13 @@ Tail gradient canvas — long narrow streak, alpha fades along +x.
 Paints the streaming-gas layer texture: a horizontally TILEABLE
 filament field (`wrapS = RepeatWrapping`) so updateFx can roll
 `map.offset.x` and the gas visibly streams anti-sunward like plasma
-riding the solar wind. Seamlessness is guaranteed analytically —
-every wisp follows `y(x) = mid + sin(2π·cycles·x/W + φ)·amp` with an
-INTEGER cycle count, so the path's phase at the left edge equals the
-right edge; knot clumps are each drawn twice at `x` and `x − W` to
-wrap blobs that straddle the seam. A faint envelope gradient keeps
-the layer brightest near the nucleus root without breaking the wrap
-(the envelope is applied by the OTHER static tail sprite — this layer
-stays uniform so scrolling never smears a ramp).
+riding the solar wind. The tail silhouette is NOT painted here —
+it lives in the plane's vertex colors (scroll-invariant), so this
+texture must stay seamless: every wisp follows
+`y(x) = mid + sin(2π·cycles·x/W + φ)·amp` with an INTEGER cycle
+count, so the path's phase at the left edge equals the right edge;
+knot clumps are each drawn at `x ± W` to wrap blobs that straddle
+the seam.
 
 - `@param` THREE The three.js module.
 - `@param` seed Deterministic RNG stream (seeded per tail so the ion and
@@ -40,7 +45,8 @@ as braided streamers, not one uniform smear.
 
 ### `for`
 
-Knots — denser gas clumps the outgassing vents throw. Painted at
+Knots — denser gas clumps the outgassing vents throw, biased toward
+the root (real comae are thickest at the nucleus). Painted at
 both `x` and `x ± W` so a blob crossing the wrap seam shows its
 continuation on the far edge.
 
@@ -80,10 +86,17 @@ root edge lands on the nucleus and the fade runs anti-sunward.
 `tilt` swings the sprite's origin off the ecliptic plane so the
 dust fan visibly lags the ion streak.
 
-### `gasLayer`
+### `gasPlane`
 
-Gas layers — a second filament sprite over each tail whose texture
-wraps horizontally: updateFx streams `map.offset.x` so the gas
-visibly flows anti-sunward (the ion wind is the faster, plasma is
-field-entrained while dust drifts). Each layer gets its own
-CanvasTexture so the scroll offsets don't fight.
+Gas layer — a highly tessellated PLANE that updateFx rolls around
+the tail axis to face the camera (a cylindrical billboard): unlike
+a camera-facing sprite it has true spatial extent (it is a real
+streak of gas sitting in the scene, not a postcard), and unlike a
+cone it can never expose a polygonal silhouette. The silhouette is
+carried by PER-VERTEX COLORS, not the texture: `b = ramp(t)·(1−w²)^p`
+fades axial position t (0 root → 1 tip) AND transverse offset w
+(−1…1), so every quad edge lands at black — which additive
+blending renders as fully transparent. Because the envelope is
+geometry-side, the seamless filament map can scroll `offset.x`
+forever without dragging the fade with it — gas genuinely streams
+anti-sunward through a static soft envelope.

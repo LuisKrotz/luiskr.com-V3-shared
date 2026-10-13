@@ -128,7 +128,23 @@ Secondary texture for translucent shells (Venus atmosphere, Saturn ring).
 
 ### (module scope)
 
-Shell is a flat ring disc (Saturn) rather than an atmosphere sphere.
+Shell is a flat ring disc rather than an atmosphere sphere — with
+no `shellTexture` a seeded procedural band strip is painted instead
+(Uranus/Neptune's thin dusty arcs), so any body can carry rings.
+
+### (module scope)
+
+Ring radii as body-radius multiples — default to Saturn's strip
+(SF_DETAIL.RING_INNER/OUTER); ice giants override with their honest
+narrower spans (Uranus's rings hug 1.6–2.0 R, not Saturn's wide
+plate).
+
+### (module scope)
+
+Procedural band count override for `ringStripFor` — default
+SF_DETAIL.RING_BANDS; real systems differ wildly (Jupiter 4 faint
+rings, Uranus 13 razor-thin arcs, Neptune 5 dusty arcs) so the
+catalog pins the honest count per body.
 
 ### (module scope)
 

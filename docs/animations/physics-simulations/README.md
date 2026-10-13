@@ -188,7 +188,8 @@ canonical instance.
 `SF_KINDS.COMET` bodies (Halley) render an irregular dark nucleus —
 albedo ≈ 0.04, crumpled via `irregularGeometry` — wrapped in an
 additive coma sprite plus a camera-facing gradient envelope sprite and
-a **tapered gas cone** per tail, all parented to the `center` group.
+a **cylindrical-billboard gas plane** per tail, all parented to the
+`center` group.
 Because `center` is only **translated** along +x by the conic radius
 (pivot carries the angular sweep), local +x is anti-sunward by
 construction at every orbital phase — the tails never need
@@ -199,20 +200,22 @@ orientation math.
 - **Dust tail**: shorter, wider, tilted `DUST_TILT` off the radius
   vector — grains lag the comet's orbital motion, fanning off the ion
   streak.
-- **Gas layers**: each tail carries an open-ended `CylinderGeometry`
-  cone (narrow root on the nucleus, wide `GAS_TIP` mouth at the far
-  end) skinned with a doubly-tileable filament field (`gasFor` —
-  sine-wandering wisps with integer cycle counts so `wrapS`/`wrapT =
-RepeatWrapping` tile around the circumference AND along the axis).
-  A per-vertex color ramp `b = min(1, 3.5t)·(1−t)^1.3` fades the tip
-  to black — under additive blending the tail dissolves into space
-  with no hard rim, and the true 3D volume never shows a billboard
-  rectangle from any camera angle. updateFx rescales `(len, w, w)`
-  from the live radius, scrolls `map.offset.y` to stream filaments
-  anti-sunward (`−t·GAS_FLOW`), swirls `rotation.x` ±`WOBBLE_AMP`
-  (axial spin around the tail's own axis), and flickers opacity on a
-  per-comet seeded rate — the tail churns like plasma/dust being
-  blown off, not a painted streak.
+- **Gas layers**: each tail carries a tessellated `PlaneGeometry`
+  (`GAS_U × GAS_V`) rolled about its streak axis to face the camera —
+  a cylindrical billboard with real spatial extent, never a cone's
+  polygonal silhouette and never a sprite's rectangular frame. The
+  silhouette lives in **per-vertex colors**, not the texture:
+  `b = min(1,3.5t)·(1−t)^1.3·(1−w²)^1.5` fades axial position `t`
+  (root→tip) and transverse offset `w`, so every quad edge lands at
+  black — invisible under additive blending. Because the envelope is
+  geometry-side, the seamless filament map (`gasFor` — sine-wandering
+  wisps with integer cycle counts so `wrapS = RepeatWrapping` tiles
+  forever) scrolls `map.offset.x` per frame and gas genuinely streams
+  anti-sunward through a static soft envelope. updateFx solves the
+  roll `θ = atan2(−uy, lz)` by dropping the camera into the
+  tail-parent frame and un-rotating the dust tilt, then overlays a
+  `WOBBLE_AMP` sinusoid + a seeded opacity flicker — the tail churns
+  like plasma/dust being blown off, not a painted streak.
 - **Activity factor**: sublimation ignites only inside a periapsis
   window — `rCut = rMin + span·ACTIVE_FRAC`, then
   `f = clamp((rCut − r)/(rCut − rMin), 0, 1)^GAMMA` where

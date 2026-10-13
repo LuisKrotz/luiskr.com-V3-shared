@@ -46,3 +46,10 @@ plain property; `list` recovers instances `group.add` hides.
 CylinderGeometry stand-in exposing a finite `position` attribute —
 the chain-mock's `count` proxy coerces to 0 so the jet vertex-fade
 loop never iterates under the auto-mock.
+
+### `fakeCometCyl`
+
+CylinderGeometry stand-in for the gas-cone vertex fade — the
+auto-mock's `attributes.position` proxy coerces to NaN so the
+vertex-color loop would never iterate; four real verts spanning
+root→tip (x ∈ [-0.5, 0.5]) run it.

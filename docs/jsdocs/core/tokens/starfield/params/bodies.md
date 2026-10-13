@@ -128,24 +128,44 @@ satPivots update.
 
 ### `COUNT`
 
-Hero rocks per belt — enough variety that the annulus reads as a
-crowded debris field at fly-in distance, not a sparse scatter. Each
-rock is a seeded unique mesh, so the count is the visual density,
-not a texture detail.
+Hero rocks per belt — fewer than before but each one is now a
+high-tessellation mesh: the annulus reads as a crowded debris
+field at fly-in distance without the vertex-memory blowup that
+96 ultra-dense geometries would cost (~3M tris per belt).
 
 ### `DETAIL`
 
 Mesh tessellation — icosahedron detail for regular rocks and
-tetrahedron detail for fragments. Detail 3 ≈ 1280 tris/rock:
-smooth enough that the crumpled silhouette reads as a real body
-under glancing light, cheap enough that ~200 hero rocks add under
-0.3M tris per belt.
+tetrahedron detail for fragments. Detail 6 ≈ 82k tris/rock —
+64× the old detail-3 budget — so silhouettes hold a continuous
+curve at fly-in zoom with no readable polygon edges; fragments
+stay coarser (sharp shard planes are their look).
+
+### `MID_FREQ`
+
+Mid/micro relief octaves — a single low-frequency noise pass makes
+every rock a smooth blob, so displacement stacks three octaves:
+the macro crumple (1×) sets the silhouette, `MID_FREQ ×` adds the
+lumpy potato bumps real asteroids carry, and `FINE_FREQ ×` grains
+the surface at regolith scale.
+
+### `TEX_W`
+
+Class-texture canvas (px) — 512×256 equirect, 16× the pixel count
+of the original 128×64 strip so crater rims and mineral veins
+resolve as texture detail instead of smearing into noise.
+
+### `TEX_GRAIN`
+
+Per-class feature counts, scaled to the hi-res canvas.
 
 ### `SIZE_MIN`
 
 Rock radius as a fraction of annulus width — fragments at MIN,
 regular bodies in the mid band, BIG_FRAC of rocks promoted to the
 large-body range (Ceres-class stand-ins, still far under planets).
+Kept small: a hero rock must read as a boulder drifting past, never
+as a planet-scale body crossing the frame.
 
 ### `BIG_FRAC`
 
@@ -263,21 +283,27 @@ below `TAIL_OFF`. Halley sublimates measurably out to ~3 AU against
 an 0.59–35 AU orbit → ~9% window; 0.3 reads correctly at chart scale
 where the tail should die before the orbit leaves the inner system.
 
-### `GAS_FLOW_ION`
+### `GAS_U`
 
-Gas layer — each tail composites a second sprite whose filament
-texture tiles horizontally (streaks wrap at the canvas edge) so
-updateFx can scroll `map.offset.x` and stream gas anti-sunward.
-`FLOW_*` are offsets/second; the ion wind moves fastest (plasma is
-magnetically entrained, dust drifts). `WOBBLE_*` is the turbulence:
-a slow sinusoidal rotation + opacity shimmer per tail.
+Gas layer — each tail carries a tessellated PLANE that updateFx
+rolls about the streak axis to face the camera (a cylindrical
+billboard): real spatial extent like a cone, but its silhouette is
+painted into per-vertex colors — `ramp(t)·(1−w²)^p` → every quad
+edge lands at alpha-0, so no polygon edge can ever show — while
+the seamless filament map underneath scrolls `offset.x` so gas
+streams anti-sunward through the static envelope. `GAS_U`/`GAS_V`
+is the plane tessellation (dense enough that the vertex-color
+envelope interpolates smoothly). `FLOW_*` are offsets/second; the
+ion wind moves fastest (plasma is magnetically entrained, dust
+drifts). `WOBBLE_*` adds a slow sinusoidal roll shimmer per tail.
 
 ### `GAS_W`
 
-Filament texture — wisps drawn as sinuous horizontal streaks with
-knot clumps. `FILAMENT_W` is the base alpha; wander is in texture
-units. The gas texture is 256×64 px — long and thin, matching the
-tail's aspect.
+Filament texture — wisps drawn as sinuous horizontal streaks (u
+runs root→tip along the streak) with knot clumps biased toward the
+root. `FILAMENT_W` is the base alpha; wander is in texture units.
+The texture is 512×128 px and wraps horizontally so the scroll is
+seamless forever.
 
 ### `SF_DETAIL`
 
@@ -317,6 +343,16 @@ V coordinate sampling the ring strip's center row (radius = U).
 ### `RING_INNER`
 
 Saturn ring radii as body-radius multiples (matches ring texture).
+
+### `RING_STRIP_W`
+
+Procedural ring strip — ringed bodies without a photo texture
+(Uranus, Neptune) get a seeded banded strip painted at build time:
+`RING_STRIP_*` sizes the radius-indexed canvas, `RING_BANDS` seeds
+the tenuous ring count, `RING_BAND_W`/`RING_ALPHA_*` shape each
+narrow dusty band. Uranus's real system is 13 razor-thin dark
+rings; the painter biases thin + faint so it reads as a charcoal
+sketch, not Saturn's bright bands.
 
 ### `HALO_SCALE`
 

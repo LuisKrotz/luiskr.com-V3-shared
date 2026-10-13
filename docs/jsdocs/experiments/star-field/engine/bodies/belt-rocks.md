@@ -9,10 +9,6 @@ Hero asteroids for the two belts — COUNT individual
 
 ## Members
 
-### `_TEX_W`
-
-Rock texture canvas size — small equirect, speckle hides seams.
-
 ### (module scope)
 
 Material class descriptor — palette source + paint recipe + PBR
@@ -37,10 +33,6 @@ Material roughness — metal reads glossier than regolith.
 ### `metalness`
 
 Material metalness — only the `metal` class is truly metallic.
-
-### `flat`
-
-Flat shading — stone/carbon keep facets, ice/dust stay smooth.
 
 ### `_CLASSES`
 

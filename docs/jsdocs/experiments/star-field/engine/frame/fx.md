@@ -9,6 +9,12 @@ Ambient-life per-frame effects — `pulse` bodies (variable
 
 ## Members
 
+### `_camScratch`
+
+Module scratch vector — updateFx drops the camera position into each
+gas plane's parent-local frame once per frame; reusing one vector
+keeps the per-frame path allocation-free.
+
 ### `solarWindAt`
 
 Solar-wind level — the shared activity signal every wind-touched
@@ -31,10 +37,26 @@ surface tint between the neutral white and the ice-age palette.
 
 ### `gasI`
 
-Streaming gas — each tail's filament layer scrolls its texture
-along +x (the anti-sunward direction, via RepeatWrapping
-`map.offset.x`), wobbles a few hundredths of a radian and
-flickers on a detuned sine, so the tail reads as churning
-plasma/dust blowing off the nucleus instead of a painted streak.
-The gas sprite shadows the base tail's position/scale by copying
-the rescaled length each frame.
+Streaming gas — each tail's tessellated plane is a CYLINDRICAL
+BILLBOARD: it rolls about its streak axis so the broad side
+faces the camera (a plane edge-on is a hairline, never a
+polygonal shell), while the vertex-color envelope keeps every
+quad edge at alpha 0 and the seamless filament map scrolls
+`offset.x` underneath so gas visibly streams anti-sunward. The
+roll solves `θ = atan2(−uy, lz)` in the tail-parent frame after
+rotating the dust tilt back out — the plane's +z normal then
+points at the camera; a slow wobble overlays it for turbulent
+shimmer, and a detuned sine flickers opacity like plasma
+gusts. The plane shadows the base tail's length each frame and
+scales its width on y only (z stays 1 — it is a surface, not
+a shell).
+
+### `cam`
+
+Camera roll — the camera position drops into each plane's
+parent-local frame (+x anti-sunward), the dust tilt is rotated
+back out of the offset so the roll axis is the streak's own x,
+and the remaining transverse angle solves `θ = atan2(−uy, lz)`
+(normal +z → (0,−sinθ,cosθ) ∥ (uy,lz)). A lazy module scratch
+vector keeps this allocation-free; without a camera/parent the
+planes keep their built orientation plus the wobble.
