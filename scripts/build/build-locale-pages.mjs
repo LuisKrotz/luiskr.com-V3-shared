@@ -38,36 +38,17 @@ import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { PROJECT_ALIASES } from '../../../core/tokens/routes/aliases.ts'
+import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
 
 const VALID_LANGS = Object.keys(LANG_SLUGS)
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
-// ─── Locale → BCP-47 / og:locale mapping ─────────────────────────────────────
-// hreflang and <html lang> need BCP-47 tags; og:locale wants xx_YY. Dialects
-// without a region code keep their ISO-639-3 tag and map og:locale to the
-// closest standardized culture.
-const LOCALE_TAGS = Object.freeze({
-  en: { bcp: 'en', og: 'en_US' },
-  br: { bcp: 'pt-BR', og: 'pt_BR' },
-  es: { bcp: 'es', og: 'es_ES' },
-  de: { bcp: 'de', og: 'de_DE' },
-  hrk: { bcp: 'hrk', og: 'de_DE' },
-  cas: { bcp: 'es-AR', og: 'es_AR' },
-  riv: { bcp: 'es-UY', og: 'es_UY' },
-  gn: { bcp: 'gn', og: 'es_PY' },
-  it: { bcp: 'it', og: 'it_IT' },
-  ru: { bcp: 'ru', og: 'ru_RU' },
-  fr: { bcp: 'fr', og: 'fr_FR' },
-  tln: { bcp: 'tln', og: 'it_IT' },
-  gl: { bcp: 'gl', og: 'gl_ES' },
-  ca: { bcp: 'ca', og: 'ca_ES' },
-  nl: { bcp: 'nl', og: 'nl_NL' },
-  ga: { bcp: 'ga', og: 'ga_IE' },
-})
-
 const SITE_URL = 'https://luiskr.com'
 const BASE_TITLE = 'Luis Krötz'
+const CDN_BASE = 'https://storage.googleapis.com/luiskr.com/public/_v3/'
+const SCHEMA_CONTEXT = 'https://schema.org'
+const SHARE_IMAGE = `${SITE_URL}/assets/icons/share.png`
 
 /**
  * Media-slug transform — MUST match generate-sitemap.js's slugify byte for
@@ -118,6 +99,100 @@ const toDescription = (html, max = 160) => {
   return cut.slice(0, Math.max(cut.lastIndexOf(' '), 0)).trim()
 }
 
+// ─── CDN media URL grammar — mirrors core/utils/media.ts buildMediaUrls ─────
+// Images carry -mozjpg-uncompressed (full) / -mozjpg3-MSSIM-tuned-kodak (thumb)
+// suffixes; videos are .mp4 with a .mp4.jpg-thumb.jpg poster. Unsuffixed or
+// hypothetical -16x9/-4x3 variants DO NOT exist on the bucket — never emit
+// them: Google drops image candidates that 404.
+const mediaUrls = (folder, m) => {
+  if (!m || !m.src) return { source: '', thumb: '', isVideo: false }
+
+  const isVideo = m.isVideo ?? false
+  const base = `${CDN_BASE}${folder || ''}${m.src}`
+
+  return isVideo
+    ? { source: `${base}.mp4`, thumb: `${base}.mp4.jpg-thumb.jpg`, isVideo }
+    : {
+        source: `${base}-mozjpg-uncompressed.jpg`,
+        thumb: `${base}-mozjpg3-MSSIM-tuned-kodak.jpg`,
+        isVideo,
+      }
+}
+
+// ─── JSON-LD entity builders — mirrors core/utils/schema.ts (that module is
+// aliased (@core/…) so the standalone Node path can't import it; the shapes
+// below must stay in step with it). ─────────────────────────────────────────
+const orgEntity = () => ({
+  '@context': SCHEMA_CONTEXT,
+  '@type': 'Organization',
+  '@id': `${SITE_URL}#organization`,
+  legalName: 'Jacson Luis Krötz',
+  name: BASE_TITLE,
+  url: SITE_URL,
+  logo: `${SITE_URL}/assets/icons/android-chrome-256x256.png`,
+  image: SHARE_IMAGE,
+  sameAs: [
+    'https://api.whatsapp.com/send?phone=+5551982274782',
+    'https://github.com/LuisKrotz',
+    'https://www.linkedin.com/in/luis-kr%C3%B6tz/?locale=en_US',
+    'https://www.instagram.com/j_luiskrotz',
+  ],
+})
+
+const websiteEntity = (bcp) => ({
+  '@context': SCHEMA_CONTEXT,
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}#website`,
+  url: SITE_URL,
+  name: BASE_TITLE,
+  description:
+    'Front-End Software Engineer specializing in performance, design systems, and animations.',
+  image: SHARE_IMAGE,
+  inLanguage: bcp,
+  publisher: { '@id': `${SITE_URL}#organization` },
+})
+
+/** Ordered crumbs → BreadcrumbList entity (positions are 1-based per spec). */
+const breadcrumbEntity = (items, id) => ({
+  '@context': SCHEMA_CONTEXT,
+  '@type': 'BreadcrumbList',
+  '@id': id,
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    item: item.url,
+  })),
+})
+
+/** VideoObject for one media descriptor — mp4 contentUrl + poster thumb. */
+const videoEntity = (folder, m, title, description) => {
+  const { source, thumb } = mediaUrls(folder, m)
+
+  return {
+    '@context': SCHEMA_CONTEXT,
+    '@type': 'VideoObject',
+    name: m.label || `${title} Video`,
+    description: description || `Showcase video for ${title}`,
+    thumbnailUrl: [thumb],
+    uploadDate: '2021-01-01T00:00:00+00:00',
+    duration: 'PT1M00S',
+    contentUrl: source,
+    embedUrl: source,
+  }
+}
+
+/** Recursively yields every sections node that carries a `src`. */
+function* walkMedia(node) {
+  if (Array.isArray(node)) {
+    for (const child of node) yield* walkMedia(child)
+
+    return
+  }
+
+  if (node && typeof node === 'object' && typeof node.src === 'string' && node.src) yield node
+}
+
 /** Brotil + gzip siblings next to each emitted index.html (Firebase serves them). */
 const writeCompressed = (file, html) => {
   const buf = Buffer.from(html, 'utf8')
@@ -143,8 +218,16 @@ const writeCompressed = (file, html) => {
  *   (defaults to `url`); alias slugs point at their canonical project so
  *   /portfolio/brazilian-leather doesn't compete with /portfolio/cicb
  * @param {Array<{bcp:string,url:string}>} o.alternates - hreflang rows
+ * @param {string} [o.image] - route-specific share image (project cover /
+ *   media asset); omitted → the shell's share.png stays
+ * @param {Array<object>} [o.entities] - extra JSON-LD entities appended to
+ *   the @graph after Organization + WebSite (WebPage, BreadcrumbList,
+ *   Article, ItemList, VideoObject…)
  */
-function localize(html, { bcpLang, ogLocale, title, description, url, canonicalUrl, alternates }) {
+function localize(
+  html,
+  { bcpLang, ogLocale, title, description, url, canonicalUrl, alternates, image, entities }
+) {
   const canon = canonicalUrl || url
   let out = html
 
@@ -182,21 +265,42 @@ function localize(html, { bcpLang, ogLocale, title, description, url, canonicalU
   out = out.replace(/(<meta name="DC\.Description"\s+content=")[^"]*(")/, `$1${d}$2`)
   out = out.replace(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${d}$2`)
 
+  // Route-specific share image — the three image metas swap together so
+  // card crawlers never mix a project cover with share.png. The shell's
+  // fixed og:image:width/height describe share.png; they are dropped for
+  // custom images since wrong dimensions are worse than none.
+  if (image) {
+    for (const re of [
+      /(<meta itemprop="image" content=")[^"]*(")/,
+      /(<meta property="og:image" content=")[^"]*(")/,
+      /(<meta name="twitter:image:src" content=")[^"]*(")/,
+    ]) {
+      out = out.replace(re, `$1${esc(image)}$2`)
+    }
+
+    out = out.replace(/\s*<meta property="og:image:(?:width|height)"[^>]*>/g, '')
+  }
+
   // Language declarations
   out = out.replace(
     /(<meta name="DC\.Language" content=")[^"]*(")/,
     `$1${ogLocale.toLowerCase()}$2`
   )
 
-  // JSON-LD: the WebSite entity carries the page URL + inLanguage; the
-  // Organization entity keeps its canonical root url. Any inLanguage key
-  // already present is stripped first so re-runs against a previously
-  // generated shell stay idempotent instead of duplicating the key.
-  out = out.replace(/,"inLanguage"\s*:\s*"[^"]*"/g, '')
+  // JSON-LD: the whole graph is rebuilt per route — Organization + a
+  // localized WebSite plus whatever route entities the caller composed
+  // (WebPage, BreadcrumbList, Article, media ItemList, VideoObjects).
+  // Replacing the script body wholesale keeps re-runs idempotent.
+  const graph = {
+    '@context': SCHEMA_CONTEXT,
+    '@graph': [orgEntity(), websiteEntity(bcpLang), ...(entities || [])],
+  }
+
+  const graphJson = JSON.stringify(graph)
 
   out = out.replace(
-    /("@type"\s*:\s*"WebSite"[^}]*?"url"\s*:\s*")[^"]*(")/,
-    `$1${url}$2,"inLanguage":"${bcpLang}"`
+    /(<script type="application\/ld\+json" id="jsonld-graph">)[\s\S]*?(<\/script>)/,
+    (match, open, close) => `${open}${graphJson}${close}`
   )
 
   // og:locale + hreflang alternates + x-default, inserted before </head>.
@@ -316,14 +420,133 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   const projectDescOf = (loc, slug) =>
     toDescription(firstPara(t(loc, (x) => x.projects?.[slug]?.sections))) || aboutDescOf(loc)
 
+  /**
+   * Full rich-media graph for one project page — Article + media
+   * ItemList (entries deep-link to the emitted /portfolio/<p>/<media>
+   * URLs; the SPA serves every labelled media slug) + one VideoObject
+   * per video. Mirrors runtime generateProjectSchema.
+   */
+  const projectEntities = (loc, slug, exclude) => {
+    const project = t(loc, (x) => x.projects?.[slug])
+
+    if (!project) return []
+
+    const base = `${SITE_URL}${loc === 'en' ? '' : `/${loc}`}/portfolio/${slug}`
+    const bcp = LOCALE_TAGS[loc].bcp
+    const title = toDescription(project.title || slug, 80)
+    const description = projectDescOf(loc, slug)
+    const folder = project.folder || ''
+    const cover = mediaUrls(folder, project.cover)
+
+    const entities = [
+      {
+        '@context': SCHEMA_CONTEXT,
+        '@type': 'Article',
+        '@id': `${base}#article`,
+        isPartOf: {
+          '@type': 'WebPage',
+          '@id': `${base}#webpage`,
+          url: base,
+          name: title,
+          inLanguage: bcp,
+        },
+        headline: title,
+        inLanguage: bcp,
+        mainEntityOfPage: base,
+        datePublished: '2021-01-01T00:00:00+00:00',
+        dateModified: '2021-01-01T00:00:00+00:00',
+        author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+        publisher: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+        image: [cover.source ? (cover.isVideo ? cover.thumb : cover.source) : SHARE_IMAGE],
+        description,
+      },
+    ]
+
+    if (project.cover?.isVideo && project.cover.src) {
+      entities.push(videoEntity(folder, project.cover, title, description))
+    }
+
+    const media = [...walkMedia(project.sections)]
+
+    const listItems = media
+      .filter((m) => m.src && m.label)
+      .map((m, i) => {
+        const { source, thumb, isVideo } = mediaUrls(folder, m)
+
+        return {
+          '@type': 'ListItem',
+          position: i + 1,
+          url: `${base}/${slugify(m.label)}`,
+          name: m.label,
+          image: isVideo ? thumb : source,
+        }
+      })
+
+    if (listItems.length) {
+      entities.push({
+        '@context': SCHEMA_CONTEXT,
+        '@type': 'ItemList',
+        itemListElement: listItems,
+      })
+    }
+
+    for (const m of media.filter((x) => x.isVideo && x.src && x !== exclude)) {
+      entities.push(videoEntity(folder, m, title, description))
+    }
+
+    return entities
+  }
+
+  /** Cover share-image for a project — uncompressed jpg or video poster. */
+  const projectImageOf = (loc, slug) => {
+    const project = t(loc, (x) => x.projects?.[slug])
+    const cover = mediaUrls(project?.folder || '', project?.cover)
+
+    return cover.source ? (cover.isVideo ? cover.thumb : cover.source) : undefined
+  }
+
+  /** Carousel ItemList for locale home pages — portfolio tiles → covers. */
+  const homeEntities = (loc) => {
+    const raw = t(loc, (x) => x.pages?.HOME?.portfoliolist) || []
+    const items = Array.isArray(raw) ? raw : Object.values(raw)
+
+    const base = `${SITE_URL}${loc === 'en' ? '' : `/${loc}`}`
+
+    const element = items
+      .filter((i) => i && (i.link || i.slug))
+      .map((i, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        url: `${base}/portfolio/${i.link || i.slug}`,
+        name: i.label || i.title || `Item ${idx + 1}`,
+        ...(i.image ? { image: `${CDN_BASE}covers/${i.image}.jpg` } : {}),
+      }))
+
+    return element.length
+      ? [{ '@context': SCHEMA_CONTEXT, '@type': 'ItemList', itemListElement: element }]
+      : []
+  }
+
+  /** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names. */
+  const pageNameFromTitle = (title) => {
+    const prefix = `${BASE_TITLE} | `
+    const suffix = ` | ${BASE_TITLE}`
+
+    if (title.startsWith(prefix)) return title.slice(prefix.length)
+
+    if (title.endsWith(suffix)) return title.slice(0, -suffix.length)
+
+    return title
+  }
+
   const epDescOf = (loc) =>
     toDescription(t(loc, (x) => x.pages?.['earth-playground']?.description)) || aboutDescOf(loc)
 
   const sfDescOf = (loc) =>
     toDescription(t(loc, (x) => x.pages?.['star-field']?.description)) || aboutDescOf(loc)
 
-  /** Expandable-media slugs of a project — mirrors generate-sitemap's walk. */
-  const mediaSlugsOf = (project) => {
+  /** Expandable-media {slug,label,media} rows of a project — mirrors generate-sitemap's walk. */
+  const mediaRowsOf = (project) => {
     const out = []
 
     for (const section of project?.sections || []) {
@@ -339,7 +562,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
             // PATH_MAX per segment is 255 — a few monster labels slugify
             // past it; those URLs stay on the `**` SPA fallback (same as
             // today) rather than breaking the emit.
-            if (slug && slug.length <= 200) out.push(slug)
+            if (slug && slug.length <= 200) out.push({ slug, label: m.label, media: m })
           }
         }
       }
@@ -373,6 +596,8 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         title: BASE_TITLE,
         description: aboutDescOf(loc),
         alt: homePath,
+        isHome: true,
+        entities: homeEntities(loc),
       },
     ]
 
@@ -468,14 +693,18 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     // (canonical → real slug) and the media-modal deep links the sitemap
     // lists (English-only by design).
     for (const slug of Object.keys(en.projects || {})) {
-      const title = titleOf(toDescription(t(loc, (x) => x.projects?.[slug]?.title) || slug, 80))
+      const pageName = toDescription(t(loc, (x) => x.projects?.[slug]?.title) || slug, 80)
+      const title = titleOf(pageName)
 
       const description = projectDescOf(loc, slug)
 
       routes.push({
         path: `${prefix}portfolio/${slug}`,
         title,
+        pageName,
         description,
+        image: projectImageOf(loc, slug),
+        entities: projectEntities(loc, slug),
         alt: portfolioAlt(slug),
       })
 
@@ -486,20 +715,50 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
           routes.push({
             path: `portfolio/${alias}`,
             title,
+            pageName,
             description,
+            image: projectImageOf(loc, slug),
+            entities: projectEntities(loc, slug),
             alt: portfolioAlt(slug),
             canonical: portfolioAlt(slug)('en'),
           })
         }
       }
 
-      for (const media of mediaSlugsOf(t(loc, (x) => x.projects?.[slug]))) {
-        const mediaUrl = `${SITE_URL}/portfolio/${slug}/${media}`
+      const project = t(loc, (x) => x.projects?.[slug])
+      const projectUrl = `${SITE_URL}/portfolio/${slug}`
+
+      for (const { slug: mediaSlug, label, media } of mediaRowsOf(project)) {
+        const mediaUrl = `${projectUrl}/${mediaSlug}`
+        const { source, thumb, isVideo } = mediaUrls(project?.folder || '', media)
 
         routes.push({
-          path: `portfolio/${slug}/${media}`,
+          path: `portfolio/${slug}/${mediaSlug}`,
           title,
+          pageName: label,
           description,
+          image: source ? (isVideo ? thumb : source) : undefined,
+          // The media page carries the whole project graph plus its own
+          // media entity (ImageObject for stills, VideoObject for clips)
+          // so Google can index the specific asset at this URL.
+          entities: [
+            ...(isVideo
+              ? [videoEntity(project?.folder || '', media, pageName, description)]
+              : source
+                ? [
+                    {
+                      '@context': SCHEMA_CONTEXT,
+                      '@type': 'ImageObject',
+                      '@id': `${mediaUrl}#image`,
+                      url: source,
+                      contentUrl: source,
+                      name: label,
+                    },
+                  ]
+                : []),
+            ...projectEntities(loc, slug, media),
+          ],
+          crumbs: [{ name: pageName, url: projectUrl }],
           canonical: mediaUrl,
           alternates: [{ bcp: 'en', og: 'en_US', url: mediaUrl }],
         })
@@ -515,6 +774,21 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   const rootDescription = toDescription(
     en.pages?.about?.col1?.[0] || 'Front-End Developer focused on creating beautiful experiences.'
   )
+
+  const webPageEntity = ({ url, name, description, bcp, image, crumbs }) => ({
+    '@context': SCHEMA_CONTEXT,
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name,
+    description,
+    inLanguage: bcp,
+    isPartOf: { '@id': `${SITE_URL}#website` },
+    publisher: { '@id': `${SITE_URL}#organization` },
+    primaryImageOfPage: { '@type': 'ImageObject', url: image || SHARE_IMAGE },
+    ...(crumbs ? { breadcrumb: { '@id': `${url}#breadcrumbs` } } : {}),
+  })
+
   const rootHtml = localize(template, {
     bcpLang: 'en',
     ogLocale: 'en_US',
@@ -522,6 +796,15 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     description: rootDescription,
     url: `${SITE_URL}/`,
     alternates: alternatesFor(homePath),
+    entities: [
+      webPageEntity({
+        url: `${SITE_URL}/`,
+        name: BASE_TITLE,
+        description: rootDescription,
+        bcp: 'en',
+      }),
+      ...homeEntities('en'),
+    ],
   })
 
   // ── Per-route documents ───────────────────────────────────────────────────
@@ -536,11 +819,44 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     for (const route of routesFor(loc)) {
       if (!route.path) continue // en home — dist/index.html written by the root pass
 
+      const pageUrl = route.canonical
+        ? route.canonical.startsWith('http')
+          ? route.canonical
+          : `${SITE_URL}${route.canonical}`
+        : `${SITE_URL}/${route.path}`
+
+      const description = route.description || aboutDescOf(loc)
+
+      const pageName = route.pageName || pageNameFromTitle(route.title)
+
+      // Home locales emit no breadcrumb (single page); every other route
+      // gets Home → [project] → page.
+      const crumbs = route.isHome
+        ? null
+        : [
+            { name: BASE_TITLE, url: `${SITE_URL}${loc === 'en' ? '/' : `/${loc}`}` },
+            ...(route.crumbs || []),
+            { name: pageName, url: pageUrl },
+          ]
+
+      const entities = [
+        webPageEntity({
+          url: pageUrl,
+          name: pageName,
+          description,
+          bcp: tags.bcp,
+          image: route.image,
+          crumbs,
+        }),
+        ...(crumbs ? [breadcrumbEntity(crumbs, `${pageUrl}#breadcrumbs`)] : []),
+        ...(route.entities || []),
+      ]
+
       const out = localize(template, {
         bcpLang: tags.bcp,
         ogLocale: tags.og,
         title: route.title,
-        description: route.description || aboutDescOf(loc),
+        description,
         url: `${SITE_URL}/${route.path}`,
         canonicalUrl: route.canonical
           ? route.canonical.startsWith('http')
@@ -548,6 +864,8 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
             : `${SITE_URL}${route.canonical}`
           : undefined,
         alternates: route.alternates || alternatesFor(route.alt),
+        image: route.image,
+        entities,
       })
 
       const file =
