@@ -158,10 +158,15 @@ through eclipse instead of glowing. All proportions derive from
 
 Decorative companion satellites — small unlit spheres on child pivots;
 `sat.station` swaps the glow ball for the crafted truss-and-panels
-model (ISS). `satPivots` returns the {pivot,speed,phase} records
-frame.ts rotates.
+model (ISS). Plain companions carry the same fresnel-limb material as
+before but now modulated by a surface — the satellite's own photo
+(`sat.texture`, preloaded with the host's maps) or a seeded
+`surfaceFor` equirect keyed on `host:sat:index`, so companion worlds
+are textured bodies too, not bare glow dots. `satPivots` returns the
+{pivot,speed,phase} records frame.ts rotates.
 
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors.
 - `@param` def Catalog entry — `satellites` lists the companions.
 - `@param` mesh The host body mesh — pivots attach to it to orbit.
+- `@param` texMap Loaded texture map keyed by URL.
