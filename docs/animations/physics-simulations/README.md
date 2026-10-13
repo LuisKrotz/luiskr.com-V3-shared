@@ -187,23 +187,32 @@ canonical instance.
 
 `SF_KINDS.COMET` bodies (Halley) render an irregular dark nucleus —
 albedo ≈ 0.04, crumpled via `irregularGeometry` — wrapped in an
-additive coma sprite plus **four** camera-facing tail sprites parented
-to the `center` group. Because `center` is only **translated** along +x
-by the conic radius (pivot carries the angular sweep), local +x is
-anti-sunward by construction at every orbital phase — the tails never
-need orientation math.
+additive coma sprite plus a camera-facing gradient envelope sprite and
+a **tapered gas cone** per tail, all parented to the `center` group.
+Because `center` is only **translated** along +x by the conic radius
+(pivot carries the angular sweep), local +x is anti-sunward by
+construction at every orbital phase — the tails never need
+orientation math.
 
 - **Ion tail**: long, thin, blue-white, exactly anti-sunward (plasma
   entrained along the solar-wind field lines).
 - **Dust tail**: shorter, wider, tilted `DUST_TILT` off the radius
   vector — grains lag the comet's orbital motion, fanning off the ion
   streak.
-- **Gas layers**: each tail carries a second sprite painted with a
-  tileable filament field (`gasFor` — sine-wandering wisps with integer
-  cycle counts so `wrapS = RepeatWrapping` tiles seamlessly). updateFx
-  scrolls `map.offset.x` anti-sunward (`−t·GAS_FLOW`), wobbles rotation
-  ±`WOBBLE_AMP`, and flickers opacity on a per-comet seeded rate — the
-  tail churns like plasma/dust being blown off, not a painted streak.
+- **Gas layers**: each tail carries an open-ended `CylinderGeometry`
+  cone (narrow root on the nucleus, wide `GAS_TIP` mouth at the far
+  end) skinned with a doubly-tileable filament field (`gasFor` —
+  sine-wandering wisps with integer cycle counts so `wrapS`/`wrapT =
+RepeatWrapping` tile around the circumference AND along the axis).
+  A per-vertex color ramp `b = min(1, 3.5t)·(1−t)^1.3` fades the tip
+  to black — under additive blending the tail dissolves into space
+  with no hard rim, and the true 3D volume never shows a billboard
+  rectangle from any camera angle. updateFx rescales `(len, w, w)`
+  from the live radius, scrolls `map.offset.y` to stream filaments
+  anti-sunward (`−t·GAS_FLOW`), swirls `rotation.x` ±`WOBBLE_AMP`
+  (axial spin around the tail's own axis), and flickers opacity on a
+  per-comet seeded rate — the tail churns like plasma/dust being
+  blown off, not a painted streak.
 - **Activity factor**: sublimation ignites only inside a periapsis
   window — `rCut = rMin + span·ACTIVE_FRAC`, then
   `f = clamp((rCut − r)/(rCut − rMin), 0, 1)^GAMMA` where
