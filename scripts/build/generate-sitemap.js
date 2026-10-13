@@ -70,7 +70,7 @@ async function run() {
 
   const enSlugs = LANG_SLUGS.en || {}
 
-  for (const key of ['about', 'contact', 'privacy', 'gdpr', 'terms']) {
+  for (const key of ['about', 'contact', 'privacy', 'gdpr', 'terms', 'license']) {
     if (enSlugs[key]) urlSet.add(`/${enSlugs[key]}`)
   }
 
@@ -95,6 +95,7 @@ async function run() {
       if (slugs.privacy) urlSet.add(`/${lang}/${slugs.privacy}`)
       if (slugs.gdpr) urlSet.add(`/${lang}/${slugs.gdpr}`)
       if (slugs.terms) urlSet.add(`/${lang}/${slugs.terms}`)
+      if (slugs.license) urlSet.add(`/${lang}/${slugs.license}`)
       if (slugs.about) urlSet.add(`/${lang}/${slugs.about}`)
       if (slugs.contact) urlSet.add(`/${lang}/${slugs.contact}`)
       if (slugs.earthPlayground) urlSet.add(`/${lang}/${slugs.earthPlayground}`)
@@ -250,6 +251,7 @@ async function run() {
       'privacy',
       'gdpr',
       'terms',
+      'license',
       'about',
       'contact',
       'earthPlayground',

@@ -127,8 +127,8 @@ function localize(html, { bcpLang, ogLocale, title, description, url, alternates
   // Strip any previously injected og:locale + hreflang block — the standalone
   // path feeds an already-localized dist/index.html back through localize(),
   // and without this each run appends a duplicate alternates set.
-  out = out.replace(/<link rel="alternate"[^>]*>\s*/g, '')
-  out = out.replace(/<meta property="og:locale(?::alternate)?"[^>]*>\s*/g, '')
+  out = out.replace(/\s*<link rel="alternate"[^>]*>/g, '')
+  out = out.replace(/\s*<meta property="og:locale(?::alternate)?"[^>]*>/g, '')
 
   // <html lang> + document title
   out = out.replace(/<html lang="[^"]*"/, `<html lang="${bcpLang}"`)
@@ -165,8 +165,11 @@ function localize(html, { bcpLang, ogLocale, title, description, url, alternates
   )
 
   // JSON-LD: the WebSite entity carries the page URL + inLanguage; the
-  // Organization entity keeps its canonical root url. Whitespace-tolerant
-  // so it matches both the pretty-printed shell block and compact graphs.
+  // Organization entity keeps its canonical root url. Any inLanguage key
+  // already present is stripped first so re-runs against a previously
+  // generated shell stay idempotent instead of duplicating the key.
+  out = out.replace(/,"inLanguage"\s*:\s*"[^"]*"/g, '')
+
   out = out.replace(
     /("@type"\s*:\s*"WebSite"[^}]*?"url"\s*:\s*")[^"]*(")/,
     `$1${url}$2,"inLanguage":"${bcpLang}"`
@@ -185,7 +188,7 @@ function localize(html, { bcpLang, ogLocale, title, description, url, alternates
     `  <link rel="alternate" hreflang="x-default" href="${alternates[0].url}">`,
   ].join('\n')
 
-  out = out.replace('</head>', `${inject}\n</head>`)
+  out = out.replace(/\s*<\/head>/, `${inject}\n</head>`)
 
   return out
 }
@@ -272,6 +275,11 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         { path: `${loc}/${slugs.privacy}`, title: titleOf(pageName(1)), alt: slugPath('privacy') },
         { path: `${loc}/${slugs.gdpr}`, title: titleOf(pageName(2)), alt: slugPath('gdpr') },
         { path: `${loc}/${slugs.terms}`, title: titleOf(pageName(3)), alt: slugPath('terms') },
+        {
+          path: `${loc}/${slugs.license}`,
+          title: titleOf(pageName(4)),
+          alt: slugPath('license'),
+        },
         {
           path: `${loc}/${slugs.earthPlayground}`,
           title: pgTitle(),
@@ -385,6 +393,7 @@ export function syncFirebaseRewrites() {
       slugs.privacy,
       slugs.gdpr,
       slugs.terms,
+      slugs.license,
       slugs.earthPlayground,
       slugs.starField,
       'earth-playground',
