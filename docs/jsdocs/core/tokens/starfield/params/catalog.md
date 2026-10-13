@@ -53,6 +53,13 @@ ISS solar arrays — the wings' burnished gold kapton over silicon.
 
 Earth atmosphere fresnel tints — day limb, terminator dusk, night.
 
+### `ATMO_VENUS`
+
+Exoplanet rim tints — TRAPPIST-1c's Venus-like CO₂ shroud (pale
+sulfuric amber), Proxima c's ice-giant methane cyan, Proxima b's
+thin warm haze over rock. Each pins `atmoColor` so the limb shell
+carries the right chemistry instead of Earth's blue.
+
 ### `AURORA_JUPITER`
 
 Giant-planet aurora palettes — hydrogen-dominated upper atmospheres
@@ -60,12 +67,23 @@ emit UV-blue curtains instead of Earth's oxygen green: Jupiter's
 powerful oval reads cyan-white, Saturn's a deep blue, Neptune's a
 faint violet (weak far-out field, 47°-tilted dipole).
 
+### `PROXIMA_D`
+
+Per-world Proxima palette — d rides inside the ice line and is a
+scorched lava-crust rock; b is the temperate candidate (warm
+weathered regolith, possibly ocean-shrouded); c is the distant
+mini-Neptune, blue ice over a hydrogen envelope.
+
 ### `TRAPPIST_B`
 
 Per-world tints for the seven-planet chain — shared color made every
 member read as the same ball. Inner pair scorched rock, mid worlds
 through the volatile line into the habitable-zone teal/ocean slate,
 outermost icy.
+
+### `BARNARD_PLANET`
+
+Barnard b — hot rocky sub-Earth skimming a red dwarf: dark iron-rich crust.
 
 ### `DWARF_SPH`
 
@@ -84,12 +102,28 @@ Cosmic-hierarchy shells + member speckles.
 
 Small-body belts — rocky rubble grey-brown, Kuiper ice blue-white.
 
+### `PALLAS`
+
+Named belt residents — Pallas' pale basaltic surface, Juno's S-type
+stony iron, Hygiea's carbonaceous dark, Eros' regolith tanned by
+solar wind.
+
+### `HAUMEA`
+
+Kuiper-belt residents — Haumea's crystalline ice crust (tumbled
+cigar), Makemake's methane-red tholin frost, Eris' blinding
+nitrogen/methane snow, Arrokoth's cold-classical rust lobes.
+
 ### `ROCK_STONE`
 
 Belt hero-rock material classes — ordinary chondrite stone,
 carbonaceous black, nickel-iron sheen, cometary ice and regolith
 dust. Hero rocks pick one seeded class so the belt reads as mixed
 debris, not a single material.
+
+### `ROCK_HYDRO`
+
+Hydrated clay minerals — CM-chondrite reddish mudstone.
 
 ### `STAR_BLUE`
 

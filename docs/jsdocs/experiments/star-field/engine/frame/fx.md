@@ -28,3 +28,13 @@ sine scale oscillation; `cycle` bodies (Earth's glaciation) lerp the
 surface tint between the neutral white and the ice-age palette.
 
 - `@param` s Engine state.
+
+### `gasI`
+
+Streaming gas — each tail's filament layer scrolls its texture
+along +x (the anti-sunward direction, via RepeatWrapping
+`map.offset.x`), wobbles a few hundredths of a radian and
+flickers on a detuned sine, so the tail reads as churning
+plasma/dust blowing off the nucleus instead of a painted streak.
+The gas sprite shadows the base tail's position/scale by copying
+the rescaled length each frame.

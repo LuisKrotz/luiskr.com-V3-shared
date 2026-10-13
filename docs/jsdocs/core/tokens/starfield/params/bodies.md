@@ -128,7 +128,18 @@ satPivots update.
 
 ### `COUNT`
 
-Hero rocks per belt — enough variety to read at fly-in distance.
+Hero rocks per belt — enough variety that the annulus reads as a
+crowded debris field at fly-in distance, not a sparse scatter. Each
+rock is a seeded unique mesh, so the count is the visual density,
+not a texture detail.
+
+### `DETAIL`
+
+Mesh tessellation — icosahedron detail for regular rocks and
+tetrahedron detail for fragments. Detail 3 ≈ 1280 tris/rock:
+smooth enough that the crumpled silhouette reads as a real body
+under glancing light, cheap enough that ~200 hero rocks add under
+0.3M tris per belt.
 
 ### `SIZE_MIN`
 
@@ -156,13 +167,15 @@ Fragments deform harder — broken shards, not rounded potatoes.
 
 ### `CLASS_STONE`
 
-Material-class mix — probabilities must sum to 1: ordinary
-stony (chondrite) dominates, carbonaceous + dusty bodies next,
-then ice and nickel-iron.
+Material-class mix — probabilities sum with the metal remainder
+to 1: ordinary stony (chondrite) dominates, carbonaceous +
+hydrated + dusty bodies next, then ice, and nickel-iron holds
+what remains. The class picks drive both the painted texture and
+the material response (metal glints, ice refracts).
 
 ### (module scope)
 
-(remainder → metal)
+(remainder → metal ≈ 0.16)
 
 ### `SPIN_MIN`
 
@@ -221,6 +234,11 @@ Coma sprite diameter × nucleus radius — the sublimated envelope.
 
 Coma opacity at periapsis — thins with the same factor as tails.
 
+### `COMA_FLOOR`
+
+Coma brightness floor — an inactive nucleus still vents a faint
+background coma; only the tails fully die.
+
 ### `ION_LEN`
 
 Ion tail length/width as multiples of the nucleus radius.
@@ -234,11 +252,32 @@ Dust tail — shorter, broader, lagging the radius vector.
 Dust-tail lag angle (rad) — grains trail the comet's orbit, so the
 streak fans off the anti-sunward line.
 
-### `TAIL_FLOOR`
+### `ACTIVE_FRAC`
 
-Apoapsis floor — tail factor never drops fully to zero (sublimation
-weakens but never halts), keeping a faint stub at the far end of
-the eccentric orbit.
+Periapsis window — fraction of the periapsis→apoapsis span inside
+which sublimation runs hard enough to grow tails. Solar flux falls
+as 1/r², so the thaw front collapses quickly on the outbound leg:
+`active = clamp(((rMin + span·ACTIVE_FRAC) − r) / (span·ACTIVE_FRAC))`
+raised to `GAMMA`, and the tail sprites unmount (`visible=false`)
+below `TAIL_OFF`. Halley sublimates measurably out to ~3 AU against
+an 0.59–35 AU orbit → ~9% window; 0.3 reads correctly at chart scale
+where the tail should die before the orbit leaves the inner system.
+
+### `GAS_FLOW_ION`
+
+Gas layer — each tail composites a second sprite whose filament
+texture tiles horizontally (streaks wrap at the canvas edge) so
+updateFx can scroll `map.offset.x` and stream gas anti-sunward.
+`FLOW_*` are offsets/second; the ion wind moves fastest (plasma is
+magnetically entrained, dust drifts). `WOBBLE_*` is the turbulence:
+a slow sinusoidal rotation + opacity shimmer per tail.
+
+### `GAS_W`
+
+Filament texture — wisps drawn as sinuous horizontal streaks with
+knot clumps. `FILAMENT_W` is the base alpha; wander is in texture
+units. The gas texture is 256×64 px — long and thin, matching the
+tail's aspect.
 
 ### `SF_DETAIL`
 

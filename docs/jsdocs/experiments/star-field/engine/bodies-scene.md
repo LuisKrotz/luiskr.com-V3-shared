@@ -22,6 +22,12 @@ and pickable in the state maps.
 - `@param` texMap Loaded texture map keyed by URL.
 - `@param` glowTex Shared glow texture for sprites/discs (may be undefined).
 
+### `bodySunDir`
+
+Body-local sun direction — created only for bodies whose shading
+depends on illumination (emissive maps, atmosphere rims, plume
+vents); updateDayNight rewrites it per frame in `mesh` space.
+
 ### `mountGalacticRider`
 
 Galactic co-rotation — the solar system and its stellar neighborhood

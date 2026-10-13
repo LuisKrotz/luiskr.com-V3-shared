@@ -13,6 +13,37 @@ Comet builder — a `SF_KINDS.COMET` body is a dark
 
 Tail gradient canvas — long narrow streak, alpha fades along +x.
 
+### `gasFor`
+
+Paints the streaming-gas layer texture: a horizontally TILEABLE
+filament field (`wrapS = RepeatWrapping`) so updateFx can roll
+`map.offset.x` and the gas visibly streams anti-sunward like plasma
+riding the solar wind. Seamlessness is guaranteed analytically —
+every wisp follows `y(x) = mid + sin(2π·cycles·x/W + φ)·amp` with an
+INTEGER cycle count, so the path's phase at the left edge equals the
+right edge; knot clumps are each drawn twice at `x` and `x − W` to
+wrap blobs that straddle the seam. A faint envelope gradient keeps
+the layer brightest near the nucleus root without breaking the wrap
+(the envelope is applied by the OTHER static tail sprite — this layer
+stays uniform so scrolling never smears a ramp).
+
+- `@param` THREE The three.js module.
+- `@param` seed Deterministic RNG stream (seeded per tail so the ion and
+- `@returns` A tileable CanvasTexture, or undefined without a 2d context.
+
+### `for`
+
+Filaments — thin sinuous rays running the tail's length. Integer
+`cycles` keeps the sine periodic across the canvas width (the wrap
+seam is invisible); each streak's alpha jitters so the sheet reads
+as braided streamers, not one uniform smear.
+
+### `for`
+
+Knots — denser gas clumps the outgassing vents throw. Painted at
+both `x` and `x ± W` so a blob crossing the wrap seam shows its
+continuation on the far edge.
+
 ### `tailFor`
 
 Paints the shared tail sprite texture: a horizontal gradient that is
@@ -39,7 +70,7 @@ permanently anti-sunward.
 - `@param` def Catalog entry — `radius` sizes the nucleus; `ecc`/`orbit`
 - `@param` texMap Loaded texture map (a comet with a real nucleus map
 - `@param` glowTex Shared radial-glow texture for the coma sprite.
-- `@returns` `{ mesh, coma, ion, dust }` — the pickable nucleus group
+- `@returns` `{ mesh, coma, ion, dust, ionGas, dustGas }` — the pickable
 
 ### `tailSprite`
 
@@ -48,3 +79,11 @@ angle. Its center sits at `len/2` along +x so the texture's bright
 root edge lands on the nucleus and the fade runs anti-sunward.
 `tilt` swings the sprite's origin off the ecliptic plane so the
 dust fan visibly lags the ion streak.
+
+### `gasLayer`
+
+Gas layers — a second filament sprite over each tail whose texture
+wraps horizontally: updateFx streams `map.offset.x` so the gas
+visibly flows anti-sunward (the ion wind is the faster, plasma is
+field-entrained while dust drifts). Each layer gets its own
+CanvasTexture so the scroll offsets don't fight.

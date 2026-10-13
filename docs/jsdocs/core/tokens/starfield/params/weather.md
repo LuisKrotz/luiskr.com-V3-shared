@@ -316,6 +316,15 @@ Jet/puff reach as a multiple of the body radius.
 
 Jet sprite width × body radius.
 
+### `JET_BASE_W`
+
+Jet cone footprint — the steady column is an open-ended tapered
+cylinder rooted at the vent (narrow throat, umbrella spread at the
+top, CylinderGeometry(rTop>rBottom)). JET_SEG is the radial
+tessellation — 12 keeps the silhouette round under any azimuth.
+A vertical alpha gradient texture feeds `map`: blazing at the vent
+(v=1 side) and dissolving into transparency at the rim.
+
 ### `PERIOD`
 
 Rising-puff cycle seconds (per-vent phase is seeded).
@@ -327,6 +336,14 @@ Steady jet opacity at the vent base.
 ### `PUFF_OPACITY`
 
 Puff opacity peak at the bottom of its rise.
+
+### `SUN_LO`
+
+Sunlight gate — cryovolcanic jets scatter sunlight, so a vent on
+the body's night side shows only a faint smudge. `dot(ventDir,
+sunDirLocal)` smoothsteps between LO/HI: fully dark vents keep
+DARK_FLOOR so the plume never pops discontinuously at the
+terminator.
 
 ### `POLAR_LAT`
 

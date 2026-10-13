@@ -15,10 +15,14 @@ Surface style buckets — how the generator dresses a body.
 
 ### `surfaceStyle`
 
-Picks the surface style for a body: moons and dwarf planets are
-cratered rock; gas-rich exoplanet-sized bodies favor latitude bands;
-icy surfaces favor bright streaks. The seed decides within each
-kind's bias so two bodies of the same kind still differ.
+Picks the surface style for a body: moons, asteroids and dwarf
+planets are cratered rock; gas-rich exoplanet-sized bodies favor
+latitude bands; icy surfaces favor bright streaks. An authored
+`def.surface` recipe (SF_SURFACES) overrides the draw — the catalog
+pins it when the dossier describes a specific climate, so a lava
+planet can never come out banded or oceanic. Otherwise the seed
+decides within each kind's bias so two bodies of the same kind
+still differ.
 
 - `@param` def Body def.
 - `@param` rand Seeded RNG.
@@ -59,6 +63,27 @@ streams, not a barcode.
 
 Ice streaks — long bright diagonal cracks over the base, the Europa/
 Enceladus look: a handful of soft bright gradients at seeded angles.
+
+- `@param` ctx 2d context.
+- `@param` base Body channel triple.
+- `@param` rand Seeded RNG.
+
+### `lava`
+
+Lava veins — glowing fault cracks over a dark crust, the read for a
+world too hot to hold surface water (Proxima d, TRAPPIST-1b): a
+crumpled black-crust base gets split by bright molten streaks plus a
+few radiating hot-spot calderas.
+
+- `@param` ctx 2d context.
+- `@param` base Body channel triple (already darkened crust).
+- `@param` rand Seeded RNG.
+
+### `ocean`
+
+Ocean surface — deep water base with broad island/ice mottling and
+bright polar caps (top and bottom of the equirect map), the read for
+a temperate water world (TRAPPIST-1e/f candidates).
 
 - `@param` ctx 2d context.
 - `@param` base Body channel triple.

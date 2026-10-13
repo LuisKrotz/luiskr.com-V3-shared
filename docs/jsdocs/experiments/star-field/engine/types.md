@@ -285,6 +285,14 @@ Crumple depth as a fraction of the body radius (0–1).
 
 Triaxial proportions [x, y, z] — the body's three radii normalized to x=1 (Phobos ≈ [1, 0.81, 0.67]).
 
+### (module scope)
+
+Procedural-surface recipe pin — one of `SF_SURFACES` (`rock`,
+`ice`, `gas`, `lava`, `ocean`). The painter's kind bias still seeds
+the grain, but the recipe forces the read: a molten Proxima d can
+never draw water bands, an oceanic TRAPPIST-1e always carries seas.
+Absent → seeded pick inside the kind's palette as before.
+
 ### `dist`
 
 Authored distance label for the hover tooltip — semi-major axis in
@@ -502,6 +510,15 @@ Each frame `updateDayNight` writes `dir = normalize(sunPos −
 bodyPos)` into the shared vector the material's TSL uniform wraps,
 so lights stay dark on the lit hemisphere and the rim migrates
 with the terminator.
+
+### (module scope)
+
+Light-source anchor override — galactic planets (TRAPPIST-1's
+worlds, Proxima's) are lit by their host star, not the solar
+Sun, so their day/night vector resolves against the parent's
+anchor instead of the default `sunLight`. Moons of planets
+(Io, Enceladus) keep the default: they orbit a planet but are
+still lit by the real Sun.
 
 ### `approached`
 
@@ -772,6 +789,13 @@ stub), reproducing how sublimation scales with solar flux.
 
 Ion + dust tail sprites and the coma sprite (order matters: ion first).
 
+### `ionGas`
+
+Scrolling gas-filament layers composited over each tail — their
+textures tile horizontally so updateFx can stream `map.offset.x`
+anti-sunward (the solar-wind flow) while `WOBBLE`/`FLICKER` wiggle
+and breathe them like live plasma.
+
 ### `rMin`
 
 Periapsis/apoapsis distances (chart units) — the scale window.
@@ -779,6 +803,10 @@ Periapsis/apoapsis distances (chart units) — the scale window.
 ### `ionScale`
 
 Resting sprite scales captured at build, multiplied by the factor.
+
+### `ionPhase`
+
+Seeded wobble phases/rates — each tail stirs at its own beat.
 
 ### (module scope)
 
@@ -789,7 +817,7 @@ eruption with zero per-frame allocation.
 
 ### `jet`
 
-Steady jet sprite rooted at the vent (shimmering base).
+Steady tapered-cone jet rooted at the vent (shimmering column).
 
 ### `puff`
 
@@ -810,6 +838,12 @@ Body radius (spawn height) and jet reach (world units).
 ### `width`
 
 Puff base width (world units) — grows as it rises.
+
+### (module scope)
+
+Shared body-local sun direction — the dayNight registry fills it
+each frame; updateFx dots it against `dir` so vents only jet when
+the sun lights their hemisphere (Elysium-dark vents go smudge).
 
 ### (module scope)
 
