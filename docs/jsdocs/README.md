@@ -1742,14 +1742,6 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                         | What it does |
-| ------------------------------------------------------------ | ------------ |
-| [`star-field.js`](experiments/star-field/dist/star-field.md) | —            |
-
-## Entry points
-
-_Boot surfaces: what the user sees first on each bundle._
-
 | File                                                                   | What it does                                                |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------- |
 | [`bodies-scene.ts`](experiments/star-field/engine/bodies-scene.md)     | Scene-graph assembler for the star-field catalog — turns    |
@@ -2374,14 +2366,6 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`index.ts`](website/index.md)              | Barrel for the `website` module — the public site's routable |
 | [`jest.config.mjs`](website/jest.config.md) | —                                                            |
 | [`vite.config.js`](website/vite.config.md)  | Library build for the `website` module — the public site's   |
-
-## Entry points
-
-_Boot surfaces: what the user sees first on each bundle._
-
-| File                                    | What it does |
-| --------------------------------------- | ------------ |
-| [`website.js`](website/dist/website.md) | —            |
 
 ## Entry points
 
