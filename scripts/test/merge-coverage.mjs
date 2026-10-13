@@ -56,9 +56,11 @@ const coverageDir = (root) => path.join(ROOT, root, 'reports', 'coverage')
 //
 // Maps are merged PER FILE with a freshness check: istanbul unions by
 // statement/branch location, so a stale run that predates a source edit
-// would inject phantom uncovered locations from the old file shape. When
-// the maps disagree on a file's statement/branch/fn locations only the
-// freshest run's entry is valid; identical shapes merge normally.
+// would inject phantom uncovered locations from the old file shape. The
+// newest run's entry defines the current shape; every entry sharing it is
+// unioned (a 0-hit entry is "not measured by that suite", not "uncovered" —
+// keeping the newest alone would drop real hits whenever fresh runs coexist
+// with a stale one), while older-shape entries are discarded.
 const rawMaps = []
 
 for (const [name, { root }] of Object.entries(MODULES)) {
@@ -110,15 +112,12 @@ for (const [file, entries] of byFile) {
   const newest = entries.reduce((a, b) => (b.mtime > a.mtime ? b : a))
   const newestShape = shapeOf(newest.fc)
 
-  if (entries.every((e) => shapeOf(e.fc) === newestShape)) {
-    const union = createCoverageMap()
+  const current = entries.filter((e) => shapeOf(e.fc) === newestShape)
+  const union = createCoverageMap()
 
-    for (const e of entries) union.addFileCoverage(e.fc)
+  for (const e of current) union.addFileCoverage(e.fc)
 
-    merged.addFileCoverage(union.fileCoverageFor(file))
-  } else {
-    merged.addFileCoverage(newest.fc)
-  }
+  merged.addFileCoverage(union.fileCoverageFor(file))
 }
 
 for (const [name, { root, src }] of emit) {

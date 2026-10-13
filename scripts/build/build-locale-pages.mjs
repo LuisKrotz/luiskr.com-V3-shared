@@ -12,11 +12,15 @@
  * generator emits home (/<loc>), the localized about/contact/legal/
  * earthPlayground/starField slugs, the English playground + star-field
  * alias segments the sitemap also lists, and /<loc>/portfolio/<slug>
- * project pages. Each document gets per-route hreflang alternates pointing
- * at the equivalent route in every locale — never back to the locale
- * roots — plus a localized WebSite JSON-LD url + inLanguage. Docs stay
- * English-only (no /<loc>/docs pages) and dist/cms/ is never touched —
- * the CMS stays unindexed.
+ * project pages. English routes emit straight to dist/<route>/index.html
+ * (exact-match static files beat the `**` SPA catch-all, so no rewrite
+ * entries are needed) — including legacy portfolio aliases (canonical →
+ * real slug) and the media-modal deep links the sitemap lists. Each
+ * document gets a per-route localized title + description, per-route
+ * hreflang alternates pointing at the equivalent route in every locale —
+ * never back to the locale roots — plus a localized WebSite JSON-LD
+ * url + inLanguage. Docs stay English-only (no /<loc>/docs pages) and
+ * dist/cms/ is never touched — the CMS stays unindexed.
  *
  * The template is dist/index.html *after* the multi-tier loader injection
  * (build-targets.mjs step 5), so each page boots the same capability-based
@@ -33,6 +37,7 @@ import { Buffer } from 'node:buffer'
 import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
+import { PROJECT_ALIASES } from '../../../core/tokens/routes/aliases.ts'
 
 const VALID_LANGS = Object.keys(LANG_SLUGS)
 
@@ -63,6 +68,21 @@ const LOCALE_TAGS = Object.freeze({
 
 const SITE_URL = 'https://luiskr.com'
 const BASE_TITLE = 'Luis Krötz'
+
+/**
+ * Media-slug transform — MUST match generate-sitemap.js's slugify byte for
+ * byte: emitted /portfolio/<slug>/<media> file names have to line up with
+ * the URLs the sitemap already lists (diacritics fold to ASCII).
+ */
+const slugify = (text) =>
+  (text || '')
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 
 /** Escape a string for use inside an HTML attribute or text node. */
 const esc = (s) =>
@@ -118,10 +138,14 @@ const writeCompressed = (file, html) => {
  * @param {string} o.ogLocale - og:locale value (xx_YY)
  * @param {string} o.title - document + social title
  * @param {string} o.description - meta description text
- * @param {string} o.url - canonical absolute URL for this page
+ * @param {string} o.url - this page's absolute URL
+ * @param {string} [o.canonicalUrl] - canonical/og:url override for alias pages
+ *   (defaults to `url`); alias slugs point at their canonical project so
+ *   /portfolio/brazilian-leather doesn't compete with /portfolio/cicb
  * @param {Array<{bcp:string,url:string}>} o.alternates - hreflang rows
  */
-function localize(html, { bcpLang, ogLocale, title, description, url, alternates }) {
+function localize(html, { bcpLang, ogLocale, title, description, url, canonicalUrl, alternates }) {
+  const canon = canonicalUrl || url
   let out = html
 
   // Strip any previously injected og:locale + hreflang block — the standalone
@@ -145,9 +169,9 @@ function localize(html, { bcpLang, ogLocale, title, description, url, alternates
 
   // Canonical + social URLs — attribute-targeted so share.png and JSON-LD
   // image/logo URLs are never rewritten.
-  out = out.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
-  out = out.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
-  out = out.replace(/(<meta name="twitter:url" content=")[^"]*(")/, `$1${url}$2`)
+  out = out.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${canon}$2`)
+  out = out.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${canon}$2`)
+  out = out.replace(/(<meta name="twitter:url" content=")[^"]*(")/, `$1${canon}$2`)
 
   // Description metas
   const d = esc(description)
@@ -248,7 +272,91 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
 
   let written = 0
 
-  /** Route table: path-suffix → title + canonical-equivalent alternates path. */
+  // ── Per-route description resolvers — one source of truth per page type ──
+  // Home/about share the bio blurb; contact composes its channels; legal
+  // pages take their first paragraph; playgrounds take the authored
+  // `description` field; projects take the first body paragraph. Every
+  // resolver falls back to the about blurb so no page emits empty meta.
+  const aboutDescOf = (loc) =>
+    toDescription(
+      t(loc, (x) => x.pages?.about?.col1?.[0]) ||
+        'Front-End Developer focused on creating beautiful experiences.'
+    )
+
+  const contactDescOf = (loc) => {
+    const c = t(loc, (x) => x.components?.contact)
+
+    const links = (c?.line1 || [])
+      .map((i) => i?.description)
+      .filter(Boolean)
+      .join(', ')
+
+    return c?.title ? toDescription(`${c.title} | ${links}`) : aboutDescOf(loc)
+  }
+
+  const legalDescOf = (loc, pageKey) =>
+    toDescription(t(loc, (x) => x.pages?.[pageKey]?.sections?.[0]?.content?.[0])) ||
+    aboutDescOf(loc)
+
+  /** Recursively finds the first paragraph string inside a nested sections payload. */
+  const firstPara = (node) => {
+    if (typeof node === 'string') return node
+
+    if (Array.isArray(node)) {
+      for (const item of node) {
+        const found = firstPara(item)
+
+        if (found) return found
+      }
+    }
+
+    return ''
+  }
+
+  const projectDescOf = (loc, slug) =>
+    toDescription(firstPara(t(loc, (x) => x.projects?.[slug]?.sections))) || aboutDescOf(loc)
+
+  const epDescOf = (loc) =>
+    toDescription(t(loc, (x) => x.pages?.['earth-playground']?.description)) || aboutDescOf(loc)
+
+  const sfDescOf = (loc) =>
+    toDescription(t(loc, (x) => x.pages?.['star-field']?.description)) || aboutDescOf(loc)
+
+  /** Expandable-media slugs of a project — mirrors generate-sitemap's walk. */
+  const mediaSlugsOf = (project) => {
+    const out = []
+
+    for (const section of project?.sections || []) {
+      const items = Array.isArray(section) ? section : [section]
+
+      for (const item of items) {
+        const media = Array.isArray(item) ? item : [item]
+
+        for (const m of media) {
+          if (m && typeof m === 'object' && m.label && m.canExpand) {
+            const slug = slugify(m.label)
+
+            // PATH_MAX per segment is 255 — a few monster labels slugify
+            // past it; those URLs stay on the `**` SPA fallback (same as
+            // today) rather than breaking the emit.
+            if (slug && slug.length <= 200) out.push(slug)
+          }
+        }
+      }
+    }
+
+    return out
+  }
+
+  const portfolioAlt = (slug) => (loc2) => `${loc2 === 'en' ? '' : `/${loc2}`}/portfolio/${slug}`
+
+  /**
+   * Route table: relative path → title, localized description,
+   * canonical-equivalent alternates path, optional canonical override.
+   * `path` is the emitted file path relative to its base (en → dist/,
+   * others → dist/langs/); en home yields '' — dist/index.html is
+   * already written by the root pass.
+   */
   const routesFor = (loc) => {
     const slugs = LANG_SLUGS[loc]
     const legal = t(loc, (x) => x.components?.['legal-footer']?.links) || legalEn
@@ -257,54 +365,145 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     const pgTitle = () =>
       `${t(loc, (x) => x.APP?.earthPlayground) || 'Earth Playground'} | ${BASE_TITLE}`
     const sfTitle = () => `${t(loc, (x) => x.APP?.starField) || 'Star Field'} | ${BASE_TITLE}`
+    const prefix = loc === 'en' ? '' : `${loc}/`
 
-    const routes = [{ path: loc, title: BASE_TITLE, alt: homePath }]
+    const routes = [
+      {
+        path: loc === 'en' ? '' : loc,
+        title: BASE_TITLE,
+        description: aboutDescOf(loc),
+        alt: homePath,
+      },
+    ]
 
     if (slugs) {
+      const epCanonical = slugPath('earthPlayground')(loc)
+
       routes.push(
         {
-          path: `${loc}/${slugs.about}`,
+          path: `${prefix}${slugs.about}`,
           title: titleOf(t(loc, (x) => x.APP?.about?.description)),
+          description: aboutDescOf(loc),
           alt: slugPath('about'),
         },
         {
-          path: `${loc}/${slugs.contact}`,
+          path: `${prefix}${slugs.contact}`,
           title: titleOf(t(loc, (x) => x.APP?.contact)),
+          description: contactDescOf(loc),
           alt: slugPath('contact'),
         },
-        { path: `${loc}/${slugs.privacy}`, title: titleOf(pageName(1)), alt: slugPath('privacy') },
-        { path: `${loc}/${slugs.gdpr}`, title: titleOf(pageName(2)), alt: slugPath('gdpr') },
-        { path: `${loc}/${slugs.terms}`, title: titleOf(pageName(3)), alt: slugPath('terms') },
         {
-          path: `${loc}/${slugs.license}`,
+          path: `${prefix}${slugs.privacy}`,
+          title: titleOf(pageName(1)),
+          description: legalDescOf(loc, 'privacy-policy'),
+          alt: slugPath('privacy'),
+        },
+        {
+          path: `${prefix}${slugs.gdpr}`,
+          title: titleOf(pageName(2)),
+          description: legalDescOf(loc, 'GDPR'),
+          alt: slugPath('gdpr'),
+        },
+        {
+          path: `${prefix}${slugs.terms}`,
+          title: titleOf(pageName(3)),
+          description: legalDescOf(loc, 'terms-of-use'),
+          alt: slugPath('terms'),
+        },
+        {
+          path: `${prefix}${slugs.license}`,
           title: titleOf(pageName(4)),
+          description: legalDescOf(loc, 'license'),
           alt: slugPath('license'),
         },
         {
-          path: `${loc}/${slugs.earthPlayground}`,
+          path: `${prefix}${slugs.earthPlayground}`,
           title: pgTitle(),
+          description: epDescOf(loc),
           alt: slugPath('earthPlayground'),
         },
-        { path: `${loc}/${slugs.starField}`, title: sfTitle(), alt: slugPath('starField') }
+        {
+          path: `${prefix}${slugs.starField}`,
+          title: sfTitle(),
+          description: sfDescOf(loc),
+          alt: slugPath('starField'),
+        }
       )
+
+      // English playground alias segments under the locale prefix (sitemap
+      // parity) — alternates resolve to the canonical localized slugs and
+      // the canonical link points at the locale's canonical slug so the
+      // alias URL never competes with it.
+      if (loc !== 'en' || slugs.earthPlayground !== 'earth-playground') {
+        routes.push({
+          path: `${prefix}earth-playground`,
+          title: pgTitle(),
+          description: epDescOf(loc),
+          alt: slugPath('earthPlayground'),
+          canonical: epCanonical,
+        })
+      }
+
+      routes.push({
+        path: `${prefix}space-playground`,
+        title: pgTitle(),
+        description: epDescOf(loc),
+        alt: slugPath('earthPlayground'),
+        canonical: epCanonical,
+      })
+
+      if (loc !== 'en' || slugs.starField !== 'star-field-experiment') {
+        routes.push({
+          path: `${prefix}star-field-experiment`,
+          title: sfTitle(),
+          description: sfDescOf(loc),
+          alt: slugPath('starField'),
+          canonical: slugPath('starField')(loc),
+        })
+      }
     }
 
-    // English playground segments under the locale prefix (sitemap parity) —
-    // alternates resolve to the canonical localized slugs.
-    routes.push(
-      { path: `${loc}/earth-playground`, title: pgTitle(), alt: slugPath('earthPlayground') },
-      { path: `${loc}/space-playground`, title: pgTitle(), alt: slugPath('earthPlayground') },
-      { path: `${loc}/star-field-experiment`, title: sfTitle(), alt: slugPath('starField') }
-    )
-
-    // Localized portfolio — /<loc>/portfolio/<slug> renders the project view
-    // translated; media-modal deep links stay English-only.
+    // Portfolio — /<loc>/portfolio/<slug> renders the project view
+    // translated; English additionally emits the legacy alias slugs
+    // (canonical → real slug) and the media-modal deep links the sitemap
+    // lists (English-only by design).
     for (const slug of Object.keys(en.projects || {})) {
+      const title = titleOf(toDescription(t(loc, (x) => x.projects?.[slug]?.title) || slug, 80))
+
+      const description = projectDescOf(loc, slug)
+
       routes.push({
-        path: `${loc}/portfolio/${slug}`,
-        title: titleOf(toDescription(t(loc, (x) => x.projects?.[slug]?.title) || slug, 80)),
-        alt: (loc2) => `${loc2 === 'en' ? '' : `/${loc2}`}/portfolio/${slug}`,
+        path: `${prefix}portfolio/${slug}`,
+        title,
+        description,
+        alt: portfolioAlt(slug),
       })
+
+      if (loc !== 'en') continue
+
+      for (const [alias, canonical] of Object.entries(PROJECT_ALIASES)) {
+        if (canonical === slug) {
+          routes.push({
+            path: `portfolio/${alias}`,
+            title,
+            description,
+            alt: portfolioAlt(slug),
+            canonical: portfolioAlt(slug)('en'),
+          })
+        }
+      }
+
+      for (const media of mediaSlugsOf(t(loc, (x) => x.projects?.[slug]))) {
+        const mediaUrl = `${SITE_URL}/portfolio/${slug}/${media}`
+
+        routes.push({
+          path: `portfolio/${slug}/${media}`,
+          title,
+          description,
+          canonical: mediaUrl,
+          alternates: [{ bcp: 'en', og: 'en_US', url: mediaUrl }],
+        })
+      }
     }
 
     return routes
@@ -325,30 +524,36 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     alternates: alternatesFor(homePath),
   })
 
-  // ── Localized documents ───────────────────────────────────────────────────
+  // ── Per-route documents ───────────────────────────────────────────────────
+  // English emits straight to dist/<route>/index.html — exact-match static
+  // files win over the `**` SPA rewrite, so no firebase.json entry is
+  // needed. Other locales live under dist/langs/<loc>/… with rewrites.
   for (const loc of VALID_LANGS) {
-    if (loc === 'en' || !LOCALE_TAGS[loc]) continue
+    if (!LOCALE_TAGS[loc]) continue
 
     const tags = LOCALE_TAGS[loc]
-    const description = toDescription(
-      t(loc, (x) => x.pages?.about?.col1?.[0]) ||
-        'Front-End Developer focused on creating beautiful experiences.'
-    )
 
     for (const route of routesFor(loc)) {
+      if (!route.path) continue // en home — dist/index.html written by the root pass
+
       const out = localize(template, {
         bcpLang: tags.bcp,
         ogLocale: tags.og,
         title: route.title,
-        description,
+        description: route.description || aboutDescOf(loc),
         url: `${SITE_URL}/${route.path}`,
-        alternates: alternatesFor(route.alt),
+        canonicalUrl: route.canonical
+          ? route.canonical.startsWith('http')
+            ? route.canonical
+            : `${SITE_URL}${route.canonical}`
+          : undefined,
+        alternates: route.alternates || alternatesFor(route.alt),
       })
 
-      // Locales live under dist/langs/<loc>/… — firebase.json rewrites map
-      // the public /<loc>/… URLs back to these files (rewrites have no splat
-      // destination support, so every route gets an explicit entry).
-      const file = path.join(distDir, 'langs', route.path, 'index.html')
+      const file =
+        loc === 'en'
+          ? path.join(distDir, route.path, 'index.html')
+          : path.join(distDir, 'langs', route.path, 'index.html')
 
       fs.mkdirSync(path.dirname(file), { recursive: true })
       writeCompressed(file, out)
