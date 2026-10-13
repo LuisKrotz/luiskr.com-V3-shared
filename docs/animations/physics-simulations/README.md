@@ -183,13 +183,13 @@ canonical instance.
   decay — the real impact-fireball profile.
 - Pooled sprites: fixed cap, slots recycle — zero allocation per hit.
 
-## 9. Comet tails (sublimation scaling)
+## 9. Comet tails (sublimation window + streaming gas)
 
 `SF_KINDS.COMET` bodies (Halley) render an irregular dark nucleus —
 albedo ≈ 0.04, crumpled via `irregularGeometry` — wrapped in an
-additive coma sprite plus two camera-facing tail sprites parented to
-the `center` group. Because `center` is only **translated** along +x by
-the conic radius (pivot carries the angular sweep), local +x is
+additive coma sprite plus **four** camera-facing tail sprites parented
+to the `center` group. Because `center` is only **translated** along +x
+by the conic radius (pivot carries the angular sweep), local +x is
 anti-sunward by construction at every orbital phase — the tails never
 need orientation math.
 
@@ -198,20 +198,35 @@ need orientation math.
 - **Dust tail**: shorter, wider, tilted `DUST_TILT` off the radius
   vector — grains lag the comet's orbital motion, fanning off the ion
   streak.
-- **Activity factor**: `f = TAIL_FLOOR + (1−TAIL_FLOOR)·(rMax − r)/(rMax − rMin)`
-  where `r = center.position.x` is the live conic radius — the tail is
-  full at periapsis and shrinks to a whisper at apoapsis, mimicking
-  sublimation ∝ solar flux. Coma scale/opacity ride the same factor.
+- **Gas layers**: each tail carries a second sprite painted with a
+  tileable filament field (`gasFor` — sine-wandering wisps with integer
+  cycle counts so `wrapS = RepeatWrapping` tiles seamlessly). updateFx
+  scrolls `map.offset.x` anti-sunward (`−t·GAS_FLOW`), wobbles rotation
+  ±`WOBBLE_AMP`, and flickers opacity on a per-comet seeded rate — the
+  tail churns like plasma/dust being blown off, not a painted streak.
+- **Activity factor**: sublimation ignites only inside a periapsis
+  window — `rCut = rMin + span·ACTIVE_FRAC`, then
+  `f = clamp((rCut − r)/(rCut − rMin), 0, 1)^GAMMA` where
+  `r = center.position.x` is the live conic radius (≈1/r² flux
+  behavior). Below `TAIL_OFF` the tail sprites unmount entirely
+  (`visible = false`) — a comet flying home from apoapsis shows a dark
+  nucleus under a `COMA_FLOOR`-thin coma, never a phantom streak.
 
 ## 10. Cryovolcanic plumes
 
-`def.plumes` (Enceladus `polar`, Io scattered) — per vent a steady jet
-sprite plus a `puff` cycling `dir·(radius + cyc·height)` with
-`opacity ∝ 4·cyc·(1−cyc)` (rises bright, fades at altitude) and
-`width ∝ 1 + 1.6·cyc` (expands as it climbs). Vent directions sample
-the south-polar band (`|y| > POLAR_LAT`) or the uniform sphere. The
-group is a `detail` member — plumes switch off at LOD distance — and a
-mesh child, so vents co-rotate with their terrain.
+`def.plumes` (Enceladus `polar`, Io scattered) — per vent a **tapered
+cone jet** (`CylinderGeometry` with a vertical alpha-ramp texture, so
+the column reads as a 3D jet from every azimuth) plus a `puff` cycling
+`dir·(radius + cyc·height)` with `opacity ∝ 4·cyc·(1−cyc)` (rises
+bright, fades at altitude) and `width ∝ 1 + 1.6·cyc` (expands as it
+climbs). Vent directions sample the south-polar band (`|y| > POLAR_LAT`)
+or the uniform sphere. **Sun gating**: each vent's `sunDir` slot is
+rewritten per frame by the shared `updateDayNight` vector;
+`dot(ventDir, sunDirLocal)` smoothsteps between `SUN_LO`/`SUN_HI` —
+night-side vents drop to `DARK_FLOOR` so geysers read on the lit limb
+the way the Enceladus backscatter images show them. The group is a
+`detail` member — plumes switch off at LOD distance — and a mesh
+child, so vents co-rotate with their terrain.
 
 ## 11. Corona + limb flares
 
@@ -243,6 +258,13 @@ tween never fights the user.
 - `updateLod` swaps high-detail meshes in/out by camera distance;
   `checkApproach` prefetches dossier JSON + near-field detail before
   the body is visited — lazy load ahead of need.
+- **Per-detail reach override** — detail objects carrying
+  `userData[SF_USER_DETAIL_R]` (the LEO swarm holder, catalogued
+  orbiters like the ISS) gate on an absolute camera distance instead of
+  the generic `PAD + max(radius, orbit)·SCALE` reach. Without it a
+  host's heliocentric `orbit` (Earth: 44 units → ~570-unit reach) would
+  reveal its near-field shell from interplanetary range; the override
+  keeps LEO glints visible only inside lunar range (~7 units).
 - `registryBodies` is an LRU map: registry stars spawn real meshes on
   approach/selection and evict the least-recently-touched beyond the
   cap — 139 k catalogued objects can't all exist at once.
@@ -261,7 +283,7 @@ sequenceDiagram
     Note over LRU: geometry, materials,<br/>textures freed
 ```
 
-## 14. Star-cloud fill (WASM worker)
+## 12. Star-cloud fill (WASM worker)
 
 `engine/star-cloud.ts` + `fill-worker.ts` — the 139 563-object HYG
 binary catalog is a **single Points draw call**. Attribute fills
@@ -269,7 +291,7 @@ binary catalog is a **single Points draw call**. Attribute fills
 exist, with a synchronous JS fill as the fallback — batch work only,
 never per-frame.
 
-## 15. Website springs & tweens
+## 13. Website springs & tweens
 
 - **Genie** (`core/utils/motion/genie.ts`) — transform-origin scale
   tween timed by `ANIMATION_DURATIONS`; compositor-only (`transform`),

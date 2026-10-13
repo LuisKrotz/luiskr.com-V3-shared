@@ -277,12 +277,26 @@ three layers:
   range.
 - **Comets** (`bodies/comet.ts`, `SF_KINDS.COMET`): Halley rides a
   retrograde, steeply-inclined eccentric conic — an irregular coal-dark
-  nucleus in an additive coma, with ion + dust tail sprites locked
-  anti-sunward (tails live on `center`, where local +x always points
-  away from the Sun) and shrinking with the live conic radius.
-- **Plumes** (`bodies/plumes.ts`): `def.plumes` vents spawn steady jets
-  - rising/fading puffs co-rotating with the surface — Enceladus'
-    south-polar tiger-stripe geysers, Io's volcanic plumes.
+  nucleus in an additive coma, with ion + dust tails each backed by a
+  scrolling filament-gas sprite, all locked anti-sunward (tails live on
+  `center`, where local +x always points away from the Sun). Tails
+  ignite only inside a periapsis window (`SF_COMET.ACTIVE_FRAC` —
+  sublimation ≈ 1/r² flux) and unmount entirely on the outer leg.
+- **Plumes** (`bodies/plumes.ts`): `def.plumes` vents spawn tapered
+  cone jets + rising/fading puffs co-rotating with the surface —
+  Enceladus' south-polar tiger-stripe geysers, Io's volcanic plumes —
+  gated by `dot(ventDir, sunDirLocal)` so night-side vents dim.
+- **Belts** (`bodies/belt.ts` + `bodies/belt-rocks.ts`): selectable —
+  an invisible `RingGeometry` proxy (`SF_USER_PROXY`, so real meshes on
+  the ray still win) fills the annulus, and seeded hero rocks (stone/
+  carbon/hydrated/dust/ice/metal classes, irregular geometry, own
+  Keplerian pivots) ride inside the particle disc and resolve the same
+  body id through the parent chain.
+- **Surface recipes** (`bodies/procedural/surface.ts` + `SF_SURFACES`):
+  untextured solid bodies get a seeded equirect canvas — `def.surface`
+  pins rock/ice/gas/lava/ocean recipes per dossier climate (Proxima d
+  lava crust, TRAPPIST-1e/f ocean + caps, 1h ice streaks); `ASTEROID`
+  and `COMET` kinds join the cratered-rock club.
 - **Dwarf-galaxy halos** (`galaxy.ts`): elliptical dwarfs get a
   seeded elliptical star cloud plus a soft `glowTex` backing smudge at
   `DWARF_HALO_SCALE`, so distant dwarfs read as haze rather than
