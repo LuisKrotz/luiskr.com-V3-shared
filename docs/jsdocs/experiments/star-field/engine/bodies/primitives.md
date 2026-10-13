@@ -19,6 +19,15 @@ Per-body mesh builders for the scene-graph assembler in
 prefers a real-mesh hit down the ray so proxy bubbles never eclipse
 the bodies they overlap.
 
+### `SF_USER_DETAIL_R`
+
+`userData` key overriding a detail object's LOD reveal distance —
+updateLod reads it as an absolute camera-to-anchor reach. Local-scale
+detail (the LEO satellite swarm, ISS-class orbiters) must not inherit
+the host's heliocentric `orbit` in the generic `PAD + size·SCALE`
+reach or Earth's near-field shell would render from halfway across
+the chart; these objects carry their own honest reach instead.
+
 ### `makePickProxy`
 
 Invisible pick bubble for bodies too small to hit reliably — planets

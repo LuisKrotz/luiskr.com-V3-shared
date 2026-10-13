@@ -197,6 +197,49 @@ wear: from Proxima's range (~1 060 units) the real solar system is
 a single bright star, never a resolved cluster. The threshold sits
 well clear of the belt so normal fly-throughs never trigger it.
 
+### `SF_COMET`
+
+Comet rendering — a `SF_KINDS.COMET` body is a dark irregular nucleus
+wrapped in a sublimated gas/dust envelope (coma) trailing two tails.
+The ion tail is a long narrow streak pointing straight anti-sunward
+(the solar wind entrains plasma along field lines); the dust tail is
+shorter, wider and lags the radius vector because grains keep some
+orbital momentum — it tilts off the anti-sunward line and fans out.
+Both tails are camera-facing sprites rooted at the nucleus whose
+length and opacity scale with heliocentric proximity: sublimation
+scales steeply with solar flux, so `TAIL_FLOOR` keeps a whisper at
+apoapsis while periapsis throws the full streak. Lengths are
+multiples of the nucleus radius (Halley ≈ 0.2 units → ~6.4-unit ion
+streak), so the proportions read correctly at chart scale where an
+honest ~10⁸-km tail would cross the whole map.
+
+### `COMA_SCALE`
+
+Coma sprite diameter × nucleus radius — the sublimated envelope.
+
+### `COMA_OPACITY`
+
+Coma opacity at periapsis — thins with the same factor as tails.
+
+### `ION_LEN`
+
+Ion tail length/width as multiples of the nucleus radius.
+
+### `DUST_LEN`
+
+Dust tail — shorter, broader, lagging the radius vector.
+
+### `DUST_TILT`
+
+Dust-tail lag angle (rad) — grains trail the comet's orbit, so the
+streak fans off the anti-sunward line.
+
+### `TAIL_FLOOR`
+
+Apoapsis floor — tail factor never drops fully to zero (sublimation
+weakens but never halts), keeping a faint stub at the far end of
+the eccentric orbit.
+
 ### `SF_DETAIL`
 
 Photographic-surface tuning — the real-imagery rendering layer for

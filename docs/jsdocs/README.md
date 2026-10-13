@@ -1809,8 +1809,10 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`belt-rocks.ts`](experiments/star-field/engine/bodies/belt-rocks.md) | Hero asteroids for the two belts — COUNT individual      |
 | [`belt.ts`](experiments/star-field/engine/bodies/belt.md)             | Small-body annulus renderer — asteroid belt and Kuiper   |
 | [`black-hole.ts`](experiments/star-field/engine/bodies/black-hole.md) | Sagittarius A* renderer — a layered relativistic object  |
+| [`comet.ts`](experiments/star-field/engine/bodies/comet.md)           | Comet builder — a `SF_KINDS.COMET` body is a dark        |
 | [`deep-sky.ts`](experiments/star-field/engine/bodies/deep-sky.md)     | Real-imagery surface for deep-sky bodies — nebulae, star |
 | [`mask.ts`](experiments/star-field/engine/bodies/mask.md)             | Photo-texture edge feathering for deep-sky billboards.   |
+| [`plumes.ts`](experiments/star-field/engine/bodies/plumes.md)         | Cryovolcanic and volcanic plume systems — the moving     |
 | [`primitives.ts`](experiments/star-field/engine/bodies/primitives.md) | Per-body mesh builders for the scene-graph assembler in  |
 | [`procedural.ts`](experiments/star-field/engine/bodies/procedural.md) | Barrel for the seeded canvas texture generators — each   |
 | [`structures.ts`](experiments/star-field/engine/bodies/structures.md) | Cosmic-hierarchy bodies — boundary spheres + member      |

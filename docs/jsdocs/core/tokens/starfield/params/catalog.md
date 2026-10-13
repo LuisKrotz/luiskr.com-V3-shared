@@ -23,6 +23,24 @@ nebula/galaxy hues are emissive accents on a dark sprite.
 
 Halley's nucleus — icy dust, faint cyan-white.
 
+### `COMET_ION`
+
+Comet tail palette — the ion (plasma) tail glows blue-white from
+CO+ fluorescence under solar UV, while the dust tail scatters plain
+sunlight: a warm, dimmer, slightly yellowed streak. The nucleus
+itself is among the darkest bodies known (Halley albedo ≈ 0.04).
+
+### `PLUME_ICE`
+
+Cryovolcanic/volcanic plume tints — Enceladus vents water-ice
+grains lit ice-blue; Io's plumes are sulfur/SO₂ fallout, a warm
+sulphurous gold.
+
+### `TITAN_HAZE`
+
+Titan's tholin photochemical haze — the opaque orange limb glow
+overriding the Earth-blue atmosphere tint on its rim shell.
+
 ### `ISS`
 
 ISS truss — bright metallic white.

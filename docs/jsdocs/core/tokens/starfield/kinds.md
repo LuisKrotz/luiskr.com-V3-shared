@@ -50,6 +50,12 @@ Artificial companion (ISS-class orbiters) — registered only inside
 a host body's `satellites` list; gives the dossier badge a real
 label instead of falling through to the raw kind string.
 
+### `COMET`
+
+Icy small body on an eccentric orbit (Halley-class) — renders a
+dark irregular nucleus wrapped in a sublimated coma with ion and
+dust tails that stream anti-sunward and grow toward periapsis.
+
 ### `SF_ACTIONS`
 
 Toolbar/panel action names dispatched through `data-action` clicks.

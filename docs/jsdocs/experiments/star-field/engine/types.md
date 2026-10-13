@@ -326,6 +326,36 @@ around the circular pivot sweep.
 
 ### (module scope)
 
+Atmosphere tint override (SF_COLORS hex) — the rim shell normally
+migrates Earth's day/dusk/night palette; bodies with a chemically
+different sky (Titan's tholin haze) pin the limb to their own hue.
+
+### (module scope)
+
+Cryovolcanic/volcanic plume system — animated geyser/volcano vents
+that throw ejecta sprites into space (Enceladus' south-polar tiger
+stripes, Io's scattered sulfur plumes). `polar` clusters the vents
+around the south pole; `color` tints the jets (water-ice vs
+sulfur), `height` overrides the reach as a body-radius multiple.
+
+### (module scope)
+
+Vent count — defaults to `SF_PLUME.VENTS`.
+
+### (module scope)
+
+True → vents cluster at the south pole (Enceladus tiger stripes).
+
+### (module scope)
+
+Plume tint (SF_COLORS hex) — ejecta particle color.
+
+### (module scope)
+
+Jet reach × body radius — defaults to `SF_PLUME.HEIGHT`.
+
+### (module scope)
+
 One media asset inside a dossier — the file lives under
 `public/media/<id>/` and renders with caption + credit (NASA/ESA/…
 attribution is required by the sources' usage terms).
@@ -729,6 +759,57 @@ close.
 Living-nebula animation record — parked on the sprite's userData by
 `makeNebulaSprite` (`SF_USER_NEBULA`) and lifted here so updateFx
 can churn the depth layers each frame.
+
+### (module scope)
+
+Comet tail/coma animation record — updateFx reads the live conic
+radius off `center.position.x` (frame.ts writes it for `ecc`
+orbits) and rescales/re-lights the tail sprites between `rMin`
+(periapsis — full streak) and `rMax` (apoapsis — near-invisible
+stub), reproducing how sublimation scales with solar flux.
+
+### `ion`
+
+Ion + dust tail sprites and the coma sprite (order matters: ion first).
+
+### `rMin`
+
+Periapsis/apoapsis distances (chart units) — the scale window.
+
+### `ionScale`
+
+Resting sprite scales captured at build, multiplied by the factor.
+
+### (module scope)
+
+Cryovolcanic plume system — per-vent jet + cycling puff sprite
+records built by `makePlumes`; updateFx rises each puff along its
+vent direction, expands and fades it, and recycles it — continuous
+eruption with zero per-frame allocation.
+
+### `jet`
+
+Steady jet sprite rooted at the vent (shimmering base).
+
+### `puff`
+
+Rising ejecta puff cycling outward along `dir`.
+
+### `dir`
+
+Unit vent direction (body-local) — the ejecta axis.
+
+### `phase`
+
+Seeded cycle phase (0–1) and rate multiplier.
+
+### `radius`
+
+Body radius (spawn height) and jet reach (world units).
+
+### `width`
+
+Puff base width (world units) — grows as it rises.
 
 ### (module scope)
 
