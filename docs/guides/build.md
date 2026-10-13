@@ -165,7 +165,8 @@ dist/index.html                 modern site + inlined tier/polyfill loader
 dist/cms/index.html             CMS app (noindex)
 dist/v/<tier>/assets/           per-tier JS + CSS (hashed, .br/.gz siblings)
 dist/assets/                    website assets + conditional polyfills (hashed)
-dist/langs/<loc>/<route>/       pre-rendered localized pages (hreflang JSON-LD)
+dist/langs/<loc>/<route>/       pre-rendered localized pages — per-route
+│                               hreflang alternates + localized JSON-LD
 dist/experiments/earth-playground/   playground textures + music
 dist/scripts/wasm/              engine.wasm + layout.wasm
 dist/scripts/workers/           wasm-worker.js

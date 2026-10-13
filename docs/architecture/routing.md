@@ -18,14 +18,21 @@ Views are lazily `import()`ed by the router so each route ships its own chunk:
 | `/portfolio/:slug` (project slugs + aliases)    | `website/views/project/Project.tsx`                | `Project-*.js`         |
 | `/privacy-policy`, `/gdpr`, `/terms-of-use`     | `website/views/legal/Legal.tsx`                    | `Legal-*.js`           |
 | `/earth-playground` (alias `/space-playground`) | `experiments/earth-playground/SpacePlayground.tsx` | `SpacePlayground-*.js` |
+| `/star-field-experiment[/<body>]`               | `experiments/star-field/StarField.tsx`             | `StarField-*.js`       |
 | `/docs[/*]` (English-only; `*` = manifest path) | `experiments/docs/Docs.tsx`                        | `Docs-*.js`            |
 | anything else                                   | `website/views/not-found/NotFound.tsx`             | `NotFound-*.js`        |
 | `/cms*`                                         | handled by the CMS bundle, not this table          | —                      |
 
 The `/docs/*` wildcard resolves a node in the build-time docs manifest —
-every publishable file is a crawlable URL listed in `public/sitemap.xml`
-with a per-route JSON-LD graph (see `core/utils/schema.ts` →
-`generateDocsSchema`).
+every publishable file is a crawlable URL listed in
+`public/meta/sitemap-en.xml` with a per-route JSON-LD graph (see
+`core/utils/schema.ts` → `generateDocsSchema`).
+
+Every row above is localized — `LANG_SLUGS` maps each route to a slug per
+locale (`/br/playground-da-terra`, `/de/sternenfeld-experiment`,
+`/<loc>/portfolio/<slug>`), `generate-sitemap.js` lists them in the
+per-locale sitemaps, and `build-locale-pages.mjs` pre-renders matching
+`dist/langs/<loc>/<route>/` documents. Docs stay English-only.
 
 `PROJECT_ALIASES` maps legacy/external slugs to canonical project keys so old
 links keep working.

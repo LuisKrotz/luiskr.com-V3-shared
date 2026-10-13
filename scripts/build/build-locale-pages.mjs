@@ -7,11 +7,16 @@
  * description, canonical, og/twitter cards, hreflang alternates and JSON-LD
  * — instead of the English shell the catch-all Firebase rewrite serves.
  *
- * Route inventory mirrors the runtime router (core/router/router.js) and
- * public/meta/sitemap.xml: for every locale in LANG_SLUGS the generator emits
- * home (/<loc>), about, contact, privacy, gdpr, terms, the localized
- * earth-playground slug and the English playground aliases the sitemap
- * also lists. dist/cms/ is never touched — the CMS stays unindexed.
+ * Route inventory mirrors the runtime router (core/router/parse-path.ts)
+ * and public/meta/sitemap-*.xml: for every locale in LANG_SLUGS the
+ * generator emits home (/<loc>), the localized about/contact/legal/
+ * earthPlayground/starField slugs, the English playground + star-field
+ * alias segments the sitemap also lists, and /<loc>/portfolio/<slug>
+ * project pages. Each document gets per-route hreflang alternates pointing
+ * at the equivalent route in every locale — never back to the locale
+ * roots — plus a localized WebSite JSON-LD url + inLanguage. Docs stay
+ * English-only (no /<loc>/docs pages) and dist/cms/ is never touched —
+ * the CMS stays unindexed.
  *
  * The template is dist/index.html *after* the multi-tier loader injection
  * (build-targets.mjs step 5), so each page boots the same capability-based

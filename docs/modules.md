@@ -55,6 +55,22 @@ travels through them, and how the codebase documents itself.
 5. Those same translation nodes are **written** by `cms/` — a separate bundle
    behind Google OAuth — so content travels CMS → RTDB → site with no deploy.
 
+## How crawlers see it
+
+The app is an SPA, but the crawl surface is fully enumerated at build time:
+
+- `generate-sitemap.js` mirrors the runtime router + `LANG_SLUGS` into a
+  sitemap index, per-locale `sitemap-<loc>.xml` files, `urllist.txt`, and
+  localized `robots.txt` / `llms.txt` / `ai-catalog.json` — every canonical
+  route, localized slug, portfolio project, and star-field body deep link.
+  Docs routes stay English-only.
+- `build-locale-pages.mjs` pre-renders each localized route into
+  `dist/langs/<loc>/<route>/` — translated `<title>`/meta/canonical,
+  per-route `hreflang` alternates, localized JSON-LD — with Firebase
+  rewrites mapping public paths to those documents.
+- `shared/tests/governance/seo-route-parity.test.js` pins the committed
+  artifacts, `firebase.json` rewrites, and slug table in sync.
+
 ## How the docs are made
 
 The repository documents itself in three layers, all browsable at `/docs`:

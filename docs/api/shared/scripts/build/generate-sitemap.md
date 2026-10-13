@@ -1,5 +1,7 @@
 # `shared/scripts/build/generate-sitemap.js`
 
+Emits the whole crawl surface under `website/public/meta/`:
+
 |                |                                                                           |
 | -------------- | ------------------------------------------------------------------------- |
 | **Source**     | `src/shared/scripts/build/generate-sitemap.js`                            |
@@ -13,21 +15,11 @@ Emits one `<urlset>` document for `urls`.
 
 ### `localeUrlsOf`
 
-URLs owned by one locale — `/<loc>` plus its localized + playground routes.
+URLs owned by one locale — `/<loc>` plus its localized, playground and portfolio routes.
 
 ### `localizedLlms`
 
-, /docs/** — the docs
-// portal is English-only by design); every other locale sitemap lists only
-// its own /<loc>/… routes. sitemap.xml becomes the index document.
-const sharedUrls = allUrls.filter((u) => !/^\/[a-z]{2,5}(\/|$)/.test(u) || u === '/')
-const enUrls = sharedUrls
-const translations = fs.existsSync('database.json')
-? JSON.parse(fs.readFileSync('database.json', 'utf-8')).translations || {}
-: {}
-const llmsTemplate = fs.readFileSync(path.join(META_DIR, 'llms.txt'), 'utf-8')
-
-/** Localized llms.txt — swaps the intro line for the locale's about text.
+Localized llms.txt — swaps the intro line for the locale's about text.
 
 ### `localizedCatalog`
 

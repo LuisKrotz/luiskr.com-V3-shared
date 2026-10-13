@@ -1,3 +1,30 @@
+/**
+ * @file scripts/build/generate-sitemap.js
+ * @description Emits the whole crawl surface under `website/public/meta/`:
+ * `sitemap.xml` (an index over the per-locale `sitemap-<loc>.xml` files),
+ * the global `urllist.txt`, and localized `robots.txt` / `urllist.txt` /
+ * `llms.txt` / `ai-catalog.json` files per locale.
+ *
+ * Route inventory mirrors `core/router/parse-path.ts` + `LANG_SLUGS`:
+ * - English unprefixed surface — `/`, `/about`, `/contact`, the legal
+ *   routes, `/earth-playground` + `/space-playground` alias,
+ *   `/star-field-experiment`, `/portfolio/<slug>` plus media-modal deep
+ *   links and legacy aliases, `/star-field-experiment/<body>` catalog deep
+ *   links for every authored dossier, and every publishable `/docs/<root>/<path>`
+ *   manifest node (files and folder listings).
+ * - Per locale `/<loc>/…` — the locale's localized slugs for
+ *   about/contact/legal/earthPlayground/starField, the English
+ *   playground + star-field alias segments the router also accepts under a
+ *   locale prefix, and `/<loc>/portfolio/<slug>` project routes.
+ * - Docs are English-only by design — `/<loc>/docs/…` never appears.
+ * - English-segment legal aliases under a locale (`/br/privacy-policy`)
+ *   resolve in the router but stay unlisted: localized slugs are canonical.
+ *
+ * `sitemap-en.xml` keeps every non-locale-prefixed URL — `LOCALE_PREFIX_RE`
+ * is built from the real locale codes so single-word routes like `/docs/**`
+ * or `/gdpr` are never mistaken for a locale prefix and dropped.
+ */
+
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -9,7 +36,7 @@ const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..
 const VALID_LANGS = Object.keys(LANG_SLUGS)
 
 // Locale-prefixed path detector — built from the actual locale codes so
-// single-word routes like /docs/** or /gdpr are never mistaken for a
+// single-word routes like /docs/* or /gdpr are never mistaken for a
 // locale prefix and dropped from the English sitemap.
 const LOCALE_PREFIX_RE = new RegExp(`^/(${VALID_LANGS.join('|')})(/|$)`)
 
@@ -239,7 +266,7 @@ async function run() {
   }
 
   // ── Per-locale sitemaps + sitemap index ────────────────────────────────────
-  // English gets the unprefixed surface (/, /portfolio/**, /docs/** — the docs
+  // English gets the unprefixed surface (/, /portfolio/*, /docs/* — the docs
   // portal is English-only by design); every other locale sitemap lists only
   // its own /<loc>/… routes. sitemap.xml becomes the index document.
   const sharedUrls = allUrls.filter((u) => u === '/' || !LOCALE_PREFIX_RE.test(u))

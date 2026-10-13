@@ -124,7 +124,13 @@ opposite: every manifest file is a crawlable `/docs/<root>/<path>` route —
 `itemscope`/`itemtype`/`itemprop` microdata, and `generate-sitemap.js`
 enumerates the whole manifest into the English `public/meta/sitemap-en.xml`
 (the root `sitemap.xml` is an index over per-locale `sitemap-<loc>.xml`
-files; docs routes stay English-only).
+files; docs routes stay English-only). Beyond docs the same generator lists
+the complete public surface — localized `LANG_SLUGS` routes,
+`/<loc>/portfolio/<slug>` project pages, and `/star-field-experiment/<body>`
+catalog deep links — while `build-locale-pages.mjs` pre-renders matching
+`dist/langs/` documents with per-route `hreflang` alternates and localized
+JSON-LD. `shared/tests/governance/seo-route-parity.test.js` pins the
+artifacts, rewrites, and slug table in sync.
 
 ## Data flow (read path)
 

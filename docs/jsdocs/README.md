@@ -2034,7 +2034,7 @@ _The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
 | [`build-wasm.js`](shared/scripts/build/build-wasm.md)                  | —                                                                |
 | [`build.mjs`](shared/scripts/build/build.md)                           | Production build orchestrator                                    |
 | [`deploy-info.mjs`](shared/scripts/build/deploy-info.md)               | Assembles `dist/deploy-info/` — the "last deploy" bundle the CMS |
-| [`generate-sitemap.js`](shared/scripts/build/generate-sitemap.md)      | —                                                                |
+| [`generate-sitemap.js`](shared/scripts/build/generate-sitemap.md)      | Emits the whole crawl surface under `website/public/meta/`:      |
 
 ## Shared / tooling scripts
 
