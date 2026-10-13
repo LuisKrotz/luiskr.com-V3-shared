@@ -183,7 +183,37 @@ canonical instance.
   decay — the real impact-fireball profile.
 - Pooled sprites: fixed cap, slots recycle — zero allocation per hit.
 
-## 9. Corona + limb flares
+## 9. Comet tails (sublimation scaling)
+
+`SF_KINDS.COMET` bodies (Halley) render an irregular dark nucleus —
+albedo ≈ 0.04, crumpled via `irregularGeometry` — wrapped in an
+additive coma sprite plus two camera-facing tail sprites parented to
+the `center` group. Because `center` is only **translated** along +x by
+the conic radius (pivot carries the angular sweep), local +x is
+anti-sunward by construction at every orbital phase — the tails never
+need orientation math.
+
+- **Ion tail**: long, thin, blue-white, exactly anti-sunward (plasma
+  entrained along the solar-wind field lines).
+- **Dust tail**: shorter, wider, tilted `DUST_TILT` off the radius
+  vector — grains lag the comet's orbital motion, fanning off the ion
+  streak.
+- **Activity factor**: `f = TAIL_FLOOR + (1−TAIL_FLOOR)·(rMax − r)/(rMax − rMin)`
+  where `r = center.position.x` is the live conic radius — the tail is
+  full at periapsis and shrinks to a whisper at apoapsis, mimicking
+  sublimation ∝ solar flux. Coma scale/opacity ride the same factor.
+
+## 10. Cryovolcanic plumes
+
+`def.plumes` (Enceladus `polar`, Io scattered) — per vent a steady jet
+sprite plus a `puff` cycling `dir·(radius + cyc·height)` with
+`opacity ∝ 4·cyc·(1−cyc)` (rises bright, fades at altitude) and
+`width ∝ 1 + 1.6·cyc` (expands as it climbs). Vent directions sample
+the south-polar band (`|y| > POLAR_LAT`) or the uniform sphere. The
+group is a `detail` member — plumes switch off at LOD distance — and a
+mesh child, so vents co-rotate with their terrain.
+
+## 11. Corona + limb flares
 
 - **Corona**: slow in-plane UV rotation `phase + t·rate`; opacity
   shimmer `0.55 + 0.2·sin(6·rate·t + phase)` scaled by `0.7 + 0.5·wind`.
@@ -191,7 +221,7 @@ canonical instance.
   sin⁴ makes bright narrow pulses; scale stretches
   `MIN_SCALE + MAX_STRETCH·k`, so storms throw prominences into space.
 
-## 10. Fly-to camera tween
+## 12. Fly-to camera tween
 
 `engine/fly.ts` — selection glides the camera over `FLY_MS` (2.6 s):
 
@@ -205,7 +235,7 @@ frame (`track()`), so a moving rider-mounted anchor can't strand the
 camera on a stale spot. Any drag/wheel input cancels instantly — the
 tween never fights the user.
 
-## 11. Floating origin + LOD
+## 13. Floating origin + LOD
 
 - `followSelected` pins the followed anchor at the origin each frame,
   so fly-to spans only the local gap — positions never carry 40 000-unit
@@ -231,7 +261,7 @@ sequenceDiagram
     Note over LRU: geometry, materials,<br/>textures freed
 ```
 
-## 12. Star-cloud fill (WASM worker)
+## 14. Star-cloud fill (WASM worker)
 
 `engine/star-cloud.ts` + `fill-worker.ts` — the 139 563-object HYG
 binary catalog is a **single Points draw call**. Attribute fills
@@ -239,7 +269,7 @@ binary catalog is a **single Points draw call**. Attribute fills
 exist, with a synchronous JS fill as the fallback — batch work only,
 never per-frame.
 
-## 13. Website springs & tweens
+## 15. Website springs & tweens
 
 - **Genie** (`core/utils/motion/genie.ts`) — transform-origin scale
   tween timed by `ANIMATION_DURATIONS`; compositor-only (`transform`),

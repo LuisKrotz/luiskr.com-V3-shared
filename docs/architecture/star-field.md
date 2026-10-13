@@ -270,6 +270,23 @@ three layers:
   swarm's own node/anchor, so clicking the dot annulus opens the
   `near-earth-satellites` dossier while the proxy still loses to
   Earth's real mesh (and to the ISS bubble inside it) along the ray.
+- **Near-field reach override** (`frame/updates.ts`): swarm holders and
+  rider shells carry `userData[SF_USER_DETAIL_R]` — an absolute camera
+  distance that replaces the generic `max(radius, orbit)·SCALE` reach,
+  so Earth's 44-unit orbit can't reveal the LEO shell beyond lunar
+  range.
+- **Comets** (`bodies/comet.ts`, `SF_KINDS.COMET`): Halley rides a
+  retrograde, steeply-inclined eccentric conic — an irregular coal-dark
+  nucleus in an additive coma, with ion + dust tail sprites locked
+  anti-sunward (tails live on `center`, where local +x always points
+  away from the Sun) and shrinking with the live conic radius.
+- **Plumes** (`bodies/plumes.ts`): `def.plumes` vents spawn steady jets
+  - rising/fading puffs co-rotating with the surface — Enceladus'
+    south-polar tiger-stripe geysers, Io's volcanic plumes.
+- **Dwarf-galaxy halos** (`galaxy.ts`): elliptical dwarfs get a
+  seeded elliptical star cloud plus a soft `glowTex` backing smudge at
+  `DWARF_HALO_SCALE`, so distant dwarfs read as haze rather than
+  sparse point dust.
 
 ```mermaid
 flowchart TD
