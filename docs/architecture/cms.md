@@ -43,7 +43,7 @@ flowchart LR
     ED --> DATA["data.ts — load all locales'<br/>node, save active locale"]
     ED --> EVT["events.ts — input<br/>binding"]
     ED --> REN["render.ts — JSX"]
-    DATA -->|set(ref)| FB["translations/&lt;loc&gt;/<br/>Firebase RTDB"]
+    DATA -->|"set(ref)"| FB["translations/&lt;loc&gt;/<br/>Firebase RTDB"]
     FB -.->|"live value<br/>next visit"| SITE["public site"]
 ```
 

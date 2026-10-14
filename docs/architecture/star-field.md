@@ -342,7 +342,7 @@ sequenceDiagram
     participant D as dossier/registry
 
     P->>C: tap/click on canvas
-    C->>C: pickAt (raycast; proxy hits defer to real meshes)
+    C->>C: pickAt (raycast — proxy hits defer to real meshes)
     C->>C: _selectBody(id)
     Note over C: mobile (<768px): nav sheet<br/>auto-closes on select
     C->>E: selectBody → startFly(offset = max(8r, 0.04))

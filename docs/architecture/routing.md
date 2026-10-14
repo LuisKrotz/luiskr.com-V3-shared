@@ -82,7 +82,7 @@ sequenceDiagram
     R->>R: navigate(path) → parse locale + route
     R->>S: commit(SET_ROUTE)
     R->>R: dynamic import(view chunk)
-    R->>V: new + append to &lt;main&gt;
+    R->>V: new + append to #lt;main#gt;
     V->>V: constructor → skeleton placeholders
     V->>V: fetch DB node (pages/*, projects/*)
     V->>V: render() → resolve() → skeleton fade + content-in
