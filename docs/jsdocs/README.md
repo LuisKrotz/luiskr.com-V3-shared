@@ -449,6 +449,7 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                         | What it does                                                          |
 | ------------------------------------------------------------ | --------------------------------------------------------------------- |
+| [`carousel-media.ts`](core/safari/patches/carousel-media.md) | Carousel-hosted media overrides for iOS/Safari — WebKit               |
 | [`carousel.ts`](core/safari/patches/carousel.md)             | CustomCarousel patch: injects the safari-carousel stylesheet into the |
 | [`media-expanded.ts`](core/safari/patches/media-expanded.md) | MediaExpanded patch: explicit touchend close on every close target    |
 | [`media-figure.ts`](core/safari/patches/media-figure.md)     | MediaFigure patch orchestrator: safari-media styles,                  |
@@ -760,6 +761,7 @@ _Shared primitives every surface builds on — no direct UI._
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | [`browser-detect-browser-detect-stamped-runtime-reader.test.js`](core/tests/unit/browser/browser-detect-browser-detect-stamped-runtime-reader.test.md)                                   | Split from browser-detect.test.js — covers the "browser detect — stamped runtime reader" describe.              |
 | [`browser-detect-browser-detect-ua-table.test.js`](core/tests/unit/browser/browser-detect-browser-detect-ua-table.test.md)                                                               | Split from browser-detect.test.js — covers the "browser detect — UA table" describe.                            |
+| [`safari-patch-safari-patch-carouselmedia-patch.test.js`](core/tests/unit/browser/safari-patch-safari-patch-carouselmedia-patch.test.md)                                                 | Carousel-hosted media overrides — isCarouselHosted shadow-host                                                  |
 | [`safari-patch-safari-patch-customcarousel-patch.test.js`](core/tests/unit/browser/safari-patch-safari-patch-customcarousel-patch.test.md)                                               | Split from safari-patch.test.js — covers the "safari-patch — CustomCarousel patch" describe.                    |
 | [`safari-patch-safari-patch-mediaexpanded-fake-contexts.test.js`](core/tests/unit/browser/safari-patch-safari-patch-mediaexpanded-fake-contexts.test.md)                                 | Split from safari-patch.test.js — covers the "safari-patch — MediaExpanded fake contexts" describe.             |
 | [`safari-patch-safari-patch-mediaexpanded-onmounted-patch-real-elements.test.js`](core/tests/unit/browser/safari-patch-safari-patch-mediaexpanded-onmounted-patch-real-elements.test.md) | Split from safari-patch.test.js — covers the "safari-patch — MediaExpanded onMounted patch (real elements)" de… |
@@ -1784,6 +1786,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`fill-worker.ts`](experiments/star-field/engine/fill-worker.md)       | Multi-threaded fill dispatcher — the star-field's heavy     |
 | [`fly.ts`](experiments/star-field/engine/fly.md)                       | Camera fly-to tween for the star-field engine — when a body |
 | [`frame.ts`](experiments/star-field/engine/frame.md)                   | Per-frame orchestrator for the star-field engine: the       |
+| [`ios.ts`](experiments/star-field/engine/ios.md)                       | iOS/iPadOS capability bail-out for the star-field engine.   |
 | [`materials.ts`](experiments/star-field/engine/materials.md)           | Material-parameter hygiene for the body builders            |
 | [`picking.ts`](experiments/star-field/engine/picking.md)               | Pointer picking for the star-field canvas: pointerdown      |
 | [`post-nodes.ts`](experiments/star-field/engine/post-nodes.md)         | Custom TSL post nodes for the star-field RenderPipeline     |
@@ -1957,6 +1960,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                  | What it does                                                  |
 | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| [`engine-ios.test.js`](experiments/star-field/tests/starfield/engine-ios.test.md)                     | engine/ios.ts — isIOSDevice UA-detection arms (iPhone/iPad    |
 | [`star-boot.test.js`](experiments/star-field/tests/starfield/star-boot.test.md)                       | StarField boot helpers — loader progress mirroring, engine    |
 | [`star-dossier.test.js`](experiments/star-field/tests/starfield/star-dossier.test.md)                 | Lazy dossier loader — fetchDossier caches per body id and     |
 | [`star-field-component.test.js`](experiments/star-field/tests/starfield/star-field-component.test.md) | Full lifecycle for the real &lt;view-star-field&gt; element — |

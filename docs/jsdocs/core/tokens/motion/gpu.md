@@ -2,9 +2,9 @@
 
 GPU detection & power-hint tokens — renderer-string
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/motion/gpu.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/motion/gpu.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -34,6 +34,14 @@ immutable at runtime.
 ### `MOBILE_UA`
 
 Mobile user agents — WebGL hinting is irrelevant (single GPU path)
+
+### `IOS_UA`
+
+iPhone/iPad/iPod — full GPU scenes exceed the mobile jetsam budget
+
+### `MACINTOSH_UA`
+
+iPadOS 13+ "desktop mode" disguise — Macintosh UA + multi-touch
 
 ### `QUAD_STRIP`
 
