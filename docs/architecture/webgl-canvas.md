@@ -45,11 +45,11 @@ are playground-owned and live in `experiments/earth-playground/`.
 flowchart LR
     MNT["mount"] --> ACQ{"webglContext()<br/>via webgl-mode"}
     ACQ -->|"fallback flag /<br/>no GL / software GL"| FB["is-fallback<br/>CSS presentation"]
-    ACQ -->|ok| POOL["webgl-pool.acquire()<br/>refcounted slot"]
+    ACQ -->|"ok"| POOL["webgl-pool.acquire()<br/>refcounted slot"]
     POOL --> REN["render loop / on-demand paint"]
     REN --> OBS{"IntersectionObserver"}
-    OBS -->|offscreen| PURGE["purge() — cancel RAF,<br/>loseContext, release slot"]
-    PURGE -->|re-enters| RST["restore() — rebuild<br/>context + program"] --> REN
+    OBS -->|"offscreen"| PURGE["purge() — cancel RAF,<br/>loseContext, release slot"]
+    PURGE -->|"re-enters"| RST["restore() — rebuild<br/>context + program"] --> REN
     REN --> DST["destroy() — delete buffers/<br/>programs, return slot"]
     DST --> FB
 ```

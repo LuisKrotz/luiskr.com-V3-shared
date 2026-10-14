@@ -1788,6 +1788,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`frame.ts`](experiments/star-field/engine/frame.md)                   | Per-frame orchestrator for the star-field engine: the       |
 | [`ios.ts`](experiments/star-field/engine/ios.md)                       | iOS/iPadOS capability bail-out for the star-field engine.   |
 | [`materials.ts`](experiments/star-field/engine/materials.md)           | Material-parameter hygiene for the body builders            |
+| [`mobile.ts`](experiments/star-field/engine/mobile.md)                 | Mobile/low-power capability bail-out for the star-field     |
 | [`picking.ts`](experiments/star-field/engine/picking.md)               | Pointer picking for the star-field canvas: pointerdown      |
 | [`post-nodes.ts`](experiments/star-field/engine/post-nodes.md)         | Custom TSL post nodes for the star-field RenderPipeline     |
 | [`post.ts`](experiments/star-field/engine/post.md)                     | Post-processing chain for the star-field engine —           |
@@ -1961,6 +1962,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | File                                                                                                  | What it does                                                  |
 | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
 | [`engine-ios.test.js`](experiments/star-field/tests/starfield/engine-ios.test.md)                     | engine/ios.ts — isIOSDevice UA-detection arms (iPhone/iPad    |
+| [`engine-mobile.test.js`](experiments/star-field/tests/starfield/engine-mobile.test.md)               | engine/mobile.ts — isLowPowerMobile detection arms            |
 | [`star-boot.test.js`](experiments/star-field/tests/starfield/star-boot.test.md)                       | StarField boot helpers — loader progress mirroring, engine    |
 | [`star-dossier.test.js`](experiments/star-field/tests/starfield/star-dossier.test.md)                 | Lazy dossier loader — fetchDossier caches per body id and     |
 | [`star-field-component.test.js`](experiments/star-field/tests/starfield/star-field-component.test.md) | Full lifecycle for the real &lt;view-star-field&gt; element — |
@@ -2138,6 +2140,7 @@ _The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
 | [`coverage-gaps.mjs`](shared/scripts/verify/coverage-gaps.md)    | —                                                          |
 | [`coverage-gate.mjs`](shared/scripts/verify/coverage-gate.md)    | Per-file coverage enforcement, per module                  |
 | [`scope-gates.mjs`](shared/scripts/verify/scope-gates.md)        | Scoped quality-gate runner for the module workspace        |
+| [`scroll-fps.mjs`](shared/scripts/verify/scroll-fps.md)          | —                                                          |
 | [`security-scan.mjs`](shared/scripts/verify/security-scan.md)    | Dependency vulnerability scan                              |
 | [`test-lighthouse.js`](shared/scripts/verify/test-lighthouse.md) | Backward-compatible Lighthouse entry point                 |
 | [`uncov.mjs`](shared/scripts/verify/uncov.md)                    | —                                                          |

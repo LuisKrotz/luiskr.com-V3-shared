@@ -40,12 +40,12 @@ flowchart TD
     VIEW["SpacePlayground.tsx"] --> BOOTP["space/boot.ts<br/>progress → loader"]
     BOOTP --> INIT["earth/setup/bootstrap.ts"]
     INIT --> RND{"renderer-setup<br/>WebGPU adapter?"}
-    RND -->|no / init fails| CLONE["clone canvas →<br/>WebGL fallback retry"]
-    RND -->|yes| GPU["WebGPURenderer"]
+    RND -->|"no / init fails"| CLONE["clone canvas →<br/>WebGL fallback retry"]
+    RND -->|"yes"| GPU["WebGPURenderer"]
     CLONE & GPU --> SCENE["scene-setup + post-setup<br/>meshes · TSL graphs · post-fx"]
     SCENE --> WIRE["space/wiring.ts<br/>bind panel controls"]
     WIRE --> LOOP["earth/runtime/frame.ts<br/>RAF: updates + sun sync + render"]
-    LOOP -->|frame throws| FAIL["s.failed → loader swaps<br/>to static fallback"]
+    LOOP -->|"frame throws"| FAIL["s.failed → loader swaps<br/>to static fallback"]
 ```
 
 ## Loader contract

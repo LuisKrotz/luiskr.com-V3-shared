@@ -191,6 +191,7 @@ describe('AppRoot tails', () => {
     store.commit(PREF_MUTATIONS.SET_THEME, THEME.SYSTEM)
 
     window.dispatchEvent(new Event(WINDOW_EVENTS.SCROLL))
+    window.dispatchEvent(new Event(WINDOW_EVENTS.SCROLL)) // coalesced: the pending rAF arm skips it
     window.dispatchEvent(new Event(WINDOW_EVENTS.RESIZE))
 
     await flush(200)
@@ -224,6 +225,20 @@ describe('AppRoot tails', () => {
       globalThis.document = origDoc
       window.matchMedia = origMM
     }
+
+    globalThis.fetch = origFetch
+  })
+
+  test('disconnect cancels a pending coalesced scroll rAF', async () => {
+    const { el, origFetch } = await mountApp()
+
+    window.dispatchEvent(new Event(WINDOW_EVENTS.SCROLL))
+
+    expect(el._scrollRaf).not.toBe(0)
+
+    el.remove()
+
+    expect(el._scrollRaf).toBe(0)
 
     globalThis.fetch = origFetch
   })

@@ -129,7 +129,22 @@ export function mountAppShell(c: AppRoot): void {
     c.checkScroll()
   })
 
-  c.addScopedListener(window, WINDOW_EVENTS.SCROLL, () => c.checkScroll(), { passive: true })
+  // Scroll events can fire many times per frame on high-refresh displays —
+  // coalesce them through rAF so scrollHeight/layout reads run once per
+  // rendered frame instead of once per event.
+  c.addScopedListener(
+    window,
+    WINDOW_EVENTS.SCROLL,
+    () => {
+      if (!c._scrollRaf) {
+        c._scrollRaf = requestAnimationFrame(() => {
+          c._scrollRaf = 0
+          c.checkScroll()
+        })
+      }
+    },
+    { passive: true }
+  )
 
   // Async content (images, locale data, late view mounts) grows the
   // document after first paint — without a re-measure the nav's

@@ -64,8 +64,8 @@ flowchart TB
     SF --> ENG --> STATE
     ENG --> BST --> RND & SCN & BSC
     BSC --> catalog & render
-    RENDER -.->|select| ENG
-    PICK -.->|pointer pick| SF
+    RENDER -.->|"select"| ENG
+    PICK -.->|"pointer pick"| SF
 ```
 
 | File / folder                                | Role                                                                                 |
@@ -152,8 +152,8 @@ flowchart LR
     LB --> CD["sfChartDist — piecewise<br/>galactic/local/cosmic tiers"]
     CD --> GP["sfGalacticPos — spherical→cartesian<br/>+ shared MW_TILT frame"]
     GP --> RID{"inside CO_ROTATE_R<br/>of the Sun?"}
-    RID -->|yes| SPIN["parent onto mw.spinner<br/>(co-rotating rider)"]
-    RID -->|no| WORLD["world-fixed node"]
+    RID -->|"yes"| SPIN["parent onto mw.spinner<br/>(co-rotating rider)"]
+    RID -->|"no"| WORLD["world-fixed node"]
     AU --> SHR["shrinkSolar × SOLAR_SCALE (0.002)<br/>Sun → 0.024 u ≪ Proxima's 0.042 u"]
     SHR --> RID
 ```
@@ -191,7 +191,7 @@ flowchart TB
     RIDER --> NEBS["nebulae/clusters"]
     RIDER --> CLD["deep-field 139k-star cloud"]
     RIDER --> SGR["sagittarius-a (disc centre, local frame)"]
-    MW -.->|world-fixed| EXT["M31 · M33 · dwarfs · hierarchy shells"]
+    MW -.->|"world-fixed"| EXT["M31 · M33 · dwarfs · hierarchy shells"]
 ```
 
 ### Floating origin
@@ -305,13 +305,13 @@ three layers:
 ```mermaid
 flowchart TD
     REQ{request frame} --> GATE{webglAllowed?}
-    GATE -->|no| CSS["2D canvas fallback<br/>fallback-stars.ts"]
-    GATE -->|yes| ADP{WebGPU adapter?}
-    ADP -->|yes| GPU["WebGPU backend"]
-    ADP -->|no / init fails| CLN["clone canvas → forceWebGL"]
+    GATE -->|"no"| CSS["2D canvas fallback<br/>fallback-stars.ts"]
+    GATE -->|"yes"| ADP{WebGPU adapter?}
+    ADP -->|"yes"| GPU["WebGPU backend"]
+    ADP -->|"no / init fails"| CLN["clone canvas → forceWebGL"]
     CLN --> GPU2["WebGL2 backend"]
     GPU & GPU2 --> REN["node-pipeline render"]
-    REN -->|frame throws| FAIL["s.failed → cancel RAF → onLost → CSS fallback"]
+    REN -->|"frame throws"| FAIL["s.failed → cancel RAF → onLost → CSS fallback"]
 ```
 
 ## Frame loop
@@ -370,7 +370,7 @@ flowchart TB
     end
     TOG --> NAV
     NAV -->|"pick a body"| PAN
-    DESK["Desktop-only: pinned disclaimer strip,<br/>gesture hint, side drawers"] -.->|hidden| chrome
+    DESK["Desktop-only: pinned disclaimer strip,<br/>gesture hint, side drawers"] -.->|"hidden"| chrome
 ```
 
 On small screens the pinned disclaimer paragraph and the gesture hint

@@ -13,13 +13,13 @@ one executor, chosen by where the data lives:
 ```mermaid
 flowchart TD
     Q["animation channel"] --> A{"per-frame, per-pixel/vertex?"}
-    A -->|yes| G["GPU — WebGPU TSL nodes / GLSL shaders"]
+    A -->|"yes"| G["GPU — WebGPU TSL nodes / GLSL shaders"]
     A -->|"no — batch math"| B{"heavy + parallelizable?"}
-    B -->|yes| W["WASM worker pool — wasm-pool.ts"]
+    B -->|"yes"| W["WASM worker pool — wasm-pool.ts"]
     B -->|"no"| C["JS on main thread — synchronous"]
 
-    G -.->|probe fails / energy-saver| C
-    W -.->|no wasm / no worker| C
+    G -.->|"probe fails / energy-saver"| C
+    W -.->|"no wasm / no worker"| C
 ```
 
 - **GPU first on desktop**: WebGPU node materials (three.js TSL) with a

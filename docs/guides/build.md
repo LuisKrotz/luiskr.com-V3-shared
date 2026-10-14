@@ -15,8 +15,8 @@ older-engine compatibility is delivered exclusively by this build matrix
 ```mermaid
 flowchart LR
     BUILD["yarn build"] --> PRE{"prebuild:<br/>yarn verify"}
-    PRE -->|fail| STOP["no dist emitted"]
-    PRE -->|pass| MATRIX["build-targets.mjs<br/>12 vite builds, LK_TARGET per tier"]
+    PRE -->|"fail"| STOP["no dist emitted"]
+    PRE -->|"pass"| MATRIX["build-targets.mjs<br/>12 vite builds, LK_TARGET per tier"]
     MATRIX --> POLY["IIFE bundles per<br/>POLYFILLS group"]
     MATRIX --> HTML["rewrite dist/index.html<br/>inline ES5 loader + __LK manifest"]
     POLY --> HTML

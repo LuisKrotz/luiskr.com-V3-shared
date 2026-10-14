@@ -72,6 +72,8 @@ export class AppRoot extends BaseComponent {
   _introLoader: IntroLoader | null = null
   /** Watches document height so onBottom/activeSection never go stale. */
   _docObserver: ResizeObserver | null = null
+  /** Pending rAF coalescing burst scroll events into one checkScroll per frame. */
+  _scrollRaf = 0
 
   constructor() {
     super(appStyles)
@@ -102,6 +104,12 @@ export class AppRoot extends BaseComponent {
     this._introLoader?.destroy()
 
     this._docObserver?.disconnect()
+
+    if (this._scrollRaf) {
+      cancelAnimationFrame(this._scrollRaf)
+
+      this._scrollRaf = 0
+    }
   }
 
   /**

@@ -36,9 +36,9 @@ holds state + lifecycle + delegates, behavior lives in sibling modules
 ```mermaid
 flowchart LR
     BOOT["cms/main.ts"] --> AUTH{"Firebase auth<br/>listener"}
-    AUTH -->|signed out| LOGIN["AdminLogin<br/>email/password"]
-    AUTH -->|signed in| DASH["CmsDashboard<br/>tab shell"]
-    LOGIN -->|success| DASH
+    AUTH -->|"signed out"| LOGIN["AdminLogin<br/>email/password"]
+    AUTH -->|"signed in"| DASH["CmsDashboard<br/>tab shell"]
+    LOGIN -->|"success"| DASH
     DASH --> ED["Cms*Editor<br/>facade"]
     ED --> DATA["data.ts — load all locales'<br/>node, save active locale"]
     ED --> EVT["events.ts — input<br/>binding"]
