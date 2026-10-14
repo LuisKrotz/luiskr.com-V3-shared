@@ -27,3 +27,16 @@ Particle-layer fixture — a Points-shaped object whose
 `userData.gasPts` carries real typed arrays so the sim loop
 writes positions/colors for real. `ud` is exposed on the fixture
 so assertions can read the buffers back.
+
+### `mkInstanced`
+
+Instanced-tail surface — a live billboard path needs the tail's
+`setMatrixAt`/`getWorldQuaternion` plus a camera quaternion and a
+`s.THREE` scratch allocator. `sz` seeds the per-grain size array
+on ion only, so ionGas still takes the `ud.sz?.[i] ?? 1` arm.
+
+### `FXQuat`
+
+Minimal THREE scratch — fx.ts lazily builds _mat/_vec/_scl/_qN/_qC
+once `s.THREE` exists; the billboard compose path only needs
+compose/set/setScalar and a chainable invert/multiply.

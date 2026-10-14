@@ -58,6 +58,34 @@ Loads the star-field label translations via SWR.
 
 Stores the fetched pages/star-field node and re-renders.
 
+### `_loadBodyNames`
+
+Loads the locale body-name table (`data/<locale>/names.json`) —
+cached per locale by dossier.ts. On resolve the drawer re-renders
+localized rows and the open selection's URL segment is re-synced so
+a selection made before the map landed still gets its translated
+route name. `_namesReady` lets `_applyDeepLink`/`onRouteParamChange`
+defer slug resolution until the table exists.
+
+### `_resolveBodyParam`
+
+Resolves a route `body` segment to a catalog id — accepts the raw
+id (`vesta`), a registry id (`star-NNNNNN`), or a slugified
+localized name from the loaded names table (`via-lactea`).
+
+- `@param` param The `body` route param.
+- `@returns` The catalog id, or null when unresolvable.
+
+### `_slugForId`
+
+Route segment for a body — the slugified localized name once the
+names table has landed (`Via Láctea` → `via-lactea`), the raw id
+before. The raw id is itself a valid segment (slugify folds it to
+itself), so a pre-map selection stays resolvable.
+
+- `@param` id Catalog body id.
+- `@returns` The URL segment to write.
+
 ### `_updateLoader`
 
 Mirrors engine bootstrap progress into the loader overlay.
@@ -143,9 +171,11 @@ chart root rather than stacking body segments.
 ### `_syncUrl`
 
 Keeps the address bar in sync with the selection — selecting pushes
-`…/<body>` so Back returns to the chart, closing returns to the base
-chart URL. Skips when the current route already carries the target
-so the param-change echo (`onRouteParamChange`) cannot loop.
+`…/<localized-slug>` (the slugified translated body name once the
+names table has landed, the raw id before) so Back returns to the
+chart, closing returns to the base chart URL. Skips when the
+current route already carries the target so the param-change echo
+(`onRouteParamChange`) cannot loop.
 
 - `@param` id Newly selected body id, or null after close.
 

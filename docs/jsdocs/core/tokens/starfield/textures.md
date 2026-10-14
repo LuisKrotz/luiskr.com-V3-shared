@@ -42,6 +42,12 @@ hides the rectangular edge so the photo reads as the object.
 
 Public-URL prefix for the per-body lazy-loaded JSON dossiers.
 
+### `SF_NAMES_FILE`
+
+Per-locale body-name table filename — `data/<locale>/names.json`
+maps every curated body id to its localized display name; the router
+slugifies it for translated deep-link segments and the navigator rows.
+
 ### `SF_ASSET_BASE`
 
 Module public-asset root — dossier media entries join under this.
