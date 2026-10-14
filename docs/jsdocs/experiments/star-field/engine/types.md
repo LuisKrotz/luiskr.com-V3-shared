@@ -797,32 +797,31 @@ can churn the depth layers each frame.
 
 Comet tail/coma animation record — updateFx reads the live conic
 radius off `center.position.x` (frame.ts writes it for `ecc`
-orbits) and rescales/re-lights the tail sprites between `rMin`
-(periapsis — full streak) and `rMax` (apoapsis — near-invisible
-stub), reproducing how sublimation scales with solar flux.
+orbits) and re-drives each tail's particle field between `rMin`
+(periapsis — full stream) and `rMax` (apoapsis — near-invisible
+stub), reproducing how sublimation scales with solar flux. Each
+`Points` layer carries its seeded grain field in
+`userData.gasPts` — the record only needs the object handles.
 
 ### `ion`
 
-Ion + dust tail sprites and the coma sprite (order matters: ion first).
+Ion-tail particle layers (core stream + diffuse sheath).
 
-### `ionGas`
+### `dust`
 
-Scrolling gas-filament layers composited over each tail — their
-textures tile horizontally so updateFx can stream `map.offset.x`
-anti-sunward (the solar-wind flow) while `WOBBLE`/`FLICKER` wiggle
-and breathe them like live plasma.
+Dust-tail particle layers (core stream + diffuse sheath).
+
+### `coma`
+
+Coma glow sprite hugging the nucleus.
 
 ### `rMin`
 
 Periapsis/apoapsis distances (chart units) — the scale window.
 
-### `ionScale`
+### `comaScale`
 
-Resting sprite scales captured at build, multiplied by the factor.
-
-### `ionPhase`
-
-Seeded wobble phases/rates — each tail stirs at its own beat.
+Resting coma scale captured at build, multiplied by the factor.
 
 ### (module scope)
 

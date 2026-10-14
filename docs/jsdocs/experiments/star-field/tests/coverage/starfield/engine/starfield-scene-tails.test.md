@@ -20,3 +20,10 @@ Encodes a fake deep-field binary: uint32 count + stride-6 float records.
 ### `dirVec`
 
 Plain {x,y,z,set} stand-in — the auto-mock's Vector3 swallows sets.
+
+### `mkPts`
+
+Particle-layer fixture — a Points-shaped object whose
+`userData.gasPts` carries real typed arrays so the sim loop
+writes positions/colors for real. `ud` is exposed on the fixture
+so assertions can read the buffers back.

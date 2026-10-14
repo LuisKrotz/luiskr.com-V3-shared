@@ -9,11 +9,31 @@ Ambient-life per-frame effects — `pulse` bodies (variable
 
 ## Members
 
-### `_camScratch`
+### (module scope)
 
-Module scratch vector — updateFx drops the camera position into each
-gas plane's parent-local frame once per frame; reusing one vector
-keeps the per-frame path allocation-free.
+Live particle-sim record stashed on each tail `Points` node's
+`userData[SF_USER_GAS]` — updateFx reads the seeded per-grain vectors
+and rewrites `pos`/`col` in place each frame (the buffers are shared
+with the geometry's BufferAttributes, so `needsUpdate` is the only
+GPU round-trip; nothing allocates per frame). Bare test fixtures may
+stub any field — every access is optional-chained and the layer is
+simply skipped when the record is absent.
+
+### (module scope)
+
+Quaternion-ish — the scratch shape updateFx needs for the comet
+billboard math (`invert`, `multiply`). Structural so the three.js
+mock and the real Quaternion both satisfy it.
+
+### `_mat`
+
+Billboard scratch — per-grain instance matrices are composed as
+`translate(grain) · orient(camera) · scale(size)`: a tail quad must
+always face the camera, so its local orientation is the node's
+inverse world quaternion times the camera's world quaternion. The
+objects are created lazily off `s.THREE` (the module arrives on the
+state, not as an import) and reused every frame — zero allocation in
+the hot loop.
 
 ### `solarWindAt`
 
@@ -35,28 +55,52 @@ surface tint between the neutral white and the ice-age palette.
 
 - `@param` s Engine state.
 
-### `gasI`
+### `windK`
 
-Streaming gas — each tail's tessellated plane is a CYLINDRICAL
-BILLBOARD: it rolls about its streak axis so the broad side
-faces the camera (a plane edge-on is a hairline, never a
-polygonal shell), while the vertex-color envelope keeps every
-quad edge at alpha 0 and the seamless filament map scrolls
-`offset.x` underneath so gas visibly streams anti-sunward. The
-roll solves `θ = atan2(−uy, lz)` in the tail-parent frame after
-rotating the dust tilt back out — the plane's +z normal then
-points at the camera; a slow wobble overlays it for turbulent
-shimmer, and a detuned sine flickers opacity like plasma
-gusts. The plane shadows the base tail's length each frame and
-scales its width on y only (z stays 1 — it is a surface, not
-a shell).
+Particle tails — each layer's `userData.gasPts` holds the
+seeded grain field; this loop is the emission simulation:
+
+d = frac(phase[i] + t·rate[i]) — grain age 0→1
+x = d·len — anti-sunward drift
+y = lat[i]·sp + sin(wobble)·amp — lateral fan +
+plasma turbulence
+z = latZ[i]·sp·ZFLAT — thin-sheet depth
+sp = spread·(1 + grow·d) — solar-wind
+dispersion fan
+color = rgb·smoothstep(d/RAMP)·(1−d)^FADE·dim[i]·windK
+
+The `(1−d)^FADE` term makes every grain die at its own
+distance — the tip dissolves grain-by-grain instead of ending
+on a line — and vertex-color brightness doubles as alpha under
+additive blending, so no quad edge exists anywhere in the
+silhouette. `len`/`sp` scale with the periapsis factor `f`
+(sublimation ≈ solar flux), and `windK` couples brightness to
+the shared solar-wind level so storms surge the stream.
+~640 grains × a handful of flops — zero allocation.
+
+### `T`
+
+One lazy scratch set for the whole comet section — matrix/quat
+compose targets shared by every tail layer this frame.
 
 ### `cam`
 
-Camera roll — the camera position drops into each plane's
-parent-local frame (+x anti-sunward), the dust tilt is rotated
-back out of the offset so the roll axis is the streak's own x,
-and the remaining transverse angle solves `θ = atan2(−uy, lz)`
-(normal +z → (0,−sinθ,cosθ) ∥ (uy,lz)). A lazy module scratch
-vector keeps this allocation-free; without a camera/parent the
-planes keep their built orientation plus the wobble.
+Billboard orientation — the quads face the camera in the
+node's local frame: `local = nodeWorldQuat⁻¹ · camWorldQuat`.
+Without a live camera/renderer (tests) the grain buffers
+still update — only the matrix write is skipped.
+
+### `rr`
+
+Envelope — `smoothstep(0, RAMP, d)` ramps fresh grains in
+(no pop at the nucleus), `(1−d)^FADE` dissolves them toward
+the tip, `dim[i]` spreads per-grain brightness, `windK`
+surges the whole column on solar storms, and `GAIN` pushes
+overlapping additive grains into saturation so the cloud
+fuses into a column.
+
+### `if`
+
+Instance matrix — the grain's quad swells downstream
+(`SZ_BASE + SZ_GROW·d`: dispersing gas expands) and carries
+the seeded size jitter.

@@ -90,3 +90,28 @@ crumple amplitude so rock/moon silhouettes dimple deterministically.
 
 - `@param` x Sample x. @param y Sample y. @param z Sample z.
 - `@returns` Signed noise value ≈[-1,1].
+
+### `weldGeometry`
+
+Welds a subdivided primitive's duplicated vertices into an INDEXED
+geometry — `IcosahedronGeometry`/`TetrahedronGeometry` emit every
+face's corners as independent vertices, so `computeVertexNormals`
+on the raw mesh produces PER-FACE normals: each triangle shades
+flat, which is exactly the crystalline "warty" facet look asteroids
+must not have. Welded vertices share one normal, so the displaced
+surface shades smooth (bumpy but continuous, like real rubble) —
+and vertex count drops ~85% (a detail-6 icosahedron's 246k verts
+become ~41k), cutting VRAM the same amount.
+
+Vertex identity keys on the rounded position — subdivision vertices
+are bit-identical across faces, so a fixed-precision string dedups
+them deterministically. Callers displace the WELDED positions (one
+vertex = one noise evaluation) and bake UVs/normals afterwards.
+
+- `@param` THREE The three.js module.
+- `@param` geo Subdivided source geometry with a `position` attribute.
+- `@returns` Indexed geometry with a single welded position attribute.
+
+### `byPos`
+
+Position → welded vertex index; 5 decimals ≈ sub-micron at unit scale.
