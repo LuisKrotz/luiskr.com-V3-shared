@@ -63,11 +63,8 @@ describe('Lighthouse CI configuration', () => {
       expect.arrayContaining([WINDOW_EVENTS.ERROR, expect.objectContaining({ minScore: 1 })])
     )
 
-    // SEO floor is 0.9: the IETF-draft Content-Signal directive in
-    // robots.txt is valid but flagged "unknown directive" by Lighthouse's
-    // robots-txt audit, costing ~0.08 — no other SEO regression fits under it.
     expect(assertions['categories:seo']).toEqual(
-      expect.arrayContaining([WINDOW_EVENTS.ERROR, expect.objectContaining({ minScore: 0.9 })])
+      expect.arrayContaining([WINDOW_EVENTS.ERROR, expect.objectContaining({ minScore: 1 })])
     )
   })
 })
