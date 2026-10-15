@@ -958,6 +958,30 @@ const STATIC_REWRITES = Object.freeze([
   { source: '/llms.txt', destination: '/meta/llms.txt' },
   { source: '/ai-catalog.json', destination: '/meta/ai-catalog.json' },
   { source: '/.well-known/ai-catalog.json', destination: '/meta/.well-known/ai-catalog.json' },
+  { source: '/.well-known/api-catalog', destination: '/meta/.well-known/api-catalog' },
+  { source: '/openapi.json', destination: '/meta/openapi.json' },
+  { source: '/auth.md', destination: '/meta/auth.md' },
+  {
+    source: '/.well-known/oauth-authorization-server',
+    destination: '/meta/.well-known/oauth-authorization-server',
+  },
+  {
+    source: '/.well-known/oauth-protected-resource',
+    destination: '/meta/.well-known/oauth-protected-resource',
+  },
+  { source: '/.well-known/agent-card.json', destination: '/meta/.well-known/agent-card.json' },
+  {
+    source: '/.well-known/agent-skills/index.json',
+    destination: '/meta/.well-known/agent-skills/index.json',
+  },
+  {
+    source: '/.well-known/mcp/server-card.json',
+    destination: '/meta/.well-known/mcp/server-card.json',
+  },
+  {
+    source: '/.well-known/http-message-signatures-directory',
+    destination: '/meta/.well-known/http-message-signatures-directory',
+  },
   { source: '/browserconfig.xml', destination: '/meta/browserconfig.xml' },
   ...VALID_LANGS.map((loc) => ({
     source: `/sitemap-${loc}.xml`,
