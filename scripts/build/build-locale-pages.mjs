@@ -963,11 +963,11 @@ const STATIC_REWRITES = Object.freeze([
   { source: '/auth.md', destination: '/meta/auth.md' },
   {
     source: '/.well-known/oauth-authorization-server',
-    destination: '/meta/.well-known/oauth-authorization-server',
+    destination: '/meta/.well-known/oauth-authorization-server.json',
   },
   {
     source: '/.well-known/oauth-protected-resource',
-    destination: '/meta/.well-known/oauth-protected-resource',
+    destination: '/meta/.well-known/oauth-protected-resource.json',
   },
   { source: '/.well-known/agent-card.json', destination: '/meta/.well-known/agent-card.json' },
   {
@@ -980,7 +980,7 @@ const STATIC_REWRITES = Object.freeze([
   },
   {
     source: '/.well-known/http-message-signatures-directory',
-    destination: '/meta/.well-known/http-message-signatures-directory',
+    destination: '/meta/.well-known/http-message-signatures-directory.json',
   },
   { source: '/browserconfig.xml', destination: '/meta/browserconfig.xml' },
   ...VALID_LANGS.map((loc) => ({
