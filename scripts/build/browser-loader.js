@@ -28,7 +28,8 @@
   function probe(code) {
     try {
       return !!new Function('return (' + code + ')')()
-    } catch {
+    } catch (e) {
+      void e
       return false
     }
   }
@@ -45,7 +46,8 @@
     try {
       new Function('return import("x")')
       return true
-    } catch {
+    } catch (e) {
+      void e
       return false
     }
   }
@@ -170,7 +172,8 @@
     document.head.appendChild(l)
   }
 
-  /** Graceful notice for engines below every tier (e.g. IE11). */
+  /** Graceful notice — only reachable if the manifest ships no floor tier
+   *  (the `ie` tier's empty probe list passes unconditionally). */
   function showFallback() {
     var box = document.createElement('div')
     box.setAttribute(

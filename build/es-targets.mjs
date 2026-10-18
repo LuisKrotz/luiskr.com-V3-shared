@@ -170,6 +170,23 @@ export const ES_TARGETS = [
       `(function(){ return 2 ** 3 === 8 })()`,
     ],
   },
+  {
+    name: 'ie',
+    label:
+      'ES5 — the floor: IE10/IE11 and anything that fails every probe. Derived by Babel-lowering the es2016 IIFE (preset-env ie11) — no separate vite build.',
+    viteTarget: 'es2015',
+    terserEcma: 5,
+    cssTarget: 'ie11',
+    format: 'iife',
+    legacy: true,
+    // `babelFrom` marks a derived tier: build-targets.mjs skips its vite
+    // build and instead lowers the named tier's emitted bundle to ES5.
+    babelFrom: 'es2016',
+    // Empty probe list = unconditional pass — this tier is the last
+    // resort, so EVERY engine that survived to it loads it rather than
+    // the "needs a newer browser" message.
+    test: [],
+  },
 ]
 
 /** Polyfill groups — each loads ONLY when its runtime guard fails. */

@@ -2,9 +2,9 @@
 
 WebGL three-position theme slider (light / system / dark)
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/theme-slider.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/utils/canvas/widgets/theme-slider.ts`           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -17,6 +17,12 @@ Uses normalized aspect coordinates (range 0.0 to 3.33) to prevent GPU float over
 Position 0: Dark (Night - Lunar moon with craters, twinkling stars, starry canyon mesas)
 Position 1: System (Twilight - Balanced orb, sun rings rising on left, crescent on right)
 Position 2: Light (Day - Sun knob on right, peach/coral sky, radiant sun on left)
+
+### `dragRectLeft`
+
+Cached canvas rect for the active drag — captured once at
+pointerdown so the high-rate pointermove path performs zero layout
+reads (the rect cannot change mid-gesture; cleared on pointerup).
 
 ### `_themeToP`
 
@@ -66,6 +72,7 @@ Moves the knob to the given theme's stop (spring-animated).
 
 Applies prefers-reduced-motion: swaps the animation loop for one
 static frame render, or restarts the loop when motion is re-allowed.
+
 - `@param` {boolean} isReduced
 
 ### `_renderStatic`

@@ -9,6 +9,7 @@ import { VIEW_TAGS } from '@core/tokens/elements/views.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { devError } from '@core/devlog.js'
+import { flushLayout } from '@core/utils/dom.js'
 import { notifyLoadFailed } from '@core/utils/notify.js'
 import store from '@core/store.js'
 import router from '@core/router/router.js'
@@ -115,7 +116,9 @@ export async function flipAppView(
     incoming.classList.add(STATE_CLASSES.PAGE_FADE_IN)
     outlet.replaceChildren(incoming)
 
-    void incoming.offsetHeight
+    // Intentional transition-restart flush — committed styles are needed
+    // before removing the fade-in class in the same frame.
+    flushLayout(incoming)
 
     incoming.classList.remove(STATE_CLASSES.PAGE_FADE_IN)
   }, ANIMATION_DURATIONS.PAGE_FADE_HALF)

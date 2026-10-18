@@ -18,6 +18,9 @@ import type { LangDialogEl, PrefModalEl } from './types.js'
 import type { AppRoot } from '../App.js'
 import { ANIMATION_DURATIONS } from '@core/tokens/motion/animation.js'
 import { webglPool } from '@core/utils/canvas/webgl-pool.js'
+import { syncCyrillicFont } from '@core/locale/cyrillic-font.js'
+import { updateReaderContent } from '@core/locale/reader-content.js'
+import { initMediaManifest } from '@core/utils/media/manifest.js'
 
 /**
  * Schedules non-urgent work during idle time; falls back to a short
@@ -40,6 +43,11 @@ export function mountAppShell(c: AppRoot): void {
   store.commit(PREF_MUTATIONS.INIT_THEME)
   store.commit(PREF_MUTATIONS.INIT_REDUCED_MOTION)
   c.initInputListeners()
+
+  // Warm the media-variant manifest early (non-blocking) — until it lands,
+  // renders omit webp <source>s and serve originals, which is always safe.
+  void initMediaManifest()
+
   c.loadData()
 
   if (store.getters.getShowGrid()) {
@@ -47,6 +55,11 @@ export function mountAppShell(c: AppRoot): void {
   }
 
   c.subscribe(store)
+
+  // Cyrillic font surface — toggle Fira Sans on/off with the locale and
+  // keep <html lang> truthful; subscribed so locale commits re-sync.
+  syncCyrillicFont(store.getters.getLang())
+  store.subscribe(() => syncCyrillicFont(store.getters.getLang()))
 
   // Lazy-load heavy global components after first paint
   import('@website/components/dialogs/PreferencesModal.js')
@@ -109,6 +122,10 @@ export function mountAppShell(c: AppRoot): void {
     c.currentViewTag = to.view
     c._updateViewContent(to, from)
     c.loadData()
+
+    // Reader-mode content mirrors the route's prerendered page — keeps
+    // the parked <article> truthful for reader mode + AI agents.
+    updateReaderContent(window.location.pathname)
 
     // Programmatic/history navigation may not originate from a click. Retry
     // visible fallback widgets after the new view has mounted.

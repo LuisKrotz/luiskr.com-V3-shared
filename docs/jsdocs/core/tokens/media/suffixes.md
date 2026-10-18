@@ -2,9 +2,9 @@
 
 Media asset filename-suffix tokens. All suffixes match the
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/media/suffixes.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/media/suffixes.ts`                       |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -40,3 +40,11 @@ Video poster/thumb extension (appended after .mp4)
 ### `VIDEO_SCALE`
 
 2× scale-down video variant suffix
+
+### `WEBP_EXT`
+
+Compressed image extension — webp sibling of every .jpg asset
+
+### `WEBM_EXT`
+
+Compressed video extension — webm sibling of every .mp4 asset

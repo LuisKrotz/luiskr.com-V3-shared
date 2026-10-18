@@ -100,3 +100,45 @@ base64) keeps the URI readable and is the spec-supported form for
 - `@param` w Intrinsic width to declare (px).
 - `@param` h Intrinsic height to declare (px).
 - `@returns` `data:image/svg+xml;charset=utf-8,…` URI for img.src.
+
+### `cachedVW`
+
+Cached `window.innerWidth` — Blink marks innerWidth as layout-forcing
+when it follows style writes, so batch passes (mosaic layout, fit
+flushes) read it once per event-loop task instead of once per call.
+The cache lives for a single microtask turn: innerWidth can only change
+on resize, which never lands mid-task, and the first read of the next
+task re-queries.
+
+### `viewportWidth`
+
+Returns `window.innerWidth`, memoized within the current task. The
+first call takes the (layout-forcing) hit; every subsequent caller in
+the same task reuses the number — after DOM writes this keeps a burst
+of N reads down to a single possible reflow at the batch head.
+
+- `@returns` viewport width in px, or 0 without a window (SSR/tests).
+
+### `resetViewportCache`
+
+Test/invalidate hook — clears the memoized width. Test suites call it
+between cases since jsdom/happy-dom innerWidth is mutable mid-test.
+
+### `inIntentionalFlush`
+
+Set while flushLayout runs — the reflow test allowlists this window.
+
+### `isIntentionalFlush`
+
+True only inside flushLayout() — used by the forced-reflow governance test.
+
+### `flushLayout`
+
+Deliberate synchronous layout flush — the ONE sanctioned forced reflow.
+Used by the transition-restart pattern: write classes/styles, force
+layout so the browser commits them, then apply the animating class in
+the same frame. Callers get the element's offsetHeight as a side effect
+of the flush; the return value is meant to be ignored (`void`).
+
+- `@param` el Element whose layout is flushed.
+- `@returns` the element's offsetHeight (the flushing read).

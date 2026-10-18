@@ -9,6 +9,12 @@ Emits per-locale, per-route static index.html files into
 
 ## Members
 
+### `CYRILLIC_SLUG`
+
+Russian Cyrillic → Latin transliteration — Cyrillic media labels would
+otherwise slugify to '' and lose their deep-link URL. MUST stay
+byte-identical to CYRILLIC_SLUG in core/utils/string.ts.
+
 ### `slugify`
 
 Media-slug transform — MUST match generate-sitemap.js's slugify byte for
@@ -57,6 +63,7 @@ Rewrites the English shell into a localized document.
 - `@param` {Array<{bcp:string,url:string}>} o.alternates - hreflang rows
 - `@param` {string} [o.image] - route-specific share image (project cover /
 - `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
+- `@param` {string} [o.content] - prerendered body markup injected into
 
 ### `buildLocalePages`
 
@@ -92,13 +99,71 @@ Cover share-image for a project — uncompressed jpg or video poster.
 
 Carousel ItemList for locale home pages — portfolio tiles → covers.
 
+### `richParagraphs`
+
+Authored rich-text array → <p> markup (trusted CMS html).
+
+### `leafParagraphs`
+
+Every authored leaf string under a CMS node → <p> markup (trusted CMS
+html). Experience pages carry their copy as UI labels rather than a
+single description field — walking the whole object guarantees none of
+the authored text is left JavaScript-only. `skip` drops keys already
+rendered as headings.
+
+### `contactBlock`
+
+Contact block — channel links + legal links from components.contact.
+
+### `mediaFigure`
+
+One media item as crawlable markup — the figure shows the light
+preview variant (<img> thumb / <video> poster+mp4); the caption links
+straight to the best-quality source so the uncompressed asset is a
+first-class crawl target. `deepHref` wraps the media in the
+/portfolio/<p>/<media> deep link.
+
+### `homeContent`
+
+Home page content — about bio + mentions + portfolio mosaic + contact.
+
+### `legalContent`
+
+Legal page content — title + every authored section.
+
+### `projectContent`
+
+Project interna — title, hero cover, all section text + every figure.
+
+### `mediaContent`
+
+Media-modal deep link — the single asset + its caption + project context.
+
+### `experienceContent`
+
+Experience page content — title + every authored label/copy leaf.
+
+### `readStarBody`
+
+Star-field body dossier JSON — locale file with English fallback.
+
+### `starBodyContent`
+
+Star-field body page — dossier text, facts table, credited media.
+
+### `starIndexContent`
+
+Star-field index — description + the full localized body catalog.
+
 ### `pageNameFromTitle`
 
-Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names.
+/** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names.
 
 ### `mediaRowsOf`
 
-Expandable-media {slug,label,media} rows of a project — mirrors generate-sitemap's walk.
+Labelled-media {slug,label,media} rows of a project — mirrors
+generate-sitemap's walk and the runtime modal: every labelled item with
+a src is addressable through /portfolio/<slug>/<media>.
 
 ### `routesFor`
 
@@ -110,16 +175,80 @@ already written by the root pass.
 
 ### `syncFirebaseRewrites`
 
-Regenerates the `hosting.rewrites` block in firebase.json so the public
-locale URLs (`/br`, `/br/sobre`, …) keep serving the pages now emitted
-under `dist/langs/<loc>/…`. Firebase rewrite destinations are single
-files — no glob capture — so the table enumerates every route the same
-way `routesFor` does. Preserves every non-rewrite hosting key and the
-meta/CMS/SPA-catch-all entries declared in `STATIC_REWRITES`.
+Regenerates the `hosting.rewrites` + `hosting.redirects` blocks in
+firebase.json. Rewrites keep the public locale URLs (`/br`, `/br/sobre`,
+…) serving the pages emitted under `dist/langs/<loc>/…` — destinations
+are single files (no glob capture), so the table enumerates every route
+the same way `routesFor` does. Redirects 301 every noncanonical alias the
+router accepts — legacy project slugs (PROJECT_ALIASES incl. media deep
+links), English-segment routes under a locale prefix, `/space-playground`
+and `/<loc>/docs` — onto their canonical paths so crawlers consolidate
+onto the sitemap surface instead of indexing alias URLs. Preserves every
+non-rewrite/non-redirect hosting key and the meta/CMS/SPA-catch-all
+entries declared in `STATIC_REWRITES`/`SPA_REWRITES`.
 
 ### `META_FILE_REWRITES`
 
-Rewrites that sit before the locale table — meta files moved into
+`, `/portfolio/${canonical}/:splat`)
+
+    for (const loc of VALID_LANGS) {
+      if (loc === 'en') continue
+
+      addRedirect(`/${loc}/portfolio/${alias}`, `/${loc}/portfolio/${canonical}`)
+      addRedirect(`/${loc}/portfolio/${alias}/**`, `/${loc}/portfolio/${canonical}/:splat`)
+    }
+
+}
+
+// English legacy legal segments → canonical English slugs.
+addRedirect('/privacy', `/${enSlugs.privacy}`)
+addRedirect('/terms', `/${enSlugs.terms}`)
+
+// `/space-playground` → the locale's earthPlayground slug (en included).
+addRedirect('/space-playground', `/${enSlugs.earthPlayground}`)
+
+for (const loc of VALID_LANGS) {
+if (loc === 'en') continue
+
+    const slugs = LANG_SLUGS[loc] || {}
+
+    // English-segment + legacy legal aliases under the locale prefix.
+    for (const [aliases, key] of [
+      [['privacy', 'privacy-policy'], 'privacy'],
+      [['gdpr'], 'gdpr'],
+      [['terms', 'terms-of-use'], 'terms'],
+      [['license'], 'license'],
+      [['about'], 'about'],
+      [['contact'], 'contact'],
+    ]) {
+      for (const alias of aliases) {
+        addRedirect(`/${loc}/${alias}`, `/${loc}/${slugs[key] || enSlugs[key]}`)
+      }
+    }
+
+    // English-segment experience aliases → localized canonical slugs.
+    for (const alias of ['earth-playground', 'space-playground']) {
+      addRedirect(`/${loc}/${alias}`, `/${loc}/${slugs.earthPlayground || enSlugs.earthPlayground}`)
+    }
+
+    const sfTarget = `/${loc}/${slugs.starField || enSlugs.starField}`
+
+    addRedirect(`/${loc}/star-field-experiment`, sfTarget)
+    addRedirect(`/${loc}/star-field-experiment/**`, `${sfTarget}/:splat`)
+
+    // Docs are English-only — a locale-prefixed docs URL canonicalizes to
+    // the unprefixed route, so it redirects rather than rendering.
+    addRedirect(`/${loc}/docs`, '/docs')
+    addRedirect(`/${loc}/docs/**`, '/docs/:splat')
+
+}
+
+cfg.hosting.redirects = redirects
+
+fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`)
+}
+
+/** Rewrites that sit before the locale table — meta files moved into
 public/meta/ keep their root URLs through these entries. Per-locale
 sitemap files and localized agent-readable files (robots/urllist/llms/
 ai-catalog under /meta/<loc>/) keep their `/<loc>/<file>` URLs.

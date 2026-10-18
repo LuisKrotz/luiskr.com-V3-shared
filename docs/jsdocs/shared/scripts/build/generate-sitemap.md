@@ -9,13 +9,51 @@ Emits the whole crawl surface under `website/public/meta/`:
 
 ## Members
 
+### `URLSET_XMLNS`
+
+XML namespaces emitted on every <urlset>.
+
+### `escXml`
+
+Escapes text for XML element bodies (media titles/descriptions).
+
+### `titleOf`
+
+Truncates a media title to Google's 100-char video-title bound.
+
+### `mediaItemsOf`
+
+Media items of a project — mirrors `website/views/project/modal.ts`'s
+traversal exactly: sections → groups (arrays whose head is NOT a string —
+string-head groups are text blocks) → media objects. Every object with a
+`src` is a real asset on the page and gets indexed; items with a label
+additionally get their own `/portfolio/<slug>/<media>` deep-link URL.
+
+### `mediaRowsOf`
+
+Labelled-media deep links of a project — slug → media item. Distinct
+captions can collapse to the same slug, so occurrences after the first
+gain `-2`, `-3`, … in document order — byte-identical to mediaSlugSeq
+in core/utils/string.ts so every item keeps an indexable URL and the
+emitted pages + runtime resolver agree.
+
+### `mediaTagXml`
+
+XML media tags for one media item — image:image or video:video.
+
+### `projectPageTags`
+
+Aggregated media tags for a project page — cover + every item,
+deduped by resolved asset URL.
+
 ### `sitemapDoc`
 
-Emits one `<urlset>` document for `urls`.
+Emits one `<urlset>` document for `urls`, media tags included.
 
 ### `localeUrlsOf`
 
-URLs owned by one locale — `/<loc>` plus its localized, playground and portfolio routes.
+URLs owned by one locale — `/<loc>` plus its localized routes, portfolio
+deep links and star-field bodies.
 
 ### `localizedLlms`
 

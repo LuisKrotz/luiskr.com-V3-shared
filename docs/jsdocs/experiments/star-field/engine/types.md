@@ -614,6 +614,26 @@ Pointer listeners to detach on destroy.
 
 last pointer-down position for click-vs-drag discrimination.
 
+### `pickX`
+
+Pending hover-pick position — the freshest coalesced pointer sample.
+High-rate mice (1000Hz+) fire several pointermoves per frame; the
+handler only records scalars and the rAF tick raycasts once per
+frame against the latest pair, never once per event.
+
+### `pickRaf`
+
+Non-null while a per-frame pick tick is queued — dedupes rAF arms.
+
+### `viewW`
+
+Cached canvas box in CSS px — refreshed by `handleStarResize`. The
+per-frame projection (`anchorScreenPos`/`worldScreenPos`) and
+galaxy-cloud updates read these instead of `clientWidth`/
+`clientHeight` so hover tracking and fades never issue a layout
+read inside the render loop. 0 = not measured yet (cold path falls
+back to a one-time live read).
+
 ### `lastT`
 
 Last tick timestamp for dt-based animation.
@@ -759,6 +779,13 @@ the orbit sweep so debris reads as tumbling rubble, not rails.
 LOD-toggleable secondary geometry — atmosphere shells, ring discs,
 satellite pivots; frame.ts hides these
 beyond the detail distance so far bodies draw as one primitive.
+
+### (module scope)
+
+Volumetric-galaxy Points cache — `updateGalaxyClouds` resolves the
+`userData.volumetric` child once and parks the handle here so the
+per-frame fade never re-walks `mesh.children` (a `.find` call
+allocates its predicate closure every frame otherwise).
 
 ### (module scope)
 

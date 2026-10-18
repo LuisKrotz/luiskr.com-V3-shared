@@ -57,9 +57,9 @@ export const moduleNameMapper = {
   '^virtual:i18n-fallback$': path.join(TESTS_DIR, '__mocks__/i18nFallbackMock.js'),
   '^virtual:i18n-boot-index$': path.join(TESTS_DIR, '__mocks__/i18nBootIndexMock.js'),
   '^virtual:docs-manifest$': path.join(TESTS_DIR, '__mocks__/docsManifestMock.js'),
-  // mermaid is heavy + DOM-coupled — the docs mermaid module gets a stub
-  // that records initialize/run calls and drops placeholder SVGs.
-  '^mermaid$': path.join(TESTS_DIR, '__mocks__/mermaid.js'),
+  // NOTE: the wasm-diagram stub lives ONLY in the docs-portal config —
+  // scoping it there keeps core's own wasm-diagram tails on the real
+  // module.
   '^@tests/(.*)$': path.join(TESTS_DIR, '$1'),
   '^@build/(.*)$': path.join(REPO_ROOT, 'shared/build/$1'),
   '^@core$': path.join(REPO_ROOT, 'core/index.js'),

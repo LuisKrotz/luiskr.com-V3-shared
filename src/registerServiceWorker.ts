@@ -6,9 +6,9 @@
  */
 
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
-import { register } from 'register-service-worker'
+import { WINDOW_EVENTS } from '@core/tokens/events/dom.js'
 import { devError, devInfo } from '@core/devlog.js'
-import { dropStaleServiceWorkers } from '@core/utils/service-worker.js'
+import { dropStaleServiceWorkers, registerSiteServiceWorker } from '@core/utils/service-worker.js'
 
 /**
  * Registers `<base>service-worker.js` on window load when `env.PROD` is set.
@@ -23,8 +23,8 @@ export const registerServiceWorker = (env: { PROD?: boolean; BASE_URL?: string }
     return
   }
 
-  window.addEventListener('load', () => {
-    register(`${env.BASE_URL}service-worker.js`, {
+  window.addEventListener(WINDOW_EVENTS.LOAD, () => {
+    void registerSiteServiceWorker(`${env.BASE_URL}service-worker.js`, {
       ready() {
         devInfo(
           'App is being served from cache by a service worker.\n' +

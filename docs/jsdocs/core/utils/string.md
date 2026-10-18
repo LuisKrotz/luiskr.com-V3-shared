@@ -50,13 +50,22 @@ Pure ESM utility function, tree-shakeable.
 - `@param` {string} str — raw text that may contain &, <, >, ", '
 - `@returns` {string} entity-escaped text safe for markup contexts
 
+### `CYRILLIC_SLUG`
+
+Russian Cyrillic → Latin transliteration map for `slugify`. Media
+labels exist per locale; without this step a Cyrillic-only caption
+(e.g. "фон бренда") would slugify to '' — the deep link would never
+be written, emitted, or sitemapped, dropping the item's indexable URL.
+Must be copied byte-identically into the build-script slugify twins.
+
 ### `slugify`
 
 Converts a string into a clean, URL-safe and DOM-id-safe slug.
-Pipeline: NFD-fold diacritics to ASCII → lowercase → trim → collapse
-every non-alphanumeric run to a single `-` → strip edge dashes. e.g.
-"METCHA — Leather!" → "metcha-leather", "Cecerelê: tour" →
-"cecerele-tour", "aboutmarco.com" → "aboutmarco-com".
+Pipeline: NFD-fold diacritics to ASCII → lowercase → transliterate
+Cyrillic → trim → collapse every non-alphanumeric run to a single `-`
+→ strip edge dashes. e.g. "METCHA — Leather!" → "metcha-leather",
+"Cecerelê: tour" → "cecerele-tour", "aboutmarco.com" →
+"aboutmarco-com", "фон бренда" → "fon-brenda".
 MUST stay byte-identical to the slugify in shared/scripts/build
 (generate-sitemap.js + build-locale-pages.mjs): it computes the media
 deep-link segment both at runtime (modal write/read) and at build
@@ -65,3 +74,20 @@ or indexed /portfolio/<p>/<media> links stop auto-opening.
 
 - `@param` text Display text to slug.
 - `@returns` URL/id-safe slug, or '' for non-string input.
+
+### `mediaSlugSeq`
+
+Assigns the canonical deep-link slug for one media item within a
+project's traversal. Distinct captions can collapse to the same slug
+("Fórum 2020, Full page" vs "Fórum 2020: Full Page"), which used to
+silently drop the second item's indexable URL everywhere. The first
+occurrence keeps the base slug; later ones gain `-2`, `-3`, … in
+document order — every labelled item stays uniquely addressable.
+Callers iterate items in traversal order sharing one `seen` map; the
+same map/count convention is mirrored in the build scripts
+(generate-sitemap.js + build-locale-pages.mjs) so emitted file names,
+sitemap <loc>s and runtime resolution agree.
+
+- `@param` seen Per-project base-slug → assigned-count map (mutated).
+- `@param` label The item's caption.
+- `@returns` The item's unique deep-link slug ('' when unslugifiable).

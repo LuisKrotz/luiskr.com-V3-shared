@@ -44,13 +44,67 @@ const only = process.env.LK_ONLY ? new Set(process.env.LK_ONLY.split(',')) : nul
 const buildList = ES_TARGETS.filter((t) => !only || only.has(t.name))
 
 for (const [i, t] of buildList.entries()) {
+  // Derived tiers (`babelFrom`) skip the vite build — they lower an
+  // already-emitted bundle in the post-pass below.
+  if (t.babelFrom) continue
+
   console.log(`\n═══ build ${i + 1}/${buildList.length}: ${t.name} (${t.format}) ═══`)
+
+  // LK_KEEP_DIST keeps emptyOutDir off, so a rebuilt tier must clear its own
+  // v/<tier>/ dir — stale hashed bundles would linger and the manifest scan
+  // below could pick the old index-*.js, pointing visitors at dead code.
+  fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true })
 
   run('yarn', ['vite', 'build'], {
     LK_TARGET: t.name,
     LK_EMPTY_OUTDIR: i === 0 && !process.env.LK_KEEP_DIST ? '1' : '0',
     LK_NO_PUBLIC: i === 0 && !process.env.LK_KEEP_DIST ? '' : '1',
   })
+}
+
+// ── 1b. Derived ES5 tiers ───────────────────────────────────────────────────
+// Babel lowers the source tier's emitted IIFE to parse-level ES5 — the only
+// thing IE10/IE11 execute. preset-env with ie targets also lowers
+// generators (regenerator), classes, const/let, template literals —
+// everything esbuild's es2015 floor leaves behind.
+for (const t of buildList.filter((t) => t.babelFrom)) {
+  const srcDir = path.join(DIST, 'v', t.babelFrom, 'assets', 'js')
+  const srcFile = fs.readdirSync(srcDir).find((f) => f.startsWith('index-') && f.endsWith('.js'))
+
+  if (!srcFile) throw new Error(`tier ${t.name}: source bundle for ${t.babelFrom} missing`)
+
+  console.log(`\n═══ babel ${t.babelFrom} → ${t.name} (ES5) ═══`)
+
+  const babel = await import('@babel/core')
+  const presetEnv = (await import('@babel/preset-env')).default
+  const { code } = await babel.transformFileAsync(path.join(srcDir, srcFile), {
+    babelrc: false,
+    configFile: false,
+    // modules:false — the input is already an IIFE, not a module graph;
+    // transpiling its (nonexistent) modules would wrap it wrongly.
+    presets: [[presetEnv, { targets: { ie: '11' }, modules: false }]],
+    compact: true,
+    comments: false,
+  })
+
+  const { minify: terserMinify } = await import('terser')
+  const { code: min } = await terserMinify(code, {
+    ecma: 5,
+    compress: { passes: 2 },
+    mangle: true,
+    format: { ascii_only: true },
+  })
+
+  const outDir = path.join(DIST, 'v', t.name, 'assets', 'js')
+
+  fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true })
+  fs.mkdirSync(outDir, { recursive: true })
+
+  const hash = crypto.createHash('md5').update(min).digest('hex').slice(0, 8)
+  const name = `index-${hash}.js`
+
+  fs.writeFileSync(path.join(outDir, name), min)
+  console.log(`  ${t.name}: ${name} (${(min.length / 1024).toFixed(0)}KB)`)
 }
 
 // ── 2. Polyfill bundles ─────────────────────────────────────────────────────
@@ -76,6 +130,29 @@ for (const p of POLYFILLS) {
   })
 
   if (typeof bundle.close === 'function') await bundle.close()
+}
+
+// Polyfill bundles ship to the ES5 floor too — rolldown's es2015 output
+// still uses const/arrow/class syntax IE can't parse, so every emitted
+// file gets the same preset-env pass the `ie` tier receives. Modern
+// browsers pay nothing (ES5 is equally executable everywhere).
+{
+  const babel = await import('@babel/core')
+  const presetEnv = (await import('@babel/preset-env')).default
+  const dir = path.join(DIST, 'assets/polyfills')
+
+  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.js'))) {
+    const file = path.join(dir, f)
+    const { code } = await babel.transformFileAsync(file, {
+      babelrc: false,
+      configFile: false,
+      presets: [[presetEnv, { targets: { ie: '11' }, modules: false }]],
+      compact: true,
+      comments: false,
+    })
+
+    fs.writeFileSync(file, code)
+  }
 }
 
 // Hash-named files → runtime paths for the loader manifest.

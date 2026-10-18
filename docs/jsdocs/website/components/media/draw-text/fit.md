@@ -47,13 +47,40 @@ rAF handle for the queued batch — `0` means no flush is scheduled.
 
 ### `applyFit`
 
-Applies the computed scale for one host after its measurement phase —
-the write half of the batched flush, kept separate so the loop never
-interleaves reads with writes.
+Applies the computed scale for one host — the write half of the batched
+flush, fed by values captured in the read phase so the loop is pure
+writes (a getComputedStyle here would re-interleave read → write).
 
 - `@param` host — the draw-text element
-- `@param` avail — parent content-box width measured in the read phase
-- `@param` widest — widest word width measured in the read phase
+- `@param` m — measurements captured in the read phase
+
+### (module scope)
+
+Measurements captured in the flush's read phase for one host.
+
+### `avail`
+
+Parent content-box width in px.
+
+### `widest`
+
+Widest `.draw-text__word` width in px.
+
+### `baseFont`
+
+Host font size at the stylesheet ramp, px.
+
+### `baseSpacing`
+
+Host letter-spacing at the stylesheet ramp, px (normal → 0).
+
+### `measureFit`
+
+Reads every layout/style value applyFit needs for one host — kept in a
+single place so the flush's middle phase is pure reads.
+
+- `@param` host — the draw-text element
+- `@returns` the host's measurements for the write phase
 
 ### `flushFits`
 

@@ -45,6 +45,14 @@ bubble it orbits inside (the Moon stays clickable over Earth).
 
 - `@returns` The hit body id, or null.
 
+### `PICK_NDC`
+
+Pooled NDC vector reused by every pick — one allocation, ever.
+
+### `sharedRaycaster`
+
+Pooled raycaster instance — intersectObjects re-runs on it per frame.
+
 ### `RaycasterCtor`
 
 Set by bootstrap — the lazily imported Raycaster class.

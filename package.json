@@ -16,8 +16,7 @@
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.mjs --coverage"
   },
   "dependencies": {
-    "@luiskr/core": "1.0.0",
-    "register-service-worker": "^1.7.2"
+    "@luiskr/core": "1.0.0"
   },
   "devDependencies": {
     "jest": "^30.5.2",

@@ -39,6 +39,8 @@ import { fileURLToPath } from 'node:url'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { PROJECT_ALIASES } from '../../../core/tokens/routes/aliases.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
+import { loadMediaManifest, resolveMediaUrls, resolveCoverThumbKey } from './media-manifest.mjs'
+import { scanManifest } from '../../build/docs/scan.mjs'
 
 const VALID_LANGS = Object.keys(LANG_SLUGS)
 
@@ -51,6 +53,47 @@ const SCHEMA_CONTEXT = 'https://schema.org'
 const SHARE_IMAGE = `${SITE_URL}/assets/icons/share.png`
 
 /**
+ * Russian Cyrillic → Latin transliteration — Cyrillic media labels would
+ * otherwise slugify to '' and lose their deep-link URL. MUST stay
+ * byte-identical to CYRILLIC_SLUG in core/utils/string.ts.
+ */
+const CYRILLIC_SLUG = {
+  а: 'a',
+  б: 'b',
+  в: 'v',
+  г: 'g',
+  д: 'd',
+  е: 'e',
+  ё: 'e',
+  ж: 'zh',
+  з: 'z',
+  и: 'i',
+  й: 'y',
+  к: 'k',
+  л: 'l',
+  м: 'm',
+  н: 'n',
+  о: 'o',
+  п: 'p',
+  р: 'r',
+  с: 's',
+  т: 't',
+  у: 'u',
+  ф: 'f',
+  х: 'h',
+  ц: 'c',
+  ч: 'ch',
+  ш: 'sh',
+  щ: 'sch',
+  ъ: '',
+  ы: 'y',
+  ь: '',
+  э: 'e',
+  ю: 'yu',
+  я: 'ya',
+}
+
+/**
  * Media-slug transform — MUST match generate-sitemap.js's slugify byte for
  * byte: emitted /portfolio/<slug>/<media> file names have to line up with
  * the URLs the sitemap already lists (diacritics fold to ASCII).
@@ -61,6 +104,7 @@ const slugify = (text) =>
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
+    .replace(/[а-яё]/g, (ch) => CYRILLIC_SLUG[ch])
     .trim()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
@@ -100,23 +144,21 @@ const toDescription = (html, max = 160) => {
 }
 
 // ─── CDN media URL grammar — mirrors core/utils/media.ts buildMediaUrls ─────
-// Images carry -mozjpg-uncompressed (full) / -mozjpg3-MSSIM-tuned-kodak (thumb)
-// suffixes; videos are .mp4 with a .mp4.jpg-thumb.jpg poster. Unsuffixed or
-// hypothetical -16x9/-4x3 variants DO NOT exist on the bucket — never emit
-// them: Google drops image candidates that 404.
-const mediaUrls = (folder, m) => {
-  if (!m || !m.src) return { source: '', thumb: '', isVideo: false }
+// Derivative availability is per-object, so variant resolution runs against
+// the bucket manifest generate-sitemap persists at
+// website/public/meta/media-manifest.json (uncompressed pass preferred,
+// raw originals for legacy items). Without a manifest the historic
+// convention is emitted. Unsuffixed-hypothetical variants (-16x9/-4x3)
+// DO NOT exist on the bucket — never emit them: Google drops image
+// candidates that 404.
+const mediaUrls = (folder, m, manifest) => {
+  const { source, thumb, isVideo } = resolveMediaUrls(folder, m, manifest)
 
-  const isVideo = m.isVideo ?? false
-  const base = `${CDN_BASE}${folder || ''}${m.src}`
-
-  return isVideo
-    ? { source: `${base}.mp4`, thumb: `${base}.mp4.jpg-thumb.jpg`, isVideo }
-    : {
-        source: `${base}-mozjpg-uncompressed.jpg`,
-        thumb: `${base}-mozjpg3-MSSIM-tuned-kodak.jpg`,
-        isVideo,
-      }
+  return {
+    source: source ? `${CDN_BASE}${source}` : '',
+    thumb: thumb ? `${CDN_BASE}${thumb}` : '',
+    isVideo,
+  }
 }
 
 // ─── JSON-LD entity builders — mirrors core/utils/schema.ts (that module is
@@ -166,8 +208,8 @@ const breadcrumbEntity = (items, id) => ({
 })
 
 /** VideoObject for one media descriptor — mp4 contentUrl + poster thumb. */
-const videoEntity = (folder, m, title, description) => {
-  const { source, thumb } = mediaUrls(folder, m)
+const videoEntity = (folder, m, title, description, manifest) => {
+  const { source, thumb } = mediaUrls(folder, m, manifest)
 
   return {
     '@context': SCHEMA_CONTEXT,
@@ -223,10 +265,14 @@ const writeCompressed = (file, html) => {
  * @param {Array<object>} [o.entities] - extra JSON-LD entities appended to
  *   the @graph after Organization + WebSite (WebPage, BreadcrumbList,
  *   Article, ItemList, VideoObject…)
+ * @param {string} [o.content] - prerendered body markup injected into
+ *   `<div id="app">` so crawlers and AI agents that never run JavaScript
+ *   still read the full page content — the SPA replaces it on mount via
+ *   `replaceChildren`.
  */
-function localize(
+export function localize(
   html,
-  { bcpLang, ogLocale, title, description, url, canonicalUrl, alternates, image, entities }
+  { bcpLang, ogLocale, title, description, url, canonicalUrl, alternates, image, entities, content }
 ) {
   const canon = canonicalUrl || url
   let out = html
@@ -237,8 +283,15 @@ function localize(
   out = out.replace(/\s*<link rel="alternate"[^>]*>/g, '')
   out = out.replace(/\s*<meta property="og:locale(?::alternate)?"[^>]*>/g, '')
 
-  // <html lang> + document title
+  // <html lang> + document title — Russian documents also carry the
+  // cyrillic-font state class at markup level so --font-primary flips to
+  // Fira Sans even before the head script runs.
   out = out.replace(/<html lang="[^"]*"/, `<html lang="${bcpLang}"`)
+
+  if (bcpLang === 'ru') {
+    out = out.replace(/<html([^>]*)class="([^"]*)"/, '<html$1class="$2 cyrillic-font"')
+  }
+
   out = out.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`)
 
   // Title-bearing metas
@@ -318,6 +371,20 @@ function localize(
 
   out = out.replace(/\s*<\/head>/, `${inject}\n</head>`)
 
+  // Prerendered route content — the app container ships populated so the
+  // page is fully readable without JavaScript; mount() hoists it offscreen
+  // (reader modes + AI agents keep reading it) instead of deleting it.
+  // The <article class="reader-content"> mirrors READER_CLASSES.CONTENT.
+  // The match covers every prior emission state — clean template
+  // (<div id="app"></div>), a previous article-wrapped run, and the legacy
+  // bare-<main> shape — so standalone re-runs never keep stale content.
+  if (content) {
+    out = out.replace(
+      /<div id="app">(?:<article class="reader-content">[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?<\/div>/,
+      `<div id="app"><article class="reader-content">${content}</article></div>`
+    )
+  }
+
   return out
 }
 
@@ -349,6 +416,11 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   const en = translations.en || {}
   const legalEn = en.components?.['legal-footer']?.links || []
 
+  // CDN media manifest — resolveMediaUrls picks per-item best variants when
+  // the generate-sitemap pass persisted one; falls back to the suffix
+  // convention otherwise.
+  const mediaManifest = loadMediaManifest(path.join(ROOT, 'website', 'public', 'meta'))
+
   /** Per-locale lookup with English fallback (mirrors runtime appText). */
   const t = (loc, get) => {
     const v = get(translations[loc] || {})
@@ -368,11 +440,15 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   const homePath = (loc) => (loc === 'en' ? '/' : `/${loc}`)
 
   const alternatesFor = (pathOf) =>
-    VALID_LANGS.filter((loc) => LOCALE_TAGS[loc]).map((loc) => ({
-      bcp: LOCALE_TAGS[loc].bcp,
-      og: LOCALE_TAGS[loc].og,
-      url: `${SITE_URL}${pathOf(loc)}`,
-    }))
+    VALID_LANGS.filter((loc) => LOCALE_TAGS[loc])
+      .map((loc) => {
+        const path = pathOf(loc)
+
+        return path === null
+          ? null
+          : { bcp: LOCALE_TAGS[loc].bcp, og: LOCALE_TAGS[loc].og, url: `${SITE_URL}${path}` }
+      })
+      .filter(Boolean)
 
   let written = 0
 
@@ -436,7 +512,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     const title = toDescription(project.title || slug, 80)
     const description = projectDescOf(loc, slug)
     const folder = project.folder || ''
-    const cover = mediaUrls(folder, project.cover)
+    const cover = mediaUrls(folder, project.cover, mediaManifest)
 
     const entities = [
       {
@@ -463,21 +539,36 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     ]
 
     if (project.cover?.isVideo && project.cover.src) {
-      entities.push(videoEntity(folder, project.cover, title, description))
+      entities.push(videoEntity(folder, project.cover, title, description, mediaManifest))
     }
 
     const media = [...walkMedia(project.sections)]
+    const slugSeen = new Map()
 
     const listItems = media
-      .filter((m) => m.src && m.label)
-      .map((m, i) => {
-        const { source, thumb, isVideo } = mediaUrls(folder, m)
+      .map((m) => {
+        let deepSlug = ''
+
+        if (m.src && m.label) {
+          const b = slugify(m.label)
+          const ordinal = slugSeen.get(b) ?? 0
+
+          slugSeen.set(b, ordinal + 1)
+
+          deepSlug = ordinal ? `${b}-${ordinal + 1}` : b
+        }
+
+        return { m, deepSlug }
+      })
+      .filter((e) => e.deepSlug && e.deepSlug.length <= 200)
+      .map((e, i) => {
+        const { source, thumb, isVideo } = mediaUrls(folder, e.m, mediaManifest)
 
         return {
           '@type': 'ListItem',
           position: i + 1,
-          url: `${base}/${slugify(m.label)}`,
-          name: m.label,
+          url: `${base}/${e.deepSlug}`,
+          name: e.m.label,
           image: isVideo ? thumb : source,
         }
       })
@@ -491,7 +582,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     }
 
     for (const m of media.filter((x) => x.isVideo && x.src && x !== exclude)) {
-      entities.push(videoEntity(folder, m, title, description))
+      entities.push(videoEntity(folder, m, title, description, mediaManifest))
     }
 
     return entities
@@ -500,7 +591,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   /** Cover share-image for a project — uncompressed jpg or video poster. */
   const projectImageOf = (loc, slug) => {
     const project = t(loc, (x) => x.projects?.[slug])
-    const cover = mediaUrls(project?.folder || '', project?.cover)
+    const cover = mediaUrls(project?.folder || '', project?.cover, mediaManifest)
 
     return cover.source ? (cover.isVideo ? cover.thumb : cover.source) : undefined
   }
@@ -527,7 +618,267 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
       : []
   }
 
-  /** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names. */
+  // ── Prerendered body content — everything a no-JS crawler/AI agent reads ──
+  // The markup lands inside <div id="app">; mount() swaps it for the live
+  // <app-root>. Authored CMS rich text embeds as-is (it already carries the
+  // site's own <br>/<a> markup); plain strings escape through esc().
+
+  const locPrefixOf = (loc) => (loc === 'en' ? '' : `/${loc}`)
+
+  /** Authored rich-text array → <p> markup (trusted CMS html). */
+  const richParagraphs = (arr) =>
+    (Array.isArray(arr) ? arr : arr ? [arr] : []).map((p) => `<p>${p}</p>`).join('')
+
+  /**
+   * Every authored leaf string under a CMS node → <p> markup (trusted CMS
+   * html). Experience pages carry their copy as UI labels rather than a
+   * single description field — walking the whole object guarantees none of
+   * the authored text is left JavaScript-only. `skip` drops keys already
+   * rendered as headings.
+   */
+  const leafParagraphs = (obj, skip = new Set(['title'])) => {
+    const out = []
+
+    const walk = (o) => {
+      if (Array.isArray(o)) {
+        for (const item of o) walk(item)
+
+        return
+      }
+
+      for (const [k, v] of Object.entries(o || {})) {
+        if (typeof v === 'string') {
+          if (v.trim() && !skip.has(k)) out.push(`<p>${v}</p>`)
+        } else if (v && typeof v === 'object') {
+          walk(v)
+        }
+      }
+    }
+
+    walk(obj)
+
+    return out.join('')
+  }
+
+  /** Contact block — channel links + legal links from components.contact. */
+  const contactBlock = (loc) => {
+    const c = t(loc, (x) => x.components?.contact) || {}
+    const heading = t(loc, (x) => x.APP?.contact) || ''
+    const links = (arr) =>
+      (arr || [])
+        .map((i) => `<li><a href="${esc(i.link || '#')}">${i.description || ''}</a></li>`)
+        .join('')
+
+    return `<section id="contact"><h2>${esc(heading)}</h2><ul>${links(c.line1)}</ul><ul>${links(c.line2)}</ul></section>`
+  }
+
+  /**
+   * One media item as crawlable markup — the figure shows the light
+   * preview variant (<img> thumb / <video> poster+mp4); the caption links
+   * straight to the best-quality source so the uncompressed asset is a
+   * first-class crawl target. `deepHref` wraps the media in the
+   * /portfolio/<p>/<media> deep link.
+   */
+  const mediaFigure = (folder, m, deepHref) => {
+    const { source, thumb, isVideo } = mediaUrls(folder, m, mediaManifest)
+
+    if (!source) return ''
+
+    const label = esc(m.label || '')
+    const wh = m.size?.[0] ? ` width="${m.size[0]}" height="${m.size[1]}"` : ''
+
+    // <video><source> retries the next entry on 404, but <picture><source>
+    // does not — a missing webp renders as broken. webp is emitted only
+    // when the bucket manifest confirms the sibling was generated.
+    const webm = source.endsWith('.mp4') ? `${source.slice(0, -4)}.webm` : ''
+    const webp = (u) =>
+      u.endsWith('.jpg') && mediaManifest?.has(`${u.slice(CDN_BASE.length, -4)}.webp`)
+        ? `${u.slice(0, -4)}.webp`
+        : ''
+
+    const media = isVideo
+      ? `<video${thumb ? ` poster="${esc(thumb)}"` : ''} controls muted playsinline preload="none"${wh}>${webm ? `<source src="${esc(webm)}" type="video/webm">` : ''}<source src="${esc(source)}" type="video/mp4"></video>`
+      : `<picture>${webp(thumb || source) ? `<source srcset="${esc(webp(thumb || source))}" type="image/webp">` : ''}<img src="${esc(thumb || source)}" alt="${esc(label)}" loading="lazy" decoding="async"${wh}></picture>`
+
+    return `<figure>${deepHref ? `<a href="${esc(deepHref)}">` : ''}${media}${deepHref ? '</a>' : ''}<figcaption><a href="${esc(source)}">${label || esc(m.src)}</a></figcaption></figure>`
+  }
+
+  /** Home page content — about bio + mentions + portfolio mosaic + contact. */
+  const homeContent = (loc) => {
+    const about = t(loc, (x) => x.pages?.about) || {}
+    const home = t(loc, (x) => x.pages?.HOME) || {}
+    const raw = home.portfoliolist || []
+    const items = Array.isArray(raw) ? raw : Object.values(raw)
+    const prefix = locPrefixOf(loc)
+
+    const tiles = items
+      .filter((i) => i && (i.link || i.slug))
+      .map((i) => {
+        const href = `${prefix}/portfolio/${i.link || i.slug}`
+        const coverKey = i.image ? resolveCoverThumbKey(i.image, mediaManifest) : ''
+        const coverSrc = coverKey ? `${CDN_BASE}${coverKey}` : ''
+        const coverWebp = mediaManifest?.has(`${coverKey.slice(0, -4)}.webp`)
+          ? `${CDN_BASE}${coverKey.slice(0, -4)}.webp`
+          : ''
+        const img = coverSrc
+          ? `<figure><picture>${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="${esc(i.label || '')}" loading="lazy" decoding="async"></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
+          : ''
+        const desc = i.description ? `<p>${i.description}</p>` : ''
+
+        return `<li><a href="${href}">${img}<h3>${esc(i.label || '')}</h3>${desc}</a></li>`
+      })
+      .join('')
+
+    const mentions = (about.mention_items || [])
+      .map((m) => `<li><a href="${esc(m.link || '#')}">${m.description || ''}</a></li>`)
+      .join('')
+
+    const mentionsBlock = about.mentions
+      ? `<section><h2>${esc(about.mentions)}</h2><ul>${mentions}</ul></section>`
+      : ''
+
+    return `<main><h1>${esc(BASE_TITLE)}</h1><section id="about"><h2>${esc(about.title || '')}</h2>${richParagraphs(about.col1)}${richParagraphs(about.col2)}${mentionsBlock}</section><section id="portfolio"><h2>${esc(home.featured || home.message || '')}</h2><ul>${tiles}</ul></section>${contactBlock(loc)}</main>`
+  }
+
+  /** Legal page content — title + every authored section. */
+  const legalContent = (loc, pageKey) => {
+    const page = t(loc, (x) => x.pages?.[pageKey]) || {}
+
+    const sections = (page.sections || [])
+      .map(
+        (s) =>
+          `<section>${s.title ? `<h2>${esc(s.title)}</h2>` : ''}${richParagraphs(s.content)}</section>`
+      )
+      .join('')
+
+    return `<main><h1>${esc(page.title || '')}</h1>${sections}</main>`
+  }
+
+  /** Project interna — title, hero cover, all section text + every figure. */
+  const projectContent = (loc, slug) => {
+    const project = t(loc, (x) => x.projects?.[slug]) || {}
+    const folder = project.folder || ''
+    const prefix = locPrefixOf(loc)
+    const parts = [`<main><h1>${esc(project.title || slug)}</h1>`]
+
+    if (project.cover?.src) parts.push(mediaFigure(folder, project.cover, ''))
+
+    const slugSeen = new Map()
+
+    for (const section of project.sections || []) {
+      for (const group of section) {
+        if (!Array.isArray(group)) continue
+
+        if (typeof group[0] === 'string') {
+          parts.push(group.map((g) => `<p>${esc(g)}</p>`).join(''))
+
+          continue
+        }
+
+        for (const m of group) {
+          if (!m || typeof m !== 'object' || !m.src) continue
+
+          let deep = ''
+
+          if (m.label) {
+            const base = slugify(m.label)
+            const ordinal = slugSeen.get(base) ?? 0
+
+            slugSeen.set(base, ordinal + 1)
+
+            const mediaSlug = ordinal ? `${base}-${ordinal + 1}` : base
+
+            if (base && mediaSlug.length <= 200) deep = `${prefix}/portfolio/${slug}/${mediaSlug}`
+          }
+
+          parts.push(mediaFigure(folder, m, deep))
+        }
+      }
+    }
+
+    parts.push('</main>')
+
+    return parts.join('')
+  }
+
+  /** Media-modal deep link — the single asset + its caption + project context. */
+  const mediaContent = (loc, slug, label) => {
+    const project = t(loc, (x) => x.projects?.[slug]) || {}
+
+    return `<main><p><a href="${locPrefixOf(loc)}/portfolio/${slug}">${esc(project.title || slug)}</a></p><h1>${esc(label || slug)}</h1></main>`
+  }
+
+  /** Experience page content — title + every authored label/copy leaf. */
+  const experienceContent = (loc, pageKey) => {
+    const page = t(loc, (x) => x.pages?.[pageKey]) || {}
+
+    return `<main><h1>${esc(page.title || '')}</h1>${leafParagraphs(page)}</main>`
+  }
+
+  /** Star-field body dossier JSON — locale file with English fallback. */
+  const readStarBody = (loc, bodyId) => {
+    for (const l of [loc, 'en']) {
+      try {
+        return JSON.parse(
+          fs.readFileSync(
+            path.join(ROOT, 'experiments', 'star-field', 'public', 'data', l, `${bodyId}.json`),
+            'utf8'
+          )
+        )
+      } catch {
+        // locale file missing → try the English dossier
+      }
+    }
+
+    return null
+  }
+
+  /** Star-field body page — dossier text, facts table, credited media. */
+  const starBodyContent = (loc, bodyId) => {
+    const b = readStarBody(loc, bodyId)
+
+    if (!b) return `<main><h1>${esc(bodyId)}</h1></main>`
+
+    const facts = (b.facts || [])
+      .map((f) => `<dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd>`)
+      .join('')
+
+    const images = (b.media?.images || [])
+      .map(
+        (img) =>
+          `<figure><img src="${esc(img.src)}" alt="${esc(img.caption || '')}" loading="lazy" decoding="async"><figcaption>${esc(img.caption || '')}${img.credit ? ` — ${esc(img.credit)}` : ''}</figcaption></figure>`
+      )
+      .join('')
+
+    const audio = (b.media?.audio || [])
+      .map(
+        (a) =>
+          `<figure><audio src="${esc(a.src)}" controls preload="none"></audio><figcaption>${esc(a.caption || '')}${a.credit ? ` — ${esc(a.credit)}` : ''}</figcaption></figure>`
+      )
+      .join('')
+
+    const refs = (b.meta?.refs || []).map((r) => `<li>${esc(r)}</li>`).join('')
+
+    return `<main><h1>${esc(b.name || bodyId)}</h1><p><em>${esc(b.kind || '')}</em> — ${esc(b.tagline || '')}</p>${facts ? `<dl>${facts}</dl>` : ''}<p>${esc(b.history || '')}</p>${images}${audio}${b.source ? `<p><a href="${esc(b.source)}">${esc(b.source)}</a></p>` : ''}${refs ? `<ul>${refs}</ul>` : ''}</main>`
+  }
+
+  /** Star-field index — description + the full localized body catalog. */
+  const starIndexContent = (loc, bodyIds) => {
+    const page = t(loc, (x) => x.pages?.['star-field']) || {}
+    const prefix = `${locPrefixOf(loc)}/${(LANG_SLUGS[loc] || enSlugs).starField}`
+
+    const links = bodyIds
+      .map((id) => {
+        const b = readStarBody(loc, id)
+
+        return `<li><a href="${prefix}/${esc(id)}">${esc(b?.name || id)}</a></li>`
+      })
+      .join('')
+
+    return `<main><h1>${esc(page.title || '')}</h1>${leafParagraphs(page)}<ul>${links}</ul></main>`
+  }
+
+  /**  /** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names. */
   const pageNameFromTitle = (title) => {
     const prefix = `${BASE_TITLE} | `
     const suffix = ` | ${BASE_TITLE}`
@@ -545,9 +896,12 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   const sfDescOf = (loc) =>
     toDescription(t(loc, (x) => x.pages?.['star-field']?.description)) || aboutDescOf(loc)
 
-  /** Expandable-media {slug,label,media} rows of a project — mirrors generate-sitemap's walk. */
+  /** Labelled-media {slug,label,media} rows of a project — mirrors
+   * generate-sitemap's walk and the runtime modal: every labelled item with
+   * a src is addressable through /portfolio/<slug>/<media>. */
   const mediaRowsOf = (project) => {
     const out = []
+    const seen = new Map()
 
     for (const section of project?.sections || []) {
       const items = Array.isArray(section) ? section : [section]
@@ -556,13 +910,24 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         const media = Array.isArray(item) ? item : [item]
 
         for (const m of media) {
-          if (m && typeof m === 'object' && m.label && m.canExpand) {
-            const slug = slugify(m.label)
+          if (m && typeof m === 'object' && m.label && m.src) {
+            const base = slugify(m.label)
+
+            if (!base) continue
+
+            // Distinct captions can collapse to the same slug — later
+            // occurrences gain -2, -3… in document order (mediaSlugSeq's
+            // convention) so every item keeps an indexable URL.
+            const ordinal = seen.get(base) ?? 0
+
+            seen.set(base, ordinal + 1)
+
+            const slug = ordinal ? `${base}-${ordinal + 1}` : base
 
             // PATH_MAX per segment is 255 — a few monster labels slugify
             // past it; those URLs stay on the `**` SPA fallback (same as
             // today) rather than breaking the emit.
-            if (slug && slug.length <= 200) out.push({ slug, label: m.label, media: m })
+            if (slug.length <= 200) out.push({ slug, label: m.label, media: m })
           }
         }
       }
@@ -571,7 +936,36 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     return out
   }
 
+  // Labelled-media rows per (loc, project) — cached; media identity across
+  // locales is aligned by `src`, which is locale-invariant while labels
+  // (and therefore slugs) are translated.
+  const locRowsCache = new Map()
+
+  const locMediaSlug = (loc2, slug, src) => {
+    const key = `${loc2}:${slug}`
+
+    if (!locRowsCache.has(key)) {
+      locRowsCache.set(key, mediaRowsOf(t(loc2, (x) => x.projects?.[slug])))
+    }
+
+    return locRowsCache.get(key).find((r) => r.media.src === src)?.slug || null
+  }
+
   const portfolioAlt = (slug) => (loc2) => `${loc2 === 'en' ? '' : `/${loc2}`}/portfolio/${slug}`
+
+  // Star-field body ids — the en catalog is the canonical id list;
+  // localized dossier JSONs (data/<loc>/<id>.json) fall back to it.
+  const starBodyIds = (() => {
+    try {
+      return fs
+        .readdirSync(path.join(ROOT, 'experiments', 'star-field', 'public', 'data', 'en'))
+        .filter((f) => f.endsWith('.json'))
+        .map((f) => f.replace(/\.json$/, ''))
+        .sort()
+    } catch {
+      return []
+    }
+  })()
 
   /**
    * Route table: relative path → title, localized description,
@@ -598,6 +992,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         alt: homePath,
         isHome: true,
         entities: homeEntities(loc),
+        content: homeContent(loc),
       },
     ]
 
@@ -610,48 +1005,56 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
           title: titleOf(t(loc, (x) => x.APP?.about?.description)),
           description: aboutDescOf(loc),
           alt: slugPath('about'),
+          content: homeContent(loc),
         },
         {
           path: `${prefix}${slugs.contact}`,
           title: titleOf(t(loc, (x) => x.APP?.contact)),
           description: contactDescOf(loc),
           alt: slugPath('contact'),
+          content: homeContent(loc),
         },
         {
           path: `${prefix}${slugs.privacy}`,
           title: titleOf(pageName(1)),
           description: legalDescOf(loc, 'privacy-policy'),
           alt: slugPath('privacy'),
+          content: legalContent(loc, 'privacy-policy'),
         },
         {
           path: `${prefix}${slugs.gdpr}`,
           title: titleOf(pageName(2)),
           description: legalDescOf(loc, 'GDPR'),
           alt: slugPath('gdpr'),
+          content: legalContent(loc, 'GDPR'),
         },
         {
           path: `${prefix}${slugs.terms}`,
           title: titleOf(pageName(3)),
           description: legalDescOf(loc, 'terms-of-use'),
           alt: slugPath('terms'),
+          content: legalContent(loc, 'terms-of-use'),
         },
         {
           path: `${prefix}${slugs.license}`,
           title: titleOf(pageName(4)),
           description: legalDescOf(loc, 'license'),
           alt: slugPath('license'),
+          content: legalContent(loc, 'license'),
         },
         {
           path: `${prefix}${slugs.earthPlayground}`,
           title: pgTitle(),
           description: epDescOf(loc),
           alt: slugPath('earthPlayground'),
+          content: experienceContent(loc, 'earth-playground'),
         },
         {
           path: `${prefix}${slugs.starField}`,
           title: sfTitle(),
           description: sfDescOf(loc),
           alt: slugPath('starField'),
+          content: starIndexContent(loc, starBodyIds),
         }
       )
 
@@ -689,9 +1092,12 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     }
 
     // Portfolio — /<loc>/portfolio/<slug> renders the project view
-    // translated; English additionally emits the legacy alias slugs
-    // (canonical → real slug) and the media-modal deep links the sitemap
-    // lists (English-only by design).
+    // translated; every labelled media item gets its own deep-link page in
+    // EVERY locale (/<loc>/portfolio/<slug>/<media>, canonical to itself).
+    // English additionally emits the legacy alias slugs (canonical → real
+    // slug; firebase 301s them ahead of these files anyway).
+    const locPrefix = loc === 'en' ? '' : `/${loc}`
+
     for (const slug of Object.keys(en.projects || {})) {
       const pageName = toDescription(t(loc, (x) => x.projects?.[slug]?.title) || slug, 80)
       const title = titleOf(pageName)
@@ -706,44 +1112,56 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         image: projectImageOf(loc, slug),
         entities: projectEntities(loc, slug),
         alt: portfolioAlt(slug),
+        content: projectContent(loc, slug),
       })
 
-      if (loc !== 'en') continue
-
-      for (const [alias, canonical] of Object.entries(PROJECT_ALIASES)) {
-        if (canonical === slug) {
-          routes.push({
-            path: `portfolio/${alias}`,
-            title,
-            pageName,
-            description,
-            image: projectImageOf(loc, slug),
-            entities: projectEntities(loc, slug),
-            alt: portfolioAlt(slug),
-            canonical: portfolioAlt(slug)('en'),
-          })
+      if (loc === 'en') {
+        for (const [alias, canonical] of Object.entries(PROJECT_ALIASES)) {
+          if (canonical === slug) {
+            routes.push({
+              path: `portfolio/${alias}`,
+              title,
+              pageName,
+              description,
+              image: projectImageOf(loc, slug),
+              entities: projectEntities(loc, slug),
+              alt: portfolioAlt(slug),
+              canonical: portfolioAlt(slug)('en'),
+              content: projectContent(loc, slug),
+            })
+          }
         }
       }
 
       const project = t(loc, (x) => x.projects?.[slug])
-      const projectUrl = `${SITE_URL}/portfolio/${slug}`
+      const projectUrl = `${SITE_URL}${locPrefix}/portfolio/${slug}`
 
       for (const { slug: mediaSlug, label, media } of mediaRowsOf(project)) {
         const mediaUrl = `${projectUrl}/${mediaSlug}`
-        const { source, thumb, isVideo } = mediaUrls(project?.folder || '', media)
+        // hreflang alternates must carry each locale's OWN media slug —
+        // labels are translated, so the same asset's deep link differs
+        // per locale (null → locale dropped from alternates).
+        const mediaPath = (l2) => {
+          const slug2 = locMediaSlug(l2, slug, media.src)
+
+          return slug2 ? `${l2 === 'en' ? '' : `/${l2}`}/portfolio/${slug}/${slug2}` : null
+        }
+        const { source, thumb, isVideo } = mediaUrls(project?.folder || '', media, mediaManifest)
 
         routes.push({
-          path: `portfolio/${slug}/${mediaSlug}`,
+          path: `${prefix}portfolio/${slug}/${mediaSlug}`,
+          emitAtPublicPath: loc !== 'en',
           title,
           pageName: label,
           description,
           image: source ? (isVideo ? thumb : source) : undefined,
+          content: `${mediaContent(loc, slug, label)}${mediaFigure(project?.folder || '', media, '')}`,
           // The media page carries the whole project graph plus its own
           // media entity (ImageObject for stills, VideoObject for clips)
           // so Google can index the specific asset at this URL.
           entities: [
             ...(isVideo
-              ? [videoEntity(project?.folder || '', media, pageName, description)]
+              ? [videoEntity(project?.folder || '', media, pageName, description, mediaManifest)]
               : source
                 ? [
                     {
@@ -760,7 +1178,53 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
           ],
           crumbs: [{ name: pageName, url: projectUrl }],
           canonical: mediaUrl,
-          alternates: [{ bcp: 'en', og: 'en_US', url: mediaUrl }],
+          alternates: alternatesFor(mediaPath),
+        })
+      }
+    }
+
+    // Star-field bodies — every catalog dossier deep-links at
+    // /<loc>/<starField>/<body>, canonical to itself (the routes are
+    // translated; the localized slug is the canonical form).
+    if (slugs) {
+      const sfIndexUrl = `${SITE_URL}${locPrefix}/${slugs.starField}`
+
+      for (const bodyId of starBodyIds) {
+        const body = readStarBody(loc, bodyId)
+        const bodyPath = (l2) =>
+          `${l2 === 'en' ? '' : `/${l2}`}/${(LANG_SLUGS[l2] || enSlugs).starField}/${bodyId}`
+        const bodyUrl = `${SITE_URL}${bodyPath(loc)}`
+        const bodyName = body?.name || bodyId
+
+        routes.push({
+          path: `${prefix}${slugs.starField}/${bodyId}`,
+          emitAtPublicPath: loc !== 'en',
+          title: titleOf(`${bodyName} | ${t(loc, (x) => x.APP?.starField) || 'Star Field'}`),
+          pageName: bodyName,
+          description: toDescription(body?.tagline || '') || sfDescOf(loc),
+          content: starBodyContent(loc, bodyId),
+          entities: [
+            {
+              '@context': SCHEMA_CONTEXT,
+              '@type': 'Article',
+              '@id': `${bodyUrl}#article`,
+              headline: bodyName,
+              description: body?.tagline || '',
+              about: body?.kind || '',
+              inLanguage: LOCALE_TAGS[loc].bcp,
+              mainEntityOfPage: bodyUrl,
+              isPartOf: { '@id': `${sfIndexUrl}#webpage` },
+              author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+            },
+          ],
+          crumbs: [
+            {
+              name: t(loc, (x) => x.APP?.starField) || 'Star Field',
+              url: sfIndexUrl,
+            },
+          ],
+          canonical: bodyUrl,
+          alternates: alternatesFor(bodyPath),
         })
       }
     }
@@ -805,6 +1269,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
       }),
       ...homeEntities('en'),
     ],
+    content: homeContent('en'),
   })
 
   // ── Per-route documents ───────────────────────────────────────────────────
@@ -866,10 +1331,15 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         alternates: route.alternates || alternatesFor(route.alt),
         image: route.image,
         entities,
+        content: route.content,
       })
 
+      // en → dist/<route>/; locale base routes → dist/langs/<loc>/… (served
+      // through firebase rewrites); localized media/star-body deep links →
+      // dist/<loc>/… at the public path (exact static files win — too many
+      // routes to enumerate as rewrites).
       const file =
-        loc === 'en'
+        loc === 'en' || route.emitAtPublicPath
           ? path.join(distDir, route.path, 'index.html')
           : path.join(distDir, 'langs', route.path, 'index.html')
 
@@ -879,18 +1349,180 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     }
   }
 
+  // ── Docs portal pages — English-only; every manifest node emits a fully
+  // rendered document (files embed their docs-content payload, directories
+  // emit child listings) so the whole docs surface reads without JS.
+  const docsContentDir = path.join(distDir, 'docs-content')
+
+  const emitDocsPages = () => {
+    const { roots } = scanManifest(ROOT)
+
+    // /docs/<root> — index page per manifest root, then every child node.
+    const writeDocsPage = ({ urlPath, name, description, body, crumbs }) => {
+      const pageUrl = `${SITE_URL}${urlPath}`
+
+      const entities = [
+        webPageEntity({
+          url: pageUrl,
+          name,
+          description,
+          bcp: 'en',
+          crumbs,
+        }),
+        ...(crumbs ? [breadcrumbEntity(crumbs, `${pageUrl}#breadcrumbs`)] : []),
+        {
+          '@context': SCHEMA_CONTEXT,
+          '@type': 'TechArticle',
+          '@id': `${pageUrl}#article`,
+          headline: name,
+          description,
+          inLanguage: 'en',
+          mainEntityOfPage: pageUrl,
+          isPartOf: { '@id': `${SITE_URL}/docs#webpage` },
+        },
+      ]
+
+      const out = localize(template, {
+        bcpLang: 'en',
+        ogLocale: 'en_US',
+        title: `${name} | ${BASE_TITLE}`,
+        description,
+        url: pageUrl,
+        alternates: [{ bcp: 'en', og: 'en_US', url: pageUrl }],
+        entities,
+        content: body,
+      })
+
+      // `.html` file nodes (generated sassdoc/jsdoc pages) emit AT their
+      // own path — the URL already maps to that file, and their content
+      // rightly shadows the parent dir's index page (children write after
+      // parents, so the real document wins the shared path).
+      const rel = urlPath.slice('/docs/'.length)
+      const file = rel.endsWith('.html')
+        ? path.join(distDir, 'docs', rel)
+        : path.join(distDir, 'docs', rel, 'index.html')
+
+      try {
+        fs.mkdirSync(path.dirname(file), { recursive: true })
+        writeCompressed(file, out)
+        written++
+      } catch (err) {
+        console.warn(`[locale-pages] docs page skipped ${urlPath}:`, err?.message || err)
+      }
+    }
+
+    const dirList = (children) =>
+      `<ul>${(children || [])
+        .map(
+          (c) =>
+            `<li><a href="/docs/${esc(c.path)}">${esc(c.name)}${c.type === 'dir' ? '/' : ''}</a></li>`
+        )
+        .join('')}</ul>`
+
+    const emit = (node, trail) => {
+      const urlPath = `/docs/${node.path}`
+      const isDir = node.type === 'dir'
+      let body
+      let description
+
+      if (isDir) {
+        body = `<main><h1>${esc(node.name)}</h1>${dirList(node.children)}</main>`
+        description = `${node.name} — docs directory`
+      } else {
+        let doc = {}
+
+        try {
+          doc = JSON.parse(fs.readFileSync(path.join(docsContentDir, `${node.path}.json`), 'utf8'))
+        } catch {
+          // payload missing → name-only fallback body
+        }
+
+        body = `<main>${doc.html || `<h1>${esc(node.name)}</h1>`}</main>`
+        description =
+          toDescription(String(doc.html || '').replace(/<[^>]+>/g, ' ')) ||
+          `${node.name} — documentation`
+      }
+
+      const crumbItems = [
+        { name: BASE_TITLE, url: `${SITE_URL}/` },
+        { name: 'Docs', url: `${SITE_URL}/docs` },
+        ...trail,
+        { name: node.name, url: `${SITE_URL}${urlPath}` },
+      ]
+
+      writeDocsPage({
+        urlPath,
+        name: node.name,
+        description,
+        body,
+        crumbs: crumbItems,
+      })
+
+      if (isDir) {
+        for (const child of node.children || []) {
+          emit(child, [...trail, { name: node.name, url: `${SITE_URL}${urlPath}` }])
+        }
+      }
+    }
+
+    // /docs itself — index over every manifest root.
+    writeDocsPage({
+      urlPath: '/docs',
+      name: 'Docs',
+      description: 'Documentation portal — source, reports, coverage and module docs.',
+      body: `<main><h1>Docs</h1><ul>${roots
+        .map((r) => `<li><a href="/docs/${esc(r.root)}">${esc(r.label || r.root)}</a></li>`)
+        .join('')}</ul></main>`,
+      crumbs: [
+        { name: BASE_TITLE, url: `${SITE_URL}/` },
+        { name: 'Docs', url: `${SITE_URL}/docs` },
+      ],
+    })
+
+    for (const root of roots) {
+      const rootTrail = [
+        { name: BASE_TITLE, url: `${SITE_URL}/` },
+        { name: 'Docs', url: `${SITE_URL}/docs` },
+        { name: root.label || root.root, url: `${SITE_URL}/docs/${root.root}` },
+      ]
+
+      writeDocsPage({
+        urlPath: `/docs/${root.root}`,
+        name: root.label || root.root,
+        description: `${root.label || root.root} — documentation index`,
+        body: `<main><h1>${esc(root.label || root.root)}</h1>${dirList(root.children)}</main>`,
+        crumbs: rootTrail,
+      })
+
+      for (const child of root.children || []) {
+        emit(child, rootTrail.slice(1))
+      }
+    }
+  }
+
+  try {
+    emitDocsPages()
+  } catch (err) {
+    console.warn('[locale-pages] docs emit skipped:', err?.message || err)
+  }
+
   syncFirebaseRewrites()
 
   return { html: rootHtml, written, locales: VALID_LANGS.length - 1 }
 }
 
 /**
- * Regenerates the `hosting.rewrites` block in firebase.json so the public
- * locale URLs (`/br`, `/br/sobre`, …) keep serving the pages now emitted
- * under `dist/langs/<loc>/…`. Firebase rewrite destinations are single
- * files — no glob capture — so the table enumerates every route the same
- * way `routesFor` does. Preserves every non-rewrite hosting key and the
- * meta/CMS/SPA-catch-all entries declared in `STATIC_REWRITES`.
+ * Regenerates the `hosting.rewrites` + `hosting.redirects` blocks in
+ * firebase.json. Rewrites keep the public locale URLs (`/br`, `/br/sobre`,
+ * …) serving the pages emitted under `dist/langs/<loc>/…` — destinations
+ * are single files (no glob capture), so the table enumerates every route
+ * the same way `routesFor` does. Redirects 301 every noncanonical alias the
+ * router accepts — legacy project slugs (PROJECT_ALIASES incl. media deep
+ * links), English-segment routes under a locale prefix, `/space-playground`
+ * and `/<loc>/docs` — onto their canonical paths so crawlers consolidate
+ * onto the sitemap surface instead of indexing alias URLs. Preserves every
+ * non-rewrite/non-redirect hosting key and the meta/CMS/SPA-catch-all
+ * entries declared in `STATIC_REWRITES`/`SPA_REWRITES`.
  */
 export function syncFirebaseRewrites() {
   const firebasePath = path.join(ROOT, 'firebase.json')
@@ -936,6 +1568,72 @@ export function syncFirebaseRewrites() {
   }
 
   cfg.hosting.rewrites = [...STATIC_REWRITES, ...localeRoutes, ...SPA_REWRITES]
+
+  // ── 301 redirects for every noncanonical alias the router resolves ────────
+  // Firebase evaluates redirects before static files and rewrites, so these
+  // win over both the prerendered alias pages and the `**` SPA catch-all.
+  const enSlugs = LANG_SLUGS.en || {}
+  const redirects = []
+  const addRedirect = (source, destination) => {
+    if (source !== destination) redirects.push({ source, destination, type: 301 })
+  }
+
+  // Legacy project slugs — page and media-modal deep links, en + locales.
+  for (const [alias, canonical] of Object.entries(PROJECT_ALIASES)) {
+    addRedirect(`/portfolio/${alias}`, `/portfolio/${canonical}`)
+    addRedirect(`/portfolio/${alias}/**`, `/portfolio/${canonical}/:splat`)
+
+    for (const loc of VALID_LANGS) {
+      if (loc === 'en') continue
+
+      addRedirect(`/${loc}/portfolio/${alias}`, `/${loc}/portfolio/${canonical}`)
+      addRedirect(`/${loc}/portfolio/${alias}/**`, `/${loc}/portfolio/${canonical}/:splat`)
+    }
+  }
+
+  // English legacy legal segments → canonical English slugs.
+  addRedirect('/privacy', `/${enSlugs.privacy}`)
+  addRedirect('/terms', `/${enSlugs.terms}`)
+
+  // `/space-playground` → the locale's earthPlayground slug (en included).
+  addRedirect('/space-playground', `/${enSlugs.earthPlayground}`)
+
+  for (const loc of VALID_LANGS) {
+    if (loc === 'en') continue
+
+    const slugs = LANG_SLUGS[loc] || {}
+
+    // English-segment + legacy legal aliases under the locale prefix.
+    for (const [aliases, key] of [
+      [['privacy', 'privacy-policy'], 'privacy'],
+      [['gdpr'], 'gdpr'],
+      [['terms', 'terms-of-use'], 'terms'],
+      [['license'], 'license'],
+      [['about'], 'about'],
+      [['contact'], 'contact'],
+    ]) {
+      for (const alias of aliases) {
+        addRedirect(`/${loc}/${alias}`, `/${loc}/${slugs[key] || enSlugs[key]}`)
+      }
+    }
+
+    // English-segment experience aliases → localized canonical slugs.
+    for (const alias of ['earth-playground', 'space-playground']) {
+      addRedirect(`/${loc}/${alias}`, `/${loc}/${slugs.earthPlayground || enSlugs.earthPlayground}`)
+    }
+
+    const sfTarget = `/${loc}/${slugs.starField || enSlugs.starField}`
+
+    addRedirect(`/${loc}/star-field-experiment`, sfTarget)
+    addRedirect(`/${loc}/star-field-experiment/**`, `${sfTarget}/:splat`)
+
+    // Docs are English-only — a locale-prefixed docs URL canonicalizes to
+    // the unprefixed route, so it redirects rather than rendering.
+    addRedirect(`/${loc}/docs`, '/docs')
+    addRedirect(`/${loc}/docs/**`, '/docs/:splat')
+  }
+
+  cfg.hosting.redirects = redirects
 
   fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`)
 }

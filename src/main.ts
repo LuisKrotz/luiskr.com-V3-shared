@@ -33,6 +33,7 @@ import { warmBootstrap } from '@core/utils/data/db.js'
 import { startRouteWarming } from '@core/utils/motion/route-warmer.js'
 import { initGlobalErrorHandlers } from '@core/utils/notify.js'
 import { runDebugActions } from '@core/debug/params.js'
+import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 
 // Warm the critical path in parallel with the rest of the boot: the locale's
 // data snapshot and, for home-like routes, the Home view chunk.
@@ -66,19 +67,30 @@ const isSafari =
       !CSS.supports(QUERY_STRINGS.CONTAINER_TYPE, QUERY_STRINGS.INLINE_SIZE)))
 
 /**
- * Inserts <app-root> into #app if empty. Idempotent — safe to call on a timer
- * while the document finishes parsing.
- * @returns {boolean} true when the root element now exists in the DOM
+ * Inserts <app-root> into #app. Idempotent — safe to call on a timer while
+ * the document finishes parsing. Prerendered pages ship a reader-content
+ * <article> inside #app: it is hoisted offscreen (never deleted) before the
+ * swap so reader modes, no-JS crawlers and AI agents keep the full document
+ * after the shell mounts — Readability can't pierce the app's shadow DOM.
+ * @returns {boolean} true when the root element exists in the DOM
  */
 const mount = () => {
   const appContainer = document.getElementById(APP_IDS.APP)
 
-  if (appContainer && !appContainer.firstElementChild) {
-    appContainer.replaceChildren(document.createElement(COMPONENT_TAGS.APP_ROOT))
-    return true
+  if (!appContainer) return false
+
+  if (appContainer.querySelector(COMPONENT_TAGS.APP_ROOT)) return true
+
+  const article = appContainer.querySelector(`article.${READER_CLASSES.CONTENT}`)
+
+  if (article) {
+    article.classList.add(READER_CLASSES.OFFSCREEN)
+    document.body.appendChild(article)
   }
 
-  return false
+  appContainer.replaceChildren(document.createElement(COMPONENT_TAGS.APP_ROOT))
+
+  return true
 }
 
 /**

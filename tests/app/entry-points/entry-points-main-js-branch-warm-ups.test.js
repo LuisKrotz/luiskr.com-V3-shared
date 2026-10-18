@@ -6,6 +6,7 @@ import { describe, test, expect, jest, beforeEach } from '@jest/globals'
 import { waitFor } from '@tests/fixtures/test-constants.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
+import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 
 const registerMock = jest.fn()
 
@@ -88,6 +89,27 @@ describe('main.js branch warm-ups', () => {
     expect(window.router).toBeTruthy()
 
     window.history.pushState({}, '', '/')
+  })
+
+  test('mount hoists the prerendered reader article offscreen', async () => {
+    jest.resetModules()
+
+    const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
+
+    app.id = APP_IDS.APP
+    app.innerHTML = `<article class="${READER_CLASSES.CONTENT}"><main><h1>Pre</h1></main></article>`
+    document.body.appendChild(app)
+
+    await (await import('@/main.js')).bootPromise.catch(() => {})
+    await waitFor(() => window.router, 90000)
+
+    const parked = document.body.querySelector(`article.${READER_CLASSES.CONTENT}`)
+
+    expect(parked).toBeTruthy()
+    expect(parked.classList.contains(READER_CLASSES.OFFSCREEN)).toBe(true)
+    expect(app.contains(parked)).toBe(false)
+
+    parked.remove()
   })
 
   test('missing #app container arms the mount retry loop', async () => {

@@ -46,6 +46,42 @@ rare, brief, bright gusts that make auroras ignite and flares leap.
 - `@param` t Scene seconds.
 - `@returns` Activity level (0 quiet … ~1.5 storm).
 
+### `updateTail`
+
+One comet-tail layer update — the grain sim for a single `Points`
+field (positions/colors rewritten in place on the shared buffers,
+instance matrices composed into the pooled scratch). Module-level on
+purpose: declaring it inside updateFx would allocate a closure every
+frame a comet is live; explicit params keep it monomorphic and
+capture-free.
+
+- `@param` pts The tail Points node carrying `userData[SF_USER_GAS]`.
+- `@param` s Engine state (camera for the billboard quat, scene `t`).
+- `@param` f Comet activity factor 0..1 (tail length/width/opacity scale).
+- `@param` windK Solar-wind gain multiplier for the grain column.
+
+### `cam`
+
+Billboard orientation — the quads face the camera in the
+node's local frame: `local = nodeWorldQuat⁻¹ · camWorldQuat`.
+Without a live camera/renderer (tests) the grain buffers
+still update — only the matrix write is skipped.
+
+### `rr`
+
+Envelope — `smoothstep(0, RAMP, d)` ramps fresh grains in
+(no pop at the nucleus), `(1−d)^FADE` dissolves them toward
+the tip, `dim[i]` spreads per-grain brightness, `windK`
+surges the whole column on solar storms, and `GAIN` pushes
+overlapping additive grains into saturation so the cloud
+fuses into a column.
+
+### `if`
+
+Instance matrix — the grain's quad swells downstream
+(`SZ_BASE + SZ_GROW·d`: dispersing gas expands) and carries
+the seeded size jitter.
+
 ### `updateFx`
 
 Ambient life — the small "alive" behaviors on top of the static chart:
@@ -82,25 +118,3 @@ the shared solar-wind level so storms surge the stream.
 
 One lazy scratch set for the whole comet section — matrix/quat
 compose targets shared by every tail layer this frame.
-
-### `cam`
-
-Billboard orientation — the quads face the camera in the
-node's local frame: `local = nodeWorldQuat⁻¹ · camWorldQuat`.
-Without a live camera/renderer (tests) the grain buffers
-still update — only the matrix write is skipped.
-
-### `rr`
-
-Envelope — `smoothstep(0, RAMP, d)` ramps fresh grains in
-(no pop at the nucleus), `(1−d)^FADE` dissolves them toward
-the tip, `dim[i]` spreads per-grain brightness, `windK`
-surges the whole column on solar storms, and `GAIN` pushes
-overlapping additive grains into saturation so the cloud
-fuses into a column.
-
-### `if`
-
-Instance matrix — the grain's quad swells downstream
-(`SZ_BASE + SZ_GROW·d`: dispersing gas expands) and carries
-the seeded size jitter.

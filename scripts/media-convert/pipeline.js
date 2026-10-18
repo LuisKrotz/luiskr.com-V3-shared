@@ -6,10 +6,14 @@
  *     {base}-mozjpg-50.jpg                 (q50  — tasks/image/50)
  *     {base}-mozjpg-75.jpg                 (q75  — tasks/image/75)
  *     {base}-mozjpg3-MSSIM-tuned-kodak.jpg (q25 + blur — tasks/image/25)
+ *     + a .webp sibling of every .jpg above (the runtime's if-exists
+ *       <source>/preload chain prefers them when present)
  *
  *   videos (any format) →
  *     {base}.mp4                                (h264, tasks/video/transform.sh)
+ *     {base}.webm                               (vp9+opus — first <source>)
  *     {base}.mp4-scaledown-2x.mp4               (h264, iw/2 — iw/4 for ≥4K)
+ *     {base}.mp4-scaledown-2x.webm              (vp9+opus scaled)
  *     {base}.mp4.jpg                            (first-frame poster)
  *     {base}.mp4.jpg-thumb.jpg                  (q25 + blur thumb)
  *     {base}.mp4-scaledown-2x.mp4.jpg           (poster of the scaled video)
@@ -17,6 +21,9 @@
  *
  * Tool preference per the original scripts: ImageMagick `convert` + mozjpeg
  * `cjpeg` when installed, ffmpeg fallback otherwise (always available).
+ * WebP/WebM are always ffmpeg (libwebp / libvpx-vp9) — light compression,
+ * and an output that lands >= its input is discarded so the jpg/mp4
+ * original remains the served variant.
  */
 import { spawn } from 'node:child_process'
 import { existsSync } from 'node:fs'
@@ -166,7 +173,81 @@ async function jpeg(src, dest, quality, { blur = false } = {}) {
   await run('ffmpeg', args)
 }
 
-/** tasks/image/* — four mozjpeg variants of any source image. */
+/** Single WebP encode — libwebp picture preset, quality 90 (light). */
+async function webp(src, dest) {
+  await run('ffmpeg', [
+    '-y',
+    '-i',
+    src,
+    '-c:v',
+    'libwebp',
+    '-quality',
+    '90',
+    '-compression_level',
+    '4',
+    '-preset',
+    'picture',
+    dest,
+  ])
+}
+
+/** Single WebM encode — VP9+Opus, crf 30 with row-mt multithreading. */
+async function webm(src, dest) {
+  await run('ffmpeg', [
+    '-y',
+    '-i',
+    src,
+    '-c:v',
+    'libvpx-vp9',
+    '-crf',
+    '30',
+    '-b:v',
+    '0',
+    '-row-mt',
+    '1',
+    '-cpu-used',
+    '3',
+    '-deadline',
+    'good',
+    '-c:a',
+    'libopus',
+    '-b:a',
+    '96k',
+    dest,
+  ])
+}
+
+/**
+ * Emits a compressed sibling only when it actually compresses — a webp/webm
+ * output that lands >= its source is deleted so the jpg/mp4 remains the
+ * variant the runtime serves ("leave them as they are" for non-compressible
+ * assets). Returns the kept basename or null.
+ */
+async function keepIfSmaller(src, dest, encode) {
+  const { statSync, unlinkSync } = await import('node:fs')
+
+  try {
+    await encode(src, dest)
+  } catch {
+    return null
+  }
+
+  const kept = statSync(dest).size < statSync(src).size
+
+  if (!kept) {
+    try {
+      unlinkSync(dest)
+    } catch {
+      /* best-effort tmp cleanup */
+    }
+
+    return null
+  }
+
+  return path.basename(dest)
+}
+
+/** tasks/image/* — four mozjpeg variants + webp siblings of any source image. */
 export async function convertImage(inFile, outDir, baseName) {
   const out = (suffix) => path.join(outDir, `${baseName}${suffix}`)
   const results = []
@@ -181,6 +262,10 @@ export async function convertImage(inFile, outDir, baseName) {
   for (const [dest, quality, opts] of jobs) {
     await jpeg(inFile, dest, quality, opts)
     results.push(path.basename(dest))
+
+    const webpName = await keepIfSmaller(dest, dest.replace(/\.jpg$/, '.webp'), webp)
+
+    if (webpName) results.push(webpName)
   }
 
   return results
@@ -230,6 +315,11 @@ export async function convertVideo(inFile, outDir, baseName) {
   }
   results.push(path.basename(mp4))
 
+  // webm sibling — vp9+opus, first <source> when it compresses
+  const webmName = await keepIfSmaller(mp4, mp4.replace(/\.mp4$/, '.webm'), webm)
+
+  if (webmName) results.push(webmName)
+
   // reducemp4-2x.sh — /2 normally, /4 when the source is ≥4K wide. The scale
   // is truncated to even dimensions: odd halves (1513px screen recordings →
   // 756.5) make libx264 fail with EINVAL and write zero packets.
@@ -254,6 +344,10 @@ export async function convertVideo(inFile, outDir, baseName) {
     scaled,
   ])
   results.push(path.basename(scaled))
+
+  const webmScaledName = await keepIfSmaller(scaled, scaled.replace(/\.mp4$/, '.webm'), webm)
+
+  if (webmScaledName) results.push(webmScaledName)
 
   // create-thumb.sh — first-frame posters of both videos
   const poster = `${mp4}.jpg`
