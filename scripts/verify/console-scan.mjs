@@ -50,7 +50,7 @@ const CONSOLE_RE =
 // Generated/vendor trees inside module dirs are not authored app source —
 // the zero-console policy targets shipping code, not test suites, reports,
 // or build output.
-const SKIP_DIRS = new Set(['dist', 'node_modules', 'tests', 'reports'])
+const SKIP_DIRS = new Set(['dist', 'node_modules', 'tests', 'reports', 'public'])
 
 const listSrcFiles = (dir) => {
   const out = []

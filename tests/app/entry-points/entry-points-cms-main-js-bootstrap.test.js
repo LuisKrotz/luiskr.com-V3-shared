@@ -10,8 +10,9 @@ import { CMS_IDS } from '@core/tokens/ids/cms.js'
 
 const registerMock = jest.fn()
 
-jest.unstable_mockModule('register-service-worker', () => ({
-  register: registerMock,
+jest.unstable_mockModule('@core/utils/service-worker.js', () => ({
+  registerSiteServiceWorker: registerMock,
+  dropStaleServiceWorkers: jest.fn(),
 }))
 
 const authCallbacks = []
