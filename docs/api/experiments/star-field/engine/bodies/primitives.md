@@ -19,6 +19,15 @@ Per-body mesh builders for the scene-graph assembler in
 prefers a real-mesh hit down the ray so proxy bubbles never eclipse
 the bodies they overlap.
 
+### `SF_USER_DETAIL_R`
+
+`userData` key overriding a detail object's LOD reveal distance —
+updateLod reads it as an absolute camera-to-anchor reach. Local-scale
+detail (the LEO satellite swarm, ISS-class orbiters) must not inherit
+the host's heliocentric `orbit` in the generic `PAD + size·SCALE`
+reach or Earth's near-field shell would render from halfway across
+the chart; these objects carry their own honest reach instead.
+
 ### `makePickProxy`
 
 Invisible pick bubble for bodies too small to hit reliably — planets
@@ -49,6 +58,25 @@ classic GLSL ShaderMaterials.
 - `@param` tex Optional photosphere texture — modulates the core.
 - `@param` rimTint Limb color (hot rim for stars, muted for moons).
 - `@param` falloff Fresnel exponent — higher keeps a tight bright core.
+
+### `irregularGeometry`
+
+Triaxial rubble-pile geometry for `def.irregular` bodies — a detail-7
+icosahedron crumpled by two octaves of seeded value noise so the
+silhouette dimples like a captured asteroid instead of reading as a
+hydrostatic ball. Every vertex sits on the sphere (r = def.radius);
+the macro displacement `vnoise(unit)·amp` pushes it along its own
+normal, then a fine octave at `ROCK_FINE_FREQ ×` adds regolith-scale
+grain so the shading never reads as one smooth lump,
+then `axes` stretches the solid into the body's true triaxial
+proportions (Phobos ≈ 27×22×18 km → [1, 0.81, 0.67]). Per-vertex
+spherical UVs (u = atan2 longitude, v = asin latitude) are baked
+from the PRE-stretch unit direction so an equirect map still wraps
+pole-to-pole without smearing across the crumpled facets.
+
+- `@param` THREE The three.js module.
+- `@param` def Catalog entry — `irregular` carries amp + optional axes.
+- `@returns` Crumpled geometry with spherical UVs + smooth normals.
 
 ### `makeSphere`
 
@@ -103,15 +131,33 @@ IS its far-field representation.
 - `@param` glowTex Shared radial-gradient glow texture (may be undefined).
 - `@param` flat Point-star mode — a filled core glow (no photosphere behind
 
+### `ringStripFor`
+
+Paints a radius-indexed ring strip for ringed bodies with no photo
+texture (Uranus, Neptune) — u sweeps inner→outer radius, matching the
+UV remap makeShell applies to RingGeometry. Seeded thin dusty bands:
+the real ice-giant ring systems are a handful of razor-thin dark
+arcs (Uranus: 13 narrow rings, albedo ~0.02; Neptune: 5 faint arcs),
+so the strip stays mostly transparent with sparse low-alpha bands —
+never Saturn's broad bright plate.
+
+- `@param` THREE The three.js module.
+- `@param` def Catalog entry — seeds the band layout + tints from color.
+- `@returns` A CanvasTexture, or undefined without a 2d context.
+
 ### `makeShell`
 
-Translucent shell layer — Venus's haze atmosphere and Saturn's ring get
-a secondary texture-mapped surface parented to the main mesh. Returns
-the created Object3D so the caller can register it as LOD detail.
+Translucent shell layer — Venus's haze atmosphere and the giant
+planets' rings get a secondary texture-mapped surface parented to
+the main mesh. A ringed body with no authored texture (Uranus,
+Neptune) falls back to `ringStripFor`'s seeded dusty bands; radii
+default to Saturn's strip but `def.ringInner`/`ringOuter` pin the
+honest per-body span. Returns the created Object3D so the caller can
+register it as LOD detail.
 
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry.
-- `@param` shellTexture Shell texture URL — narrowed non-null by the caller's
+- `@param` shellTexture Shell texture URL — undefined for procedural rings.
 - `@param` parent The primary mesh the shell rides on.
 - `@param` texMap Loaded texture map keyed by URL.
 
@@ -141,10 +187,15 @@ through eclipse instead of glowing. All proportions derive from
 
 Decorative companion satellites — small unlit spheres on child pivots;
 `sat.station` swaps the glow ball for the crafted truss-and-panels
-model (ISS). `satPivots` returns the {pivot,speed,phase} records
-frame.ts rotates.
+model (ISS). Plain companions carry the same fresnel-limb material as
+before but now modulated by a surface — the satellite's own photo
+(`sat.texture`, preloaded with the host's maps) or a seeded
+`surfaceFor` equirect keyed on `host:sat:index`, so companion worlds
+are textured bodies too, not bare glow dots. `satPivots` returns the
+{pivot,speed,phase} records frame.ts rotates.
 
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors.
 - `@param` def Catalog entry — `satellites` lists the companions.
 - `@param` mesh The host body mesh — pivots attach to it to orbit.
+- `@param` texMap Loaded texture map keyed by URL.

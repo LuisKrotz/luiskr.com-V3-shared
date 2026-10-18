@@ -2,9 +2,9 @@
 
 &lt;portfolio-related&gt; — "related projects" strip at the
 
-| | |
-|---|---|
-| **Source** | `src/website/components/portfolio/Related.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/portfolio/Related.tsx`          |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -24,6 +24,14 @@ detect line-clamp truncation, so scrollHeight vs clientHeight does
 it here. The flag drives the `is-truncated` class that reveals the
 pulsing "···" affordance; measured only while collapsed (open state
 is unclamped by definition, and the affordance hides anyway).
+
+### `_queueNoteMeasure`
+
+Schedules a single truncation measure on the next animation frame.
+Reads inside rAF hit clean layout, so the scrollHeight query costs
+~0; running it synchronously on every onUpdated/RO tick forced a
+whole-document layout per call (the scroll-jank source profiles
+flagged). Bursts (render → RO fire → render) collapse into one read.
 
 ### `_watchNoteTruncation`
 

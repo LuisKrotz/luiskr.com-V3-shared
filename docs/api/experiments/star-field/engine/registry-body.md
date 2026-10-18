@@ -90,7 +90,10 @@ plus an additive halo sprite tinted by the OpenNGC type code.
 Disposes every geometry/material/owned texture under a spawned
 registry group — canvas-generated textures (procedural surfaces) are
 theirs to release; the shared `glowTex` sprite is excluded so
-eviction never corrupts the scene's shared sprite.
+eviction never corrupts the scene's shared sprite. Every material
+slot is scanned (map/normalMap/emissiveMap/…) — procedural bodies
+carry several textures and freeing only `map` would leak the rest on
+each LRU eviction.
 
 - `@param` s Engine state (shared glowTex to exclude).
 - `@param` root The spawned group to strip.

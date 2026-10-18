@@ -82,6 +82,15 @@ Starting angle on the orbit (radians).
 
 ### (module scope)
 
+Orbital inclination about the parent's x-axis (radians) — tilts the
+whole orbit plane, not the body. Real multi-planet systems share
+near-coplanar planes but are never perfectly aligned; small nonzero
+values break the edge-on straight-line illusion while still reading
+as a resonant chain. Written to `pivot.rotation.x` at build so it
+survives the per-frame `rotation.y` orbit sweep.
+
+### (module scope)
+
 Orbital eccentricity 0–1 — when set, the pivot still sweeps the
 angle uniformly but the mesh's radial distance follows the conic
 `r = a(1−e²)/(1+e·cos θ)` so the body draws a visible ellipse
@@ -119,7 +128,23 @@ Secondary texture for translucent shells (Venus atmosphere, Saturn ring).
 
 ### (module scope)
 
-Shell is a flat ring disc (Saturn) rather than an atmosphere sphere.
+Shell is a flat ring disc rather than an atmosphere sphere — with
+no `shellTexture` a seeded procedural band strip is painted instead
+(Uranus/Neptune's thin dusty arcs), so any body can carry rings.
+
+### (module scope)
+
+Ring radii as body-radius multiples — default to Saturn's strip
+(SF_DETAIL.RING_INNER/OUTER); ice giants override with their honest
+narrower spans (Uranus's rings hug 1.6–2.0 R, not Saturn's wide
+plate).
+
+### (module scope)
+
+Procedural band count override for `ringStripFor` — default
+SF_DETAIL.RING_BANDS; real systems differ wildly (Jupiter 4 faint
+rings, Uranus 13 razor-thin arcs, Neptune 5 dusty arcs) so the
+catalog pins the honest count per body.
 
 ### (module scope)
 
@@ -242,7 +267,12 @@ breathe and stretch outward with the shared solar-wind cycle (Sun).
 
 LEO constellation shell — `count` point glints sharing one inclined
 orbital plane at `orbit`× radius, sweeping as a unit (the Starlink
-swarm; `orbit` multiplies `def.radius`).
+swarm; `orbit` multiplies `def.radius`). An `id`/`name` pair turns
+the whole shell into a dossier-backed pick target like a catalogued
+companion: an invisible pick bubble at the shell radius registers
+the swarm in `pickables`/`nodes`/`anchors` so clicking the glint
+annulus (but not the planet it wraps — the proxy loses to any real
+mesh hit along the ray) opens the near-orbit dossier.
 
 ### (module scope)
 
@@ -251,6 +281,33 @@ pooled flash sprite fires at a random surface point every
 `SF_METEOR.INTERVAL`-ish seconds (updateFx). For bodies whose
 dossier describes ongoing bombardment — the flash makes the
 crater record readable as a live process.
+
+### (module scope)
+
+Irregular rubble-pile body — replaces the perfect SphereGeometry
+with a seeded noise-crumpled icosahedron: each vertex displaces
+along its own normal by `vnoise(unit+offset)·amp·radius` and the
+whole solid stretches along `axes` (triaxial proportions, default
+seeded mild). For moons whose dossier JSON describes a lumpy
+captured asteroid (Phobos, Deimos) rather than a hydrostatic ball —
+the silhouette carries the physics (tidal stripping, rubble
+re-accretion) the sphere could never show.
+
+### `amp`
+
+Crumple depth as a fraction of the body radius (0–1).
+
+### (module scope)
+
+Triaxial proportions [x, y, z] — the body's three radii normalized to x=1 (Phobos ≈ [1, 0.81, 0.67]).
+
+### (module scope)
+
+Procedural-surface recipe pin — one of `SF_SURFACES` (`rock`,
+`ice`, `gas`, `lava`, `ocean`). The painter's kind bias still seeds
+the grain, but the recipe forces the read: a molten Proxima d can
+never draw water bands, an oceanic TRAPPIST-1e always carries seas.
+Absent → seeded pick inside the kind's palette as before.
 
 ### `dist`
 
@@ -290,6 +347,36 @@ not second moons.
 
 Same conic rule as `SFBodyDef.ecc` — radial distance modulates
 around the circular pivot sweep.
+
+### (module scope)
+
+Atmosphere tint override (SF_COLORS hex) — the rim shell normally
+migrates Earth's day/dusk/night palette; bodies with a chemically
+different sky (Titan's tholin haze) pin the limb to their own hue.
+
+### (module scope)
+
+Cryovolcanic/volcanic plume system — animated geyser/volcano vents
+that throw ejecta sprites into space (Enceladus' south-polar tiger
+stripes, Io's scattered sulfur plumes). `polar` clusters the vents
+around the south pole; `color` tints the jets (water-ice vs
+sulfur), `height` overrides the reach as a body-radius multiple.
+
+### (module scope)
+
+Vent count — defaults to `SF_PLUME.VENTS`.
+
+### (module scope)
+
+True → vents cluster at the south pole (Enceladus tiger stripes).
+
+### (module scope)
+
+Plume tint (SF_COLORS hex) — ejecta particle color.
+
+### (module scope)
+
+Jet reach × body radius — defaults to `SF_PLUME.HEIGHT`.
 
 ### (module scope)
 
@@ -440,6 +527,15 @@ bodyPos)` into the shared vector the material's TSL uniform wraps,
 so lights stay dark on the lit hemisphere and the rim migrates
 with the terminator.
 
+### (module scope)
+
+Light-source anchor override — galactic planets (TRAPPIST-1's
+worlds, Proxima's) are lit by their host star, not the solar
+Sun, so their day/night vector resolves against the parent's
+anchor instead of the default `sunLight`. Moons of planets
+(Io, Enceladus) keep the default: they orbit a planet but are
+still lit by the real Sun.
+
 ### `approached`
 
 ids whose dossier was already prefetched — approach fires once.
@@ -518,6 +614,26 @@ Pointer listeners to detach on destroy.
 
 last pointer-down position for click-vs-drag discrimination.
 
+### `pickX`
+
+Pending hover-pick position — the freshest coalesced pointer sample.
+High-rate mice (1000Hz+) fire several pointermoves per frame; the
+handler only records scalars and the rAF tick raycasts once per
+frame against the latest pair, never once per event.
+
+### `pickRaf`
+
+Non-null while a per-frame pick tick is queued — dedupes rAF arms.
+
+### `viewW`
+
+Cached canvas box in CSS px — refreshed by `handleStarResize`. The
+per-frame projection (`anchorScreenPos`/`worldScreenPos`) and
+galaxy-cloud updates read these instead of `clientWidth`/
+`clientHeight` so hover tracking and fades never issue a layout
+read inside the render loop. 0 = not measured yet (cold path falls
+back to a one-time live read).
+
 ### `lastT`
 
 Last tick timestamp for dt-based animation.
@@ -588,6 +704,17 @@ Spin target (mesh or its inner group) for self-rotation.
 
 ### (module scope)
 
+Body-system center — the group that carries the orbit radius
+(`position.x = def.orbit`) and hosts everything that must share the
+body's location but NOT its orientation: the axis-lock group, the
+bare mesh, satellite pivots and constellation swarms. It never
+rotates itself, so children orbit the body's center in the pivot
+frame instead of inheriting surface spin or lock counter-rotation.
+For orbiting bodies this is also the eccentric-orbit target —
+frame.ts rewrites its `position.x` with the conic radius.
+
+### (module scope)
+
 Inertial axis lock — a group between the orbit pivot and the mesh
 carrying `rotation.z = tilt` and counter-rotated on Y each frame.
 Without it the pivot's orbital Y-rotation precesses the spin axis
@@ -655,6 +782,13 @@ beyond the detail distance so far bodies draw as one primitive.
 
 ### (module scope)
 
+Volumetric-galaxy Points cache — `updateGalaxyClouds` resolves the
+`userData.volumetric` child once and parks the handle here so the
+per-frame fade never re-walks `mesh.children` (a `.find` call
+allocates its predicate closure every frame otherwise).
+
+### (module scope)
+
 Star corona sprite — the seeded streamer texture from
 `procedural.coronaFor`; updateFx rotates `material.rotation` and
 breathes `material.opacity` so stars shimmer like live suns.
@@ -679,6 +813,93 @@ near-field group (real photosphere sphere + annulus halo + corona +
 flares, parked on `detail`) resolves on approach, so the star reads
 as an unresolvable point from range and as its spectral class up
 close.
+
+### (module scope)
+
+Living-nebula animation record — parked on the sprite's userData by
+`makeNebulaSprite` (`SF_USER_NEBULA`) and lifted here so updateFx
+can churn the depth layers each frame.
+
+### (module scope)
+
+Comet tail/coma animation record — updateFx reads the live conic
+radius off `center.position.x` (frame.ts writes it for `ecc`
+orbits) and re-drives each tail's particle field between `rMin`
+(periapsis — full stream) and `rMax` (apoapsis — near-invisible
+stub), reproducing how sublimation scales with solar flux. Each
+`Points` layer carries its seeded grain field in
+`userData.gasPts` — the record only needs the object handles.
+
+### `ion`
+
+Ion-tail particle layers (core stream + diffuse sheath).
+
+### `dust`
+
+Dust-tail particle layers (core stream + diffuse sheath).
+
+### `coma`
+
+Coma glow sprite hugging the nucleus.
+
+### `rMin`
+
+Periapsis/apoapsis distances (chart units) — the scale window.
+
+### `comaScale`
+
+Resting coma scale captured at build, multiplied by the factor.
+
+### (module scope)
+
+Cryovolcanic plume system — per-vent jet + cycling puff sprite
+records built by `makePlumes`; updateFx rises each puff along its
+vent direction, expands and fades it, and recycles it — continuous
+eruption with zero per-frame allocation.
+
+### `jet`
+
+Steady tapered-cone jet rooted at the vent (shimmering column).
+
+### `puff`
+
+Rising ejecta puff cycling outward along `dir`.
+
+### `dir`
+
+Unit vent direction (body-local) — the ejecta axis.
+
+### `phase`
+
+Seeded cycle phase (0–1) and rate multiplier.
+
+### `radius`
+
+Body radius (spawn height) and jet reach (world units).
+
+### `width`
+
+Puff base width (world units) — grows as it rises.
+
+### (module scope)
+
+Shared body-local sun direction — the dayNight registry fills it
+each frame; updateFx dots it against `dir` so vents only jet when
+the sun lights their hemisphere (Elysium-dark vents go smudge).
+
+### (module scope)
+
+Living-nebula fx record — the per-layer swirl state for a deep-sky
+sprite. Each entry owns one SpriteMaterial (primary photo, rotated
+echo ghost, or wide underlay glow); `rate` is rad/scene-second (the
+echo's is negative → counter-rotating shear), `phase` the seeded
+start angle, `opBase` the resting opacity the shimmer wave scales.
+`baseScale` captures the aspect-corrected sprite scale so the whole
+sprite can breathe without losing the photo's aspect.
+
+### `phase`
+
+Seeded phase offset for the whole-sprite breathing wave.
 
 ### (module scope)
 

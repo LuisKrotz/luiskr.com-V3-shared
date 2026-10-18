@@ -15,11 +15,14 @@ images (any format) →
 {base}-mozjpg-uncompressed.jpg (q100 — tasks/image/100)
 {base}-mozjpg-50.jpg (q50 — tasks/image/50)
 {base}-mozjpg-75.jpg (q75 — tasks/image/75)
-{base}-mozjpg3-MSSIM-tuned-kodak.jpg (q25 + blur — tasks/image/25)
+{base}-mozjpg3-MSSIM-tuned-kodak.jpg (q25 + blur — tasks/image/25) + a .webp sibling of every .jpg above (the runtime's if-exists
+<source>/preload chain prefers them when present)
 
 videos (any format) →
 {base}.mp4 (h264, tasks/video/transform.sh)
+{base}.webm (vp9+opus — first <source>)
 {base}.mp4-scaledown-2x.mp4 (h264, iw/2 — iw/4 for ≥4K)
+{base}.mp4-scaledown-2x.webm (vp9+opus scaled)
 {base}.mp4.jpg (first-frame poster)
 {base}.mp4.jpg-thumb.jpg (q25 + blur thumb)
 {base}.mp4-scaledown-2x.mp4.jpg (poster of the scaled video)
@@ -27,6 +30,9 @@ videos (any format) →
 
 Tool preference per the original scripts: ImageMagick `convert` + mozjpeg
 `cjpeg` when installed, ffmpeg fallback otherwise (always available).
+WebP/WebM are always ffmpeg (libwebp / libvpx-vp9) — light compression,
+and an output that lands >= its input is discarded so the jpg/mp4
+original remains the served variant.
 
 ### `imgMagick`
 
@@ -48,7 +54,22 @@ Single JPEG encode honoring the task scripts' tools when present.
 
 ### (module scope)
 
-tasks/image/* — four mozjpeg variants of any source image.
+Single WebP encode — libwebp picture preset, quality 90 (light).
+
+### (module scope)
+
+Single WebM encode — VP9+Opus, crf 30 with row-mt multithreading.
+
+### (module scope)
+
+Emits a compressed sibling only when it actually compresses — a webp/webm
+output that lands >= its source is deleted so the jpg/mp4 remains the
+variant the runtime serves ("leave them as they are" for non-compressible
+assets). Returns the kept basename or null.
+
+### (module scope)
+
+tasks/image/* — four mozjpeg variants + webp siblings of any source image.
 
 ### (module scope)
 

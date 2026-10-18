@@ -9,10 +9,6 @@ Hero asteroids for the two belts — COUNT individual
 
 ## Members
 
-### `_TEX_W`
-
-Rock texture canvas size — small equirect, speckle hides seams.
-
 ### (module scope)
 
 Material class descriptor — palette source + paint recipe + PBR
@@ -38,21 +34,10 @@ Material roughness — metal reads glossier than regolith.
 
 Material metalness — only the `metal` class is truly metallic.
 
-### `flat`
-
-Flat shading — stone/carbon keep facets, ice/dust stay smooth.
-
 ### `_CLASSES`
 
 The five belt material classes, mirroring real asteroid taxonomy —
 stony chondrites dominate, carbonaceous next, dust/ice/metal trail.
-
-### `vnoise`
-
-Cheap value-noise 3d for vertex displacement — layered sin/cos hash
-so rock silhouettes crumple without needing a full fbm import.
-
-- `@param` x Sample x. @param y Sample y. @param z Sample z.
 
 ### `rockTexture`
 

@@ -2,9 +2,9 @@
 
 &lt;media-expanded&gt; — full-screen media viewer inside the
 
-| | |
-|---|---|
-| **Source** | `src/website/components/media/MediaExpanded.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/media/MediaExpanded.tsx`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -16,6 +16,10 @@ The MediaExpanded — expanded class.
 ### `source`
 
 Full-res media URL (from the source attribute).
+
+### `sourceWebm`
+
+Webm sibling of an .mp4 source — first <source> when it exists.
 
 ### `thumb`
 

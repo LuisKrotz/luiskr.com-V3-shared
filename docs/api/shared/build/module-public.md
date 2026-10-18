@@ -19,6 +19,25 @@ Module public mounts: `{ dir }` (repo-relative source) → `{ at }` (URL
 prefix it answers under). Order is irrelevant — the longest prefixes are
 just connect routes; `'/'` mounts fall through to `next()` on misses.
 
+### `firebaseRewrites`
+
+firebase.json hosting rewrites — `/robots.txt` → `/meta/robots.txt`
+and friends. Firebase evaluates these at hosting level, so plain
+`vite dev`/`vite preview` never saw them (Lighthouse fetched the SPA
+index.html as robots.txt). Reading the config keeps the rewrite
+table single-sourced; glob sources (`/**` SPA catch-alls) are
+excluded — the SPA fallback already owns those.
+
+- `@returns` {{ source: string, destination: string }[]} Plain path rewrites.
+
+### `rewriteMount`
+
+Connect middleware applying the firebase rewrites — rewrites
+`req.url` to the destination so a later `serveMount` answers the
+mapped file. Registered before the mounts.
+
+- `@returns` {import('connect').NextHandleFunction} Rewrite handler.
+
 ### `MIME`
 
 Minimal content-type table for the dev middleware (build copies need none).

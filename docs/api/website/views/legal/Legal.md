@@ -2,9 +2,9 @@
 
 &lt;view-legal&gt; — the legal-page route (privacy policy, GDPR,
 
-| | |
-|---|---|
-| **Source** | `src/website/views/legal/Legal.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/views/legal/Legal.tsx`                     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -31,7 +31,7 @@ Reloads when the locale changes.
 
 ### `loadData`
 
-Fetches the legal document node (privacy-policy | gdpr | terms-of-use)
+Fetches the legal document node (privacy-policy | gdpr | terms-of-use | license)
 for the current locale. `wait` defers the DOM write — used after a
 route swap so the old document's fade-out finishes before the new
 skeleton→content swap (prevents a flash of loading state). SWR: the

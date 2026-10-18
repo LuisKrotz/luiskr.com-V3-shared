@@ -2,9 +2,9 @@
 
 Path tokens split by function — public URL routes, Firebase
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/routes/paths.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/routes/paths.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -32,3 +32,11 @@ Segment names inside translations/<locale>/ used by the bootstrap chunks
 Frozen asset path map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
+
+### `WASM_OVERLAY_PREFIX`
+
+wasm-pack `--target web` artifacts — JS glue beside the .wasm.
+
+### `WASM_DIAGRAM_PREFIX`
+
+`rust/diagram` artifacts — the mermaid-subset SVG engine.

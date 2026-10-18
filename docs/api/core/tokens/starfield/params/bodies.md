@@ -128,13 +128,45 @@ satPivots update.
 
 ### `COUNT`
 
-Hero rocks per belt — enough variety to read at fly-in distance.
+Hero rocks per belt — fewer than before but each one is now a
+high-tessellation mesh: the annulus reads as a crowded debris
+field at fly-in distance without the vertex-memory blowup that
+96 ultra-dense geometries would cost (~3M tris per belt).
+
+### `DETAIL`
+
+Mesh tessellation — icosahedron detail for regular rocks and
+tetrahedron detail for fragments. `detail` is EDGE segments:
+icosahedron detail 24 → 20·25² = 12.5k tris/rock (~600k per belt)
+so silhouettes hold a continuous curve at fly-in zoom with no
+readable polygon edges; fragments stay coarser (sharp shard
+planes are their look — tetra detail 10 → 4·11² = 484 tris).
+
+### `MID_FREQ`
+
+Mid/micro relief octaves — a single low-frequency noise pass makes
+every rock a smooth blob, so displacement stacks three octaves:
+the macro crumple (1×) sets the silhouette, `MID_FREQ ×` adds the
+lumpy potato bumps real asteroids carry, and `FINE_FREQ ×` grains
+the surface at regolith scale.
+
+### `TEX_W`
+
+Class-texture canvas (px) — 512×256 equirect, 16× the pixel count
+of the original 128×64 strip so crater rims and mineral veins
+resolve as texture detail instead of smearing into noise.
+
+### `TEX_GRAIN`
+
+Per-class feature counts, scaled to the hi-res canvas.
 
 ### `SIZE_MIN`
 
 Rock radius as a fraction of annulus width — fragments at MIN,
 regular bodies in the mid band, BIG_FRAC of rocks promoted to the
 large-body range (Ceres-class stand-ins, still far under planets).
+Kept small: a hero rock must read as a boulder drifting past, never
+as a planet-scale body crossing the frame.
 
 ### `BIG_FRAC`
 
@@ -156,13 +188,15 @@ Fragments deform harder — broken shards, not rounded potatoes.
 
 ### `CLASS_STONE`
 
-Material-class mix — probabilities must sum to 1: ordinary
-stony (chondrite) dominates, carbonaceous + dusty bodies next,
-then ice and nickel-iron.
+Material-class mix — probabilities sum with the metal remainder
+to 1: ordinary stony (chondrite) dominates, carbonaceous +
+hydrated + dusty bodies next, then ice, and nickel-iron holds
+what remains. The class picks drive both the painted texture and
+the material response (metal glints, ice refracts).
 
 ### (module scope)
 
-(remainder → metal)
+(remainder → metal ≈ 0.16)
 
 ### `SPIN_MIN`
 
@@ -196,6 +230,152 @@ photosphere for the same flat point glow the neighborhood stars
 wear: from Proxima's range (~1 060 units) the real solar system is
 a single bright star, never a resolved cluster. The threshold sits
 well clear of the belt so normal fly-throughs never trigger it.
+
+### `SF_COMET`
+
+Comet rendering — a `SF_KINDS.COMET` body is a dark irregular nucleus
+wrapped in a sublimated gas/dust envelope (coma) trailing two tails.
+The ion tail is a long narrow streak pointing straight anti-sunward
+(the solar wind entrains plasma along field lines); the dust tail is
+shorter, wider and lags the radius vector because grains keep some
+orbital momentum — it tilts off the anti-sunward line and fans out.
+Both tails are PARTICLE STREAMS rooted at the nucleus — `THREE.Points`
+clouds of soft-glow grains, never quads — whose length and opacity
+scale with heliocentric proximity: sublimation scales steeply with
+solar flux, so the tail ignites at periapsis and dies on the outbound
+leg. Lengths are multiples of the nucleus radius (Halley ≈ 0.2 units
+→ ~6.4-unit ion stream), so the proportions read correctly at chart
+scale where an honest ~10⁸-km tail would cross the whole map.
+
+### `COMA_SCALE`
+
+Coma sprite diameter × nucleus radius — the sublimated envelope.
+
+### `COMA_OPACITY`
+
+Coma opacity at periapsis — thins with the same factor as tails.
+
+### `COMA_FLOOR`
+
+Coma brightness floor — an inactive nucleus still vents a faint
+background coma; only the tails fully die.
+
+### `ION_LEN`
+
+Ion tail length as a multiple of the nucleus radius — the plasma
+stream reaches well past the coma before it disperses.
+
+### `DUST_LEN`
+
+Dust tail — shorter, broader, lagging the radius vector.
+
+### `DUST_TILT`
+
+Dust-tail lag angle (rad) — grains trail the comet's orbit, so the
+fan tilts off the anti-sunward line.
+
+### `ACTIVE_FRAC`
+
+Periapsis window — fraction of the periapsis→apoapsis span inside
+which sublimation runs hard enough to grow tails. Solar flux falls
+as 1/r², so the thaw front collapses quickly on the outbound leg:
+`active = clamp(((rMin + span·ACTIVE_FRAC) − r) / (span·ACTIVE_FRAC))`
+raised to `GAMMA`, and the tail clouds unmount (`visible=false`)
+below `TAIL_OFF`. Halley sublimates measurably out to ~3 AU against
+an 0.59–35 AU orbit → ~9% window; 0.3 reads correctly at chart scale
+where the tail should die before the orbit leaves the inner system.
+
+### `PTS_CORE`
+
+Particle counts — each tail is TWO `Points` layers: `PTS_CORE`
+small bright grains forming the dense axial stream and `PTS_HALO`
+large dim grains forming the diffuse gas sheath around it. ~640
+grains per comet ≈ a few draw calls total — far cheaper than the
+displaced-geometry alternatives and the only primitive whose
+silhouette can never render a hard edge.
+
+### `PSZ_CORE`
+
+Grain sizes (× nucleus radius) — core grains are tight sparks,
+halo grains are big soft blobs whose overlap fakes the gas volume.
+Under additive blending each grain contributes a fraction of its
+footprint, so the grains run large: a sparse cloud of small
+sprites reads as confetti, not gas.
+
+### `DUST_PSIZE`
+
+Dust grains ride slightly larger than ion plasma.
+
+### `SPREAD_ION`
+
+Column spread — the half-width at the root (× radius) and the
+downstream fan factor: `spread(d) = SPREAD·(1 + GROW·d)` so the
+column opens as grains drift anti-sunward (solar-wind dispersion).
+Dust disperses far wider than the field-locked ion stream.
+
+### `WID_FLOOR`
+
+`WID_FLOOR` keeps a residual spread when the tail shrinks toward
+apoapsis (the column thins but never pinches to a zero-width line).
+
+### `SHEATH_W`
+
+Sheath layer — wider spread and lower opacity than the core it
+wraps (`SHEATH_W` × spread, `OP_HALO` × opacity); `HALO_SLOW`
+slows its grains (outer gas drags behind the entrained spine).
+
+### `RATE_ION_LO`
+
+Emission rates — per-particle lifecycle `d = frac(phase + t·rate)`
+in cycles/scene-second. Ion plasma streams fast (magnetically
+entrained, ~5–20 s to cross), dust grains creep (~15–70 s). Each
+particle seeds a rate inside its layer's range so the stream never
+marches in lockstep.
+
+### `DIM_LO`
+
+Per-grain brightness floor (`DIM_LO`) and lateral wobble — each
+grain rides a seeded sine `sin(t·WOBF + phase)·WOB_AMP·spread·(0.25+0.75d)`
+growing downstream (turbulence amplifies as the column thins);
+`WOBF_LO/HI` spread the wobble frequencies so the column shimmers
+instead of sloshing.
+
+### `SZ_LO`
+
+Grain footprint — `SZ_LO` is the per-grain seeded size floor
+(`sz[i] ∈ [SZ_LO, 1]` × layer size), `SZ_BASE + SZ_GROW·d` swells a
+grain's quad as it drifts downstream — dispersing gas expands, so
+the column stays fused (overlapping soft blobs) all the way to the
+ragged tip instead of thinning into separated dots.
+
+### `PTS_RAMP`
+
+Brightness envelope along a grain's life `d` — a smoothstep ramp
+over the first `PTS_RAMP` fraction (fresh grains glow in rather
+than pop), then `(1−d)^PTS_FADE` so every grain dies at its own
+distance: the tip dissolves grain-by-grain into a ragged comb.
+`FADE` stays shallow — a steep falloff starves the mid-tail and
+the stream reads as a stub behind the coma.
+
+### `ZFLAT`
+
+Vertical flattening — the z spread is `ZFLAT` × the in-plane
+spread (the tail sheet is thinner than it is wide, like a real
+dust sheet seen edge-on).
+
+### `GAIN`
+
+HDR grain gain — vertex colors are written as `rgb·envelope·GAIN`:
+values >1 push overlapping additive grains into saturation, which
+is what fuses a sparse cloud into a continuous glowing column —
+without it each grain stays a faint gray speck and the tail reads
+as confetti instead of gas.
+
+### `WIND_K`
+
+Solar-wind gust coupling — grain brightness scales by
+`1 − WIND_K + WIND_K·windNorm` so a storm visibly surges the
+stream (katsushika-style brightness waves down the tail).
 
 ### `SF_DETAIL`
 
@@ -235,6 +415,16 @@ V coordinate sampling the ring strip's center row (radius = U).
 ### `RING_INNER`
 
 Saturn ring radii as body-radius multiples (matches ring texture).
+
+### `RING_STRIP_W`
+
+Procedural ring strip — ringed bodies without a photo texture
+(Uranus, Neptune) get a seeded banded strip painted at build time:
+`RING_STRIP_*` sizes the radius-indexed canvas, `RING_BANDS` seeds
+the tenuous ring count, `RING_BAND_W`/`RING_ALPHA_*` shape each
+narrow dusty band. Uranus's real system is 13 razor-thin dark
+rings; the painter biases thin + faint so it reads as a charcoal
+sketch, not Saturn's bright bands.
 
 ### `HALO_SCALE`
 
@@ -372,7 +562,11 @@ Rotation jitter added to the seeded base angle (radians).
 
 Nebula depth layering — a parallax echo + wide underlay glow composed
 under the photo sprite so a nebula reads as a volume of gas at
-different depths instead of one flat billboard.
+different depths instead of one flat billboard. The *_RATE/_FREQ/_WAVE
+members drive the ambient-life pass in updateFx: each layer swirls
+(SpriteMaterial.rotation is a UV-space turn, so the feathered photo
+churns in place rather than orbiting) and breathes opacity on detuned
+sines; rates are seeded from the body id so no two nebulae churn alike.
 
 ### `ECHO_SCALE`
 
@@ -389,3 +583,29 @@ Underlay glow scale multiplier — the wide light-field behind.
 ### `UNDER_OPACITY`
 
 Underlay glow opacity.
+
+### `SWIRL_MIN`
+
+Slowest layer swirl rate (rad/scene-second) — real nebular flows
+move at ~10 km/s over light-year spans, so the chart suggests the
+churn with sub-centi-radian rotation rather than a visible spin.
+
+### `SWIRL_SPREAD`
+
+Seeded spread added to SWIRL_MIN — per-nebula swirl variance.
+
+### `ECHO_RATE`
+
+Echo counter-rotation factor — negative sign makes the ghost layer shear against the photo.
+
+### `UNDER_RATE`
+
+Underlay drift factor — the widest layer barely turns.
+
+### `OP_WAVE`
+
+Opacity shimmer amplitude (fraction of opBase) + detuned frequency.
+
+### `BREATHE_AMP`
+
+Whole-sprite breathing — ±fraction scale swell like gas pressure waves.

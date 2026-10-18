@@ -2,9 +2,9 @@
 
 Native DOM event-name tokens split by input modality —
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/events/dom.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/events/dom.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -84,3 +84,30 @@ events (user gesture start/end, per-frame change).
 
 Frozen clipboard event-name map — copy/cut/selection events the docs
 portal intercepts for its source-code copy guard.
+
+### `SW_EVENTS`
+
+Frozen service-worker event/state map — registration lifecycle
+(`updatefound` on the registration, `statechange`/`installed` on the
+installing worker) plus window online/offline. Local replacement for
+the retired `register-service-worker` dependency.
+
+### `SW_STRINGS`
+
+ServiceWorker state strings + registration plumbing constants.
+
+### `SCRIPT_MIME`
+
+Content-type fragment a valid SW script must answer with.
+
+### `CONTENT_TYPE`
+
+Response header read by the localhost validity probe.
+
+### `PROBE_HEADER`
+
+Request header sent by the localhost probe (mirrors real SW fetches).
+
+### `PROBE_VALUE`
+
+Probe header value — browsers tag SW script requests this way.

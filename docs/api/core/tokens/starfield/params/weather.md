@@ -285,3 +285,72 @@ Altitude jitter fraction — the shell has thickness, not a line.
 ### `SIZE`
 
 Point size vs the host body radius — glints, not balls.
+
+### `REVEAL`
+
+Near-field reveal distance (world units) — LEO satellites are
+invisible from interplanetary range: the swarm resolves only when
+the camera is inside the Moon's orbital neighborhood (~4.5 units),
+so the threshold sits just past it. The value is an absolute
+camera-to-host distance, replacing the generic LOD `PAD + size·SCALE`
+reach that would otherwise key on the host's heliocentric orbit and
+reveal the shell from halfway across the chart.
+
+### `SF_PLUME`
+
+Cryovolcanic/volcanic plume systems — Enceladus vents water-ice
+geysers from its south-polar tiger stripes, Io throws sulfur plumes
+hundreds of km over its whole surface. Each vent carries a steady
+jet sprite plus a rising puff sprite that cycles outward, fades, and
+recycles — a continuous eruption read without per-frame allocation.
+
+### `VENTS`
+
+Default vent count when `def.plumes.count` is unset.
+
+### `HEIGHT`
+
+Jet/puff reach as a multiple of the body radius.
+
+### `WIDTH`
+
+Jet sprite width × body radius.
+
+### `JET_BASE_W`
+
+Jet cone footprint — the steady column is an open-ended tapered
+cylinder rooted at the vent (narrow throat, umbrella spread at the
+top, CylinderGeometry(rTop>rBottom)). JET_SEG is the radial
+tessellation — 12 keeps the silhouette round under any azimuth.
+A vertical alpha gradient texture feeds `map`: blazing at the vent
+(v=1 side) and dissolving into transparency at the rim.
+
+### `PERIOD`
+
+Rising-puff cycle seconds (per-vent phase is seeded).
+
+### `OPACITY`
+
+Steady jet opacity at the vent base.
+
+### `PUFF_OPACITY`
+
+Puff opacity peak at the bottom of its rise.
+
+### `SUN_LO`
+
+Sunlight gate — cryovolcanic jets scatter sunlight, so a vent on
+the body's night side shows only a faint smudge. `dot(ventDir,
+sunDirLocal)` smoothsteps between LO/HI: fully dark vents keep
+DARK_FLOOR so the plume never pops discontinuously at the
+terminator.
+
+### `POLAR_LAT`
+
+Polar vent latitude band — |y| on the unit sphere above this marks
+the tiger-stripe cluster (Enceladus vents sit ~75°S). Scattered
+(volcanic) vents ignore it and sample the whole sphere.
+
+### `POLAR_SPREAD`
+
+Per-vent spread around the pole direction (unit-sphere radius).

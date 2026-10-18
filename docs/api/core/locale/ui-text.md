@@ -46,7 +46,7 @@ Localized copyright line for the site footers — resolves
 substitutes the `{year}` placeholder with the current calendar year so
 the stored translation never goes stale.
 
-- `@returns` e.g. 'All rights reserved © Luis Krötz, 2026'
+- `@returns` e.g. 'Copyright © 2026 Luis Krötz'
 
 ### `rightsParts`
 

@@ -2,18 +2,21 @@
 
 Public-site entry point (modern ESM bundle).
 
-| | |
-|---|---|
-| **Source** | `src/shared/src/main.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared/src/main.ts`                                |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
 ### `mount`
 
-Inserts <app-root> into #app if empty. Idempotent — safe to call on a timer
-while the document finishes parsing.
-- `@returns` {boolean} true when the root element now exists in the DOM
+Inserts <app-root> into #app. Idempotent — safe to call on a timer while
+the document finishes parsing. Prerendered pages ship a reader-content
+<article> inside #app: it is hoisted offscreen (never deleted) before the
+swap so reader modes, no-JS crawlers and AI agents keep the full document
+after the shell mounts — Readability can't pierce the app's shadow DOM.
+- `@returns` {boolean} true when the root element exists in the DOM
 
 ### `start`
 

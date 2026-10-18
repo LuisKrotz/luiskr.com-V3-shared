@@ -32,7 +32,21 @@ rockTexture make on top of the shared fake2d surface.
 
 Geometry stand-in with a real position attribute — the chain
 mock's `count` proxy coerces NaN so the crumple/UV-bake vertex
-loop would never iterate; four real verts let it run.
+loop would never iterate; five real verts let it run, and the last
+DUPLICATES the first so `weldGeometry`'s dedup arm (`byPos.get`
+hit) exercises too.
+
+### `fakeAttr`
+
+Weld-aware attribute stand-in — `weldGeometry` rebuilds the mesh
+into a fresh indexed BufferGeometry, so the welded position array
+must keep `count`/`getX`/`setXYZ` for the displacement loop to run.
+
+### `fakeBufGeo`
+
+Weld-aware geometry stand-in — stores attributes set via
+`setAttribute` (the auto-mock proxy would drop them, hiding the
+welded position array from the displacement loop).
 
 ### `recNodes`
 

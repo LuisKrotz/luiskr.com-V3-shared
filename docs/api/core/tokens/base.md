@@ -127,6 +127,11 @@ composes from this fragment (zero-hardcoding rule 9).
 
 BEM block fragment "b distort" — composed by the token groups below into full class names.
 
+### `_B_GPU_OVERLAY`
+
+BEM block fragment "b webgpu overlay" — composed by the token groups into
+the dual-layer render canvas class names (zero-hardcoding rules 4–5).
+
 ### `_B_FOOTER_SOURCE`
 
 BEM block fragment "b footer source" — composed by the token groups below into full class names.
@@ -418,6 +423,10 @@ Token key "k privacy policy" — single source for the repeated literal.
 ### `_K_TERMS_OF_USE`
 
 Token key "k terms of use" — single source for the repeated literal.
+
+### `_K_LICENSE`
+
+Token key "k license" — single source for the repeated literal.
 
 ### `_K_EARTH_PLAYGROUND`
 

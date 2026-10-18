@@ -1,34 +1,32 @@
 # `experiments/docs/mermaid.ts`
 
-Mermaid diagram rendering for docs payloads — markdown
+Diagram rendering for docs payloads — markdown
 
-| | |
-|---|---|
-| **Source** | `src/experiments/docs/mermaid.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments/docs/mermaid.ts`                       |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
-### `initialized`
+### `FONT_SIZE_FALLBACK`
 
-Whether mermaid.initialize has already run — it is global config.
+Default font size when the computed style is unparsable.
 
-### `themeVars`
+### `themeJson`
 
-Reads the live theme custom properties into a mermaid `themeVariables`
-map — the diagram inherits the project's ink/surface/accent tokens
-instead of shipping mermaid's default palette.
+Reads the live theme custom properties + computed type into the
+engine's theme JSON — the diagram inherits the project's
+ink/surface/accent tokens instead of shipping a palette.
+
 - `@param` style Computed style of the docs root (carries the theme vars).
-- `@returns` themeVariables map for mermaid.initialize.
+- `@returns` JSON string for `render_diagram`'s `Theme::from_json`.
 
 ### `renderMermaidBlocks`
 
 Renders every unprocessed `.docs-mermaid` block inside `container`
-into an inline SVG diagram. Safe to call repeatedly — mermaid marks
-processed nodes (`data-processed`), so later payloads don't re-render
-earlier diagrams.
+into an inline SVG diagram. Safe to call repeatedly — processed
+nodes are marked (`data-processed`), so later payloads don't
+re-render earlier diagrams.
+
 - `@param` container The docs-content box holding rendered payload HTML.
-
-### `uid`
-
-Unique render id per block — mermaid.render rejects reused ids.

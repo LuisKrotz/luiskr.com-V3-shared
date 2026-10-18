@@ -34,6 +34,10 @@ Host-forced active flag — keeps the carousel live even when side-by-side would
 
 Live CarouselArrowWebGL widgets (null until viewport entry).
 
+### `_ringFills`
+
+Cached ring-fill nodes — autoplay refreshes when a re-render detaches them.
+
 ### `currentIndex`
 
 Logical index into items (0..len-1; clone positions never stored).

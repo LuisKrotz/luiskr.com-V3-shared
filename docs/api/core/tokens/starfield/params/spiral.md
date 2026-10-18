@@ -282,6 +282,14 @@ per-point brightness begins its smooth roll-off to zero. Without it
 the density cutoff reads as a hard ball boundary instead of a haze
 that dissolves into the sky.
 
+### `DWARF_HALO_SCALE`
+
+Dwarf-galaxy backing glow — `spiralDisc.elliptical` bodies carry no
+photographic disc, and their size-attenuated star Points collapse to
+sub-pixel specks at Local-Group standoff distances, so a soft tinted
+halo sprite the size of the whole smudge keeps dwarfs readable as
+fuzzy unresolved patches from across the group.
+
 ### `SUN_BUBBLE`
 
 Heliocentric exclusion bubble (chart units) carved out of a

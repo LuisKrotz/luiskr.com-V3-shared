@@ -1,8 +1,8 @@
 # `core/router/types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/core/router/types.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/router/types.ts`                                |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -12,6 +12,14 @@
 Metadata one route contributes to the document — `title`/`translation` feed
 the head, `scrollTo` a post-nav anchor, `projectRoute`/`legalRoute` classify the
 page for schema/analytics treatment.
+
+### (module scope)
+
+Meta description text — synced into description/og/twitter/DC metas.
+
+### (module scope)
+
+Canonical path override — normalizes alias/legacy URLs to their canonical slug.
 
 ### (module scope)
 
