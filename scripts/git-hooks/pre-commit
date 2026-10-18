@@ -31,7 +31,10 @@ if [[ -n "$STAGED" ]]; then
   PRETTIER_BIN="$SUPER${SUPER:+/}node_modules/.bin/prettier"
   [[ -x "$PRETTIER_BIN" ]] || PRETTIER_BIN="$PWD/node_modules/.bin/prettier"
   print -r -- "$STAGED" | xargs -s 65536 "$PRETTIER_BIN" --write --ignore-unknown
-  print -r -- "$STAGED" | xargs -s 65536 git add --
+  # -f: every staged path is already tracked, but git>=2.4x rejects an
+  # explicit pathspec that textually matches a .gitignore pattern (e.g.
+  # tracked tests under an ignored `coverage/` dir) unless forced.
+  print -r -- "$STAGED" | xargs -s 65536 git add -f --
 fi
 
 # ── 2. Typecheck ──────────────────────────────────────────────────────────────
