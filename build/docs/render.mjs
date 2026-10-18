@@ -3,7 +3,7 @@
  * @description Build-time file → HTML renderers for the docs portal.
  *
  * Every portal entry renders as HTML no matter the source format:
- *   - markdown  → `marked` GFM conversion (tables, task lists, fenced
+ *   - markdown  → Rust/wasm GFM conversion (tables, task lists, fenced
  *     code, autolinks, heading anchors — the GitHub rendering contract)
  *   - source code / scripts / styles → escaped <pre> with a language class
  *   - json      → pretty-printed, escaped
@@ -17,10 +17,26 @@
  * by unit tests without touching the filesystem.
  */
 
-import { marked } from 'marked'
+import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import {
+  initSync,
+  markdown_to_html,
+} from '../../../website/public/wasm/markdown/luiskr_markdown.js'
 
-// GitHub-flavored markdown: tables, strikethrough, task lists, autolinks.
-marked.use({ gfm: true })
+/**
+ * Repo root — same `fileURLToPath(new URL('../..', …))` convention as
+ * `shared/build/module-public.mjs`, one level deeper for docs/.
+ */
+const REPO = fileURLToPath(new URL('../../..', import.meta.url))
+
+// Markdown → HTML runs in Rust (pulldown-cmark + the marked-parity
+// autolinker) compiled to wasm — `marked` left the dependency tree.
+// The artifact is committed under website/public/wasm so the portal
+// build works without a Rust toolchain on the build host.
+initSync({
+  module: fs.readFileSync(`${REPO}/website/public/wasm/markdown/luiskr_markdown_bg.wasm`),
+})
 
 /** HTML-escapes a text fragment for inclusion in markup or <pre>. */
 export const escapeHtml = (text) =>
@@ -45,12 +61,18 @@ const slugify = (text) =>
     .replace(/\s+/gu, '-')
 
 /**
- * Full markdown → HTML via `marked` with GFM enabled (tables, task lists,
- * fenced code, strikethrough, autolinks). A post-pass adds `id` anchors to
- * headings the same way GitHub does, and adds `loading="lazy"` to images.
+ * Full markdown → HTML via the Rust `markdown` wasm artifact
+ * (pulldown-cmark with the same GFM surface `marked` exposed: tables,
+ * task lists, fenced code, strikethrough, autolinks). A post-pass adds
+ * `id` anchors to headings the same way GitHub does, normalizes the
+ * void-element ` />` closers pulldown emits to marked's `>` form, and
+ * adds `loading="lazy"` to images.
  */
 const renderMarkdown = (text) => {
-  const html = marked.parse(text, { async: false })
+  // pulldown-cmark emits XHTML-style voids (`<hr />`, `<img … />`,
+  // `<input …/>`); marked emitted the HTML form (`<hr>`). Normalize so
+  // the output stays byte-compatible with the previous pipeline.
+  const html = markdown_to_html(text).replace(/(<(?:hr|br|img|input)\b[^>]*?)\s*\/>/giu, '$1>')
 
   const slugged = html.replace(
     /<h([1-6])>([\s\S]*?)<\/h\1>/gu,

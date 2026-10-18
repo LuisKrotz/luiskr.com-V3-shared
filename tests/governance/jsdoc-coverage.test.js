@@ -20,9 +20,10 @@ const collect = (dir, exts, out = []) => {
     const p = path.join(dir, e)
 
     if (statSync(p).isDirectory()) {
-      // Generated bundles, vendored trees, test suites, and per-module
-      // report output are not authored source.
-      if (['dist', 'node_modules', 'tests', 'reports', 'coverage'].includes(e)) continue
+      // Generated bundles, vendored trees, test suites, per-module
+      // report output, and the wasm-pack artifacts under public/ are
+      // not authored source (mirrors coverage-gate's SKIP_DIRS).
+      if (['dist', 'node_modules', 'tests', 'reports', 'coverage', 'public'].includes(e)) continue
 
       collect(p, exts, out)
     } else if (exts.some((x) => p.endsWith(x))) {

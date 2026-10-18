@@ -51,8 +51,9 @@ const allSourceFiles = (exts) =>
   areaRoots.flatMap((dir) => (fs.existsSync(dir) ? getAllFiles(dir, exts) : []))
 
 // Generated/emitted trees are never scanned — dist/ output, vendored
-// dependency replacements, node_modules, per-module reports, and the
-// module tests trees themselves are not authored source.
+// dependency replacements, node_modules, per-module reports, the wasm-pack
+// artifacts under public/, and the module tests trees themselves are not
+// authored source (mirrors coverage-gate's SKIP_DIRS).
 const SKIP_DIRS = new Set([
   '.git',
   '.firebase',
@@ -62,6 +63,7 @@ const SKIP_DIRS = new Set([
   'local-modules',
   'tests',
   'reports',
+  'public',
 ])
 
 function getAllFiles(dir, exts = ['.scss', '.css', '.js', '.ts', '.tsx']) {
