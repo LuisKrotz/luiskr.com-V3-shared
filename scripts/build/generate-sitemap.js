@@ -125,6 +125,19 @@ const escXml = (s) =>
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
 
+/**
+ * Percent-encodes a URL for sitemap loc emission — bucket keys can carry
+ * literal spaces/non-ASCII which make RFC-3986-invalid URLs. decodeURI-
+ * first keeps it idempotent (encodeURI escapes '%' itself).
+ */
+const encLoc = (u) => {
+  try {
+    return encodeURI(decodeURI(u))
+  } catch {
+    return encodeURI(u)
+  }
+}
+
 /** Truncates a media title to Google's 100-char video-title bound. */
 const titleOf = (label, max = 100) => {
   const t = String(label || '').trim()
@@ -304,8 +317,10 @@ async function run() {
 
       const key = resolveCoverKey(item.image, manifest)
 
+      // Bucket keys can carry literal spaces/non-ASCII — loc values must
+      // be RFC-3986-encoded or the sitemap URLs are invalid.
       tags.push(
-        `    <image:image>\n      <image:loc>${escXml(`${CDN_BASE}${key}`)}</image:loc>` +
+        `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</image:loc>` +
           `\n      <image:title>${escXml(titleOf(item.label || item.image))}</image:title>\n    </image:image>`
       )
     }
@@ -330,16 +345,16 @@ async function run() {
 
     if (isVideo) {
       return [
-        `    <video:video>\n      <video:thumbnail_loc>${escXml(`${CDN_BASE}${thumb}`)}</video:thumbnail_loc>` +
+        `    <video:video>\n      <video:thumbnail_loc>${escXml(encLoc(`${CDN_BASE}${thumb}`))}</video:thumbnail_loc>` +
           `\n      <video:title>${title}</video:title>\n      <video:description>${escXml(
             titleOf(`${projectTitle} — ${label || projectTitle}`, 2048)
           )}</video:description>` +
-          `\n      <video:content_loc>${escXml(`${CDN_BASE}${source}`)}</video:content_loc>\n    </video:video>`,
+          `\n      <video:content_loc>${escXml(encLoc(`${CDN_BASE}${source}`))}</video:content_loc>\n    </video:video>`,
       ]
     }
 
     return [
-      `    <image:image>\n      <image:loc>${escXml(`${CDN_BASE}${source}`)}</image:loc>` +
+      `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${source}`))}</image:loc>` +
         `\n      <image:title>${title}</image:title>\n    </image:image>`,
     ]
   }

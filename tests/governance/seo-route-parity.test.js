@@ -355,12 +355,22 @@ describe('SEO route parity', () => {
     const keys = new Set(manifest)
     const prefix = 'https://storage.googleapis.com/luiskr.com/public/_v3/'
 
+    // <loc> URLs are RFC-3986-encoded (bucket keys can carry literal
+    // spaces) while the manifest stores raw keys — decode before lookup.
+    const keyOf = (u) => {
+      let k = u.slice(prefix.length)
+
+      if (k.includes('%') && !/%(?![0-9a-fA-F]{2})/.test(k)) k = decodeURI(k)
+
+      return k
+    }
+
     for (const u of imageLocs) {
-      expect(keys.has(u.slice(prefix.length))).toBe(true)
+      expect(keys.has(keyOf(u))).toBe(true)
     }
 
     for (const m of enSitemap.matchAll(/<video:(?:content_loc|thumbnail_loc)>([^<]+)<\//g)) {
-      expect(keys.has(m[1].slice(prefix.length))).toBe(true)
+      expect(keys.has(keyOf(m[1]))).toBe(true)
     }
   })
 

@@ -118,6 +118,33 @@ const esc = (s) =>
     .replace(/"/g, '&quot;')
 
 /**
+ * Percent-encodes a URL for markup/JSON-LD emission — bucket keys can
+ * carry literal spaces ('brazilian leather/…', '…PARIS FASHION-WEEK…') and
+ * non-ASCII, which break srcset candidate parsing (whitespace-separated
+ * grammar) and RFC-3986-strict contexts (JSON-LD, sitemap locs). Mirrors
+ * core/utils/media.ts encodeMediaUrl — that module uses @core aliases so
+ * this standalone Node path can't import it. decodeURI-first keeps it
+ * idempotent on already-encoded input (encodeURI escapes '%' itself).
+ */
+const enc = (u) => {
+  if (!u) return u
+
+  try {
+    return encodeURI(decodeURI(u))
+  } catch {
+    return encodeURI(u)
+  }
+}
+
+/**
+ * Reverses enc() for manifest-key lookups — bucket keys are stored raw,
+ * so a '%XX'-encoded URL must decode before `manifest.has`. Malformed
+ * escapes (a '%' not followed by two hex digits) make decodeURI throw, so
+ * those short-circuit to the raw form.
+ */
+const dec = (u) => (u.includes('%') && !/%(?![0-9a-fA-F]{2})/.test(u) ? decodeURI(u) : u)
+
+/**
  * Strips markup from a translated rich-text string and compacts it into a
  * meta-description-sized plain-text snippet (≤160 chars, cut at a word
  * boundary). &nbsp; entities decode to regular spaces so the tag can sit
@@ -155,8 +182,8 @@ const mediaUrls = (folder, m, manifest) => {
   const { source, thumb, isVideo } = resolveMediaUrls(folder, m, manifest)
 
   return {
-    source: source ? `${CDN_BASE}${source}` : '',
-    thumb: thumb ? `${CDN_BASE}${thumb}` : '',
+    source: source ? enc(`${CDN_BASE}${source}`) : '',
+    thumb: thumb ? enc(`${CDN_BASE}${thumb}`) : '',
     isVideo,
   }
 }
@@ -610,7 +637,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         position: idx + 1,
         url: `${base}/portfolio/${i.link || i.slug}`,
         name: i.label || i.title || `Item ${idx + 1}`,
-        ...(i.image ? { image: `${CDN_BASE}covers/${i.image}.jpg` } : {}),
+        ...(i.image ? { image: enc(`${CDN_BASE}covers/${i.image}.jpg`) } : {}),
       }))
 
     return element.length
@@ -689,10 +716,16 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
 
     // <video><source> retries the next entry on 404, but <picture><source>
     // does not — a missing webp renders as broken. webp is emitted only
-    // when the bucket manifest confirms the sibling was generated.
-    const webm = source.endsWith('.mp4') ? `${source.slice(0, -4)}.webm` : ''
+    // when the bucket manifest confirms the sibling was generated. webm
+    // gets the same gate: video falls back gracefully, but an unconverted
+    // <source> is still a doomed request on every page view.
+    const webm =
+      source.endsWith('.mp4') &&
+      mediaManifest?.has(`${dec(source.slice(CDN_BASE.length, -4))}.webm`)
+        ? `${source.slice(0, -4)}.webm`
+        : ''
     const webp = (u) =>
-      u.endsWith('.jpg') && mediaManifest?.has(`${u.slice(CDN_BASE.length, -4)}.webp`)
+      u.endsWith('.jpg') && mediaManifest?.has(`${dec(u.slice(CDN_BASE.length, -4))}.webp`)
         ? `${u.slice(0, -4)}.webp`
         : ''
 
@@ -716,9 +749,9 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
       .map((i) => {
         const href = `${prefix}/portfolio/${i.link || i.slug}`
         const coverKey = i.image ? resolveCoverThumbKey(i.image, mediaManifest) : ''
-        const coverSrc = coverKey ? `${CDN_BASE}${coverKey}` : ''
+        const coverSrc = coverKey ? enc(`${CDN_BASE}${coverKey}`) : ''
         const coverWebp = mediaManifest?.has(`${coverKey.slice(0, -4)}.webp`)
-          ? `${CDN_BASE}${coverKey.slice(0, -4)}.webp`
+          ? enc(`${CDN_BASE}${coverKey.slice(0, -4)}.webp`)
           : ''
         const img = coverSrc
           ? `<figure><picture>${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="${esc(i.label || '')}" loading="lazy" decoding="async"></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
@@ -865,20 +898,20 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     const images = (b.media?.images || [])
       .map(
         (img) =>
-          `<figure><img src="${esc(img.src)}" alt="${esc(img.caption || '')}" loading="lazy" decoding="async"><figcaption>${esc(img.caption || '')}${img.credit ? ` — ${esc(img.credit)}` : ''}</figcaption></figure>`
+          `<figure><img src="${esc(enc(img.src))}" alt="${esc(img.caption || '')}" loading="lazy" decoding="async"><figcaption>${esc(img.caption || '')}${img.credit ? ` — ${esc(img.credit)}` : ''}</figcaption></figure>`
       )
       .join('')
 
     const audio = (b.media?.audio || [])
       .map(
         (a) =>
-          `<figure><audio src="${esc(a.src)}" controls preload="none"></audio><figcaption>${esc(a.caption || '')}${a.credit ? ` — ${esc(a.credit)}` : ''}</figcaption></figure>`
+          `<figure><audio src="${esc(enc(a.src))}" controls preload="none"></audio><figcaption>${esc(a.caption || '')}${a.credit ? ` — ${esc(a.credit)}` : ''}</figcaption></figure>`
       )
       .join('')
 
     const refs = (b.meta?.refs || []).map((r) => `<li>${esc(r)}</li>`).join('')
 
-    return `<main><h1>${esc(b.name || bodyId)}</h1><p><em>${esc(b.kind || '')}</em> — ${esc(b.tagline || '')}</p>${facts ? `<dl>${facts}</dl>` : ''}<p>${esc(b.history || '')}</p>${images}${audio}${b.source ? `<p><a href="${esc(b.source)}">${esc(b.source)}</a></p>` : ''}${refs ? `<ul>${refs}</ul>` : ''}</main>`
+    return `<main><h1>${esc(b.name || bodyId)}</h1><p><em>${esc(b.kind || '')}</em> — ${esc(b.tagline || '')}</p>${facts ? `<dl>${facts}</dl>` : ''}<p>${esc(b.history || '')}</p>${images}${audio}${b.source ? `<p><a href="${esc(enc(b.source))}">${esc(b.source)}</a></p>` : ''}${refs ? `<ul>${refs}</ul>` : ''}</main>`
   }
 
   /** Star-field index — description + the full localized body catalog. */

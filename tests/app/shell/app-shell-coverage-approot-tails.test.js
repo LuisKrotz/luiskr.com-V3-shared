@@ -430,6 +430,7 @@ describe('AppRoot tails', () => {
     el.shadowRoot.querySelector(COMPONENT_TAGS.APP_NAV)?.remove()
     el.shadowRoot.querySelector(COMPONENT_TAGS.COOKIE_BANNER)?.remove()
     el.shadowRoot.querySelector(COMPONENT_TAGS.PREFERENCES_MODAL)?.remove()
+    el.shadowRoot.querySelector(`.${APP_CLASSES.PROGRESS_BAR}`)?.remove()
     el.onUpdated()
 
     globalThis.fetch = origFetch
