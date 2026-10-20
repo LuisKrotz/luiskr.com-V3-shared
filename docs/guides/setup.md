@@ -26,18 +26,60 @@ flowchart TB
 
 ## Required programs
 
-- **Node.js** ≥ 24 (LTS recommended)
+- **Node.js** ≥ 24 (LTS recommended — `.nvmrc` pins it, so `nvm install` just works)
 - **Yarn** 1.22.x classic (`yarn`)
 - **Git** ≥ 2.34
 - A **C++ toolchain** for native optional dependencies (`better-sqlite3`, `sharp`, `electron`, etc.)
 
-Optional (for CMS media conversion):
+Optional (installed/probed by `yarn setup` where the platform allows):
 
+- **firebase-tools** (`firebase` CLI) — `yarn deploy`, `firebase login`, RTDB scripts.
+  Installs globally via `yarn global add firebase-tools` on every platform.
+- **Google Cloud SDK** (`gcloud` + `gsutil`) — the media upload/validate scripts
+  (`shared/scripts/media/*`) reach the CDN bucket and read OAuth tokens from
+  `gcloud auth application-default login`.
 - **ffmpeg** + **ffprobe**
 - **ImageMagick** (`magick` on Windows; `convert` on macOS/Linux)
 - **mozjpeg** / `cjpeg` (sharper JPEG re-encode)
+- **Rust toolchain** (`rustup`/`cargo` + `wasm32-unknown-unknown` target + `wasm-pack`) —
+  only needed to _rebuild_ the `rust/*/` crates; every crate ships a committed
+  `pkg/` wasm artifact, so the site builds fine without it.
 
-`yarn setup` detects missing tools and prints the exact install command for your platform. The CMS media converter exposes the same detector at `/api/media-convert/tools` and can run the install for you when no `sudo` password is required.
+`yarn setup` detects missing tools and installs them: brew/winget/choco run
+unattended, linux `sudo` installs run when sudo is passwordless, otherwise it
+prints the exact command for a root shell. The CMS media converter exposes the
+same detector at `/api/media-convert/tools`.
+
+## Install nvm (all platforms)
+
+Node ≥ 24 is easiest through nvm — the repo's `.nvmrc` already pins the major.
+
+```bash
+# macOS / Linux — Intel, Apple Silicon, ARM64 (zsh or bash)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | zsh
+nvm install        # reads .nvmrc → Node 24
+```
+
+```powershell
+# Windows — x64 and ARM64, in PowerShell
+winget install -e --id CoreyButler.NVMforWindows   # or the GitHub installer
+nvm install 24
+nvm use 24
+```
+
+Then Yarn 1.x via corepack (ships with Node):
+
+```bash
+corepack enable && corepack prepare yarn@1.22.22 --activate
+```
+
+And the global CLIs:
+
+```bash
+yarn global add firebase-tools        # deploy + RTDB scripts
+firebase login
+gcloud auth application-default login # media scripts OAuth (after SDK install)
+```
 
 ---
 
@@ -61,6 +103,10 @@ sudo apt-get install -y build-essential python3 git
 # Media toolchain (optional, used by CMS converter)
 sudo apt-get install -y ffmpeg imagemagick libjpeg-turbo-progs
 
+# Cloud CLIs (optional — deploy + media scripts)
+yarn global add firebase-tools
+sudo snap install google-cloud-cli --classic   # or google's apt repo
+
 # Clone and run
 git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com-V3.git
 cd luiskr.com-V3
@@ -82,6 +128,10 @@ sudo dnf install -y nodejs yarn git gcc-c++ make python3
 # Media toolchain (optional)
 sudo dnf install -y ffmpeg ImageMagick libjpeg-turbo-utils
 
+# Cloud CLIs (optional — deploy + media scripts)
+yarn global add firebase-tools
+sudo snap install google-cloud-cli --classic   # or google's yum repo
+
 # Clone and run
 git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com-V3.git
 cd luiskr.com-V3
@@ -100,6 +150,10 @@ brew install node@24 yarn git
 
 # Media toolchain (optional)
 brew install ffmpeg imagemagick mozjpeg
+
+# Cloud CLIs (optional — deploy + media scripts)
+brew install --cask google-cloud-sdk
+yarn global add firebase-tools
 
 # Make the tools available on Apple Silicon Macs
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
@@ -128,6 +182,10 @@ winget install -e --id Git.Git
 winget install -e --id Gyan.FFmpeg
 # ImageMagick on Windows exposes `magick`, not `convert`:
 winget install -e --id ImageMagick.ImageMagick
+
+# Cloud CLIs (optional — deploy + media scripts)
+winget install -e --id Google.CloudSDK
+yarn global add firebase-tools
 
 # Clone and run (in a regular terminal, PowerShell or CMD)
 git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com-V3.git
