@@ -177,7 +177,7 @@ const svgDims = async (key) => {
 
   if (w && h) return { w: Math.round(+w[1]), h: Math.round(+h[1]) }
 
-  const vb = tag[0].match(/\bviewBox="?[\d.\-]+\s+[\d.\-]+\s+([\d.]+)\s+([\d.]+)/i)
+  const vb = tag[0].match(/\bviewBox="?[\d.-]+\s+[\d.-]+\s+([\d.]+)\s+([\d.]+)/i)
 
   return vb ? { w: Math.round(+vb[1]), h: Math.round(+vb[2]) } : null
 }

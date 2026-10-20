@@ -54,13 +54,19 @@ const coverageDir = (root) => path.join(ROOT, root, 'reports', 'coverage')
 // re-emitted report silently drops their contributions. `only` only filters
 // which per-module reports are written below.
 //
-// Maps are merged PER FILE with a freshness check: istanbul unions by
-// statement/branch location, so a stale run that predates a source edit
-// would inject phantom uncovered locations from the old file shape. The
-// newest run's entry defines the current shape; every entry sharing it is
-// unioned (a 0-hit entry is "not measured by that suite", not "uncovered" —
-// keeping the newest alone would drop real hits whenever fresh runs coexist
-// with a stale one), while older-shape entries are discarded.
+// Maps are merged PER FILE. Jest instrumentation is dialect-shaped — each
+// module's transform (babel vs ts preset options) can emit different
+// statement/branch location tables for the SAME source, and istanbul
+// unions by location, so cross-dialect entries can never merge. The old
+// rule kept the newest-mtime shape and discarded the rest, which let an
+// arbitrary run order overwrite a well-covered file with a nearly-empty
+// entry (e.g. a later module's raw map recording the file 6% while its own
+// module measured 88%). Instead: the module that OWNS the file supplies
+// the authoritative dialect; every entry sharing that shape is unioned
+// (a 0-hit entry is "not measured by that suite", not "uncovered"). Files
+// outside every module's src root fall back to the newest shape. A stale
+// run whose shape no longer matches the owner dialect is still discarded —
+// its phantom uncovered locations could never be hit.
 const rawMaps = []
 
 for (const [name, { root }] of Object.entries(MODULES)) {
@@ -92,7 +98,7 @@ const shapeOf = (fc) => JSON.stringify([fc.statementMap, fc.branchMap, fc.fnMap]
 
 const byFile = new Map()
 
-for (const { mtime, data } of rawMaps) {
+for (const { name, mtime, data } of rawMaps) {
   for (const [file, fc] of Object.entries(data)) {
     const inner = fc.data || fc
     let list = byFile.get(file)
@@ -102,17 +108,29 @@ for (const { mtime, data } of rawMaps) {
       byFile.set(file, list)
     }
 
-    list.push({ mtime, fc: inner })
+    list.push({ name, mtime, fc: inner })
   }
 }
 
 const merged = createCoverageMap()
 
 for (const [file, entries] of byFile) {
-  const newest = entries.reduce((a, b) => (b.mtime > a.mtime ? b : a))
-  const newestShape = shapeOf(newest.fc)
+  // Owner module = the module whose src root prefixes the file. Its raw map
+  // carries this file's canonical instrumentation dialect.
+  const owner = Object.values(MODULES).find(({ src }) =>
+    src.some((d) => file.startsWith(`${path.join(ROOT, d)}${path.sep}`))
+  )
 
-  const current = entries.filter((e) => shapeOf(e.fc) === newestShape)
+  const ownerName = owner ? Object.keys(MODULES).find((k) => MODULES[k] === owner) : undefined
+
+  const ownerEntries = ownerName ? entries.filter((e) => e.name === ownerName) : []
+
+  const chosenShape =
+    ownerEntries.length > 0
+      ? shapeOf(ownerEntries.reduce((a, b) => (b.mtime > a.mtime ? b : a)).fc)
+      : shapeOf(entries.reduce((a, b) => (b.mtime > a.mtime ? b : a)).fc)
+
+  const current = entries.filter((e) => shapeOf(e.fc) === chosenShape)
   const union = createCoverageMap()
 
   for (const e of current) union.addFileCoverage(e.fc)
