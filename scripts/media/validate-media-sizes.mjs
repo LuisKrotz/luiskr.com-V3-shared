@@ -30,8 +30,16 @@
  *    `JSON.stringify(db, null, 2)` shape the file already uses; without it
  *    the script only reports and exits non-zero when diffs exist, so it
  *    can gate CI.
+ *  - `--push` writes the probed intrinsic sizes to the live Firebase RTDB:
+ *    each locale's `translations/<loc>/projects` tree is read once, live
+ *    `size` values are diffed against the probe, and only the drifted
+ *    nodes are written through a single multi-path PATCH — so the CMS
+ *    database converges to truth without touching unchanged nodes.
+ *    Auth uses the gcloud Application Default Credentials token
+ *    (`gcloud auth application-default login`) — no service-account key
+ *    file required.
  *
- * Usage: node shared/scripts/media/validate-media-sizes.mjs [--fix] [--workers N] [--json <report-path>]
+ * Usage: node shared/scripts/media/validate-media-sizes.mjs [--fix] [--push] [--workers N] [--json <report-path>]
  */
 
 import { execFile } from 'node:child_process'
@@ -83,6 +91,7 @@ const VIDEO_DIM_VARIANTS = Object.freeze([MEDIA.VIDEO_EXT])
 
 const args = process.argv.slice(2)
 const FIX = args.includes('--fix')
+const PUSH = args.includes('--push')
 const jsonIdx = args.indexOf('--json')
 const JSON_OUT = jsonIdx >= 0 ? args[jsonIdx + 1] : null
 const workersIdx = args.indexOf('--workers')
@@ -211,13 +220,15 @@ const videoDims = async (key) => {
 /**
  * Collects every media node `{ src, size, isVideo }` in the database.
  * Returns a Map of `folder + src` → `{ folder, src, size, isVideo, nodes[] }`
- * where `nodes` holds every object reference across all 16 locales so a
- * `--fix` write updates every language consistently.
+ * where `nodes` holds `{ node, path }` for every locale occurrence — `node`
+ * is the live object reference so `--fix` updates every language at once,
+ * and `path` is the RTDB location (`translations/<loc>/projects/…`) so
+ * `--push` can write the same leaf remotely.
  */
 const collectMedia = (db) => {
   const map = new Map()
 
-  const collect = (node, folder) => {
+  const collect = (node, folder, path) => {
     if (!node || typeof node !== 'object') return
 
     if (typeof node.src === 'string' && Array.isArray(node.size)) {
@@ -235,29 +246,29 @@ const collectMedia = (db) => {
         map.set(key, rec)
       }
 
-      rec.nodes.push(node)
+      rec.nodes.push({ node, path })
       return
     }
 
-    for (const k in node) collect(node[k], folder)
+    for (const k in node) collect(node[k], folder, path ? `${path}/${k}` : k)
   }
 
-  const visit = (node) => {
+  const visit = (node, path) => {
     if (!node || typeof node !== 'object') return
 
     if (node.projects && typeof node.projects === 'object') {
       for (const p in node.projects) {
         const project = node.projects[p]
-        collect(project, project.folder || '')
+        collect(project, project.folder || '', `${path}/projects/${p}`)
       }
     }
 
     for (const k in node) {
-      if (k !== 'projects') visit(node[k])
+      if (k !== 'projects') visit(node[k], path ? `${path}/${k}` : k)
     }
   }
 
-  visit(db)
+  visit(db, '')
   return map
 }
 
@@ -355,14 +366,110 @@ const main = async () => {
 
   if (FIX && diffs.length) {
     for (const d of diffs) {
-      for (const node of d.nodes) node.size = [d.actual.w, d.actual.h]
+      for (const { node } of d.nodes) node.size = [d.actual.w, d.actual.h]
     }
 
     fs.writeFileSync(DB_PATH, `${JSON.stringify(db, null, 2)}\n`, 'utf-8')
     console.log(`media-size-validation: updated ${diffs.length} entries in database.json`)
   }
 
+  if (PUSH) await pushLive(results)
+
   if (diffs.length || errors.length) process.exit(FIX && !errors.length ? 0 : 1)
+}
+
+/** RTDB REST root — multi-path PATCH target for the live CMS database. */
+const RTDB_URL = 'https://luiskr-com.firebaseio.com'
+
+/**
+ * Reads a Google OAuth2 access token from gcloud Application Default
+ * Credentials — the same auth surface `firebase deploy` uses, so no
+ * service-account key file is needed on a machine that already runs
+ * `gcloud auth application-default login`.
+ */
+const adcToken = async () => {
+  const { stdout } = await run('gcloud', ['auth', 'application-default', 'print-access-token'])
+
+  return stdout.trim()
+}
+
+/**
+ * Pushes probed intrinsic sizes to the live Firebase RTDB.
+ *
+ * Per locale, `translations/<loc>/projects` is fetched once and every
+ * media node's live `size` is compared against the probed value — only
+ * drifted leaves go into the multi-path PATCH, so unchanged rows are
+ * never rewritten and the request stays small even on a fully synced
+ * database (the PATCH body ends up nearly empty).
+ */
+const pushLive = async (results) => {
+  const wanted = new Map()
+
+  for (const r of results) {
+    if (!r.actual) continue
+
+    for (const { path } of r.nodes) wanted.set(`${path}/size`, [r.actual.w, r.actual.h])
+  }
+
+  if (!wanted.size) {
+    console.log('media-size-validation: nothing probed — skipping Firebase push')
+    return
+  }
+
+  const locales = new Set([...wanted.keys()].map((p) => p.split('/')[1]).filter(Boolean))
+  const token = await adcToken()
+  const updates = {}
+
+  for (const loc of locales) {
+    const res = await fetch(
+      `${RTDB_URL}/translations/${loc}/projects.json?access_token=${token}&shallow=false`
+    )
+
+    if (!res.ok) {
+      console.error(`media-size-validation: RTDB read failed for ${loc} (${res.status})`)
+      continue
+    }
+
+    const live = await res.json()
+    const flat = new Map()
+    const walk = (node, path) => {
+      if (!node || typeof node !== 'object') return
+
+      flat.set(path, node)
+      for (const k in node) walk(node[k], `${path}/${k}`)
+    }
+
+    walk(live, `translations/${loc}/projects`)
+
+    for (const [path, size] of wanted) {
+      if (!path.startsWith(`translations/${loc}/`)) continue
+
+      const liveNode = flat.get(path)
+
+      if (!Array.isArray(liveNode) || liveNode[0] !== size[0] || liveNode[1] !== size[1])
+        updates[path] = size
+    }
+  }
+
+  const paths = Object.keys(updates)
+
+  if (!paths.length) {
+    console.log('media-size-validation: Firebase RTDB already in sync — 0 writes needed')
+    return
+  }
+
+  const res = await fetch(`${RTDB_URL}/.json?access_token=${token}`, {
+    method: 'PATCH',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(updates),
+  })
+
+  if (!res.ok) {
+    console.error(`media-size-validation: RTDB PATCH failed (${res.status}) ${await res.text()}`)
+    process.exit(2)
+  }
+
+  console.log(`media-size-validation: pushed ${paths.length} size corrections to Firebase RTDB`)
 }
 
 main().catch((e) => {
