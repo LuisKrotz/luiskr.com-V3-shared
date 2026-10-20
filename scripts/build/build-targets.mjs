@@ -286,7 +286,13 @@ for (const t of ES_TARGETS) {
 
 for (const t of tierManifest) t.css = `/v/${t.name}/assets/css/${t.css}`
 
-// ── 5. Inline loader + manifest into dist/index.html ────────────────────────
+// ── 5. Chunk-size gate — every emitted JS ≤ 50KiB / CSS ≤ 5KiB minified ────
+// Runs while dist/ holds the fresh chunks but before the expensive
+// locale-pages fan-out, so an over-budget regression fails the build here
+// instead of after 18k documents were written.
+run(process.execPath, ['shared/scripts/verify/chunk-budget.mjs'])
+
+// ── 6. Inline loader + manifest into dist/index.html ────────────────────────
 const indexPath = path.join(DIST, 'index.html')
 
 let html = fs.readFileSync(indexPath, 'utf8')
