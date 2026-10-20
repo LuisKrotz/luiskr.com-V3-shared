@@ -2,9 +2,9 @@
 
 WebGL skeleton/shimmer layer for loading states: a shared
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/loaders/skeleton-webgl.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/utils/canvas/loaders/skeleton-webgl.ts`         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -88,9 +88,9 @@ unavailable: the canvas is simply never attached.
 
 ### (module scope)
 
-- `@param` {HTMLElement} host   The custom element (positioned via :host(.has-skeleton-layer))
-- `@param` {ShadowRoot} root    Where the canvas lives (survives content re-renders)
-- `@param` {Element} content    The content wrapper that holds the placeholders
+- `@param` {HTMLElement} host The custom element (positioned via :host(.has-skeleton-layer))
+- `@param` {ShadowRoot} root Where the canvas lives (survives content re-renders)
+- `@param` {Element} content The content wrapper that holds the placeholders
 
 ### `root`
 
@@ -111,6 +111,23 @@ The canvas's 2D context — receives the blit each frame.
 ### `renderer`
 
 Borrowed shared-renderer handle — null until acquire succeeds.
+
+### `_wasm`
+
+Live WebGPU wasm widget handle — set when the skeleton artifact
+mounts (preferred path; MANUAL drive — this class owns the loop).
+
+### `_abandoned`
+
+Mount-abandon latch — set by destroy()/the fallback arm of
+resolve() so a late-arriving wasm handle can never activate a
+layer over content that already resolved.
+
+### `_wasmT`
+
+Last wasm-painted `t` — the crate accumulates its own clock via
+`frame(dt)`, so dt must be the time since the last PAINTED frame
+(frame-skip means loop ticks ≠ painted frames).
 
 ### `animId`
 
@@ -135,6 +152,12 @@ Per-rect base RGBA uploaded as u_sbase.
 ### `skelInkData`
 
 Per-rect ink RGBA uploaded as u_sink.
+
+### `sheetData`
+
+Interleaved wasm sheet — 16 f32s per rect row
+[rect(4), meta(4), sbase(4), sink(4)] matching the crate's
+`write_sheet` layout (rust/skeleton SHEET_VEC4S = MAX_RECTS×4).
 
 ### `base`
 
@@ -224,6 +247,7 @@ layer destroys itself; the CSS shimmer stays as the fallback.
 ### `_parseCssColor`
 
 Parses rgb()/hex into normalized 0–1 floats for shader uniforms.
+
 - `@param` str Raw CSS color string.
 - `@returns` [r,g,b,a] floats, or null on unparsable input.
 
@@ -253,6 +277,7 @@ rAF callback — animates the shimmer until resolved (skeleton/loop.ts).
 
 Renders one frame via the shared renderer — delegates the actual GL
 draw + 2D blit to skeleton/loop.ts.
+
 - `@param` t Animation clock in seconds.
 - `@param` resolve Resolve-out progress 0–1.
 
@@ -274,6 +299,7 @@ the layer after the host detaches.
 Keeps a component's skeleton layer in sync with its rendered content.
 Call from onUpdated()/onMounted(): creates the layer while skeleton nodes
 exist, re-measures after every render, resolves it once they are gone.
+
 - `@param` component The host component whose content is being watched.
 
 ### `destroySkeletonLayer`
@@ -281,4 +307,5 @@ exist, re-measures after every render, resolves it once they are gone.
 Component-unmount teardown — destroys the layer immediately (no
 resolve-out: the host is going away, so a fade would never be seen) and
 clears the component's reference.
+
 - `@param` component The host component being unmounted.

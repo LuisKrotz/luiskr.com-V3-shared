@@ -2,9 +2,9 @@
 
 &lt;cms-deploy-info&gt; — the Deploy Info tab: renders the
 
-| | |
-|---|---|
-| **Source** | `src/cms/deploy-info/CmsDeployInfo.tsx` |
+|                |                                                      |
+| -------------- | ---------------------------------------------------- |
+| **Source**     | `src/cms/deploy-info/CmsDeployInfo.tsx`              |
 | **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
 
 ## Members
@@ -38,6 +38,10 @@ Renders the Lighthouse category score cells for one URL entry.
 ### `_renderCoverage`
 
 Renders the Jest coverage summary table.
+
+### `_renderBundle`
+
+Renders the bundle inventory (per-type sizes, tiers, wasm crates).
 
 ### `_renderAxe`
 

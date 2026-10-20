@@ -61,6 +61,30 @@ re-runs the fuzzy match against the new page's related list.
 
 Lifecycle: removes the router subscription + the note observer.
 
+### `_syncAnimDescs`
+
+Binds animation descriptions to the animated nodes the render just
+produced — every related tile's hover lift, and the disclaimer's
+pulsing note-dots. Must run post-render (never in the JSX): the
+desc node is injected per root, so applying on detached nodes
+would spawn duplicate `lk-anim-desc-*` ids — a WCAG failure.
+Re-rendered nodes are re-bound; idempotent on repeats.
+
+### `_syncRingSheen`
+
+Keeps the instanced ring-sheen overlay bound to the live
+`.related-mosaic` node — renders recreate the strip, so a session
+mounted on a detached node is torn down and remounted. Without
+WebGPU the mount is a no-op and the CSS pseudo rings stay.
+
+### `_mountDividerSheen`
+
+Re-mounts the divider-sheen WebGPU widgets on the footer's `<hr>`
+dividers — the nodes are recreated on every render, so each update
+disposes the stale mounts first (canvas + IO + rAF + widget).
+Without `navigator.gpu` or under reduced-motion the mount helper
+is a no-op and the CSS `::after` sweep stays the render path.
+
 ### `fetchData`
 
 Fires two SWR reads in parallel: the home page node (for the

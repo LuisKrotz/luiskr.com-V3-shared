@@ -22,3 +22,7 @@ Docs-portal footer entry — link + localized English-only note.
 ### `FOOTER_DIVIDER`
 
 Self-made credit + copyright block below the source row.
+
+### `FOOTER_DIVIDER_CANVAS`
+
+WebGPU overlay canvas for the divider sheen (`divider-sheen` widget).

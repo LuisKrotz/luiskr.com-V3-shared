@@ -2,9 +2,9 @@
 
 &lt;cookie-banner&gt; — consent notice bar: accept/decline
 
-| | |
-|---|---|
-| **Source** | `src/website/components/feedback/CookieBanner.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/feedback/CookieBanner.tsx`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -24,6 +24,12 @@ Lifecycle: re-measures after any render flips banner visibility.
 ### (module scope)
 
 Lifecycle: releases the height observer when the element detaches.
+
+### (module scope)
+
+Mounts the corner-brackets WebGPU widget on the accept/refuse
+buttons — re-queries every update so the hidden-banner teardown and
+post-translation re-render both drop stale mounts.
 
 ### (module scope)
 

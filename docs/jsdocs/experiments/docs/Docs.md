@@ -2,9 +2,9 @@
 
 &lt;view-docs&gt; — the English-only docs portal route.
 
-| | |
-|---|---|
-| **Source** | `src/experiments/docs/Docs.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments/docs/Docs.tsx`                         |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -81,6 +81,7 @@ Localized toast copy for the copy guard — componentText already English-falls-
 ### `navigateDocs`
 
 Navigates within the portal — a bare path resolves against /docs.
+
 - `@param` subPath Manifest-relative path ('' → portal root).
 
 ### `pickNode`
@@ -117,7 +118,9 @@ subtrees are naturally skipped).
 
 ARIA treeview keys on the nav: ↑/↓ move between visible rows, → opens
 a closed dir (or descends into an open one), ← closes an open dir (or
-focuses the parent). Enter/Space stay native button activation.
+focuses the parent). The rows are anchors now — Enter activates
+natively, Space is routed to a click since anchors don't activate on
+Space like buttons do.
 
 ### `onGridKey`
 

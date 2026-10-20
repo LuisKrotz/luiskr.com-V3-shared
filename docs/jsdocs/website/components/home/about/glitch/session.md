@@ -34,14 +34,37 @@ realms (happy-dom exposes the class only on the window it created).
 
 ### `armGlitch`
 
-Arms the session: builds the overlay canvas + context against the live
-wrapper. Bails quietly when the image isn't decoded, the wrapper is
-zero-size, the 2D context is unavailable, or motion is reduced — the
-<img> remains as the static fallback. Idempotent — returns true when a
-session is already running.
+Arms the session: builds the overlay canvas against the live wrapper,
+then races the two render backends — the rust/glitch WebGPU widget
+mounts first when `navigator.gpu` exists; anything else claims the 2D
+context and the painter pipeline (a canvas only allows ONE context
+mode, so the 2D claim is deferred until the wasm arm fails). Bails
+quietly when the image isn't decoded, the wrapper is zero-size, or
+motion is reduced — the <img> remains as the static fallback.
+Idempotent — returns true when a session is already running.
 
 - `@param` host The <about-section> component the session parks on.
 - `@param` wrap The live picture wrapper element.
+
+### `armCtx2d`
+
+Claims the 2D backend on the session canvas and rebuilds the channel
+ghosts + scanline tile against the already-measured cover rect. Called
+directly when WebGPU is absent and by the wasm arm on mount/upload
+failure — the painter pipeline is the permanent fallback.
+
+- `@param` s Live session (geometry already measured).
+- `@returns` false when the context claim fails — the session is unusable.
+
+### `dropSession`
+
+Tears a session down in place — stops the loop, destroys the wasm
+widget, disconnects the observer, removes the overlay and un-parks it
+from the host. Used by the wasm arm when every backend failed and by
+disarmGlitch for normal teardown.
+
+- `@param` host The component the session was parked on.
+- `@param` s The session to kill.
 
 ### `healSession`
 

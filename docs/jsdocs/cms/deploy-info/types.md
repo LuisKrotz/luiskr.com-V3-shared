@@ -1,8 +1,8 @@
 # `cms/deploy-info/types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/deploy-info/types.ts` |
+|                |                                                      |
+| -------------- | ---------------------------------------------------- |
+| **Source**     | `src/cms/deploy-info/types.ts`                       |
 | **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
 
 ## Members
@@ -41,6 +41,30 @@ rows (acceptedRisk marks entries waived via security-exceptions.json).
 Shape of the console-scan gate output — `ok` is the pass/fail,
 `violations` lists each `console.*` callsite found under src/ (file, line,
 method) since src is a zero-console zone (AGENTS.md rule 12).
+
+### (module scope)
+
+One file-type rollup in the bundle-stats report — `bytes` is the
+emitted (minified) size, `unminified` the pre-minification source
+bytes recovered from sourcemap sourcesContent, `gzip`/`brotli` the
+compressed wire sizes.
+
+### (module scope)
+
+One ES-target tier row — the js/css/misc buckets emitted under
+dist/v/<tier>/ plus that tier's ten heaviest chunks.
+
+### (module scope)
+
+One wasm artifact crate row — .wasm module bytes + .js glue bytes.
+
+### (module scope)
+
+Shape of the bundle-stats report — the post-build dist/ inventory:
+file-type totals (js/css/html/wasm/assets) with minified vs
+unminified vs compressed bytes, per-tier rows, the per-crate wasm
+table, prerendered-HTML grouped by top-level directory, and the
+heaviest emitted chunks overall.
 
 ### (module scope)
 

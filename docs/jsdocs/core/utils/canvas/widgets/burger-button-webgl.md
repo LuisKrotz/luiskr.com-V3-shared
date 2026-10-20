@@ -2,9 +2,9 @@
 
 WebGL hamburger icon for the nav burger button: three
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/burger-button-webgl.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/utils/canvas/widgets/burger-button-webgl.ts`    |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -20,9 +20,39 @@ Adapts to the current theme: dark icon in light mode, bright icon in dark mode.
 - `@param` {HTMLCanvasElement} canvas - icon canvas inside the nav burger button
 - `@param` {Function} onClick - optional click handler (the canvas becomes
 
+### `_wasm`
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+### `_wasmFailed`
+
+Latch — a failed wasm mount never retries on this instance.
+
+### `_wasmPending`
+
+In-flight mount — restore() must not double-mount on re-entry.
+
+### `_wasmT`
+
+Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
+
+### `_tryWasm`
+
+Attempts the WebGPU wasm burger (~50KB artifact, own GPUDevice).
+MANUAL drive: this class keeps its own loop/resize logic, so the
+bridge only initializes the surface — state setters and frame(dt)
+are forwarded by the existing draw path. On any failure the WebGL
+path runs exactly as before; on success the canvas gets a webgpu
+context (which is mutually exclusive with the webgl one, so the
+mount MUST settle before _initGLReal touches getContext).
+
 ### `_initGL`
 
 Creates the WebGL context + shader program; falls back to the CSS/DOM path on failure.
+
+### `_initGLReal`
+
+The synchronous WebGL bootstrap — ran directly on no-WebGPU browsers and after a wasm mount failure.
 
 ### `_triggerFallback`
 
@@ -46,6 +76,7 @@ Renders one frame at time t (seconds) — shared by the RAF loop and the
 static reduced-motion path. u_dark is re-evaluated per frame from the
 live DOM classes (dark theme OR nav-on-dark over the contact band) so
 the icon recolors instantly on theme/scroll changes with no listener.
+
 - `@param` {number} t - seconds since construction
 
 ### `_loop`

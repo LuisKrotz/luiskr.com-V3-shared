@@ -14,7 +14,7 @@ theme publishes a cyan-blue plasma ramp, light theme an airy
 paper-fire ramp. Falls back to the fixed canvas inks when the
 properties are absent (older stylesheet, non-themed host).
 
-- `@returns` The four-stop combustion ink ramp.
+- `@returns` The combustion ink ramp (embers ×3, scorch, smoke).
 
 ### (module scope)
 

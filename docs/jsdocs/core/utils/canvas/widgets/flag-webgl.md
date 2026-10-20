@@ -2,9 +2,9 @@
 
 WebGL flag renderer for the language dialog: draws each
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/flag-webgl.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/utils/canvas/widgets/flag-webgl.ts`             |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -13,6 +13,7 @@ WebGL flag renderer for the language dialog: draws each
 
 WebGL Flag Animator for Language Selection Buttons
 Each flag has a completely unique animated kinetic effect and wave physics:
+
 - EN (0): Star-spangled waving ripple with specular stars sparkle
 - PT (1): Solar burst pulse radiating from rhombus with Southern Cross constellation twinkle
 - ES (2): Warm flamenco silk wave with golden crest glow
@@ -26,6 +27,22 @@ Each flag has a completely unique animated kinetic effect and wave physics:
 - FR (10): Revolutionary vertical tricolor ripple with satin sheen
 - TLN (11): Venetian gondola water reflection merging Italian and Brazilian tones
 
+### `_wasm`
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+### `_wasmFailed`
+
+Latch — a failed wasm mount never retries on this instance.
+
+### `_wasmPending`
+
+In-flight mount — restore() must not double-mount on re-entry.
+
+### `_wasmT`
+
+Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
+
 ### (module scope)
 
 Display aspect of the whole canvas. A split flag shows the left half of
@@ -37,6 +54,7 @@ so its width is the mean of both natural widths.
 Normalized 0–1 x where a hybrid flag's two halves meet: the first
 flag's share of the combined aspect widths (aspect1/(aspect1+aspect2))
 so each half keeps its natural proportions instead of stretching 50/50.
+
 - `@returns` {number}
 
 ### `_resizeToNaturalAspect`
@@ -49,7 +67,26 @@ Picks the shader's animation mode (wave / gentle ripple / static).
 
 ### `init`
 
-Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
+Boot sequence: wasm mount → GL init → event binding → render start; fully degrades to the fallback path.
+
+### `_tryWasm`
+
+Attempts the WebGPU wasm flag (~52KB artifact, own GPUDevice).
+MANUAL drive: this class keeps its own loop + hover easing, so the
+bridge only initializes the surface. On failure the shared-
+renderer 2D path runs exactly as before.
+
+### `loadWasmImages`
+
+Decodes the locale's flag SVG(s) through the wasm image-decoder
+worker and uploads them as textures — the GPU→GPU bitmap path
+never round-trips pixels through the main thread. Unsplit locales
+bind the same bitmap twice (the shader's cheapest no-op).
+
+### `init2d`
+
+The shared-renderer 2D boot — ran directly on no-WebGPU browsers
+and after a wasm mount failure.
 
 ### `purge`
 

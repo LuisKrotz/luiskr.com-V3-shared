@@ -101,6 +101,19 @@ base64) keeps the URI readable and is the spec-supported form for
 - `@param` h Intrinsic height to declare (px).
 - `@returns` `data:image/svg+xml;charset=utf-8,…` URI for img.src.
 
+### `isPlainClick`
+
+`isPlainClick` — true only for an unmodified primary activation: left
+button, no Ctrl/Meta/Shift/Alt. Nav anchors are real `<a href>` so a
+modified or middle click must reach the default action (open in new
+tab/window); handlers call this first and bail out before any
+preventDefault so the browser keeps native link semantics.
+Non-mouse clicks (keyboard Enter → `detail` 0, button −1/undefined on
+synthetic dispatches) count as plain — they carry no new-tab intent.
+
+- `@param` e The click event.
+- `@returns` True when the click is a plain primary activation.
+
 ### `cachedVW`
 
 Cached `window.innerWidth` — Blink marks innerWidth as layout-forcing

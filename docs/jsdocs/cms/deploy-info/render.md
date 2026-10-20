@@ -1,8 +1,8 @@
 # `cms/deploy-info/render.tsx`
 
-| | |
-|---|---|
-| **Source** | `src/cms/deploy-info/render.tsx` |
+|                |                                                      |
+| -------------- | ---------------------------------------------------- |
+| **Source**     | `src/cms/deploy-info/render.tsx`                     |
 | **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
 
 ## Members
@@ -42,6 +42,30 @@ Renders the axe-core accessibility scan (violations grouped by surface).
 ### `renderSnyk`
 
 Renders the dependency vulnerability scan (Snyk or yarn-audit fallback).
+
+### `BYTE_UNITS`
+
+Byte-size units for the bundle tables — KB/MB/GB with one decimal.
+
+### `fmtBytes`
+
+Formats a byte count as a compact human size (B/KB/MB/GB, one
+decimal past the byte unit); non-numbers render an em-dash.
+
+- `@param` {unknown} value Byte count from the bundle-stats report.
+- `@returns` {string} The formatted size.
+
+### `BUNDLE_TOTAL_KEYS`
+
+Bundle-rollup row order — the file-type totals in display order.
+
+### `bundleRow`
+
+One size row for a bucket — files, minified, unminified, gzip, brotli.
+
+### `renderBundle`
+
+Renders the post-build bundle inventory (emitted sizes per type, tier, crate).
 
 ### `renderConsoleScan`
 

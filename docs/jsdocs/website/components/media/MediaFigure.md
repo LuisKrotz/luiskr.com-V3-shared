@@ -78,6 +78,13 @@ Scaled webm fallback for constrained devices.
 
 Sets the <source> src on a video element when it becomes playable.
 
+### (module scope)
+
+Re-binds the progressive-crossfade description after each render —
+the layered img stack is recreated per update, so the fresh nodes
+re-attach to the root's shared desc node. The img keeps its media
+alt; `longdesc` + `aria-describedby` carry the animation story.
+
 ### `playVideo`
 
 Starts muted playback honoring reduced-motion/autoplay prefs.

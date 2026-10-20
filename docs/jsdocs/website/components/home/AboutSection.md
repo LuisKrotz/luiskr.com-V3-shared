@@ -2,9 +2,9 @@
 
 &lt;about-section&gt; — the home page's bio block: Gravatar profile
 
-| | |
-|---|---|
-| **Source** | `src/website/components/home/AboutSection.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/home/AboutSection.tsx`          |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -24,6 +24,13 @@ Binds the portrait glitch handlers once the shadow root exists.
 ### (module scope)
 
 Stops any running glitch loop when the element leaves the DOM.
+
+### (module scope)
+
+Re-binds the bio's continuous type-in description — the two-column
+paragraph cascade is ONE coordinated animation (col2 starts as col1
+ends), so the text container carries the ABOUT_TEXT record on top
+of each <draw-text>'s own TEXT_DRAW binding.
 
 ### `aboutTranslations`
 

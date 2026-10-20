@@ -59,7 +59,8 @@ Appends the tier stylesheet to <head>.
 
 ### `showFallback`
 
-Graceful notice for engines below every tier (e.g. IE11).
+Graceful notice — only reachable if the manifest ships no floor tier
+(the `ie` tier's empty probe list passes unconditionally).
 
 ### `boot`
 

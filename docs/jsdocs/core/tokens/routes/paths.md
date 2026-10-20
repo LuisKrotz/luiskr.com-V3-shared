@@ -33,6 +33,10 @@ Frozen asset path map — sole declaration site for these tokens; consumers read
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
 
-### `WASM_OVERLAY_PREFIX`
+### `WASM_WIDGETS_PREFIX`
 
-wasm-pack `--target web` artifacts — JS glue beside the .wasm.
+wasm-pack `--target web` widget artifacts — `/wasm/<slug>/`.
+
+### `WASM_DIAGRAM_PREFIX`
+
+`rust/diagram` artifacts — the mermaid-subset SVG engine.

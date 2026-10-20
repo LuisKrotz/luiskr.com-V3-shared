@@ -25,6 +25,23 @@ the URLs the sitemap already lists (diacritics fold to ASCII).
 
 Escape a string for use inside an HTML attribute or text node.
 
+### `enc`
+
+Percent-encodes a URL for markup/JSON-LD emission — bucket keys can
+carry literal spaces ('brazilian leather/…', '…PARIS FASHION-WEEK…') and
+non-ASCII, which break srcset candidate parsing (whitespace-separated
+grammar) and RFC-3986-strict contexts (JSON-LD, sitemap locs). Mirrors
+core/utils/media.ts encodeMediaUrl — that module uses @core aliases so
+this standalone Node path can't import it. decodeURI-first keeps it
+idempotent on already-encoded input (encodeURI escapes '%' itself).
+
+### `dec`
+
+Reverses enc() for manifest-key lookups — bucket keys are stored raw,
+so a '%XX'-encoded URL must decode before `manifest.has`. Malformed
+escapes (a '%' not followed by two hex digits) make decodeURI throw, so
+those short-circuit to the raw form.
+
 ### `toDescription`
 
 Strips markup from a translated rich-text string and compacts it into a
@@ -143,6 +160,13 @@ Media-modal deep link — the single asset + its caption + project context.
 
 Experience page content — title + every authored label/copy leaf.
 
+### `animationsContent`
+
+Animations-reference hub — title + intro + every animation record's
+alt/longdesc as a definition list. The static mirror of the runtime
+<view-animations> listing: crawlers, AI agents and reader mode read the
+same components.animations records without running JavaScript.
+
 ### `readStarBody`
 
 Star-field body dossier JSON — locale file with English fallback.
@@ -235,6 +259,12 @@ if (loc === 'en') continue
 
     addRedirect(`/${loc}/star-field-experiment`, sfTarget)
     addRedirect(`/${loc}/star-field-experiment/**`, `${sfTarget}/:splat`)
+
+    // English-segment animations alias → localized canonical slug.
+    addRedirect(
+      `/${loc}/${enSlugs.animations}`,
+      `/${loc}/${slugs.animations || enSlugs.animations}`
+    )
 
     // Docs are English-only — a locale-prefixed docs URL canonicalizes to
     // the unprefixed route, so it redirects rather than rendering.

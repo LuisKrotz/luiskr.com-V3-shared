@@ -2,9 +2,9 @@
 
 WebGL animated circular close (X) button used by the expand
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/close-button.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/utils/canvas/widgets/close-button.ts`           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -13,11 +13,28 @@ WebGL animated circular close (X) button used by the expand
 
 WebGL Animated Close Button
 Features:
+
 - Liquid fills slower and procedural rising bubbles with specular highlights
 - Rotating X during hover/liquid animation
 - Razor-sharp vector anti-aliased X line strokes (zero blur)
 - Kinetic shockwave ripple on click
 - Resilient Canvas 2D fallback
+
+### `_wasm`
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+### `_wasmFailed`
+
+Latch — a failed wasm mount never retries on this instance.
+
+### `_wasmPending`
+
+In-flight mount — restore() must not double-mount on re-entry.
+
+### `_wasmT`
+
+Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
 ### `constructor`
 

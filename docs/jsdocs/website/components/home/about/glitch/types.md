@@ -147,6 +147,11 @@ Live glitch session parked on `host._glitch`.
 
 Overlay canvas inside the picture wrapper.
 
+### `ctx`
+
+2D backend context — null while the WebGPU arm mounts and forever
+after it succeeds; the rust/glitch shader replaces every painter.
+
 ### `w`
 
 Canvas size in device px.
@@ -199,3 +204,15 @@ Frame counter — paces un-armed retry polls.
 Wrapper ResizeObserver — the CSS canvas is width:100%, so any post-arm
 layout change (resize, grid reflow, mosaic expand above) would stretch
 the stale device-px raster into a zoomed/cropped portrait without it.
+
+### `wasm`
+
+Live rust/glitch widget — the WebGPU render backend. Null while the
+mount is in flight or after it fails (the 2D painters run instead).
+
+### (module scope)
+
+Narrowed view of the session for the 2D painters — `frame()` guards on
+`s.ctx` once and passes this type down, so every painter keeps a
+non-nullable context without per-call checks (the wasm arm never
+reaches them).

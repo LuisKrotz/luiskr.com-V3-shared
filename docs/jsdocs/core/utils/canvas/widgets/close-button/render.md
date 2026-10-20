@@ -1,8 +1,8 @@
 # `core/utils/canvas/widgets/close-button/render.ts`
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/close-button/render.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/utils/canvas/widgets/close-button/render.ts`    |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -28,6 +28,10 @@ hover-state still applies (without animating).
 ### `animate`
 
 Starts the requestAnimationFrame render loop (skipped under reduced motion).
+
+### `renderWasm`
+
+Per-frame wasm render: pushes the three eased channels + one frame tick.
 
 ### `renderWebGL`
 

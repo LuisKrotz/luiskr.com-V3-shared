@@ -410,9 +410,10 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                           | What it does |
-| -------------------------------------------------------------- | ------------ |
-| [`wasm-worker.js`](core/public/scripts/workers/wasm-worker.md) | —            |
+| File                                                                       | What it does |
+| -------------------------------------------------------------------------- | ------------ |
+| [`gpu-render-worker.js`](core/public/scripts/workers/gpu-render-worker.md) | —            |
+| [`wasm-worker.js`](core/public/scripts/workers/wasm-worker.md)             | —            |
 
 ## Core engine
 
@@ -517,8 +518,10 @@ _Shared primitives every surface builds on — no direct UI._
 | [`intro-loader-tails-2.test.js`](core/tests/coverage/canvas/loaders/intro-loader-tails-2.test.md)                 | Split from coverage-tails-4.test.js — covers the "intro-loader tails 2" describe. |
 | [`intro-loader-tails-3.test.js`](core/tests/coverage/canvas/loaders/intro-loader-tails-3.test.md)                 | Coverage tails for the intro-loader fallback arms: a loader                       |
 | [`intro-loader-tails.test.js`](core/tests/coverage/canvas/loaders/intro-loader-tails.test.md)                     | Split from coverage-tails-2.test.js — covers the "intro-loader tails" describe.   |
+| [`menu-background-wasm-tails.test.js`](core/tests/coverage/canvas/loaders/menu-background-wasm-tails.test.md)     | Coverage tail for the WebGPU/wasm menu-background path —                          |
 | [`menu-software-renderer-tails.test.js`](core/tests/coverage/canvas/loaders/menu-software-renderer-tails.test.md) | Coverage tail for the software-rasterizer rejection in                            |
 | [`skeleton-measure-tails.test.js`](core/tests/coverage/canvas/loaders/skeleton-measure-tails.test.md)             | Coverage tails for skeleton measure/init edges: host-bounds                       |
+| [`skeleton-wasm-tails.test.js`](core/tests/coverage/canvas/loaders/skeleton-wasm-tails.test.md)                   | Coverage tail for the WebGPU/wasm skeleton path —                                 |
 
 ## Core engine
 
@@ -528,7 +531,19 @@ _Shared primitives every surface builds on — no direct UI._
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | [`burger-button-tails.test.js`](core/tests/coverage/canvas/widgets/burger-button-tails.test.md)                                                                                                 | Split from coverage-tails-2.test.js — covers the "burger-button tails" describe.                                |
 | [`burger-tails-2.test.js`](core/tests/coverage/canvas/widgets/burger-tails-2.test.md)                                                                                                           | Split from coverage-tails-5.test.js — covers the "burger tails 2" describe.                                     |
+| [`burger-wasm-tails.test.js`](core/tests/coverage/canvas/widgets/burger-wasm-tails.test.md)                                                                                                     | Coverage tail for the WebGPU/wasm burger path —                                                                 |
+| [`close-button-init-tails.test.js`](core/tests/coverage/canvas/widgets/close-button-init-tails.test.md)                                                                                         | Coverage tail for close-button/init.ts — the exported                                                           |
+| [`close-button-render-tails.test.js`](core/tests/coverage/canvas/widgets/close-button-render-tails.test.md)                                                                                     | Coverage tail for close-button/render.ts — the                                                                  |
+| [`close-button-wasm-tails.test.js`](core/tests/coverage/canvas/widgets/close-button-wasm-tails.test.md)                                                                                         | Coverage tail for the WebGPU/wasm close button path —                                                           |
 | [`flag-texture-wasm-tails.test.js`](core/tests/coverage/canvas/widgets/flag-texture-wasm-tails.test.md)                                                                                         | Coverage tails for the worker-decoded flag texture path:                                                        |
+| [`flag-wasm-tails.test.js`](core/tests/coverage/canvas/widgets/flag-wasm-tails.test.md)                                                                                                         | Coverage tail for the WebGPU/wasm flag path — init's                                                            |
+| [`switch-slider-init-tails.test.js`](core/tests/coverage/canvas/widgets/switch-slider-init-tails.test.md)                                                                                       | Coverage tail for switch-slider/init.ts — the exported                                                          |
+| [`switch-slider-render-tails.test.js`](core/tests/coverage/canvas/widgets/switch-slider-render-tails.test.md)                                                                                   | Coverage tail for switch-slider/render.ts — the spring                                                          |
+| [`switch-slider-wasm-tails.test.js`](core/tests/coverage/canvas/widgets/switch-slider-wasm-tails.test.md)                                                                                       | Coverage tail for the WebGPU/wasm switch slider path —                                                          |
+| [`theme-slider-events-tails.test.js`](core/tests/coverage/canvas/widgets/theme-slider-events-tails.test.md)                                                                                     | Coverage tail for theme-slider/events.ts — the bound                                                            |
+| [`theme-slider-init-tails.test.js`](core/tests/coverage/canvas/widgets/theme-slider-init-tails.test.md)                                                                                         | Coverage tail for theme-slider/init.ts — the exported                                                           |
+| [`theme-slider-render-tails.test.js`](core/tests/coverage/canvas/widgets/theme-slider-render-tails.test.md)                                                                                     | Coverage tail for theme-slider/render.ts — the spring                                                           |
+| [`theme-slider-wasm-tails.test.js`](core/tests/coverage/canvas/widgets/theme-slider-wasm-tails.test.md)                                                                                         | Coverage tail for the WebGPU/wasm theme slider path —                                                           |
 | [`widget-tails-burgerbuttonwebgl-program-failure-static-resize-guards.test.js`](core/tests/coverage/canvas/widgets/widget-tails-burgerbuttonwebgl-program-failure-static-resize-guards.test.md) | Split from widget-tails.test.js — covers the "BurgerButtonWebGL — program failure + static resize guards" desc… |
 | [`widget-tails-carouselarrowwebgl-unbind-else-arms.test.js`](core/tests/coverage/canvas/widgets/widget-tails-carouselarrowwebgl-unbind-else-arms.test.md)                                       | Split from widget-tails.test.js — covers the "CarouselArrowWebGL — unbind else-arms" describe.                  |
 | [`widget-tails-flag-texture-draw-creation-guards.test.js`](core/tests/coverage/canvas/widgets/widget-tails-flag-texture-draw-creation-guards.test.md)                                           | Split from widget-tails.test.js — covers the "flag texture/draw — creation guards" describe.                    |
@@ -659,6 +674,14 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
+| File                                                                                          | What it does                                         |
+| --------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [`animation-desc-tails.test.js`](core/tests/coverage/utils/a11y/animation-desc-tails.test.md) | Coverage for core/utils/a11y/animation-desc.ts — the |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
 | File                                                                                              | What it does                                                                |
 | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | [`db-tails-2.test.js`](core/tests/coverage/utils/data/db-tails-2.test.md)                         | Split from coverage-tails-4.test.js — covers the "db tails 2" describe.     |
@@ -670,30 +693,40 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                                                         | What it does                                                                 |
-| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [`dom-arm-guard-tails.test.js`](core/tests/coverage/utils/dom-arm-guard-tails.test.md)       | Coverage tails for the residual-input guard in core/utils/dom.ts —           |
-| [`dom-utils-tails.test.js`](core/tests/coverage/utils/dom-utils-tails.test.md)               | Split from coverage-tails-5.test.js — covers the "dom-utils tails" describe. |
-| [`media-manifest-tails-2.test.js`](core/tests/coverage/utils/media-manifest-tails-2.test.md) | Second coverage tail for utils/media/manifest.ts — the                       |
-| [`media-manifest-tails-3.test.js`](core/tests/coverage/utils/media-manifest-tails-3.test.md) | Third coverage tail for utils/media/manifest.ts — the                        |
-| [`media-manifest-tails.test.js`](core/tests/coverage/utils/media-manifest-tails.test.md)     | Coverage tail for utils/media/manifest.ts — the runtime gate                 |
-| [`media-tails.test.js`](core/tests/coverage/utils/media-tails.test.md)                       | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
-| [`media-utils-tails.test.js`](core/tests/coverage/utils/media-utils-tails.test.md)           | Split from coverage-tails.test.js — covers the "media utils tails" describe. |
-| [`string-tails.test.js`](core/tests/coverage/utils/string-tails.test.md)                     | Coverage tails for core/utils/string.ts — iterated HTML                      |
+| File                                                                                                   | What it does                                                                 |
+| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| [`dom-arm-guard-tails.test.js`](core/tests/coverage/utils/dom-arm-guard-tails.test.md)                 | Coverage tails for the residual-input guard in core/utils/dom.ts —           |
+| [`dom-utils-tails.test.js`](core/tests/coverage/utils/dom-utils-tails.test.md)                         | Split from coverage-tails-5.test.js — covers the "dom-utils tails" describe. |
+| [`media-manifest-encode-tails.test.js`](core/tests/coverage/utils/media-manifest-encode-tails.test.md) | Coverage tail for the percent-decoded lookup arm of                          |
+| [`media-manifest-tails-2.test.js`](core/tests/coverage/utils/media-manifest-tails-2.test.md)           | Second coverage tail for utils/media/manifest.ts — the                       |
+| [`media-manifest-tails-3.test.js`](core/tests/coverage/utils/media-manifest-tails-3.test.md)           | Third coverage tail for utils/media/manifest.ts — the                        |
+| [`media-manifest-tails.test.js`](core/tests/coverage/utils/media-manifest-tails.test.md)               | Coverage tail for utils/media/manifest.ts — the runtime gate                 |
+| [`media-tails.test.js`](core/tests/coverage/utils/media-tails.test.md)                                 | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
+| [`media-utils-tails.test.js`](core/tests/coverage/utils/media-utils-tails.test.md)                     | Split from coverage-tails.test.js — covers the "media utils tails" describe. |
+| [`service-worker-tails.test.js`](core/tests/coverage/utils/service-worker-tails.test.md)               | Coverage tail for utils/service-worker.ts — the local                        |
+| [`string-tails.test.js`](core/tests/coverage/utils/string-tails.test.md)                               | Coverage tails for core/utils/string.ts — iterated HTML                      |
 
 ## Core engine
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                                                             | What it does                                                                     |
-| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| [`gpu-accel-tails-7.test.js`](core/tests/coverage/utils/gpu/gpu-accel-tails-7.test.md)           | Split from coverage-tails-7.test.js — covers the "gpu-accel tails" describe.     |
-| [`gpu-accel-tails.test.js`](core/tests/coverage/utils/gpu/gpu-accel-tails.test.md)               | Split from coverage-tails-5.test.js — covers the "gpu-accel tails" describe.     |
-| [`gpu-info-tails-test-js.test.js`](core/tests/coverage/utils/gpu/gpu-info-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "gpu-info tails" describe.        |
-| [`gpu-info-tails.test.js`](core/tests/coverage/utils/gpu/gpu-info-tails.test.md)                 | Split from coverage-tails-4.test.js — covers the "gpu-info tails" describe.      |
-| [`npu-predict-tails-2.test.js`](core/tests/coverage/utils/gpu/npu-predict-tails-2.test.md)       | Split from coverage-tails-4.test.js — covers the "npu-predict tails 2" describe. |
-| [`npu-predict-tails.test.js`](core/tests/coverage/utils/gpu/npu-predict-tails.test.md)           | Split from coverage-tails-2.test.js — covers the "npu-predict tails" describe.   |
-| [`webgpu-overlay-tails.test.js`](core/tests/coverage/utils/gpu/webgpu-overlay-tails.test.md)     | Coverage tail for utils/gpu/webgpu-overlay.ts — the                              |
+| File                                                                                                     | What it does                                                                     |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [`corner-brackets-tails.test.js`](core/tests/coverage/utils/gpu/corner-brackets-tails.test.md)           | Coverage tail for utils/gpu/corner-brackets.ts — the                             |
+| [`divider-sheen-tails.test.js`](core/tests/coverage/utils/gpu/divider-sheen-tails.test.md)               | Coverage tail for utils/gpu/divider-sheen.ts — the                               |
+| [`gpu-accel-tails-7.test.js`](core/tests/coverage/utils/gpu/gpu-accel-tails-7.test.md)                   | Split from coverage-tails-7.test.js — covers the "gpu-accel tails" describe.     |
+| [`gpu-accel-tails.test.js`](core/tests/coverage/utils/gpu/gpu-accel-tails.test.md)                       | Split from coverage-tails-5.test.js — covers the "gpu-accel tails" describe.     |
+| [`gpu-info-tails-test-js.test.js`](core/tests/coverage/utils/gpu/gpu-info-tails-test-js.test.md)         | Split from coverage-tails.test.js — covers the "gpu-info tails" describe.        |
+| [`gpu-info-tails.test.js`](core/tests/coverage/utils/gpu/gpu-info-tails.test.md)                         | Split from coverage-tails-4.test.js — covers the "gpu-info tails" describe.      |
+| [`gpu-widgets-tails.test.js`](core/tests/coverage/utils/gpu/gpu-widgets-tails.test.md)                   | Coverage tail for tokens/motion/gpu-widgets — the                                |
+| [`npu-predict-tails-2.test.js`](core/tests/coverage/utils/gpu/npu-predict-tails-2.test.md)               | Split from coverage-tails-4.test.js — covers the "npu-predict tails 2" describe. |
+| [`npu-predict-tails.test.js`](core/tests/coverage/utils/gpu/npu-predict-tails.test.md)                   | Split from coverage-tails-2.test.js — covers the "npu-predict tails" describe.   |
+| [`orbit-controller-tails.test.js`](core/tests/coverage/utils/gpu/orbit-controller-tails.test.md)         | Coverage tail for utils/gpu/orbit-controller.ts — the                            |
+| [`ring-sheen-tails.test.js`](core/tests/coverage/utils/gpu/ring-sheen-tails.test.md)                     | Coverage tail for utils/gpu/ring-sheen.ts — the                                  |
+| [`scene3d-tails.test.js`](core/tests/coverage/utils/gpu/scene3d-tails.test.md)                           | Coverage tail for utils/gpu/scene3d.ts — the JS facade                           |
+| [`webgpu-widget-env-tails.test.js`](core/tests/coverage/utils/gpu/webgpu-widget-env-tails.test.md)       | Coverage tail for utils/gpu/webgpu-widget.ts arms that                           |
+| [`webgpu-widget-tails.test.js`](core/tests/coverage/utils/gpu/webgpu-widget-tails.test.md)               | Coverage tail for utils/gpu/webgpu-widget.ts — the                               |
+| [`webgpu-widget-worker-tails.test.js`](core/tests/coverage/utils/gpu/webgpu-widget-worker-tails.test.md) | Coverage tail for the render-worker route in                                     |
 
 ## Core engine
 
@@ -710,8 +743,10 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                                                                        | What it does                                                                    |
 | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`bezier-tails.test.js`](core/tests/coverage/utils/motion/bezier-tails.test.md)                             | Coverage for core/utils/motion/bezier.ts — the                                  |
 | [`frame-budget-tails.test.js`](core/tests/coverage/utils/motion/frame-budget-tails.test.md)                 | Coverage tails for core/tokens/motion/frame-budget.ts —                         |
 | [`genie-tails.test.js`](core/tests/coverage/utils/motion/genie-tails.test.md)                               | Split from coverage-tails.test.js — covers the "genie tails" describe.          |
+| [`scroll-spring-tails.test.js`](core/tests/coverage/utils/motion/scroll-spring-tails.test.md)               | Coverage for core/utils/motion/scroll-spring.ts — the                           |
 | [`scroll-state-tails-test-js.test.js`](core/tests/coverage/utils/motion/scroll-state-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "scroll-state tails" describe.   |
 | [`scroll-state-tails.test.js`](core/tests/coverage/utils/motion/scroll-state-tails.test.md)                 | Split from coverage-tails-4.test.js — covers the "scroll-state tails" describe. |
 
@@ -733,9 +768,13 @@ _Shared primitives every surface builds on — no direct UI._
 | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | [`wasm-css-tails-test-js.test.js`](core/tests/coverage/utils/wasm/wasm-css-tails-test-js.test.md)                     | Split from coverage-tails.test.js — covers the "wasm-css tails" describe.                |
 | [`wasm-css-tails.test.js`](core/tests/coverage/utils/wasm/wasm-css-tails.test.md)                                     | Split from coverage-tails-4.test.js — covers the "wasm-css tails" describe.              |
+| [`wasm-diagram-tails-2.test.js`](core/tests/coverage/utils/wasm/wasm-diagram-tails-2.test.md)                         | Coverage tails for core/utils/wasm/wasm-diagram.ts,                                      |
+| [`wasm-diagram-tails-3.test.js`](core/tests/coverage/utils/wasm/wasm-diagram-tails-3.test.md)                         | Coverage tails for core/utils/wasm/wasm-diagram.ts,                                      |
+| [`wasm-diagram-tails.test.js`](core/tests/coverage/utils/wasm/wasm-diagram-tails.test.md)                             | Coverage tails for core/utils/wasm/wasm-diagram.ts —                                     |
 | [`wasm-media-threads-tails-test-js.test.js`](core/tests/coverage/utils/wasm/wasm-media-threads-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "wasm-media-threads tails" describe.      |
 | [`wasm-media-threads-tails.test.js`](core/tests/coverage/utils/wasm/wasm-media-threads-tails.test.md)                 | Split from coverage-tails-5.test.js — covers the "wasm-media-threads tails" describe.    |
-| [`wasm-pool-tails.test.js`](core/tests/coverage/utils/wasm/wasm-pool-tails.test.md)                                   | Split from coverage-tails-4.test.js — covers the "wasm-pool tails" describe.             |
+| [`wasm-pool-env-tails.test.js`](core/tests/coverage/utils/wasm/wasm-pool-env-tails.test.md)                           | Coverage for core/utils/wasm/wasm-pool.ts module-evaluation                              |
+| [`wasm-pool-tails.test.js`](core/tests/coverage/utils/wasm/wasm-pool-tails.test.md)                                   | Coverage for core/utils/wasm/wasm-pool.ts — the worker                                   |
 | [`wasm-scroll-container-tails.test.js`](core/tests/coverage/utils/wasm/wasm-scroll-container-tails.test.md)           | Split from coverage-tails-5.test.js — covers the "wasm-scroll container tails" describe. |
 | [`wasm-scroll-tails-2.test.js`](core/tests/coverage/utils/wasm/wasm-scroll-tails-2.test.md)                           | Split from coverage-tails-5.test.js — covers the "wasm-scroll tails 2" describe.         |
 | [`wasm-scroll-tails.test.js`](core/tests/coverage/utils/wasm/wasm-scroll-tails.test.md)                               | Split from coverage-tails-2.test.js — covers the "wasm-scroll tails" describe.           |
@@ -960,6 +999,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`a11y.ts`](core/tokens/classes/a11y.md)                       | Accessibility-only class tokens — token group.                    |
 | [`about.ts`](core/tokens/classes/about.md)                     | About section class tokens — token group.                         |
 | [`admin.ts`](core/tokens/classes/admin.md)                     | Admin login view class tokens — token group.                      |
+| [`animations.ts`](core/tokens/classes/animations.md)           | Animations-reference view class tokens — grouped subset of        |
 | [`app.ts`](core/tokens/classes/app.md)                         | App shell class tokens — progress bar + view outlet               |
 | [`awards-carousel.ts`](core/tokens/classes/awards-carousel.md) | Awards carousel (`aw-c-*` block) class tokens — grouped subset of |
 | [`awards.ts`](core/tokens/classes/awards.md)                   | Awards footer class tokens — token group.                         |
@@ -972,7 +1012,6 @@ _Shared primitives every surface builds on — no direct UI._
 | [`effects.ts`](core/tokens/classes/effects.md)                 | Ambient effect canvas class tokens — fluid background,            |
 | [`flags.ts`](core/tokens/classes/flags.md)                     | Language flag class tokens — token group.                         |
 | [`footer.ts`](core/tokens/classes/footer.md)                   | Footer source-code row class tokens — grouped subset of           |
-| [`gpu.ts`](core/tokens/classes/gpu.md)                         | WebGPU overlay class tokens — the dual-layer render canvas        |
 | [`lang.ts`](core/tokens/classes/lang.md)                       | Language dialog class tokens — token group.                       |
 | [`legal.ts`](core/tokens/classes/legal.md)                     | Legal pages + not-found view class tokens — grouped subset of     |
 | [`loader.ts`](core/tokens/classes/loader.md)                   | Intro loader class tokens — token group.                          |
@@ -1012,6 +1051,7 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                      | What it does                                                       |
 | --------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`animation-ids.ts`](core/tokens/data/animation-ids.md)   | Animation registry — one stable id per distinct animated           |
 | [`cms-keys.ts`](core/tokens/data/cms-keys.md)             | CMS/Firebase node-key tokens — keys used to read the               |
 | [`component-keys.ts`](core/tokens/data/component-keys.md) | Dotted paths into translations/&lt;locale&gt;/components — grouped |
 | [`log.ts`](core/tokens/data/log.md)                       | Dev-log severity levels + the globalThis inspection key.           |
@@ -1096,10 +1136,13 @@ _Shared primitives every surface builds on — no direct UI._
 | [`animation.ts`](core/tokens/motion/animation.md)       | Easing curve + transition duration tokens — grouped subsets |
 | [`carousel.ts`](core/tokens/motion/carousel.md)         | Carousel timing/geometry tokens — grouped subsets of        |
 | [`frame-budget.ts`](core/tokens/motion/frame-budget.md) | Animation frame-budget constants — the per-frame work       |
+| [`genie.ts`](core/tokens/motion/genie.md)               | Expand-modal genie-warp tunables — the macOS-style liquid   |
+| [`gpu-widgets.ts`](core/tokens/motion/gpu-widgets.md)   | WebGPU widget discriminants + artifact registry — the       |
 | [`gpu.ts`](core/tokens/motion/gpu.md)                   | GPU detection & power-hint tokens — renderer-string         |
 | [`notify.ts`](core/tokens/motion/notify.md)             | Notification/toast runtime tuning tokens.                   |
 | [`prefetch.ts`](core/tokens/motion/prefetch.md)         | Predictive-prefetch tuning tokens.                          |
 | [`skeleton.ts`](core/tokens/motion/skeleton.md)         | WebGL skeleton-field configuration tokens — grouped subsets |
+| [`slider.ts`](core/tokens/motion/slider.md)             | Knob-spring tunables for the slider widgets (theme          |
 
 ## Core engine
 
@@ -1202,6 +1245,14 @@ _Shared primitives every surface builds on — no direct UI._
 | [`arrows.ts`](core/tokens/theme/arrows.md)     | Carousel arrow button directions — shared by CustomCarousel |
 | [`switches.ts`](core/tokens/theme/switches.md) | Switch slider context types — `data-switch` values          |
 | [`theme.ts`](core/tokens/theme/theme.md)       | Theme value tokens — dark/light/system registry.            |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
+| File                                                     | What it does                                         |
+| -------------------------------------------------------- | ---------------------------------------------------- |
+| [`animation-desc.ts`](core/utils/a11y/animation-desc.md) | Animated-element descriptions — binds every animated |
 
 ## Core engine
 
@@ -1358,11 +1409,16 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                          | What it does                                                  |
 | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| [`corner-brackets.ts`](core/utils/gpu/corner-brackets.md)     | —                                                             |
+| [`divider-sheen.ts`](core/utils/gpu/divider-sheen.md)         | —                                                             |
 | [`gpu-accel-shaders.ts`](core/utils/gpu/gpu-accel-shaders.md) | GLSL sources for the GPUAccelerator passthrough program —     |
 | [`gpu-accel.ts`](core/utils/gpu/gpu-accel.md)                 | Hardware GPU acceleration singleton: a lazily-created         |
 | [`gpu-info.ts`](core/utils/gpu/gpu-info.md)                   | Shared GPU capability detection + WebGL context-option hints. |
 | [`npu-predict.ts`](core/utils/gpu/npu-predict.md)             | Hardware-tiered prefetch predictor: scores navigation         |
-| [`webgpu-overlay.ts`](core/utils/gpu/webgpu-overlay.md)       | JS→wasm bridge for the `rust/overlay` WebGPU surface — the    |
+| [`orbit-controller.ts`](core/utils/gpu/orbit-controller.md)   | —                                                             |
+| [`ring-sheen.ts`](core/utils/gpu/ring-sheen.md)               | —                                                             |
+| [`scene3d.ts`](core/utils/gpu/scene3d.md)                     | —                                                             |
+| [`webgpu-widget.ts`](core/utils/gpu/webgpu-widget.md)         | Per-widget WebGPU/Rust bridge — the loader for the            |
 
 ## Core engine
 
@@ -1377,11 +1433,14 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                   | What it does                                                  |
-| ------------------------------------------------------ | ------------------------------------------------------------- |
-| [`genie.ts`](core/utils/motion/genie.md)               | "Genie" dialog transition shared by the preferences modal and |
-| [`route-warmer.ts`](core/utils/motion/route-warmer.md) | Post-load route-chunk warming.                                |
-| [`scroll-state.ts`](core/utils/motion/scroll-state.md) | Global "is the window currently scrolling" flag plus an       |
+| File                                                     | What it does                                                        |
+| -------------------------------------------------------- | ------------------------------------------------------------------- |
+| [`bezier.ts`](core/utils/motion/bezier.md)               | Cubic-bezier easing evaluator — the CSS `cubic-bezier(x1,y1,x2,y2)` |
+| [`genie.ts`](core/utils/motion/genie.md)                 | "Genie" dialog transition shared by the preferences modal and       |
+| [`route-warmer.ts`](core/utils/motion/route-warmer.md)   | Post-load route-chunk warming.                                      |
+| [`scroll-spring.ts`](core/utils/motion/scroll-spring.md) | Scroll-position chase spring — the shared driver both               |
+| [`scroll-state.ts`](core/utils/motion/scroll-state.md)   | Global "is the window currently scrolling" flag plus an             |
+| [`spring.ts`](core/utils/motion/spring.md)               | Shared chase-spring integrator — a damped spring                    |
 
 ## Core engine
 
@@ -1408,6 +1467,7 @@ _Shared primitives every surface builds on — no direct UI._
 | File                                                             | What it does                                                              |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | [`wasm-css.ts`](core/utils/wasm/wasm-css.md)                     | Dynamic-CSS injector: owns the single &lt;style id="wasm-dynamic-css"&gt; |
+| [`wasm-diagram.ts`](core/utils/wasm/wasm-diagram.md)             | Lazy loader for the `rust/diagram` wasm engine — the                      |
 | [`wasm-image-decoder.ts`](core/utils/wasm/wasm-image-decoder.md) | Image decode pipeline: fetch → worker-side createImageBitmap              |
 | [`wasm-layout.ts`](core/utils/wasm/wasm-layout.md)               | Layout/animation math with a WebAssembly fast path.                       |
 | [`wasm-media-threads.ts`](core/utils/wasm/wasm-media-threads.md) | Off-main-thread media pipeline built on the WASM worker pool:             |
@@ -1428,23 +1488,24 @@ _Electron main/launcher/preload — wraps dist/ as an installable app._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                  | What it does                                                    |
-| ----------------------------------------------------- | --------------------------------------------------------------- |
-| [`Docs.tsx`](experiments/docs/Docs.md)                | &lt;view-docs&gt; — the English-only docs portal route.         |
-| [`arch-scene.ts`](experiments/docs/arch-scene.md)     | Interactive three.js visualization of the docs manifest —       |
-| [`copy-guard.ts`](experiments/docs/copy-guard.md)     | Copy-protection layer for the docs source viewer.               |
-| [`coverage-nav.ts`](experiments/docs/coverage-nav.md) | Istanbul coverage-report interactivity for the docs viewer.     |
-| [`dev.ts`](experiments/docs/dev.md)                   | Standalone dev entry for the docs-portal experiment —           |
-| [`folder-svg.tsx`](experiments/docs/folder-svg.md)    | Deterministic animated folder glyphs for the docs grid.         |
-| [`gl-strip.ts`](experiments/docs/gl-strip.md)         | WebGL thread-field backdrop for the docs navigation region.     |
-| [`index.ts`](experiments/docs/index.md)               | Barrel for the `docs` experiment module — the in-app            |
-| [`jest.config.mjs`](experiments/docs/jest.config.md)  | —                                                               |
-| [`loader.ts`](experiments/docs/loader.md)             | Boot-loader lifecycle for &lt;view-docs&gt; — mirrors the space |
-| [`manifest.ts`](experiments/docs/manifest.md)         | Build-time docs manifest access + path resolution.              |
-| [`mermaid.ts`](experiments/docs/mermaid.md)           | Mermaid diagram rendering for docs payloads — markdown          |
-| [`render.tsx`](experiments/docs/render.md)            | JSX template for &lt;view-docs&gt; — extracted from Docs.tsx.   |
-| [`telemetry.ts`](experiments/docs/telemetry.md)       | Copy-attempt telemetry for the docs source viewer.              |
-| [`vite.config.js`](experiments/docs/vite.config.md)   | Library build for the `docs` experiment — the in-app            |
+| File                                                    | What it does                                                    |
+| ------------------------------------------------------- | --------------------------------------------------------------- |
+| [`Docs.tsx`](experiments/docs/Docs.md)                  | &lt;view-docs&gt; — the English-only docs portal route.         |
+| [`arch-scene-3d.ts`](experiments/docs/arch-scene-3d.md) | —                                                               |
+| [`arch-scene.ts`](experiments/docs/arch-scene.md)       | Interactive three.js visualization of the docs manifest —       |
+| [`copy-guard.ts`](experiments/docs/copy-guard.md)       | Copy-protection layer for the docs source viewer.               |
+| [`coverage-nav.ts`](experiments/docs/coverage-nav.md)   | Istanbul coverage-report interactivity for the docs viewer.     |
+| [`dev.ts`](experiments/docs/dev.md)                     | Standalone dev entry for the docs-portal experiment —           |
+| [`folder-svg.tsx`](experiments/docs/folder-svg.md)      | Deterministic animated folder glyphs for the docs grid.         |
+| [`gl-strip.ts`](experiments/docs/gl-strip.md)           | WebGL thread-field backdrop for the docs navigation region.     |
+| [`index.ts`](experiments/docs/index.md)                 | Barrel for the `docs` experiment module — the in-app            |
+| [`jest.config.mjs`](experiments/docs/jest.config.md)    | —                                                               |
+| [`loader.ts`](experiments/docs/loader.md)               | Boot-loader lifecycle for &lt;view-docs&gt; — mirrors the space |
+| [`manifest.ts`](experiments/docs/manifest.md)           | Build-time docs manifest access + path resolution.              |
+| [`mermaid.ts`](experiments/docs/mermaid.md)             | Diagram rendering for docs payloads — markdown                  |
+| [`render.tsx`](experiments/docs/render.md)              | JSX template for &lt;view-docs&gt; — extracted from Docs.tsx.   |
+| [`telemetry.ts`](experiments/docs/telemetry.md)         | Copy-attempt telemetry for the docs source viewer.              |
+| [`vite.config.js`](experiments/docs/vite.config.md)     | Library build for the `docs` experiment — the in-app            |
 
 ## Entry points
 
@@ -1600,6 +1661,8 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                                           | What it does                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| [`arch-scene-3d-tails.test.js`](experiments/docs/tests/coverage/arch-scene-3d-tails.test.md)                                   | Coverage tail for docs/arch-scene-3d.ts and the                                 |
+| [`arch-scene-tails-notex.test.js`](experiments/docs/tests/coverage/arch-scene-tails-notex.test.md)                             | Coverage tail for docs/arch-scene.ts — `makeLabel`'s                            |
 | [`arch-scene-tails.test.js`](experiments/docs/tests/coverage/arch-scene-tails.test.md)                                         | Coverage tails for the docs architecture scene — mounts                         |
 | [`coverage-nav.test.js`](experiments/docs/tests/coverage/coverage-nav.test.md)                                                 | Coverage tails for docs/coverage-nav.ts — the istanbul                          |
 | [`docs-reregister.test.js`](experiments/docs/tests/coverage/docs-reregister.test.md)                                           | Covers the custom-elements registration guard's else arm —                      |
@@ -1610,7 +1673,8 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`docs-tails-generated-folder-artwork.test.js`](experiments/docs/tests/coverage/docs-tails-generated-folder-artwork.test.md)   | Split from docs-tails.test.js — covers the "generated folder artwork" describe. |
 | [`docs-tails-loader.test.js`](experiments/docs/tests/coverage/docs-tails-loader.test.md)                                       | Coverage tails for docs/loader.ts + the Docs.tsx loader                         |
 | [`docs-tails-onmounted-empty-docs-path.test.js`](experiments/docs/tests/coverage/docs-tails-onmounted-empty-docs-path.test.md) | Coverage tail for experiments/docs/Docs.tsx — onMounted's                       |
-| [`mermaid.test.js`](experiments/docs/tests/coverage/mermaid.test.md)                                                           | Coverage tails for docs/mermaid.ts — lazy mermaid import,                       |
+| [`docs-tails-plain-click-arms.test.js`](experiments/docs/tests/coverage/docs-tails-plain-click-arms.test.md)                   | Coverage tail for docs render.tsx + Docs.tsx — the                              |
+| [`mermaid.test.js`](experiments/docs/tests/coverage/mermaid.test.md)                                                           | Coverage tails for docs/mermaid.ts — lazy wasm diagram                          |
 
 ## Entry points
 
@@ -2101,6 +2165,7 @@ _The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
 | File                                                                                                   | What it does                                                                    |
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
 | [`ast-string-extract.js`](shared/scripts/i18n/ast-string-extract.md)                                   | AST-based static analysis tool to detect repeated non-syntactic string literals |
+| [`patch-animation-descriptions.js`](shared/scripts/i18n/patch-animation-descriptions.md)               | Seeds the animated-element accessibility descriptions into                      |
 | [`patch-earth-playground-translations.js`](shared/scripts/i18n/patch-earth-playground-translations.md) | —                                                                               |
 | [`patch-ui-gaps-and-cyrillic.js`](shared/scripts/i18n/patch-ui-gaps-and-cyrillic.md)                   | —                                                                               |
 | [`seed-translations.js`](shared/scripts/i18n/seed-translations.md)                                     | —                                                                               |
@@ -2132,9 +2197,10 @@ _The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
 
 _The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
 
-| File                                                                 | What it does                                                |
-| -------------------------------------------------------------------- | ----------------------------------------------------------- |
-| [`webp-webm-convert.mjs`](shared/scripts/media/webp-webm-convert.md) | Batch CDN transcode — every image (jpg/png) and video (mp4) |
+| File                                                                       | What it does                                                |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| [`validate-media-sizes.mjs`](shared/scripts/media/validate-media-sizes.md) | Validates every media `size` declared in `database.json`    |
+| [`webp-webm-convert.mjs`](shared/scripts/media/webp-webm-convert.md)       | Batch CDN transcode — every image (jpg/png) and video (mp4) |
 
 ## Shared / tooling scripts
 
@@ -2159,6 +2225,7 @@ _The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold._
 
 | File                                                             | What it does                                               |
 | ---------------------------------------------------------------- | ---------------------------------------------------------- |
+| [`chunk-budget.mjs`](shared/scripts/verify/chunk-budget.md)      | Minified chunk-size gate                                   |
 | [`console-scan.mjs`](shared/scripts/verify/console-scan.md)      | Scans every .ts/.tsx/.js file under src/ for console usage |
 | [`coverage-gaps.mjs`](shared/scripts/verify/coverage-gaps.md)    | —                                                          |
 | [`coverage-gate.mjs`](shared/scripts/verify/coverage-gate.md)    | Per-file coverage enforcement, per module                  |
@@ -2188,7 +2255,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`boot.ts`](shared/src/app/boot.md)     | App shell bootstrap — preference init, data load, lazy dialog/HUD chunk imports, router subscription with prog… |
 | [`data.ts`](shared/src/app/data.md)     | Locale data loading for AppRoot — fetches the APP translation node per locale, fans it out to translations, an… |
 | [`input.ts`](shared/src/app/input.md)   | Global input listeners for AppRoot — keyboard shortcuts, pointer handlers, and preference-triggering events bo… |
-| [`modal.ts`](shared/src/app/modal.md)   | Modal-state DOM sync for AppRoot — toggles modal-open on html/body, copies the modifier class onto the wrapper… |
+| [`modal.ts`](shared/src/app/modal.md)   | Modal-state DOM sync for AppRoot — toggles modal-open on html/body and copies the modifier class onto the wrap… |
 | [`scroll.ts`](shared/src/app/scroll.md) | Scroll tracking for AppRoot — measures the #about/#contact section tops and keeps activeSection/onBottom in sy… |
 | [`types.ts`](shared/src/app/types.md)   | Shared structural types for the App shell — the APP                                                             |
 | [`view.ts`](shared/src/app/view.md)     | View outlet reconciliation for AppRoot — same-tag routes delegate to onRouteParamChange; new views lazy-import… |
@@ -2298,6 +2365,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`fx.ts`](website/components/home/about/glitch/fx.md)           | —            |
 | [`session.ts`](website/components/home/about/glitch/session.md) | —            |
 | [`types.ts`](website/components/home/about/glitch/types.md)     | —            |
+| [`wasm.ts`](website/components/home/about/glitch/wasm.md)       | —            |
 
 ## Entry points
 
@@ -2336,6 +2404,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`particles.ts`](website/components/home/mosaic/burn/particles.md) | —            |
 | [`tuning.ts`](website/components/home/mosaic/burn/tuning.md)       | —            |
 | [`types.ts`](website/components/home/mosaic/burn/types.md)         | —            |
+| [`wasm.ts`](website/components/home/mosaic/burn/wasm.md)           | —            |
 
 ## Entry points
 
@@ -2359,24 +2428,30 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                          | What it does |
-| ------------------------------------------------------------- | ------------ |
-| [`dom.ts`](website/components/media/draw-text/dom.md)         | —            |
-| [`fit.ts`](website/components/media/draw-text/fit.md)         | —            |
-| [`render.ts`](website/components/media/draw-text/render.md)   | —            |
-| [`sheet.ts`](website/components/media/draw-text/sheet.md)     | —            |
-| [`trigger.ts`](website/components/media/draw-text/trigger.md) | —            |
-| [`types.ts`](website/components/media/draw-text/types.md)     | —            |
+| File                                                              | What it does |
+| ----------------------------------------------------------------- | ------------ |
+| [`dom.ts`](website/components/media/draw-text/dom.md)             | —            |
+| [`fit.ts`](website/components/media/draw-text/fit.md)             | —            |
+| [`gpu.ts`](website/components/media/draw-text/gpu.md)             | —            |
+| [`render.ts`](website/components/media/draw-text/render.md)       | —            |
+| [`sheet.ts`](website/components/media/draw-text/sheet.md)         | —            |
+| [`traversal.ts`](website/components/media/draw-text/traversal.md) | —            |
+| [`trigger.ts`](website/components/media/draw-text/trigger.md)     | —            |
+| [`types.ts`](website/components/media/draw-text/types.md)         | —            |
 
 ## Entry points
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                        | What it does                                                     |
-| ----------------------------------------------------------- | ---------------------------------------------------------------- |
-| [`close.ts`](website/components/media/expanded/close.md)    | Dismissal sequence for &lt;media-expanded&gt;: the class add     |
-| [`mount.ts`](website/components/media/expanded/mount.md)    | Mount wiring for &lt;media-expanded&gt;: scroll reset, Escape /  |
-| [`render.tsx`](website/components/media/expanded/render.md) | JSX template for &lt;media-expanded&gt; — four close affordances |
+| File                                                                     | What it does                                                     |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| [`close.ts`](website/components/media/expanded/close.md)                 | Dismissal sequence for &lt;media-expanded&gt;: the genie warp    |
+| [`genie-canvas.ts`](website/components/media/expanded/genie-canvas.md)   | 2D-canvas backend for the expand-modal genie warp — the          |
+| [`genie-gpu.ts`](website/components/media/expanded/genie-gpu.md)         | WebGPU/Rust backend for the expand-modal genie warp —            |
+| [`genie-texture.ts`](website/components/media/expanded/genie-texture.md) | Sheet-texture composer for the expand-modal genie warp —         |
+| [`genie.ts`](website/components/media/expanded/genie.md)                 | Expand-modal genie transition — the macOS-style liquid           |
+| [`mount.ts`](website/components/media/expanded/mount.md)                 | Mount wiring for &lt;media-expanded&gt;: scroll reset, Escape /  |
+| [`render.tsx`](website/components/media/expanded/render.md)              | JSX template for &lt;media-expanded&gt; — four close affordances |
 
 ## Entry points
 
@@ -2447,114 +2522,6 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                                                                             | What it does |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| [`_basePickBy-R67pbdGD.js`](website/node_modules/.vite/deps/_basePickBy-R67pbdGD.md)                                                                             | —            |
-| [`_baseUniq-Bxc4gNqY.js`](website/node_modules/.vite/deps/_baseUniq-Bxc4gNqY.md)                                                                                 | —            |
-| [`abnfDiagram-O67JEVCF-CWb0w45A.js`](website/node_modules/.vite/deps/abnfDiagram-O67JEVCF-CWb0w45A.md)                                                           | —            |
-| [`arc-BZlKa5rx.js`](website/node_modules/.vite/deps/arc-BZlKa5rx.md)                                                                                             | —            |
-| [`architecture-WOLXFQ4H-Ci3KPFOl.js`](website/node_modules/.vite/deps/architecture-WOLXFQ4H-Ci3KPFOl.md)                                                         | —            |
-| [`architectureDiagram-NJMV4G6O-D52-Sd96.js`](website/node_modules/.vite/deps/architectureDiagram-NJMV4G6O-D52-Sd96.md)                                           | —            |
-| [`array-75Ih5Qg4.js`](website/node_modules/.vite/deps/array-75Ih5Qg4.md)                                                                                         | —            |
-| [`blockDiagram-BEXU5L5S-Dl2u1X_b.js`](website/node_modules/.vite/deps/blockDiagram-BEXU5L5S-Dl2u1X_b.md)                                                         | —            |
-| [`c4Diagram-YGBWAQC7-1iq5M9d3.js`](website/node_modules/.vite/deps/c4Diagram-YGBWAQC7-1iq5M9d3.md)                                                               | —            |
-| [`channel-CFqyg1wt.js`](website/node_modules/.vite/deps/channel-CFqyg1wt.md)                                                                                     | —            |
-| [`chunk-24IY7LWP-C4BqTQLO.js`](website/node_modules/.vite/deps/chunk-24IY7LWP-C4BqTQLO.md)                                                                       | —            |
-| [`chunk-2Q5K7J3B-CXvdJIQp.js`](website/node_modules/.vite/deps/chunk-2Q5K7J3B-CXvdJIQp.md)                                                                       | —            |
-| [`chunk-3FUC2YCW-D0KYGKiH.js`](website/node_modules/.vite/deps/chunk-3FUC2YCW-D0KYGKiH.md)                                                                       | —            |
-| [`chunk-3M4EKCLJ-tI9w75Wn.js`](website/node_modules/.vite/deps/chunk-3M4EKCLJ-tI9w75Wn.md)                                                                       | —            |
-| [`chunk-4S7OKTRW-C5EbCuY3.js`](website/node_modules/.vite/deps/chunk-4S7OKTRW-C5EbCuY3.md)                                                                       | —            |
-| [`chunk-53FOQ5SW-B5VjP-Dk.js`](website/node_modules/.vite/deps/chunk-53FOQ5SW-B5VjP-Dk.md)                                                                       | —            |
-| [`chunk-5DYCD2WN-DAR7BC4k.js`](website/node_modules/.vite/deps/chunk-5DYCD2WN-DAR7BC4k.md)                                                                       | —            |
-| [`chunk-5VM5RSS4-BPlVySOU.js`](website/node_modules/.vite/deps/chunk-5VM5RSS4-BPlVySOU.md)                                                                       | —            |
-| [`chunk-6AEJRKK7-svc14AMY.js`](website/node_modules/.vite/deps/chunk-6AEJRKK7-svc14AMY.md)                                                                       | —            |
-| [`chunk-742MDFTN-BtFZX1wB.js`](website/node_modules/.vite/deps/chunk-742MDFTN-BtFZX1wB.md)                                                                       | —            |
-| [`chunk-7INBJB4K-CqWDMXiO.js`](website/node_modules/.vite/deps/chunk-7INBJB4K-CqWDMXiO.md)                                                                       | —            |
-| [`chunk-7M6MHVWA-B1A7eoIv.js`](website/node_modules/.vite/deps/chunk-7M6MHVWA-B1A7eoIv.md)                                                                       | —            |
-| [`chunk-7PRAP22T-BHnP5BMF.js`](website/node_modules/.vite/deps/chunk-7PRAP22T-BHnP5BMF.md)                                                                       | —            |
-| [`chunk-BP2KR52E-BZQwlaX3.js`](website/node_modules/.vite/deps/chunk-BP2KR52E-BZQwlaX3.md)                                                                       | —            |
-| [`chunk-DUW6YSOI-CXtMbCr8.js`](website/node_modules/.vite/deps/chunk-DUW6YSOI-CXtMbCr8.md)                                                                       | —            |
-| [`chunk-F6S3BTY2-CgmO9bdP.js`](website/node_modules/.vite/deps/chunk-F6S3BTY2-CgmO9bdP.md)                                                                       | —            |
-| [`chunk-GNY47TPC-DF13VVPC.js`](website/node_modules/.vite/deps/chunk-GNY47TPC-DF13VVPC.md)                                                                       | —            |
-| [`chunk-GTNCS2PH-817jg2Eh.js`](website/node_modules/.vite/deps/chunk-GTNCS2PH-817jg2Eh.md)                                                                       | —            |
-| [`chunk-GWA4HPMP-38XlhbcN.js`](website/node_modules/.vite/deps/chunk-GWA4HPMP-38XlhbcN.md)                                                                       | —            |
-| [`chunk-J5ZVWO5B-Bo_dfdFR.js`](website/node_modules/.vite/deps/chunk-J5ZVWO5B-Bo_dfdFR.md)                                                                       | —            |
-| [`chunk-JWPE2WC7-A4W5jbI5.js`](website/node_modules/.vite/deps/chunk-JWPE2WC7-A4W5jbI5.md)                                                                       | —            |
-| [`chunk-KPI5JJXK-eHA3LU47.js`](website/node_modules/.vite/deps/chunk-KPI5JJXK-eHA3LU47.md)                                                                       | —            |
-| [`chunk-LNGE3PJU-Qb8j-eKt.js`](website/node_modules/.vite/deps/chunk-LNGE3PJU-Qb8j-eKt.md)                                                                       | —            |
-| [`chunk-MBY4JIJT-UbjF87zM.js`](website/node_modules/.vite/deps/chunk-MBY4JIJT-UbjF87zM.md)                                                                       | —            |
-| [`chunk-NETBCI7D-CgvzviZr.js`](website/node_modules/.vite/deps/chunk-NETBCI7D-CgvzviZr.md)                                                                       | —            |
-| [`chunk-NGNAAXSQ-DqrZ5DhU.js`](website/node_modules/.vite/deps/chunk-NGNAAXSQ-DqrZ5DhU.md)                                                                       | —            |
-| [`chunk-O7XYJQB3-DbKJsHma.js`](website/node_modules/.vite/deps/chunk-O7XYJQB3-DbKJsHma.md)                                                                       | —            |
-| [`chunk-OD3NTWWA-YyjZ_EWO.js`](website/node_modules/.vite/deps/chunk-OD3NTWWA-YyjZ_EWO.md)                                                                       | —            |
-| [`chunk-QNH66VMT-DVgNUOih.js`](website/node_modules/.vite/deps/chunk-QNH66VMT-DVgNUOih.md)                                                                       | —            |
-| [`chunk-TPMEZKFX-FwDAX4uG.js`](website/node_modules/.vite/deps/chunk-TPMEZKFX-FwDAX4uG.md)                                                                       | —            |
-| [`chunk-UA2S7LBM-B4gagXGB.js`](website/node_modules/.vite/deps/chunk-UA2S7LBM-B4gagXGB.md)                                                                       | —            |
-| [`chunk-VPELOWWC-kI3Qs42E.js`](website/node_modules/.vite/deps/chunk-VPELOWWC-kI3Qs42E.md)                                                                       | —            |
-| [`chunk-VTWWFHGB-DnCbC-Bh.js`](website/node_modules/.vite/deps/chunk-VTWWFHGB-DnCbC-Bh.md)                                                                       | —            |
-| [`chunk-VZTHESGH-B_rvQeJu.js`](website/node_modules/.vite/deps/chunk-VZTHESGH-B_rvQeJu.md)                                                                       | —            |
-| [`chunk-WEXAMYUT-pmva2luN.js`](website/node_modules/.vite/deps/chunk-WEXAMYUT-pmva2luN.md)                                                                       | —            |
-| [`chunk-XXDRQBXY-DYFacFsK.js`](website/node_modules/.vite/deps/chunk-XXDRQBXY-DYFacFsK.md)                                                                       | —            |
-| [`chunk-Y2CYZVJY-Dfzeezb0.js`](website/node_modules/.vite/deps/chunk-Y2CYZVJY-Dfzeezb0.md)                                                                       | —            |
-| [`chunk-YK26KJH5-BjoJyUQi.js`](website/node_modules/.vite/deps/chunk-YK26KJH5-BjoJyUQi.md)                                                                       | —            |
-| [`chunk-Z7XXMR3K-dTFbNoo2.js`](website/node_modules/.vite/deps/chunk-Z7XXMR3K-dTFbNoo2.md)                                                                       | —            |
-| [`chunk-ZIGJFQKS-Cxp2h1WN.js`](website/node_modules/.vite/deps/chunk-ZIGJFQKS-Cxp2h1WN.md)                                                                       | —            |
-| [`chunk-ZO67DCNQ-4rtUOXx7.js`](website/node_modules/.vite/deps/chunk-ZO67DCNQ-4rtUOXx7.md)                                                                       | —            |
-| [`classDiagram-v2-NBCMYWYE-BwHTTgBE.js`](website/node_modules/.vite/deps/classDiagram-v2-NBCMYWYE-BwHTTgBE.md)                                                   | —            |
-| [`cose-bilkent-JH36ORCC-BeowErvQ.js`](website/node_modules/.vite/deps/cose-bilkent-JH36ORCC-BeowErvQ.md)                                                         | —            |
-| [`cynefin-EF2NZ3EQ-BvIf5Xw3.js`](website/node_modules/.vite/deps/cynefin-EF2NZ3EQ-BvIf5Xw3.md)                                                                   | —            |
-| [`cynefinDiagram-VND7K2PF-CKzfHB6X.js`](website/node_modules/.vite/deps/cynefinDiagram-VND7K2PF-CKzfHB6X.md)                                                     | —            |
-| [`cytoscape.esm-dHEcqfMW.js`](website/node_modules/.vite/deps/cytoscape.esm-dHEcqfMW.md)                                                                         | —            |
-| [`dagre-6A5THRUB-BSYBgHZu.js`](website/node_modules/.vite/deps/dagre-6A5THRUB-BSYBgHZu.md)                                                                       | —            |
-| [`diagram-22UHCM2B-C2E6kJZH.js`](website/node_modules/.vite/deps/diagram-22UHCM2B-C2E6kJZH.md)                                                                   | —            |
-| [`diagram-3UASUU5V-Bp5v49lV.js`](website/node_modules/.vite/deps/diagram-3UASUU5V-Bp5v49lV.md)                                                                   | —            |
-| [`diagram-ATOU4E4O-DPjCK6ND.js`](website/node_modules/.vite/deps/diagram-ATOU4E4O-DPjCK6ND.md)                                                                   | —            |
-| [`diagram-CDSNMT55-lZSWYxrt.js`](website/node_modules/.vite/deps/diagram-CDSNMT55-lZSWYxrt.md)                                                                   | —            |
-| [`diagram-MLGK6HIB-DMDdzFYC.js`](website/node_modules/.vite/deps/diagram-MLGK6HIB-DMDdzFYC.md)                                                                   | —            |
-| [`diagram-MPIPVDR6-CK5A-t-E.js`](website/node_modules/.vite/deps/diagram-MPIPVDR6-CK5A-t-E.md)                                                                   | —            |
-| [`dist-C3GfzUGR.js`](website/node_modules/.vite/deps/dist-C3GfzUGR.md)                                                                                           | —            |
-| [`ebnfDiagram-ZINNZB2B-8_3stlge.js`](website/node_modules/.vite/deps/ebnfDiagram-ZINNZB2B-8_3stlge.md)                                                           | —            |
-| [`elk-276RUBZZ-CJRlpT0N.js`](website/node_modules/.vite/deps/elk-276RUBZZ-CJRlpT0N.md)                                                                           | —            |
-| [`erDiagram-OPXOYQCR-C4-lNQfV.js`](website/node_modules/.vite/deps/erDiagram-OPXOYQCR-C4-lNQfV.md)                                                               | —            |
-| [`eventmodeling-K75KTNOO-CgyN5LnZ.js`](website/node_modules/.vite/deps/eventmodeling-K75KTNOO-CgyN5LnZ.md)                                                       | —            |
-| [`flowDiagram-KWPJA3E3-CQp-0m6U.js`](website/node_modules/.vite/deps/flowDiagram-KWPJA3E3-CQp-0m6U.md)                                                           | —            |
-| [`ganttDiagram-FUAMR5RP-D4LJhsSg.js`](website/node_modules/.vite/deps/ganttDiagram-FUAMR5RP-D4LJhsSg.md)                                                         | —            |
-| [`gitGraph-VSP46ZUC-DkWQBb1I.js`](website/node_modules/.vite/deps/gitGraph-VSP46ZUC-DkWQBb1I.md)                                                                 | —            |
-| [`gitGraphDiagram-X574FWY7-CauzieBF.js`](website/node_modules/.vite/deps/gitGraphDiagram-X574FWY7-CauzieBF.md)                                                   | —            |
-| [`graphlib-BM9HLzsO.js`](website/node_modules/.vite/deps/graphlib-BM9HLzsO.md)                                                                                   | —            |
-| [`info-OHQRW6UA-BfpFEgsW.js`](website/node_modules/.vite/deps/info-OHQRW6UA-BfpFEgsW.md)                                                                         | —            |
-| [`infoDiagram-VRGFBTTK-VQAL8Z8T.js`](website/node_modules/.vite/deps/infoDiagram-VRGFBTTK-VQAL8Z8T.md)                                                           | —            |
-| [`init-Dh18tYCu.js`](website/node_modules/.vite/deps/init-Dh18tYCu.md)                                                                                           | —            |
-| [`ishikawaDiagram-OU5B5YK6-BFIYASFt.js`](website/node_modules/.vite/deps/ishikawaDiagram-OU5B5YK6-BFIYASFt.md)                                                   | —            |
-| [`journeyDiagram-ZHPQQLJL-DobRWFNk.js`](website/node_modules/.vite/deps/journeyDiagram-ZHPQQLJL-DobRWFNk.md)                                                     | —            |
-| [`kanban-definition-PNTS6WVX-BON_g3Sr.js`](website/node_modules/.vite/deps/kanban-definition-PNTS6WVX-BON_g3Sr.md)                                               | —            |
-| [`katex-CKqoXQSZ.js`](website/node_modules/.vite/deps/katex-CKqoXQSZ.md)                                                                                         | —            |
-| [`line-Db0NvjVC.js`](website/node_modules/.vite/deps/line-Db0NvjVC.md)                                                                                           | —            |
-| [`linear-Ev0Bk2jY.js`](website/node_modules/.vite/deps/linear-Ev0Bk2jY.md)                                                                                       | —            |
-| [`mermaid-parser.core-DgRivRKh.js`](website/node_modules/.vite/deps/mermaid-parser.core-DgRivRKh.md)                                                             | —            |
-| [`mermaid.js`](website/node_modules/.vite/deps/mermaid.md)                                                                                                       | —            |
-| [`mindmap-definition-NLK3R4M7-BgU6MDJt.js`](website/node_modules/.vite/deps/mindmap-definition-NLK3R4M7-BgU6MDJt.md)                                             | —            |
-| [`ordinal-NnwLOLjY.js`](website/node_modules/.vite/deps/ordinal-NnwLOLjY.md)                                                                                     | —            |
-| [`packet-JDAUHWVQ-BSSZ_--a.js`](website/node_modules/.vite/deps/packet-JDAUHWVQ-BSSZ_--a.md)                                                                     | —            |
-| [`path-C50fP6Zq.js`](website/node_modules/.vite/deps/path-C50fP6Zq.md)                                                                                           | —            |
-| [`pegDiagram-GJSIUBJH-lbjac6Jk.js`](website/node_modules/.vite/deps/pegDiagram-GJSIUBJH-lbjac6Jk.md)                                                             | —            |
-| [`pie-XZMESJXO-DKxnfC5h.js`](website/node_modules/.vite/deps/pie-XZMESJXO-DKxnfC5h.md)                                                                           | —            |
-| [`pieDiagram-5QR66LMP-Zrh3o1as.js`](website/node_modules/.vite/deps/pieDiagram-5QR66LMP-Zrh3o1as.md)                                                             | —            |
-| [`quadrantDiagram-O4NWA36T-B1mlYrH0.js`](website/node_modules/.vite/deps/quadrantDiagram-O4NWA36T-B1mlYrH0.md)                                                   | —            |
-| [`radar-ABXABTNO-CSJxUmWb.js`](website/node_modules/.vite/deps/radar-ABXABTNO-CSJxUmWb.md)                                                                       | —            |
-| [`railroad-I3PHUGI6-CDsDmBJ6.js`](website/node_modules/.vite/deps/railroad-I3PHUGI6-CDsDmBJ6.md)                                                                 | —            |
-| [`railroad-abnf-LNEFI6M7-DhTZfnm7.js`](website/node_modules/.vite/deps/railroad-abnf-LNEFI6M7-DhTZfnm7.md)                                                       | —            |
-| [`railroad-ebnf-DWYD2UWJ-DBrXZzsS.js`](website/node_modules/.vite/deps/railroad-ebnf-DWYD2UWJ-DBrXZzsS.md)                                                       | —            |
-| [`railroad-peg-JR7BVNR7-CDxHavVh.js`](website/node_modules/.vite/deps/railroad-peg-JR7BVNR7-CDxHavVh.md)                                                         | —            |
-| [`railroadDiagram-XR7U4H2S-C76RC5Lf.js`](website/node_modules/.vite/deps/railroadDiagram-XR7U4H2S-C76RC5Lf.md)                                                   | —            |
-| [`register-service-worker.js`](website/node_modules/.vite/deps/register-service-worker.md)                                                                       | —            |
-| [`requirementDiagram-PLB6GJNP-Co6r_46J.js`](website/node_modules/.vite/deps/requirementDiagram-PLB6GJNP-Co6r_46J.md)                                             | —            |
-| [`rough.esm-C83Xrj0c.js`](website/node_modules/.vite/deps/rough.esm-C83Xrj0c.md)                                                                                 | —            |
-| [`sankeyDiagram-IPEJSGJF-D7Mwqzrn.js`](website/node_modules/.vite/deps/sankeyDiagram-IPEJSGJF-D7Mwqzrn.md)                                                       | —            |
-| [`sequenceDiagram-PO4LG4MO-CQXs1ptx.js`](website/node_modules/.vite/deps/sequenceDiagram-PO4LG4MO-CQXs1ptx.md)                                                   | —            |
-| [`sizeCapture-INFHLROL-1Jyd49Qd.js`](website/node_modules/.vite/deps/sizeCapture-INFHLROL-1Jyd49Qd.md)                                                           | —            |
-| [`src-D4YIA_Cv.js`](website/node_modules/.vite/deps/src-D4YIA_Cv.md)                                                                                             | —            |
-| [`stateDiagram-v2-GCMORJYK-DdqrhbUH.js`](website/node_modules/.vite/deps/stateDiagram-v2-GCMORJYK-DdqrhbUH.md)                                                   | —            |
-| [`swimlanes-2SLR337P-BtYakJeg.js`](website/node_modules/.vite/deps/swimlanes-2SLR337P-BtYakJeg.md)                                                               | —            |
-| [`swimlanesDiagram-TC7HE7FX-NYWZismM.js`](website/node_modules/.vite/deps/swimlanesDiagram-TC7HE7FX-NYWZismM.md)                                                 | —            |
 | [`three.core-B6noAy13.js`](website/node_modules/.vite/deps/three.core-B6noAy13.md)                                                                               | —            |
 | [`three.js`](website/node_modules/.vite/deps/three.md)                                                                                                           | —            |
 | [`three_examples_jsm_controls_OrbitControls__js.js`](website/node_modules/.vite/deps/three_examples_jsm_controls_OrbitControls__js.md)                           | —            |
@@ -2563,14 +2530,170 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`three_examples_jsm_tsl_display_FilmNode__js.js`](website/node_modules/.vite/deps/three_examples_jsm_tsl_display_FilmNode__js.md)                               | —            |
 | [`three_tsl.js`](website/node_modules/.vite/deps/three_tsl.md)                                                                                                   | —            |
 | [`three_webgpu.js`](website/node_modules/.vite/deps/three_webgpu.md)                                                                                             | —            |
-| [`timeline-definition-EJHVYXUP-D_yfu3Qy.js`](website/node_modules/.vite/deps/timeline-definition-EJHVYXUP-D_yfu3Qy.md)                                           | —            |
-| [`treeView-D4JQ5SDB-DuCciKse.js`](website/node_modules/.vite/deps/treeView-D4JQ5SDB-DuCciKse.md)                                                                 | —            |
-| [`treemap-SAJKECNS-22kGQt7-.js`](website/node_modules/.vite/deps/treemap-SAJKECNS-22kGQt7-.md)                                                                   | —            |
-| [`usecaseDiagram-POWQR4AR-DlovicMl.js`](website/node_modules/.vite/deps/usecaseDiagram-POWQR4AR-DlovicMl.md)                                                     | —            |
-| [`vennDiagram-UO4OBE2U-paPgm4YI.js`](website/node_modules/.vite/deps/vennDiagram-UO4OBE2U-paPgm4YI.md)                                                           | —            |
-| [`wardley-7MLQ67FV-B1xdcdXr.js`](website/node_modules/.vite/deps/wardley-7MLQ67FV-B1xdcdXr.md)                                                                   | —            |
-| [`wardleyDiagram-VNRHLVJA-CY3S80Os.js`](website/node_modules/.vite/deps/wardleyDiagram-VNRHLVJA-CY3S80Os.md)                                                     | —            |
-| [`xychartDiagram-PMCCYNJV-BukmFjrQ.js`](website/node_modules/.vite/deps/xychartDiagram-PMCCYNJV-BukmFjrQ.md)                                                     | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                              | What it does |
+| ----------------------------------------------------------------- | ------------ |
+| [`luiskr_burger.js`](website/public/wasm/burger/luiskr_burger.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                        | What it does |
+| ----------------------------------------------------------- | ------------ |
+| [`luiskr_burn.js`](website/public/wasm/burn/luiskr_burn.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                | What it does |
+| ----------------------------------------------------------------------------------- | ------------ |
+| [`luiskr_close_button.js`](website/public/wasm/close-button/luiskr_close_button.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                         | What it does |
+| -------------------------------------------------------------------------------------------- | ------------ |
+| [`luiskr_corner_brackets.js`](website/public/wasm/corner-brackets/luiskr_corner_brackets.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                 | What it does |
+| -------------------------------------------------------------------- | ------------ |
+| [`luiskr_diagram.js`](website/public/wasm/diagram/luiskr_diagram.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                   | What it does |
+| -------------------------------------------------------------------------------------- | ------------ |
+| [`luiskr_divider_sheen.js`](website/public/wasm/divider-sheen/luiskr_divider_sheen.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                        | What it does |
+| ----------------------------------------------------------- | ------------ |
+| [`luiskr_flag.js`](website/public/wasm/flag/luiskr_flag.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                           | What it does |
+| -------------------------------------------------------------- | ------------ |
+| [`luiskr_genie.js`](website/public/wasm/genie/luiskr_genie.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                              | What it does |
+| ----------------------------------------------------------------- | ------------ |
+| [`luiskr_glitch.js`](website/public/wasm/glitch/luiskr_glitch.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                    | What it does |
+| ----------------------------------------------------------------------- | ------------ |
+| [`luiskr_markdown.js`](website/public/wasm/markdown/luiskr_markdown.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                           | What it does |
+| -------------------------------------------------------------- | ------------ |
+| [`luiskr_media.js`](website/public/wasm/media/luiskr_media.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                         | What it does |
+| -------------------------------------------------------------------------------------------- | ------------ |
+| [`luiskr_menu_background.js`](website/public/wasm/menu-background/luiskr_menu_background.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                          | What it does |
+| ----------------------------------------------------------------------------- | ------------ |
+| [`luiskr_ring_sheen.js`](website/public/wasm/ring-sheen/luiskr_ring_sheen.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                 | What it does |
+| -------------------------------------------------------------------- | ------------ |
+| [`luiskr_scene3d.js`](website/public/wasm/scene3d/luiskr_scene3d.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                    | What it does |
+| ----------------------------------------------------------------------- | ------------ |
+| [`luiskr_skeleton.js`](website/public/wasm/skeleton/luiskr_skeleton.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                   | What it does |
+| -------------------------------------------------------------------------------------- | ------------ |
+| [`luiskr_switch_slider.js`](website/public/wasm/switch-slider/luiskr_switch_slider.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                       | What it does |
+| -------------------------------------------------------------------------- | ------------ |
+| [`luiskr_text_draw.js`](website/public/wasm/text-draw/luiskr_text_draw.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                | What it does |
+| ----------------------------------------------------------------------------------- | ------------ |
+| [`luiskr_theme_slider.js`](website/public/wasm/theme-slider/luiskr_theme_slider.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                       | What it does |
+| -------------------------------------------------------------------------- | ------------ |
+| [`block-navigation.js`](website/reports/coverage-anim/block-navigation.md) | —            |
+| [`prettify.js`](website/reports/coverage-anim/prettify.md)                 | —            |
+| [`sorter.js`](website/reports/coverage-anim/sorter.md)                     | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                      | What it does |
+| ------------------------------------------------------------------------- | ------------ |
+| [`block-navigation.js`](website/reports/coverage-run/block-navigation.md) | —            |
+| [`prettify.js`](website/reports/coverage-run/prettify.md)                 | —            |
+| [`sorter.js`](website/reports/coverage-run/sorter.md)                     | —            |
 
 ## Entry points
 
@@ -2738,6 +2861,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`delegate-tails-component-delegate-methods.test.js`](website/tests/coverage/components/carousel/delegate-tails-component-delegate-methods.test.md)                                     | Split from delegate-tails.test.js — covers the "component delegate methods" describe.                   |
 | [`delegate-tails-misc-attr-guard-arms.test.js`](website/tests/coverage/components/carousel/delegate-tails-misc-attr-guard-arms.test.md)                                                 | Split from delegate-tails.test.js — covers the "misc attr/guard arms" describe.                         |
 | [`delegate-tails-mosaic-draw-text-tails.test.js`](website/tests/coverage/components/carousel/delegate-tails-mosaic-draw-text-tails.test.md)                                             | Split from delegate-tails.test.js — covers the "mosaic + draw-text tails" describe.                     |
+| [`delegate-tails-spring-nav-tails.test.js`](website/tests/coverage/components/carousel/delegate-tails-spring-nav-tails.test.md)                                                         | Coverage tails for the scroll-spring navigation paths in                                                |
 | [`sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.js`](website/tests/coverage/components/carousel/sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.md)   | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit guard tails" describe.  |
 | [`sizing-tails-custom-carousel-sizing-measurefit-ladder-tails.test.js`](website/tests/coverage/components/carousel/sizing-tails-custom-carousel-sizing-measurefit-ladder-tails.test.md) | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit ladder tails" describe. |
 | [`sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.js`](website/tests/coverage/components/carousel/sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.md)     | Coverage tails for custom-carousel/sizing — the mobile-src                                              |
@@ -2748,6 +2872,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                         | What it does                                                                        |
 | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| [`lang-dialog-tails.test.js`](website/tests/coverage/components/dialogs/lang-dialog-tails.test.md)           | Coverage tails for components/dialogs/lang-dialog —                                 |
 | [`langdialog-tails.test.js`](website/tests/coverage/components/dialogs/langdialog-tails.test.md)             | Split from coverage-tails-3.test.js — covers the "LangDialog tails" describe.       |
 | [`preferencesmodal-tails.test.js`](website/tests/coverage/components/dialogs/preferencesmodal-tails.test.md) | Split from coverage-tails-3.test.js — covers the "PreferencesModal tails" describe. |
 
@@ -2779,8 +2904,10 @@ _Boot surfaces: what the user sees first on each bundle._
 | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | [`about-glitch-crop.test.js`](website/tests/coverage/components/home/about-glitch-crop.test.md)                                     | Framing-fidelity tests for website/components/home/about/glitch.ts —                |
 | [`about-glitch-tails.test.js`](website/tests/coverage/components/home/about-glitch-tails.test.md)                                   | Coverage tails for website/components/home/about/glitch.ts —                        |
+| [`about-glitch-wasm-tails.test.js`](website/tests/coverage/components/home/about-glitch-wasm-tails.test.md)                         | Coverage tail for components/home/about/glitch/wasm.ts —                            |
 | [`aboutsection-tails.test.js`](website/tests/coverage/components/home/aboutsection-tails.test.md)                                   | Coverage tails for AboutSection's side-info column:                                 |
 | [`awards-desc-fallback-tails.test.js`](website/tests/coverage/components/home/awards-desc-fallback-tails.test.md)                   | Covers the `                                                                        |     | DOCS_STRINGS.DESC_FALLBACK` arm in the awards |
+| [`awards-render-tails.test.js`](website/tests/coverage/components/home/awards-render-tails.test.md)                                 | Coverage tails for components/home/awards/render.tsx +                              |
 | [`awardsmentions-tails-2.test.js`](website/tests/coverage/components/home/awardsmentions-tails-2.test.md)                           | Split from coverage-tails-6.test.js — covers the "AwardsMentions tails 2" describe. |
 | [`awardsmentions-tails.test.js`](website/tests/coverage/components/home/awardsmentions-tails.test.md)                               | Split from coverage-tails-3.test.js — covers the "AwardsMentions tails" describe.   |
 | [`contactsection-tails-test-js.test.js`](website/tests/coverage/components/home/contactsection-tails-test-js.test.md)               | Split from coverage-tails.test.js — covers the "ContactSection tails" describe.     |
@@ -2790,6 +2917,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`homemosaic-tails.test.js`](website/tests/coverage/components/home/homemosaic-tails.test.md)                                       | Split from coverage-tails-3.test.js — covers the "HomeMosaic tails" describe.       |
 | [`mosaic-burn-letters.test.js`](website/tests/coverage/components/home/mosaic-burn-letters.test.md)                                 | Per-letter combustion tests for website/components/home/mosaic/burn.ts —            |
 | [`mosaic-burn-tails.test.js`](website/tests/coverage/components/home/mosaic-burn-tails.test.md)                                     | Coverage tails for website/components/home/mosaic/burn.ts —                         |
+| [`mosaic-burn-wasm-tails.test.js`](website/tests/coverage/components/home/mosaic-burn-wasm-tails.test.md)                           | Coverage tail for the WebGPU/wasm burn particle path —                              |
 | [`mosaic-burn-word-boxes-tails.test.js`](website/tests/coverage/components/home/mosaic-burn-word-boxes-tails.test.md)               | Coverage tails for mosaic/burn/paper.js — the DOM Range                             |
 | [`mosaic-onclick-missing-detail-tails.test.js`](website/tests/coverage/components/home/mosaic-onclick-missing-detail-tails.test.md) | Coverage tail for components/home/mosaic/interactions.ts —                          |
 | [`mosaic-projecthref-tails.test.js`](website/tests/coverage/components/home/mosaic-projecthref-tails.test.md)                       | Coverage tails for components/home/mosaic/interactions.ts —                         |
@@ -2801,9 +2929,17 @@ _Boot surfaces: what the user sees first on each bundle._
 | File                                                                                                                           | What it does                                                                        |
 | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
 | [`draw-text-fit-tails.test.js`](website/tests/coverage/components/media/draw-text-fit-tails.test.md)                           | Coverage tails for draw-text/fit.ts — the opt-in `fit`                              |
+| [`draw-text-gpu-tails.test.js`](website/tests/coverage/components/media/draw-text-gpu-tails.test.md)                           | Coverage tail for components/media/draw-text/gpu.ts —                               |
 | [`draw-text-nested-tags.test.js`](website/tests/coverage/components/media/draw-text-nested-tags.test.md)                       | —                                                                                   |
 | [`draw-text-ordered-tails.test.js`](website/tests/coverage/components/media/draw-text-ordered-tails.test.md)                   | Coverage tail for the ordered-reveal session in                                     |
 | [`draw-text-render-tails.test.js`](website/tests/coverage/components/media/draw-text-render-tails.test.md)                     | Split from coverage-tails-7.test.js — covers the "draw-text render tails" describe. |
+| [`draw-text-traversal-tails.test.js`](website/tests/coverage/components/media/draw-text-traversal-tails.test.md)               | Coverage tail for components/media/draw-text/traversal.ts —                         |
+| [`expanded-close-tails.test.js`](website/tests/coverage/components/media/expanded-close-tails.test.md)                         | Coverage tails for components/media/expanded/close.ts —                             |
+| [`expanded-genie-canvas-tails.test.js`](website/tests/coverage/components/media/expanded-genie-canvas-tails.test.md)           | Coverage for website/components/media/expanded/genie-canvas.ts —                    |
+| [`expanded-genie-tails.test.js`](website/tests/coverage/components/media/expanded-genie-tails.test.md)                         | Coverage for website/components/media/expanded/genie.ts +                           |
+| [`expanded-genie-texture-tails.test.js`](website/tests/coverage/components/media/expanded-genie-texture-tails.test.md)         | Coverage for website/components/media/expanded/genie-texture.ts —                   |
+| [`expanded-mount-tails.test.js`](website/tests/coverage/components/media/expanded-mount-tails.test.md)                         | Coverage tails for components/media/expanded/mount.ts —                             |
+| [`media-figure-tails.test.js`](website/tests/coverage/components/media/media-figure-tails.test.md)                             | Coverage tails for components/media/figure/modal.ts +                               |
 | [`media-manifest-webp-source-tails.test.js`](website/tests/coverage/components/media/media-manifest-webp-source-tails.test.md) | Coverage tail for the manifest-gated &lt;source&gt; emission —                      |
 
 ## Entry points
@@ -2812,7 +2948,18 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                           | What it does                                                 |
 | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [`nav-handlers-tails.test.js`](website/tests/coverage/components/nav/nav-handlers-tails.test.md)               | Coverage tails for components/nav/handlers.ts — the          |
+| [`nav-menu-render-tails.test.js`](website/tests/coverage/components/nav/nav-menu-render-tails.test.md)         | Coverage tails for components/nav/menu.tsx +                 |
 | [`nav-render-notfound-tails.test.js`](website/tests/coverage/components/nav/nav-render-notfound-tails.test.md) | Coverage tails for components/nav/render.tsx — the 404-route |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                                       | What it does                                                 |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [`related-render-tails.test.js`](website/tests/coverage/components/portfolio/related-render-tails.test.md) | Coverage tails for components/portfolio/related/render.tsx — |
+| [`related-sync-tails.test.js`](website/tests/coverage/components/portfolio/related-sync-tails.test.md)     | Coverage tail for components/portfolio/Related.tsx —         |
 
 ## Entry points
 
@@ -2820,6 +2967,9 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                            | What it does                                                                   |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [`animations-tails-2.test.js`](website/tests/coverage/pages/animations-tails-2.test.md)         | Coverage tails for website/views/animations — the data-miss                    |
+| [`animations-tails-3.test.js`](website/tests/coverage/pages/animations-tails-3.test.md)         | Coverage tail for the &lt;view-animations&gt; define guard — the               |
+| [`animations-tails.test.js`](website/tests/coverage/pages/animations-tails.test.md)             | Coverage tails for website/views/animations — the async                        |
 | [`home-route-tails.test.js`](website/tests/coverage/pages/home-route-tails.test.md)             | Split from coverage-tails-3.test.js — covers the "Home route tails" describe.  |
 | [`legal-route-tails.test.js`](website/tests/coverage/pages/legal-route-tails.test.md)           | Split from coverage-tails-3.test.js — covers the "Legal route tails" describe. |
 | [`legal-tails-2.test.js`](website/tests/coverage/pages/legal-tails-2.test.md)                   | Split from coverage-tails-5.test.js — covers the "Legal tails 2" describe.     |
@@ -2849,9 +2999,18 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`views-legalfooter.test.js`](website/tests/views/views-legalfooter.test.md)                                 | Split from views.test.js — covers the "LegalFooter" describe.                   |
 | [`views-portfoliorelated.test.js`](website/tests/views/views-portfoliorelated.test.md)                       | Split from views.test.js — covers the "PortfolioRelated" describe.              |
 | [`views-source-file-structure.test.js`](website/tests/views/views-source-file-structure.test.md)             | Split from views.test.js — covers the "Source file structure" describe.         |
+| [`views-viewanimations.test.js`](website/tests/views/views-viewanimations.test.md)                           | ViewAnimations suite — the animations-reference route view:                     |
 | [`views-viewlegal.test.js`](website/tests/views/views-viewlegal.test.md)                                     | Split from views.test.js — covers the "ViewLegal" describe.                     |
 | [`views-viewnotfound.test.js`](website/tests/views/views-viewnotfound.test.md)                               | Split from views.test.js — covers the "ViewNotFound" describe.                  |
 | [`views-viewproject.test.js`](website/tests/views/views-viewproject.test.md)                                 | Split from views.test.js — covers the "ViewProject" describe.                   |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                       | What it does                                                    |
+| ---------------------------------------------------------- | --------------------------------------------------------------- |
+| [`Animations.tsx`](website/views/animations/Animations.md) | &lt;view-animations&gt; — the animations-reference route: lists |
 
 ## Entry points
 

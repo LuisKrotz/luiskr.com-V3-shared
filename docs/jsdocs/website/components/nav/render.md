@@ -2,9 +2,9 @@
 
 JSX template for &lt;app-nav&gt;, extracted from AppNav.tsx —
 
-| | |
-|---|---|
-| **Source** | `src/website/components/nav/render.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website/components/nav/render.tsx`                 |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -16,5 +16,12 @@ menu overlay. Returns '' while the media-expand modal is open — an empty
 render wipes the nav DOM so its z-index/focus can never compete with the
 modal chrome. The CTA label chain (contact → selected work at page bottom →
 related on project routes) mirrors the menu item order.
+
 - `@param` nav AppNav instance — reads its getters/state, calls delegates.
 - `@returns` JSX tree, or '' while a modal owns the screen.
+
+### (module scope)
+
+Route items render as real anchors — right-click and
+open-in-new-tab reach the href; plain clicks go through
+the SPA handler. Dialog triggers stay buttons.

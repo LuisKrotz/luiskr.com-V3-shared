@@ -69,7 +69,12 @@ Scroll debounce — _checkInfiniteLoop runs 150ms after the last event.
 
 ### `teleportTimer`
 
-Pending clone→real instant jump (CAROUSEL_TIMING.TELEPORT_DELAY).
+Pending clone→real instant jump watchdog (CAROUSEL_TIMING.TELEPORT_DELAY).
+
+### `pendingTeleport`
+
+Clone→real teleport armed by _scheduleTeleport — the scroll spring's
+settle fires it; the timer is only the rAF-starvation watchdog.
 
 ### `isNavigating`
 
@@ -252,6 +257,10 @@ Instant position jump — used for the clone teleports.
 ### `onScroll`
 
 Scroll handler: detects when the track lands on a clone edge to teleport.
+
+### `_cancelNavSpring`
+
+User-gesture takeover — kills the scroll spring + pending teleport.
 
 ### `_checkInfiniteLoop`
 

@@ -53,6 +53,20 @@ no `size=` is left alone since the regex finds no match.
 - `@param` size Pixel edge to request (default 300 — the rendered avatar box).
 - `@returns` Rewritten URL, original URL, or '' for non-string input.
 
+### `encodeMediaUrl`
+
+Percent-encodes a media URL for attribute/markup emission — bucket keys
+can carry literal spaces ('brazilian leather/…', '…PARIS FASHION-WEEK…')
+and non-ASCII ('garçonne'), which the bucket serves fine but which break
+<source srcset> candidates (its grammar splits on whitespace) and
+RFC-3986-strict contexts (sitemap locs, JSON-LD image/contentUrl).
+Idempotent: already-encoded input decodes first, so a %20 never
+becomes %2520 (encodeURI escapes '%' itself). Malformed escapes make
+decodeURI throw — the catch emits the input with bare '%' → %25.
+
+- `@param` url Raw or encoded media URL (may contain spaces/non-ASCII).
+- `@returns` The emission-safe URL ('' stays '').
+
 ### `webpSibling`
 
 Derives the .webp sibling of a .jpg URL — the compressed-variant naming

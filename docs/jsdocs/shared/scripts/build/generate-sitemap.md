@@ -17,6 +17,12 @@ XML namespaces emitted on every <urlset>.
 
 Escapes text for XML element bodies (media titles/descriptions).
 
+### `encLoc`
+
+Percent-encodes a URL for sitemap loc emission — bucket keys can carry
+literal spaces/non-ASCII which make RFC-3986-invalid URLs. decodeURI-
+first keeps it idempotent (encodeURI escapes '%' itself).
+
 ### `titleOf`
 
 Truncates a media title to Google's 100-char video-title bound.

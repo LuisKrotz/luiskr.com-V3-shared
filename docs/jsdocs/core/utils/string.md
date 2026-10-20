@@ -75,6 +75,18 @@ or indexed /portfolio/<p>/<media> links stop auto-opening.
 - `@param` text Display text to slug.
 - `@returns` URL/id-safe slug, or '' for non-string input.
 
+### `splitDrawSentences`
+
+Splits a paragraph into sentence runs for staged draw-text reveals.
+A boundary is terminal punctuation (. ! ? …) followed by whitespace —
+mid-word dots without a following space ("Three.js", CDN paths) never
+split. The delimiter whitespace is consumed; callers join runs with a
+real space node so inline wrapping is preserved. Text with no
+boundary returns as a single run; empty input returns [].
+
+- `@param` text Raw paragraph text.
+- `@returns` Sentence strings in document order, whitespace-trimmed.
+
 ### `mediaSlugSeq`
 
 Assigns the canonical deep-link slug for one media item within a
