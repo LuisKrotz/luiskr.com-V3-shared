@@ -42,7 +42,7 @@ are playground-owned and live in `experiments/earth-playground/`.
 ## Widget lifecycle
 
 ```mermaid
-flowchart LR
+flowchart TB
     MNT["mount"] --> ACQ{"webglContext()<br/>via webgl-mode"}
     ACQ -->|"fallback flag /<br/>no GL / software GL"| FB["is-fallback<br/>CSS presentation"]
     ACQ -->|"ok"| POOL["webgl-pool.acquire()<br/>refcounted slot"]

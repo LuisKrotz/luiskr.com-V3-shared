@@ -185,12 +185,3 @@ export function resolveCoverKey(image, manifest) {
 
   return pickVariant(base, IMAGE_VARIANTS, manifest) || `${base}${MEDIA.EXT}`
 }
-
-/** Resolves a home-mosaic cover to its lightweight preview key (<img src>). */
-export function resolveCoverThumbKey(image, manifest) {
-  const base = `covers/${image}`
-
-  if (!manifest) return `${base}${MEDIA.EXT}`
-
-  return pickVariant(base, IMAGE_THUMB_VARIANTS, manifest) || `${base}${MEDIA.EXT}`
-}

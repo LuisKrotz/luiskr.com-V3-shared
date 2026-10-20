@@ -12,15 +12,23 @@
  * generator emits home (/<loc>), the localized about/contact/legal/
  * earthPlayground/starField slugs, the English playground + star-field
  * alias segments the sitemap also lists, and /<loc>/portfolio/<slug>
- * project pages. English routes emit straight to dist/<route>/index.html
- * (exact-match static files beat the `**` SPA catch-all, so no rewrite
- * entries are needed) — including legacy portfolio aliases (canonical →
- * real slug) and the media-modal deep links the sitemap lists. Each
- * document gets a per-route localized title + description, per-route
- * hreflang alternates pointing at the equivalent route in every locale —
- * never back to the locale roots — plus a localized WebSite JSON-LD
- * url + inLanguage. Docs stay English-only (no /<loc>/docs pages) and
- * dist/cms/ is never touched — the CMS stays unindexed.
+ * project pages. Every route emits at its public path — English under
+ * dist/<route>/, other locales under dist/<loc>/<slug>/ — so exact-match
+ * static files resolve under any static server (firebase, vite preview,
+ * crawlers) without relying on rewrites; rewrite-covered locale base
+ * routes additionally write the dist/langs/<loc>/… copy the firebase
+ * rewrites point at. English also emits legacy portfolio aliases
+ * (canonical → real slug) and the media-modal deep links the sitemap
+ * lists. Each document gets a per-route localized title + description,
+ * per-route hreflang alternates pointing at the equivalent route in
+ * every locale — never back to the locale roots — plus a localized
+ * WebSite JSON-LD url + inLanguage. Docs stay English-only (no
+ * /<loc>/docs pages) and dist/cms/ is never touched — the CMS stays
+ * unindexed.
+ *
+ * Translations come from the live RTDB `translations` node fetched by
+ * prefetchTranslations() (build-targets / standalone main call it first);
+ * the committed database.json snapshot is the offline fallback.
  *
  * The template is dist/index.html *after* the multi-tier loader injection
  * (build-targets.mjs step 5), so each page boots the same capability-based
@@ -39,7 +47,7 @@ import { fileURLToPath } from 'node:url'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { PROJECT_ALIASES } from '../../../core/tokens/routes/aliases.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
-import { loadMediaManifest, resolveMediaUrls, resolveCoverThumbKey } from './media-manifest.mjs'
+import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
 import { scanManifest } from '../../build/docs/scan.mjs'
 
 const VALID_LANGS = Object.keys(LANG_SLUGS)
@@ -49,6 +57,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const SITE_URL = 'https://luiskr.com'
 const BASE_TITLE = 'Luis Krötz'
 const CDN_BASE = 'https://storage.googleapis.com/luiskr.com/public/_v3/'
+const FIREBASE_DB = 'https://luiskr-com.firebaseio.com'
 const SCHEMA_CONTEXT = 'https://schema.org'
 const SHARE_IMAGE = `${SITE_URL}/assets/icons/share.png`
 
@@ -416,6 +425,141 @@ export function localize(
 }
 
 /**
+ * Star-field dossier image dims cache — image URL → ` width="W" height="H"`
+ * attribute fragment, seeded by `prefetchStarMediaDims` (dossier JSONs store
+ * no intrinsic size, so each unique CDN image is probed once via a small
+ * range request and shared across all 15 locales).
+ */
+const starMediaDims = new Map()
+
+/** Bytes fetched per image-dims probe — SOF/IHDR headers live in the head. */
+const DIMS_PROBE_BYTES = 64 * 1024
+
+/**
+ * Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
+ * or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
+ * are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
+ * @param {Buffer} buf - head bytes of the image
+ */
+const scanImageDims = (buf) => {
+  if (buf.length >= 24 && buf.readUInt32BE(0) === 0x89504e47) {
+    return [buf.readUInt32BE(16), buf.readUInt32BE(20)]
+  }
+
+  if (buf.length < 4 || buf.readUInt16BE(0) !== 0xffd8) return null
+
+  let off = 2
+
+  while (off + 9 < buf.length) {
+    if (buf[off] !== 0xff) {
+      off += 1
+
+      continue
+    }
+
+    const marker = buf[off + 1]
+
+    if (marker >= 0xd0 && marker <= 0xd9) {
+      off += 2
+
+      continue
+    }
+
+    if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+      return [buf.readUInt16BE(off + 7), buf.readUInt16BE(off + 5)]
+    }
+
+    off += 2 + buf.readUInt16BE(off + 2)
+  }
+
+  return null
+}
+
+/**
+ * Live `translations` node pulled from the RTDB by prefetchTranslations().
+ * When set, buildLocalePages emits current per-locale CMS text instead of
+ * the committed database.json snapshot (which lags behind content edits —
+ * the exact gap that made localized pages render English/fallback text).
+ */
+let liveTranslations = null
+
+/**
+ * Fetches the live `translations` node once per build so every prerendered
+ * page carries the per-locale text authors actually published. Offline or
+ * unreachable host → warn and keep the database.json snapshot as the source.
+ */
+export async function prefetchTranslations() {
+  try {
+    const res = await fetch(`${FIREBASE_DB}/translations.json`)
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+
+    const data = await res.json()
+
+    if (!data?.en || typeof data.en !== 'object') throw new Error('payload missing `en` root')
+
+    liveTranslations = data
+    console.log(`[locale-pages] live translations: ${Object.keys(data).length} locales`)
+  } catch (e) {
+    console.warn(
+      `[locale-pages] live translations unavailable (${e.message}) — using database.json snapshot`
+    )
+  }
+}
+
+/**
+ * Probes every unique star-field dossier image once (64 KB range request
+ * each) so emitted <img> tags carry real width/height attrs — the
+ * lazy-media CLS budget flagged the bare imgs. Failures are silent:
+ * a missing probe just emits the attr-less tag it always did.
+ */
+export async function prefetchStarMediaDims() {
+  const srcs = new Set()
+
+  try {
+    const dataRoot = path.join(ROOT, 'experiments', 'star-field', 'public', 'data')
+
+    for (const loc of fs.readdirSync(dataRoot)) {
+      const locDir = path.join(dataRoot, loc)
+
+      if (!fs.statSync(locDir).isDirectory()) continue
+
+      for (const file of fs.readdirSync(locDir)) {
+        if (!file.endsWith('.json')) continue
+
+        try {
+          const dossier = JSON.parse(fs.readFileSync(path.join(locDir, file), 'utf8'))
+
+          for (const img of dossier?.media?.images || []) {
+            if (img?.src) srcs.add(img.src)
+          }
+        } catch {
+          /* one malformed dossier must not kill the fan-out */
+        }
+      }
+    }
+  } catch {
+    return
+  }
+
+  await Promise.all(
+    [...srcs].map(async (url) => {
+      try {
+        const res = await fetch(url, { headers: { Range: `bytes=0-${DIMS_PROBE_BYTES - 1}` } })
+
+        if (!res.ok) return
+
+        const dims = scanImageDims(Buffer.from(await res.arrayBuffer()))
+
+        if (dims) starMediaDims.set(url, ` width="${dims[0]}" height="${dims[1]}"`)
+      } catch {
+        /* unreachable host → attr-less img, same as before */
+      }
+    })
+  )
+}
+
+/**
  * Generates all localized pages under `distDir`. When `template` is omitted
  * the post-loader dist/index.html is read from disk; when provided (the
  * build orchestrator's in-memory copy) the localized root document is
@@ -433,12 +577,17 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     template = fs.readFileSync(indexPath, 'utf8')
   }
 
-  let translations = {}
-  const dbPath = path.join(ROOT, 'database.json')
+  // Live RTDB translations win when prefetchTranslations() succeeded;
+  // the committed database.json snapshot is the offline fallback.
+  let translations = liveTranslations || {}
 
-  if (fs.existsSync(dbPath))
-    translations = JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations || {}
-  else console.warn('[locale-pages] database.json missing — emitting English fallbacks only')
+  if (!liveTranslations) {
+    const dbPath = path.join(ROOT, 'database.json')
+
+    if (fs.existsSync(dbPath))
+      translations = JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations || {}
+    else console.warn('[locale-pages] database.json missing — emitting English fallbacks only')
+  }
 
   const en = translations.en || {}
   const legalEn = en.components?.['legal-footer']?.links || []
@@ -700,11 +849,11 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   }
 
   /**
-   * One media item as crawlable markup — the figure shows the light
-   * preview variant (<img> thumb / <video> poster+mp4); the caption links
-   * straight to the best-quality source so the uncompressed asset is a
-   * first-class crawl target. `deepHref` wraps the media in the
-   * /portfolio/<p>/<media> deep link.
+   * One media item as crawlable markup — the figure's <img> carries the
+   * best-quality source itself (uncompressed pass preferred) so crawlers
+   * and no-JS viewers index the full-resolution asset, not the thumb;
+   * the caption links to the same source as a first-class crawl target.
+   * `deepHref` wraps the media in the /portfolio/<p>/<media> deep link.
    */
   const mediaFigure = (folder, m, deepHref) => {
     const { source, thumb, isVideo } = mediaUrls(folder, m, mediaManifest)
@@ -731,7 +880,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
 
     const media = isVideo
       ? `<video${thumb ? ` poster="${esc(thumb)}"` : ''} controls muted playsinline preload="none"${wh}>${webm ? `<source src="${esc(webm)}" type="video/webm">` : ''}<source src="${esc(source)}" type="video/mp4"></video>`
-      : `<picture>${webp(thumb || source) ? `<source srcset="${esc(webp(thumb || source))}" type="image/webp">` : ''}<img src="${esc(thumb || source)}" alt="${esc(label)}" loading="lazy" decoding="async"${wh}></picture>`
+      : `<picture>${webp(source) ? `<source srcset="${esc(webp(source))}" type="image/webp">` : ''}<img src="${esc(source)}" alt="${esc(label)}" loading="lazy" decoding="async"${wh}></picture>`
 
     return `<figure>${deepHref ? `<a href="${esc(deepHref)}">` : ''}${media}${deepHref ? '</a>' : ''}<figcaption><a href="${esc(source)}">${label || esc(m.src)}</a></figcaption></figure>`
   }
@@ -748,13 +897,15 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
       .filter((i) => i && (i.link || i.slug))
       .map((i) => {
         const href = `${prefix}/portfolio/${i.link || i.slug}`
-        const coverKey = i.image ? resolveCoverThumbKey(i.image, mediaManifest) : ''
+        const coverKey = i.image ? resolveCoverKey(i.image, mediaManifest) : ''
         const coverSrc = coverKey ? enc(`${CDN_BASE}${coverKey}`) : ''
         const coverWebp = mediaManifest?.has(`${coverKey.slice(0, -4)}.webp`)
           ? enc(`${CDN_BASE}${coverKey.slice(0, -4)}.webp`)
           : ''
+        const coverWh =
+          i.width?.[0] && i.height?.[0] ? ` width="${i.width[0]}" height="${i.height[0]}"` : ''
         const img = coverSrc
-          ? `<figure><picture>${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="${esc(i.label || '')}" loading="lazy" decoding="async"></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
+          ? `<figure><picture>${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="${esc(i.label || '')}" loading="lazy" decoding="async"${coverWh}></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
           : ''
         const desc = i.description ? `<p>${i.description}</p>` : ''
 
@@ -896,10 +1047,11 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
       .join('')
 
     const images = (b.media?.images || [])
-      .map(
-        (img) =>
-          `<figure><img src="${esc(enc(img.src))}" alt="${esc(img.caption || '')}" loading="lazy" decoding="async"><figcaption>${esc(img.caption || '')}${img.credit ? ` — ${esc(img.credit)}` : ''}</figcaption></figure>`
-      )
+      .map((img) => {
+        const wh = starMediaDims.get(img.src) || ''
+
+        return `<figure><img src="${esc(enc(img.src))}" alt="${esc(img.caption || '')}" loading="lazy" decoding="async"${wh}><figcaption>${esc(img.caption || '')}${img.credit ? ` — ${esc(img.credit)}` : ''}</figcaption></figure>`
+      })
       .join('')
 
     const audio = (b.media?.audio || [])
@@ -1092,7 +1244,10 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         },
         {
           path: `${prefix}${slugs.license}`,
-          title: titleOf(pageName(4)),
+          // The footer nav has no license link — legal[4] never exists.
+          // Fall back to the page doc's title, then a literal so the route
+          // doesn't emit the bare BASE_TITLE.
+          title: titleOf(pageName(4) || t(loc, (x) => x.pages?.license?.title) || 'License'),
           description: legalDescOf(loc, 'license'),
           alt: slugPath('license'),
           content: legalContent(loc, 'license'),
@@ -1396,18 +1551,25 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         content: route.content,
       })
 
-      // en → dist/<route>/; locale base routes → dist/langs/<loc>/… (served
-      // through firebase rewrites); localized media/star-body deep links →
-      // dist/<loc>/… at the public path (exact static files win — too many
-      // routes to enumerate as rewrites).
-      const file =
-        loc === 'en' || route.emitAtPublicPath
-          ? path.join(distDir, route.path, 'index.html')
-          : path.join(distDir, 'langs', route.path, 'index.html')
+      // en → dist/<route>/; every other locale emits at its PUBLIC path
+      // dist/<loc>/… too — exact static files resolve under plain static
+      // serving (vite preview, no rewrites) instead of falling back to the
+      // English shell. Rewrite-covered base routes additionally emit the
+      // dist/langs/<loc>/… copy those rewrites point at (identical bytes;
+      // the static file simply wins in production).
+      const publicFile = path.join(distDir, route.path, 'index.html')
 
-      fs.mkdirSync(path.dirname(file), { recursive: true })
-      writeCompressed(file, out)
+      fs.mkdirSync(path.dirname(publicFile), { recursive: true })
+      writeCompressed(publicFile, out)
       written++
+
+      if (loc !== 'en' && !route.emitAtPublicPath) {
+        const langsFile = path.join(distDir, 'langs', route.path, 'index.html')
+
+        fs.mkdirSync(path.dirname(langsFile), { recursive: true })
+        writeCompressed(langsFile, out)
+        written++
+      }
     }
   }
 
@@ -1592,11 +1754,13 @@ export function syncFirebaseRewrites() {
 
   // Localized portfolio slugs — the /<loc>/portfolio/<slug> pages emitted by
   // buildLocalePages need explicit rewrites (the `**` catch-all would serve
-  // the English shell instead).
+  // the English shell instead). Live translations win when prefetched.
   const dbPath = path.join(ROOT, 'database.json')
-  const projectSlugs = fs.existsSync(dbPath)
-    ? Object.keys(JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations?.en?.projects || {})
-    : []
+  const projectSlugs = liveTranslations?.en?.projects
+    ? Object.keys(liveTranslations.en.projects)
+    : fs.existsSync(dbPath)
+      ? Object.keys(JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations?.en?.projects || {})
+      : []
 
   const localeRoutes = []
 
@@ -1777,6 +1941,9 @@ const SPA_REWRITES = Object.freeze([
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const DIST = path.join(ROOT, 'dist')
   const indexPath = path.join(DIST, 'index.html')
+
+  await Promise.all([prefetchStarMediaDims(), prefetchTranslations()])
+
   const { html, written, locales } = buildLocalePages(DIST)
 
   writeCompressed(indexPath, html)

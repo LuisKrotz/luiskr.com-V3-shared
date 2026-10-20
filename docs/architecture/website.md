@@ -6,19 +6,13 @@ views → shadow-DOM components.
 ## Components
 
 ```mermaid
-sequenceDiagram
-    participant R as Router
-    participant V as View element
-    participant DB as Firebase/SWR
-    participant C as BaseComponent children
-
-    R->>V: mount → constructor emits skeleton placeholders
-    V->>DB: fetchFirebaseDb(pages/*, projects/*)
-    DB-->>V: snapshot now, live value later
-    V->>V: render() → resolve()
-    V->>C: append shadow-DOM children (?inline sheets)
-    R->>V: route away → disconnected()
-    V->>C: teardown — listeners, observers,<br/>WebGL contexts released
+flowchart TB
+    S1["Router — mount: constructor emits<br/>skeleton placeholders"] --> S2["View — fetchFirebaseDb<br/>(pages/*, projects/*)"]
+    S2 --> S3["Firebase/SWR — snapshot now,<br/>live value later"]
+    S3 --> S4["View — render() → resolve()"]
+    S4 --> S5["View — append shadow-DOM children<br/>(?inline sheets)"]
+    S5 --> S6["Router — route away → disconnected()"]
+    S6 --> S7["View — teardown: listeners, observers,<br/>WebGL contexts released"]
 ```
 
 Each component is a `BaseComponent` subclass:

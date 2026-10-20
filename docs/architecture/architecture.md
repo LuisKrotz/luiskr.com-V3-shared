@@ -5,55 +5,37 @@
 ```mermaid
 flowchart TB
     subgraph entries["Entry points (separate bundles)"]
-        MAIN["index.html → shared/src/main.ts"]
-        CMSMAIN["cms/index.html → cms/main.ts"]
+        ENT["index.html → shared/src/main.ts<br/>cms/index.html → cms/main.ts"]
     end
 
     subgraph shell["shared/src/ — app shell"]
-        APP["App.tsx + app/ (app-shell)"]
+        APP["App.tsx + app/ (app-shell)<br/>router-driven view outlet"]
     end
 
     subgraph site["website/ — public website module"]
-        SITER["views/: Home · Project · Legal · NotFound"]
-        SITEC["components/<domain>/: AppNav, HomeMosaic, MediaFigure, …"]
+        SITE["views/: Home · Project · Legal · NotFound<br/>components/<domain>/: AppNav, HomeMosaic,<br/>MediaFigure, …"]
     end
 
     subgraph cms["cms/ — CMS module (ESNext only)"]
-        CMSR["routes/: AdminLogin · CmsDashboard"]
-        CMSC["<feature>/: Cms* editors (facade + data/events/render)"]
-        CMST["tokens.ts · sass/cms.scss"]
+        CMSM["routes/: AdminLogin · CmsDashboard<br/><feature>/: Cms* editors (facade + data/events/render)<br/>tokens.ts · sass/cms.scss"]
     end
 
     subgraph exp["experiments/ — isolated modules"]
-        SP["earth-playground: SpacePlayground + earth/ (Three.js WebGPU)"]
-        DP["docs: /docs portal (Docs.tsx + manifest + arch-scene)"]
+        EXP["earth-playground: SpacePlayground + earth/<br/>(Three.js WebGPU)<br/>docs: /docs portal (Docs.tsx + manifest<br/>+ arch-scene)"]
     end
 
     subgraph shared["core/ — shared engine module"]
-        ROUTER["core/router/router.ts"]
-        CORE["Component · jsx · store · tokens · i18n"]
-        UTILS["utils/<domain>: data · canvas · wasm · motion · perf"]
-        SASS["sass: base tokens + component styles"]
-        FB["firebase.ts"]
+        CORE["core/router/router.ts<br/>Component · jsx · store · tokens · i18n<br/>utils/<domain>: data · canvas · wasm · motion · perf<br/>sass: base tokens + component styles<br/>firebase.ts"]
     end
 
-    MAIN --> APP
-    CMSMAIN --> CMSR
-    APP --> ROUTER --> SITER
-    ROUTER -. lazy .-> SP
-    ROUTER -. lazy .-> DP
-    SITER --> SITEC
-    CMSR --> CMSC
-    SITER --> CORE
-    SITEC --> CORE
-    SITEC --> UTILS
-    SP --> CORE
-    SP --> UTILS
-    DP --> CORE
-    CMSC --> CORE
-    CMSC --> FB
-    APP --> FB
-    UTILS --> FB
+    ENT --> APP
+    APP --> SITE
+    SITE --- CMSM
+    CMSM --- EXP
+    APP -.->|"lazy"| EXP
+    SITE --> CORE
+    CMSM --> CORE
+    EXP --> CORE
 ```
 
 ### Import rules

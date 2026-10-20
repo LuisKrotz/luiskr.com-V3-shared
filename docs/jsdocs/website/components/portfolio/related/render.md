@@ -27,7 +27,7 @@ Skeleton mosaic — tiles 1 and 3-6 carry the featured modifier so the shimmer m
 
 Back-home link — first item of the footer's link row (localized route +
 label), resolved through the same live-then-fallback path <legal-footer>
-uses. The -home modifier sets the label in lowercase.
+uses. The -home modifier marks the link so tests can locate it.
 
 ### `renderCreditBlock`
 

@@ -17,7 +17,7 @@ Distances compress in three continuous tiers — **directions stay
 astronomically true, only radii compress**:
 
 ```mermaid
-flowchart LR
+flowchart TB
     A["galactic coords (l, b, d_ly)"] --> B["gpos()"]
     B --> C{"d_ly"}
     C -->|"d ≤ 1 Mly"| D["galactic tier<br/>1 u = 100 ly"]
@@ -110,7 +110,7 @@ W(t) = BASE + WAVE_AMP·(½ + ½·sin(2πt/WAVE_PERIOD))
   irregularly, like real weather.
 
 ```mermaid
-flowchart LR
+flowchart TB
     S1["sin(f₁t)"] --> M["×"]
     S2["sin(f₂t+1.3)"] --> M
     M --> P["max(0,·)^POW"]
@@ -154,6 +154,7 @@ flowchart TB
         U["underlay — wide, faint, ×UNDER_RATE"]
         B["base — photo/seeded gas, ×rate"]
         E["echo — counter-rotates −rate·ECHO_RATE"]
+        U --- B --- E
     end
     U -->|"rotation+opacity+scale"| R["living composite"]
     B --> R
@@ -282,17 +283,11 @@ tween never fights the user.
   cap — 139 k catalogued objects can't all exist at once.
 
 ```mermaid
-sequenceDiagram
-    participant Cam as camera
-    participant U as updates.ts
-    participant R as registry-body.ts
-    participant LRU as registryBodies (LRU)
-
-    Cam->>U: approach radius crossed
-    U->>R: spawn(id)
-    R->>LRU: touch / insert body node
-    LRU-->>R: evict oldest beyond CAP → dispose()
-    Note over LRU: geometry, materials,<br/>textures freed
+flowchart TB
+    S1["camera — approach radius crossed"] --> S2["updates.ts — spawn(id)"]
+    S2 --> S3["registry-body.ts — touch /<br/>insert body node"]
+    S3 --> S4["registryBodies (LRU) — evict<br/>oldest beyond CAP → dispose()"]
+    S4 -.-> N["geometry, materials,<br/>textures freed"]
 ```
 
 ## 12. Star-cloud fill (WASM worker)

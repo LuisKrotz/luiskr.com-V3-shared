@@ -5,22 +5,13 @@ the repo is the source-of-truth snapshot baked into the bundle and synced to
 Firebase.
 
 ```mermaid
-flowchart TD
+flowchart TB
     TR["translations/&lt;loc&gt;/"]
     TR --> APP["APP/ — global UI strings"]
-    TR --> COMP["components/ — component copy"]
-    TR --> PAGES["pages/ — route copy"]
-    TR --> PROJ["projects/ — case studies"]
-    TR --> SLUGS["slugs/ — localized route slugs"]
-
-    COMP --> C1["contact: {title, line1, line2}"]
-    COMP --> C2["legal-footer: {links: [{link, page}]}"]
-    COMP --> C3["related: {title, note, path, projects, socials: [{link, network}]}"]
-    COMP --> C4["preferences-modal, lang-dialog, media, source-code, …"]
-
-    PAGES --> P1["HOME, ABOUT, GDPR, PRIVACY, TERMS, NOT_FOUND, EARTH_PLAYGROUND"]
-
-    PROJ --> PR1["<key>: {cover{src,isVideo}, folder, sections: [[texts, media], …]}"]
+    APP --- COMP["components/ — component copy:<br/>contact: {title, line1, line2}<br/>legal-footer: {links: [{link, page}]}<br/>related: {title, note, path, projects,<br/>socials: [{link, network}]}<br/>preferences-modal, lang-dialog,<br/>media, source-code, …"]
+    COMP --- PAGES["pages/ — route copy:<br/>HOME, ABOUT, GDPR, PRIVACY,<br/>TERMS, NOT_FOUND, EARTH_PLAYGROUND"]
+    PAGES --- PROJ["projects/ — case studies:<br/><key>: {cover{src,isVideo}, folder,<br/>sections: [[texts, media], …]}"]
+    PROJ --- SLUGS["slugs/ — localized route slugs"]
 ```
 
 ## Node contracts

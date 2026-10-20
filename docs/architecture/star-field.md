@@ -19,53 +19,30 @@ centre as part of the disc — never a stationary exhibit.
 ```mermaid
 flowchart TB
     subgraph host["Host component"]
-        SF["StarField.tsx — custom-element facade"]
-        RENDER["star/render.tsx — loader, nav drawer, dossier panel, HUD"]
-        BOOT["star/boot.ts — progress → loader → ready"]
-        I18N["star/i18n.ts — locale node + fallback"]
-        DOSS["star/dossier.ts — lazy per-body JSON"]
+        HOST["StarField.tsx — custom-element facade<br/>star/render.tsx — loader, nav drawer, dossier panel, HUD<br/>star/boot.ts — progress → loader → ready<br/>star/i18n.ts — locale node + fallback<br/>star/dossier.ts — lazy per-body JSON"]
     end
 
     subgraph facade["Engine facade"]
-        ENG["starfield-engine.ts — init/select/fly/screenshot/destroy"]
-        STATE["engine/state.ts — SFState bag"]
+        ENG["starfield-engine.ts — init/select/fly/screenshot/destroy<br/>engine/state.ts — SFState bag"]
     end
 
     subgraph scene["Scene assembly"]
-        BST["engine/bootstrap.ts — lazy three import + wiring"]
-        RND["engine/renderer-setup.ts — gate + backend probe + log depth"]
-        SCN["engine/scene.ts — camera rig, skybox, lights"]
-        BSC["engine/bodies-scene.ts — catalog → node graph + rider"]
+        SCN["engine/bootstrap.ts — lazy three import + wiring<br/>engine/renderer-setup.ts — gate + backend probe + log depth<br/>engine/scene.ts — camera rig, skybox, lights<br/>engine/bodies-scene.ts — catalog → node graph + rider"]
     end
 
     subgraph catalog["engine/catalog/ — authored defs"]
-        GEO["geo.ts — gpos/MW_CENTER/MW_RADIUS/shrinkSolar"]
-        SOL["solar.ts — AU-scale defs (shrunk ×0.002)"]
-        MWY["milky-way.ts — named stars at real (l,b,d)"]
-        NEB["nebulae.ts — honest-extent photo sprites"]
-        GLX["galaxies.ts — MW volumetric disc, M31, M33, Sgr A*"]
-        LG["local-group.ts — dwarf galaxies"]
-        HIER["hierarchy.ts — structure shells/speckles"]
+        CAT["geo.ts — gpos/MW_CENTER/MW_RADIUS/shrinkSolar<br/>solar.ts — AU-scale defs (shrunk ×0.002)<br/>milky-way.ts — named stars at real (l,b,d)<br/>nebulae.ts — honest-extent photo sprites<br/>galaxies.ts — MW volumetric disc, M31, M33, Sgr A*<br/>local-group.ts — dwarf galaxies<br/>hierarchy.ts — structure shells/speckles"]
     end
 
     subgraph render["Per-frame + makers"]
-        FRM["engine/frame.ts + frame/ — tick, camera, updates, fx"]
-        SPR["engine/spiral/ — spiral fill math + galaxy assembly"]
-        BOD["engine/bodies/ — primitives, mask, deep-sky, belt, black-hole, structures, procedural/"]
-        CLOUD["engine/star-cloud.ts — 139k HYG binary points"]
-        REG["engine/registry.ts — manifest + shards + synthesized dossiers"]
-        WORK["engine/fill-worker.ts — wasmPool batch fills"]
-        PICK["engine/picking.ts — raycast + drag threshold"]
-        FLY["engine/fly.ts — fly-to tween"]
-        SCALE["engine/scale.ts — 3-tier compression + axis map"]
+        REN["engine/frame.ts + frame/ — tick, camera, updates, fx<br/>engine/spiral/ — spiral fill math + galaxy assembly<br/>engine/bodies/ — primitives, mask, deep-sky, belt,<br/>black-hole, structures, procedural/<br/>engine/star-cloud.ts — 139k HYG binary points<br/>engine/registry.ts — manifest + shards + synthesized dossiers<br/>engine/fill-worker.ts — wasmPool batch fills<br/>engine/picking.ts — raycast + drag threshold<br/>engine/fly.ts — fly-to tween<br/>engine/scale.ts — 3-tier compression + axis map"]
     end
 
-    SF --> RENDER & BOOT & I18N & DOSS
-    SF --> ENG --> STATE
-    ENG --> BST --> RND & SCN & BSC
-    BSC --> catalog & render
-    RENDER -.->|"select"| ENG
-    PICK -.->|"pointer pick"| SF
+    HOST --> ENG
+    ENG --> SCN
+    SCN --> CAT
+    CAT --> REN
+    REN -.->|"select / pointer pick"| HOST
 ```
 
 | File / folder                                | Role                                                                                 |
@@ -100,35 +77,22 @@ half-attach listeners, and `onReady` fires exactly once (success or
 bail) so the loader can never stick.
 
 ```mermaid
-sequenceDiagram
-    participant Host as StarField.tsx
-    participant Eng as starfield-engine
-    participant Boot as bootstrap.ts
-    participant GPU as renderer-setup
-    participant Wrk as fill-worker/wasmPool
-
-    Host->>Eng: init()
-    Eng->>Boot: bootstrapStarField(s)
-    Boot->>Boot: lazy import three + webgpu + tsl + OrbitControls
-    Boot->>GPU: initStarRenderer(s, WebGPURenderer)
-    GPU->>GPU: webglAllowed() gate
-    alt gate fails
-        GPU-->>Boot: false → bail (CSS fallback)
-    else gate passes
-        GPU->>GPU: WebGPU adapter probe
-        alt adapter ok
-            GPU->>GPU: WebGPURenderer + logarithmicDepthBuffer
-        else probe/init fails
-            GPU->>GPU: clone canvas → forceWebGL retry
-        end
-    end
-    Boot->>Boot: setupStarCamera + loadStarTextures (progress 10→80)
-    Boot->>Boot: setupStarScene + buildStarBodies (progress 84)
-    Boot->>Boot: bindPicking + handleStarResize + warmUpShaders (92)
-    Boot->>Boot: tickStar() — first frame (100, onReady)
-    Boot->>Wrk: ensureStarCloud() — fire-and-forget
-    Wrk->>Wrk: fetch HYG binary → wasm decode/fill → mount on MW disc
-    Eng-->>Host: onReady → dismiss loader (or failed → CSS fallback)
+flowchart TB
+    S1["StarField.tsx — init()"] --> S2["engine — bootstrapStarField(s)"]
+    S2 --> S3["bootstrap.ts — lazy import three +<br/>webgpu + tsl + OrbitControls"]
+    S3 --> S4["initStarRenderer(s, WebGPURenderer)"]
+    S4 --> GATE{"webglAllowed()?"}
+    GATE -->|"fails"| BAIL["false → bail<br/>(CSS fallback)"]
+    GATE -->|"passes"| PROBE{"WebGPU adapter probe"}
+    PROBE -->|"ok"| WGPU["WebGPURenderer +<br/>logarithmicDepthBuffer"]
+    PROBE -->|"probe/init fails"| WGL["clone canvas →<br/>forceWebGL retry"]
+    WGPU --> S5["setupStarCamera + loadStarTextures<br/>(progress 10→80)"]
+    WGL --> S5
+    S5 --> S6["setupStarScene + buildStarBodies<br/>(progress 84)"]
+    S6 --> S7["bindPicking + handleStarResize +<br/>warmUpShaders (92)"]
+    S7 --> S8["tickStar() — first frame<br/>(100, onReady)"]
+    S8 --> S9["fill-worker/wasmPool — ensureStarCloud():<br/>fetch HYG binary → wasm decode/fill<br/>→ mount on MW disc"]
+    S8 --> S10["onReady → dismiss loader<br/>(or failed → CSS fallback)"]
 ```
 
 ## Scale & coordinate model
@@ -144,7 +108,7 @@ three tiers while **every direction stays astronomically true**:
 | Cosmic      | > 10 Mly | 20 000 ly / u | Superclusters, observable-universe shell (46k u) |
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph input["Author-time values"]
         LB["real galactic (l, b, d_ly)"]
         AU["AU-scale solar defs"]
@@ -186,11 +150,7 @@ core lap) with `SF_SPIRAL.ROTOR_DIFF`× differential inner-disc motion.
 ```mermaid
 flowchart TB
     MW["milky-way spinner<br/>spin 0.02 + rotor ×1.6"] --> RIDER["galactic rider group"]
-    RIDER --> SUN["solar tier (0.002×)"]
-    RIDER --> NBS["named stars @ true (l,b,d)"]
-    RIDER --> NEBS["nebulae/clusters"]
-    RIDER --> CLD["deep-field 139k-star cloud"]
-    RIDER --> SGR["sagittarius-a (disc centre, local frame)"]
+    RIDER --> BOD["solar tier (0.002×)<br/>named stars @ true (l,b,d)<br/>nebulae/clusters<br/>deep-field 139k-star cloud<br/>sagittarius-a (disc centre, local frame)"]
     MW -.->|"world-fixed"| EXT["M31 · M33 · dwarfs · hierarchy shells"]
 ```
 
@@ -322,38 +282,28 @@ binary decode, speckles, belt) routes through `fill-worker.ts` →
 `wasmPool` off-thread with bit-identical JS fallbacks.
 
 ```mermaid
-flowchart LR
+flowchart TB
     RAF["RAF"] --> TICK["tickStar<br/>(throw → failed+fallback)"]
-    TICK --> CAM["frame/camera — floating-origin pin,<br/>fly tween, follow, hints, controls"]
-    TICK --> UPD["frame/updates — orbit/spin,<br/>satellites, LOD, day/night<br/>vectors, approach prefetch"]
-    TICK --> FX["frame/fx — pulses, flares,<br/>seasonal tint, cloud fade,<br/>structure rims"]
-    UPD --> REN["renderer.render"]
-    FX --> REN
+    TICK --> STAGES["frame/camera — floating-origin pin, fly tween,<br/>follow, hints, controls<br/>frame/updates — orbit/spin, satellites, LOD,<br/>day/night vectors, approach prefetch<br/>frame/fx — pulses, flares, seasonal tint,<br/>cloud fade, structure rims"]
+    STAGES --> REN["renderer.render<br/>(updates + fx)"]
     REN --> RAF
 ```
 
 ## Interaction flow
 
 ```mermaid
-sequenceDiagram
-    participant P as Pointer/Keyboard
-    participant C as StarField.tsx
-    participant E as Engine
-    participant D as dossier/registry
-
-    P->>C: tap/click on canvas
-    C->>C: pickAt (raycast — proxy hits defer to real meshes)
-    C->>C: _selectBody(id)
-    Note over C: mobile (<768px): nav sheet<br/>auto-closes on select
-    C->>E: selectBody → startFly(offset = max(8r, 0.04))
-    C->>D: loadDossier / synthesized registry record
-    D-->>C: dossier JSON (locale → EN fallback)
-    C->>C: open ≤50dvh panel + aria-live announce + URL sync
-    P->>C: Escape → close panel (then drawer)
-    C->>E: deselect() — stops selection-follow
-    P->>C: hover/focus nav or registry row
-    C->>E: setHint(anchor | record)
-    E->>E: worldScreenPos → HUD leader line,<br/>off-screen clamps to viewport edge<br/>(arrow hints the direction at any zoom)
+flowchart TB
+    S1["Pointer/Keyboard — tap/click on canvas"] --> S2["StarField.tsx — pickAt raycast<br/>(proxy hits defer to real meshes)"]
+    S2 --> S3["StarField.tsx — _selectBody(id)"]
+    S3 -.-> N1["mobile (<768px): nav sheet<br/>auto-closes on select"]
+    S3 --> S4["Engine — selectBody → startFly<br/>(offset = max(8r, 0.04))"]
+    S4 --> S5["dossier/registry — loadDossier /<br/>synthesized registry record"]
+    S5 --> S6["dossier JSON<br/>(locale → EN fallback)"]
+    S6 --> S7["open ≤50dvh panel + aria-live<br/>announce + URL sync"]
+    S7 --> S8["Escape → close panel<br/>(then drawer)"]
+    S8 --> S9["Engine — deselect(): stops<br/>selection-follow"]
+    S9 --> S10["hover/focus nav or registry row"]
+    S10 --> S11["Engine — setHint(anchor | record):<br/>worldScreenPos → HUD leader line,<br/>off-screen clamps to viewport edge<br/>(arrow hints the direction at any zoom)"]
 ```
 
 ## Mobile layout (< 768px)
@@ -363,10 +313,12 @@ flowchart TB
     subgraph chrome["Bottom chrome — decluttered"]
         TOG["Explore toggle (bottom-left)"]
         ACT["Actions (bottom-right, stacked)"]
+        TOG --- ACT
     end
     subgraph sheets["Capped sheets — max-height 50dvh"]
         NAV["Nav drawer — auto-closes on select;<br/>scale disclaimer lives at its foot"]
         PAN["Dossier panel — slides up over scene"]
+        NAV --- PAN
     end
     TOG --> NAV
     NAV -->|"pick a body"| PAN

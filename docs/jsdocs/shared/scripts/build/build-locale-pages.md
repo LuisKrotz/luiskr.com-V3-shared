@@ -82,6 +82,45 @@ Rewrites the English shell into a localized document.
 - `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
 - `@param` {string} [o.content] - prerendered body markup injected into
 
+### `starMediaDims`
+
+Star-field dossier image dims cache — image URL → ` width="W" height="H"`
+attribute fragment, seeded by `prefetchStarMediaDims` (dossier JSONs store
+no intrinsic size, so each unique CDN image is probed once via a small
+range request and shared across all 15 locales).
+
+### `DIMS_PROBE_BYTES`
+
+Bytes fetched per image-dims probe — SOF/IHDR headers live in the head.
+
+### `scanImageDims`
+
+Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
+or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
+are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
+
+- `@param` {Buffer} buf - head bytes of the image
+
+### `liveTranslations`
+
+Live `translations` node pulled from the RTDB by prefetchTranslations().
+When set, buildLocalePages emits current per-locale CMS text instead of
+the committed database.json snapshot (which lags behind content edits —
+the exact gap that made localized pages render English/fallback text).
+
+### (module scope)
+
+Fetches the live `translations` node once per build so every prerendered
+page carries the per-locale text authors actually published. Offline or
+unreachable host → warn and keep the database.json snapshot as the source.
+
+### (module scope)
+
+Probes every unique star-field dossier image once (64 KB range request
+each) so emitted <img> tags carry real width/height attrs — the
+lazy-media CLS budget flagged the bare imgs. Failures are silent:
+a missing probe just emits the attr-less tag it always did.
+
 ### `buildLocalePages`
 
 Generates all localized pages under `distDir`. When `template` is omitted
@@ -134,11 +173,11 @@ Contact block — channel links + legal links from components.contact.
 
 ### `mediaFigure`
 
-One media item as crawlable markup — the figure shows the light
-preview variant (<img> thumb / <video> poster+mp4); the caption links
-straight to the best-quality source so the uncompressed asset is a
-first-class crawl target. `deepHref` wraps the media in the
-/portfolio/<p>/<media> deep link.
+One media item as crawlable markup — the figure's <img> carries the
+best-quality source itself (uncompressed pass preferred) so crawlers
+and no-JS viewers index the full-resolution asset, not the thumb;
+the caption links to the same source as a first-class crawl target.
+`deepHref` wraps the media in the /portfolio/<p>/<media> deep link.
 
 ### `homeContent`
 

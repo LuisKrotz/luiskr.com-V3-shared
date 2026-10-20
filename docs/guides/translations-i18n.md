@@ -26,7 +26,7 @@ translations/<loc>/
 ## Load path
 
 ```mermaid
-flowchart LR
+flowchart TB
     M["main.ts"] --> VC["virtual:locale-* chunks<br/>(Vite snapshot plugin)"]
     VC --> R0["instant snapshot render<br/>zero network wait"]
     VC --> DB["fetchFirebaseDb(path, onUpdate)<br/>core/utils/data/db.ts"]

@@ -34,7 +34,7 @@ holds state + lifecycle + delegates, behavior lives in sibling modules
 (`data` = Firebase load/save, `events` = input binding, `render` = JSX).
 
 ```mermaid
-flowchart LR
+flowchart TB
     BOOT["cms/main.ts"] --> AUTH{"Firebase auth<br/>listener"}
     AUTH -->|"signed out"| LOGIN["AdminLogin<br/>email/password"]
     AUTH -->|"signed in"| DASH["CmsDashboard<br/>tab shell"]

@@ -59,20 +59,14 @@ inventory:
 | Skybox / 139k star cloud   | GPU static points   | `star-cloud.ts` single draw call       |
 
 ```mermaid
-sequenceDiagram
-    participant R as rAF loop
-    participant F as frame.ts
-    participant U as updates.ts
-    participant X as fx.ts
-    participant C as camera.ts
-
-    R->>F: tick(dt)
-    F->>C: damping + fly-to tween
-    F->>U: orbits — r=a(1-e²)/(1+e·cosθ)
-    F->>U: axis locks, LOD, registry spawns
-    F->>X: nebula layers, wind, meteors,
-    X->>X: pulse, climate, weather, aurora
-    F->>R: renderer.render(scene, camera)
+flowchart TB
+    S1["rAF loop — tick(dt)"] --> S2["frame.ts — damping +<br/>fly-to tween → camera.ts"]
+    S2 --> S3["updates.ts — orbits:<br/>r=a(1-e²)/(1+e·cosθ)"]
+    S3 --> S4["updates.ts — axis locks,<br/>LOD, registry spawns"]
+    S4 --> S5["fx.ts — nebula layers,<br/>wind, meteors"]
+    S5 --> S6["fx.ts — pulse, climate,<br/>weather, aurora"]
+    S6 --> S7["frame.ts — renderer.render<br/>(scene, camera)"]
+    S7 -->|"next frame"| S1
 ```
 
 ## Earth Playground (`experiments/earth-playground`)

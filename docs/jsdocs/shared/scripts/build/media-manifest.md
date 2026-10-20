@@ -67,7 +67,3 @@ matching the runtime URL builders in `core/utils/media.ts`.
 ### `resolveCoverKey`
 
 Resolves a home-mosaic cover image to its best indexable key.
-
-### `resolveCoverThumbKey`
-
-Resolves a home-mosaic cover to its lightweight preview key (<img src>).

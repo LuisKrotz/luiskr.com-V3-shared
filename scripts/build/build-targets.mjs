@@ -26,7 +26,11 @@ import crypto from 'node:crypto'
 import { constants as zlibConstants } from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 import { ES_TARGETS, POLYFILLS, POLYFILL_ORDER, BROWSERS } from '../../build/es-targets.mjs'
-import { buildLocalePages } from './build-locale-pages.mjs'
+import {
+  buildLocalePages,
+  prefetchStarMediaDims,
+  prefetchTranslations,
+} from './build-locale-pages.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..', '..', '..')
@@ -330,6 +334,12 @@ const defaultEntry = match[1]
 const loaderTag = `<link rel="modulepreload" crossorigin href="${defaultEntry}"><script>${loaderMin.trim()}</script>`
 
 html = html.replace(match[0], loaderTag)
+
+// Star-field dossier images store no dims — probe each unique CDN image
+// once so emitted <img> tags carry real width/height attrs (cached for
+// every locale's fan-out below). Pull the live RTDB translations in
+// parallel so prerendered pages carry current per-locale CMS text.
+await Promise.all([prefetchStarMediaDims(), prefetchTranslations()])
 
 // Per-locale shells: emit dist/<loc>/<slug>/index.html for every sitemap
 // route with translated title/meta/JSON-LD + hreflang alternates, and return

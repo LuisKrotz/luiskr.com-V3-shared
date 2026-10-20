@@ -14,7 +14,7 @@ yarn setup --check
 ```
 
 ```mermaid
-flowchart LR
+flowchart TB
     SETUP["yarn setup"] --> DEPS["platform deps check<br/>node · yarn · git · toolchain"]
     DEPS --> INST["yarn install"]
     INST --> HOOKS["yarn hooks:install<br/>pre-commit + pre-push"]

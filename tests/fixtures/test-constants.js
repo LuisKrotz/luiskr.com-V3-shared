@@ -226,6 +226,7 @@ export const TEST_PROJECTS = {
   SAGE: 'sage',
   METCHA: 'metcha',
   METCHA_TITLE: 'Metcha',
+  MELISSA: 'melissa',
   MINI_MELISSA: 'mini-melissa',
   NATHALIA_BOND: 'nathalia-bond',
   SLUG_BRAZILIAN_LEATHER: 'brazilian-leather',

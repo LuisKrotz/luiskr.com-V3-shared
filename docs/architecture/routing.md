@@ -73,21 +73,14 @@ store.state.lang.slugs        (set by App.tsx during locale load)
 ## View lifecycle
 
 ```mermaid
-sequenceDiagram
-    participant R as router.ts
-    participant S as store
-    participant V as View element
-    participant P as Previous view
-
-    R->>R: navigate(path) → parse locale + route
-    R->>S: commit(SET_ROUTE)
-    R->>R: dynamic import(view chunk)
-    R->>V: new + append to #lt;main#gt;
-    V->>V: constructor → skeleton placeholders
-    V->>V: fetch DB node (pages/*, projects/*)
-    V->>V: render() → resolve() → skeleton fade + content-in
-    R->>P: disconnected → BaseComponent teardown
-    Note over P: scoped listeners removed,<br/>WebGL contexts released
+flowchart TB
+    S1["router.ts — navigate(path):<br/>parse locale + route"] --> S2["store — commit(SET_ROUTE)"]
+    S2 --> S3["router.ts — dynamic import<br/>(view chunk)"]
+    S3 --> S4["View — new + append to <main>:<br/>constructor → skeleton placeholders"]
+    S4 --> S5["View — fetch DB node<br/>(pages/*, projects/*)"]
+    S5 --> S6["View — render() → resolve():<br/>skeleton fade + content-in"]
+    S6 --> S7["Previous view — disconnected:<br/>BaseComponent teardown"]
+    S7 -.-> N["scoped listeners removed,<br/>WebGL contexts released"]
 ```
 
 Locale-prefixed inbound paths resolve through `detectLangFromPath()`

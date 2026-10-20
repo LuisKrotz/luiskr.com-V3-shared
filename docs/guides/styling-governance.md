@@ -29,7 +29,7 @@ from the live `components/` copies (missing fixes) and was only reachable via
 a stale `Footer.tsx` import (now repointed to `components/internals.scss`).
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph compile["Compile-time (base/ only)"]
         VARS["_variables.scss<br/>$color-* · $space-* Fibonacci"]
         MIX["_mixins.scss · _fonts.scss<br/>_placeholders.scss"]

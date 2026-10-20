@@ -111,7 +111,7 @@ the CMS Deploy Info tab. Reports are gitignored.
 ## Verification pipeline
 
 ```mermaid
-flowchart LR
+flowchart TB
     VER["yarn verify"] --> C1["console-scan<br/>zero console.*"]
     C1 --> C2["eslint<br/>zero errors"]
     C2 --> C3["run-modules --coverage<br/>all suites + axe +<br/>contrast-aaa + governance"]

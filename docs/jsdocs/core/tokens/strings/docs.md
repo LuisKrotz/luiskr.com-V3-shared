@@ -48,6 +48,10 @@ Keyboard key the print-screen guard reacts to.
 
 Editable-breadcrumb input fallback when the URL path can't resolve.
 
+### `CRUMB_INPUT_NAME`
+
+`name` attr for the editable-breadcrumb field (form-field audit).
+
 ### `SRC_ROOT`
 
 Root-bucket folder exempt from index-file auto-open (source tree).

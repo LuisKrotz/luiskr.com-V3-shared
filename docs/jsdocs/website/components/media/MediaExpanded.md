@@ -19,7 +19,9 @@ Full-res media URL (from the source attribute).
 
 ### `sourceWebm`
 
-Webm sibling of an .mp4 source — first <source> when it exists.
+Webm sibling of an .mp4 source — first <source> when it exists
+(manifest-known absent ⇒ '', same doomed-request gate as the
+figure's resolveMediaSources).
 
 ### `thumb`
 

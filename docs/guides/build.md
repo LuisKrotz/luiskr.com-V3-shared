@@ -13,7 +13,7 @@ older-engine compatibility is delivered exclusively by this build matrix
 ## Multi-target matrix (`shared/build/es-targets.mjs`)
 
 ```mermaid
-flowchart LR
+flowchart TB
     BUILD["yarn build"] --> PRE{"prebuild:<br/>yarn verify"}
     PRE -->|"fail"| STOP["no dist emitted"]
     PRE -->|"pass"| MATRIX["build-targets.mjs<br/>12 vite builds, LK_TARGET per tier"]
