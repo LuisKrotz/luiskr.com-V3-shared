@@ -40,6 +40,8 @@ import { checkAppScroll, updateAppSectionTops } from './app/scroll.js'
 import type { AppNavEl, AppTranslations, CookieBannerEl, PrefModalEl } from './app/types.js'
 import { flipAppView, updateAppViewContent } from './app/view.js'
 import type { RouteDescriptor } from '@core/router/router.js'
+import { applyAnimationDesc } from '@core/utils/a11y/animation-desc.js'
+import { ANIMATION_IDS } from '@core/tokens/data/animation-ids.js'
 
 // Route depth: home = 0, all other views = 1
 
@@ -246,6 +248,11 @@ export class AppRoot extends BaseComponent {
       pref.pref = this.translations?.pref
     }
     this._updateModalState()
+
+    // The route progress bar is recreated per render — re-bind its
+    // animation description against the fresh node (idempotent).
+    const pBar = this.$(`.${APP_CLASSES.PROGRESS_BAR}`)
+    if (pBar) applyAnimationDesc(pBar as Element, ANIMATION_IDS.PROGRESS_BAR)
   }
 }
 

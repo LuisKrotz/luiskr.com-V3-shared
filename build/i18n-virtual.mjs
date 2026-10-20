@@ -49,6 +49,9 @@ export const i18nFallbackPlugin = ({ root }) => {
         pages: {
           'not-found': en.pages['not-found'],
           'earth-playground': en.pages['earth-playground'],
+          // Animations-reference chrome — title + intro/meta description —
+          // inlined so the hub renders before Firebase resolves.
+          animations: en.pages.animations,
           HOME: {
             archive: en.pages.HOME.archive,
             explore: en.pages.HOME.explore,

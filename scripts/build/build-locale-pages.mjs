@@ -815,6 +815,25 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
     return `<main><h1>${esc(page.title || '')}</h1>${leafParagraphs(page)}</main>`
   }
 
+  /** Animations-reference hub — title + intro + every animation record's
+   *  alt/longdesc as a definition list. The static mirror of the runtime
+   *  <view-animations> listing: crawlers, AI agents and reader mode read the
+   *  same components.animations records without running JavaScript. */
+  const animationsContent = (loc) => {
+    const page = t(loc, (x) => x.pages?.animations) || {}
+
+    const records = t(loc, (x) => x.components?.animations) || {}
+
+    const rows = Object.entries(records)
+      .map(
+        ([id, r]) =>
+          `<div id="${esc(id)}"><dt>${esc(r?.alt || id)}</dt><dd>${esc(r?.longdesc || '')}</dd></div>`
+      )
+      .join('')
+
+    return `<main><h1>${esc(page.title || 'Animations Reference')}</h1>${page.description ? `<p>${esc(page.description)}</p>` : ''}<dl>${rows}</dl></main>`
+  }
+
   /** Star-field body dossier JSON — locale file with English fallback. */
   const readStarBody = (loc, bodyId) => {
     for (const l of [loc, 'en']) {
@@ -895,6 +914,9 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
 
   const sfDescOf = (loc) =>
     toDescription(t(loc, (x) => x.pages?.['star-field']?.description)) || aboutDescOf(loc)
+
+  const animDescOf = (loc) =>
+    toDescription(t(loc, (x) => x.pages?.animations?.description)) || aboutDescOf(loc)
 
   /** Labelled-media {slug,label,media} rows of a project — mirrors
    * generate-sitemap's walk and the runtime modal: every labelled item with
@@ -1055,6 +1077,13 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
           description: sfDescOf(loc),
           alt: slugPath('starField'),
           content: starIndexContent(loc, starBodyIds),
+        },
+        {
+          path: `${prefix}${slugs.animations}`,
+          title: titleOf(t(loc, (x) => x.pages?.animations?.title)),
+          description: animDescOf(loc),
+          alt: slugPath('animations'),
+          content: animationsContent(loc),
         }
       )
 
@@ -1551,6 +1580,7 @@ export function syncFirebaseRewrites() {
       slugs.license,
       slugs.earthPlayground,
       slugs.starField,
+      slugs.animations,
       'earth-playground',
       'space-playground',
       'star-field-experiment',
@@ -1626,6 +1656,12 @@ export function syncFirebaseRewrites() {
 
     addRedirect(`/${loc}/star-field-experiment`, sfTarget)
     addRedirect(`/${loc}/star-field-experiment/**`, `${sfTarget}/:splat`)
+
+    // English-segment animations alias → localized canonical slug.
+    addRedirect(
+      `/${loc}/${enSlugs.animations}`,
+      `/${loc}/${slugs.animations || enSlugs.animations}`
+    )
 
     // Docs are English-only — a locale-prefixed docs URL canonicalizes to
     // the unprefixed route, so it redirects rather than rendering.

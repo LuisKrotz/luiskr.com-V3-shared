@@ -21,6 +21,8 @@ import { webglPool } from '@core/utils/canvas/webgl-pool.js'
 import { syncCyrillicFont } from '@core/locale/cyrillic-font.js'
 import { updateReaderContent } from '@core/locale/reader-content.js'
 import { initMediaManifest } from '@core/utils/media/manifest.js'
+import { applyAnimationDesc } from '@core/utils/a11y/animation-desc.js'
+import { ANIMATION_IDS } from '@core/tokens/data/animation-ids.js'
 
 /**
  * Schedules non-urgent work during idle time; falls back to a short
@@ -49,6 +51,11 @@ export function mountAppShell(c: AppRoot): void {
   void initMediaManifest()
 
   c.loadData()
+
+  // The ambient body::before glow (body-glow-drift) animates the
+  // document itself — bound once at boot; the desc node lands in the
+  // document root where every crawler reads it.
+  applyAnimationDesc(document.body, ANIMATION_IDS.BODY_GLOW)
 
   if (store.getters.getShowGrid()) {
     document.documentElement.classList.add(STATE_CLASSES.SHOW_GRID)

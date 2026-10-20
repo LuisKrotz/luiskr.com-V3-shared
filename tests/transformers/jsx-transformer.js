@@ -41,10 +41,14 @@ const transformer = {
     const result = transformSync(filename, sourceText, {
       lang,
       jsx: { runtime: 'classic', pragma: 'h', pragmaFrag: 'Fragment' },
-      // `import.meta.env` is a Vite compile-time global — under Jest it does
-      // not exist, so map it to a runtime global tests can populate per-file
-      // (undefined by default, which keeps every env check falsy as before).
-      define: { 'import.meta.env': 'globalThis.__VITE_ENV__' },
+      // `import.meta.env` / `import.meta.hot` are Vite compile-time globals —
+      // under Jest they do not exist, so map them to runtime globals tests can
+      // populate per-file (undefined by default, which keeps every env/HMR
+      // check falsy as before).
+      define: {
+        'import.meta.env': 'globalThis.__VITE_ENV__',
+        'import.meta.hot': 'globalThis.__VITE_HOT__',
+      },
     })
 
     if (result.errors && result.errors.length > 0) {

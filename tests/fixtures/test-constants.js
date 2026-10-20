@@ -21,6 +21,7 @@ const readScss = (name) => readSassDeep(path.join(ROOT_DIR, name))
 
 export const SCSS = {
   about: readScss('core/sass/components/home/about.scss'),
+  animations: readScss('website/views/animations/animations.scss'),
   app: readScss('core/sass/components/shell/app.scss'),
   navShell: readScss('core/sass/components/shell/app/nav-shell.scss'),
   awardsCarousel: readScss('core/sass/components/carousel/awards-carousel.scss'),

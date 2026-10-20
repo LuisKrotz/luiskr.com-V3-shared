@@ -24,6 +24,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import zlib from 'node:zlib'
 import { execSync } from 'node:child_process'
 
 const ROOT = process.cwd()
@@ -45,6 +46,10 @@ const COVERAGE_MODULES = [
   'experiments/earth-playground',
   'experiments/docs',
 ]
+
+const DIST_DIR = path.join(ROOT, 'dist')
+const TIERS_DIR = path.join(DIST_DIR, 'v')
+const WASM_DIR = path.join(DIST_DIR, 'wasm')
 
 const readJson = (file) => {
   try {
@@ -138,15 +143,310 @@ const collectCoverage = () => {
   return { total: totals, modules }
 }
 
+// ─── Bundle stats ────────────────────────────────────────────────────────────
+// Post-build dist/ sweep for the CMS Bundle section: per-tier JS/CSS
+// (emitted bytes + unminified bytes recovered from each sourcemap's
+// sourcesContent + the build's precompressed .gz/.br siblings), every
+// prerendered HTML page, the wasm artifact table, and the remaining
+// static assets — one file-type rollup plus the breakdowns the CMS
+// renders per tier and per crate.
+
+/** Byte size of a file, or null when absent. */
+const fileSize = (file) => {
+  try {
+    return fs.statSync(file).size
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Unminified source size for a built asset — the emitted `.map` carries
+ * `sourcesContent` (the pre-minification module text); summing byte
+ * lengths reproduces what the bundle weighed before terser/lightningcss.
+ * @param {string} file Emitted bundle path.
+ * @returns {number|null} Summed source bytes, or null without a map.
+ */
+const unminifiedSize = (file) => {
+  const map = readJson(`${file}.map`)
+
+  if (!Array.isArray(map?.sourcesContent)) return null
+
+  let bytes = 0
+
+  for (const src of map.sourcesContent) {
+    if (typeof src === 'string') bytes += Buffer.byteLength(src)
+  }
+
+  return bytes
+}
+
+/** Recursive generator — yields every file path under `dir`. */
+const walk = function* (dir) {
+  let entries
+
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true })
+  } catch {
+    return
+  }
+
+  for (const entry of entries) {
+    const p = path.join(dir, entry.name)
+
+    if (entry.isDirectory()) yield* walk(p)
+    else if (entry.isFile()) yield p
+  }
+}
+
+// Auxiliary siblings emitted alongside every minified asset — excluded
+// from primary-file scans (their sizes land on the parent's row).
+const AUX_EXT = new Set(['.map', '.br', '.gz'])
+
+// dist/ subtrees the sweep handles separately — tier trees, wasm
+// artifacts, and this report itself get dedicated tables.
+const SWEEP_SKIP = new Set(['v', 'wasm', 'deploy-info'])
+
+// Compressed-size bound — files without .gz/.br siblings (root-level
+// js, docs scripts) are compressed on the fly up to this size; beyond
+// it the rollup reports 0 rather than burn build minutes on media.
+const COMPUTE_MAX_BYTES = 2 * 1024 * 1024
+
+/**
+ * Sizes for one emitted file: raw bytes plus compressed bytes — the
+ * build's precompressed .gz/.br siblings when they exist (vite's
+ * compression emits them next to every bundled asset), computed via
+ * zlib for smaller strays that ship uncompressed.
+ * @param {string} file Emitted file path.
+ * @returns {{bytes:number,gzip:number,brotli:number}} Size triple.
+ */
+const fileSizes = (file) => {
+  const bytes = fileSize(file) || 0
+  let gzip = fileSize(`${file}.gz`) || 0
+  let brotli = fileSize(`${file}.br`) || 0
+
+  if ((!gzip || !brotli) && bytes && bytes <= COMPUTE_MAX_BYTES) {
+    const buf = fs.readFileSync(file)
+
+    if (!gzip) gzip = zlib.gzipSync(buf).length
+    if (!brotli) brotli = zlib.brotliCompressSync(buf).length
+  }
+
+  return { bytes, gzip, brotli }
+}
+
+/** Blank file-type bucket — counts plus minified/unminified/compressed bytes. */
+const blank = () => ({ files: 0, bytes: 0, unminified: 0, gzip: 0, brotli: 0 })
+
+/** Folds one file's sizes (+ optional unminified bytes) into a bucket. */
+const acc = (bucket, sizes, unminified = 0) => {
+  bucket.files += 1
+  bucket.bytes += sizes.bytes
+  bucket.unminified += unminified
+  bucket.gzip += sizes.gzip
+  bucket.brotli += sizes.brotli
+}
+
+/**
+ * Scans one tier tree (dist/v/<tier>/): JS + CSS bundles with source-map
+ * unminified sizes, misc emitted payloads (fonts/wasm spills), and the
+ * ten largest chunks for the CMS "heaviest output" list.
+ * @param {string} dir dist/v/<tier> path.
+ * @returns {{js:object,css:object,misc:object,largest:Array}}
+ */
+const collectTier = (dir) => {
+  const js = blank()
+  const css = blank()
+  const misc = blank()
+  const largest = []
+
+  for (const file of walk(dir)) {
+    const ext = path.extname(file)
+
+    if (AUX_EXT.has(ext) || ext === '.json') continue
+
+    const sizes = fileSizes(file)
+
+    if (ext === '.js') {
+      acc(js, sizes, unminifiedSize(file) || 0)
+      largest.push({ file: path.relative(DIST_DIR, file), bytes: sizes.bytes })
+    } else if (ext === '.css') {
+      acc(css, sizes, unminifiedSize(file) || 0)
+      largest.push({ file: path.relative(DIST_DIR, file), bytes: sizes.bytes })
+    } else {
+      acc(misc, sizes)
+    }
+  }
+
+  largest.sort((a, b) => b.bytes - a.bytes)
+
+  return { js, css, misc, largest: largest.slice(0, 10) }
+}
+
+/** Per-crate wasm table — .wasm module bytes + .js glue bytes each. */
+const collectWasmCrates = () => {
+  const crates = []
+
+  let entries
+
+  try {
+    entries = fs.readdirSync(WASM_DIR, { withFileTypes: true })
+  } catch {
+    return crates
+  }
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue
+
+    let wasmBytes = 0
+    let jsBytes = 0
+    let jsFiles = 0
+    let files = 0
+
+    for (const file of walk(path.join(WASM_DIR, entry.name))) {
+      const ext = path.extname(file)
+
+      files += 1
+
+      if (ext === '.wasm') wasmBytes += fileSize(file) || 0
+      else if (ext === '.js') {
+        jsBytes += fileSize(file) || 0
+        jsFiles += 1
+      }
+    }
+
+    crates.push({ crate: entry.name, files, wasmBytes, jsBytes, jsFiles })
+  }
+
+  crates.sort((a, b) => a.crate.localeCompare(b.crate))
+
+  return crates
+}
+
+/**
+ * Full dist/ bundle inventory: a file-type rollup (js, css, html, wasm,
+ * assets) with minified/unminified/compressed bytes, the per-tier
+ * breakdown, the per-crate wasm table, and HTML grouped by top-level
+ * directory (the prerendered locale trees).
+ * @returns {object|null} The bundle-stats report, or null without dist/.
+ */
+const collectBundleStats = () => {
+  if (!fs.existsSync(DIST_DIR)) return null
+
+  const totals = { js: blank(), css: blank(), html: blank(), wasm: blank(), assets: blank() }
+  const tiers = []
+  const htmlByDir = {}
+  const largest = []
+
+  // Every emitted file under dist/ — classified by extension into the
+  // rollup buckets; aux siblings (.map/.br/.gz) are folded into their
+  // parent's sizes instead of counted as payload.
+  for (const entry of fs.readdirSync(DIST_DIR, { withFileTypes: true })) {
+    const top = path.join(DIST_DIR, entry.name)
+    const files = entry.isDirectory() ? (SWEEP_SKIP.has(entry.name) ? [] : walk(top)) : [top]
+
+    for (const file of files) {
+      const ext = path.extname(file)
+
+      if (AUX_EXT.has(ext)) continue
+
+      const sizes = fileSizes(file)
+
+      if (ext === '.js') {
+        acc(totals.js, sizes, unminifiedSize(file) || 0)
+      } else if (ext === '.css') {
+        acc(totals.css, sizes, unminifiedSize(file) || 0)
+      } else if (ext === '.html') {
+        acc(totals.html, sizes)
+
+        const dir = path.relative(DIST_DIR, path.dirname(file)).split(path.sep)[0] || '.'
+
+        htmlByDir[dir] = htmlByDir[dir] || { dir, files: 0, bytes: 0 }
+        htmlByDir[dir].files += 1
+        htmlByDir[dir].bytes += sizes.bytes
+      } else if (ext === '.wasm') {
+        acc(totals.wasm, sizes)
+      } else {
+        acc(totals.assets, sizes)
+      }
+    }
+  }
+
+  // Tier trees get their own rows — the same buckets plus the ten
+  // heaviest emitted chunks anywhere in the tier.
+  let tierEntries
+
+  try {
+    tierEntries = fs.readdirSync(TIERS_DIR, { withFileTypes: true })
+  } catch {
+    tierEntries = []
+  }
+
+  for (const entry of tierEntries) {
+    if (!entry.isDirectory()) continue
+
+    const t = collectTier(path.join(TIERS_DIR, entry.name))
+
+    tiers.push({ name: entry.name, ...t })
+
+    largest.push(...t.largest)
+
+    // Tier bundles ARE shipped js/css — fold every tier into the rollup
+    // (each visitor downloads one tier; the CMS shows the per-tier rows
+    // alongside the all-tiers total).
+    for (const [key, bucket] of [
+      ['js', t.js],
+      ['css', t.css],
+    ]) {
+      totals[key].files += bucket.files
+      totals[key].bytes += bucket.bytes
+      totals[key].unminified += bucket.unminified
+      totals[key].gzip += bucket.gzip
+      totals[key].brotli += bucket.brotli
+    }
+  }
+
+  const wasm = collectWasmCrates()
+
+  for (const crate of wasm) {
+    totals.wasm.files += crate.files
+    totals.wasm.bytes += crate.wasmBytes
+    // The wasm-pack glue is shipped js — counted here since the wasm/
+    // subtree is skipped by the primary sweep.
+    totals.js.files += crate.jsFiles
+    totals.js.bytes += crate.jsBytes
+  }
+
+  largest.sort((a, b) => b.bytes - a.bytes)
+
+  const byDir = Object.values(htmlByDir).sort((a, b) => b.files - a.files)
+
+  return {
+    generatedAt: new Date().toISOString(),
+    totals,
+    tiers,
+    wasm,
+    html: { ...totals.html, byDir: byDir.slice(0, 20) },
+    largest: largest.slice(0, 15),
+  }
+}
+
 // ─── Assemble ────────────────────────────────────────────────────────────────
 const main = () => {
   const lighthouse = collectLighthouse()
 
   const coverage = collectCoverage()
 
+  const bundle = collectBundleStats()
+
   fs.mkdirSync(OUT_DIR, { recursive: true })
 
   const files = {}
+
+  if (bundle) {
+    fs.writeFileSync(path.join(OUT_DIR, 'bundle-stats.json'), JSON.stringify(bundle, null, 2))
+    files.bundle = 'bundle-stats.json'
+  }
 
   if (lighthouse) {
     fs.writeFileSync(

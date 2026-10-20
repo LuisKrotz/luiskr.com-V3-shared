@@ -89,6 +89,8 @@ export async function flipAppView(
       await import('@star/StarField.js')
     } else if (toTag === VIEW_TAGS.VIEW_DOCS) {
       await import('@docs/Docs.js')
+    } else if (toTag === VIEW_TAGS.VIEW_ANIMATIONS) {
+      await import('@website/views/animations/Animations.js')
     }
   } catch (err) {
     // Chunk fetch failed (offline, stale deploy/SW): keep the current view

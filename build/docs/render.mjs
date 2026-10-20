@@ -352,7 +352,14 @@ const sanitizeHtmlDoc = (doc, linkResolver = null) => {
   // Remap root selectors onto the `.docs-html` wrapper so the report's own
   // surface (font size, text color, white background) survives inlining.
   const scopeRootSelectors = (style) =>
-    style.replace(/(^|[\s,{>~+])(body|html)(?![\w-])/gim, '$1.docs-html')
+    style
+      .replace(/(^|[\s,{>~+])(body|html)(?![\w-])/gim, '$1.docs-html')
+      // Report `!important`s (istanbul status fills) exist only to win over
+      // the report's own cascade — inside the shadowed payload they'd also
+      // outrank the portal's themed overrides, so they're stripped. The
+      // report's own rules keep their relative order, so its internal
+      // precedence is unchanged.
+      .replace(/!important/g, '')
 
   const styles = [...doc.matchAll(/<style\b[^>]*>[\s\S]*?<\/style\s*>/giu)].map((m) =>
     scopeRootSelectors(m[0])

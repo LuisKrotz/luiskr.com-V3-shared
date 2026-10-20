@@ -598,4 +598,35 @@ describe('Style Governance & Zero-Hardcoding Enforcement', () => {
 
     expect(offenders).toEqual([])
   })
+
+  // ── 17. Rule 28: adopted stylesheets, never inline CSS rule payloads ──────
+  // Stylesheet delivery is compiled SCSS or a constructable CSSStyleSheet
+  // adopted into the target root — an `el.style.cssText = '…'` or
+  // `setAttribute('style', '…')` declaration payload is an inline stylesheet
+  // and is banned. Dynamic value plumbing is NOT flagged on purpose: JSX
+  // `style={{…}}` props, `style.setProperty`, and single-property writes
+  // (`style.display`, `style.transform`) carry runtime values, not rules.
+  // `core/jsx.ts` is exempt — it is the runtime that compiles the JSX
+  // `style` prop (string form → cssText is its job).
+  test('Rule 28: ZERO inline stylesheet payloads (cssText / setAttribute style) outside the JSX runtime', () => {
+    const jsxRuntime = path.join(coreDir, 'jsx.ts')
+    const cssTextRe = /\.style\.cssText\s*=/
+    const styleAttrRe = /\.setAttribute\(\s*['"`]style['"`]/
+    const offenders = []
+
+    for (const file of allSourceFiles(['.ts', '.tsx', '.js'])) {
+      if (file === jsxRuntime) continue
+
+      const raw = fs.readFileSync(file, 'utf-8')
+
+      // Blank comments so prose mentioning the pattern isn't flagged.
+      const codeOnly = raw.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/[^\n]*/g, ' ')
+
+      if (cssTextRe.test(codeOnly) || styleAttrRe.test(codeOnly)) {
+        offenders.push(path.relative(rootDir, file))
+      }
+    }
+
+    expect(offenders).toEqual([])
+  })
 })

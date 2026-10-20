@@ -224,7 +224,7 @@ async function run() {
 
   const enSlugs = LANG_SLUGS.en || {}
 
-  for (const key of ['about', 'contact', 'privacy', 'gdpr', 'terms', 'license']) {
+  for (const key of ['about', 'contact', 'privacy', 'gdpr', 'terms', 'license', 'animations']) {
     if (enSlugs[key]) urlSet.add(`/${enSlugs[key]}`)
   }
 
@@ -253,6 +253,7 @@ async function run() {
         'contact',
         'earthPlayground',
         'starField',
+        'animations',
       ]) {
         if (slugs[key]) urlSet.add(`/${lang}/${slugs[key]}`)
       }
@@ -504,6 +505,7 @@ async function run() {
       'contact',
       'earthPlayground',
       'starField',
+      'animations',
     ]) {
       if (slugs[key]) own.push(`/${loc}/${slugs[key]}`)
     }
