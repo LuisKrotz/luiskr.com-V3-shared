@@ -60,7 +60,9 @@ describe('media-figure.scss reads CSS vars inside Shadow Root', () => {
     // Intrinsic-size contract: the placeholder keeps its natural box and the
     // mf vars only clamp it — a fixed `width: var(--mf-w)` would force every
     // slide to the same width and upscale images past their source size.
-    expect(mfc).toMatch(/max-width:\s*var\(--mf-w,/)
+    // The cap composes inside min(...) with --mf-natural-w so the box can
+    // also never exceed the file's own intrinsic width.
+    expect(mfc).toMatch(/max-width:\s*min\(var\(--mf-w,/)
     // `(?:^|[;{]\s*)width:` — the property must be `width`, not `max-width`.
     expect(mfc).not.toMatch(/\.render-placeholder\s*\{[^}]*[;{]\s*width:\s*var\(--mf-w/)
   })

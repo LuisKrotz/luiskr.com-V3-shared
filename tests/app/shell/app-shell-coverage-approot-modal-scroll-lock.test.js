@@ -12,7 +12,6 @@ import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
 import { MODAL_MUTATIONS } from '@core/tokens/events/mutations.js'
 import { MODAL_CLASSES } from '@core/tokens/classes/modal.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
-import { STATE_STRINGS } from '@core/tokens/strings/state.js'
 import { CHAR_STRINGS } from '@core/tokens/strings/chars.js'
 import { KEYBOARD_EVENTS } from '@core/tokens/events/dom.js'
 
@@ -55,7 +54,7 @@ const _keydown = (key) =>
 
 // ─── modal scroll-lock ───────────────────────────────────────────────────────
 describe('AppRoot — modal scroll lock', () => {
-  test('open locks <main> at -scrollY; close restores position', async () => {
+  test('open toggles modal-open on html/body and the wrapper; the page itself stays unpinned', async () => {
     const origFetch = stableFetch()
 
     const el = new AppRoot()
@@ -72,17 +71,21 @@ describe('AppRoot — modal scroll lock', () => {
 
     el._updateModalState()
 
+    // The native dialog's inert top layer is the scroll lock — no
+    // fixed-position pin is stamped on <main>, so nothing shifts or
+    // collapses the document's scrollable height under the modal.
     const mainEl = el.shadowRoot.querySelector(`#${APP_IDS.MAIN_CONTENT}`)
 
     expect(document.documentElement.classList.contains(MODAL_CLASSES.MODAL_OPEN)).toBe(true)
-    expect(mainEl.style.position).toBe(STATE_STRINGS.FIXED)
-    expect(mainEl.style.top).toBe('-320px')
+    expect(document.body.classList.contains(MODAL_CLASSES.MODAL_OPEN)).toBe(true)
+    expect(mainEl.style.position).toBe(CHAR_STRINGS.EMPTY)
+    expect(mainEl.style.top).toBe(CHAR_STRINGS.EMPTY)
 
     store.commit(MODAL_MUTATIONS.SET_MODAL, { transform: 0, class: '', open: false, media: {} })
     el._updateModalState()
 
-    expect(mainEl.style.position).toBe(CHAR_STRINGS.EMPTY)
     expect(document.documentElement.classList.contains(MODAL_CLASSES.MODAL_OPEN)).toBe(false)
+    expect(document.body.classList.contains(MODAL_CLASSES.MODAL_OPEN)).toBe(false)
 
     globalThis.fetch = origFetch
   })
