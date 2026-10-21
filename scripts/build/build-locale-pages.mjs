@@ -48,6 +48,7 @@ import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '../../../core/tokens/routes/aliases.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
 import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
+import { withFsRetry } from './fs-retry.mjs'
 import { scanManifest } from '../../build/docs/scan.mjs'
 
 const VALID_LANGS = Object.keys(LANG_SLUGS)
@@ -294,12 +295,14 @@ function* walkMedia(node) {
 const writeCompressed = (file, html) => {
   const buf = Buffer.from(html, 'utf8')
 
-  fs.writeFileSync(file, html)
-  fs.writeFileSync(
-    `${file}.br`,
-    zlib.brotliCompressSync(buf, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11 } })
+  withFsRetry(() => fs.writeFileSync(file, html))
+  withFsRetry(() =>
+    fs.writeFileSync(
+      `${file}.br`,
+      zlib.brotliCompressSync(buf, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11 } })
+    )
   )
-  fs.writeFileSync(`${file}.gz`, zlib.gzipSync(buf, { level: 9 }))
+  withFsRetry(() => fs.writeFileSync(`${file}.gz`, zlib.gzipSync(buf, { level: 9 })))
 }
 
 /**
@@ -1582,14 +1585,14 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
       // the static file simply wins in production).
       const publicFile = path.join(distDir, route.path, 'index.html')
 
-      fs.mkdirSync(path.dirname(publicFile), { recursive: true })
+      withFsRetry(() => fs.mkdirSync(path.dirname(publicFile), { recursive: true }))
       writeCompressed(publicFile, out)
       written++
 
       if (loc !== 'en' && !route.emitAtPublicPath) {
         const langsFile = path.join(distDir, 'langs', route.path, 'index.html')
 
-        fs.mkdirSync(path.dirname(langsFile), { recursive: true })
+        withFsRetry(() => fs.mkdirSync(path.dirname(langsFile), { recursive: true }))
         writeCompressed(langsFile, out)
         written++
       }
@@ -1650,7 +1653,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         : path.join(distDir, 'docs', rel, 'index.html')
 
       try {
-        fs.mkdirSync(path.dirname(file), { recursive: true })
+        withFsRetry(() => fs.mkdirSync(path.dirname(file), { recursive: true }))
         writeCompressed(file, out)
         written++
       } catch (err) {
@@ -1891,7 +1894,7 @@ export function syncFirebaseRewrites() {
 
   cfg.hosting.redirects = redirects
 
-  fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`)
+  withFsRetry(() => fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`))
 }
 
 /** Rewrites that sit before the locale table — meta files moved into

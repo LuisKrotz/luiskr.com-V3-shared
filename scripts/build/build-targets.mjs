@@ -31,6 +31,7 @@ import {
   prefetchStarMediaDims,
   prefetchTranslations,
 } from './build-locale-pages.mjs'
+import { withFsRetry, withFsRetryAsync } from './fs-retry.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..', '..', '..')
@@ -57,7 +58,7 @@ for (const [i, t] of buildList.entries()) {
   // LK_KEEP_DIST keeps emptyOutDir off, so a rebuilt tier must clear its own
   // v/<tier>/ dir — stale hashed bundles would linger and the manifest scan
   // below could pick the old index-*.js, pointing visitors at dead code.
-  fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true })
+  withFsRetry(() => fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true }))
 
   run('yarn', ['vite', 'build'], {
     LK_TARGET: t.name,
@@ -101,13 +102,13 @@ for (const t of buildList.filter((t) => t.babelFrom)) {
 
   const outDir = path.join(DIST, 'v', t.name, 'assets', 'js')
 
-  fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true })
-  fs.mkdirSync(outDir, { recursive: true })
+  withFsRetry(() => fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true }))
+  withFsRetry(() => fs.mkdirSync(outDir, { recursive: true }))
 
   const hash = crypto.createHash('md5').update(min).digest('hex').slice(0, 8)
   const name = `index-${hash}.js`
 
-  fs.writeFileSync(path.join(outDir, name), min)
+  withFsRetry(() => fs.writeFileSync(path.join(outDir, name), min))
   console.log(`  ${t.name}: ${name} (${(min.length / 1024).toFixed(0)}KB)`)
 }
 
@@ -125,13 +126,15 @@ for (const p of POLYFILLS) {
     transform: { target: 'es2015' },
   })
 
-  await bundle.write({
-    dir: path.join(DIST, 'assets/polyfills'),
-    format: 'iife',
-    entryFileNames: '[name]-[hash].js',
-    minify: true,
-    codeSplitting: false,
-  })
+  await withFsRetryAsync(() =>
+    bundle.write({
+      dir: path.join(DIST, 'assets/polyfills'),
+      format: 'iife',
+      entryFileNames: '[name]-[hash].js',
+      minify: true,
+      codeSplitting: false,
+    })
+  )
 
   if (typeof bundle.close === 'function') await bundle.close()
 }
@@ -155,7 +158,7 @@ for (const p of POLYFILLS) {
       comments: false,
     })
 
-    fs.writeFileSync(file, code)
+    withFsRetry(() => fs.writeFileSync(file, code))
   }
 }
 
@@ -207,7 +210,7 @@ const emitCss = async (t, prefix = 'index-') => {
   })
 
   const outDir = path.join(DIST, 'v', t.name, 'assets', 'css')
-  fs.mkdirSync(outDir, { recursive: true })
+  withFsRetry(() => fs.mkdirSync(outDir, { recursive: true }))
 
   const { code, map } = transform({
     filename: 'app.css',
@@ -223,7 +226,7 @@ const emitCss = async (t, prefix = 'index-') => {
   const name = `${prefix}${hash}.css`
   const finalCode = Buffer.concat([code, Buffer.from(`\n/*# sourceMappingURL=${name}.map */\n`)])
 
-  fs.writeFileSync(path.join(outDir, name), finalCode)
+  withFsRetry(() => fs.writeFileSync(path.join(outDir, name), finalCode))
 
   // Sass emits absolute build-machine paths in `sources` — rewrite them
   // repo-relative so deployed maps don't leak the filesystem layout.
@@ -233,12 +236,16 @@ const emitCss = async (t, prefix = 'index-') => {
     s.replace(/^.*?(?=src[/\\]sass)/, '').replace(/\\/g, '/')
   )
 
-  fs.writeFileSync(path.join(outDir, `${name}.map`), JSON.stringify(parsedMap))
-  fs.writeFileSync(
-    path.join(outDir, `${name}.br`),
-    zlib.brotliCompressSync(finalCode, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
+  withFsRetry(() => fs.writeFileSync(path.join(outDir, `${name}.map`), JSON.stringify(parsedMap)))
+  withFsRetry(() =>
+    fs.writeFileSync(
+      path.join(outDir, `${name}.br`),
+      zlib.brotliCompressSync(finalCode, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
+    )
   )
-  fs.writeFileSync(path.join(outDir, `${name}.gz`), zlib.gzipSync(finalCode, { level: 9 }))
+  withFsRetry(() =>
+    fs.writeFileSync(path.join(outDir, `${name}.gz`), zlib.gzipSync(finalCode, { level: 9 }))
+  )
 
   return name
 }
@@ -348,16 +355,18 @@ const localePages = buildLocalePages(DIST, html)
 
 html = localePages.html
 
-fs.writeFileSync(indexPath, html)
+withFsRetry(() => fs.writeFileSync(indexPath, html))
 
 // Compressed index.html siblings (Firebase serves .br/.gz when present).
 const htmlBuf = Buffer.from(html, 'utf8')
 
-fs.writeFileSync(
-  `${indexPath}.br`,
-  zlib.brotliCompressSync(htmlBuf, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
+withFsRetry(() =>
+  fs.writeFileSync(
+    `${indexPath}.br`,
+    zlib.brotliCompressSync(htmlBuf, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
+  )
 )
-fs.writeFileSync(`${indexPath}.gz`, zlib.gzipSync(htmlBuf, { level: 9 }))
+withFsRetry(() => fs.writeFileSync(`${indexPath}.gz`, zlib.gzipSync(htmlBuf, { level: 9 })))
 
 // Re-stamp the service-worker's precache revision for index.html so the new
 // html (with the loader) is what Workbox serves.
@@ -370,16 +379,18 @@ if (fs.existsSync(swPath)) {
     /\{url:"index\.html",revision:"[^"]+"\}/,
     `{url:"index.html",revision:"${htmlHash}"}`
   )
-  fs.writeFileSync(swPath, sw)
+  withFsRetry(() => fs.writeFileSync(swPath, sw))
 
   const swBuf = Buffer.from(sw, 'utf8')
   if (fs.existsSync(`${swPath}.br`))
-    fs.writeFileSync(
-      `${swPath}.br`,
-      zlib.brotliCompressSync(swBuf, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
+    withFsRetry(() =>
+      fs.writeFileSync(
+        `${swPath}.br`,
+        zlib.brotliCompressSync(swBuf, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
+      )
     )
   if (fs.existsSync(`${swPath}.gz`))
-    fs.writeFileSync(`${swPath}.gz`, zlib.gzipSync(swBuf, { level: 9 }))
+    withFsRetry(() => fs.writeFileSync(`${swPath}.gz`, zlib.gzipSync(swBuf, { level: 9 })))
 }
 
 console.log(
