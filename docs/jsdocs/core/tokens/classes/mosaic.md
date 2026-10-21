@@ -20,6 +20,15 @@ the token contract immutable at runtime.
 Set on the card while its title burn session runs — silences the
  border sheen so only the combustion reads as the hover effect.
 
+### `HOME_MOSAIC_IMG_PLACEHOLDER`
+
+Progressive-cover layers — intrinsic-size SVG reserves the painted
+ box, LQIP first paint, then the display ladder fades in over it.
+
+### `HOME_MOSAIC_IMG_LOADED`
+
+Published on the high layer's `load` — the CSS crossfade trigger.
+
 ### `HOME_MOSAIC_BTN_CANVAS`
 
 WebGPU overlay canvas for the corner-bracket widget on card CTAs.

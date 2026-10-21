@@ -81,6 +81,30 @@ webpSibling: `x.mp4` → `x.webm` and `x.mp4-scaledown-2x.mp4` →
 - `@param` url MP4 media URL.
 - `@returns` The same URL with .webm instead of .mp4, or '' when not .mp4.
 
+### `coverLadderStep`
+
+`load` step on a progressive cover's high layer — the ladder walker.
+Records the painted URL in the host registry (re-renders rebuild the
+shadow DOM wholesale via replaceChildren, so the registry is what
+re-emits the reached tier instead of replaying from the LQIP) and
+publishes the loaded class driving the CSS crossfade. When rungs
+remain above the painted one it preloads the next tier through a
+detached Image — the probe request doubles as the webp decode check —
+and swaps `src` only once bytes confirm, so a painted rung can never
+tear. The swap re-fires the img's own `load`, re-entering this step
+until the highest proven tier is reached.
+- `@param` registry Host map of cover key → highest confirmed painted URL
+- `@param` coverKey Stable identity of the cover (the original URL).
+- `@param` img The high-layer img that fired `load` (event currentTarget).
+- `@param` rungs Ascending proven tiers from coverVariants — last is top.
+- `@param` loadedClass Class token that turns the layer's opacity on.
+
+### `advance`
+
+Publishes a confirmed tier — the emitted rung-0 <source> has served
+ by now, so its <source> nodes go and img.src becomes authoritative;
+ the resulting `load` re-enters this step to climb the next rung.
+
 ### `buildMediaUrls`
 
 Constructs media URLs for images and videos following the project's

@@ -21,6 +21,10 @@ Thumb quality suffix → kodak MSSIM-tuned q=3
 
 Q50 medium-res suffix
 
+### `Q75`
+
+Q75 high-res suffix
+
 ### `Q100`
 
 Q100 / uncompressed lossless suffix
