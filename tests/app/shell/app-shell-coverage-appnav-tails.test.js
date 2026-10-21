@@ -21,7 +21,6 @@ import { SECTION_IDS } from '@core/tokens/ids/sections.js'
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { ATTR_VALUES } from '@core/tokens/attrs/values.js'
 import { NAV_BURGER_CLASSES, NAV_CLASSES, NAV_MENU_CLASSES } from '@core/tokens/classes/nav.js'
-import { PREF_CLASSES } from '@core/tokens/classes/preferences.js'
 
 import { KEYS, LOCALES, ROUTE_NAMES, SECTIONS } from '@core/constants.js'
 
@@ -413,10 +412,12 @@ describe('AppNav tails', () => {
     await flush(ANIMATION_DURATIONS.MENU_SETTLE_DURATION + 100)
     expect(el._menuSettled).toBe(true)
 
-    el._menuCloseBtn?.destroy?.()
-    el._menuCloseBtn = null
+    // The menu has no separate close widget — the burger morphs into
+    // the close control. Re-mounting is idempotent on the live bg.
+    const bg = el._menuBg
+
     el._mountMenuWebGL()
-    expect(el._menuCloseBtn?.drawProgress).toBe(1)
+    expect(el._menuBg).toBe(bg)
 
     const burger = el._burgerBtn
 
@@ -502,7 +503,8 @@ describe('AppNav tails', () => {
 
     await flush()
 
-    shadow.querySelector(`.${PREF_CLASSES.PREF_CLOSE_BTN}`).click()
+    // The burger doubles as the close control while the menu is open.
+    shadow.querySelector(`.${NAV_BURGER_CLASSES.NAV_BURGER_FALLBACK}`).click()
     el._closeMenu()
 
     await flush(ANIMATION_DURATIONS.MENU_CLOSE_DURATION + 100)
@@ -652,7 +654,6 @@ describe('AppNav tails', () => {
     await flush()
 
     el._menuBg = null
-    el._menuCloseBtn = null
     el._closeMenu()
 
     await flush(ANIMATION_DURATIONS.MENU_CLOSE_DURATION + 100)
@@ -672,7 +673,6 @@ describe('AppNav tails', () => {
 
     expect(el._menuBg).toBeNull()
     expect(el._burgerBtn).toBeNull()
-    expect(el._menuCloseBtn).toBeNull()
     expect(el._menuSettleTimer).toBeNull()
 
     el.onDestroy()
