@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/autoplay](../README.md) / stopCarouselAutoplay
 
 ```ts
-function stopCarouselAutoplay(c, permanently?): void;
+function stopCarouselAutoplay(c, permanently?): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:82
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:89
 
 Stops autoplay and drains the progress ring. `permanently` latches
 _autoplayPermanentlyStopped — every user-initiated navigation

@@ -16,7 +16,7 @@ Clears the frame and draws the undistorted portrait (circle-clipped).
 
 ### s
 
-[`GlitchSession`](../../types/interfaces/GlitchSession.md)
+[`Glitch2dSession`](../../types/type-aliases/Glitch2dSession.md)
 
 ## Returns
 

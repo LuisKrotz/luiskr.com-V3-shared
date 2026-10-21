@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/render](../README.md) / pct
 
 ```ts
-function pct(value): string;
+function pct(value): string
 ```
 
-Defined in: cms/deploy-info/render.tsx:41
+Defined in: cms/deploy-info/render.tsx:42
 
 Formats a 0–1 score as a whole percentage; non-numbers render an em-dash.
 

@@ -18,6 +18,12 @@ const SF_DETAIL: Readonly<{
   RING_V: 0.5
   RING_INNER: 1.24
   RING_OUTER: 2.28
+  RING_STRIP_W: 512
+  RING_STRIP_H: 16
+  RING_BANDS: 7
+  RING_BAND_W: 0.012
+  RING_ALPHA_MIN: 0.04
+  RING_ALPHA_MAX: 0.5
   HALO_SCALE: 3.6
   CORONA_SCALE: 2.2
   HALO_OPACITY: 0.55
@@ -46,7 +52,7 @@ const SF_DETAIL: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/starfield/params/bodies.ts:210
+Defined in: core/tokens/starfield/params/bodies.ts:397
 
 Photographic-surface tuning — the real-imagery rendering layer for
 planets and deep-sky objects. Photo masks feather a source image's

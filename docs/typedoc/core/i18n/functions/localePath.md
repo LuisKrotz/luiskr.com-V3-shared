@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / [core/i18n](../README.md) / localePath
 
 ```ts
-function localePath(key, lang?): string;
+function localePath(key, lang?): string
 ```
 
-Defined in: core/i18n.ts:127
+Defined in: core/i18n.ts:131
 
 Builds a localized URL for a route key ('about', 'privacy', …).
 English paths stay un-prefixed (/about); other locales get

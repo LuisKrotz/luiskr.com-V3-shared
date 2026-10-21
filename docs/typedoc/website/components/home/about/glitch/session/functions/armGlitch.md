@@ -8,13 +8,16 @@
 function armGlitch(host, wrap): boolean
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:100
+Defined in: website/components/home/about/glitch/session.ts:117
 
-Arms the session: builds the overlay canvas + context against the live
-wrapper. Bails quietly when the image isn't decoded, the wrapper is
-zero-size, the 2D context is unavailable, or motion is reduced — the
-<img> remains as the static fallback. Idempotent — returns true when a
-session is already running.
+Arms the session: builds the overlay canvas against the live wrapper,
+then races the two render backends — the rust/glitch WebGPU widget
+mounts first when `navigator.gpu` exists; anything else claims the 2D
+context and the painter pipeline (a canvas only allows ONE context
+mode, so the 2D claim is deferred until the wasm arm fails). Bails
+quietly when the image isn't decoded, the wrapper is zero-size, or
+motion is reduced — the <img> remains as the static fallback.
+Idempotent — returns true when a session is already running.
 
 ## Parameters
 

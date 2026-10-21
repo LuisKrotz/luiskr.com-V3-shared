@@ -8,6 +8,6 @@
 const _EMBER_VY_MAX: 74 = 74
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:63
+Defined in: website/components/home/mosaic/burn/tuning.ts:68
 
 Ember upward velocity ceiling — the fastest sparks outrun the front.

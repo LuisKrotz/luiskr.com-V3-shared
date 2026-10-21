@@ -8,7 +8,7 @@
 function updateFx(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/fx.ts:41
+Defined in: experiments/star-field/engine/frame/fx.ts:211
 
 Ambient life — the small "alive" behaviors on top of the static chart:
 `pulse` bodies (variable stars, pulsars, flaring cores) breathe via a

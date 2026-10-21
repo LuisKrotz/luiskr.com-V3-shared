@@ -147,6 +147,15 @@ const FORMAT_BY_EXT = Object.freeze({
  * dedicated roots instead of leaking into a source bucket. */
 const SKIP_DIRS = new Set(['node_modules', '.git', 'coverage', 'dist', 'tests', 'reports'])
 
+/**
+ * Entry names that can never be published: characters illegal in Windows
+ * filenames (`* ? " < > | :`) break `git checkout` on win32 clones, and
+ * `?`/`*` inside a URL path segment corrupt query/glob semantics for
+ * crawlers. Typedoc renders ambient `declare module '*.scss'` shims as
+ * directories named after the glob pattern — those must be skipped.
+ */
+const ILLEGAL_NAME = /[*?"<>|:]/u
+
 /** Largest media payload inlined as a data-URL (bytes on disk). */
 export const MEDIA_INLINE_LIMIT = 256 * 1024
 
@@ -177,7 +186,7 @@ const scanDir = (absDir, baseDir, root, topSkip) => {
   const files = []
 
   for (const entry of entries) {
-    if (entry.name.startsWith('.')) continue
+    if (entry.name.startsWith('.') || ILLEGAL_NAME.test(entry.name)) continue
 
     const abs = path.join(absDir, entry.name)
 
@@ -270,8 +279,12 @@ export const resolveFileId = (repoRoot, id) => {
 
   if (!decl || !rel) return null
 
-  // Reject traversal segments before any fs hit.
-  if (rel.split('/').some((seg) => seg === '..' || seg === '' || seg.startsWith('.'))) {
+  // Reject traversal and Windows/URL-illegal segments before any fs hit.
+  if (
+    rel
+      .split('/')
+      .some((seg) => seg === '..' || seg === '' || seg.startsWith('.') || ILLEGAL_NAME.test(seg))
+  ) {
     return null
   }
 

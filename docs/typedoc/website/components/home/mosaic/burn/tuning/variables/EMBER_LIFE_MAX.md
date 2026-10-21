@@ -8,6 +8,6 @@
 const _EMBER_LIFE_MAX: 0.9 = 0.9
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:55
+Defined in: website/components/home/mosaic/burn/tuning.ts:60
 
 Ember lifetime ceiling — sparks die well before the front finishes.

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/draw-text/dom](../README.md) / updateDom
 
 ```ts
-function updateDom(host): void;
+function updateDom(host): void
 ```
 
-Defined in: website/components/media/draw-text/dom.ts:16
+Defined in: website/components/media/draw-text/dom.ts:17
 
 Re-renders the shadow DOM for current props.
 

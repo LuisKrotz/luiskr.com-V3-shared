@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/nav](../README.md) / setupIntersectionObserver
 
 ```ts
-function setupIntersectionObserver(c): void;
+function setupIntersectionObserver(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:356
+Defined in: website/components/carousel/custom-carousel/nav.ts:439
 
 IntersectionObserver wiring — entry: adds the in-view class and mounts
 the WebGL arrows; exit: destroys the arrows (their GL contexts are

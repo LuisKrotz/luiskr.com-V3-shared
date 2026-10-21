@@ -456,6 +456,18 @@ Re-exports [THEME_CSS_PROPS](tokens/css/theme/variables/THEME_CSS_PROPS.md)
 
 ---
 
+### ANIMATION\_IDS
+
+Re-exports [ANIMATION_IDS](tokens/data/animation-ids/variables/ANIMATION_IDS.md)
+
+---
+
+### ANIMATION\_DESC\_ID\_PREFIX
+
+Re-exports [ANIMATION_DESC_ID_PREFIX](tokens/data/animation-ids/variables/ANIMATION_DESC_ID_PREFIX.md)
+
+---
+
 ### CMS\_KEYS
 
 Re-exports [CMS_KEYS](tokens/data/cms-keys/variables/CMS_KEYS.md)
@@ -618,6 +630,12 @@ Re-exports [HTML_TAGS](tokens/elements/html/variables/HTML_TAGS.md)
 
 ---
 
+### HTML\_PHRASING\_TAGS
+
+Re-exports [HTML_PHRASING_TAGS](tokens/elements/html/variables/HTML_PHRASING_TAGS.md)
+
+---
+
 ### VIEW\_TAGS
 
 Re-exports [VIEW_TAGS](tokens/elements/views/variables/VIEW_TAGS.md)
@@ -705,6 +723,18 @@ Re-exports [ORBIT_EVENTS](tokens/events/dom/variables/ORBIT_EVENTS.md)
 ### CLIPBOARD\_EVENTS
 
 Re-exports [CLIPBOARD_EVENTS](tokens/events/dom/variables/CLIPBOARD_EVENTS.md)
+
+---
+
+### SW\_EVENTS
+
+Re-exports [SW_EVENTS](tokens/events/dom/variables/SW_EVENTS.md)
+
+---
+
+### SW\_STRINGS
+
+Re-exports [SW_STRINGS](tokens/events/dom/variables/SW_STRINGS.md)
 
 ---
 
@@ -942,6 +972,12 @@ Re-exports [CAROUSEL_TIMING](tokens/motion/carousel/variables/CAROUSEL_TIMING.md
 
 ---
 
+### CAROUSEL\_SPRING
+
+Re-exports [CAROUSEL_SPRING](tokens/motion/carousel/variables/CAROUSEL_SPRING.md)
+
+---
+
 ### CAROUSEL\_LAYOUT
 
 Re-exports [CAROUSEL_LAYOUT](tokens/motion/carousel/variables/CAROUSEL_LAYOUT.md)
@@ -951,6 +987,36 @@ Re-exports [CAROUSEL_LAYOUT](tokens/motion/carousel/variables/CAROUSEL_LAYOUT.md
 ### CAROUSEL\_LOADING
 
 Re-exports [CAROUSEL_LOADING](tokens/motion/carousel/variables/CAROUSEL_LOADING.md)
+
+---
+
+### GPU\_WIDGET\_KINDS
+
+Re-exports [GPU_WIDGET_KINDS](tokens/motion/gpu-widgets/variables/GPU_WIDGET_KINDS.md)
+
+---
+
+### GPU\_WIDGET\_ARTIFACTS
+
+Re-exports [GPU_WIDGET_ARTIFACTS](tokens/motion/gpu-widgets/variables/GPU_WIDGET_ARTIFACTS.md)
+
+---
+
+### GPU\_WIDGET\_UNIFORM\_F32S
+
+Re-exports [GPU_WIDGET_UNIFORM_F32S](tokens/motion/gpu-widgets/variables/GPU_WIDGET_UNIFORM_F32S.md)
+
+---
+
+### GPU\_WIDGET\_DRIVE
+
+Re-exports [GPU_WIDGET_DRIVE](tokens/motion/gpu-widgets/variables/GPU_WIDGET_DRIVE.md)
+
+---
+
+### GPU\_FLAG\_ANIMS
+
+Re-exports [GPU_FLAG_ANIMS](tokens/motion/gpu-widgets/variables/GPU_FLAG_ANIMS.md)
 
 ---
 
@@ -1290,6 +1356,12 @@ Re-exports [SF_KINDS](tokens/starfield/kinds/variables/SF_KINDS.md)
 
 ---
 
+### SF\_SURFACES
+
+Re-exports [SF_SURFACES](tokens/starfield/kinds/variables/SF_SURFACES.md)
+
+---
+
 ### SF\_ACTIONS
 
 Re-exports [SF_ACTIONS](tokens/starfield/kinds/variables/SF_ACTIONS.md)
@@ -1386,6 +1458,12 @@ Re-exports [SF_NEBULA_DEPTH](tokens/starfield/params/bodies/variables/SF_NEBULA_
 
 ---
 
+### SF\_COMET
+
+Re-exports [SF_COMET](tokens/starfield/params/bodies/variables/SF_COMET.md)
+
+---
+
 ### SF\_SPIRAL
 
 Re-exports [SF_SPIRAL](tokens/starfield/params/spiral/variables/SF_SPIRAL.md)
@@ -1464,6 +1542,12 @@ Re-exports [SF_METEOR](tokens/starfield/params/weather/variables/SF_METEOR.md)
 
 ---
 
+### SF\_PLUME
+
+Re-exports [SF_PLUME](tokens/starfield/params/weather/variables/SF_PLUME.md)
+
+---
+
 ### SF\_TEXTURES
 
 Re-exports [SF_TEXTURES](tokens/starfield/textures/variables/SF_TEXTURES.md)
@@ -1473,6 +1557,12 @@ Re-exports [SF_TEXTURES](tokens/starfield/textures/variables/SF_TEXTURES.md)
 ### SF\_DATA\_BASE
 
 Re-exports [SF_DATA_BASE](tokens/starfield/textures/variables/SF_DATA_BASE.md)
+
+---
+
+### SF\_NAMES\_FILE
+
+Re-exports [SF_NAMES_FILE](tokens/starfield/textures/variables/SF_NAMES_FILE.md)
 
 ---
 
@@ -1656,6 +1746,36 @@ Re-exports [svgPlaceholder](utils/dom/functions/svgPlaceholder.md)
 
 ---
 
+### isPlainClick
+
+Re-exports [isPlainClick](utils/dom/functions/isPlainClick.md)
+
+---
+
+### viewportWidth
+
+Re-exports [viewportWidth](utils/dom/functions/viewportWidth.md)
+
+---
+
+### resetViewportCache
+
+Re-exports [resetViewportCache](utils/dom/functions/resetViewportCache.md)
+
+---
+
+### isIntentionalFlush
+
+Re-exports [isIntentionalFlush](utils/dom/functions/isIntentionalFlush.md)
+
+---
+
+### flushLayout
+
+Re-exports [flushLayout](utils/dom/functions/flushLayout.md)
+
+---
+
 ### MediaUrlItem
 
 Re-exports [MediaUrlItem](utils/media/interfaces/MediaUrlItem.md)
@@ -1686,6 +1806,24 @@ Re-exports [getOptimizedGravatar](utils/media/functions/getOptimizedGravatar.md)
 
 ---
 
+### encodeMediaUrl
+
+Re-exports [encodeMediaUrl](utils/media/functions/encodeMediaUrl.md)
+
+---
+
+### webpSibling
+
+Re-exports [webpSibling](utils/media/functions/webpSibling.md)
+
+---
+
+### webmSibling
+
+Re-exports [webmSibling](utils/media/functions/webmSibling.md)
+
+---
+
 ### buildMediaUrls
 
 Re-exports [buildMediaUrls](utils/media/functions/buildMediaUrls.md)
@@ -1710,6 +1848,24 @@ Re-exports [generateProjectArticleSchema](utils/schema/functions/generateProject
 
 ---
 
+### generateBreadcrumbSchema
+
+Re-exports [generateBreadcrumbSchema](utils/schema/functions/generateBreadcrumbSchema.md)
+
+---
+
+### generateRouteSchema
+
+Re-exports [generateRouteSchema](utils/schema/functions/generateRouteSchema.md)
+
+---
+
+### generateProjectSchema
+
+Re-exports [generateProjectSchema](utils/schema/functions/generateProjectSchema.md)
+
+---
+
 ### generateDocsSchema
 
 Re-exports [generateDocsSchema](utils/schema/functions/generateDocsSchema.md)
@@ -1728,6 +1884,12 @@ Re-exports [stripHtml](utils/string/functions/stripHtml.md)
 
 ---
 
+### toMetaDescription
+
+Re-exports [toMetaDescription](utils/string/functions/toMetaDescription.md)
+
+---
+
 ### escapeHtml
 
 Re-exports [escapeHtml](utils/string/functions/escapeHtml.md)
@@ -1737,3 +1899,15 @@ Re-exports [escapeHtml](utils/string/functions/escapeHtml.md)
 ### slugify
 
 Re-exports [slugify](utils/string/functions/slugify.md)
+
+---
+
+### splitDrawSentences
+
+Re-exports [splitDrawSentences](utils/string/functions/splitDrawSentences.md)
+
+---
+
+### mediaSlugSeq
+
+Re-exports [mediaSlugSeq](utils/string/functions/mediaSlugSeq.md)

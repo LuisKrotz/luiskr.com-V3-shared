@@ -8,6 +8,6 @@
 const _DATA: 'data-' = 'data-'
 ```
 
-Defined in: core/tokens/base.ts:518
+Defined in: core/tokens/base.ts:532
 
 Internal scalar token `data-` — composed by the token groups in this module.

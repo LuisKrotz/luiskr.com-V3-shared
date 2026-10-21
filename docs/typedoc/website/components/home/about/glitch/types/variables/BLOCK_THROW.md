@@ -8,6 +8,6 @@
 const _BLOCK_THROW: 0.05 = 0.05
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:59
+Defined in: website/components/home/about/glitch/types.ts:60
 
 Block-tear max duplicate offset (frame-width fraction).

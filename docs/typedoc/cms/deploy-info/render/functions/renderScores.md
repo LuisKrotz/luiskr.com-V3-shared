@@ -1,16 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/render](../README.md) / renderScores
 
 ```ts
-function renderScores(scores): 
-  | Element[]
-  | null;
+function renderScores(scores): Element[] | null
 ```
 
-Defined in: cms/deploy-info/render.tsx:47
+Defined in: cms/deploy-info/render.tsx:48
 
 Renders the score chips for one Lighthouse category set.
 
@@ -22,5 +20,5 @@ Renders the score chips for one Lighthouse category set.
 
 ## Returns
 
-  \| [`Element`](../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)[]
-  \| `null`
+\| [`Element`](../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)[]
+\| `null`

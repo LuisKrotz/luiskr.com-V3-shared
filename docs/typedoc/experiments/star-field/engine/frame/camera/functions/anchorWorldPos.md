@@ -8,7 +8,7 @@
 function anchorWorldPos(anchor): object
 ```
 
-Defined in: experiments/star-field/engine/frame/camera.ts:147
+Defined in: experiments/star-field/engine/frame/camera.ts:149
 
 World position of an anchor — single getWorldPosition call-site so the
 armed Vector3 stays private to this module; returns {x,y,z} so callers

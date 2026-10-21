@@ -8,6 +8,6 @@
 const _ROLL_H: 0.12 = 0.12
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:67
+Defined in: website/components/home/about/glitch/types.ts:68
 
 Rolling-bar height as a fraction of frame height.

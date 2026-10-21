@@ -8,7 +8,7 @@
 function bootstrapStarField(s): Promise<void>
 ```
 
-Defined in: experiments/star-field/engine/bootstrap.ts:111
+Defined in: experiments/star-field/engine/bootstrap.ts:135
 
 Bootstraps the star-field engine — full sequence: three import →
 renderer probe → scene/camera/controls → texture parallel load →

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/i18n](../README.md) / applySpaceTranslations
 
 ```ts
-function applySpaceTranslations(c, val): void;
+function applySpaceTranslations(c, val): void
 ```
 
-Defined in: experiments/earth-playground/space/i18n.ts:58
+Defined in: experiments/earth-playground/space/i18n.ts:60
 
 Applies space translations.
 

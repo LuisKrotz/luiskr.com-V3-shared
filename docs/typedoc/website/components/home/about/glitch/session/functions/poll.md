@@ -8,7 +8,7 @@
 function poll(host): void
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:225
+Defined in: website/components/home/about/glitch/session.ts:301
 
 The un-armed half of the loop: polls at ~4 Hz until the portrait has
 decoded enough to arm, then hands off to the session's own raf chain.

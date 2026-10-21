@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/safari/patches/media-figure/image-load](../README.md) / bindSafariImageLoad
 
 ```ts
-function bindSafariImageLoad(
-   el, 
-   fig, 
-   isHero
-): void;
+function bindSafariImageLoad(el, fig, isHero): void
 ```
 
-Defined in: core/safari/patches/media-figure/image-load.ts:83
+Defined in: core/safari/patches/media-figure/image-load.ts:84
 
 Lazy-thumbnail + img-observer wiring for non-hero images: the thumb
 defers via loading=lazy and the Q50 swap triggers once the figure

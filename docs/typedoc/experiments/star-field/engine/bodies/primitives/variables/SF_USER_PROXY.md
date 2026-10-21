@@ -8,7 +8,7 @@
 const SF_USER_PROXY: 'pickProxy' = 'pickProxy'
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:26
+Defined in: experiments/star-field/engine/bodies/primitives.ts:28
 
 `userData` flag marking an invisible oversized pick proxy — picking
 prefers a real-mesh hit down the ray so proxy bubbles never eclipse

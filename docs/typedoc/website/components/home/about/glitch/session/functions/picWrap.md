@@ -8,7 +8,7 @@
 function picWrap(host): HTMLElement | null
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:49
+Defined in: website/components/home/about/glitch/session.ts:63
 
 The live picture wrapper inside the shadow root, if rendered.
 

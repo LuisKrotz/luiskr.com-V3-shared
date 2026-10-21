@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/safari/patches/carousel](../README.md) / patchCarousel
 
 ```ts
-function patchCarousel(): void;
+function patchCarousel(): void
 ```
 
-Defined in: core/safari/patches/carousel.ts:18
+Defined in: core/safari/patches/carousel.ts:19
 
 Installs the carousel patch once <custom-carousel> registers: neuters
 `_measureFit` (iOS layout thrash — reading fit metrics mid-layout

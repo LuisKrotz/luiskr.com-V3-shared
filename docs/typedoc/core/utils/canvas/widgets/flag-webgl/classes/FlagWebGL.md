@@ -1,13 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/widgets/flag-webgl](../README.md) / FlagWebGL
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:40
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:46
 
 WebGL Flag Animator for Language Selection Buttons
 Each flag has a completely unique animated kinetic effect and wave physics:
+
 - EN (0): Star-spangled waving ripple with specular stars sparkle
 - PT (1): Solar burst pulse radiating from rhombus with Southern Cross constellation twinkle
 - ES (2): Warm flamenco silk wave with golden crest glow
@@ -29,7 +30,7 @@ Each flag has a completely unique animated kinetic effect and wave physics:
 new FlagWebGL(canvas, langOption): FlagWebGL;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:60
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:74
 
 #### Parameters
 
@@ -39,133 +40,133 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:60
 
 ##### langOption
 
-  \| \{
-  `code`: `"en"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `cc2?`: `undefined`;
-  `short`: `string`;
+\| \{
+`code`: `"en"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`cc2?`: `undefined`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"br"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `cc2?`: `undefined`;
-  `short`: `string`;
+\| \{
+`code`: `"br"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`cc2?`: `undefined`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"es"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `cc2?`: `undefined`;
-  `short`: `string`;
+\| \{
+`code`: `"es"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`cc2?`: `undefined`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"de"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `cc2`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`code`: `"de"`;
+`label`: `string`;
+`cc`: `string`;
+`cc2`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"hrk"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `cc2`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`code`: `"hrk"`;
+`label`: `string`;
+`cc`: `string`;
+`cc2`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"cas"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `cc2`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`code`: `"cas"`;
+`label`: `string`;
+`cc`: `string`;
+`cc2`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"riv"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `cc2`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`code`: `"riv"`;
+`label`: `string`;
+`cc`: `string`;
+`cc2`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"gn"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `cc2?`: `undefined`;
-  `short`: `string`;
+\| \{
+`code`: `"gn"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`cc2?`: `undefined`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"it"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `cc2?`: `undefined`;
-  `short`: `string`;
+\| \{
+`code`: `"it"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`cc2?`: `undefined`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"ru"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `cc2?`: `undefined`;
-  `short`: `string`;
+\| \{
+`code`: `"ru"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`cc2?`: `undefined`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"fr"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `cc2?`: `undefined`;
-  `short`: `string`;
+\| \{
+`code`: `"fr"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`cc2?`: `undefined`;
+`short`: `string`;
 \}
-  \| \{
-  `code`: `"tln"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `cc2`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`code`: `"tln"`;
+`label`: `string`;
+`cc`: `string`;
+`cc2`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
-  \| \{
-  `cc2?`: `undefined`;
-  `code`: `"gl"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`cc2?`: `undefined`;
+`code`: `"gl"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
-  \| \{
-  `cc2?`: `undefined`;
-  `code`: `"ca"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`cc2?`: `undefined`;
+`code`: `"ca"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
-  \| \{
-  `cc2?`: `undefined`;
-  `code`: `"nl"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`cc2?`: `undefined`;
+`code`: `"nl"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
-  \| \{
-  `cc2?`: `undefined`;
-  `code`: `"ga"`;
-  `label`: `string`;
-  `cc`: `string`;
-  `flag`: `string`;
-  `short`: `string`;
+\| \{
+`cc2?`: `undefined`;
+`code`: `"ga"`;
+`label`: `string`;
+`cc`: `string`;
+`flag`: `string`;
+`short`: `string`;
 \}
 
 #### Returns
@@ -177,17 +178,17 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:60
 ### canvas
 
 ```ts
-canvas: HTMLCanvasElement;
+canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:41
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:47
 
-***
+---
 
 ### lang
 
 ```ts
-lang: 
+lang:
   | {
   code: "en";
   label: string;
@@ -318,89 +319,89 @@ lang:
 };
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:42
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:48
 
-***
+---
 
 ### height
 
 ```ts
-height: number;
-```
-
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:43
-
-***
-
-### aspect1
-
-```ts
-aspect1: number;
-```
-
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:44
-
-***
-
-### aspect2
-
-```ts
-aspect2: number;
-```
-
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:45
-
-***
-
-### width
-
-```ts
-width: number;
-```
-
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:46
-
-***
-
-### isHovered
-
-```ts
-isHovered: boolean = false;
-```
-
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:47
-
-***
-
-### hoverLevel
-
-```ts
-hoverLevel: number = 0;
-```
-
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:48
-
-***
-
-### useWebGL
-
-```ts
-useWebGL: boolean = false;
+height: number
 ```
 
 Defined in: core/utils/canvas/widgets/flag-webgl.ts:49
 
-***
+---
 
-### \_paused
+### aspect1
 
 ```ts
-_paused: boolean = false;
+aspect1: number
 ```
 
 Defined in: core/utils/canvas/widgets/flag-webgl.ts:50
 
-***
+---
+
+### aspect2
+
+```ts
+aspect2: number
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:51
+
+---
+
+### width
+
+```ts
+width: number
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:52
+
+---
+
+### isHovered
+
+```ts
+isHovered: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:53
+
+---
+
+### hoverLevel
+
+```ts
+hoverLevel: number = 0
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:54
+
+---
+
+### useWebGL
+
+```ts
+useWebGL: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:55
+
+---
+
+### \_paused
+
+```ts
+_paused: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:56
+
+---
 
 ### animId
 
@@ -408,19 +409,19 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:50
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:51
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:57
 
-***
+---
 
 ### startTime
 
 ```ts
-startTime: number;
+startTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:52
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:58
 
-***
+---
 
 ### ctx
 
@@ -428,9 +429,9 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:52
 ctx: CanvasRenderingContext2D | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:53
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:59
 
-***
+---
 
 ### renderer
 
@@ -438,19 +439,19 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:53
 renderer: FlagRenderer | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:54
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:60
 
-***
+---
 
 ### isLoaded
 
 ```ts
-isLoaded: boolean = false;
+isLoaded: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:55
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:61
 
-***
+---
 
 ### onMouseEnter
 
@@ -458,9 +459,9 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:55
 onMouseEnter: (() => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:56
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:62
 
-***
+---
 
 ### onMouseLeave
 
@@ -468,17 +469,67 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:56
 onMouseLeave: (() => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:57
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:63
 
-***
+---
 
 ### boundTarget
 
 ```ts
-boundTarget: HTMLElement | undefined;
+boundTarget: HTMLElement | undefined
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:58
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:64
+
+---
+
+### \_wasm
+
+```ts
+_wasm:
+  | WidgetHandle
+  | null = null;
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:66
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+---
+
+### \_wasmFailed
+
+```ts
+_wasmFailed: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:68
+
+Latch — a failed wasm mount never retries on this instance.
+
+---
+
+### \_wasmPending
+
+```ts
+_wasmPending: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:70
+
+In-flight mount — restore() must not double-mount on re-entry.
+
+---
+
+### \_wasmT
+
+```ts
+_wasmT: number = 0
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:72
+
+Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
 ## Methods
 
@@ -488,7 +539,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:58
 _displayAspect(): number;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:106
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:120
 
 Natural aspect ratio the flag should display at (from its source SVG).
 
@@ -496,7 +547,7 @@ Natural aspect ratio the flag should display at (from its source SVG).
 
 `number`
 
-***
+---
 
 ### \_splitPoint()
 
@@ -504,7 +555,7 @@ Natural aspect ratio the flag should display at (from its source SVG).
 _splitPoint(): number;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:116
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:130
 
 Normalized 0–1 x where a hybrid flag's two halves meet: the first
 flag's share of the combined aspect widths (aspect1/(aspect1+aspect2))
@@ -514,7 +565,7 @@ so each half keeps its natural proportions instead of stretching 50/50.
 
 `number`
 
-***
+---
 
 ### \_resizeToNaturalAspect()
 
@@ -522,7 +573,7 @@ so each half keeps its natural proportions instead of stretching 50/50.
 _resizeToNaturalAspect(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:122
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:136
 
 Sizes the canvas to the flag's natural aspect ratio.
 
@@ -530,7 +581,7 @@ Sizes the canvas to the flag's natural aspect ratio.
 
 `void`
 
-***
+---
 
 ### \_getAnimType()
 
@@ -538,7 +589,7 @@ Sizes the canvas to the flag's natural aspect ratio.
 _getAnimType(): number;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:128
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:142
 
 Picks the shader's animation mode (wave / gentle ripple / static).
 
@@ -546,7 +597,7 @@ Picks the shader's animation mode (wave / gentle ripple / static).
 
 `number`
 
-***
+---
 
 ### init()
 
@@ -554,15 +605,70 @@ Picks the shader's animation mode (wave / gentle ripple / static).
 init(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:134
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:148
 
-Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
+Boot sequence: wasm mount → GL init → event binding → render start; fully degrades to the fallback path.
 
 #### Returns
 
 `void`
 
-***
+---
+
+### \_tryWasm()
+
+```ts
+_tryWasm(): void;
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:171
+
+Attempts the WebGPU wasm flag (~52KB artifact, own GPUDevice).
+MANUAL drive: this class keeps its own loop + hover easing, so the
+bridge only initializes the surface. On failure the shared-
+renderer 2D path runs exactly as before.
+
+#### Returns
+
+`void`
+
+---
+
+### loadWasmImages()
+
+```ts
+loadWasmImages(): void;
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:219
+
+Decodes the locale's flag SVG(s) through the wasm image-decoder
+worker and uploads them as textures — the GPU→GPU bitmap path
+never round-trips pixels through the main thread. Unsplit locales
+bind the same bitmap twice (the shader's cheapest no-op).
+
+#### Returns
+
+`void`
+
+---
+
+### init2d()
+
+```ts
+init2d(): void;
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:272
+
+The shared-renderer 2D boot — ran directly on no-WebGPU browsers
+and after a wasm mount failure.
+
+#### Returns
+
+`void`
+
+---
 
 ### purge()
 
@@ -570,7 +676,7 @@ Boot sequence: GL init → event binding → render start; fully degrades to the
 purge(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:171
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:309
 
 webglPool hook — offscreen: stops the loop and releases the shared
 renderer reference so the pooled GL context can be disposed once
@@ -580,7 +686,7 @@ every flag is out of view (or destroyed).
 
 `void`
 
-***
+---
 
 ### restore()
 
@@ -588,7 +694,7 @@ every flag is out of view (or destroyed).
 restore(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:188
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:332
 
 Re-acquires the shared renderer and resumes the wave loop after a purge.
 
@@ -596,7 +702,7 @@ Re-acquires the shared renderer and resumes the wave loop after a purge.
 
 `void`
 
-***
+---
 
 ### \_triggerFallback()
 
@@ -604,7 +710,7 @@ Re-acquires the shared renderer and resumes the wave loop after a purge.
 _triggerFallback(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:210
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:362
 
 Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on context loss or init failure.
 
@@ -612,7 +718,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 
 `void`
 
-***
+---
 
 ### loadImages()
 
@@ -620,7 +726,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 loadImages(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:216
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:368
 
 Loads the flag's SVG source(s) into the texture cache.
 
@@ -628,7 +734,7 @@ Loads the flag's SVG source(s) into the texture cache.
 
 `void`
 
-***
+---
 
 ### bindEvents()
 
@@ -636,7 +742,7 @@ Loads the flag's SVG source(s) into the texture cache.
 bindEvents(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:252
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:404
 
 Wires pointer/hover listeners that drive the widget's interactive state.
 
@@ -644,7 +750,7 @@ Wires pointer/hover listeners that drive the widget's interactive state.
 
 `void`
 
-***
+---
 
 ### setHover()
 
@@ -652,7 +758,7 @@ Wires pointer/hover listeners that drive the widget's interactive state.
 setHover(hovered): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:272
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:428
 
 Updates hover state — the shader renders the hover accent when true.
 
@@ -666,7 +772,7 @@ Updates hover state — the shader renders the hover accent when true.
 
 `void`
 
-***
+---
 
 ### setReducedMotion()
 
@@ -674,7 +780,7 @@ Updates hover state — the shader renders the hover accent when true.
 setReducedMotion(isReduced): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:282
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:438
 
 Applies prefers-reduced-motion: swaps the animation loop for one static frame render.
 
@@ -688,7 +794,7 @@ Applies prefers-reduced-motion: swaps the animation loop for one static frame re
 
 `void`
 
-***
+---
 
 ### \_renderStatic()
 
@@ -696,7 +802,7 @@ Applies prefers-reduced-motion: swaps the animation loop for one static frame re
 _renderStatic(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:295
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:451
 
 Draws a single settled frame — used under reduced motion or when the loop is stopped.
 
@@ -704,7 +810,7 @@ Draws a single settled frame — used under reduced motion or when the loop is s
 
 `void`
 
-***
+---
 
 ### animate()
 
@@ -712,7 +818,7 @@ Draws a single settled frame — used under reduced motion or when the loop is s
 animate(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:301
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:457
 
 Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
@@ -720,7 +826,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
 `void`
 
-***
+---
 
 ### \_renderWebGL()
 
@@ -728,7 +834,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 _renderWebGL(now): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:307
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:463
 
 Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 
@@ -742,7 +848,7 @@ Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 
 `void`
 
-***
+---
 
 ### destroy()
 
@@ -750,7 +856,7 @@ Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:313
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:469
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

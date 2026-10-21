@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/figure/mount](../README.md) / mountMediaFigure
 
 ```ts
-function mountMediaFigure(c): void;
+function mountMediaFigure(c): void
 ```
 
-Defined in: website/components/media/figure/mount.ts:20
+Defined in: website/components/media/figure/mount.ts:24
 
 Mounts media figure.
 

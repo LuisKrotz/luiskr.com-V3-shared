@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/data](../README.md) / loadReports
 
 ```ts
-function loadReports(host): Promise<void>;
+function loadReports(host): Promise<void>
 ```
 
-Defined in: cms/deploy-info/data.ts:37
+Defined in: cms/deploy-info/data.ts:38
 
 Fetches the manifest then all five reports in parallel — the index
 is the gate (missing bundle → "run yarn deploy:info" hint), each

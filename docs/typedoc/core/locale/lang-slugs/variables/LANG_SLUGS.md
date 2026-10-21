@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/locale/lang-slugs](../README.md) / LANG\_SLUGS
 
 ```ts
-const LANG_SLUGS: Record<string, LangSlugMap>;
+const LANG_SLUGS: Record<string, LangSlugMap>
 ```
 
-Defined in: core/locale/lang-slugs.ts:36
+Defined in: core/locale/lang-slugs.ts:38
 
 Localized route slugs per locale — the path segments after the locale
 prefix. English is canonical/un-prefixed; every other locale maps its

@@ -9,6 +9,7 @@ const CAROUSEL_CLASSES: Readonly<{
   CAROUSEL: 'carousel'
   CAROUSEL_CONTAINER: 'carousel-container'
   CAROUSEL_TRACK: 'carousel-track'
+  CAROUSEL_TRACK_ANIMATING: 'carousel-track--animating'
   CAROUSEL_SLIDE: 'carousel-slide'
   CAROUSEL_SLIDE_ACTIVE: 'carousel-slide--active'
   CAROUSEL_PREV: 'carousel-prev'

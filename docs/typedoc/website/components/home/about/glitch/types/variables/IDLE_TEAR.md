@@ -8,6 +8,6 @@
 const _IDLE_TEAR: 0.02 = 0.02
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:25
+Defined in: website/components/home/about/glitch/types.ts:26
 
 Idle tear distance bound as a frame-width fraction.

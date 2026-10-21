@@ -8,7 +8,7 @@
 function updateGalaxyClouds(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/updates.ts:176
+Defined in: experiments/star-field/engine/frame/updates.ts:192
 
 Volumetric galaxy cloud fade — the Milky Way's particle disc is
 viewed from inside. Without distance attenuation the hundreds of

@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [shared/src/app/view](../README.md) / flipAppView
 
 ```ts
-function flipAppView(
-   c, 
-   outlet, 
-   _to?
-): Promise<void>;
+function flipAppView(c, outlet, _to?): Promise<void>
 ```
 
-Defined in: shared/src/app/view.ts:65
+Defined in: shared/src/app/view.ts:66
 
 View swap: lazy-imports the target view's chunk (each import is in its
 own branch so bundlers keep per-route code-splitting), then either

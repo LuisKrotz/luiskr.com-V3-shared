@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../../README.md) / [website/components/home/mosaic/burn/types](../README.md) / BurnInk
 
-Defined in: website/components/home/mosaic/burn/types.ts:92
+Defined in: website/components/home/mosaic/burn/types.ts:109
 
 Combustion ink ramp — resolved from `--burn-*` CSS custom properties
 (dark theme: cyan-blue plasma fire on the accent ramp; light theme:
@@ -19,7 +19,7 @@ lacks the custom properties.
 core: string
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:93
+Defined in: website/components/home/mosaic/burn/types.ts:110
 
 ---
 
@@ -29,7 +29,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:93
 mid: string
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:94
+Defined in: website/components/home/mosaic/burn/types.ts:111
 
 ---
 
@@ -39,7 +39,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:94
 edge: string
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:95
+Defined in: website/components/home/mosaic/burn/types.ts:112
 
 ---
 
@@ -49,4 +49,16 @@ Defined in: website/components/home/mosaic/burn/types.ts:95
 scorch: string
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:96
+Defined in: website/components/home/mosaic/burn/types.ts:113
+
+---
+
+### smoke
+
+```ts
+smoke: string
+```
+
+Defined in: website/components/home/mosaic/burn/types.ts:115
+
+Smoke-puff tint — the rising ash column behind the embers.

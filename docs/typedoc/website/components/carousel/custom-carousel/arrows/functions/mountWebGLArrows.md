@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/arrows](../README.md) / mountWebGLArrows
 
 ```ts
-function mountWebGLArrows(c): void;
+function mountWebGLArrows(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/arrows.ts:105
+Defined in: website/components/carousel/custom-carousel/arrows.ts:120
 
 Mounts the CarouselArrowWebGL widgets on the prev/next button canvases.
 Idempotent per canvas: a live widget whose canvas was replaced by a

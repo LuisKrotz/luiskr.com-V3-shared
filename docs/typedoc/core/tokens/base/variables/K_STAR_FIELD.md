@@ -8,7 +8,7 @@
 const _K_STAR_FIELD: 'starField' = 'starField'
 ```
 
-Defined in: core/tokens/base.ts:436
+Defined in: core/tokens/base.ts:445
 
 Shared key token `starField` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

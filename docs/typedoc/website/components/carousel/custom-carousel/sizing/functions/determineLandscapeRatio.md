@@ -8,7 +8,7 @@
 function determineLandscapeRatio(items): string | null
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:244
+Defined in: website/components/carousel/custom-carousel/sizing.ts:252
 
 Calculates the majority landscape aspect ratio key ('16:9' | '21:9' | '32:9') among the
 landscape items in the list. Compares each item's width/height ratio against the 16:9,

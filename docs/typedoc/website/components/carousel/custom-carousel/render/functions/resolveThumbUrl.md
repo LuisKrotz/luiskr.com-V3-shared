@@ -8,7 +8,7 @@
 function resolveThumbUrl(item, folder): string
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:60
+Defined in: website/components/carousel/custom-carousel/render.tsx:62
 
 Resolves the preview/poster image URL for the repetition pattern.
 

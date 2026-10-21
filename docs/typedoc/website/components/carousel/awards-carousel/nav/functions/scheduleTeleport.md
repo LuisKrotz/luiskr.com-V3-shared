@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/nav](../README.md) / scheduleTeleport
 
 ```ts
-function scheduleTeleport(host, targetIdx): void;
+function scheduleTeleport(host, targetIdx): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:66
+Defined in: website/components/carousel/awards-carousel/nav.ts:138
 
 Clone→real teleport for the infinite loop: waits TELEPORT_DELAY (420ms,
 just past the smooth-scroll duration) so the clone finishes animating

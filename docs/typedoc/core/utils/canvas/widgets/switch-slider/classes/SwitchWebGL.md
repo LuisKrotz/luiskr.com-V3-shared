@@ -1,17 +1,18 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/widgets/switch-slider](../README.md) / SwitchWebGL
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:28
+Defined in: core/utils/canvas/widgets/switch-slider.ts:30
 
 Contextual WebGL Switch Slider for Developer Tools
 Renders custom animated graphical draw elements referent to each toggle's context:
+
 - 'stats': Live ECG oscilloscope waveform + pulsing chip matrix (Stats for Nerds)
 - 'grid': Glowing blueprint column grid lines + scanning crosshairs (Show Grid)
 - 'motion': Subtle ambient drift (OFF) vs calm still horizon datum (ON) (Reduced Motion)
-All switches share an identical solid centered knob indicator dot.
+  All switches share an identical solid centered knob indicator dot.
 
 ## Constructors
 
@@ -19,14 +20,14 @@ All switches share an identical solid centered knob indicator dot.
 
 ```ts
 new SwitchWebGL(
-   canvas, 
-   contextType?, 
-   initialActive?, 
+   canvas,
+   contextType?,
+   initialActive?,
    onToggle?
 ): SwitchWebGL;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:56
+Defined in: core/utils/canvas/widgets/switch-slider.ts:70
 
 #### Parameters
 
@@ -55,22 +56,22 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:56
 ### canvas
 
 ```ts
-canvas: HTMLCanvasElement;
+canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:29
+Defined in: core/utils/canvas/widgets/switch-slider.ts:31
 
-***
+---
 
 ### contextType
 
 ```ts
-contextType: string;
+contextType: string
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:30
+Defined in: core/utils/canvas/widgets/switch-slider.ts:32
 
-***
+---
 
 ### onToggle
 
@@ -78,79 +79,103 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:30
 onToggle: ((_active) => void) | null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:31
+Defined in: core/utils/canvas/widgets/switch-slider.ts:33
 
-***
+---
 
 ### isActive
 
 ```ts
-isActive: boolean;
-```
-
-Defined in: core/utils/canvas/widgets/switch-slider.ts:32
-
-***
-
-### width
-
-```ts
-width: number;
-```
-
-Defined in: core/utils/canvas/widgets/switch-slider.ts:33
-
-***
-
-### height
-
-```ts
-height: number;
+isActive: boolean
 ```
 
 Defined in: core/utils/canvas/widgets/switch-slider.ts:34
 
-***
+---
 
-### targetP
+### width
 
 ```ts
-targetP: number;
+width: number
 ```
 
 Defined in: core/utils/canvas/widgets/switch-slider.ts:35
 
-***
+---
 
-### currentP
+### height
 
 ```ts
-currentP: number;
+height: number
 ```
 
 Defined in: core/utils/canvas/widgets/switch-slider.ts:36
 
-***
+---
 
-### knobX
+### targetP
 
 ```ts
-knobX: number;
+targetP: number
 ```
 
 Defined in: core/utils/canvas/widgets/switch-slider.ts:37
 
-***
+---
 
-### useWebGL
+### currentP
 
 ```ts
-useWebGL: boolean = false;
+currentP: number
 ```
 
 Defined in: core/utils/canvas/widgets/switch-slider.ts:38
 
-***
+---
+
+### velP
+
+```ts
+velP: number = 0
+```
+
+Defined in: core/utils/canvas/widgets/switch-slider.ts:40
+
+Chase-spring velocity (track units/s) — feeds the elastic settle.
+
+---
+
+### \_animT
+
+```ts
+_animT: number = 0
+```
+
+Defined in: core/utils/canvas/widgets/switch-slider.ts:42
+
+Last animate() timestamp — the spring's dt source.
+
+---
+
+### knobX
+
+```ts
+knobX: number
+```
+
+Defined in: core/utils/canvas/widgets/switch-slider.ts:43
+
+---
+
+### useWebGL
+
+```ts
+useWebGL: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/switch-slider.ts:44
+
+---
 
 ### animId
 
@@ -158,29 +183,29 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:38
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:39
+Defined in: core/utils/canvas/widgets/switch-slider.ts:45
 
-***
+---
 
 ### startTime
 
 ```ts
-startTime: number;
+startTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:40
+Defined in: core/utils/canvas/widgets/switch-slider.ts:46
 
-***
+---
 
 ### dpr
 
 ```ts
-dpr: number = 2;
+dpr: number = 2
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:41
+Defined in: core/utils/canvas/widgets/switch-slider.ts:47
 
-***
+---
 
 ### gl
 
@@ -188,9 +213,9 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:41
 gl: WebGLRenderingContext | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:42
+Defined in: core/utils/canvas/widgets/switch-slider.ts:48
 
-***
+---
 
 ### ctx
 
@@ -198,9 +223,9 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:42
 ctx: CanvasRenderingContext2D | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:43
+Defined in: core/utils/canvas/widgets/switch-slider.ts:49
 
-***
+---
 
 ### program
 
@@ -208,9 +233,9 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:43
 program: WebGLProgram | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:44
+Defined in: core/utils/canvas/widgets/switch-slider.ts:50
 
-***
+---
 
 ### quadBuffer
 
@@ -218,19 +243,19 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:44
 quadBuffer: WebGLBuffer | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:45
+Defined in: core/utils/canvas/widgets/switch-slider.ts:51
 
-***
+---
 
 ### aPos
 
 ```ts
-aPos: number = -1;
+aPos: number = -1
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:46
+Defined in: core/utils/canvas/widgets/switch-slider.ts:52
 
-***
+---
 
 ### uContext
 
@@ -238,9 +263,9 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:46
 uContext: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:47
+Defined in: core/utils/canvas/widgets/switch-slider.ts:53
 
-***
+---
 
 ### uKnobX
 
@@ -248,9 +273,9 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:47
 uKnobX: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:48
+Defined in: core/utils/canvas/widgets/switch-slider.ts:54
 
-***
+---
 
 ### uProgress
 
@@ -258,9 +283,9 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:48
 uProgress: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:49
+Defined in: core/utils/canvas/widgets/switch-slider.ts:55
 
-***
+---
 
 ### uResolution
 
@@ -268,9 +293,9 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:49
 uResolution: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:50
+Defined in: core/utils/canvas/widgets/switch-slider.ts:56
 
-***
+---
 
 ### uTime
 
@@ -278,9 +303,9 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:50
 uTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:51
+Defined in: core/utils/canvas/widgets/switch-slider.ts:57
 
-***
+---
 
 ### \_onContextLost
 
@@ -288,19 +313,19 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:51
 _onContextLost: EventListener | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:52
+Defined in: core/utils/canvas/widgets/switch-slider.ts:58
 
-***
+---
 
 ### \_purged
 
 ```ts
-_purged: boolean = false;
+_purged: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:53
+Defined in: core/utils/canvas/widgets/switch-slider.ts:59
 
-***
+---
 
 ### onClick
 
@@ -308,7 +333,57 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:53
 onClick: ((_e) => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:54
+Defined in: core/utils/canvas/widgets/switch-slider.ts:60
+
+---
+
+### \_wasm
+
+```ts
+_wasm:
+  | WidgetHandle
+  | null = null;
+```
+
+Defined in: core/utils/canvas/widgets/switch-slider.ts:62
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+---
+
+### \_wasmFailed
+
+```ts
+_wasmFailed: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/switch-slider.ts:64
+
+Latch — a failed wasm mount never retries on this instance.
+
+---
+
+### \_wasmPending
+
+```ts
+_wasmPending: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/switch-slider.ts:66
+
+In-flight mount — restore() must not double-mount on re-entry.
+
+---
+
+### \_wasmT
+
+```ts
+_wasmT: number = 0
+```
+
+Defined in: core/utils/canvas/widgets/switch-slider.ts:68
+
+Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
 ## Methods
 
@@ -318,7 +393,7 @@ Defined in: core/utils/canvas/widgets/switch-slider.ts:54
 _pToKnobX(p): number;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:101
+Defined in: core/utils/canvas/widgets/switch-slider.ts:117
 
 Progress 0–1 → knob pixel X. The knob (radius 11) is inset 14px from
 each end — exactly half the 28px track height — so it sits centered
@@ -336,7 +411,7 @@ inside the capsule's rounded caps at both extremes.
 
 CSS px
 
-***
+---
 
 ### \_contextCode()
 
@@ -344,7 +419,7 @@ CSS px
 _contextCode(): number;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:115
+Defined in: core/utils/canvas/widgets/switch-slider.ts:131
 
 Context → shader's u_context float id (0=stats, 1=grid/cyan/space,
 2=motion). The fragment shader branches on ranges (<0.5, <1.5, else)
@@ -354,7 +429,7 @@ so several visual aliases can share the grid animation.
 
 `number`
 
-***
+---
 
 ### init()
 
@@ -362,7 +437,7 @@ so several visual aliases can share the grid animation.
 init(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:130
+Defined in: core/utils/canvas/widgets/switch-slider.ts:146
 
 Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
 
@@ -370,7 +445,7 @@ Boot sequence: GL init → event binding → render start; fully degrades to the
 
 `void`
 
-***
+---
 
 ### \_triggerFallback()
 
@@ -378,7 +453,7 @@ Boot sequence: GL init → event binding → render start; fully degrades to the
 _triggerFallback(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:136
+Defined in: core/utils/canvas/widgets/switch-slider.ts:152
 
 Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on context loss or init failure.
 
@@ -386,7 +461,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 
 `void`
 
-***
+---
 
 ### initWebGL()
 
@@ -394,7 +469,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 initWebGL(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:142
+Defined in: core/utils/canvas/widgets/switch-slider.ts:158
 
 Creates the WebGL context, compiles the shader program and sets up uniforms/buffers; falls back on any failure.
 
@@ -402,7 +477,7 @@ Creates the WebGL context, compiles the shader program and sets up uniforms/buff
 
 `void`
 
-***
+---
 
 ### bindEvents()
 
@@ -410,7 +485,7 @@ Creates the WebGL context, compiles the shader program and sets up uniforms/buff
 bindEvents(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:148
+Defined in: core/utils/canvas/widgets/switch-slider.ts:164
 
 Wires pointer/hover listeners that drive the widget's interactive state.
 
@@ -418,7 +493,7 @@ Wires pointer/hover listeners that drive the widget's interactive state.
 
 `void`
 
-***
+---
 
 ### toggle()
 
@@ -426,7 +501,7 @@ Wires pointer/hover listeners that drive the widget's interactive state.
 toggle(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:160
+Defined in: core/utils/canvas/widgets/switch-slider.ts:180
 
 Flips the switch and fires the onToggle callback.
 
@@ -434,7 +509,7 @@ Flips the switch and fires the onToggle callback.
 
 `void`
 
-***
+---
 
 ### setActive()
 
@@ -442,7 +517,7 @@ Flips the switch and fires the onToggle callback.
 setActive(active): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:172
+Defined in: core/utils/canvas/widgets/switch-slider.ts:192
 
 Sets the knob position programmatically (animates the slide).
 
@@ -456,7 +531,7 @@ Sets the knob position programmatically (animates the slide).
 
 `void`
 
-***
+---
 
 ### setReducedMotion()
 
@@ -464,7 +539,7 @@ Sets the knob position programmatically (animates the slide).
 setReducedMotion(isReduced): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:185
+Defined in: core/utils/canvas/widgets/switch-slider.ts:205
 
 Applies prefers-reduced-motion: swaps the animation loop for one
 static frame render, or restarts the loop when motion is re-allowed.
@@ -479,7 +554,7 @@ static frame render, or restarts the loop when motion is re-allowed.
 
 `void`
 
-***
+---
 
 ### \_renderStatic()
 
@@ -487,7 +562,7 @@ static frame render, or restarts the loop when motion is re-allowed.
 _renderStatic(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:197
+Defined in: core/utils/canvas/widgets/switch-slider.ts:217
 
 Snap state to target and draw a single settled frame — used under
 reduced motion or when the loop is stopped.
@@ -496,7 +571,7 @@ reduced motion or when the loop is stopped.
 
 `void`
 
-***
+---
 
 ### animate()
 
@@ -504,7 +579,7 @@ reduced motion or when the loop is stopped.
 animate(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:203
+Defined in: core/utils/canvas/widgets/switch-slider.ts:223
 
 Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
@@ -512,7 +587,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
 `void`
 
-***
+---
 
 ### \_renderWebGL()
 
@@ -520,7 +595,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 _renderWebGL(now): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:209
+Defined in: core/utils/canvas/widgets/switch-slider.ts:229
 
 Per-frame WebGL render: updates time/knob uniforms and draws the quad.
 
@@ -534,7 +609,7 @@ Per-frame WebGL render: updates time/knob uniforms and draws the quad.
 
 `void`
 
-***
+---
 
 ### \_renderCanvas2D()
 
@@ -542,7 +617,7 @@ Per-frame WebGL render: updates time/knob uniforms and draws the quad.
 _renderCanvas2D(now): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:215
+Defined in: core/utils/canvas/widgets/switch-slider.ts:235
 
 Per-frame Canvas2D fallback render — same visual language as the shader.
 
@@ -556,7 +631,7 @@ Per-frame Canvas2D fallback render — same visual language as the shader.
 
 `void`
 
-***
+---
 
 ### purge()
 
@@ -564,7 +639,7 @@ Per-frame Canvas2D fallback render — same visual language as the shader.
 purge(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:224
+Defined in: core/utils/canvas/widgets/switch-slider.ts:244
 
 webglPool hook — offscreen: stops the loop (GL or 2D) and force-loses
 the GL context so offscreen widgets hold no context slots; restore()
@@ -574,7 +649,7 @@ rebuilds the GL program or re-acquires the 2D context on re-entry.
 
 `void`
 
-***
+---
 
 ### restore()
 
@@ -582,7 +657,7 @@ rebuilds the GL program or re-acquires the 2D context on re-entry.
 restore(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:245
+Defined in: core/utils/canvas/widgets/switch-slider.ts:271
 
 Recreates the GL context + program (or the 2D fallback) and resumes the loop after a purge.
 
@@ -590,7 +665,7 @@ Recreates the GL context + program (or the 2D fallback) and resumes the loop aft
 
 `void`
 
-***
+---
 
 ### destroy()
 
@@ -598,7 +673,7 @@ Recreates the GL context + program (or the 2D fallback) and resumes the loop aft
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider.ts:283
+Defined in: core/utils/canvas/widgets/switch-slider.ts:317
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

@@ -1,16 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/render](../README.md) / renderAppNav
 
 ```ts
-function renderAppNav(nav): 
-  | ""
-  | Element;
+function renderAppNav(nav): '' | Element
 ```
 
-Defined in: website/components/nav/render.tsx:43
+Defined in: website/components/nav/render.tsx:44
 
 Renders the <app-nav> template: logo, burger strip, and the fullscreen
 menu overlay. Returns '' while the media-expand modal is open — an empty
@@ -28,7 +26,7 @@ AppNav instance — reads its getters/state, calls delegates.
 
 ## Returns
 
-  \| `""`
-  \| [`Element`](../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+\| `""`
+\| [`Element`](../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
 
 JSX tree, or '' while a modal owns the screen.

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/widgets/theme-slider/render](../README.md) / renderCanvas2D
 
 ```ts
-function renderCanvas2D(host): void;
+function renderCanvas2D(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider/render.ts:107
+Defined in: core/utils/canvas/widgets/theme-slider/render.ts:150
 
 Canvas2D fallback renderer — mirrors the shader's composition.
 NOTE: `host.ctx` is never assigned in this class — _triggerFallback()

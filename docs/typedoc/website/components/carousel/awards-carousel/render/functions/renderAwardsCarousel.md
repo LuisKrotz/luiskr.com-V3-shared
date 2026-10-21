@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/render](../README.md) / renderAwardsCarousel
 
 ```ts
-function renderAwardsCarousel(host): Element;
+function renderAwardsCarousel(host): Element
 ```
 
-Defined in: website/components/carousel/awards-carousel/render.tsx:120
+Defined in: website/components/carousel/awards-carousel/render.tsx:121
 
 JSX template for the component's shadow DOM — the track is
 `[clone(last)] …real slides… [clone(first)]`; the clone ends are what

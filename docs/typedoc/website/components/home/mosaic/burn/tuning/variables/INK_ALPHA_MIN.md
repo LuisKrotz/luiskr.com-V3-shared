@@ -8,6 +8,6 @@
 const _INK_ALPHA_MIN: 32 = 32
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:84
+Defined in: website/components/home/mosaic/burn/tuning.ts:89
 
 Alpha floor for "has ink" — anti-aliased feather below ~12% is ignored.

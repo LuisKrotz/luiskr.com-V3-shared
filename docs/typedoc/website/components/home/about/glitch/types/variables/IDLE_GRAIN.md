@@ -8,6 +8,6 @@
 const _IDLE_GRAIN: 16 = 16
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:21
+Defined in: website/components/home/about/glitch/types.ts:22
 
 Idle grain pixels per frame — sparse film dust.

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/arrows](../README.md) / destroyWebGLArrows
 
 ```ts
-function destroyWebGLArrows(c): void;
+function destroyWebGLArrows(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/arrows.ts:147
+Defined in: website/components/carousel/custom-carousel/arrows.ts:162
 
 Destroys both arrow widgets — called on viewport exit (contexts are
 released offscreen to keep the pool small) and on destroy. Nulling the

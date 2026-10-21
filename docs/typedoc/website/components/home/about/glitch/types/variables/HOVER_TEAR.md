@@ -8,6 +8,6 @@
 const _HOVER_TEAR: 0.035 = 0.035
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:45
+Defined in: website/components/home/about/glitch/types.ts:46
 
 Hover tear distance bound as a frame-width fraction.

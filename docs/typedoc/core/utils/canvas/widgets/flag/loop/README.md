@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / core/utils/canvas/widgets/flag/loop
 
@@ -8,5 +8,6 @@
 
 - [triggerFlagFallback](functions/triggerFlagFallback.md)
 - [renderStaticFlag](functions/renderStaticFlag.md)
+- [renderFlagWasm](functions/renderFlagWasm.md)
 - [renderFlagWebGL](functions/renderFlagWebGL.md)
 - [animateFlag](functions/animateFlag.md)

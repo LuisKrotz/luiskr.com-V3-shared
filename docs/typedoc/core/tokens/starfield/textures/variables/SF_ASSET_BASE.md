@@ -8,6 +8,6 @@
 const SF_ASSET_BASE: '/experiments/star-field' = '/experiments/star-field'
 ```
 
-Defined in: core/tokens/starfield/textures.ts:93
+Defined in: core/tokens/starfield/textures.ts:112
 
 Module public-asset root — dossier media entries join under this.

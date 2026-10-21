@@ -8,7 +8,7 @@
 function frame(s): void
 ```
 
-Defined in: website/components/home/mosaic/burn/loop.ts:45
+Defined in: website/components/home/mosaic/burn/loop.ts:48
 
 One combustion frame: rebuild the burned paper (char → glow → consume,
 per letter), blit it, spawn + draw particles. When every letter's front

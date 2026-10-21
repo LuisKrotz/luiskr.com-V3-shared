@@ -42,6 +42,12 @@ Re-exports [gasFor](gas/functions/gasFor.md)
 
 ---
 
+### clusterFor
+
+Re-exports [clusterFor](cluster/functions/clusterFor.md)
+
+---
+
 ### spikesFor
 
 Re-exports [spikesFor](spikes/functions/spikesFor.md)

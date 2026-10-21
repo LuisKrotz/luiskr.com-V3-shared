@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/i18n](../README.md) / loadSpaceTranslations
 
 ```ts
-function loadSpaceTranslations(c): void;
+function loadSpaceTranslations(c): void
 ```
 
-Defined in: experiments/earth-playground/space/i18n.ts:29
+Defined in: experiments/earth-playground/space/i18n.ts:31
 
 Loads space translations.
 

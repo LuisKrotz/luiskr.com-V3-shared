@@ -8,6 +8,6 @@
 const SOLAR: SFBodyDef[]
 ```
 
-Defined in: experiments/star-field/engine/catalog/solar.ts:588
+Defined in: experiments/star-field/engine/catalog/solar.ts:846
 
 Solar tier at render scale — every def run through `shrinkSolar`.

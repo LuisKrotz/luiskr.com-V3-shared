@@ -8,7 +8,7 @@
 function getRatioMultiplier(ratio): number
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:295
+Defined in: website/components/carousel/custom-carousel/sizing.ts:303
 
 Returns the numeric multiplier (w/h) for a given aspect ratio key.
 

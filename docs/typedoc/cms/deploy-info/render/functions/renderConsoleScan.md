@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/render](../README.md) / renderConsoleScan
 
 ```ts
-function renderConsoleScan(host): Element;
+function renderConsoleScan(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:235
+Defined in: cms/deploy-info/render.tsx:412
 
 Renders the console.* usage scan (debug-leftover policy).
 

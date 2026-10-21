@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [shared/src/app/boot](../README.md) / mountAppShell
 
 ```ts
-function mountAppShell(c): void;
+function mountAppShell(c): void
 ```
 
-Defined in: shared/src/app/boot.ts:39
+Defined in: shared/src/app/boot.ts:44
 
 Mounts app shell.
 

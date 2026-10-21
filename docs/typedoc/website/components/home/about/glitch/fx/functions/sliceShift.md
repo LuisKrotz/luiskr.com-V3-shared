@@ -19,7 +19,7 @@ scale.
 
 ### s
 
-[`GlitchSession`](../../types/interfaces/GlitchSession.md)
+[`Glitch2dSession`](../../types/type-aliases/Glitch2dSession.md)
 
 ## Returns
 

@@ -8,7 +8,7 @@
 function mountBurn(cardEl, overlay, titleEl, item): void
 ```
 
-Defined in: website/components/home/mosaic/burn/mount.ts:67
+Defined in: website/components/home/mosaic/burn/mount.ts:70
 
 Mounts the combustion canvas over the title's current box: measures
 the h2 and overlay at hover-instant and plays the dissolve exactly

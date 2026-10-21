@@ -8,6 +8,6 @@
 const _B_NAV_MENU_MODAL: 'nav-menu-modal'
 ```
 
-Defined in: core/tokens/base.ts:351
+Defined in: core/tokens/base.ts:356
 
 BEM block fragment "b nav menu modal" — composed by the token groups below into full class names.

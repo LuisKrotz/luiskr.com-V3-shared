@@ -18,10 +18,12 @@ const ANIMATION_DURATIONS: Readonly<{
   LOADER_FADE_MS: 800
   SCROLL_DURATION: 600
   SCROLL_MIN_DISTANCE: 2
+  BRACKET_MS: 250
+  BRACKET_FAST_MS: 200
 }>
 ```
 
-Defined in: core/tokens/motion/animation.ts:24
+Defined in: core/tokens/motion/animation.ts:42
 
 Frozen animation map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token

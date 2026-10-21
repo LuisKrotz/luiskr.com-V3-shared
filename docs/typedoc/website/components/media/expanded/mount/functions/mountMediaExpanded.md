@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/expanded/mount](../README.md) / mountMediaExpanded
 
 ```ts
-function mountMediaExpanded(el): void;
+function mountMediaExpanded(el): void
 ```
 
-Defined in: website/components/media/expanded/mount.ts:73
+Defined in: website/components/media/expanded/mount.ts:106
 
 Mount lifecycle: listeners, close button, telemetry, media pipeline.
 

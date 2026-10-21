@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFFly
 
-Defined in: experiments/star-field/engine/types.ts:627
+Defined in: experiments/star-field/engine/types.ts:849
 
 Active camera fly-to tween — cubic ease-in-out over FLY_MS.
 
@@ -16,7 +16,7 @@ Active camera fly-to tween — cubic ease-in-out over FLY_MS.
 t0: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:629
+Defined in: experiments/star-field/engine/types.ts:851
 
 Start time (performance.now snapshot).
 
@@ -28,7 +28,7 @@ Start time (performance.now snapshot).
 fromPos: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:631
+Defined in: experiments/star-field/engine/types.ts:853
 
 Camera position at tween start.
 
@@ -58,7 +58,7 @@ z: number
 offset: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:633
+Defined in: experiments/star-field/engine/types.ts:855
 
 Approach offset — destination sits this vector away from the body.
 
@@ -88,7 +88,7 @@ z: number
 fromTgt: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:635
+Defined in: experiments/star-field/engine/types.ts:857
 
 Controls target at tween start.
 
@@ -124,7 +124,7 @@ track: () =>
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:642
+Defined in: experiments/star-field/engine/types.ts:864
 
 Live body-position getter — rider-mounted anchors keep moving while
 the tween runs, so the destination is re-resolved every frame; a
@@ -148,7 +148,7 @@ time. Returns null when the anchor is gone (dest frozen at last).
 last: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:644
+Defined in: experiments/star-field/engine/types.ts:866
 
 Last resolved body position — destination anchor when track yields null.
 
@@ -178,7 +178,7 @@ z: number
 optional done?: () => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:646
+Defined in: experiments/star-field/engine/types.ts:868
 
 Optional follow-up when the tween completes (fire onSelect).
 

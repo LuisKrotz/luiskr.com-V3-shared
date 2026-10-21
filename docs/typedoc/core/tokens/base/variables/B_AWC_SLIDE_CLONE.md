@@ -8,6 +8,6 @@
 const _B_AWC_SLIDE_CLONE: 'aw-c-slide--clone'
 ```
 
-Defined in: core/tokens/base.ts:364
+Defined in: core/tokens/base.ts:369
 
 BEM block fragment "b awc slide clone" — composed by the token groups below into full class names.

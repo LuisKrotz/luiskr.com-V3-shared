@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/wiring](../README.md) / handleSpaceAction
 
 ```ts
-function handleSpaceAction(
-   c, 
-   action, 
-   btn
-): void;
+function handleSpaceAction(c, action, btn): void
 ```
 
-Defined in: experiments/earth-playground/space/wiring.ts:192
+Defined in: experiments/earth-playground/space/wiring.ts:227
 
 Dispatches a data-action button: panel-open is engine-free; the rest
 need a live _earthBg — reset (view + saved settings + inputs back to

@@ -8,7 +8,7 @@
 function followSelected(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/camera.ts:257
+Defined in: experiments/star-field/engine/frame/camera.ts:264
 
 Orbit-follow — keeps the followed anchor pinned at the world origin by
 counter-translating `s.world` (the floating origin). Rider-mounted

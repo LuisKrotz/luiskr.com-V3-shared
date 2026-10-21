@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/data](../README.md) / onRouteParamChange
 
 ```ts
-function onRouteParamChange(view, to): void;
+function onRouteParamChange(view, to): void
 ```
 
-Defined in: website/views/project/data.ts:130
+Defined in: website/views/project/data.ts:170
 
 Router hook — project→project navigations reload data without remounting.
 
@@ -20,8 +20,8 @@ Router hook — project→project navigations reload data without remounting.
 
 ### to
 
-  \| [`RouteDescriptor`](../../../../../core/router/types/interfaces/RouteDescriptor.md)
-  \| `null`
+\| [`RouteDescriptor`](../../../../../core/router/types/interfaces/RouteDescriptor.md)
+\| `null`
 
 ## Returns
 

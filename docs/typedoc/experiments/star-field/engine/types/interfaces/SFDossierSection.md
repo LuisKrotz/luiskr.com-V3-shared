@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFDossierSection
 
-Defined in: experiments/star-field/engine/types.ts:306
+Defined in: experiments/star-field/engine/types.ts:390
 
 A named prose section — dossiers with `sections` render the deep
 history as titled subsections (formation, exploration, geology, …)
@@ -18,7 +18,7 @@ instead of one flat paragraph.
 title: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:307
+Defined in: experiments/star-field/engine/types.ts:391
 
 ---
 
@@ -28,4 +28,4 @@ Defined in: experiments/star-field/engine/types.ts:307
 body: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:308
+Defined in: experiments/star-field/engine/types.ts:392

@@ -16,7 +16,7 @@ function worldScreenPos(
 } | null
 ```
 
-Defined in: experiments/star-field/engine/frame/camera.ts:66
+Defined in: experiments/star-field/engine/frame/camera.ts:68
 
 Projects a raw world point into canvas-space pixels — the projection
 backing for the navigator-hover position hint. Unlike

@@ -8,6 +8,6 @@
 const _FLECK_G: 60 = 60
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:71
+Defined in: website/components/home/mosaic/burn/tuning.ts:76
 
 Gravity accelerating flecks + rebuild deposits downward (px/s²).

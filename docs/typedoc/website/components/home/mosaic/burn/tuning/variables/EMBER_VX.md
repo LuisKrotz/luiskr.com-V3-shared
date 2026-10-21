@@ -8,6 +8,6 @@
 const _EMBER_VX: 18 = 18
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:65
+Defined in: website/components/home/mosaic/burn/tuning.ts:70
 
 Ember sideways drift bound (canvas px/s).

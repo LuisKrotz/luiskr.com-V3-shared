@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/loaders/menu-background-webgl](../README.md) / MenuBackgroundWebGL
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:41
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:44
 
 WebGL animated background for the mobile burger menu — "Membrane" concept.
 Renders fine organic monochrome contour lines (domain-warped fbm isolines)
@@ -23,7 +23,7 @@ unavailable or the shader fails to compile/link.
 new MenuBackgroundWebGL(canvas): MenuBackgroundWebGL;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:78
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:87
 
 #### Parameters
 
@@ -40,20 +40,20 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:78
 ### canvas
 
 ```ts
-canvas: HTMLCanvasElement;
+canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:47
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:50
 
 #### Param
 
 **canvas**
 
 fullscreen canvas behind the menu
-  overlay's content; owned by AppNav which calls start/release/stop
-  with the menu's open/close lifecycle
+overlay's content; owned by AppNav which calls start/release/stop
+with the menu's open/close lifecycle
 
-***
+---
 
 ### gl
 
@@ -61,9 +61,9 @@ fullscreen canvas behind the menu
 gl: WebGLRenderingContext | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:48
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:51
 
-***
+---
 
 ### program
 
@@ -71,9 +71,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:48
 program: WebGLProgram | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:49
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:52
 
-***
+---
 
 ### quadBuffer
 
@@ -81,9 +81,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:49
 quadBuffer: WebGLBuffer | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:50
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:53
 
-***
+---
 
 ### animId
 
@@ -91,9 +91,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:50
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:51
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:54
 
-***
+---
 
 ### uTime
 
@@ -101,9 +101,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:51
 uTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:52
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:55
 
-***
+---
 
 ### uResolution
 
@@ -111,9 +111,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:52
 uResolution: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:53
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:56
 
-***
+---
 
 ### uColor
 
@@ -121,9 +121,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:53
 uColor: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:54
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:57
 
-***
+---
 
 ### uColor2
 
@@ -131,9 +131,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:54
 uColor2: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:55
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:58
 
-***
+---
 
 ### uReveal
 
@@ -141,9 +141,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:55
 uReveal: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:56
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:59
 
-***
+---
 
 ### uAlpha
 
@@ -151,39 +151,39 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:56
 uAlpha: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:57
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:60
 
-***
+---
 
 ### width
 
 ```ts
-width: number = 0;
+width: number = 0
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:58
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:61
 
-***
+---
 
 ### height
 
 ```ts
-height: number = 0;
+height: number = 0
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:59
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:62
 
-***
+---
 
 ### isActive
 
 ```ts
-isActive: boolean = false;
+isActive: boolean = false
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:60
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:63
 
-***
+---
 
 ### \_ro
 
@@ -191,89 +191,89 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:60
 _ro: ResizeObserver | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:61
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:64
 
-***
+---
 
 ### useWebGL
 
 ```ts
-useWebGL: boolean = false;
-```
-
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:62
-
-***
-
-### \_reveal
-
-```ts
-_reveal: number = 0;
-```
-
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:63
-
-***
-
-### \_revealTarget
-
-```ts
-_revealTarget: number = 0;
-```
-
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:64
-
-***
-
-### \_revealFrom
-
-```ts
-_revealFrom: number = 0;
+useWebGL: boolean = false
 ```
 
 Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:65
 
-***
+---
 
-### \_revealT0
+### \_reveal
 
 ```ts
-_revealT0: number = 0;
+_reveal: number = 0
 ```
 
 Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:66
 
-***
+---
 
-### \_revealDur
+### \_revealTarget
 
 ```ts
-_revealDur: number = 0;
+_revealTarget: number = 0
 ```
 
 Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:67
 
-***
+---
 
-### \_lastFrame
+### \_revealFrom
 
 ```ts
-_lastFrame: number = 0;
+_revealFrom: number = 0
 ```
 
 Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:68
 
-***
+---
 
-### \_elapsed
+### \_revealT0
 
 ```ts
-_elapsed: number = 0;
+_revealT0: number = 0
 ```
 
 Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:69
 
-***
+---
+
+### \_revealDur
+
+```ts
+_revealDur: number = 0
+```
+
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:70
+
+---
+
+### \_lastFrame
+
+```ts
+_lastFrame: number = 0
+```
+
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:71
+
+---
+
+### \_elapsed
+
+```ts
+_elapsed: number = 0
+```
+
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:72
+
+---
 
 ### \_color
 
@@ -281,9 +281,9 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:69
 _color: number[];
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:70
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:73
 
-***
+---
 
 ### \_color2
 
@@ -291,29 +291,29 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:70
 _color2: number[];
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:71
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:74
 
-***
+---
 
 ### \_darkAtStart
 
 ```ts
-_darkAtStart: boolean = false;
+_darkAtStart: boolean = false
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:72
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:75
 
-***
+---
 
 ### \_hasDeriv
 
 ```ts
-_hasDeriv: boolean = false;
+_hasDeriv: boolean = false
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:73
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:76
 
-***
+---
 
 ### \_onContextLost
 
@@ -321,27 +321,65 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:73
 _onContextLost: EventListener | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:74
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:77
 
-***
+---
 
 ### \_purged
 
 ```ts
-_purged: boolean = false;
+_purged: boolean = false
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:75
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:78
 
-***
+---
 
 ### \_wantsActive
 
 ```ts
-_wantsActive: boolean = false;
+_wantsActive: boolean = false
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:76
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:79
+
+---
+
+### \_wasm
+
+```ts
+_wasm:
+  | WidgetHandle
+  | null = null;
+```
+
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:81
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+---
+
+### \_wasmFailed
+
+```ts
+_wasmFailed: boolean = false
+```
+
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:83
+
+Latch — a failed wasm mount never retries on this instance.
+
+---
+
+### \_wasmPending
+
+```ts
+_wasmPending: boolean = false
+```
+
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:85
+
+In-flight mount — restore() must not double-mount on re-entry.
 
 ## Methods
 
@@ -351,7 +389,7 @@ Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:76
 _initGL(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:91
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:100
 
 Creates the WebGL context + shader program; falls back to the CSS/DOM path on failure.
 
@@ -359,7 +397,26 @@ Creates the WebGL context + shader program; falls back to the CSS/DOM path on fa
 
 `void`
 
-***
+---
+
+### \_tryWasm()
+
+```ts
+_tryWasm(): void;
+```
+
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:122
+
+Attempts the WebGPU wasm menu background (~50KB artifact, own
+GPUDevice). MANUAL drive: this class keeps its own reveal ease +
+loop, so the bridge only initializes the surface. On any failure
+the WebGL path runs exactly as before.
+
+#### Returns
+
+`void`
+
+---
 
 ### \_triggerFallback()
 
@@ -367,7 +424,7 @@ Creates the WebGL context + shader program; falls back to the CSS/DOM path on fa
 _triggerFallback(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:97
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:168
 
 Switches to the non-WebGL path (CSS moiré layer) — used on context loss or init failure.
 
@@ -375,7 +432,7 @@ Switches to the non-WebGL path (CSS moiré layer) — used on context loss or in
 
 `void`
 
-***
+---
 
 ### \_releaseGL()
 
@@ -383,7 +440,7 @@ Switches to the non-WebGL path (CSS moiré layer) — used on context loss or in
 _releaseGL(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:103
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:174
 
 Frees the quad program/buffer and force-loses the context (listener detached first).
 
@@ -391,7 +448,7 @@ Frees the quad program/buffer and force-loses the context (listener detached fir
 
 `void`
 
-***
+---
 
 ### \_parseCssColor()
 
@@ -399,7 +456,7 @@ Frees the quad program/buffer and force-loses the context (listener detached fir
 _parseCssColor(str): number[] | null;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:113
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:184
 
 Parses a CSS colour string (#rgb, #rrggbb, rgb(), rgba()) into a
 normalized [r,g,b] float triple for the shader uniform.
@@ -414,7 +471,7 @@ normalized [r,g,b] float triple for the shader uniform.
 
 `number`[] \| `null`
 
-***
+---
 
 ### \_sampleTheme()
 
@@ -422,7 +479,7 @@ normalized [r,g,b] float triple for the shader uniform.
 _sampleTheme(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:119
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:190
 
 Samples --menu-ink / --menu-ink-2 into the shader ink colors.
 
@@ -430,7 +487,7 @@ Samples --menu-ink / --menu-ink-2 into the shader ink colors.
 
 `void`
 
-***
+---
 
 ### start()
 
@@ -438,7 +495,7 @@ Samples --menu-ink / --menu-ink-2 into the shader ink colors.
 start(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:125
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:196
 
 Begins the render loop on menu open (see menu-background-loop.ts).
 
@@ -446,7 +503,7 @@ Begins the render loop on menu open (see menu-background-loop.ts).
 
 `void`
 
-***
+---
 
 ### release()
 
@@ -454,7 +511,7 @@ Begins the render loop on menu open (see menu-background-loop.ts).
 release(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:135
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:206
 
 Eases the reveal back to 0 so the field dissolves on menu close.
 
@@ -462,7 +519,7 @@ Eases the reveal back to 0 so the field dissolves on menu close.
 
 `void`
 
-***
+---
 
 ### purge()
 
@@ -470,7 +527,7 @@ Eases the reveal back to 0 so the field dissolves on menu close.
 purge(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:147
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:218
 
 webglPool hook — canvas scrolled offscreen (or the browser trimmed
 contexts): tears the GL resources down entirely instead of merely
@@ -481,7 +538,7 @@ recreates them on re-entry.
 
 `void`
 
-***
+---
 
 ### restore()
 
@@ -489,7 +546,7 @@ recreates them on re-entry.
 restore(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:161
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:238
 
 Recreates the GL context + restarts the loop after an offscreen purge.
 
@@ -497,7 +554,7 @@ Recreates the GL context + restarts the loop after an offscreen purge.
 
 `void`
 
-***
+---
 
 ### \_animateReveal()
 
@@ -505,7 +562,7 @@ Recreates the GL context + restarts the loop after an offscreen purge.
 _animateReveal(target, dur): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:180
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:257
 
 Starts (or restarts mid-flight) a timed reveal ease.
 
@@ -523,7 +580,7 @@ Starts (or restarts mid-flight) a timed reveal ease.
 
 `void`
 
-***
+---
 
 ### \_tickReveal()
 
@@ -531,7 +588,7 @@ Starts (or restarts mid-flight) a timed reveal ease.
 _tickReveal(now): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:186
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:263
 
 Advances the reveal ease to the current timestamp.
 
@@ -545,7 +602,7 @@ Advances the reveal ease to the current timestamp.
 
 `void`
 
-***
+---
 
 ### stop()
 
@@ -553,7 +610,7 @@ Advances the reveal ease to the current timestamp.
 stop(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:192
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:269
 
 Stops the rAF loop.
 
@@ -561,7 +618,7 @@ Stops the rAF loop.
 
 `void`
 
-***
+---
 
 ### \_handleResize()
 
@@ -569,7 +626,7 @@ Stops the rAF loop.
 _handleResize(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:198
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:275
 
 Syncs buffer size + u_res uniform with the viewport.
 
@@ -577,7 +634,7 @@ Syncs buffer size + u_res uniform with the viewport.
 
 `void`
 
-***
+---
 
 ### \_loop()
 
@@ -585,7 +642,7 @@ Syncs buffer size + u_res uniform with the viewport.
 _loop(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:204
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:281
 
 rAF callback — draws the animated contour field each frame.
 
@@ -593,7 +650,7 @@ rAF callback — draws the animated contour field each frame.
 
 `void`
 
-***
+---
 
 ### \_renderFrame()
 
@@ -601,7 +658,7 @@ rAF callback — draws the animated contour field each frame.
 _renderFrame(staticTime?): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:210
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:287
 
 Renders the noise field; a fixed staticTime renders one settled frame.
 
@@ -615,7 +672,7 @@ Renders the noise field; a fixed staticTime renders one settled frame.
 
 `void`
 
-***
+---
 
 ### destroy()
 
@@ -623,7 +680,7 @@ Renders the noise field; a fixed staticTime renders one settled frame.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:216
+Defined in: core/utils/canvas/loaders/menu-background-webgl.ts:293
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

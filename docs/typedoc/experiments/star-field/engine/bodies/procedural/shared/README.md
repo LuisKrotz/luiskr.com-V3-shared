@@ -23,3 +23,5 @@
 - [shade](functions/shade.md)
 - [texCanvas](functions/texCanvas.md)
 - [blob](functions/blob.md)
+- [vnoise](functions/vnoise.md)
+- [weldGeometry](functions/weldGeometry.md)

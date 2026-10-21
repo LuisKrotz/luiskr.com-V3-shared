@@ -8,7 +8,7 @@
 function updateStructures(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/updates.ts:137
+Defined in: experiments/star-field/engine/frame/updates.ts:153
 
 Cosmic-hierarchy shell fade — hides the inside of every boundary bubble
 while the camera is deep within it. A huge fresnel shell viewed from

@@ -8,6 +8,6 @@
 const _FRONT_STEP: 3 = 3
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:37
+Defined in: website/components/home/mosaic/burn/tuning.ts:42
 
 X stride for tracing a letter's jagged front polygon (device px).

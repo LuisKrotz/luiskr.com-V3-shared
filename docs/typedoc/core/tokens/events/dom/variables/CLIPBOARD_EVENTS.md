@@ -14,7 +14,7 @@ const CLIPBOARD_EVENTS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/events/dom.ts:158
+Defined in: core/tokens/events/dom.ts:160
 
 Frozen clipboard event-name map — copy/cut/selection events the docs
 portal intercepts for its source-code copy guard.

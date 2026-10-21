@@ -8,6 +8,6 @@
 const _EMBER_LIFE_MIN: 0.35 = 0.35
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:53
+Defined in: website/components/home/mosaic/burn/tuning.ts:58
 
 Particle lifetime bounds (seconds).

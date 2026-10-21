@@ -8,7 +8,7 @@
 function makeStation(THREE, sat): Object3D
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:457
+Defined in: experiments/star-field/engine/bodies/primitives.ts:632
 
 Crafted-station silhouette — a crewed orbiter (the ISS) is not a ball
 of light: a long truss carries a pressurized-module core at centre and

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/figure/video](../README.md) / playVideo
 
 ```ts
-function playVideo(fig, target): void;
+function playVideo(fig, target): void
 ```
 
-Defined in: website/components/media/figure/video.ts:42
+Defined in: website/components/media/figure/video.ts:43
 
 Starts muted playback honoring reduced-motion/autoplay prefs.
 

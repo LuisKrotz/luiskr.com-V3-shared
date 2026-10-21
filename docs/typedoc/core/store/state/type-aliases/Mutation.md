@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / Mutation
 
 ```ts
-type Mutation = (_payload?) => void | boolean;
+type Mutation = (_payload?) => void | boolean
 ```
 
-Defined in: core/store/state.ts:129
+Defined in: core/store/state.ts:144
 
 One named mutation: receives an optional payload, mutates store.state,
 and returns `false` to suppress notify() for no-op writes (any other

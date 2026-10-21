@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../../README.md) / [website/components/home/about/glitch/types](../README.md) / GlitchSession
 
-Defined in: website/components/home/about/glitch/types.ts:84
+Defined in: website/components/home/about/glitch/types.ts:85
 
 Live glitch session parked on `host._glitch`.
 
@@ -16,7 +16,7 @@ Live glitch session parked on `host._glitch`.
 canvas: HTMLCanvasElement
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:86
+Defined in: website/components/home/about/glitch/types.ts:87
 
 Overlay canvas inside the picture wrapper.
 
@@ -25,10 +25,13 @@ Overlay canvas inside the picture wrapper.
 ### ctx
 
 ```ts
-ctx: CanvasRenderingContext2D
+ctx: CanvasRenderingContext2D | null
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:87
+Defined in: website/components/home/about/glitch/types.ts:90
+
+2D backend context — null while the WebGPU arm mounts and forever
+after it succeeds; the rust/glitch shader replaces every painter.
 
 ---
 
@@ -38,7 +41,7 @@ Defined in: website/components/home/about/glitch/types.ts:87
 w: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:89
+Defined in: website/components/home/about/glitch/types.ts:92
 
 Canvas size in device px.
 
@@ -50,7 +53,7 @@ Canvas size in device px.
 h: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:90
+Defined in: website/components/home/about/glitch/types.ts:93
 
 ---
 
@@ -60,7 +63,7 @@ Defined in: website/components/home/about/glitch/types.ts:90
 dx: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:92
+Defined in: website/components/home/about/glitch/types.ts:95
 
 Cover-fit destination rect of the portrait (device px).
 
@@ -72,7 +75,7 @@ Cover-fit destination rect of the portrait (device px).
 dy: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:93
+Defined in: website/components/home/about/glitch/types.ts:96
 
 ---
 
@@ -82,7 +85,7 @@ Defined in: website/components/home/about/glitch/types.ts:93
 dw: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:94
+Defined in: website/components/home/about/glitch/types.ts:97
 
 ---
 
@@ -92,7 +95,7 @@ Defined in: website/components/home/about/glitch/types.ts:94
 dh: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:95
+Defined in: website/components/home/about/glitch/types.ts:98
 
 ---
 
@@ -102,7 +105,7 @@ Defined in: website/components/home/about/glitch/types.ts:95
 img: HTMLImageElement
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:97
+Defined in: website/components/home/about/glitch/types.ts:100
 
 Live image element — re-resolved after shadow re-renders.
 
@@ -114,7 +117,7 @@ Live image element — re-resolved after shadow re-renders.
 srcW: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:102
+Defined in: website/components/home/about/glitch/types.ts:105
 
 Natural size the cover rect was computed against — a srcset
 candidate swap changes naturalWidth while `complete` stays true,
@@ -129,7 +132,7 @@ wrong-aspect portrait = the "zoomed portrait" bug).
 srcH: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:103
+Defined in: website/components/home/about/glitch/types.ts:106
 
 ---
 
@@ -139,7 +142,7 @@ Defined in: website/components/home/about/glitch/types.ts:103
 red: HTMLCanvasElement
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:105
+Defined in: website/components/home/about/glitch/types.ts:108
 
 Precomputed red / cyan channel canvases for the RGB split.
 
@@ -151,7 +154,7 @@ Precomputed red / cyan channel canvases for the RGB split.
 cyan: HTMLCanvasElement
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:106
+Defined in: website/components/home/about/glitch/types.ts:109
 
 ---
 
@@ -161,7 +164,7 @@ Defined in: website/components/home/about/glitch/types.ts:106
 scan: HTMLCanvasElement
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:108
+Defined in: website/components/home/about/glitch/types.ts:111
 
 Scanline tile canvas (1×_SCAN_PERIOD) used as a repeat pattern.
 
@@ -173,7 +176,7 @@ Scanline tile canvas (1×_SCAN_PERIOD) used as a repeat pattern.
 t: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:110
+Defined in: website/components/home/about/glitch/types.ts:113
 
 Elapsed seconds — drives the rolling bar.
 
@@ -185,7 +188,7 @@ Elapsed seconds — drives the rolling bar.
 lastT: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:111
+Defined in: website/components/home/about/glitch/types.ts:114
 
 ---
 
@@ -195,7 +198,7 @@ Defined in: website/components/home/about/glitch/types.ts:111
 raf: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:113
+Defined in: website/components/home/about/glitch/types.ts:116
 
 Pending rAF handle.
 
@@ -207,7 +210,7 @@ Pending rAF handle.
 active: boolean
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:115
+Defined in: website/components/home/about/glitch/types.ts:118
 
 True while the loop should keep running.
 
@@ -219,7 +222,7 @@ True while the loop should keep running.
 hover: boolean
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:117
+Defined in: website/components/home/about/glitch/types.ts:120
 
 Intensity — idle ambient or full VHS under hover.
 
@@ -231,7 +234,7 @@ Intensity — idle ambient or full VHS under hover.
 tick: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:119
+Defined in: website/components/home/about/glitch/types.ts:122
 
 Frame counter — paces un-armed retry polls.
 
@@ -243,8 +246,23 @@ Frame counter — paces un-armed retry polls.
 ro: ResizeObserver | null
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:123
+Defined in: website/components/home/about/glitch/types.ts:126
 
 Wrapper ResizeObserver — the CSS canvas is width:100%, so any post-arm
 layout change (resize, grid reflow, mosaic expand above) would stretch
 the stale device-px raster into a zoomed/cropped portrait without it.
+
+---
+
+### wasm
+
+```ts
+wasm:
+  | WidgetHandle
+  | null;
+```
+
+Defined in: website/components/home/about/glitch/types.ts:129
+
+Live rust/glitch widget — the WebGPU render backend. Null while the
+mount is in flight or after it fails (the 2D painters run instead).

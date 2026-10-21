@@ -8,7 +8,7 @@
 function tick(host): void
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:196
+Defined in: website/components/home/about/glitch/session.ts:265
 
 Self-maintaining tick — always running while mounted:
 no session → retry the arm at ~4 Hz (covers lazy image decode

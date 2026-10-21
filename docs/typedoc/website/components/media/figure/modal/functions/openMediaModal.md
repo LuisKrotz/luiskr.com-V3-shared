@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/figure/modal](../README.md) / openMediaModal
 
 ```ts
-function openMediaModal(c): void;
+function openMediaModal(c): void
 ```
 
-Defined in: website/components/media/figure/modal.ts:19
+Defined in: website/components/media/figure/modal.ts:21
 
 Opens media modal.
 

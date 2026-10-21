@@ -8,7 +8,7 @@
 function blob(ctx, w, h, x, y, r, inner, outer): void
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:103
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:104
 
 Soft radial blob fill — the shared paint primitive: mottle patches,
 craters, gas lobes and flare knots are all radial gradients punched

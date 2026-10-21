@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/portfolio/related/types](../README.md) / HomeItem
 
@@ -19,7 +19,7 @@ optional link?: string;
 
 Defined in: website/components/portfolio/related/types.ts:49
 
-***
+---
 
 ### image?
 
@@ -29,7 +29,7 @@ optional image?: string;
 
 Defined in: website/components/portfolio/related/types.ts:50
 
-***
+---
 
 ### label?
 
@@ -39,7 +39,7 @@ optional label?: string;
 
 Defined in: website/components/portfolio/related/types.ts:51
 
-***
+---
 
 ### title?
 
@@ -49,7 +49,7 @@ optional title?: string;
 
 Defined in: website/components/portfolio/related/types.ts:52
 
-***
+---
 
 ### description?
 
@@ -58,3 +58,27 @@ optional description?: string;
 ```
 
 Defined in: website/components/portfolio/related/types.ts:53
+
+---
+
+### width?
+
+```ts
+optional width?: (string | number)[];
+```
+
+Defined in: website/components/portfolio/related/types.ts:55
+
+[main, scaled] cover pixel widths as stored in the DB row.
+
+---
+
+### height?
+
+```ts
+optional height?: (string | number)[];
+```
+
+Defined in: website/components/portfolio/related/types.ts:57
+
+[main, scaled] cover pixel heights — same pairing as `width`.

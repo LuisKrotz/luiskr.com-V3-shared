@@ -1,15 +1,16 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/strings/debug](../README.md) / DEBUG\_PARAMS
 
 ```ts
 const DEBUG_PARAMS: Readonly<{
-  KEY: "debug";
-  NOTIFICATION_TEST: "sendNotificationTest";
-  WEBGL_MODE: "webGLMode";
-}>;
+  KEY: 'debug'
+  NOTIFICATION_TEST: 'sendNotificationTest'
+  WEBGL_MODE: 'webGLMode'
+  WEBGPU_WIDGETS: 'webgpuWidgets'
+}>
 ```
 
 Defined in: core/tokens/strings/debug.ts:13

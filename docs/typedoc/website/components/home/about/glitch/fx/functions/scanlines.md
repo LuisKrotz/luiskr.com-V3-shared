@@ -16,7 +16,7 @@ CRT raster lines via a repeated tile, jittered vertically each frame.
 
 ### s
 
-[`GlitchSession`](../../types/interfaces/GlitchSession.md)
+[`Glitch2dSession`](../../types/type-aliases/Glitch2dSession.md)
 
 ## Returns
 

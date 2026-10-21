@@ -11,10 +11,14 @@ function makeSphere(
   def,
   texMap,
   sunDir?
-): Mesh<SphereGeometry, Material<MaterialEventMap>, Object3DEventMap>
+): Mesh<
+  BufferGeometry<NormalBufferAttributes, BufferGeometryEventMap>,
+  Material<MaterialEventMap>,
+  Object3DEventMap
+>
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:120
+Defined in: experiments/star-field/engine/bodies/primitives.ts:214
 
 Sphere + material for a solid body — textured when the catalog maps one,
 tinted procedural otherwise. Stars/systems use the fresnel-limb node
@@ -59,4 +63,4 @@ Shared sun-direction vector (mutated per frame by
 
 ## Returns
 
-`Mesh`\<`SphereGeometry`, `Material`\<`MaterialEventMap`\>, `Object3DEventMap`\>
+`Mesh`\<`BufferGeometry`\<`NormalBufferAttributes`, `BufferGeometryEventMap`\>, `Material`\<`MaterialEventMap`\>, `Object3DEventMap`\>

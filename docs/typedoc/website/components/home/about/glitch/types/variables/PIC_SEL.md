@@ -8,6 +8,6 @@
 const _PIC_SEL: string
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:13
+Defined in: website/components/home/about/glitch/types.ts:14
 
 Wrapper/img selector pair, resolved fresh each tick (re-render safe).

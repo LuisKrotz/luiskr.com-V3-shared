@@ -32,13 +32,68 @@ Defined in: website/components/home/mosaic/burn/types.ts:12
 
 ---
 
+### gpuCanvas?
+
+```ts
+optional gpuCanvas?: HTMLCanvasElement;
+```
+
+Defined in: website/components/home/mosaic/burn/types.ts:19
+
+Optional WebGPU particle canvas — mounted over `canvas` when the
+per-widget wasm burn artifact loads; the paper raster stays 2D
+(canvas contexts are mutually exclusive per element), particles
+move to the GPU canvas.
+
+---
+
+### wasm?
+
+```ts
+optional wasm?:
+  | WidgetHandle
+  | null;
+```
+
+Defined in: website/components/home/mosaic/burn/types.ts:25
+
+Live WebGPU wasm handle — the particle sim+renderer runs in the
+artifact (begin/set_letters/set_ink/set_colors/set_dir/set_stage/
+frame); unset on failure or before the mount resolves.
+
+---
+
+### wasmPending?
+
+```ts
+optional wasmPending?: boolean;
+```
+
+Defined in: website/components/home/mosaic/burn/types.ts:27
+
+In-flight mount — teardown must not double-resolve.
+
+---
+
+### wasmFailed?
+
+```ts
+optional wasmFailed?: boolean;
+```
+
+Defined in: website/components/home/mosaic/burn/types.ts:29
+
+Latch — a failed wasm mount never retries this session.
+
+---
+
 ### paper
 
 ```ts
 paper: HTMLCanvasElement
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:14
+Defined in: website/components/home/mosaic/burn/types.ts:31
 
 Pre-rasterized "paper" — the title text as a drawable image.
 
@@ -50,7 +105,7 @@ Pre-rasterized "paper" — the title text as a drawable image.
 w: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:16
+Defined in: website/components/home/mosaic/burn/types.ts:33
 
 Canvas box in device px.
 
@@ -62,7 +117,7 @@ Canvas box in device px.
 h: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:17
+Defined in: website/components/home/mosaic/burn/types.ts:34
 
 ---
 
@@ -72,7 +127,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:17
 paperX: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:19
+Defined in: website/components/home/mosaic/burn/types.ts:36
 
 Paper (title box) offset inside the canvas — the pad bleeds embers.
 
@@ -84,7 +139,7 @@ Paper (title box) offset inside the canvas — the pad bleeds embers.
 paperY: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:20
+Defined in: website/components/home/mosaic/burn/types.ts:37
 
 ---
 
@@ -94,7 +149,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:20
 paperW: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:21
+Defined in: website/components/home/mosaic/burn/types.ts:38
 
 ---
 
@@ -104,7 +159,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:21
 paperH: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:22
+Defined in: website/components/home/mosaic/burn/types.ts:39
 
 ---
 
@@ -114,7 +169,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:22
 t: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:24
+Defined in: website/components/home/mosaic/burn/types.ts:41
 
 Seconds elapsed — noise/particle clock (forward progress derives from it).
 
@@ -126,7 +181,7 @@ Seconds elapsed — noise/particle clock (forward progress derives from it).
 dur: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:25
+Defined in: website/components/home/mosaic/burn/types.ts:42
 
 ---
 
@@ -136,7 +191,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:25
 prog: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:32
+Defined in: website/components/home/mosaic/burn/types.ts:49
 
 Burn progress 0..1 while rebuilding — captured from the forward clock
 at disarm, then counted down; burnPaper re-derives the raster from
@@ -151,7 +206,7 @@ glyphs (a true time-reverse of the consume front).
 dir: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:34
+Defined in: website/components/home/mosaic/burn/types.ts:51
 
 Direction: 1 combusts forward, −1 un-burns back to whole text.
 
@@ -163,7 +218,7 @@ Direction: 1 combusts forward, −1 un-burns back to whole text.
 lastT: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:35
+Defined in: website/components/home/mosaic/burn/types.ts:52
 
 ---
 
@@ -173,7 +228,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:35
 raf: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:36
+Defined in: website/components/home/mosaic/burn/types.ts:53
 
 ---
 
@@ -183,7 +238,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:36
 active: boolean
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:37
+Defined in: website/components/home/mosaic/burn/types.ts:54
 
 ---
 
@@ -193,7 +248,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:37
 cardEl: Element
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:39
+Defined in: website/components/home/mosaic/burn/types.ts:56
 
 Owning card — teardown restores its classes and removes the slot.
 
@@ -205,7 +260,7 @@ Owning card — teardown restores its classes and removes the slot.
 particles: BurnParticle[];
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:41
+Defined in: website/components/home/mosaic/burn/types.ts:58
 
 Live particles (embers + char flecks).
 
@@ -217,7 +272,7 @@ Live particles (embers + char flecks).
 letters: LetterBurn[];
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:49
+Defined in: website/components/home/mosaic/burn/types.ts:66
 
 Per-glyph burn units — detected as ink column-runs in the rasterized
 paper (a space's gap splits runs, so each bucket IS a letter, not a
@@ -233,7 +288,7 @@ stand untouched — the effect consumes the text letter by letter.
 colLetter: Int16Array
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:51
+Defined in: website/components/home/mosaic/burn/types.ts:68
 
 Paper-x → owning letter index (nearest letter for gap columns).
 
@@ -245,7 +300,7 @@ Paper-x → owning letter index (nearest letter for gap columns).
 colInk: Uint8Array
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:53
+Defined in: website/components/home/mosaic/burn/types.ts:70
 
 Paper-x → ink coverage flag (0/1) — embers only spawn on glyph ink.
 
@@ -257,7 +312,7 @@ Paper-x → ink coverage flag (0/1) — embers only spawn on glyph ink.
 work: HTMLCanvasElement
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:59
+Defined in: website/components/home/mosaic/burn/types.ts:76
 
 Working raster — every frame rebuilds the burned text here (paper →
 char-darken → erode), then blits into the display canvas so the
@@ -271,7 +326,7 @@ compositing never collides with particles.
 workCtx: CanvasRenderingContext2D
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:60
+Defined in: website/components/home/mosaic/burn/types.ts:77
 
 ---
 
@@ -281,7 +336,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:60
 titleEl: HTMLElement
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:69
+Defined in: website/components/home/mosaic/burn/types.ts:86
 
 Live DOM nodes — re-measured every frame. The card's expand ease
 animates the h2's `cqw` font-size and flex-end position for ~0.42s;
@@ -298,7 +353,7 @@ is always pixel-identical to what the DOM would show.
 overlayEl: HTMLElement
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:70
+Defined in: website/components/home/mosaic/burn/types.ts:87
 
 ---
 
@@ -308,7 +363,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:70
 ink: BurnInk
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:72
+Defined in: website/components/home/mosaic/burn/types.ts:89
 
 Theme-resolved inks — read once from the CSS burn palette.
 
@@ -320,7 +375,7 @@ Theme-resolved inks — read once from the CSS burn palette.
 inkColor: string
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:79
+Defined in: website/components/home/mosaic/burn/types.ts:96
 
 The title's resolved ink color captured BEFORE the DOM glyphs hide —
 the `burning` class sets `color: transparent`, so any re-raster after
@@ -335,7 +390,7 @@ vanishes" bug).
 lastBox: string
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:81
+Defined in: website/components/home/mosaic/burn/types.ts:98
 
 Arm-time title-box signature — set once; a truthy value freezes the raster.
 
@@ -347,6 +402,6 @@ Arm-time title-box signature — set once; a truthy value freezes the raster.
 lastPos: string
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:83
+Defined in: website/components/home/mosaic/burn/types.ts:100
 
 Last tracked canvas-space position — position-only drift detector.

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/render](../README.md) / renderDocs
 
 ```ts
-function renderDocs(view): HTMLElement;
+function renderDocs(view): HTMLElement
 ```
 
-Defined in: experiments/docs/render.tsx:125
+Defined in: experiments/docs/render.tsx:181
 
 The docs template — assembled for ViewDocs.render().
 

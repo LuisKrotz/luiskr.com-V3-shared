@@ -1,19 +1,22 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/nav](../README.md) / scheduleTeleport
 
 ```ts
-function scheduleTeleport(c, targetIdx): void;
+function scheduleTeleport(c, targetIdx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:187
+Defined in: website/components/carousel/custom-carousel/nav.ts:258
 
-Schedules the clone→real teleport: after TELEPORT_DELAY (just past the
-smooth-scroll duration so the clone finishes animating in), instant-jump
-to the identical real slide — invisible. Any pending teleport is
-cancelled first so rapid nav can't queue competing jumps.
+Arms the clone→real teleport: `pendingTeleport` is the normal path —
+the scroll spring's settle fires it through `settleNav` the frame the
+clone parks. The TELEPORT_DELAY timer is only the rAF-starvation
+watchdog (hidden tab): if the spring can't run, the instant jump
+still lands — invisible either way since clone and twin are
+pixel-identical. A pending teleport is cancelled first so rapid nav
+can't queue competing jumps.
 
 ## Parameters
 

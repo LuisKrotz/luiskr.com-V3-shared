@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/events](../README.md) / bindEvents
 
 ```ts
-function bindEvents(host): void;
+function bindEvents(host): void
 ```
 
-Defined in: website/components/home/mosaic/events.ts:14
+Defined in: website/components/home/mosaic/events.ts:15
 
 Binds click/hover/leave/resize handlers inside the shadow root.
 

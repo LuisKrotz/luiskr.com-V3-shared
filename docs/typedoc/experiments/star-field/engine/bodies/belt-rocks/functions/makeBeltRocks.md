@@ -8,7 +8,7 @@
 function makeBeltRocks(THREE, def): object
 ```
 
-Defined in: experiments/star-field/engine/bodies/belt-rocks.ts:298
+Defined in: experiments/star-field/engine/bodies/belt-rocks.ts:318
 
 Populates an asteroid-belt definition with hero rock meshes — the
 particle annulus stays as the mass background, these give the belt

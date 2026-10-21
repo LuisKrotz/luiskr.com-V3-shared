@@ -8,6 +8,6 @@
 const _TRACK_H: 0.02 = 0.02
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:61
+Defined in: website/components/home/about/glitch/types.ts:62
 
 VHS tracking bar — thin brightened horizontal strip.

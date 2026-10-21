@@ -8,7 +8,7 @@
 function toggleNavMenu(host): void
 ```
 
-Defined in: website/components/nav/menu.tsx:114
+Defined in: website/components/nav/menu.tsx:116
 
 Opens/closes the fullscreen menu overlay.
 

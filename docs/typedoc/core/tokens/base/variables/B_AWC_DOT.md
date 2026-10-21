@@ -8,7 +8,7 @@
 const _B_AWC_DOT: 'aw-c-dot'
 ```
 
-Defined in: core/tokens/base.ts:356
+Defined in: core/tokens/base.ts:361
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

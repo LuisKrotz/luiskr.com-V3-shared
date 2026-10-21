@@ -17,7 +17,7 @@ jittered height — the white tracking line at the tape head switch.
 
 ### s
 
-[`GlitchSession`](../../types/interfaces/GlitchSession.md)
+[`Glitch2dSession`](../../types/type-aliases/Glitch2dSession.md)
 
 ## Returns
 

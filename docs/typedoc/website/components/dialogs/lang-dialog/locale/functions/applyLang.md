@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/dialogs/lang-dialog/locale](../README.md) / applyLang
 
 ```ts
-function applyLang(newLang): void;
+function applyLang(newLang): void
 ```
 
-Defined in: website/components/dialogs/lang-dialog/locale.ts:22
+Defined in: website/components/dialogs/lang-dialog/locale.ts:56
 
 Applies the chosen locale: commits the language + rewrites the URL.
 

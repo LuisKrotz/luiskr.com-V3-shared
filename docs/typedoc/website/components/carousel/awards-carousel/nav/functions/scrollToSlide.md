@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/nav](../README.md) / scrollToSlide
 
 ```ts
-function scrollToSlide(host, idx): void;
+function scrollToSlide(host, idx): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:83
+Defined in: website/components/carousel/awards-carousel/nav.ts:161
 
 Smooth scroll to slide idx (children offset +1 skips the last-clone).
 Same centering math as scrollToElement but reads rects fresh — the

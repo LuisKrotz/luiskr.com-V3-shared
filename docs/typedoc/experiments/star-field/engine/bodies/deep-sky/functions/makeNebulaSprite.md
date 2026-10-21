@@ -1,20 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/star-field/engine/bodies/deep-sky](../README.md) / makeNebulaSprite
 
 ```ts
-function makeNebulaSprite(
-   THREE, 
-   def, 
-   texMap, 
-   glowTex, 
-   lobes?
-): Sprite;
+function makeNebulaSprite(THREE, def, texMap, glowTex, lobes?): Sprite
 ```
 
-Defined in: experiments/star-field/engine/bodies/deep-sky.ts:35
+Defined in: experiments/star-field/engine/bodies/deep-sky.ts:45
 
 Billboard sprite for nebulae and star clusters — the real photo on a
 camera-facing sprite with feathered edges and source aspect ratio

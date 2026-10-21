@@ -19,6 +19,8 @@ const SF_KINDS: Readonly<{
   STRUCTURE: 'structure'
   BELT: 'belt'
   SATELLITE: 'satellite'
+  COMET: 'comet'
+  ASTEROID: 'asteroid'
 }>
 ```
 

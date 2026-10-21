@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/skeleton/loop](../README.md) / resolve
 
 ```ts
-function resolve(host): void;
+function resolve(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton/loop.ts:91
+Defined in: core/utils/canvas/loaders/skeleton/loop.ts:129
 
 Content has arrived: fades the real content in, plays the shimmer
 resolve-out animation, then tears down and releases the shared GL

@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/arch-scene](../README.md) / ArchSceneHandle
 
-Defined in: experiments/docs/arch-scene.ts:36
+Defined in: experiments/docs/arch-scene.ts:38
 
 Live scene resources — destroy() frees renderer + listeners.
 
@@ -16,13 +16,13 @@ Live scene resources — destroy() frees renderer + listeners.
 destroy(): void;
 ```
 
-Defined in: experiments/docs/arch-scene.ts:37
+Defined in: experiments/docs/arch-scene.ts:39
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### setActive()
 
@@ -30,7 +30,7 @@ Defined in: experiments/docs/arch-scene.ts:37
 setActive(_path): void;
 ```
 
-Defined in: experiments/docs/arch-scene.ts:44
+Defined in: experiments/docs/arch-scene.ts:46
 
 Highlights the node matching `path` — the current docs location.
 Safe to call before the async graph build lands; the highlight

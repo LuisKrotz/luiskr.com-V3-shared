@@ -42,6 +42,36 @@ Re-exports [svgPlaceholder](dom/functions/svgPlaceholder.md)
 
 ---
 
+### isPlainClick
+
+Re-exports [isPlainClick](dom/functions/isPlainClick.md)
+
+---
+
+### viewportWidth
+
+Re-exports [viewportWidth](dom/functions/viewportWidth.md)
+
+---
+
+### resetViewportCache
+
+Re-exports [resetViewportCache](dom/functions/resetViewportCache.md)
+
+---
+
+### isIntentionalFlush
+
+Re-exports [isIntentionalFlush](dom/functions/isIntentionalFlush.md)
+
+---
+
+### flushLayout
+
+Re-exports [flushLayout](dom/functions/flushLayout.md)
+
+---
+
 ### MediaUrlItem
 
 Re-exports [MediaUrlItem](media/interfaces/MediaUrlItem.md)
@@ -72,6 +102,24 @@ Re-exports [getOptimizedGravatar](media/functions/getOptimizedGravatar.md)
 
 ---
 
+### encodeMediaUrl
+
+Re-exports [encodeMediaUrl](media/functions/encodeMediaUrl.md)
+
+---
+
+### webpSibling
+
+Re-exports [webpSibling](media/functions/webpSibling.md)
+
+---
+
+### webmSibling
+
+Re-exports [webmSibling](media/functions/webmSibling.md)
+
+---
+
 ### buildMediaUrls
 
 Re-exports [buildMediaUrls](media/functions/buildMediaUrls.md)
@@ -96,6 +144,24 @@ Re-exports [generateProjectArticleSchema](schema/functions/generateProjectArticl
 
 ---
 
+### generateBreadcrumbSchema
+
+Re-exports [generateBreadcrumbSchema](schema/functions/generateBreadcrumbSchema.md)
+
+---
+
+### generateRouteSchema
+
+Re-exports [generateRouteSchema](schema/functions/generateRouteSchema.md)
+
+---
+
+### generateProjectSchema
+
+Re-exports [generateProjectSchema](schema/functions/generateProjectSchema.md)
+
+---
+
 ### generateDocsSchema
 
 Re-exports [generateDocsSchema](schema/functions/generateDocsSchema.md)
@@ -114,6 +180,12 @@ Re-exports [stripHtml](string/functions/stripHtml.md)
 
 ---
 
+### toMetaDescription
+
+Re-exports [toMetaDescription](string/functions/toMetaDescription.md)
+
+---
+
 ### escapeHtml
 
 Re-exports [escapeHtml](string/functions/escapeHtml.md)
@@ -123,3 +195,15 @@ Re-exports [escapeHtml](string/functions/escapeHtml.md)
 ### slugify
 
 Re-exports [slugify](string/functions/slugify.md)
+
+---
+
+### splitDrawSentences
+
+Re-exports [splitDrawSentences](string/functions/splitDrawSentences.md)
+
+---
+
+### mediaSlugSeq
+
+Re-exports [mediaSlugSeq](string/functions/mediaSlugSeq.md)

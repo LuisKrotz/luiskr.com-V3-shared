@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/figure/video](../README.md) / pauseVideo
 
 ```ts
-function pauseVideo(fig, target): void;
+function pauseVideo(fig, target): void
 ```
 
-Defined in: website/components/media/figure/video.ts:60
+Defined in: website/components/media/figure/video.ts:61
 
 Pauses playback (offscreen or pref change).
 

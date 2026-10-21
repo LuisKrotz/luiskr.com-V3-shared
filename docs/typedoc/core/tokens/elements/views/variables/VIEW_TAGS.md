@@ -1,21 +1,22 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/elements/views](../README.md) / VIEW\_TAGS
 
 ```ts
 const VIEW_TAGS: Readonly<{
-  VIEW_HOME: "view-home";
-  VIEW_PROJECT: "view-project";
-  VIEW_LEGAL: "view-legal";
-  VIEW_NOT_FOUND: "view-not-found";
-  VIEW_ADMIN_LOGIN: "view-admin-login";
-  VIEW_CMS_DASHBOARD: "view-cms-dashboard";
-  VIEW_SPACE_PLAYGROUND: "view-space-playground";
-  VIEW_STAR_FIELD: "view-star-field";
-  VIEW_DOCS: "view-docs";
-}>;
+  VIEW_HOME: 'view-home'
+  VIEW_PROJECT: 'view-project'
+  VIEW_LEGAL: 'view-legal'
+  VIEW_NOT_FOUND: 'view-not-found'
+  VIEW_ADMIN_LOGIN: 'view-admin-login'
+  VIEW_CMS_DASHBOARD: 'view-cms-dashboard'
+  VIEW_SPACE_PLAYGROUND: 'view-space-playground'
+  VIEW_STAR_FIELD: 'view-star-field'
+  VIEW_DOCS: 'view-docs'
+  VIEW_ANIMATIONS: 'view-animations'
+}>
 ```
 
 Defined in: core/tokens/elements/views.ts:12

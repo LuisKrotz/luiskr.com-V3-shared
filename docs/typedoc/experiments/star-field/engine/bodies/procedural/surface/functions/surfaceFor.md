@@ -8,7 +8,7 @@
 function surfaceFor(THREE, def): Texture<unknown, TextureEventMap> | undefined
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/surface.ts:182
+Defined in: experiments/star-field/engine/bodies/procedural/surface.ts:302
 
 Generates a seeded equirect surface texture for an untextured solid
 body — planets, moons, dwarf planets and rocky exoplanet satellites

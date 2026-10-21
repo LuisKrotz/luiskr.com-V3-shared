@@ -7,12 +7,16 @@
 ```ts
 const WASM_POOL: Readonly<{
   WORKER_URL: '/scripts/workers/wasm-worker.js'
+  GPU_WORKER_URL: '/scripts/workers/gpu-render-worker.js'
   ENGINE_URL: '/scripts/wasm/engine.wasm'
-  MOBILE_MAX: 2
+  MOBILE_MAX: 4
   DESKTOP_MIN: 2
-  DESKTOP_MAX: 4
+  DESKTOP_MAX: 14
+  RESERVED_CORES: 2
   FALLBACK_CORES: 2
   REPLY_TIMEOUT_MS: 8000
+  RESPAWN_COOLDOWN_MS: 5000
+  MAX_WIPEOUTS: 3
 }>
 ```
 

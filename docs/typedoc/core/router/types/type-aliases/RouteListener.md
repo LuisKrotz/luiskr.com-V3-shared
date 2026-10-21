@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/router/types](../README.md) / RouteListener
 
 ```ts
-type RouteListener = (_to, from) => void;
+type RouteListener = (_to, from) => void
 ```
 
-Defined in: core/router/types.ts:39
+Defined in: core/router/types.ts:43
 
 Subscriber signature — fired on every successful navigation.
 

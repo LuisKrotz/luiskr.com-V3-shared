@@ -96,6 +96,12 @@ Re-exports [SF_NEBULA_DEPTH](bodies/variables/SF_NEBULA_DEPTH.md)
 
 ---
 
+### SF\_COMET
+
+Re-exports [SF_COMET](bodies/variables/SF_COMET.md)
+
+---
+
 ### SF\_SPIRAL
 
 Re-exports [SF_SPIRAL](spiral/variables/SF_SPIRAL.md)
@@ -171,3 +177,9 @@ Re-exports [SF_CONSTELLATION](weather/variables/SF_CONSTELLATION.md)
 ### SF\_METEOR
 
 Re-exports [SF_METEOR](weather/variables/SF_METEOR.md)
+
+---
+
+### SF\_PLUME
+
+Re-exports [SF_PLUME](weather/variables/SF_PLUME.md)

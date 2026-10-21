@@ -8,6 +8,6 @@
 const _FLECK_LIFE_MAX: 1.1 = 1.1
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:59
+Defined in: website/components/home/mosaic/burn/tuning.ts:64
 
 Fleck lifetime ceiling (seconds).

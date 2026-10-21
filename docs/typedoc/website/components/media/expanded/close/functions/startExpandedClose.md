@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/expanded/close](../README.md) / startExpandedClose
 
 ```ts
-function startExpandedClose(el): void;
+function startExpandedClose(el): void
 ```
 
-Defined in: website/components/media/expanded/close.ts:25
+Defined in: website/components/media/expanded/close.ts:82
 
 Starts expanded close.
 

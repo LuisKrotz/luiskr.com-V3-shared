@@ -8,6 +8,6 @@
 const _ROLL_SPEED: 0.4 = 0.4
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:69
+Defined in: website/components/home/about/glitch/types.ts:70
 
 Rolling-bar sweep speed (frame-heights per second).

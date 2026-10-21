@@ -8,7 +8,7 @@
 function checkApproach(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/updates.ts:28
+Defined in: experiments/star-field/engine/frame/updates.ts:29
 
 Proximity check — when the camera comes within a body's approach
 distance its dossier JSON prefetches via `onApproach`, once per body

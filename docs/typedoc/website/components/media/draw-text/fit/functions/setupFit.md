@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/draw-text/fit](../README.md) / setupFit
 
 ```ts
-function setupFit(host): void;
+function setupFit(host): void
 ```
 
-Defined in: website/components/media/draw-text/fit.ts:116
+Defined in: website/components/media/draw-text/fit.ts:215
 
 Installs the fit pipeline for a fitted host: immediate measure, a
 ResizeObserver on the parent (the sizing constraint) for breakpoint /

@@ -8,7 +8,7 @@
 function isLandscapeItem(item): boolean
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:197
+Defined in: website/components/carousel/custom-carousel/sizing.ts:205
 
 Detects whether a slide item is landscape (by class or aspect ratio).
 

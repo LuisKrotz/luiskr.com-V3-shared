@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [shared/src/app/modal](../README.md) / updateAppModalState
 
 ```ts
-function updateAppModalState(c): void;
+function updateAppModalState(c): void
 ```
 
-Defined in: shared/src/app/modal.ts:20
+Defined in: shared/src/app/modal.ts:17
 
 Updates app modal state.
 

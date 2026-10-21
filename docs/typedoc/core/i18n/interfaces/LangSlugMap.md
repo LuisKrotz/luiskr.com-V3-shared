@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / [core/i18n](../README.md) / LangSlugMap
 
@@ -14,81 +14,105 @@ its translated path segment (`about` → 'sobre'/'ueber', …).
 ### about
 
 ```ts
-about: string;
+about: string
 ```
 
 Defined in: core/i18n.ts:75
 
 '/<loc>/about' segment.
 
-***
+---
 
 ### contact
 
 ```ts
-contact: string;
+contact: string
 ```
 
 Defined in: core/i18n.ts:77
 
 Contact page segment.
 
-***
+---
 
 ### privacy
 
 ```ts
-privacy: string;
+privacy: string
 ```
 
 Defined in: core/i18n.ts:79
 
 Privacy-policy page segment.
 
-***
+---
 
 ### gdpr
 
 ```ts
-gdpr: string;
+gdpr: string
 ```
 
 Defined in: core/i18n.ts:81
 
 GDPR page segment.
 
-***
+---
 
 ### terms
 
 ```ts
-terms: string;
+terms: string
 ```
 
 Defined in: core/i18n.ts:83
 
 Terms-of-use page segment.
 
-***
+---
 
-### earthPlayground
+### license
 
 ```ts
-earthPlayground: string;
+license: string
 ```
 
 Defined in: core/i18n.ts:85
 
-Earth playground segment.
+License page segment.
 
-***
+---
 
-### starField
+### earthPlayground
 
 ```ts
-starField: string;
+earthPlayground: string
 ```
 
 Defined in: core/i18n.ts:87
 
+Earth playground segment.
+
+---
+
+### starField
+
+```ts
+starField: string
+```
+
+Defined in: core/i18n.ts:89
+
 Star-field experiment segment.
+
+---
+
+### animations
+
+```ts
+animations: string
+```
+
+Defined in: core/i18n.ts:91
+
+Animations-reference segment.

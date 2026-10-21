@@ -14,7 +14,7 @@ function texCanvas(
 } | null
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:78
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:79
 
 Creates a canvas + 2d context for texture generation, or null when
 the environment has no 2d (headless probes, blocked canvas) — every

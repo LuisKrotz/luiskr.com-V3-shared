@@ -8,7 +8,7 @@
 function trackHover(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/updates.ts:279
+Defined in: experiments/star-field/engine/frame/updates.ts:300
 
 Hover tracking — re-projects the hovered anchor each tick and reports
 canvas-space pixels so the DOM tooltip + leader line track orbiting

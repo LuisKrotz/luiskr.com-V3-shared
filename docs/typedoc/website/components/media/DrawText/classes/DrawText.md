@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/media/DrawText](../README.md) / DrawText
 
-Defined in: website/components/media/DrawText.tsx:35
+Defined in: website/components/media/DrawText.tsx:38
 
 Draws text.
 
@@ -20,7 +20,7 @@ Draws text.
 new DrawText(): DrawText;
 ```
 
-Defined in: website/components/media/DrawText.tsx:58
+Defined in: website/components/media/DrawText.tsx:65
 
 #### Returns
 
@@ -37,22 +37,22 @@ HTMLElement.constructor
 ### \_isVisible
 
 ```ts
-_isVisible: boolean = false;
+_isVisible: boolean = false
 ```
 
-Defined in: website/components/media/DrawText.tsx:36
+Defined in: website/components/media/DrawText.tsx:39
 
-***
+---
 
 ### \_hasAnimated
 
 ```ts
-_hasAnimated: boolean = false;
+_hasAnimated: boolean = false
 ```
 
-Defined in: website/components/media/DrawText.tsx:37
+Defined in: website/components/media/DrawText.tsx:40
 
-***
+---
 
 ### \_observer
 
@@ -60,9 +60,9 @@ Defined in: website/components/media/DrawText.tsx:37
 _observer: IntersectionObserver | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:38
+Defined in: website/components/media/DrawText.tsx:41
 
-***
+---
 
 ### \_animTimer
 
@@ -70,19 +70,19 @@ Defined in: website/components/media/DrawText.tsx:38
 _animTimer: DrawTimer | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:39
+Defined in: website/components/media/DrawText.tsx:42
 
-***
+---
 
 ### \_isMounted
 
 ```ts
-_isMounted: boolean = false;
+_isMounted: boolean = false
 ```
 
-Defined in: website/components/media/DrawText.tsx:40
+Defined in: website/components/media/DrawText.tsx:43
 
-***
+---
 
 ### \_styleEl
 
@@ -90,9 +90,9 @@ Defined in: website/components/media/DrawText.tsx:40
 _styleEl: HTMLStyleElement | CSSStyleSheet | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:41
+Defined in: website/components/media/DrawText.tsx:44
 
-***
+---
 
 ### \_contentEl
 
@@ -100,9 +100,9 @@ Defined in: website/components/media/DrawText.tsx:41
 _contentEl: HTMLSpanElement | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:42
+Defined in: website/components/media/DrawText.tsx:45
 
-***
+---
 
 ### \_fitObserver
 
@@ -110,9 +110,9 @@ Defined in: website/components/media/DrawText.tsx:42
 _fitObserver: ResizeObserver | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:43
+Defined in: website/components/media/DrawText.tsx:46
 
-***
+---
 
 ### \_effectiveOffset
 
@@ -120,14 +120,58 @@ Defined in: website/components/media/DrawText.tsx:43
 _effectiveOffset: number | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:44
+Defined in: website/components/media/DrawText.tsx:47
 
-***
+---
+
+### \_gpuHandle
+
+```ts
+_gpuHandle:
+  | {
+  destroy: void;
+}
+  | null = null;
+```
+
+Defined in: website/components/media/DrawText.tsx:48
+
+---
+
+### \_gpuPending
+
+```ts
+_gpuPending: boolean = false
+```
+
+Defined in: website/components/media/DrawText.tsx:49
+
+---
+
+### \_gpuRaf
+
+```ts
+_gpuRaf: number = 0
+```
+
+Defined in: website/components/media/DrawText.tsx:50
+
+---
+
+### \_gpuCanvas
+
+```ts
+_gpuCanvas: HTMLCanvasElement | null = null;
+```
+
+Defined in: website/components/media/DrawText.tsx:51
+
+---
 
 ### onbeforexrselect
 
 ```ts
-onbeforexrselect: ((this, ev) => any) | null;
+onbeforexrselect: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/@types/webxr/index.d.ts:1237
@@ -143,12 +187,12 @@ at the time the input device's primary action is triggered.
 HTMLElement.onbeforexrselect
 ```
 
-***
+---
 
 ### ariaActiveDescendantElement
 
 ```ts
-ariaActiveDescendantElement: Element | null;
+ariaActiveDescendantElement: Element | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3242
@@ -161,12 +205,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3242
 HTMLElement.ariaActiveDescendantElement
 ```
 
-***
+---
 
 ### ariaAtomic
 
 ```ts
-ariaAtomic: string | null;
+ariaAtomic: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3244
@@ -179,12 +223,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3244
 HTMLElement.ariaAtomic
 ```
 
-***
+---
 
 ### ariaAutoComplete
 
 ```ts
-ariaAutoComplete: string | null;
+ariaAutoComplete: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3246
@@ -197,12 +241,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3246
 HTMLElement.ariaAutoComplete
 ```
 
-***
+---
 
 ### ariaBrailleLabel
 
 ```ts
-ariaBrailleLabel: string | null;
+ariaBrailleLabel: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3248
@@ -215,12 +259,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3248
 HTMLElement.ariaBrailleLabel
 ```
 
-***
+---
 
 ### ariaBrailleRoleDescription
 
 ```ts
-ariaBrailleRoleDescription: string | null;
+ariaBrailleRoleDescription: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3250
@@ -233,12 +277,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3250
 HTMLElement.ariaBrailleRoleDescription
 ```
 
-***
+---
 
 ### ariaBusy
 
 ```ts
-ariaBusy: string | null;
+ariaBusy: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3252
@@ -251,12 +295,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3252
 HTMLElement.ariaBusy
 ```
 
-***
+---
 
 ### ariaChecked
 
 ```ts
-ariaChecked: string | null;
+ariaChecked: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3254
@@ -269,12 +313,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3254
 HTMLElement.ariaChecked
 ```
 
-***
+---
 
 ### ariaColCount
 
 ```ts
-ariaColCount: string | null;
+ariaColCount: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3256
@@ -287,12 +331,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3256
 HTMLElement.ariaColCount
 ```
 
-***
+---
 
 ### ariaColIndex
 
 ```ts
-ariaColIndex: string | null;
+ariaColIndex: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3258
@@ -305,12 +349,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3258
 HTMLElement.ariaColIndex
 ```
 
-***
+---
 
 ### ariaColIndexText
 
 ```ts
-ariaColIndexText: string | null;
+ariaColIndexText: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3260
@@ -323,12 +367,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3260
 HTMLElement.ariaColIndexText
 ```
 
-***
+---
 
 ### ariaColSpan
 
 ```ts
-ariaColSpan: string | null;
+ariaColSpan: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3262
@@ -341,7 +385,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3262
 HTMLElement.ariaColSpan
 ```
 
-***
+---
 
 ### ariaControlsElements
 
@@ -359,12 +403,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3264
 HTMLElement.ariaControlsElements
 ```
 
-***
+---
 
 ### ariaCurrent
 
 ```ts
-ariaCurrent: string | null;
+ariaCurrent: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3266
@@ -377,7 +421,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3266
 HTMLElement.ariaCurrent
 ```
 
-***
+---
 
 ### ariaDescribedByElements
 
@@ -395,12 +439,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3268
 HTMLElement.ariaDescribedByElements
 ```
 
-***
+---
 
 ### ariaDescription
 
 ```ts
-ariaDescription: string | null;
+ariaDescription: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3270
@@ -413,7 +457,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3270
 HTMLElement.ariaDescription
 ```
 
-***
+---
 
 ### ariaDetailsElements
 
@@ -431,12 +475,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3272
 HTMLElement.ariaDetailsElements
 ```
 
-***
+---
 
 ### ariaDisabled
 
 ```ts
-ariaDisabled: string | null;
+ariaDisabled: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3274
@@ -449,7 +493,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3274
 HTMLElement.ariaDisabled
 ```
 
-***
+---
 
 ### ariaErrorMessageElements
 
@@ -467,12 +511,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3276
 HTMLElement.ariaErrorMessageElements
 ```
 
-***
+---
 
 ### ariaExpanded
 
 ```ts
-ariaExpanded: string | null;
+ariaExpanded: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3278
@@ -485,7 +529,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3278
 HTMLElement.ariaExpanded
 ```
 
-***
+---
 
 ### ariaFlowToElements
 
@@ -503,12 +547,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3280
 HTMLElement.ariaFlowToElements
 ```
 
-***
+---
 
 ### ariaHasPopup
 
 ```ts
-ariaHasPopup: string | null;
+ariaHasPopup: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3282
@@ -521,12 +565,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3282
 HTMLElement.ariaHasPopup
 ```
 
-***
+---
 
 ### ariaHidden
 
 ```ts
-ariaHidden: string | null;
+ariaHidden: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3284
@@ -539,12 +583,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3284
 HTMLElement.ariaHidden
 ```
 
-***
+---
 
 ### ariaInvalid
 
 ```ts
-ariaInvalid: string | null;
+ariaInvalid: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3286
@@ -557,12 +601,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3286
 HTMLElement.ariaInvalid
 ```
 
-***
+---
 
 ### ariaKeyShortcuts
 
 ```ts
-ariaKeyShortcuts: string | null;
+ariaKeyShortcuts: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3288
@@ -575,12 +619,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3288
 HTMLElement.ariaKeyShortcuts
 ```
 
-***
+---
 
 ### ariaLabel
 
 ```ts
-ariaLabel: string | null;
+ariaLabel: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3290
@@ -593,7 +637,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3290
 HTMLElement.ariaLabel
 ```
 
-***
+---
 
 ### ariaLabelledByElements
 
@@ -611,12 +655,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3292
 HTMLElement.ariaLabelledByElements
 ```
 
-***
+---
 
 ### ariaLevel
 
 ```ts
-ariaLevel: string | null;
+ariaLevel: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3294
@@ -629,12 +673,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3294
 HTMLElement.ariaLevel
 ```
 
-***
+---
 
 ### ariaLive
 
 ```ts
-ariaLive: string | null;
+ariaLive: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3296
@@ -647,12 +691,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3296
 HTMLElement.ariaLive
 ```
 
-***
+---
 
 ### ariaModal
 
 ```ts
-ariaModal: string | null;
+ariaModal: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3298
@@ -665,12 +709,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3298
 HTMLElement.ariaModal
 ```
 
-***
+---
 
 ### ariaMultiLine
 
 ```ts
-ariaMultiLine: string | null;
+ariaMultiLine: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3300
@@ -683,12 +727,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3300
 HTMLElement.ariaMultiLine
 ```
 
-***
+---
 
 ### ariaMultiSelectable
 
 ```ts
-ariaMultiSelectable: string | null;
+ariaMultiSelectable: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3302
@@ -701,12 +745,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3302
 HTMLElement.ariaMultiSelectable
 ```
 
-***
+---
 
 ### ariaOrientation
 
 ```ts
-ariaOrientation: string | null;
+ariaOrientation: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3304
@@ -719,7 +763,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3304
 HTMLElement.ariaOrientation
 ```
 
-***
+---
 
 ### ariaOwnsElements
 
@@ -737,12 +781,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3306
 HTMLElement.ariaOwnsElements
 ```
 
-***
+---
 
 ### ariaPlaceholder
 
 ```ts
-ariaPlaceholder: string | null;
+ariaPlaceholder: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3308
@@ -755,12 +799,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3308
 HTMLElement.ariaPlaceholder
 ```
 
-***
+---
 
 ### ariaPosInSet
 
 ```ts
-ariaPosInSet: string | null;
+ariaPosInSet: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3310
@@ -773,12 +817,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3310
 HTMLElement.ariaPosInSet
 ```
 
-***
+---
 
 ### ariaPressed
 
 ```ts
-ariaPressed: string | null;
+ariaPressed: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3312
@@ -791,12 +835,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3312
 HTMLElement.ariaPressed
 ```
 
-***
+---
 
 ### ariaReadOnly
 
 ```ts
-ariaReadOnly: string | null;
+ariaReadOnly: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3314
@@ -809,12 +853,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3314
 HTMLElement.ariaReadOnly
 ```
 
-***
+---
 
 ### ariaRelevant
 
 ```ts
-ariaRelevant: string | null;
+ariaRelevant: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3316
@@ -827,12 +871,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3316
 HTMLElement.ariaRelevant
 ```
 
-***
+---
 
 ### ariaRequired
 
 ```ts
-ariaRequired: string | null;
+ariaRequired: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3318
@@ -845,12 +889,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3318
 HTMLElement.ariaRequired
 ```
 
-***
+---
 
 ### ariaRoleDescription
 
 ```ts
-ariaRoleDescription: string | null;
+ariaRoleDescription: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3320
@@ -863,12 +907,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3320
 HTMLElement.ariaRoleDescription
 ```
 
-***
+---
 
 ### ariaRowCount
 
 ```ts
-ariaRowCount: string | null;
+ariaRowCount: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3322
@@ -881,12 +925,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3322
 HTMLElement.ariaRowCount
 ```
 
-***
+---
 
 ### ariaRowIndex
 
 ```ts
-ariaRowIndex: string | null;
+ariaRowIndex: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3324
@@ -899,12 +943,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3324
 HTMLElement.ariaRowIndex
 ```
 
-***
+---
 
 ### ariaRowIndexText
 
 ```ts
-ariaRowIndexText: string | null;
+ariaRowIndexText: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3326
@@ -917,12 +961,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3326
 HTMLElement.ariaRowIndexText
 ```
 
-***
+---
 
 ### ariaRowSpan
 
 ```ts
-ariaRowSpan: string | null;
+ariaRowSpan: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3328
@@ -935,12 +979,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3328
 HTMLElement.ariaRowSpan
 ```
 
-***
+---
 
 ### ariaSelected
 
 ```ts
-ariaSelected: string | null;
+ariaSelected: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3330
@@ -953,12 +997,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3330
 HTMLElement.ariaSelected
 ```
 
-***
+---
 
 ### ariaSetSize
 
 ```ts
-ariaSetSize: string | null;
+ariaSetSize: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3332
@@ -971,12 +1015,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3332
 HTMLElement.ariaSetSize
 ```
 
-***
+---
 
 ### ariaSort
 
 ```ts
-ariaSort: string | null;
+ariaSort: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3334
@@ -989,12 +1033,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3334
 HTMLElement.ariaSort
 ```
 
-***
+---
 
 ### ariaValueMax
 
 ```ts
-ariaValueMax: string | null;
+ariaValueMax: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3336
@@ -1007,12 +1051,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3336
 HTMLElement.ariaValueMax
 ```
 
-***
+---
 
 ### ariaValueMin
 
 ```ts
-ariaValueMin: string | null;
+ariaValueMin: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3338
@@ -1025,12 +1069,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3338
 HTMLElement.ariaValueMin
 ```
 
-***
+---
 
 ### ariaValueNow
 
 ```ts
-ariaValueNow: string | null;
+ariaValueNow: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3340
@@ -1043,12 +1087,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3340
 HTMLElement.ariaValueNow
 ```
 
-***
+---
 
 ### ariaValueText
 
 ```ts
-ariaValueText: string | null;
+ariaValueText: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3342
@@ -1061,12 +1105,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3342
 HTMLElement.ariaValueText
 ```
 
-***
+---
 
 ### role
 
 ```ts
-role: string | null;
+role: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3344
@@ -1079,7 +1123,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3344
 HTMLElement.role
 ```
 
-***
+---
 
 ### attributes
 
@@ -1099,12 +1143,12 @@ The **`Element.attributes`** property returns a live collection of all attribute
 HTMLElement.attributes
 ```
 
-***
+---
 
 ### className
 
 ```ts
-className: string;
+className: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13527
@@ -1119,7 +1163,7 @@ The **`className`** property of the Element interface gets and sets the value of
 HTMLElement.className
 ```
 
-***
+---
 
 ### clientHeight
 
@@ -1139,7 +1183,7 @@ The **`clientHeight`** read-only property of the Element interface is zero for e
 HTMLElement.clientHeight
 ```
 
-***
+---
 
 ### clientLeft
 
@@ -1159,7 +1203,7 @@ The **`clientLeft`** read-only property of the Element interface returns the wid
 HTMLElement.clientLeft
 ```
 
-***
+---
 
 ### clientTop
 
@@ -1179,7 +1223,7 @@ The **`clientTop`** read-only property of the Element interface returns the widt
 HTMLElement.clientTop
 ```
 
-***
+---
 
 ### clientWidth
 
@@ -1199,7 +1243,7 @@ The **`clientWidth`** read-only property of the Element interface is zero for in
 HTMLElement.clientWidth
 ```
 
-***
+---
 
 ### currentCSSZoom
 
@@ -1219,7 +1263,7 @@ The **`currentCSSZoom`** read-only property of the Element interface provides th
 HTMLElement.currentCSSZoom
 ```
 
-***
+---
 
 ### customElementRegistry
 
@@ -1235,12 +1279,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13558
 HTMLElement.customElementRegistry
 ```
 
-***
+---
 
 ### id
 
 ```ts
-id: string;
+id: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13564
@@ -1255,12 +1299,12 @@ The **`id`** property of the Element interface represents the element's identifi
 HTMLElement.id
 ```
 
-***
+---
 
 ### innerHTML
 
 ```ts
-innerHTML: string;
+innerHTML: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13570
@@ -1275,7 +1319,7 @@ The **`innerHTML`** property of the Element interface gets or sets the HTML or X
 HTMLElement.innerHTML
 ```
 
-***
+---
 
 ### localName
 
@@ -1295,7 +1339,7 @@ The **`Element.localName`** read-only property returns the local part of the qua
 HTMLElement.localName
 ```
 
-***
+---
 
 ### namespaceURI
 
@@ -1315,12 +1359,12 @@ The **`Element.namespaceURI`** read-only property returns the namespace URI of t
 HTMLElement.namespaceURI
 ```
 
-***
+---
 
 ### onfullscreenchange
 
 ```ts
-onfullscreenchange: ((this, ev) => any) | null;
+onfullscreenchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13584
@@ -1333,12 +1377,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13584
 HTMLElement.onfullscreenchange
 ```
 
-***
+---
 
 ### onfullscreenerror
 
 ```ts
-onfullscreenerror: ((this, ev) => any) | null;
+onfullscreenerror: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13586
@@ -1351,12 +1395,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13586
 HTMLElement.onfullscreenerror
 ```
 
-***
+---
 
 ### outerHTML
 
 ```ts
-outerHTML: string;
+outerHTML: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13592
@@ -1371,7 +1415,7 @@ The **`outerHTML`** attribute of the Element interface gets or sets the HTML or 
 HTMLElement.outerHTML
 ```
 
-***
+---
 
 ### ownerDocument
 
@@ -1391,7 +1435,7 @@ The read-only **`ownerDocument`** property of the Node interface returns the top
 HTMLElement.ownerDocument
 ```
 
-***
+---
 
 ### prefix
 
@@ -1411,7 +1455,7 @@ The **`Element.prefix`** read-only property returns the namespace prefix of the 
 HTMLElement.prefix
 ```
 
-***
+---
 
 ### scrollHeight
 
@@ -1431,12 +1475,12 @@ The **`scrollHeight`** read-only property of the Element interface is a measurem
 HTMLElement.scrollHeight
 ```
 
-***
+---
 
 ### scrollLeft
 
 ```ts
-scrollLeft: number;
+scrollLeft: number
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13618
@@ -1451,12 +1495,12 @@ The **`scrollLeft`** property of the Element interface gets or sets the number o
 HTMLElement.scrollLeft
 ```
 
-***
+---
 
 ### scrollTop
 
 ```ts
-scrollTop: number;
+scrollTop: number
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13624
@@ -1471,7 +1515,7 @@ The **`scrollTop`** property of the Element interface gets or sets the number of
 HTMLElement.scrollTop
 ```
 
-***
+---
 
 ### scrollWidth
 
@@ -1491,7 +1535,7 @@ The **`scrollWidth`** read-only property of the Element interface is a measureme
 HTMLElement.scrollWidth
 ```
 
-***
+---
 
 ### shadowRoot
 
@@ -1511,12 +1555,12 @@ The **`Element.shadowRoot`** read-only property represents the shadow root hoste
 HTMLElement.shadowRoot
 ```
 
-***
+---
 
 ### slot
 
 ```ts
-slot: string;
+slot: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13642
@@ -1531,7 +1575,7 @@ The **`slot`** property of the Element interface returns the name of the shadow 
 HTMLElement.slot
 ```
 
-***
+---
 
 ### tagName
 
@@ -1551,7 +1595,7 @@ The **`tagName`** read-only property of the Element interface returns the tag na
 HTMLElement.tagName
 ```
 
-***
+---
 
 ### attributeStyleMap
 
@@ -1569,12 +1613,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13928
 HTMLElement.attributeStyleMap
 ```
 
-***
+---
 
 ### contentEditable
 
 ```ts
-contentEditable: string;
+contentEditable: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13936
@@ -1587,12 +1631,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13936
 HTMLElement.contentEditable
 ```
 
-***
+---
 
 ### enterKeyHint
 
 ```ts
-enterKeyHint: string;
+enterKeyHint: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13938
@@ -1605,12 +1649,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13938
 HTMLElement.enterKeyHint
 ```
 
-***
+---
 
 ### inputMode
 
 ```ts
-inputMode: string;
+inputMode: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13940
@@ -1623,7 +1667,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13940
 HTMLElement.inputMode
 ```
 
-***
+---
 
 ### isContentEditable
 
@@ -1641,12 +1685,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13942
 HTMLElement.isContentEditable
 ```
 
-***
+---
 
 ### onabort
 
 ```ts
-onabort: ((this, ev) => any) | null;
+onabort: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16764
@@ -1659,12 +1703,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16764
 HTMLElement.onabort
 ```
 
-***
+---
 
 ### onanimationcancel
 
 ```ts
-onanimationcancel: ((this, ev) => any) | null;
+onanimationcancel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16766
@@ -1677,12 +1721,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16766
 HTMLElement.onanimationcancel
 ```
 
-***
+---
 
 ### onanimationend
 
 ```ts
-onanimationend: ((this, ev) => any) | null;
+onanimationend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16768
@@ -1695,12 +1739,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16768
 HTMLElement.onanimationend
 ```
 
-***
+---
 
 ### onanimationiteration
 
 ```ts
-onanimationiteration: ((this, ev) => any) | null;
+onanimationiteration: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16770
@@ -1713,12 +1757,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16770
 HTMLElement.onanimationiteration
 ```
 
-***
+---
 
 ### onanimationstart
 
 ```ts
-onanimationstart: ((this, ev) => any) | null;
+onanimationstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16772
@@ -1731,12 +1775,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16772
 HTMLElement.onanimationstart
 ```
 
-***
+---
 
 ### onauxclick
 
 ```ts
-onauxclick: ((this, ev) => any) | null;
+onauxclick: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16774
@@ -1749,12 +1793,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16774
 HTMLElement.onauxclick
 ```
 
-***
+---
 
 ### onbeforeinput
 
 ```ts
-onbeforeinput: ((this, ev) => any) | null;
+onbeforeinput: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16776
@@ -1767,12 +1811,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16776
 HTMLElement.onbeforeinput
 ```
 
-***
+---
 
 ### onbeforematch
 
 ```ts
-onbeforematch: ((this, ev) => any) | null;
+onbeforematch: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16778
@@ -1785,12 +1829,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16778
 HTMLElement.onbeforematch
 ```
 
-***
+---
 
 ### onbeforetoggle
 
 ```ts
-onbeforetoggle: ((this, ev) => any) | null;
+onbeforetoggle: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16780
@@ -1803,12 +1847,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16780
 HTMLElement.onbeforetoggle
 ```
 
-***
+---
 
 ### onblur
 
 ```ts
-onblur: ((this, ev) => any) | null;
+onblur: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16782
@@ -1821,12 +1865,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16782
 HTMLElement.onblur
 ```
 
-***
+---
 
 ### oncancel
 
 ```ts
-oncancel: ((this, ev) => any) | null;
+oncancel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16784
@@ -1839,12 +1883,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16784
 HTMLElement.oncancel
 ```
 
-***
+---
 
 ### oncanplay
 
 ```ts
-oncanplay: ((this, ev) => any) | null;
+oncanplay: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16786
@@ -1857,12 +1901,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16786
 HTMLElement.oncanplay
 ```
 
-***
+---
 
 ### oncanplaythrough
 
 ```ts
-oncanplaythrough: ((this, ev) => any) | null;
+oncanplaythrough: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16788
@@ -1875,12 +1919,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16788
 HTMLElement.oncanplaythrough
 ```
 
-***
+---
 
 ### onchange
 
 ```ts
-onchange: ((this, ev) => any) | null;
+onchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16790
@@ -1893,12 +1937,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16790
 HTMLElement.onchange
 ```
 
-***
+---
 
 ### onclick
 
 ```ts
-onclick: ((this, ev) => any) | null;
+onclick: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16792
@@ -1911,12 +1955,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16792
 HTMLElement.onclick
 ```
 
-***
+---
 
 ### onclose
 
 ```ts
-onclose: ((this, ev) => any) | null;
+onclose: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16794
@@ -1929,12 +1973,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16794
 HTMLElement.onclose
 ```
 
-***
+---
 
 ### oncommand
 
 ```ts
-oncommand: ((this, ev) => any) | null;
+oncommand: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16796
@@ -1947,12 +1991,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16796
 HTMLElement.oncommand
 ```
 
-***
+---
 
 ### oncontextlost
 
 ```ts
-oncontextlost: ((this, ev) => any) | null;
+oncontextlost: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16798
@@ -1965,12 +2009,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16798
 HTMLElement.oncontextlost
 ```
 
-***
+---
 
 ### oncontextmenu
 
 ```ts
-oncontextmenu: ((this, ev) => any) | null;
+oncontextmenu: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16800
@@ -1983,12 +2027,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16800
 HTMLElement.oncontextmenu
 ```
 
-***
+---
 
 ### oncontextrestored
 
 ```ts
-oncontextrestored: ((this, ev) => any) | null;
+oncontextrestored: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16802
@@ -2001,12 +2045,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16802
 HTMLElement.oncontextrestored
 ```
 
-***
+---
 
 ### oncopy
 
 ```ts
-oncopy: ((this, ev) => any) | null;
+oncopy: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16804
@@ -2019,12 +2063,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16804
 HTMLElement.oncopy
 ```
 
-***
+---
 
 ### oncuechange
 
 ```ts
-oncuechange: ((this, ev) => any) | null;
+oncuechange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16806
@@ -2037,12 +2081,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16806
 HTMLElement.oncuechange
 ```
 
-***
+---
 
 ### oncut
 
 ```ts
-oncut: ((this, ev) => any) | null;
+oncut: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16808
@@ -2055,12 +2099,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16808
 HTMLElement.oncut
 ```
 
-***
+---
 
 ### ondblclick
 
 ```ts
-ondblclick: ((this, ev) => any) | null;
+ondblclick: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16810
@@ -2073,12 +2117,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16810
 HTMLElement.ondblclick
 ```
 
-***
+---
 
 ### ondrag
 
 ```ts
-ondrag: ((this, ev) => any) | null;
+ondrag: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16812
@@ -2091,12 +2135,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16812
 HTMLElement.ondrag
 ```
 
-***
+---
 
 ### ondragend
 
 ```ts
-ondragend: ((this, ev) => any) | null;
+ondragend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16814
@@ -2109,12 +2153,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16814
 HTMLElement.ondragend
 ```
 
-***
+---
 
 ### ondragenter
 
 ```ts
-ondragenter: ((this, ev) => any) | null;
+ondragenter: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16816
@@ -2127,12 +2171,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16816
 HTMLElement.ondragenter
 ```
 
-***
+---
 
 ### ondragleave
 
 ```ts
-ondragleave: ((this, ev) => any) | null;
+ondragleave: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16818
@@ -2145,12 +2189,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16818
 HTMLElement.ondragleave
 ```
 
-***
+---
 
 ### ondragover
 
 ```ts
-ondragover: ((this, ev) => any) | null;
+ondragover: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16820
@@ -2163,12 +2207,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16820
 HTMLElement.ondragover
 ```
 
-***
+---
 
 ### ondragstart
 
 ```ts
-ondragstart: ((this, ev) => any) | null;
+ondragstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16822
@@ -2181,12 +2225,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16822
 HTMLElement.ondragstart
 ```
 
-***
+---
 
 ### ondrop
 
 ```ts
-ondrop: ((this, ev) => any) | null;
+ondrop: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16824
@@ -2199,12 +2243,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16824
 HTMLElement.ondrop
 ```
 
-***
+---
 
 ### ondurationchange
 
 ```ts
-ondurationchange: ((this, ev) => any) | null;
+ondurationchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16826
@@ -2217,12 +2261,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16826
 HTMLElement.ondurationchange
 ```
 
-***
+---
 
 ### onemptied
 
 ```ts
-onemptied: ((this, ev) => any) | null;
+onemptied: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16828
@@ -2235,12 +2279,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16828
 HTMLElement.onemptied
 ```
 
-***
+---
 
 ### onended
 
 ```ts
-onended: ((this, ev) => any) | null;
+onended: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16830
@@ -2253,12 +2297,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16830
 HTMLElement.onended
 ```
 
-***
+---
 
 ### onerror
 
 ```ts
-onerror: OnErrorEventHandler;
+onerror: OnErrorEventHandler
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16832
@@ -2271,12 +2315,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16832
 HTMLElement.onerror
 ```
 
-***
+---
 
 ### onfocus
 
 ```ts
-onfocus: ((this, ev) => any) | null;
+onfocus: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16834
@@ -2289,12 +2333,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16834
 HTMLElement.onfocus
 ```
 
-***
+---
 
 ### onformdata
 
 ```ts
-onformdata: ((this, ev) => any) | null;
+onformdata: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16836
@@ -2307,12 +2351,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16836
 HTMLElement.onformdata
 ```
 
-***
+---
 
 ### ongotpointercapture
 
 ```ts
-ongotpointercapture: ((this, ev) => any) | null;
+ongotpointercapture: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16838
@@ -2325,12 +2369,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16838
 HTMLElement.ongotpointercapture
 ```
 
-***
+---
 
 ### oninput
 
 ```ts
-oninput: ((this, ev) => any) | null;
+oninput: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16840
@@ -2343,12 +2387,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16840
 HTMLElement.oninput
 ```
 
-***
+---
 
 ### oninvalid
 
 ```ts
-oninvalid: ((this, ev) => any) | null;
+oninvalid: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16842
@@ -2361,12 +2405,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16842
 HTMLElement.oninvalid
 ```
 
-***
+---
 
 ### onkeydown
 
 ```ts
-onkeydown: ((this, ev) => any) | null;
+onkeydown: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16844
@@ -2379,12 +2423,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16844
 HTMLElement.onkeydown
 ```
 
-***
+---
 
 ### ~~onkeypress~~
 
 ```ts
-onkeypress: ((this, ev) => any) | null;
+onkeypress: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16850
@@ -2399,12 +2443,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16850
 HTMLElement.onkeypress
 ```
 
-***
+---
 
 ### onkeyup
 
 ```ts
-onkeyup: ((this, ev) => any) | null;
+onkeyup: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16852
@@ -2417,12 +2461,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16852
 HTMLElement.onkeyup
 ```
 
-***
+---
 
 ### onload
 
 ```ts
-onload: ((this, ev) => any) | null;
+onload: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16854
@@ -2435,12 +2479,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16854
 HTMLElement.onload
 ```
 
-***
+---
 
 ### onloadeddata
 
 ```ts
-onloadeddata: ((this, ev) => any) | null;
+onloadeddata: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16856
@@ -2453,12 +2497,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16856
 HTMLElement.onloadeddata
 ```
 
-***
+---
 
 ### onloadedmetadata
 
 ```ts
-onloadedmetadata: ((this, ev) => any) | null;
+onloadedmetadata: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16858
@@ -2471,12 +2515,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16858
 HTMLElement.onloadedmetadata
 ```
 
-***
+---
 
 ### onloadstart
 
 ```ts
-onloadstart: ((this, ev) => any) | null;
+onloadstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16860
@@ -2489,12 +2533,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16860
 HTMLElement.onloadstart
 ```
 
-***
+---
 
 ### onlostpointercapture
 
 ```ts
-onlostpointercapture: ((this, ev) => any) | null;
+onlostpointercapture: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16862
@@ -2507,12 +2551,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16862
 HTMLElement.onlostpointercapture
 ```
 
-***
+---
 
 ### onmousedown
 
 ```ts
-onmousedown: ((this, ev) => any) | null;
+onmousedown: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16864
@@ -2525,12 +2569,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16864
 HTMLElement.onmousedown
 ```
 
-***
+---
 
 ### onmouseenter
 
 ```ts
-onmouseenter: ((this, ev) => any) | null;
+onmouseenter: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16866
@@ -2543,12 +2587,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16866
 HTMLElement.onmouseenter
 ```
 
-***
+---
 
 ### onmouseleave
 
 ```ts
-onmouseleave: ((this, ev) => any) | null;
+onmouseleave: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16868
@@ -2561,12 +2605,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16868
 HTMLElement.onmouseleave
 ```
 
-***
+---
 
 ### onmousemove
 
 ```ts
-onmousemove: ((this, ev) => any) | null;
+onmousemove: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16870
@@ -2579,12 +2623,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16870
 HTMLElement.onmousemove
 ```
 
-***
+---
 
 ### onmouseout
 
 ```ts
-onmouseout: ((this, ev) => any) | null;
+onmouseout: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16872
@@ -2597,12 +2641,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16872
 HTMLElement.onmouseout
 ```
 
-***
+---
 
 ### onmouseover
 
 ```ts
-onmouseover: ((this, ev) => any) | null;
+onmouseover: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16874
@@ -2615,12 +2659,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16874
 HTMLElement.onmouseover
 ```
 
-***
+---
 
 ### onmouseup
 
 ```ts
-onmouseup: ((this, ev) => any) | null;
+onmouseup: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16876
@@ -2633,12 +2677,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16876
 HTMLElement.onmouseup
 ```
 
-***
+---
 
 ### onpaste
 
 ```ts
-onpaste: ((this, ev) => any) | null;
+onpaste: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16878
@@ -2651,12 +2695,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16878
 HTMLElement.onpaste
 ```
 
-***
+---
 
 ### onpause
 
 ```ts
-onpause: ((this, ev) => any) | null;
+onpause: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16880
@@ -2669,12 +2713,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16880
 HTMLElement.onpause
 ```
 
-***
+---
 
 ### onplay
 
 ```ts
-onplay: ((this, ev) => any) | null;
+onplay: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16882
@@ -2687,12 +2731,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16882
 HTMLElement.onplay
 ```
 
-***
+---
 
 ### onplaying
 
 ```ts
-onplaying: ((this, ev) => any) | null;
+onplaying: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16884
@@ -2705,12 +2749,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16884
 HTMLElement.onplaying
 ```
 
-***
+---
 
 ### onpointercancel
 
 ```ts
-onpointercancel: ((this, ev) => any) | null;
+onpointercancel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16886
@@ -2723,12 +2767,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16886
 HTMLElement.onpointercancel
 ```
 
-***
+---
 
 ### onpointerdown
 
 ```ts
-onpointerdown: ((this, ev) => any) | null;
+onpointerdown: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16888
@@ -2741,12 +2785,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16888
 HTMLElement.onpointerdown
 ```
 
-***
+---
 
 ### onpointerenter
 
 ```ts
-onpointerenter: ((this, ev) => any) | null;
+onpointerenter: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16890
@@ -2759,12 +2803,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16890
 HTMLElement.onpointerenter
 ```
 
-***
+---
 
 ### onpointerleave
 
 ```ts
-onpointerleave: ((this, ev) => any) | null;
+onpointerleave: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16892
@@ -2777,12 +2821,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16892
 HTMLElement.onpointerleave
 ```
 
-***
+---
 
 ### onpointermove
 
 ```ts
-onpointermove: ((this, ev) => any) | null;
+onpointermove: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16894
@@ -2795,12 +2839,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16894
 HTMLElement.onpointermove
 ```
 
-***
+---
 
 ### onpointerout
 
 ```ts
-onpointerout: ((this, ev) => any) | null;
+onpointerout: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16896
@@ -2813,12 +2857,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16896
 HTMLElement.onpointerout
 ```
 
-***
+---
 
 ### onpointerover
 
 ```ts
-onpointerover: ((this, ev) => any) | null;
+onpointerover: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16898
@@ -2831,12 +2875,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16898
 HTMLElement.onpointerover
 ```
 
-***
+---
 
 ### onpointerrawupdate
 
 ```ts
-onpointerrawupdate: ((this, ev) => any) | null;
+onpointerrawupdate: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16904
@@ -2851,12 +2895,12 @@ Available only in secure contexts.
 HTMLElement.onpointerrawupdate
 ```
 
-***
+---
 
 ### onpointerup
 
 ```ts
-onpointerup: ((this, ev) => any) | null;
+onpointerup: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16906
@@ -2869,12 +2913,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16906
 HTMLElement.onpointerup
 ```
 
-***
+---
 
 ### onprogress
 
 ```ts
-onprogress: ((this, ev) => any) | null;
+onprogress: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16908
@@ -2887,12 +2931,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16908
 HTMLElement.onprogress
 ```
 
-***
+---
 
 ### onratechange
 
 ```ts
-onratechange: ((this, ev) => any) | null;
+onratechange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16910
@@ -2905,12 +2949,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16910
 HTMLElement.onratechange
 ```
 
-***
+---
 
 ### onreset
 
 ```ts
-onreset: ((this, ev) => any) | null;
+onreset: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16912
@@ -2923,12 +2967,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16912
 HTMLElement.onreset
 ```
 
-***
+---
 
 ### onresize
 
 ```ts
-onresize: ((this, ev) => any) | null;
+onresize: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16914
@@ -2941,12 +2985,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16914
 HTMLElement.onresize
 ```
 
-***
+---
 
 ### onscroll
 
 ```ts
-onscroll: ((this, ev) => any) | null;
+onscroll: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16916
@@ -2959,12 +3003,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16916
 HTMLElement.onscroll
 ```
 
-***
+---
 
 ### onscrollend
 
 ```ts
-onscrollend: ((this, ev) => any) | null;
+onscrollend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16918
@@ -2977,12 +3021,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16918
 HTMLElement.onscrollend
 ```
 
-***
+---
 
 ### onsecuritypolicyviolation
 
 ```ts
-onsecuritypolicyviolation: ((this, ev) => any) | null;
+onsecuritypolicyviolation: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16920
@@ -2995,12 +3039,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16920
 HTMLElement.onsecuritypolicyviolation
 ```
 
-***
+---
 
 ### onseeked
 
 ```ts
-onseeked: ((this, ev) => any) | null;
+onseeked: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16922
@@ -3013,12 +3057,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16922
 HTMLElement.onseeked
 ```
 
-***
+---
 
 ### onseeking
 
 ```ts
-onseeking: ((this, ev) => any) | null;
+onseeking: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16924
@@ -3031,12 +3075,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16924
 HTMLElement.onseeking
 ```
 
-***
+---
 
 ### onselect
 
 ```ts
-onselect: ((this, ev) => any) | null;
+onselect: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16926
@@ -3049,12 +3093,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16926
 HTMLElement.onselect
 ```
 
-***
+---
 
 ### onselectionchange
 
 ```ts
-onselectionchange: ((this, ev) => any) | null;
+onselectionchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16928
@@ -3067,12 +3111,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16928
 HTMLElement.onselectionchange
 ```
 
-***
+---
 
 ### onselectstart
 
 ```ts
-onselectstart: ((this, ev) => any) | null;
+onselectstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16930
@@ -3085,12 +3129,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16930
 HTMLElement.onselectstart
 ```
 
-***
+---
 
 ### onslotchange
 
 ```ts
-onslotchange: ((this, ev) => any) | null;
+onslotchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16932
@@ -3103,12 +3147,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16932
 HTMLElement.onslotchange
 ```
 
-***
+---
 
 ### onstalled
 
 ```ts
-onstalled: ((this, ev) => any) | null;
+onstalled: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16934
@@ -3121,12 +3165,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16934
 HTMLElement.onstalled
 ```
 
-***
+---
 
 ### onsubmit
 
 ```ts
-onsubmit: ((this, ev) => any) | null;
+onsubmit: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16936
@@ -3139,12 +3183,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16936
 HTMLElement.onsubmit
 ```
 
-***
+---
 
 ### onsuspend
 
 ```ts
-onsuspend: ((this, ev) => any) | null;
+onsuspend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16938
@@ -3157,12 +3201,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16938
 HTMLElement.onsuspend
 ```
 
-***
+---
 
 ### ontimeupdate
 
 ```ts
-ontimeupdate: ((this, ev) => any) | null;
+ontimeupdate: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16940
@@ -3175,12 +3219,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16940
 HTMLElement.ontimeupdate
 ```
 
-***
+---
 
 ### ontoggle
 
 ```ts
-ontoggle: ((this, ev) => any) | null;
+ontoggle: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16942
@@ -3193,7 +3237,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16942
 HTMLElement.ontoggle
 ```
 
-***
+---
 
 ### ontouchcancel?
 
@@ -3211,7 +3255,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16944
 HTMLElement.ontouchcancel
 ```
 
-***
+---
 
 ### ontouchend?
 
@@ -3229,7 +3273,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16946
 HTMLElement.ontouchend
 ```
 
-***
+---
 
 ### ontouchmove?
 
@@ -3247,7 +3291,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16948
 HTMLElement.ontouchmove
 ```
 
-***
+---
 
 ### ontouchstart?
 
@@ -3265,12 +3309,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16950
 HTMLElement.ontouchstart
 ```
 
-***
+---
 
 ### ontransitioncancel
 
 ```ts
-ontransitioncancel: ((this, ev) => any) | null;
+ontransitioncancel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16952
@@ -3283,12 +3327,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16952
 HTMLElement.ontransitioncancel
 ```
 
-***
+---
 
 ### ontransitionend
 
 ```ts
-ontransitionend: ((this, ev) => any) | null;
+ontransitionend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16954
@@ -3301,12 +3345,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16954
 HTMLElement.ontransitionend
 ```
 
-***
+---
 
 ### ontransitionrun
 
 ```ts
-ontransitionrun: ((this, ev) => any) | null;
+ontransitionrun: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16956
@@ -3319,12 +3363,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16956
 HTMLElement.ontransitionrun
 ```
 
-***
+---
 
 ### ontransitionstart
 
 ```ts
-ontransitionstart: ((this, ev) => any) | null;
+ontransitionstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16958
@@ -3337,12 +3381,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16958
 HTMLElement.ontransitionstart
 ```
 
-***
+---
 
 ### onvolumechange
 
 ```ts
-onvolumechange: ((this, ev) => any) | null;
+onvolumechange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16960
@@ -3355,12 +3399,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16960
 HTMLElement.onvolumechange
 ```
 
-***
+---
 
 ### onwaiting
 
 ```ts
-onwaiting: ((this, ev) => any) | null;
+onwaiting: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16962
@@ -3373,12 +3417,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16962
 HTMLElement.onwaiting
 ```
 
-***
+---
 
 ### ~~onwebkitanimationend~~
 
 ```ts
-onwebkitanimationend: ((this, ev) => any) | null;
+onwebkitanimationend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16968
@@ -3395,12 +3439,12 @@ This is a legacy alias of `onanimationend`.
 HTMLElement.onwebkitanimationend
 ```
 
-***
+---
 
 ### ~~onwebkitanimationiteration~~
 
 ```ts
-onwebkitanimationiteration: ((this, ev) => any) | null;
+onwebkitanimationiteration: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16974
@@ -3417,12 +3461,12 @@ This is a legacy alias of `onanimationiteration`.
 HTMLElement.onwebkitanimationiteration
 ```
 
-***
+---
 
 ### ~~onwebkitanimationstart~~
 
 ```ts
-onwebkitanimationstart: ((this, ev) => any) | null;
+onwebkitanimationstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16980
@@ -3439,12 +3483,12 @@ This is a legacy alias of `onanimationstart`.
 HTMLElement.onwebkitanimationstart
 ```
 
-***
+---
 
 ### ~~onwebkittransitionend~~
 
 ```ts
-onwebkittransitionend: ((this, ev) => any) | null;
+onwebkittransitionend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16986
@@ -3461,12 +3505,12 @@ This is a legacy alias of `ontransitionend`.
 HTMLElement.onwebkittransitionend
 ```
 
-***
+---
 
 ### onwheel
 
 ```ts
-onwheel: ((this, ev) => any) | null;
+onwheel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16988
@@ -3479,12 +3523,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16988
 HTMLElement.onwheel
 ```
 
-***
+---
 
 ### accessKey
 
 ```ts
-accessKey: string;
+accessKey: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17735
@@ -3499,7 +3543,7 @@ The **`HTMLElement.accessKey`** property sets the keystroke which a user can pre
 HTMLElement.accessKey
 ```
 
-***
+---
 
 ### accessKeyLabel
 
@@ -3519,12 +3563,12 @@ The **`HTMLElement.accessKeyLabel`** read-only property returns a string contain
 HTMLElement.accessKeyLabel
 ```
 
-***
+---
 
 ### autocapitalize
 
 ```ts
-autocapitalize: string;
+autocapitalize: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17747
@@ -3539,12 +3583,12 @@ The **`autocapitalize`** property of the HTMLElement interface represents the el
 HTMLElement.autocapitalize
 ```
 
-***
+---
 
 ### autocorrect
 
 ```ts
-autocorrect: boolean;
+autocorrect: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17753
@@ -3559,12 +3603,12 @@ The **`autocorrect`** property of the HTMLElement interface controls whether or 
 HTMLElement.autocorrect
 ```
 
-***
+---
 
 ### dir
 
 ```ts
-dir: string;
+dir: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17759
@@ -3579,12 +3623,12 @@ The **`HTMLElement.dir`** property indicates the text writing directionality of 
 HTMLElement.dir
 ```
 
-***
+---
 
 ### draggable
 
 ```ts
-draggable: boolean;
+draggable: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17765
@@ -3599,12 +3643,12 @@ The **`draggable`** property of the HTMLElement interface gets and sets a Boolea
 HTMLElement.draggable
 ```
 
-***
+---
 
 ### hidden
 
 ```ts
-hidden: boolean | "until-found";
+hidden: boolean | 'until-found'
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17771
@@ -3619,12 +3663,12 @@ The HTMLElement property **`hidden`** reflects the value of the element's hidden
 HTMLElement.hidden
 ```
 
-***
+---
 
 ### inert
 
 ```ts
-inert: boolean;
+inert: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17777
@@ -3639,12 +3683,12 @@ The HTMLElement property **`inert`** reflects the value of the element's inert a
 HTMLElement.inert
 ```
 
-***
+---
 
 ### innerText
 
 ```ts
-innerText: string;
+innerText: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17783
@@ -3659,12 +3703,12 @@ The **`innerText`** property of the HTMLElement interface represents the rendere
 HTMLElement.innerText
 ```
 
-***
+---
 
 ### lang
 
 ```ts
-lang: string;
+lang: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17789
@@ -3679,7 +3723,7 @@ The **`lang`** property of the HTMLElement interface indicates the base language
 HTMLElement.lang
 ```
 
-***
+---
 
 ### offsetHeight
 
@@ -3699,7 +3743,7 @@ The **`offsetHeight`** read-only property of the HTMLElement interface returns t
 HTMLElement.offsetHeight
 ```
 
-***
+---
 
 ### offsetLeft
 
@@ -3719,7 +3763,7 @@ The **`offsetLeft`** read-only property of the HTMLElement interface returns the
 HTMLElement.offsetLeft
 ```
 
-***
+---
 
 ### offsetParent
 
@@ -3739,7 +3783,7 @@ The **`HTMLElement.offsetParent`** read-only property returns a reference to the
 HTMLElement.offsetParent
 ```
 
-***
+---
 
 ### offsetTop
 
@@ -3759,7 +3803,7 @@ The **`offsetTop`** read-only property of the HTMLElement interface returns the 
 HTMLElement.offsetTop
 ```
 
-***
+---
 
 ### offsetWidth
 
@@ -3779,12 +3823,12 @@ The **`offsetWidth`** read-only property of the HTMLElement interface returns th
 HTMLElement.offsetWidth
 ```
 
-***
+---
 
 ### outerText
 
 ```ts
-outerText: string;
+outerText: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17825
@@ -3799,12 +3843,12 @@ The **`outerText`** property of the HTMLElement interface returns the same value
 HTMLElement.outerText
 ```
 
-***
+---
 
 ### popover
 
 ```ts
-popover: string | null;
+popover: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17831
@@ -3819,12 +3863,12 @@ The **`popover`** property of the HTMLElement interface gets and sets an element
 HTMLElement.popover
 ```
 
-***
+---
 
 ### spellcheck
 
 ```ts
-spellcheck: boolean;
+spellcheck: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17837
@@ -3839,12 +3883,12 @@ The **`spellcheck`** property of the HTMLElement interface represents a boolean 
 HTMLElement.spellcheck
 ```
 
-***
+---
 
 ### title
 
 ```ts
-title: string;
+title: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17843
@@ -3859,12 +3903,12 @@ The **`HTMLElement.title`** property represents the title of the element: the te
 HTMLElement.title
 ```
 
-***
+---
 
 ### translate
 
 ```ts
-translate: boolean;
+translate: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17849
@@ -3879,12 +3923,12 @@ The **`translate`** property of the HTMLElement interface indicates whether an e
 HTMLElement.translate
 ```
 
-***
+---
 
 ### writingSuggestions
 
 ```ts
-writingSuggestions: string;
+writingSuggestions: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17855
@@ -3899,12 +3943,12 @@ The **`writingSuggestions`** property of the HTMLElement interface is a string i
 HTMLElement.writingSuggestions
 ```
 
-***
+---
 
 ### autofocus
 
 ```ts
-autofocus: boolean;
+autofocus: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20122
@@ -3917,7 +3961,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20122
 HTMLElement.autofocus
 ```
 
-***
+---
 
 ### dataset
 
@@ -3935,12 +3979,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20124
 HTMLElement.dataset
 ```
 
-***
+---
 
 ### nonce
 
 ```ts
-nonce: string;
+nonce: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20126
@@ -3953,12 +3997,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20126
 HTMLElement.nonce
 ```
 
-***
+---
 
 ### tabIndex
 
 ```ts
-tabIndex: number;
+tabIndex: number
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20128
@@ -3971,7 +4015,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20128
 HTMLElement.tabIndex
 ```
 
-***
+---
 
 ### baseURI
 
@@ -3991,7 +4035,7 @@ The read-only **`baseURI`** property of the Node interface returns the absolute 
 HTMLElement.baseURI
 ```
 
-***
+---
 
 ### childNodes
 
@@ -4011,7 +4055,7 @@ The read-only **`childNodes`** property of the Node interface returns a live Nod
 HTMLElement.childNodes
 ```
 
-***
+---
 
 ### firstChild
 
@@ -4031,7 +4075,7 @@ The read-only **`firstChild`** property of the Node interface returns the node's
 HTMLElement.firstChild
 ```
 
-***
+---
 
 ### isConnected
 
@@ -4051,7 +4095,7 @@ The read-only **`isConnected`** property of the Node interface returns a boolean
 HTMLElement.isConnected
 ```
 
-***
+---
 
 ### lastChild
 
@@ -4071,7 +4115,7 @@ The read-only **`lastChild`** property of the Node interface returns the last ch
 HTMLElement.lastChild
 ```
 
-***
+---
 
 ### nextSibling
 
@@ -4091,7 +4135,7 @@ The read-only **`nextSibling`** property of the Node interface returns the node 
 HTMLElement.nextSibling
 ```
 
-***
+---
 
 ### nodeName
 
@@ -4111,7 +4155,7 @@ The read-only **`nodeName`** property of Node returns the name of the current no
 HTMLElement.nodeName
 ```
 
-***
+---
 
 ### nodeType
 
@@ -4131,12 +4175,12 @@ The read-only **`nodeType`** property of a Node interface is an integer that ide
 HTMLElement.nodeType
 ```
 
-***
+---
 
 ### nodeValue
 
 ```ts
-nodeValue: string | null;
+nodeValue: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26089
@@ -4151,7 +4195,7 @@ The **`nodeValue`** property of the Node interface returns or sets the value of 
 HTMLElement.nodeValue
 ```
 
-***
+---
 
 ### parentElement
 
@@ -4171,7 +4215,7 @@ The read-only **`parentElement`** property of Node interface returns the DOM nod
 HTMLElement.parentElement
 ```
 
-***
+---
 
 ### parentNode
 
@@ -4191,7 +4235,7 @@ The read-only **`parentNode`** property of the Node interface returns the parent
 HTMLElement.parentNode
 ```
 
-***
+---
 
 ### previousSibling
 
@@ -4211,7 +4255,7 @@ The read-only **`previousSibling`** property of the Node interface returns the n
 HTMLElement.previousSibling
 ```
 
-***
+---
 
 ### ELEMENT\_NODE
 
@@ -4229,7 +4273,7 @@ node is an element.
 HTMLElement.ELEMENT_NODE
 ```
 
-***
+---
 
 ### ATTRIBUTE\_NODE
 
@@ -4245,7 +4289,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26212
 HTMLElement.ATTRIBUTE_NODE
 ```
 
-***
+---
 
 ### TEXT\_NODE
 
@@ -4263,7 +4307,7 @@ node is a Text node.
 HTMLElement.TEXT_NODE
 ```
 
-***
+---
 
 ### CDATA\_SECTION\_NODE
 
@@ -4281,7 +4325,7 @@ node is a CDATASection node.
 HTMLElement.CDATA_SECTION_NODE
 ```
 
-***
+---
 
 ### ENTITY\_REFERENCE\_NODE
 
@@ -4297,7 +4341,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26217
 HTMLElement.ENTITY_REFERENCE_NODE
 ```
 
-***
+---
 
 ### ENTITY\_NODE
 
@@ -4313,7 +4357,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26218
 HTMLElement.ENTITY_NODE
 ```
 
-***
+---
 
 ### PROCESSING\_INSTRUCTION\_NODE
 
@@ -4331,7 +4375,7 @@ node is a ProcessingInstruction node.
 HTMLElement.PROCESSING_INSTRUCTION_NODE
 ```
 
-***
+---
 
 ### COMMENT\_NODE
 
@@ -4349,7 +4393,7 @@ node is a Comment node.
 HTMLElement.COMMENT_NODE
 ```
 
-***
+---
 
 ### DOCUMENT\_NODE
 
@@ -4367,7 +4411,7 @@ node is a document.
 HTMLElement.DOCUMENT_NODE
 ```
 
-***
+---
 
 ### DOCUMENT\_TYPE\_NODE
 
@@ -4385,7 +4429,7 @@ node is a doctype.
 HTMLElement.DOCUMENT_TYPE_NODE
 ```
 
-***
+---
 
 ### DOCUMENT\_FRAGMENT\_NODE
 
@@ -4403,7 +4447,7 @@ node is a DocumentFragment node.
 HTMLElement.DOCUMENT_FRAGMENT_NODE
 ```
 
-***
+---
 
 ### NOTATION\_NODE
 
@@ -4419,7 +4463,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26229
 HTMLElement.NOTATION_NODE
 ```
 
-***
+---
 
 ### DOCUMENT\_POSITION\_DISCONNECTED
 
@@ -4437,7 +4481,7 @@ Set when node and other are not in the same tree.
 HTMLElement.DOCUMENT_POSITION_DISCONNECTED
 ```
 
-***
+---
 
 ### DOCUMENT\_POSITION\_PRECEDING
 
@@ -4455,7 +4499,7 @@ Set when other is preceding node.
 HTMLElement.DOCUMENT_POSITION_PRECEDING
 ```
 
-***
+---
 
 ### DOCUMENT\_POSITION\_FOLLOWING
 
@@ -4473,7 +4517,7 @@ Set when other is following node.
 HTMLElement.DOCUMENT_POSITION_FOLLOWING
 ```
 
-***
+---
 
 ### DOCUMENT\_POSITION\_CONTAINS
 
@@ -4491,7 +4535,7 @@ Set when other is an ancestor of node.
 HTMLElement.DOCUMENT_POSITION_CONTAINS
 ```
 
-***
+---
 
 ### DOCUMENT\_POSITION\_CONTAINED\_BY
 
@@ -4509,7 +4553,7 @@ Set when other is a descendant of node.
 HTMLElement.DOCUMENT_POSITION_CONTAINED_BY
 ```
 
-***
+---
 
 ### DOCUMENT\_POSITION\_IMPLEMENTATION\_SPECIFIC
 
@@ -4525,7 +4569,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26240
 HTMLElement.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
 ```
 
-***
+---
 
 ### nextElementSibling
 
@@ -4545,7 +4589,7 @@ Returns the first following sibling that is an element, and null otherwise.
 HTMLElement.nextElementSibling
 ```
 
-***
+---
 
 ### previousElementSibling
 
@@ -4565,7 +4609,7 @@ Returns the first preceding sibling that is an element, and null otherwise.
 HTMLElement.previousElementSibling
 ```
 
-***
+---
 
 ### childElementCount
 
@@ -4583,7 +4627,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27044
 HTMLElement.childElementCount
 ```
 
-***
+---
 
 ### children
 
@@ -4603,7 +4647,7 @@ Returns the child elements.
 HTMLElement.children
 ```
 
-***
+---
 
 ### firstElementChild
 
@@ -4623,7 +4667,7 @@ Returns the first child that is an element, and null otherwise.
 HTMLElement.firstElementChild
 ```
 
-***
+---
 
 ### lastElementChild
 
@@ -4643,7 +4687,7 @@ Returns the last child that is an element, and null otherwise.
 HTMLElement.lastElementChild
 ```
 
-***
+---
 
 ### assignedSlot
 
@@ -4671,13 +4715,13 @@ HTMLElement.assignedSlot
 get static observedAttributes(): ("visible" | "delay" | "offset" | "trigger" | "ordered" | "fit" | "text")[];
 ```
 
-Defined in: website/components/media/DrawText.tsx:46
+Defined in: website/components/media/DrawText.tsx:53
 
 ##### Returns
 
 (`"visible"` \| `"delay"` \| `"offset"` \| `"trigger"` \| `"ordered"` \| `"fit"` \| `"text"`)[]
 
-***
+---
 
 ### text
 
@@ -4687,7 +4731,7 @@ Defined in: website/components/media/DrawText.tsx:46
 get text(): string;
 ```
 
-Defined in: website/components/media/DrawText.tsx:66
+Defined in: website/components/media/DrawText.tsx:73
 
 Setter/getter — the text content to animate.
 
@@ -4701,7 +4745,7 @@ Setter/getter — the text content to animate.
 set text(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:70
+Defined in: website/components/media/DrawText.tsx:77
 
 ##### Parameters
 
@@ -4713,7 +4757,7 @@ Defined in: website/components/media/DrawText.tsx:70
 
 `void`
 
-***
+---
 
 ### delay
 
@@ -4723,7 +4767,7 @@ Defined in: website/components/media/DrawText.tsx:70
 get delay(): number;
 ```
 
-Defined in: website/components/media/DrawText.tsx:76
+Defined in: website/components/media/DrawText.tsx:83
 
 Setter/getter — per-character animation delay in ms.
 
@@ -4737,7 +4781,7 @@ Setter/getter — per-character animation delay in ms.
 set delay(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:83
+Defined in: website/components/media/DrawText.tsx:90
 
 ##### Parameters
 
@@ -4749,7 +4793,7 @@ Defined in: website/components/media/DrawText.tsx:83
 
 `void`
 
-***
+---
 
 ### offset
 
@@ -4759,7 +4803,7 @@ Defined in: website/components/media/DrawText.tsx:83
 get offset(): number;
 ```
 
-Defined in: website/components/media/DrawText.tsx:89
+Defined in: website/components/media/DrawText.tsx:96
 
 Setter/getter — start-time offset before the first character.
 
@@ -4773,7 +4817,7 @@ Setter/getter — start-time offset before the first character.
 set offset(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:93
+Defined in: website/components/media/DrawText.tsx:100
 
 ##### Parameters
 
@@ -4785,7 +4829,7 @@ Defined in: website/components/media/DrawText.tsx:93
 
 `void`
 
-***
+---
 
 ### triggerMode
 
@@ -4795,7 +4839,7 @@ Defined in: website/components/media/DrawText.tsx:93
 get triggerMode(): string;
 ```
 
-Defined in: website/components/media/DrawText.tsx:99
+Defined in: website/components/media/DrawText.tsx:106
 
 Setter/getter — how the animation starts (visible/manual/hover).
 
@@ -4809,7 +4853,7 @@ Setter/getter — how the animation starts (visible/manual/hover).
 set triggerMode(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:103
+Defined in: website/components/media/DrawText.tsx:110
 
 ##### Parameters
 
@@ -4821,7 +4865,7 @@ Defined in: website/components/media/DrawText.tsx:103
 
 `void`
 
-***
+---
 
 ### ordered
 
@@ -4831,7 +4875,7 @@ Defined in: website/components/media/DrawText.tsx:103
 get ordered(): boolean;
 ```
 
-Defined in: website/components/media/DrawText.tsx:113
+Defined in: website/components/media/DrawText.tsx:120
 
 Ordered-queue flag — when set, `offset` is a scheduled start on the
 shared session clock (document-order cascade) rather than a delay
@@ -4841,7 +4885,7 @@ after this element's own trigger.
 
 `boolean`
 
-***
+---
 
 ### visible
 
@@ -4851,7 +4895,7 @@ after this element's own trigger.
 get visible(): boolean;
 ```
 
-Defined in: website/components/media/DrawText.tsx:119
+Defined in: website/components/media/DrawText.tsx:126
 
 Setter/getter — visibility flag used by the auto trigger.
 
@@ -4865,7 +4909,7 @@ Setter/getter — visibility flag used by the auto trigger.
 set visible(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:126
+Defined in: website/components/media/DrawText.tsx:133
 
 ##### Parameters
 
@@ -4877,7 +4921,7 @@ Defined in: website/components/media/DrawText.tsx:126
 
 `void`
 
-***
+---
 
 ### \_needsCharSpans
 
@@ -4887,7 +4931,7 @@ Defined in: website/components/media/DrawText.tsx:126
 get _needsCharSpans(): boolean;
 ```
 
-Defined in: website/components/media/DrawText.tsx:200
+Defined in: website/components/media/DrawText.tsx:213
 
 Per-character spans only exist while the animation runs. Before the
 element enters the viewport and after the animation has finished the
@@ -4899,7 +4943,7 @@ spans permanently.
 
 `boolean`
 
-***
+---
 
 ### \_rootEl
 
@@ -4909,7 +4953,7 @@ spans permanently.
 get _rootEl(): HTMLSpanElement | null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:213
+Defined in: website/components/media/DrawText.tsx:226
 
 The animated content element inside the shadow root — cached by _applyContent so repeated queries are free.
 
@@ -4917,7 +4961,7 @@ The animated content element inside the shadow root — cached by _applyContent 
 
 `HTMLSpanElement` \| `null`
 
-***
+---
 
 ### classList
 
@@ -4961,7 +5005,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13521
 HTMLElement.classList
 ```
 
-***
+---
 
 ### part
 
@@ -5005,7 +5049,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13600
 HTMLElement.part
 ```
 
-***
+---
 
 ### textContent
 
@@ -5051,7 +5095,7 @@ The **`textContent`** property of the Node interface represents the text content
 HTMLElement.textContent
 ```
 
-***
+---
 
 ### style
 
@@ -5101,13 +5145,13 @@ HTMLElement.style
 connectedCallback(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:131
+Defined in: website/components/media/DrawText.tsx:138
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### disconnectedCallback()
 
@@ -5115,25 +5159,25 @@ Defined in: website/components/media/DrawText.tsx:131
 disconnectedCallback(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:141
+Defined in: website/components/media/DrawText.tsx:152
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### attributeChangedCallback()
 
 ```ts
 attributeChangedCallback(
-   name, 
-   oldValue, 
+   name,
+   oldValue,
    newValue
 ): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:161
+Defined in: website/components/media/DrawText.tsx:174
 
 #### Parameters
 
@@ -5153,7 +5197,7 @@ Defined in: website/components/media/DrawText.tsx:161
 
 `void`
 
-***
+---
 
 ### \_updateDom()
 
@@ -5161,7 +5205,7 @@ Defined in: website/components/media/DrawText.tsx:161
 _updateDom(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:206
+Defined in: website/components/media/DrawText.tsx:219
 
 Re-renders the shadow DOM for current props.
 
@@ -5169,7 +5213,7 @@ Re-renders the shadow DOM for current props.
 
 `void`
 
-***
+---
 
 ### trigger()
 
@@ -5177,7 +5221,7 @@ Re-renders the shadow DOM for current props.
 trigger(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:219
+Defined in: website/components/media/DrawText.tsx:232
 
 Starts the animation externally (manual trigger mode).
 
@@ -5185,7 +5229,7 @@ Starts the animation externally (manual trigger mode).
 
 `void`
 
-***
+---
 
 ### reset()
 
@@ -5193,7 +5237,7 @@ Starts the animation externally (manual trigger mode).
 reset(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:225
+Defined in: website/components/media/DrawText.tsx:238
 
 Returns characters to the hidden start state so the animation can replay.
 
@@ -5201,7 +5245,7 @@ Returns characters to the hidden start state so the animation can replay.
 
 `void`
 
-***
+---
 
 ### \_setupTrigger()
 
@@ -5209,7 +5253,7 @@ Returns characters to the hidden start state so the animation can replay.
 _setupTrigger(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:247
+Defined in: website/components/media/DrawText.tsx:266
 
 Wires the active trigger mode (delegate — ./draw-text/trigger.ts).
 
@@ -5217,7 +5261,7 @@ Wires the active trigger mode (delegate — ./draw-text/trigger.ts).
 
 `void`
 
-***
+---
 
 ### \_setupFit()
 
@@ -5225,7 +5269,7 @@ Wires the active trigger mode (delegate — ./draw-text/trigger.ts).
 _setupFit(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:253
+Defined in: website/components/media/DrawText.tsx:272
 
 Installs the fit-to-width pipeline (delegate — ./draw-text/fit.ts).
 
@@ -5233,7 +5277,7 @@ Installs the fit-to-width pipeline (delegate — ./draw-text/fit.ts).
 
 `void`
 
-***
+---
 
 ### \_startAnimation()
 
@@ -5241,7 +5285,7 @@ Installs the fit-to-width pipeline (delegate — ./draw-text/fit.ts).
 _startAnimation(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:259
+Defined in: website/components/media/DrawText.tsx:278
 
 Runs the reveal sequence (delegate — ./draw-text/trigger.ts).
 
@@ -5249,7 +5293,7 @@ Runs the reveal sequence (delegate — ./draw-text/trigger.ts).
 
 `void`
 
-***
+---
 
 ### \_parseTokens()
 
@@ -5257,7 +5301,7 @@ Runs the reveal sequence (delegate — ./draw-text/trigger.ts).
 _parseTokens(text): DrawToken[];
 ```
 
-Defined in: website/components/media/DrawText.tsx:265
+Defined in: website/components/media/DrawText.tsx:284
 
 Tokenizes the text into word/space/br/inline-tag chunks (delegate).
 
@@ -5271,7 +5315,7 @@ Tokenizes the text into word/space/br/inline-tag chunks (delegate).
 
 [`DrawToken`](../../draw-text/types/interfaces/DrawToken.md)[]
 
-***
+---
 
 ### \_renderContent()
 
@@ -5279,7 +5323,7 @@ Tokenizes the text into word/space/br/inline-tag chunks (delegate).
 _renderContent(withChars?): string;
 ```
 
-Defined in: website/components/media/DrawText.tsx:271
+Defined in: website/components/media/DrawText.tsx:290
 
 Builds the animated span tree (delegate — ./draw-text/render.ts).
 
@@ -5293,7 +5337,7 @@ Builds the animated span tree (delegate — ./draw-text/render.ts).
 
 `string`
 
-***
+---
 
 ### animate()
 
@@ -5325,7 +5369,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3556
 HTMLElement.animate
 ```
 
-***
+---
 
 ### getAnimations()
 
@@ -5353,7 +5397,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3558
 HTMLElement.getAnimations
 ```
 
-***
+---
 
 ### after()
 
@@ -5385,7 +5429,7 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 HTMLElement.after
 ```
 
-***
+---
 
 ### before()
 
@@ -5417,7 +5461,7 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 HTMLElement.before
 ```
 
-***
+---
 
 ### remove()
 
@@ -5441,7 +5485,7 @@ Removes node.
 HTMLElement.remove
 ```
 
-***
+---
 
 ### replaceWith()
 
@@ -5473,7 +5517,7 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 HTMLElement.replaceWith
 ```
 
-***
+---
 
 ### attachShadow()
 
@@ -5503,7 +5547,7 @@ The **`Element.attachShadow()`** method attaches a shadow DOM tree to the specif
 HTMLElement.attachShadow
 ```
 
-***
+---
 
 ### checkVisibility()
 
@@ -5533,14 +5577,14 @@ The **`checkVisibility()`** method of the Element interface checks whether the e
 HTMLElement.checkVisibility
 ```
 
-***
+---
 
 ### closest()
 
 #### Call Signature
 
 ```ts
-closest<K>(selector): 
+closest<K>(selector):
   | HTMLElementTagNameMap[K]
   | null;
 ```
@@ -5555,7 +5599,7 @@ The **`closest()`** method of the Element interface traverses the element and it
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -5565,8 +5609,8 @@ The **`closest()`** method of the Element interface traverses the element and it
 
 ##### Returns
 
-  \| [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)\[`K`\]
-  \| `null`
+\| [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)\[`K`\]
+\| `null`
 
 ##### Inherited from
 
@@ -5586,7 +5630,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13667
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -5616,7 +5660,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13668
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -5646,7 +5690,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13669
 
 ###### E
 
-`E` *extends* `Element` = `Element`
+`E` _extends_ `Element` = `Element`
 
 ##### Parameters
 
@@ -5664,7 +5708,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13669
 HTMLElement.closest
 ```
 
-***
+---
 
 ### computedStyleMap()
 
@@ -5688,7 +5732,7 @@ The **`computedStyleMap()`** method of the Element interface returns a StyleProp
 HTMLElement.computedStyleMap
 ```
 
-***
+---
 
 ### getAttribute()
 
@@ -5718,7 +5762,7 @@ The **`getAttribute()`** method of the Element interface returns the value of a 
 HTMLElement.getAttribute
 ```
 
-***
+---
 
 ### getAttributeNS()
 
@@ -5752,7 +5796,7 @@ The **`getAttributeNS()`** method of the Element interface returns the string va
 HTMLElement.getAttributeNS
 ```
 
-***
+---
 
 ### getAttributeNames()
 
@@ -5776,7 +5820,7 @@ The **`getAttributeNames()`** method of the Element interface returns the attrib
 HTMLElement.getAttributeNames
 ```
 
-***
+---
 
 ### getAttributeNode()
 
@@ -5806,7 +5850,7 @@ Returns the specified attribute of the specified element, as an Attr node.
 HTMLElement.getAttributeNode
 ```
 
-***
+---
 
 ### getAttributeNodeNS()
 
@@ -5840,7 +5884,7 @@ The **`getAttributeNodeNS()`** method of the Element interface returns the names
 HTMLElement.getAttributeNodeNS
 ```
 
-***
+---
 
 ### getBoundingClientRect()
 
@@ -5864,7 +5908,7 @@ The **`Element.getBoundingClientRect()`** method returns a DOMRect object provid
 HTMLElement.getBoundingClientRect
 ```
 
-***
+---
 
 ### getClientRects()
 
@@ -5888,7 +5932,7 @@ The **`getClientRects()`** method of the Element interface returns a collection 
 HTMLElement.getClientRects
 ```
 
-***
+---
 
 ### getElementsByClassName()
 
@@ -5918,7 +5962,7 @@ The Element method **`getElementsByClassName()`** returns a live HTMLCollection 
 HTMLElement.getElementsByClassName
 ```
 
-***
+---
 
 ### getElementsByTagName()
 
@@ -5938,7 +5982,7 @@ The **`Element.getElementsByTagName()`** method returns a live HTMLCollection of
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -5968,7 +6012,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13730
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -5998,7 +6042,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13731
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -6028,7 +6072,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13733
 
 ###### K
 
-`K` *extends* keyof `HTMLElementDeprecatedTagNameMap`
+`K` _extends_ keyof `HTMLElementDeprecatedTagNameMap`
 
 ##### Parameters
 
@@ -6072,7 +6116,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13734
 HTMLElement.getElementsByTagName
 ```
 
-***
+---
 
 ### getElementsByTagNameNS()
 
@@ -6192,7 +6236,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13743
 HTMLElement.getElementsByTagNameNS
 ```
 
-***
+---
 
 ### getHTML()
 
@@ -6222,7 +6266,7 @@ The **`getHTML()`** method of the Element interface is used to serialize an elem
 HTMLElement.getHTML
 ```
 
-***
+---
 
 ### hasAttribute()
 
@@ -6252,7 +6296,7 @@ The **`Element.hasAttribute()`** method returns a Boolean value indicating wheth
 HTMLElement.hasAttribute
 ```
 
-***
+---
 
 ### hasAttributeNS()
 
@@ -6286,7 +6330,7 @@ The **`hasAttributeNS()`** method of the Element interface returns a boolean val
 HTMLElement.hasAttributeNS
 ```
 
-***
+---
 
 ### hasAttributes()
 
@@ -6310,7 +6354,7 @@ The **`hasAttributes()`** method of the Element interface returns a boolean valu
 HTMLElement.hasAttributes
 ```
 
-***
+---
 
 ### hasPointerCapture()
 
@@ -6340,7 +6384,7 @@ The **`hasPointerCapture()`** method of the Element interface checks whether the
 HTMLElement.hasPointerCapture
 ```
 
-***
+---
 
 ### insertAdjacentElement()
 
@@ -6374,7 +6418,7 @@ The **`insertAdjacentElement()`** method of the Element interface inserts a give
 HTMLElement.insertAdjacentElement
 ```
 
-***
+---
 
 ### insertAdjacentHTML()
 
@@ -6408,7 +6452,7 @@ The **`insertAdjacentHTML()`** method of the Element interface parses the specif
 HTMLElement.insertAdjacentHTML
 ```
 
-***
+---
 
 ### insertAdjacentText()
 
@@ -6442,7 +6486,7 @@ The **`insertAdjacentText()`** method of the Element interface, given a relative
 HTMLElement.insertAdjacentText
 ```
 
-***
+---
 
 ### matches()
 
@@ -6462,7 +6506,7 @@ The **`matches()`** method of the Element interface tests whether the element wo
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -6492,7 +6536,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13798
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -6522,7 +6566,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13799
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -6564,7 +6608,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13800
 HTMLElement.matches
 ```
 
-***
+---
 
 ### releasePointerCapture()
 
@@ -6594,7 +6638,7 @@ The **`releasePointerCapture()`** method of the Element interface releases (stop
 HTMLElement.releasePointerCapture
 ```
 
-***
+---
 
 ### removeAttribute()
 
@@ -6624,7 +6668,7 @@ The Element method **`removeAttribute()`** removes the attribute with the specif
 HTMLElement.removeAttribute
 ```
 
-***
+---
 
 ### removeAttributeNS()
 
@@ -6658,7 +6702,7 @@ The **`removeAttributeNS()`** method of the Element interface removes the specif
 HTMLElement.removeAttributeNS
 ```
 
-***
+---
 
 ### removeAttributeNode()
 
@@ -6688,7 +6732,7 @@ The **`removeAttributeNode()`** method of the Element interface removes the spec
 HTMLElement.removeAttributeNode
 ```
 
-***
+---
 
 ### requestFullscreen()
 
@@ -6718,7 +6762,7 @@ The **`Element.requestFullscreen()`** method issues an asynchronous request to m
 HTMLElement.requestFullscreen
 ```
 
-***
+---
 
 ### requestPointerLock()
 
@@ -6748,7 +6792,7 @@ The **`requestPointerLock()`** method of the Element interface lets you asynchro
 HTMLElement.requestPointerLock
 ```
 
-***
+---
 
 ### scroll()
 
@@ -6808,7 +6852,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13843
 HTMLElement.scroll
 ```
 
-***
+---
 
 ### scrollBy()
 
@@ -6868,7 +6912,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13850
 HTMLElement.scrollBy
 ```
 
-***
+---
 
 ### scrollIntoView()
 
@@ -6898,7 +6942,7 @@ The Element interface's **`scrollIntoView()`** method scrolls the element's ance
 HTMLElement.scrollIntoView
 ```
 
-***
+---
 
 ### scrollTo()
 
@@ -6958,7 +7002,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13863
 HTMLElement.scrollTo
 ```
 
-***
+---
 
 ### setAttribute()
 
@@ -6992,14 +7036,14 @@ The **`setAttribute()`** method of the Element interface sets the value of an at
 HTMLElement.setAttribute
 ```
 
-***
+---
 
 ### setAttributeNS()
 
 ```ts
 setAttributeNS(
-   namespace, 
-   qualifiedName, 
+   namespace,
+   qualifiedName,
    value
 ): void;
 ```
@@ -7034,7 +7078,7 @@ The **`setAttributeNS()`** method of the Element interface adds a new attribute 
 HTMLElement.setAttributeNS
 ```
 
-***
+---
 
 ### setAttributeNode()
 
@@ -7064,7 +7108,7 @@ The **`setAttributeNode()`** method of the Element interface adds a new Attr nod
 HTMLElement.setAttributeNode
 ```
 
-***
+---
 
 ### setAttributeNodeNS()
 
@@ -7094,7 +7138,7 @@ The **`setAttributeNodeNS()`** method of the Element interface adds a new namesp
 HTMLElement.setAttributeNodeNS
 ```
 
-***
+---
 
 ### setHTMLUnsafe()
 
@@ -7124,7 +7168,7 @@ The **`setHTMLUnsafe()`** method of the Element interface is used to parse HTML 
 HTMLElement.setHTMLUnsafe
 ```
 
-***
+---
 
 ### setPointerCapture()
 
@@ -7154,7 +7198,7 @@ The **`setPointerCapture()`** method of the Element interface is used to designa
 HTMLElement.setPointerCapture
 ```
 
-***
+---
 
 ### toggleAttribute()
 
@@ -7188,7 +7232,7 @@ The **`toggleAttribute()`** method of the Element interface toggles a Boolean at
 HTMLElement.toggleAttribute
 ```
 
-***
+---
 
 ### ~~webkitMatchesSelector()~~
 
@@ -7220,7 +7264,7 @@ This is a legacy alias of `matches`.
 HTMLElement.webkitMatchesSelector
 ```
 
-***
+---
 
 ### dispatchEvent()
 
@@ -7280,7 +7324,7 @@ The **`dispatchEvent()`** method of the EventTarget sends an Event to the object
 HTMLElement.dispatchEvent
 ```
 
-***
+---
 
 ### attachInternals()
 
@@ -7304,7 +7348,7 @@ The **`HTMLElement.attachInternals()`** method returns an ElementInternals objec
 HTMLElement.attachInternals
 ```
 
-***
+---
 
 ### click()
 
@@ -7328,7 +7372,7 @@ The **`HTMLElement.click()`** method simulates a mouse click on an element. When
 HTMLElement.click
 ```
 
-***
+---
 
 ### hidePopover()
 
@@ -7352,7 +7396,7 @@ The **`hidePopover()`** method of the HTMLElement interface hides a popover elem
 HTMLElement.hidePopover
 ```
 
-***
+---
 
 ### showPopover()
 
@@ -7382,7 +7426,7 @@ The **`showPopover()`** method of the HTMLElement interface shows a popover elem
 HTMLElement.showPopover
 ```
 
-***
+---
 
 ### togglePopover()
 
@@ -7412,7 +7456,7 @@ The **`togglePopover()`** method of the HTMLElement interface toggles a popover 
 HTMLElement.togglePopover
 ```
 
-***
+---
 
 ### addEventListener()
 
@@ -7420,8 +7464,8 @@ HTMLElement.togglePopover
 
 ```ts
 addEventListener<K>(
-   type, 
-   listener, 
+   type,
+   listener,
    options?
 ): void;
 ```
@@ -7432,7 +7476,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17886
 
 ###### K
 
-`K` *extends* keyof `HTMLElementEventMap`
+`K` _extends_ keyof `HTMLElementEventMap`
 
 ##### Parameters
 
@@ -7462,8 +7506,8 @@ HTMLElement.addEventListener
 
 ```ts
 addEventListener(
-   type, 
-   listener, 
+   type,
+   listener,
    options?
 ): void;
 ```
@@ -7494,7 +7538,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17887
 HTMLElement.addEventListener
 ```
 
-***
+---
 
 ### removeEventListener()
 
@@ -7502,8 +7546,8 @@ HTMLElement.addEventListener
 
 ```ts
 removeEventListener<K>(
-   type, 
-   listener, 
+   type,
+   listener,
    options?
 ): void;
 ```
@@ -7514,7 +7558,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17888
 
 ###### K
 
-`K` *extends* keyof `HTMLElementEventMap`
+`K` _extends_ keyof `HTMLElementEventMap`
 
 ##### Parameters
 
@@ -7544,8 +7588,8 @@ HTMLElement.removeEventListener
 
 ```ts
 removeEventListener(
-   type, 
-   listener, 
+   type,
+   listener,
    options?
 ): void;
 ```
@@ -7576,7 +7620,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17889
 HTMLElement.removeEventListener
 ```
 
-***
+---
 
 ### blur()
 
@@ -7598,7 +7642,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20130
 HTMLElement.blur
 ```
 
-***
+---
 
 ### focus()
 
@@ -7626,7 +7670,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20132
 HTMLElement.focus
 ```
 
-***
+---
 
 ### appendChild()
 
@@ -7644,7 +7688,7 @@ The **`appendChild()`** method of the Node interface adds a node to the end of t
 
 ##### T
 
-`T` *extends* `Node`
+`T` _extends_ `Node`
 
 #### Parameters
 
@@ -7662,7 +7706,7 @@ The **`appendChild()`** method of the Node interface adds a node to the end of t
 HTMLElement.appendChild
 ```
 
-***
+---
 
 ### cloneNode()
 
@@ -7692,7 +7736,7 @@ The **`cloneNode()`** method of the Node interface returns a duplicate of the no
 HTMLElement.cloneNode
 ```
 
-***
+---
 
 ### compareDocumentPosition()
 
@@ -7722,7 +7766,7 @@ The **`compareDocumentPosition()`** method of the Node interface reports the pos
 HTMLElement.compareDocumentPosition
 ```
 
-***
+---
 
 ### contains()
 
@@ -7752,7 +7796,7 @@ The **`contains()`** method of the Node interface returns a boolean value indica
 HTMLElement.contains
 ```
 
-***
+---
 
 ### getRootNode()
 
@@ -7782,7 +7826,7 @@ The **`getRootNode()`** method of the Node interface returns the context object'
 HTMLElement.getRootNode
 ```
 
-***
+---
 
 ### hasChildNodes()
 
@@ -7806,7 +7850,7 @@ The **`hasChildNodes()`** method of the Node interface returns a boolean value i
 HTMLElement.hasChildNodes
 ```
 
-***
+---
 
 ### insertBefore()
 
@@ -7824,7 +7868,7 @@ The **`insertBefore()`** method of the Node interface inserts a node before a re
 
 ##### T
 
-`T` *extends* `Node`
+`T` _extends_ `Node`
 
 #### Parameters
 
@@ -7846,7 +7890,7 @@ The **`insertBefore()`** method of the Node interface inserts a node before a re
 HTMLElement.insertBefore
 ```
 
-***
+---
 
 ### isDefaultNamespace()
 
@@ -7876,7 +7920,7 @@ The **`isDefaultNamespace()`** method of the Node interface accepts a namespace 
 HTMLElement.isDefaultNamespace
 ```
 
-***
+---
 
 ### isEqualNode()
 
@@ -7906,7 +7950,7 @@ The **`isEqualNode()`** method of the Node interface tests whether two nodes are
 HTMLElement.isEqualNode
 ```
 
-***
+---
 
 ### isSameNode()
 
@@ -7936,7 +7980,7 @@ The **`isSameNode()`** method of the Node interface is a legacy alias the for th
 HTMLElement.isSameNode
 ```
 
-***
+---
 
 ### lookupNamespaceURI()
 
@@ -7966,7 +8010,7 @@ The **`lookupNamespaceURI()`** method of the Node interface takes a prefix as pa
 HTMLElement.lookupNamespaceURI
 ```
 
-***
+---
 
 ### lookupPrefix()
 
@@ -7996,7 +8040,7 @@ The **`lookupPrefix()`** method of the Node interface returns a string containin
 HTMLElement.lookupPrefix
 ```
 
-***
+---
 
 ### normalize()
 
@@ -8020,7 +8064,7 @@ The **`normalize()`** method of the Node interface puts the specified node and a
 HTMLElement.normalize
 ```
 
-***
+---
 
 ### removeChild()
 
@@ -8038,7 +8082,7 @@ The **`removeChild()`** method of the Node interface removes a child node from t
 
 ##### T
 
-`T` *extends* `Node`
+`T` _extends_ `Node`
 
 #### Parameters
 
@@ -8056,7 +8100,7 @@ The **`removeChild()`** method of the Node interface removes a child node from t
 HTMLElement.removeChild
 ```
 
-***
+---
 
 ### replaceChild()
 
@@ -8074,7 +8118,7 @@ The **`replaceChild()`** method of the Node interface replaces a child node with
 
 ##### T
 
-`T` *extends* `Node`
+`T` _extends_ `Node`
 
 #### Parameters
 
@@ -8096,7 +8140,7 @@ The **`replaceChild()`** method of the Node interface replaces a child node with
 HTMLElement.replaceChild
 ```
 
-***
+---
 
 ### append()
 
@@ -8128,7 +8172,7 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 HTMLElement.append
 ```
 
-***
+---
 
 ### moveBefore()
 
@@ -8160,7 +8204,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27072
 HTMLElement.moveBefore
 ```
 
-***
+---
 
 ### prepend()
 
@@ -8192,14 +8236,14 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 HTMLElement.prepend
 ```
 
-***
+---
 
 ### querySelector()
 
 #### Call Signature
 
 ```ts
-querySelector<K>(selectors): 
+querySelector<K>(selectors):
   | HTMLElementTagNameMap[K]
   | null;
 ```
@@ -8214,7 +8258,7 @@ Returns the first element that is a descendant of node that matches selectors.
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -8224,8 +8268,8 @@ Returns the first element that is a descendant of node that matches selectors.
 
 ##### Returns
 
-  \| [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)\[`K`\]
-  \| `null`
+\| [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)\[`K`\]
+\| `null`
 
 ##### Inherited from
 
@@ -8245,7 +8289,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27087
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -8275,7 +8319,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27088
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -8305,7 +8349,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27090
 
 ###### K
 
-`K` *extends* keyof `HTMLElementDeprecatedTagNameMap`
+`K` _extends_ keyof `HTMLElementDeprecatedTagNameMap`
 
 ##### Parameters
 
@@ -8337,7 +8381,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27091
 
 ###### E
 
-`E` *extends* `Element` = `Element`
+`E` _extends_ `Element` = `Element`
 
 ##### Parameters
 
@@ -8355,7 +8399,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27091
 HTMLElement.querySelector
 ```
 
-***
+---
 
 ### querySelectorAll()
 
@@ -8375,7 +8419,7 @@ Returns all element descendants of node that match selectors.
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -8405,7 +8449,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27098
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -8435,7 +8479,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27099
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -8465,7 +8509,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27101
 
 ###### K
 
-`K` *extends* keyof `HTMLElementDeprecatedTagNameMap`
+`K` _extends_ keyof `HTMLElementDeprecatedTagNameMap`
 
 ##### Parameters
 
@@ -8497,7 +8541,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27102
 
 ###### E
 
-`E` *extends* `Element` = `Element`
+`E` _extends_ `Element` = `Element`
 
 ##### Parameters
 
@@ -8515,7 +8559,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27102
 HTMLElement.querySelectorAll
 ```
 
-***
+---
 
 ### replaceChildren()
 

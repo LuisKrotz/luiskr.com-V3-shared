@@ -36,6 +36,7 @@ const SF_CLASSES: Readonly<{
   SF_NAV_OPEN: 'sf-nav--open'
   SF_NAV_TOGGLE: 'sf-nav-toggle'
   SF_NAV_PANEL: 'sf-nav-panel'
+  SF_NAV_PIN: 'sf-nav-pin'
   SF_NAV_HEAD: 'sf-nav-head'
   SF_NAV_HEADING: 'sf-nav-heading'
   SF_NAV_CLOSE: 'sf-nav-close'

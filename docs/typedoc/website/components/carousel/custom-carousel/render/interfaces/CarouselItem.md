@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/render](../README.md) / CarouselItem
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:29
+Defined in: website/components/carousel/custom-carousel/render.tsx:31
 
 Slide descriptor consumed by the carousel.
 
@@ -16,7 +16,7 @@ Slide descriptor consumed by the carousel.
 src: string
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:31
+Defined in: website/components/carousel/custom-carousel/render.tsx:33
 
 Extensionless CDN stem — the media-figure resolves the real filename.
 
@@ -28,7 +28,7 @@ Extensionless CDN stem — the media-figure resolves the real filename.
 optional size?: number[];
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:33
+Defined in: website/components/carousel/custom-carousel/render.tsx:35
 
 Intrinsic [w,h] for aspect-ratio layout (optional — falls back to GENERIC_DIMENSIONS).
 
@@ -40,7 +40,7 @@ Intrinsic [w,h] for aspect-ratio layout (optional — falls back to GENERIC_DIME
 optional label?: string;
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:35
+Defined in: website/components/carousel/custom-carousel/render.tsx:37
 
 Accessible/visible caption.
 
@@ -52,7 +52,7 @@ Accessible/visible caption.
 optional class?: string;
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:37
+Defined in: website/components/carousel/custom-carousel/render.tsx:39
 
 Extra layout class (e.g. 'landscape') forwarded to the item wrapper.
 
@@ -64,7 +64,7 @@ Extra layout class (e.g. 'landscape') forwarded to the item wrapper.
 optional isVideo?: boolean;
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:39
+Defined in: website/components/carousel/custom-carousel/render.tsx:41
 
 Video slide flag — routes to the mp4 grammar + video element.
 
@@ -76,6 +76,6 @@ Video slide flag — routes to the mp4 grammar + video element.
 optional canExpand?: boolean;
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:41
+Defined in: website/components/carousel/custom-carousel/render.tsx:43
 
 Whether the slide can open the fullscreen expand modal.

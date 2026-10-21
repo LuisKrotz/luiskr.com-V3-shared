@@ -8,6 +8,6 @@
 const _K_TOUCHSTART: 'touchstart' = 'touchstart'
 ```
 
-Defined in: core/tokens/base.ts:500
+Defined in: core/tokens/base.ts:514
 
 Token key "k touchstart" — single source for the repeated literal.

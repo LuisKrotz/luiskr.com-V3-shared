@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/widgets/flag/anim](../README.md) / displayAspect
 
 ```ts
-function displayAspect(flag): number;
+function displayAspect(flag): number
 ```
 
-Defined in: core/utils/canvas/widgets/flag/anim.ts:19
+Defined in: core/utils/canvas/widgets/flag/anim.ts:20
 
 Display aspect of the whole canvas. A split flag shows the left half of
 the first flag and the right half of the second, each at natural scale,

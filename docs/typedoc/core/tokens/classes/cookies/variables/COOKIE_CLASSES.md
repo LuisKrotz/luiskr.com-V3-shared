@@ -1,17 +1,18 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/classes/cookies](../README.md) / COOKIE\_CLASSES
 
 ```ts
 const COOKIE_CLASSES: Readonly<{
-  COOKIES: "cookies";
-  COOKIES_INFO: "cookies-info";
-  COOKIES_BUTTONS: "cookies-buttons";
-  COOKIES_BUTTONS_ACCEPT: "cookies-buttons-accept";
-  COOKIES_BUTTONS_REFUSE: "cookies-buttons-refuse";
-}>;
+  COOKIES: 'cookies'
+  COOKIES_INFO: 'cookies-info'
+  COOKIES_BUTTONS: 'cookies-buttons'
+  COOKIES_BUTTONS_ACCEPT: 'cookies-buttons-accept'
+  COOKIES_BUTTONS_REFUSE: 'cookies-buttons-refuse'
+  COOKIES_BUTTONS_CANVAS: 'cookies-buttons-canvas'
+}>
 ```
 
 Defined in: core/tokens/classes/cookies.ts:13

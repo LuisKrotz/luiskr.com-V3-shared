@@ -8,7 +8,7 @@
 type ThreeModule = __module
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:16
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:17
 
 Lazy-loaded three.js module — the experiment imports three only
 after WebGL probing succeeds, so every helper takes it as a param.

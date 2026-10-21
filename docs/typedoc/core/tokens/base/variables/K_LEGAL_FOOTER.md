@@ -8,6 +8,6 @@
 const _K_LEGAL_FOOTER: 'legal-footer' = 'legal-footer'
 ```
 
-Defined in: core/tokens/base.ts:444
+Defined in: core/tokens/base.ts:458
 
 Token key "k legal footer" — single source for the repeated literal.

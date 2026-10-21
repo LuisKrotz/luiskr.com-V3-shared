@@ -8,6 +8,6 @@
 const _BURN_MS_MAX: 2400 = 2400
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:41
+Defined in: website/components/home/mosaic/burn/tuning.ts:46
 
 Burn duration ceiling — long descriptions cap here, never run on.

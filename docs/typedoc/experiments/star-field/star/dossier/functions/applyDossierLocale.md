@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/star/dossier](../README.md) / applyDossierLocale
 
 ```ts
-function applyDossierLocale(c): void;
+function applyDossierLocale(c): void
 ```
 
-Defined in: experiments/star-field/star/dossier.ts:209
+Defined in: experiments/star-field/star/dossier.ts:307
 
 Re-derives the panel dossier for the current locale — called on store
 locale changes so the open panel swaps language; cached files resolve

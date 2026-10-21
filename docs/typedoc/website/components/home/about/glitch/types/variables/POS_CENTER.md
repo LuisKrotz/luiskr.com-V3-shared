@@ -8,6 +8,6 @@
 const _POS_CENTER: 50 = 50
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:81
+Defined in: website/components/home/about/glitch/types.ts:82
 
 object-position fallback when the keyword parse fails — center.

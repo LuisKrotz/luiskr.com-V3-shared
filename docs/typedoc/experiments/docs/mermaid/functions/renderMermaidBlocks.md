@@ -1,19 +1,19 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/mermaid](../README.md) / renderMermaidBlocks
 
 ```ts
-function renderMermaidBlocks(container): Promise<void>;
+function renderMermaidBlocks(container): Promise<void>
 ```
 
-Defined in: experiments/docs/mermaid.ts:58
+Defined in: experiments/docs/mermaid.ts:64
 
 Renders every unprocessed `.docs-mermaid` block inside `container`
-into an inline SVG diagram. Safe to call repeatedly — mermaid marks
-processed nodes (`data-processed`), so later payloads don't re-render
-earlier diagrams.
+into an inline SVG diagram. Safe to call repeatedly — processed
+nodes are marked (`data-processed`), so later payloads don't
+re-render earlier diagrams.
 
 ## Parameters
 

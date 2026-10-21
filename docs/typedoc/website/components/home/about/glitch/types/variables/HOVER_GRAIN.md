@@ -8,6 +8,6 @@
 const _HOVER_GRAIN: 460 = 460
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:37
+Defined in: website/components/home/about/glitch/types.ts:38
 
 Hover grain pixels per frame — dense film grain.

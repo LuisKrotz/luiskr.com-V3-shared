@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/string](../README.md) / stripHtml
 
 ```ts
-function stripHtml(str): string;
+function stripHtml(str): string
 ```
 
-Defined in: core/utils/string.ts:21
+Defined in: core/utils/string.ts:22
 
 Strips HTML tags iteratively to prevent malformed or nested tags from leaking.
 A single `replace(/<[^>]*>/)` pass can leave a reconstructed tag behind

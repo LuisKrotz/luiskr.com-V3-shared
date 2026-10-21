@@ -8,6 +8,6 @@
 const _HOVER_BAND_MIN: 0.01 = 0.01
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:49
+Defined in: website/components/home/about/glitch/types.ts:50
 
 Hover tear-band minimum height (frame-height fraction).

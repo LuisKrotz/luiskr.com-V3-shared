@@ -8,6 +8,6 @@
 const _IMG_SEL: string
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:15
+Defined in: website/components/home/about/glitch/types.ts:16
 
 Live img selector — re-resolved each tick after shadow re-renders.

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / [core/i18n](../README.md) / detectLangFromPath
 
 ```ts
-function detectLangFromPath(pathname): string;
+function detectLangFromPath(pathname): string
 ```
 
-Defined in: core/i18n.ts:105
+Defined in: core/i18n.ts:109
 
 Extracts the locale segment from a URL path; defaults to English when
 the first segment isn't a valid locale code. `/de/ueber` → 'de',

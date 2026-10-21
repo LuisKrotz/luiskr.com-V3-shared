@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/string](../README.md) / escapeHtml
 
 ```ts
-function escapeHtml(str): string;
+function escapeHtml(str): string
 ```
 
-Defined in: core/utils/string.ts:45
+Defined in: core/utils/string.ts:81
 
 Escapes HTML-significant characters for safe insertion into innerHTML or
 double-quoted attributes. `&` must be replaced first so the entities

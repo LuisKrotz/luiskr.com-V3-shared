@@ -8,7 +8,7 @@
 function updateStarCloud(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/updates.ts:241
+Defined in: experiments/star-field/engine/frame/updates.ts:262
 
 Deep-field cloud camera fade — the real catalogue surrounds the Sun
 isotropically, so pulled far enough back it reads as a solid glowing

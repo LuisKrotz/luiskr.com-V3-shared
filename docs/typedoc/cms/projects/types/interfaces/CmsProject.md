@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/types](../README.md) / CmsProject
 
-Defined in: cms/projects/types.ts:25
+Defined in: cms/projects/types.ts:26
 
 The persisted CMS project document shape.
 
@@ -13,56 +13,56 @@ The persisted CMS project document shape.
 ### title
 
 ```ts
-title: string;
+title: string
 ```
 
-Defined in: cms/projects/types.ts:27
+Defined in: cms/projects/types.ts:28
 
 Project title (heading + metadata).
 
-***
+---
 
 ### folder
 
 ```ts
-folder: string;
+folder: string
 ```
 
-Defined in: cms/projects/types.ts:29
+Defined in: cms/projects/types.ts:30
 
 CDN folder prefix all media resolves under.
 
-***
+---
 
 ### seo
 
 ```ts
-seo: object;
+seo: object
 ```
 
-Defined in: cms/projects/types.ts:31
+Defined in: cms/projects/types.ts:32
 
 SEO flags — noIndex removes the project from crawlers/schema.
 
 #### noIndex
 
 ```ts
-noIndex: boolean;
+noIndex: boolean
 ```
 
-***
+---
 
 ### cover
 
 ```ts
-cover: CmsMediaItem;
+cover: CmsMediaItem
 ```
 
-Defined in: cms/projects/types.ts:33
+Defined in: cms/projects/types.ts:34
 
 Cover media shown in mosaics/cards.
 
-***
+---
 
 ### sections
 
@@ -70,6 +70,6 @@ Cover media shown in mosaics/cards.
 sections: CmsSection[];
 ```
 
-Defined in: cms/projects/types.ts:35
+Defined in: cms/projects/types.ts:36
 
 Ordered content sections.

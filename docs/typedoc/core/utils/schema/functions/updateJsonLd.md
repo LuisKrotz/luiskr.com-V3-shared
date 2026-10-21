@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/schema](../README.md) / updateJsonLd
 
 ```ts
-function updateJsonLd(graph): void;
+function updateJsonLd(graph): void
 ```
 
-Defined in: core/utils/schema.ts:271
+Defined in: core/utils/schema.ts:583
 
 Dynamically updates the JSON-LD script graph in the document head.
 Maintains exactly one `<script type="application/ld+json">` node — an
@@ -23,10 +23,10 @@ it on teardown so the entity never leaks onto the next route.
 
 ### graph
 
-  \| `Record`\<`string`, `unknown`\>
-  \| `Record`\<`string`, `unknown`\>[]
-  \| `null`
-  \| `undefined`
+\| `Record`\<`string`, `unknown`\>
+\| `Record`\<`string`, `unknown`\>[]
+\| `null`
+\| `undefined`
 
 Entity or entity array; null/undefined removes the node.
 

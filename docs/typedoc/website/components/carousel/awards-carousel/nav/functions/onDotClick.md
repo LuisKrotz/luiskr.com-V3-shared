@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/nav](../README.md) / onDotClick
 
 ```ts
-function onDotClick(host, idx): void;
+function onDotClick(host, idx): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:156
+Defined in: website/components/carousel/awards-carousel/nav.ts:235
 
 Jumps to the slide matching the clicked dot — a manual choice stops
 autoplay (user intent overrides the ambient cycle).

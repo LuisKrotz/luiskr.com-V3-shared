@@ -8,6 +8,6 @@
 const _HOVER_BLOCKS: 3 = 3
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:53
+Defined in: website/components/home/about/glitch/types.ts:54
 
 Hover block-tear count/size bounds.

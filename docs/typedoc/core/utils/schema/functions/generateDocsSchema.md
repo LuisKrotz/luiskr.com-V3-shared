@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/schema](../README.md) / generateDocsSchema
 
 ```ts
-function generateDocsSchema(docsPath, node): Record<string, unknown>[];
+function generateDocsSchema(docsPath, node): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:204
+Defined in: core/utils/schema.ts:516
 
 Generates the docs-portal JSON-LD graph for a resolved docs path:
 a `BreadcrumbList` mirroring the on-page crumb trail plus one page

@@ -8,6 +8,6 @@
 const _IDLE_HIT: 0.05 = 0.05
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:19
+Defined in: website/components/home/about/glitch/types.ts:20
 
 Chance an idle frame runs a small tear/fringe burst.

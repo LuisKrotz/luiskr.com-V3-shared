@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/wiring](../README.md) / syncSpacePanel
 
 ```ts
-function syncSpacePanel(c): void;
+function syncSpacePanel(c): void
 ```
 
-Defined in: experiments/earth-playground/space/wiring.ts:327
+Defined in: experiments/earth-playground/space/wiring.ts:362
 
 Reflects `_panelOpen` into the DOM — the collapsed class on the panel
 and the reopen button's display (hidden while the panel is open).

@@ -1,16 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/render](../README.md) / renderItem
 
 ```ts
-function renderItem(host, item): 
-  | Element
-  | null;
+function renderItem(host, item): Element | null
 ```
 
-Defined in: website/components/carousel/awards-carousel/render.tsx:29
+Defined in: website/components/carousel/awards-carousel/render.tsx:30
 
 JSX for one slide — two shapes by variant: `awards` renders an outbound
 link (target=_blank + rel=noopener — external sites get no opener
@@ -34,7 +32,7 @@ Slide data; null-safe (clones render undefined).
 
 ## Returns
 
-  \| [`Element`](../../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
-  \| `null`
+\| [`Element`](../../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+\| `null`
 
 Slide JSX or null.

@@ -11,7 +11,7 @@ const GL_EVENTS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/events/dom.ts:139
+Defined in: core/tokens/events/dom.ts:141
 
 Frozen gl event-name map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the

@@ -1,25 +1,21 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / buildMediaUrls
 
 ```ts
-function buildMediaUrls(
-   storage, 
-   folder, 
-   item
-): MediaUrls;
+function buildMediaUrls(storage, folder, item): MediaUrls
 ```
 
-Defined in: core/utils/media.ts:113
+Defined in: core/utils/media.ts:161
 
 Constructs media URLs for images and videos following the project's
 compression pipeline. URL grammar:
-  image source : storage + folder + src + '-mozjpg-uncompressed.jpg'   (full quality)
-  image thumb  : storage + folder + src + '-mozjpg3-MSSIM-tuned-kodak.jpg' (blur-up)
-  video source : storage + folder + src + '.mp4'
-  video thumb  : storage + folder + src + '.mp4.jpg-thumb.jpg'         (poster frame)
+image source : storage + folder + src + '-mozjpg-uncompressed.jpg' (full quality)
+image thumb : storage + folder + src + '-mozjpg3-MSSIM-tuned-kodak.jpg' (blur-up)
+video source : storage + folder + src + '.mp4'
+video thumb : storage + folder + src + '.mp4.jpg-thumb.jpg' (poster frame)
 `src` in the DB never carries an extension — the pipeline's suffix is
 appended here, which is why an unsuffixed URL 404s.
 

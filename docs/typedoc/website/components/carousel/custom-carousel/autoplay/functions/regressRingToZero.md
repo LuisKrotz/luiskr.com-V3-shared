@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/autoplay](../README.md) / regressRingToZero
 
 ```ts
-function regressRingToZero(c): void;
+function regressRingToZero(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:112
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:119
 
 Drains ringProgress to 0 by RING_REGRESS_STEP per frame instead of
 snapping — the ring visibly unwinds when autoplay stops, matching the

@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/widgets/burger-button-webgl](../README.md) / BurgerButtonWebGL
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:30
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:33
 
 WebGL animated hamburger icon for the mobile burger button.
 Renders three sleek horizontal lines with rounded pill caps and subtle wave animation.
@@ -18,7 +18,7 @@ Adapts to the current theme: dark icon in light mode, bright icon in dark mode.
 new BurgerButtonWebGL(canvas, onClick?): BurgerButtonWebGL;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:54
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:65
 
 #### Parameters
 
@@ -39,10 +39,10 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:54
 ### canvas
 
 ```ts
-canvas: HTMLCanvasElement;
+canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:37
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:40
 
 #### Param
 
@@ -55,10 +55,10 @@ icon canvas inside the nav burger button
 **onClick**
 
 optional click handler (the canvas becomes
-  interactive — cursor:pointer + click listener); pass null when the
-  parent button already handles clicks
+interactive — cursor:pointer + click listener); pass null when the
+parent button already handles clicks
 
-***
+---
 
 ### gl
 
@@ -66,9 +66,9 @@ optional click handler (the canvas becomes
 gl: WebGLRenderingContext | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:38
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:41
 
-***
+---
 
 ### program
 
@@ -76,9 +76,9 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:38
 program: WebGLProgram | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:39
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:42
 
-***
+---
 
 ### quadBuffer
 
@@ -86,9 +86,9 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:39
 quadBuffer: WebGLBuffer | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:40
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:43
 
-***
+---
 
 ### animId
 
@@ -96,19 +96,19 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:40
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:41
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:44
 
-***
+---
 
 ### startTime
 
 ```ts
-startTime: number;
+startTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:42
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:45
 
-***
+---
 
 ### uTime
 
@@ -116,9 +116,9 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:42
 uTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:43
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:46
 
-***
+---
 
 ### uResolution
 
@@ -126,9 +126,9 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:43
 uResolution: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:44
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:47
 
-***
+---
 
 ### uDark
 
@@ -136,19 +136,19 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:44
 uDark: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:45
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:48
 
-***
+---
 
 ### \_onClick
 
 ```ts
-_onClick: EventListener | null;
+_onClick: EventListener | null
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:46
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:49
 
-***
+---
 
 ### \_onKeyDown
 
@@ -156,9 +156,9 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:46
 _onKeyDown: ((e) => void) | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:47
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:50
 
-***
+---
 
 ### \_onContextLost
 
@@ -166,9 +166,9 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:47
 _onContextLost: EventListener | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:48
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:51
 
-***
+---
 
 ### \_onResize
 
@@ -176,43 +176,115 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:48
 _onResize: () => void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:49
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:52
 
 #### Returns
 
 `void`
 
-***
+---
 
 ### \_purged
 
 ```ts
-_purged: boolean = false;
+_purged: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:50
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:53
 
-***
+---
 
 ### \_hasDeriv
 
 ```ts
-_hasDeriv: boolean = false;
+_hasDeriv: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:51
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:54
 
-***
+---
 
 ### useWebGL
 
 ```ts
-useWebGL: boolean = false;
+useWebGL: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:52
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:55
+
+---
+
+### \_wasm
+
+```ts
+_wasm:
+  | WidgetHandle
+  | null = null;
+```
+
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:57
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+---
+
+### \_wasmFailed
+
+```ts
+_wasmFailed: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:59
+
+Latch — a failed wasm mount never retries on this instance.
+
+---
+
+### \_wasmPending
+
+```ts
+_wasmPending: boolean = false
+```
+
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:61
+
+In-flight mount — restore() must not double-mount on re-entry.
+
+---
+
+### \_wasmT
+
+```ts
+_wasmT: number = 0
+```
+
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:63
+
+Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
 ## Methods
+
+### \_tryWasm()
+
+```ts
+_tryWasm(): void;
+```
+
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:118
+
+Attempts the WebGPU wasm burger (~50KB artifact, own GPUDevice).
+MANUAL drive: this class keeps its own loop/resize logic, so the
+bridge only initializes the surface — state setters and frame(dt)
+are forwarded by the existing draw path. On any failure the WebGL
+path runs exactly as before; on success the canvas gets a webgpu
+context (which is mutually exclusive with the webgl one, so the
+mount MUST settle before _initGLReal touches getContext).
+
+#### Returns
+
+`void`
+
+---
 
 ### \_initGL()
 
@@ -220,7 +292,7 @@ Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:52
 _initGL(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:100
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:168
 
 Creates the WebGL context + shader program; falls back to the CSS/DOM path on failure.
 
@@ -228,7 +300,23 @@ Creates the WebGL context + shader program; falls back to the CSS/DOM path on fa
 
 `void`
 
-***
+---
+
+### \_initGLReal()
+
+```ts
+_initGLReal(): void;
+```
+
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:186
+
+The synchronous WebGL bootstrap — ran directly on no-WebGPU browsers and after a wasm mount failure.
+
+#### Returns
+
+`void`
+
+---
 
 ### \_triggerFallback()
 
@@ -236,7 +324,7 @@ Creates the WebGL context + shader program; falls back to the CSS/DOM path on fa
 _triggerFallback(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:165
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:246
 
 Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on context loss or init failure.
 
@@ -244,7 +332,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 
 `void`
 
-***
+---
 
 ### \_checkResize()
 
@@ -252,7 +340,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 _checkResize(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:192
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:273
 
 Re-syncs the drawing buffer to the canvas's CSS box × devicePixelRatio
 (capped at 2). Only reallocates when the rounded size actually changed,
@@ -264,7 +352,7 @@ cleared buffer blank until the next state change.
 
 `void`
 
-***
+---
 
 ### \_start()
 
@@ -272,7 +360,7 @@ cleared buffer blank until the next state change.
 _start(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:222
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:311
 
 Chooses reduced-motion static render vs the rAF loop.
 
@@ -280,7 +368,7 @@ Chooses reduced-motion static render vs the rAF loop.
 
 `void`
 
-***
+---
 
 ### \_drawFrame()
 
@@ -288,7 +376,7 @@ Chooses reduced-motion static render vs the rAF loop.
 _drawFrame(t): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:251
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:340
 
 Renders one frame at time t (seconds) — shared by the RAF loop and the
 static reduced-motion path. u_dark is re-evaluated per frame from the
@@ -307,7 +395,7 @@ seconds since construction
 
 `void`
 
-***
+---
 
 ### \_loop()
 
@@ -315,7 +403,7 @@ seconds since construction
 _loop(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:281
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:386
 
 rAF callback — repaints each frame while running.
 
@@ -323,7 +411,7 @@ rAF callback — repaints each frame while running.
 
 `void`
 
-***
+---
 
 ### purge()
 
@@ -331,7 +419,7 @@ rAF callback — repaints each frame while running.
 purge(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:294
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:399
 
 webglPool hook — offscreen: stops the loop and releases the GL
 context entirely; restore() rebuilds it on re-entry so offscreen
@@ -341,7 +429,7 @@ widgets never hold context slots.
 
 `void`
 
-***
+---
 
 ### restore()
 
@@ -349,7 +437,7 @@ widgets never hold context slots.
 restore(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:311
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:424
 
 Recreates the GL context and resumes the loop after an offscreen purge.
 
@@ -357,7 +445,7 @@ Recreates the GL context and resumes the loop after an offscreen purge.
 
 `void`
 
-***
+---
 
 ### destroy()
 
@@ -365,7 +453,7 @@ Recreates the GL context and resumes the loop after an offscreen purge.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:331
+Defined in: core/utils/canvas/widgets/burger-button-webgl.ts:452
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

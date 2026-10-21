@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/widgets/flag/texture](../README.md) / flagImage
 
 ```ts
-function flagImage(renderer, cc): HTMLImageElement;
+function flagImage(renderer, cc): HTMLImageElement
 ```
 
-Defined in: core/utils/canvas/widgets/flag/texture.ts:53
+Defined in: core/utils/canvas/widgets/flag/texture.ts:59
 
 Builds (once) and caches the flag's composited <img> for country code
 cc — composite means the base flag plus any overlays (e.g. the EU

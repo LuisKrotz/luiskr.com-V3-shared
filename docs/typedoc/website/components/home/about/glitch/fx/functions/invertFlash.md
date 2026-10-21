@@ -16,7 +16,7 @@ One-frame near-total inversion — the classic bad-signal flash.
 
 ### s
 
-[`GlitchSession`](../../types/interfaces/GlitchSession.md)
+[`Glitch2dSession`](../../types/type-aliases/Glitch2dSession.md)
 
 ## Returns
 

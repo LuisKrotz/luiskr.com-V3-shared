@@ -8,6 +8,6 @@
 const _FLECK_VX: 22 = 22
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:69
+Defined in: website/components/home/mosaic/burn/tuning.ts:74
 
 Fleck sideways drift bound (canvas px/s).

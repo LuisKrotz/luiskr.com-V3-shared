@@ -8,7 +8,7 @@
 function syncPaper(s): void
 ```
 
-Defined in: website/components/home/mosaic/burn/paper.ts:331
+Defined in: website/components/home/mosaic/burn/paper.ts:333
 
 Anchors the canvas once at arm size, then tracks POSITION only. The
 card's expand ease animates the h2's `cqw` font-size for ~0.42s after

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/i18n](../README.md) / applySpaceDbDefaults
 
 ```ts
-function applySpaceDbDefaults(c, defaults): void;
+function applySpaceDbDefaults(c, defaults): void
 ```
 
-Defined in: experiments/earth-playground/space/i18n.ts:73
+Defined in: experiments/earth-playground/space/i18n.ts:79
 
 Applies space db defaults.
 
@@ -20,9 +20,9 @@ Applies space db defaults.
 
 ### defaults
 
-  \| `Record`\<`string`, [`SpParamValue`](../../controls/type-aliases/SpParamValue.md)\>
-  \| `null`
-  \| `undefined`
+\| `Record`\<`string`, [`SpParamValue`](../../controls/type-aliases/SpParamValue.md)\>
+\| `null`
+\| `undefined`
 
 ## Returns
 

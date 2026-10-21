@@ -8,6 +8,10 @@
 
 - [GlitchSession](interfaces/GlitchSession.md)
 
+## Type Aliases
+
+- [Glitch2dSession](type-aliases/Glitch2dSession.md)
+
 ## Variables
 
 - [\_DPR\_CAP](variables/DPR_CAP.md)

@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / core/utils/wasm/wasm-layout
 
@@ -19,3 +19,5 @@
 - [calcMosaicGap](functions/calcMosaicGap.md)
 - [calcResponsivePadding](functions/calcResponsivePadding.md)
 - [calcAspectScaled](functions/calcAspectScaled.md)
+- [calcMediaScale](functions/calcMediaScale.md)
+- [calcMediaBox](functions/calcMediaBox.md)

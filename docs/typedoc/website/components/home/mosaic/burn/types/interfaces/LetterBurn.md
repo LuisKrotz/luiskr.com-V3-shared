@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../../README.md) / [website/components/home/mosaic/burn/types](../README.md) / LetterBurn
 
-Defined in: website/components/home/mosaic/burn/types.ts:106
+Defined in: website/components/home/mosaic/burn/types.ts:125
 
 One glyph's burn unit — the ink-run span in the paper raster plus its
 ignition profile. `v` is the burn-speed multiplier, `delay` the share
@@ -20,7 +20,7 @@ front only travels through its own glyph.
 x0: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:108
+Defined in: website/components/home/mosaic/burn/types.ts:127
 
 Column span inside the paper raster (device px).
 
@@ -32,7 +32,7 @@ Column span inside the paper raster (device px).
 x1: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:109
+Defined in: website/components/home/mosaic/burn/types.ts:128
 
 ---
 
@@ -42,7 +42,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:109
 y0: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:111
+Defined in: website/components/home/mosaic/burn/types.ts:130
 
 Ink vertical extent inside the paper raster (device px).
 
@@ -54,7 +54,7 @@ Ink vertical extent inside the paper raster (device px).
 y1: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:112
+Defined in: website/components/home/mosaic/burn/types.ts:131
 
 ---
 
@@ -64,7 +64,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:112
 v: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:114
+Defined in: website/components/home/mosaic/burn/types.ts:133
 
 Burn-speed multiplier — 0.55..1.45 of the global front rate.
 
@@ -76,6 +76,6 @@ Burn-speed multiplier — 0.55..1.45 of the global front rate.
 delay: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:116
+Defined in: website/components/home/mosaic/burn/types.ts:135
 
 Ignition delay as a fraction of total progress (0..0.22).

@@ -8,6 +8,6 @@
 const _BAND_MIN: 6 = 6
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:31
+Defined in: website/components/home/mosaic/burn/tuning.ts:36
 
 Scorch-band minimum height in device px (tiny letters still char visibly).

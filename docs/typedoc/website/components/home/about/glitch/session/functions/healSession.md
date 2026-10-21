@@ -8,7 +8,7 @@
 function healSession(host, s): boolean
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:167
+Defined in: website/components/home/about/glitch/session.ts:236
 
 Re-homes the session after a shadow re-render: the old wrapper/img were
 discarded, so the canvas is re-appended to the fresh wrapper and the

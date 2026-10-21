@@ -11,3 +11,8 @@
 - [withinModalArmWindow](functions/withinModalArmWindow.md)
 - [armResidualInputGuard](functions/armResidualInputGuard.md)
 - [svgPlaceholder](functions/svgPlaceholder.md)
+- [isPlainClick](functions/isPlainClick.md)
+- [viewportWidth](functions/viewportWidth.md)
+- [resetViewportCache](functions/resetViewportCache.md)
+- [isIntentionalFlush](functions/isIntentionalFlush.md)
+- [flushLayout](functions/flushLayout.md)

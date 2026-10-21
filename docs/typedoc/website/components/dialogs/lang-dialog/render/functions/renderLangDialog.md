@@ -1,16 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/dialogs/lang-dialog/render](../README.md) / renderLangDialog
 
 ```ts
-function renderLangDialog(host): 
-  | Element
-  | null;
+function renderLangDialog(host): Element | null
 ```
 
-Defined in: website/components/dialogs/lang-dialog/render.tsx:75
+Defined in: website/components/dialogs/lang-dialog/render.tsx:83
 
 JSX template.
 
@@ -22,5 +20,5 @@ JSX template.
 
 ## Returns
 
-  \| [`Element`](../../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
-  \| `null`
+\| [`Element`](../../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+\| `null`

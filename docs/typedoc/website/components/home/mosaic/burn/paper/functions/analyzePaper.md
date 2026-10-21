@@ -8,7 +8,7 @@
 function analyzePaper(s): void
 ```
 
-Defined in: website/components/home/mosaic/burn/paper.ts:228
+Defined in: website/components/home/mosaic/burn/paper.ts:230
 
 Reads the rasterized paper's alpha channel to locate each glyph:
 columns that carry ink form runs — a space leaves a transparent gap,

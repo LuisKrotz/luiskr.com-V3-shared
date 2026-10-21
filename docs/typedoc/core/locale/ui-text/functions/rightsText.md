@@ -19,4 +19,4 @@ the stored translation never goes stale.
 
 `string`
 
-e.g. 'All rights reserved © Luis Krötz, 2026'
+e.g. 'Copyright © 2026 Luis Krötz'

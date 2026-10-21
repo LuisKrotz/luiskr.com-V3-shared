@@ -8,6 +8,6 @@
 const _EMBER_SIZE: 2.2 = 2.2
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:78
+Defined in: website/components/home/mosaic/burn/tuning.ts:83
 
 Particle size bounds in device px.

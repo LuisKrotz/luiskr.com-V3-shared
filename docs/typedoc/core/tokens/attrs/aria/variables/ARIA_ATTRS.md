@@ -1,34 +1,36 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/attrs/aria](../README.md) / ARIA\_ATTRS
 
 ```ts
 const ARIA_ATTRS: Readonly<{
-  ARIA_LABEL: "aria-label";
-  ARIA_EXPANDED: "aria-expanded";
-  ARIA_CONTROLS: "aria-controls";
-  ARIA_LABELLEDBY: "aria-labelledby";
-  ARIA_MODAL: "aria-modal";
-  ARIA_HIDDEN: "aria-hidden";
-  ARIA_LIVE: "aria-live";
-  ARIA_PRESSED: "aria-pressed";
-  ARIA_CHECKED: "aria-checked";
-  POLITE: "polite";
-  ROLE: "role";
-  ROLE_DIALOG: "dialog";
-  ROLE_GROUP: "group";
-  ROLE_SWITCH: "switch";
-  ROLE_BUTTON: "button";
-  ROLE_NAVIGATION: "navigation";
-  ROLE_ALERT: "alert";
-  ROLE_STATUS: "status";
-  ROLE_TREE: "tree";
-  ROLE_TREEITEM: "treeitem";
-  ROLE_NONE: "none";
-  TABINDEX: "tabindex";
-}>;
+  ARIA_LABEL: 'aria-label'
+  ARIA_EXPANDED: 'aria-expanded'
+  ARIA_CONTROLS: 'aria-controls'
+  ARIA_LABELLEDBY: 'aria-labelledby'
+  ARIA_DESCRIBEDBY: 'aria-describedby'
+  ARIA_MODAL: 'aria-modal'
+  ARIA_HIDDEN: 'aria-hidden'
+  ARIA_LIVE: 'aria-live'
+  ARIA_PRESSED: 'aria-pressed'
+  ARIA_CHECKED: 'aria-checked'
+  POLITE: 'polite'
+  ROLE: 'role'
+  ROLE_DIALOG: 'dialog'
+  ROLE_GROUP: 'group'
+  ROLE_SWITCH: 'switch'
+  ROLE_BUTTON: 'button'
+  ROLE_NAVIGATION: 'navigation'
+  ROLE_ALERT: 'alert'
+  ROLE_STATUS: 'status'
+  ROLE_TREE: 'tree'
+  ROLE_TREEITEM: 'treeitem'
+  ROLE_NONE: 'none'
+  ROLE_IMG: 'img'
+  TABINDEX: 'tabindex'
+}>
 ```
 
 Defined in: core/tokens/attrs/aria.ts:13

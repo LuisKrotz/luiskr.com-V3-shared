@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/nav](../README.md) / markAdjacentLoaded
 
 ```ts
-function markAdjacentLoaded(c, centerIdx): void;
+function markAdjacentLoaded(c, centerIdx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:56
+Defined in: website/components/carousel/custom-carousel/nav.ts:122
 
 Lazy-load window: flags slides within 2 ring positions of `centerIdx`
 as loadable so their media src gets assigned. Distance is measured on

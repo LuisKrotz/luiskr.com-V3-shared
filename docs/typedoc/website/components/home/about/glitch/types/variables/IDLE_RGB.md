@@ -8,6 +8,6 @@
 const _IDLE_RGB: 1.4 = 1.4
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:23
+Defined in: website/components/home/about/glitch/types.ts:24
 
 Idle RGB fringe bound in device px — sub-pixel shimmer.

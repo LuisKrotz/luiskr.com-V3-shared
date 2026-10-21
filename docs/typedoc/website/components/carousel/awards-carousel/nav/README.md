@@ -1,11 +1,12 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / website/components/carousel/awards-carousel/nav
 
 ## Functions
 
+- [cancelNavSpring](functions/cancelNavSpring.md)
 - [scrollToElement](functions/scrollToElement.md)
 - [jumpToSlide](functions/jumpToSlide.md)
 - [scheduleTeleport](functions/scheduleTeleport.md)

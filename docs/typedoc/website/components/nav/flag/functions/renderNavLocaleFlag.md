@@ -1,16 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/flag](../README.md) / renderNavLocaleFlag
 
 ```ts
-function renderNavLocaleFlag(host): 
-  | string
-  | Element;
+function renderNavLocaleFlag(host): string | Element
 ```
 
-Defined in: website/components/nav/flag.tsx:58
+Defined in: website/components/nav/flag.tsx:60
 
 Flag button content: GL canvas + <img> fallback (split flag for dual-cc locales).
 
@@ -22,5 +20,5 @@ Flag button content: GL canvas + <img> fallback (split flag for dual-cc locales)
 
 ## Returns
 
-  \| `string`
-  \| [`Element`](../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+\| `string`
+\| [`Element`](../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)

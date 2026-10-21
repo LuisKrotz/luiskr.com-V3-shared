@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/nav](../README.md) / jumpToSlide
 
 ```ts
-function jumpToSlide(
-   c, 
-   idx, 
-   smooth?
-): void;
+function jumpToSlide(c, idx, smooth?): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:228
+Defined in: website/components/carousel/custom-carousel/nav.ts:303
 
 Instant (default) or smooth position jump to slide idx — used for the
 clone teleports and resize refits. When layout hasn't produced

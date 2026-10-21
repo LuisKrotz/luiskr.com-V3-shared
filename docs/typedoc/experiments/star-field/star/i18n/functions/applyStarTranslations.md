@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/star/i18n](../README.md) / applyStarTranslations
 
 ```ts
-function applyStarTranslations(c, val): void;
+function applyStarTranslations(c, val): void
 ```
 
-Defined in: experiments/star-field/star/i18n.ts:52
+Defined in: experiments/star-field/star/i18n.ts:54
 
 Applies the fetched label map and re-renders — dossier content stays
 untouched (body facts ship in the per-body JSONs, not the DB).

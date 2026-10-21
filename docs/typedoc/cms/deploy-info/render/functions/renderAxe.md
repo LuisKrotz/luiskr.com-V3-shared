@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/render](../README.md) / renderAxe
 
 ```ts
-function renderAxe(host): Element;
+function renderAxe(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:125
+Defined in: cms/deploy-info/render.tsx:126
 
 Renders the axe-core accessibility scan (violations grouped by surface).
 

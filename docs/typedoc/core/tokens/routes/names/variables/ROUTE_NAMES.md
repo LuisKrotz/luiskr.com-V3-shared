@@ -1,25 +1,27 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/routes/names](../README.md) / ROUTE\_NAMES
 
 ```ts
 const ROUTE_NAMES: Readonly<{
-  HOME: "Home";
-  ABOUT: "About";
-  CONTACT: "Contact";
-  PRIVACY: "Privacy Policy";
-  GDPR: "GDPR";
-  TERMS: "Terms of Use";
-  PROJECT: "DynamicProject";
-  NOT_FOUND: "Not Found";
-  ADMIN_LOGIN: "Admin Login";
-  CMS_DASHBOARD: "CMS Dashboard";
-  EARTH_PLAYGROUND: "Earth Playground";
-  STAR_FIELD: "Star Field";
-  DOCS: "In-depth project docs";
-}>;
+  HOME: 'Home'
+  ABOUT: 'About'
+  CONTACT: 'Contact'
+  PRIVACY: 'Privacy Policy'
+  GDPR: 'GDPR'
+  TERMS: 'Terms of Use'
+  LICENSE: 'License'
+  PROJECT: 'DynamicProject'
+  NOT_FOUND: 'Not Found'
+  ADMIN_LOGIN: 'Admin Login'
+  CMS_DASHBOARD: 'CMS Dashboard'
+  EARTH_PLAYGROUND: 'Earth Playground'
+  STAR_FIELD: 'Star Field'
+  DOCS: 'In-depth project docs'
+  ANIMATIONS: 'Animations Reference'
+}>
 ```
 
 Defined in: core/tokens/routes/names.ts:11

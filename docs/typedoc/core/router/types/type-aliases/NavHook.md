@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/router/types](../README.md) / NavHook
 
 ```ts
-type NavHook = (_to, from) => unknown;
+type NavHook = (_to, from) => unknown
 ```
 
-Defined in: core/router/types.ts:42
+Defined in: core/router/types.ts:46
 
 Guard/hook signature — a returned string/{path} short-circuits into a redirect.
 

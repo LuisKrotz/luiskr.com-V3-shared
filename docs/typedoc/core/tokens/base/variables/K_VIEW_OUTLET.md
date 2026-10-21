@@ -8,7 +8,7 @@
 const _K_VIEW_OUTLET: 'view-outlet' = 'view-outlet'
 ```
 
-Defined in: core/tokens/base.ts:470
+Defined in: core/tokens/base.ts:484
 
 Shared key token `view-outlet` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

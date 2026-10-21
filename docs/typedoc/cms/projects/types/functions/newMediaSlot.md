@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/types](../README.md) / newMediaSlot
 
 ```ts
-function newMediaSlot(): CmsMediaItem;
+function newMediaSlot(): CmsMediaItem
 ```
 
-Defined in: cms/projects/types.ts:63
+Defined in: cms/projects/types.ts:64
 
 Default section media slot dimensions.
 

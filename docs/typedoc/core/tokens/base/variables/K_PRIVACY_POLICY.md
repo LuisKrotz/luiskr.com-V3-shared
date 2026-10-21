@@ -8,6 +8,6 @@
 const _K_PRIVACY_POLICY: 'privacy-policy' = 'privacy-policy'
 ```
 
-Defined in: core/tokens/base.ts:422
+Defined in: core/tokens/base.ts:427
 
 Token key "k privacy policy" — single source for the repeated literal.

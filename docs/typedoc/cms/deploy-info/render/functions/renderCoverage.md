@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/render](../README.md) / renderCoverage
 
 ```ts
-function renderCoverage(host): Element;
+function renderCoverage(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:89
+Defined in: cms/deploy-info/render.tsx:90
 
 Renders the Jest coverage summary table.
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/autoplay](../README.md) / startCarouselAutoplay
 
 ```ts
-function startCarouselAutoplay(c): void;
+function startCarouselAutoplay(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:58
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:65
 
 Starts the autoplay RAF loop unless latched off or already running.
 `autoplayStart` is backdated by `autoplayElapsed` so a pause→resume

@@ -1,19 +1,21 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/classes/draw-text](../README.md) / DRAW\_TEXT\_CLASSES
 
 ```ts
 const DRAW_TEXT_CLASSES: Readonly<{
-  DRAW_TEXT: "draw-text";
-  DRAW_TEXT_WORD: "draw-text__word";
-  DRAW_TEXT_CHAR: "draw-text__char";
-  DRAW_TEXT_SPACE: "draw-text__space";
-  DRAW_TEXT_VISIBLE: "draw-text--visible";
-  DRAW_TEXT_DONE: "draw-text--done";
-  DRAW_TEXT_PENDING: "draw-text--pending";
-}>;
+  DRAW_TEXT: 'draw-text'
+  DRAW_TEXT_WORD: 'draw-text__word'
+  DRAW_TEXT_CHAR: 'draw-text__char'
+  DRAW_TEXT_SPACE: 'draw-text__space'
+  DRAW_TEXT_VISIBLE: 'draw-text--visible'
+  DRAW_TEXT_DONE: 'draw-text--done'
+  DRAW_TEXT_PENDING: 'draw-text--pending'
+  DRAW_TEXT_GPU: 'draw-text--gpu'
+  DRAW_TEXT_CANVAS: 'draw-text__canvas'
+}>
 ```
 
 Defined in: core/tokens/classes/draw-text.ts:12

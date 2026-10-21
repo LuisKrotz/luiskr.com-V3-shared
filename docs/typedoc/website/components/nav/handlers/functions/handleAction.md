@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/handlers](../README.md) / handleAction
 
 ```ts
-function handleAction(host, e?): void;
+function handleAction(host, e?): void
 ```
 
-Defined in: website/components/nav/handlers.ts:87
+Defined in: website/components/nav/handlers.ts:94
 
 Contact/CTA click: near the document bottom the entry becomes "selected
 work" — home scrolls back to the mosaic (top), internals navigate to the

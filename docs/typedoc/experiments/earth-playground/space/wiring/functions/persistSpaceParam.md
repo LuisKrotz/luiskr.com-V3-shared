@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/wiring](../README.md) / persistSpaceParam
 
 ```ts
-function persistSpaceParam(
-   c, 
-   param, 
-   val
-): void;
+function persistSpaceParam(c, param, val): void
 ```
 
-Defined in: experiments/earth-playground/space/wiring.ts:316
+Defined in: experiments/earth-playground/space/wiring.ts:351
 
 Writes one param into the saved-settings map and persists the whole map
 to localStorage — the single write point for panel state.

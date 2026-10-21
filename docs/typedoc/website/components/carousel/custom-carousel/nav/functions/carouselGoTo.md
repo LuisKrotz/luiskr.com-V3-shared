@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/nav](../README.md) / carouselGoTo
 
 ```ts
-function carouselGoTo(c, idx): void;
+function carouselGoTo(c, idx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:87
+Defined in: website/components/carousel/custom-carousel/nav.ts:153
 
 Navigate to slide idx — accepts out-of-range idx (idx<0 or idx≥len) by
 scrolling to the CLONE slide at that edge, then scheduling an instant

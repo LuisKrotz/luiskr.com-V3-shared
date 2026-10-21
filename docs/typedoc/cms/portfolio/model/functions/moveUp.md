@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/portfolio/model](../README.md) / moveUp
 
 ```ts
-function moveUp(host, idx): void;
+function moveUp(host, idx): void
 ```
 
-Defined in: cms/portfolio/model.ts:80
+Defined in: cms/portfolio/model.ts:81
 
 Moves up.
 

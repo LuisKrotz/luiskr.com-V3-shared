@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/media/MediaExpanded](../README.md) / MediaExpanded
 
-Defined in: website/components/media/MediaExpanded.tsx:24
+Defined in: website/components/media/MediaExpanded.tsx:29
 
 The MediaExpanded — expanded class.
 
@@ -20,7 +20,7 @@ The MediaExpanded — expanded class.
 new MediaExpanded(): MediaExpanded;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:40
+Defined in: website/components/media/MediaExpanded.tsx:47
 
 #### Returns
 
@@ -46,7 +46,7 @@ Defined in: core/Component.ts:70
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_componentStyles`](../../../../../core/Component/classes/BaseComponent.md#_componentstyles)
 
-***
+---
 
 ### \_eventDisposers
 
@@ -68,7 +68,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_eventDisposers`](../../../../../core/Component/classes/BaseComponent.md#_eventdisposers)
 
-***
+---
 
 ### \_storeUnsubscribers
 
@@ -89,12 +89,12 @@ detached element stops receiving store pushes and can be GC'd.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_storeUnsubscribers`](../../../../../core/Component/classes/BaseComponent.md#_storeunsubscribers)
 
-***
+---
 
 ### \_isMounted
 
 ```ts
-_isMounted: boolean = false;
+_isMounted: boolean = false
 ```
 
 Defined in: core/Component.ts:90
@@ -107,7 +107,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_isMounted`](../../../../../core/Component/classes/BaseComponent.md#_ismounted)
 
-***
+---
 
 ### \_styleNode
 
@@ -123,7 +123,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_styleNode`](../../../../../core/Component/classes/BaseComponent.md#_stylenode)
 
-***
+---
 
 ### \_contentNode
 
@@ -141,12 +141,12 @@ header for why that split exists).
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_contentNode`](../../../../../core/Component/classes/BaseComponent.md#_contentnode)
 
-***
+---
 
 ### \_skeletonLayer
 
 ```ts
-_skeletonLayer: 
+_skeletonLayer:
   | SkeletonWebGL
   | null = null;
 ```
@@ -159,12 +159,12 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_skeletonLayer`](../../../../../core/Component/classes/BaseComponent.md#_skeletonlayer)
 
-***
+---
 
 ### state
 
 ```ts
-state: ComponentState = {};
+state: ComponentState = {}
 ```
 
 Defined in: core/Component.ts:106
@@ -175,46 +175,68 @@ Reactive state bag — written only through setState() so updates always re-rend
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`state`](../../../../../core/Component/classes/BaseComponent.md#state)
 
-***
+---
 
 ### isClosing
 
 ```ts
-isClosing: boolean = false;
+isClosing: boolean = false
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:25
+Defined in: website/components/media/MediaExpanded.tsx:30
 
-***
+---
 
 ### currentSrc
 
 ```ts
-currentSrc: string = ATTR_VALUES.EMPTY;
+currentSrc: string = ATTR_VALUES.EMPTY
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:26
+Defined in: website/components/media/MediaExpanded.tsx:31
 
-***
+---
 
 ### \_closeBtn
 
 ```ts
-_closeBtn: 
+_closeBtn:
   | {
   destroy: void;
 }
   | null = null;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:27
+Defined in: website/components/media/MediaExpanded.tsx:32
 
-***
+---
+
+### \_brackets
+
+```ts
+_brackets: (() => void) | null = null;
+```
+
+Defined in: website/components/media/MediaExpanded.tsx:33
+
+---
+
+### \_genie
+
+```ts
+_genie:
+  | GenieSession
+  | null = null;
+```
+
+Defined in: website/components/media/MediaExpanded.tsx:34
+
+---
 
 ### onbeforexrselect
 
 ```ts
-onbeforexrselect: ((this, ev) => any) | null;
+onbeforexrselect: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/@types/webxr/index.d.ts:1237
@@ -228,12 +250,12 @@ at the time the input device's primary action is triggered.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onbeforexrselect`](../../../../../core/Component/classes/BaseComponent.md#onbeforexrselect)
 
-***
+---
 
 ### ariaActiveDescendantElement
 
 ```ts
-ariaActiveDescendantElement: Element | null;
+ariaActiveDescendantElement: Element | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3242
@@ -244,12 +266,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3242
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaActiveDescendantElement`](../../../../../core/Component/classes/BaseComponent.md#ariaactivedescendantelement)
 
-***
+---
 
 ### ariaAtomic
 
 ```ts
-ariaAtomic: string | null;
+ariaAtomic: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3244
@@ -260,12 +282,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3244
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaAtomic`](../../../../../core/Component/classes/BaseComponent.md#ariaatomic)
 
-***
+---
 
 ### ariaAutoComplete
 
 ```ts
-ariaAutoComplete: string | null;
+ariaAutoComplete: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3246
@@ -276,12 +298,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3246
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaAutoComplete`](../../../../../core/Component/classes/BaseComponent.md#ariaautocomplete)
 
-***
+---
 
 ### ariaBrailleLabel
 
 ```ts
-ariaBrailleLabel: string | null;
+ariaBrailleLabel: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3248
@@ -292,12 +314,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3248
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaBrailleLabel`](../../../../../core/Component/classes/BaseComponent.md#ariabraillelabel)
 
-***
+---
 
 ### ariaBrailleRoleDescription
 
 ```ts
-ariaBrailleRoleDescription: string | null;
+ariaBrailleRoleDescription: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3250
@@ -308,12 +330,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3250
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaBrailleRoleDescription`](../../../../../core/Component/classes/BaseComponent.md#ariabrailleroledescription)
 
-***
+---
 
 ### ariaBusy
 
 ```ts
-ariaBusy: string | null;
+ariaBusy: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3252
@@ -324,12 +346,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3252
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaBusy`](../../../../../core/Component/classes/BaseComponent.md#ariabusy)
 
-***
+---
 
 ### ariaChecked
 
 ```ts
-ariaChecked: string | null;
+ariaChecked: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3254
@@ -340,12 +362,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3254
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaChecked`](../../../../../core/Component/classes/BaseComponent.md#ariachecked)
 
-***
+---
 
 ### ariaColCount
 
 ```ts
-ariaColCount: string | null;
+ariaColCount: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3256
@@ -356,12 +378,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3256
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaColCount`](../../../../../core/Component/classes/BaseComponent.md#ariacolcount)
 
-***
+---
 
 ### ariaColIndex
 
 ```ts
-ariaColIndex: string | null;
+ariaColIndex: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3258
@@ -372,12 +394,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3258
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaColIndex`](../../../../../core/Component/classes/BaseComponent.md#ariacolindex)
 
-***
+---
 
 ### ariaColIndexText
 
 ```ts
-ariaColIndexText: string | null;
+ariaColIndexText: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3260
@@ -388,12 +410,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3260
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaColIndexText`](../../../../../core/Component/classes/BaseComponent.md#ariacolindextext)
 
-***
+---
 
 ### ariaColSpan
 
 ```ts
-ariaColSpan: string | null;
+ariaColSpan: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3262
@@ -404,7 +426,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3262
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaColSpan`](../../../../../core/Component/classes/BaseComponent.md#ariacolspan)
 
-***
+---
 
 ### ariaControlsElements
 
@@ -420,12 +442,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3264
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaControlsElements`](../../../../../core/Component/classes/BaseComponent.md#ariacontrolselements)
 
-***
+---
 
 ### ariaCurrent
 
 ```ts
-ariaCurrent: string | null;
+ariaCurrent: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3266
@@ -436,7 +458,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3266
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaCurrent`](../../../../../core/Component/classes/BaseComponent.md#ariacurrent)
 
-***
+---
 
 ### ariaDescribedByElements
 
@@ -452,12 +474,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3268
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaDescribedByElements`](../../../../../core/Component/classes/BaseComponent.md#ariadescribedbyelements)
 
-***
+---
 
 ### ariaDescription
 
 ```ts
-ariaDescription: string | null;
+ariaDescription: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3270
@@ -468,7 +490,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3270
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaDescription`](../../../../../core/Component/classes/BaseComponent.md#ariadescription)
 
-***
+---
 
 ### ariaDetailsElements
 
@@ -484,12 +506,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3272
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaDetailsElements`](../../../../../core/Component/classes/BaseComponent.md#ariadetailselements)
 
-***
+---
 
 ### ariaDisabled
 
 ```ts
-ariaDisabled: string | null;
+ariaDisabled: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3274
@@ -500,7 +522,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3274
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaDisabled`](../../../../../core/Component/classes/BaseComponent.md#ariadisabled)
 
-***
+---
 
 ### ariaErrorMessageElements
 
@@ -516,12 +538,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3276
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaErrorMessageElements`](../../../../../core/Component/classes/BaseComponent.md#ariaerrormessageelements)
 
-***
+---
 
 ### ariaExpanded
 
 ```ts
-ariaExpanded: string | null;
+ariaExpanded: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3278
@@ -532,7 +554,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3278
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaExpanded`](../../../../../core/Component/classes/BaseComponent.md#ariaexpanded)
 
-***
+---
 
 ### ariaFlowToElements
 
@@ -548,12 +570,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3280
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaFlowToElements`](../../../../../core/Component/classes/BaseComponent.md#ariaflowtoelements)
 
-***
+---
 
 ### ariaHasPopup
 
 ```ts
-ariaHasPopup: string | null;
+ariaHasPopup: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3282
@@ -564,12 +586,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3282
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaHasPopup`](../../../../../core/Component/classes/BaseComponent.md#ariahaspopup)
 
-***
+---
 
 ### ariaHidden
 
 ```ts
-ariaHidden: string | null;
+ariaHidden: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3284
@@ -580,12 +602,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3284
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaHidden`](../../../../../core/Component/classes/BaseComponent.md#ariahidden)
 
-***
+---
 
 ### ariaInvalid
 
 ```ts
-ariaInvalid: string | null;
+ariaInvalid: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3286
@@ -596,12 +618,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3286
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaInvalid`](../../../../../core/Component/classes/BaseComponent.md#ariainvalid)
 
-***
+---
 
 ### ariaKeyShortcuts
 
 ```ts
-ariaKeyShortcuts: string | null;
+ariaKeyShortcuts: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3288
@@ -612,12 +634,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3288
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaKeyShortcuts`](../../../../../core/Component/classes/BaseComponent.md#ariakeyshortcuts)
 
-***
+---
 
 ### ariaLabel
 
 ```ts
-ariaLabel: string | null;
+ariaLabel: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3290
@@ -628,7 +650,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3290
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaLabel`](../../../../../core/Component/classes/BaseComponent.md#arialabel)
 
-***
+---
 
 ### ariaLabelledByElements
 
@@ -644,12 +666,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3292
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaLabelledByElements`](../../../../../core/Component/classes/BaseComponent.md#arialabelledbyelements)
 
-***
+---
 
 ### ariaLevel
 
 ```ts
-ariaLevel: string | null;
+ariaLevel: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3294
@@ -660,12 +682,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3294
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaLevel`](../../../../../core/Component/classes/BaseComponent.md#arialevel)
 
-***
+---
 
 ### ariaLive
 
 ```ts
-ariaLive: string | null;
+ariaLive: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3296
@@ -676,12 +698,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3296
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaLive`](../../../../../core/Component/classes/BaseComponent.md#arialive)
 
-***
+---
 
 ### ariaModal
 
 ```ts
-ariaModal: string | null;
+ariaModal: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3298
@@ -692,12 +714,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3298
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaModal`](../../../../../core/Component/classes/BaseComponent.md#ariamodal)
 
-***
+---
 
 ### ariaMultiLine
 
 ```ts
-ariaMultiLine: string | null;
+ariaMultiLine: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3300
@@ -708,12 +730,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3300
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaMultiLine`](../../../../../core/Component/classes/BaseComponent.md#ariamultiline)
 
-***
+---
 
 ### ariaMultiSelectable
 
 ```ts
-ariaMultiSelectable: string | null;
+ariaMultiSelectable: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3302
@@ -724,12 +746,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3302
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaMultiSelectable`](../../../../../core/Component/classes/BaseComponent.md#ariamultiselectable)
 
-***
+---
 
 ### ariaOrientation
 
 ```ts
-ariaOrientation: string | null;
+ariaOrientation: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3304
@@ -740,7 +762,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3304
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaOrientation`](../../../../../core/Component/classes/BaseComponent.md#ariaorientation)
 
-***
+---
 
 ### ariaOwnsElements
 
@@ -756,12 +778,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3306
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaOwnsElements`](../../../../../core/Component/classes/BaseComponent.md#ariaownselements)
 
-***
+---
 
 ### ariaPlaceholder
 
 ```ts
-ariaPlaceholder: string | null;
+ariaPlaceholder: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3308
@@ -772,12 +794,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3308
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaPlaceholder`](../../../../../core/Component/classes/BaseComponent.md#ariaplaceholder)
 
-***
+---
 
 ### ariaPosInSet
 
 ```ts
-ariaPosInSet: string | null;
+ariaPosInSet: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3310
@@ -788,12 +810,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3310
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaPosInSet`](../../../../../core/Component/classes/BaseComponent.md#ariaposinset)
 
-***
+---
 
 ### ariaPressed
 
 ```ts
-ariaPressed: string | null;
+ariaPressed: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3312
@@ -804,12 +826,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3312
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaPressed`](../../../../../core/Component/classes/BaseComponent.md#ariapressed)
 
-***
+---
 
 ### ariaReadOnly
 
 ```ts
-ariaReadOnly: string | null;
+ariaReadOnly: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3314
@@ -820,12 +842,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3314
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaReadOnly`](../../../../../core/Component/classes/BaseComponent.md#ariareadonly)
 
-***
+---
 
 ### ariaRelevant
 
 ```ts
-ariaRelevant: string | null;
+ariaRelevant: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3316
@@ -836,12 +858,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3316
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaRelevant`](../../../../../core/Component/classes/BaseComponent.md#ariarelevant)
 
-***
+---
 
 ### ariaRequired
 
 ```ts
-ariaRequired: string | null;
+ariaRequired: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3318
@@ -852,12 +874,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3318
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaRequired`](../../../../../core/Component/classes/BaseComponent.md#ariarequired)
 
-***
+---
 
 ### ariaRoleDescription
 
 ```ts
-ariaRoleDescription: string | null;
+ariaRoleDescription: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3320
@@ -868,12 +890,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3320
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaRoleDescription`](../../../../../core/Component/classes/BaseComponent.md#ariaroledescription)
 
-***
+---
 
 ### ariaRowCount
 
 ```ts
-ariaRowCount: string | null;
+ariaRowCount: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3322
@@ -884,12 +906,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3322
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaRowCount`](../../../../../core/Component/classes/BaseComponent.md#ariarowcount)
 
-***
+---
 
 ### ariaRowIndex
 
 ```ts
-ariaRowIndex: string | null;
+ariaRowIndex: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3324
@@ -900,12 +922,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3324
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaRowIndex`](../../../../../core/Component/classes/BaseComponent.md#ariarowindex)
 
-***
+---
 
 ### ariaRowIndexText
 
 ```ts
-ariaRowIndexText: string | null;
+ariaRowIndexText: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3326
@@ -916,12 +938,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3326
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaRowIndexText`](../../../../../core/Component/classes/BaseComponent.md#ariarowindextext)
 
-***
+---
 
 ### ariaRowSpan
 
 ```ts
-ariaRowSpan: string | null;
+ariaRowSpan: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3328
@@ -932,12 +954,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3328
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaRowSpan`](../../../../../core/Component/classes/BaseComponent.md#ariarowspan)
 
-***
+---
 
 ### ariaSelected
 
 ```ts
-ariaSelected: string | null;
+ariaSelected: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3330
@@ -948,12 +970,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3330
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaSelected`](../../../../../core/Component/classes/BaseComponent.md#ariaselected)
 
-***
+---
 
 ### ariaSetSize
 
 ```ts
-ariaSetSize: string | null;
+ariaSetSize: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3332
@@ -964,12 +986,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3332
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaSetSize`](../../../../../core/Component/classes/BaseComponent.md#ariasetsize)
 
-***
+---
 
 ### ariaSort
 
 ```ts
-ariaSort: string | null;
+ariaSort: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3334
@@ -980,12 +1002,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3334
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaSort`](../../../../../core/Component/classes/BaseComponent.md#ariasort)
 
-***
+---
 
 ### ariaValueMax
 
 ```ts
-ariaValueMax: string | null;
+ariaValueMax: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3336
@@ -996,12 +1018,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3336
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaValueMax`](../../../../../core/Component/classes/BaseComponent.md#ariavaluemax)
 
-***
+---
 
 ### ariaValueMin
 
 ```ts
-ariaValueMin: string | null;
+ariaValueMin: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3338
@@ -1012,12 +1034,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3338
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaValueMin`](../../../../../core/Component/classes/BaseComponent.md#ariavaluemin)
 
-***
+---
 
 ### ariaValueNow
 
 ```ts
-ariaValueNow: string | null;
+ariaValueNow: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3340
@@ -1028,12 +1050,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3340
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaValueNow`](../../../../../core/Component/classes/BaseComponent.md#ariavaluenow)
 
-***
+---
 
 ### ariaValueText
 
 ```ts
-ariaValueText: string | null;
+ariaValueText: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3342
@@ -1044,12 +1066,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3342
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ariaValueText`](../../../../../core/Component/classes/BaseComponent.md#ariavaluetext)
 
-***
+---
 
 ### role
 
 ```ts
-role: string | null;
+role: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3344
@@ -1060,7 +1082,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3344
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`role`](../../../../../core/Component/classes/BaseComponent.md#role)
 
-***
+---
 
 ### attributes
 
@@ -1078,12 +1100,12 @@ The **`Element.attributes`** property returns a live collection of all attribute
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`attributes`](../../../../../core/Component/classes/BaseComponent.md#attributes)
 
-***
+---
 
 ### className
 
 ```ts
-className: string;
+className: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13527
@@ -1096,7 +1118,7 @@ The **`className`** property of the Element interface gets and sets the value of
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`className`](../../../../../core/Component/classes/BaseComponent.md#classname)
 
-***
+---
 
 ### clientHeight
 
@@ -1114,7 +1136,7 @@ The **`clientHeight`** read-only property of the Element interface is zero for e
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`clientHeight`](../../../../../core/Component/classes/BaseComponent.md#clientheight)
 
-***
+---
 
 ### clientLeft
 
@@ -1132,7 +1154,7 @@ The **`clientLeft`** read-only property of the Element interface returns the wid
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`clientLeft`](../../../../../core/Component/classes/BaseComponent.md#clientleft)
 
-***
+---
 
 ### clientTop
 
@@ -1150,7 +1172,7 @@ The **`clientTop`** read-only property of the Element interface returns the widt
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`clientTop`](../../../../../core/Component/classes/BaseComponent.md#clienttop)
 
-***
+---
 
 ### clientWidth
 
@@ -1168,7 +1190,7 @@ The **`clientWidth`** read-only property of the Element interface is zero for in
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`clientWidth`](../../../../../core/Component/classes/BaseComponent.md#clientwidth)
 
-***
+---
 
 ### currentCSSZoom
 
@@ -1186,7 +1208,7 @@ The **`currentCSSZoom`** read-only property of the Element interface provides th
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`currentCSSZoom`](../../../../../core/Component/classes/BaseComponent.md#currentcsszoom)
 
-***
+---
 
 ### customElementRegistry
 
@@ -1200,12 +1222,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13558
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`customElementRegistry`](../../../../../core/Component/classes/BaseComponent.md#customelementregistry)
 
-***
+---
 
 ### id
 
 ```ts
-id: string;
+id: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13564
@@ -1218,12 +1240,12 @@ The **`id`** property of the Element interface represents the element's identifi
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`id`](../../../../../core/Component/classes/BaseComponent.md#id)
 
-***
+---
 
 ### innerHTML
 
 ```ts
-innerHTML: string;
+innerHTML: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13570
@@ -1236,7 +1258,7 @@ The **`innerHTML`** property of the Element interface gets or sets the HTML or X
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`innerHTML`](../../../../../core/Component/classes/BaseComponent.md#innerhtml)
 
-***
+---
 
 ### localName
 
@@ -1254,7 +1276,7 @@ The **`Element.localName`** read-only property returns the local part of the qua
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`localName`](../../../../../core/Component/classes/BaseComponent.md#localname)
 
-***
+---
 
 ### namespaceURI
 
@@ -1272,12 +1294,12 @@ The **`Element.namespaceURI`** read-only property returns the namespace URI of t
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`namespaceURI`](../../../../../core/Component/classes/BaseComponent.md#namespaceuri)
 
-***
+---
 
 ### onfullscreenchange
 
 ```ts
-onfullscreenchange: ((this, ev) => any) | null;
+onfullscreenchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13584
@@ -1288,12 +1310,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13584
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onfullscreenchange`](../../../../../core/Component/classes/BaseComponent.md#onfullscreenchange)
 
-***
+---
 
 ### onfullscreenerror
 
 ```ts
-onfullscreenerror: ((this, ev) => any) | null;
+onfullscreenerror: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13586
@@ -1304,12 +1326,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13586
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onfullscreenerror`](../../../../../core/Component/classes/BaseComponent.md#onfullscreenerror)
 
-***
+---
 
 ### outerHTML
 
 ```ts
-outerHTML: string;
+outerHTML: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13592
@@ -1322,7 +1344,7 @@ The **`outerHTML`** attribute of the Element interface gets or sets the HTML or 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`outerHTML`](../../../../../core/Component/classes/BaseComponent.md#outerhtml)
 
-***
+---
 
 ### ownerDocument
 
@@ -1340,7 +1362,7 @@ The read-only **`ownerDocument`** property of the Node interface returns the top
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ownerDocument`](../../../../../core/Component/classes/BaseComponent.md#ownerdocument)
 
-***
+---
 
 ### prefix
 
@@ -1358,7 +1380,7 @@ The **`Element.prefix`** read-only property returns the namespace prefix of the 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`prefix`](../../../../../core/Component/classes/BaseComponent.md#prefix)
 
-***
+---
 
 ### scrollHeight
 
@@ -1376,12 +1398,12 @@ The **`scrollHeight`** read-only property of the Element interface is a measurem
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`scrollHeight`](../../../../../core/Component/classes/BaseComponent.md#scrollheight)
 
-***
+---
 
 ### scrollLeft
 
 ```ts
-scrollLeft: number;
+scrollLeft: number
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13618
@@ -1394,12 +1416,12 @@ The **`scrollLeft`** property of the Element interface gets or sets the number o
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`scrollLeft`](../../../../../core/Component/classes/BaseComponent.md#scrollleft)
 
-***
+---
 
 ### scrollTop
 
 ```ts
-scrollTop: number;
+scrollTop: number
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13624
@@ -1412,7 +1434,7 @@ The **`scrollTop`** property of the Element interface gets or sets the number of
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`scrollTop`](../../../../../core/Component/classes/BaseComponent.md#scrolltop)
 
-***
+---
 
 ### scrollWidth
 
@@ -1430,7 +1452,7 @@ The **`scrollWidth`** read-only property of the Element interface is a measureme
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`scrollWidth`](../../../../../core/Component/classes/BaseComponent.md#scrollwidth)
 
-***
+---
 
 ### shadowRoot
 
@@ -1448,12 +1470,12 @@ The **`Element.shadowRoot`** read-only property represents the shadow root hoste
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`shadowRoot`](../../../../../core/Component/classes/BaseComponent.md#shadowroot)
 
-***
+---
 
 ### slot
 
 ```ts
-slot: string;
+slot: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13642
@@ -1466,7 +1488,7 @@ The **`slot`** property of the Element interface returns the name of the shadow 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`slot`](../../../../../core/Component/classes/BaseComponent.md#slot)
 
-***
+---
 
 ### tagName
 
@@ -1484,7 +1506,7 @@ The **`tagName`** read-only property of the Element interface returns the tag na
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`tagName`](../../../../../core/Component/classes/BaseComponent.md#tagname)
 
-***
+---
 
 ### attributeStyleMap
 
@@ -1500,12 +1522,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13928
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`attributeStyleMap`](../../../../../core/Component/classes/BaseComponent.md#attributestylemap)
 
-***
+---
 
 ### contentEditable
 
 ```ts
-contentEditable: string;
+contentEditable: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13936
@@ -1516,12 +1538,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13936
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`contentEditable`](../../../../../core/Component/classes/BaseComponent.md#contenteditable)
 
-***
+---
 
 ### enterKeyHint
 
 ```ts
-enterKeyHint: string;
+enterKeyHint: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13938
@@ -1532,12 +1554,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13938
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`enterKeyHint`](../../../../../core/Component/classes/BaseComponent.md#enterkeyhint)
 
-***
+---
 
 ### inputMode
 
 ```ts
-inputMode: string;
+inputMode: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13940
@@ -1548,7 +1570,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13940
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`inputMode`](../../../../../core/Component/classes/BaseComponent.md#inputmode)
 
-***
+---
 
 ### isContentEditable
 
@@ -1564,12 +1586,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13942
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`isContentEditable`](../../../../../core/Component/classes/BaseComponent.md#iscontenteditable)
 
-***
+---
 
 ### onabort
 
 ```ts
-onabort: ((this, ev) => any) | null;
+onabort: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16764
@@ -1580,12 +1602,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16764
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onabort`](../../../../../core/Component/classes/BaseComponent.md#onabort)
 
-***
+---
 
 ### onanimationcancel
 
 ```ts
-onanimationcancel: ((this, ev) => any) | null;
+onanimationcancel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16766
@@ -1596,12 +1618,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16766
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onanimationcancel`](../../../../../core/Component/classes/BaseComponent.md#onanimationcancel)
 
-***
+---
 
 ### onanimationend
 
 ```ts
-onanimationend: ((this, ev) => any) | null;
+onanimationend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16768
@@ -1612,12 +1634,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16768
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onanimationend`](../../../../../core/Component/classes/BaseComponent.md#onanimationend)
 
-***
+---
 
 ### onanimationiteration
 
 ```ts
-onanimationiteration: ((this, ev) => any) | null;
+onanimationiteration: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16770
@@ -1628,12 +1650,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16770
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onanimationiteration`](../../../../../core/Component/classes/BaseComponent.md#onanimationiteration)
 
-***
+---
 
 ### onanimationstart
 
 ```ts
-onanimationstart: ((this, ev) => any) | null;
+onanimationstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16772
@@ -1644,12 +1666,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16772
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onanimationstart`](../../../../../core/Component/classes/BaseComponent.md#onanimationstart)
 
-***
+---
 
 ### onauxclick
 
 ```ts
-onauxclick: ((this, ev) => any) | null;
+onauxclick: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16774
@@ -1660,12 +1682,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16774
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onauxclick`](../../../../../core/Component/classes/BaseComponent.md#onauxclick)
 
-***
+---
 
 ### onbeforeinput
 
 ```ts
-onbeforeinput: ((this, ev) => any) | null;
+onbeforeinput: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16776
@@ -1676,12 +1698,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16776
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onbeforeinput`](../../../../../core/Component/classes/BaseComponent.md#onbeforeinput)
 
-***
+---
 
 ### onbeforematch
 
 ```ts
-onbeforematch: ((this, ev) => any) | null;
+onbeforematch: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16778
@@ -1692,12 +1714,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16778
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onbeforematch`](../../../../../core/Component/classes/BaseComponent.md#onbeforematch)
 
-***
+---
 
 ### onbeforetoggle
 
 ```ts
-onbeforetoggle: ((this, ev) => any) | null;
+onbeforetoggle: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16780
@@ -1708,12 +1730,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16780
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onbeforetoggle`](../../../../../core/Component/classes/BaseComponent.md#onbeforetoggle)
 
-***
+---
 
 ### onblur
 
 ```ts
-onblur: ((this, ev) => any) | null;
+onblur: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16782
@@ -1724,12 +1746,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16782
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onblur`](../../../../../core/Component/classes/BaseComponent.md#onblur)
 
-***
+---
 
 ### oncancel
 
 ```ts
-oncancel: ((this, ev) => any) | null;
+oncancel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16784
@@ -1740,12 +1762,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16784
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncancel`](../../../../../core/Component/classes/BaseComponent.md#oncancel)
 
-***
+---
 
 ### oncanplay
 
 ```ts
-oncanplay: ((this, ev) => any) | null;
+oncanplay: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16786
@@ -1756,12 +1778,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16786
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncanplay`](../../../../../core/Component/classes/BaseComponent.md#oncanplay)
 
-***
+---
 
 ### oncanplaythrough
 
 ```ts
-oncanplaythrough: ((this, ev) => any) | null;
+oncanplaythrough: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16788
@@ -1772,12 +1794,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16788
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncanplaythrough`](../../../../../core/Component/classes/BaseComponent.md#oncanplaythrough)
 
-***
+---
 
 ### onchange
 
 ```ts
-onchange: ((this, ev) => any) | null;
+onchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16790
@@ -1788,12 +1810,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16790
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onchange`](../../../../../core/Component/classes/BaseComponent.md#onchange)
 
-***
+---
 
 ### onclick
 
 ```ts
-onclick: ((this, ev) => any) | null;
+onclick: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16792
@@ -1804,12 +1826,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16792
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onclick`](../../../../../core/Component/classes/BaseComponent.md#onclick)
 
-***
+---
 
 ### onclose
 
 ```ts
-onclose: ((this, ev) => any) | null;
+onclose: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16794
@@ -1820,12 +1842,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16794
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onclose`](../../../../../core/Component/classes/BaseComponent.md#onclose)
 
-***
+---
 
 ### oncommand
 
 ```ts
-oncommand: ((this, ev) => any) | null;
+oncommand: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16796
@@ -1836,12 +1858,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16796
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncommand`](../../../../../core/Component/classes/BaseComponent.md#oncommand)
 
-***
+---
 
 ### oncontextlost
 
 ```ts
-oncontextlost: ((this, ev) => any) | null;
+oncontextlost: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16798
@@ -1852,12 +1874,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16798
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncontextlost`](../../../../../core/Component/classes/BaseComponent.md#oncontextlost)
 
-***
+---
 
 ### oncontextmenu
 
 ```ts
-oncontextmenu: ((this, ev) => any) | null;
+oncontextmenu: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16800
@@ -1868,12 +1890,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16800
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncontextmenu`](../../../../../core/Component/classes/BaseComponent.md#oncontextmenu)
 
-***
+---
 
 ### oncontextrestored
 
 ```ts
-oncontextrestored: ((this, ev) => any) | null;
+oncontextrestored: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16802
@@ -1884,12 +1906,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16802
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncontextrestored`](../../../../../core/Component/classes/BaseComponent.md#oncontextrestored)
 
-***
+---
 
 ### oncopy
 
 ```ts
-oncopy: ((this, ev) => any) | null;
+oncopy: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16804
@@ -1900,12 +1922,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16804
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncopy`](../../../../../core/Component/classes/BaseComponent.md#oncopy)
 
-***
+---
 
 ### oncuechange
 
 ```ts
-oncuechange: ((this, ev) => any) | null;
+oncuechange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16806
@@ -1916,12 +1938,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16806
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncuechange`](../../../../../core/Component/classes/BaseComponent.md#oncuechange)
 
-***
+---
 
 ### oncut
 
 ```ts
-oncut: ((this, ev) => any) | null;
+oncut: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16808
@@ -1932,12 +1954,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16808
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oncut`](../../../../../core/Component/classes/BaseComponent.md#oncut)
 
-***
+---
 
 ### ondblclick
 
 ```ts
-ondblclick: ((this, ev) => any) | null;
+ondblclick: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16810
@@ -1948,12 +1970,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16810
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondblclick`](../../../../../core/Component/classes/BaseComponent.md#ondblclick)
 
-***
+---
 
 ### ondrag
 
 ```ts
-ondrag: ((this, ev) => any) | null;
+ondrag: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16812
@@ -1964,12 +1986,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16812
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondrag`](../../../../../core/Component/classes/BaseComponent.md#ondrag)
 
-***
+---
 
 ### ondragend
 
 ```ts
-ondragend: ((this, ev) => any) | null;
+ondragend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16814
@@ -1980,12 +2002,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16814
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondragend`](../../../../../core/Component/classes/BaseComponent.md#ondragend)
 
-***
+---
 
 ### ondragenter
 
 ```ts
-ondragenter: ((this, ev) => any) | null;
+ondragenter: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16816
@@ -1996,12 +2018,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16816
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondragenter`](../../../../../core/Component/classes/BaseComponent.md#ondragenter)
 
-***
+---
 
 ### ondragleave
 
 ```ts
-ondragleave: ((this, ev) => any) | null;
+ondragleave: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16818
@@ -2012,12 +2034,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16818
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondragleave`](../../../../../core/Component/classes/BaseComponent.md#ondragleave)
 
-***
+---
 
 ### ondragover
 
 ```ts
-ondragover: ((this, ev) => any) | null;
+ondragover: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16820
@@ -2028,12 +2050,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16820
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondragover`](../../../../../core/Component/classes/BaseComponent.md#ondragover)
 
-***
+---
 
 ### ondragstart
 
 ```ts
-ondragstart: ((this, ev) => any) | null;
+ondragstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16822
@@ -2044,12 +2066,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16822
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondragstart`](../../../../../core/Component/classes/BaseComponent.md#ondragstart)
 
-***
+---
 
 ### ondrop
 
 ```ts
-ondrop: ((this, ev) => any) | null;
+ondrop: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16824
@@ -2060,12 +2082,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16824
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondrop`](../../../../../core/Component/classes/BaseComponent.md#ondrop)
 
-***
+---
 
 ### ondurationchange
 
 ```ts
-ondurationchange: ((this, ev) => any) | null;
+ondurationchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16826
@@ -2076,12 +2098,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16826
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ondurationchange`](../../../../../core/Component/classes/BaseComponent.md#ondurationchange)
 
-***
+---
 
 ### onemptied
 
 ```ts
-onemptied: ((this, ev) => any) | null;
+onemptied: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16828
@@ -2092,12 +2114,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16828
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onemptied`](../../../../../core/Component/classes/BaseComponent.md#onemptied)
 
-***
+---
 
 ### onended
 
 ```ts
-onended: ((this, ev) => any) | null;
+onended: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16830
@@ -2108,12 +2130,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16830
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onended`](../../../../../core/Component/classes/BaseComponent.md#onended)
 
-***
+---
 
 ### onerror
 
 ```ts
-onerror: OnErrorEventHandler;
+onerror: OnErrorEventHandler
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16832
@@ -2124,12 +2146,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16832
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onerror`](../../../../../core/Component/classes/BaseComponent.md#onerror)
 
-***
+---
 
 ### onfocus
 
 ```ts
-onfocus: ((this, ev) => any) | null;
+onfocus: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16834
@@ -2140,12 +2162,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16834
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onfocus`](../../../../../core/Component/classes/BaseComponent.md#onfocus)
 
-***
+---
 
 ### onformdata
 
 ```ts
-onformdata: ((this, ev) => any) | null;
+onformdata: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16836
@@ -2156,12 +2178,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16836
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onformdata`](../../../../../core/Component/classes/BaseComponent.md#onformdata)
 
-***
+---
 
 ### ongotpointercapture
 
 ```ts
-ongotpointercapture: ((this, ev) => any) | null;
+ongotpointercapture: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16838
@@ -2172,12 +2194,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16838
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ongotpointercapture`](../../../../../core/Component/classes/BaseComponent.md#ongotpointercapture)
 
-***
+---
 
 ### oninput
 
 ```ts
-oninput: ((this, ev) => any) | null;
+oninput: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16840
@@ -2188,12 +2210,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16840
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oninput`](../../../../../core/Component/classes/BaseComponent.md#oninput)
 
-***
+---
 
 ### oninvalid
 
 ```ts
-oninvalid: ((this, ev) => any) | null;
+oninvalid: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16842
@@ -2204,12 +2226,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16842
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`oninvalid`](../../../../../core/Component/classes/BaseComponent.md#oninvalid)
 
-***
+---
 
 ### onkeydown
 
 ```ts
-onkeydown: ((this, ev) => any) | null;
+onkeydown: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16844
@@ -2220,12 +2242,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16844
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onkeydown`](../../../../../core/Component/classes/BaseComponent.md#onkeydown)
 
-***
+---
 
 ### ~~onkeypress~~
 
 ```ts
-onkeypress: ((this, ev) => any) | null;
+onkeypress: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16850
@@ -2238,12 +2260,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16850
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onkeypress`](../../../../../core/Component/classes/BaseComponent.md#onkeypress)
 
-***
+---
 
 ### onkeyup
 
 ```ts
-onkeyup: ((this, ev) => any) | null;
+onkeyup: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16852
@@ -2254,12 +2276,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16852
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onkeyup`](../../../../../core/Component/classes/BaseComponent.md#onkeyup)
 
-***
+---
 
 ### onload
 
 ```ts
-onload: ((this, ev) => any) | null;
+onload: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16854
@@ -2270,12 +2292,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16854
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onload`](../../../../../core/Component/classes/BaseComponent.md#onload)
 
-***
+---
 
 ### onloadeddata
 
 ```ts
-onloadeddata: ((this, ev) => any) | null;
+onloadeddata: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16856
@@ -2286,12 +2308,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16856
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onloadeddata`](../../../../../core/Component/classes/BaseComponent.md#onloadeddata)
 
-***
+---
 
 ### onloadedmetadata
 
 ```ts
-onloadedmetadata: ((this, ev) => any) | null;
+onloadedmetadata: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16858
@@ -2302,12 +2324,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16858
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onloadedmetadata`](../../../../../core/Component/classes/BaseComponent.md#onloadedmetadata)
 
-***
+---
 
 ### onloadstart
 
 ```ts
-onloadstart: ((this, ev) => any) | null;
+onloadstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16860
@@ -2318,12 +2340,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16860
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onloadstart`](../../../../../core/Component/classes/BaseComponent.md#onloadstart)
 
-***
+---
 
 ### onlostpointercapture
 
 ```ts
-onlostpointercapture: ((this, ev) => any) | null;
+onlostpointercapture: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16862
@@ -2334,12 +2356,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16862
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onlostpointercapture`](../../../../../core/Component/classes/BaseComponent.md#onlostpointercapture)
 
-***
+---
 
 ### onmousedown
 
 ```ts
-onmousedown: ((this, ev) => any) | null;
+onmousedown: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16864
@@ -2350,12 +2372,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16864
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onmousedown`](../../../../../core/Component/classes/BaseComponent.md#onmousedown)
 
-***
+---
 
 ### onmouseenter
 
 ```ts
-onmouseenter: ((this, ev) => any) | null;
+onmouseenter: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16866
@@ -2366,12 +2388,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16866
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onmouseenter`](../../../../../core/Component/classes/BaseComponent.md#onmouseenter)
 
-***
+---
 
 ### onmouseleave
 
 ```ts
-onmouseleave: ((this, ev) => any) | null;
+onmouseleave: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16868
@@ -2382,12 +2404,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16868
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onmouseleave`](../../../../../core/Component/classes/BaseComponent.md#onmouseleave)
 
-***
+---
 
 ### onmousemove
 
 ```ts
-onmousemove: ((this, ev) => any) | null;
+onmousemove: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16870
@@ -2398,12 +2420,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16870
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onmousemove`](../../../../../core/Component/classes/BaseComponent.md#onmousemove)
 
-***
+---
 
 ### onmouseout
 
 ```ts
-onmouseout: ((this, ev) => any) | null;
+onmouseout: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16872
@@ -2414,12 +2436,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16872
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onmouseout`](../../../../../core/Component/classes/BaseComponent.md#onmouseout)
 
-***
+---
 
 ### onmouseover
 
 ```ts
-onmouseover: ((this, ev) => any) | null;
+onmouseover: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16874
@@ -2430,12 +2452,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16874
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onmouseover`](../../../../../core/Component/classes/BaseComponent.md#onmouseover)
 
-***
+---
 
 ### onmouseup
 
 ```ts
-onmouseup: ((this, ev) => any) | null;
+onmouseup: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16876
@@ -2446,12 +2468,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16876
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onmouseup`](../../../../../core/Component/classes/BaseComponent.md#onmouseup)
 
-***
+---
 
 ### onpaste
 
 ```ts
-onpaste: ((this, ev) => any) | null;
+onpaste: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16878
@@ -2462,12 +2484,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16878
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpaste`](../../../../../core/Component/classes/BaseComponent.md#onpaste)
 
-***
+---
 
 ### onpause
 
 ```ts
-onpause: ((this, ev) => any) | null;
+onpause: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16880
@@ -2478,12 +2500,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16880
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpause`](../../../../../core/Component/classes/BaseComponent.md#onpause)
 
-***
+---
 
 ### onplay
 
 ```ts
-onplay: ((this, ev) => any) | null;
+onplay: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16882
@@ -2494,12 +2516,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16882
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onplay`](../../../../../core/Component/classes/BaseComponent.md#onplay)
 
-***
+---
 
 ### onplaying
 
 ```ts
-onplaying: ((this, ev) => any) | null;
+onplaying: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16884
@@ -2510,12 +2532,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16884
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onplaying`](../../../../../core/Component/classes/BaseComponent.md#onplaying)
 
-***
+---
 
 ### onpointercancel
 
 ```ts
-onpointercancel: ((this, ev) => any) | null;
+onpointercancel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16886
@@ -2526,12 +2548,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16886
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointercancel`](../../../../../core/Component/classes/BaseComponent.md#onpointercancel)
 
-***
+---
 
 ### onpointerdown
 
 ```ts
-onpointerdown: ((this, ev) => any) | null;
+onpointerdown: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16888
@@ -2542,12 +2564,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16888
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointerdown`](../../../../../core/Component/classes/BaseComponent.md#onpointerdown)
 
-***
+---
 
 ### onpointerenter
 
 ```ts
-onpointerenter: ((this, ev) => any) | null;
+onpointerenter: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16890
@@ -2558,12 +2580,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16890
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointerenter`](../../../../../core/Component/classes/BaseComponent.md#onpointerenter)
 
-***
+---
 
 ### onpointerleave
 
 ```ts
-onpointerleave: ((this, ev) => any) | null;
+onpointerleave: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16892
@@ -2574,12 +2596,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16892
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointerleave`](../../../../../core/Component/classes/BaseComponent.md#onpointerleave)
 
-***
+---
 
 ### onpointermove
 
 ```ts
-onpointermove: ((this, ev) => any) | null;
+onpointermove: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16894
@@ -2590,12 +2612,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16894
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointermove`](../../../../../core/Component/classes/BaseComponent.md#onpointermove)
 
-***
+---
 
 ### onpointerout
 
 ```ts
-onpointerout: ((this, ev) => any) | null;
+onpointerout: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16896
@@ -2606,12 +2628,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16896
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointerout`](../../../../../core/Component/classes/BaseComponent.md#onpointerout)
 
-***
+---
 
 ### onpointerover
 
 ```ts
-onpointerover: ((this, ev) => any) | null;
+onpointerover: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16898
@@ -2622,12 +2644,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16898
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointerover`](../../../../../core/Component/classes/BaseComponent.md#onpointerover)
 
-***
+---
 
 ### onpointerrawupdate
 
 ```ts
-onpointerrawupdate: ((this, ev) => any) | null;
+onpointerrawupdate: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16904
@@ -2640,12 +2662,12 @@ Available only in secure contexts.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointerrawupdate`](../../../../../core/Component/classes/BaseComponent.md#onpointerrawupdate)
 
-***
+---
 
 ### onpointerup
 
 ```ts
-onpointerup: ((this, ev) => any) | null;
+onpointerup: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16906
@@ -2656,12 +2678,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16906
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onpointerup`](../../../../../core/Component/classes/BaseComponent.md#onpointerup)
 
-***
+---
 
 ### onprogress
 
 ```ts
-onprogress: ((this, ev) => any) | null;
+onprogress: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16908
@@ -2672,12 +2694,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16908
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onprogress`](../../../../../core/Component/classes/BaseComponent.md#onprogress)
 
-***
+---
 
 ### onratechange
 
 ```ts
-onratechange: ((this, ev) => any) | null;
+onratechange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16910
@@ -2688,12 +2710,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16910
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onratechange`](../../../../../core/Component/classes/BaseComponent.md#onratechange)
 
-***
+---
 
 ### onreset
 
 ```ts
-onreset: ((this, ev) => any) | null;
+onreset: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16912
@@ -2704,12 +2726,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16912
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onreset`](../../../../../core/Component/classes/BaseComponent.md#onreset)
 
-***
+---
 
 ### onresize
 
 ```ts
-onresize: ((this, ev) => any) | null;
+onresize: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16914
@@ -2720,12 +2742,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16914
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onresize`](../../../../../core/Component/classes/BaseComponent.md#onresize)
 
-***
+---
 
 ### onscroll
 
 ```ts
-onscroll: ((this, ev) => any) | null;
+onscroll: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16916
@@ -2736,12 +2758,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16916
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onscroll`](../../../../../core/Component/classes/BaseComponent.md#onscroll)
 
-***
+---
 
 ### onscrollend
 
 ```ts
-onscrollend: ((this, ev) => any) | null;
+onscrollend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16918
@@ -2752,12 +2774,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16918
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onscrollend`](../../../../../core/Component/classes/BaseComponent.md#onscrollend)
 
-***
+---
 
 ### onsecuritypolicyviolation
 
 ```ts
-onsecuritypolicyviolation: ((this, ev) => any) | null;
+onsecuritypolicyviolation: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16920
@@ -2768,12 +2790,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16920
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onsecuritypolicyviolation`](../../../../../core/Component/classes/BaseComponent.md#onsecuritypolicyviolation)
 
-***
+---
 
 ### onseeked
 
 ```ts
-onseeked: ((this, ev) => any) | null;
+onseeked: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16922
@@ -2784,12 +2806,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16922
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onseeked`](../../../../../core/Component/classes/BaseComponent.md#onseeked)
 
-***
+---
 
 ### onseeking
 
 ```ts
-onseeking: ((this, ev) => any) | null;
+onseeking: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16924
@@ -2800,12 +2822,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16924
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onseeking`](../../../../../core/Component/classes/BaseComponent.md#onseeking)
 
-***
+---
 
 ### onselect
 
 ```ts
-onselect: ((this, ev) => any) | null;
+onselect: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16926
@@ -2816,12 +2838,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16926
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onselect`](../../../../../core/Component/classes/BaseComponent.md#onselect)
 
-***
+---
 
 ### onselectionchange
 
 ```ts
-onselectionchange: ((this, ev) => any) | null;
+onselectionchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16928
@@ -2832,12 +2854,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16928
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onselectionchange`](../../../../../core/Component/classes/BaseComponent.md#onselectionchange)
 
-***
+---
 
 ### onselectstart
 
 ```ts
-onselectstart: ((this, ev) => any) | null;
+onselectstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16930
@@ -2848,12 +2870,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16930
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onselectstart`](../../../../../core/Component/classes/BaseComponent.md#onselectstart)
 
-***
+---
 
 ### onslotchange
 
 ```ts
-onslotchange: ((this, ev) => any) | null;
+onslotchange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16932
@@ -2864,12 +2886,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16932
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onslotchange`](../../../../../core/Component/classes/BaseComponent.md#onslotchange)
 
-***
+---
 
 ### onstalled
 
 ```ts
-onstalled: ((this, ev) => any) | null;
+onstalled: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16934
@@ -2880,12 +2902,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16934
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onstalled`](../../../../../core/Component/classes/BaseComponent.md#onstalled)
 
-***
+---
 
 ### onsubmit
 
 ```ts
-onsubmit: ((this, ev) => any) | null;
+onsubmit: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16936
@@ -2896,12 +2918,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16936
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onsubmit`](../../../../../core/Component/classes/BaseComponent.md#onsubmit)
 
-***
+---
 
 ### onsuspend
 
 ```ts
-onsuspend: ((this, ev) => any) | null;
+onsuspend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16938
@@ -2912,12 +2934,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16938
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onsuspend`](../../../../../core/Component/classes/BaseComponent.md#onsuspend)
 
-***
+---
 
 ### ontimeupdate
 
 ```ts
-ontimeupdate: ((this, ev) => any) | null;
+ontimeupdate: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16940
@@ -2928,12 +2950,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16940
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontimeupdate`](../../../../../core/Component/classes/BaseComponent.md#ontimeupdate)
 
-***
+---
 
 ### ontoggle
 
 ```ts
-ontoggle: ((this, ev) => any) | null;
+ontoggle: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16942
@@ -2944,7 +2966,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16942
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontoggle`](../../../../../core/Component/classes/BaseComponent.md#ontoggle)
 
-***
+---
 
 ### ontouchcancel?
 
@@ -2960,7 +2982,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16944
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontouchcancel`](../../../../../core/Component/classes/BaseComponent.md#ontouchcancel)
 
-***
+---
 
 ### ontouchend?
 
@@ -2976,7 +2998,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16946
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontouchend`](../../../../../core/Component/classes/BaseComponent.md#ontouchend)
 
-***
+---
 
 ### ontouchmove?
 
@@ -2992,7 +3014,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16948
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontouchmove`](../../../../../core/Component/classes/BaseComponent.md#ontouchmove)
 
-***
+---
 
 ### ontouchstart?
 
@@ -3008,12 +3030,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16950
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontouchstart`](../../../../../core/Component/classes/BaseComponent.md#ontouchstart)
 
-***
+---
 
 ### ontransitioncancel
 
 ```ts
-ontransitioncancel: ((this, ev) => any) | null;
+ontransitioncancel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16952
@@ -3024,12 +3046,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16952
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontransitioncancel`](../../../../../core/Component/classes/BaseComponent.md#ontransitioncancel)
 
-***
+---
 
 ### ontransitionend
 
 ```ts
-ontransitionend: ((this, ev) => any) | null;
+ontransitionend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16954
@@ -3040,12 +3062,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16954
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontransitionend`](../../../../../core/Component/classes/BaseComponent.md#ontransitionend)
 
-***
+---
 
 ### ontransitionrun
 
 ```ts
-ontransitionrun: ((this, ev) => any) | null;
+ontransitionrun: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16956
@@ -3056,12 +3078,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16956
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontransitionrun`](../../../../../core/Component/classes/BaseComponent.md#ontransitionrun)
 
-***
+---
 
 ### ontransitionstart
 
 ```ts
-ontransitionstart: ((this, ev) => any) | null;
+ontransitionstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16958
@@ -3072,12 +3094,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16958
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ontransitionstart`](../../../../../core/Component/classes/BaseComponent.md#ontransitionstart)
 
-***
+---
 
 ### onvolumechange
 
 ```ts
-onvolumechange: ((this, ev) => any) | null;
+onvolumechange: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16960
@@ -3088,12 +3110,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16960
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onvolumechange`](../../../../../core/Component/classes/BaseComponent.md#onvolumechange)
 
-***
+---
 
 ### onwaiting
 
 ```ts
-onwaiting: ((this, ev) => any) | null;
+onwaiting: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16962
@@ -3104,12 +3126,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16962
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onwaiting`](../../../../../core/Component/classes/BaseComponent.md#onwaiting)
 
-***
+---
 
 ### ~~onwebkitanimationend~~
 
 ```ts
-onwebkitanimationend: ((this, ev) => any) | null;
+onwebkitanimationend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16968
@@ -3124,12 +3146,12 @@ This is a legacy alias of `onanimationend`.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onwebkitanimationend`](../../../../../core/Component/classes/BaseComponent.md#onwebkitanimationend)
 
-***
+---
 
 ### ~~onwebkitanimationiteration~~
 
 ```ts
-onwebkitanimationiteration: ((this, ev) => any) | null;
+onwebkitanimationiteration: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16974
@@ -3144,12 +3166,12 @@ This is a legacy alias of `onanimationiteration`.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onwebkitanimationiteration`](../../../../../core/Component/classes/BaseComponent.md#onwebkitanimationiteration)
 
-***
+---
 
 ### ~~onwebkitanimationstart~~
 
 ```ts
-onwebkitanimationstart: ((this, ev) => any) | null;
+onwebkitanimationstart: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16980
@@ -3164,12 +3186,12 @@ This is a legacy alias of `onanimationstart`.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onwebkitanimationstart`](../../../../../core/Component/classes/BaseComponent.md#onwebkitanimationstart)
 
-***
+---
 
 ### ~~onwebkittransitionend~~
 
 ```ts
-onwebkittransitionend: ((this, ev) => any) | null;
+onwebkittransitionend: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16986
@@ -3184,12 +3206,12 @@ This is a legacy alias of `ontransitionend`.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onwebkittransitionend`](../../../../../core/Component/classes/BaseComponent.md#onwebkittransitionend)
 
-***
+---
 
 ### onwheel
 
 ```ts
-onwheel: ((this, ev) => any) | null;
+onwheel: ((this, ev) => any) | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16988
@@ -3200,12 +3222,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:16988
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onwheel`](../../../../../core/Component/classes/BaseComponent.md#onwheel)
 
-***
+---
 
 ### accessKey
 
 ```ts
-accessKey: string;
+accessKey: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17735
@@ -3218,7 +3240,7 @@ The **`HTMLElement.accessKey`** property sets the keystroke which a user can pre
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`accessKey`](../../../../../core/Component/classes/BaseComponent.md#accesskey)
 
-***
+---
 
 ### accessKeyLabel
 
@@ -3236,12 +3258,12 @@ The **`HTMLElement.accessKeyLabel`** read-only property returns a string contain
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`accessKeyLabel`](../../../../../core/Component/classes/BaseComponent.md#accesskeylabel)
 
-***
+---
 
 ### autocapitalize
 
 ```ts
-autocapitalize: string;
+autocapitalize: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17747
@@ -3254,12 +3276,12 @@ The **`autocapitalize`** property of the HTMLElement interface represents the el
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`autocapitalize`](../../../../../core/Component/classes/BaseComponent.md#autocapitalize)
 
-***
+---
 
 ### autocorrect
 
 ```ts
-autocorrect: boolean;
+autocorrect: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17753
@@ -3272,12 +3294,12 @@ The **`autocorrect`** property of the HTMLElement interface controls whether or 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`autocorrect`](../../../../../core/Component/classes/BaseComponent.md#autocorrect)
 
-***
+---
 
 ### dir
 
 ```ts
-dir: string;
+dir: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17759
@@ -3290,12 +3312,12 @@ The **`HTMLElement.dir`** property indicates the text writing directionality of 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`dir`](../../../../../core/Component/classes/BaseComponent.md#dir)
 
-***
+---
 
 ### draggable
 
 ```ts
-draggable: boolean;
+draggable: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17765
@@ -3308,12 +3330,12 @@ The **`draggable`** property of the HTMLElement interface gets and sets a Boolea
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`draggable`](../../../../../core/Component/classes/BaseComponent.md#draggable)
 
-***
+---
 
 ### hidden
 
 ```ts
-hidden: boolean | "until-found";
+hidden: boolean | 'until-found'
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17771
@@ -3326,12 +3348,12 @@ The HTMLElement property **`hidden`** reflects the value of the element's hidden
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`hidden`](../../../../../core/Component/classes/BaseComponent.md#hidden)
 
-***
+---
 
 ### inert
 
 ```ts
-inert: boolean;
+inert: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17777
@@ -3344,12 +3366,12 @@ The HTMLElement property **`inert`** reflects the value of the element's inert a
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`inert`](../../../../../core/Component/classes/BaseComponent.md#inert)
 
-***
+---
 
 ### innerText
 
 ```ts
-innerText: string;
+innerText: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17783
@@ -3362,12 +3384,12 @@ The **`innerText`** property of the HTMLElement interface represents the rendere
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`innerText`](../../../../../core/Component/classes/BaseComponent.md#innertext)
 
-***
+---
 
 ### lang
 
 ```ts
-lang: string;
+lang: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17789
@@ -3380,7 +3402,7 @@ The **`lang`** property of the HTMLElement interface indicates the base language
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`lang`](../../../../../core/Component/classes/BaseComponent.md#lang)
 
-***
+---
 
 ### offsetHeight
 
@@ -3398,7 +3420,7 @@ The **`offsetHeight`** read-only property of the HTMLElement interface returns t
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`offsetHeight`](../../../../../core/Component/classes/BaseComponent.md#offsetheight)
 
-***
+---
 
 ### offsetLeft
 
@@ -3416,7 +3438,7 @@ The **`offsetLeft`** read-only property of the HTMLElement interface returns the
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`offsetLeft`](../../../../../core/Component/classes/BaseComponent.md#offsetleft)
 
-***
+---
 
 ### offsetParent
 
@@ -3434,7 +3456,7 @@ The **`HTMLElement.offsetParent`** read-only property returns a reference to the
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`offsetParent`](../../../../../core/Component/classes/BaseComponent.md#offsetparent)
 
-***
+---
 
 ### offsetTop
 
@@ -3452,7 +3474,7 @@ The **`offsetTop`** read-only property of the HTMLElement interface returns the 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`offsetTop`](../../../../../core/Component/classes/BaseComponent.md#offsettop)
 
-***
+---
 
 ### offsetWidth
 
@@ -3470,12 +3492,12 @@ The **`offsetWidth`** read-only property of the HTMLElement interface returns th
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`offsetWidth`](../../../../../core/Component/classes/BaseComponent.md#offsetwidth)
 
-***
+---
 
 ### outerText
 
 ```ts
-outerText: string;
+outerText: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17825
@@ -3488,12 +3510,12 @@ The **`outerText`** property of the HTMLElement interface returns the same value
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`outerText`](../../../../../core/Component/classes/BaseComponent.md#outertext)
 
-***
+---
 
 ### popover
 
 ```ts
-popover: string | null;
+popover: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17831
@@ -3506,12 +3528,12 @@ The **`popover`** property of the HTMLElement interface gets and sets an element
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`popover`](../../../../../core/Component/classes/BaseComponent.md#popover)
 
-***
+---
 
 ### spellcheck
 
 ```ts
-spellcheck: boolean;
+spellcheck: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17837
@@ -3524,12 +3546,12 @@ The **`spellcheck`** property of the HTMLElement interface represents a boolean 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`spellcheck`](../../../../../core/Component/classes/BaseComponent.md#spellcheck)
 
-***
+---
 
 ### title
 
 ```ts
-title: string;
+title: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17843
@@ -3542,12 +3564,12 @@ The **`HTMLElement.title`** property represents the title of the element: the te
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`title`](../../../../../core/Component/classes/BaseComponent.md#title)
 
-***
+---
 
 ### translate
 
 ```ts
-translate: boolean;
+translate: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17849
@@ -3560,12 +3582,12 @@ The **`translate`** property of the HTMLElement interface indicates whether an e
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`translate`](../../../../../core/Component/classes/BaseComponent.md#translate)
 
-***
+---
 
 ### writingSuggestions
 
 ```ts
-writingSuggestions: string;
+writingSuggestions: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17855
@@ -3578,12 +3600,12 @@ The **`writingSuggestions`** property of the HTMLElement interface is a string i
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`writingSuggestions`](../../../../../core/Component/classes/BaseComponent.md#writingsuggestions)
 
-***
+---
 
 ### autofocus
 
 ```ts
-autofocus: boolean;
+autofocus: boolean
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20122
@@ -3594,7 +3616,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20122
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`autofocus`](../../../../../core/Component/classes/BaseComponent.md#autofocus)
 
-***
+---
 
 ### dataset
 
@@ -3610,12 +3632,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20124
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`dataset`](../../../../../core/Component/classes/BaseComponent.md#dataset)
 
-***
+---
 
 ### nonce
 
 ```ts
-nonce: string;
+nonce: string
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20126
@@ -3626,12 +3648,12 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20126
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`nonce`](../../../../../core/Component/classes/BaseComponent.md#nonce)
 
-***
+---
 
 ### tabIndex
 
 ```ts
-tabIndex: number;
+tabIndex: number
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20128
@@ -3642,7 +3664,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20128
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`tabIndex`](../../../../../core/Component/classes/BaseComponent.md#tabindex)
 
-***
+---
 
 ### baseURI
 
@@ -3660,7 +3682,7 @@ The read-only **`baseURI`** property of the Node interface returns the absolute 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`baseURI`](../../../../../core/Component/classes/BaseComponent.md#baseuri)
 
-***
+---
 
 ### childNodes
 
@@ -3678,7 +3700,7 @@ The read-only **`childNodes`** property of the Node interface returns a live Nod
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`childNodes`](../../../../../core/Component/classes/BaseComponent.md#childnodes)
 
-***
+---
 
 ### firstChild
 
@@ -3696,7 +3718,7 @@ The read-only **`firstChild`** property of the Node interface returns the node's
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`firstChild`](../../../../../core/Component/classes/BaseComponent.md#firstchild)
 
-***
+---
 
 ### isConnected
 
@@ -3714,7 +3736,7 @@ The read-only **`isConnected`** property of the Node interface returns a boolean
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`isConnected`](../../../../../core/Component/classes/BaseComponent.md#isconnected)
 
-***
+---
 
 ### lastChild
 
@@ -3732,7 +3754,7 @@ The read-only **`lastChild`** property of the Node interface returns the last ch
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`lastChild`](../../../../../core/Component/classes/BaseComponent.md#lastchild)
 
-***
+---
 
 ### nextSibling
 
@@ -3750,7 +3772,7 @@ The read-only **`nextSibling`** property of the Node interface returns the node 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`nextSibling`](../../../../../core/Component/classes/BaseComponent.md#nextsibling)
 
-***
+---
 
 ### nodeName
 
@@ -3768,7 +3790,7 @@ The read-only **`nodeName`** property of Node returns the name of the current no
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`nodeName`](../../../../../core/Component/classes/BaseComponent.md#nodename)
 
-***
+---
 
 ### nodeType
 
@@ -3786,12 +3808,12 @@ The read-only **`nodeType`** property of a Node interface is an integer that ide
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`nodeType`](../../../../../core/Component/classes/BaseComponent.md#nodetype)
 
-***
+---
 
 ### nodeValue
 
 ```ts
-nodeValue: string | null;
+nodeValue: string | null
 ```
 
 Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26089
@@ -3804,7 +3826,7 @@ The **`nodeValue`** property of the Node interface returns or sets the value of 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`nodeValue`](../../../../../core/Component/classes/BaseComponent.md#nodevalue)
 
-***
+---
 
 ### parentElement
 
@@ -3822,7 +3844,7 @@ The read-only **`parentElement`** property of Node interface returns the DOM nod
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`parentElement`](../../../../../core/Component/classes/BaseComponent.md#parentelement)
 
-***
+---
 
 ### parentNode
 
@@ -3840,7 +3862,7 @@ The read-only **`parentNode`** property of the Node interface returns the parent
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`parentNode`](../../../../../core/Component/classes/BaseComponent.md#parentnode)
 
-***
+---
 
 ### previousSibling
 
@@ -3858,7 +3880,7 @@ The read-only **`previousSibling`** property of the Node interface returns the n
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`previousSibling`](../../../../../core/Component/classes/BaseComponent.md#previoussibling)
 
-***
+---
 
 ### ELEMENT\_NODE
 
@@ -3874,7 +3896,7 @@ node is an element.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ELEMENT_NODE`](../../../../../core/Component/classes/BaseComponent.md#element_node)
 
-***
+---
 
 ### ATTRIBUTE\_NODE
 
@@ -3888,7 +3910,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26212
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ATTRIBUTE_NODE`](../../../../../core/Component/classes/BaseComponent.md#attribute_node)
 
-***
+---
 
 ### TEXT\_NODE
 
@@ -3904,7 +3926,7 @@ node is a Text node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`TEXT_NODE`](../../../../../core/Component/classes/BaseComponent.md#text_node)
 
-***
+---
 
 ### CDATA\_SECTION\_NODE
 
@@ -3920,7 +3942,7 @@ node is a CDATASection node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`CDATA_SECTION_NODE`](../../../../../core/Component/classes/BaseComponent.md#cdata_section_node)
 
-***
+---
 
 ### ENTITY\_REFERENCE\_NODE
 
@@ -3934,7 +3956,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26217
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ENTITY_REFERENCE_NODE`](../../../../../core/Component/classes/BaseComponent.md#entity_reference_node)
 
-***
+---
 
 ### ENTITY\_NODE
 
@@ -3948,7 +3970,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26218
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`ENTITY_NODE`](../../../../../core/Component/classes/BaseComponent.md#entity_node)
 
-***
+---
 
 ### PROCESSING\_INSTRUCTION\_NODE
 
@@ -3964,7 +3986,7 @@ node is a ProcessingInstruction node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`PROCESSING_INSTRUCTION_NODE`](../../../../../core/Component/classes/BaseComponent.md#processing_instruction_node)
 
-***
+---
 
 ### COMMENT\_NODE
 
@@ -3980,7 +4002,7 @@ node is a Comment node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`COMMENT_NODE`](../../../../../core/Component/classes/BaseComponent.md#comment_node)
 
-***
+---
 
 ### DOCUMENT\_NODE
 
@@ -3996,7 +4018,7 @@ node is a document.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_NODE`](../../../../../core/Component/classes/BaseComponent.md#document_node)
 
-***
+---
 
 ### DOCUMENT\_TYPE\_NODE
 
@@ -4012,7 +4034,7 @@ node is a doctype.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_TYPE_NODE`](../../../../../core/Component/classes/BaseComponent.md#document_type_node)
 
-***
+---
 
 ### DOCUMENT\_FRAGMENT\_NODE
 
@@ -4028,7 +4050,7 @@ node is a DocumentFragment node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_FRAGMENT_NODE`](../../../../../core/Component/classes/BaseComponent.md#document_fragment_node)
 
-***
+---
 
 ### NOTATION\_NODE
 
@@ -4042,7 +4064,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26229
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`NOTATION_NODE`](../../../../../core/Component/classes/BaseComponent.md#notation_node)
 
-***
+---
 
 ### DOCUMENT\_POSITION\_DISCONNECTED
 
@@ -4058,7 +4080,7 @@ Set when node and other are not in the same tree.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_POSITION_DISCONNECTED`](../../../../../core/Component/classes/BaseComponent.md#document_position_disconnected)
 
-***
+---
 
 ### DOCUMENT\_POSITION\_PRECEDING
 
@@ -4074,7 +4096,7 @@ Set when other is preceding node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_POSITION_PRECEDING`](../../../../../core/Component/classes/BaseComponent.md#document_position_preceding)
 
-***
+---
 
 ### DOCUMENT\_POSITION\_FOLLOWING
 
@@ -4090,7 +4112,7 @@ Set when other is following node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_POSITION_FOLLOWING`](../../../../../core/Component/classes/BaseComponent.md#document_position_following)
 
-***
+---
 
 ### DOCUMENT\_POSITION\_CONTAINS
 
@@ -4106,7 +4128,7 @@ Set when other is an ancestor of node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_POSITION_CONTAINS`](../../../../../core/Component/classes/BaseComponent.md#document_position_contains)
 
-***
+---
 
 ### DOCUMENT\_POSITION\_CONTAINED\_BY
 
@@ -4122,7 +4144,7 @@ Set when other is a descendant of node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_POSITION_CONTAINED_BY`](../../../../../core/Component/classes/BaseComponent.md#document_position_contained_by)
 
-***
+---
 
 ### DOCUMENT\_POSITION\_IMPLEMENTATION\_SPECIFIC
 
@@ -4136,7 +4158,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:26240
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC`](../../../../../core/Component/classes/BaseComponent.md#document_position_implementation_specific)
 
-***
+---
 
 ### nextElementSibling
 
@@ -4154,7 +4176,7 @@ Returns the first following sibling that is an element, and null otherwise.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`nextElementSibling`](../../../../../core/Component/classes/BaseComponent.md#nextelementsibling)
 
-***
+---
 
 ### previousElementSibling
 
@@ -4172,7 +4194,7 @@ Returns the first preceding sibling that is an element, and null otherwise.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`previousElementSibling`](../../../../../core/Component/classes/BaseComponent.md#previouselementsibling)
 
-***
+---
 
 ### childElementCount
 
@@ -4188,7 +4210,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27044
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`childElementCount`](../../../../../core/Component/classes/BaseComponent.md#childelementcount)
 
-***
+---
 
 ### children
 
@@ -4206,7 +4228,7 @@ Returns the child elements.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`children`](../../../../../core/Component/classes/BaseComponent.md#children)
 
-***
+---
 
 ### firstElementChild
 
@@ -4224,7 +4246,7 @@ Returns the first child that is an element, and null otherwise.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`firstElementChild`](../../../../../core/Component/classes/BaseComponent.md#firstelementchild)
 
-***
+---
 
 ### lastElementChild
 
@@ -4242,7 +4264,7 @@ Returns the last child that is an element, and null otherwise.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`lastElementChild`](../../../../../core/Component/classes/BaseComponent.md#lastelementchild)
 
-***
+---
 
 ### assignedSlot
 
@@ -4268,13 +4290,13 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get static observedAttributes(): string[];
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:29
+Defined in: website/components/media/MediaExpanded.tsx:36
 
 ##### Returns
 
 `string`[]
 
-***
+---
 
 ### source
 
@@ -4284,7 +4306,7 @@ Defined in: website/components/media/MediaExpanded.tsx:29
 get source(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:46
+Defined in: website/components/media/MediaExpanded.tsx:53
 
 Full-res media URL (from the source attribute).
 
@@ -4292,7 +4314,27 @@ Full-res media URL (from the source attribute).
 
 `string`
 
-***
+---
+
+### sourceWebm
+
+#### Get Signature
+
+```ts
+get sourceWebm(): string;
+```
+
+Defined in: website/components/media/MediaExpanded.tsx:61
+
+Webm sibling of an .mp4 source — first <source> when it exists
+(manifest-known absent ⇒ '', same doomed-request gate as the
+figure's resolveMediaSources).
+
+##### Returns
+
+`string`
+
+---
 
 ### thumb
 
@@ -4302,7 +4344,7 @@ Full-res media URL (from the source attribute).
 get thumb(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:52
+Defined in: website/components/media/MediaExpanded.tsx:69
 
 Low-res thumbnail URL shown while the full asset loads.
 
@@ -4310,7 +4352,7 @@ Low-res thumbnail URL shown while the full asset loads.
 
 `string`
 
-***
+---
 
 ### alt
 
@@ -4320,7 +4362,7 @@ Low-res thumbnail URL shown while the full asset loads.
 get alt(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:58
+Defined in: website/components/media/MediaExpanded.tsx:75
 
 Alt text for the media.
 
@@ -4328,7 +4370,7 @@ Alt text for the media.
 
 `string`
 
-***
+---
 
 ### mediaWidth
 
@@ -4338,7 +4380,7 @@ Alt text for the media.
 get mediaWidth(): number;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:64
+Defined in: website/components/media/MediaExpanded.tsx:81
 
 Natural media width attribute.
 
@@ -4346,7 +4388,7 @@ Natural media width attribute.
 
 `number`
 
-***
+---
 
 ### mediaHeight
 
@@ -4356,7 +4398,7 @@ Natural media width attribute.
 get mediaHeight(): number;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:73
+Defined in: website/components/media/MediaExpanded.tsx:90
 
 Natural media height attribute.
 
@@ -4364,7 +4406,7 @@ Natural media height attribute.
 
 `number`
 
-***
+---
 
 ### isVideo
 
@@ -4374,7 +4416,7 @@ Natural media height attribute.
 get isVideo(): boolean;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:82
+Defined in: website/components/media/MediaExpanded.tsx:99
 
 Whether the source is a video.
 
@@ -4382,7 +4424,7 @@ Whether the source is a video.
 
 `boolean`
 
-***
+---
 
 ### classList
 
@@ -4424,7 +4466,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13521
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`classList`](../../../../../core/Component/classes/BaseComponent.md#classlist)
 
-***
+---
 
 ### part
 
@@ -4466,7 +4508,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13600
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`part`](../../../../../core/Component/classes/BaseComponent.md#part)
 
-***
+---
 
 ### textContent
 
@@ -4510,7 +4552,7 @@ The **`textContent`** property of the Node interface represents the text content
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`textContent`](../../../../../core/Component/classes/BaseComponent.md#textcontent)
 
-***
+---
 
 ### style
 
@@ -4568,7 +4610,7 @@ Defined in: core/Component.ts:115
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onUpdated`](../../../../../core/Component/classes/BaseComponent.md#onupdated)
 
-***
+---
 
 ### onStoreUpdate()?
 
@@ -4592,7 +4634,7 @@ Defined in: core/Component.ts:116
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onStoreUpdate`](../../../../../core/Component/classes/BaseComponent.md#onstoreupdate)
 
-***
+---
 
 ### setState()
 
@@ -4613,8 +4655,8 @@ lets components update one field without re-sending the whole bag.
 
 ##### updater
 
-  \| [`ComponentState`](../../../../../core/Component/type-aliases/ComponentState.md)
-  \| ((`_state`) => [`ComponentState`](../../../../../core/Component/type-aliases/ComponentState.md))
+\| [`ComponentState`](../../../../../core/Component/type-aliases/ComponentState.md)
+\| ((`_state`) => [`ComponentState`](../../../../../core/Component/type-aliases/ComponentState.md))
 
 Partial state patch, or (prevState) => patch.
 
@@ -4626,7 +4668,7 @@ Partial state patch, or (prevState) => patch.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`setState`](../../../../../core/Component/classes/BaseComponent.md#setstate)
 
-***
+---
 
 ### connectedCallback()
 
@@ -4651,7 +4693,7 @@ every branch below is written to be idempotent on re-mount.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`connectedCallback`](../../../../../core/Component/classes/BaseComponent.md#connectedcallback)
 
-***
+---
 
 ### disconnectedCallback()
 
@@ -4675,7 +4717,7 @@ subscribe() rather than rendering into a disconnecting root.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`disconnectedCallback`](../../../../../core/Component/classes/BaseComponent.md#disconnectedcallback)
 
-***
+---
 
 ### $()
 
@@ -4692,7 +4734,7 @@ throwing when the shadow root is absent (detached construction in tests).
 
 ##### T
 
-`T` *extends* `Element` = `HTMLElement`
+`T` _extends_ `Element` = `HTMLElement`
 
 #### Parameters
 
@@ -4712,7 +4754,7 @@ First matching element or null.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`$`](../../../../../core/Component/classes/BaseComponent.md#_)
 
-***
+---
 
 ### $$()
 
@@ -4730,7 +4772,7 @@ iteration methods on older engines).
 
 ##### T
 
-`T` *extends* `Element` = `HTMLElement`
+`T` _extends_ `Element` = `HTMLElement`
 
 #### Parameters
 
@@ -4750,15 +4792,15 @@ Array of matching elements (never null).
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`$$`](../../../../../core/Component/classes/BaseComponent.md#_-1)
 
-***
+---
 
 ### addScopedListener()
 
 ```ts
 addScopedListener(
-   target, 
-   event, 
-   handler, 
+   target,
+   event,
+   handler,
    options?
 ): void;
 ```
@@ -4805,7 +4847,7 @@ Passive/capture/once options forwarded verbatim.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`addScopedListener`](../../../../../core/Component/classes/BaseComponent.md#addscopedlistener)
 
-***
+---
 
 ### subscribe()
 
@@ -4836,7 +4878,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`subscribe`](../../../../../core/Component/classes/BaseComponent.md#subscribe)
 
-***
+---
 
 ### \_renderInitial()
 
@@ -4859,7 +4901,7 @@ paths reuse existing nodes instead of duplicating them.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_renderInitial`](../../../../../core/Component/classes/BaseComponent.md#_renderinitial)
 
-***
+---
 
 ### \_updateDom()
 
@@ -4884,7 +4926,7 @@ tracked element on every state change).
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_updateDom`](../../../../../core/Component/classes/BaseComponent.md#_updatedom)
 
-***
+---
 
 ### \_applyRenderOutput()
 
@@ -4896,11 +4938,12 @@ Defined in: core/Component.ts:351
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
- - Node → `replaceChildren(node)` — the JSX fast path, keeps DOM identity.
- - Array → `replaceChildren(...filtered)` — fragment-style multi-root
-   render; nullish entries are filtered so conditional JSX slots can just
-   return null.
- - string/nullish → `innerHTML` — legacy string templates; '' clears.
+
+- Node → `replaceChildren(node)` — the JSX fast path, keeps DOM identity.
+- Array → `replaceChildren(...filtered)` — fragment-style multi-root
+  render; nullish entries are filtered so conditional JSX slots can just
+  return null.
+- string/nullish → `innerHTML` — legacy string templates; '' clears.
 
 #### Parameters
 
@@ -4918,7 +4961,7 @@ Render result from render().
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`_applyRenderOutput`](../../../../../core/Component/classes/BaseComponent.md#_applyrenderoutput)
 
-***
+---
 
 ### onInit()
 
@@ -4926,7 +4969,7 @@ Render result from render().
 onInit(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:89
+Defined in: website/components/media/MediaExpanded.tsx:106
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4940,7 +4983,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onInit`](../../../../../core/Component/classes/BaseComponent.md#oninit)
 
-***
+---
 
 ### onMounted()
 
@@ -4948,7 +4991,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 onMounted(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:93
+Defined in: website/components/media/MediaExpanded.tsx:110
 
 #### Returns
 
@@ -4958,7 +5001,7 @@ Defined in: website/components/media/MediaExpanded.tsx:93
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onMounted`](../../../../../core/Component/classes/BaseComponent.md#onmounted)
 
-***
+---
 
 ### placeholder()
 
@@ -4966,7 +5009,7 @@ Defined in: website/components/media/MediaExpanded.tsx:93
 placeholder(width, height): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:99
+Defined in: website/components/media/MediaExpanded.tsx:116
 
 Placeholder box style while the full asset loads.
 
@@ -4984,7 +5027,7 @@ Placeholder box style while the full asset loads.
 
 `string`
 
-***
+---
 
 ### startClose()
 
@@ -4992,7 +5035,7 @@ Placeholder box style while the full asset loads.
 startClose(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:105
+Defined in: website/components/media/MediaExpanded.tsx:122
 
 Dismissal sequence — CSS zoom-out, then URL/dialog/scroll teardown (see expanded-close.ts).
 
@@ -5000,7 +5043,7 @@ Dismissal sequence — CSS zoom-out, then URL/dialog/scroll teardown (see expand
 
 `void`
 
-***
+---
 
 ### onDestroy()
 
@@ -5008,7 +5051,7 @@ Dismissal sequence — CSS zoom-out, then URL/dialog/scroll teardown (see expand
 onDestroy(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:109
+Defined in: website/components/media/MediaExpanded.tsx:126
 
 #### Returns
 
@@ -5018,7 +5061,7 @@ Defined in: website/components/media/MediaExpanded.tsx:109
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onDestroy`](../../../../../core/Component/classes/BaseComponent.md#ondestroy)
 
-***
+---
 
 ### render()
 
@@ -5026,7 +5069,7 @@ Defined in: website/components/media/MediaExpanded.tsx:109
 render(): Element;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:119
+Defined in: website/components/media/MediaExpanded.tsx:149
 
 JSX template (see expanded-render.tsx).
 
@@ -5038,7 +5081,7 @@ JSX template (see expanded-render.tsx).
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`render`](../../../../../core/Component/classes/BaseComponent.md#render)
 
-***
+---
 
 ### animate()
 
@@ -5068,7 +5111,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3556
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`animate`](../../../../../core/Component/classes/BaseComponent.md#animate)
 
-***
+---
 
 ### getAnimations()
 
@@ -5094,7 +5137,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:3558
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getAnimations`](../../../../../core/Component/classes/BaseComponent.md#getanimations)
 
-***
+---
 
 ### after()
 
@@ -5124,7 +5167,7 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`after`](../../../../../core/Component/classes/BaseComponent.md#after)
 
-***
+---
 
 ### before()
 
@@ -5154,7 +5197,7 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`before`](../../../../../core/Component/classes/BaseComponent.md#before)
 
-***
+---
 
 ### remove()
 
@@ -5176,7 +5219,7 @@ Removes node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`remove`](../../../../../core/Component/classes/BaseComponent.md#remove)
 
-***
+---
 
 ### replaceWith()
 
@@ -5206,7 +5249,7 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`replaceWith`](../../../../../core/Component/classes/BaseComponent.md#replacewith)
 
-***
+---
 
 ### attachShadow()
 
@@ -5234,7 +5277,7 @@ The **`Element.attachShadow()`** method attaches a shadow DOM tree to the specif
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`attachShadow`](../../../../../core/Component/classes/BaseComponent.md#attachshadow)
 
-***
+---
 
 ### checkVisibility()
 
@@ -5262,14 +5305,14 @@ The **`checkVisibility()`** method of the Element interface checks whether the e
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`checkVisibility`](../../../../../core/Component/classes/BaseComponent.md#checkvisibility)
 
-***
+---
 
 ### closest()
 
 #### Call Signature
 
 ```ts
-closest<K>(selector): 
+closest<K>(selector):
   | HTMLElementTagNameMap[K]
   | null;
 ```
@@ -5284,7 +5327,7 @@ The **`closest()`** method of the Element interface traverses the element and it
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -5294,8 +5337,8 @@ The **`closest()`** method of the Element interface traverses the element and it
 
 ##### Returns
 
-  \| [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)\[`K`\]
-  \| `null`
+\| [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)\[`K`\]
+\| `null`
 
 ##### Inherited from
 
@@ -5313,7 +5356,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13667
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -5341,7 +5384,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13668
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -5369,7 +5412,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13669
 
 ###### E
 
-`E` *extends* `Element` = `Element`
+`E` _extends_ `Element` = `Element`
 
 ##### Parameters
 
@@ -5385,7 +5428,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13669
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`closest`](../../../../../core/Component/classes/BaseComponent.md#closest)
 
-***
+---
 
 ### computedStyleMap()
 
@@ -5407,7 +5450,7 @@ The **`computedStyleMap()`** method of the Element interface returns a StyleProp
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`computedStyleMap`](../../../../../core/Component/classes/BaseComponent.md#computedstylemap)
 
-***
+---
 
 ### getAttribute()
 
@@ -5435,7 +5478,7 @@ The **`getAttribute()`** method of the Element interface returns the value of a 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getAttribute`](../../../../../core/Component/classes/BaseComponent.md#getattribute)
 
-***
+---
 
 ### getAttributeNS()
 
@@ -5467,7 +5510,7 @@ The **`getAttributeNS()`** method of the Element interface returns the string va
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getAttributeNS`](../../../../../core/Component/classes/BaseComponent.md#getattributens)
 
-***
+---
 
 ### getAttributeNames()
 
@@ -5489,7 +5532,7 @@ The **`getAttributeNames()`** method of the Element interface returns the attrib
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getAttributeNames`](../../../../../core/Component/classes/BaseComponent.md#getattributenames)
 
-***
+---
 
 ### getAttributeNode()
 
@@ -5517,7 +5560,7 @@ Returns the specified attribute of the specified element, as an Attr node.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getAttributeNode`](../../../../../core/Component/classes/BaseComponent.md#getattributenode)
 
-***
+---
 
 ### getAttributeNodeNS()
 
@@ -5549,7 +5592,7 @@ The **`getAttributeNodeNS()`** method of the Element interface returns the names
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getAttributeNodeNS`](../../../../../core/Component/classes/BaseComponent.md#getattributenodens)
 
-***
+---
 
 ### getBoundingClientRect()
 
@@ -5571,7 +5614,7 @@ The **`Element.getBoundingClientRect()`** method returns a DOMRect object provid
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getBoundingClientRect`](../../../../../core/Component/classes/BaseComponent.md#getboundingclientrect)
 
-***
+---
 
 ### getClientRects()
 
@@ -5593,7 +5636,7 @@ The **`getClientRects()`** method of the Element interface returns a collection 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getClientRects`](../../../../../core/Component/classes/BaseComponent.md#getclientrects)
 
-***
+---
 
 ### getElementsByClassName()
 
@@ -5621,7 +5664,7 @@ The Element method **`getElementsByClassName()`** returns a live HTMLCollection 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getElementsByClassName`](../../../../../core/Component/classes/BaseComponent.md#getelementsbyclassname)
 
-***
+---
 
 ### getElementsByTagName()
 
@@ -5641,7 +5684,7 @@ The **`Element.getElementsByTagName()`** method returns a live HTMLCollection of
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -5669,7 +5712,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13730
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -5697,7 +5740,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13731
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -5725,7 +5768,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13733
 
 ###### K
 
-`K` *extends* keyof `HTMLElementDeprecatedTagNameMap`
+`K` _extends_ keyof `HTMLElementDeprecatedTagNameMap`
 
 ##### Parameters
 
@@ -5765,7 +5808,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13734
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getElementsByTagName`](../../../../../core/Component/classes/BaseComponent.md#getelementsbytagname)
 
-***
+---
 
 ### getElementsByTagNameNS()
 
@@ -5877,7 +5920,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13743
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getElementsByTagNameNS`](../../../../../core/Component/classes/BaseComponent.md#getelementsbytagnamens)
 
-***
+---
 
 ### getHTML()
 
@@ -5905,7 +5948,7 @@ The **`getHTML()`** method of the Element interface is used to serialize an elem
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getHTML`](../../../../../core/Component/classes/BaseComponent.md#gethtml)
 
-***
+---
 
 ### hasAttribute()
 
@@ -5933,7 +5976,7 @@ The **`Element.hasAttribute()`** method returns a Boolean value indicating wheth
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`hasAttribute`](../../../../../core/Component/classes/BaseComponent.md#hasattribute)
 
-***
+---
 
 ### hasAttributeNS()
 
@@ -5965,7 +6008,7 @@ The **`hasAttributeNS()`** method of the Element interface returns a boolean val
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`hasAttributeNS`](../../../../../core/Component/classes/BaseComponent.md#hasattributens)
 
-***
+---
 
 ### hasAttributes()
 
@@ -5987,7 +6030,7 @@ The **`hasAttributes()`** method of the Element interface returns a boolean valu
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`hasAttributes`](../../../../../core/Component/classes/BaseComponent.md#hasattributes)
 
-***
+---
 
 ### hasPointerCapture()
 
@@ -6015,7 +6058,7 @@ The **`hasPointerCapture()`** method of the Element interface checks whether the
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`hasPointerCapture`](../../../../../core/Component/classes/BaseComponent.md#haspointercapture)
 
-***
+---
 
 ### insertAdjacentElement()
 
@@ -6047,7 +6090,7 @@ The **`insertAdjacentElement()`** method of the Element interface inserts a give
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`insertAdjacentElement`](../../../../../core/Component/classes/BaseComponent.md#insertadjacentelement)
 
-***
+---
 
 ### insertAdjacentHTML()
 
@@ -6079,7 +6122,7 @@ The **`insertAdjacentHTML()`** method of the Element interface parses the specif
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`insertAdjacentHTML`](../../../../../core/Component/classes/BaseComponent.md#insertadjacenthtml)
 
-***
+---
 
 ### insertAdjacentText()
 
@@ -6111,7 +6154,7 @@ The **`insertAdjacentText()`** method of the Element interface, given a relative
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`insertAdjacentText`](../../../../../core/Component/classes/BaseComponent.md#insertadjacenttext)
 
-***
+---
 
 ### matches()
 
@@ -6131,7 +6174,7 @@ The **`matches()`** method of the Element interface tests whether the element wo
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -6159,7 +6202,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13798
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -6187,7 +6230,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13799
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -6225,7 +6268,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13800
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`matches`](../../../../../core/Component/classes/BaseComponent.md#matches)
 
-***
+---
 
 ### releasePointerCapture()
 
@@ -6253,7 +6296,7 @@ The **`releasePointerCapture()`** method of the Element interface releases (stop
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`releasePointerCapture`](../../../../../core/Component/classes/BaseComponent.md#releasepointercapture)
 
-***
+---
 
 ### removeAttribute()
 
@@ -6281,7 +6324,7 @@ The Element method **`removeAttribute()`** removes the attribute with the specif
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`removeAttribute`](../../../../../core/Component/classes/BaseComponent.md#removeattribute)
 
-***
+---
 
 ### removeAttributeNS()
 
@@ -6313,7 +6356,7 @@ The **`removeAttributeNS()`** method of the Element interface removes the specif
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`removeAttributeNS`](../../../../../core/Component/classes/BaseComponent.md#removeattributens)
 
-***
+---
 
 ### removeAttributeNode()
 
@@ -6341,7 +6384,7 @@ The **`removeAttributeNode()`** method of the Element interface removes the spec
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`removeAttributeNode`](../../../../../core/Component/classes/BaseComponent.md#removeattributenode)
 
-***
+---
 
 ### requestFullscreen()
 
@@ -6369,7 +6412,7 @@ The **`Element.requestFullscreen()`** method issues an asynchronous request to m
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`requestFullscreen`](../../../../../core/Component/classes/BaseComponent.md#requestfullscreen)
 
-***
+---
 
 ### requestPointerLock()
 
@@ -6397,7 +6440,7 @@ The **`requestPointerLock()`** method of the Element interface lets you asynchro
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`requestPointerLock`](../../../../../core/Component/classes/BaseComponent.md#requestpointerlock)
 
-***
+---
 
 ### scroll()
 
@@ -6453,7 +6496,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13843
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`scroll`](../../../../../core/Component/classes/BaseComponent.md#scroll)
 
-***
+---
 
 ### scrollBy()
 
@@ -6509,7 +6552,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13850
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`scrollBy`](../../../../../core/Component/classes/BaseComponent.md#scrollby)
 
-***
+---
 
 ### scrollIntoView()
 
@@ -6537,7 +6580,7 @@ The Element interface's **`scrollIntoView()`** method scrolls the element's ance
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`scrollIntoView`](../../../../../core/Component/classes/BaseComponent.md#scrollintoview)
 
-***
+---
 
 ### scrollTo()
 
@@ -6593,7 +6636,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13863
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`scrollTo`](../../../../../core/Component/classes/BaseComponent.md#scrollto)
 
-***
+---
 
 ### setAttribute()
 
@@ -6625,14 +6668,14 @@ The **`setAttribute()`** method of the Element interface sets the value of an at
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`setAttribute`](../../../../../core/Component/classes/BaseComponent.md#setattribute)
 
-***
+---
 
 ### setAttributeNS()
 
 ```ts
 setAttributeNS(
-   namespace, 
-   qualifiedName, 
+   namespace,
+   qualifiedName,
    value
 ): void;
 ```
@@ -6665,7 +6708,7 @@ The **`setAttributeNS()`** method of the Element interface adds a new attribute 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`setAttributeNS`](../../../../../core/Component/classes/BaseComponent.md#setattributens)
 
-***
+---
 
 ### setAttributeNode()
 
@@ -6693,7 +6736,7 @@ The **`setAttributeNode()`** method of the Element interface adds a new Attr nod
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`setAttributeNode`](../../../../../core/Component/classes/BaseComponent.md#setattributenode)
 
-***
+---
 
 ### setAttributeNodeNS()
 
@@ -6721,7 +6764,7 @@ The **`setAttributeNodeNS()`** method of the Element interface adds a new namesp
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`setAttributeNodeNS`](../../../../../core/Component/classes/BaseComponent.md#setattributenodens)
 
-***
+---
 
 ### setHTMLUnsafe()
 
@@ -6749,7 +6792,7 @@ The **`setHTMLUnsafe()`** method of the Element interface is used to parse HTML 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`setHTMLUnsafe`](../../../../../core/Component/classes/BaseComponent.md#sethtmlunsafe)
 
-***
+---
 
 ### setPointerCapture()
 
@@ -6777,7 +6820,7 @@ The **`setPointerCapture()`** method of the Element interface is used to designa
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`setPointerCapture`](../../../../../core/Component/classes/BaseComponent.md#setpointercapture)
 
-***
+---
 
 ### toggleAttribute()
 
@@ -6809,7 +6852,7 @@ The **`toggleAttribute()`** method of the Element interface toggles a Boolean at
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`toggleAttribute`](../../../../../core/Component/classes/BaseComponent.md#toggleattribute)
 
-***
+---
 
 ### ~~webkitMatchesSelector()~~
 
@@ -6839,7 +6882,7 @@ This is a legacy alias of `matches`.
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`webkitMatchesSelector`](../../../../../core/Component/classes/BaseComponent.md#webkitmatchesselector)
 
-***
+---
 
 ### dispatchEvent()
 
@@ -6895,7 +6938,7 @@ The **`dispatchEvent()`** method of the EventTarget sends an Event to the object
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`dispatchEvent`](../../../../../core/Component/classes/BaseComponent.md#dispatchevent)
 
-***
+---
 
 ### attachInternals()
 
@@ -6917,7 +6960,7 @@ The **`HTMLElement.attachInternals()`** method returns an ElementInternals objec
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`attachInternals`](../../../../../core/Component/classes/BaseComponent.md#attachinternals)
 
-***
+---
 
 ### click()
 
@@ -6939,7 +6982,7 @@ The **`HTMLElement.click()`** method simulates a mouse click on an element. When
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`click`](../../../../../core/Component/classes/BaseComponent.md#click)
 
-***
+---
 
 ### hidePopover()
 
@@ -6961,7 +7004,7 @@ The **`hidePopover()`** method of the HTMLElement interface hides a popover elem
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`hidePopover`](../../../../../core/Component/classes/BaseComponent.md#hidepopover)
 
-***
+---
 
 ### showPopover()
 
@@ -6989,7 +7032,7 @@ The **`showPopover()`** method of the HTMLElement interface shows a popover elem
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`showPopover`](../../../../../core/Component/classes/BaseComponent.md#showpopover)
 
-***
+---
 
 ### togglePopover()
 
@@ -7017,7 +7060,7 @@ The **`togglePopover()`** method of the HTMLElement interface toggles a popover 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`togglePopover`](../../../../../core/Component/classes/BaseComponent.md#togglepopover)
 
-***
+---
 
 ### addEventListener()
 
@@ -7025,8 +7068,8 @@ The **`togglePopover()`** method of the HTMLElement interface toggles a popover 
 
 ```ts
 addEventListener<K>(
-   type, 
-   listener, 
+   type,
+   listener,
    options?
 ): void;
 ```
@@ -7037,7 +7080,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17886
 
 ###### K
 
-`K` *extends* keyof `HTMLElementEventMap`
+`K` _extends_ keyof `HTMLElementEventMap`
 
 ##### Parameters
 
@@ -7065,8 +7108,8 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17886
 
 ```ts
 addEventListener(
-   type, 
-   listener, 
+   type,
+   listener,
    options?
 ): void;
 ```
@@ -7095,7 +7138,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17887
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`addEventListener`](../../../../../core/Component/classes/BaseComponent.md#addeventlistener)
 
-***
+---
 
 ### removeEventListener()
 
@@ -7103,8 +7146,8 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17887
 
 ```ts
 removeEventListener<K>(
-   type, 
-   listener, 
+   type,
+   listener,
    options?
 ): void;
 ```
@@ -7115,7 +7158,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17888
 
 ###### K
 
-`K` *extends* keyof `HTMLElementEventMap`
+`K` _extends_ keyof `HTMLElementEventMap`
 
 ##### Parameters
 
@@ -7143,8 +7186,8 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17888
 
 ```ts
 removeEventListener(
-   type, 
-   listener, 
+   type,
+   listener,
    options?
 ): void;
 ```
@@ -7173,7 +7216,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17889
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`removeEventListener`](../../../../../core/Component/classes/BaseComponent.md#removeeventlistener)
 
-***
+---
 
 ### blur()
 
@@ -7193,7 +7236,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20130
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`blur`](../../../../../core/Component/classes/BaseComponent.md#blur)
 
-***
+---
 
 ### focus()
 
@@ -7219,7 +7262,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:20132
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`focus`](../../../../../core/Component/classes/BaseComponent.md#focus)
 
-***
+---
 
 ### appendChild()
 
@@ -7237,7 +7280,7 @@ The **`appendChild()`** method of the Node interface adds a node to the end of t
 
 ##### T
 
-`T` *extends* `Node`
+`T` _extends_ `Node`
 
 #### Parameters
 
@@ -7253,7 +7296,7 @@ The **`appendChild()`** method of the Node interface adds a node to the end of t
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`appendChild`](../../../../../core/Component/classes/BaseComponent.md#appendchild)
 
-***
+---
 
 ### cloneNode()
 
@@ -7281,7 +7324,7 @@ The **`cloneNode()`** method of the Node interface returns a duplicate of the no
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`cloneNode`](../../../../../core/Component/classes/BaseComponent.md#clonenode)
 
-***
+---
 
 ### compareDocumentPosition()
 
@@ -7309,7 +7352,7 @@ The **`compareDocumentPosition()`** method of the Node interface reports the pos
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`compareDocumentPosition`](../../../../../core/Component/classes/BaseComponent.md#comparedocumentposition)
 
-***
+---
 
 ### contains()
 
@@ -7337,7 +7380,7 @@ The **`contains()`** method of the Node interface returns a boolean value indica
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`contains`](../../../../../core/Component/classes/BaseComponent.md#contains)
 
-***
+---
 
 ### getRootNode()
 
@@ -7365,7 +7408,7 @@ The **`getRootNode()`** method of the Node interface returns the context object'
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`getRootNode`](../../../../../core/Component/classes/BaseComponent.md#getrootnode)
 
-***
+---
 
 ### hasChildNodes()
 
@@ -7387,7 +7430,7 @@ The **`hasChildNodes()`** method of the Node interface returns a boolean value i
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`hasChildNodes`](../../../../../core/Component/classes/BaseComponent.md#haschildnodes)
 
-***
+---
 
 ### insertBefore()
 
@@ -7405,7 +7448,7 @@ The **`insertBefore()`** method of the Node interface inserts a node before a re
 
 ##### T
 
-`T` *extends* `Node`
+`T` _extends_ `Node`
 
 #### Parameters
 
@@ -7425,7 +7468,7 @@ The **`insertBefore()`** method of the Node interface inserts a node before a re
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`insertBefore`](../../../../../core/Component/classes/BaseComponent.md#insertbefore)
 
-***
+---
 
 ### isDefaultNamespace()
 
@@ -7453,7 +7496,7 @@ The **`isDefaultNamespace()`** method of the Node interface accepts a namespace 
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`isDefaultNamespace`](../../../../../core/Component/classes/BaseComponent.md#isdefaultnamespace)
 
-***
+---
 
 ### isEqualNode()
 
@@ -7481,7 +7524,7 @@ The **`isEqualNode()`** method of the Node interface tests whether two nodes are
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`isEqualNode`](../../../../../core/Component/classes/BaseComponent.md#isequalnode)
 
-***
+---
 
 ### isSameNode()
 
@@ -7509,7 +7552,7 @@ The **`isSameNode()`** method of the Node interface is a legacy alias the for th
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`isSameNode`](../../../../../core/Component/classes/BaseComponent.md#issamenode)
 
-***
+---
 
 ### lookupNamespaceURI()
 
@@ -7537,7 +7580,7 @@ The **`lookupNamespaceURI()`** method of the Node interface takes a prefix as pa
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`lookupNamespaceURI`](../../../../../core/Component/classes/BaseComponent.md#lookupnamespaceuri)
 
-***
+---
 
 ### lookupPrefix()
 
@@ -7565,7 +7608,7 @@ The **`lookupPrefix()`** method of the Node interface returns a string containin
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`lookupPrefix`](../../../../../core/Component/classes/BaseComponent.md#lookupprefix)
 
-***
+---
 
 ### normalize()
 
@@ -7587,7 +7630,7 @@ The **`normalize()`** method of the Node interface puts the specified node and a
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`normalize`](../../../../../core/Component/classes/BaseComponent.md#normalize)
 
-***
+---
 
 ### removeChild()
 
@@ -7605,7 +7648,7 @@ The **`removeChild()`** method of the Node interface removes a child node from t
 
 ##### T
 
-`T` *extends* `Node`
+`T` _extends_ `Node`
 
 #### Parameters
 
@@ -7621,7 +7664,7 @@ The **`removeChild()`** method of the Node interface removes a child node from t
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`removeChild`](../../../../../core/Component/classes/BaseComponent.md#removechild)
 
-***
+---
 
 ### replaceChild()
 
@@ -7639,7 +7682,7 @@ The **`replaceChild()`** method of the Node interface replaces a child node with
 
 ##### T
 
-`T` *extends* `Node`
+`T` _extends_ `Node`
 
 #### Parameters
 
@@ -7659,7 +7702,7 @@ The **`replaceChild()`** method of the Node interface replaces a child node with
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`replaceChild`](../../../../../core/Component/classes/BaseComponent.md#replacechild)
 
-***
+---
 
 ### append()
 
@@ -7689,7 +7732,7 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`append`](../../../../../core/Component/classes/BaseComponent.md#append)
 
-***
+---
 
 ### moveBefore()
 
@@ -7719,7 +7762,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27072
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`moveBefore`](../../../../../core/Component/classes/BaseComponent.md#movebefore)
 
-***
+---
 
 ### prepend()
 
@@ -7749,14 +7792,14 @@ Throws a "HierarchyRequestError" DOMException if the constraints of the node tre
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`prepend`](../../../../../core/Component/classes/BaseComponent.md#prepend)
 
-***
+---
 
 ### querySelector()
 
 #### Call Signature
 
 ```ts
-querySelector<K>(selectors): 
+querySelector<K>(selectors):
   | HTMLElementTagNameMap[K]
   | null;
 ```
@@ -7771,7 +7814,7 @@ Returns the first element that is a descendant of node that matches selectors.
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -7781,8 +7824,8 @@ Returns the first element that is a descendant of node that matches selectors.
 
 ##### Returns
 
-  \| [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)\[`K`\]
-  \| `null`
+\| [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)\[`K`\]
+\| `null`
 
 ##### Inherited from
 
@@ -7800,7 +7843,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27087
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -7828,7 +7871,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27088
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -7856,7 +7899,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27090
 
 ###### K
 
-`K` *extends* keyof `HTMLElementDeprecatedTagNameMap`
+`K` _extends_ keyof `HTMLElementDeprecatedTagNameMap`
 
 ##### Parameters
 
@@ -7886,7 +7929,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27091
 
 ###### E
 
-`E` *extends* `Element` = `Element`
+`E` _extends_ `Element` = `Element`
 
 ##### Parameters
 
@@ -7902,7 +7945,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27091
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`querySelector`](../../../../../core/Component/classes/BaseComponent.md#queryselector)
 
-***
+---
 
 ### querySelectorAll()
 
@@ -7922,7 +7965,7 @@ Returns all element descendants of node that match selectors.
 
 ###### K
 
-`K` *extends* keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
+`K` _extends_ keyof [`HTMLElementTagNameMap`](../../../../../shared/src/globals/interfaces/HTMLElementTagNameMap.md)
 
 ##### Parameters
 
@@ -7950,7 +7993,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27098
 
 ###### K
 
-`K` *extends* keyof `SVGElementTagNameMap`
+`K` _extends_ keyof `SVGElementTagNameMap`
 
 ##### Parameters
 
@@ -7978,7 +8021,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27099
 
 ###### K
 
-`K` *extends* keyof `MathMLElementTagNameMap`
+`K` _extends_ keyof `MathMLElementTagNameMap`
 
 ##### Parameters
 
@@ -8006,7 +8049,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27101
 
 ###### K
 
-`K` *extends* keyof `HTMLElementDeprecatedTagNameMap`
+`K` _extends_ keyof `HTMLElementDeprecatedTagNameMap`
 
 ##### Parameters
 
@@ -8036,7 +8079,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27102
 
 ###### E
 
-`E` *extends* `Element` = `Element`
+`E` _extends_ `Element` = `Element`
 
 ##### Parameters
 
@@ -8052,7 +8095,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:27102
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`querySelectorAll`](../../../../../core/Component/classes/BaseComponent.md#queryselectorall)
 
-***
+---
 
 ### replaceChildren()
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/wiring](../README.md) / mountSpaceCheckboxCanvases
 
 ```ts
-function mountSpaceCheckboxCanvases(c): void;
+function mountSpaceCheckboxCanvases(c): void
 ```
 
-Defined in: experiments/earth-playground/space/wiring.ts:347
+Defined in: experiments/earth-playground/space/wiring.ts:382
 
 Mounts one CheckboxWebGL twin per checkbox canvas: destroys a stale
 twin when the canvas element changed identity across a re-render,

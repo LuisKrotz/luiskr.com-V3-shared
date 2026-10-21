@@ -8,7 +8,7 @@
 function insertTitleSlot(cardEl, titleText): void
 ```
 
-Defined in: website/components/home/mosaic/burn/mount.ts:30
+Defined in: website/components/home/mosaic/burn/mount.ts:33
 
 Inserts the rewrite slot above the description: an aria-hidden spacer
 holds the layout space (zero reflow when the clone animates) and a

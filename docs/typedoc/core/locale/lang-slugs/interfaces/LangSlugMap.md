@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/locale/lang-slugs](../README.md) / LangSlugMap
 
@@ -13,67 +13,87 @@ One locale's localized route segments (keys match the router's route ids).
 ### about
 
 ```ts
-about: string;
+about: string
 ```
 
 Defined in: core/locale/lang-slugs.ts:16
 
-***
+---
 
 ### contact
 
 ```ts
-contact: string;
+contact: string
 ```
 
 Defined in: core/locale/lang-slugs.ts:17
 
-***
+---
 
 ### privacy
 
 ```ts
-privacy: string;
+privacy: string
 ```
 
 Defined in: core/locale/lang-slugs.ts:18
 
-***
+---
 
 ### gdpr
 
 ```ts
-gdpr: string;
+gdpr: string
 ```
 
 Defined in: core/locale/lang-slugs.ts:19
 
-***
+---
 
 ### terms
 
 ```ts
-terms: string;
+terms: string
 ```
 
 Defined in: core/locale/lang-slugs.ts:20
 
-***
+---
 
-### earthPlayground
+### license
 
 ```ts
-earthPlayground: string;
+license: string
 ```
 
 Defined in: core/locale/lang-slugs.ts:21
 
-***
+---
+
+### earthPlayground
+
+```ts
+earthPlayground: string
+```
+
+Defined in: core/locale/lang-slugs.ts:22
+
+---
 
 ### starField
 
 ```ts
-starField: string;
+starField: string
 ```
 
-Defined in: core/locale/lang-slugs.ts:22
+Defined in: core/locale/lang-slugs.ts:23
+
+---
+
+### animations
+
+```ts
+animations: string
+```
+
+Defined in: core/locale/lang-slugs.ts:24

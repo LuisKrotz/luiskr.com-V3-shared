@@ -8,6 +8,6 @@
 const SPRITE_PX: 256 = 256
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:28
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:29
 
 Sprite texture edge for coronas and nebula gas.

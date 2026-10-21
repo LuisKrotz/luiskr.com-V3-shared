@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/router/types](../README.md) / RouteMeta
 
@@ -20,7 +20,31 @@ optional title?: string;
 
 Defined in: core/router/types.ts:13
 
-***
+---
+
+### description?
+
+```ts
+optional description?: string;
+```
+
+Defined in: core/router/types.ts:15
+
+Meta description text — synced into description/og/twitter/DC metas.
+
+---
+
+### canonical?
+
+```ts
+optional canonical?: string;
+```
+
+Defined in: core/router/types.ts:17
+
+Canonical path override — normalizes alias/legacy URLs to their canonical slug.
+
+---
 
 ### translation?
 
@@ -28,9 +52,9 @@ Defined in: core/router/types.ts:13
 optional translation?: string;
 ```
 
-Defined in: core/router/types.ts:14
+Defined in: core/router/types.ts:18
 
-***
+---
 
 ### scrollTo?
 
@@ -38,9 +62,9 @@ Defined in: core/router/types.ts:14
 optional scrollTo?: string;
 ```
 
-Defined in: core/router/types.ts:15
+Defined in: core/router/types.ts:19
 
-***
+---
 
 ### projectRoute?
 
@@ -48,9 +72,9 @@ Defined in: core/router/types.ts:15
 optional projectRoute?: boolean;
 ```
 
-Defined in: core/router/types.ts:16
+Defined in: core/router/types.ts:20
 
-***
+---
 
 ### legalRoute?
 
@@ -58,9 +82,9 @@ Defined in: core/router/types.ts:16
 optional legalRoute?: boolean;
 ```
 
-Defined in: core/router/types.ts:17
+Defined in: core/router/types.ts:21
 
-***
+---
 
 ### docsRoute?
 
@@ -68,6 +92,6 @@ Defined in: core/router/types.ts:17
 optional docsRoute?: boolean;
 ```
 
-Defined in: core/router/types.ts:19
+Defined in: core/router/types.ts:23
 
 English-only docs portal — suppresses the language switcher.

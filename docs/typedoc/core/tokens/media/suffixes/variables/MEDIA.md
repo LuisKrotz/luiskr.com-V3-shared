@@ -1,20 +1,22 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/media/suffixes](../README.md) / MEDIA
 
 ```ts
 const MEDIA: Readonly<{
-  MOZ: "-mozjpg";
-  THUMB_SUFFIX: "3-MSSIM-tuned-kodak";
-  Q50: "-50";
-  Q100: "-uncompressed";
-  EXT: ".jpg";
-  VIDEO_EXT: ".mp4";
-  VIDEO_THUMB_EXT: ".mp4.jpg-thumb.jpg";
-  VIDEO_SCALE: ".mp4-scaledown-2x";
-}>;
+  MOZ: '-mozjpg'
+  THUMB_SUFFIX: '3-MSSIM-tuned-kodak'
+  Q50: '-50'
+  Q100: '-uncompressed'
+  EXT: '.jpg'
+  VIDEO_EXT: '.mp4'
+  VIDEO_THUMB_EXT: '.mp4.jpg-thumb.jpg'
+  VIDEO_SCALE: '.mp4-scaledown-2x'
+  WEBP_EXT: '.webp'
+  WEBM_EXT: '.webm'
+}>
 ```
 
 Defined in: core/tokens/media/suffixes.ts:13

@@ -8,6 +8,6 @@
 const _K_STYLE: 'style' = 'style'
 ```
 
-Defined in: core/tokens/base.ts:487
+Defined in: core/tokens/base.ts:501
 
 Token key "k style" — single source for the repeated literal.

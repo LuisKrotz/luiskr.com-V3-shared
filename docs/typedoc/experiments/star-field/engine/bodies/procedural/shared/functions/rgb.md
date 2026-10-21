@@ -8,7 +8,7 @@
 function rgb(hex): Rgb
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:40
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:41
 
 Unpacks a packed hex color into `[r, g, b]` channel floats (0–255) —
 the canvas API wants css-rgba() strings, not three hex ints.

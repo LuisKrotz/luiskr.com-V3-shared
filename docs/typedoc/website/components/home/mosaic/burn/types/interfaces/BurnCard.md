@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../../README.md) / [website/components/home/mosaic/burn/types](../README.md) / BurnCard
 
-Defined in: website/components/home/mosaic/burn/types.ts:143
+Defined in: website/components/home/mosaic/burn/types.ts:162
 
 Card element carrying a parked burn session.
 
@@ -20,7 +20,7 @@ Card element carrying a parked burn session.
 optional _burn?: BurnSession | null;
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:144
+Defined in: website/components/home/mosaic/burn/types.ts:163
 
 ---
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/flag](../README.md) / mountNavFlag
 
 ```ts
-function mountNavFlag(host): void;
+function mountNavFlag(host): void
 ```
 
-Defined in: website/components/nav/flag.tsx:100
+Defined in: website/components/nav/flag.tsx:102
 
 Creates the FlagWebGL instance on the flag button's canvas.
 

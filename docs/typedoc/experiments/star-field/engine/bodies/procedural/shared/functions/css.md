@@ -8,7 +8,7 @@
 function css(c, a): string
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:51
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:52
 
 `rgba()` css string for a channel triple + alpha.
 

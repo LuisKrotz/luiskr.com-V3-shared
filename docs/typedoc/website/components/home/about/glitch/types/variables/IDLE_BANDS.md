@@ -8,6 +8,6 @@
 const _IDLE_BANDS: 2 = 2
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:27
+Defined in: website/components/home/about/glitch/types.ts:28
 
 Idle slice-band count + height bounds (frame-height fractions).

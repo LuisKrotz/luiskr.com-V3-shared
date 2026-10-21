@@ -8,11 +8,15 @@
 function makeShell(THREE, def, shellTexture, parent, texMap): Object3D
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:377
+Defined in: experiments/star-field/engine/bodies/primitives.ts:551
 
-Translucent shell layer — Venus's haze atmosphere and Saturn's ring get
-a secondary texture-mapped surface parented to the main mesh. Returns
-the created Object3D so the caller can register it as LOD detail.
+Translucent shell layer — Venus's haze atmosphere and the giant
+planets' rings get a secondary texture-mapped surface parented to
+the main mesh. A ringed body with no authored texture (Uranus,
+Neptune) falls back to `ringStripFor`'s seeded dusty bands; radii
+default to Saturn's strip but `def.ringInner`/`ringOuter` pin the
+honest per-body span. Returns the created Object3D so the caller can
+register it as LOD detail.
 
 ## Parameters
 
@@ -30,10 +34,9 @@ Catalog entry.
 
 ### shellTexture
 
-`string`
+`string` \| `undefined`
 
-Shell texture URL — narrowed non-null by the caller's
-`if (def.shellTexture)` guard.
+Shell texture URL — undefined for procedural rings.
 
 ### parent
 

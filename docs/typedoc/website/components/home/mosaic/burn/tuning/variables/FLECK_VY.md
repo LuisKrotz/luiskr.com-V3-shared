@@ -8,6 +8,6 @@
 const _FLECK_VY: 46 = 46
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:67
+Defined in: website/components/home/mosaic/burn/tuning.ts:72
 
 Fleck launch velocity + gravity pull (canvas px/s, px/s²).

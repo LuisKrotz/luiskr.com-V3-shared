@@ -1,15 +1,16 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/media/urls](../README.md) / CDN\_URLS
 
 ```ts
 const CDN_URLS: Readonly<{
-  CDN_BASE: "https://storage.googleapis.com/luiskr.com/public/_v3/";
-  FLAG_CDN: "https://flagcdn.com/";
-  FIREBASE_DB: "https://luiskr-com.firebaseio.com";
-}>;
+  CDN_BASE: 'https://storage.googleapis.com/luiskr.com/public/_v3/'
+  FLAG_CDN: 'https://flagcdn.com/'
+  FIREBASE_DB: 'https://luiskr-com.firebaseio.com'
+  MEDIA_MANIFEST: '/meta/media-manifest.json'
+}>
 ```
 
 Defined in: core/tokens/media/urls.ts:14

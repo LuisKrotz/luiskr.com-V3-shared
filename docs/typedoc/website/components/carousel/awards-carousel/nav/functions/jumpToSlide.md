@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/nav](../README.md) / jumpToSlide
 
 ```ts
-function jumpToSlide(
-   host, 
-   idx, 
-   smooth?
-): void;
+function jumpToSlide(host, idx, smooth?): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:41
+Defined in: website/components/carousel/awards-carousel/nav.ts:104
 
 Instant centering jump (offsetLeft variant — no smooth scroll): used
 for the invisible clone→real teleport and resize refits. Retries one
@@ -33,7 +29,7 @@ The AwardsCarousel element.
 `number`
 
 Real-slide index; `children[idx + 1]` skips the leading
-  last-clone prepended to the track.
+last-clone prepended to the track.
 
 ### smooth?
 

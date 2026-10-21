@@ -8,7 +8,7 @@
 function rotateStarCamera(s, dAzimuth, dPolar): void
 ```
 
-Defined in: experiments/star-field/engine/frame/camera.ts:170
+Defined in: experiments/star-field/engine/frame/camera.ts:172
 
 Arrow-key orbit — rotates the camera around the controls target in
 screen-intuitive steps: left/right change azimuth, up/down change

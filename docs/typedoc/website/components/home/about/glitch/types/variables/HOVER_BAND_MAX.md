@@ -8,6 +8,6 @@
 const _HOVER_BAND_MAX: 0.06 = 0.06
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:51
+Defined in: website/components/home/about/glitch/types.ts:52
 
 Hover tear-band maximum height (frame-height fraction).

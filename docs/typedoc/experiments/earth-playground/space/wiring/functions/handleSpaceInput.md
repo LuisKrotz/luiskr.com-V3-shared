@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/wiring](../README.md) / handleSpaceInput
 
 ```ts
-function handleSpaceInput(c, input): void;
+function handleSpaceInput(c, input): void
 ```
 
-Defined in: experiments/earth-playground/space/wiring.ts:269
+Defined in: experiments/earth-playground/space/wiring.ts:304
 
 Routes one param input to the engine: reads checked (checkbox) or
 Number(value) (slider), repaints the slider's track-fill % + row label,

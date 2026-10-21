@@ -1,32 +1,34 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/classes/mosaic](../README.md) / HOME\_MOSAIC\_CLASSES
 
 ```ts
 const HOME_MOSAIC_CLASSES: Readonly<{
-  HOME_PORTFOLIO_SECTION: "home-portfolio-section";
-  HOME_SECTION_TITLE: "home-section-title";
-  HOME_MOSAIC: "home-mosaic";
-  HOME_MOSAIC_ITEM: "home-mosaic-item";
-  HOME_MOSAIC_ITEM_FEATURED: "home-mosaic-item--featured";
-  HOME_MOSAIC_ITEM_EXPANDED: "home-mosaic-item--expanded";
-  HOME_MOSAIC_ITEM_BURNING: "home-mosaic-item--burning";
-  HOME_MOSAIC_MEDIA: "home-mosaic-media";
-  HOME_MOSAIC_IMG: "home-mosaic-img";
-  HOME_MOSAIC_TITLE_OVERLAY: "home-mosaic-title-overlay";
-  HOME_MOSAIC_TITLE: "home-mosaic-title";
-  HOME_MOSAIC_TITLE_BURNING: "home-mosaic-title--burning";
-  HOME_MOSAIC_TITLE_BURN: "home-mosaic-title-burn";
-  HOME_MOSAIC_TITLE_SLOT: "home-mosaic-title-slot";
-  HOME_MOSAIC_TITLE_DUP: "home-mosaic-title-dup";
-  HOME_MOSAIC_TITLE_REWRITE: "home-mosaic-title-rewrite";
-  HOME_MOSAIC_BOTTOM: "home-mosaic-bottom";
-  HOME_MOSAIC_DETAILS: "home-mosaic-details";
-  HOME_MOSAIC_DESC: "home-mosaic-desc";
-  HOME_MOSAIC_BTN: "home-mosaic-btn";
-}>;
+  HOME_PORTFOLIO_SECTION: 'home-portfolio-section'
+  HOME_SECTION_TITLE: 'home-section-title'
+  HOME_MOSAIC: 'home-mosaic'
+  HOME_MOSAIC_ITEM: 'home-mosaic-item'
+  HOME_MOSAIC_ITEM_FEATURED: 'home-mosaic-item--featured'
+  HOME_MOSAIC_ITEM_EXPANDED: 'home-mosaic-item--expanded'
+  HOME_MOSAIC_ITEM_BURNING: 'home-mosaic-item--burning'
+  HOME_MOSAIC_MEDIA: 'home-mosaic-media'
+  HOME_MOSAIC_IMG: 'home-mosaic-img'
+  HOME_MOSAIC_TITLE_OVERLAY: 'home-mosaic-title-overlay'
+  HOME_MOSAIC_TITLE: 'home-mosaic-title'
+  HOME_MOSAIC_TITLE_BURNING: 'home-mosaic-title--burning'
+  HOME_MOSAIC_TITLE_BURN: 'home-mosaic-title-burn'
+  HOME_MOSAIC_TITLE_SLOT: 'home-mosaic-title-slot'
+  HOME_MOSAIC_TITLE_DUP: 'home-mosaic-title-dup'
+  HOME_MOSAIC_TITLE_REWRITE: 'home-mosaic-title-rewrite'
+  HOME_MOSAIC_BOTTOM: 'home-mosaic-bottom'
+  HOME_MOSAIC_DETAILS: 'home-mosaic-details'
+  HOME_MOSAIC_DESC: 'home-mosaic-desc'
+  HOME_MOSAIC_BTN: 'home-mosaic-btn'
+  HOME_MOSAIC_BTN_CANVAS: 'home-mosaic-btn-canvas'
+  HOME_MOSAIC_RING_CANVAS: 'home-mosaic-ring-canvas'
+}>
 ```
 
 Defined in: core/tokens/classes/mosaic.ts:13

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/nav](../README.md) / carouselOnDotClick
 
 ```ts
-function carouselOnDotClick(c, idx): void;
+function carouselOnDotClick(c, idx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:339
+Defined in: website/components/carousel/custom-carousel/nav.ts:422
 
 Dot-nav click — jumps straight to idx and permanently stops autoplay;
 dot clicks are deliberate picks, not ambient browsing.

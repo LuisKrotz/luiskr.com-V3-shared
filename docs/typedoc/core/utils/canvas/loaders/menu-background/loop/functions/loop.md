@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/menu-background/loop](../README.md) / loop
 
 ```ts
-function loop(host): void;
+function loop(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:160
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:168
 
 rAF callback — draws the animated contour field each frame.
 

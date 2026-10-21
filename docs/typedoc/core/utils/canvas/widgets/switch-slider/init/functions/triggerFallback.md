@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/widgets/switch-slider/init](../README.md) / triggerFallback
 
 ```ts
-function triggerFallback(host): void;
+function triggerFallback(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider/init.ts:32
+Defined in: core/utils/canvas/widgets/switch-slider/init.ts:34
 
 Switches to the non-WebGL path — releases any live GL, then hides the canvas so the CSS fallback shows.
 

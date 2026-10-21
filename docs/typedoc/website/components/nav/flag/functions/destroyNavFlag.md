@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/flag](../README.md) / destroyNavFlag
 
 ```ts
-function destroyNavFlag(host): void;
+function destroyNavFlag(host): void
 ```
 
-Defined in: website/components/nav/flag.tsx:119
+Defined in: website/components/nav/flag.tsx:123
 
 Tears down the FlagWebGL instance.
 

@@ -1,13 +1,15 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/motion/gpu](../README.md) / UA\_PATTERNS
 
 ```ts
 const UA_PATTERNS: Readonly<{
-  MOBILE_UA: RegExp;
-}>;
+  MOBILE_UA: RegExp
+  IOS_UA: RegExp
+  MACINTOSH_UA: RegExp
+}>
 ```
 
 Defined in: core/tokens/motion/gpu.ts:30

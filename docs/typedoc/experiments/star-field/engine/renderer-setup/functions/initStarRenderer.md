@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/renderer-setup](../README.md) / initStarRenderer
 
 ```ts
-function initStarRenderer(s, WebGPURenderer): Promise<boolean>;
+function initStarRenderer(s, WebGPURenderer): Promise<boolean>
 ```
 
-Defined in: experiments/star-field/engine/renderer-setup.ts:26
+Defined in: experiments/star-field/engine/renderer-setup.ts:27
 
 Builds + initializes the renderer on `s`. Returns false when the GPU
 path is disallowed so bootstrap can bail into the CSS fallback; a WebGPU
@@ -25,7 +25,7 @@ Engine state bag.
 
 ### WebGPURenderer
 
-*typeof* `WebGPURenderer`
+_typeof_ `WebGPURenderer`
 
 The three/webgpu renderer class.
 

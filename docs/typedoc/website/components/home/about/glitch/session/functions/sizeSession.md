@@ -8,7 +8,7 @@
 function sizeSession(s, box): void
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:22
+Defined in: website/components/home/about/glitch/session.ts:26
 
 Sizes the canvas + caches cover crop, channel ghosts and scan tile.
 

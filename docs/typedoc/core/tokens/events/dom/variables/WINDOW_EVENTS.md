@@ -14,6 +14,7 @@ const WINDOW_EVENTS: Readonly<{
   UNHANDLED_REJECTION: 'unhandledrejection'
   LOAD: 'load'
   DOM_CONTENT_LOADED: 'DOMContentLoaded'
+  PAGEHIDE: 'pagehide'
 }>
 ```
 

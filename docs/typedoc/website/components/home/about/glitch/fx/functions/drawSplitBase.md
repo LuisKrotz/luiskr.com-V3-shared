@@ -21,7 +21,7 @@ white blowout) — so this is the frame's base, never an overlay.
 
 ### s
 
-[`GlitchSession`](../../types/interfaces/GlitchSession.md)
+[`Glitch2dSession`](../../types/type-aliases/Glitch2dSession.md)
 
 ## Returns
 

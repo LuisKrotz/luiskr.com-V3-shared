@@ -8,7 +8,7 @@
 const _COL_SPEED_MIN: 0.7 = 0.7
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:25
+Defined in: website/components/home/mosaic/burn/tuning.ts:30
 
 Per-letter burn-speed range — each glyph bucket burns between ~55%
 and ~145% of the base rate, so letters vanish at visibly different

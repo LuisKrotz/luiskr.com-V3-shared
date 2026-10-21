@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../../README.md) / [website/components/home/mosaic/burn/types](../README.md) / BurnParticle
 
-Defined in: website/components/home/mosaic/burn/types.ts:120
+Defined in: website/components/home/mosaic/burn/types.ts:139
 
 One combustion particle — an ember (bright, rises) or fleck (dark, curls).
 
@@ -16,7 +16,7 @@ One combustion particle — an ember (bright, rises) or fleck (dark, curls).
 x: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:121
+Defined in: website/components/home/mosaic/burn/types.ts:140
 
 ---
 
@@ -26,7 +26,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:121
 y: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:122
+Defined in: website/components/home/mosaic/burn/types.ts:141
 
 ---
 
@@ -36,7 +36,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:122
 vx: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:123
+Defined in: website/components/home/mosaic/burn/types.ts:142
 
 ---
 
@@ -46,7 +46,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:123
 vy: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:124
+Defined in: website/components/home/mosaic/burn/types.ts:143
 
 ---
 
@@ -56,7 +56,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:124
 life: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:125
+Defined in: website/components/home/mosaic/burn/types.ts:144
 
 ---
 
@@ -66,7 +66,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:125
 maxLife: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:126
+Defined in: website/components/home/mosaic/burn/types.ts:145
 
 ---
 
@@ -76,7 +76,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:126
 size: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:127
+Defined in: website/components/home/mosaic/burn/types.ts:146
 
 ---
 
@@ -86,7 +86,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:127
 kind: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:129
+Defined in: website/components/home/mosaic/burn/types.ts:148
 
 0 = ember, 1 = char fleck.
 
@@ -98,7 +98,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:129
 rot: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:131
+Defined in: website/components/home/mosaic/burn/types.ts:150
 
 Rotation for flecks (radians) + tumble speed.
 
@@ -110,7 +110,7 @@ Rotation for flecks (radians) + tumble speed.
 spin: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:132
+Defined in: website/components/home/mosaic/burn/types.ts:151
 
 ---
 
@@ -120,7 +120,7 @@ Defined in: website/components/home/mosaic/burn/types.ts:132
 phase: number
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:134
+Defined in: website/components/home/mosaic/burn/types.ts:153
 
 Per-particle noise phase — keeps flicker/wobble desynced.
 
@@ -132,7 +132,7 @@ Per-particle noise phase — keeps flicker/wobble desynced.
 optional L?: LetterBurn;
 ```
 
-Defined in: website/components/home/mosaic/burn/types.ts:139
+Defined in: website/components/home/mosaic/burn/types.ts:158
 
 Rebuild deposits only — the letter whose front this particle rains
 onto. Undefined for burn particles, which simply rise and die.

@@ -15,6 +15,6 @@ const SF_ACTIONS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/starfield/kinds.ts:71
+Defined in: core/tokens/starfield/kinds.ts:103
 
 Toolbar/panel action names dispatched through `data-action` clicks.

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/modal-dom](../README.md) / onProjectStoreUpdate
 
 ```ts
-function onProjectStoreUpdate(view): void;
+function onProjectStoreUpdate(view): void
 ```
 
-Defined in: website/views/project/modal-dom.tsx:72
+Defined in: website/views/project/modal-dom.tsx:67
 
 Store change → reload on locale switch, otherwise sync modal DOM.
 

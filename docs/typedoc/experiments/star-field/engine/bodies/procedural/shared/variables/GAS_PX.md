@@ -8,6 +8,6 @@
 const GAS_PX: 384 = 384
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:31
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:32
 
 Gas sprite canvas edge in pixels.

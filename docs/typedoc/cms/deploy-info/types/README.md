@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / cms/deploy-info/types
 
@@ -12,6 +12,10 @@
 - [AxeReport](interfaces/AxeReport.md)
 - [SnykReport](interfaces/SnykReport.md)
 - [ConsoleScanReport](interfaces/ConsoleScanReport.md)
+- [BundleBucket](interfaces/BundleBucket.md)
+- [BundleTier](interfaces/BundleTier.md)
+- [WasmCrateStats](interfaces/WasmCrateStats.md)
+- [BundleStatsReport](interfaces/BundleStatsReport.md)
 
 ## Type Aliases
 

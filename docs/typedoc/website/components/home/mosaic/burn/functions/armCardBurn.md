@@ -8,7 +8,7 @@
 function armCardBurn(host, i, item): void
 ```
 
-Defined in: website/components/home/mosaic/burn.ts:77
+Defined in: website/components/home/mosaic/burn.ts:78
 
 Arms the burn on card `i`: inserts the rewrite slot, then mounts the
 combustion canvas IMMEDIATELY — the user expects the dissolve the

@@ -8,7 +8,7 @@
 function makeCloudShell(THREE, def, cloudTex): Object3D
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:227
+Defined in: experiments/star-field/engine/bodies/primitives.ts:336
 
 Extra translucent sphere one shell above a surface — Earth's cloud
 deck rides a white-on-black map under additive blending so the dark

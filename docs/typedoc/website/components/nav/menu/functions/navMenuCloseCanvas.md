@@ -8,7 +8,7 @@
 function navMenuCloseCanvas(host): HTMLCanvasElement
 ```
 
-Defined in: website/components/nav/menu.tsx:103
+Defined in: website/components/nav/menu.tsx:105
 
 Canvas JSX for the WebGL menu close (X) icon.
 

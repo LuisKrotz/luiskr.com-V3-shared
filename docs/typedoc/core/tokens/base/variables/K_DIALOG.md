@@ -8,6 +8,6 @@
 const _K_DIALOG: 'dialog' = 'dialog'
 ```
 
-Defined in: core/tokens/base.ts:491
+Defined in: core/tokens/base.ts:505
 
 Token key "k dialog" — single source for the repeated literal.

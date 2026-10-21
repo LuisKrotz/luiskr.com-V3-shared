@@ -1,11 +1,12 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / website/components/carousel/custom-carousel/nav
 
 ## Functions
 
+- [cancelNavSpring](functions/cancelNavSpring.md)
 - [markAdjacentLoaded](functions/markAdjacentLoaded.md)
 - [carouselGoTo](functions/carouselGoTo.md)
 - [updateActiveClasses](functions/updateActiveClasses.md)

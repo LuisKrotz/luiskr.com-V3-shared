@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/legal/Footer](../README.md) / LegalFooter
 
-Defined in: website/components/legal/Footer.tsx:41
+Defined in: website/components/legal/Footer.tsx:43
 
 The LegalFooter — footer class.
 
@@ -20,7 +20,7 @@ The LegalFooter — footer class.
 new LegalFooter(): LegalFooter;
 ```
 
-Defined in: website/components/legal/Footer.tsx:44
+Defined in: website/components/legal/Footer.tsx:48
 
 #### Returns
 
@@ -4416,24 +4416,6 @@ onInit → _renderInitial → onMounted → onUpdated.
 
 ---
 
-### onUpdated()?
-
-```ts
-optional onUpdated(): void;
-```
-
-Defined in: core/Component.ts:115
-
-#### Returns
-
-`void`
-
-#### Inherited from
-
-[`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onUpdated`](../../../../../core/Component/classes/BaseComponent.md#onupdated)
-
----
-
 ### setState()
 
 ```ts
@@ -4767,7 +4749,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/legal/Footer.tsx:48
+Defined in: website/components/legal/Footer.tsx:52
 
 #### Returns
 
@@ -4779,13 +4761,31 @@ Defined in: website/components/legal/Footer.tsx:48
 
 ---
 
+### onUpdated()
+
+```ts
+onUpdated(): void;
+```
+
+Defined in: website/components/legal/Footer.tsx:99
+
+#### Returns
+
+`void`
+
+#### Overrides
+
+[`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onUpdated`](../../../../../core/Component/classes/BaseComponent.md#onupdated)
+
+---
+
 ### onDestroy()
 
 ```ts
 onDestroy(): void;
 ```
 
-Defined in: website/components/legal/Footer.tsx:91
+Defined in: website/components/legal/Footer.tsx:115
 
 #### Returns
 
@@ -4803,7 +4803,7 @@ Defined in: website/components/legal/Footer.tsx:91
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/legal/Footer.tsx:99
+Defined in: website/components/legal/Footer.tsx:127
 
 #### Returns
 
@@ -4821,7 +4821,7 @@ Defined in: website/components/legal/Footer.tsx:99
 render(): Element;
 ```
 
-Defined in: website/components/legal/Footer.tsx:105
+Defined in: website/components/legal/Footer.tsx:133
 
 JSX template for the component's shadow DOM.
 

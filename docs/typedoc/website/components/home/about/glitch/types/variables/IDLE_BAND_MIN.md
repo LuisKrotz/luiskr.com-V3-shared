@@ -8,6 +8,6 @@
 const _IDLE_BAND_MIN: 0.006 = 0.006
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:29
+Defined in: website/components/home/about/glitch/types.ts:30
 
 Idle tear-band minimum height (frame-height fraction).

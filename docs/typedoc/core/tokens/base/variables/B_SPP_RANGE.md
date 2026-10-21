@@ -8,6 +8,6 @@
 const _B_SPP_RANGE: 'sp-panel-range'
 ```
 
-Defined in: core/tokens/base.ts:386
+Defined in: core/tokens/base.ts:391
 
 BEM block fragment "b spp range" — composed by the token groups below into full class names.

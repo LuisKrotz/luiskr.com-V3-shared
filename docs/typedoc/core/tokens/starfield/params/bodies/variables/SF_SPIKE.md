@@ -17,7 +17,7 @@ const SF_SPIKE: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/starfield/params/bodies.ts:332
+Defined in: core/tokens/starfield/params/bodies.ts:534
 
 Diffraction-spike starburst — the telescope-optics cross that rides
 bright stars. Spikes are soft elliptical gradients (never stroked

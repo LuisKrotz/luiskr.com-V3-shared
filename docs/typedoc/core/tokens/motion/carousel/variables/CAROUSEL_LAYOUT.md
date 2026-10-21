@@ -44,7 +44,7 @@ const CAROUSEL_LAYOUT: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/motion/carousel.ts:30
+Defined in: core/tokens/motion/carousel.ts:75
 
 Frozen carousel map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token

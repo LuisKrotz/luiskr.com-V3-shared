@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/portfolio/model](../README.md) / getImagePreview
 
 ```ts
-function getImagePreview(imgName): string;
+function getImagePreview(imgName): string
 ```
 
-Defined in: cms/portfolio/model.ts:17
+Defined in: cms/portfolio/model.ts:18
 
 Gets image preview.
 

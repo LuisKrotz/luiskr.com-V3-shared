@@ -8,6 +8,6 @@
 const _BLOCK_H_MAX: 0.05 = 0.05
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:57
+Defined in: website/components/home/about/glitch/types.ts:58
 
 Block-tear max height (frame-height fraction).

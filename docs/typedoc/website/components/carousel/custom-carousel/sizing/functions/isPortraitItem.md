@@ -8,7 +8,7 @@
 function isPortraitItem(item): boolean
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:216
+Defined in: website/components/carousel/custom-carousel/sizing.ts:224
 
 Detects whether a slide item is portrait.
 

@@ -8,7 +8,7 @@
 function handleStarResize(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/camera.ts:215
+Defined in: experiments/star-field/engine/frame/camera.ts:217
 
 Resize step: measures the shadow host first, then the canvas parent,
 then the window. Pixel ratio caps at 2 to prevent 3x-phone fill-rate

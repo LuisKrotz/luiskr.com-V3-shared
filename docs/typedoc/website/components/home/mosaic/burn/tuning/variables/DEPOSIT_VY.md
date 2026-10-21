@@ -8,7 +8,7 @@
 const _DEPOSIT_VY: 18 = 18
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:76
+Defined in: website/components/home/mosaic/burn/tuning.ts:81
 
 Rebuild deposit launch speed (canvas px/s) — motes leave the empty
 zone drifting down gently, then _FLECK_G accelerates the fall.

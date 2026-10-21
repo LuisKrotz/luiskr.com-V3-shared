@@ -21,6 +21,7 @@ const INTERNAL_CLASSES: Readonly<{
   INTERNAL_FOOTER_RELATED: 'internal-footer-related'
   INTERNAL_FOOTER_ITEMS: 'internal-footer-items'
   INTERNAL_FOOTER_ITEMS_DIVIDER: 'internal-footer-items-divider'
+  INTERNAL_FOOTER_ITEMS_DIVIDER_CANVAS: 'internal-footer-items-divider-canvas'
   INTERNAL_FOOTER_ITEMS_LINK: 'internal-footer-items-link'
   INTERNAL_FOOTER_ITEMS_SEP: 'internal-footer-items-separator'
   INTERNAL_FOOTER_ITEMS_NOTE: 'internal-footer-items-note'

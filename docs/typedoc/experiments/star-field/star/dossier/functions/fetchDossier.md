@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/star/dossier](../README.md) / fetchDossier
 
 ```ts
-function fetchDossier(
-   id, 
-   locale?, 
-   labels?
-): Promise<SFDossier | null>;
+function fetchDossier(id, locale?, labels?): Promise<SFDossier | null>
 ```
 
-Defined in: experiments/star-field/star/dossier.ts:166
+Defined in: experiments/star-field/star/dossier.ts:264
 
 Fetches one locale dossier JSON — `data/<locale>/<id>.json`, with the
 canonical English file as fallback so a not-yet-translated body still
@@ -27,7 +23,7 @@ and the panel is synthesized with the locale's field labels.
 `string`
 
 Body id matching `public/data/<locale>/<id>.json`, or a
-  registry id (`star-NNNNNN`, `exoplanet-NNNNNN`, `dso-NNNNNN`).
+registry id (`star-NNNNNN`, `exoplanet-NNNNNN`, `dso-NNNNNN`).
 
 ### locale?
 
@@ -40,7 +36,7 @@ Active locale code — defaults to the store's current.
 `Record`\<`string`, `unknown`\> \| `null`
 
 Optional label map for registry synthesis (component's
-  merged translations); the English snapshot fills any gaps.
+merged translations); the English snapshot fills any gaps.
 
 ## Returns
 

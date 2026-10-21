@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / experiments/star-field/engine/types
 
@@ -15,6 +15,7 @@
 - [SFDossierFile](interfaces/SFDossierFile.md)
 - [SFState](interfaces/SFState.md)
 - [SFNode](interfaces/SFNode.md)
+- [SFNebulaFx](interfaces/SFNebulaFx.md)
 - [SFFly](interfaces/SFFly.md)
 
 ## Type Aliases

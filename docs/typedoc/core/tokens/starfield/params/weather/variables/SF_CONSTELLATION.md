@@ -12,6 +12,7 @@ const SF_CONSTELLATION: Readonly<{
   INCLINE_SPREAD: 0.5
   JITTER: 0.3
   SIZE: 0.012
+  REVEAL: 7
 }>
 ```
 

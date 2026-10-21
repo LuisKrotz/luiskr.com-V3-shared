@@ -8,6 +8,6 @@
 const _SPAWN_PER_S: 90 = 90
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:49
+Defined in: website/components/home/mosaic/burn/tuning.ts:54
 
 Ember spawn per second along the front while it burns.

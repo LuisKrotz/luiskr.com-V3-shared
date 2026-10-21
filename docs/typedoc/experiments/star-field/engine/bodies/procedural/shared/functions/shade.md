@@ -8,7 +8,7 @@
 function shade(c, k): Rgb
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:63
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:64
 
 Scales a channel triple toward white (`k > 0`) or black (`k < 0`) —
 crater rims, band highlights and corona streamers all derive from the

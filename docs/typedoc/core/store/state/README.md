@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / core/store/state
 
@@ -10,6 +10,7 @@
 - [LangState](interfaces/LangState.md)
 - [MentionsState](interfaces/MentionsState.md)
 - [ModalMedia](interfaces/ModalMedia.md)
+- [ModalRect](interfaces/ModalRect.md)
 - [ModalObject](interfaces/ModalObject.md)
 - [PagePos](interfaces/PagePos.md)
 - [StoreState](interfaces/StoreState.md)

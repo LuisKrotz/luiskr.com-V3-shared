@@ -1,21 +1,26 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/string](../README.md) / slugify
 
 ```ts
-function slugify(text): string;
+function slugify(text): string
 ```
 
-Defined in: core/utils/string.ts:66
+Defined in: core/utils/string.ts:150
 
 Converts a string into a clean, URL-safe and DOM-id-safe slug.
-Pipeline: lowercase → drop non-word/non-space/non-dash chars → collapse
-whitespace+underscores to `-` → collapse consecutive dashes. e.g.
-"METCHA — Leather!" → "metcha-leather". `\w` is ASCII-only
-([a-z0-9_]) — accented characters are dropped, which intentionally
-mirrors the ASCII-folded LANG_SLUGS convention for URL safety.
+Pipeline: NFD-fold diacritics to ASCII → lowercase → transliterate
+Cyrillic → trim → collapse every non-alphanumeric run to a single `-`
+→ strip edge dashes. e.g. "METCHA — Leather!" → "metcha-leather",
+"Cecerelê: tour" → "cecerele-tour", "aboutmarco.com" →
+"aboutmarco-com", "фон бренда" → "fon-brenda".
+MUST stay byte-identical to the slugify in shared/scripts/build
+(generate-sitemap.js + build-locale-pages.mjs): it computes the media
+deep-link segment both at runtime (modal write/read) and at build
+(emitted pages + sitemap URLs), so the two transforms have to agree
+or indexed /portfolio/<p>/<media> links stop auto-opening.
 
 ## Parameters
 

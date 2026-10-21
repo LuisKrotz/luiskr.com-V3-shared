@@ -8,7 +8,7 @@
 const _B_INTERNAL_FOOTER: 'internal-footer'
 ```
 
-Defined in: core/tokens/base.ts:291
+Defined in: core/tokens/base.ts:296
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

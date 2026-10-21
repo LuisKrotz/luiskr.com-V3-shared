@@ -13,7 +13,7 @@ const SF_LOD: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/starfield/params/bodies.ts:173
+Defined in: core/tokens/starfield/params/bodies.ts:216
 
 Detail level-of-detail — secondary geometry (atmosphere shells, ring
 discs, satellite companions) renders only while the

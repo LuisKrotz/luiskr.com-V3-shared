@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/draw-text/trigger](../README.md) / registerOrdered
 
 ```ts
-function registerOrdered(host): void;
+function registerOrdered(host): void
 ```
 
-Defined in: website/components/media/draw-text/trigger.ts:57
+Defined in: website/components/media/draw-text/trigger.ts:59
 
 Registers an ordered element in the reveal session. Idempotent —
 setupTrigger re-runs on text/attr changes, the Set dedups.

@@ -8,6 +8,6 @@
 const _B_PREF_BACKDROP: 'pref-backdrop'
 ```
 
-Defined in: core/tokens/base.ts:321
+Defined in: core/tokens/base.ts:326
 
 BEM block fragment "b pref backdrop" — composed by the token groups below into full class names.

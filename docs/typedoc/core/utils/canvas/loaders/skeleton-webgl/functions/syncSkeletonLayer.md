@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/loaders/skeleton-webgl](../README.md) / syncSkeletonLayer
 
 ```ts
-function syncSkeletonLayer(component): void;
+function syncSkeletonLayer(component): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:328
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:360
 
 Keeps a component's skeleton layer in sync with its rendered content.
 Call from onUpdated()/onMounted(): creates the layer while skeleton nodes

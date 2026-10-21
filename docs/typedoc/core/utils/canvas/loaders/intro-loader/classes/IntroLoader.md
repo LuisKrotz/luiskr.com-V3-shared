@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/loaders/intro-loader](../README.md) / IntroLoader
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:45
+Defined in: core/utils/canvas/loaders/intro-loader.ts:47
 
 Experiments-style intro loader — spinner ring + percent + stage readout
 
@@ -19,7 +19,7 @@ Experiments-style intro loader — spinner ring + percent + stage readout
 new IntroLoader(rootContainer?, onComplete?): IntroLoader;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:57
+Defined in: core/utils/canvas/loaders/intro-loader.ts:59
 
 #### Parameters
 
@@ -43,7 +43,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:57
 rootContainer: HTMLElement
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:46
+Defined in: core/utils/canvas/loaders/intro-loader.ts:48
 
 ---
 
@@ -53,7 +53,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:46
 onComplete: (() => void) | null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:47
+Defined in: core/utils/canvas/loaders/intro-loader.ts:49
 
 ---
 
@@ -63,7 +63,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:47
 container: HTMLElement | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:48
+Defined in: core/utils/canvas/loaders/intro-loader.ts:50
 
 ---
 
@@ -73,7 +73,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:48
 percentEl: HTMLElement | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:49
+Defined in: core/utils/canvas/loaders/intro-loader.ts:51
 
 ---
 
@@ -83,7 +83,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:49
 msgEl: HTMLElement | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:50
+Defined in: core/utils/canvas/loaders/intro-loader.ts:52
 
 ---
 
@@ -93,7 +93,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:50
 barEl: HTMLElement | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:51
+Defined in: core/utils/canvas/loaders/intro-loader.ts:53
 
 ---
 
@@ -103,7 +103,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:51
 progress: number = 0
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:52
+Defined in: core/utils/canvas/loaders/intro-loader.ts:54
 
 ---
 
@@ -113,7 +113,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:52
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:53
+Defined in: core/utils/canvas/loaders/intro-loader.ts:55
 
 ---
 
@@ -123,7 +123,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:53
 startTime: number
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:54
+Defined in: core/utils/canvas/loaders/intro-loader.ts:56
 
 ---
 
@@ -133,7 +133,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:54
 copy: LoaderCopy
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:55
+Defined in: core/utils/canvas/loaders/intro-loader.ts:57
 
 ## Methods
 
@@ -143,7 +143,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:55
 init(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:69
+Defined in: core/utils/canvas/loaders/intro-loader.ts:71
 
 Builds the overlay DOM + starts the progress sequence.
 
@@ -159,7 +159,7 @@ Builds the overlay DOM + starts the progress sequence.
 runAnimation(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:158
+Defined in: core/utils/canvas/loaders/intro-loader.ts:164
 
 Steps percent + the localized stage line across the boot budget.
 
@@ -175,7 +175,7 @@ Steps percent + the localized stage line across the boot budget.
 finish(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:197
+Defined in: core/utils/canvas/loaders/intro-loader.ts:203
 
 Completes the loader: fades the overlay and calls onComplete.
 
@@ -191,7 +191,7 @@ Completes the loader: fades the overlay and calls onComplete.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:214
+Defined in: core/utils/canvas/loaders/intro-loader.ts:220
 
 Releases the rAF handle and removes the overlay so it can be GC'd.
 

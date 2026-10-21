@@ -6,6 +6,18 @@
 
 ## References
 
+### ANIMATION\_IDS
+
+Re-exports [ANIMATION_IDS](animation-ids/variables/ANIMATION_IDS.md)
+
+---
+
+### ANIMATION\_DESC\_ID\_PREFIX
+
+Re-exports [ANIMATION_DESC_ID_PREFIX](animation-ids/variables/ANIMATION_DESC_ID_PREFIX.md)
+
+---
+
 ### CMS\_KEYS
 
 Re-exports [CMS_KEYS](cms-keys/variables/CMS_KEYS.md)

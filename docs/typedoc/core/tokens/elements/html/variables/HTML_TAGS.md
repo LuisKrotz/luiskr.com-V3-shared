@@ -1,39 +1,42 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/elements/html](../README.md) / HTML\_TAGS
 
 ```ts
 const HTML_TAGS: Readonly<{
-  FIGURE: "figure";
-  VIDEO: "video";
-  IMG: "img";
-  IFRAME: "iframe";
-  BUTTON: "button";
-  LINK: "link";
-  META: "meta";
-  STYLE: "style";
-  DIV: "div";
-  SPAN: "span";
-  A: "a";
-  P: "p";
-  CANVAS: "canvas";
-  SELECT: "select";
-  OPTION: "option";
-  INPUT: "input";
-  TEXTAREA: "textarea";
-  LABEL: "label";
-  H2: "h2";
-  H3: "h3";
-  NAV: "nav";
-  ASIDE: "aside";
-  HEADER: "header";
-  MAIN: "main";
-  DIALOG: "dialog";
-  TITLE: "title";
-  H1: "h1";
-}>;
+  FIGURE: 'figure'
+  ARTICLE: 'article'
+  VIDEO: 'video'
+  IMG: 'img'
+  IFRAME: 'iframe'
+  BUTTON: 'button'
+  LINK: 'link'
+  META: 'meta'
+  STYLE: 'style'
+  DIV: 'div'
+  SPAN: 'span'
+  A: 'a'
+  P: 'p'
+  CANVAS: 'canvas'
+  SELECT: 'select'
+  OPTION: 'option'
+  INPUT: 'input'
+  TEXTAREA: 'textarea'
+  LABEL: 'label'
+  H2: 'h2'
+  H3: 'h3'
+  NAV: 'nav'
+  ASIDE: 'aside'
+  HEADER: 'header'
+  MAIN: 'main'
+  DIALOG: 'dialog'
+  TITLE: 'title'
+  H1: 'h1'
+  HTML: 'html'
+  BODY: 'body'
+}>
 ```
 
 Defined in: core/tokens/elements/html.ts:13

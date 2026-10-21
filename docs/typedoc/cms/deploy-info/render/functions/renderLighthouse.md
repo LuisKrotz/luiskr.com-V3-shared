@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/render](../README.md) / renderLighthouse
 
 ```ts
-function renderLighthouse(host): Element;
+function renderLighthouse(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:58
+Defined in: cms/deploy-info/render.tsx:59
 
 Renders the Lighthouse section (scores + failing audits).
 

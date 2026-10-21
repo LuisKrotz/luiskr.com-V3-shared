@@ -8,6 +8,6 @@
 const _B_AWC_BTN_RING: 'aw-c-btn-ring'
 ```
 
-Defined in: core/tokens/base.ts:373
+Defined in: core/tokens/base.ts:378
 
 BEM block fragment "b awc btn ring" — composed by the token groups below into full class names.

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/skeleton/loop](../README.md) / loop
 
 ```ts
-function loop(host): void;
+function loop(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton/loop.ts:35
+Defined in: core/utils/canvas/loaders/skeleton/loop.ts:53
 
 rAF callback — animates the shimmer until resolved.
 

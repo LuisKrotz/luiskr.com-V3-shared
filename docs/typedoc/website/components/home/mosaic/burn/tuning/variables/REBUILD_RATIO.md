@@ -8,7 +8,7 @@
 const _REBUILD_RATIO: 0.55 = 0.55
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:102
+Defined in: website/components/home/mosaic/burn/tuning.ts:107
 
 Rebuild speed on un-hover — the un-burn replays the consume front
 downward at this fraction of the burn duration, so rebuilding the

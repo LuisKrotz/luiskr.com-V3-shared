@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/schema](../README.md) / generateWebsiteSchema
 
 ```ts
-function generateWebsiteSchema(): Record<string, unknown>[];
+function generateWebsiteSchema(): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:40
+Defined in: core/utils/schema.ts:79
 
 Generates WebSite and Organization schema for the homepage.
 

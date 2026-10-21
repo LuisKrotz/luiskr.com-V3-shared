@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/data](../README.md) / initProject
 
 ```ts
-function initProject(view): void;
+function initProject(view): void
 ```
 
-Defined in: website/views/project/data.ts:69
+Defined in: website/views/project/data.ts:90
 
 Initializes the resolved project record for the current route.
 

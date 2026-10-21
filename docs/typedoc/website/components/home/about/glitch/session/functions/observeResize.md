@@ -8,7 +8,7 @@
 function observeResize(s, wrap): ResizeObserver | null
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:62
+Defined in: website/components/home/about/glitch/session.ts:76
 
 Watches the picture wrapper for geometry changes: the session's device-px
 canvas is pinned to `width:100%`, so it must be re-rastered whenever the

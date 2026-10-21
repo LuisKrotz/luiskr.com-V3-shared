@@ -8,6 +8,6 @@
 type Rgb = [number, number, number]
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:19
+Defined in: experiments/star-field/engine/bodies/procedural/shared.ts:20
 
 RGBA components extracted from a packed hex color.

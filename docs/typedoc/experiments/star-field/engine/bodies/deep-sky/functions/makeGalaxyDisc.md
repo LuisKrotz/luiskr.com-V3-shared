@@ -8,7 +8,7 @@
 function makeGalaxyDisc(THREE, def, texMap, glowTex, localTilt?): Mesh
 ```
 
-Defined in: experiments/star-field/engine/bodies/deep-sky.ts:99
+Defined in: experiments/star-field/engine/bodies/deep-sky.ts:199
 
 Tilted photographic disc for an external galaxy — the real image on a
 plane lying in the body's disc plane, edge-feathered so it melts into

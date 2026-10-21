@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/panel-render](../README.md) / renderSpAction
 
 ```ts
-function renderSpAction(act, t): Element;
+function renderSpAction(act, t): Element
 ```
 
-Defined in: experiments/earth-playground/space/panel-render.tsx:87
+Defined in: experiments/earth-playground/space/panel-render.tsx:89
 
 One group-level action button (reset view / screenshot / copy settings).
 

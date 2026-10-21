@@ -15,7 +15,7 @@ const WASM_CSS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/data/wasm.ts:67
+Defined in: core/tokens/data/wasm.ts:97
 
 Dynamic-CSS injector tokens — the managed <style> node's sole rule is
 the GPU compositor-promotion utility class; skeleton defaults cover the

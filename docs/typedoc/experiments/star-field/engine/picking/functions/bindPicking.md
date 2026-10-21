@@ -8,7 +8,7 @@
 function bindPicking(s): void
 ```
 
-Defined in: experiments/star-field/engine/picking.ts:145
+Defined in: experiments/star-field/engine/picking.ts:160
 
 Binds the pointer listeners on the render canvas: down records origin +
 cancels fly, up-within-threshold selects, move updates hover. Listeners

@@ -8,6 +8,6 @@
 const _INVERT_CHANCE: 0.02 = 0.02
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:63
+Defined in: website/components/home/about/glitch/types.ts:64
 
 Chance per hover frame of an inversion flash.

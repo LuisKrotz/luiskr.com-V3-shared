@@ -8,7 +8,7 @@
 function updateDayNight(s): void
 ```
 
-Defined in: experiments/star-field/engine/frame/updates.ts:315
+Defined in: experiments/star-field/engine/frame/updates.ts:336
 
 Day/night uniform feed — for every body whose shading depends on the
 sun direction (night-lights emissive gating, atmosphere rim shells)

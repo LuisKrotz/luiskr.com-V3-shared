@@ -8,7 +8,7 @@
 function makeAtmoShell(THREE, deps, def, sunDir): Object3D
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:261
+Defined in: experiments/star-field/engine/bodies/primitives.ts:370
 
 Atmosphere rim shell — a fresnel-limb translucent sphere just past
 the surface whose tint migrates with the sun direction: deep blue on

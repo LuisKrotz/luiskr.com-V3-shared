@@ -8,6 +8,6 @@
 const _FLECK_SIZE: 3.4 = 3.4
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:80
+Defined in: website/components/home/mosaic/burn/tuning.ts:85
 
 Fleck size bound — char scraps read bigger than ember sparks.

@@ -8,6 +8,6 @@
 const SF_DATA_BASE: '/experiments/star-field/data' = '/experiments/star-field/data'
 ```
 
-Defined in: core/tokens/starfield/textures.ts:90
+Defined in: core/tokens/starfield/textures.ts:102
 
 Public-URL prefix for the per-body lazy-loaded JSON dossiers.

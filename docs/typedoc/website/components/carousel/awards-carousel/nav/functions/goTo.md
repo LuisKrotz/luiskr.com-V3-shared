@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/nav](../README.md) / goTo
 
 ```ts
-function goTo(host, idx): void;
+function goTo(host, idx): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:107
+Defined in: website/components/carousel/awards-carousel/nav.ts:185
 
 Navigate to slide idx. idx may be out-of-range (−1 or len): the call
 scrolls to the matching CLONE slide at that edge and schedules an

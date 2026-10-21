@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/safari/patches/media-figure/image-load](../README.md) / safariLoadHighRes
 
 ```ts
-function safariLoadHighRes(el): void;
+function safariLoadHighRes(el): void
 ```
 
-Defined in: core/safari/patches/media-figure/image-load.ts:24
+Defined in: core/safari/patches/media-figure/image-load.ts:25
 
 Safari loadHighRes: requests the Q50 (medium) variant instead of the
 uncompressed source — iOS Safari hard-fails canvas/decode on images

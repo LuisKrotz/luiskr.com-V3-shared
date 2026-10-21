@@ -8,7 +8,7 @@
 function makeStarHalo(THREE, def, glowTex, flat?): Sprite
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:334
+Defined in: experiments/star-field/engine/bodies/primitives.ts:452
 
 Additive halo sprite behind a luminous body — stars and the Sun glow
 like point sources on a real long-exposure frame instead of rendering

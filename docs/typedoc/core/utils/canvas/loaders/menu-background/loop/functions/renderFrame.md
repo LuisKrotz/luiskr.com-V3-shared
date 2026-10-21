@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/menu-background/loop](../README.md) / renderFrame
 
 ```ts
-function renderFrame(host, staticTime?): void;
+function renderFrame(host, staticTime?): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:169
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:177
 
 Renders the noise field; a fixed staticTime renders one settled frame.
 

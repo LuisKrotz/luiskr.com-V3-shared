@@ -8,7 +8,7 @@
 const _K_FOCUS: 'focus' = 'focus'
 ```
 
-Defined in: core/tokens/base.ts:509
+Defined in: core/tokens/base.ts:523
 
 Shared key token `focus` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

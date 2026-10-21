@@ -8,7 +8,7 @@
 function attachGlitch(host): void
 ```
 
-Defined in: website/components/home/about/glitch.ts:67
+Defined in: website/components/home/about/glitch.ts:60
 
 Binds the always-on glitch: starts the arm poll immediately (the effect
 runs ambient interference as soon as the portrait decodes — no hover

@@ -8,6 +8,6 @@
 const _POS_PCT: 100 = 100
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:79
+Defined in: website/components/home/about/glitch/types.ts:80
 
 Percent scale for parsing object-position ("50%" → 0.5).

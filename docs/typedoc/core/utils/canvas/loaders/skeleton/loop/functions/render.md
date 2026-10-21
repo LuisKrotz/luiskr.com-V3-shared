@@ -1,20 +1,16 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/skeleton/loop](../README.md) / render
 
 ```ts
-function render(
-   host, 
-   t, 
-   resolve
-): void;
+function render(host, t, resolve): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton/loop.ts:74
+Defined in: core/utils/canvas/loaders/skeleton/loop.ts:92
 
-Renders a frame via the shared renderer.
+Renders a frame via the live backend — wasm widget or shared 2D renderer.
 
 ## Parameters
 

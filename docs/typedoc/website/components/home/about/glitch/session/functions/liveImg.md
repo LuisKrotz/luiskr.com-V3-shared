@@ -8,7 +8,7 @@
 function liveImg(wrap): HTMLImageElement | null
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:83
+Defined in: website/components/home/about/glitch/session.ts:97
 
 The live decoded portrait, if the current DOM node is usable —
 duck-typed because instanceof HTMLImageElement isn't reliable across

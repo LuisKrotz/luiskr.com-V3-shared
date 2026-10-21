@@ -8,7 +8,7 @@
 function ensureRegistryBody(s, rec): void
 ```
 
-Defined in: experiments/star-field/engine/registry-body.ts:300
+Defined in: experiments/star-field/engine/registry-body.ts:305
 
 Materializes the rendered body for a catalog record at its true
 heliocentric chart position — the object the cloud point stands in

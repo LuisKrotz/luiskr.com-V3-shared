@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/autoplay](../README.md) / updateCarouselRingDom
 
 ```ts
-function updateCarouselRingDom(c): void;
+function updateCarouselRingDom(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:197
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:204
 
 Pushes progress into the DOM: the SVG ring's stroke-dashoffset (full
 circumference = empty, 0 = full circle) and the WebGL arrows' arc.

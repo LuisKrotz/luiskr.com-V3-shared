@@ -11,3 +11,4 @@
 - [SF\_AURORA](variables/SF_AURORA.md)
 - [SF\_METEOR](variables/SF_METEOR.md)
 - [SF\_CONSTELLATION](variables/SF_CONSTELLATION.md)
+- [SF\_PLUME](variables/SF_PLUME.md)

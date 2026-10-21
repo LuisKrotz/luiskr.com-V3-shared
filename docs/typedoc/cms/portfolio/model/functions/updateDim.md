@@ -1,19 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/portfolio/model](../README.md) / updateDim
 
 ```ts
-function updateDim(
-   item, 
-   prop, 
-   idx, 
-   val
-): void;
+function updateDim(item, prop, idx, val): void
 ```
 
-Defined in: cms/portfolio/model.ts:30
+Defined in: cms/portfolio/model.ts:31
 
 Updates dim.
 

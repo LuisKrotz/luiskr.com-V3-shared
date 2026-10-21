@@ -8,19 +8,21 @@
 function measureFit(c, observedWidth?): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:62
+Defined in: website/components/carousel/custom-carousel/sizing.ts:65
 
 Decides whether the items fit side-by-side (no carousel chrome) or need
 the scroll track. Side-by-side requires: ≤2 items, viewport
 ≥ SIDE_BY_SIDE_BREAKPOINT, and projected total width ≤ host width.
 The projection mirrors the shadow-DOM contract in media-figure.scss +
 carousel-host.scss exactly: strip height is --mf-h (70dvh minus a pad
-under 1024, fixed $space-* steps above), media width is
-ratio·stripH floored at MEDIA_MIN_WIDTH on ≥375px viewports and capped
-by the regular gutter cap or the landscape --mf-max-w ladder, and each
-item adds its breakpoint padding + desktop side margin. Items missing
-intrinsic sizes use GENERIC_DIMENSIONS defaults (conservative portrait)
-so a partial CMS row can't silently flip to scroll mode.
+under 1024, fixed $space-* steps above) clamped to the file's natural
+height, media width is aspect-driven and capped by the regular gutter
+cap, the landscape --mf-max-w ladder, AND the natural pixel width
+(calcMediaBox — WASM-backed, never upscales), floored at
+min(MEDIA_MIN_WIDTH, naturalW) on ≥375px viewports; each item adds its
+breakpoint padding + desktop side margin. Items missing intrinsic
+sizes use GENERIC_DIMENSIONS defaults (conservative portrait) so a
+partial CMS row can't silently flip to scroll mode.
 
 ## Parameters
 

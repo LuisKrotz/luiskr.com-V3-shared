@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/modal](../README.md) / checkAutoOpenModal
 
 ```ts
-function checkAutoOpenModal(c): void;
+function checkAutoOpenModal(c): void
 ```
 
-Defined in: website/views/project/modal.ts:21
+Defined in: website/views/project/modal.ts:20
 
 Checks auto open modal.
 

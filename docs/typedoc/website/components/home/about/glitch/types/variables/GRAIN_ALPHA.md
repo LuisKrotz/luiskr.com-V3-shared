@@ -8,6 +8,6 @@
 const _GRAIN_ALPHA: 0.22 = 0.22
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:39
+Defined in: website/components/home/about/glitch/types.ts:40
 
 Grain alpha — film noise sits visibly on the image.

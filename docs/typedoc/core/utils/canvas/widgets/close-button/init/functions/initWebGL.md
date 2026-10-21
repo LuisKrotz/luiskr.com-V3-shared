@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/widgets/close-button/init](../README.md) / initWebGL
 
 ```ts
-function initWebGL(host): void;
+function initWebGL(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/close-button/init.ts:147
+Defined in: core/utils/canvas/widgets/close-button/init.ts:233
 
 Creates the WebGL context, compiles the shader program and sets up uniforms/buffers; falls back on any failure.
 

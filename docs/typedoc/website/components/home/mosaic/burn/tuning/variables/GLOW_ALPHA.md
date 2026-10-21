@@ -8,6 +8,6 @@
 const _GLOW_ALPHA: 0.55 = 0.55
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:35
+Defined in: website/components/home/mosaic/burn/tuning.ts:40
 
 Opacity of the additive ember wash hugging the live front.

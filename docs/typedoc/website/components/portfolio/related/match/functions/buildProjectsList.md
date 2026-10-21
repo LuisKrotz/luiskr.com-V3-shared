@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/portfolio/related/match](../README.md) / buildProjectsList
 
 ```ts
-function buildProjectsList(
-   translations, 
-   homePortfolio, 
-   storage
-): RelatedCard[];
+function buildProjectsList(translations, homePortfolio, storage): RelatedCard[]
 ```
 
-Defined in: website/components/portfolio/related/match.ts:62
+Defined in: website/components/portfolio/related/match.ts:75
 
 Maps the DB `related.projects` rows into display-ready cards.
 

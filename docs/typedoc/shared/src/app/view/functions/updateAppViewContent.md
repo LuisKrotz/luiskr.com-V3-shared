@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [shared/src/app/view](../README.md) / updateAppViewContent
 
 ```ts
-function updateAppViewContent(
-   c, 
-   to?, 
-   _from?
-): void;
+function updateAppViewContent(c, to?, _from?): void
 ```
 
-Defined in: shared/src/app/view.ts:29
+Defined in: shared/src/app/view.ts:30
 
 Route-change reconciliation for the view outlet: when the target view
 tag equals the mounted one (and the element is actually defined), the
@@ -36,8 +32,8 @@ Destination descriptor (falls back to router.currentRoute).
 
 ### \_from?
 
-  \| [`RouteDescriptor`](../../../../../core/router/types/interfaces/RouteDescriptor.md)
-  \| `null`
+\| [`RouteDescriptor`](../../../../../core/router/types/interfaces/RouteDescriptor.md)
+\| `null`
 
 Origin descriptor — unused, kept for listener parity.
 

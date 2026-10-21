@@ -8,6 +8,6 @@
 const _K_SITE_URL: 'https://luiskr.com' = 'https://luiskr.com'
 ```
 
-Defined in: core/tokens/base.ts:513
+Defined in: core/tokens/base.ts:527
 
 Token key "k site url" — single source for the repeated literal.

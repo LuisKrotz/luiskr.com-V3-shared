@@ -20,7 +20,7 @@ The PreferencesModal — modal class.
 new PreferencesModal(): PreferencesModal;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:46
+Defined in: website/components/dialogs/PreferencesModal.tsx:48
 
 #### Returns
 
@@ -223,13 +223,33 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:42
 
 ---
 
+### \_doneBrackets
+
+```ts
+_doneBrackets: (() => void) | null = null;
+```
+
+Defined in: website/components/dialogs/PreferencesModal.tsx:43
+
+---
+
+### \_doneBracketsBtn
+
+```ts
+_doneBracketsBtn: HTMLElement | null = null;
+```
+
+Defined in: website/components/dialogs/PreferencesModal.tsx:44
+
+---
+
 ### \_closing
 
 ```ts
 _closing: boolean = false
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:43
+Defined in: website/components/dialogs/PreferencesModal.tsx:45
 
 ---
 
@@ -239,7 +259,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:43
 _openedAt: number = 0
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:44
+Defined in: website/components/dialogs/PreferencesModal.tsx:46
 
 ---
 
@@ -4300,7 +4320,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get pref(): PrefNode | null;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:57
+Defined in: website/components/dialogs/PreferencesModal.tsx:59
 
 ##### Returns
 
@@ -4312,7 +4332,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:57
 set pref(val): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:52
+Defined in: website/components/dialogs/PreferencesModal.tsx:54
 
 Setter/getter — the pref.* translation node for labels.
 
@@ -4336,7 +4356,7 @@ Setter/getter — the pref.* translation node for labels.
 get open(): boolean;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:68
+Defined in: website/components/dialogs/PreferencesModal.tsx:70
 
 ##### Returns
 
@@ -4348,7 +4368,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:68
 set open(val): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:63
+Defined in: website/components/dialogs/PreferencesModal.tsx:65
 
 Setter/getter — controls the modal's open state.
 
@@ -4372,7 +4392,7 @@ Setter/getter — controls the modal's open state.
 get t(): PrefNode;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:74
+Defined in: website/components/dialogs/PreferencesModal.tsx:76
 
 Convenience getter — pref translations shorthand used in render.
 
@@ -4390,7 +4410,7 @@ Convenience getter — pref translations shorthand used in render.
 get isOpen(): boolean;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:87
+Defined in: website/components/dialogs/PreferencesModal.tsx:89
 
 Whether the modal is shown.
 
@@ -4408,7 +4428,7 @@ Whether the modal is shown.
 get currentTheme(): string;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:93
+Defined in: website/components/dialogs/PreferencesModal.tsx:95
 
 The store's theme value (light/dark/system).
 
@@ -4426,7 +4446,7 @@ The store's theme value (light/dark/system).
 get reducedMotion(): boolean;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:99
+Defined in: website/components/dialogs/PreferencesModal.tsx:101
 
 Whether reduced motion is enabled.
 
@@ -4444,7 +4464,7 @@ Whether reduced motion is enabled.
 get npuAnalytics(): NpuAnalytics & object;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:105
+Defined in: website/components/dialogs/PreferencesModal.tsx:107
 
 Live analytics from the NPU predictor for the dev-tools readout.
 
@@ -4462,7 +4482,7 @@ Live analytics from the NPU predictor for the dev-tools readout.
 get npuStatus(): unknown;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:114
+Defined in: website/components/dialogs/PreferencesModal.tsx:116
 
 Human-readable acceleration tier for the dev-tools readout. Ordered
 best→fallback: NPU (neural inference available) → GPU → WASM — the
@@ -4997,7 +5017,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:120
+Defined in: website/components/dialogs/PreferencesModal.tsx:122
 
 #### Returns
 
@@ -5015,7 +5035,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:120
 onDestroy(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:129
+Defined in: website/components/dialogs/PreferencesModal.tsx:131
 
 #### Returns
 
@@ -5033,7 +5053,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:129
 _syncOpenState(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:135
+Defined in: website/components/dialogs/PreferencesModal.tsx:137
 
 Reflects the open flag into DOM/classes and runs the genie enter/leave.
 
@@ -5049,7 +5069,7 @@ Reflects the open flag into DOM/classes and runs the genie enter/leave.
 _mountWebGLControls(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:141
+Defined in: website/components/dialogs/PreferencesModal.tsx:143
 
 Mounts the WebGL widgets onto the freshly rendered canvases.
 
@@ -5065,7 +5085,7 @@ Mounts the WebGL widgets onto the freshly rendered canvases.
 _destroyWebGLControls(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:147
+Defined in: website/components/dialogs/PreferencesModal.tsx:149
 
 Tears down the mounted GL widgets.
 
@@ -5081,7 +5101,7 @@ Tears down the mounted GL widgets.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:160
+Defined in: website/components/dialogs/PreferencesModal.tsx:162
 
 Store-driven sync. Two paths:
 open-state flipped → full re-render + mount widgets + genie-enter
@@ -5107,7 +5127,7 @@ widgets and re-derive switch/theme states without a re-render
 _updateThemeUI(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:208
+Defined in: website/components/dialogs/PreferencesModal.tsx:210
 
 Syncs the theme slider widget with the store's theme.
 
@@ -5123,7 +5143,7 @@ Syncs the theme slider widget with the store's theme.
 _updateSwitchesUI(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:214
+Defined in: website/components/dialogs/PreferencesModal.tsx:216
 
 Syncs each switch widget with its pref value.
 
@@ -5139,7 +5159,7 @@ Syncs each switch widget with its pref value.
 onUpdated(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:218
+Defined in: website/components/dialogs/PreferencesModal.tsx:220
 
 #### Returns
 
@@ -5157,7 +5177,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:218
 _bindBackdropEvents(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:231
+Defined in: website/components/dialogs/PreferencesModal.tsx:233
 
 Wires Escape dismissal + the residual-input guard — both bound once on
 the persistent element; everything else is JSX onClick on rendered
@@ -5175,7 +5195,7 @@ controls.
 close(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:249
+Defined in: website/components/dialogs/PreferencesModal.tsx:251
 
 Close flow: play the genie-leave shrink-back-to-trigger animation
 first, THEN commit the closed state — committing early would unmount
@@ -5196,7 +5216,7 @@ render():
   | null;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:269
+Defined in: website/components/dialogs/PreferencesModal.tsx:271
 
 JSX template (delegate — ./preferences/render.tsx).
 

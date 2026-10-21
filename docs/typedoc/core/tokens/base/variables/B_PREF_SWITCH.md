@@ -8,6 +8,6 @@
 const _B_PREF_SWITCH: 'pref-switch'
 ```
 
-Defined in: core/tokens/base.ts:312
+Defined in: core/tokens/base.ts:317
 
 BEM block fragment "b pref switch" — composed by the token groups below into full class names.

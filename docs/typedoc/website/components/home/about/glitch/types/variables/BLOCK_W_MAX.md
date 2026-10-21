@@ -8,6 +8,6 @@
 const _BLOCK_W_MAX: 0.18 = 0.18
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:55
+Defined in: website/components/home/about/glitch/types.ts:56
 
 Block-tear max width (frame-width fraction).

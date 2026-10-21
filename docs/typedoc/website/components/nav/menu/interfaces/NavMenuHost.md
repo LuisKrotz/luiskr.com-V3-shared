@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/menu](../README.md) / NavMenuHost
 
-Defined in: website/components/nav/menu.tsx:25
+Defined in: website/components/nav/menu.tsx:27
 
 Host surface the menu helpers need (satisfied by AppNav).
 
@@ -20,7 +20,7 @@ Host surface the menu helpers need (satisfied by AppNav).
 _navFlags: FlagWebGL[];
 ```
 
-Defined in: website/components/nav/flag.tsx:25
+Defined in: website/components/nav/flag.tsx:27
 
 Live flag widgets (max one — the menu flag).
 
@@ -36,7 +36,7 @@ Live flag widgets (max one — the menu flag).
 _menuFlagCanvasEl: HTMLCanvasElement | null
 ```
 
-Defined in: website/components/nav/flag.tsx:27
+Defined in: website/components/nav/flag.tsx:29
 
 Persistent per-locale flag canvas; rebuilt on locale change.
 
@@ -52,7 +52,7 @@ Persistent per-locale flag canvas; rebuilt on locale change.
 _menuFlagLang: string | null
 ```
 
-Defined in: website/components/nav/flag.tsx:29
+Defined in: website/components/nav/flag.tsx:31
 
 Locale the current flag canvas was built for.
 
@@ -68,7 +68,7 @@ Locale the current flag canvas was built for.
 readonly locale: string;
 ```
 
-Defined in: website/components/nav/flag.tsx:31
+Defined in: website/components/nav/flag.tsx:33
 
 Active locale code.
 
@@ -213,7 +213,7 @@ readonly currentLang:
   | null;
 ```
 
-Defined in: website/components/nav/flag.tsx:33
+Defined in: website/components/nav/flag.tsx:35
 
 The active LANG_OPTIONS entry (code + label + flag cc).
 
@@ -229,7 +229,7 @@ The active LANG_OPTIONS entry (code + label + flag cc).
 _menuOpen: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:27
+Defined in: website/components/nav/menu.tsx:29
 
 Menu overlay open flag.
 
@@ -241,7 +241,7 @@ Menu overlay open flag.
 _menuOpenedAt: number
 ```
 
-Defined in: website/components/nav/menu.tsx:29
+Defined in: website/components/nav/menu.tsx:31
 
 performance.now() of the open transition — feeds the residual-input guard.
 
@@ -253,7 +253,7 @@ performance.now() of the open transition — feeds the residual-input guard.
 _menuClosing: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:31
+Defined in: website/components/nav/menu.tsx:33
 
 Close animation in flight — guards double-close.
 
@@ -265,7 +265,7 @@ Close animation in flight — guards double-close.
 _menuSettled: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:33
+Defined in: website/components/nav/menu.tsx:35
 
 Open animation completed — close X may snap to drawn state.
 
@@ -277,7 +277,7 @@ Open animation completed — close X may snap to drawn state.
 _menuSettleTimer: number | null
 ```
 
-Defined in: website/components/nav/menu.tsx:35
+Defined in: website/components/nav/menu.tsx:37
 
 Settle-delay timer handle; cleared on destroy/close.
 
@@ -291,7 +291,7 @@ _menuBg:
   | null;
 ```
 
-Defined in: website/components/nav/menu.tsx:37
+Defined in: website/components/nav/menu.tsx:39
 
 Live menu-background widget over the fullscreen canvas.
 
@@ -305,7 +305,7 @@ _menuCloseBtn:
   | null;
 ```
 
-Defined in: website/components/nav/menu.tsx:39
+Defined in: website/components/nav/menu.tsx:41
 
 Live close-X widget.
 
@@ -319,7 +319,7 @@ _burgerBtn:
   | null;
 ```
 
-Defined in: website/components/nav/menu.tsx:41
+Defined in: website/components/nav/menu.tsx:43
 
 Live burger widget.
 
@@ -331,7 +331,7 @@ Live burger widget.
 _burgerCanvasEl: HTMLCanvasElement | null
 ```
 
-Defined in: website/components/nav/menu.tsx:43
+Defined in: website/components/nav/menu.tsx:45
 
 Persistent burger canvas (survives re-renders).
 
@@ -343,7 +343,7 @@ Persistent burger canvas (survives re-renders).
 _menuCanvasEl: HTMLCanvasElement | null
 ```
 
-Defined in: website/components/nav/menu.tsx:45
+Defined in: website/components/nav/menu.tsx:47
 
 Persistent menu background canvas.
 
@@ -355,7 +355,7 @@ Persistent menu background canvas.
 _menuCloseCanvasEl: HTMLCanvasElement | null
 ```
 
-Defined in: website/components/nav/menu.tsx:47
+Defined in: website/components/nav/menu.tsx:49
 
 Persistent close-X canvas.
 
@@ -367,7 +367,7 @@ Persistent close-X canvas.
 _onDark: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:49
+Defined in: website/components/nav/menu.tsx:51
 
 True while the nav floats over a dark band (contrast variant).
 
@@ -379,7 +379,7 @@ True while the nav floats over a dark band (contrast variant).
 $(selector): Element | null;
 ```
 
-Defined in: website/components/nav/menu.tsx:51
+Defined in: website/components/nav/menu.tsx:53
 
 Shadow-scoped querySelector.
 
@@ -401,7 +401,7 @@ Shadow-scoped querySelector.
 _updateDom(): void;
 ```
 
-Defined in: website/components/nav/menu.tsx:53
+Defined in: website/components/nav/menu.tsx:55
 
 Triggers a template re-render.
 

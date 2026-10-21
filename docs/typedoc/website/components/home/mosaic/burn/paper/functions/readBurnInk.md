@@ -8,7 +8,7 @@
 function readBurnInk(): BurnInk
 ```
 
-Defined in: website/components/home/mosaic/burn/paper.ts:35
+Defined in: website/components/home/mosaic/burn/paper.ts:36
 
 Resolves the burn palette from the root CSS custom properties — dark
 theme publishes a cyan-blue plasma ramp, light theme an airy
@@ -19,4 +19,4 @@ properties are absent (older stylesheet, non-themed host).
 
 [`BurnInk`](../../types/interfaces/BurnInk.md)
 
-The four-stop combustion ink ramp.
+The combustion ink ramp (embers ×3, scorch, smoke).

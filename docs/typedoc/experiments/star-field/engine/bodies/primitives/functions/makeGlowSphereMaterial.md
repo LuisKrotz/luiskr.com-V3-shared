@@ -8,7 +8,7 @@
 function makeGlowSphereMaterial(THREE, deps, colorHex, tex, rimTint, falloff): Material
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:68
+Defined in: experiments/star-field/engine/bodies/primitives.ts:80
 
 Luminous-sphere node material — a star's disc must not read as a flat
 polygon. The fresnel rim `(1 − |view·n|)^falloff` mixes the body's

@@ -1,17 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/motion/carousel](../README.md) / CAROUSEL\_TIMING
 
 ```ts
 const CAROUSEL_TIMING: Readonly<{
-  AUTOPLAY_DURATION: 5000;
-  TELEPORT_DELAY: 420;
-  NAVIGATION_SETTLE_DELAY: 400;
-  SCROLL_DEBOUNCE_MS: 150;
-  RING_REGRESS_STEP: 0.04;
-}>;
+  AUTOPLAY_DURATION: 5000
+  TELEPORT_DELAY: 1100
+  NAVIGATION_SETTLE_DELAY: 1400
+  SCROLL_DEBOUNCE_MS: 150
+  RING_REGRESS_STEP: 0.04
+}>
 ```
 
 Defined in: core/tokens/motion/carousel.ts:12

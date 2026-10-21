@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/render](../README.md) / renderMosaic
 
 ```ts
-function renderMosaic(host): Element;
+function renderMosaic(host): Element
 ```
 
-Defined in: website/components/home/mosaic/render.tsx:117
+Defined in: website/components/home/mosaic/render.tsx:131
 
 JSX template for the component's shadow DOM.
 

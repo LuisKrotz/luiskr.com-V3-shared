@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/safari/types](../README.md) / PatchableProto
 
@@ -24,7 +24,7 @@ Defined in: core/safari/types.ts:47
 
 `void`
 
-***
+---
 
 ### \_measureFit?
 
@@ -38,7 +38,7 @@ Defined in: core/safari/types.ts:48
 
 `void`
 
-***
+---
 
 ### onMounted?
 
@@ -52,7 +52,7 @@ Defined in: core/safari/types.ts:49
 
 `void`
 
-***
+---
 
 ### onDestroy?
 
@@ -66,7 +66,7 @@ Defined in: core/safari/types.ts:50
 
 `void`
 
-***
+---
 
 ### loadHighRes?
 
@@ -80,7 +80,7 @@ Defined in: core/safari/types.ts:51
 
 `void`
 
-***
+---
 
 ### \_updateModalDOM?
 
@@ -89,6 +89,20 @@ optional _updateModalDOM?: () => void;
 ```
 
 Defined in: core/safari/types.ts:52
+
+#### Returns
+
+`void`
+
+---
+
+### \_updateDom?
+
+```ts
+optional _updateDom?: () => void;
+```
+
+Defined in: core/safari/types.ts:53
 
 #### Returns
 

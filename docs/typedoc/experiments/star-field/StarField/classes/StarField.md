@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/star-field/StarField](../README.md) / StarField
 
-Defined in: experiments/star-field/StarField.tsx:81
+Defined in: experiments/star-field/StarField.tsx:90
 
 The StarField — a full-viewport explorable star chart.
 
@@ -20,7 +20,7 @@ The StarField — a full-viewport explorable star chart.
 new StarField(): StarField;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:106
+Defined in: experiments/star-field/StarField.tsx:117
 
 #### Returns
 
@@ -185,7 +185,7 @@ _engine:
   | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:82
+Defined in: experiments/star-field/StarField.tsx:91
 
 ---
 
@@ -195,7 +195,7 @@ Defined in: experiments/star-field/StarField.tsx:82
 _canvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:83
+Defined in: experiments/star-field/StarField.tsx:92
 
 ---
 
@@ -205,7 +205,7 @@ Defined in: experiments/star-field/StarField.tsx:83
 _isInitializing: boolean = false
 ```
 
-Defined in: experiments/star-field/StarField.tsx:84
+Defined in: experiments/star-field/StarField.tsx:93
 
 ---
 
@@ -215,7 +215,7 @@ Defined in: experiments/star-field/StarField.tsx:84
 _sfReady: boolean = false
 ```
 
-Defined in: experiments/star-field/StarField.tsx:85
+Defined in: experiments/star-field/StarField.tsx:94
 
 ---
 
@@ -225,7 +225,7 @@ Defined in: experiments/star-field/StarField.tsx:85
 _sfFailed: boolean = false
 ```
 
-Defined in: experiments/star-field/StarField.tsx:86
+Defined in: experiments/star-field/StarField.tsx:95
 
 ---
 
@@ -235,7 +235,7 @@ Defined in: experiments/star-field/StarField.tsx:86
 _fallbackDispose: (() => void) | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:87
+Defined in: experiments/star-field/StarField.tsx:96
 
 ---
 
@@ -245,7 +245,7 @@ Defined in: experiments/star-field/StarField.tsx:87
 _navOpen: boolean = false
 ```
 
-Defined in: experiments/star-field/StarField.tsx:88
+Defined in: experiments/star-field/StarField.tsx:97
 
 ---
 
@@ -255,7 +255,7 @@ Defined in: experiments/star-field/StarField.tsx:88
 _instructionsOpen: boolean = false
 ```
 
-Defined in: experiments/star-field/StarField.tsx:89
+Defined in: experiments/star-field/StarField.tsx:98
 
 ---
 
@@ -265,7 +265,7 @@ Defined in: experiments/star-field/StarField.tsx:89
 _search: string = ''
 ```
 
-Defined in: experiments/star-field/StarField.tsx:90
+Defined in: experiments/star-field/StarField.tsx:99
 
 ---
 
@@ -275,7 +275,7 @@ Defined in: experiments/star-field/StarField.tsx:90
 _selectedId: string | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:91
+Defined in: experiments/star-field/StarField.tsx:100
 
 ---
 
@@ -285,7 +285,7 @@ Defined in: experiments/star-field/StarField.tsx:91
 _dossier: SFDossier | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:92
+Defined in: experiments/star-field/StarField.tsx:101
 
 ---
 
@@ -295,7 +295,7 @@ Defined in: experiments/star-field/StarField.tsx:92
 _dossierLoading: boolean = false
 ```
 
-Defined in: experiments/star-field/StarField.tsx:93
+Defined in: experiments/star-field/StarField.tsx:102
 
 ---
 
@@ -305,7 +305,7 @@ Defined in: experiments/star-field/StarField.tsx:93
 _liveText: string = ''
 ```
 
-Defined in: experiments/star-field/StarField.tsx:94
+Defined in: experiments/star-field/StarField.tsx:103
 
 ---
 
@@ -315,7 +315,7 @@ Defined in: experiments/star-field/StarField.tsx:94
 _lastLocale: string | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:95
+Defined in: experiments/star-field/StarField.tsx:104
 
 ---
 
@@ -325,7 +325,7 @@ Defined in: experiments/star-field/StarField.tsx:95
 translations: Record<string, unknown> | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:96
+Defined in: experiments/star-field/StarField.tsx:105
 
 ---
 
@@ -335,7 +335,7 @@ Defined in: experiments/star-field/StarField.tsx:96
 _onKeyDown: ((e) => void) | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:97
+Defined in: experiments/star-field/StarField.tsx:106
 
 ---
 
@@ -347,7 +347,7 @@ _regManifest:
   | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:98
+Defined in: experiments/star-field/StarField.tsx:107
 
 ---
 
@@ -357,7 +357,7 @@ Defined in: experiments/star-field/StarField.tsx:98
 _regLoading: boolean = false
 ```
 
-Defined in: experiments/star-field/StarField.tsx:99
+Defined in: experiments/star-field/StarField.tsx:108
 
 ---
 
@@ -367,7 +367,7 @@ Defined in: experiments/star-field/StarField.tsx:99
 _regLoaded: Map<string, number>
 ```
 
-Defined in: experiments/star-field/StarField.tsx:100
+Defined in: experiments/star-field/StarField.tsx:109
 
 ---
 
@@ -377,7 +377,7 @@ Defined in: experiments/star-field/StarField.tsx:100
 _regRecords: Map<string, SFRegistryRecord[]>
 ```
 
-Defined in: experiments/star-field/StarField.tsx:101
+Defined in: experiments/star-field/StarField.tsx:110
 
 ---
 
@@ -389,7 +389,7 @@ _regSearch:
   | null = null;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:102
+Defined in: experiments/star-field/StarField.tsx:111
 
 ---
 
@@ -399,7 +399,7 @@ Defined in: experiments/star-field/StarField.tsx:102
 _regSearching: boolean = false
 ```
 
-Defined in: experiments/star-field/StarField.tsx:103
+Defined in: experiments/star-field/StarField.tsx:112
 
 ---
 
@@ -409,7 +409,27 @@ Defined in: experiments/star-field/StarField.tsx:103
 _regQuery: string = ''
 ```
 
-Defined in: experiments/star-field/StarField.tsx:104
+Defined in: experiments/star-field/StarField.tsx:113
+
+---
+
+### \_names
+
+```ts
+_names: SFBodyNames | null = null;
+```
+
+Defined in: experiments/star-field/StarField.tsx:114
+
+---
+
+### \_namesReady
+
+```ts
+_namesReady: Promise<unknown>
+```
+
+Defined in: experiments/star-field/StarField.tsx:115
 
 ---
 
@@ -4960,7 +4980,7 @@ Render result from render().
 _getCanvasEl(): HTMLCanvasElement;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:112
+Defined in: experiments/star-field/StarField.tsx:123
 
 The render canvas the engine draws into — kept across re-renders.
 
@@ -4976,7 +4996,7 @@ The render canvas the engine draws into — kept across re-renders.
 onMounted(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:126
+Defined in: experiments/star-field/StarField.tsx:137
 
 Lifecycle: subscribes, mounts the canvas, loads labels, boots the engine.
 
@@ -4996,7 +5016,7 @@ Lifecycle: subscribes, mounts the canvas, loads labels, boots the engine.
 onUpdated(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:155
+Defined in: experiments/star-field/StarField.tsx:172
 
 Lifecycle: re-mounts the canvas after re-render + re-inits if needed.
 
@@ -5016,7 +5036,7 @@ Lifecycle: re-mounts the canvas after re-render + re-inits if needed.
 onDestroy(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:169
+Defined in: experiments/star-field/StarField.tsx:191
 
 Lifecycle: destroys the engine and unbinds the Escape handler.
 
@@ -5036,7 +5056,7 @@ Lifecycle: destroys the engine and unbinds the Escape handler.
 onStoreUpdate(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:195
+Defined in: experiments/star-field/StarField.tsx:217
 
 Re-fetches labels + re-derives the open dossier on locale change.
 
@@ -5056,7 +5076,7 @@ Re-fetches labels + re-derives the open dossier on locale change.
 _loadTranslations(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:207
+Defined in: experiments/star-field/StarField.tsx:231
 
 Loads the star-field label translations via SWR.
 
@@ -5072,7 +5092,7 @@ Loads the star-field label translations via SWR.
 _applyTranslations(val): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:213
+Defined in: experiments/star-field/StarField.tsx:237
 
 Stores the fetched pages/star-field node and re-renders.
 
@@ -5088,13 +5108,91 @@ Stores the fetched pages/star-field node and re-renders.
 
 ---
 
+### \_loadBodyNames()
+
+```ts
+_loadBodyNames(): void;
+```
+
+Defined in: experiments/star-field/StarField.tsx:250
+
+Loads the locale body-name table (`data/<locale>/names.json`) —
+cached per locale by dossier.ts. On resolve the drawer re-renders
+localized rows and the open selection's URL segment is re-synced so
+a selection made before the map landed still gets its translated
+route name. `_namesReady` lets `_applyDeepLink`/`onRouteParamChange`
+defer slug resolution until the table exists.
+
+#### Returns
+
+`void`
+
+---
+
+### \_resolveBodyParam()
+
+```ts
+_resolveBodyParam(param): string | null;
+```
+
+Defined in: experiments/star-field/StarField.tsx:268
+
+Resolves a route `body` segment to a catalog id — accepts the raw
+id (`vesta`), a registry id (`star-NNNNNN`), or a slugified
+localized name from the loaded names table (`via-lactea`).
+
+#### Parameters
+
+##### param
+
+`string` \| `null` \| `undefined`
+
+The `body` route param.
+
+#### Returns
+
+`string` \| `null`
+
+The catalog id, or null when unresolvable.
+
+---
+
+### \_slugForId()
+
+```ts
+_slugForId(id): string;
+```
+
+Defined in: experiments/star-field/StarField.tsx:285
+
+Route segment for a body — the slugified localized name once the
+names table has landed (`Via Láctea` → `via-lactea`), the raw id
+before. The raw id is itself a valid segment (slugify folds it to
+itself), so a pre-map selection stays resolvable.
+
+#### Parameters
+
+##### id
+
+`string`
+
+Catalog body id.
+
+#### Returns
+
+`string`
+
+The URL segment to write.
+
+---
+
 ### \_updateLoader()
 
 ```ts
 _updateLoader(msg, pct): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:219
+Defined in: experiments/star-field/StarField.tsx:293
 
 Mirrors engine bootstrap progress into the loader overlay.
 
@@ -5120,7 +5218,7 @@ Mirrors engine bootstrap progress into the loader overlay.
 _initEngine(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:225
+Defined in: experiments/star-field/StarField.tsx:299
 
 Creates the engine with ready/select/approach/hover callbacks.
 
@@ -5136,7 +5234,7 @@ Creates the engine with ready/select/approach/hover callbacks.
 _dismissLoader(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:231
+Defined in: experiments/star-field/StarField.tsx:305
 
 Hides the loading overlay after the first usable frame.
 
@@ -5152,7 +5250,7 @@ Hides the loading overlay after the first usable frame.
 _bindKeys(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:242
+Defined in: experiments/star-field/StarField.tsx:316
 
 Binds the document-level keyboard map — Escape dismisses (panel,
 then drawer) and the arrow keys orbit the camera, so the chart is
@@ -5171,7 +5269,7 @@ view holds focus.
 _setSearch(q): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:283
+Defined in: experiments/star-field/StarField.tsx:357
 
 Search-filter setter — re-renders the navigator list narrowed to
 bodies whose catalog name or id contains the query (case-folded),
@@ -5199,7 +5297,7 @@ Raw input value from the drawer search field.
 _ensureRegistry(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:319
+Defined in: experiments/star-field/StarField.tsx:393
 
 Lazily resolves the registry manifest — fired the first time the
 drawer opens or a search starts, so the 139k index metadata costs
@@ -5217,7 +5315,7 @@ nothing for users who never browse the catalogue.
 _loadMoreRegistry(kind): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:340
+Defined in: experiments/star-field/StarField.tsx:414
 
 Incremental catalogue browsing — fetches the next 1,000-record
 shard for a kind and appends it to the drawer's loaded list. Each
@@ -5244,7 +5342,7 @@ Registry kind (`star`/`exoplanet`/`dso`).
 _toggleInstructions(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:372
+Defined in: experiments/star-field/StarField.tsx:437
 
 Toggles the mobile instructions modal.
 
@@ -5260,7 +5358,7 @@ Toggles the mobile instructions modal.
 _closeInstructions(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:379
+Defined in: experiments/star-field/StarField.tsx:444
 
 Closes the mobile instructions modal.
 
@@ -5276,7 +5374,7 @@ Closes the mobile instructions modal.
 _toggleNav(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:389
+Defined in: experiments/star-field/StarField.tsx:454
 
 Opens the drawer and starts the manifest fetch in one gesture.
 
@@ -5292,7 +5390,7 @@ Opens the drawer and starts the manifest fetch in one gesture.
 _matchesSearch(def): boolean;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:405
+Defined in: experiments/star-field/StarField.tsx:470
 
 Drawer filter predicate — matches on catalog name or id; an empty
 query passes everything.
@@ -5323,7 +5421,7 @@ Catalog entry under test.
 _selectBody(id): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:417
+Defined in: experiments/star-field/StarField.tsx:487
 
 Selection entry point — shared by nav buttons and canvas picking:
 loads the dossier panel and flies the camera to the body.
@@ -5348,7 +5446,7 @@ Catalog body id.
 _closePanel(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:443
+Defined in: experiments/star-field/StarField.tsx:513
 
 Closes the dossier panel and clears the selection.
 
@@ -5364,7 +5462,7 @@ Closes the dossier panel and clears the selection.
 _baseStarPath(): string;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:461
+Defined in: experiments/star-field/StarField.tsx:531
 
 Current-route base path — the star-field URL minus a trailing
 `/<body>` segment, so deep-link navigation always composes from the
@@ -5384,12 +5482,14 @@ The chart base path in the active locale.
 _syncUrl(id): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:480
+Defined in: experiments/star-field/StarField.tsx:552
 
 Keeps the address bar in sync with the selection — selecting pushes
-`…/<body>` so Back returns to the chart, closing returns to the base
-chart URL. Skips when the current route already carries the target
-so the param-change echo (`onRouteParamChange`) cannot loop.
+`…/<localized-slug>` (the slugified translated body name once the
+names table has landed, the raw id before) so Back returns to the
+chart, closing returns to the base chart URL. Skips when the
+current route already carries the target so the param-change echo
+(`onRouteParamChange`) cannot loop.
 
 #### Parameters
 
@@ -5411,7 +5511,7 @@ Newly selected body id, or null after close.
 onRouteParamChange(_route): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:500
+Defined in: experiments/star-field/StarField.tsx:574
 
 Router param echo — same-view navigation delivers the new descriptor
 here: a valid `body` param selects it (idempotent on repeat), its
@@ -5440,7 +5540,7 @@ The destination descriptor (unused — reads
 _applyDeepLink(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:523
+Defined in: experiments/star-field/StarField.tsx:610
 
 Deep-link entry — after the engine reports ready, selects the body
 named in the URL (flies the camera + opens the dossier). Defaults
@@ -5458,7 +5558,7 @@ to the Sun when no specific body was deep-linked.
 _takeScreenshot(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:533
+Defined in: experiments/star-field/StarField.tsx:627
 
 Downloads the current frame as a PNG.
 
@@ -5474,7 +5574,7 @@ Downloads the current frame as a PNG.
 _flyHome(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:541
+Defined in: experiments/star-field/StarField.tsx:635
 
 Returns the camera to the overview pose.
 
@@ -5490,7 +5590,7 @@ Returns the camera to the overview pose.
 _handleHover(id): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:553
+Defined in: experiments/star-field/StarField.tsx:647
 
 Hover announce — updates the aria-live HUD text when the pointer
 crosses a body so screen readers and the HUD chip both learn it.
@@ -5515,7 +5615,7 @@ Hovered body id, or null on leaving.
 _syncTip(id, text): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:593
+Defined in: experiments/star-field/StarField.tsx:691
 
 Tooltip label sync — writes `{name} · {dist}` into the leader-line
 tooltip and shows it while a body is hovered; hides it on leave.
@@ -5552,7 +5652,7 @@ _handleHoverMove(
 ): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:632
+Defined in: experiments/star-field/StarField.tsx:741
 
 Per-frame hover tracking — the engine reports the hovered body's
 projected canvas-space pixel position every tick; the tooltip root
@@ -5606,7 +5706,7 @@ Outward direction in degrees for the leader-line arrow.
 _hintBody(id, rec?): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:663
+Defined in: experiments/star-field/StarField.tsx:772
 
 Navigator-hover position hint — while a catalog row is hovered or
 focused the engine reports that body's projected screen position
@@ -5639,7 +5739,7 @@ Registry record — passed only for shard ids (`star-NNNNNN`…).
 _clearHint(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:669
+Defined in: experiments/star-field/StarField.tsx:778
 
 Clears the navigator-hover hint when the row loses pointer/focus.
 
@@ -5655,7 +5755,7 @@ Clears the navigator-hover hint when the row loses pointer/focus.
 _announce(id): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:675
+Defined in: experiments/star-field/StarField.tsx:784
 
 Announces a selection through the same live region.
 
@@ -5677,10 +5777,14 @@ Announces a selection through the same live region.
 _updateDom(): void;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:689
+Defined in: experiments/star-field/StarField.tsx:802
 
-Re-renders the component template while preserving focus and cursor
-position if the search input was active, preventing autocomplete blur.
+Re-renders the component template while preserving three pieces of
+transient UI state that the wholesale shadow-DOM rebuild would drop:
+the search input's focus and cursor (autocomplete blur), and the
+navigator panel's scroll offset — without the carry, any state
+change (selection, dossier load, manifest arrival) bounces the
+drawer list back to its top.
 
 #### Returns
 
@@ -5698,7 +5802,7 @@ position if the search input was active, preventing autocomplete blur.
 render(): Element;
 ```
 
-Defined in: experiments/star-field/StarField.tsx:715
+Defined in: experiments/star-field/StarField.tsx:836
 
 Subclasses render() to return a JSX DOM Node or HTML string for the content area.
 The base implementation returns an empty string so instantiating the base

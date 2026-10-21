@@ -8,6 +8,6 @@
 const _FLECK_LIFE_MIN: 0.5 = 0.5
 ```
 
-Defined in: website/components/home/mosaic/burn/tuning.ts:57
+Defined in: website/components/home/mosaic/burn/tuning.ts:62
 
 Fleck lifetime floor — char flecks outlast embers (they tumble).

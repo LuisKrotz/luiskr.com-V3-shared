@@ -11,6 +11,8 @@
 - [observeResize](functions/observeResize.md)
 - [liveImg](functions/liveImg.md)
 - [armGlitch](functions/armGlitch.md)
+- [armCtx2d](functions/armCtx2d.md)
+- [dropSession](functions/dropSession.md)
 - [healSession](functions/healSession.md)
 - [tick](functions/tick.md)
 - [poll](functions/poll.md)

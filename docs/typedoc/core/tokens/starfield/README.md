@@ -18,6 +18,12 @@ Re-exports [SF_KINDS](kinds/variables/SF_KINDS.md)
 
 ---
 
+### SF\_SURFACES
+
+Re-exports [SF_SURFACES](kinds/variables/SF_SURFACES.md)
+
+---
+
 ### SF\_ACTIONS
 
 Re-exports [SF_ACTIONS](kinds/variables/SF_ACTIONS.md)
@@ -114,6 +120,12 @@ Re-exports [SF_NEBULA_DEPTH](params/bodies/variables/SF_NEBULA_DEPTH.md)
 
 ---
 
+### SF\_COMET
+
+Re-exports [SF_COMET](params/bodies/variables/SF_COMET.md)
+
+---
+
 ### SF\_SPIRAL
 
 Re-exports [SF_SPIRAL](params/spiral/variables/SF_SPIRAL.md)
@@ -192,6 +204,12 @@ Re-exports [SF_METEOR](params/weather/variables/SF_METEOR.md)
 
 ---
 
+### SF\_PLUME
+
+Re-exports [SF_PLUME](params/weather/variables/SF_PLUME.md)
+
+---
+
 ### SF\_TEXTURES
 
 Re-exports [SF_TEXTURES](textures/variables/SF_TEXTURES.md)
@@ -201,6 +219,12 @@ Re-exports [SF_TEXTURES](textures/variables/SF_TEXTURES.md)
 ### SF\_DATA\_BASE
 
 Re-exports [SF_DATA_BASE](textures/variables/SF_DATA_BASE.md)
+
+---
+
+### SF\_NAMES\_FILE
+
+Re-exports [SF_NAMES_FILE](textures/variables/SF_NAMES_FILE.md)
 
 ---
 

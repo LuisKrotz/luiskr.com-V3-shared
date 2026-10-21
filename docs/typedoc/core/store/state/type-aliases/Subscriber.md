@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / Subscriber
 
 ```ts
-type Subscriber = (_state) => void;
+type Subscriber = (_state) => void
 ```
 
-Defined in: core/store/state.ts:139
+Defined in: core/store/state.ts:154
 
 Subscriber callback — invoked by notify() with the state bag after every
 commit that didn't suppress notification.

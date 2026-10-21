@@ -8,7 +8,7 @@
 function makePickProxy(THREE, radius): Object3D
 ```
 
-Defined in: experiments/star-field/engine/bodies/primitives.ts:42
+Defined in: experiments/star-field/engine/bodies/primitives.ts:54
 
 Invisible pick bubble for bodies too small to hit reliably — planets
 and moons under `SF_DETAIL.PICK_MIN` world units subtend a handful of

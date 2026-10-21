@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/handlers](../README.md) / handleAbout
 
 ```ts
-function handleAbout(host, e?): void;
+function handleAbout(host, e?): void
 ```
 
-Defined in: website/components/nav/handlers.ts:72
+Defined in: website/components/nav/handlers.ts:77
 
 About link click: routes to the localized about slug.
 

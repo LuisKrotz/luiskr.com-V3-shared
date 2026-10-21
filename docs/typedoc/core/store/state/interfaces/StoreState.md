@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / StoreState
 
-Defined in: core/store/state.ts:98
+Defined in: core/store/state.ts:113
 
 The whole reactive state bag. Field naming follows the shape the legacy
 CMS data already uses (clickortap, marqueeamount, portfoliolist are
@@ -16,207 +16,207 @@ the translation payload contract).
 ### clickortap
 
 ```ts
-clickortap: string;
-```
-
-Defined in: core/store/state.ts:99
-
-***
-
-### inputMethod
-
-```ts
-inputMethod: string;
-```
-
-Defined in: core/store/state.ts:100
-
-***
-
-### actionTextMap
-
-```ts
-actionTextMap: ActionTextMap;
-```
-
-Defined in: core/store/state.ts:101
-
-***
-
-### has\_touch
-
-```ts
-has_touch: boolean;
-```
-
-Defined in: core/store/state.ts:102
-
-***
-
-### lang
-
-```ts
-lang: LangState;
-```
-
-Defined in: core/store/state.ts:103
-
-***
-
-### mentions
-
-```ts
-mentions: MentionsState;
-```
-
-Defined in: core/store/state.ts:104
-
-***
-
-### marqueeamount
-
-```ts
-marqueeamount: number;
-```
-
-Defined in: core/store/state.ts:105
-
-***
-
-### modalObject
-
-```ts
-modalObject: ModalObject;
-```
-
-Defined in: core/store/state.ts:106
-
-***
-
-### origin
-
-```ts
-origin: string;
-```
-
-Defined in: core/store/state.ts:107
-
-***
-
-### page
-
-```ts
-page: PagePos;
-```
-
-Defined in: core/store/state.ts:108
-
-***
-
-### showhover
-
-```ts
-showhover: boolean;
-```
-
-Defined in: core/store/state.ts:109
-
-***
-
-### storage
-
-```ts
-storage: string;
-```
-
-Defined in: core/store/state.ts:110
-
-***
-
-### reducedMotion
-
-```ts
-reducedMotion: boolean;
-```
-
-Defined in: core/store/state.ts:111
-
-***
-
-### theme
-
-```ts
-theme: string;
-```
-
-Defined in: core/store/state.ts:112
-
-***
-
-### showStatsForNerds
-
-```ts
-showStatsForNerds: boolean;
-```
-
-Defined in: core/store/state.ts:113
-
-***
-
-### showGrid
-
-```ts
-showGrid: boolean;
+clickortap: string
 ```
 
 Defined in: core/store/state.ts:114
 
-***
+---
 
-### videoAutoplay
+### inputMethod
 
 ```ts
-videoAutoplay: boolean;
+inputMethod: string
 ```
 
 Defined in: core/store/state.ts:115
 
-***
+---
 
-### effectiveTheme
+### actionTextMap
 
 ```ts
-effectiveTheme: string;
+actionTextMap: ActionTextMap
 ```
 
 Defined in: core/store/state.ts:116
 
-***
+---
 
-### preferencesOpen
+### has\_touch
 
 ```ts
-preferencesOpen: boolean;
+has_touch: boolean
 ```
 
 Defined in: core/store/state.ts:117
 
-***
+---
 
-### langDialogOpen
+### lang
 
 ```ts
-langDialogOpen: boolean;
+lang: LangState
 ```
 
 Defined in: core/store/state.ts:118
 
-***
+---
+
+### mentions
+
+```ts
+mentions: MentionsState
+```
+
+Defined in: core/store/state.ts:119
+
+---
+
+### marqueeamount
+
+```ts
+marqueeamount: number
+```
+
+Defined in: core/store/state.ts:120
+
+---
+
+### modalObject
+
+```ts
+modalObject: ModalObject
+```
+
+Defined in: core/store/state.ts:121
+
+---
+
+### origin
+
+```ts
+origin: string
+```
+
+Defined in: core/store/state.ts:122
+
+---
+
+### page
+
+```ts
+page: PagePos
+```
+
+Defined in: core/store/state.ts:123
+
+---
+
+### showhover
+
+```ts
+showhover: boolean
+```
+
+Defined in: core/store/state.ts:124
+
+---
+
+### storage
+
+```ts
+storage: string
+```
+
+Defined in: core/store/state.ts:125
+
+---
+
+### reducedMotion
+
+```ts
+reducedMotion: boolean
+```
+
+Defined in: core/store/state.ts:126
+
+---
+
+### theme
+
+```ts
+theme: string
+```
+
+Defined in: core/store/state.ts:127
+
+---
+
+### showStatsForNerds
+
+```ts
+showStatsForNerds: boolean
+```
+
+Defined in: core/store/state.ts:128
+
+---
+
+### showGrid
+
+```ts
+showGrid: boolean
+```
+
+Defined in: core/store/state.ts:129
+
+---
+
+### videoAutoplay
+
+```ts
+videoAutoplay: boolean
+```
+
+Defined in: core/store/state.ts:130
+
+---
+
+### effectiveTheme
+
+```ts
+effectiveTheme: string
+```
+
+Defined in: core/store/state.ts:131
+
+---
+
+### preferencesOpen
+
+```ts
+preferencesOpen: boolean
+```
+
+Defined in: core/store/state.ts:132
+
+---
+
+### langDialogOpen
+
+```ts
+langDialogOpen: boolean
+```
+
+Defined in: core/store/state.ts:133
+
+---
 
 ### modalOrigin
 
 ```ts
-modalOrigin: 
+modalOrigin:
   | {
   x: number;
   y: number;
@@ -224,9 +224,9 @@ modalOrigin:
   | null;
 ```
 
-Defined in: core/store/state.ts:119
+Defined in: core/store/state.ts:134
 
-***
+---
 
 ### portfoliolist
 
@@ -234,4 +234,4 @@ Defined in: core/store/state.ts:119
 portfoliolist: unknown[];
 ```
 
-Defined in: core/store/state.ts:120
+Defined in: core/store/state.ts:135

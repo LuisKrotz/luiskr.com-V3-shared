@@ -8,7 +8,7 @@
 function teardownBurn(s): void
 ```
 
-Defined in: website/components/home/mosaic/burn/loop.ts:23
+Defined in: website/components/home/mosaic/burn/loop.ts:24
 
 Final session teardown — restores the DOM title's ink, drops the burn
 canvas + rewrite slot, and detaches the session from its card. Runs

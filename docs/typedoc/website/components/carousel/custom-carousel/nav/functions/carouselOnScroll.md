@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/nav](../README.md) / carouselOnScroll
 
 ```ts
-function carouselOnScroll(c): void;
+function carouselOnScroll(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:256
+Defined in: website/components/carousel/custom-carousel/nav.ts:339
 
 Scroll handler — debounces SCROLL_DEBOUNCE_MS (150ms) then runs the
 clone-teleport check. Skipped while isNavigating (a programmatic scroll

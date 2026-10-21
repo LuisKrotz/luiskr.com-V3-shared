@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/flag](../README.md) / NavFlagHost
 
-Defined in: website/components/nav/flag.tsx:23
+Defined in: website/components/nav/flag.tsx:25
 
 Host surface the flag helpers need (satisfied by AppNav).
 
@@ -20,35 +20,35 @@ Host surface the flag helpers need (satisfied by AppNav).
 _navFlags: FlagWebGL[];
 ```
 
-Defined in: website/components/nav/flag.tsx:25
+Defined in: website/components/nav/flag.tsx:27
 
 Live flag widgets (max one — the menu flag).
 
-***
+---
 
 ### \_menuFlagCanvasEl
 
 ```ts
-_menuFlagCanvasEl: HTMLCanvasElement | null;
-```
-
-Defined in: website/components/nav/flag.tsx:27
-
-Persistent per-locale flag canvas; rebuilt on locale change.
-
-***
-
-### \_menuFlagLang
-
-```ts
-_menuFlagLang: string | null;
+_menuFlagCanvasEl: HTMLCanvasElement | null
 ```
 
 Defined in: website/components/nav/flag.tsx:29
 
+Persistent per-locale flag canvas; rebuilt on locale change.
+
+---
+
+### \_menuFlagLang
+
+```ts
+_menuFlagLang: string | null
+```
+
+Defined in: website/components/nav/flag.tsx:31
+
 Locale the current flag canvas was built for.
 
-***
+---
 
 ### locale
 
@@ -56,16 +56,16 @@ Locale the current flag canvas was built for.
 readonly locale: string;
 ```
 
-Defined in: website/components/nav/flag.tsx:31
+Defined in: website/components/nav/flag.tsx:33
 
 Active locale code.
 
-***
+---
 
 ### currentLang
 
 ```ts
-readonly currentLang: 
+readonly currentLang:
   | {
   code: "en";
   label: string;
@@ -197,6 +197,6 @@ readonly currentLang:
   | null;
 ```
 
-Defined in: website/components/nav/flag.tsx:33
+Defined in: website/components/nav/flag.tsx:35
 
 The active LANG_OPTIONS entry (code + label + flag cc).

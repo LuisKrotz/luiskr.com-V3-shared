@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/widgets/switch-slider/render](../README.md) / renderCanvas2D
 
 ```ts
-function renderCanvas2D(host, now): void;
+function renderCanvas2D(host, now): void
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider/render.ts:98
+Defined in: core/utils/canvas/widgets/switch-slider/render.ts:136
 
 Per-frame Canvas2D fallback render — same visual language as the shader.
 

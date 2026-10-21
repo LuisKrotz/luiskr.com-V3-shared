@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/nav](../README.md) / scrollToElement
 
 ```ts
-function scrollToElement(host, el): void;
+function scrollToElement(host, el): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:20
+Defined in: website/components/carousel/awards-carousel/nav.ts:83
 
 Smooth-centers an element in the track. Formula (same geometry as
 CustomCarousel): scrollLeft + (el.left − track.left) positions the

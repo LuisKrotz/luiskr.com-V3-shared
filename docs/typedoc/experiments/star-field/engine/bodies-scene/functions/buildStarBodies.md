@@ -8,7 +8,7 @@
 function buildStarBodies(s, THREE, deps, defs, texMap, glowTex): void
 ```
 
-Defined in: experiments/star-field/engine/bodies-scene.ts:65
+Defined in: experiments/star-field/engine/bodies-scene.ts:69
 
 Builds every catalog body into the scene graph: pivots for orbiting
 bodies (rotation.y = phase + t·speed), fixed groups for `pos` bodies,

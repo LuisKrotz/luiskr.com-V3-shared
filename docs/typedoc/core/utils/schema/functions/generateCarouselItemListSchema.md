@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/schema](../README.md) / generateCarouselItemListSchema
 
 ```ts
-function generateCarouselItemListSchema(items?, baseUrl?): Record<string, unknown> | null;
+function generateCarouselItemListSchema(items?, baseUrl?): Record<string, unknown> | null
 ```
 
-Defined in: core/utils/schema.ts:74
+Defined in: core/utils/schema.ts:118
 
 Generates an ItemList matching Google Carousel rich results guidelines —
 `position` is 1-based per the spec, and `image` is only emitted when the
