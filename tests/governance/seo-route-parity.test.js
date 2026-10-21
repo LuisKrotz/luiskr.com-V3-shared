@@ -504,11 +504,12 @@ describe('SEO route parity', () => {
       '',
       '<article class="reader-content"><main><h1>Stale</h1></main></article>',
       '<main><h1>Stale</h1></main>',
+      '<div class="boot-veil" aria-hidden="true">Luis&nbsp;Krötz</div><article class="reader-content"><main><h1>Stale</h1></main></article>',
     ]) {
       const out = localize(shell(prior), args)
 
       expect(out).toContain(
-        '<div id="app"><article class="reader-content"><main><h1>Privacy Policy</h1></main></article></div>'
+        '<div id="app"><div class="boot-veil" aria-hidden="true">Luis&nbsp;Krötz</div><article class="reader-content"><main><h1>Privacy Policy</h1></main></article></div>'
       )
       expect(out).not.toContain('Stale')
     }

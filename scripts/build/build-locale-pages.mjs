@@ -62,6 +62,15 @@ const SCHEMA_CONTEXT = 'https://schema.org'
 const SHARE_IMAGE = `${SITE_URL}/assets/icons/share.png`
 
 /**
+ * Static boot veil emitted as the first #app child — MUST stay byte-identical
+ * to the veil div in index.html (single element, no nested tags, so the
+ * localize() swap can recognize and re-emit it on every run). It paints a
+ * brand splash before the JS bundle lands; mount()'s replaceChildren on #app
+ * destroys it.
+ */
+const BOOT_VEIL_HTML = '<div class="boot-veil" aria-hidden="true">Luis&nbsp;Krötz</div>'
+
+/**
  * Russian Cyrillic → Latin transliteration — Cyrillic media labels would
  * otherwise slugify to '' and lose their deep-link URL. MUST stay
  * byte-identical to CYRILLIC_SLUG in core/utils/string.ts.
@@ -427,10 +436,13 @@ export function localize(
   // The match covers every prior emission state — clean template
   // (<div id="app"></div>), a previous article-wrapped run, and the legacy
   // bare-<main> shape — so standalone re-runs never keep stale content.
+  // The static boot veil is re-emitted ahead of the article: it paints a
+  // brand splash before the JS bundle lands (early FCP/LCP, no dead dark
+  // frame) and replaceChildren destroys it at mount.
   if (content) {
     out = out.replace(
-      /<div id="app">(?:<article class="reader-content">[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?<\/div>/,
-      `<div id="app"><article class="reader-content">${content}</article></div>`
+      /<div id="app">\s*(?:<div class="boot-veil"[^>]*>[\s\S]*?<\/div>\s*)?(?:<article class="reader-content">[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?\s*<\/div>/,
+      `<div id="app">${BOOT_VEIL_HTML}<article class="reader-content">${content}</article></div>`
     )
   }
 

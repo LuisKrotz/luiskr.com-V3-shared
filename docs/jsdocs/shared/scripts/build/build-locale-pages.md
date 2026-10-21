@@ -9,6 +9,14 @@ Emits per-locale, per-route static index.html files into
 
 ## Members
 
+### `BOOT_VEIL_HTML`
+
+Static boot veil emitted as the first #app child — MUST stay byte-identical
+to the veil div in index.html (single element, no nested tags, so the
+localize() swap can recognize and re-emit it on every run). It paints a
+brand splash before the JS bundle lands; mount()'s replaceChildren on #app
+destroys it.
+
 ### `CYRILLIC_SLUG`
 
 Russian Cyrillic → Latin transliteration — Cyrillic media labels would
