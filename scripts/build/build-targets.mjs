@@ -39,6 +39,7 @@ import {
 } from './build-locale-pages.mjs'
 import { withFsRetry, withFsRetryAsync } from './fs-retry.mjs'
 import { queueCompressedWrite, drainCompressedWrites } from './compress-queue.mjs'
+import { genOnnxModels } from './gen-onnx-models.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..', '..', '..')
@@ -135,6 +136,11 @@ const buildTier = (t, i, first) => {
 }
 
 const viteTiers = buildList.filter((t) => !t.babelFrom)
+
+// ONNX model + ORT runtime artifacts regenerate into website/public
+// BEFORE build 0 — that tier alone copies public/ into dist/, so the
+// ML layer's .onnx graphs and /ort/ wasm must exist by then.
+genOnnxModels()
 
 // Build 0 owns the dist wipe + public copy — it must complete before any
 // parallel sibling writes, or emptyOutDir could erase their early output.

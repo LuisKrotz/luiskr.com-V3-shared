@@ -88,6 +88,10 @@ export const moduleNameMapper = {
     '__mocks__/three-post.js'
   ),
   '^three/examples/jsm/tsl/display/FilmNode\\.js$': path.join(TESTS_DIR, '__mocks__/three-post.js'),
+  // onnxruntime-web is device-bound (67MB wasm, GPU/NPU probes) — every
+  // suite routes it through the recording stub; the ort-engine tails
+  // drive it via __ortState instead of real sessions.
+  '^onnxruntime-web(/.*)?$': path.join(TESTS_DIR, '__mocks__/onnxruntime-web.js'),
 }
 
 /**
