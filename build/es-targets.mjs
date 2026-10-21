@@ -198,6 +198,16 @@ export const POLYFILLS = [
     guard: `typeof Promise === 'function' && typeof Symbol === 'function' && typeof Map === 'function' && typeof Object.assign === 'function'`,
   },
   {
+    name: 'polyfills',
+    entry: 'core/legacy-polyfills/polyfills.js',
+    // iOS 14.x–15.3 baseline shims: structuredClone, Array/String .at,
+    // Object.hasOwn, queueMicrotask, inert. Modern engines (iOS 15.4+,
+    // every evergreen desktop) pass the guard and never fetch the file —
+    // it must NOT ride the tier bundles (Lighthouse counts it as legacy
+    // JavaScript dead weight).
+    guard: `typeof structuredClone === 'function' && typeof Object.hasOwn === 'function' && typeof Array.prototype.at === 'function' && typeof String.prototype.at === 'function' && typeof queueMicrotask === 'function' && (typeof HTMLElement === 'undefined' || 'inert' in HTMLElement.prototype)`,
+  },
+  {
     name: 'fetch',
     entry: 'core/legacy-polyfills/fetch.js',
     guard: `typeof fetch === 'function'`,
@@ -230,7 +240,16 @@ export const POLYFILLS = [
 ]
 
 /** Load order — core shims first, they may be prerequisites of later groups. */
-export const POLYFILL_ORDER = ['es-core', 'fetch', 'dom', 'webcomponents', 'io', 'ro', 'cssvars']
+export const POLYFILL_ORDER = [
+  'es-core',
+  'fetch',
+  'polyfills',
+  'dom',
+  'webcomponents',
+  'io',
+  'ro',
+  'cssvars',
+]
 
 /**
  * Browser identification + per-engine quirks. Order is significant: UA
