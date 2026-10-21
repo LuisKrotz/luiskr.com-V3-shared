@@ -22,3 +22,9 @@ Document-level JS-capability marker — set by the head inline script.
 ### `NO_JS`
 
 Document-level no-JS marker shipped in index.html until JS flips it.
+
+### `INTRO_SKIP`
+
+Document-level intro-skip marker — the head script stamps it when the
+ boot intro already ran this session or reduced-motion disables it, so
+ the statically-emitted loader markup never paints.

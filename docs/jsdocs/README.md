@@ -482,6 +482,7 @@
 |---|---|
 | [`intro-loader-tails-2.test.js`](core\tests\coverage\canvas\loaders/intro-loader-tails-2.test.md) | Split from coverage-tails-4.test.js — covers the "intro-loader tails 2" describe. |
 | [`intro-loader-tails-3.test.js`](core\tests\coverage\canvas\loaders/intro-loader-tails-3.test.md) | Coverage tails for the intro-loader fallback arms: a loader |
+| [`intro-loader-tails-4.test.js`](core\tests\coverage\canvas\loaders/intro-loader-tails-4.test.md) | Covers the static-markup adoption paths — emitted pages |
 | [`intro-loader-tails.test.js`](core\tests\coverage\canvas\loaders/intro-loader-tails.test.md) | Split from coverage-tails-2.test.js — covers the "intro-loader tails" describe. |
 | [`menu-background-wasm-tails.test.js`](core\tests\coverage\canvas\loaders/menu-background-wasm-tails.test.md) | Coverage tail for the WebGPU/wasm menu-background path — |
 | [`menu-software-renderer-tails.test.js`](core\tests\coverage\canvas\loaders/menu-software-renderer-tails.test.md) | Coverage tail for the software-rasterizer rejection in |
@@ -1145,6 +1146,7 @@
 | [`cookies.ts`](core\tokens\selectors/cookies.md) | Cookie banner selector tokens — token group. |
 | [`docs.ts`](core\tokens\selectors/docs.md) | Docs-portal query-selector tokens — grouped subset of |
 | [`draw-text.ts`](core\tokens\selectors/draw-text.md) | DrawText selector tokens — token group. |
+| [`loader.ts`](core\tokens\selectors/loader.md) | Intro loader selector tokens — grouped subset of |
 | [`mosaic.ts`](core\tokens\selectors/mosaic.md) | Home mosaic selector tokens — token group. |
 | [`nav.ts`](core\tokens\selectors/nav.md) | Navigation selector tokens — token group. |
 | [`skeleton.ts`](core\tokens\selectors/skeleton.md) | Skeleton placeholder selector tokens — grouped subset of |
@@ -1945,7 +1947,7 @@
 | [`fs-retry.mjs`](shared\scripts\build/fs-retry.md) | Bounded retry for fs operations that race Windows file locks. |
 | [`generate-sitemap.js`](shared\scripts\build/generate-sitemap.md) | Emits the whole crawl surface under `website/public/meta/`: |
 | [`media-manifest.mjs`](shared\scripts\build/media-manifest.md) | CDN media inventory + best-variant resolution shared by the |
-| [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md) | Firebase `predeploy` step — stamps the IETF-draft |
+| [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md) | Firebase `predeploy` step — stamps the AI-usage opt-out |
 
 ## Entry points
 

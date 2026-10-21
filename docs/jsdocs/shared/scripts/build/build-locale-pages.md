@@ -89,6 +89,7 @@ Rewrites the English shell into a localized document.
 - `@param` {string} [o.image] - route-specific share image (project cover /
 - `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
 - `@param` {string} [o.content] - prerendered body markup injected into
+- `@param` {{title:string,msg:string}} [o.loader] - per-locale APP.loader copy
 
 ### `starMediaDims`
 
@@ -141,6 +142,11 @@ returned so the caller can run its own compress/SW-stamp pass.
 ### `t`
 
 Per-locale lookup with English fallback (mirrors runtime appText).
+
+### `loaderCopyFor`
+
+Per-locale APP.loader copy for the statically-emitted intro-loader
+ veil — title + first stage line (mirrors runtime loaderCopy).
 
 ### `firstPara`
 

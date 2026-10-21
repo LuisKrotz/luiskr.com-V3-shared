@@ -33,7 +33,12 @@ locale's `loader.stages` (site assets/pages copy) as progress climbs.
 
 ### `init`
 
-Builds the overlay DOM + starts the progress sequence.
+Builds or adopts the overlay DOM + starts the progress sequence.
+
+### `buildOverlay`
+
+Builds the overlay DOM from scratch — used when the document did not
+ ship the static loader markup (dev server, non-prerendered shells).
 
 ### `runAnimation`
 

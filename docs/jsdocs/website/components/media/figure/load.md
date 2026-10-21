@@ -27,12 +27,31 @@ bytes arrive (zero-CLS without shipping a real image).
 
 ### (module scope)
 
-Thumb → high-res swap. A detached Image preloads the Q50 variant —
-webp first, jpg on 404 (the "if webp exists" check is the request
-itself, no manifest round-trip); on load the visible element swaps src
-+ gets the loaded class (the CSS crossfade) and the thumb hides. The
-4096²-pixel budget gates the GPU texture upload only — oversized
+Thumb → high-res quality ladder. Detached Image probes climb the
+manifest-proven rungs (q50 → q75 → raw original → uncompressed) — webp
+first, jpg on 404 (the "if webp exists" check is the request itself, no
+manifest round-trip); every confirmed tier republishes the same high
+layer's src, so the painted box upgrades in place and can never tear.
+The 4096²-pixel budget gates the GPU texture upload only — oversized
 sources still fetch and decode (the browser owns that memory), so a
 big file can never pin its card on the blurred thumb.
 Errors mark loaded anyway — a broken image must not pin the skeleton
 shimmer forever.
+
+### `best`
+
+Highest confirmed probe — the bitmap handed to the GPU at chain end.
+
+### `publish`
+
+Publishes a confirmed tier into the visible high layer — the probe
+already holds the bytes, so the src swap paints from cache without a
+reload flash. Re-queries the element each rung because _updateDom
+rebuilds the shadow DOM wholesale between steps.
+
+### `climb`
+
+Probes rung `i` through a detached Image; on confirm the tier paints
+and the climb continues, stopping when the highest proven quality is
+reached. A proven-but-dead webp retries once as jpg; a dead jpg just
+skips to the next rung — the best confirmed tier stays painted.
