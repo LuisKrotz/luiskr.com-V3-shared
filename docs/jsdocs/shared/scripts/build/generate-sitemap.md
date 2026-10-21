@@ -13,6 +13,15 @@ Emits the whole crawl surface under `website/public/meta/`:
 
 XML namespaces emitted on every <urlset>.
 
+### `capSlug`
+
+Caps a media deep-link slug at MEDIA_SLUG_MAX_LENGTH so
+prerendered dist paths stay under Windows MAX_PATH — the cut drops the
+trailing partial word (and a dangling hyphen) so the slug always ends
+on a hyphen boundary. Byte-identical to the cap in mediaSlugSeq
+(core/utils/string.ts) so sitemap <loc>s, emitted pages and the runtime
+resolver agree.
+
 ### `escXml`
 
 Escapes text for XML element bodies (media titles/descriptions).

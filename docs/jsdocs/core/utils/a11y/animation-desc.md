@@ -41,6 +41,14 @@ and purpose in one paragraph.
 - `@param` id ANIMATION_IDS entry.
 - `@returns` The localized longdesc text, or ''.
 
+### `ensureImgRole`
+
+Ensures the element carries `role="img"` so an applied `aria-label`
+is legal on a generic host — an author-provided role is never
+overwritten. Shared by the canvas and generic-element branches.
+
+- `@param` el The animated element.
+
 ### `ensureDescNode`
 
 Finds-or-creates the longdesc node inside `root` and refreshes its

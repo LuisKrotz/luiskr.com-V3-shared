@@ -700,6 +700,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`media-manifest-encode-tails.test.js`](core/tests/coverage/utils/media-manifest-encode-tails.test.md) | Coverage tail for the percent-decoded lookup arm of                          |
 | [`media-manifest-tails-2.test.js`](core/tests/coverage/utils/media-manifest-tails-2.test.md)           | Second coverage tail for utils/media/manifest.ts — the                       |
 | [`media-manifest-tails-3.test.js`](core/tests/coverage/utils/media-manifest-tails-3.test.md)           | Third coverage tail for utils/media/manifest.ts — the                        |
+| [`media-manifest-tails-4.test.js`](core/tests/coverage/utils/media-manifest-tails-4.test.md)           | Fourth coverage tail for utils/media/manifest.ts —                           |
 | [`media-manifest-tails.test.js`](core/tests/coverage/utils/media-manifest-tails.test.md)               | Coverage tail for utils/media/manifest.ts — the runtime gate                 |
 | [`media-tails.test.js`](core/tests/coverage/utils/media-tails.test.md)                                 | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
 | [`media-utils-tails.test.js`](core/tests/coverage/utils/media-utils-tails.test.md)                     | Split from coverage-tails.test.js — covers the "media utils tails" describe. |

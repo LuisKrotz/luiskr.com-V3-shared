@@ -91,4 +91,10 @@ describe('windows path safety', () => {
 
     expect(report('case-insensitive collisions', offenders)).toBe('')
   })
+
+  test('no tracked path exceeds 200 chars (MAX_PATH headroom)', () => {
+    const offenders = paths.filter((p) => p.length > 200)
+
+    expect(report('overlong paths', offenders)).toBe('')
+  })
 })

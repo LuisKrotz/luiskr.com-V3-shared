@@ -26,7 +26,7 @@ import { describe, test, expect } from '@jest/globals'
 import fs from 'node:fs'
 import path from 'node:path'
 import { LANG_SLUGS } from '@core/i18n.js'
-import { PROJECT_ALIASES } from '@core/tokens/routes/aliases.js'
+import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '@core/tokens/routes/aliases.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 import { scanManifest } from '../../build/docs/scan.mjs'
 import { localize } from '../../scripts/build/build-locale-pages.mjs'
@@ -101,6 +101,17 @@ const slugify = (text) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
+/**
+ * Media-slug length cap — byte-for-byte the capSlug in generate-sitemap.js /
+ * build-locale-pages.mjs (mediaSlugSeq in core/utils/string.ts): cuts at
+ * MEDIA_SLUG_MAX_LENGTH then drops the trailing partial word so
+ * prerendered paths stay under Windows MAX_PATH.
+ */
+const capSlug = (base) =>
+  base.length > MEDIA_SLUG_MAX_LENGTH
+    ? base.slice(0, MEDIA_SLUG_MAX_LENGTH).replace(/-[^-]*$/u, '')
+    : base
+
 /** Every {slug,label} media deep link addressable under /<loc>/portfolio/<p>/ —
  * labels (and so slugs) are translated, so each locale yields its own set;
  * project slugs iterate the English table exactly like the generator. */
@@ -117,7 +128,7 @@ const mediaDeepLinks = (loc = 'en') => {
       for (const item of Array.isArray(section) ? section : [section]) {
         for (const m of Array.isArray(item) ? item : [item]) {
           if (m && typeof m === 'object' && m.label && m.src) {
-            const base = slugify(m.label)
+            const base = capSlug(slugify(m.label))
 
             if (!base) continue
 
@@ -127,7 +138,7 @@ const mediaDeepLinks = (loc = 'en') => {
 
             const media = ordinal ? `${base}-${ordinal + 1}` : base
 
-            if (media.length <= 200) out.push(`/portfolio/${slug}/${media}`)
+            out.push(`/portfolio/${slug}/${media}`)
           }
         }
       }

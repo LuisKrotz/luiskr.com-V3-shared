@@ -21,6 +21,15 @@ Media-slug transform — MUST match generate-sitemap.js's slugify byte for
 byte: emitted /portfolio/<slug>/<media> file names have to line up with
 the URLs the sitemap already lists (diacritics fold to ASCII).
 
+### `capSlug`
+
+Caps a media deep-link slug at MEDIA_SLUG_MAX_LENGTH so
+prerendered dist paths stay under Windows MAX_PATH — the cut drops the
+trailing partial word (and a dangling hyphen) so the slug always ends
+on a hyphen boundary. Byte-identical to the cap in mediaSlugSeq
+(core/utils/string.ts) so emitted file names, sitemap <loc>s and the
+runtime resolver agree.
+
 ### `esc`
 
 Escape a string for use inside an HTML attribute or text node.

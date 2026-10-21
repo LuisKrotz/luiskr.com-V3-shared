@@ -2,9 +2,9 @@
 
 Global state modifier class tokens — grouped subset of
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/classes/state.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core/tokens/classes/state.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -14,3 +14,11 @@ Global state modifier class tokens — grouped subset of
 Frozen state class-name map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes
 the token contract immutable at runtime.
+
+### `JS`
+
+Document-level JS-capability marker — set by the head inline script.
+
+### `NO_JS`
+
+Document-level no-JS marker shipped in index.html until JS flips it.

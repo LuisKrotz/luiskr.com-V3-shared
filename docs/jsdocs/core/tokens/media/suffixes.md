@@ -25,6 +25,10 @@ Q50 medium-res suffix
 
 Q100 / uncompressed lossless suffix
 
+### `MOBILE_SUFFIX`
+
+Small-viewport derivative suffix (appended after the quality tag)
+
 ### `EXT`
 
 Static image extension

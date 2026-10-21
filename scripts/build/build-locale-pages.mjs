@@ -45,7 +45,7 @@ import { Buffer } from 'node:buffer'
 import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
-import { PROJECT_ALIASES } from '../../../core/tokens/routes/aliases.ts'
+import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '../../../core/tokens/routes/aliases.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
 import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
 import { scanManifest } from '../../build/docs/scan.mjs'
@@ -117,6 +117,19 @@ const slugify = (text) =>
     .trim()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
+
+/**
+ * Caps a media deep-link slug at MEDIA_SLUG_MAX_LENGTH so
+ * prerendered dist paths stay under Windows MAX_PATH — the cut drops the
+ * trailing partial word (and a dangling hyphen) so the slug always ends
+ * on a hyphen boundary. Byte-identical to the cap in mediaSlugSeq
+ * (core/utils/string.ts) so emitted file names, sitemap <loc>s and the
+ * runtime resolver agree.
+ */
+const capSlug = (base) =>
+  base.length > MEDIA_SLUG_MAX_LENGTH
+    ? base.slice(0, MEDIA_SLUG_MAX_LENGTH).replace(/-[^-]*$/u, '')
+    : base
 
 /** Escape a string for use inside an HTML attribute or text node. */
 const esc = (s) =>
@@ -726,7 +739,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         let deepSlug = ''
 
         if (m.src && m.label) {
-          const b = slugify(m.label)
+          const b = capSlug(slugify(m.label))
           const ordinal = slugSeen.get(b) ?? 0
 
           slugSeen.set(b, ordinal + 1)
@@ -736,7 +749,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
 
         return { m, deepSlug }
       })
-      .filter((e) => e.deepSlug && e.deepSlug.length <= 200)
+      .filter((e) => e.deepSlug)
       .map((e, i) => {
         const { source, thumb, isVideo } = mediaUrls(folder, e.m, mediaManifest)
 
@@ -882,7 +895,11 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
       ? `<video${thumb ? ` poster="${esc(thumb)}"` : ''} controls muted playsinline preload="none"${wh}>${webm ? `<source src="${esc(webm)}" type="video/webm">` : ''}<source src="${esc(source)}" type="video/mp4"></video>`
       : `<picture>${webp(source) ? `<source srcset="${esc(webp(source))}" type="image/webp">` : ''}<img src="${esc(source)}" alt="${esc(label)}" loading="lazy" decoding="async"${wh}></picture>`
 
-    return `<figure>${deepHref ? `<a href="${esc(deepHref)}">` : ''}${media}${deepHref ? '</a>' : ''}<figcaption><a href="${esc(source)}">${label || esc(m.src)}</a></figcaption></figure>`
+    // The deep-link anchor wraps bare media — no text content — so it
+    // carries the caption as its accessible name (axe link-name).
+    const linkLabel = label ? ` aria-label="${label}"` : ''
+
+    return `<figure>${deepHref ? `<a href="${esc(deepHref)}"${linkLabel}>` : ''}${media}${deepHref ? '</a>' : ''}<figcaption><a href="${esc(source)}">${label || esc(m.src)}</a></figcaption></figure>`
   }
 
   /** Home page content — about bio + mentions + portfolio mosaic + contact. */
@@ -965,14 +982,14 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
           let deep = ''
 
           if (m.label) {
-            const base = slugify(m.label)
+            const base = capSlug(slugify(m.label))
             const ordinal = slugSeen.get(base) ?? 0
 
             slugSeen.set(base, ordinal + 1)
 
             const mediaSlug = ordinal ? `${base}-${ordinal + 1}` : base
 
-            if (base && mediaSlug.length <= 200) deep = `${prefix}/portfolio/${slug}/${mediaSlug}`
+            if (base) deep = `${prefix}/portfolio/${slug}/${mediaSlug}`
           }
 
           parts.push(mediaFigure(folder, m, deep))
@@ -1118,7 +1135,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
 
         for (const m of media) {
           if (m && typeof m === 'object' && m.label && m.src) {
-            const base = slugify(m.label)
+            const base = capSlug(slugify(m.label))
 
             if (!base) continue
 
@@ -1131,10 +1148,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
 
             const slug = ordinal ? `${base}-${ordinal + 1}` : base
 
-            // PATH_MAX per segment is 255 — a few monster labels slugify
-            // past it; those URLs stay on the `**` SPA fallback (same as
-            // today) rather than breaking the emit.
-            if (slug.length <= 200) out.push({ slug, label: m.label, media: m })
+            out.push({ slug, label: m.label, media: m })
           }
         }
       }

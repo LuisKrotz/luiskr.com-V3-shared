@@ -45,6 +45,25 @@ Largest media payload inlined as a data-URL (bytes on disk).
 Resolves a file extension to its format tag; unknown/binary shapes fall
 back to 'text' so every listed file still renders as readable HTML.
 
+### `byDirThenName`
+
+Manifest ordering — dirs before files, then alphabetically by name. The
+same convention scanDir produces via its dirs/files split; used to
+re-order the concatenated children of merged case-collision dirs.
+
+### `mergeCaseCollisions`
+
+Merges sibling nodes whose names collide case-insensitively — required
+because Windows checkouts live on case-insensitive NTFS, where `App/` and
+`app/` (typedoc emits both shapes for a module next to a folder) map to
+the same directory and each emitted `index.html` would overwrite the
+other. Colliding dirs keep the first-seen node and absorb the later
+dirs' children; colliding files keep the first and drop the rest.
+Recursion handles collisions introduced inside the merged children.
+
+- `@param` {Array<object>} nodes Sibling manifest nodes in scan order.
+- `@returns` {Array<object>} Deduped nodes, scan order preserved.
+
 ### `scanDir`
 
 Recursively scans one directory into manifest nodes. Hidden entries and

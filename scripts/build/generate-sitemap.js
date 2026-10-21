@@ -34,6 +34,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
+import { MEDIA_SLUG_MAX_LENGTH } from '../../../core/tokens/routes/aliases.ts'
 import { scanManifest } from '../../build/docs/scan.mjs'
 import {
   fetchMediaManifest,
@@ -118,6 +119,19 @@ function slugify(text) {
     .replace(/^-+|-+$/g, '')
 }
 
+/**
+ * Caps a media deep-link slug at MEDIA_SLUG_MAX_LENGTH so
+ * prerendered dist paths stay under Windows MAX_PATH — the cut drops the
+ * trailing partial word (and a dangling hyphen) so the slug always ends
+ * on a hyphen boundary. Byte-identical to the cap in mediaSlugSeq
+ * (core/utils/string.ts) so sitemap <loc>s, emitted pages and the runtime
+ * resolver agree.
+ */
+const capSlug = (base) =>
+  base.length > MEDIA_SLUG_MAX_LENGTH
+    ? base.slice(0, MEDIA_SLUG_MAX_LENGTH).replace(/-[^-]*$/u, '')
+    : base
+
 /** Escapes text for XML element bodies (media titles/descriptions). */
 const escXml = (s) =>
   String(s || '')
@@ -182,7 +196,7 @@ const mediaRowsOf = (project) => {
   for (const m of mediaItemsOf(project)) {
     if (!m.label) continue
 
-    const base = slugify(m.label)
+    const base = capSlug(slugify(m.label))
 
     if (!base) continue
 
@@ -192,7 +206,7 @@ const mediaRowsOf = (project) => {
 
     const slug = ordinal ? `${base}-${ordinal + 1}` : base
 
-    if (slug.length <= 200) rows.set(slug, m)
+    rows.set(slug, m)
   }
 
   return rows
