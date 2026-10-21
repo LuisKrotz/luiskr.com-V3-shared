@@ -1,11 +1,11 @@
-# `experiments/star-field/engine/bodies/procedural/shared.ts`
+# `experiments\star-field\engine\bodies\procedural\shared.ts`
 
 Shared paint primitives for the seeded texture
 
-|                |                                                                 |
-| -------------- | --------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/procedural/shared.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.         |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bodies\procedural\shared.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -37,14 +37,12 @@ Gas sprite canvas edge in pixels.
 
 Unpacks a packed hex color into `[r, g, b]` channel floats (0–255) —
 the canvas API wants css-rgba() strings, not three hex ints.
-
 - `@param` hex Packed color int (may be undefined → neutral grey fallback
 - `@returns` Channel triple.
 
 ### `css`
 
 `rgba()` css string for a channel triple + alpha.
-
 - `@param` c Channel triple.
 - `@param` a Alpha 0–1.
 
@@ -53,7 +51,6 @@ the canvas API wants css-rgba() strings, not three hex ints.
 Scales a channel triple toward white (`k > 0`) or black (`k < 0`) —
 crater rims, band highlights and corona streamers all derive from the
 body's own palette instead of carrying their own literals.
-
 - `@param` c Base channel triple.
 - `@param` k Shift −1..1.
 - `@returns` Shifted triple.
@@ -63,7 +60,6 @@ body's own palette instead of carrying their own literals.
 Creates a canvas + 2d context for texture generation, or null when
 the environment has no 2d (headless probes, blocked canvas) — every
 caller keeps its previous fallback in that case.
-
 - `@param` w Canvas width px.
 - `@param` h Canvas height px.
 
@@ -72,7 +68,6 @@ caller keeps its previous fallback in that case.
 Soft radial blob fill — the shared paint primitive: mottle patches,
 craters, gas lobes and flare knots are all radial gradients punched
 into the canvas at a point.
-
 - `@param` ctx 2d context.
 - `@param` x Center x.
 - `@param` y Center y.
@@ -87,7 +82,6 @@ detuned sines (fundamental 0.55 + octave 0.3 + octave 0.15, wavenumber
 ratios ~2.7 and ~4.4) approximating band-limited fbm without a real
 gradient-noise import. Output stays in ≈[-1,1]; callers scale by their
 crumple amplitude so rock/moon silhouettes dimple deterministically.
-
 - `@param` x Sample x. @param y Sample y. @param z Sample z.
 - `@returns` Signed noise value ≈[-1,1].
 
@@ -107,7 +101,6 @@ Vertex identity keys on the rounded position — subdivision vertices
 are bit-identical across faces, so a fixed-precision string dedups
 them deterministically. Callers displace the WELDED positions (one
 vertex = one noise evaluation) and bake UVs/normals afterwards.
-
 - `@param` THREE The three.js module.
 - `@param` geo Subdivided source geometry with a `position` attribute.
 - `@returns` Indexed geometry with a single welded position attribute.

@@ -1,10 +1,10 @@
-# `core/utils/perf/stats-engine.ts`
+# `core\utils\perf\stats-engine.ts`
 
 Live performance-metrics collector behind the Stats-for-nerds
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/perf/stats-engine.ts` |
+| **Source** | `src/core\utils\perf\stats-engine.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

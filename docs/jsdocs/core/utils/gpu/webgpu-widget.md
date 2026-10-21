@@ -1,10 +1,10 @@
-# `core/utils/gpu/webgpu-widget.ts`
+# `core\utils\gpu\webgpu-widget.ts`
 
 Per-widget WebGPU/Rust bridge — the loader for the
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/gpu/webgpu-widget.ts`                     |
+| | |
+|---|---|
+| **Source** | `src/core\utils\gpu\webgpu-widget.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -102,7 +102,6 @@ mounts (worker `OffscreenCanvas` route OR in-page) only run under
 `?debug=webgpuWidgets:active`; every other state keeps the proven
 WebGL/CSS renderers authoritative. Re-parsed per call so tests and
 debug toggles flip without a reload.
-
 - `@returns` True when the WebGPU widget layer may mount.
 
 ### `sharedDevice`
@@ -119,7 +118,7 @@ widgets inside any driver's device budget.
 ### `sharedFor`
 
 The `navigator.gpu` object the cached request was issued against — a
-different handle (test double, re-exposed API) re-requests.
+ different handle (test double, re-exposed API) re-requests.
 
 ### `getSharedGpuDevice`
 
@@ -130,7 +129,6 @@ Resolves null on any failure (no adapter, rejected device request,
 undefined device) — every caller falls back to its WebGL/CSS path.
 A device that later goes lost clears the cache so the next mount
 re-requests cleanly.
-
 - `@returns` The shared GPUDevice, or null when WebGPU is unusable.
 
 ### (module scope)
@@ -148,7 +146,6 @@ Default module loader — dynamic-imports the wasm-pack glue at
 `/wasm/<slug>/<pkg>.js` (see `GPU_WIDGET_ARTIFACTS`). `@vite-ignore`
 keeps vite from resolving build-optional artifacts; a 404 rejects
 and the caller falls back. Injectable for tests.
-
 - `@param` url Artifact glue URL.
 
 ### `moduleInitOnce`
@@ -167,7 +164,6 @@ module object so concurrent mounts share ONE instantiation.
 `initModule` — the concurrency-safe wrapper around wasm-pack's
 `mod.default()`: the first caller's promise is the single
 instantiation; later callers join it.
-
 - `@param` mod The loaded artifact glue module.
 - `@returns` The shared instantiation promise.
 
@@ -179,7 +175,6 @@ itself. Calling this at the first skeleton mount starts the
 artifact fetch before `init` would, so the widget is ready the
 moment its canvas needs it; failures are swallowed because mount
 re-attempts and falls back anyway.
-
 - `@param` loadModule Injectable module loader (tests substitute a stub).
 
 ### (module scope)
@@ -188,7 +183,6 @@ Mounts a widget artifact on `canvas`: loads its wasm module, calls
 `init`, wires resize + visibility-paused rAF, and returns the live
 handle. Resolves null on any capability/artifact/init failure — the
 caller's WebGL/CSS renderer stays the render path.
-
 - `@param` kind `GPU_WIDGET_KINDS` discriminant.
 - `@param` canvas The widget's dedicated canvas element.
 - `@param` loadModule Injectable module loader (tests substitute a stub).
@@ -206,7 +200,6 @@ One macrotask boundary — `setTimeout(0)` via Promise; yields to
 input/rAF between consecutive widget inits. Kept as a named helper
 so the queue line stays a single expression and tests can stub the
 boundary if needed.
-
 - `@returns` A promise resolving on the next task.
 
 ### `withTimeout`
@@ -216,7 +209,6 @@ time, rejects otherwise. Used on the two unbounded GPU awaits —
 adapter/device requests and widget init — where a wedged driver or a
 dead device leaves the promise pending forever, which would latch
 the caller's mount-in-flight flag and starve its WebGL/CSS fallback.
-
 - `@param` p The promise to bound.
 - `@param` ms Deadline in milliseconds.
 - `@returns` The bounded promise.
@@ -230,7 +222,6 @@ skips frames while the tab is hidden (frame-budget rule). In
 `manual` mode none of that attaches — the caller's own loop calls
 `widget.frame`, `widget.set_size`, and `widget.resize`, so there is
 exactly one clock and one resize observer per widget.
-
 - `@param` widget Live wasm widget instance.
 - `@param` canvas The widget's canvas element.
 - `@param` manual True to skip the rAF clock + listeners entirely.
@@ -245,7 +236,6 @@ the glue — the `__wbg_*_free` shim then walks a stale layout and
 traps `memory access out of bounds` as an unhandled rejection from
 inside the registry callback, which no caller can catch). A corrupt
 free is contained here — the widget is already dead either way.
-
 - `@param` widget The live (or init-failed) wasm widget to release.
 
 ### (module scope)
@@ -312,7 +302,6 @@ Monotonic reply id for call/probe round trips.
 
 `dispatchWorkerMessage` — the single onmessage router for the
 render worker: mount acks, call/probe replies, and death notices.
-
 - `@param` e The worker message event.
 
 ### (module scope)
@@ -321,14 +310,12 @@ render worker: mount acks, call/probe replies, and death notices.
 decides once whether this browser can render widgets in a worker —
 module workers + OffscreenCanvas + worker `navigator.gpu`; anything
 less routes every mount in-page permanently.
-
 - `@returns` True when the worker answered the probe as capable.
 
 ### `getRenderWorker`
 
 `getRenderWorker` — the capability gate for the worker route:
 resolves the live worker, or null when the browser can't run it.
-
 - `@returns` The render worker or null.
 
 ### `destroyRenderWorker`
@@ -346,14 +333,13 @@ the thread (and its browser process slot) alive forever.
 `mountViaWorker` — attempt the off-main-thread mount: transfer the
 canvas to the render worker, wait for the artifact to init there,
 and wire a message-forwarding handle. Returns:
-
-- `{handle}` on success;
-- `{canvas}` when the transfer happened but the worker mount
-  failed — the element is dead (placeholder mode, no context can
-  ever attach), so it is marked in place and the caller's own
-  fallback path takes over;
-- `null` when the worker can't run at all (probe failed or the
-  canvas was already transferred).
+  - `{handle}` on success;
+  - `{canvas}` when the transfer happened but the worker mount
+    failed — the element is dead (placeholder mode, no context can
+    ever attach), so it is marked in place and the caller's own
+    fallback path takes over;
+  - `null` when the worker can't run at all (probe failed or the
+    canvas was already transferred).
 - `@param` spec The artifact registry entry.
 - `@param` canvas The widget's canvas element.
 - `@param` manual Drive mode — manual widgets pace `frame` messages from

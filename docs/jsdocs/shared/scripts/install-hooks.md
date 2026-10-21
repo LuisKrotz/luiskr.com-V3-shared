@@ -1,9 +1,9 @@
-# `shared/scripts/install-hooks.mjs`
+# `shared\scripts\install-hooks.mjs`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/install-hooks.mjs`                                    |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\install-hooks.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -19,7 +19,7 @@ Uses `git rev-parse --git-dir` so worktrees and submodule checkouts
 resolve their true hooks dir (a `.git` file, not a directory).
 
 Run once after cloning (or after pulling when hooks change):
-yarn hooks:install
+  yarn hooks:install
 
 ### `installInto`
 

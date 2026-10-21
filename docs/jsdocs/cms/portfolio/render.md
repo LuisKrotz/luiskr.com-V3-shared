@@ -1,9 +1,9 @@
-# `cms/portfolio/render.tsx`
+# `cms\portfolio\render.tsx`
 
 | | |
 |---|---|
-| **Source** | `src/cms/portfolio/render.tsx` |
-| **UX surface** | Portfolio list + related-projects editor card. |
+| **Source** | `src/cms\portfolio\render.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

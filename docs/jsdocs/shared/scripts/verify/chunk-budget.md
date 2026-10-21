@@ -1,11 +1,11 @@
-# `shared/scripts/verify/chunk-budget.mjs`
+# `shared\scripts\verify\chunk-budget.mjs`
 
 Minified chunk-size gate. Scans dist/v/&lt;tier&gt;/assets/{js,css}
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/verify/chunk-budget.mjs`                              |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\verify\chunk-budget.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

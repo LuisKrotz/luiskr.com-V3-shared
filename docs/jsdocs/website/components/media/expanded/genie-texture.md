@@ -1,11 +1,11 @@
-# `website/components/media/expanded/genie-texture.ts`
+# `website\components\media\expanded\genie-texture.ts`
 
 Sheet-texture composer for the expand-modal genie warp —
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Source**     | `src/website/components/media/expanded/genie-texture.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
+| | |
+|---|---|
+| **Source** | `src/website\components\media\expanded\genie-texture.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -58,7 +58,6 @@ An off-DOM Image primed with a video's poster — drawImage on an
 undecoded <video> paints nothing, but the poster URL is already in
 the browser cache (the figure card showed it), so the detached Image
 decodes within a frame or two and the restamp loop adopts it.
-
 - `@param` el The media element — `poster` only exists on <video>.
 - `@returns` The primed image, or null when no poster is set.
 
@@ -71,7 +70,6 @@ letterboxed pixels live (not stretched across the item's box). The
 smaller than its box draws at natural size, never upscaled — the same
 guarantee the modal's CSS gives the live element.
 Writes into `out` (a scratch rect — no allocation per call).
-
 - `@param` sw Source pixel width.
 - `@param` sh Source pixel height.
 - `@param` box The item's content-local box.
@@ -84,7 +82,6 @@ clip, the placeholder layer, then the media item contain-fitted.
 Returns the geometry the renderer needs for per-frame restamps
 (the item's box, the figure clip, the corner radius) — all
 content-local CSS px.
-
 - `@param` ctx The texture context.
 - `@param` content The modal content root.
 - `@param` ox Content-local origin x.
@@ -104,7 +101,6 @@ veil and viewport chrome stay out of the texture and fade under
 result is a stable texture so the per-frame work stays a pure strip
 resample. The texture long edge caps at GENIE_WARP.TEX_MAX_PX —
 enough sharpness for a 700ms warp without an unbounded framebuffer.
-
 - `@param` content The modal content root (the figure lives inside it).
 - `@param` dpr The overlay's device-pixel cap (already clamped).
 - `@returns` The sheet record, or null when the card has no box or the

@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/camera.ts`
+# `core\tokens\starfield\params\camera.ts`
 
 Camera-rig and navigation parameters — field of view,
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/camera.ts`              |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\starfield\params\camera.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

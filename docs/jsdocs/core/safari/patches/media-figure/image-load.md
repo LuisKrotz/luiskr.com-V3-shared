@@ -1,10 +1,10 @@
-# `core/safari/patches/media-figure/image-load.ts`
+# `core\safari\patches\media-figure\image-load.ts`
 
 Safari image-loading overrides for MediaFigure: a
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/safari/patches/media-figure/image-load.ts`      |
+| | |
+|---|---|
+| **Source** | `src/core\safari\patches\media-figure\image-load.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

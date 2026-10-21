@@ -1,10 +1,10 @@
-# `core/devlog.ts`
+# `core\devlog.ts`
 
 Zero-console diagnostics sink (project rule: no console.* in
 
 | | |
 |---|---|
-| **Source** | `src/core/devlog.ts` |
+| **Source** | `src/core\devlog.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

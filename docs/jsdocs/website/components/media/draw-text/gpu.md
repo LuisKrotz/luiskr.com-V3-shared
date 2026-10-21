@@ -1,8 +1,8 @@
-# `website/components/media/draw-text/gpu.ts`
+# `website\components\media\draw-text\gpu.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/media/draw-text/gpu.ts`         |
+| | |
+|---|---|
+| **Source** | `src/website\components\media\draw-text\gpu.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -43,7 +43,6 @@ element. Called from `startAnimation` after the char spans mount;
 resolves silently — on any failure the CSS animation is the render
 path (the canvas/class are only applied once the atlas + sheet are
 live).
-
 - `@param` host The draw-text element.
 - `@param` totalMs Wall-clock span of the reveal (last delay + duration)
 
@@ -53,7 +52,6 @@ live).
 pushes ink + sheet into the widget. Returns false when nothing
 measurable exists (hidden block, zero-size chars — the CSS path
 then stays authoritative).
-
 - `@param` host The draw-text element.
 - `@param` mounted Live widget handle.
 - `@param` contentEl The `.draw-text` content span.
@@ -90,7 +88,6 @@ glyph-block envelope (nonzero, non-full-bleed). Runs once per
 trigger — the readback is a single mapAsync, never on the frame
 path. Returns false on any readback/validation failure so the DOM
 reveal remains the render path.
-
 - `@param` mounted Live widget handle.
 - `@param` canvas The (not-yet-attached) overlay canvas.
 - `@param` probeMs ms past the last char's end — forces full reveal.
@@ -103,7 +100,6 @@ scheduled char's delay + its own duration, the point where every
 glyph is fully drawn. Kept separate from the wall-clock `totalMs`
 (which adds presentation slack) so the probe measures the real
 "all revealed" moment.
-
 - `@param` host The draw-text element.
 - `@param` chars The per-char spans.
 - `@returns` ms after the reveal's start where all chars are drawn.
@@ -116,7 +112,6 @@ DOM spans animate in parallel, so finish() is a same-state swap.
 The DOM-suppression class lands on the first submitted frame — the
 class flip and the canvas's first present composite together, so no
 frame ever shows neither paint source (the mount blink).
-
 - `@param` host The draw-text element.
 - `@param` mounted Live widget handle.
 - `@param` totalMs Reveal span — the overlay disarms after it.
@@ -127,7 +122,6 @@ frame ever shows neither paint source (the mount blink).
 `finish` — the end-state swap: drop the suppression class (the DOM
 chars' CSS animation already completed to the same rest state), then
 remove the canvas + widget.
-
 - `@param` host The draw-text element.
 
 ### `teardownGpuDraw`
@@ -135,5 +129,4 @@ remove the canvas + widget.
 `teardownGpuDraw` — disarms the overlay without touching DOM paint:
 used by reset()/disconnectedCallback (where the DOM re-renders to
 the pending state on its own) and by `finish` (after the class drop).
-
 - `@param` host The draw-text element.

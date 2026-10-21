@@ -1,11 +1,11 @@
-# `shared/scripts/docs/gen-docs.mjs`
+# `shared\scripts\docs\gen-docs.mjs`
 
 Generates docs/api/*.md from the JSDoc across the workspace —
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/docs/gen-docs.mjs`                                    |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\docs\gen-docs.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

@@ -1,8 +1,8 @@
-# `core/utils/canvas/widgets/theme-slider/math.ts`
+# `core\utils\canvas\widgets\theme-slider\math.ts`
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/widgets/theme-slider/math.ts` |
+| **Source** | `src/core\utils\canvas\widgets\theme-slider\math.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

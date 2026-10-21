@@ -1,10 +1,10 @@
-# `website/components/carousel/CustomCarousel.tsx`
+# `website\components\carousel\CustomCarousel.tsx`
 
 &lt;custom-carousel&gt; — infinite-loop horizontal carousel used by
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/carousel/CustomCarousel.tsx`    |
+| | |
+|---|---|
+| **Source** | `src/website\components\carousel\CustomCarousel.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -57,7 +57,7 @@ Accumulated ms into the cycle — survives pause→resume.
 ### `ringProgress`
 
 0–1 fraction of the autoplay cycle — drives both the SVG ring and
-the WebGL arrows' progress arc.
+ the WebGL arrows' progress arc.
 
 ### `rafId`
 
@@ -74,12 +74,12 @@ Pending clone→real instant jump watchdog (CAROUSEL_TIMING.TELEPORT_DELAY).
 ### `pendingTeleport`
 
 Clone→real teleport armed by _scheduleTeleport — the scroll spring's
-settle fires it; the timer is only the rAF-starvation watchdog.
+ settle fires it; the timer is only the rAF-starvation watchdog.
 
 ### `isNavigating`
 
 True while a programmatic scroll is animating — suppresses the
-scroll-handler teleport so the goTo-driven clone jump isn't undone.
+ scroll-handler teleport so the goTo-driven clone jump isn't undone.
 
 ### `touchStartX`
 
@@ -88,7 +88,7 @@ Swipe origin X for the threshold check in the touchend handler.
 ### `slideLoaded`
 
 Per-index lazy flag: media src assigned only for slides near the
-active one (±2 positions, wrapping).
+ active one (±2 positions, wrapping).
 
 ### `circumference`
 
@@ -156,7 +156,6 @@ Batch-assigns items/folder/forceActive with a single render — the
 setter chain would otherwise re-render per property. Re-applying the
 same data (same array reference + same flags) is a no-op, so parents
 may call it freely from render/update paths.
-
 - `@param` {object} o
 - `@param` {Array} o.items
 - `@param` {string} o.folder

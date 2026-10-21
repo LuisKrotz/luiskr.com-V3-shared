@@ -1,11 +1,11 @@
-# `cms/projects/CmsProjectsList.tsx`
+# `cms\projects\CmsProjectsList.tsx`
 
 CMS projects editor: full case-study editing — project
 
 | | |
 |---|---|
-| **Source** | `src/cms/projects/CmsProjectsList.tsx` |
-| **UX surface** | Per-project sections editor card. |
+| **Source** | `src/cms\projects\CmsProjectsList.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/spiral/fill.ts`
+# `experiments\star-field\engine\spiral\fill.ts`
 
 Deterministic point-cloud fills for galaxies — the math
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/spiral/fill.ts`      |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\spiral\fill.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -19,7 +19,6 @@ gaussian so the disc reads as a real spiral at any tilt. An optional
 stellar-halo distribution (globular-cluster haze standing in for the
 oldest populations), and `thick` multiplies disc thickness for bodies
 like the Milky Way whose volume must read as a 3-D object from inside.
-
 - `@param` pos Float32 xyz buffer — indexes [i0·3, i1·3) are written.
 - `@param` col Float32 rgb buffer (same range).
 - `@param` radius Disc radius in scene units.
@@ -40,7 +39,6 @@ just a smooth spheroid of old stars: a gaussian radial profile (dense
 core, exponential fall-off) over uniform directions, flattened on Y so
 the smudge reads as a dE/dSph rather than a ball. The `tint` hex steers
 the vertex ramp so spheroidals glow warm and irregulars read cooler.
-
 - `@param` pos Float32 xyz buffer — indexes [i0·3, i1·3) are written.
 - `@param` col Float32 rgb buffer (same range).
 - `@param` radius Body radius in scene units.
@@ -57,7 +55,6 @@ Fills the dust-lane buffers — the Great Rift. Lanes hug the arm gaps
 spiral + sway the star fill uses, so dust traces the actual gaps
 rather than a parallel-but-different curve. Per-point Fibonacci-hashed
 seeds keep the fill chunkable across the worker pool.
-
 - `@param` pos Float32 xyz buffer — indexes [i0·3, i1·3) are written.
 - `@param` col Float32 rgb buffer (same range).
 - `@param` seed Body seed.

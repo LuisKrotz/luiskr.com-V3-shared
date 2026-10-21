@@ -1,10 +1,10 @@
-# `core/safari/types.ts`
+# `core\safari\types.ts`
 
 Shared structural types for the Safari runtime patches —
 
 | | |
 |---|---|
-| **Source** | `src/core/safari/types.ts` |
+| **Source** | `src/core\safari\types.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

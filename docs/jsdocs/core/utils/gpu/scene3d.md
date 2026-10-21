@@ -1,8 +1,8 @@
-# `core/utils/gpu/scene3d.ts`
+# `core\utils\gpu\scene3d.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/gpu/scene3d.ts`                           |
+| | |
+|---|---|
+| **Source** | `src/core\utils\gpu\scene3d.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -270,7 +270,6 @@ Default module loader — dynamic-imports the wasm-pack glue at the
 registry URL. `@vite-ignore` keeps vite from resolving the
 build-optional artifact; a 404 rejects and the caller falls back.
 Injectable for tests.
-
 - `@param` url Artifact glue URL.
 
 ### `resizeScene3d`
@@ -278,7 +277,6 @@ Injectable for tests.
 Pushes the canvas's current device-px size into the engine — the
 same DPR-aware measurement the widget bridge performs, shared by the
 mount path and the ResizeObserver arm.
-
 - `@param` surface The live engine handle.
 - `@param` canvas The host canvas.
 
@@ -289,7 +287,6 @@ async mount (adapter + device + configure), wires a ResizeObserver
 feeding device-px `resize`, and returns the live handle. Resolves
 null on ANY capability/artifact/init failure — the caller keeps its
 existing renderer, so mounting can never regress the page.
-
 - `@param` canvas The scene's dedicated canvas element.
 - `@param` loadModule Injectable module loader (tests substitute a stub).
 
@@ -301,7 +298,6 @@ the texture half of `THREE.TextureLoader.loadAsync`. Resolves the
 registry texture id, or null when decode/upload fails so the caller
 falls back to a procedural color (same contract as the engines'
 missing-texture arm).
-
 - `@param` surface The live engine handle.
 - `@param` url CDN image URL.
 - `@param` targetW GPU resize-hint width.

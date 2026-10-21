@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/scale.ts`
+# `experiments\star-field\engine\scale.ts`
 
 Multi-tier astronomical scale model for the star-field
 
 | | |
 |---|---|
-| **Source** | `src/experiments/star-field/engine/scale.ts` |
+| **Source** | `src/experiments\star-field\engine\scale.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `shared/src/App.tsx`
+# `shared\src\App.tsx`
 
 &lt;app-root&gt; — the application's shell custom element.
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/shared/src/App.tsx`                                |
+| | |
+|---|---|
+| **Source** | `src/shared\src\App.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -49,12 +49,11 @@ changes and re-applies modal open/close state to the shell.
 ### `_updateModalState`
 
 Syncs modal state into the DOM without a full re-render:
-
-- toggles .modal-open on <html>/<body> (locks scroll via CSS)
-- copies the modal's modifier class onto the app wrapper
-- applies the iOS Safari scroll-lock: <main> becomes position:fixed
-  at -scrollY so the page can't rubber-band behind the dialog
-- restores the scroll offset when the modal closes
+  - toggles .modal-open on <html>/<body> (locks scroll via CSS)
+  - copies the modal's modifier class onto the app wrapper
+  - applies the iOS Safari scroll-lock: <main> becomes position:fixed
+    at -scrollY so the page can't rubber-band behind the dialog
+  - restores the scroll offset when the modal closes
 
 ### `initInputListeners`
 

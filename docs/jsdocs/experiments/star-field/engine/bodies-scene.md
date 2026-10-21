@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies-scene.ts`
+# `experiments\star-field\engine\bodies-scene.ts`
 
 Scene-graph assembler for the star-field catalog — turns
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies-scene.ts`     |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bodies-scene.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -15,7 +15,6 @@ Builds every catalog body into the scene graph: pivots for orbiting
 bodies (rotation.y = phase + t·speed), fixed groups for `pos` bodies,
 satellites and shells, then registers the node, anchor
 and pickable in the state maps.
-
 - `@param` s Engine state.
 - `@param` THREE The three.js module.
 - `@param` defs Catalog entries.
@@ -44,6 +43,5 @@ in the same rotating frame, it stays locked on the Sun forever — the
 earlier static-outer-disc workaround is no longer needed.
 The rider counter-tilts its own X so children keep their ecliptic
 orientation (the solar system's plane is not the galactic plane).
-
 - `@param` s Engine state (nodes map must be fully populated).
 - `@param` THREE The three.js module.

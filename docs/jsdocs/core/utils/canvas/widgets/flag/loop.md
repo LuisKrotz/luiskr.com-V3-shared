@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/flag/loop.ts`
+# `core\utils\canvas\widgets\flag\loop.ts`
 
 Render loop + fallback transitions for FlagWebGL: the
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/flag/loop.ts`              |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\flag\loop.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,11 +1,11 @@
-# `website/tests/coverage/components/home/mosaic-burn-word-boxes-tails.test.js`
+# `website\tests\coverage\components\home\mosaic-burn-word-boxes-tails.test.js`
 
 Coverage tails for mosaic/burn/paper.js — the DOM Range
 
-|                |                                                                                   |
-| -------------- | --------------------------------------------------------------------------------- |
-| **Source**     | `src/website/tests/coverage/components/home/mosaic-burn-word-boxes-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.                           |
+| | |
+|---|---|
+| **Source** | `src/website\tests\coverage\components\home\mosaic-burn-word-boxes-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

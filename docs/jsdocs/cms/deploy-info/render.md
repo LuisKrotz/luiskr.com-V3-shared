@@ -1,9 +1,9 @@
-# `cms/deploy-info/render.tsx`
+# `cms\deploy-info\render.tsx`
 
-|                |                                                      |
-| -------------- | ---------------------------------------------------- |
-| **Source**     | `src/cms/deploy-info/render.tsx`                     |
-| **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
+| | |
+|---|---|
+| **Source** | `src/cms\deploy-info\render.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
@@ -51,7 +51,6 @@ Byte-size units for the bundle tables — KB/MB/GB with one decimal.
 
 Formats a byte count as a compact human size (B/KB/MB/GB, one
 decimal past the byte unit); non-numbers render an em-dash.
-
 - `@param` {unknown} value Byte count from the bundle-stats report.
 - `@returns` {string} The formatted size.
 

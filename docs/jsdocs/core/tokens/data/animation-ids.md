@@ -1,10 +1,10 @@
-# `core/tokens/data/animation-ids.ts`
+# `core\tokens\data\animation-ids.ts`
 
 Animation registry — one stable id per distinct animated
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/data/animation-ids.ts`                   |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\data\animation-ids.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

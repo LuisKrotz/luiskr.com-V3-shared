@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/scene/post-nodes.ts`
+# `experiments\earth-playground\earth\scene\post-nodes.ts`
 
 Custom TSL post nodes for the RenderPipeline output chain,
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/scene/post-nodes.ts` |
+| **Source** | `src/experiments\earth-playground\earth\scene\post-nodes.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

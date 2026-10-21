@@ -1,8 +1,8 @@
-# `shared/local-modules/braces/lib/parse.js`
+# `shared\local-modules\braces\lib\parse.js`
 
 | | |
 |---|---|
-| **Source** | `src/shared/local-modules/braces/lib/parse.js` |
+| **Source** | `src/shared\local-modules\braces\lib\parse.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

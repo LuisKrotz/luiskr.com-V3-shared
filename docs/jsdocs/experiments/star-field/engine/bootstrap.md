@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bootstrap.ts`
+# `experiments\star-field\engine\bootstrap.ts`
 
 Async scene assembly for the star-field engine. Loads
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bootstrap.ts`        |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bootstrap.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -18,7 +18,6 @@ host's and `makeSatellites` never lands the not-in-map fallback for
 a real file. Exported so the satellite arm is unit-testable on a
 fixture slice — the live catalog's own scan happens inside
 `bootstrapStarField` where no fixture can inject a textured sat.
-
 - `@param` defs Catalog entries to scan.
 - `@returns` The deduplicated URL set (skybox included).
 
@@ -29,7 +28,6 @@ per completed file so the loader bar climbs smoothly across the ~14
 fetches. A single failed texture resolves as undefined (the body
 falls back to its procedural color) rather than sinking the whole
 boot.
-
 - `@returns` URL → texture map (missing textures absent).
 
 ### (module scope)
@@ -44,5 +42,4 @@ renderer probe → scene/camera/controls → texture parallel load →
 body graph → picking → resize → shader warmup → first frame → ready.
 Silent bailouts (webglAllowed, probe failure, dispose mid-boot) leave
 `s.failed`/partial state for init() to flag.
-
 - `@param` s Engine state.

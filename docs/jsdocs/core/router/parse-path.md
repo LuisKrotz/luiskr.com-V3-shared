@@ -1,8 +1,8 @@
-# `core/router/parse-path.ts`
+# `core\router\parse-path.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/router/parse-path.ts`                           |
+| | |
+|---|---|
+| **Source** | `src/core\router\parse-path.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

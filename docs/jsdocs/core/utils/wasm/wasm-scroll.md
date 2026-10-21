@@ -1,10 +1,10 @@
-# `core/utils/wasm/wasm-scroll.ts`
+# `core\utils\wasm\wasm-scroll.ts`
 
 rAF-driven smooth scroller: animates window (or a container)
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/wasm/wasm-scroll.ts` |
+| **Source** | `src/core\utils\wasm\wasm-scroll.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

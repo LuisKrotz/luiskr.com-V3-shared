@@ -1,11 +1,11 @@
-# `shared/scripts/test/merge-coverage.mjs`
+# `shared\scripts\test\merge-coverage.mjs`
 
 Unions the raw coverage maps each module's Jest run wrote to
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/test/merge-coverage.mjs`                              |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\test\merge-coverage.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

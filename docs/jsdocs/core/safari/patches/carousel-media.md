@@ -1,10 +1,10 @@
-# `core/safari/patches/carousel-media.ts`
+# `core\safari\patches\carousel-media.ts`
 
 Carousel-hosted media overrides for iOS/Safari — WebKit
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/safari/patches/carousel-media.ts`               |
+| | |
+|---|---|
+| **Source** | `src/core\safari\patches\carousel-media.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -12,9 +12,8 @@ Carousel-hosted media overrides for iOS/Safari — WebKit
 ### `isCarouselHosted`
 
 Whether a media-figure is hosted inside a carousel — the figure's
-shadow root is owned by the slide, so the _element's_ root node is the
+shadow root is owned by the slide, so the *element's* root node is the
 carousel's own shadow tree and `host` is the carousel element.
-
 - `@param` el The media-figure element being mounted.
 - `@returns` true when the figure lives inside <custom-carousel> or
 
@@ -26,7 +25,6 @@ track) and kick the Q50 high-res swap immediately instead of waiting
 on the IntersectionObserver Safari silently drops. The `$` call is
 optional-chained because the retroactive pass can encounter
 not-yet-upgraded media-figure elements.
-
 - `@param` el The carousel-hosted media-figure.
 
 ### `eagerizeShadowTree`
@@ -38,7 +36,6 @@ media-figure inside — covering figures that mounted before the
 MediaFigure onMounted patch could observe them. safariLoadHighRes
 early-returns once isLoaded, so repeat passes on re-render are cheap
 nudges, not duplicate loads.
-
 - `@param` host The carousel element whose shadow tree is scanned.
 
 ### `eagerizeShadowImages`
@@ -51,7 +48,6 @@ installs the wrap — so a shadow-piercing retroactive pass (deep*
 queries cross the nested view shadow roots) flips anything painted
 in that window. Figures mounted later are handled per-mount via
 eagerizeCarouselFigure() inside the MediaFigure onMounted patch.
-
 - `@param` tag Custom-element tag name to wrap.
 
 ### `patchCarouselMedia`

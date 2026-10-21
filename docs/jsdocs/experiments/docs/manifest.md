@@ -1,10 +1,10 @@
-# `experiments/docs/manifest.ts`
+# `experiments\docs\manifest.ts`
 
 Build-time docs manifest access + path resolution.
 
 | | |
 |---|---|
-| **Source** | `src/experiments/docs/manifest.ts` |
+| **Source** | `src/experiments\docs\manifest.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

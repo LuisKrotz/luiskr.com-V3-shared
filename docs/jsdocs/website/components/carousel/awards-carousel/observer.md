@@ -1,8 +1,8 @@
-# `website/components/carousel/awards-carousel/observer.ts`
+# `website\components\carousel\awards-carousel\observer.ts`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/carousel/awards-carousel/observer.ts` |
+| **Source** | `src/website\components\carousel\awards-carousel\observer.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

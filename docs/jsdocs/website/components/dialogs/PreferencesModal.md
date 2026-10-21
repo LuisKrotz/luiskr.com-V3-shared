@@ -1,10 +1,10 @@
-# `website/components/dialogs/PreferencesModal.tsx`
+# `website\components\dialogs\PreferencesModal.tsx`
 
 &lt;preferences-modal&gt; — settings dialog: theme slider
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/dialogs/PreferencesModal.tsx`   |
+| | |
+|---|---|
+| **Source** | `src/website\components\dialogs\PreferencesModal.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -62,12 +62,12 @@ Tears down the mounted GL widgets.
 ### (module scope)
 
 Store-driven sync. Two paths:
-open-state flipped → full re-render + mount widgets + genie-enter
-(the zoom-from-trigger animation) + focus the backdrop for
-Escape-dismiss and screen-reader context
-already open → in-place sync: propagate reduced-motion to the
-widgets and re-derive switch/theme states without a re-render
-(avoids destroying canvases mid-interaction)
+  open-state flipped → full re-render + mount widgets + genie-enter
+    (the zoom-from-trigger animation) + focus the backdrop for
+    Escape-dismiss and screen-reader context
+  already open → in-place sync: propagate reduced-motion to the
+    widgets and re-derive switch/theme states without a re-render
+    (avoids destroying canvases mid-interaction)
 
 ### `_updateThemeUI`
 

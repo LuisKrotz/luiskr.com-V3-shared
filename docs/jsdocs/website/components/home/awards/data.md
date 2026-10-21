@@ -1,10 +1,10 @@
-# `website/components/home/awards/data.ts`
+# `website\components\home\awards\data.ts`
 
 Data helpers for &lt;awards-mentions&gt;: the legal-links list
 
 | | |
 |---|---|
-| **Source** | `src/website/components/home/awards/data.ts` |
+| **Source** | `src/website\components\home\awards\data.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

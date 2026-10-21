@@ -1,10 +1,10 @@
-# `core/tokens/classes/animations.ts`
+# `core\tokens\classes\animations.ts`
 
 Animations-reference view class tokens — grouped subset of
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/classes/animations.ts`                   |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\classes\animations.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

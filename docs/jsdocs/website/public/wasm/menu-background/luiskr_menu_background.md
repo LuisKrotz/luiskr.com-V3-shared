@@ -1,9 +1,9 @@
-# `website/public/wasm/menu-background/luiskr_menu_background.js`
+# `website\public\wasm\menu-background\luiskr_menu_background.js`
 
-|                |                                                                     |
-| -------------- | ------------------------------------------------------------------- |
-| **Source**     | `src/website/public/wasm/menu-background/luiskr_menu_background.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.             |
+| | |
+|---|---|
+| **Source** | `src/website\public\wasm\menu-background\luiskr_menu_background.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -14,7 +14,6 @@ Public wasm surface — one fullscreen canvas per instance.
 ### `frame`
 
 `frame` — one animation tick: pack, write, draw.
-
 - `@param` dt Seconds since the previous call.
 - `@param` {number} dt
 
@@ -22,7 +21,6 @@ Public wasm surface — one fullscreen canvas per instance.
 
 `init` — device + pipeline. Rejection → JS keeps the WebGL
 backdrop; mounting can never regress the page.
-
 - `@param` canvas The widget's dedicated canvas.
 - `@param` device The shared GPUDevice (one per page, from the JS bridge).
 - `@returns` Ok on a live surface, Err(JsValue) on failure.
@@ -36,7 +34,6 @@ backdrop; mounting can never regress the page.
 ### `resize`
 
 `resize` — canvas-bitmap change → surface re-configure.
-
 - `@param` _w Device-pixel width (element-side).
 - `@param` _h Device-pixel height.
 - `@param` {number} w
@@ -45,7 +42,6 @@ backdrop; mounting can never regress the page.
 ### `set_size`
 
 `set_size` — the canvas's CSS-pixel size (res + rect).
-
 - `@param` w Canvas width in CSS pixels.
 - `@param` h Canvas height in CSS pixels.
 - `@param` {number} w
@@ -55,7 +51,6 @@ backdrop; mounting can never regress the page.
 
 `set_state` — bundled scalar update: reveal amount, the two
 theme inks (linear 0..1 rgb triples), and the global alpha.
-
 - `@param` reveal 0..1 menu open amount.
 - `@param` r1 Primary ink red.
 - `@param` g1 Primary ink green.

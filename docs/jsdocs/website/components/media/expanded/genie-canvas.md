@@ -1,10 +1,10 @@
-# `website/components/media/expanded/genie-canvas.ts`
+# `website\components\media\expanded\genie-canvas.ts`
 
 2D-canvas backend for the expand-modal genie warp — the
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/media/expanded/genie-canvas.ts` |
+| | |
+|---|---|
+| **Source** | `src/website\components\media\expanded\genie-canvas.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -17,7 +17,6 @@ Ghost-band alpha for the undecoded-media silhouette (subtle by design).
 
 easeInOutCubic — the row clock for the horizontal pinch. Zero slope
 at both ends so the walls ease into the funnel and land softly.
-
 - `@param` t Progress 0..1.
 - `@returns` Eased progress 0..1.
 
@@ -126,7 +125,6 @@ slot re-stamps live sources each frame — the <video> keeps playing
 inside the warp and a late decode upgrades the texture mid-flight —
 so the funnel never shows a flat ghost rectangle. A null sheet (or
 one without a texture) paints the soft accent silhouette.
-
 - `@param` canvas The overlay canvas (device-px sized already).
 - `@param` ctx Its 2D context — caller validated non-null.
 - `@param` sheet The composited modal sheet from `buildGenieSheet`.
@@ -150,7 +148,6 @@ rect and the draw runs inside the figure's saved clip.
 `frame` — one animation tick: clear, strip-warp the sheet texture,
 stamp the dock flash in the run's last quarter, restore composite
 state.
-
 - `@param` _dt Frame delta seconds — unused by the field (progress is
 - `@param` p Eased funnel progress 0..1 (0 = modal sheet, 1 = figure funnel).
 - `@returns` False when the context is gone (caller force-settles).
@@ -167,8 +164,8 @@ Strip math (viewport CSS px — the ctx transform maps to device
 px): rows index in "down-space" — ty runs 0 at the sheet's far
 edge to 1 at the figure-facing edge — and each row owns two
 staggered clocks:
-xs = (1−ty)·STAGGER_X xe = easeInOutCubic(clamp((p−xs)/(1−xs)))
-ys = (1−ty)·STAGGER_Y ye = easeInQuad( clamp((p−ys)/(1−ys)))
+  xs = (1−ty)·STAGGER_X   xe = easeInOutCubic(clamp((p−xs)/(1−xs)))
+  ys = (1−ty)·STAGGER_Y   ye = easeInQuad(    clamp((p−ys)/(1−ys)))
 The leading edge's rows start at p=0 while the far edge waits out
 its stagger — the funnel's S-walls and the "window flows through
 the neck" look emerge from the stagger alone (no sine bow, no
@@ -177,7 +174,6 @@ card rect at p=1 — the canonical point-collapse mouth suits a dock
 icon, not a half-viewport card. Rows stay horizontal (y depends
 only on ty), so bands tile exactly — the shared boundary corners
 keep neighbouring parallelograms airtight through the funnel.
-
 - `@param` p Eased funnel progress 0..1 (0 = modal, 1 = figure).
 
 ### `dispose`

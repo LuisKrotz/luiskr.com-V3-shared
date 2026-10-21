@@ -1,10 +1,10 @@
-# `website/components/feedback/CookieBanner.tsx`
+# `website\components\feedback\CookieBanner.tsx`
 
 &lt;cookie-banner&gt; — consent notice bar: accept/decline
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/feedback/CookieBanner.tsx`      |
+| | |
+|---|---|
+| **Source** | `src/website\components\feedback\CookieBanner.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

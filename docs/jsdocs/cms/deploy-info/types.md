@@ -1,9 +1,9 @@
-# `cms/deploy-info/types.ts`
+# `cms\deploy-info\types.ts`
 
-|                |                                                      |
-| -------------- | ---------------------------------------------------- |
-| **Source**     | `src/cms/deploy-info/types.ts`                       |
-| **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
+| | |
+|---|---|
+| **Source** | `src/cms\deploy-info\types.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

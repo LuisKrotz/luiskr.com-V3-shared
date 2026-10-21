@@ -1,8 +1,8 @@
-# `core/utils/data/sanitize.ts`
+# `core\utils\data\sanitize.ts`
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/data/sanitize.ts` |
+| **Source** | `src/core\utils\data\sanitize.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

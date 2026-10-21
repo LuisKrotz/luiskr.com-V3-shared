@@ -1,10 +1,10 @@
-# `website/views/project/types.ts`
+# `website\views\project\types.ts`
 
 Shared shapes for the &lt;view-project&gt; route: media items,
 
 | | |
 |---|---|
-| **Source** | `src/website/views/project/types.ts` |
+| **Source** | `src/website\views\project\types.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

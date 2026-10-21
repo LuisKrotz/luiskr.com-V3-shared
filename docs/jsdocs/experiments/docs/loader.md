@@ -1,10 +1,10 @@
-# `experiments/docs/loader.ts`
+# `experiments\docs\loader.ts`
 
 Boot-loader lifecycle for &lt;view-docs&gt; — mirrors the space
 
 | | |
 |---|---|
-| **Source** | `src/experiments/docs/loader.ts` |
+| **Source** | `src/experiments\docs\loader.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

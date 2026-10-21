@@ -1,11 +1,11 @@
-# `shared/scripts/build/stamp-content-signal.mjs`
+# `shared\scripts\build\stamp-content-signal.mjs`
 
 Firebase `predeploy` step — stamps the IETF-draft
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/stamp-content-signal.mjs`                       |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\build\stamp-content-signal.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -20,7 +20,6 @@ Directive line inserted directly under `User-agent: *` per the spec.
 ### `collectRobots`
 
 Recursively collects every robots.txt under a directory.
-
 - `@param` {string} dir directory to walk
 - `@returns` {string[]} absolute robots.txt paths
 

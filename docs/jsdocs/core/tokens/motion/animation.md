@@ -1,10 +1,10 @@
-# `core/tokens/motion/animation.ts`
+# `core\tokens\motion\animation.ts`
 
 Easing curve + transition duration tokens — grouped subsets
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/motion/animation.ts`                     |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\motion\animation.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

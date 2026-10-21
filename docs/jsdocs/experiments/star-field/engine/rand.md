@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/rand.ts`
+# `experiments\star-field\engine\rand.ts`
 
 Deterministic seeded RNG for the star-field engine — the
 
 | | |
 |---|---|
-| **Source** | `src/experiments/star-field/engine/rand.ts` |
+| **Source** | `src/experiments\star-field\engine\rand.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

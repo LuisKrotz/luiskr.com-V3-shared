@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/burger-button/shaders.ts`
+# `core\utils\canvas\widgets\burger-button\shaders.ts`
 
 GLSL sources for BurgerButtonWebGL, extracted from
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/widgets/burger-button/shaders.ts` |
+| **Source** | `src/core\utils\canvas\widgets\burger-button\shaders.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

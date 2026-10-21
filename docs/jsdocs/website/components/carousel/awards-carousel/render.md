@@ -1,8 +1,8 @@
-# `website/components/carousel/awards-carousel/render.tsx`
+# `website\components\carousel\awards-carousel\render.tsx`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/carousel/awards-carousel/render.tsx` |
+| **Source** | `src/website\components\carousel\awards-carousel\render.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

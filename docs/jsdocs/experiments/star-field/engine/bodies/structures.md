@@ -1,11 +1,11 @@
-# `experiments/star-field/engine/bodies/structures.ts`
+# `experiments\star-field\engine\bodies\structures.ts`
 
 Cosmic-hierarchy bodies — boundary spheres + member
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/structures.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bodies\structures.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -16,7 +16,6 @@ filament preamble (principal axis + density knots) is drawn once by
 the caller from a sequential `lcg(seed)` stream and passed in, while
 member points draw from per-point Fibonacci-hashed streams so the
 fill partitions identically across the worker pool.
-
 - `@param` pos xyz buffer — indexes [i0·3, i1·3) written.
 - `@param` col rgb buffer (same range).
 - `@param` seed Body seed.
@@ -38,7 +37,6 @@ skin. Brightness jitters per point so the cloud reads as a galaxy
 field rather than noise static; additive tiny points, never pickable.
 The fill dispatches chunked through the WASM worker pool; the local
 path below is the bit-identical fallback.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry (id seeds the scatter).
 - `@param` radius Speckle volume radius in chart units.
@@ -53,7 +51,6 @@ over the sky. The node graph is the TSL translation of the original
 GLSL rim shader — the WebGPURenderer pipeline rejects classic
 ShaderMaterials. Output is premultiplied (`color·opacity·rim`) so
 additive blending adds exactly the rim glow.
-
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors (bootstrap-injected).
 - `@param` def Catalog entry — `def.color` tints the bubble.
@@ -68,7 +65,6 @@ a flat film over the sky (the BackSide wash bug), and the boundary
 blends into the black instead of cutting a hard disc. Every child's
 raycast is stubbed so the shell can never eat a pointer hit meant
 for bodies inside it.
-
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors (bootstrap-injected).
 - `@param` def Catalog entry — `structure.radius` sets the shell size.

@@ -1,9 +1,9 @@
-# `cms/about/events.ts`
+# `cms\about\events.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/about/events.ts` |
-| **UX surface** | About-section editor card. |
+| **Source** | `src/cms\about\events.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

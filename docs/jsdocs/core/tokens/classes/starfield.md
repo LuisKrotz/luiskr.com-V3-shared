@@ -1,10 +1,10 @@
-# `core/tokens/classes/starfield.ts`
+# `core\tokens\classes\starfield.ts`
 
 Star-field experiment class tokens (`sf-*` block) —
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/classes/starfield.ts`                    |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\classes\starfield.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

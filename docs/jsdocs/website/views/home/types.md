@@ -1,10 +1,10 @@
-# `website/views/home/types.ts`
+# `website\views\home\types.ts`
 
 Shapes for the &lt;view-home&gt; route: the portfolio list item,
 
 | | |
 |---|---|
-| **Source** | `src/website/views/home/types.ts` |
+| **Source** | `src/website\views\home\types.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

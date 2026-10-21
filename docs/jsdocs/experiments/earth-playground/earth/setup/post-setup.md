@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/setup/post-setup.ts`
+# `experiments\earth-playground\earth\setup\post-setup.ts`
 
 Post-processing chain for the Earth engine: color-grading,
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/setup/post-setup.ts` |
+| **Source** | `src/experiments\earth-playground\earth\setup\post-setup.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

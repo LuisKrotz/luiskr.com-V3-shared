@@ -1,10 +1,10 @@
-# `core/predictive-loader.ts`
+# `core\predictive-loader.ts`
 
 Intent-based predictive prefetching engine.
 
 | | |
 |---|---|
-| **Source** | `src/core/predictive-loader.ts` |
+| **Source** | `src/core\predictive-loader.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

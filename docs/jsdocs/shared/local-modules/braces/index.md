@@ -1,8 +1,8 @@
-# `shared/local-modules/braces/index.js`
+# `shared\local-modules\braces\index.js`
 
 | | |
 |---|---|
-| **Source** | `src/shared/local-modules/braces/index.js` |
+| **Source** | `src/shared\local-modules\braces\index.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

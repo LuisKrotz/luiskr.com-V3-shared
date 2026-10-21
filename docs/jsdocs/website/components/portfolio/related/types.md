@@ -1,8 +1,8 @@
-# `website/components/portfolio/related/types.ts`
+# `website\components\portfolio\related\types.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/portfolio/related/types.ts`     |
+| | |
+|---|---|
+| **Source** | `src/website\components\portfolio\related\types.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `website/views/home/scroll.ts`
+# `website\views\home\scroll.ts`
 
 Post-navigation scroll handling for &lt;view-home&gt;: same-view
 
 | | |
 |---|---|
-| **Source** | `src/website/views/home/scroll.ts` |
+| **Source** | `src/website\views\home\scroll.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

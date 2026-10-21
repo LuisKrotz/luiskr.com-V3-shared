@@ -1,11 +1,11 @@
-# `shared/scripts/media/validate-media-sizes.mjs`
+# `shared\scripts\media\validate-media-sizes.mjs`
 
 Validates every media `size` declared in `database.json`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/media/validate-media-sizes.mjs`                       |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\media\validate-media-sizes.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -29,7 +29,7 @@ embedded thumbnail APP1 segments before the frame header.
 
 ### `IMAGE_DIM_VARIANTS`
 
-Image variants usable for _dimensions_ — same-source derivative passes
+Image variants usable for *dimensions* — same-source derivative passes
 only. The kodak MSSIM thumb is excluded deliberately: it is a downscaled
 blur-up placeholder and would record the wrong intrinsic size.
 

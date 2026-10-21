@@ -1,10 +1,10 @@
-# `core/utils/canvas/webgl-pool.ts`
+# `core\utils\canvas\webgl-pool.ts`
 
 Lifecycle pool for the shared WebGL contexts: registers
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/webgl-pool.ts` |
+| **Source** | `src/core\utils\canvas\webgl-pool.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

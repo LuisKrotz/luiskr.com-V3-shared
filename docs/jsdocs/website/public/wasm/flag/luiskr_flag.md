@@ -1,8 +1,8 @@
-# `website/public/wasm/flag/luiskr_flag.js`
+# `website\public\wasm\flag\luiskr_flag.js`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/public/wasm/flag/luiskr_flag.js`           |
+| | |
+|---|---|
+| **Source** | `src/website\public\wasm\flag\luiskr_flag.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -16,7 +16,6 @@ Public wasm surface — one flag canvas per instance.
 `frame` — one animation tick: pack, write, draw. Skips silently
 until textures land (no bind group yet — an unbound draw would
 be a validation error).
-
 - `@param` dt Seconds since the previous call.
 - `@param` {number} dt
 
@@ -24,7 +23,6 @@ be a validation error).
 
 `init` — device + pipeline + sampler; the bind group builds
 once textures land (`upload_textures` → `rebind`).
-
 - `@param` canvas The widget's dedicated canvas.
 - `@param` device The shared GPUDevice (one per page, from the JS bridge).
 - `@returns` Ok on a live surface, Err(JsValue) on failure.
@@ -38,7 +36,6 @@ once textures land (`upload_textures` → `rebind`).
 ### `resize`
 
 `resize` — canvas-bitmap change → surface re-configure.
-
 - `@param` _w Device-pixel width (element-side).
 - `@param` _h Device-pixel height.
 - `@param` {number} w
@@ -47,7 +44,6 @@ once textures land (`upload_textures` → `rebind`).
 ### `set_size`
 
 `set_size` — the canvas's CSS-pixel size (res + rect).
-
 - `@param` w Canvas width in CSS pixels.
 - `@param` h Canvas height in CSS pixels.
 - `@param` {number} w
@@ -57,7 +53,6 @@ once textures land (`upload_textures` → `rebind`).
 
 `set_state` — bundled scalar update: hover amount, the locale
 personality, and the split-flag geometry.
-
 - `@param` hover 0..1 hover amount.
 - `@param` anim Locale personality 0..11 (`GPU_FLAG_ANIMS`).
 - `@param` is_split 0 single / 1 split flag.
@@ -78,7 +73,6 @@ live next frame.
 `ImageBitmap` inputs — the browser decodes the SVG off-main-
 thread and `copyExternalImageToTexture` moves pixels GPU→GPU,
 so no CPU pixel round-trip ever touches the flag path.
-
 - `@param` a The primary flag's decoded bitmap.
 - `@param` b The secondary flag's decoded bitmap (same as `a` for
 - `@param` {ImageBitmap} a

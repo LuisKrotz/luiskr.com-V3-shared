@@ -1,10 +1,10 @@
-# `website/views/home/data.ts`
+# `website\views\home\data.ts`
 
 Data loading for &lt;view-home&gt;: three SWR sources fetched
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/views/home/data.ts`                        |
+| | |
+|---|---|
+| **Source** | `src/website\views\home\data.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/firebase.ts`
+# `core\firebase.ts`
 
 Firebase client bootstrap — split between the site (read-only)
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/firebase.ts`                                    |
+| | |
+|---|---|
+| **Source** | `src/core\firebase.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -56,7 +56,6 @@ VITE_FIREBASE_APPCHECK_SITE_KEY carries the reCAPTCHA site key
 console-issued debug token so localhost dev can mint valid tokens.
 With no site key configured the init is a no-op — the 401 cause then
 surfaces through the recorded popup detail instead of hanging.
-
 - `@returns` The AppCheck instance, or null when unconfigured/failed.
 
 ### `_authInstance`
@@ -71,7 +70,6 @@ In-flight auth-chunk promise — concurrent callers share one import.
 
 Lazily imports firebase/auth once and returns the shared Auth instance.
 Concurrent callers share _authPromise so the chunk is fetched exactly once.
-
 - `@returns` The Auth instance bound to `app`.
 
 ### `_dbInstance`
@@ -86,7 +84,6 @@ In-flight database-chunk promise — concurrent callers share one import.
 
 Lazily imports firebase/database once and returns the shared RTDB
 instance. Only needed by the CMS write path — public reads use REST.
-
 - `@returns` The Database instance bound to `app`.
 
 ### (module scope)
@@ -97,7 +94,6 @@ When the environment can't complete the popup handshake (popup blockers,
 COOP window.closed blocking, partitioned web storage, unsupported
 contexts — the AUTH_REDIRECT_FALLBACK_CODES set), retries transparently
 via signInWithRedirect, which navigates away and never resolves.
-
 - `@returns` The SDK UserCredential, or nothing when the redirect fallback fires.
 
 ### `probeAuthBackend`
@@ -109,7 +105,6 @@ the relayed event error by code alone (`_createError(auth, code)`),
 dropping the nested server message ("Firebase App Check token is
 invalid.", …). Re-issuing the call directly returns the real reason.
 POST only creates no server state: it resolves which providers apply.
-
 - `@returns` The server's error message, or empty when the probe can't run
 
 ### (module scope)
@@ -129,7 +124,6 @@ Upper bound on the redirect-event wait — the iframe relay can stall.
 Persists the OAuth-return failure code for the login view and consumes
 the redirect marker — storage itself may be the blocker, so every write
 is guarded.
-
 - `@param` code Firebase-style error code (or a synthetic `auth/*` code).
 
 ### `flagAuthError`
@@ -137,7 +131,6 @@ is guarded.
 Persists an "auth failed but not via the OAuth return" signal used to
 distinguish a null getRedirectResult with an outstanding marker (event
 lost to blocked third-party storage) from a plain first visit.
-
 - `@param` code Firebase-style error code.
 
 ### `raceTimeout`
@@ -158,7 +151,6 @@ previously left the page hanging with the stale redirect marker. On a
 timeout or failure the real diagnosis is recorded for the login view,
 while a best-effort background subscribe still wires the listener so a
 late-arriving event can still sign in.
-
 - `@param` callback Invoked with the User (or null on sign-out) on every auth transition.
 - `@returns` {Promise<Function>} the SDK's unsubscribe function
 
@@ -174,7 +166,6 @@ Lightweight HTTP REST reader for the Realtime Database: GETs
 
 Cache order: in-flight promise map → sessionStorage (survives route
 changes within the tab) → network → SDK get() fallback on REST failure.
-
 - `@param` path RTDB path — leading slash stripped for URL safety.
 - `@returns` Snapshot-shaped {exists, val} wrapping the JSON payload.
 

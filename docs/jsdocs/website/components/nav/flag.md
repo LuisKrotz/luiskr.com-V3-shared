@@ -1,10 +1,10 @@
-# `website/components/nav/flag.tsx`
+# `website\components\nav\flag.tsx`
 
 Locale flag rendering + FlagWebGL lifecycle for &lt;app-nav&gt;,
 
 | | |
 |---|---|
-| **Source** | `src/website/components/nav/flag.tsx` |
+| **Source** | `src/website\components\nav\flag.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

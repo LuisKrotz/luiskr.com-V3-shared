@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/frame/camera.ts`
+# `experiments\star-field\engine\frame\camera.ts`
 
 Camera-side per-frame behavior — world/screen anchor
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/frame/camera.ts`     |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\frame\camera.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -16,7 +16,6 @@ hover tooltip + leader line — one getWorldPosition → project(camera)
 → NDC → px pass, all on the shared scratch vector (zero per-frame
 allocation). Returns null when the anchor or camera isn't projectable
 (test mocks, unbooted state) or the point sits behind the camera.
-
 - `@param` anchor Any Object3D in the scene graph.
 - `@param` s Engine state (camera + canvas for the projection + size).
 
@@ -31,7 +30,6 @@ facing the object, and any off-screen result is clamped inside
 `SF_TIP.EDGE_PAD` — the hint therefore locates the body at any zoom
 level. `edge` reports the clamp and `angle` the outward direction in
 degrees (canvas coords, y-down) for the leader-line arrow.
-
 - `@param` p World-space point (pinned-frame coords).
 - `@param` s Engine state (camera + canvas for the projection + size).
 
@@ -40,7 +38,6 @@ degrees (canvas coords, y-down) for the leader-line arrow.
 World position of an anchor — single getWorldPosition call-site so the
 armed Vector3 stays private to this module; returns {x,y,z} so callers
 never handle three types.
-
 - `@param` anchor Any Object3D in the scene graph.
 
 ### `rotateStarCamera`
@@ -53,7 +50,6 @@ and any running fly-to is cancelled so manual control always wins.
 The offset is converted to spherical coordinates (r, θ azimuth in the
 XZ plane, φ polar from +Y), the deltas are applied, then converted
 back to Cartesian around the target.
-
 - `@param` s Engine state (camera + controls required; no-op before boot).
 - `@param` dAzimuth Azimuth delta in radians (left = -, right = +).
 - `@param` dPolar Polar delta in radians (down = -, up = +).
@@ -63,7 +59,6 @@ back to Cartesian around the target.
 Resize step: measures the shadow host first, then the canvas parent,
 then the window. Pixel ratio caps at 2 to prevent 3x-phone fill-rate
 blowout.
-
 - `@param` s Engine state.
 
 ### `followSelected`
@@ -84,5 +79,4 @@ tween's own target lerp stays free to pan.
 Registry ids carry no anchor — they are static shard points — and are
 skipped. Runs every tick (not just post-fly) so the repin lands the
 same frame a new follow is armed.
-
 - `@param` s Engine state.

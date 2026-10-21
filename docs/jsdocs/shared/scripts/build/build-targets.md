@@ -1,8 +1,8 @@
-# `shared/scripts/build/build-targets.mjs`
+# `shared\scripts\build\build-targets.mjs`
 
 Multi-target build orchestrator.
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/build-targets.mjs`                              |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\build\build-targets.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |

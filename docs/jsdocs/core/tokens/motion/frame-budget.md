@@ -1,10 +1,10 @@
-# `core/tokens/motion/frame-budget.ts`
+# `core\tokens\motion\frame-budget.ts`
 
 Animation frame-budget constants — the per-frame work
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/motion/frame-budget.ts`                  |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\motion\frame-budget.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

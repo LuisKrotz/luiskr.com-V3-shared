@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth-background.ts`
+# `experiments\earth-playground\earth-background.ts`
 
 Three.js WebGPU Earth background engine.
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth-background.ts` |
+| **Source** | `src/experiments\earth-playground\earth-background.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

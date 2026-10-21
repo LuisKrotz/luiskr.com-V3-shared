@@ -1,10 +1,10 @@
-# `core/utils/motion/genie.ts`
+# `core\utils\motion\genie.ts`
 
 "Genie" dialog transition shared by the preferences modal and
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/motion/genie.ts` |
+| **Source** | `src/core\utils\motion\genie.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

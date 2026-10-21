@@ -1,8 +1,8 @@
-# `website/components/media/draw-text/render.ts`
+# `website\components\media\draw-text\render.ts`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/media/draw-text/render.ts` |
+| **Source** | `src/website\components\media\draw-text\render.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

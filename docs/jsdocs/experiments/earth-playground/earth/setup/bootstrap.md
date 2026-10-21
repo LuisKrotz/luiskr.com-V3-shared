@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/setup/bootstrap.ts`
+# `experiments\earth-playground\earth\setup\bootstrap.ts`
 
 Async scene assembly for the Earth engine, extracted from
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/setup/bootstrap.ts` |
+| **Source** | `src/experiments\earth-playground\earth\setup\bootstrap.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

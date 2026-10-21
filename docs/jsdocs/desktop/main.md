@@ -1,8 +1,8 @@
-# `desktop/main.mjs`
+# `desktop\main.mjs`
 
-|                |                                                                     |
-| -------------- | ------------------------------------------------------------------- |
-| **Source**     | `src/desktop/main.mjs`                                              |
+| | |
+|---|---|
+| **Source** | `src/desktop\main.mjs` |
 | **UX surface** | Electron main/launcher/preload — wraps dist/ as an installable app. |
 
 ## Members
@@ -19,8 +19,8 @@ dev`'s vite middleware, so the converter panel behaves exactly like a
 non-dev browser: the localhost gate hides it unless the dev server
 runs alongside.
 
-yarn desktop:dev — serve dist/ in an Electron window (build first)
-yarn desktop:build — per-OS installers via electron-builder (release/)
+  yarn desktop:dev    — serve dist/ in an Electron window (build first)
+  yarn desktop:build  — per-OS installers via electron-builder (release/)
 
 ### `MIME`
 

@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/layout.ts`
+# `website\components\home\mosaic\layout.ts`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/home/mosaic/layout.ts` |
+| **Source** | `src/website\components\home\mosaic\layout.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

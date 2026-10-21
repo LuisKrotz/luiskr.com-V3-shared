@@ -1,11 +1,11 @@
-# `experiments/star-field/engine/bodies/primitives.ts`
+# `experiments\star-field\engine\bodies\primitives.ts`
 
 Per-body mesh builders for the scene-graph assembler in
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/primitives.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bodies\primitives.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -37,7 +37,6 @@ pixels at the home camera, so a slightly larger transparent sphere
 raycaster a usable target. Marked `SF_USER_PROXY` so a real-mesh hit
 along the same ray always wins; the caller stamps the body id on
 `userData` since the proxy is shared across kinds.
-
 - `@param` THREE The three.js module.
 - `@param` radius The body's true radius — the proxy scales with it so
 - `@returns` The invisible proxy mesh.
@@ -51,7 +50,6 @@ silhouette, so the photosphere dissolves into its additive halo
 instead of cutting a hard circle against the sky. Built as a
 MeshBasicNodeMaterial — the WebGPURenderer node pipeline rejects
 classic GLSL ShaderMaterials.
-
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors (bootstrap-injected).
 - `@param` colorHex Core tint (def.color; SUN_LIGHT fallback).
@@ -73,7 +71,6 @@ proportions (Phobos ≈ 27×22×18 km → [1, 0.81, 0.67]). Per-vertex
 spherical UVs (u = atan2 longitude, v = asin latitude) are baked
 from the PRE-stretch unit direction so an equirect map still wraps
 pole-to-pole without smearing across the crumpled facets.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry — `irregular` carries amp + optional axes.
 - `@returns` Crumpled geometry with spherical UVs + smooth normals.
@@ -87,7 +84,6 @@ MeshStandard. When `sunDir` is passed (day/night registry vector) the
 body upgrades to `MeshStandardNodeMaterial` so the emissive layer can
 be gated by the sun direction — city lights never glow on the lit
 hemisphere.
-
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors.
 - `@param` def Catalog entry.
@@ -100,7 +96,6 @@ Extra translucent sphere one shell above a surface — Earth's cloud
 deck rides a white-on-black map under additive blending so the dark
 sky between clouds contributes nothing; the deck scales slightly past
 the surface sphere so it reads as atmosphere, not paint.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry (radius sizes the shell).
 - `@param` cloudTex The loaded cloud map (caller guards its presence).
@@ -113,7 +108,6 @@ the night limb, bright scattering blue on the day limb, and a warm
 amber band through the terminator (rayleigh→mie analogy). Opacity
 also dims on the night side so the rim reads thinnest where the air
 is unlit. `updateDayNight` keeps the shared `sunDir` vector current.
-
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors (bootstrap-injected).
 - `@param` def Catalog entry — `def.atmosphere` scales the base opacity.
@@ -125,7 +119,6 @@ Additive halo sprite behind a luminous body — stars and the Sun glow
 like point sources on a real long-exposure frame instead of rendering
 as flat colored balls. Kept off the LOD `detail` list: a star's glow
 IS its far-field representation.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry (color tints the halo).
 - `@param` glowTex Shared radial-gradient glow texture (may be undefined).
@@ -140,7 +133,6 @@ the real ice-giant ring systems are a handful of razor-thin dark
 arcs (Uranus: 13 narrow rings, albedo ~0.02; Neptune: 5 faint arcs),
 so the strip stays mostly transparent with sparse low-alpha bands —
 never Saturn's broad bright plate.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry — seeds the band layout + tints from color.
 - `@returns` A CanvasTexture, or undefined without a 2d context.
@@ -154,7 +146,6 @@ Neptune) falls back to `ringStripFor`'s seeded dusty bands; radii
 default to Saturn's strip but `def.ringInner`/`ringOuter` pin the
 honest per-body span. Returns the created Object3D so the caller can
 register it as LOD detail.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry.
 - `@param` shellTexture Shell texture URL — undefined for procedural rings.
@@ -178,7 +169,6 @@ a pair of wide flat solar-array wings at the tips, all in lit
 MeshStandardMaterial so the station glints in sunlight and goes dark
 through eclipse instead of glowing. All proportions derive from
 `sat.radius` so the model shrinks with the solar tier.
-
 - `@param` THREE The three.js module.
 - `@param` sat Satellite def — `radius` is the core scale unit.
 - `@returns` The station group (caller positions it on its pivot).
@@ -193,7 +183,6 @@ before but now modulated by a surface — the satellite's own photo
 `surfaceFor` equirect keyed on `host:sat:index`, so companion worlds
 are textured bodies too, not bare glow dots. `satPivots` returns the
 {pivot,speed,phase} records frame.ts rotates.
-
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors.
 - `@param` def Catalog entry — `satellites` lists the companions.

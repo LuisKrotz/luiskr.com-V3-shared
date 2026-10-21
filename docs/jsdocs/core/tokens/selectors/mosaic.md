@@ -1,10 +1,10 @@
-# `core/tokens/selectors/mosaic.ts`
+# `core\tokens\selectors\mosaic.ts`
 
 Home mosaic selector tokens — token group.
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/selectors/mosaic.ts` |
+| **Source** | `src/core\tokens\selectors\mosaic.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

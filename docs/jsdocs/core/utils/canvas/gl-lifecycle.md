@@ -1,10 +1,10 @@
-# `core/utils/canvas/gl-lifecycle.ts`
+# `core\utils\canvas\gl-lifecycle.ts`
 
 Shared context-loss + release plumbing for the quad-based
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/gl-lifecycle.ts` |
+| **Source** | `src/core\utils\canvas\gl-lifecycle.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

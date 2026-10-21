@@ -1,10 +1,10 @@
-# `core/tokens/motion/slider.ts`
+# `core\tokens\motion\slider.ts`
 
 Knob-spring tunables for the slider widgets (theme
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/motion/slider.ts`                        |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\motion\slider.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,11 +1,11 @@
-# `experiments/star-field/engine/catalog/hierarchy.ts`
+# `experiments\star-field\engine\catalog\hierarchy.ts`
 
 Cosmic-hierarchy boundary structures — translucent
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog/hierarchy.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\catalog\hierarchy.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

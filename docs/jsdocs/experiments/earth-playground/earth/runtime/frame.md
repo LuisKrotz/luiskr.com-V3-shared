@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/runtime/frame.ts`
+# `experiments\earth-playground\earth\runtime\frame.ts`
 
 Per-frame + per-resize behavior for the Earth engine,
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/runtime/frame.ts` |
+| **Source** | `src/experiments\earth-playground\earth\runtime\frame.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

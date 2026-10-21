@@ -1,8 +1,8 @@
-# `website/tests/coverage/components/media/draw-text-nested-tags.test.js`
+# `website\tests\coverage\components\media\draw-text-nested-tags.test.js`
 
 | | |
 |---|---|
-| **Source** | `src/website/tests/coverage/components/media/draw-text-nested-tags.test.js` |
+| **Source** | `src/website\tests\coverage\components\media\draw-text-nested-tags.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/tokens/playground/textures.ts`
+# `core\tokens\playground\textures.ts`
 
 CDN URLs for the Earth Playground texture set — every map
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/playground/textures.ts`                  |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\playground\textures.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/tokens/attrs/data.ts`
+# `core\tokens\attrs\data.ts`
 
 `data-*` attribute tokens — token group. Every name is
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/attrs/data.ts`                           |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\attrs\data.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

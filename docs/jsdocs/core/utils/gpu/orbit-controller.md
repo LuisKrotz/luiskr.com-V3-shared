@@ -1,8 +1,8 @@
-# `core/utils/gpu/orbit-controller.ts`
+# `core\utils\gpu\orbit-controller.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/gpu/orbit-controller.ts`                  |
+| | |
+|---|---|
+| **Source** | `src/core\utils\gpu\orbit-controller.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -87,7 +87,6 @@ One frame of integration — auto-rotate advances the target while
 no pointer is captured, then every channel damps toward its
 target. Allocation-free. Returns true when the pose changed (the
 caller pushes `set_orbit` + fires CHANGE consumers).
-
 - `@param` dt Frame delta in seconds.
 
 ### `getDistance`
@@ -120,14 +119,13 @@ Binds pointer/wheel input on `canvas` to a damped orbit rig. The rig
 never touches the camera itself — consumers read the pose fields
 after `update(dt)` and push them into the engine (`set_orbit`) or a
 three camera (the math is backend-agnostic by design).
-
 - `@param` canvas The scene's input surface.
 - `@param` spec Gesture + clamp options.
 
 ### `dirty`
 
 Pose-dirty latch — setTarget/setPose change the pushed pose even
-when the damped channels are already settled.
+      when the damped channels are already settled.
 
 ### `pointers`
 

@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/theme-slider/paint-2d.ts`
+# `core\utils\canvas\widgets\theme-slider\paint-2d.ts`
 
 Canvas2D fallback renderer for ThemeSliderWebGL, extracted
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/widgets/theme-slider/paint-2d.ts` |
+| **Source** | `src/core\utils\canvas\widgets\theme-slider\paint-2d.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

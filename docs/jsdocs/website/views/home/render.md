@@ -1,10 +1,10 @@
-# `website/views/home/render.tsx`
+# `website\views\home\render.tsx`
 
 JSX template for &lt;view-home&gt; — the hero mosaic, about
 
 | | |
 |---|---|
-| **Source** | `src/website/views/home/render.tsx` |
+| **Source** | `src/website\views\home\render.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

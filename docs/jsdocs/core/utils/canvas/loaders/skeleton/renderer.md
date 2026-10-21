@@ -1,10 +1,10 @@
-# `core/utils/canvas/loaders/skeleton/renderer.ts`
+# `core\utils\canvas\loaders\skeleton\renderer.ts`
 
 Shared WebGL shimmer renderer for skeleton layers,
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/loaders/skeleton/renderer.ts` |
+| **Source** | `src/core\utils\canvas\loaders\skeleton\renderer.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

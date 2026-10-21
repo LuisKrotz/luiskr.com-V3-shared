@@ -1,10 +1,10 @@
-# `core/utils/perf/stats/flush.ts`
+# `core\utils\perf\stats\flush.ts`
 
 Flush interval for the stats engine: every INTERVAL_MS it
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/perf/stats/flush.ts` |
+| **Source** | `src/core\utils\perf\stats\flush.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

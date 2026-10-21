@@ -1,10 +1,10 @@
-# `core/tokens/motion/gpu-widgets.ts`
+# `core\tokens\motion\gpu-widgets.ts`
 
 WebGPU widget discriminants + artifact registry — the
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/motion/gpu-widgets.ts`                   |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\motion\gpu-widgets.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `website/components/portfolio/Related.tsx`
+# `website\components\portfolio\Related.tsx`
 
 &lt;portfolio-related&gt; — "related projects" strip at the
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/portfolio/Related.tsx`          |
+| | |
+|---|---|
+| **Source** | `src/website\components\portfolio\Related.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/close-button.ts`
+# `core\utils\canvas\widgets\close-button.ts`
 
 WebGL animated circular close (X) button used by the expand
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/close-button.ts`           |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\close-button.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -13,7 +13,6 @@ WebGL animated circular close (X) button used by the expand
 
 WebGL Animated Close Button
 Features:
-
 - Liquid fills slower and procedural rising bubbles with specular highlights
 - Rotating X during hover/liquid animation
 - Razor-sharp vector anti-aliased X line strokes (zero blur)

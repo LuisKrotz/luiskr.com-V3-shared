@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/weather.ts`
+# `experiments\star-field\engine\bodies\weather.ts`
 
 Living-planet systems — everything that makes Earth (and
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/weather.ts`   |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bodies\weather.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -36,7 +36,6 @@ sampled at `positionLocal`, so the cloud deck and the surface shadow
 read the SAME sky in the same frame. `positionLocal` is object space,
 meaning the field co-rotates with the body while the internal drift
 terms add the atmosphere's own differential motion on top.
-
 - `@param` TSL three/tsl namespace.
 - `@param` time Shared time uniform (scene seconds).
 - `@param` sunDirU Shared sun-direction uniform node — its Y doubles as
@@ -52,7 +51,6 @@ additive white wash. `surfaceMat` gets a colorNode multiplying the
 day-side diffuse by `1 − SHADOW·density` so thick weather visibly
 dims the ground beneath it. The shared `fxTime` uniform drives field
 evolution (updateFx writes it once per frame).
-
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors.
 - `@param` def Catalog entry (radius sizes the shell).
@@ -74,7 +72,6 @@ and the high-frequency curtain rays; the shared wind uniform gates
 brightness so a solar storm ignites every aurora-bearing world in
 the same frame, and the optional sun-direction uniform dims the
 day-side arc (UV emission runs in sunlight — it just doesn't show).
-
 - `@param` THREE The three.js module.
 - `@param` deps TSL namespace + node-material ctors.
 - `@param` def Catalog entry — `aurora` carries the per-body palette,
@@ -89,7 +86,6 @@ orbital shell: each satellite is a single lit pixel glinting as it
 laps the planet, and the whole shell precesses as a unit on its
 pivot (frame.ts rotates it like a satellite pivot). Raycast is
 stubbed so the swarm can never steal a body click.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry — `constellation` carries count/orbit.
 
@@ -99,7 +95,6 @@ Solar limb flares — `FLARE_N` seeded prominence sprites rooted at the
 photosphere edge of the Sun's equatorial band. updateFx scales them by
 `wind × sin⁴(phase + t·rate)` so eruptions breathe with the activity
 cycle and spike outward when storms hit.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry (Sun).
 - `@param` glowTex Shared radial-glow texture for the sprite maps.
@@ -113,7 +108,6 @@ a slot at a random surface point when `meteorNext` elapses and fades
 it over `SF_METEOR.LIFE`, so a body like Callisto reads as still
 being bombarded — matching the "saturated with craters" dossier —
 instead of standing geologically dead.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry (meteors-flagged).
 - `@param` glowTex Shared radial-glow texture for the flash map.

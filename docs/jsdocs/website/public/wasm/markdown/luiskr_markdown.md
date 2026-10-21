@@ -1,8 +1,8 @@
-# `website/public/wasm/markdown/luiskr_markdown.js`
+# `website\public\wasm\markdown\luiskr_markdown.js`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/public/wasm/markdown/luiskr_markdown.js`   |
+| | |
+|---|---|
+| **Source** | `src/website\public\wasm\markdown\luiskr_markdown.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -19,7 +19,7 @@ autolinks — the `marked.use({ gfm: true })` bundle).
   delimiter form marked renders into `<table><thead><tbody>`.
 - `ENABLE_STRIKETHROUGH` — `~~gone~~` → `<del>`.
 - `ENABLE_TASKLISTS` — `- [ ] item` → `<li><input disabled
-type="checkbox">`.
+  type="checkbox">`.
 
 Plus the event-stream bare-URL autolinker above — marked's gfm
 autolink parity that pulldown's `ENABLE_GFM` flag doesn't cover
@@ -30,7 +30,6 @@ Footnotes, smart punctuation, math, superscript/subscript,
 wikilinks, and heading attributes stay OFF — marked never enabled
 them, so enabling them here would silently change output for
 syntax that previously rendered as literal text.
-
 - `@param` source The Markdown source text.
 - `@returns` The rendered HTML string.
 - `@param` {string} source

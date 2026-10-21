@@ -1,11 +1,11 @@
-# `cms/dev/firebase-mock.ts`
+# `cms\dev\firebase-mock.ts`
 
 Dev-only offline stub for Firebase Auth + RTDB. Enabled by
 
 | | |
 |---|---|
-| **Source** | `src/cms/dev/firebase-mock.ts` |
-| **UX surface** | Offline dev mock — never shipped. |
+| **Source** | `src/cms\dev\firebase-mock.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

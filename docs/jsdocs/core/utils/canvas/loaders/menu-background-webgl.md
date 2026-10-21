@@ -1,10 +1,10 @@
-# `core/utils/canvas/loaders/menu-background-webgl.ts`
+# `core\utils\canvas\loaders\menu-background-webgl.ts`
 
 Fullscreen WebGL background for the nav menu overlay: an
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/loaders/menu-background-webgl.ts`  |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\loaders\menu-background-webgl.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

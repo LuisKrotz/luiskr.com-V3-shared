@@ -1,10 +1,10 @@
-# `core/utils/canvas/loaders/skeleton/shaders.ts`
+# `core\utils\canvas\loaders\skeleton\shaders.ts`
 
 GLSL sources for the skeleton shimmer layer, extracted
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/loaders/skeleton/shaders.ts` |
+| **Source** | `src/core\utils\canvas\loaders\skeleton\shaders.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

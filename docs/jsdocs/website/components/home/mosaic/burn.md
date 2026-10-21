@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/burn.ts`
+# `website\components\home\mosaic\burn.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/mosaic/burn.ts`            |
+| | |
+|---|---|
+| **Source** | `src/website\components\home\mosaic\burn.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -17,7 +17,6 @@ the burn where the glyphs stood while the card grows behind it (the
 h2's ink is hidden as soon as the canvas takes over, so the moving
 DOM title never shows through). Reduced motion skips the canvas
 entirely — the title swap happens instantly.
-
 - `@param` host The <home-mosaic> component instance.
 - `@param` i The card index inside the mosaic data set.
 - `@param` item The card's mosaic item (label drives the rewrite slot).
@@ -31,6 +30,5 @@ where the burn stopped so the front returns from exactly the consumed
 edge; frame() runs the teardown once the text is rebuilt. A card with
 no session (reduced motion, never armed) restores instantly — safe to
 call unconditionally.
-
 - `@param` host The <home-mosaic> component instance.
 - `@param` i The card index inside the mosaic data set.

@@ -1,10 +1,10 @@
-# `core/tokens/motion/skeleton.ts`
+# `core\tokens\motion\skeleton.ts`
 
 WebGL skeleton-field configuration tokens — grouped subsets
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/motion/skeleton.ts` |
+| **Source** | `src/core\tokens\motion\skeleton.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `experiments/star-field/star/render.tsx`
+# `experiments\star-field\star\render.tsx`
 
 JSX for StarField's render() — boot loader overlay (same
 
 | | |
 |---|---|
-| **Source** | `src/experiments/star-field/star/render.tsx` |
+| **Source** | `src/experiments\star-field\star\render.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

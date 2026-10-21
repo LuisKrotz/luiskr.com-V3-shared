@@ -1,10 +1,10 @@
-# `website/components/home/mosaic/pack.ts`
+# `website\components\home\mosaic\pack.ts`
 
 Masonry packing engine for &lt;home-mosaic&gt;, extracted from
 
 | | |
 |---|---|
-| **Source** | `src/website/components/home/mosaic/pack.ts` |
+| **Source** | `src/website\components\home\mosaic\pack.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

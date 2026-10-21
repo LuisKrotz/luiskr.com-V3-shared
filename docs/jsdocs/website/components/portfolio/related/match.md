@@ -1,8 +1,8 @@
-# `website/components/portfolio/related/match.ts`
+# `website\components\portfolio\related\match.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/portfolio/related/match.ts`     |
+| | |
+|---|---|
+| **Source** | `src/website\components\portfolio\related\match.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -18,7 +18,7 @@ Strips leading /projects/, /portfolio/ or lone slash plus a trailing slash — t
 ### `matchesExact`
 
 One related row vs one home item — strict link/image equality, checked before the loose rules so
-prefix-collision slugs (minimelissa vs melissa) bind their own card instead of the earliest row.
+    prefix-collision slugs (minimelissa vs melissa) bind their own card instead of the earliest row.
 
 ### `matches`
 

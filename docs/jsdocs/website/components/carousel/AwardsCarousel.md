@@ -1,10 +1,10 @@
-# `website/components/carousel/AwardsCarousel.tsx`
+# `website\components\carousel\AwardsCarousel.tsx`
 
 &lt;awards-carousel&gt; — lightweight carousel used by the awards
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/carousel/AwardsCarousel.tsx`    |
+| | |
+|---|---|
+| **Source** | `src/website\components\carousel\AwardsCarousel.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -61,7 +61,7 @@ Pending clone→real jump watchdog timer (rAF-starvation fallback).
 ### `pendingTeleport`
 
 Clone→real teleport armed by _scheduleTeleport — the scroll spring's
-settle fires it; the timer is only the rAF-starvation watchdog.
+ settle fires it; the timer is only the rAF-starvation watchdog.
 
 ### `touchStartX`
 

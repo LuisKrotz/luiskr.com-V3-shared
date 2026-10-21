@@ -1,8 +1,8 @@
-# `core/utils/canvas/widgets/theme-slider/render.ts`
+# `core\utils\canvas\widgets\theme-slider\render.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/theme-slider/render.ts`    |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\theme-slider\render.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

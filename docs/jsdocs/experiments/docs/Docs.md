@@ -1,10 +1,10 @@
-# `experiments/docs/Docs.tsx`
+# `experiments\docs\Docs.tsx`
 
 &lt;view-docs&gt; — the English-only docs portal route.
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/docs/Docs.tsx`                         |
+| | |
+|---|---|
+| **Source** | `src/experiments\docs\Docs.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -81,7 +81,6 @@ Localized toast copy for the copy guard — componentText already English-falls-
 ### `navigateDocs`
 
 Navigates within the portal — a bare path resolves against /docs.
-
 - `@param` subPath Manifest-relative path ('' → portal root).
 
 ### `pickNode`

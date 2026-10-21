@@ -1,10 +1,10 @@
-# `core/utils/wasm/wasm-image-decoder.ts`
+# `core\utils\wasm\wasm-image-decoder.ts`
 
 Image decode pipeline: fetch → worker-side createImageBitmap
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/wasm/wasm-image-decoder.ts` |
+| **Source** | `src/core\utils\wasm\wasm-image-decoder.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

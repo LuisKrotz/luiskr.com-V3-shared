@@ -1,10 +1,10 @@
-# `core/utils/gpu/gpu-accel-shaders.ts`
+# `core\utils\gpu\gpu-accel-shaders.ts`
 
 GLSL sources for the GPUAccelerator passthrough program —
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/gpu/gpu-accel-shaders.ts` |
+| **Source** | `src/core\utils\gpu\gpu-accel-shaders.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

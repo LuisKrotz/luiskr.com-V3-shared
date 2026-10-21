@@ -1,8 +1,8 @@
-# `website/components/nav/scroll.ts`
+# `website\components\nav\scroll.ts`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/nav/scroll.ts` |
+| **Source** | `src/website\components\nav\scroll.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/tokens/classes/docs.ts`
+# `core\tokens\classes\docs.ts`
 
 Docs-portal class tokens — BEM block `docs` + modifiers.
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/classes/docs.ts` |
+| **Source** | `src/core\tokens\classes\docs.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

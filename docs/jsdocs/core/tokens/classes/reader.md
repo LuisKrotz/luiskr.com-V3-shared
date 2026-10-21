@@ -1,10 +1,10 @@
-# `core/tokens/classes/reader.ts`
+# `core\tokens\classes\reader.ts`
 
 Reader-mode content class tokens — the prerendered article
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/classes/reader.ts`                       |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\classes\reader.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,9 +1,9 @@
-# `shared/build/jsx-in-js.mjs`
+# `shared\build\jsx-in-js.mjs`
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/jsx-in-js.mjs`                                         |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+| | |
+|---|---|
+| **Source** | `src/shared\build\jsx-in-js.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

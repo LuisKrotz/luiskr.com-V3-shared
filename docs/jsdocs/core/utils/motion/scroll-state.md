@@ -1,10 +1,10 @@
-# `core/utils/motion/scroll-state.ts`
+# `core\utils\motion\scroll-state.ts`
 
 Global "is the window currently scrolling" flag plus an
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/motion/scroll-state.ts` |
+| **Source** | `src/core\utils\motion\scroll-state.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

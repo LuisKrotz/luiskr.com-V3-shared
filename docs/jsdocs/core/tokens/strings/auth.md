@@ -1,10 +1,10 @@
-# `core/tokens/strings/auth.ts`
+# `core\tokens\strings\auth.ts`
 
 Firebase Auth error-code string tokens — token group.
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/strings/auth.ts`                         |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\strings\auth.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

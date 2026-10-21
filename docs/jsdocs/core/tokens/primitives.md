@@ -1,10 +1,10 @@
-# `core/tokens/primitives.ts`
+# `core\tokens\primitives.ts`
 
 Primitive string tokens — typeof results, punctuation,
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/primitives.ts` |
+| **Source** | `src/core\tokens\primitives.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

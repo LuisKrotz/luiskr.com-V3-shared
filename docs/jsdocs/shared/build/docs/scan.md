@@ -1,11 +1,11 @@
-# `shared/build/docs/scan.mjs`
+# `shared\build\docs\scan.mjs`
 
 Filesystem → manifest tree for the docs portal.
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/docs/scan.mjs`                                         |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+| | |
+|---|---|
+| **Source** | `src/shared\build\docs\scan.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -60,7 +60,6 @@ the same directory and each emitted `index.html` would overwrite the
 other. Colliding dirs keep the first-seen node and absorb the later
 dirs' children; colliding files keep the first and drop the rest.
 Recursion handles collisions introduced inside the merged children.
-
 - `@param` {Array<object>} nodes Sibling manifest nodes in scan order.
 - `@returns` {Array<object>} Deduped nodes, scan order preserved.
 
@@ -73,17 +72,15 @@ A root's optional `skip` list applies at the top level only — a module
 folder can exclude its own already-published subtrees (shared/docs,
 shared/local-modules) or asset payloads (star-field/public) without
 filtering same-named folders deeper in the tree (shared/scripts/docs).
-
-- `@param` {string} absDir Absolute directory being walked.
-- `@param` {string} baseDir Absolute root dir (for relative ids).
-- `@param` {string} root Manifest namespace ('docs'|'reports'|…).
+- `@param` {string}        absDir    Absolute directory being walked.
+- `@param` {string}        baseDir   Absolute root dir (for relative ids).
+- `@param` {string}        root      Manifest namespace ('docs'|'reports'|…).
 - `@param` {Array<string>} [topSkip] Top-level-only dir names to exclude.
 - `@returns` {Array<object>} Child nodes (dirs and files, stable order).
 
 ### `scanManifest`
 
 Builds the complete docs-portal manifest.
-
 - `@param` {string} repoRoot Absolute repository root.
 - `@returns` {{generated: string, roots: Array<object>}} Manifest object.
 
@@ -92,7 +89,6 @@ Builds the complete docs-portal manifest.
 Resolves a manifest `id` ('<root>:<relpath>') back to an absolute path,
 with the exclusion rules re-applied so a guessed id cannot escape the
 published tree (defense-in-depth next to route sanitization).
-
 - `@param` {string} repoRoot Absolute repository root.
-- `@param` {string} id Manifest file id.
+- `@param` {string} id       Manifest file id.
 - `@returns` {string|null} Absolute path, or null when not publishable.

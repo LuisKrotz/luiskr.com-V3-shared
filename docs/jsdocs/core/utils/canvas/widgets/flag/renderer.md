@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/flag/renderer.ts`
+# `core\utils\canvas\widgets\flag\renderer.ts`
 
 Shared WebGL renderer for FlagWebGL. One GL context serves
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/widgets/flag/renderer.ts` |
+| **Source** | `src/core\utils\canvas\widgets\flag\renderer.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,8 +1,8 @@
-# `core/public/scripts/workers/gpu-render-worker.js`
+# `core\public\scripts\workers\gpu-render-worker.js`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/public/scripts/workers/gpu-render-worker.js`    |
+| | |
+|---|---|
+| **Source** | `src/core\public\scripts\workers\gpu-render-worker.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -38,7 +38,6 @@ Request the worker-side device once; clears on loss so mounts re-request.
 ### `stop`
 
 Stop a record's pump loop.
-
 - `@param` rec The widget record.
 
 ### `pump`
@@ -46,7 +45,6 @@ Stop a record's pump loop.
 The worker-side render pump — owns `widget.frame(dt)` for
 RAF-driven kinds. A wasm-boundary throw or a false return disarms
 the pump and reports `dead` so the bridge can fall back.
-
 - `@param` rec The widget record.
 
 ### `probeFrame`
@@ -54,7 +52,6 @@ the pump and reports `dead` so the bridge can fall back.
 `probeFrame` — the draw-text overlay's self-verify, worker-side:
 jump the stagger to end state, read the canvas texture back through
 the worker's device, count painted pixels.
-
 - `@param` rec The widget record.
 - `@param` ms The probe timestamp (past the last char's end).
 - `@returns` Painted coverage ratio 0..1, or -1 on any readback failure.

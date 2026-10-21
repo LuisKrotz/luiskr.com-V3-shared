@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/flag/draw.ts`
+# `core\utils\canvas\widgets\flag\draw.ts`
 
 Per-frame draw for the shared FlagRenderer: binds the wave
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/widgets/flag/draw.ts` |
+| **Source** | `src/core\utils\canvas\widgets\flag\draw.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

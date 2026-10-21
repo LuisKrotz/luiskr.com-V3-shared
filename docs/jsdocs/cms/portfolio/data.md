@@ -1,9 +1,9 @@
-# `cms/portfolio/data.ts`
+# `cms\portfolio\data.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/portfolio/data.ts` |
-| **UX surface** | Portfolio list + related-projects editor card. |
+| **Source** | `src/cms\portfolio\data.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

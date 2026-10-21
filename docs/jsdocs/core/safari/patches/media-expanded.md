@@ -1,10 +1,10 @@
-# `core/safari/patches/media-expanded.ts`
+# `core\safari\patches\media-expanded.ts`
 
 MediaExpanded patch: explicit touchend close on every close target
 
 | | |
 |---|---|
-| **Source** | `src/core/safari/patches/media-expanded.ts` |
+| **Source** | `src/core\safari\patches\media-expanded.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

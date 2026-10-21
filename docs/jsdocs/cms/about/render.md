@@ -1,9 +1,9 @@
-# `cms/about/render.tsx`
+# `cms\about\render.tsx`
 
 | | |
 |---|---|
-| **Source** | `src/cms/about/render.tsx` |
-| **UX surface** | About-section editor card. |
+| **Source** | `src/cms\about\render.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

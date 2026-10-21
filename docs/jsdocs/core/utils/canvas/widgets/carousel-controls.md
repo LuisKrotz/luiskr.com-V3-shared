@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/carousel-controls.ts`
+# `core\utils\canvas\widgets\carousel-controls.ts`
 
 WebGL control button for the awards carousel: a circular
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/widgets/carousel-controls.ts` |
+| **Source** | `src/core\utils\canvas\widgets\carousel-controls.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

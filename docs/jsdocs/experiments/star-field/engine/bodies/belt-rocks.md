@@ -1,11 +1,11 @@
-# `experiments/star-field/engine/bodies/belt-rocks.ts`
+# `experiments\star-field\engine\bodies\belt-rocks.ts`
 
 Hero asteroids for the two belts — COUNT individual
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/belt-rocks.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bodies\belt-rocks.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -44,7 +44,6 @@ stony chondrites dominate, carbonaceous next, dust/ice/metal trail.
 Paints one material-class texture: base fill + per-class features —
 crater pits for stone, specular veins for metal, fracture streaks
 for ice, nothing but grain for carbon/dust.
-
 - `@param` THREE The three.js module.
 - `@param` cls Material class descriptor.
 - `@param` rand Seeded RNG.
@@ -57,7 +56,6 @@ Builds one unique rock geometry — either a crumpled icosahedron
 Vertices are displaced radially by seeded value noise, then per-
 vertex spherical UVs (u = atan2 longitude, v = asin latitude) are
 baked so the class texture wraps the body like a moon map.
-
 - `@param` THREE The three.js module.
 - `@param` frag True → tetrahedral fragment shape.
 - `@param` rand Seeded RNG for this individual rock.
@@ -66,7 +64,6 @@ baked so the class texture wraps the body like a moon map.
 
 Picks a material class for one rock from the cumulative probability
 table (metal holds the implicit remainder of the four named classes).
-
 - `@param` rand Seeded RNG.
 
 ### `makeBeltRocks`
@@ -74,7 +71,6 @@ table (metal holds the implicit remainder of the four named classes).
 Populates an asteroid-belt definition with hero rock meshes — the
 particle annulus stays as the mass background, these give the belt
 its readable "rocks drifting past" foreground on fly-in.
-
 - `@param` THREE The three.js module.
 - `@param` def The belt's catalog entry — `def.belt` sizes the annulus.
 - `@returns` `group` of rock pivots + `pivots` satPivots entries.

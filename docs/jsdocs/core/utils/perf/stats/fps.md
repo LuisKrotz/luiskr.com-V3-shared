@@ -1,10 +1,10 @@
-# `core/utils/perf/stats/fps.ts`
+# `core\utils\perf\stats\fps.ts`
 
 FPS sampler for the stats engine: counts rAF ticks and
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/perf/stats/fps.ts` |
+| **Source** | `src/core\utils\perf\stats\fps.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `website/components/feedback/StatsHud.tsx`
+# `website\components\feedback\StatsHud.tsx`
 
 &lt;stats-hud&gt; — the stats-for-nerds overlay: a compact HUD in
 
 | | |
 |---|---|
-| **Source** | `src/website/components/feedback/StatsHud.tsx` |
+| **Source** | `src/website\components\feedback\StatsHud.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

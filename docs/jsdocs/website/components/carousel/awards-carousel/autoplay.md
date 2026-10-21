@@ -1,8 +1,8 @@
-# `website/components/carousel/awards-carousel/autoplay.ts`
+# `website\components\carousel\awards-carousel\autoplay.ts`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/carousel/awards-carousel/autoplay.ts` |
+| **Source** | `src/website\components\carousel\awards-carousel\autoplay.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

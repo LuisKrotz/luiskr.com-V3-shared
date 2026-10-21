@@ -1,10 +1,10 @@
-# `website/components/home/AwardsMentions.tsx`
+# `website\components\home\AwardsMentions.tsx`
 
 &lt;awards-mentions&gt; — the footer band on internals/home: an
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/AwardsMentions.tsx`        |
+| | |
+|---|---|
+| **Source** | `src/website\components\home\AwardsMentions.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,11 +1,11 @@
-# `experiments/star-field/engine/catalog/local-group.ts`
+# `experiments\star-field\engine\catalog\local-group.ts`
 
 Local Group dwarf + satellite galaxies — seeded
 
-|                |                                                            |
-| -------------- | ---------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog/local-group.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.    |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\catalog\local-group.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

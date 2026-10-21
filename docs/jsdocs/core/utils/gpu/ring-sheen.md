@@ -1,8 +1,8 @@
-# `core/utils/gpu/ring-sheen.ts`
+# `core\utils\gpu\ring-sheen.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/gpu/ring-sheen.ts`                        |
+| | |
+|---|---|
+| **Source** | `src/core\utils\gpu\ring-sheen.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -41,7 +41,6 @@ Tear down canvas/widget/observers/listeners.
 `mountRingSheen` — overlays one instanced ring canvas on a tile
 container. Returns null when the surface can't mount (no GPU, no
 IntersectionObserver, reduced motion) — the CSS rings stay.
-
 - `@param` container The positioned ancestor the canvas fills
 - `@param` tilesSelector Class selector for the ringed tiles.
 - `@param` canvasClass Overlay canvas class (the `:has()` gate keys on it).
@@ -56,7 +55,6 @@ True while tile geometry may be stale (transition/resize/repack).
 Re-measures every tile against the container box and repushes the
 sheet + backing size. Colors refresh too — theme flips restyle the
 ring vars without a remount.
-
 - `@param` surface The live widget handle (callers run post-mount or post-guard).
 
 ### `tick`

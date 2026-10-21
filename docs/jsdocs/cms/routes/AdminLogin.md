@@ -1,11 +1,11 @@
-# `cms/routes/AdminLogin.tsx`
+# `cms\routes\AdminLogin.tsx`
 
 &lt;view-admin-login&gt; — the CMS gate: a single Google OAuth
 
-|                |                                       |
-| -------------- | ------------------------------------- |
-| **Source**     | `src/cms/routes/AdminLogin.tsx`       |
-| **UX surface** | Login screen and the dashboard shell. |
+| | |
+|---|---|
+| **Source** | `src/cms\routes\AdminLogin.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
@@ -15,7 +15,6 @@ Unwraps a Firebase error's real cause: auth/internal-error embeds the
 backend rejection as a JSON string inside `message` (the App-Check 401
 from createAuthUri), so the inner `error.message` is what actually
 names the failure. Returns the raw text when it isn't wrapped JSON.
-
 - `@param` raw The SDK error message (possibly a JSON-encoded API error).
 - `@returns` The innermost human-readable message.
 

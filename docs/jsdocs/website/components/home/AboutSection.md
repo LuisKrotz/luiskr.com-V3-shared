@@ -1,10 +1,10 @@
-# `website/components/home/AboutSection.tsx`
+# `website\components\home\AboutSection.tsx`
 
 &lt;about-section&gt; — the home page's bio block: Gravatar profile
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/AboutSection.tsx`          |
+| | |
+|---|---|
+| **Source** | `src/website\components\home\AboutSection.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

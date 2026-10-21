@@ -1,11 +1,11 @@
-# `shared/scripts/build/generate-sitemap.js`
+# `shared\scripts\build\generate-sitemap.js`
 
 Emits the whole crawl surface under `website/public/meta/`:
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/generate-sitemap.js`                            |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\build\generate-sitemap.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

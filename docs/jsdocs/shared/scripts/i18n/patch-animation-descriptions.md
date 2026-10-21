@@ -1,11 +1,11 @@
-# `shared/scripts/i18n/patch-animation-descriptions.js`
+# `shared\scripts\i18n\patch-animation-descriptions.js`
 
 Seeds the animated-element accessibility descriptions into
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/i18n/patch-animation-descriptions.js`                 |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\i18n\patch-animation-descriptions.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -16,14 +16,14 @@ Route/nav label for the animations-reference hub — APP.animations.
 ### `PAGES`
 
 Hub page chrome — pages.animations.{title,description} per locale.
-`description` doubles as the page intro paragraph and the meta/SERP
-snippet, so it names exactly what the records carry.
+ `description` doubles as the page intro paragraph and the meta/SERP
+ snippet, so it names exactly what the records carry.
 
 ### `SLUGS`
 
 Per-locale slug for the animations-reference route — mirrors
-`LANG_SLUGS[loc].animations` in core/locale/lang-slugs.ts so the CMS
-slug-override table carries the full key set.
+ `LANG_SLUGS[loc].animations` in core/locale/lang-slugs.ts so the CMS
+ slug-override table carries the full key set.
 
 ### `setPath`
 

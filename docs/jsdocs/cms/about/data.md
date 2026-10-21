@@ -1,9 +1,9 @@
-# `cms/about/data.ts`
+# `cms\about\data.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/about/data.ts` |
-| **UX surface** | About-section editor card. |
+| **Source** | `src/cms\about\data.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

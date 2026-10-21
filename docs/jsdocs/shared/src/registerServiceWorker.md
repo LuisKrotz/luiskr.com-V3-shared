@@ -1,10 +1,10 @@
-# `shared/src/registerServiceWorker.ts`
+# `shared\src\registerServiceWorker.ts`
 
 Registers the Workbox-generated service worker in production
 
 | | |
 |---|---|
-| **Source** | `src/shared/src/registerServiceWorker.ts` |
+| **Source** | `src/shared\src\registerServiceWorker.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

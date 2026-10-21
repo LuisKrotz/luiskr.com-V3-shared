@@ -1,11 +1,11 @@
-# `core/tests/coverage/utils/motion/scroll-spring-tails.test.js`
+# `core\tests\coverage\utils\motion\scroll-spring-tails.test.js`
 
 Coverage for core/utils/motion/scroll-spring.ts — the
 
-|                |                                                                    |
-| -------------- | ------------------------------------------------------------------ |
-| **Source**     | `src/core/tests/coverage/utils/motion/scroll-spring-tails.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI.          |
+| | |
+|---|---|
+| **Source** | `src/core\tests\coverage\utils\motion\scroll-spring-tails.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
 
@@ -21,7 +21,6 @@ Virtual clock (ms) fed to the queued callbacks.
 
 Runs `frames` rAF ticks, advancing the virtual clock by `dt` ms each.
 Callbacks re-armed during a tick land in the next queue.
-
 - `@param` {number} frames Ticks to pump.
 - `@param` {number} dt Virtual frame delta in ms.
 

@@ -1,9 +1,9 @@
-# `cms/media-convert/render.tsx`
+# `cms\media-convert\render.tsx`
 
 | | |
 |---|---|
-| **Source** | `src/cms/media-convert/render.tsx` |
-| **UX surface** | Batch image→WebP conversion pipeline UI. |
+| **Source** | `src/cms\media-convert\render.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

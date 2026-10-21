@@ -1,10 +1,10 @@
-# `core/tokens/starfield/textures.ts`
+# `core\tokens\starfield\textures.ts`
 
 CDN URLs for the Star Field experiment texture set —
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/textures.ts`                   |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\starfield\textures.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

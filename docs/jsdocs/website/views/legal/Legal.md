@@ -1,10 +1,10 @@
-# `website/views/legal/Legal.tsx`
+# `website\views\legal\Legal.tsx`
 
 &lt;view-legal&gt; — the legal-page route (privacy policy, GDPR,
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/views/legal/Legal.tsx`                     |
+| | |
+|---|---|
+| **Source** | `src/website\views\legal\Legal.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

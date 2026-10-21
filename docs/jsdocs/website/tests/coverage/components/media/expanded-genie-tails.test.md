@@ -1,11 +1,11 @@
-# `website/tests/coverage/components/media/expanded-genie-tails.test.js`
+# `website\tests\coverage\components\media\expanded-genie-tails.test.js`
 
 Coverage for website/components/media/expanded/genie.ts +
 
-|                |                                                                            |
-| -------------- | -------------------------------------------------------------------------- |
-| **Source**     | `src/website/tests/coverage/components/media/expanded-genie-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.                    |
+| | |
+|---|---|
+| **Source** | `src/website\tests\coverage\components\media\expanded-genie-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

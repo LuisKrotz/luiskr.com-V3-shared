@@ -1,8 +1,8 @@
-# `website/components/home/about/glitch/fx.ts`
+# `website\components\home\about\glitch\fx.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/about/glitch/fx.ts`        |
+| | |
+|---|---|
+| **Source** | `src/website\components\home\about\glitch\fx.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -23,7 +23,6 @@ from `naturalWidth` reads a fraction of the bitmap = the "zoomed
 corner" bug at DPR ≠ 1. Destination-rect cover sidesteps the two
 unit systems entirely: the browser maps the full image (any intrinsic
 size) into the rect.
-
 - `@param` img Decoded portrait element.
 - `@param` size Output square edge in canvas (device) px.
 - `@param` ox Canvas-space X origin of the square viewport.
@@ -35,7 +34,6 @@ Renders a channel-isolated copy of the portrait: the image is drawn
 cover-fit, then a pure-channel ink is multiplied over it so only that
 RGB channel survives. Two offsets of these under 'lighter' produce a
 true chromatic split.
-
 - `@param` s The session the channel copy is sized/drawn from.
 - `@param` mask The pure-channel ink (CANVAS_STRINGS.CHANNEL_*).
 

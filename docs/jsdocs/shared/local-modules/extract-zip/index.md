@@ -1,8 +1,8 @@
-# `shared/local-modules/extract-zip/index.js`
+# `shared\local-modules\extract-zip\index.js`
 
 | | |
 |---|---|
-| **Source** | `src/shared/local-modules/extract-zip/index.js` |
+| **Source** | `src/shared\local-modules\extract-zip\index.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

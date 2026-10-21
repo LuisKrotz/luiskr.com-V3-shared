@@ -1,10 +1,10 @@
-# `core/tokens/css/starfield.ts`
+# `core\tokens\css\starfield.ts`
 
 Star-field CSS custom-property names set from JS — grouped
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/css/starfield.ts`                        |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\css\starfield.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `experiments/earth-playground/SpacePlayground.tsx`
+# `experiments\earth-playground\SpacePlayground.tsx`
 
 &lt;view-space-playground&gt; — the space/earth playground route:
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/SpacePlayground.tsx` |
+| **Source** | `src/experiments\earth-playground\SpacePlayground.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

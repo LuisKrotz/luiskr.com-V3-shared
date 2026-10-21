@@ -1,10 +1,10 @@
-# `core/utils/gpu/npu-predict.ts`
+# `core\utils\gpu\npu-predict.ts`
 
 Hardware-tiered prefetch predictor: scores navigation
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/gpu/npu-predict.ts`                       |
+| | |
+|---|---|
+| **Source** | `src/core\utils\gpu\npu-predict.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -140,7 +140,6 @@ deliberate, slow, dwelt-on hover scores high; a fast flyby stays low.
 The WASM tier asks the worker for a spring-physics position over the
 same inputs and normalizes it onto 0–1 so all tiers emit comparable
 probabilities.
-
 - `@param` targetUrl Candidate route URL.
 - `@param` _targetEl The hovered element (reserved for hit-testing).
 - `@param` hoverTimeMs How long the pointer has dwelled on the target.
@@ -151,7 +150,6 @@ probabilities.
 Injects a <link rel="prefetch"> for the route asset — the browser
 caches it at low priority so the next navigation hits warm HTTP
 cache. Deduped by preloadedTargets.
-
 - `@param` targetUrl Route URL to prefetch.
 
 ### `preloadMediaGPU`
@@ -159,7 +157,6 @@ cache. Deduped by preloadedTargets.
 Preloads an image/media texture into GPU VRAM via the WASM worker path.
 Decoding happens off-main-thread and the resulting ImageBitmap is
 uploaded zero-copy — no main-thread Image() element, no decode jank.
-
 - `@param` src Media URL.
 - `@param` width Decode/resize hint width.
 - `@param` height Decode/resize hint height.
@@ -169,7 +166,6 @@ uploaded zero-copy — no main-thread Image() element, no decode jank.
 Metrics snapshot for the stats HUD (prediction counts, confidence,
 tier flags) — gpuAccelerated is re-resolved live so a late-initialized
 accelerator doesn't report permanently absent.
-
 - `@returns` The analytics object + live tier flags + preload count.
 
 ### `npuPredict`

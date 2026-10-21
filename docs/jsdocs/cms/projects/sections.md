@@ -1,9 +1,9 @@
-# `cms/projects/sections.ts`
+# `cms\projects\sections.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/projects/sections.ts` |
-| **UX surface** | Per-project sections editor card. |
+| **Source** | `src/cms\projects\sections.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

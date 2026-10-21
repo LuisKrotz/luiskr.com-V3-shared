@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/scene/atmos-shells.ts`
+# `experiments\earth-playground\earth\scene\atmos-shells.ts`
 
 Atmosphere shells for the Earth background — the BackSide
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/scene/atmos-shells.ts` |
+| **Source** | `src/experiments\earth-playground\earth\scene\atmos-shells.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

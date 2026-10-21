@@ -1,10 +1,10 @@
-# `experiments/docs/folder-svg.tsx`
+# `experiments\docs\folder-svg.tsx`
 
 Deterministic animated folder glyphs for the docs grid.
 
 | | |
 |---|---|
-| **Source** | `src/experiments/docs/folder-svg.tsx` |
+| **Source** | `src/experiments\docs\folder-svg.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

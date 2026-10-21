@@ -1,10 +1,10 @@
-# `core/utils/wasm/wasm-css.ts`
+# `core\utils\wasm\wasm-css.ts`
 
 Dynamic-CSS injector: owns the single &lt;style id="wasm-dynamic-css"&gt;
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/wasm/wasm-css.ts` |
+| **Source** | `src/core\utils\wasm\wasm-css.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

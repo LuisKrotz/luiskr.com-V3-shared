@@ -1,10 +1,10 @@
-# `core/tokens/starfield/kinds.ts`
+# `core\tokens\starfield\kinds.ts`
 
 Star-field taxonomy + action tokens: the region groups the
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/kinds.ts`                      |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\starfield\kinds.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

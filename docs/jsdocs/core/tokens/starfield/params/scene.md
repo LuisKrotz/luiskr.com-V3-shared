@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/scene.ts`
+# `core\tokens\starfield\params\scene.ts`
 
 Scene-shell and fallback parameters — the skybox radius,
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/scene.ts`               |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\starfield\params\scene.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

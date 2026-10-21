@@ -1,10 +1,10 @@
-# `core/debug/params.ts`
+# `core\debug\params.ts`
 
 Boot-time `?debug=…` actions. Values:
 
 | | |
 |---|---|
-| **Source** | `src/core/debug/params.ts` |
+| **Source** | `src/core\debug\params.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

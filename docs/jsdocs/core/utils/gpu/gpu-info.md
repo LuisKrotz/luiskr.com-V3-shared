@@ -1,10 +1,10 @@
-# `core/utils/gpu/gpu-info.ts`
+# `core\utils\gpu\gpu-info.ts`
 
 Shared GPU capability detection + WebGL context-option hints.
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/gpu/gpu-info.ts` |
+| **Source** | `src/core\utils\gpu\gpu-info.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,9 +1,9 @@
-# `cms/projects/types.ts`
+# `cms\projects\types.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/projects/types.ts` |
-| **UX surface** | Per-project sections editor card. |
+| **Source** | `src/cms\projects\types.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

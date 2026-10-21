@@ -1,10 +1,10 @@
-# `core/tokens/classes/mosaic.ts`
+# `core\tokens\classes\mosaic.ts`
 
 Home mosaic grid class tokens — token group.
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/classes/mosaic.ts`                       |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\classes\mosaic.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -18,7 +18,7 @@ the token contract immutable at runtime.
 ### `HOME_MOSAIC_ITEM_BURNING`
 
 Set on the card while its title burn session runs — silences the
-border sheen so only the combustion reads as the hover effect.
+ border sheen so only the combustion reads as the hover effect.
 
 ### `HOME_MOSAIC_BTN_CANVAS`
 

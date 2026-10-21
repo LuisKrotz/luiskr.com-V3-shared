@@ -1,9 +1,9 @@
-# `cms/footer/lists.ts`
+# `cms\footer\lists.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/footer/lists.ts` |
-| **UX surface** | Footer + legal links editor card. |
+| **Source** | `src/cms\footer\lists.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

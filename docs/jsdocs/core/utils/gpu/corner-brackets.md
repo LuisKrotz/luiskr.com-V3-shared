@@ -1,8 +1,8 @@
-# `core/utils/gpu/corner-brackets.ts`
+# `core\utils\gpu\corner-brackets.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/gpu/corner-brackets.ts`                   |
+| | |
+|---|---|
+| **Source** | `src/core\utils\gpu\corner-brackets.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -63,7 +63,6 @@ CSS resolves y at the parameter t where x(t)=p — Newton's method on
 the x polynomial, four iterations like the WGSL `bez` (the two must
 agree pixel-for-pixel or the GPU arm grows on a different clock than
 the CSS one it replaces).
-
 - `@param` p Linear progress 0..1.
 - `@param` x1 @param y1 @param x2 @param y2 Control-point coordinates.
 - `@returns` Eased progress 0..1.
@@ -74,7 +73,6 @@ the CSS one it replaces).
 the element's style scope: a probe span inherits the same custom
 properties, so shadow-DOM-scoped values resolve correctly. Returns 0
 when probing is impossible.
-
 - `@param` el Element whose scope the length resolves in.
 - `@param` value Any CSS width value.
 
@@ -83,7 +81,6 @@ when probing is impossible.
 Mounts the corner-brackets widget inside `button`. The canvas is a
 `position:absolute; inset:0` child — it follows the button's box for
 free, so only the backing size + arm lengths need mirroring.
-
 - `@param` button The bracketed button/link element.
 - `@param` spec Per-surface parameters (canvas class, hover inset, ease).
 - `@returns` Teardown function; safe to call more than once.
@@ -120,7 +117,6 @@ Batch mount — one `mountCornerBrackets` per matching element under
 `root` (a component shadow root or any parent). Returns a single
 teardown that destroys them all; surfaces that re-render call it
 then re-query (the helper tolerates re-mounting on new nodes).
-
 - `@param` root The subtree to query.
 - `@param` selector Class selector for the bracketed elements.
 - `@param` spec Shared surface parameters.

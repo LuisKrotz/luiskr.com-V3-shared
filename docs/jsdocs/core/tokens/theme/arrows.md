@@ -1,10 +1,10 @@
-# `core/tokens/theme/arrows.ts`
+# `core\tokens\theme\arrows.ts`
 
 Carousel arrow button directions — shared by CustomCarousel
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/theme/arrows.ts` |
+| **Source** | `src/core\tokens\theme\arrows.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

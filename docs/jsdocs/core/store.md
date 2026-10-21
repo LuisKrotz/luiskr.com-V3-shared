@@ -1,10 +1,10 @@
-# `core/store.ts`
+# `core\store.ts`
 
 Framework-free reactive state container (tiny pub/sub).
 
 | | |
 |---|---|
-| **Source** | `src/core/store.ts` |
+| **Source** | `src/core\store.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

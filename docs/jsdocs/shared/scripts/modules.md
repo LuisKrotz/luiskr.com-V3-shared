@@ -1,11 +1,11 @@
-# `shared/scripts/modules.mjs`
+# `shared\scripts\modules.mjs`
 
 Single source of truth for the workspace module registry.
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/modules.mjs`                                          |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\modules.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -24,5 +24,4 @@ roots (repo-relative) that enter that module's filtered coverage map.
 Discovers every workspace module: the fixed platform modules plus each
 experiments/<name>/ dir that ships a jest.config.mjs (sorted for
 deterministic run order).
-
 - `@returns` {Array<{name:string, root:string, src:string[]}>} module records.

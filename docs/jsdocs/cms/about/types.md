@@ -1,9 +1,9 @@
-# `cms/about/types.ts`
+# `cms\about\types.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/about/types.ts` |
-| **UX surface** | About-section editor card. |
+| **Source** | `src/cms\about\types.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

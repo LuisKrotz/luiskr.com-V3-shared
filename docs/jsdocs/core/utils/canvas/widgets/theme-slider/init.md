@@ -1,8 +1,8 @@
-# `core/utils/canvas/widgets/theme-slider/init.ts`
+# `core\utils\canvas\widgets\theme-slider\init.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/theme-slider/init.ts`      |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\theme-slider\init.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -32,7 +32,6 @@ Attempts the WebGPU wasm theme slider (~52KB artifact, own
 GPUDevice). MANUAL drive: this class keeps its own spring loop and
 pointer events, so the bridge only initializes the surface. On any
 failure initRest() runs the exact previous path (WebGL → CSS).
-
 - `@param` host The slider whose canvas the wasm widget should claim.
 
 ### `initRest`
@@ -40,7 +39,6 @@ failure initRest() runs the exact previous path (WebGL → CSS).
 The classic boot tail — context-loss watch → WebGL attempt →
 events + loop. Runs directly on no-WebGPU browsers and after a
 wasm mount failure.
-
 - `@param` host The slider to bring up on the classic path.
 
 ### `triggerFallback`

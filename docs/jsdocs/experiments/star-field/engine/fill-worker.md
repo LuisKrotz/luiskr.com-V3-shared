@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/fill-worker.ts`
+# `experiments\star-field\engine\fill-worker.ts`
 
 Multi-threaded fill dispatcher — the star-field's heavy
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/fill-worker.ts`      |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\fill-worker.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -34,7 +34,6 @@ seed, geometry params and the p-token map the worker mirrors — plus
 order into one pair of typed arrays; any failed chunk (null reply,
 malformed length) voids the whole result so the caller falls back to
 the identical local fill rather than mixing partial buffers.
-
 - `@param` action WASM_ACTIONS message type the worker dispatches on.
 - `@param` base Constant job payload shared by every chunk.
 - `@param` count Total record count to fill across chunks.

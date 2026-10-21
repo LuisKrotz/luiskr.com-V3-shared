@@ -1,11 +1,11 @@
-# `shared/build/es-targets.mjs`
+# `shared\build\es-targets.mjs`
 
 The multi-engine build matrix: every ES tier the site ships,
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/es-targets.mjs`                                        |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+| | |
+|---|---|
+| **Source** | `src/shared\build\es-targets.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

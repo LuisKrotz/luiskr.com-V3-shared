@@ -1,10 +1,10 @@
-# `core/utils/canvas/loaders/intro-loader.ts`
+# `core\utils\canvas\loaders\intro-loader.ts`
 
 Boot loader overlay — same visual language as the
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/loaders/intro-loader.ts` |
+| **Source** | `src/core\utils\canvas\loaders\intro-loader.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

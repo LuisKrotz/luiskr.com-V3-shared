@@ -1,10 +1,10 @@
-# `core/utils/canvas/gl-program.ts`
+# `core\utils\canvas\gl-program.ts`
 
 Shared WebGL boilerplate for the canvas widgets — every
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/gl-program.ts` |
+| **Source** | `src/core\utils\canvas\gl-program.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

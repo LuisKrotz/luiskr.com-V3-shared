@@ -1,10 +1,10 @@
-# `website/components/media/MediaFigure.tsx`
+# `website\components\media\MediaFigure.tsx`
 
 &lt;media-figure&gt; — the site's core media card: renders a
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/media/MediaFigure.tsx`          |
+| | |
+|---|---|
+| **Source** | `src/website\components\media\MediaFigure.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -112,10 +112,9 @@ Opens the expand modal with this media's descriptor via the store.
 ### (module scope)
 
 JSX template — a layered stack the CSS crossfades:
-
-1. placeholder <img> SVG data-URI at exact aspect (zero-CLS)
-2. thumb <img> instant low-res paint
-3. high-res <img> fades in over the thumb once decoded
-   video path replaces 2+3 with a muted looping <video>
-   Expand affordance renders as two buttons: a visible labelled one and
-   a full-cover aria-hidden layer that catches clicks anywhere on media.
+  1. placeholder <img>  SVG data-URI at exact aspect (zero-CLS)
+  2. thumb <img>        instant low-res paint
+  3. high-res <img>     fades in over the thumb once decoded
+  video path replaces 2+3 with a muted looping <video>
+Expand affordance renders as two buttons: a visible labelled one and
+a full-cover aria-hidden layer that catches clicks anywhere on media.

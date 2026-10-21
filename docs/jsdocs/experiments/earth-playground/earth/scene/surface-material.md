@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/scene/surface-material.ts`
+# `experiments\earth-playground\earth\scene\surface-material.ts`
 
 Surface material node graph for the Earth shell —
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/scene/surface-material.ts` |
+| **Source** | `src/experiments\earth-playground\earth\scene\surface-material.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

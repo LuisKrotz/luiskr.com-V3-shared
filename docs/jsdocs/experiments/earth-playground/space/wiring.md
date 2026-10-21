@@ -1,10 +1,10 @@
-# `experiments/earth-playground/space/wiring.ts`
+# `experiments\earth-playground\space\wiring.ts`
 
 Control wiring for SpacePlayground — panel event binding,
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/space/wiring.ts` |
+| **Source** | `src/experiments\earth-playground\space\wiring.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

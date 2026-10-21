@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/bodies.ts`
+# `core\tokens\starfield\params\bodies.ts`
 
 Per-body feature tuning — the Sgr A* black-hole composite
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/bodies.ts`              |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\starfield\params\bodies.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -201,7 +201,7 @@ the material response (metal glints, ice refracts).
 ### `SPIN_MIN`
 
 Tumble rates in rad/s — fragments spin fastest (collision
-fragments do); asteroid rotations run minutes-to-hours.
+ fragments do); asteroid rotations run minutes-to-hours.
 
 ### `SF_LOD`
 
@@ -258,12 +258,12 @@ Coma opacity at periapsis — thins with the same factor as tails.
 ### `COMA_FLOOR`
 
 Coma brightness floor — an inactive nucleus still vents a faint
-background coma; only the tails fully die.
+ background coma; only the tails fully die.
 
 ### `ION_LEN`
 
 Ion tail length as a multiple of the nucleus radius — the plasma
-stream reaches well past the coma before it disperses.
+ stream reaches well past the coma before it disperses.
 
 ### `DUST_LEN`
 
@@ -272,7 +272,7 @@ Dust tail — shorter, broader, lagging the radius vector.
 ### `DUST_TILT`
 
 Dust-tail lag angle (rad) — grains trail the comet's orbit, so the
-fan tilts off the anti-sunward line.
+ fan tilts off the anti-sunward line.
 
 ### `ACTIVE_FRAC`
 
@@ -297,10 +297,10 @@ silhouette can never render a hard edge.
 ### `PSZ_CORE`
 
 Grain sizes (× nucleus radius) — core grains are tight sparks,
-halo grains are big soft blobs whose overlap fakes the gas volume.
-Under additive blending each grain contributes a fraction of its
-footprint, so the grains run large: a sparse cloud of small
-sprites reads as confetti, not gas.
+ halo grains are big soft blobs whose overlap fakes the gas volume.
+ Under additive blending each grain contributes a fraction of its
+ footprint, so the grains run large: a sparse cloud of small
+ sprites reads as confetti, not gas.
 
 ### `DUST_PSIZE`
 
@@ -316,13 +316,13 @@ Dust disperses far wider than the field-locked ion stream.
 ### `WID_FLOOR`
 
 `WID_FLOOR` keeps a residual spread when the tail shrinks toward
-apoapsis (the column thins but never pinches to a zero-width line).
+ apoapsis (the column thins but never pinches to a zero-width line).
 
 ### `SHEATH_W`
 
 Sheath layer — wider spread and lower opacity than the core it
-wraps (`SHEATH_W` × spread, `OP_HALO` × opacity); `HALO_SLOW`
-slows its grains (outer gas drags behind the entrained spine).
+ wraps (`SHEATH_W` × spread, `OP_HALO` × opacity); `HALO_SLOW`
+ slows its grains (outer gas drags behind the entrained spine).
 
 ### `RATE_ION_LO`
 
@@ -360,8 +360,8 @@ the stream reads as a stub behind the coma.
 ### `ZFLAT`
 
 Vertical flattening — the z spread is `ZFLAT` × the in-plane
-spread (the tail sheet is thinner than it is wide, like a real
-dust sheet seen edge-on).
+ spread (the tail sheet is thinner than it is wide, like a real
+ dust sheet seen edge-on).
 
 ### `GAIN`
 
@@ -374,8 +374,8 @@ as confetti instead of gas.
 ### `WIND_K`
 
 Solar-wind gust coupling — grain brightness scales by
-`1 − WIND_K + WIND_K·windNorm` so a storm visibly surges the
-stream (katsushika-style brightness waves down the tail).
+ `1 − WIND_K + WIND_K·windNorm` so a storm visibly surges the
+ stream (katsushika-style brightness waves down the tail).
 
 ### `SF_DETAIL`
 
@@ -406,7 +406,7 @@ no detectable rim.
 ### `MASK_LOBE_DIST`
 
 Nebula lobe-mask scatter — distance band, lobe radius band, and the
-per-lobe alpha range (base + jitter).
+ per-lobe alpha range (base + jitter).
 
 ### `RING_V`
 
@@ -429,9 +429,9 @@ sketch, not Saturn's bright bands.
 ### `HALO_SCALE`
 
 Additive halo sprite diameter as a multiple of the star's radius —
-the eased tail (see `_HALO_T*` in procedural.ts) makes the outer
-third invisible, so 3.6 keeps the glow hugging the limb without
-ballooning into the bounded-ball look a wide linear ramp gives.
+ the eased tail (see `_HALO_T*` in procedural.ts) makes the outer
+ third invisible, so 3.6 keeps the glow hugging the limb without
+ ballooning into the bounded-ball look a wide linear ramp gives.
 
 ### `CORONA_SCALE`
 
@@ -496,7 +496,7 @@ Fraction of the galaxy particle budget kept for sparkle points.
 ### `SPARKLE_PX`
 
 Sparkle point size (px) — slightly fatter than the dust field so
-foreground stars sparkle against the photo disc.
+ foreground stars sparkle against the photo disc.
 
 ### `PICK_MIN`
 

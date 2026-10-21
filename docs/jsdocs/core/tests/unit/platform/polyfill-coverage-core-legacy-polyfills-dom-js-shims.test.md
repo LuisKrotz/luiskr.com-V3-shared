@@ -1,10 +1,10 @@
-# `core/tests/unit/platform/polyfill-coverage-core-legacy-polyfills-dom-js-shims.test.js`
+# `core\tests\unit\platform\polyfill-coverage-core-legacy-polyfills-dom-js-shims.test.js`
 
 Split from polyfill-coverage.test.js — covers the "core/legacy-polyfills/dom.js shims" describe.
 
 | | |
 |---|---|
-| **Source** | `src/core/tests/unit/platform/polyfill-coverage-core-legacy-polyfills-dom-js-shims.test.js` |
+| **Source** | `src/core\tests\unit\platform\polyfill-coverage-core-legacy-polyfills-dom-js-shims.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

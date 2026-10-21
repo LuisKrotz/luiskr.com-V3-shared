@@ -1,8 +1,8 @@
-# `website/tests/components/canvas/widgets/canvas-widgets-themesliderwebgl.test.js`
+# `website\tests\components\canvas\widgets\canvas-widgets-themesliderwebgl.test.js`
 
 Split from canvas-widgets.test.js — covers the "ThemeSliderWebGL" describe.
 
-|                |                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------- |
-| **Source**     | `src/website/tests/components/canvas/widgets/canvas-widgets-themesliderwebgl.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.                               |
+| | |
+|---|---|
+| **Source** | `src/website\tests\components\canvas\widgets\canvas-widgets-themesliderwebgl.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |

@@ -1,11 +1,11 @@
-# `cms/deploy-info/CmsDeployInfo.tsx`
+# `cms\deploy-info\CmsDeployInfo.tsx`
 
 &lt;cms-deploy-info&gt; — the Deploy Info tab: renders the
 
-|                |                                                      |
-| -------------- | ---------------------------------------------------- |
-| **Source**     | `src/cms/deploy-info/CmsDeployInfo.tsx`              |
-| **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
+| | |
+|---|---|
+| **Source** | `src/cms\deploy-info\CmsDeployInfo.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

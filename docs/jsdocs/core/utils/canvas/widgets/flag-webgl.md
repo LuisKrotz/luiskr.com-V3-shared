@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/flag-webgl.ts`
+# `core\utils\canvas\widgets\flag-webgl.ts`
 
 WebGL flag renderer for the language dialog: draws each
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/flag-webgl.ts`             |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\flag-webgl.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -13,7 +13,6 @@ WebGL flag renderer for the language dialog: draws each
 
 WebGL Flag Animator for Language Selection Buttons
 Each flag has a completely unique animated kinetic effect and wave physics:
-
 - EN (0): Star-spangled waving ripple with specular stars sparkle
 - PT (1): Solar burst pulse radiating from rhombus with Southern Cross constellation twinkle
 - ES (2): Warm flamenco silk wave with golden crest glow
@@ -54,7 +53,6 @@ so its width is the mean of both natural widths.
 Normalized 0–1 x where a hybrid flag's two halves meet: the first
 flag's share of the combined aspect widths (aspect1/(aspect1+aspect2))
 so each half keeps its natural proportions instead of stretching 50/50.
-
 - `@returns` {number}
 
 ### `_resizeToNaturalAspect`

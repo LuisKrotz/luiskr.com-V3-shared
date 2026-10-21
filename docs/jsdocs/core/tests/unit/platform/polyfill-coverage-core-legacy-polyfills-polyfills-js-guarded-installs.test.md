@@ -1,10 +1,10 @@
-# `core/tests/unit/platform/polyfill-coverage-core-legacy-polyfills-polyfills-js-guarded-installs.test.js`
+# `core\tests\unit\platform\polyfill-coverage-core-legacy-polyfills-polyfills-js-guarded-installs.test.js`
 
 Split from polyfill-coverage.test.js — covers the "core/legacy-polyfills/polyfills.js guarded installs" describe.
 
 | | |
 |---|---|
-| **Source** | `src/core/tests/unit/platform/polyfill-coverage-core-legacy-polyfills-polyfills-js-guarded-installs.test.js` |
+| **Source** | `src/core\tests\unit\platform\polyfill-coverage-core-legacy-polyfills-polyfills-js-guarded-installs.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

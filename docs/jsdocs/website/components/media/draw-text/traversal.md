@@ -1,8 +1,8 @@
-# `website/components/media/draw-text/traversal.ts`
+# `website\components\media\draw-text\traversal.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/media/draw-text/traversal.ts`   |
+| | |
+|---|---|
+| **Source** | `src/website\components\media\draw-text\traversal.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -61,7 +61,6 @@ write last (pen lift) or never (paper — alpha masks them out anyway).
 The bucket queue is a bounded drain loop, not stack emulation: each
 pixel is enqueued at most once per relaxation and dist strictly
 decreases per re-push, so the ring always empties.
-
 - `@param` data RGBA bytes of the painted atlas (`ctx.getImageData().data`).
 - `@param` width Atlas width in px.
 - `@param` height Atlas height in px (the atlas is a single row of cells).
@@ -72,6 +71,5 @@ decreases per re-push, so the ring always empties.
 Relaxes the 8-neighbourhood of one popped pixel — a straight step
 costs 2, a diagonal 3, and a neighbour is (re)queued only when this
 path is strictly cheaper than whatever distance it already holds.
-
 - `@param` px Flat index of the pixel whose frontier expands.
 - `@param` cur Distance of the popped pixel (its bucket slot).

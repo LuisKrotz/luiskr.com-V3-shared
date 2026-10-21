@@ -1,8 +1,8 @@
-# `core/utils/canvas/loaders/skeleton/loop.ts`
+# `core\utils\canvas\loaders\skeleton\loop.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/loaders/skeleton/loop.ts`          |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\loaders\skeleton\loop.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

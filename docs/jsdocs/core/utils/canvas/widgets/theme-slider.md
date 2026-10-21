@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/theme-slider.ts`
+# `core\utils\canvas\widgets\theme-slider.ts`
 
 WebGL three-position theme slider (light / system / dark)
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/theme-slider.ts`           |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\theme-slider.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -102,7 +102,6 @@ Moves the knob to the given theme's stop (spring-animated).
 
 Applies prefers-reduced-motion: swaps the animation loop for one
 static frame render, or restarts the loop when motion is re-allowed.
-
 - `@param` {boolean} isReduced
 
 ### `_renderStatic`

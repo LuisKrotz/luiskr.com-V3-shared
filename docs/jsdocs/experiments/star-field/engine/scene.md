@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/scene.ts`
+# `experiments\star-field\engine\scene.ts`
 
 Scene-graph foundation for the star-field engine: the
 
 | | |
 |---|---|
-| **Source** | `src/experiments/star-field/engine/scene.ts` |
+| **Source** | `src/experiments\star-field\engine\scene.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

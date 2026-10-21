@@ -1,10 +1,10 @@
-# `core/utils/motion/scroll-spring.ts`
+# `core\utils\motion\scroll-spring.ts`
 
 Scroll-position chase spring — the shared driver both
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/motion/scroll-spring.ts`                  |
+| | |
+|---|---|
+| **Source** | `src/core\utils\motion\scroll-spring.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -41,7 +41,6 @@ Runs one spring tick: integrates the px chase, writes the track's
 scrollLeft, and either re-arms or settles (snap to target + class
 lift + onSettle). Kept as a closure over (track, state) so the rAF
 body itself allocates nothing per frame.
-
 - `@param` track The scrolling element.
 - `@param` s The track's spring state.
 - `@param` animClass Class lifted on settle.
@@ -53,7 +52,6 @@ Spring-scrolls `track` to `target` scrollLeft. Mid-flight retargets
 preserve velocity (the organic part — a rapid double-tap nav curves
 onto the new course instead of restarting). When a spring is already
 live only the target/onSettle update — the loop keeps its frame cadence.
-
 - `@param` track The scrolling element (the carousel track).
 - `@param` target Target scrollLeft (px).
 - `@param` animClass Track modifier class that disables CSS snap+smooth
@@ -66,6 +64,5 @@ Cancels a live spring — user-input takeover (wheel/touch): the track
 stays wherever the spring left it and mandatory snap re-engages from
 the lifted class. The caller's onSettle is dropped — a cancelled nav
 must not fire its teleport.
-
 - `@param` track The scrolling element.
 - `@param` animClass The modifier class to lift.

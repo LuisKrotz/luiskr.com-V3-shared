@@ -1,8 +1,8 @@
-# `experiments/docs/tests/coverage/mermaid.test.js`
+# `experiments\docs\tests\coverage\mermaid.test.js`
 
 Coverage tails for docs/mermaid.ts — lazy wasm diagram
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/docs/tests/coverage/mermaid.test.js`   |
+| | |
+|---|---|
+| **Source** | `src/experiments\docs\tests\coverage\mermaid.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |

@@ -1,10 +1,10 @@
-# `core/locale/fallback.ts`
+# `core\locale\fallback.ts`
 
 Build-time English translation snapshot. The Vite plugin
 
 | | |
 |---|---|
-| **Source** | `src/core/locale/fallback.ts` |
+| **Source** | `src/core\locale\fallback.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `experiments/docs/copy-guard.ts`
+# `experiments\docs\copy-guard.ts`
 
 Copy-protection layer for the docs source viewer.
 
 | | |
 |---|---|
-| **Source** | `src/experiments/docs/copy-guard.ts` |
+| **Source** | `src/experiments\docs\copy-guard.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/tokens/classes/awards-carousel.ts`
+# `core\tokens\classes\awards-carousel.ts`
 
 Awards carousel (`aw-c-*` block) class tokens — grouped subset of
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/classes/awards-carousel.ts`              |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\classes\awards-carousel.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

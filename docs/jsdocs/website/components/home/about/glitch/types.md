@@ -1,8 +1,8 @@
-# `website/components/home/about/glitch/types.ts`
+# `website\components\home\about\glitch\types.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/about/glitch/types.ts`     |
+| | |
+|---|---|
+| **Source** | `src/website\components\home\about\glitch\types.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -150,7 +150,7 @@ Overlay canvas inside the picture wrapper.
 ### `ctx`
 
 2D backend context — null while the WebGPU arm mounts and forever
-after it succeeds; the rust/glitch shader replaces every painter.
+ after it succeeds; the rust/glitch shader replaces every painter.
 
 ### `w`
 
@@ -167,9 +167,9 @@ Live image element — re-resolved after shadow re-renders.
 ### `srcW`
 
 Natural size the cover rect was computed against — a srcset
-candidate swap changes naturalWidth while `complete` stays true,
-silently invalidating dx/dy/dw/dh (the stale rect then scales a
-wrong-aspect portrait = the "zoomed portrait" bug).
+ candidate swap changes naturalWidth while `complete` stays true,
+ silently invalidating dx/dy/dw/dh (the stale rect then scales a
+ wrong-aspect portrait = the "zoomed portrait" bug).
 
 ### `red`
 
@@ -202,13 +202,13 @@ Frame counter — paces un-armed retry polls.
 ### `ro`
 
 Wrapper ResizeObserver — the CSS canvas is width:100%, so any post-arm
-layout change (resize, grid reflow, mosaic expand above) would stretch
-the stale device-px raster into a zoomed/cropped portrait without it.
+ layout change (resize, grid reflow, mosaic expand above) would stretch
+ the stale device-px raster into a zoomed/cropped portrait without it.
 
 ### `wasm`
 
 Live rust/glitch widget — the WebGPU render backend. Null while the
-mount is in flight or after it fails (the 2D painters run instead).
+ mount is in flight or after it fails (the 2D painters run instead).
 
 ### (module scope)
 

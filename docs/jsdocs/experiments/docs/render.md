@@ -1,10 +1,10 @@
-# `experiments/docs/render.tsx`
+# `experiments\docs\render.tsx`
 
 JSX template for &lt;view-docs&gt; — extracted from Docs.tsx.
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/docs/render.tsx`                       |
+| | |
+|---|---|
+| **Source** | `src/experiments\docs\render.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -14,7 +14,6 @@ JSX template for &lt;view-docs&gt; — extracted from Docs.tsx.
 Absolute `/docs` route for a manifest-relative path — the canonical URL
 every navigation surface (tree rows, grid cards, crumbs) carries as a
 real href so crawlers, reader mode, and new-tab gestures all resolve.
-
 - `@param` subPath Manifest-relative path ('' → portal root).
 - `@returns` The portal-relative URL.
 
@@ -23,7 +22,6 @@ real href so crawlers, reader mode, and new-tab gestures all resolve.
 The URL a tree-row click actually lands on: an expanded dir the viewer
 sits inside collapses UP one level, so its href mirrors the parent —
 every other row maps to its own canonical /docs/<path>.
-
 - `@param` view The host docs view (reads docsPath for the inside check).
 - `@param` node The manifest node the row renders.
 - `@param` open Whether the dir row is currently expanded.

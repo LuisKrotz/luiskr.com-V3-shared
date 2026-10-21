@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/burn/tuning.ts`
+# `website\components\home\mosaic\burn\tuning.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/mosaic/burn/tuning.ts`     |
+| | |
+|---|---|
+| **Source** | `src/website\components\home\mosaic\burn\tuning.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -10,15 +10,15 @@
 ### `_PAD_X`
 
 Side/vertical bleed (css px) around the title box — embers need room,
-and the smoke wander (~30px lateral drift over a puff's life) must not
-slice at the canvas edge.
+ and the smoke wander (~30px lateral drift over a puff's life) must not
+ slice at the canvas edge.
 
 ### `_PAD_TOP`
 
 Top bleed (css px) — the smoke plume climbs at up to ~90px/s with a
-life up to 3.2s (~250px of headroom needed) before it thins out; the
-canvas must hold the whole column so the plume dissipates instead of
-slicing at the canvas edge.
+ life up to 3.2s (~250px of headroom needed) before it thins out; the
+ canvas must hold the whole column so the plume dissipates instead of
+ slicing at the canvas edge.
 
 ### `_PAD_BOTTOM`
 
@@ -27,7 +27,7 @@ Bottom bleed (css px) — the front ignites at the baseline edge.
 ### `_JAG_RATIO`
 
 Jagged-edge amplitude as a fraction of the paper height — a small
-organic waver on top of the per-letter speed spread.
+ organic waver on top of the per-letter speed spread.
 
 ### `_COL_SPEED_MIN`
 

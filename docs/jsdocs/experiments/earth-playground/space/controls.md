@@ -1,10 +1,10 @@
-# `experiments/earth-playground/space/controls.ts`
+# `experiments\earth-playground\space\controls.ts`
 
 Control schema + persistence for &lt;view-space-playground&gt;,
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/space/controls.ts` |
+| **Source** | `src/experiments\earth-playground\space\controls.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,8 +1,8 @@
-# `website/components/nav/handlers.ts`
+# `website\components\nav\handlers.ts`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/nav/handlers.ts` |
+| **Source** | `src/website\components\nav\handlers.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

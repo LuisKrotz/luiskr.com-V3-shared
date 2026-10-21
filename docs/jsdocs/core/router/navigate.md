@@ -1,8 +1,8 @@
-# `core/router/navigate.ts`
+# `core\router\navigate.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/router/navigate.ts`                             |
+| | |
+|---|---|
+| **Source** | `src/core\router\navigate.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -51,7 +51,6 @@ re-emit the graph with the real description instead of the parse-time
 fallback, and so rich views can append entities to the same base.
 `canonicalOverride` lets syncDocumentHead pass the URL it already
 computed for the <link canonical> so both stay identical.
-
 - `@param` to Resolved route descriptor.
 - `@param` canonicalOverride Canonical URL; recomputed from `to` when absent.
 - `@param` description Description override (post-fetch localized text).

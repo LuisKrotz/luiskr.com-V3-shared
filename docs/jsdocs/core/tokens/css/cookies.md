@@ -1,10 +1,10 @@
-# `core/tokens/css/cookies.ts`
+# `core\tokens\css\cookies.ts`
 
 Cookie-banner CSS custom-property names — grouped subset of
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/css/cookies.ts` |
+| **Source** | `src/core\tokens\css\cookies.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/utils/perf/stats/network.ts`
+# `core\utils\perf\stats\network.ts`
 
 Network sampler for the stats engine: a resource-timing
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/perf/stats/network.ts` |
+| **Source** | `src/core\utils\perf\stats\network.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

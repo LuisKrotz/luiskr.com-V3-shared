@@ -1,8 +1,8 @@
-# `website/public/wasm/genie/luiskr_genie.js`
+# `website\public\wasm\genie\luiskr_genie.js`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/public/wasm/genie/luiskr_genie.js`         |
+| | |
+|---|---|
+| **Source** | `src/website\public\wasm\genie\luiskr_genie.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -14,7 +14,6 @@ Public wasm surface — one genie transition per expand modal.
 ### `frame`
 
 `frame` — repack uniforms + one render pass (the mesh draw).
-
 - `@param` dt Frame delta in seconds.
 - `@returns` false once the surface is stale/lost.
 - `@param` {number} dt
@@ -23,7 +22,6 @@ Public wasm surface — one genie transition per expand modal.
 ### `init`
 
 `init` — device + the mesh pipeline + the placeholder texture.
-
 - `@param` canvas The overlay canvas.
 - `@param` device The shared GPUDevice (one per page, from the JS bridge).
 - `@returns` Ok on a live surface, Err(JsValue) on failure.
@@ -37,7 +35,6 @@ Public wasm surface — one genie transition per expand modal.
 ### `resize`
 
 `resize` — device px — the `res` uniform + surface re-configure.
-
 - `@param` w @param h Backing size in device pixels.
 - `@param` {number} w
 - `@param` {number} h
@@ -45,7 +42,6 @@ Public wasm surface — one genie transition per expand modal.
 ### `set_flags`
 
 `set_flags` — direction + facing edge.
-
 - `@param` opening 1.0 while opening, 0.0 on the collapse.
 - `@param` near_bottom 1.0 when the origin sits below the destination.
 - `@param` {number} opening
@@ -54,14 +50,12 @@ Public wasm surface — one genie transition per expand modal.
 ### `set_progress`
 
 `set_progress` — the JS-owned spring progress 0..1.
-
 - `@param` p Progress.
 - `@param` {number} p
 
 ### `set_rects`
 
 `set_rects` — the warp's origin + destination rects, CSS px.
-
 - `@param` fx @param fy @param fw @param fh Origin rect.
 - `@param` tx @param ty @param tw @param th Destination rect.
 - `@param` {number} fx
@@ -76,7 +70,6 @@ Public wasm surface — one genie transition per expand modal.
 ### `set_size`
 
 `set_size` — canvas CSS px (drives the dpr uniform against `dev`).
-
 - `@param` w @param h CSS size.
 - `@param` {number} w
 - `@param` {number} h
@@ -85,7 +78,6 @@ Public wasm surface — one genie transition per expand modal.
 
 `set_tint` — the accent rgba (0-1, theme-resolved in JS) the
 untextured ghost fill reads.
-
 - `@param` r @param g @param b @param a Rgba channels.
 - `@param` {number} r
 - `@param` {number} g
@@ -97,7 +89,6 @@ untextured ghost fill reads.
 `upload_bitmap` — decode happened off-thread (createImageBitmap);
 GPU→GPU copy into a fresh texture, then the mesh bind group is
 rebuilt against it and `has_tex` goes live.
-
 - `@param` bitmap The decoded frame.
 - `@param` w @param h Bitmap pixel size.
 - `@param` {ImageBitmap} bitmap

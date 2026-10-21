@@ -1,11 +1,11 @@
-# `website/tests/coverage/components/home/mosaic-burn-letters.test.js`
+# `website\tests\coverage\components\home\mosaic-burn-letters.test.js`
 
 Per-letter combustion tests for website/components/home/mosaic/burn.ts —
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/website/tests/coverage/components/home/mosaic-burn-letters.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.                  |
+| | |
+|---|---|
+| **Source** | `src/website\tests\coverage\components\home\mosaic-burn-letters.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

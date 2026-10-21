@@ -1,10 +1,10 @@
-# `website/views/home/Home.tsx`
+# `website\views\home\Home.tsx`
 
 &lt;view-home&gt; — the home page route: hero carousel, about
 
 | | |
 |---|---|
-| **Source** | `src/website/views/home/Home.tsx` |
+| **Source** | `src/website\views\home\Home.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

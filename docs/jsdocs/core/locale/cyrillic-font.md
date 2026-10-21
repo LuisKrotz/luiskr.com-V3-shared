@@ -1,10 +1,10 @@
-# `core/locale/cyrillic-font.ts`
+# `core\locale\cyrillic-font.ts`
 
 Cyrillic font plumbing — Russian (`ru`) renders in Fira
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/locale/cyrillic-font.ts`                        |
+| | |
+|---|---|
+| **Source** | `src/core\locale\cyrillic-font.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -24,5 +24,4 @@ Syncs the cyrillic font surface to the active locale: on `ru` the
 stylesheet is appended to <head>; off `ru` the class is removed so
 Fira Sans is never requested. `<html lang>` follows the locale's
 BCP-47 tag so assistive tech + crawlers see the real document language.
-
 - `@param` lang Active locale code (`en`, `br`, `ru`, …).

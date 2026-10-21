@@ -1,10 +1,10 @@
-# `core/jsx.ts`
+# `core\jsx.ts`
 
 Zero-dependency native DOM JSX pragma.
 
 | | |
 |---|---|
-| **Source** | `src/core/jsx.ts` |
+| **Source** | `src/core\jsx.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

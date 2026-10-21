@@ -1,10 +1,10 @@
-# `core/utils/wasm/wasm-media-threads.ts`
+# `core\utils\wasm\wasm-media-threads.ts`
 
 Off-main-thread media pipeline built on the WASM worker pool:
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/wasm/wasm-media-threads.ts` |
+| **Source** | `src/core\utils\wasm\wasm-media-threads.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

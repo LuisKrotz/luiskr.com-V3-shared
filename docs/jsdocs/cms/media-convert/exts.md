@@ -1,9 +1,9 @@
-# `cms/media-convert/exts.ts`
+# `cms\media-convert\exts.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/media-convert/exts.ts` |
-| **UX surface** | Batch image→WebP conversion pipeline UI. |
+| **Source** | `src/cms\media-convert\exts.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

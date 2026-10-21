@@ -1,10 +1,10 @@
-# `core/tokens/layout/masonry.ts`
+# `core\tokens\layout\masonry.ts`
 
 Masonry layout constants. These match the Vue source values
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/layout/masonry.ts` |
+| **Source** | `src/core\tokens\layout\masonry.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

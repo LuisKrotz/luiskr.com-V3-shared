@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/catalog.ts`
+# `experiments\star-field\engine\catalog.ts`
 
 The star-field body catalog — one static SFBodyDef per
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog.ts`          |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\catalog.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -21,5 +21,4 @@ Ordered group keys for the navigator drawer sections.
 
 Groups catalog entries by SF_GROUPS key — the navigator renders one
 section per key with the body's display name on a focusable button.
-
 - `@returns` group key → defs in catalog order

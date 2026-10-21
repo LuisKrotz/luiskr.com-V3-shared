@@ -1,9 +1,9 @@
-# `website/tests/coverage/components/footer/related-note-tails.test.js`
+# `website\tests\coverage\components\footer\related-note-tails.test.js`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/website/tests/coverage/components/footer/related-note-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.                   |
+| | |
+|---|---|
+| **Source** | `src/website\tests\coverage\components\footer\related-note-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/settings.ts`
+# `experiments\earth-playground\earth\settings.ts`
 
 Settings snapshot builder for the WebGPU Earth engine,
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/settings.ts` |
+| **Source** | `src/experiments\earth-playground\earth\settings.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

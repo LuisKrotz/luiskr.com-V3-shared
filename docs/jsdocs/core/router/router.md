@@ -1,10 +1,10 @@
-# `core/router/router.ts`
+# `core\router\router.ts`
 
 History-API SPA router for the public site.
 
 | | |
 |---|---|
-| **Source** | `src/core/router/router.ts` |
+| **Source** | `src/core\router\router.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

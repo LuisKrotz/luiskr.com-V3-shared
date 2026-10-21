@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/mask.ts`
+# `experiments\star-field\engine\bodies\mask.ts`
 
 Photo-texture edge feathering for deep-sky billboards.
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/mask.ts`      |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bodies\mask.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -18,7 +18,6 @@ Fallback lobe-mask seed when the caller passes no body id.
 Returns the intrinsic pixel size of a loaded texture — `image` may be
 an HTMLImageElement (`naturalWidth`) or any frame source carrying
 `width`/`height`; both collapse to 0 when unset (teardown mid-load).
-
 - `@param` tex Source texture.
 - `@returns` `[width, height]` in source pixels.
 
@@ -35,7 +34,6 @@ By default the mask is a smooth radial disc — appropriate for galaxies
 and face-on discs. For nebulae, `options.lobes` produces a seeded,
 irregular, wispy boundary so each nebula reads as a gas cloud rather
 than a flat circular photograph pasted on the sky.
-
 - `@param` THREE The three.js module.
 - `@param` tex Loaded photo texture (`tex.image` must be set).
 - `@param` options Optional mask shape — `lobes` and `seed` for nebulae.

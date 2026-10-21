@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/interactions.ts`
+# `website\components\home\mosaic\interactions.ts`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/home/mosaic/interactions.ts` |
+| **Source** | `src/website\components\home\mosaic\interactions.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

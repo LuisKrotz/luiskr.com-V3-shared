@@ -1,10 +1,10 @@
-# `website/components/media/figure/video.ts`
+# `website\components\media\figure\video.ts`
 
 Video playback plumbing for &lt;media-figure&gt;: lazy &lt;source&gt;
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/media/figure/video.ts`          |
+| | |
+|---|---|
+| **Source** | `src/website\components\media\figure\video.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

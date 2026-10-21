@@ -1,10 +1,10 @@
-# `core/safari/patches/media-figure.ts`
+# `core\safari\patches\media-figure.ts`
 
 MediaFigure patch orchestrator: safari-media styles,
 
 | | |
 |---|---|
-| **Source** | `src/core/safari/patches/media-figure.ts` |
+| **Source** | `src/core\safari\patches\media-figure.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

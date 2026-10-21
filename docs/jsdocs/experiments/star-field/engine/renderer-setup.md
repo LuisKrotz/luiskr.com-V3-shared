@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/renderer-setup.ts`
+# `experiments\star-field\engine\renderer-setup.ts`
 
 Renderer creation for the star-field engine — same contract
 
 | | |
 |---|---|
-| **Source** | `src/experiments/star-field/engine/renderer-setup.ts` |
+| **Source** | `src/experiments\star-field\engine\renderer-setup.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

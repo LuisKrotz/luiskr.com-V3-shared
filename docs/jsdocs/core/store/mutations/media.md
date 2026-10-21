@@ -1,10 +1,10 @@
-# `core/store/mutations/media.ts`
+# `core\store\mutations\media.ts`
 
 Media + debug-display mutations: stats-for-nerds, the
 
 | | |
 |---|---|
-| **Source** | `src/core/store/mutations/media.ts` |
+| **Source** | `src/core\store\mutations\media.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

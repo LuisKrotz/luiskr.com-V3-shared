@@ -1,11 +1,11 @@
-# `cms/routes/CmsDashboard.tsx`
+# `cms\routes\CmsDashboard.tsx`
 
 &lt;view-cms-dashboard&gt; — the authenticated CMS shell: header
 
 | | |
 |---|---|
-| **Source** | `src/cms/routes/CmsDashboard.tsx` |
-| **UX surface** | Login screen and the dashboard shell. |
+| **Source** | `src/cms\routes\CmsDashboard.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

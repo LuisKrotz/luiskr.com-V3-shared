@@ -1,10 +1,10 @@
-# `cms/tokens/fields/media.ts`
+# `cms\tokens\fields\media.ts`
 
 Media-converter classes + control IDs — dropzone state,
 
 | | |
 |---|---|
-| **Source** | `src/cms/tokens/fields/media.ts` |
+| **Source** | `src/cms\tokens\fields\media.ts` |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members

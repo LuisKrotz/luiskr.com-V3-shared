@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/worker.ts`
+# `core\tokens\starfield\params\worker.ts`
 
 Worker-dispatch and deep-field layer parameters — the
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/worker.ts`              |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\starfield\params\worker.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -95,7 +95,7 @@ volumetric disc carry the far-field read instead.
 ### `CAM_FADE_FLOOR`
 
 Floor of 0 — the catalogue fully dissolves at range so its
-isotropic extent can never silhouette a sphere against the disc.
+ isotropic extent can never silhouette a sphere against the disc.
 
 ### `FAR_CLAMP`
 

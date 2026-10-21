@@ -1,11 +1,11 @@
-# `shared/scripts/media/webp-webm-convert.mjs`
+# `shared\scripts\media\webp-webm-convert.mjs`
 
 Batch CDN transcode — every image (jpg/png) and video (mp4)
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/media/webp-webm-convert.mjs`                          |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\media\webp-webm-convert.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -26,7 +26,6 @@ Image source size cap — anything past 64 MB is a print asset.
 ffmpeg per-media conversion. WebP gets a high-quality picture preset;
 WebM gets VP9+Opus with row-mt multithreading — cluster output streams
 progressively so the file plays while still buffering.
-
 - `@param` {string} src - local source path
 - `@param` {string} dst - local target path
 - `@param` {string} srcExt - lowercase source extension

@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/fly.ts`
+# `experiments\star-field\engine\fly.ts`
 
 Camera fly-to tween for the star-field engine — when a body
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/fly.ts`              |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\fly.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -19,7 +19,6 @@ curve the site prefers for long camera moves.
 Arms a fly-to tween: destination is `offset` units along the current
 camera→body direction (or straight above when the camera is too close
 to define a direction), target tracks the body's live world position.
-
 - `@param` s Engine state.
 - `@param` track Body world-position getter — re-resolved per frame so a
 - `@param` offset Standoff distance — scaled per body so giants frame wide.
@@ -30,12 +29,10 @@ to define a direction), target tracks the body's live world position.
 Advances the active tween one frame — lerps camera position and the
 controls target along the eased progress; clears `s.fly` and fires
 `done` when complete.
-
 - `@param` s Engine state.
 
 ### `cancelFly`
 
 Cancels an in-flight tween — called on user pointer/wheel input so
 manual control always wins over the animation.
-
 - `@param` s Engine state.

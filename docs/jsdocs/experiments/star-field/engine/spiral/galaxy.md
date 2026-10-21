@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/spiral/galaxy.ts`
+# `experiments\star-field\engine\spiral\galaxy.ts`
 
 Spiral-galaxy assembly — `makeSpiralGalaxy` composes a
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/spiral/galaxy.ts`    |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\spiral\galaxy.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -14,7 +14,6 @@ Spiral-galaxy assembly — `makeSpiralGalaxy` composes a
 One soft-sprite Points cloud — the shared glow texture gives each
 vertex a round airbrushed edge instead of the default square splat,
 which is what turned the old cloud into a hard-edged white blob.
-
 - `@param` THREE The three.js module.
 - `@param` pos xyz vertex buffer.
 - `@param` col rgb vertex buffer.
@@ -28,7 +27,6 @@ disc (or the seeded procedural spiral when no photo resolved), a soft
 sparkle layer of foreground stars for depth, a warm additive core
 sprite for the bulge glow, and an invisible sphere carrying
 `userData.bodyId` so picking/hover work against a real mesh.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog galaxy entry (radius = disc radius, tilt = disc
 - `@param` texMap Loaded texture map keyed by URL — the body's `texture`
@@ -52,7 +50,6 @@ rigid whole-disc spin never sweeps it through the solar system.
 Writes a resolved fill into the geometries — with a rotor the
 buffers partition at spinCut2 (inner cloud ↔ outer disc, order
 preserved); without it the cloud takes the buffers whole.
-
 - `@param` p Filled xyz buffer.
 - `@param` c Filled rgb buffer.
 - `@param` geo Target geometry (star cloud or dust lanes).

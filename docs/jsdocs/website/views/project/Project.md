@@ -1,10 +1,10 @@
-# `website/views/project/Project.tsx`
+# `website\views\project\Project.tsx`
 
 &lt;view-project&gt; — the portfolio detail route: hero cover,
 
 | | |
 |---|---|
-| **Source** | `src/website/views/project/Project.tsx` |
+| **Source** | `src/website\views\project\Project.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

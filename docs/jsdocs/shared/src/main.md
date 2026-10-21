@@ -1,10 +1,10 @@
-# `shared/src/main.ts`
+# `shared\src\main.ts`
 
 Public-site entry point (modern ESM bundle).
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/shared/src/main.ts`                                |
+| | |
+|---|---|
+| **Source** | `src/shared\src\main.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

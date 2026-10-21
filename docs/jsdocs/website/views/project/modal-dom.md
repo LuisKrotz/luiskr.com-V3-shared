@@ -1,10 +1,10 @@
-# `website/views/project/modal-dom.tsx`
+# `website\views\project\modal-dom.tsx`
 
 Imperative expand-modal sync for &lt;view-project&gt;: mirrors
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/views/project/modal-dom.tsx`               |
+| | |
+|---|---|
+| **Source** | `src/website\views\project\modal-dom.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

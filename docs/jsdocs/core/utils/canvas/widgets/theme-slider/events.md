@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/theme-slider/events.ts`
+# `core\utils\canvas\widgets\theme-slider\events.ts`
 
 Pointer/click/keyboard wiring for ThemeSliderWebGL,
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/widgets/theme-slider/events.ts` |
+| **Source** | `src/core\utils\canvas\widgets\theme-slider\events.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

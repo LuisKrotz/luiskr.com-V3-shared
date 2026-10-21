@@ -1,10 +1,10 @@
-# `core/utils/canvas/webgl-mode.ts`
+# `core\utils\canvas\webgl-mode.ts`
 
 Single choke point for WebGL availability. Every widget asks
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/webgl-mode.ts` |
+| **Source** | `src/core\utils\canvas\webgl-mode.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

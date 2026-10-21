@@ -1,10 +1,10 @@
-# `website/components/media/DrawText.tsx`
+# `website\components\media\DrawText.tsx`
 
 &lt;draw-text&gt; — character-staggered text reveal: splits its
 
 | | |
 |---|---|
-| **Source** | `src/website/components/media/DrawText.tsx` |
+| **Source** | `src/website\components\media\DrawText.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

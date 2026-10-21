@@ -1,11 +1,11 @@
-# `website/tests/coverage/components/media/draw-text-traversal-tails.test.js`
+# `website\tests\coverage\components\media\draw-text-traversal-tails.test.js`
 
 Coverage tail for components/media/draw-text/traversal.ts —
 
-|                |                                                                                 |
-| -------------- | ------------------------------------------------------------------------------- |
-| **Source**     | `src/website/tests/coverage/components/media/draw-text-traversal-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.                         |
+| | |
+|---|---|
+| **Source** | `src/website\tests\coverage\components\media\draw-text-traversal-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

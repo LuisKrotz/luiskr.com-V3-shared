@@ -1,10 +1,10 @@
-# `core/tokens/attrs/common.ts`
+# `core\tokens\attrs\common.ts`
 
 Generic DOM attribute + attribute-value tokens — the
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/attrs/common.ts`                         |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\attrs\common.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

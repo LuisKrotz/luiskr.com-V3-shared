@@ -1,11 +1,11 @@
-# `shared/build/vite-lib.mjs`
+# `shared\build\vite-lib.mjs`
 
 Shared factory for the per-module Vite library builds. Every
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/vite-lib.mjs`                                          |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+| | |
+|---|---|
+| **Source** | `src/shared\build\vite-lib.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -26,13 +26,11 @@ emitted CSS is byte-identical correct (rules pass through untouched, and
 errorRecovery keeps them in the output), so the "not recognized" notice is
 pure log noise. Filter exactly that pattern; every other warning keeps
 surfacing.
-
 - `@returns` {import('vite').Logger} Logger with the host-context warning filtered.
 
 ### `moduleConfig`
 
 Builds a Vite library config for one module folder.
-
 - `@param` {object} opts Options.
 - `@param` {string} opts.dir Absolute path of the module folder.
 - `@param` {string} opts.name Bundle file stem emitted under dist/.

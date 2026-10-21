@@ -1,10 +1,10 @@
-# `website/components/feedback/SiteToast.tsx`
+# `website\components\feedback\SiteToast.tsx`
 
 &lt;site-toast&gt; — the in-page notification surface. notify()
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/feedback/SiteToast.tsx`         |
+| | |
+|---|---|
+| **Source** | `src/website\components\feedback\SiteToast.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -16,7 +16,6 @@ The SiteToast — toast class.
 ### `push`
 
 Queues a toast item and starts its auto-dismiss clock.
-
 - `@param` item.text - body copy (already localized by the caller)
 - `@param` item.type - NOTIFY_TYPES entry; styles the BEM modifier
 - `@param` item.title - optional eyebrow heading
@@ -26,7 +25,6 @@ Queues a toast item and starts its auto-dismiss clock.
 ### (module scope)
 
 Removes an item by id and cancels its pending auto-dismiss.
-
 - `@param` {number} id
 
 ### (module scope)

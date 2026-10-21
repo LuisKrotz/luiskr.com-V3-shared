@@ -1,10 +1,10 @@
-# `website/views/project/layout.ts`
+# `website\views\project\layout.ts`
 
 Layout helpers for ViewProject — per-section height from the first media ratio, text stagger delays, and the landscape-group detector that forces carousel mode.
 
 | | |
 |---|---|
-| **Source** | `src/website/views/project/layout.ts` |
+| **Source** | `src/website\views\project\layout.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

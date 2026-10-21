@@ -1,10 +1,10 @@
-# `core/tokens/ids/docs.ts`
+# `core\tokens\ids\docs.ts`
 
 Docs-portal element id tokens — grouped subset of IDS.
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/ids/docs.ts` |
+| **Source** | `src/core\tokens\ids\docs.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

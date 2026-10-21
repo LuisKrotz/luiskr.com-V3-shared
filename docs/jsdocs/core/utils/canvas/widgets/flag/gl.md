@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/flag/gl.ts`
+# `core\utils\canvas\widgets\flag\gl.ts`
 
 GL lifecycle for the shared FlagRenderer: lazy context
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/canvas/widgets/flag/gl.ts` |
+| **Source** | `src/core\utils\canvas\widgets\flag\gl.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

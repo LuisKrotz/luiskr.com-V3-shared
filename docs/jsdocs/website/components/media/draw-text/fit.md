@@ -1,8 +1,8 @@
-# `website/components/media/draw-text/fit.ts`
+# `website\components\media\draw-text\fit.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/media/draw-text/fit.ts`         |
+| | |
+|---|---|
+| **Source** | `src/website\components\media\draw-text\fit.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -12,7 +12,6 @@
 Returns the parent's horizontal content-box width in px — the space the
 title is actually allowed to occupy. Falls back to the host's own
 clientWidth when the element has no parent (detached / test mounts).
-
 - `@param` host — the draw-text element
 - `@returns` available width in px, `0` when unmeasurable
 
@@ -21,7 +20,6 @@ clientWidth when the element has no parent (detached / test mounts).
 Returns the widest word span inside the shadow root in px. Words are
 `inline-block` + `nowrap`, so their rect is the true overflow source —
 the line itself wraps legally at the space tokens.
-
 - `@param` host — the draw-text element
 - `@returns` widest `.draw-text__word` width in px
 
@@ -32,7 +30,6 @@ letter spacing so the widest word fits the parent's content box.
 Clears the inline overrides first so re-measurement is always relative
 to the stylesheet ramp. No-ops without the `fit` attribute, without a
 measurable box, or when the text already fits.
-
 - `@param` host — the draw-text element
 
 ### `fitQueue`
@@ -50,7 +47,6 @@ rAF handle for the queued batch — `0` means no flush is scheduled.
 Applies the computed scale for one host — the write half of the batched
 flush, fed by values captured in the read phase so the loop is pure
 writes (a getComputedStyle here would re-interleave read → write).
-
 - `@param` host — the draw-text element
 - `@param` m — measurements captured in the read phase
 
@@ -78,7 +74,6 @@ Host letter-spacing at the stylesheet ramp, px (normal → 0).
 
 Reads every layout/style value applyFit needs for one host — kept in a
 single place so the flush's middle phase is pure reads.
-
 - `@param` host — the draw-text element
 - `@returns` the host's measurements for the write phase
 
@@ -97,7 +92,6 @@ measuring synchronously. All draw-text siblings mount in the same task
 batch; coalescing their fits prevents sequential forced reflows — the
 synchronous `fitText` remains available for callers that already hold
 a stable layout (and for the test suite's deterministic asserts).
-
 - `@param` host — the draw-text element
 
 ### `setupFit`
@@ -106,7 +100,6 @@ Installs the fit pipeline for a fitted host: immediate measure, a
 ResizeObserver on the parent (the sizing constraint) for breakpoint /
 orientation changes, and a one-shot refit once webfonts finish loading
 (late font swaps can widen the same word by several percent).
-
 - `@param` host — the draw-text element
 
 ### `teardownFit`
@@ -114,5 +107,4 @@ orientation changes, and a one-shot refit once webfonts finish loading
 Disconnects the fit observer, drops any queued batch entry, and
 restores the stylesheet font sizing — called on disconnect and when
 the `fit` attribute is removed.
-
 - `@param` host — the draw-text element

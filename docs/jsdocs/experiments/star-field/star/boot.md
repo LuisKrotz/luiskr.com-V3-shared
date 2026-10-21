@@ -1,10 +1,10 @@
-# `experiments/star-field/star/boot.ts`
+# `experiments\star-field\star\boot.ts`
 
 Engine bootstrap for StarField — constructs StarFieldEngine
 
 | | |
 |---|---|
-| **Source** | `src/experiments/star-field/star/boot.ts` |
+| **Source** | `src/experiments\star-field\star\boot.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

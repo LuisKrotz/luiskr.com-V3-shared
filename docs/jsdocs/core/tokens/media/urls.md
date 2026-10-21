@@ -1,10 +1,10 @@
-# `core/tokens/media/urls.ts`
+# `core\tokens\media\urls.ts`
 
 External base URLs split by function — grouped subsets of
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/media/urls.ts`                           |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\media\urls.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

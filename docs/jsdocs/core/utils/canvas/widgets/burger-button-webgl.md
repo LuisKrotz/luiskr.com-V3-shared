@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/burger-button-webgl.ts`
+# `core\utils\canvas\widgets\burger-button-webgl.ts`
 
 WebGL hamburger icon for the nav burger button: three
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/burger-button-webgl.ts`    |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\burger-button-webgl.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -76,7 +76,6 @@ Renders one frame at time t (seconds) — shared by the RAF loop and the
 static reduced-motion path. u_dark is re-evaluated per frame from the
 live DOM classes (dark theme OR nav-on-dark over the contact band) so
 the icon recolors instantly on theme/scroll changes with no listener.
-
 - `@param` {number} t - seconds since construction
 
 ### `_loop`

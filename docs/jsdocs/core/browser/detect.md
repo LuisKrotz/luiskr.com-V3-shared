@@ -1,10 +1,10 @@
-# `core/browser/detect.ts`
+# `core\browser\detect.ts`
 
 Single source of truth for engine identification. The same
 
 | | |
 |---|---|
-| **Source** | `src/core/browser/detect.ts` |
+| **Source** | `src/core\browser\detect.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

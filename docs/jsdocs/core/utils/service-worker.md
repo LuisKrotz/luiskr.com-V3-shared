@@ -1,8 +1,8 @@
-# `core/utils/service-worker.ts`
+# `core\utils\service-worker.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/service-worker.ts`                        |
+| | |
+|---|---|
+| **Source** | `src/core\utils\service-worker.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

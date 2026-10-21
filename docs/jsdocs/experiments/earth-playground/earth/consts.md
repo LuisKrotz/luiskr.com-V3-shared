@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/consts.ts`
+# `experiments\earth-playground\earth\consts.ts`
 
 Scene-graph scale constants + shared TSL arg types for the
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/consts.ts` |
+| **Source** | `src/experiments\earth-playground\earth\consts.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

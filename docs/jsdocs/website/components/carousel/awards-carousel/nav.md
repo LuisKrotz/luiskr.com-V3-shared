@@ -1,9 +1,9 @@
-# `website/components/carousel/awards-carousel/nav.ts`
+# `website\components\carousel\awards-carousel\nav.ts`
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Source**     | `src/website/components/carousel/awards-carousel/nav.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
+| | |
+|---|---|
+| **Source** | `src/website\components\carousel\awards-carousel\nav.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -13,7 +13,6 @@ Drives the track to `left` through the shared scroll spring — the
 elastic slide travel (reduced-motion → the driver's instant arm).
 The settle callback is the nav completion path: it fires the armed
 clone→real teleport then releases `isNavigating`.
-
 - `@param` host The AwardsCarousel element.
 - `@param` track The scrollable track element.
 - `@param` left Target scrollLeft (px).
@@ -23,7 +22,6 @@ clone→real teleport then releases `isNavigating`.
 Spring-settle completion — fires the armed clone teleport (invisible:
 clone and twin are pixel-identical), clears its watchdog, releases
 the scroll-handler suppression.
-
 - `@param` host The AwardsCarousel element.
 
 ### `cancelNavSpring`
@@ -31,7 +29,6 @@ the scroll-handler suppression.
 Gesture takeover — cancels a live scroll spring, drops the pending
 teleport, releases isNavigating. Mandatory snap re-engages from the
 lifted animating class so the user's own scroll owns the track.
-
 - `@param` host The AwardsCarousel element.
 
 ### `scrollToElement`
@@ -40,7 +37,6 @@ Smooth-centers an element in the track. Formula (same geometry as
 CustomCarousel): scrollLeft + (el.left − track.left) positions the
 slide at the track's left edge; −(track.w − el.w)/2 recenters it so
 the slide's midpoint sits on the track's midpoint.
-
 - `@param` host The AwardsCarousel element.
 - `@param` el Slide element to center.
 
@@ -51,7 +47,6 @@ for the invisible clone→real teleport and resize refits. Retries one
 frame later when layout hasn't produced measurable widths yet (a
 display:none parent yields clientWidth 0 — waiting a frame beats
 computing a bogus 0-offset jump).
-
 - `@param` host The AwardsCarousel element.
 - `@param` idx Real-slide index; `children[idx + 1]` skips the leading
 - `@param` smooth true for a smooth jump, false (default) for instant.
@@ -63,7 +58,6 @@ just past the smooth-scroll duration) so the clone finishes animating
 in, then instant-jumps to its real twin — invisible because the clone
 and real slide are pixel-identical. A pending teleport is cancelled so
 rapid nav can't queue competing jumps.
-
 - `@param` host The AwardsCarousel element.
 - `@param` targetIdx Real-slide index to land on after the clone animates.
 
@@ -73,7 +67,6 @@ Smooth scroll to slide idx (children offset +1 skips the last-clone).
 Same centering math as scrollToElement but reads rects fresh — the
 track may have scrolled between calls, so offsets come from
 getBoundingClientRect, not offsetLeft.
-
 - `@param` host The AwardsCarousel element.
 - `@param` idx Real-slide index.
 
@@ -87,7 +80,6 @@ directly; the NAVIGATION_SETTLE_DELAY isNavigating window suppresses
 scroll-handler teleports until the smooth animation settles.
 `((idx % len) + len) % len` normalizes idx into [0,len) — the double
 modulo handles negative idx (−1 → len−1) where a single % yields −1.
-
 - `@param` host The AwardsCarousel element.
 - `@param` idx Target index — may be −1 or len for edge wraps.
 
@@ -95,6 +87,5 @@ modulo handles negative idx (−1 → len−1) where a single % yields −1.
 
 Jumps to the slide matching the clicked dot — a manual choice stops
 autoplay (user intent overrides the ambient cycle).
-
 - `@param` host The AwardsCarousel element.
 - `@param` idx Dot index → real-slide index.

@@ -1,10 +1,10 @@
-# `core/utils/gpu/gpu-accel.ts`
+# `core\utils\gpu\gpu-accel.ts`
 
 Hardware GPU acceleration singleton: a lazily-created
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/gpu/gpu-accel.ts` |
+| **Source** | `src/core\utils\gpu\gpu-accel.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

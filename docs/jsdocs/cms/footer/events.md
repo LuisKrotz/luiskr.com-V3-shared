@@ -1,9 +1,9 @@
-# `cms/footer/events.ts`
+# `cms\footer\events.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/footer/events.ts` |
-| **UX surface** | Footer + legal links editor card. |
+| **Source** | `src/cms\footer\events.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

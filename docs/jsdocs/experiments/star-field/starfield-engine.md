@@ -1,10 +1,10 @@
-# `experiments/star-field/starfield-engine.ts`
+# `experiments\star-field\starfield-engine.ts`
 
 Facade for the star-field three.js engine — owns the SFState
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/starfield-engine.ts`        |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\starfield-engine.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -42,7 +42,6 @@ anchors map; registry ids (`star-NNNNNN`…) resolve through the
 shard index to their true heliocentric position. Called by the host
 for both nav picks and canvas raycast picks — `onSelect` is only
 fired by the pointer path (picking.ts) so selection never loops.
-
 - `@param` id Catalog body id or registry id.
 
 ### `setHint`
@@ -56,7 +55,6 @@ their shard record so the static shard point resolves in the
 pinned frame. Also echoes `onHover` so the tooltip label +
 aria-live announce populate the same way canvas hover does.
 Pass null to clear.
-
 - `@param` id Hovered body id, or null to clear the hint.
 - `@param` rec Registry record when `id` is a shard id (star-NNNNNN…).
 
@@ -67,7 +65,6 @@ screen-intuitive steps: left/right change azimuth, up/down change
 polar (clamped off the poles). Pure spherical math on the offset
 vector — no three types needed, and any running fly-to is cancelled
 so manual control wins.
-
 - `@param` dAzimuth Azimuth delta in radians (left = -, right = +).
 - `@param` dPolar Polar delta in radians (down = -, up = +).
 

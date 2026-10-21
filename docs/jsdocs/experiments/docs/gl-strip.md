@@ -1,10 +1,10 @@
-# `experiments/docs/gl-strip.ts`
+# `experiments\docs\gl-strip.ts`
 
 WebGL thread-field backdrop for the docs navigation region.
 
 | | |
 |---|---|
-| **Source** | `src/experiments/docs/gl-strip.ts` |
+| **Source** | `src/experiments\docs\gl-strip.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

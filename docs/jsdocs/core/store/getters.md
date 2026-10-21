@@ -1,10 +1,10 @@
-# `core/store/getters.ts`
+# `core\store\getters.ts`
 
 Getter map factory — read-only accessors so the state
 
 | | |
 |---|---|
-| **Source** | `src/core/store/getters.ts` |
+| **Source** | `src/core\store\getters.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

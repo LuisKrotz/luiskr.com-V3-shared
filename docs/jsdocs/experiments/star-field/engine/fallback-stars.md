@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/fallback-stars.ts`
+# `experiments\star-field\engine\fallback-stars.ts`
 
 Static 2D-canvas starfield for the no-WebGL fallback —
 
 | | |
 |---|---|
-| **Source** | `src/experiments/star-field/engine/fallback-stars.ts` |
+| **Source** | `src/experiments\star-field\engine\fallback-stars.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

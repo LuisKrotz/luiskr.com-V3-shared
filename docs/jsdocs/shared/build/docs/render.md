@@ -1,11 +1,11 @@
-# `shared/build/docs/render.mjs`
+# `shared\build\docs\render.mjs`
 
 Build-time file → HTML renderers for the docs portal.
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/docs/render.mjs`                                       |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+| | |
+|---|---|
+| **Source** | `src/shared\build\docs\render.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -111,20 +111,18 @@ page chrome) and keeps the document's markup so it inherits the
 project's CSS variables + the viewer's generic element styles.
 
 Removed:
-
-- `<script>` / `<noscript>` — noscript blocks are what surfaced the
-  "requires JavaScript" fallback text inside the sandboxed iframe.
-- `<iframe>/<object>/<embed>` — no nested browsing contexts.
-- `<base>` / `<meta>` / `<link>` — no navigation or external fetches.
-- `on*` event-handler attributes — defense in depth on top of the
-  build-time trust boundary.
+  - `<script>` / `<noscript>` — noscript blocks are what surfaced the
+    "requires JavaScript" fallback text inside the sandboxed iframe.
+  - `<iframe>/<object>/<embed>` — no nested browsing contexts.
+  - `<base>` / `<meta>` / `<link>` — no navigation or external fetches.
+  - `on*` event-handler attributes — defense in depth on top of the
+    build-time trust boundary.
 
 ### `renderFile`
 
 Dispatches a file to the right renderer.
-
-- `@param` {string} format Format tag emitted by scan.mjs.
-- `@param` {string} content Raw file text.
-- `@param` {string} ext Lower-cased extension without the dot.
-- `@param` {object} [opts] Optional: `linkResolver(href)` → CSS text
+- `@param` {string} format        Format tag emitted by scan.mjs.
+- `@param` {string} content       Raw file text.
+- `@param` {string} ext           Lower-cased extension without the dot.
+- `@param` {object} [opts]        Optional: `linkResolver(href)` → CSS text
 - `@returns` {string} Rendered markup, safe for the viewer's innerHTML paint.

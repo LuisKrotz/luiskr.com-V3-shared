@@ -1,10 +1,10 @@
-# `core/tokens/motion/genie.ts`
+# `core\tokens\motion\genie.ts`
 
 Expand-modal genie-warp tunables — the macOS-style liquid
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/motion/genie.ts`                         |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\motion\genie.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

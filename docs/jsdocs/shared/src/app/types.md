@@ -1,10 +1,10 @@
-# `shared/src/app/types.ts`
+# `shared\src\app\types.ts`
 
 Shared structural types for the App shell — the APP
 
 | | |
 |---|---|
-| **Source** | `src/shared/src/app/types.ts` |
+| **Source** | `src/shared\src\app\types.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

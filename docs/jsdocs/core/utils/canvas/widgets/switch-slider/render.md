@@ -1,8 +1,8 @@
-# `core/utils/canvas/widgets/switch-slider/render.ts`
+# `core\utils\canvas\widgets\switch-slider\render.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/switch-slider/render.ts`   |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\switch-slider\render.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

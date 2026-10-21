@@ -1,9 +1,9 @@
-# `website/public/wasm/divider-sheen/luiskr_divider_sheen.js`
+# `website\public\wasm\divider-sheen\luiskr_divider_sheen.js`
 
-|                |                                                                 |
-| -------------- | --------------------------------------------------------------- |
-| **Source**     | `src/website/public/wasm/divider-sheen/luiskr_divider_sheen.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.         |
+| | |
+|---|---|
+| **Source** | `src/website\public\wasm\divider-sheen\luiskr_divider_sheen.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -14,7 +14,6 @@ Public wasm surface — one divider canvas per footer hairline.
 ### `frame`
 
 `frame` — advance the sweep clock, repack, draw.
-
 - `@param` dt Frame delta in seconds.
 - `@returns` false once the surface is stale/lost.
 - `@param` {number} dt
@@ -23,7 +22,6 @@ Public wasm surface — one divider canvas per footer hairline.
 ### `init`
 
 `init` — device + pipeline + the single bind group.
-
 - `@param` canvas The divider's overlay canvas.
 - `@param` device The shared GPUDevice (one per page, from the JS bridge).
 - `@returns` Ok on a live surface, Err(JsValue) on failure.
@@ -37,7 +35,6 @@ Public wasm surface — one divider canvas per footer hairline.
 ### `resize`
 
 `resize` — device px — the `res`/`rect` uniform.
-
 - `@param` w @param h Backing size in device pixels.
 - `@param` {number} w
 - `@param` {number} h
@@ -47,7 +44,6 @@ Public wasm surface — one divider canvas per footer hairline.
 `set_colors` — push the live theme colors (read once per
 theme flip from the DOM's computed style — the shader never
 sees CSS vars).
-
 - `@param` br @param bg @param bb @param ba Hairline rgba 0-1.
 - `@param` ar @param ag @param ab @param aa Accent-band rgba 0-1.
 - `@param` {number} br
@@ -62,7 +58,6 @@ sees CSS vars).
 ### `set_size`
 
 `set_size` — CSS px (contract parity; unused — device px only).
-
 - `@param` _w @param _h CSS size — unused.
 - `@param` {number} _w
 - `@param` {number} _h

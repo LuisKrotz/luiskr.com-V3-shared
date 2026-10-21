@@ -1,10 +1,10 @@
-# `experiments/docs/coverage-nav.ts`
+# `experiments\docs\coverage-nav.ts`
 
 Istanbul coverage-report interactivity for the docs viewer.
 
 | | |
 |---|---|
-| **Source** | `src/experiments/docs/coverage-nav.ts` |
+| **Source** | `src/experiments\docs\coverage-nav.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

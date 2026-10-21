@@ -1,8 +1,8 @@
-# `website/components/dialogs/preferences/webgl.ts`
+# `website\components\dialogs\preferences\webgl.ts`
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/dialogs/preferences/webgl.ts`   |
+| | |
+|---|---|
+| **Source** | `src/website\components\dialogs\preferences\webgl.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

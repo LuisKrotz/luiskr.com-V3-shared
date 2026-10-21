@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/runtime/updates.ts`
+# `experiments\earth-playground\earth\runtime\updates.ts`
 
 Live-tweak API for the Earth engine, extracted from
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/runtime/updates.ts` |
+| **Source** | `src/experiments\earth-playground\earth\runtime\updates.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

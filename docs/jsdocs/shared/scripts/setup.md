@@ -1,9 +1,9 @@
-# `shared/scripts/setup.mjs`
+# `shared\scripts\setup.mjs`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/setup.mjs`                                            |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\setup.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -12,13 +12,16 @@
 Guided dev-environment installer — `yarn setup`. Cross-platform
 (Node-only, no shell): verifies Node/Yarn/Git, initialises git
 submodules, installs dependencies, wires git hooks, installs the CLI
-toolchain (firebase-tools, Google Cloud SDK) and the media-convert
+toolchain (firebase-tools, Google Cloud SDK), repairs a partial rust
+wasm toolchain (wasm32 target, wasm-pack) and the media-convert
 toolchain (ffmpeg/ImageMagick/mozjpeg), then prints the exact next
 steps. Read-only checks never mutate; installs are the standard yarn +
-package-manager operations for the detected platform.
+package-manager operations for the detected platform. On Windows the
+persisted registry PATH is merged into the process env first so tools
+installed earlier in the session are visible to every probe below.
 
-yarn setup full guided setup — installs everything missing
-yarn setup --check report only — no install/write side effects
+  yarn setup            full guided setup — installs everything missing
+  yarn setup --check    report only — no install/write side effects
 
 ### `probe`
 

@@ -1,11 +1,11 @@
-# `shared/scripts/verify/scope-gates.mjs`
+# `shared\scripts\verify\scope-gates.mjs`
 
 Scoped quality-gate runner for the module workspace. Git
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/verify/scope-gates.mjs`                               |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\verify\scope-gates.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -13,12 +13,12 @@ Scoped quality-gate runner for the module workspace. Git
 
 Scope registry: module dirs, the per-module tsconfig and jest config,
 and policy flags.
-dirs — source roots eslint/stylelint scan.
-tsconfig — scoped compilation target.
-jest — the module's own Jest config (its tests live inside it).
-governance — also run the cross-cutting scan suite in shared/tests.
-a11y — include axe-scan + contrast-aaa in that governance run.
-lighthouse — the scope is eligible for Lighthouse performance checks.
+  dirs     — source roots eslint/stylelint scan.
+  tsconfig — scoped compilation target.
+  jest     — the module's own Jest config (its tests live inside it).
+  governance — also run the cross-cutting scan suite in shared/tests.
+  a11y     — include axe-scan + contrast-aaa in that governance run.
+  lighthouse — the scope is eligible for Lighthouse performance checks.
 
 ### `SCOPE_ROOTS`
 
@@ -94,21 +94,21 @@ Runs the gate set for one scope and stamps the stored result.
 ### `runLink`
 
 /*.scss`),
-'--max-warnings=0',
-])
-}
+      '--max-warnings=0',
+    ])
+  }
 
-if (exists(def.jest)) {
-checks.push('jest')
-run(`${scope} jest`, 'node', [...JEST, '--config', def.jest])
-}
+  if (exists(def.jest)) {
+    checks.push('jest')
+    run(`${scope} jest`, 'node', [...JEST, '--config', def.jest])
+  }
 
-if (def.governance) {
-checks.push('governance')
-runGovernance(scope, def.a11y)
-}
+  if (def.governance) {
+    checks.push('governance')
+    runGovernance(scope, def.a11y)
+  }
 
-stamp(scope, checks)
+  stamp(scope, checks)
 }
 
 /**

@@ -1,9 +1,9 @@
-# `cms/projects/data.ts`
+# `cms\projects\data.ts`
 
 | | |
 |---|---|
-| **Source** | `src/cms/projects/data.ts` |
-| **UX surface** | Per-project sections editor card. |
+| **Source** | `src/cms\projects\data.ts` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

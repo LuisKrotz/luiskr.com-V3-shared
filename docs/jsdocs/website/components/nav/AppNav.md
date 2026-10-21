@@ -1,10 +1,10 @@
-# `website/components/nav/AppNav.tsx`
+# `website\components\nav\AppNav.tsx`
 
 &lt;app-nav&gt; — the persistent top navigation bar: logo, burger
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/nav/AppNav.tsx`                 |
+| | |
+|---|---|
+| **Source** | `src/website\components\nav\AppNav.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -167,7 +167,6 @@ Display label for the active locale in the flag button.
 Returns the persistent flag canvas for the current locale, rebuilding
 it only when the locale changed. The element survives re-renders so
 the WebGL context is created once per language, not per render.
-
 - `@returns` {HTMLCanvasElement}
 
 ### `renderLocaleFlag`

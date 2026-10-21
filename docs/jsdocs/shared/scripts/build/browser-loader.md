@@ -1,11 +1,11 @@
-# `shared/scripts/build/browser-loader.js`
+# `shared\scripts\build\browser-loader.js`
 
 Runtime bundle dispatcher, inlined into dist/index.html by
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/browser-loader.js`                              |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\build\browser-loader.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -20,8 +20,8 @@ Native ES module support (IE/EdgeHTML and pre-Chrome-61 lack it).
 ### `supportsImport`
 
 Dynamic import() — Safari ≤11.0 / Edge ≤18 have modules but no import().
-Compile-only probe: executing the import could hit CSP script-src, so we
-only check that the syntax parses.
+ Compile-only probe: executing the import could hit CSP script-src, so we
+ only check that the syntax parses.
 
 ### `detectBrowser`
 
@@ -60,7 +60,7 @@ Appends the tier stylesheet to <head>.
 ### `showFallback`
 
 Graceful notice — only reachable if the manifest ships no floor tier
-(the `ie` tier's empty probe list passes unconditionally).
+ (the `ie` tier's empty probe list passes unconditionally).
 
 ### `boot`
 

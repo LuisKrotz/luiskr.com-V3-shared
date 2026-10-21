@@ -1,27 +1,19 @@
-# `shared/scripts/build/build-locale-pages.mjs`
+# `shared\scripts\build\build-locale-pages.mjs`
 
 Emits per-locale, per-route static index.html files into
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/build-locale-pages.mjs`                         |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+| | |
+|---|---|
+| **Source** | `src/shared\scripts\build\build-locale-pages.mjs` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
-### `BOOT_VEIL_HTML`
+### (module scope)
 
-Static boot veil emitted as the first #app child — MUST stay byte-identical
-to the veil div in index.html (single element, no nested tags, so the
-localize() swap can recognize and re-emit it on every run). It paints a
-brand splash before the JS bundle lands; mount()'s replaceChildren on #app
-destroys it.
-
-### `CYRILLIC_SLUG`
-
-Russian Cyrillic → Latin transliteration — Cyrillic media labels would
-otherwise slugify to '' and lose their deep-link URL. MUST stay
-byte-identical to CYRILLIC_SLUG in core/utils/string.ts.
+The match below tolerates a legacy .boot-veil emitted inside #app by an
+earlier template revision so re-runs normalize older documents back to
+the clean article shape.
 
 ### `slugify`
 
@@ -85,7 +77,6 @@ Brotil + gzip siblings next to each emitted index.html (Firebase serves them).
 ### `localize`
 
 Rewrites the English shell into a localized document.
-
 - `@param` {string} html - post-loader dist/index.html source
 - `@param` {object} o
 - `@param` {string} o.bcpLang - BCP-47 tag for <html lang> + og:locale alt
@@ -115,7 +106,6 @@ Bytes fetched per image-dims probe — SOF/IHDR headers live in the head.
 Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
 or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
 are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
-
 - `@param` {Buffer} buf - head bytes of the image
 
 ### `liveTranslations`
@@ -144,7 +134,6 @@ Generates all localized pages under `distDir`. When `template` is omitted
 the post-loader dist/index.html is read from disk; when provided (the
 build orchestrator's in-memory copy) the localized root document is
 returned so the caller can run its own compress/SW-stamp pass.
-
 - `@param` {string} distDir - absolute dist path
 - `@param` {string} [template] - shell HTML; defaults to dist/index.html on disk
 - `@returns` {{html: string, written: number, locales: number}} localized root html + counts
@@ -219,9 +208,9 @@ Experience page content — title + every authored label/copy leaf.
 ### `animationsContent`
 
 Animations-reference hub — title + intro + every animation record's
-alt/longdesc as a definition list. The static mirror of the runtime
-<view-animations> listing: crawlers, AI agents and reader mode read the
-same components.animations records without running JavaScript.
+ alt/longdesc as a definition list. The static mirror of the runtime
+ <view-animations> listing: crawlers, AI agents and reader mode read the
+ same components.animations records without running JavaScript.
 
 ### `readStarBody`
 
@@ -277,18 +266,17 @@ entries declared in `STATIC_REWRITES`/`SPA_REWRITES`.
       addRedirect(`/${loc}/portfolio/${alias}`, `/${loc}/portfolio/${canonical}`)
       addRedirect(`/${loc}/portfolio/${alias}/**`, `/${loc}/portfolio/${canonical}/:splat`)
     }
+  }
 
-}
+  // English legacy legal segments → canonical English slugs.
+  addRedirect('/privacy', `/${enSlugs.privacy}`)
+  addRedirect('/terms', `/${enSlugs.terms}`)
 
-// English legacy legal segments → canonical English slugs.
-addRedirect('/privacy', `/${enSlugs.privacy}`)
-addRedirect('/terms', `/${enSlugs.terms}`)
+  // `/space-playground` → the locale's earthPlayground slug (en included).
+  addRedirect('/space-playground', `/${enSlugs.earthPlayground}`)
 
-// `/space-playground` → the locale's earthPlayground slug (en included).
-addRedirect('/space-playground', `/${enSlugs.earthPlayground}`)
-
-for (const loc of VALID_LANGS) {
-if (loc === 'en') continue
+  for (const loc of VALID_LANGS) {
+    if (loc === 'en') continue
 
     const slugs = LANG_SLUGS[loc] || {}
 
@@ -326,12 +314,11 @@ if (loc === 'en') continue
     // the unprefixed route, so it redirects rather than rendering.
     addRedirect(`/${loc}/docs`, '/docs')
     addRedirect(`/${loc}/docs/**`, '/docs/:splat')
+  }
 
-}
+  cfg.hosting.redirects = redirects
 
-cfg.hosting.redirects = redirects
-
-fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`)
+  withFsRetry(() => fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`))
 }
 
 /** Rewrites that sit before the locale table — meta files moved into

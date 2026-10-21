@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/black-hole.ts`
+# `experiments\star-field\engine\bodies\black-hole.ts`
 
 Sagittarius A* renderer — a layered relativistic object
 
 | | |
 |---|---|
-| **Source** | `src/experiments/star-field/engine/bodies/black-hole.ts` |
+| **Source** | `src/experiments\star-field\engine\bodies\black-hole.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

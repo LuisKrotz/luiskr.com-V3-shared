@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/spiral.ts`
+# `core\tokens\starfield\params\spiral.ts`
 
 Procedural spiral-galaxy point-cloud parameters — the
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/spiral.ts`              |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\starfield\params\spiral.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -125,8 +125,8 @@ bulge-overlapping points wrap gracefully rather than diverging.
 ### `GOLDEN_ANGLE`
 
 Golden angle ≈ 137.5° (2π·(2−φ)) — the divergence angle that keeps
-successive structures maximally non-repeating; phases the arm sway
-and spur offsets so no two arms share a rhythm.
+ successive structures maximally non-repeating; phases the arm sway
+ and spur offsets so no two arms share a rhythm.
 
 ### `ARM_PITCH_TIGHT`
 
@@ -257,8 +257,8 @@ Core-glow sprite opacity on the procedural fallback disc.
 ### `CORE_R`
 
 Per-point color ramp — hot amber bulge → dusty pale-violet rim,
-matching the real Milky Way's warm dust lane palette (pure blue
-edges read as a grey fog from inside the disc).
+ matching the real Milky Way's warm dust lane palette (pure blue
+ edges read as a grey fog from inside the disc).
 
 ### `HALO_RADIUS`
 

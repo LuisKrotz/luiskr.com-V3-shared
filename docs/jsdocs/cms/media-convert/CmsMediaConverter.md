@@ -1,11 +1,11 @@
-# `cms/media-convert/CmsMediaConverter.tsx`
+# `cms\media-convert\CmsMediaConverter.tsx`
 
 &lt;cms-media-converter&gt; — localhost-only batch media
 
 | | |
 |---|---|
-| **Source** | `src/cms/media-convert/CmsMediaConverter.tsx` |
-| **UX surface** | Batch image→WebP conversion pipeline UI. |
+| **Source** | `src/cms\media-convert\CmsMediaConverter.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

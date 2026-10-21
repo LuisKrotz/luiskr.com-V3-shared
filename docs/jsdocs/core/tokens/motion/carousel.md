@@ -1,10 +1,10 @@
-# `core/tokens/motion/carousel.ts`
+# `core\tokens\motion\carousel.ts`
 
 Carousel timing/geometry tokens — grouped subsets of
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/motion/carousel.ts`                      |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\motion\carousel.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -40,7 +40,7 @@ slightly elastic slide travel that replaced the browser's fixed
 on retarget). Integrated by `springStep` in `core/utils/motion` with
 px-space epsilons — same integrator the slider knobs run.
 
-ωn = √96 ≈ 9.8 rad/s, ζ = 20/(2·√96) ≈ 1.02
+  ωn = √96 ≈ 9.8 rad/s, ζ = 20/(2·√96) ≈ 1.02
 
 ζ≈1.02 is the critical-damping boundary — the slide travels fast and
 parks on the target with no visible swing-back (a measurable

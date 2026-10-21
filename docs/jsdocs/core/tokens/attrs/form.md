@@ -1,10 +1,10 @@
-# `core/tokens/attrs/form.ts`
+# `core\tokens\attrs\form.ts`
 
 Form control attribute tokens — token group. Covers the
 
 | | |
 |---|---|
-| **Source** | `src/core/tokens/attrs/form.ts` |
+| **Source** | `src/core\tokens\attrs\form.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,9 +1,9 @@
-# `cms/projects/render.tsx`
+# `cms\projects\render.tsx`
 
 | | |
 |---|---|
-| **Source** | `src/cms/projects/render.tsx` |
-| **UX surface** | Per-project sections editor card. |
+| **Source** | `src/cms\projects\render.tsx` |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

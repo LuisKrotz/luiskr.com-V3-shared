@@ -1,10 +1,10 @@
-# `experiments/earth-playground/space/panel-render.tsx`
+# `experiments\earth-playground\space\panel-render.tsx`
 
 Pure JSX renderers for the space-playground control panel,
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/space/panel-render.tsx` |
+| **Source** | `src/experiments\earth-playground\space\panel-render.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

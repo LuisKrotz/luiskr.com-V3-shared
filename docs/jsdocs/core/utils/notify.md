@@ -1,10 +1,10 @@
-# `core/utils/notify.ts`
+# `core\utils\notify.ts`
 
 User-facing notification service. A failure is surfaced as a
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/notify.ts` |
+| **Source** | `src/core\utils\notify.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

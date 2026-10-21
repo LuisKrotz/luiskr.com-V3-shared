@@ -1,10 +1,10 @@
-# `website/views/home/children.ts`
+# `website\views\home\children.ts`
 
 Pushes loaded translations/items from &lt;view-home&gt; into its
 
 | | |
 |---|---|
-| **Source** | `src/website/views/home/children.ts` |
+| **Source** | `src/website\views\home\children.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,8 +1,8 @@
-# `core/utils/canvas/widgets/close-button/render.ts`
+# `core\utils\canvas\widgets\close-button\render.ts`
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/close-button/render.ts`    |
+| | |
+|---|---|
+| **Source** | `src/core\utils\canvas\widgets\close-button\render.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

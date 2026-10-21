@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/scale.ts`
+# `core\tokens\starfield\params\scale.ts`
 
 Astronomical-scale and hierarchy-structure parameters —
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/scale.ts`               |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\starfield\params\scale.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -55,7 +55,8 @@ structure, while extragalactic structures stay world-fixed.
 ### `SOLAR_SCALE`
 
 Solar-tier diagram scale — 1 preserves the authored planetary system
-dimensions (Sun radius 12, Earth orbit 39, Neptune orbit 106, Kuiper belt 150) cleanly within its own domain without shrinking bodies to sub-pixels.
+dimensions (Sun radius 12, Earth orbit 39, Neptune orbit 106, Kuiper belt
+150) cleanly within its own domain without shrinking bodies to sub-pixels.
 
 ### `SF_STRUCTURE`
 
@@ -71,16 +72,16 @@ Shell sphere tessellation — low, it is a boundary hint not a body.
 ### `SHELL_OPACITY`
 
 Shell rim brightness at grazing angles — a whisper: the boundary
-must read as a faint meniscus at extreme grazing angles only, never
-as a painted ball. Additive rims still stack into a visible film
-when the camera sits inside a huge boundary (e.g.
-interstellar-neighborhood), so this stays far under the speckle
-opacity the member-galaxy field carries.
+ must read as a faint meniscus at extreme grazing angles only, never
+ as a painted ball. Additive rims still stack into a visible film
+ when the camera sits inside a huge boundary (e.g.
+ interstellar-neighborhood), so this stays far under the speckle
+ opacity the member-galaxy field carries.
 
 ### `SHELL_RIM`
 
 Fresnel exponent — higher tightens the rim to a hairline bubble
-edge; lower spreads a broad halo inward.
+ edge; lower spreads a broad halo inward.
 
 ### `FADE_IN`
 
@@ -109,10 +110,10 @@ Speckle radius fraction of the shell — members keep off the skin.
 ### `SPECKLE_FLATTEN`
 
 Speckle volume flattening — galaxy clusters and superclusters are
-flattened filament/sheet-like collections, not uniform spheres. The Y
-axis is squashed by this factor to break the "disco ball" look.
+ flattened filament/sheet-like collections, not uniform spheres. The Y
+ axis is squashed by this factor to break the "disco ball" look.
 
 ### `SPECKLE_CONCENTRATE`
 
 Speckle radial concentration — lower exponents push members toward the
-center (dense core + sparse outskirts); 1.0 is uniform volume.
+ center (dense core + sparse outskirts); 1.0 is uniform volume.

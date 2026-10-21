@@ -1,10 +1,10 @@
-# `core/utils/motion/route-warmer.ts`
+# `core\utils\motion\route-warmer.ts`
 
 Post-load route-chunk warming.
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/motion/route-warmer.ts` |
+| **Source** | `src/core\utils\motion\route-warmer.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

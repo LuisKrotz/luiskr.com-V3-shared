@@ -1,11 +1,11 @@
-# `experiments/star-field/tests/coverage/starfield/engine/starfield-fallback-tails.test.js`
+# `experiments\star-field\tests\coverage\starfield\engine\starfield-fallback-tails.test.js`
 
 Coverage tails for the no-WebGL fallback surface —
 
-|                |                                                                                               |
-| -------------- | --------------------------------------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/tests/coverage/starfield/engine/starfield-fallback-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.                                       |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-fallback-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

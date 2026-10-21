@@ -1,8 +1,8 @@
-# `website/components/dialogs/preferences/types.ts`
+# `website\components\dialogs\preferences\types.ts`
 
 | | |
 |---|---|
-| **Source** | `src/website/components/dialogs/preferences/types.ts` |
+| **Source** | `src/website\components\dialogs\preferences\types.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

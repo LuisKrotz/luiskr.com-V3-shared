@@ -1,10 +1,10 @@
-# `core/utils/media/local-media-cache.ts`
+# `core\utils\media\local-media-cache.ts`
 
 Three-tier media cache: in-memory Map (object URLs) →
 
 | | |
 |---|---|
-| **Source** | `src/core/utils/media/local-media-cache.ts` |
+| **Source** | `src/core\utils\media\local-media-cache.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

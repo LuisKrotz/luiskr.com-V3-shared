@@ -1,10 +1,10 @@
-# `core/tokens/elements/html.ts`
+# `core\tokens\elements\html.ts`
 
 Native HTML tag-name tokens — token group.
 
-|                |                                                           |
-| -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/elements/html.ts`                        |
+| | |
+|---|---|
+| **Source** | `src/core\tokens\elements\html.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

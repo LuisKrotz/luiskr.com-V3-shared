@@ -1,10 +1,10 @@
-# `experiments/earth-playground/space/boot.ts`
+# `experiments\earth-playground\space\boot.ts`
 
 Earth engine bootstrap for SpacePlayground — creates the
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/space/boot.ts` |
+| **Source** | `src/experiments\earth-playground\space\boot.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

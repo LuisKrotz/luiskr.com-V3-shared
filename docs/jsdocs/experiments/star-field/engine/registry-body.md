@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/registry-body.ts`
+# `experiments\star-field\engine\registry-body.ts`
 
 Lazy registry-body spawner — the 139,563-record deep
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/registry-body.ts`    |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\registry-body.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -34,7 +34,6 @@ object matches the point it replaces.
 
 Resolves the spectral tint for a star record — first letter of the
 Harvard class (`s` = "G2V" → G) through the shared ramp.
-
 - `@param` rec Registry record.
 
 ### `dsoTint`
@@ -42,7 +41,6 @@ Harvard class (`s` = "G2V" → G) through the shared ramp.
 Resolves the DSO tint by scanning the record's OpenNGC type code
 against the ordered match table (first hit wins — SNR before G so a
 remnant never reads as a galaxy).
-
 - `@param` rec Registry record.
 
 ### `starRadius`
@@ -50,7 +48,6 @@ remnant never reads as a galaxy).
 Magnitude → chart radius for a spawned star — real discs scale with
 luminosity, so a Sirius-class record (mag −1) draws the largest disc
 the clamps allow while a mag-9 dwarf stays a hard point with a halo.
-
 - `@param` m Apparent magnitude (null/absent → mid-curve).
 
 ### `buildStar`
@@ -59,7 +56,6 @@ Registry star — a fresnel-limb photosphere sphere (same shader the
 authored stars use) tinted by spectral class with a seeded
 granulation surface texture, plus the additive halo sprite so the
 selected star reads as a point source at cloud range.
-
 - `@param` THREE The three.js module.
 - `@param` s Engine state (deps + glowTex).
 - `@param` rec The registry record.
@@ -70,7 +66,6 @@ Registry exoplanet — a lit sphere whose surface is the shared seeded
 procedural texture (mottle/bands/streaks keyed on the record id), so
 each of the 5,974 catalogued worlds gets its own terrain instead of
 the same painted ball. Tint picks seeded from the exoplanet palette.
-
 - `@param` THREE The three.js module.
 - `@param` rec The registry record.
 
@@ -80,7 +75,6 @@ Registry deep-sky object — a seeded elliptical speckle cloud (the
 same `fillElliptical` the authored dwarf galaxies use, so a catalog
 galaxy/cluster resolves as a resolved member swarm, not a billboard)
 plus an additive halo sprite tinted by the OpenNGC type code.
-
 - `@param` THREE The three.js module.
 - `@param` s Engine state (glowTex).
 - `@param` rec The registry record.
@@ -94,7 +88,6 @@ eviction never corrupts the scene's shared sprite. Every material
 slot is scanned (map/normalMap/emissiveMap/…) — procedural bodies
 carry several textures and freeing only `map` would leak the rest on
 each LRU eviction.
-
 - `@param` s Engine state (shared glowTex to exclude).
 - `@param` root The spawned group to strip.
 
@@ -105,7 +98,6 @@ heliocentric chart position — the object the cloud point stands in
 for. LRU-cached on `s.registryBodies`; a cache overflow evicts and
 disposes the oldest spawn so mesh count stays bounded. No-ops on
 missing THREE/deps (pre-boot), missing Sun pivot, or dispose.
-
 - `@param` s Engine state.
 - `@param` rec The resolved registry record.
 
@@ -113,5 +105,4 @@ missing THREE/deps (pre-boot), missing Sun pivot, or dispose.
 
 Strips every spawned registry body — engine teardown and any
 context-loss path call this so the LRU set can't leak GPU buffers.
-
 - `@param` s Engine state.

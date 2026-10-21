@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/comet.ts`
+# `experiments\star-field\engine\bodies\comet.ts`
 
 Comet builder — a `SF_KINDS.COMET` body is a dark
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/comet.ts`     |
+| | |
+|---|---|
+| **Source** | `src/experiments\star-field\engine\bodies\comet.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -46,7 +46,6 @@ confetti. An InstancedMesh of unit quads — one draw call for the
 whole cloud, each instance matrix billboarded onto the camera
 orientation per frame — keeps real world-space size, the soft glow
 texture, and per-grain HDR color on every renderer.
-
 - `@param` THREE The three.js module.
 - `@param` rand Seeded RNG stream (per-tail, so ion and dust churn on
 - `@param` glowTex Shared radial-glow texture — each grain sprites a soft
@@ -94,7 +93,6 @@ indifferent to spin); the tails mount on `center` where local +x is
 permanently anti-sunward. Each tail is two particle layers — a tight
 bright core stream and a wide dim sheath — so the column reads as a
 volume of gas with a dense spine, not a painted band.
-
 - `@param` THREE The three.js module.
 - `@param` def Catalog entry — `radius` sizes the nucleus AND every tail
 - `@param` texMap Loaded texture map (a comet with a real nucleus map

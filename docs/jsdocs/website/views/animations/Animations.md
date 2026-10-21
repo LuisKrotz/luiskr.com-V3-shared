@@ -1,10 +1,10 @@
-# `website/views/animations/Animations.tsx`
+# `website\views\animations\Animations.tsx`
 
 &lt;view-animations&gt; — the animations-reference route: lists
 
-|                |                                                         |
-| -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/views/animations/Animations.tsx`           |
+| | |
+|---|---|
+| **Source** | `src/website\views\animations\Animations.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

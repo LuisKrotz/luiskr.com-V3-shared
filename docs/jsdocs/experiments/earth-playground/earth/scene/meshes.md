@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/scene/meshes.ts`
+# `experiments\earth-playground\earth\scene\meshes.ts`
 
 Scene mesh builders for the WebGPU Earth background —
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/scene/meshes.ts` |
+| **Source** | `src/experiments\earth-playground\earth\scene\meshes.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

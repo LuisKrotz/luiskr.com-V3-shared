@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/runtime/state.ts`
+# `experiments\earth-playground\earth\runtime\state.ts`
 
 Mutable engine state for EarthBackground, extracted from
 
 | | |
 |---|---|
-| **Source** | `src/experiments/earth-playground/earth/runtime/state.ts` |
+| **Source** | `src/experiments\earth-playground\earth\runtime\state.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
