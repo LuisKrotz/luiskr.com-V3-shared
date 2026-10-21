@@ -496,8 +496,8 @@
 | File | What it does |
 |---|---|
 | [`burger-button-tails.test.js`](core\tests\coverage\canvas\widgets/burger-button-tails.test.md) | Split from coverage-tails-2.test.js — covers the "burger-button tails" describe. |
+| [`burger-liquid-tails.test.js`](core\tests\coverage\canvas\widgets/burger-liquid-tails.test.md) | Coverage tail for the liquid burger icon — the |
 | [`burger-tails-2.test.js`](core\tests\coverage\canvas\widgets/burger-tails-2.test.md) | Split from coverage-tails-5.test.js — covers the "burger tails 2" describe. |
-| [`burger-wasm-tails.test.js`](core\tests\coverage\canvas\widgets/burger-wasm-tails.test.md) | Coverage tail for the WebGPU/wasm burger path — |
 | [`close-button-init-tails.test.js`](core\tests\coverage\canvas\widgets/close-button-init-tails.test.md) | Coverage tail for close-button/init.ts — the exported |
 | [`close-button-render-tails.test.js`](core\tests\coverage\canvas\widgets/close-button-render-tails.test.md) | Coverage tail for close-button/render.ts — the |
 | [`close-button-wasm-tails.test.js`](core\tests\coverage\canvas\widgets/close-button-wasm-tails.test.md) | Coverage tail for the WebGPU/wasm close button path — |
@@ -1290,7 +1290,7 @@
 
 | File | What it does |
 |---|---|
-| [`burger-button-webgl.ts`](core\utils\canvas\widgets/burger-button-webgl.md) | WebGL hamburger icon for the nav burger button: three |
+| [`burger-button-webgl.ts`](core\utils\canvas\widgets/burger-button-webgl.md) | WebGL menu icon for the nav burger button: four rounded |
 | [`carousel-controls.ts`](core\utils\canvas\widgets/carousel-controls.md) | WebGL control button for the awards carousel: a circular |
 | [`close-button.ts`](core\utils\canvas\widgets/close-button.md) | WebGL animated circular close (X) button used by the expand |
 | [`flag-webgl.ts`](core\utils\canvas\widgets/flag-webgl.md) | WebGL flag renderer for the language dialog: draws each |

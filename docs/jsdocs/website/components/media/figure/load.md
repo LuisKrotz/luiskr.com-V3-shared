@@ -45,9 +45,13 @@ Highest confirmed probe — the bitmap handed to the GPU at chain end.
 ### `publish`
 
 Publishes a confirmed tier into the visible high layer — the probe
-already holds the bytes, so the src swap paints from cache without a
-reload flash. Re-queries the element each rung because _updateDom
-rebuilds the shadow DOM wholesale between steps.
+already holds the bytes. The tier mounts as a NEW img stacked over
+the painted one (reassigning the live img.src would blank the box
+while the upgrade re-decodes — the rung blink); the clone mounts
+empty, paints once its own `load` fires, and retires every layer
+underneath in the same task, so the swap is atomic per frame.
+Re-queries the topmost layer each rung because _updateDom rebuilds
+the shadow DOM wholesale between steps.
 
 ### `climb`
 

@@ -15,7 +15,7 @@ Shared fullscreen-quad vertex shader.
 
 ### `BURGER_FS_BODY`
 
-Hairline menu-icon fragment shader body (prefix with the deriv prelude).
+Liquid menu-icon fragment shader body (prefix with the deriv prelude).
 
 ### `burgerFsSource`
 
