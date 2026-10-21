@@ -234,7 +234,7 @@ describe('Style Governance & Zero-Hardcoding Enforcement', () => {
         }
 
         const codeOnly = line
-          .replace(/\/\/.*$/, '')
+          .replace(/\/\/[^\n]*/, '')
           .replace(/\/\*.*?\*\//g, '')
           .trim()
 

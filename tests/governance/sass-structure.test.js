@@ -19,8 +19,9 @@ import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { NAV_SELECTORS } from '@core/tokens/selectors/nav.js'
 import { readSassDeep } from '@tests/fixtures/sass-resolve.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
+import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 
-const root = '/home/luis/projects/luiskr.com-V3'
+const root = ROOT_DIR
 const readSass = (rel) => {
   try {
     const abs = resolve(root, rel)

@@ -12,9 +12,13 @@
 import { describe, test, expect } from '@jest/globals'
 import { readFileSync, readdirSync, statSync, existsSync } from 'fs'
 import { resolve, dirname, join } from 'path'
+import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 
-const ROOT = '/home/luis/projects/luiskr.com-V3'
-const COMPONENTS = resolve(ROOT, 'website/components')
+/** Node paths use the platform separator — every comparison below assumes POSIX '/'. */
+const toPosix = (p) => p.replace(/\\/g, '/')
+
+const ROOT = toPosix(ROOT_DIR)
+const COMPONENTS = toPosix(resolve(ROOT, 'website/components'))
 
 /** Recursively collect every .ts/.tsx module under a directory. */
 const walk = (dir, acc = []) => {
@@ -23,7 +27,7 @@ const walk = (dir, acc = []) => {
     const st = statSync(p)
 
     if (st.isDirectory()) walk(p, acc)
-    else if (/\.(ts|tsx)$/.test(entry)) acc.push(p)
+    else if (/\.(ts|tsx)$/.test(entry)) acc.push(toPosix(p))
   }
 
   return acc
@@ -52,13 +56,13 @@ const ALIAS_ROOTS = {
 
 /** Resolves an import specifier to a repo path, or null for externals. */
 const resolveSpec = (spec, fromFile) => {
-  if (spec.startsWith('.')) return resolve(dirname(fromFile), spec)
+  if (spec.startsWith('.')) return toPosix(resolve(dirname(fromFile), spec))
 
   for (const [alias, dir] of Object.entries(ALIAS_ROOTS)) {
-    if (spec.startsWith(alias)) return resolve(ROOT, dir, spec.slice(alias.length))
+    if (spec.startsWith(alias)) return toPosix(resolve(ROOT, dir, spec.slice(alias.length)))
   }
 
-  if (spec === '@core') return resolve(ROOT, 'core/index.ts')
+  if (spec === '@core') return toPosix(resolve(ROOT, 'core/index.ts'))
 
   return null
 }
@@ -94,14 +98,14 @@ describe('Component portability (self-contained folders)', () => {
       resolve(ROOT, 'cms'),
       resolve(ROOT, 'shared/src/app'),
       resolve(ROOT, 'experiments'),
-    ]
+    ].map(toPosix)
 
     // The router singleton + its descriptor types are shared infra (like the
     // store): navigation is the contract components expose, not view logic.
     const allowedRouteImports = [
       resolve(ROOT, 'core/router/router.js'),
       resolve(ROOT, 'core/router/types.js'),
-    ]
+    ].map(toPosix)
 
     for (const f of files) {
       const src = readFileSync(f, 'utf8')
@@ -162,7 +166,7 @@ describe('Component portability (self-contained folders)', () => {
       // link contract; the router singleton itself is not view logic.
       resolve(ROOT, 'core/router/router.js'),
       resolve(ROOT, 'core/router/types.js'),
-    ]
+    ].map(toPosix)
 
     for (const f of files) {
       const owner = ownerOf(f)
