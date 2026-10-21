@@ -25,7 +25,7 @@
  * and an output that lands >= its input is discarded so the jpg/mp4
  * original remains the served variant.
  */
-import { spawn } from 'node:child_process'
+import { spawn, spawnSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 import { IMAGE_EXTS, VIDEO_EXTS, isMediaPath } from '../../../cms/media-convert/exts.ts'
@@ -86,9 +86,51 @@ export const hasTool = async (cmd, args = ['-version']) =>
     p.on('close', (code) => resolve(code === 0))
   })
 
+/**
+ * Merges the persisted Machine+User PATH from the Windows registry into
+ * process.env.PATH. winget/choco persist PATH updates to the registry on
+ * install, but a terminal (or IDE) spawned before the install keeps the
+ * stale snapshot — every spawn below inherits this process env, so
+ * refreshing here makes just-installed tools (ffmpeg, gcloud, …)
+ * discoverable within the same setup run. No-op off win32 and when
+ * PowerShell is unavailable.
+ */
+export const refreshWindowsPath = () => {
+  if (process.platform !== 'win32') return
+
+  const r = spawnSync(
+    'powershell',
+    [
+      '-NoProfile',
+      '-Command',
+      "[Environment]::ExpandEnvironmentVariables([Environment]::GetEnvironmentVariable('Path','Machine')) + ';' + [Environment]::ExpandEnvironmentVariables([Environment]::GetEnvironmentVariable('Path','User'))",
+    ],
+    { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
+  )
+
+  if (r.status !== 0) return
+
+  const entries = (process.env.PATH || '').split(';').filter(Boolean)
+  const seen = new Set(entries.map((p) => p.toLowerCase().replace(/\\+$/, '')))
+
+  for (const dir of (r.stdout || '').split(';')) {
+    const trimmed = dir.trim()
+    const key = trimmed.toLowerCase().replace(/\\+$/, '')
+
+    if (trimmed && !seen.has(key)) {
+      seen.add(key)
+      entries.push(trimmed)
+    }
+  }
+
+  process.env.PATH = entries.join(';')
+}
+
 let TOOLS = null
 
 export async function detectTools(force = false) {
+  refreshWindowsPath()
+
   if (!TOOLS || force) {
     const [ffmpeg, ffprobe, convert, cjpeg, magick] = await Promise.all([
       hasTool('ffmpeg'),

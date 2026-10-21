@@ -8,7 +8,7 @@
  * copyable commands instead of spawning into a tty-less sudo prompt.
  */
 import { spawn } from 'node:child_process'
-import { detectTools, hasTool } from './pipeline.js'
+import { detectTools, hasTool, refreshWindowsPath } from './pipeline.js'
 
 /** Package managers probed per platform, in preference order. */
 const MANAGER_CANDIDATES = {
@@ -44,6 +44,8 @@ const needs = (t) => ({
  * @returns {Promise<string|null>} e.g. 'brew', 'winget', 'apt-get'.
  */
 export async function detectManager() {
+  refreshWindowsPath()
+
   const candidates = MANAGER_CANDIDATES[process.platform] || MANAGER_CANDIDATES.linux
 
   // Package managers take --version (apt-get -version exits 100).
@@ -184,7 +186,6 @@ export async function installTools() {
   }
 
   let log = ''
-  let ok = true
 
   for (const [cmd, args] of report.plan.commands) {
     log += `$ ${display(cmd, args)}\n`
@@ -202,13 +203,12 @@ export async function installTools() {
       p.on('close', resolve)
     })
 
-    if (code !== 0) {
-      ok = false
-      break
-    }
+    if (code !== 0) break
   }
 
   const after = await toolsReport(true)
 
-  return { ok: ok && !after.missing.ffmpeg, log, report: after }
+  // Judge by the post-install probe, not exit codes: winget exits nonzero
+  // for "already installed / no newer version", which is success here.
+  return { ok: !after.missing.ffmpeg, log, report: after }
 }

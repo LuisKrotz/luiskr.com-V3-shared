@@ -3,10 +3,13 @@
  * Guided dev-environment installer — `yarn setup`. Cross-platform
  * (Node-only, no shell): verifies Node/Yarn/Git, initialises git
  * submodules, installs dependencies, wires git hooks, installs the CLI
- * toolchain (firebase-tools, Google Cloud SDK) and the media-convert
+ * toolchain (firebase-tools, Google Cloud SDK), repairs a partial rust
+ * wasm toolchain (wasm32 target, wasm-pack) and the media-convert
  * toolchain (ffmpeg/ImageMagick/mozjpeg), then prints the exact next
  * steps. Read-only checks never mutate; installs are the standard yarn +
- * package-manager operations for the detected platform.
+ * package-manager operations for the detected platform. On Windows the
+ * persisted registry PATH is merged into the process env first so tools
+ * installed earlier in the session are visible to every probe below.
  *
  *   yarn setup            full guided setup — installs everything missing
  *   yarn setup --check    report only — no install/write side effects
@@ -62,6 +65,13 @@ const runSudoIfAble = (sudoCmd) => {
   })
   return r.status === 0
 }
+
+// Windows PATH refresh: winget/choco persist PATH to the registry, but a
+// terminal spawned before the install keeps the stale snapshot — merge
+// the persisted PATH so every probe below sees tools installed earlier
+// in this same session. In-process env only; no write side effects.
+const { refreshWindowsPath } = await import('./media-convert/pipeline.js')
+refreshWindowsPath()
 
 // ── 1. Prerequisites ────────────────────────────────────────────────────
 console.log(`\n[1/6] Prerequisites (${process.platform}/${process.arch})`)
@@ -218,10 +228,27 @@ if (gcloud) {
 // Rust toolchain — only needed to REBUILD the wasm crates under rust/*/;
 // every crate ships a prebuilt pkg/ artifact committed to the repo.
 const cargo = probe('cargo', ['--version'])
-const wasm32 = probe('rustup', ['target', 'list', '--installed'])?.includes(
-  'wasm32-unknown-unknown'
-)
-const wasmPack = probe('wasm-pack', ['--version'])
+let wasm32 = probe('rustup', ['target', 'list', '--installed'])?.includes('wasm32-unknown-unknown')
+let wasmPack = probe('wasm-pack', ['--version'])
+
+// Auto-repair a partial toolchain: `rustup target add` and
+// `cargo install` are user-level on every platform, so a missing wasm32
+// target or wasm-pack is healed in place rather than just reported. An
+// absent cargo stays manual — installing rustup itself is a bigger
+// opt-in than fixing the toolchain around it.
+if (!checkOnly && cargo && !wasm32) {
+  await runStep('rustup', ['target', 'add', 'wasm32-unknown-unknown'])
+
+  wasm32 = (probe('rustup', ['target', 'list', '--installed']) || '').includes(
+    'wasm32-unknown-unknown'
+  )
+}
+
+if (!checkOnly && cargo && !wasmPack) {
+  await runStep('cargo', ['install', 'wasm-pack'])
+
+  wasmPack = probe('wasm-pack', ['--version'])
+}
 
 if (cargo && wasm32 && wasmPack) {
   ok('rust toolchain (cargo + wasm32 target + wasm-pack)')
