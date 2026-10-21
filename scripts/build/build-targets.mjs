@@ -18,7 +18,7 @@
  *
  * Invoked by `yarn build` AFTER the prebuild verify gate passes.
  */
-import { execFileSync } from 'node:child_process'
+import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import zlib from 'node:zlib'
@@ -37,8 +37,38 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..', '..', '..')
 const DIST = path.join(ROOT, 'dist')
 
-const run = (cmd, args, env = {}) =>
-  execFileSync(cmd, args, { cwd: ROOT, env: { ...process.env, ...env }, stdio: 'inherit' })
+const run = (cmd, args, env = {}, label = '') =>
+  new Promise((resolve, reject) => {
+    const child = spawn(cmd, args, {
+      cwd: ROOT,
+      env: { ...process.env, ...env },
+      stdio: 'inherit',
+      shell: false,
+    })
+
+    // Long build steps (rolldown's chunk render, minify) emit nothing for
+    // minutes — a heartbeat keeps the log visibly alive instead of looking
+    // frozen. Stderr so piped stdout stays clean.
+    const t0 = Date.now()
+
+    const heartbeat = setInterval(() => {
+      process.stderr.write(
+        `  … ${label || `${cmd} ${args.join(' ')}`} — ${Math.round((Date.now() - t0) / 1000)}s elapsed\n`
+      )
+    }, 30000)
+
+    child.on('error', (err) => {
+      clearInterval(heartbeat)
+      reject(err)
+    })
+
+    child.on('exit', (code) => {
+      clearInterval(heartbeat)
+
+      if (code === 0) resolve()
+      else reject(new Error(`${cmd} ${args.join(' ')} exited with code ${code}`))
+    })
+  })
 
 // ── 1. Per-tier vite builds ─────────────────────────────────────────────────
 // The first build owns emptyOutDir + publicDir copying; later builds only
@@ -60,11 +90,16 @@ for (const [i, t] of buildList.entries()) {
   // below could pick the old index-*.js, pointing visitors at dead code.
   withFsRetry(() => fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true }))
 
-  run('yarn', ['vite', 'build'], {
-    LK_TARGET: t.name,
-    LK_EMPTY_OUTDIR: i === 0 && !process.env.LK_KEEP_DIST ? '1' : '0',
-    LK_NO_PUBLIC: i === 0 && !process.env.LK_KEEP_DIST ? '' : '1',
-  })
+  await run(
+    'yarn',
+    ['vite', 'build'],
+    {
+      LK_TARGET: t.name,
+      LK_EMPTY_OUTDIR: i === 0 && !process.env.LK_KEEP_DIST ? '1' : '0',
+      LK_NO_PUBLIC: i === 0 && !process.env.LK_KEEP_DIST ? '' : '1',
+    },
+    `vite build ${t.name}`
+  )
 }
 
 // ── 1b. Derived ES5 tiers ───────────────────────────────────────────────────
@@ -301,7 +336,7 @@ for (const t of tierManifest) t.css = `/v/${t.name}/assets/css/${t.css}`
 // Runs while dist/ holds the fresh chunks but before the expensive
 // locale-pages fan-out, so an over-budget regression fails the build here
 // instead of after 18k documents were written.
-run(process.execPath, ['shared/scripts/verify/chunk-budget.mjs'])
+await run(process.execPath, ['shared/scripts/verify/chunk-budget.mjs'], {}, 'chunk-budget scan')
 
 // ── 6. Inline loader + manifest into dist/index.html ────────────────────────
 const indexPath = path.join(DIST, 'index.html')

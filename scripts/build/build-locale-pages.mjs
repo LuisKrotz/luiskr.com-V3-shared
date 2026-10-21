@@ -463,9 +463,17 @@ export function localize(
   }
 
   // Localize the statically-emitted intro-loader copy — mirrors
-  // LOADER_CLASSES.INTRO_LOADER_TITLE / _MSG in the body markup.
-  if (loader?.title)
+  // LOADER_CLASSES.INTRO_LOADER_TITLE / _MSG in the body markup; the
+  // named-region aria-label follows the title so the landmark stays
+  // localized too.
+  if (loader?.title) {
     out = out.replace(/(<div class="intro-loader-title">)[^<]*/, `$1${esc(loader.title)}`)
+
+    out = out.replace(
+      /(<div class="intro-loader"[^>]*aria-label=")[^"]*(")/,
+      `$1${esc(loader.title)}$2`
+    )
+  }
 
   if (loader?.msg)
     out = out.replace(/(<div class="intro-loader-msg">)[^<]*/, `$1${esc(loader.msg)}`)
