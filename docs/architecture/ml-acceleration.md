@@ -83,6 +83,36 @@ phases of separable Catmull-Rom bicubic taps — producing a 2×
 no blink. Inputs cap at 512² px (the readback marshals on the main
 thread); larger media already has the quality it needs.
 
+### Media pipeline: warm → decode → enhance
+
+```mermaid
+flowchart LR
+    W["warmObserver — 600px margin"] -->|"first rung only"| F["detached fetch — CDN edge + HTTP cache hot"]
+    O["imgObserver — 100px margin"] --> L["ladder climb — serial ascending rungs"]
+    F -.->|"force-cache replay"| L
+    L --> D["decodeImageWASM — worker createImageBitmap + GPU resize hints"]
+    D -->|"bitmap"| U["processBitmapGPU — zero-copy VRAM upload"]
+    D -->|"null"| T["processTextureGPU — img element fallback"]
+    U --> S{"under-resolved?"}
+    T --> S
+    S -->|"yes"| SR["superres-2x → processBitmapGPU"]
+    S -->|"no"| Z["done"]
+```
+
+- **Warm band**: a second IntersectionObserver at 600px fires one
+  detached fetch of the _first_ ladder rung — only the entry rung, since
+  the climb ascends serially and warming the top rung would fight the
+  low rung for bandwidth on media that may never publish.
+- **WASM decode**: at ladder end, `wasmImageDecoder.decodeImageWASM`
+  replays the confirmed URL through `fetch(cache: 'force-cache')` (the
+  warm + climb already paid the network cost), decodes in a wasm-pool
+  worker via `createImageBitmap` with GPU resize hints, and uploads the
+  bitmap zero-copy. A null result falls back to the classic
+  `processTextureGPU(img)` upload.
+- **Enhance last**: super-resolution consumes the decoded bitmap when
+  present (its `width` is the true pixel count) else the `<img>` — the
+  enhancement is opportunistic and never blocks the climb.
+
 ### diagram-cost — mermaid scheduling
 
 The docs viewer's mermaid blocks render through `rust/diagram` (wasm).
