@@ -90,9 +90,11 @@ re-emits the reached tier instead of replaying from the LQIP) and
 publishes the loaded class driving the CSS crossfade. When rungs
 remain above the painted one it preloads the next tier through a
 detached Image — the probe request doubles as the webp decode check —
-and swaps `src` only once bytes confirm, so a painted rung can never
-tear. The swap re-fires the img's own `load`, re-entering this step
-until the highest proven tier is reached.
+and only once bytes confirm does the tier go live. The upgrade never
+reassigns the painted img's `src` (that blanks the box while the new
+resource re-decodes); instead the confirmed tier mounts as a NEW
+stacked sibling whose own `load` retires the layer underneath, so no
+frame ever paints empty.
 - `@param` registry Host map of cover key → highest confirmed painted URL
 - `@param` coverKey Stable identity of the cover (the original URL).
 - `@param` img The high-layer img that fired `load` (event currentTarget).
@@ -101,9 +103,16 @@ until the highest proven tier is reached.
 
 ### `advance`
 
-Publishes a confirmed tier — the emitted rung-0 <source> has served
- by now, so its <source> nodes go and img.src becomes authoritative;
- the resulting `load` re-enters this step to climb the next rung.
+Publishes a confirmed tier as a new layer stacked over the painted
+ one. Reassigning the live img.src would drop its painted frame while
+ the upgraded resource re-decodes — the visible blink — so instead a
+ clone (every attribute carried: classes, sizes, loading, aria-hidden)
+ mounts empty on top — an img with no resolved bitmap paints nothing,
+ the rung below stays visible — and only when its own `load` fires
+ does the layer underneath retire, making the swap atomic per frame.
+ On `error` the successor removes itself and the painted rung stands.
+ The clone carries no listeners (cloneNode doesn't copy them), so the
+ climb continues through the explicit re-entry below.
 
 ### `buildMediaUrls`
 

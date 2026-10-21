@@ -1,6 +1,6 @@
 # `core\utils\canvas\widgets\burger-button-webgl.ts`
 
-WebGL hamburger icon for the nav burger button: three
+WebGL menu icon for the nav burger button: four rounded
 
 | | |
 |---|---|
@@ -11,40 +11,28 @@ WebGL hamburger icon for the nav burger button: three
 
 ### `BurgerButtonWebGL`
 
-WebGL animated hamburger icon for the mobile burger button.
-Renders three sleek horizontal lines with rounded pill caps and subtle wave animation.
-Adapts to the current theme: dark icon in light mode, bright icon in dark mode.
+WebGL liquid menu icon for the burger button.
+Renders four rounded squares that drift with a liquid idle, pool toward
+the center on hover/focus, and morph into the close X when the menu
+opens (setOpen). Adapts to the current theme: dark icon in light mode,
+bright icon in dark mode.
 
 ### `canvas`
 
 - `@param` {HTMLCanvasElement} canvas - icon canvas inside the nav burger button
 - `@param` {Function} onClick - optional click handler (the canvas becomes
 
-### `_wasm`
+### `_hover`
 
-Live WebGPU wasm handle — the preferred backend when it mounts.
+Smoothed hover convergence — pointer enter/leave + focus/blur drive the target.
 
-### `_wasmFailed`
+### `_open`
 
-Latch — a failed wasm mount never retries on this instance.
+Smoothed menu-open morph — setOpen drives the target.
 
-### `_wasmPending`
+### `_prevT`
 
-In-flight mount — restore() must not double-mount on re-entry.
-
-### `_wasmT`
-
-Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
-
-### `_tryWasm`
-
-Attempts the WebGPU wasm burger (~50KB artifact, own GPUDevice).
-MANUAL drive: this class keeps its own loop/resize logic, so the
-bridge only initializes the surface — state setters and frame(dt)
-are forwarded by the existing draw path. On any failure the WebGL
-path runs exactly as before; on success the canvas gets a webgpu
-context (which is mutually exclusive with the webgl one, so the
-mount MUST settle before _initGLReal touches getContext).
+Previous frame's t — the approach easings consume dt, not absolutes.
 
 ### `_initGL`
 
@@ -52,7 +40,7 @@ Creates the WebGL context + shader program; falls back to the CSS/DOM path on fa
 
 ### `_initGLReal`
 
-The synchronous WebGL bootstrap — ran directly on no-WebGPU browsers and after a wasm mount failure.
+The synchronous WebGL bootstrap — context, program, quad, uniform handles.
 
 ### `_triggerFallback`
 
@@ -65,6 +53,21 @@ Re-syncs the drawing buffer to the canvas's CSS box × devicePixelRatio
 and repaints one frame immediately when the RAF loop isn't running —
 in reduced-motion static mode a resize would otherwise leave the
 cleared buffer blank until the next state change.
+
+### `setOpen`
+
+Menu-open driver — the nav calls this on toggle/close so the pooled
+droplet morphs into the close X (and back). With no running loop
+(reduced motion, pre-start) the state snaps and repaints once.
+- `@param` open Whether the menu overlay is open.
+
+### `_setHover`
+
+Hover-convergence driver — pointer enter/leave and focus/blur feed it.
+
+### `_settleNow`
+
+Snaps the smoothed state to its targets and repaints — the static path.
 
 ### `_start`
 
