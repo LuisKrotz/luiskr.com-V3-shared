@@ -22,9 +22,14 @@
  * build/commit.
  *
  * Escape hatch for local iteration: VERIFY_ONLY=lint,test limits the run.
+ *
+ * Steps run CONCURRENTLY — they are independent read-only checks (none
+ * mutates another's inputs), so serial execution only wasted wall time.
+ * Output is buffered per step and printed whole on completion, so
+ * interleaved children never corrupt each other's report sections.
  */
 
-import { execSync } from 'node:child_process'
+import { spawn } from 'node:child_process'
 
 const STEPS = {
   format:
@@ -47,21 +52,51 @@ const steps = Object.entries(STEPS).filter(([name]) => !only.length || only.incl
 
 const failures = []
 
-for (const [name, cmd] of steps) {
-  console.log(`\n═══ verify: ${name} ═══`)
-
-  try {
-    execSync(cmd, {
-      stdio: 'inherit',
+/**
+ * Runs one step with piped stdio — the child's full output is captured and
+ * replayed under its banner once it exits, which keeps parallel children
+ * from interleaving their report blocks mid-line.
+ * @param {string} name step name (banner + failure list)
+ * @param {string} cmd shell command to execute
+ * @returns {Promise<void>} resolves after the child's output is flushed
+ */
+const runStep = (name, cmd) =>
+  new Promise((resolve) => {
+    // shell:true — commands carry quoted globs (prettier/stylelint) that
+    // only a shell can expand.
+    const child = spawn(cmd, {
       cwd: process.cwd(),
       env: { ...process.env, FORCE_COLOR: '1' },
+      stdio: ['ignore', 'pipe', 'pipe'],
+      shell: true,
     })
-    console.log(`✓ ${name}`)
-  } catch {
-    failures.push(name)
-    console.error(`✗ ${name} FAILED`)
-  }
-}
+
+    const chunks = []
+
+    child.stdout.on('data', (c) => chunks.push(c))
+    child.stderr.on('data', (c) => chunks.push(c))
+
+    child.on('error', (err) => {
+      chunks.push(Buffer.from(String(err)))
+    })
+
+    child.on('close', (code) => {
+      process.stdout.write(`\n═══ verify: ${name} ═══\n`)
+
+      for (const chunk of chunks) process.stdout.write(chunk)
+
+      if (code === 0) {
+        console.log(`✓ ${name}`)
+      } else {
+        failures.push(name)
+        console.error(`✗ ${name} FAILED`)
+      }
+
+      resolve()
+    })
+  })
+
+await Promise.all(steps.map(([name, cmd]) => runStep(name, cmd)))
 
 if (failures.length) {
   console.error(`\n✗ verify FAILED: ${failures.join(', ')} — fix before building/committing`)
