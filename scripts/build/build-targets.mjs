@@ -18,12 +18,18 @@
  *
  * Invoked by `yarn build` AFTER the prebuild verify gate passes.
  */
+// zlib/fs async work rides the libuv threadpool — default width is 4, which
+// would starve the ~19k-file compression drain and parallel vite children.
+// Must be set before the first threadpool use, hence above all imports that
+// could trigger one (imports themselves don't initialize the pool).
+import os from 'node:os'
+if (!process.env.UV_THREADPOOL_SIZE)
+  process.env.UV_THREADPOOL_SIZE = String(Math.max(8, os.cpus().length))
+
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
-import zlib from 'node:zlib'
 import crypto from 'node:crypto'
-import { constants as zlibConstants } from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 import { ES_TARGETS, POLYFILLS, POLYFILL_ORDER, BROWSERS } from '../../build/es-targets.mjs'
 import {
@@ -32,6 +38,7 @@ import {
   prefetchTranslations,
 } from './build-locale-pages.mjs'
 import { withFsRetry, withFsRetryAsync } from './fs-retry.mjs'
+import { queueCompressedWrite, drainCompressedWrites } from './compress-queue.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..', '..', '..')
@@ -78,10 +85,35 @@ const run = (cmd, args, env = {}, label = '') =>
 const only = process.env.LK_ONLY ? new Set(process.env.LK_ONLY.split(',')) : null
 const buildList = ES_TARGETS.filter((t) => !only || only.has(t.name))
 
-for (const [i, t] of buildList.entries()) {
-  // Derived tiers (`babelFrom`) skip the vite build — they lower an
-  // already-emitted bundle in the post-pass below.
-  if (t.babelFrom) continue
+/**
+ * Concurrent vite-build pool width. Each child peaks around 1.5–2.5GB
+ * (rolldown graph + terser + compression plugin), so the cap is RAM-
+ * derived: ~4GiB per build against total memory, bounded by cores.
+ * LK_BUILD_WORKERS overrides for hosts with different budgets.
+ */
+const BUILD_WORKERS = (() => {
+  const override = Number.parseInt(process.env.LK_BUILD_WORKERS ?? '', 10)
+
+  if (Number.isFinite(override) && override > 0) return override
+
+  const byRam = Math.floor(os.totalmem() / (4 * 1024 ** 3))
+  const byCpu = Math.max(1, Math.floor(os.cpus().length / 3))
+
+  return Math.max(2, Math.min(6, byRam, byCpu))
+})()
+
+/**
+ * Runs `vite build` for one tier. Derived tiers (`babelFrom`) are skipped
+ * here — they lower an already-emitted bundle in the post-pass below.
+ * `first` marks the owner build: it alone wipes dist/ (emptyOutDir) and
+ * copies the public dir, so it must run BEFORE the parallel wave starts.
+ * @param {object} t ES_TARGETS entry
+ * @param {number} i index in buildList (banner display only)
+ * @param {boolean} first whether this build owns dist/ initialization
+ * @returns {Promise<void>} resolves on child exit 0
+ */
+const buildTier = (t, i, first) => {
+  if (t.babelFrom) return Promise.resolve()
 
   console.log(`\n═══ build ${i + 1}/${buildList.length}: ${t.name} (${t.format}) ═══`)
 
@@ -90,17 +122,44 @@ for (const [i, t] of buildList.entries()) {
   // below could pick the old index-*.js, pointing visitors at dead code.
   withFsRetry(() => fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true }))
 
-  await run(
+  return run(
     'yarn',
     ['vite', 'build'],
     {
       LK_TARGET: t.name,
-      LK_EMPTY_OUTDIR: i === 0 && !process.env.LK_KEEP_DIST ? '1' : '0',
-      LK_NO_PUBLIC: i === 0 && !process.env.LK_KEEP_DIST ? '' : '1',
+      LK_EMPTY_OUTDIR: first && !process.env.LK_KEEP_DIST ? '1' : '0',
+      LK_NO_PUBLIC: first && !process.env.LK_KEEP_DIST ? '' : '1',
     },
     `vite build ${t.name}`
   )
 }
+
+const viteTiers = buildList.filter((t) => !t.babelFrom)
+
+// Build 0 owns the dist wipe + public copy — it must complete before any
+// parallel sibling writes, or emptyOutDir could erase their early output.
+await buildTier(viteTiers[0], buildList.indexOf(viteTiers[0]), true)
+
+/**
+ * Bounded drain over the remaining tiers: BUILD_WORKERS workers pull from
+ * the shared index until exhausted. Each vite child writes only its own
+ * dist/v/<tier>/ tree (LK_EMPTY_OUTDIR=0), so concurrent children can never
+ * touch each other's output. Iterative worker-drain — the tasks are
+ * already materialized, no self-similar traversal here.
+ */
+let tierCursor = 1
+
+await Promise.all(
+  Array.from({ length: Math.min(BUILD_WORKERS, Math.max(1, viteTiers.length - 1)) }, async () => {
+    while (tierCursor < viteTiers.length) {
+      const t = viteTiers[tierCursor]
+
+      tierCursor++
+
+      await buildTier(t, buildList.indexOf(t), false)
+    }
+  })
+)
 
 // ── 1b. Derived ES5 tiers ───────────────────────────────────────────────────
 // Babel lowers the source tier's emitted IIFE to parse-level ES5 — the only
@@ -153,26 +212,32 @@ console.log('\n═══ polyfill bundles ═══')
 const { rolldown } = await import('rolldown')
 
 // One classic-script bundle per group — iife can't code-split, so each
-// entry gets its own single-file build.
-for (const p of POLYFILLS) {
-  const bundle = await rolldown({
-    input: { [p.name]: path.join(ROOT, p.entry) },
-    platform: 'browser',
-    transform: { target: 'es2015' },
-  })
-
-  await withFsRetryAsync(() =>
-    bundle.write({
-      dir: path.join(DIST, 'assets/polyfills'),
-      format: 'iife',
-      entryFileNames: '[name]-[hash].js',
-      minify: true,
-      codeSplitting: false,
+// entry gets its own single-file build. Rolldown holds the graph in Rust
+// off the JS thread, so the builds overlap cleanly under Promise.all —
+// each bundle only ~100-300KB, six concurrent is well under any RAM cap.
+await Promise.all(
+  POLYFILLS.map(async (p) => {
+    const bundle = await rolldown({
+      input: { [p.name]: path.join(ROOT, p.entry) },
+      platform: 'browser',
+      transform: { target: 'es2015' },
     })
-  )
 
-  if (typeof bundle.close === 'function') await bundle.close()
-}
+    try {
+      await withFsRetryAsync(() =>
+        bundle.write({
+          dir: path.join(DIST, 'assets/polyfills'),
+          format: 'iife',
+          entryFileNames: '[name]-[hash].js',
+          minify: true,
+          codeSplitting: false,
+        })
+      )
+    } finally {
+      if (typeof bundle.close === 'function') await bundle.close()
+    }
+  })
+)
 
 // Polyfill bundles ship to the ES5 floor too — rolldown's es2015 output
 // still uses const/arrow/class syntax IE can't parse, so every emitted
@@ -183,18 +248,26 @@ for (const p of POLYFILLS) {
   const presetEnv = (await import('@babel/preset-env')).default
   const dir = path.join(DIST, 'assets/polyfills')
 
-  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.js'))) {
-    const file = path.join(dir, f)
-    const { code } = await babel.transformFileAsync(file, {
-      babelrc: false,
-      configFile: false,
-      presets: [[presetEnv, { targets: { ie: '11' }, modules: false }]],
-      compact: true,
-      comments: false,
-    })
+  // babel's transform pipeline is CPU-only JS — transformFileAsync releases
+  // the await between plugin phases so the files interleave; the sync write
+  // per completion is ~ms, so Promise.all is the whole win here.
+  await Promise.all(
+    fs
+      .readdirSync(dir)
+      .filter((f) => f.endsWith('.js'))
+      .map(async (f) => {
+        const file = path.join(dir, f)
+        const { code } = await babel.transformFileAsync(file, {
+          babelrc: false,
+          configFile: false,
+          presets: [[presetEnv, { targets: { ie: '11' }, modules: false }]],
+          compact: true,
+          comments: false,
+        })
 
-    withFsRetry(() => fs.writeFileSync(file, code))
-  }
+        withFsRetry(() => fs.writeFileSync(file, code))
+      })
+  )
 }
 
 // Hash-named files → runtime paths for the loader manifest.
@@ -233,16 +306,33 @@ const cssTargetMap = (cssTarget) => {
   return engine ? { [engine]: version } : undefined
 }
 
-const emitCss = async (t, prefix = 'index-') => {
-  const sass = await import('sass')
-  const { transform } = await import('lightningcss')
+/**
+ * Lazily-cached sass compilation of the global sheet — the input file and
+ * options are identical for every tier call, so the (~1-2s) compile runs
+ * once per build instead of once per emitCss() call (up to 26 times).
+ * Only the per-tier lightningcss `targets` differ downstream.
+ */
+let compiledCssSheet = null
 
-  const compiled = sass.compile(path.join(ROOT, 'core/sass/components/shell/app.scss'), {
+const compiledSheet = async () => {
+  if (compiledCssSheet) return compiledCssSheet
+
+  const sass = await import('sass')
+
+  compiledCssSheet = sass.compile(path.join(ROOT, 'core/sass/components/shell/app.scss'), {
     loadPaths: [path.join(ROOT, 'core/sass')],
     silenceDeprecations: ['import', 'global-builtin', 'legacy-js-api'],
     sourceMap: true,
     sourceMapIncludeSources: true,
   })
+
+  return compiledCssSheet
+}
+
+const emitCss = async (t, prefix = 'index-') => {
+  const { transform } = await import('lightningcss')
+
+  const compiled = await compiledSheet()
 
   const outDir = path.join(DIST, 'v', t.name, 'assets', 'css')
   withFsRetry(() => fs.mkdirSync(outDir, { recursive: true }))
@@ -261,7 +351,9 @@ const emitCss = async (t, prefix = 'index-') => {
   const name = `${prefix}${hash}.css`
   const finalCode = Buffer.concat([code, Buffer.from(`\n/*# sourceMappingURL=${name}.map */\n`)])
 
-  withFsRetry(() => fs.writeFileSync(path.join(outDir, name), finalCode))
+  // queueCompressedWrite performs the sync plain-file write itself and
+  // defers only the .br/.gz siblings to the shared compression queue.
+  queueCompressedWrite(path.join(outDir, name), finalCode)
 
   // Sass emits absolute build-machine paths in `sources` — rewrite them
   // repo-relative so deployed maps don't leak the filesystem layout.
@@ -272,15 +364,6 @@ const emitCss = async (t, prefix = 'index-') => {
   )
 
   withFsRetry(() => fs.writeFileSync(path.join(outDir, `${name}.map`), JSON.stringify(parsedMap)))
-  withFsRetry(() =>
-    fs.writeFileSync(
-      path.join(outDir, `${name}.br`),
-      zlib.brotliCompressSync(finalCode, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
-    )
-  )
-  withFsRetry(() =>
-    fs.writeFileSync(path.join(outDir, `${name}.gz`), zlib.gzipSync(finalCode, { level: 9 }))
-  )
 
   return name
 }
@@ -386,22 +469,15 @@ await Promise.all([prefetchStarMediaDims(), prefetchTranslations()])
 // Per-locale shells: emit dist/<loc>/<slug>/index.html for every sitemap
 // route with translated title/meta/JSON-LD + hreflang alternates, and return
 // the localized root document (alternates injected). CMS is never touched.
-const localePages = buildLocalePages(DIST, html)
+// buildLocalePages drains the shared compression queue internally — the
+// ~19k-page fan-out's .br/.gz siblings land on the threadpool, not here.
+const localePages = await buildLocalePages(DIST, html)
 
 html = localePages.html
 
-withFsRetry(() => fs.writeFileSync(indexPath, html))
-
-// Compressed index.html siblings (Firebase serves .br/.gz when present).
-const htmlBuf = Buffer.from(html, 'utf8')
-
-withFsRetry(() =>
-  fs.writeFileSync(
-    `${indexPath}.br`,
-    zlib.brotliCompressSync(htmlBuf, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
-  )
-)
-withFsRetry(() => fs.writeFileSync(`${indexPath}.gz`, zlib.gzipSync(htmlBuf, { level: 9 })))
+// Compressed index.html siblings (Firebase serves .br/.gz when present) —
+// the plain write lands now, the compress pass joins the queue.
+queueCompressedWrite(indexPath, html)
 
 // Re-stamp the service-worker's precache revision for index.html so the new
 // html (with the loader) is what Workbox serves.
@@ -414,19 +490,21 @@ if (fs.existsSync(swPath)) {
     /\{url:"index\.html",revision:"[^"]+"\}/,
     `{url:"index.html",revision:"${htmlHash}"}`
   )
-  withFsRetry(() => fs.writeFileSync(swPath, sw))
 
-  const swBuf = Buffer.from(sw, 'utf8')
-  if (fs.existsSync(`${swPath}.br`))
-    withFsRetry(() =>
-      fs.writeFileSync(
-        `${swPath}.br`,
-        zlib.brotliCompressSync(swBuf, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
-      )
-    )
-  if (fs.existsSync(`${swPath}.gz`))
-    withFsRetry(() => fs.writeFileSync(`${swPath}.gz`, zlib.gzipSync(swBuf, { level: 9 })))
+  // Only re-emit siblings that already exist — an uncompressed SW keeps
+  // its served shape rather than gaining .br/.gz it never had.
+  if (fs.existsSync(`${swPath}.br`) && fs.existsSync(`${swPath}.gz`)) {
+    queueCompressedWrite(swPath, sw)
+  } else {
+    withFsRetry(() => fs.writeFileSync(swPath, sw))
+  }
 }
+
+// Flush every queued sibling (css emits above + index/sw here) so the
+// process only exits once the whole compressed surface is on disk.
+const compressed = await drainCompressedWrites()
+
+console.log(`\n  compressed siblings: ${compressed} documents via queue`)
 
 console.log(
   `\n  locale-pages: ${localePages.written + 1} localized documents across ${localePages.locales} locales`

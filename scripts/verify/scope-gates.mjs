@@ -39,8 +39,9 @@
  *   local-modules / shared infra → ripple to every scope (toolchain-wide).
  */
 
-import { execSync, execFileSync } from 'node:child_process'
+import { execSync, execFileSync, spawn } from 'node:child_process'
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -209,6 +210,61 @@ const run = (label, cmd, args) => {
   execFileSync(cmd, args, { cwd: ROOT, stdio: 'inherit', shell: false })
 }
 
+/**
+ * Async counterpart for parallel gate steps — spawns the check with piped
+ * stdio so concurrently-running children can't interleave their report
+ * blocks; the captured output is replayed under the step's banner on exit.
+ * `extraEnv` carries per-step overrides (e.g. a split JEST_MAX_WORKERS
+ * budget when two jest pools run side by side).
+ * @param {string} label banner prefix
+ * @param {string} cmd executable
+ * @param {string[]} args argv
+ * @param {object} [extraEnv] env overrides merged over process.env
+ * @returns {Promise<void>} resolves on exit 0, rejects otherwise
+ */
+const runAsync = (label, cmd, args, extraEnv = {}) =>
+  new Promise((resolve, reject) => {
+    const child = spawn(cmd, args, {
+      cwd: ROOT,
+      env: { ...process.env, ...extraEnv },
+      stdio: ['ignore', 'pipe', 'pipe'],
+      shell: false,
+    })
+
+    const chunks = []
+
+    child.stdout.on('data', (c) => chunks.push(c))
+    child.stderr.on('data', (c) => chunks.push(c))
+    child.on('error', (err) => chunks.push(Buffer.from(String(err))))
+
+    child.on('close', (code) => {
+      process.stdout.write(`\n── ${label}: ${cmd} ${args.join(' ')} ──\n`)
+
+      for (const chunk of chunks) process.stdout.write(chunk)
+
+      if (code === 0) resolve()
+      else reject(new Error(`${cmd} ${args.join(' ')} exited with code ${code}`))
+    })
+  })
+
+/**
+ * Total jest-worker budget for a gate run — mirrors jest.preset's
+ * RAM-derived cap (2GiB/worker, cores−1) so two concurrent jest pools
+ * (module suite + governance) split the same ceiling instead of each
+ * claiming it whole.
+ * @param {number} share fraction of the budget this pool gets
+ * @returns {string} JEST_MAX_WORKERS value
+ */
+const jestWorkerShare = (share) =>
+  String(
+    Math.max(
+      2,
+      Math.floor(
+        Math.min(Math.floor(os.totalmem() / (2 * 1024 ** 3)), os.cpus().length - 1) * share
+      )
+    )
+  )
+
 const JEST = [
   '--experimental-vm-modules',
   '--disable-warning=ExperimentalWarning',
@@ -220,9 +276,9 @@ const JEST = [
  * the shared module's Jest config. Scopes flagged `a11y: false` (cms)
  * exclude the axe/contrast pair per the workspace contract.
  */
-const runGovernance = (scope, a11y) => {
+const runGovernance = (scope, a11y, extraEnv = {}) => {
   const dir = path.join(ROOT, GOVERNANCE_DIR)
-  if (!fs.existsSync(dir)) return
+  if (!fs.existsSync(dir)) return Promise.resolve()
 
   const files = fs
     .readdirSync(dir)
@@ -230,9 +286,14 @@ const runGovernance = (scope, a11y) => {
     .filter((f) => a11y || !A11Y_SCANS.some((re) => re.test(f)))
     .map((f) => path.join(GOVERNANCE_DIR, f))
 
-  if (!files.length) return
+  if (!files.length) return Promise.resolve()
 
-  run(`${scope} governance`, 'node', [...JEST, '--config', 'shared/jest.config.mjs', ...files])
+  return runAsync(
+    `${scope} governance`,
+    'node',
+    [...JEST, '--config', 'shared/jest.config.mjs', ...files],
+    extraEnv
+  )
 }
 
 /**
@@ -278,14 +339,24 @@ const stamp = (scope, checks) => {
   )
 }
 
-/** Runs the gate set for one scope and stamps the stored result. */
-const runScope = (scope) => {
+/**
+ * Runs the gate set for one scope and stamps the stored result. All checks
+ * are independent read-only runs, so they execute CONCURRENTLY — the lint
+ * trio (tsc/eslint/stylelint) plus the jest pair. When a scope runs both
+ * jest pools, each gets half the RAM-derived worker budget via
+ * JEST_MAX_WORKERS so the aggregate stays under the same ceiling a single
+ * full-size pool would use. A failed check rejects; Promise.allSettled
+ * lets the rest finish their buffered output before the error surfaces.
+ */
+const runScope = async (scope) => {
   const def = SCOPES[scope]
   const dirs = def.dirs.filter(exists)
   const checks = ['tsc', 'eslint']
 
-  run(`${scope} tsc`, 'yarn', ['tsc', '-p', def.tsconfig, '--noEmit'])
-  run(`${scope} eslint`, 'yarn', ['eslint', ...dirs, '--max-warnings=0'])
+  const tasks = [
+    runAsync(`${scope} tsc`, 'yarn', ['tsc', '-p', def.tsconfig, '--noEmit']),
+    runAsync(`${scope} eslint`, 'yarn', ['eslint', ...dirs, '--max-warnings=0']),
+  ]
 
   // Module dirs are their own repos — ls-files must run inside each one
   // (the superproject index holds only gitlinks, never module paths).
@@ -302,22 +373,40 @@ const runScope = (scope) => {
 
   if (hasScss) {
     checks.push('stylelint')
-    run(`${scope} stylelint`, 'yarn', [
-      'stylelint',
-      ...dirs.map((d) => `${d}/**/*.scss`),
-      '--max-warnings=0',
-    ])
+    tasks.push(
+      runAsync(`${scope} stylelint`, 'yarn', [
+        'stylelint',
+        ...dirs.map((d) => `${d}/**/*.scss`),
+        '--max-warnings=0',
+      ])
+    )
   }
 
-  if (exists(def.jest)) {
+  const runJest = exists(def.jest)
+  const runGov = def.governance
+
+  // Two concurrent jest pools split the worker budget 50/50; a lone pool
+  // keeps the full share.
+  const jestShare = runJest && runGov ? 0.5 : 1
+
+  if (runJest) {
     checks.push('jest')
-    run(`${scope} jest`, 'node', [...JEST, '--config', def.jest])
+    tasks.push(
+      runAsync(`${scope} jest`, 'node', [...JEST, '--config', def.jest], {
+        JEST_MAX_WORKERS: jestWorkerShare(jestShare),
+      })
+    )
   }
 
-  if (def.governance) {
+  if (runGov) {
     checks.push('governance')
-    runGovernance(scope, def.a11y)
+    tasks.push(runGovernance(scope, def.a11y, { JEST_MAX_WORKERS: jestWorkerShare(jestShare) }))
   }
+
+  const results = await Promise.allSettled(tasks)
+  const failed = results.find((r) => r.status === 'rejected')
+
+  if (failed) throw failed.reason
 
   stamp(scope, checks)
 }
@@ -329,7 +418,7 @@ const runScope = (scope) => {
  * record, nothing re-runs. Missing/stale stamps fall back to the scope's
  * full gate set (then re-stamp) — the gate stays honest either way.
  */
-const runLink = (modulePath) => {
+const runLink = async (modulePath) => {
   const scope = LINK_SCOPES[modulePath]
 
   if (!scope) {
@@ -355,7 +444,7 @@ const runLink = (modulePath) => {
   process.stdout.write(
     `\n── ${scope}: no stored result for ${want.slice(0, 7)} — running gates ──\n`
   )
-  runScope(scope)
+  await runScope(scope)
 
   // runScope stamps the WORKTREE head; require it to match the gitlink so
   // a dirty/diverged module can't smuggle an ungated commit upstream.
@@ -412,7 +501,7 @@ if (mode === 'areas') {
     process.exit(0)
   }
 
-  runScope(scope)
+  await runScope(scope)
 } else if (mode === 'links') {
   // Build-time validation: every submodule must carry a stored gate
   // result for the commit its gitlink records, plus a coverage summary
@@ -458,9 +547,12 @@ if (mode === 'areas') {
     process.exit(0)
   }
 
+  // Scopes run one at a time (each scope's checks already parallelize
+  // internally); stacking full scope runs would multiply jest pools past
+  // the RAM budget.
   for (const scope of scopes) {
-    if (scope.startsWith('link:')) runLink(scope.slice(5))
-    else runScope(scope)
+    if (scope.startsWith('link:')) await runLink(scope.slice(5))
+    else await runScope(scope)
   }
 } else {
   process.stderr.write(

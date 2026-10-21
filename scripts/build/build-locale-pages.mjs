@@ -40,7 +40,6 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
-import zlib from 'node:zlib'
 import { Buffer } from 'node:buffer'
 import { fileURLToPath } from 'node:url'
 
@@ -49,6 +48,7 @@ import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '../../../core/tokens/rou
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
 import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
 import { withFsRetry } from './fs-retry.mjs'
+import { queueCompressedWrite, drainCompressedWrites } from './compress-queue.mjs'
 import { scanManifest } from '../../build/docs/scan.mjs'
 
 const VALID_LANGS = Object.keys(LANG_SLUGS)
@@ -291,19 +291,14 @@ function* walkMedia(node) {
   if (node && typeof node === 'object' && typeof node.src === 'string' && node.src) yield node
 }
 
-/** Brotil + gzip siblings next to each emitted index.html (Firebase serves them). */
-const writeCompressed = (file, html) => {
-  const buf = Buffer.from(html, 'utf8')
-
-  withFsRetry(() => fs.writeFileSync(file, html))
-  withFsRetry(() =>
-    fs.writeFileSync(
-      `${file}.br`,
-      zlib.brotliCompressSync(buf, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11 } })
-    )
-  )
-  withFsRetry(() => fs.writeFileSync(`${file}.gz`, zlib.gzipSync(buf, { level: 9 })))
-}
+/**
+ * Brotli + gzip siblings next to each emitted index.html (Firebase serves
+ * them). The plain file lands synchronously; the compressed siblings go
+ * through the shared queue so the emit loop never blocks on a ~30-60ms
+ * brotli-11 pass per page — drainCompressedWrites() runs them across the
+ * libuv threadpool at the end of the fan-out.
+ */
+const writeCompressed = (file, html) => queueCompressedWrite(file, html)
 
 /**
  * Rewrites the English shell into a localized document.
@@ -625,7 +620,7 @@ export async function prefetchStarMediaDims() {
  * @param {string} [template] - shell HTML; defaults to dist/index.html on disk
  * @returns {{html: string, written: number, locales: number}} localized root html + counts
  */
-export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
+export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   const indexPath = path.join(distDir, 'index.html')
 
   if (!template) {
@@ -1800,7 +1795,11 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
 
   syncFirebaseRewrites()
 
-  return { html: rootHtml, written, locales: VALID_LANGS.length - 1 }
+  // Every queued .br/.gz sibling resolves across the libuv threadpool here
+  // — ~19k brotli-11 passes previously ran serially on this thread.
+  const compressed = await drainCompressedWrites()
+
+  return { html: rootHtml, written, locales: VALID_LANGS.length - 1, compressed }
 }
 
 /**
@@ -2012,7 +2011,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
 
   await Promise.all([prefetchStarMediaDims(), prefetchTranslations()])
 
-  const { html, written, locales } = buildLocalePages(DIST)
+  const { html, written, locales } = await buildLocalePages(DIST)
 
   writeCompressed(indexPath, html)
 
@@ -2029,6 +2028,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     )
     writeCompressed(swPath, sw)
   }
+
+  // Root/sw siblings queue after buildLocalePages' internal drain — flush
+  // the remainder before reporting.
+  await drainCompressedWrites()
 
   console.log(`[locale-pages] wrote ${written + 1} documents across ${locales} locales`)
 }
