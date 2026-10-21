@@ -166,6 +166,55 @@ export const MEDIA_INLINE_LIMIT = 256 * 1024
 const formatOf = (name) => FORMAT_BY_EXT[path.extname(name).slice(1).toLowerCase()] || 'text'
 
 /**
+ * Manifest ordering — dirs before files, then alphabetically by name. The
+ * same convention scanDir produces via its dirs/files split; used to
+ * re-order the concatenated children of merged case-collision dirs.
+ */
+const byDirThenName = (a, b) =>
+  (a.type === 'dir' ? 0 : 1) - (b.type === 'dir' ? 0 : 1) || a.name.localeCompare(b.name)
+
+/**
+ * Merges sibling nodes whose names collide case-insensitively — required
+ * because Windows checkouts live on case-insensitive NTFS, where `App/` and
+ * `app/` (typedoc emits both shapes for a module next to a folder) map to
+ * the same directory and each emitted `index.html` would overwrite the
+ * other. Colliding dirs keep the first-seen node and absorb the later
+ * dirs' children; colliding files keep the first and drop the rest.
+ * Recursion handles collisions introduced inside the merged children.
+ * @param {Array<object>} nodes Sibling manifest nodes in scan order.
+ * @returns {Array<object>} Deduped nodes, scan order preserved.
+ */
+const mergeCaseCollisions = (nodes) => {
+  const merged = []
+  const dirByKey = new Map()
+  const seenFiles = new Set()
+
+  for (const node of nodes) {
+    const key = node.name.toLowerCase()
+
+    if (node.type === 'dir') {
+      const existing = dirByKey.get(key)
+
+      if (existing) {
+        existing.children.push(...node.children)
+      } else {
+        dirByKey.set(key, node)
+        merged.push(node)
+      }
+    } else if (!seenFiles.has(key)) {
+      seenFiles.add(key)
+      merged.push(node)
+    }
+  }
+
+  for (const dir of dirByKey.values()) {
+    dir.children = mergeCaseCollisions(dir.children).sort(byDirThenName)
+  }
+
+  return merged
+}
+
+/**
  * Recursively scans one directory into manifest nodes. Hidden entries and
  * SKIP_DIRS are dropped before descent; files are sorted dirs-first, then
  * alphabetically, matching the site-wide recursive-traversal convention.
@@ -225,7 +274,7 @@ const scanDir = (absDir, baseDir, root, topSkip) => {
     }
   }
 
-  return [...dirs, ...files]
+  return mergeCaseCollisions([...dirs, ...files])
 }
 
 /**

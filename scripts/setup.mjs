@@ -89,6 +89,24 @@ if (!yarn || !git) {
 // ── 2. Git submodules ───────────────────────────────────────────────────
 console.log('\n[2/6] Git submodules')
 
+// Windows NTFS caps paths at MAX_PATH (260) — tracked prerendered docs
+// paths reach ~240 chars, so clones need long paths enabled before
+// checkout. Set repo-locally here; the README asks for the --global flag
+// before cloning.
+if (process.platform === 'win32') {
+  if (checkOnly) {
+    if (probe('git', ['config', '--get', 'core.longpaths']) === 'true') {
+      ok('core.longpaths enabled (win32)')
+    } else {
+      warn('core.longpaths not set — run `git config core.longpaths true`')
+    }
+  } else {
+    const r = await runStep('git', ['config', 'core.longpaths', 'true'])
+    if (r === 0) ok('core.longpaths enabled (win32)')
+    else warn('core.longpaths config failed — run `git config core.longpaths true` manually')
+  }
+}
+
 const shallowStatus = spawnSync('git', ['submodule', 'status'], { cwd: root, encoding: 'utf8' })
 const uninit = (shallowStatus.stdout || '').split('\n').some((l) => l.startsWith('-'))
 

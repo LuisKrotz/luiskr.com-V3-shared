@@ -28,6 +28,14 @@ Directory entries never published, whatever the format. `tests` and
 per-module `reports`/`coverage` trees are reached through their own
 dedicated roots instead of leaking into a source bucket.
 
+### `ILLEGAL_NAME`
+
+Entry names that can never be published: characters illegal in Windows
+filenames (`* ? " < > | :`) break `git checkout` on win32 clones, and
+`?`/`*` inside a URL path segment corrupt query/glob semantics for
+crawlers. Typedoc renders ambient `declare module '*.scss'` shims as
+directories named after the glob pattern — those must be skipped.
+
 ### `MEDIA_INLINE_LIMIT`
 
 Largest media payload inlined as a data-URL (bytes on disk).

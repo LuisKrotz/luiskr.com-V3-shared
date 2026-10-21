@@ -173,6 +173,10 @@ yarn dev
 Run these in **PowerShell as Administrator**:
 
 ```powershell
+# Long paths must be enabled BEFORE cloning — tracked prerendered paths
+# reach ~240 chars against the 260-char MAX_PATH limit
+git config --global core.longpaths true
+
 # winget is available on Windows 10 20H2+ and Windows 11
 winget install -e --id OpenJS.NodeJS.LTS
 winget install -e --id Yarn.Yarn
@@ -253,3 +257,7 @@ The launcher re-uses the existing `desktop/main.mjs` Electron host but loads the
 - **CMS login loops**: make sure you open `http://localhost:5173/cms/` (with trailing slash) and allow popups / third-party cookies. `yarn dev` already routes `/cms/` to the CMS bundle.
 - **`/api/media-convert/tools` reports missing tools**: run the copy/paste command printed by `yarn setup` for your OS, or use the install button in the CMS media converter panel.
 - **Submodules look empty**: run `git submodule update --init --recursive`.
+- **`error: invalid path` / `Filename too long` on Windows clone**: run
+  `git config --global core.longpaths true`, delete the partial clone and
+  re-clone — tracked prerendered paths exceed the default 260-char
+  `MAX_PATH`. `yarn setup` also sets it repo-locally afterwards.
