@@ -20,7 +20,6 @@ import { ANIMATION_DURATIONS } from '@core/tokens/motion/animation.js'
 import { webglPool } from '@core/utils/canvas/webgl-pool.js'
 import { syncCyrillicFont } from '@core/locale/cyrillic-font.js'
 import { updateReaderContent } from '@core/locale/reader-content.js'
-import { BOOT_VEIL_TIMEOUT_MS, dismissBootVeil } from './boot-veil.js'
 import { initMediaManifest } from '@core/utils/media/manifest.js'
 import { applyAnimationDesc } from '@core/utils/a11y/animation-desc.js'
 import { ANIMATION_IDS } from '@core/tokens/data/animation-ids.js'
@@ -212,11 +211,6 @@ export function mountAppShell(c: AppRoot): void {
   }
 
   import('@core/utils/canvas/loaders/intro-loader.js').then(({ IntroLoader }) => {
-    c._introLoader = new IntroLoader(document.body, dismissBootVeil)
+    c._introLoader = new IntroLoader(document.body)
   })
-
-  // The static veil outlives app-root mount (replaceChildren can't reach a
-  // body-level element) so it always gets a paint in before the loader takes
-  // over; this cap guarantees it still lifts if the loader never does.
-  setTimeout(dismissBootVeil, BOOT_VEIL_TIMEOUT_MS)
 }

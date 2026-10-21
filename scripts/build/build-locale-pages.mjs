@@ -62,10 +62,9 @@ const SCHEMA_CONTEXT = 'https://schema.org'
 const SHARE_IMAGE = `${SITE_URL}/assets/icons/share.png`
 
 /**
- * The static boot veil lives outside #app (a body-level sibling — mount()'s
- * replaceChildren would destroy it before it ever painted if it were inside).
- * The match below still tolerates the legacy veil-inside emission so re-runs
- * normalize older documents back to the clean article shape.
+ * The match below tolerates a legacy .boot-veil emitted inside #app by an
+ * earlier template revision so re-runs normalize older documents back to
+ * the clean article shape.
  */
 
 /**
@@ -434,9 +433,9 @@ export function localize(
   // The match covers every prior emission state — clean template
   // (<div id="app"></div>), a previous article-wrapped run, and the legacy
   // bare-<main> shape — so standalone re-runs never keep stale content.
-  // The match tolerates a legacy .boot-veil inside #app (it moved out to a
-  // body sibling — replaceChildren destroyed it before first paint) so
-  // re-runs strip it instead of leaving stale markup.
+  // The match tolerates a legacy .boot-veil inside #app (emitted by an
+  // earlier template revision) so re-runs strip it instead of leaving
+  // stale markup.
   if (content) {
     out = out.replace(
       /<div id="app">\s*(?:<div class="boot-veil"[^>]*>[\s\S]*?<\/div>\s*)?(?:<article class="reader-content">[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?\s*<\/div>/,
