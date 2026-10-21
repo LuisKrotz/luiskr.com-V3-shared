@@ -327,10 +327,26 @@ const writeCompressed = (file, html) => {
  *   `<div id="app">` so crawlers and AI agents that never run JavaScript
  *   still read the full page content — the SPA replaces it on mount via
  *   `replaceChildren`.
+ * @param {{title:string,msg:string}} [o.loader] - per-locale APP.loader copy
+ *   for the statically-emitted intro-loader veil (class names mirror
+ *   LOADER_CLASSES) — title + first stage line, retexted by the runtime
+ *   the instant JS adopts the node.
  */
 export function localize(
   html,
-  { bcpLang, ogLocale, title, description, url, canonicalUrl, alternates, image, entities, content }
+  {
+    bcpLang,
+    ogLocale,
+    title,
+    description,
+    url,
+    canonicalUrl,
+    alternates,
+    image,
+    entities,
+    content,
+    loader,
+  }
 ) {
   const canon = canonicalUrl || url
   let out = html
@@ -445,6 +461,14 @@ export function localize(
       `<div id="app"><article class="reader-content">${content}</article></div>`
     )
   }
+
+  // Localize the statically-emitted intro-loader copy — mirrors
+  // LOADER_CLASSES.INTRO_LOADER_TITLE / _MSG in the body markup.
+  if (loader?.title)
+    out = out.replace(/(<div class="intro-loader-title">)[^<]*/, `$1${esc(loader.title)}`)
+
+  if (loader?.msg)
+    out = out.replace(/(<div class="intro-loader-msg">)[^<]*/, `$1${esc(loader.msg)}`)
 
   return out
 }
@@ -626,6 +650,13 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
   const t = (loc, get) => {
     const v = get(translations[loc] || {})
     return v === undefined || v === null || v === '' ? get(en) : v
+  }
+
+  /** Per-locale APP.loader copy for the statically-emitted intro-loader
+   *  veil — title + first stage line (mirrors runtime loaderCopy). */
+  const loaderCopyFor = (loc) => {
+    const node = t(loc, (x) => x.APP?.loader)
+    return node ? { title: node.title, msg: node.stages?.[0] } : undefined
   }
 
   // hreflang alternates — built per route: every emitted page points its
@@ -1513,6 +1544,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
       ...homeEntities('en'),
     ],
     content: homeContent('en'),
+    loader: loaderCopyFor('en'),
   })
 
   // ── Per-route documents ───────────────────────────────────────────────────
@@ -1575,6 +1607,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         image: route.image,
         entities,
         content: route.content,
+        loader: loaderCopyFor(loc),
       })
 
       // en → dist/<route>/; every other locale emits at its PUBLIC path
@@ -1641,6 +1674,7 @@ export function buildLocalePages(distDir = path.join(ROOT, 'dist'), template) {
         alternates: [{ bcp: 'en', og: 'en_US', url: pageUrl }],
         entities,
         content: body,
+        loader: loaderCopyFor('en'),
       })
 
       // `.html` file nodes (generated sassdoc/jsdoc pages) emit AT their
