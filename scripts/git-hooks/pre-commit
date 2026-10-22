@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # luiskr.com pre-commit gate — deliberately fast:
 #   1. prettier --write on every staged file (autofix, then re-stage)
 #   2. TypeScript typecheck only. Tests and coverage belong to later gates.
@@ -30,11 +30,11 @@ if [[ -n "$STAGED" ]]; then
   # Calling the local binary directly is both safer and faster.
   PRETTIER_BIN="$SUPER${SUPER:+/}node_modules/.bin/prettier"
   [[ -x "$PRETTIER_BIN" ]] || PRETTIER_BIN="$PWD/node_modules/.bin/prettier"
-  print -r -- "$STAGED" | xargs -s 65536 "$PRETTIER_BIN" --write --ignore-unknown
+  printf '%s\n' "$STAGED" | xargs -s 65536 "$PRETTIER_BIN" --write --ignore-unknown
   # -f: every staged path is already tracked, but git>=2.4x rejects an
   # explicit pathspec that textually matches a .gitignore pattern (e.g.
   # tracked tests under an ignored `coverage/` dir) unless forced.
-  print -r -- "$STAGED" | xargs -s 65536 git add -f --
+  printf '%s\n' "$STAGED" | xargs -s 65536 git add -f --
 fi
 
 # ── 2. Typecheck ──────────────────────────────────────────────────────────────
@@ -54,7 +54,10 @@ SCOPES="$(node shared/scripts/verify/scope-gates.mjs areas --staged)"
 # Scope-less commits (docs-only, assets) skip compilation entirely; a
 # toolchain/config change resolves to every scope.
 if [[ -n "$SCOPES" ]]; then
-  for scope in ${(s: :)SCOPES}; do
+  # Unquoted expansion is the portable word-split (POSIX shells split on
+  # IFS by default); set -f guards against glob chars in scope names.
+  set -f
+  for scope in $SCOPES; do
     case "$scope" in
       link:*) ;; # gitlink bump — the module's own commit was already gated
       app)   yarn tsc --noEmit ;;
@@ -64,4 +67,5 @@ if [[ -n "$SCOPES" ]]; then
       *)     yarn tsc -p "$scope/tsconfig.json" --noEmit ;;
     esac
   done
+  set +f
 fi

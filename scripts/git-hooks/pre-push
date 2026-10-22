@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # luiskr.com pre-push gate — scoped by module, split across two contexts:
 #
 #   • inside a module (submodule) — runs THAT module's full gate set
@@ -71,10 +71,12 @@ if [[ -z "$SCOPES" && -n "$RANGE" ]]; then
 fi
 
 echo "── pre-push: scoped gates for ${SCOPES:-all modules} ──"
-# ${(s: :)...} word-splits — plain ${SCOPES} would pass the whole list as
-# one argv element and scope-gates would match zero scopes silently.
+# Unquoted expansion is the portable word-split (POSIX shells split on
+# IFS by default); set -f guards against glob chars in scope names.
 if [[ -n "$SCOPES" ]]; then
-  node shared/scripts/verify/scope-gates.mjs run ${(s: :)SCOPES}
+  set -f
+  node shared/scripts/verify/scope-gates.mjs run $SCOPES
+  set +f
 else
   node shared/scripts/verify/scope-gates.mjs run --all
 fi
