@@ -35,6 +35,13 @@ const BROTLI_OPTS = Object.freeze({
 const GZIP_OPTS = Object.freeze({ level: 9 })
 
 /**
+ * Drain worker count — ~2× the libuv pool keeps zlib busy without the
+ * EMFILE handle exhaustion an unbounded ~19k-task fan-out trips on
+ * Windows (each task opens two sibling-write handles at once).
+ */
+const DRAIN_CONCURRENCY = 64
+
+/**
  * Queued compression tasks — { file, buf } pairs. Buffers are retained
  * until their turn arrives: holding ~19k page buffers (~600MB worst
  * case) is deliberate — re-reading each file would double I/O and
@@ -44,11 +51,37 @@ const GZIP_OPTS = Object.freeze({ level: 9 })
 const pending = []
 
 /**
- * In-flight compression promises — drain() collects these plus any
- * tasks queued before the drain begins.
- * @type {Promise<void>[]}
+ * Writes `buf` to `file`, falling back to temp-write + rename when the
+ * direct write is refused. On Windows an existing file carrying the
+ * NTFS Compressed attribute rejects open-for-truncate (O_TRUNC surfaces
+ * as UNKNOWN and never clears); replacing the file through a sibling
+ * temp name sidesteps the truncate entirely — and atomic-replaces, so a
+ * reader never sees a half-written document.
+ * @param {string} file target path
+ * @param {Buffer} buf payload
  */
-const inflight = []
+const writeFileReplace = (file, buf) => {
+  try {
+    fs.writeFileSync(file, buf)
+  } catch {
+    const tmp = `${file}.wtmp`
+
+    fs.writeFileSync(tmp, buf)
+    fs.renameSync(tmp, file)
+  }
+}
+
+/** Async sibling of writeFileReplace for the drain workers. */
+const writeFileReplaceAsync = async (file, buf) => {
+  try {
+    await fs.promises.writeFile(file, buf)
+  } catch {
+    const tmp = `${file}.wtmp`
+
+    await fs.promises.writeFile(tmp, buf)
+    await fs.promises.rename(tmp, file)
+  }
+}
 
 /**
  * Writes `contents` to `file` synchronously, then queues async
@@ -61,7 +94,7 @@ const inflight = []
 export const queueCompressedWrite = (file, contents) => {
   const buf = Buffer.isBuffer(contents) ? contents : Buffer.from(contents, 'utf8')
 
-  withFsRetry(() => fs.writeFileSync(file, buf))
+  withFsRetry(() => writeFileReplace(file, buf))
   pending.push({ file, buf })
 }
 
@@ -77,32 +110,39 @@ const runTask = async ({ file, buf }) => {
   const [br, gz] = await Promise.all([brotliCompress(buf, BROTLI_OPTS), gzip(buf, GZIP_OPTS)])
 
   await Promise.all([
-    withFsRetryAsync(() => fs.promises.writeFile(`${file}.br`, br)),
-    withFsRetryAsync(() => fs.promises.writeFile(`${file}.gz`, gz)),
+    withFsRetryAsync(() => writeFileReplaceAsync(`${file}.br`, br)),
+    withFsRetryAsync(() => writeFileReplaceAsync(`${file}.gz`, gz)),
   ])
 }
 
 /**
- * Drains the queue with unbounded-by-us concurrency — the libuv
- * threadpool (sized via UV_THREADPOOL_SIZE at process start) is the
- * real limiter; queueing every task as a promise lets the pool
- * schedule them back-to-back. Tasks queued after this call would be
- * missed, so callers must drain exactly once, after the emit loop.
+ * Drains the queue with bounded worker concurrency. The libuv threadpool
+ * (sized via UV_THREADPOOL_SIZE at process start) limits zlib work, but
+ * each task also opens file handles for the two sibling writes — with
+ * ~19k queued tasks, unbounded fan-out opens handles faster than they
+ * close and trips EMFILE on Windows. A fixed worker pool keeps at most
+ * DRAIN_CONCURRENCY×2 handles in flight. Tasks queued after this call
+ * would be missed, so callers must drain exactly once, after the emit
+ * loop.
  * @returns {Promise<number>} count of documents compressed
  */
 export const drainCompressedWrites = async () => {
-  while (pending.length) {
-    inflight.push(runTask(pending.shift()))
-  }
+  let done = 0
 
-  await Promise.all(inflight)
+  // Bounded drain: each worker pulls tasks until the queue empties —
+  // runTask's own Promise.all gives every worker ~4 libuv ops in flight.
+  const workers = Array.from({ length: DRAIN_CONCURRENCY }, async () => {
+    while (pending.length) {
+      await runTask(pending.shift())
 
-  const done = inflight.length
+      done++
+    }
+  })
 
-  inflight.length = 0
+  await Promise.all(workers)
 
   return done
 }
 
 /** Pending-task count — exposed for progress logs and tests. */
-export const compressedWritesPending = () => pending.length + inflight.length
+export const compressedWritesPending = () => pending.length

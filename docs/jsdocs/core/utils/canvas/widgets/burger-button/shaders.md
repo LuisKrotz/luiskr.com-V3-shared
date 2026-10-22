@@ -9,6 +9,10 @@ GLSL sources for BurgerButtonWebGL, extracted from
 
 ## Members
 
+### `BURGER_DERIV_PRELUDE`
+
+Extension prelude enabling pixel-space SDF AA (WebGL1 only).
+
 ### `BURGER_VS`
 
 Shared fullscreen-quad vertex shader.

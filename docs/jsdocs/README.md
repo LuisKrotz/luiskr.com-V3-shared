@@ -603,6 +603,7 @@
 
 | File | What it does |
 |---|---|
+| [`media-figure-image-load-tails.test.js`](core\tests\coverage\safari/media-figure-image-load-tails.test.md) | Coverage tails for safari/patches/media-figure/image-load.ts — |
 | [`media-figure-video-src-tails.test.js`](core\tests\coverage\safari/media-figure-video-src-tails.test.md) | Coverage tails for safari/patches/media-figure/video.ts — |
 | [`safari-patch-guard-tails.test.js`](core\tests\coverage\safari/safari-patch-guard-tails.test.md) | Split from coverage-tails-7.test.js — covers the "safari patch guard tails" describe. |
 
@@ -703,6 +704,16 @@
 |---|---|
 | [`local-media-cache-tails-2.test.js`](core\tests\coverage\utils\media/local-media-cache-tails-2.test.md) | Split from coverage-tails-4.test.js — covers the "local-media-cache tails 2" describe. |
 | [`local-media-cache-tails.test.js`](core\tests\coverage\utils\media/local-media-cache-tails.test.md) | Split from coverage-tails-2.test.js — covers the "local-media-cache tails" describe. |
+
+## Core engine
+
+*Shared primitives every surface builds on — no direct UI.*
+
+| File | What it does |
+|---|---|
+| [`frame-time.test.js`](core\tests\coverage\utils\ml/frame-time.test.md) | Coverage for core/utils/ml/frame-time.ts — the ring |
+| [`ort-engine.test.js`](core\tests\coverage\utils\ml/ort-engine.test.md) | Coverage for core/utils/ml/ort-engine.ts — lazy runtime |
+| [`super-res.test.js`](core\tests\coverage\utils\ml/super-res.test.md) | Coverage for core/utils/ml/super-res.ts — input gating, |
 
 ## Core engine
 
@@ -1022,6 +1033,7 @@
 | [`cms-keys.ts`](core\tokens\data/cms-keys.md) | CMS/Firebase node-key tokens — keys used to read the |
 | [`component-keys.ts`](core\tokens\data/component-keys.md) | Dotted paths into translations/&lt;locale&gt;/components — grouped |
 | [`log.ts`](core\tokens\data/log.md) | Dev-log severity levels + the globalThis inspection key. |
+| [`ml.ts`](core\tokens\data/ml.md) | ONNX Runtime Web / WebNN engine tokens — sole declaration |
 | [`notify.ts`](core\tokens\data/notify.md) | Toast severity levels — drives the `site-toast--&lt;type&gt;` BEM |
 | [`storage.ts`](core\tokens\data/storage.md) | localStorage/sessionStorage key tokens split by scope — |
 | [`ui-keys.ts`](core\tokens\data/ui-keys.md) | UI copy keys — dotted paths into translations/&lt;locale&gt;/APP, |
@@ -1194,6 +1206,7 @@
 | [`langs.ts`](core\tokens\strings/langs.md) | Locale code string tokens — token group. |
 | [`net.ts`](core\tokens\strings/net.md) | Network/URL string tokens — token group. |
 | [`queries.ts`](core\tokens\strings/queries.md) | Selector/media-query/rootMargin string tokens — grouped |
+| [`reader.ts`](core\tokens\strings/reader.md) | Reader-mode content string tokens — the accessible label |
 | [`routes.ts`](core\tokens\strings/routes.md) | Route/CMS name string tokens — token group. |
 | [`schema.ts`](core\tokens\strings/schema.md) | Schema.org / SEO JSON-LD string tokens — grouped subset of |
 | [`state.ts`](core\tokens\strings/state.md) | State/display value string tokens — grouped subset of |
@@ -1220,7 +1233,7 @@
 
 | File | What it does |
 |---|---|
-| [`animation-desc.ts`](core\utils\a11y/animation-desc.md) | Animated-element descriptions — binds every animated |
+| [`animation-desc.ts`](core\utils\a11y/animation-desc.md) | Animated-element descriptions — places each animated |
 
 ## Core engine
 
@@ -1396,6 +1409,16 @@
 |---|---|
 | [`local-media-cache.ts`](core\utils\media/local-media-cache.md) | Three-tier media cache: in-memory Map (object URLs) → |
 | [`manifest.ts`](core\utils\media/manifest.md) | Runtime knowledge of which CDN objects exist, backed by the |
+
+## Core engine
+
+*Shared primitives every surface builds on — no direct UI.*
+
+| File | What it does |
+|---|---|
+| [`frame-time.ts`](core\utils\ml/frame-time.md) | ML-driven adaptive render quality for the WebGL/three.js |
+| [`ort-engine.ts`](core\utils\ml/ort-engine.md) | Lazy ONNX Runtime Web engine — the single entry point |
+| [`super-res.ts`](core\utils\ml/super-res.md) | ML super-resolution — when the manifest's highest proven |
 
 ## Core engine
 
@@ -1943,8 +1966,10 @@
 | [`build-targets.mjs`](shared\scripts\build/build-targets.md) | Multi-target build orchestrator. |
 | [`build-wasm.js`](shared\scripts\build/build-wasm.md) | — |
 | [`build.mjs`](shared\scripts\build/build.md) | Production build orchestrator |
+| [`compress-queue.mjs`](shared\scripts\build/compress-queue.md) | Bounded-concurrency precompressed-sibling writer. |
 | [`deploy-info.mjs`](shared\scripts\build/deploy-info.md) | Assembles `dist/deploy-info/` — the "last deploy" bundle the CMS |
 | [`fs-retry.mjs`](shared\scripts\build/fs-retry.md) | Bounded retry for fs operations that race Windows file locks. |
+| [`gen-onnx-models.mjs`](shared\scripts\build/gen-onnx-models.md) | Emits the site's tiny ONNX models into |
 | [`generate-sitemap.js`](shared\scripts\build/generate-sitemap.md) | Emits the whole crawl surface under `website/public/meta/`: |
 | [`media-manifest.mjs`](shared\scripts\build/media-manifest.md) | CDN media inventory + best-variant resolution shared by the |
 | [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md) | Firebase `predeploy` step — stamps the AI-usage opt-out |
@@ -2018,7 +2043,7 @@
 | File | What it does |
 |---|---|
 | [`merge-coverage.mjs`](shared\scripts\test/merge-coverage.md) | Unions the raw coverage maps each module's Jest run wrote to |
-| [`run-modules.mjs`](shared\scripts\test/run-modules.md) | Runs the Jest suite of every module workspace SEQUENTIALLY — |
+| [`run-modules.mjs`](shared\scripts\test/run-modules.md) | Runs the Jest suite of every module workspace — shared, |
 
 ## Entry points
 
@@ -2026,6 +2051,7 @@
 
 | File | What it does |
 |---|---|
+| [`a11y-checker.mjs`](shared\scripts\verify/a11y-checker.md) | — |
 | [`chunk-budget.mjs`](shared\scripts\verify/chunk-budget.md) | Minified chunk-size gate |
 | [`console-scan.mjs`](shared\scripts\verify/console-scan.md) | Scans every .ts/.tsx/.js file under src/ for console usage |
 | [`coverage-gaps.mjs`](shared\scripts\verify/coverage-gaps.md) | — |
@@ -2315,6 +2341,16 @@
 
 | File | What it does |
 |---|---|
+| [`ort-wasm-simd-threaded.asyncify.mjs`](website\public\ort/ort-wasm-simd-threaded.asyncify.md) | — |
+| [`ort-wasm-simd-threaded.jsep.mjs`](website\public\ort/ort-wasm-simd-threaded.jsep.md) | — |
+| [`ort-wasm-simd-threaded.mjs`](website\public\ort/ort-wasm-simd-threaded.md) | — |
+
+## Entry points
+
+*Boot surfaces: what the user sees first on each bundle.*
+
+| File | What it does |
+|---|---|
 | [`luiskr_burger.js`](website\public\wasm\burger/luiskr_burger.md) | — |
 
 ## Entry points
@@ -2452,6 +2488,16 @@
 | File | What it does |
 |---|---|
 | [`luiskr_theme_slider.js`](website\public\wasm\theme-slider/luiskr_theme_slider.md) | — |
+
+## Entry points
+
+*Boot surfaces: what the user sees first on each bundle.*
+
+| File | What it does |
+|---|---|
+| [`block-navigation.js`](website\reports\coverage-run/block-navigation.md) | — |
+| [`prettify.js`](website\reports\coverage-run/prettify.md) | — |
+| [`sorter.js`](website\reports\coverage-run/sorter.md) | — |
 
 ## Entry points
 
@@ -2677,6 +2723,7 @@
 | [`mosaic-burn-tails.test.js`](website\tests\coverage\components\home/mosaic-burn-tails.test.md) | Coverage tails for website/components/home/mosaic/burn.ts — |
 | [`mosaic-burn-wasm-tails.test.js`](website\tests\coverage\components\home/mosaic-burn-wasm-tails.test.md) | Coverage tail for the WebGPU/wasm burn particle path — |
 | [`mosaic-burn-word-boxes-tails.test.js`](website\tests\coverage\components\home/mosaic-burn-word-boxes-tails.test.md) | Coverage tails for mosaic/burn/paper.js — the DOM Range |
+| [`mosaic-keys-tails.test.js`](website\tests\coverage\components\home/mosaic-keys-tails.test.md) | Coverage tails for components/home/mosaic/interactions.ts + |
 | [`mosaic-onclick-missing-detail-tails.test.js`](website\tests\coverage\components\home/mosaic-onclick-missing-detail-tails.test.md) | Coverage tail for components/home/mosaic/interactions.ts — |
 | [`mosaic-projecthref-tails.test.js`](website\tests\coverage\components\home/mosaic-projecthref-tails.test.md) | Coverage tails for components/home/mosaic/interactions.ts — |
 
@@ -2697,7 +2744,9 @@
 | [`expanded-genie-tails.test.js`](website\tests\coverage\components\media/expanded-genie-tails.test.md) | Coverage for website/components/media/expanded/genie.ts + |
 | [`expanded-genie-texture-tails.test.js`](website\tests\coverage\components\media/expanded-genie-texture-tails.test.md) | Coverage for website/components/media/expanded/genie-texture.ts — |
 | [`expanded-mount-tails.test.js`](website\tests\coverage\components\media/expanded-mount-tails.test.md) | Coverage tails for components/media/expanded/mount.ts — |
+| [`media-figure-retire-tails.test.js`](website\tests\coverage\components\media/media-figure-retire-tails.test.md) | Coverage tails for figure/load.ts's crossfade-retire arms — |
 | [`media-figure-tails.test.js`](website\tests\coverage\components\media/media-figure-tails.test.md) | Coverage tails for components/media/figure/modal.ts + |
+| [`media-figure-warm-tails.test.js`](website\tests\coverage\components\media/media-figure-warm-tails.test.md) | Coverage tail for the CDN warm-up path — warmFirstRung's |
 | [`media-manifest-mobile-source-tails.test.js`](website\tests\coverage\components\media/media-manifest-mobile-source-tails.test.md) | Coverage tails for the mobile-tier &lt;source&gt; emission — the |
 | [`media-manifest-webp-source-tails.test.js`](website\tests\coverage\components\media/media-manifest-webp-source-tails.test.md) | Coverage tail for the manifest-gated &lt;source&gt; emission — |
 

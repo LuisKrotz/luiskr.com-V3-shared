@@ -9,6 +9,28 @@ WebGL menu icon for the nav burger button: four rounded
 
 ## Members
 
+### `SUPERSAMPLE`
+
+Backing-store supersample factor on top of the capped DPR — a 34px
+icon renders at ~136–272 buffer px so the CSS downsample adds a
+second AA pass. The shader divides by it to recover the "close px"
+basis the shared close-paint library is authored in.
+
+### `LIQUID_RATE_PER_S`
+
+Liquid pour speed, per second — matches CloseButtonWebGL's 1.6%/frame
+at 60fps so the open-state water fill pours at the same rate every
+close button does (~1s to fill on hover, same on drain).
+
+### `ROT_RATE_PER_S`
+
+X-spin speed, per second — matches CloseButtonWebGL's 4%/frame at
+60fps so the half-turn lands near the end of the pour.
+
+### `CLICK_TIME_OFF`
+
+Timestamp that disables the click shockwave (far past sentinel).
+
 ### `BurgerButtonWebGL`
 
 WebGL liquid menu icon for the burger button.
@@ -29,6 +51,21 @@ Smoothed hover convergence — pointer enter/leave + focus/blur drive the target
 ### `_open`
 
 Smoothed menu-open morph — setOpen drives the target.
+
+### `_liquid`
+
+Close-state liquid pour (u_liquid) — the turquoise water fill every
+close button shows on hover. Target follows hover ONLY while the
+menu is open, so the fill never pre-charges behind the closed icon.
+
+### `_rot`
+
+Close-state X rotation (u_rot) — the half-turn the real close
+button's X performs while its liquid fills on hover.
+
+### `_clickT`
+
+Seconds since startTime of the last press — drives the click shockwave.
 
 ### `_prevT`
 

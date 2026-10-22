@@ -26,6 +26,9 @@ import { LangDialog } from '@website/components/dialogs/LangDialog.js'
 import { LegalFooter } from '@website/components/legal/Footer.js'
 import { ViewLegal } from '@website/views/legal/Legal.js'
 import { ViewNotFound } from '@website/views/not-found/NotFound.js'
+import { ViewProject } from '@website/views/project/Project.js'
+import { ViewAnimations } from '@website/views/animations/Animations.js'
+import '@website/components/portfolio/Related.js'
 import '@website/components/media/MediaFigure.js'
 import '@website/components/carousel/CustomCarousel.js'
 import '@website/components/carousel/AwardsCarousel.js'
@@ -46,11 +49,11 @@ import { STATE_STRINGS } from '@core/tokens/strings/state.js'
 const REPORT_DIR = path.join(ROOT_DIR, 'experiments/docs/reports')
 const REPORT_FILE = path.join(REPORT_DIR, 'axe-report.json')
 // Lighthouse asserts accessibility = 1.0 — every binary audit must pass — so
-// the test gate fails on 'moderate' too (heading-order, landmark issues),
-// not just critical/serious. WCAG 2.x A+AA+AAA rules all run (AXE_RUN_TAGS):
-// rules that can't evaluate in happy-dom report 'incomplete' for review,
-// violations fail the gate.
-const FAIL_IMPACTS = new Set(['critical', 'serious', 'moderate'])
+// the test gate fails on ANY violation impact, 'minor' included (an axe
+// violation of any weight can still cost the binary audit). WCAG 2.x
+// A+AA+AAA rules all run (AXE_RUN_TAGS): rules that can't evaluate in
+// happy-dom report 'incomplete' for review, violations fail the gate.
+const FAIL_IMPACTS = new Set(['critical', 'serious', 'moderate', 'minor'])
 
 const AXE_RUN_TAGS = [
   'wcag2a',
@@ -329,7 +332,60 @@ describe('Axe Accessibility Scan — WCAG 2.x (axe-core)', () => {
     })
   })
 
-  describe('6. Static Shell (dist/index.html when built)', () => {
+  describe('6. Project & Animations Views', () => {
+    test('zero violations on the project view (title, cover, body, carousel, related)', async () => {
+      const view = new ViewProject()
+      mountInPageShell([view])
+
+      await flushMicrotasks()
+      view.translations = {
+        title: 'Stellar Branding Project',
+        folder: 'portfolio/stellar/',
+        cover: { src: 'cover', size: [1920, 1080], isVideo: false, label: 'Cover Art' },
+        sections: [
+          [
+            ['Intro paragraph one', 'Intro paragraph two'],
+            [
+              { src: 'slide1', size: [1920, 1080], label: 'Slide one' },
+              { src: 'slide2', size: [1920, 1080], label: 'Slide two' },
+            ],
+          ],
+        ],
+      }
+      view._updateDom()
+      view._bindCarousels()
+
+      await flushMicrotasks()
+
+      const entry = await recordScan('project-view', document)
+      expect(failCount(entry)).toBe(0)
+    })
+
+    test('zero violations on the animations view (title, intro, record rows)', async () => {
+      const view = new ViewAnimations()
+      mountInPageShell([view])
+
+      await flushMicrotasks()
+      view.translations = {
+        title: ROUTE_NAMES.ANIMATIONS,
+        description: 'Every animation described.',
+      }
+      store.commit(LANG_MUTATIONS.SET_COMPONENT_LANG, {
+        [CMS_KEYS.ANIMATIONS]: {
+          'burger-button': { alt: 'Burger morph', longdesc: 'Long burger description.' },
+          'nav-menu': { alt: 'Menu rise', longdesc: 'Long menu description.' },
+        },
+      })
+      view._updateDom()
+
+      await flushMicrotasks()
+
+      const entry = await recordScan('animations-view', document)
+      expect(failCount(entry)).toBe(0)
+    })
+  })
+
+  describe('7. Static Shell (dist/index.html when built)', () => {
     test('document shell has no critical/serious violations', async () => {
       const indexPath = path.join(ROOT_DIR, 'dist', 'index.html')
       if (!fs.existsSync(indexPath)) return

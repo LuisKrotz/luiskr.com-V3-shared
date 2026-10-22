@@ -642,6 +642,14 @@ Last tick timestamp for dt-based animation.
 
 Elapsed scene time (seconds) — drives orbits/spins.
 
+### `predictor`
+
+ML frame-time predictor — drives adaptive pixel-ratio quality.
+
+### `appliedQuality`
+
+Last quality applied to the renderer — dedupes setPixelRatio calls.
+
 ### `hoverId`
 
 Camera hover state — last picked body id for the HUD.

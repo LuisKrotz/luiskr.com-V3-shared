@@ -13,6 +13,30 @@ Diagram rendering for docs payloads — markdown
 
 Default font size when the computed style is unparsable.
 
+### `EDGE_RE`
+
+Cheap source scanners feeding the diagram-cost model — counts of each
+structural feature, not a parse (the wasm engine still does that).
+
+### `countMatches`
+
+Counts regex matches without allocating a match array.
+
+### `predictDiagramCost`
+
+Scores a diagram's predicted render+layout cost through the ONNX
+`diagram-cost` model (WebNN → WebGPU → wasm EP). When the predicted
+cost clears DIAGRAM_DEFER_MS the caller yields one task turn before
+rendering so a large graph can't long-task the docs view between
+blocks. A null score (no runtime/model) means render immediately —
+the same behavior as before the model existed.
+- `@param` source Raw mermaid source for the block.
+- `@returns` Predicted cost in ms, or null when ML is unavailable.
+
+### `yieldTask`
+
+Yields one macrotask turn — cheap cooperative scheduling point.
+
 ### `themeJson`
 
 Reads the live theme custom properties + computed type into the

@@ -25,6 +25,17 @@ and the <img> would collapse to the ~300×150 default replaced size under
 `width:auto`, so carousel placeholders keep their natural box before any
 bytes arrive (zero-CLS without shipping a real image).
 
+### `warmFirstRung`
+
+CDN warm ordering — fires a detached fetch of the FIRST ladder rung
+while the figure is still ~600px outside the viewport. The request
+itself warms the CDN edge and the browser HTTP cache (decodeImageWASM
+replays it via `force-cache`), so the 100px-margin climb starts on a
+hot rung instead of a cold one. Warms only the entry rung — the climb
+ascends serially, so warming the top rung early would fight the low
+rung's fetch for bandwidth and warm a resource that may never publish.
+Never publishes, never marks loaded — pure network warm.
+
 ### (module scope)
 
 Thumb → high-res quality ladder. Detached Image probes climb the
@@ -52,6 +63,17 @@ empty, paints once its own `load` fires, and retires every layer
 underneath in the same task, so the swap is atomic per frame.
 Re-queries the topmost layer each rung because _updateDom rebuilds
 the shadow DOM wholesale between steps.
+
+### `retired`
+
+Retires every layer UNDER the successor once it is fully
+painted AND fully opaque — never at load. Removing mid-fade
+(or before first paint) leaves a translucent rung over an
+empty figure box for the transition's remainder: the visible
+quality-swap blink. transitionend fires at fade completion;
+the timeout covers reduced-motion/no-transition environments
+where the event never lands. Index order is recomputed at
+retire time so a newer layer mounted above is never pruned.
 
 ### `climb`
 

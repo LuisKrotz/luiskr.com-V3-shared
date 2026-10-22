@@ -360,6 +360,17 @@ const sanitizeHtmlDoc = (doc, linkResolver = null) => {
       // report's own rules keep their relative order, so its internal
       // precedence is unchanged.
       .replace(/!important/g, '')
+      // Baked-in report colors are light-theme ink meant for the report's
+      // own white canvas — on the portal's themed surface they paint
+      // illegibly (and accessibility engines that can't resolve the
+      // adopted stylesheet still see the raw hexes). Every color/background
+      // declaration the payload ships is dropped: the themed `.docs-html`
+      // layer (docs/_rendered.scss --cov-*) owns all report coloring for
+      // both the browser cascade and external checkers. The pattern only
+      // fires on declaration starts (after `{`/`;` or a rule boundary), so
+      // property-ish words inside values can't misfire; @media blocks keep
+      // their (now colorless) rules.
+      .replace(/(^|[;{}])\s*(?:background(?:-[a-z-]+)?|color)\s*:[^;{}]+/gim, '$1')
 
   const styles = [...doc.matchAll(/<style\b[^>]*>[\s\S]*?<\/style\s*>/giu)].map((m) =>
     scopeRootSelectors(m[0])
@@ -406,6 +417,27 @@ const sanitizeHtmlDoc = (doc, linkResolver = null) => {
     .replace(/\son\w+="[^"]*"/giu, '')
     .replace(/\son\w+='[^']*'/giu, '')
     .replace(/\son\w+=[^\s>]+/giu, '')
+    // Third-party report markup (istanbul) ships unlabeled inputs — name
+    // them from their id so the embedded report satisfies
+    // input_label_exists inside the portal's shadow viewer.
+    .replace(/<input\b[^>]*>/giu, (tag) => {
+      if (/aria-label(?:ledby)?\s*=/iu.test(tag)) return tag
+
+      const id = /\bid\s*=\s*"([^"]*)"/iu.exec(tag)?.[1]
+      const label = id ? id.replace(/[-_]+/gu, ' ').replace(/([a-z])([A-Z])/gu, '$1 $2') : 'input'
+
+      return tag.replace(/\s*\/?\s*>$/u, ` aria-label="${label}">`)
+    })
+    // istanbul's sortable coverage headers are interactive <th> cells
+    // with no text — name them from data-col (humanized like the input
+    // pass) so aria_accessiblename_exists resolves.
+    .replace(/<th\b[^>]*\bdata-col\s*=\s*"([^"]*)"[^>]*>/giu, (tag, col) => {
+      if (/aria-label(?:ledby)?\s*=/iu.test(tag)) return tag
+
+      const label = col.replace(/[-_]+/gu, ' ').replace(/([a-z])([A-Z])/gu, '$1 $2')
+
+      return tag.replace(/\s*>$/u, ` aria-label="${label}">`)
+    })
 
   return `${styles.join('\n')}\n${inner}`
 }

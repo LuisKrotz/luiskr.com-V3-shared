@@ -32,6 +32,13 @@ so the CMS tab can render them grouped by page area.
 
 ### (module scope)
 
+Shape of the IBM Equal Access full-site scan summary — written by
+deploy-info.mjs from a11y-checker.json. `rules` aggregates findings by
+rule+level (count + page coverage + one example message); `routes`
+lists only the routes carrying gated findings so the table stays short.
+
+### (module scope)
+
 Shape of the security-scan report — `scanner` records whether snyk or
 yarn audit produced it, `ok` the gate outcome, `vulnerabilities` the advisory
 rows (acceptedRisk marks entries waived via security-exceptions.json).

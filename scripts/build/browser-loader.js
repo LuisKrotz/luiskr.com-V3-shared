@@ -188,6 +188,9 @@
 
   /** Boots the selected tier after its polyfills have executed. */
   function boot(tier) {
+    // Stamp the picked tier so the app can gate modern-only enhancements
+    // (ML/NPU inference) without re-probing: read by core/utils/ml/ort-engine.
+    window.__LK_TIER = tier.name
     // The default tier's stylesheet is already in <head> (static lazy-load);
     // older tiers need theirs injected (and it wins the cascade by order).
     if (!tier.default) injectCss(tier.css)
