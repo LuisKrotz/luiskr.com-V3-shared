@@ -1235,20 +1235,75 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     return `<main><h1>${esc(b.name || bodyId)}</h1><p><em>${esc(b.kind || '')}</em> — ${esc(b.tagline || '')}</p>${facts ? `<dl>${facts}</dl>` : ''}<p>${esc(b.history || '')}</p>${images}${audio}${b.source ? `<p><a href="${esc(enc(b.source))}">${esc(b.source)}</a></p>` : ''}${refs ? `<ul>${refs}</ul>` : ''}</main>`
   }
 
-  /** Star-field index — description + the full localized body catalog. */
+  /** Star-field body kinds in index order — voyage-from-home ordering;
+   *  any kind absent here still emits, appended after the ordered ones. */
+  const STAR_KIND_ORDER = [
+    'system',
+    'star',
+    'planet',
+    'dwarfPlanet',
+    'moon',
+    'asteroid',
+    'comet',
+    'belt',
+    'satellite',
+    'exoplanet',
+    'nebula',
+    'cluster',
+    'dso',
+    'galaxy',
+    'dwarfGalaxy',
+    'blackHole',
+    'structure',
+  ]
+
+  /**
+   * Star-field index — description plus the full localized body catalog
+   * grouped by kind: every object is a real <h3> heading with a link to
+   * its dossier page and its localized tagline, so the whole chart is
+   * heading-navigable and indexable without JS.
+   */
   const starIndexContent = (loc, bodyIds) => {
     const page = t(loc, (x) => x.pages?.['star-field']) || {}
     const prefix = `${locPrefixOf(loc)}/${(LANG_SLUGS[loc] || enSlugs).starField}`
 
-    const links = bodyIds
-      .map((id) => {
-        const b = readStarBody(loc, id)
+    // kind → dossier list — locale text comes from the dossier itself so
+    // a missing locale file degrades to the English dossier, never a gap.
+    const byKind = new Map()
 
-        return `<li><a href="${prefix}/${esc(id)}">${esc(b?.name || id)}</a></li>`
+    for (const id of bodyIds) {
+      const b = readStarBody(loc, id)
+
+      if (!b) continue
+
+      const list = byKind.get(b.kind) ?? []
+
+      list.push({ id, b })
+
+      byKind.set(b.kind, list)
+    }
+
+    const kinds = [...byKind.keys()].sort(
+      (a, b) =>
+        (STAR_KIND_ORDER.includes(a) ? STAR_KIND_ORDER.indexOf(a) : STAR_KIND_ORDER.length) -
+        (STAR_KIND_ORDER.includes(b) ? STAR_KIND_ORDER.indexOf(b) : STAR_KIND_ORDER.length)
+    )
+
+    const sections = kinds
+      .map((kind) => {
+        const items = byKind
+          .get(kind)
+          .map(
+            ({ id, b }) =>
+              `<article><h3><a href="${prefix}/${esc(id)}">${esc(b.name || id)}</a></h3><p><em>${esc(page[kind] || kind)}</em>${b.tagline ? ` — ${esc(b.tagline)}` : ''}</p></article>`
+          )
+          .join('')
+
+        return `<section><h2>${esc(page[kind] || kind)}</h2>${items}</section>`
       })
       .join('')
 
-    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${leafParagraphs(page)}<ul>${links}</ul></main>`
+    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${leafParagraphs(page)}${sections}</main>`
   }
 
   /**  /** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names. */
@@ -1431,6 +1486,27 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           description: sfDescOf(loc),
           alt: slugPath('starField'),
           content: starIndexContent(loc, starBodyIds),
+          // ItemList — the whole charted catalog with deep links, so the
+          // index page itself enumerates every 3D object for crawlers and
+          // agents without executing a frame of WebGL.
+          entities: [
+            {
+              '@context': SCHEMA_CONTEXT,
+              '@type': 'ItemList',
+              '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}#catalog`,
+              name: t(loc, (x) => x.APP?.starField) || 'Star Field',
+              itemListElement: starBodyIds.map((bodyId, i) => {
+                const body = readStarBody(loc, bodyId)
+
+                return {
+                  '@type': 'ListItem',
+                  position: i + 1,
+                  url: `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}/${bodyId}`,
+                  name: body?.name || bodyId,
+                }
+              }),
+            },
+          ],
         },
         {
           path: `${prefix}${slugs.animations}`,
@@ -1593,7 +1669,19 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
               '@id': `${bodyUrl}#article`,
               headline: bodyName,
               description: body?.tagline || '',
-              about: body?.kind || '',
+              about: {
+                '@type': 'Thing',
+                '@id': `${bodyUrl}#object`,
+                name: bodyName,
+                description: body?.tagline || '',
+                // Technical dossier facts as structured property values —
+                // the machine-readable tech description for each object.
+                additionalProperty: (body?.facts || []).map((f) => ({
+                  '@type': 'PropertyValue',
+                  name: f.label,
+                  value: f.value,
+                })),
+              },
               inLanguage: LOCALE_TAGS[loc].bcp,
               mainEntityOfPage: bodyUrl,
               isPartOf: { '@id': `${sfIndexUrl}#webpage` },
