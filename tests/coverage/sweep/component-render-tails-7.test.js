@@ -16,6 +16,8 @@ import '@cms/deploy-info/CmsDeployInfo.js'
 import '@website/components/media/draw-text/render.js'
 import '@website/views/project/data.js'
 
+import { A11Y_CLASSES } from '@core/tokens/classes/a11y.js'
+
 import _router from '@core/router/router.js'
 
 globalThis.alert = jest.fn()
@@ -61,7 +63,7 @@ describe('component render tails', () => {
     expect(renderContent('hello world', 5, 0, false)).not.toContain('--i')
     expect(renderContent('a<br>b', 5, 0)).toContain('<br')
     expect(renderContent('<em>x y</em>', 5, 0)).toContain('em')
-    expect(renderContent('<a href="/x">link txt</a>', 5, 0)).toContain('aria-label')
+    expect(renderContent('<a href="/x">link txt</a>', 5, 0)).toContain(A11Y_CLASSES.SR_ONLY_ALPHA)
     expect(renderContent('<a href="/x" aria-label="own">t</a>', 5, 0)).not.toContain('&nbsp;"')
     expect(renderContent('<em></em>', 5, 0)).toBeTruthy()
     expect(parseTokens('a <em>b</em> c').length).toBeGreaterThan(1)
