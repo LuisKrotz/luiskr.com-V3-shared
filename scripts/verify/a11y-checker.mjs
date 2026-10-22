@@ -64,6 +64,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getCompliance, setConfig, close } from 'accessibility-checker'
 import puppeteer from 'puppeteer'
+import {
+  CMS_PATH_RE,
+  CMS_SECURITY_HEADERS,
+  SITE_SECURITY_HEADERS,
+} from '../serve/security-headers.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 const DIST_DIR = path.join(ROOT, 'dist')
@@ -248,7 +253,12 @@ const serveDist = () =>
           return
         }
 
-        res.writeHead(200, { 'Content-Type': MIME[path.extname(file)] || MIME['.br'] })
+        res.writeHead(200, {
+          'Content-Type': MIME[path.extname(file)] || MIME['.br'],
+          // Match prod: the scan must evaluate the page under the same
+          // crossOriginIsolated context the deployed headers create.
+          ...(CMS_PATH_RE.test(urlPath) ? CMS_SECURITY_HEADERS : SITE_SECURITY_HEADERS),
+        })
         fs.createReadStream(file).pipe(res)
       } catch {
         res.writeHead(500).end()
