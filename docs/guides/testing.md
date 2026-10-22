@@ -106,7 +106,7 @@ then unions the six raw maps and re-emits per-module reports (filtered to
 each module's own sources) under `<module>/reports/coverage/` — that merged
 output is what `coverage-gate.mjs` enforces at 100% per file. The summary
 is packaged into `dist/deploy-info/` by `yarn deploy:info` and shown in
-the CMS Deploy Info tab. Reports are gitignored.
+the CMS Build tab. Reports are gitignored.
 
 ## Verification pipeline
 
@@ -148,7 +148,7 @@ Gates:
 - **Pre-push**: `shared/scripts/git-hooks/pre-push` — scoped gates for the push diff; falls back to all scopes for shared/global edits.
 - **Pre-build**: `prebuild` runs verify — a failing check means no new `dist` is generated.
 
-Reports: everything in `reports/` is bundled into `dist/deploy-info/` by `shared/scripts/build/deploy-info.mjs` and rendered in the CMS Deploy Info tab.
+Reports: everything in `reports/` is bundled into `dist/deploy-info/` by `shared/scripts/build/deploy-info.mjs` and rendered in the CMS Build tab.
 
 ## Test conventions
 

@@ -1,8 +1,8 @@
 # `cms\deploy-info\render.tsx`
 
-| | |
-|---|---|
-| **Source** | `src/cms\deploy-info\render.tsx` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\deploy-info\render.tsx`                |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
@@ -33,7 +33,7 @@ Renders the Lighthouse section (scores + failing audits).
 
 ### `renderCoverage`
 
-Renders the Jest coverage summary table.
+Renders the Jest coverage summary table plus the per-module rollup.
 
 ### `renderAxe`
 
@@ -59,6 +59,7 @@ Byte-size units for the bundle tables — KB/MB/GB with one decimal.
 
 Formats a byte count as a compact human size (B/KB/MB/GB, one
 decimal past the byte unit); non-numbers render an em-dash.
+
 - `@param` {unknown} value Byte count from the bundle-stats report.
 - `@returns` {string} The formatted size.
 
@@ -78,6 +79,11 @@ Renders the post-build bundle inventory (emitted sizes per type, tier, crate).
 
 Renders the console.* usage scan (debug-leftover policy).
 
+### `renderBuildMeta`
+
+Renders the last-build manifest metadata — generation timestamp, commit
+sha, and the inventory of report files the bundle carries.
+
 ### `renderDeployInfo`
 
-JSX template — loading/missing gates then the five-section report wall.
+JSX template — loading/missing gates then the report wall.

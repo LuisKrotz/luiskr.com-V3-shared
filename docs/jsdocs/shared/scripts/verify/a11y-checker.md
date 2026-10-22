@@ -1,8 +1,8 @@
 # `shared\scripts\verify\a11y-checker.mjs`
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\verify\a11y-checker.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\verify\a11y-checker.mjs`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -11,27 +11,22 @@
 
 Levels that gate the run when not covered by the reviewed baseline.
 
-### `fingerprintKey`
+### `baselineRoute`
 
-Stable fingerprint KEY for one finding — rule + positional-index-free
-DOM path. The engine's `path.dom`/`xpath` carries `[n]` sibling
-indices; on pages whose DOM is not fully deterministic at settle
-(playground HUD rows, media-ladder rungs, engine boot timing) the
-indices flap between runs and exact-path baselining would flag the
-same verified issue as "new" forever. Stripping indices keeps the
-element-type chain; the occurrence ordinal appended by
-`fingerprints()` keeps N identical-shape siblings distinct, so an
-EXTRA occurrence of a baselined shape still fails the gate.
-- `@param` {object} f finding entry from the checker report
-- `@returns` {string} normalized rule+path key (pre-ordinal)
+Review granularity for one route's baseline entry: `{ruleId: count}` —
+the set of potential-violation/recommendation rules a human reviewed on
+that route (count kept for the report, not for gating). Element-path
+fingerprints proved unusable: portfolio/playground pages render a
+different DOM depth every run (media ladder rungs, HUD rows, lazy
+reveals), so the same verified issue re-flags at shifted paths forever.
+The reviewable subject is the RULE — "all text_contrast_sufficient
+prompts on this route are engine artifacts", signed off in the CMS
+report. A rule never seen on the route still fails the gate.
+Legacy formats convert on read: `key|ordinal` arrays and `{key: n}`
+maps collapse to their ruleId set.
 
-### `fingerprints`
-
-Fingerprints one route's findings: `${key}|${ordinal}` where ordinal
-is the 0-based occurrence index of that key on the route. Gating
-levels only — recommendations/manual prompts never block.
-- `@param` {Array<object>} findings raw findings for one route
-- `@returns` {Array<{f: object, fp: string}>} finding + fingerprint pairs
+- `@param` {object|Array<string>|undefined} entry raw baseline entry
+- `@returns` {Set<string>} reviewed ruleIds for the route
 
 ### `MIME`
 
@@ -42,6 +37,7 @@ MIME table for the loopback dist server — only what emitted pages load.
 Recursively collects emitted pages — every directory holding an
 index.html is a servable route (dist is fully prerendered per route
 and per locale).
+
 - `@param` {string} dir - directory to walk
 - `@returns` {string[]} route paths relative to dist ('/about/' style)
 
@@ -71,6 +67,7 @@ Routes per fan-out family kept for the canonical scope.
 ### `canonicalRoutes`
 
 Picks the canonical scan surface — English routes only, CMS excluded:
+
 - every EN route scans, except fan-out families which contribute
   a small deterministic sample (first N per family)
 - docs portal depth-2 landings always scan; deeper per-source pages

@@ -8,7 +8,7 @@
  * runs — and the CMS report is still produced — on machines without a token.
  *
  * Output: reports/snyk-report.json → bundled into dist/deploy-info/ by
- * scripts/build/deploy-info.mjs and rendered in the CMS "Deploy Info" tab.
+ * scripts/build/deploy-info.mjs and rendered in the CMS "Build" tab.
  *
  * Gate: exits 1 when un-exceptioned vulnerabilities at `high`/`critical`
  * severity are found. Accepted risks live in security-exceptions.json with

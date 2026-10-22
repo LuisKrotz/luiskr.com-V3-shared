@@ -2,9 +2,9 @@
 
 &lt;view-star-field&gt; — the star-field experiment route: a
 
-| | |
-|---|---|
-| **Source** | `src/experiments\star-field\StarField.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\star-field\StarField.tsx`              |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -25,6 +25,18 @@ Pre-built id → distance-label lookup for tooltip upgrades.
 
 Arrow-key → view-rotation delta map — left/right change azimuth,
 up/down change polar (up lifts the camera = negative polar step).
+
+### `_HOTKEY_ACTIONS`
+
+Printable-key → action shortcut map — `/` opens the navigator with the
+catalog search focused, `n` toggles it, `o` flies home, `s` saves a
+frame and `i` toggles the instructions sheet. Keys are matched
+case-folded and only with no Ctrl/Meta/Alt held so browser and OS
+chords pass straight through.
+
+### `_TYPING_TAGS`
+
+Field tags whose focus means a keystroke is typing, not a shortcut.
 
 ### `StarField`
 
@@ -72,6 +84,7 @@ defer slug resolution until the table exists.
 Resolves a route `body` segment to a catalog id — accepts the raw
 id (`vesta`), a registry id (`star-NNNNNN`), or a slugified
 localized name from the loaded names table (`via-lactea`).
+
 - `@param` param The `body` route param.
 - `@returns` The catalog id, or null when unresolvable.
 
@@ -81,6 +94,7 @@ Route segment for a body — the slugified localized name once the
 names table has landed (`Via Láctea` → `via-lactea`), the raw id
 before. The raw id is itself a valid segment (slugify folds it to
 itself), so a pre-map selection stays resolvable.
+
 - `@param` id Catalog body id.
 - `@returns` The URL segment to write.
 
@@ -103,6 +117,20 @@ then drawer) and the arrow keys orbit the camera, so the chart is
 fully navigable without pointer input even when nothing inside the
 view holds focus.
 
+### `_isTyping`
+
+Typing guard — true while the shadow root's focused element is a text
+field or editable region, so `/` and the letter shortcuts never steal
+input from the catalog search (or any future field).
+
+- `@returns` Whether keystrokes should be treated as typing.
+
+### `_focusSearch`
+
+`/` shortcut — opens the navigator drawer (starting the lazy registry
+manifest too) and moves focus straight into the catalog search, the
+one-gesture path into a targeted body lookup.
+
 ### `_setSearch`
 
 Search-filter setter — re-renders the navigator list narrowed to
@@ -110,6 +138,7 @@ bodies whose catalog name or id contains the query (case-folded),
 so 66+ bodies stay browsable. Non-trivial queries also fire the
 incremental registry search over the 139k catalogue; the query
 guard keeps a slow earlier response from overwriting a newer one.
+
 - `@param` q Raw input value from the drawer search field.
 
 ### `_ensureRegistry`
@@ -124,6 +153,7 @@ Incremental catalogue browsing — fetches the next 1,000-record
 shard for a kind and appends it to the drawer's loaded list. Each
 shard is one ~100 KB fetch; records accumulate so "load more"
 never refetches earlier pages.
+
 - `@param` kind Registry kind (`star`/`exoplanet`/`dso`).
 
 ### `_toggleInstructions`
@@ -142,12 +172,14 @@ Opens the drawer and starts the manifest fetch in one gesture.
 
 Drawer filter predicate — matches on catalog name or id; an empty
 query passes everything.
+
 - `@param` def Catalog entry under test.
 
 ### `_selectBody`
 
 Selection entry point — shared by nav buttons and canvas picking:
 loads the dossier panel and flies the camera to the body.
+
 - `@param` id Catalog body id.
 
 ### `_closePanel`
@@ -159,6 +191,7 @@ Closes the dossier panel and clears the selection.
 Current-route base path — the star-field URL minus a trailing
 `/<body>` segment, so deep-link navigation always composes from the
 chart root rather than stacking body segments.
+
 - `@returns` The chart base path in the active locale.
 
 ### `_syncUrl`
@@ -169,6 +202,7 @@ names table has landed, the raw id before) so Back returns to the
 chart, closing returns to the base chart URL. Skips when the
 current route already carries the target so the param-change echo
 (`onRouteParamChange`) cannot loop.
+
 - `@param` id Newly selected body id, or null after close.
 
 ### `onRouteParamChange`
@@ -177,6 +211,7 @@ Router param echo — same-view navigation delivers the new descriptor
 here: a valid `body` param selects it (idempotent on repeat), its
 absence closes the panel. Unknown ids degrade to the plain chart so
 stale or hand-typed URLs never break the view.
+
 - `@param` _route The destination descriptor (unused — reads
 
 ### `_applyDeepLink`
@@ -197,6 +232,7 @@ Returns the camera to the overview pose.
 
 Hover announce — updates the aria-live HUD text when the pointer
 crosses a body so screen readers and the HUD chip both learn it.
+
 - `@param` id Hovered body id, or null on leaving.
 
 ### `_syncTip`
@@ -205,6 +241,7 @@ Tooltip label sync — writes `{name} · {dist}` into the leader-line
 tooltip and shows it while a body is hovered; hides it on leave.
 Direct DOM writes (like the live region) so per-frame tracking never
 triggers a full re-render.
+
 - `@param` id Hovered body id, or null on leaving.
 
 ### `_handleHoverMove`
@@ -216,6 +253,7 @@ Edge-clamped positions (object off-screen/behind) switch the tip to
 its `--edge` mode: the marker sits on the canvas rim and the leader
 line rotates toward the body, so navigator-hover hints locate the
 object at any zoom level.
+
 - `@param` id Hovered body id.
 - `@param` x Canvas-space x in px.
 - `@param` y Canvas-space y in px.
@@ -228,6 +266,7 @@ Navigator-hover position hint — while a catalog row is hovered or
 focused the engine reports that body's projected screen position
 (edge-clamped), so the row's object is located on the canvas at any
 zoom level before the user commits to the fly-to.
+
 - `@param` id Hovered catalog or registry body id.
 - `@param` rec Registry record — passed only for shard ids (`star-NNNNNN`…).
 

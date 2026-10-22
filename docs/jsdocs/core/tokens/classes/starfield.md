@@ -2,9 +2,9 @@
 
 Star-field experiment class tokens (`sf-*` block) —
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\classes\starfield.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\starfield.ts`                    |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -38,3 +38,15 @@ Sticky pinned strip inside the scrolling panel (head + search).
 ### `SF_NAV_DISCLAIMER`
 
 In-drawer scale disclaimer — mobile home for the honesty note.
+
+### `SF_INSTRUCTIONS_KEYS`
+
+Keyboard-shortcut definition list inside the instructions modal.
+
+### `SF_INSTRUCTIONS_KEY`
+
+One shortcut row — <kbd> keycap + action description.
+
+### `SF_INSTRUCTIONS_KEYCAP`
+
+The <kbd> keycap itself.

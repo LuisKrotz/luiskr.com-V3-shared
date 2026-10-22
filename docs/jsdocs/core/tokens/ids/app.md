@@ -2,9 +2,9 @@
 
 App shell element id tokens — token group.
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\ids\app.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\ids\app.ts`                              |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -26,3 +26,30 @@ Star-field mobile instructions drawer — aria-controls target for its toggle.
 ### `SF_PANEL_TITLE`
 
 Star-field dossier panel title — aria-labelledby target for the aside landmark.
+
+### `SF_NAV_DESC`
+
+Star-field navigator description node — aria-describedby target for
+the drawer landmark and its toggle button.
+
+### `SF_PANEL_TAGLINE`
+
+Star-field dossier tagline — aria-describedby target for the panel.
+
+### `SF_INSTRUCTIONS_HINT`
+
+Star-field instructions hint — aria-describedby target for the dialog.
+
+### `SF_ITEM_DESC_PREFIX`
+
+Star-field navigator item description id PREFIX — the per-body
+describedby target is `<prefix><body-id>` inside each row button.
+
+### `NAV_MENU_PANEL`
+
+Nav menu overlay — aria-controls target for the burger toggles.
+
+### `NAV_MENU_TITLE`
+
+Nav menu overlay title — aria-labelledby target for the open menu
+navigation landmark.

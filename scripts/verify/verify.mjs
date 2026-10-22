@@ -18,7 +18,7 @@
  *
  * Every step writes machine-readable reports consumed by
  * shared/scripts/build/deploy-info.mjs → dist/deploy-info/ → CMS
- * "Deploy Info" tab. Exits non-zero if ANY step fails — callers must not
+ * "Build" tab. Exits non-zero if ANY step fails — callers must not
  * build/commit.
  *
  * Escape hatch for local iteration: VERIFY_ONLY=lint,test limits the run.
