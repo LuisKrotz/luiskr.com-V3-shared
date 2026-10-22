@@ -27,14 +27,16 @@ if [[ -n "$STAGED" ]]; then
   # -s caps each invocation's argv bytes — an unbounded xargs batch can
   # exceed E2BIG on mega-commits (thousands of staged paths), and the
   # `yarn` wrapper makes it worse by re-spawning with the full env.
+  # 16384 stays under Windows Git Bash's ~26 KB xargs -s ceiling while
+  # still batching large commits into few invocations.
   # Calling the local binary directly is both safer and faster.
   PRETTIER_BIN="$SUPER${SUPER:+/}node_modules/.bin/prettier"
   [[ -x "$PRETTIER_BIN" ]] || PRETTIER_BIN="$PWD/node_modules/.bin/prettier"
-  printf '%s\n' "$STAGED" | xargs -s 65536 "$PRETTIER_BIN" --write --ignore-unknown
+  printf '%s\n' "$STAGED" | xargs -s 16384 "$PRETTIER_BIN" --write --ignore-unknown
   # -f: every staged path is already tracked, but git>=2.4x rejects an
   # explicit pathspec that textually matches a .gitignore pattern (e.g.
   # tracked tests under an ignored `coverage/` dir) unless forced.
-  printf '%s\n' "$STAGED" | xargs -s 65536 git add -f --
+  printf '%s\n' "$STAGED" | xargs -s 16384 git add -f --
 fi
 
 # ── 2. Typecheck ──────────────────────────────────────────────────────────────
