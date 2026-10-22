@@ -106,3 +106,16 @@ Corner-bracket arm expansion ramp (ms) — the 0.25s CSS transition on the ::bef
 ### `BRACKET_FAST_MS`
 
 Faster bracket ramp (ms) — the 0.2s variant on expand-modal/cookies bracket buttons
+
+### `MEDIA_LAYER_FADE`
+
+Media-figure cross-fade (ms) — the 0.5s opacity transition on
+.render-media--high in media-figure/_media.scss. Under-layers are
+retired only after the successor is fully opaque, never mid-fade
+(the quality-swap blink).
+
+### `MEDIA_LAYER_RETIRE`
+
+Under-layer retire fallback (ms) — transitionend normally ends the
+cross-fade; this timeout covers reduced-motion/no-transition engines
+where the event never lands. Must outlast MEDIA_LAYER_FADE.

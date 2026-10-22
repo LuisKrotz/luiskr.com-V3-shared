@@ -40,3 +40,11 @@ wasm-pack `--target web` widget artifacts — `/wasm/<slug>/`.
 ### `WASM_DIAGRAM_PREFIX`
 
 `rust/diagram` artifacts — the mermaid-subset SVG engine.
+
+### `ORT_WASM_PREFIX`
+
+ONNX Runtime wasm/glue binaries — `/ort/ort-wasm-…`.
+
+### `ML_MODELS_PREFIX`
+
+Generated ONNX model files — `/models/<slug>.onnx`.

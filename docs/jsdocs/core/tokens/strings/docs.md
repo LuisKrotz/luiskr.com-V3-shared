@@ -40,6 +40,12 @@ JSON suffix appended to every emitted content payload.
 
 Accessibility labels for the editable breadcrumb + copy feedback.
 
+### `MAIN_LABEL`
+
+aria-label on the docs content area — the shell already owns the
+ sole <main> landmark, so the portal's content region is a named
+ section (region landmark) rather than a second main.
+
 ### `KEY_PRINT_SCREEN`
 
 Keyboard key the print-screen guard reacts to.

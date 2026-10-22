@@ -225,7 +225,7 @@ export class AppRoot extends BaseComponent {
         <PreferencesModal />
         <LangDialog />
 
-        <main id={APP_IDS.MAIN_CONTENT}>
+        <main id={APP_IDS.MAIN_CONTENT} tabIndex={CHAR_STRINGS.MINUS_ONE}>
           <div id={APP_IDS.VIEW_OUTLET}>
             <CurrentView />
           </div>

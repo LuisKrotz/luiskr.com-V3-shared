@@ -47,6 +47,10 @@ Renders the bundle inventory (per-type sizes, tiers, wasm crates).
 
 Renders the axe-core accessibility scan (violations grouped by surface).
 
+### `_renderA11y`
+
+Renders the IBM Equal Access full-site scan (rule rollup + flagged routes).
+
 ### `_renderSnyk`
 
 Renders the dependency vulnerability scan (Snyk or yarn-audit fallback).

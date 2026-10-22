@@ -12,3 +12,7 @@ Coverage for core/utils/a11y/animation-desc.ts — the
 ### `liveRecord`
 
 Injects a live components dictionary carrying one animation record.
+
+### `expectNoAriaWiring`
+
+Every attribute the old contract used to stamp must stay unset.

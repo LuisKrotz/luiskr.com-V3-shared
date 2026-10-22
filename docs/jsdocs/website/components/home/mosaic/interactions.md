@@ -51,3 +51,27 @@ Card activation. Desktop: straight to the project route. Touch:
 first tap expands the details (records bottomH so the wall reflows),
 second tap on the SAME card navigates — the two-tap pattern gives
 touch users the hover preview desktop users get for free.
+Keyboard/NVDA/Narrator activation synthesizes a click with `detail`
+=== 0 (no pointer coordinates) — it must navigate outright, never
+queue as a "first tap". 'ontouchstart' in window is true for every
+touchscreen laptop, so without this gate Enter only expanded the
+card and screen readers announced "no action".
+
+### `cardCenter`
+
+Center point of packed card `i` parsed from its absolute style box.
+
+### `nextCardIdx`
+
+Nearest card in the arrow direction — the packed wall is masonry, so
+neighbors are resolved spatially from card centers, not DOM order.
+The direction must dominate (dx for left/right, dy for up/down) and
+the cross-axis distance is penalized 2× so ArrowDown prefers the card
+directly below over a far diagonal.
+- `@returns` The target card index, or null at the wall's edge.
+
+### `onCardKeyDown`
+
+Arrow-key navigation — moves focus to the nearest card in the arrow
+direction (roving focus over the card anchors; the focusin handler
+then expands it exactly like hover). Non-arrow keys pass through.

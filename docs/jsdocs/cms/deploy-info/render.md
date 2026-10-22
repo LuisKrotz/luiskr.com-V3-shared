@@ -39,6 +39,14 @@ Renders the Jest coverage summary table.
 
 Renders the axe-core accessibility scan (violations grouped by surface).
 
+### `a11yLevelClass`
+
+Maps an IBM finding level to the red/amber/green chip (violations red, potentials amber).
+
+### `renderA11y`
+
+Renders the IBM Equal Access full-site scan — totals, per-rule rollup, flagged routes.
+
 ### `renderSnyk`
 
 Renders the dependency vulnerability scan (Snyk or yarn-audit fallback).

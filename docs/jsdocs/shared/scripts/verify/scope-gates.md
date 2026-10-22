@@ -60,6 +60,28 @@ Lists files changed in a diff range (or the index for --staged). The
 truncated a ~21k-file push and produced an empty list. A diff failure
 is fatal, not skippable: returning [] would push with zero gates.
 
+### `runAsync`
+
+Async counterpart for parallel gate steps — spawns the check with piped
+stdio so concurrently-running children can't interleave their report
+blocks; the captured output is replayed under the step's banner on exit.
+`extraEnv` carries per-step overrides (e.g. a split JEST_MAX_WORKERS
+budget when two jest pools run side by side).
+- `@param` {string} label banner prefix
+- `@param` {string} cmd executable
+- `@param` {string[]} args argv
+- `@param` {object} [extraEnv] env overrides merged over process.env
+- `@returns` {Promise<void>} resolves on exit 0, rejects otherwise
+
+### `jestWorkerShare`
+
+Total jest-worker budget for a gate run — mirrors jest.preset's
+RAM-derived cap (2GiB/worker, cores−1) so two concurrent jest pools
+(module suite + governance) split the same ceiling instead of each
+claiming it whole.
+- `@param` {number} share fraction of the budget this pool gets
+- `@returns` {string} JEST_MAX_WORKERS value
+
 ### `runGovernance`
 
 Runs the cross-cutting governance suite (shared/tests/governance) under
@@ -89,24 +111,47 @@ of the same commit validate instantly instead of re-running.
 
 ### `runScope`
 
-Runs the gate set for one scope and stamps the stored result.
+Runs the gate set for one scope and stamps the stored result. All checks
+are independent read-only runs, so they execute CONCURRENTLY — the lint
+trio (tsc/eslint/stylelint) plus the jest pair. When a scope runs both
+jest pools, each gets half the RAM-derived worker budget via
+JEST_MAX_WORKERS so the aggregate stays under the same ceiling a single
+full-size pool would use. A failed check rejects; Promise.allSettled
+lets the rest finish their buffered output before the error surfaces.
 
 ### `runLink`
 
 /*.scss`),
-      '--max-warnings=0',
-    ])
+        '--max-warnings=0',
+      ])
+    )
   }
 
-  if (exists(def.jest)) {
+  const runJest = exists(def.jest)
+  const runGov = def.governance
+
+  // Two concurrent jest pools split the worker budget 50/50; a lone pool
+  // keeps the full share.
+  const jestShare = runJest && runGov ? 0.5 : 1
+
+  if (runJest) {
     checks.push('jest')
-    run(`${scope} jest`, 'node', [...JEST, '--config', def.jest])
+    tasks.push(
+      runAsync(`${scope} jest`, 'node', [...JEST, '--config', def.jest], {
+        JEST_MAX_WORKERS: jestWorkerShare(jestShare),
+      })
+    )
   }
 
-  if (def.governance) {
+  if (runGov) {
     checks.push('governance')
-    runGovernance(scope, def.a11y)
+    tasks.push(runGovernance(scope, def.a11y, { JEST_MAX_WORKERS: jestWorkerShare(jestShare) }))
   }
+
+  const results = await Promise.allSettled(tasks)
+  const failed = results.find((r) => r.status === 'rejected')
+
+  if (failed) throw failed.reason
 
   stamp(scope, checks)
 }

@@ -72,7 +72,11 @@ Recursively yields every sections node that carries a `src`.
 
 ### `writeCompressed`
 
-Brotil + gzip siblings next to each emitted index.html (Firebase serves them).
+Brotli + gzip siblings next to each emitted index.html (Firebase serves
+them). The plain file lands synchronously; the compressed siblings go
+through the shared queue so the emit loop never blocks on a ~30-60ms
+brotli-11 pass per page — drainCompressedWrites() runs them across the
+libuv threadpool at the end of the fan-out.
 
 ### `localize`
 
@@ -102,6 +106,16 @@ range request and shared across all 15 locales).
 
 Bytes fetched per image-dims probe — SOF/IHDR headers live in the head.
 
+### `dimsAttr`
+
+` width="W" height="H"` attribute fragment for emitted media — every
+lazy <img>/<video> must carry explicit dims or Lighthouse flags the
+bare tag and the pre-load box collapses to 0x0 (CLS). Missing source
+metadata falls back to the runtime's own GENERIC_DIMENSIONS defaults
+(the same 800×450 attr box <media-figure> declares when `size` is absent).
+- `@param` {number} [w] - intrinsic width when known
+- `@param` {number} [h] - intrinsic height when known
+
 ### `scanImageDims`
 
 Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
@@ -127,9 +141,9 @@ unreachable host → warn and keep the database.json snapshot as the source.
 Probes every unique star-field dossier image once (64 KB range request
 each) so emitted <img> tags carry real width/height attrs — the
 lazy-media CLS budget flagged the bare imgs. Failures are silent:
-a missing probe just emits the attr-less tag it always did.
+a missing probe falls back to the GENERIC_DIMENSIONS default box.
 
-### `buildLocalePages`
+### (module scope)
 
 Generates all localized pages under `distDir`. When `template` is omitted
 the post-loader dist/index.html is read from disk; when provided (the
@@ -190,6 +204,23 @@ best-quality source itself (uncompressed pass preferred) so crawlers
 and no-JS viewers index the full-resolution asset, not the thumb;
 the caption links to the same source as a first-class crawl target.
 `deepHref` wraps the media in the /portfolio/<p>/<media> deep link.
+
+### `cardTile`
+
+One portfolio card as crawlable markup — cover figure, title, and
+ the description the app reveals on hover/expand. Reader mode and
+ crawlers cannot trigger the hover, so the desc is emitted inline.
+
+### `relatedContent`
+
+Related-projects footer — the crawlable mirror of the app's
+<portfolio-related> strip. Mirrors related/match.ts: the related
+node's {link,page,featured} rows join home.portfoliolist (the
+image/description join table) via normalized link/image/label
+matching. Card descriptions ride along even though the app only
+reveals them on hover — reader mode can't hover, so the content
+must already be in the emitted markup.
+- `@param` {string} loc - locale code
 
 ### `homeContent`
 

@@ -8,8 +8,8 @@
  * failing a multi-thousand-file build on a transient race.
  */
 
-/** fs error codes a transient Windows share/scan lock can surface as. */
-const RETRYABLE_CODES = new Set(['UNKNOWN', 'EBUSY', 'EPERM', 'EACCES'])
+/** fs error codes a transient Windows share/scan lock (or a momentarily saturated handle table under drain fan-out — EMFILE) can surface as. */
+const RETRYABLE_CODES = new Set(['UNKNOWN', 'EBUSY', 'EPERM', 'EACCES', 'EMFILE'])
 
 /**
  * Attempts before rethrowing — ~60s of capped backoff. Signature updates and

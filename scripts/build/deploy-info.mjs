@@ -7,6 +7,7 @@
  *   - .lighthouseci/manifest.json   latest Lighthouse CI run (representative runs only)
  *   - <module>/reports/coverage/coverage-summary.json  per-module Jest summaries
  *   - experiments/docs/reports/axe-report.json      axe-core WCAG accessibility scan
+ *   - experiments/docs/reports/a11y-checker.json    IBM Equal Access full-site scan
  *   - experiments/docs/reports/snyk-report.json     Snyk / yarn-audit dependency scan
  *   - experiments/docs/reports/console-scan.json    console.* usage policy scan
  *
@@ -15,6 +16,7 @@
  *   - dist/deploy-info/lighthouse-summary.json  per-URL scores + failing audits
  *   - dist/deploy-info/coverage-summary.json    Jest coverage totals + per-module
  *   - dist/deploy-info/axe-report.json          a11y violations per surface
+ *   - dist/deploy-info/a11y-summary.json        IBM scan totals + per-rule/per-route
  *   - dist/deploy-info/snyk-report.json         dependency vulnerabilities
  *   - dist/deploy-info/console-scan.json        console.* usage findings
  *
@@ -50,6 +52,13 @@ const COVERAGE_MODULES = [
 const DIST_DIR = path.join(ROOT, 'dist')
 const TIERS_DIR = path.join(DIST_DIR, 'v')
 const WASM_DIR = path.join(DIST_DIR, 'wasm')
+
+const writeJson = (file, data) => {
+  const tmp = `${file}.tmp`
+
+  fs.writeFileSync(tmp, JSON.stringify(data, null, 2))
+  fs.renameSync(tmp, file)
+}
 
 const readJson = (file) => {
   try {
@@ -141,6 +150,60 @@ const collectCoverage = () => {
   }
 
   return { total: totals, modules }
+}
+
+// ─── IBM a11y scan ───────────────────────────────────────────────────────────
+// experiments/docs/reports/a11y-checker.json is a multi-MB per-finding dump —
+// the CMS gets a compact summary: totals, per-rule aggregates (with the page
+// count each rule touches), and the routes that carry any gated findings.
+// The full JSON stays served at /docs/reports/a11y-checker.json for drill-down.
+const collectA11y = () => {
+  const report = readJson(path.join(REPORTS_DIR, 'a11y-checker.json'))
+
+  if (!report?.results) return null
+
+  const rules = {}
+
+  const routes = report.results.map((p) => {
+    for (const f of p.findings || []) {
+      const key = `${f.level}|${f.ruleId}`
+      const bucket = (rules[key] ||= {
+        level: f.level,
+        ruleId: f.ruleId,
+        count: 0,
+        pages: new Set(),
+        message: f.message,
+      })
+
+      bucket.count += 1
+      bucket.pages.add(p.route)
+    }
+
+    return {
+      route: p.route,
+      violation: p.violation || 0,
+      potentialviolation: p.potentialviolation || 0,
+      recommendation: p.recommendation || 0,
+      manual: p.manual || 0,
+      gated: p.gated || 0,
+      error: p.error || undefined,
+    }
+  })
+
+  return {
+    generatedAt: report.generatedAt,
+    engine: report.engine,
+    policy: report.policy,
+    gatingLevels: report.gatingLevels,
+    pages: report.pages,
+    totals: report.totals,
+    rules: Object.values(rules)
+      .map(({ pages, ...r }) => ({ ...r, pages: pages.size }))
+      .sort((a, b) => b.count - a.count),
+    routes: routes.filter(
+      (r) => r.violation || r.potentialviolation || r.recommendation || r.gated || r.error
+    ),
+  }
 }
 
 // ─── Bundle stats ────────────────────────────────────────────────────────────
@@ -439,26 +502,30 @@ const main = () => {
 
   const bundle = collectBundleStats()
 
+  const a11y = collectA11y()
+
   fs.mkdirSync(OUT_DIR, { recursive: true })
 
   const files = {}
 
   if (bundle) {
-    fs.writeFileSync(path.join(OUT_DIR, 'bundle-stats.json'), JSON.stringify(bundle, null, 2))
+    writeJson(path.join(OUT_DIR, 'bundle-stats.json'), bundle)
     files.bundle = 'bundle-stats.json'
   }
 
   if (lighthouse) {
-    fs.writeFileSync(
-      path.join(OUT_DIR, 'lighthouse-summary.json'),
-      JSON.stringify(lighthouse, null, 2)
-    )
+    writeJson(path.join(OUT_DIR, 'lighthouse-summary.json'), lighthouse)
     files.lighthouse = 'lighthouse-summary.json'
   }
 
   if (coverage) {
-    fs.writeFileSync(path.join(OUT_DIR, 'coverage-summary.json'), JSON.stringify(coverage, null, 2))
+    writeJson(path.join(OUT_DIR, 'coverage-summary.json'), coverage)
     files.coverage = 'coverage-summary.json'
+  }
+
+  if (a11y) {
+    writeJson(path.join(OUT_DIR, 'a11y-summary.json'), a11y)
+    files.a11y = 'a11y-summary.json'
   }
 
   // Scan reports produced by the verify pipeline (axe jest suite, security-scan,
@@ -470,7 +537,7 @@ const main = () => {
   ]) {
     const report = readJson(path.join(REPORTS_DIR, file))
     if (report) {
-      fs.writeFileSync(path.join(OUT_DIR, file), JSON.stringify(report, null, 2))
+      writeJson(path.join(OUT_DIR, file), report)
       files[key] = file
     }
   }
@@ -481,7 +548,7 @@ const main = () => {
     files,
   }
 
-  fs.writeFileSync(path.join(OUT_DIR, 'index.json'), JSON.stringify(index, null, 2))
+  writeJson(path.join(OUT_DIR, 'index.json'), index)
 
   console.log(
     `[deploy-info] wrote ${OUT_DIR} (${Object.keys(files).join(', ') || 'no sources found'})`

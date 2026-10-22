@@ -45,6 +45,7 @@ import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '../../../core/tokens/routes/aliases.ts'
+import { GENERIC_DIMENSIONS } from '../../../core/tokens/media/dimensions.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
 import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
 import { withFsRetry } from './fs-retry.mjs'
@@ -451,9 +452,20 @@ export function localize(
   // earlier template revision) so re-runs strip it instead of leaving
   // stale markup.
   if (content) {
+    // Emitters return a <main> wrapper (meaningful for a standalone
+    // document), but parked inside #app it would be a second landmark
+    // competing with the shell's <main id="main-content"> — demote it to
+    // a plain div; the <article> wrapper already carries the
+    // reader-mode document signal.
+    const parked = content.replace(/^<main>/, '<div>').replace(/<\/main>$/, '</div>')
+
     out = out.replace(
-      /<div id="app">\s*(?:<div class="boot-veil"[^>]*>[\s\S]*?<\/div>\s*)?(?:<article class="reader-content">[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?\s*<\/div>/,
-      `<div id="app"><article class="reader-content">${content}</article></div>`
+      /<div id="app">\s*(?:<div class="boot-veil"[^>]*>[\s\S]*?<\/div>\s*)?(?:<article class="reader-content"[^>]*>[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?\s*<\/div>/,
+      // The parked copy is a labelled region landmark (IBM's DOM-level
+      // aria_content_in_landmark counts <article> children as un-landmarked
+      // content) while aria-hidden + inert keep the mirror out of the AT
+      // tree and focus order — screen readers hear the live app instead.
+      `<div id="app"><article class="reader-content" role="region" aria-label="Static page copy" aria-hidden="true" inert>${parked}</article></div>`
     )
   }
 
@@ -486,6 +498,18 @@ const starMediaDims = new Map()
 
 /** Bytes fetched per image-dims probe — SOF/IHDR headers live in the head. */
 const DIMS_PROBE_BYTES = 64 * 1024
+
+/**
+ * ` width="W" height="H"` attribute fragment for emitted media — every
+ * lazy <img>/<video> must carry explicit dims or Lighthouse flags the
+ * bare tag and the pre-load box collapses to 0x0 (CLS). Missing source
+ * metadata falls back to the runtime's own GENERIC_DIMENSIONS defaults
+ * (the same 800×450 attr box <media-figure> declares when `size` is absent).
+ * @param {number} [w] - intrinsic width when known
+ * @param {number} [h] - intrinsic height when known
+ */
+const dimsAttr = (w, h) =>
+  ` width="${w || GENERIC_DIMENSIONS.DEFAULT_WIDTH}" height="${h || GENERIC_DIMENSIONS.DEFAULT_HEIGHT}"`
 
 /**
  * Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
@@ -563,7 +587,7 @@ export async function prefetchTranslations() {
  * Probes every unique star-field dossier image once (64 KB range request
  * each) so emitted <img> tags carry real width/height attrs — the
  * lazy-media CLS budget flagged the bare imgs. Failures are silent:
- * a missing probe just emits the attr-less tag it always did.
+ * a missing probe falls back to the GENERIC_DIMENSIONS default box.
  */
 export async function prefetchStarMediaDims() {
   const srcs = new Set()
@@ -603,7 +627,7 @@ export async function prefetchStarMediaDims() {
 
         const dims = scanImageDims(Buffer.from(await res.arrayBuffer()))
 
-        if (dims) starMediaDims.set(url, ` width="${dims[0]}" height="${dims[1]}"`)
+        if (dims) starMediaDims.set(url, dimsAttr(dims[0], dims[1]))
       } catch {
         /* unreachable host → attr-less img, same as before */
       }
@@ -920,7 +944,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     if (!source) return ''
 
     const label = esc(m.label || '')
-    const wh = m.size?.[0] ? ` width="${m.size[0]}" height="${m.size[1]}"` : ''
+    const wh = dimsAttr(m.size?.[0], m.size?.[1])
 
     // <video><source> retries the next entry on 404, but <picture><source>
     // does not — a missing webp renders as broken. webp is emitted only
@@ -937,15 +961,110 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         ? `${u.slice(0, -4)}.webp`
         : ''
 
+    // A <video controls> inside the deep-link anchor is nested
+    // interactive content (video controls are tabbable inside the link —
+    // widget_tabbable_single) — inside the link it's a preview only, the
+    // deep page carries the real player. Standalone figures keep their
+    // controls so the media stays usable without the link.
     const media = isVideo
-      ? `<video${thumb ? ` poster="${esc(thumb)}"` : ''} controls muted playsinline preload="none"${wh}>${webm ? `<source src="${esc(webm)}" type="video/webm">` : ''}<source src="${esc(source)}" type="video/mp4"></video>`
-      : `<picture>${webp(source) ? `<source srcset="${esc(webp(source))}" type="image/webp">` : ''}<img src="${esc(source)}" alt="${esc(label)}" loading="lazy" decoding="async"${wh}></picture>`
+      ? `<video${thumb ? ` poster="${esc(thumb)}"` : ''}${deepHref ? '' : ' controls'} muted playsinline preload="none"${wh}>${webm ? `<source src="${esc(webm)}" type="video/webm">` : ''}<source src="${esc(source)}" type="video/mp4"></video>`
+      : // Inside the labelled deep-link the image is decorative — the
+        // anchor's aria-label + figcaption already carry the name, so a
+        // repeated alt is redundant verbosity for screen readers.
+        `<picture>${webp(source) ? `<source srcset="${esc(webp(source))}" type="image/webp">` : ''}<img src="${esc(source)}" alt="${esc(deepHref ? '' : label)}" loading="lazy" decoding="async"${wh}></picture>`
 
     // The deep-link anchor wraps bare media — no text content — so it
     // carries the caption as its accessible name (axe link-name).
     const linkLabel = label ? ` aria-label="${label}"` : ''
 
     return `<figure>${deepHref ? `<a href="${esc(deepHref)}"${linkLabel}>` : ''}${media}${deepHref ? '</a>' : ''}<figcaption><a href="${esc(source)}">${label || esc(m.src)}</a></figcaption></figure>`
+  }
+
+  /** One portfolio card as crawlable markup — cover figure, title, and
+   *  the description the app reveals on hover/expand. Reader mode and
+   *  crawlers cannot trigger the hover, so the desc is emitted inline. */
+  const cardTile = (i, href) => {
+    const coverKey = i.image ? resolveCoverKey(i.image, mediaManifest) : ''
+    const coverSrc = coverKey ? enc(`${CDN_BASE}${coverKey}`) : ''
+    const coverWebp = mediaManifest?.has(`${coverKey.slice(0, -4)}.webp`)
+      ? enc(`${CDN_BASE}${coverKey.slice(0, -4)}.webp`)
+      : ''
+    const coverWh = dimsAttr(i.width?.[0], i.height?.[0])
+    // The card link's own text (h3 + caption) already names the image —
+    // a duplicate alt inside the anchor is redundant for screen readers.
+    const img = coverSrc
+      ? `<figure><picture>${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="" loading="lazy" decoding="async"${coverWh}></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
+      : ''
+    const desc = i.description ? `<p>${i.description}</p>` : ''
+
+    return `<li><a href="${href}">${img}<h3>${esc(i.label || '')}</h3>${desc}</a></li>`
+  }
+
+  /**
+   * Related-projects footer — the crawlable mirror of the app's
+   * <portfolio-related> strip. Mirrors related/match.ts: the related
+   * node's {link,page,featured} rows join home.portfoliolist (the
+   * image/description join table) via normalized link/image/label
+   * matching. Card descriptions ride along even though the app only
+   * reveals them on hover — reader mode can't hover, so the content
+   * must already be in the emitted markup.
+   * @param {string} loc - locale code
+   */
+  const relatedContent = (loc) => {
+    const rel = t(loc, (x) => x.components?.related) || {}
+    const home = t(loc, (x) => x.pages?.HOME) || {}
+    const rawHome = home.portfoliolist || []
+    const homeList = Array.isArray(rawHome) ? rawHome : Object.values(rawHome)
+    const rawProjects = rel.projects || []
+    const projects = Array.isArray(rawProjects) ? rawProjects : Object.values(rawProjects)
+
+    if (!rel.title || !projects.length) return ''
+
+    const prefix = locPrefixOf(loc)
+
+    const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+    const cleanLink = (l) =>
+      (l || '').replace(/^(\/projects\/|\/portfolio\/|\/)/, '').replace(/\/$/, '')
+
+    const findHome = (link, page) => {
+      const c = norm(link)
+      const p = norm(page)
+
+      return (
+        homeList.find((h) => {
+          const hl = norm(h.link)
+          const hi = norm(h.image)
+
+          return (hl && c && hl === c) || (hi && hi === c)
+        }) ??
+        homeList.find((h) => {
+          const hl = norm(h.link)
+          const hi = norm(h.image)
+          const hb = norm(h.label || h.title)
+
+          return (
+            (hl && (c.includes(hl) || hl.includes(c))) ||
+            (hi && (c.includes(hi) || hi.includes(c))) ||
+            (hb && p && (hb.includes(p) || p.includes(hb)))
+          )
+        })
+      )
+    }
+
+    const items = projects
+      .map((p) => {
+        const link = cleanLink(p.link)
+        const hm = findHome(link, p.page)
+        const image = hm?.image || p.image || link
+        const card = { ...hm, image, label: p.page || hm?.label || hm?.title || link }
+
+        card.description = hm?.description || p.description || ''
+
+        return link ? cardTile(card, `${prefix}/portfolio/${link}`) : ''
+      })
+      .join('')
+
+    return `<section><h2>${esc(rel.title)}</h2><ul>${items}</ul></section>`
   }
 
   /** Home page content — about bio + mentions + portfolio mosaic + contact. */
@@ -958,22 +1077,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
     const tiles = items
       .filter((i) => i && (i.link || i.slug))
-      .map((i) => {
-        const href = `${prefix}/portfolio/${i.link || i.slug}`
-        const coverKey = i.image ? resolveCoverKey(i.image, mediaManifest) : ''
-        const coverSrc = coverKey ? enc(`${CDN_BASE}${coverKey}`) : ''
-        const coverWebp = mediaManifest?.has(`${coverKey.slice(0, -4)}.webp`)
-          ? enc(`${CDN_BASE}${coverKey.slice(0, -4)}.webp`)
-          : ''
-        const coverWh =
-          i.width?.[0] && i.height?.[0] ? ` width="${i.width[0]}" height="${i.height[0]}"` : ''
-        const img = coverSrc
-          ? `<figure><picture>${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="${esc(i.label || '')}" loading="lazy" decoding="async"${coverWh}></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
-          : ''
-        const desc = i.description ? `<p>${i.description}</p>` : ''
-
-        return `<li><a href="${href}">${img}<h3>${esc(i.label || '')}</h3>${desc}</a></li>`
-      })
+      .map((i) => cardTile(i, `${prefix}/portfolio/${i.link || i.slug}`))
       .join('')
 
     const mentions = (about.mention_items || [])
@@ -998,7 +1102,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       )
       .join('')
 
-    return `<main><h1>${esc(page.title || '')}</h1>${sections}</main>`
+    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${sections}</main>`
   }
 
   /** Project interna — title, hero cover, all section text + every figure. */
@@ -1043,6 +1147,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       }
     }
 
+    parts.push(relatedContent(loc))
+
     parts.push('</main>')
 
     return parts.join('')
@@ -1059,7 +1165,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   const experienceContent = (loc, pageKey) => {
     const page = t(loc, (x) => x.pages?.[pageKey]) || {}
 
-    return `<main><h1>${esc(page.title || '')}</h1>${leafParagraphs(page)}</main>`
+    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${leafParagraphs(page)}</main>`
   }
 
   /** Animations-reference hub — title + intro + every animation record's
@@ -1111,7 +1217,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
     const images = (b.media?.images || [])
       .map((img) => {
-        const wh = starMediaDims.get(img.src) || ''
+        const wh = starMediaDims.get(img.src) || dimsAttr()
 
         return `<figure><img src="${esc(enc(img.src))}" alt="${esc(img.caption || '')}" loading="lazy" decoding="async"${wh}><figcaption>${esc(img.caption || '')}${img.credit ? ` — ${esc(img.credit)}` : ''}</figcaption></figure>`
       })
@@ -1142,7 +1248,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       })
       .join('')
 
-    return `<main><h1>${esc(page.title || '')}</h1>${leafParagraphs(page)}<ul>${links}</ul></main>`
+    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${leafParagraphs(page)}<ul>${links}</ul></main>`
   }
 
   /**  /** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names. */

@@ -176,6 +176,18 @@ Set when bootstrap threw or bailed before the scene assembled — the
 
 UI theme flag — stored for the sun-rotation feature (not yet wired).
 
+### `predictor`
+
+ML frame-time predictor — adaptive pixel-ratio quality driver.
+
+### `lastFrameMs`
+
+Timestamp of the previous tick — predictor's frame-delta input.
+
+### `appliedQuality`
+
+Last quality applied to the renderer — dedupes setPixelRatio.
+
 ### `onResize`
 
 Stable resize-listener identity so destroy() can removeEventListener.

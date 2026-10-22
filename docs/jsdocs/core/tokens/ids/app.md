@@ -22,3 +22,7 @@ Star-field navigator drawer — aria-controls target for its toggle.
 ### `SF_INSTRUCTIONS_PANEL`
 
 Star-field mobile instructions drawer — aria-controls target for its toggle.
+
+### `SF_PANEL_TITLE`
+
+Star-field dossier panel title — aria-labelledby target for the aside landmark.

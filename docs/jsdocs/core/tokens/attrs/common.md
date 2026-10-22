@@ -97,6 +97,10 @@ start on the shared clock instead of a delay after its own trigger.
 
 `pointer` input-method value — fine pointer (mouse/trackpad) primary input.
 
+### `INERT`
+
+`inert` — global boolean attribute: subtree is non-interactive and non-focusable.
+
 ### `FIT`
 
 `fit` — sizing/fit field name used by media layout contracts.

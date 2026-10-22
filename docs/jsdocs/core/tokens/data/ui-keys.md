@@ -21,6 +21,10 @@ Frozen nav ui key map — sole declaration site for these tokens; consumers read
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
 
+### `SKIP`
+
+Keyboard skip-link label ('skip' in the APP dictionary).
+
 ### `COOKIE_UI_KEYS`
 
 Frozen cookie ui key map — sole declaration site for these tokens; consumers read members
