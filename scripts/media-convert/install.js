@@ -32,6 +32,15 @@ const PKGS = {
   choco: { ffmpeg: 'ffmpeg', imagemagick: 'imagemagick' },
 }
 
+/**
+ * Windows cjpeg guidance — no winget/choco mozjpeg package exists, so the
+ * npm binary wrapper is the manager-free path (it drops a prebuilt
+ * cjpeg.exe into npm's global bin dir, which is already on PATH for any
+ * Node user). vcpkg (`vcpkg install mozjpeg`) or the GitHub release zip
+ * are the alternatives.
+ */
+const WIN_CJPEG_HINT = 'npm install -g mozjpeg'
+
 /** Maps the raw tool map onto the three installable groups. */
 const needs = (t) => ({
   ffmpeg: !t.ffmpeg || !t.ffprobe,
@@ -72,16 +81,15 @@ export function plan(t, manager) {
   }
 
   if (!manager) {
-    return {
-      manager,
-      needsRoot: false,
-      commands: [],
-      manual: [
-        process.platform === 'darwin'
-          ? 'Install Homebrew (https://brew.sh), then: brew install ffmpeg imagemagick mozjpeg'
-          : 'Install ffmpeg (and optionally ImageMagick) with your system package manager',
-      ],
-    }
+    const manual = [
+      process.platform === 'darwin'
+        ? 'Install Homebrew (https://brew.sh), then: brew install ffmpeg imagemagick mozjpeg'
+        : 'Install ffmpeg (and optionally ImageMagick) with your system package manager',
+    ]
+
+    if (missing.cjpeg && process.platform === 'win32') manual.push(WIN_CJPEG_HINT)
+
+    return { manager, needsRoot: false, commands: [], manual }
   }
 
   // winget/choco and brew run without a root shell — winget elevates via
@@ -114,7 +122,10 @@ export function plan(t, manager) {
         manager,
         needsRoot: false,
         commands,
-        manual: commands.map(([c, a]) => display(c, a)),
+        manual: [
+          ...commands.map(([c, a]) => display(c, a)),
+          ...(missing.cjpeg ? [WIN_CJPEG_HINT] : []),
+        ],
       }
     }
     case 'choco': {
@@ -127,7 +138,10 @@ export function plan(t, manager) {
         manager,
         needsRoot: false,
         commands: pkgs.length ? [['choco', ['install', '-y', ...pkgs]]] : [],
-        manual: pkgs.length ? [display('choco', ['install', '-y', ...pkgs])] : [],
+        manual: [
+          ...(pkgs.length ? [display('choco', ['install', '-y', ...pkgs])] : []),
+          ...(missing.cjpeg ? [WIN_CJPEG_HINT] : []),
+        ],
       }
     }
     default: {
