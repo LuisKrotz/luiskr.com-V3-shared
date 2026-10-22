@@ -1,7 +1,7 @@
 /**
  * @file scripts/build/deploy-info.mjs
  * @description Assembles `dist/deploy-info/` — the "last deploy" bundle the CMS
- * exposes in its restricted Deploy Info tab.
+ * exposes in its restricted Build tab.
  *
  * Sources:
  *   - .lighthouseci/manifest.json   latest Lighthouse CI run (representative runs only)

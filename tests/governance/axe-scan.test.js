@@ -5,7 +5,7 @@
  * document and runs the full WCAG 2.x ruleset against the composed page and
  * each interactive surface. Aggregates every violation into
  * `experiments/docs/reports/axe-report.json` (consumed by scripts/build/deploy-info.mjs → CMS
- * Deploy Info tab).
+ * Build tab).
  *
  * Gating: any violation with impact `critical` or `serious` fails the suite —
  * the same gate blocks pre-commit and pre-build via `yarn verify`.

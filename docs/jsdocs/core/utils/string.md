@@ -2,9 +2,9 @@
 
 Small pure string transforms — HTML stripping for
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\string.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\string.ts`                                |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -18,12 +18,32 @@ re-runs until the string is stable — this is the classic "iterated
 sanitization" defense: each pass may expose a tag assembled from
 fragments of the previous pass.
 Pure ESM utility function, tree-shakeable.
+
 - `@param` str Raw markup-bearing text.
 - `@returns` Text with every `<…>` span removed.
 
 ### `META_DESCRIPTION_MAX`
 
 Meta descriptions cap at ~160 chars — Google's SERP snippet budget.
+
+### `HEADING_EXCERPT_WORDS`
+
+Word budget for a generated a11y heading — enough leading content to
+identify the block in a heading list, short enough to stay a label.
+
+### `excerptHeading`
+
+Builds a short heading from a block of content text: markup strips via
+the iterated sanitizer, whitespace collapses, and the first
+HEADING_EXCERPT_WORDS words are kept with a trailing ellipsis when the
+text runs longer — the incipit names the block after its own content
+("Joining Dell on June 6th, 2022…") instead of a meaningless ordinal.
+Returns '' for empty/non-string input so callers can fall back to a
+generic localized label.
+Pure ESM utility function, tree-shakeable.
+
+- `@param` text Raw block text (markup tolerated).
+- `@returns` Heading excerpt or ''.
 
 ### `toMetaDescription`
 
@@ -34,6 +54,7 @@ decode so `&nbsp;` doesn't survive into the content attribute, runs of
 whitespace collapse to one space, and overlong text cuts at the last
 word boundary inside `max` — never mid-word.
 Pure ESM utility function, tree-shakeable.
+
 - `@param` str Raw CMS text (may contain tags/entities).
 - `@param` max Character budget — defaults to the SERP limit.
 - `@returns` Plain-text description ≤ max chars.
@@ -44,6 +65,7 @@ Escapes HTML-significant characters for safe insertion into innerHTML or
 double-quoted attributes. `&` must be replaced first so the entities
 emitted by the later replacements are not double-escaped.
 Pure ESM utility function, tree-shakeable.
+
 - `@param` {string} str — raw text that may contain &, <, >, ", '
 - `@returns` {string} entity-escaped text safe for markup contexts
 
@@ -68,6 +90,7 @@ MUST stay byte-identical to the slugify in shared/scripts/build
 deep-link segment both at runtime (modal write/read) and at build
 (emitted pages + sitemap URLs), so the two transforms have to agree
 or indexed /portfolio/<p>/<media> links stop auto-opening.
+
 - `@param` text Display text to slug.
 - `@returns` URL/id-safe slug, or '' for non-string input.
 
@@ -79,6 +102,7 @@ mid-word dots without a following space ("Three.js", CDN paths) never
 split. The delimiter whitespace is consumed; callers join runs with a
 real space node so inline wrapping is preserved. Text with no
 boundary returns as a single run; empty input returns [].
+
 - `@param` text Raw paragraph text.
 - `@returns` Sentence strings in document order, whitespace-trimmed.
 
@@ -99,6 +123,7 @@ Callers iterate items in traversal order sharing one `seen` map; the
 same map/count convention is mirrored in the build scripts
 (generate-sitemap.js + build-locale-pages.mjs) so emitted file names,
 sitemap <loc>s and runtime resolution agree.
+
 - `@param` seen Per-project base-slug → assigned-count map (mutated).
 - `@param` label The item's caption.
 - `@returns` The item's unique deep-link slug ('' when unslugifiable).

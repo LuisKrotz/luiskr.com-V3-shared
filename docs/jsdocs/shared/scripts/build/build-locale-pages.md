@@ -2,9 +2,9 @@
 
 Emits per-locale, per-route static index.html files into
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\build\build-locale-pages.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\build-locale-pages.mjs`       |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -81,6 +81,7 @@ libuv threadpool at the end of the fan-out.
 ### `localize`
 
 Rewrites the English shell into a localized document.
+
 - `@param` {string} html - post-loader dist/index.html source
 - `@param` {object} o
 - `@param` {string} o.bcpLang - BCP-47 tag for <html lang> + og:locale alt
@@ -113,6 +114,7 @@ lazy <img>/<video> must carry explicit dims or Lighthouse flags the
 bare tag and the pre-load box collapses to 0x0 (CLS). Missing source
 metadata falls back to the runtime's own GENERIC_DIMENSIONS defaults
 (the same 800×450 attr box <media-figure> declares when `size` is absent).
+
 - `@param` {number} [w] - intrinsic width when known
 - `@param` {number} [h] - intrinsic height when known
 
@@ -121,6 +123,7 @@ metadata falls back to the runtime's own GENERIC_DIMENSIONS defaults
 Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
 or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
 are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
+
 - `@param` {Buffer} buf - head bytes of the image
 
 ### `liveTranslations`
@@ -149,6 +152,7 @@ Generates all localized pages under `distDir`. When `template` is omitted
 the post-loader dist/index.html is read from disk; when provided (the
 build orchestrator's in-memory copy) the localized root document is
 returned so the caller can run its own compress/SW-stamp pass.
+
 - `@param` {string} distDir - absolute dist path
 - `@param` {string} [template] - shell HTML; defaults to dist/index.html on disk
 - `@returns` {{html: string, written: number, locales: number}} localized root html + counts
@@ -160,7 +164,7 @@ Per-locale lookup with English fallback (mirrors runtime appText).
 ### `loaderCopyFor`
 
 Per-locale APP.loader copy for the statically-emitted intro-loader
- veil — title + first stage line (mirrors runtime loaderCopy).
+veil — title + first stage line (mirrors runtime loaderCopy).
 
 ### `firstPara`
 
@@ -208,8 +212,8 @@ the caption links to the same source as a first-class crawl target.
 ### `cardTile`
 
 One portfolio card as crawlable markup — cover figure, title, and
- the description the app reveals on hover/expand. Reader mode and
- crawlers cannot trigger the hover, so the desc is emitted inline.
+the description the app reveals on hover/expand. Reader mode and
+crawlers cannot trigger the hover, so the desc is emitted inline.
 
 ### `relatedContent`
 
@@ -220,6 +224,7 @@ image/description join table) via normalized link/image/label
 matching. Card descriptions ride along even though the app only
 reveals them on hover — reader mode can't hover, so the content
 must already be in the emitted markup.
+
 - `@param` {string} loc - locale code
 
 ### `homeContent`
@@ -245,9 +250,9 @@ Experience page content — title + every authored label/copy leaf.
 ### `animationsContent`
 
 Animations-reference hub — title + intro + every animation record's
- alt/longdesc as a definition list. The static mirror of the runtime
- <view-animations> listing: crawlers, AI agents and reader mode read the
- same components.animations records without running JavaScript.
+alt/longdesc as a definition list. The static mirror of the runtime
+<view-animations> listing: crawlers, AI agents and reader mode read the
+same components.animations records without running JavaScript.
 
 ### `readStarBody`
 
@@ -257,9 +262,17 @@ Star-field body dossier JSON — locale file with English fallback.
 
 Star-field body page — dossier text, facts table, credited media.
 
+### `STAR_KIND_ORDER`
+
+Star-field body kinds in index order — voyage-from-home ordering;
+any kind absent here still emits, appended after the ordered ones.
+
 ### `starIndexContent`
 
-Star-field index — description + the full localized body catalog.
+Star-field index — description plus the full localized body catalog
+grouped by kind: every object is a real <h3> heading with a link to
+its dossier page and its localized tagline, so the whole chart is
+heading-navigable and indexable without JS.
 
 ### `pageNameFromTitle`
 
@@ -303,17 +316,18 @@ entries declared in `STATIC_REWRITES`/`SPA_REWRITES`.
       addRedirect(`/${loc}/portfolio/${alias}`, `/${loc}/portfolio/${canonical}`)
       addRedirect(`/${loc}/portfolio/${alias}/**`, `/${loc}/portfolio/${canonical}/:splat`)
     }
-  }
 
-  // English legacy legal segments → canonical English slugs.
-  addRedirect('/privacy', `/${enSlugs.privacy}`)
-  addRedirect('/terms', `/${enSlugs.terms}`)
+}
 
-  // `/space-playground` → the locale's earthPlayground slug (en included).
-  addRedirect('/space-playground', `/${enSlugs.earthPlayground}`)
+// English legacy legal segments → canonical English slugs.
+addRedirect('/privacy', `/${enSlugs.privacy}`)
+addRedirect('/terms', `/${enSlugs.terms}`)
 
-  for (const loc of VALID_LANGS) {
-    if (loc === 'en') continue
+// `/space-playground` → the locale's earthPlayground slug (en included).
+addRedirect('/space-playground', `/${enSlugs.earthPlayground}`)
+
+for (const loc of VALID_LANGS) {
+if (loc === 'en') continue
 
     const slugs = LANG_SLUGS[loc] || {}
 
@@ -351,11 +365,12 @@ entries declared in `STATIC_REWRITES`/`SPA_REWRITES`.
     // the unprefixed route, so it redirects rather than rendering.
     addRedirect(`/${loc}/docs`, '/docs')
     addRedirect(`/${loc}/docs/**`, '/docs/:splat')
-  }
 
-  cfg.hosting.redirects = redirects
+}
 
-  withFsRetry(() => fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`))
+cfg.hosting.redirects = redirects
+
+withFsRetry(() => fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`))
 }
 
 /** Rewrites that sit before the locale table — meta files moved into

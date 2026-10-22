@@ -1,8 +1,8 @@
 # `cms\deploy-info\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms\deploy-info\types.ts` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\deploy-info\types.ts`                  |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
@@ -20,9 +20,10 @@ URL with its category scores (performance, a11y, best-practices, SEO).
 
 ### (module scope)
 
-Shape of the Jest coverage summary consumed by the Deploy Info tab —
+Shape of the Jest coverage summary consumed by the Build tab —
 `total` holds per-metric {covered,total,pct} aggregates (statements, branches,
-functions, lines).
+functions, lines); `modules` carries the same per-metric shape keyed by
+module workspace name so the tab can show each module's coverage.
 
 ### (module scope)
 
@@ -75,5 +76,5 @@ heaviest emitted chunks overall.
 
 ### (module scope)
 
-Tri-state of the Deploy Info fetch: still `loading`, the bundle
+Tri-state of the Build tab fetch: still `loading`, the bundle
 is `missing` (no deploy-info/ in this build), or the index parsed `ready`.

@@ -2,7 +2,13 @@
 
 Punctuation, unit and single-character string tokens —
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\strings\chars.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\strings\chars.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
+
+## Members
+
+### `ARROW_KEYS`
+
+Keycap glyph rows for shortcut documentation (arrows + Escape).

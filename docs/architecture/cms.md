@@ -184,9 +184,11 @@ All CMS editors render through JSX (`h()`/`CMS_TAGS`) — `CmsLangEditor` and
 `style-governance.test.js` scans `core/sass/**` only, so CMS-SCSS violations
 are unenforced until the scan is widened.
 
-## Deploy Info tab
+## Build tab
 
 `CmsDeployInfo` renders `dist/deploy-info/` (written by
-`scripts/build/deploy-info.mjs`): latest Lighthouse CI scores per URL and Jest
-coverage totals. Auth-gated like the rest of the CMS; shows an empty-state
-hint when no bundle exists yet.
+`scripts/build/deploy-info.mjs`): the last-build manifest (timestamp, commit,
+bundled report inventory), latest Lighthouse CI scores per URL, Jest coverage
+totals + per-module rollup, bundle stats, axe/IBM accessibility scans,
+dependency scan, and the console-usage scan. Auth-gated like the rest of the
+CMS; shows an empty-state hint when no bundle exists yet.

@@ -217,4 +217,4 @@ dist/deploy-info/coverage-summary.json    Jest coverage totals (yarn test:covera
 `.lighthouseci/` is pruned to the last representative run's artifacts —
 older `lhr-*` reports are discarded. The bundle ships inside `dist`, so the
 deployed site serves it at `/deploy-info/`; it is surfaced in the CMS
-Deploy Info tab (auth-gated).
+Build tab (auth-gated).
