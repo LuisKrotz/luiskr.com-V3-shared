@@ -18,6 +18,7 @@ import { flagTexture } from '@core/utils/canvas/widgets/flag/texture.js'
 import { FlagRenderer } from '@core/utils/canvas/widgets/flag/renderer.js'
 import { gpuAccel } from '@core/utils/gpu/gpu-accel.js'
 import { tokenToHtml, renderWordHtml } from '@website/components/media/draw-text/render.js'
+import { A11Y_CLASSES } from '@core/tokens/classes/a11y.js'
 import { bootstrapEarth } from '@earth/earth/setup/bootstrap.js'
 import { createEarthState } from '@earth/earth/runtime/state.js'
 import router from '@core/router/router.js'
@@ -84,22 +85,24 @@ describe('reset-free coverage tails', () => {
     // tag token with unknown chunk type → chunk EMPTY fallthrough, no wrapper
     expect(tokenToHtml({ type: CSS_STRINGS.TOKEN_TAG, chunks: [{ type: 'bogus' }] }, rw)).toBe('')
 
-    // <a> tag without inner → inner||'' arm inside the aria-label builder
+    // <a> tag without inner → inner||'' arm feeding an empty sr-only-alpha twin
     expect(
       tokenToHtml({ type: CSS_STRINGS.TOKEN_TAG, tag: 'a', attrStr: ' href="/x"' }, rw)
-    ).toContain('aria-label')
+    ).toContain(A11Y_CLASSES.SR_ONLY_ALPHA)
 
-    // <a> tag whose attrStr already carries aria-label → skip-injection arm
+    // <a> tag whose attrStr carries aria-label → the label is stripped in
+    // favour of the accessible twin so name-from-content stays exact
     const withLabel = tokenToHtml(
       { type: CSS_STRINGS.TOKEN_TAG, tag: 'a', attrStr: ' aria-label="y"' },
       rw
     )
 
-    expect(withLabel.match(/aria-label/g)).toHaveLength(1)
+    expect(withLabel).not.toContain('aria-label')
+    expect(withLabel).toContain(A11Y_CLASSES.SR_ONLY_ALPHA)
 
     // <a> tag with no attrStr → attrStr || EMPTY arm inside the label check
     expect(tokenToHtml({ type: CSS_STRINGS.TOKEN_TAG, tag: 'a', inner: 'hi' }, rw)).toContain(
-      'aria-label'
+      A11Y_CLASSES.SR_ONLY_ALPHA
     )
 
     // renderWordHtml called bare → chars=[] default-param arm

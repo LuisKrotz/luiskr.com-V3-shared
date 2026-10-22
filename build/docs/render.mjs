@@ -88,7 +88,15 @@ const renderMarkdown = (text) => {
     .replace(/\son\w+='[^']*'/giu, '')
     .replace(/\son\w+=[^\s>]+/giu, '')
 
-  const lazy = safe.replace(/<img\s/gu, '<img loading="lazy" ')
+  // Doc text mentions like `<img src>` (prose — no src="…" URL) are not
+  // real images: escaped so they render as text instead of becoming live
+  // dimensionless lazy <img> elements (the devtools CLS flag + a stray
+  // document-URL fetch). Real images get the lazy attribute instead.
+  const lazy = safe.replace(/<img\b[^>]*>/giu, (tag) => {
+    if (!/\bsrc\s*=\s*["']/u.test(tag)) return tag.replace(/^</u, '&lt;').replace(/>$/u, '&gt;')
+
+    return /\bloading\s*=/u.test(tag) ? tag : tag.replace(/^<img\s/u, '<img loading="lazy" ')
+  })
 
   // ```mermaid fences → diagram placeholder divs; the viewer lazy-loads
   // mermaid and renders each block into a themed SVG (the GitHub flow).

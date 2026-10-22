@@ -509,7 +509,7 @@ describe('SEO route parity', () => {
       const out = localize(shell(prior), args)
 
       expect(out).toContain(
-        '<div id="app"><article class="reader-content"><main><h1>Privacy Policy</h1></main></article></div>'
+        '<div id="app"><article class="reader-content" role="region" aria-label="Static page copy" aria-hidden="true" inert><div><h1>Privacy Policy</h1></div></article></div>'
       )
       expect(out).not.toContain('boot-veil')
       expect(out).not.toContain('Stale')
