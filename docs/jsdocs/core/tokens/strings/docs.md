@@ -144,6 +144,12 @@ slow backdrop motion — autorotate deg/frame-ish + node pulse.
 Speeds run far under OrbitControls' default (2.0) so the graph
 reads as a calm ambient layer, not a spinner.
 
+### `INDEX_CHUNK`
+
+semantic-index streaming — elements appended per idle slice (~a few
+ms each, far under a frame budget), the rIC starvation bound per
+slice, and the setTimeout fallback delay where rIC is absent
+
 ### `SCENE_DIR_RADIUS`
 
 node sphere radii (chart units) — sized to read at the mid-zoom

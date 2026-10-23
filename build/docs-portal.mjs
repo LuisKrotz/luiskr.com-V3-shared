@@ -1,7 +1,8 @@
 /**
  * @file docs-portal.mjs
  * @description Docs portal pipeline plugin — `virtual:docs-manifest` carries
- * the scanned docs/reports/coverage/src tree; each publishable file is also
+ * the scanned docs/reports/coverage/src tree as compact interned tuples
+ * (see docs/encode.mjs); each publishable file is also
  * emitted as a `docs-content/<root>/<path>.json` payload (rendered HTML +
  * meta) fetched lazily by the view. The dev server answers the same URLs
  * through middleware, so `experiments/docs` runs standalone with the same
@@ -10,6 +11,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { scanManifest, resolveFileId, MEDIA_INLINE_LIMIT } from './docs/scan.mjs'
+import { encodeManifest } from './docs/encode.mjs'
 import { renderFile } from './docs/render.mjs'
 import { redactSource } from './docs/redact.mjs'
 
@@ -114,7 +116,7 @@ export const docsPortalPlugin = ({ root, emitAssets = true }) => {
     load(id) {
       if (id !== '\0' + manifestId) return null
 
-      return `export default ${JSON.stringify(scanManifest(root))}`
+      return `export default ${JSON.stringify(encodeManifest(scanManifest(root)))}`
     },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {

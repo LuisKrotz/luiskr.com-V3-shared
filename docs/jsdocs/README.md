@@ -470,6 +470,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`gl-lifecycle-tails-quad-widget-purge-restore.test.js`](core\tests\coverage\canvas\infra/gl-lifecycle-tails-quad-widget-purge-restore.test.md)           | Split from gl-lifecycle-tails.test.js — covers the "quad-widget purge/restore" describe.        |
 | [`gl-lifecycle-tails-shared-renderer-purge-restore.test.js`](core\tests\coverage\canvas\infra/gl-lifecycle-tails-shared-renderer-purge-restore.test.md)   | Split from gl-lifecycle-tails.test.js — covers the "shared-renderer purge/restore" describe.    |
 | [`gl-lifecycle-tails-watchcontextloss-releasequadgl.test.js`](core\tests\coverage\canvas\infra/gl-lifecycle-tails-watchcontextloss-releasequadgl.test.md) | Split from gl-lifecycle-tails.test.js — covers the "watchContextLoss / releaseQuadGL" describe. |
+| [`webgl-mode-tails.test.js`](core\tests\coverage\canvas\infra/webgl-mode-tails.test.md)                                                                   | Coverage tails for utils/canvas/webgl-mode.ts — the                                             |
 | [`webgl-pool-observer-repeat-tails.test.js`](core\tests\coverage\canvas\infra/webgl-pool-observer-repeat-tails.test.md)                                   | Coverage tails for utils/canvas/webgl-pool.ts — the                                             |
 | [`webgl-pool-tails-2.test.js`](core\tests\coverage\canvas\infra/webgl-pool-tails-2.test.md)                                                               | Split from coverage-tails-4.test.js — covers the "webgl-pool tails 2" describe.                 |
 | [`webgl-pool-tails.test.js`](core\tests\coverage\canvas\infra/webgl-pool-tails.test.md)                                                                   | Split from coverage-tails-2.test.js — covers the "webgl-pool tails" describe.                   |
@@ -498,6 +499,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`burger-button-tails.test.js`](core\tests\coverage\canvas\widgets/burger-button-tails.test.md)                                                                                                 | Split from coverage-tails-2.test.js — covers the "burger-button tails" describe.                                |
 | [`burger-liquid-tails.test.js`](core\tests\coverage\canvas\widgets/burger-liquid-tails.test.md)                                                                                                 | Coverage tail for the liquid burger icon — the                                                                  |
 | [`burger-tails-2.test.js`](core\tests\coverage\canvas\widgets/burger-tails-2.test.md)                                                                                                           | Split from coverage-tails-5.test.js — covers the "burger tails 2" describe.                                     |
+| [`carousel-controls-tails.test.js`](core\tests\coverage\canvas\widgets/carousel-controls-tails.test.md)                                                                                         | Coverage tail for utils/canvas/widgets/carousel-controls.ts                                                     |
 | [`close-button-init-tails.test.js`](core\tests\coverage\canvas\widgets/close-button-init-tails.test.md)                                                                                         | Coverage tail for close-button/init.ts — the exported                                                           |
 | [`close-button-render-tails.test.js`](core\tests\coverage\canvas\widgets/close-button-render-tails.test.md)                                                                                     | Coverage tail for close-button/render.ts — the                                                                  |
 | [`close-button-wasm-tails.test.js`](core\tests\coverage\canvas\widgets/close-button-wasm-tails.test.md)                                                                                         | Coverage tail for the WebGPU/wasm close button path —                                                           |
@@ -704,6 +706,7 @@ _Shared primitives every surface builds on — no direct UI._
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | [`local-media-cache-tails-2.test.js`](core\tests\coverage\utils\media/local-media-cache-tails-2.test.md) | Split from coverage-tails-4.test.js — covers the "local-media-cache tails 2" describe. |
 | [`local-media-cache-tails.test.js`](core\tests\coverage\utils\media/local-media-cache-tails.test.md)     | Split from coverage-tails-2.test.js — covers the "local-media-cache tails" describe.   |
+| [`media-policy-tails.test.js`](core\tests\coverage\utils\media/media-policy-tails.test.md)               | Coverage for core/utils/media/policy.ts — the connection- and                          |
 
 ## Core engine
 
@@ -905,6 +908,7 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                                                                                   | What it does                                                                     |
 | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [`frame.test.js`](core\tests\utils\motion/frame.test.md)                                                               | Shared frame scheduler (`utils/motion/frame.ts`) — pump                          |
 | [`scroll-and-predict-local-media-cache.test.js`](core\tests\utils\motion/scroll-and-predict-local-media-cache.test.md) | Split from scroll-and-predict.test.js — covers the "local-media-cache" describe. |
 | [`scroll-and-predict-npu-predict.test.js`](core\tests\utils\motion/scroll-and-predict-npu-predict.test.md)             | Split from scroll-and-predict.test.js — covers the "npu-predict" describe.       |
 | [`scroll-and-predict-route-warmer.test.js`](core\tests\utils\motion/scroll-and-predict-route-warmer.test.md)           | Split from scroll-and-predict.test.js — covers the "route-warmer" describe.      |
@@ -1099,6 +1103,7 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                   | What it does                                               |
 | ------------------------------------------------------ | ---------------------------------------------------------- |
+| [`budget.ts`](core\tokens\media/budget.md)             | Media spend-tier vocabulary — the values `mediaBudget()`   |
 | [`cache.ts`](core\tokens\media/cache.md)               | IndexedDB media disk-cache + network cache-mode tokens.    |
 | [`dimensions.ts`](core\tokens\media/dimensions.md)     | Canonical pixel dimensions + media timing tokens split per |
 | [`flag-texture.ts`](core\tokens\media/flag-texture.md) | Shared flag renderer texture-atlas size (power of two).    |
@@ -1409,6 +1414,7 @@ _Shared primitives every surface builds on — no direct UI._
 | --------------------------------------------------------------- | ----------------------------------------------------------- |
 | [`local-media-cache.ts`](core\utils\media/local-media-cache.md) | Three-tier media cache: in-memory Map (object URLs) →       |
 | [`manifest.ts`](core\utils\media/manifest.md)                   | Runtime knowledge of which CDN objects exist, backed by the |
+| [`policy.ts`](core\utils\media/policy.md)                       | Connection- and box-aware media budgets                     |
 
 ## Core engine
 
@@ -1427,6 +1433,7 @@ _Shared primitives every surface builds on — no direct UI._
 | File                                                     | What it does                                                        |
 | -------------------------------------------------------- | ------------------------------------------------------------------- |
 | [`bezier.ts`](core\utils\motion/bezier.md)               | Cubic-bezier easing evaluator — the CSS `cubic-bezier(x1,y1,x2,y2)` |
+| [`frame.ts`](core\utils\motion/frame.md)                 | Shared frame scheduler — one requestAnimationFrame pump             |
 | [`genie.ts`](core\utils\motion/genie.md)                 | "Genie" dialog transition shared by the preferences modal and       |
 | [`route-warmer.ts`](core\utils\motion/route-warmer.md)   | Post-load route-chunk warming.                                      |
 | [`scroll-spring.ts`](core\utils\motion/scroll-spring.md) | Scroll-position chase spring — the shared driver both               |
@@ -1528,6 +1535,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`docs-tails-loader.test.js`](experiments\docs\tests\coverage/docs-tails-loader.test.md)                                       | Coverage tails for docs/loader.ts + the Docs.tsx loader                         |
 | [`docs-tails-onmounted-empty-docs-path.test.js`](experiments\docs\tests\coverage/docs-tails-onmounted-empty-docs-path.test.md) | Coverage tail for experiments/docs/Docs.tsx — onMounted's                       |
 | [`mermaid.test.js`](experiments\docs\tests\coverage/mermaid.test.md)                                                           | Coverage tails for docs/mermaid.ts — lazy wasm diagram                          |
+| [`render-index-tails.test.js`](experiments\docs\tests\coverage/render-index-tails.test.md)                                     | Coverage tail for docs render.tsx — the index-streaming                         |
 
 ## Entry points
 
@@ -1535,6 +1543,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                                                           | What it does                                                                               |
 | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| [`docs-pipeline-encodemanifest.test.js`](experiments\docs\tests\pipeline/docs-pipeline-encodemanifest.test.md)                                 | Covers shared/build/docs/encode.mjs — the compaction pass                                  |
 | [`docs-pipeline-redactsource-shouldexcludefile.test.js`](experiments\docs\tests\pipeline/docs-pipeline-redactsource-shouldexcludefile.test.md) | Split from docs-pipeline.test.js — covers the "redactSource / shouldExcludeFile" describe. |
 | [`docs-pipeline-renderfile.test.js`](experiments\docs\tests\pipeline/docs-pipeline-renderfile.test.md)                                         | Split from docs-pipeline.test.js — covers the "renderFile" describe.                       |
 | [`docs-pipeline-resolvefileid.test.js`](experiments\docs\tests\pipeline/docs-pipeline-resolvefileid.test.md)                                   | Split from docs-pipeline.test.js — covers the "resolveFileId" describe.                    |
@@ -1889,11 +1898,12 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                        | What it does                                          |
-| ------------------------------------------- | ----------------------------------------------------- |
-| [`redact.mjs`](shared\build\docs/redact.md) | Secret scrubbing for the public source-code viewer.   |
-| [`render.mjs`](shared\build\docs/render.md) | Build-time file → HTML renderers for the docs portal. |
-| [`scan.mjs`](shared\build\docs/scan.md)     | Filesystem → manifest tree for the docs portal.       |
+| File                                        | What it does                                                |
+| ------------------------------------------- | ----------------------------------------------------------- |
+| [`encode.mjs`](shared\build\docs/encode.md) | Manifest → compact wire tuples for `virtual:docs-manifest`. |
+| [`redact.mjs`](shared\build\docs/redact.md) | Secret scrubbing for the public source-code viewer.         |
+| [`render.mjs`](shared\build\docs/render.md) | Build-time file → HTML renderers for the docs portal.       |
+| [`scan.mjs`](shared\build\docs/scan.md)     | Filesystem → manifest tree for the docs portal.             |
 
 ## Entry points
 
@@ -2749,6 +2759,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`draw-text-gpu-tails.test.js`](website\tests\coverage\components\media/draw-text-gpu-tails.test.md)                               | Coverage tail for components/media/draw-text/gpu.ts —                               |
 | [`draw-text-nested-tags.test.js`](website\tests\coverage\components\media/draw-text-nested-tags.test.md)                           | —                                                                                   |
 | [`draw-text-ordered-tails.test.js`](website\tests\coverage\components\media/draw-text-ordered-tails.test.md)                       | Coverage tail for the ordered-reveal session in                                     |
+| [`draw-text-render-modes-tails.test.js`](website\tests\coverage\components\media/draw-text-render-modes-tails.test.md)             | Coverage tails for the draw-text render modes — the 'plain'                         |
 | [`draw-text-render-tails.test.js`](website\tests\coverage\components\media/draw-text-render-tails.test.md)                         | Split from coverage-tails-7.test.js — covers the "draw-text render tails" describe. |
 | [`draw-text-traversal-tails.test.js`](website\tests\coverage\components\media/draw-text-traversal-tails.test.md)                   | Coverage tail for components/media/draw-text/traversal.ts —                         |
 | [`expanded-close-tails.test.js`](website\tests\coverage\components\media/expanded-close-tails.test.md)                             | Coverage tails for components/media/expanded/close.ts —                             |

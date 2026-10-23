@@ -2,9 +2,9 @@
 
 WebGL skeleton/shimmer layer for loading states: a shared
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\loaders\skeleton-webgl.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\skeleton-webgl.ts`         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -88,9 +88,9 @@ unavailable: the canvas is simply never attached.
 
 ### (module scope)
 
-- `@param` {HTMLElement} host   The custom element (positioned via :host(.has-skeleton-layer))
-- `@param` {ShadowRoot} root    Where the canvas lives (survives content re-renders)
-- `@param` {Element} content    The content wrapper that holds the placeholders
+- `@param` {HTMLElement} host The custom element (positioned via :host(.has-skeleton-layer))
+- `@param` {ShadowRoot} root Where the canvas lives (survives content re-renders)
+- `@param` {Element} content The content wrapper that holds the placeholders
 
 ### `root`
 
@@ -132,6 +132,10 @@ Last wasm-painted `t` — the crate accumulates its own clock via
 ### `animId`
 
 rAF handle for the shimmer loop — null while paused/destroyed.
+
+### `_frameTick`
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
 
 ### `rects`
 
@@ -247,6 +251,7 @@ layer destroys itself; the CSS shimmer stays as the fallback.
 ### `_parseCssColor`
 
 Parses rgb()/hex into normalized 0–1 floats for shader uniforms.
+
 - `@param` str Raw CSS color string.
 - `@returns` [r,g,b,a] floats, or null on unparsable input.
 
@@ -276,6 +281,7 @@ rAF callback — animates the shimmer until resolved (skeleton/loop.ts).
 
 Renders one frame via the shared renderer — delegates the actual GL
 draw + 2D blit to skeleton/loop.ts.
+
 - `@param` t Animation clock in seconds.
 - `@param` resolve Resolve-out progress 0–1.
 
@@ -297,6 +303,7 @@ the layer after the host detaches.
 Keeps a component's skeleton layer in sync with its rendered content.
 Call from onUpdated()/onMounted(): creates the layer while skeleton nodes
 exist, re-measures after every render, resolves it once they are gone.
+
 - `@param` component The host component whose content is being watched.
 
 ### `destroySkeletonLayer`
@@ -304,4 +311,5 @@ exist, re-measures after every render, resolves it once they are gone.
 Component-unmount teardown — destroys the layer immediately (no
 resolve-out: the host is going away, so a fade would never be seen) and
 clears the component's reference.
+
 - `@param` component The host component being unmounted.

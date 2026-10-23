@@ -2,21 +2,36 @@
 
 WebGL control button for the awards carousel: a circular
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\widgets\carousel-controls.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\carousel-controls.ts`      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
 
+### `HOVER_FLOOR`
+
+Sleep threshold for the hover channel — below the paint gate's own
+`hoverAlpha > 0.01` cutoff (alpha = level × 1.2), so a sleeping loop
+is pixel-identical to a running one.
+
+### `CLICK_WAVE_S`
+
+Click shockwave window in seconds — matches the painter's `clickElapsed < 0.45` gate.
+
 ### `CarouselArrowWebGL`
 
 WebGL Carousel Arrow Controls with Circular Loading Progress & Gestural Microinteractions
+
 - Prev button: Swipe-left gesture (tablet card outline + hand pointing left + arrow) with expanding kinetic ripples
 - Next button: Swipe-right gesture (tablet card outline + hand pointing right + forward kinetic arrow burst)
 - Circular WebGL loading ring with glowing leading particle head synchronized to autoplay timer
 - Normalized coordinate space [-1.0 .. 1.0] scaling to all screen sizes without clipping
 - Full Canvas 2D fallback
+
+### `_frameTick`
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
 
 ### `init`
 

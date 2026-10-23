@@ -2,9 +2,9 @@
 
 Single choke point for WebGL availability. Every widget asks
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\webgl-mode.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\webgl-mode.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -31,3 +31,16 @@ reduced motion makes the next interaction-driven retry eligible again.
 Returns null in fallback mode without touching the canvas at all — a
 canvas that failed `getContext('webgl')` once can never hand it out
 again, so probing must be skipped entirely, not faked.
+
+### `webglContextDead`
+
+Whether `canvas` holds a context binding that is lost and could NOT be
+revived — the signature of a real GPU eviction. Distinct from an
+intentional `loseContext()` (which `webglContext()` restores on demand,
+so this probe resolves false) and from a WebGL-less device (getContext
+returns null — also false, since a canvas swap would fail identically).
+True means the element's binding is permanently dead and the caller
+should replace the canvas rather than retry it.
+
+- `@param` canvas The canvas whose bound context to probe.
+- `@returns` True when the bound context is unrestorably lost.

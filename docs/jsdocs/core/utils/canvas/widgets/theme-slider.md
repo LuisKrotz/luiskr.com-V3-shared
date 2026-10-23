@@ -2,9 +2,9 @@
 
 WebGL three-position theme slider (light / system / dark)
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\widgets\theme-slider.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\theme-slider.ts`           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -31,6 +31,10 @@ Last animate() timestamp — the spring's dt source.
 Cached canvas rect for the active drag — captured once at
 pointerdown so the high-rate pointermove path performs zero layout
 reads (the rect cannot change mid-gesture; cleared on pointerup).
+
+### `_frameTick`
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
 
 ### `_wasm`
 
@@ -102,6 +106,7 @@ Moves the knob to the given theme's stop (spring-animated).
 
 Applies prefers-reduced-motion: swaps the animation loop for one
 static frame render, or restarts the loop when motion is re-allowed.
+
 - `@param` {boolean} isReduced
 
 ### `_renderStatic`

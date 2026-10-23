@@ -45,7 +45,7 @@ globalThis.localStorage = win.localStorage
 globalThis.sessionStorage = win.sessionStorage
 globalThis.DOMParser = win.DOMParser
 globalThis.requestAnimationFrame = (cb) => {
-  const t = setTimeout(cb, 16)
+  const t = setTimeout(() => cb(performance.now()), 16)
   if (t && typeof t.unref === TYPE_STRINGS.FUNCTION) t.unref()
   return t
 }

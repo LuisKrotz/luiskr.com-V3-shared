@@ -107,24 +107,27 @@ declare module 'virtual:i18n-boot-index' {
 }
 
 declare module 'virtual:docs-manifest' {
-  const manifest: {
+  /**
+   * Compact manifest node tuple emitted by shared/build/docs/encode.mjs —
+   * [nameIdx, mtimeMs | children, relIdx?]. Position and arity carry the
+   * schema: element 1 is a file's mtime (ms epoch) or a dir's child
+   * tuples; the optional trailing relIdx is the strings-table index of
+   * the node's real rel path for case-merged subtrees, where positional
+   * derivation would produce the wrong path/id.
+   */
+  export type DocsWireNode = [number, number | DocsWireNode[], number?]
+
+  /** [rootIdx, labelIdx, kindIdx, children] — indexes into strings[]. */
+  export type DocsWireRoot = [number, number, number, DocsWireNode[]]
+
+  /** Compact manifest: every distinct string interned once in strings[]. */
+  export interface DocsWireManifest {
     generated: string
-    roots: Array<{
-      root: string
-      label: string
-      children: Array<{
-        type: 'dir' | 'file'
-        name: string
-        path: string
-        children?: unknown[]
-        id?: string
-        format?: string
-        size?: number
-        mtime?: string
-        embedded?: boolean
-      }>
-    }>
+    strings: string[]
+    roots: DocsWireRoot[]
   }
+
+  const manifest: DocsWireManifest
   export default manifest
 }
 
