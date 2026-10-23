@@ -88,6 +88,12 @@ In-place skeleton label while a mermaid diagram renders.
 Visible chip captioning the backdrop scene so the interactive
 architecture map is obvious to a first-time viewer.
 
+### `SCENE_ATTR_ALPHA`
+
+Instanced-attribute names on the scene's node geometries — the
+names are part of the patched GLSL program (attribute decls read
+them too), so a rename must land in both streams at once.
+
 ### `INDEX_TITLE`
 
 sr-only heading + landmark names for the complete document index —
@@ -133,6 +139,13 @@ world-space sprite size + lift above the node sphere
 
 zoom reveal: labels fade in when controls distance drops under
 (LABEL_REVEAL_BASE − depth·LABEL_DEPTH_STEP), over LABEL_FADE px
+
+### `SCENE_LABEL_MAX_DEPTH`
+
+deepest ring that gets a sprite label — each label is a canvas
+texture (~85kB VRAM), so an unlabeled deep tier keeps the scene
+inside low-power GPU memory; deep dirs stay navigable via the
+treeview and the dots themselves.
 
 ### `SCENE_BASE_RADIUS`
 

@@ -68,10 +68,14 @@ export function mountAppShell(c: AppRoot): void {
   syncCyrillicFont(store.getters.getLang())
   store.subscribe(() => syncCyrillicFont(store.getters.getLang()))
 
-  // Lazy-load heavy global components after first paint
-  import('@website/components/dialogs/PreferencesModal.js')
-  import('@website/components/dialogs/LangDialog.js')
-  import('@website/components/feedback/StatsHud.js')
+  // Lazy-load heavy global components once the main thread is idle —
+  // firing these import()s at boot puts their fetch+eval on the critical
+  // path even though none of them can render before first paint anyway.
+  deferIdle(() => {
+    import('@website/components/dialogs/PreferencesModal.js')
+    import('@website/components/dialogs/LangDialog.js')
+    import('@website/components/feedback/StatsHud.js')
+  })
 
   // Listen to open-preferences-modal from app-nav
   const openPref = () => {
