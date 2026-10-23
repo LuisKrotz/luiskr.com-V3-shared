@@ -52,7 +52,7 @@ The view the memoized index links delegate navigation to.
 
 ### `_indexEl`
 
-The built-once index subtree (all ~3.5k manifest nodes as headings).
+The built-once index subtree (all manifest nodes as heading/link rows).
 
 ### `indexLink`
 
@@ -62,22 +62,55 @@ new-tab friendly) that stays on the SPA router for plain clicks.
 - `@param` node The manifest node to link.
 - `@returns` The anchor element.
 
-### `indexNodes`
+### (module scope)
 
-Recursive index nodes — every manifest node becomes a heading wrapping
-its canonical link. Heading level is 3 + depth capped at h6, so the
-ladder mirrors the tree (bucket h3 → h4 → h5 → h6 for deep branches).
+Recursive index entries — dirs yield a heading wrapping their canonical
+link (level 3 + depth capped at h6, so the ladder mirrors the tree:
+bucket h3 → h4 → h5 → h6), files yield the bare anchor. The links land
+in document order directly under the nav: each file's anchor reads as
+belonging to the preceding dir heading, keeping every document reachable
+from both the AX tree and crawlers without a heading per file.
 
 - `@param` nodes The manifest nodes at this depth.
 - `@param` depth 1-based depth below the bucket heading.
-- `@returns` Flat heading list in document order.
+
+### (module scope)
+
+Streams the root buckets + their subtrees — h3 bucket links first, then
+each root's nodes in document order. Generator shape per the
+self-similar-traversal rule; the puller controls pacing.
+
+- `@param` roots The manifest roots.
+
+### `scheduleIndexSlice`
+
+Schedules one index slice in the next idle gap — requestIdleCallback
+with a starvation bound where it exists, a bare setTimeout otherwise.
+The timeout guarantees the tree completes even on a continuously busy
+main thread.
+
+- `@param` cb The slice to run.
+
+### `pumpIndex`
+
+Pulls INDEX_CHUNK elements per slice into the live nav — each slice is
+a few ms of createElement+append, far under a frame budget, and the
+generator's laziness means only the streamed prefix ever exists. Runs
+to completion regardless of view lifetime: the element is memoized
+module-level and re-attaches on the next render.
+
+- `@param` gen The index element stream.
+- `@param` nav The index nav being filled.
 
 ### `docsIndex`
 
 The complete document index — an sr-only nav listing every manifest node
-as a heading link so AT heading navigation and agents can reach all docs
-without unfolding the tree. Built once (manifest is static), re-attached
-on subsequent renders; real DOM so crawlers index it.
+(dirs as heading links, files as bare anchors) so AT heading navigation
+gets the tree's shape and link navigation/crawlers/agents reach all docs
+without unfolding the tree. The nav shell mounts synchronously; the
+~8k-node body streams in over idle slices so first paint and input
+tasks never pay the full attach. Memoized — re-attached on subsequent
+renders; real DOM so crawlers index it.
 
 - `@param` view The host view (links delegate navigation to it).
 - `@returns` The memoized index nav element.

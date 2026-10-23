@@ -2,9 +2,9 @@
 
 WebGL menu icon for the nav burger button: four rounded
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\widgets\burger-button-webgl.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\burger-button-webgl.ts`    |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -43,6 +43,10 @@ bright icon in dark mode.
 
 - `@param` {HTMLCanvasElement} canvas - icon canvas inside the nav burger button
 - `@param` {Function} onClick - optional click handler (the canvas becomes
+
+### `_frameTick`
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
 
 ### `_hover`
 
@@ -96,6 +100,7 @@ cleared buffer blank until the next state change.
 Menu-open driver — the nav calls this on toggle/close so the pooled
 droplet morphs into the close X (and back). With no running loop
 (reduced motion, pre-start) the state snaps and repaints once.
+
 - `@param` open Whether the menu overlay is open.
 
 ### `_setHover`
@@ -116,6 +121,7 @@ Renders one frame at time t (seconds) — shared by the RAF loop and the
 static reduced-motion path. u_dark is re-evaluated per frame from the
 live DOM classes (dark theme OR nav-on-dark over the contact band) so
 the icon recolors instantly on theme/scroll changes with no listener.
+
 - `@param` {number} t - seconds since construction
 
 ### `_loop`

@@ -2,9 +2,9 @@
 
 Network/URL string tokens — token group.
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\strings\net.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\strings\net.ts`                          |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -14,3 +14,7 @@ Network/URL string tokens — token group.
 Frozen net string map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
+
+### `EFFECTIVE_SLOW_2G`
+
+Network Information API effectiveType values (connection quality tiers).

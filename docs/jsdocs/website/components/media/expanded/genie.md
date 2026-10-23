@@ -2,9 +2,9 @@
 
 Expand-modal genie transition — the macOS-style liquid
 
-| | |
-|---|---|
-| **Source** | `src/website\components\media\expanded\genie.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\media\expanded\genie.ts`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -22,6 +22,7 @@ driver force-settles instead of latching.
 ### `frame`
 
 Draws one frame.
+
 - `@param` dt Frame delta seconds.
 - `@param` p Eased funnel progress 0..1 — 0 = the modal sheet, 1 = the
 - `@returns` False on a dead surface.
@@ -109,6 +110,7 @@ the page's `media-figure` elements in document order applying the
 same `mediaSlugSeq` numbering the build/deep-link used, and matches
 the slug trailing the URL. Returns null when no figure matches —
 the caller then falls back to the stored snapshot or the dock point.
+
 - `@param` el The <media-expanded> element (its root scopes the query).
 - `@returns` The matching <media-figure> element, or null.
 
@@ -116,6 +118,7 @@ the caller then falls back to the stored snapshot or the dock point.
 
 The origin figure's live rect — the element resolved by
 `figureForUrl`, measured in viewport CSS px.
+
 - `@param` el The <media-expanded> element.
 - `@returns` The figure's viewport rect, or null.
 
@@ -129,6 +132,7 @@ instead of warping — warping a fullscreen translucent slab read as
 a flat "mono block". Missing/zero-sized → the media item, then the
 content root, then a centered aspect-fitted rect so the field still
 has a valid target.
+
 - `@param` el The <media-expanded> element.
 - `@param` content The modal content root (already resolved upstream).
 - `@returns` The sheet rect in viewport CSS px.
@@ -138,6 +142,7 @@ has a valid target.
 Resolves the origin rect — stored click snapshot first (it survives
 the page pin), then the live figure for deep-link opens, then the
 bottom-center dock point.
+
 - `@param` el The <media-expanded> element.
 - `@param` preferLive True on close — re-measure so a resize while the
 - `@returns` The origin rect in viewport CSS px.
@@ -148,6 +153,7 @@ Removes the overlay + unveils the content — the settle/cancel
 teardown shared by every exit path. The renderer's dispose() removes
 its own canvas; the class sweep catches the dead clone the worker
 route can leave in the DOM slot after a failed transfer.
+
 - `@param` s The session.
 - `@param` el The <media-expanded> element — shadow scope for the sweep.
 
@@ -164,6 +170,7 @@ with a finite step instead of a lurch; MAX_MS force-settles
 so a wedged rAF can never latch the overlay. On settle the overlay
 drops and the content unveils in the same task, then `done` runs
 (open: no-op; close: the modal teardown).
+
 - `@param` el The <media-expanded> element.
 - `@param` s The session.
 
@@ -185,6 +192,7 @@ its instant/CSS fallback. Once true is returned the session owns the
 outcome: a backend that dies before the first frame resolves to
 `done` (open: instant unveil; close: instant teardown) rather than
 latching.
+
 - `@param` el The <media-expanded> element.
 - `@param` opening True for open (origin → modal), false for close.
 - `@param` done Settle callback — open: no-op; close: modal teardown.
@@ -196,6 +204,7 @@ The first-frame measure+mount phase — runs inside `tick`'s rAF task
 where the transition's rect/dpr/viewport reads are the task's first
 reads. Measures the field, creates the overlay canvas, picks the
 backend and attaches it to the session.
+
 - `@param` el The <media-expanded> element.
 - `@param` s The live session (opening flag carried on it).
 
@@ -206,26 +215,37 @@ progressed, so the warp picks up seamlessly. A dead/null backend
 resolves the run to `done` (instant unveil/teardown) rather than
 latching the overlay. Each backend owns its canvas and removes it
 inside dispose().
+
 - `@param` renderer The backend, or null when none could initialize.
 
 ### `makeCanvas`
 
-The overlay canvas factory — fullscreen, device-px capped, and
-already in the shadow (the worker route needs it in the DOM before
-transferToOffscreen).
+The overlay canvas factory — fullscreen, device-px capped. The
+`attach` flag controls the shadow append: the GPU/worker route
+needs the canvas in the DOM before transferToOffscreen, while the
+2D route builds its renderer detached so the ctor's style reads
+can't force a layout against the just-appended canvas — the
+append lands after every read, keeping the task to one flush.
+
+- `@param` attach Whether to append the canvas to the host shadow.
 
 ### `canvas2d`
 
 The universal 2D backend — acquires the context and wraps the
-strip-warp renderer. Null when the canvas refuses a 2D context or
-the renderer construction throws — a hard throw here must never
-latch the veil, so construction is wrapped; on failure the canvas
-is dropped and the session resolves to `done` via attach(null).
+strip-warp renderer. The canvas stays detached through context
+acquisition and renderer construction so the ctor's
+getComputedStyle reads don't force layout against a just-appended
+node; the append lands last (no reads after it, so no flush).
+Null when the canvas refuses a 2D context or the renderer
+construction throws — a hard throw here must never latch the
+veil, so construction is wrapped; on failure the session
+resolves to `done` via attach(null).
 
 ### `startGenieOpen`
 
 Open transition — warps the media from the clicked figure's rect
 into the modal's media box.
+
 - `@param` el The <media-expanded> element.
 - `@param` done Settle callback (the unveil already happened internally).
 - `@returns` False when the transition cannot start — caller falls back.
@@ -234,6 +254,7 @@ into the modal's media box.
 
 Close transition — collapses the media from the modal box back into
 the origin figure.
+
 - `@param` el The <media-expanded> element.
 - `@param` done Settle callback — the modal teardown (URL/dialog/scroll).
 - `@returns` False when the transition cannot start — caller falls back.
@@ -242,4 +263,5 @@ the origin figure.
 
 Cancels a live session — the overlay drops and the content unveils
 immediately; `done` does NOT run (the caller keeps control).
+
 - `@param` el The <media-expanded> element.

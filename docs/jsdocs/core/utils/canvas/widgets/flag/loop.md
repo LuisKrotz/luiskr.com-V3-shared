@@ -2,9 +2,9 @@
 
 Render loop + fallback transitions for FlagWebGL: the
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\widgets\flag\loop.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\flag\loop.ts`              |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -27,4 +27,4 @@ Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 
 ### `animateFlag`
 
-Starts the requestAnimationFrame render loop (skipped under reduced motion).
+Starts the shared-pool render loop (skipped under reduced motion).

@@ -1,8 +1,8 @@
 # `core\utils\canvas\widgets\theme-slider\render.ts`
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\widgets\theme-slider\render.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\theme-slider\render.ts`    |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -15,7 +15,7 @@ visibly apply without animating.
 
 ### `animate`
 
-Starts the requestAnimationFrame render loop (skipped under reduced motion).
+Starts the shared-pool render loop (skipped under reduced motion).
 
 ### `renderWasm`
 

@@ -2,9 +2,9 @@
 
 Fullscreen WebGL background for the nav menu overlay: an
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\loaders\menu-background-webgl.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\menu-background-webgl.ts`  |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -23,6 +23,10 @@ unavailable or the shader fails to compile/link.
 ### `canvas`
 
 - `@param` {HTMLCanvasElement} canvas - fullscreen canvas behind the menu
+
+### `_frameTick`
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
 
 ### `_wasm`
 
