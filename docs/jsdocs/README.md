@@ -498,6 +498,7 @@ _Shared primitives every surface builds on — no direct UI._
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | [`burger-button-tails.test.js`](core\tests\coverage\canvas\widgets/burger-button-tails.test.md)                                                                                                 | Split from coverage-tails-2.test.js — covers the "burger-button tails" describe.                                |
 | [`burger-liquid-tails.test.js`](core\tests\coverage\canvas\widgets/burger-liquid-tails.test.md)                                                                                                 | Coverage tail for the liquid burger icon — the                                                                  |
+| [`burger-settled-throttle-tails.test.js`](core\tests\coverage\canvas\widgets/burger-settled-throttle-tails.test.md)                                                                             | Coverage tail for the burger icon's settled-state throttle —                                                    |
 | [`burger-tails-2.test.js`](core\tests\coverage\canvas\widgets/burger-tails-2.test.md)                                                                                                           | Split from coverage-tails-5.test.js — covers the "burger tails 2" describe.                                     |
 | [`carousel-controls-tails.test.js`](core\tests\coverage\canvas\widgets/carousel-controls-tails.test.md)                                                                                         | Coverage tail for utils/canvas/widgets/carousel-controls.ts                                                     |
 | [`close-button-init-tails.test.js`](core\tests\coverage\canvas\widgets/close-button-init-tails.test.md)                                                                                         | Coverage tail for close-button/init.ts — the exported                                                           |
@@ -2710,6 +2711,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`cookiebanner-banner-space.test.js`](website\tests\coverage\components\feedback/cookiebanner-banner-space.test.md)   | Coverage tail for CookieBanner's --cookie-banner-h                              |
 | [`cookiebanner-tails-test-js.test.js`](website\tests\coverage\components\feedback/cookiebanner-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "CookieBanner tails" describe.   |
 | [`cookiebanner-tails.test.js`](website\tests\coverage\components\feedback/cookiebanner-tails.test.md)                 | Split from coverage-tails-4.test.js — covers the "CookieBanner tails" describe. |
+| [`statshud-engine-feed-tails.test.js`](website\tests\coverage\components\feedback/statshud-engine-feed-tails.test.md) | Coverage tails for StatsHud's conditional statsEngine feed —                    |
 
 ## Entry points
 

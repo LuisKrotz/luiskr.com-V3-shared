@@ -31,6 +31,22 @@ X-spin speed, per second — matches CloseButtonWebGL's 4%/frame at
 
 Timestamp that disables the click shockwave (far past sentinel).
 
+### `CLICK_SHOCKWAVE_S`
+
+Seconds of post-click shockwave the shader animates — the ambient
+throttle must keep every shockwave frame on the fast path.
+
+### `SETTLE_EPSILON`
+
+Convergence epsilon for the eased scalars — below this the residual
+exponential motion is sub-pixel on a 34px icon.
+
+### `SETTLE_GRACE_FRAMES`
+
+Consecutive settled frames before the ambient drift drops to half
+rate — ~0.5s at 60Hz, so a just-landed transition still renders its
+tail at full speed before the throttle engages.
+
 ### `BurgerButtonWebGL`
 
 WebGL liquid menu icon for the burger button.
@@ -74,6 +90,16 @@ Seconds since startTime of the last press — drives the click shockwave.
 ### `_prevT`
 
 Previous frame's t — the approach easings consume dt, not absolutes.
+
+### `_settleStreak`
+
+Consecutive frames with every eased scalar converged and no live
+shockwave — once it clears SETTLE_GRACE_FRAMES the ambient liquid
+drift repaints on alternating frames only.
+
+### `_parity`
+
+Alternating-frame parity used by the settled-state half-rate path.
 
 ### `_initGL`
 

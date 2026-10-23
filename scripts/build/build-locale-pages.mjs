@@ -431,6 +431,14 @@ export function localize(
     .map((a) => `  <link rel="alternate" hreflang="${a.bcp}" href="${a.url}">`)
     .join('\n')
   const inject = [
+    // LCP discovery — the route's hero (project cover / media poster) is
+    // the runtime LCP element, but the SPA mounts it only after the JS
+    // graph evaluates. Preloading at document level decouples the image
+    // fetch from the module chain: the bytes are already in cache when
+    // the media-figure mounts its poster/<img>.
+    ...(image
+      ? [`  <link rel="preload" as="image" href="${esc(image)}" fetchpriority="high">`]
+      : []),
     `  <meta property="og:locale" content="${ogLocale}">`,
     ...alternates
       .filter((a) => a.og !== ogLocale)

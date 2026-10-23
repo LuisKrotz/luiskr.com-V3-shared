@@ -29,6 +29,34 @@ A flattened manifest node with its ring depth and ring angle.
 
 A dir-name sprite with the depth it answers to (zoom-reveal bucket).
 
+### `a`
+
+Last written alpha — opacity writes and visibility flips are dirty-gated.
+
+### `GLSL_BEGIN_VERTEX`
+
+three.js GLSL anchors the instanced-node materials patch — chunk-include
+names are the stable seam inside three's generated programs.
+
+### (module scope)
+
+Instanced-node shader contract — the ambient pulse and the
+active-node scale run entirely in the vertex stage so the scene's
+~7k nodes cost two draw calls and ZERO per-frame CPU writes:
+
+transformed *= (1 + sin(uTime·SPEED + gl_InstanceID·PHASE) · AMP)
+· (1 + aActive · (SCENE_ACTIVE_SCALE − 1))
+
+`aAlpha` carries the per-node opacity (base / ancestor / active),
+`aActive` the 0/1 active flag — both are instanced attributes written
+only when the highlight path changes, never per frame.
+
+### `patchNodeMaterial`
+
+Patches a node material so the pulse scale and per-instance alpha run
+in-shader: `uTime` is the shared clock, `aAlpha`/`aActive` are the
+instanced attribute streams the highlight pass rewrites on demand.
+
 ### `layoutNodes`
 
 Flattens the manifest tree into positioned node descriptors: depth sets
@@ -137,6 +165,25 @@ no GL context can be acquired; the composite then reports `onLost`.
 
 Serializes camera pose + interaction flag into sessionStorage.
 
+### `dirMesh`
+
+Node draw calls — every dir sphere renders through ONE InstancedMesh,
+every file sphere through another, so the multi-thousand-node graph
+costs two draws instead of one call per node (plus the line set and
+the revealed labels). Weak GPUs/tablets keep their frame budget.
+
+### `dirPlaced`
+
+placed[] index per instance slot — a raycast instanceId resolves to a node.
+
+### `pickTables`
+
+Mesh → its placed-index table, so a raycast hit maps back to a path.
+
+### `pulseTime`
+
+Shared pulse clock — patched into both node materials' shaders.
+
 ### `lineGeo`
 
 Edge geometry — assigned inside buildGraph, disposed in destroy().
@@ -145,18 +192,37 @@ Edge geometry — assigned inside buildGraph, disposed in destroy().
 
 Docs path currently highlighted — '' matches the portal-root node.
 
-### `applyActive`
+### `writeActive`
 
-Paints the active-location highlight onto live nodes: the exact path
-match pops to SCENE_ACTIVE_OPACITY with a larger pulse scale, and
-ancestor dirs on its branch lift to SCENE_ANCESTOR_OPACITY so the
-route's lineage reads on the map. Everything else keeps the faint
-backdrop alpha stored on userData at build time.
+Rewrites one tier's instanced attributes for the active location:
+the exact path match pops to SCENE_ACTIVE_OPACITY with the larger
+pulse scale (aActive=1), and ancestor dirs on its branch lift to
+SCENE_ANCESTOR_OPACITY so the route's lineage reads on the map.
+Everything else keeps the faint backdrop alpha for its tier.
 
 ### `buildGraph`
 
 Populates the scene once the (possibly worker-computed) positions
 land — meshes, edges, then dir-name labels on top of dir nodes.
+
+### `buildTier`
+
+Builds one instanced tier — shared sphere geometry, one material,
+static instance matrices, and the two instanced attribute streams
+(alpha / active) the highlight pass owns.
+
+### `pathForHit`
+
+Resolves a raycast hit to a manifest path. Instanced hits carry
+`instanceId` — it indexes the tier's placed table; a hit without an
+instanceId (older three paths, test doubles) falls back to the
+object userData contract the pre-instanced scene used.
+
+### `paintFrame`
+
+One frame: zoom-reveal label pass + renderer.render. Returns false
+when the GPU/driver threw — the caller treats it exactly like a
+context loss (the host rebuilds on restore).
 
 ### `mountArchScene`
 
