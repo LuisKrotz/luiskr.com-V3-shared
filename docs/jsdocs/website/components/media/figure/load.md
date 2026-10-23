@@ -2,9 +2,9 @@
 
 Media URL matrix + progressive loading for &lt;media-figure&gt;:
 
-| | |
-|---|---|
-| **Source** | `src/website\components\media\figure\load.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\media\figure\load.ts`           |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -35,6 +35,19 @@ hot rung instead of a cold one. Warms only the entry rung — the climb
 ascends serially, so warming the top rung early would fight the low
 rung's fetch for bandwidth and warm a resource that may never publish.
 Never publishes, never marks loaded — pure network warm.
+
+### `figureLadder`
+
+The ascending rung ladder a figure climbs — the 768px-wide
+`{stem}-mobile` derivative stem when the rendered box is ≤768 CSS px
+and the manifest proves mobile tiers exist, else the full-width stem.
+Every mobile rung is a fraction of its full-width twin's bytes and a
+box that small cannot resolve the difference — Lighthouse counts the
+full-width climb as pure waste.
+
+- `@param` stem Emission-encoded extensionless media stem.
+- `@param` boxWidthCssPx Rendered figure width (0 = pre-layout → full stem).
+- `@returns` Proven ascending rungs — may be empty (manifest absent).
 
 ### (module scope)
 
