@@ -49,11 +49,21 @@ describe('Lighthouse CI configuration', () => {
     const config = await import(configPath)
     const assertions = config?.default?.ci?.assert?.assertions || {}
 
-    // Performance is exempt from the hard gate by project policy (WebGL-heavy
-    // pages) — asserted as 'warn' so regressions surface without failing CI.
+    // Performance gates at 0.80 — every non-image finding must be fixed;
+    // only image-delivery audits are warn-level (accepted findings).
     expect(assertions['categories:performance']).toEqual(
-      expect.arrayContaining(['warn', expect.objectContaining({ minScore: 0.95 })])
+      expect.arrayContaining([WINDOW_EVENTS.ERROR, expect.objectContaining({ minScore: 0.8 })])
     )
+
+    for (const audit of [
+      'image-delivery',
+      'modern-image-formats',
+      'uses-optimized-images',
+      'uses-responsive-images',
+      'efficient-animated-content',
+    ]) {
+      expect(assertions[audit]).toBe('warn')
+    }
 
     expect(assertions['categories:accessibility']).toEqual(
       expect.arrayContaining([WINDOW_EVENTS.ERROR, expect.objectContaining({ minScore: 1 })])

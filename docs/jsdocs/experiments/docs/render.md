@@ -57,9 +57,11 @@ The built-once index subtree (all manifest nodes as heading/link rows).
 ### `indexLink`
 
 Index link for one manifest node — a real /docs/<path> anchor (crawlable,
-new-tab friendly) that stays on the SPA router for plain clicks.
+new-tab friendly) carrying its path for the nav's delegated click handler.
+`tabindex="-1"` keeps it out of sequential focus (see block comment).
 
-- `@param` node The manifest node to link.
+- `@param` path Manifest-relative path the link navigates to.
+- `@param` label Anchor text (node name / bucket label).
 - `@returns` The anchor element.
 
 ### (module scope)
@@ -93,14 +95,17 @@ main thread.
 
 ### `pumpIndex`
 
-Pulls INDEX_CHUNK elements per slice into the live nav — each slice is
-a few ms of createElement+append, far under a frame budget, and the
-generator's laziness means only the streamed prefix ever exists. Runs
-to completion regardless of view lifetime: the element is memoized
+Pulls INDEX_CHUNK elements per slice into a DETACHED DocumentFragment —
+each slice is pure createElement work with zero style/layout cost since
+the fragment is not connected. On completion the whole tree attaches to
+the nav in ONE insertion, so the multi-thousand-node layout pass happens
+once (and with the nav's content-visibility skip, barely even then).
+Runs to completion regardless of view lifetime: the element is memoized
 module-level and re-attaches on the next render.
 
 - `@param` gen The index element stream.
-- `@param` nav The index nav being filled.
+- `@param` nav The index nav the finished fragment attaches to.
+- `@param` frag Detached fragment accumulating nodes between slices.
 
 ### `docsIndex`
 

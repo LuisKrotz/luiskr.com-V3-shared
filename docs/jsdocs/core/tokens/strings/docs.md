@@ -177,6 +177,12 @@ intro settle — a first (unrestored) mount eases the whole graph in
 from SCENE_INTRO_TURN radians over SCENE_INTRO_MS, then hands off to
 the ambient autorotate. Restored poses skip the intro entirely.
 
+### `SCENE3D_MOUNT_TIMEOUT`
+
+scene3d/WebGPU mount deadline — adapter+device+artifact acquisition
+can wedge on a wedged GPU process; past this bound the canvas mounts
+the proven three.js arm instead of waiting forever on a blank map.
+
 ### `SCENE_CAMERA_FIT`
 
 Camera framing — distance = graphR·FIT and height = dist·LIFT.
