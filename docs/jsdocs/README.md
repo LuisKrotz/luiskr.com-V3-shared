@@ -1983,6 +1983,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`gen-onnx-models.mjs`](shared\scripts\build/gen-onnx-models.md)           | Emits the site's tiny ONNX models into                           |
 | [`generate-sitemap.js`](shared\scripts\build/generate-sitemap.md)          | Emits the whole crawl surface under `website/public/meta/`:      |
 | [`media-manifest.mjs`](shared\scripts\build/media-manifest.md)             | CDN media inventory + best-variant resolution shared by the      |
+| [`predeploy.mjs`](shared\scripts\build/predeploy.md)                       | Firebase Hosting predeploy chain — the quality gate that a       |
 | [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md) | Firebase `predeploy` step — stamps the AI-usage opt-out          |
 
 ## Entry points

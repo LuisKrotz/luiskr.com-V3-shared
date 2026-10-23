@@ -2,9 +2,9 @@
 
 Docs-portal class tokens — BEM block `docs` + modifiers.
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\classes\docs.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\docs.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -19,3 +19,7 @@ immutable at runtime.
 ### `DOCS_LOADER`
 
 Boot loader overlay — stays up until the portal's first usable state.
+
+### `DOCS_INDEX`
+
+Complete-document index nav — offscreen + content-visibility skipped.

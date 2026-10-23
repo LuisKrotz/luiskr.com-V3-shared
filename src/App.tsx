@@ -22,12 +22,15 @@
  */
 
 import { SECTIONS } from '@core/tokens/base.js'
+import { A11Y_CLASSES } from '@core/tokens/classes/a11y.js'
 import { APP_CLASSES } from '@core/tokens/classes/app.js'
+import { NAV_UI_KEYS } from '@core/tokens/data/ui-keys.js'
 import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
 import { VIEW_TAGS } from '@core/tokens/elements/views.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 import { CHAR_STRINGS } from '@core/tokens/strings/chars.js'
 import { h } from '@core/jsx.js'
+import { appText } from '@core/locale/ui-text.js'
 import { BaseComponent } from '@core/Component.js'
 import store from '@core/store.js'
 import router from '@core/router/router.js'
@@ -219,6 +222,15 @@ export class AppRoot extends BaseComponent {
         <div
           className={`${APP_CLASSES.PROGRESS_BAR} ${this.routeLoading ? APP_CLASSES.PROGRESS_BAR_ACTIVE : CHAR_STRINGS.EMPTY}`}
         />
+
+        {/* Keyboard skip-nav — first focusable node in the shell; hidden
+            until :focus, jumps to the routed <main>. Lives in THIS shadow
+            tree: a #fragment link can only resolve an id inside its own
+            root, so a skip link inside <app-nav>'s shadow could never
+            reach #main-content (axe skip-link + real keyboard jump). */}
+        <a className={A11Y_CLASSES.SKIP_LINK} href={`${CHAR_STRINGS.HASH}${APP_IDS.MAIN_CONTENT}`}>
+          {appText(NAV_UI_KEYS.SKIP) as string}
+        </a>
 
         <AppNav />
 

@@ -77,13 +77,70 @@ const gitCommit = () => {
 }
 
 // ─── Lighthouse ──────────────────────────────────────────────────────────────
+/**
+ * One representative run record — the shape manifest.json entries carry for
+ * the collector (`isRepresentativeRun` runs only).
+ * @param {object} lhr Parsed lhr-*.json report.
+ * @param {string} filePath Absolute path of the lhr json.
+ * @returns {{url: string, isRepresentativeRun: boolean, jsonPath: string,
+ *   summary: object}} Synthesized manifest entry.
+ */
+const lhrEntry = (lhr, filePath) => ({
+  url: lhr.finalDisplayedUrl || lhr.finalUrl || lhr.requestedUrl,
+  isRepresentativeRun: true,
+  jsonPath: filePath,
+  summary: Object.fromEntries(
+    Object.entries(lhr.categories || {}).map(([key, cat]) => [key, cat.score])
+  ),
+})
+
+/**
+ * Fallback run discovery when .lighthouseci/manifest.json is missing or
+ * unreadable (interrupted/pruned runs): scan lhr-*.json files and keep the
+ * NEWEST report per audited URL — manifest timestamps order chronologically,
+ * so the highest fetchTime per url is the latest representative run.
+ * @returns {Array} Synthesized manifest entries.
+ */
+const scanLhrFiles = () => {
+  let files
+
+  try {
+    files = fs.readdirSync(LHCI_DIR)
+  } catch {
+    return []
+  }
+
+  const latest = new Map()
+
+  for (const entry of files) {
+    if (!/^lhr-\d+\.json$/.test(entry)) continue
+
+    const file = path.join(LHCI_DIR, entry)
+    const lhr = readJson(file)
+
+    if (!lhr) continue
+
+    const url = lhr.finalDisplayedUrl || lhr.finalUrl || lhr.requestedUrl
+    const fetchedAt = Date.parse(lhr.fetchTime || '') || 0
+    const prev = latest.get(url)
+
+    if (!prev || fetchedAt > prev.fetchedAt) {
+      latest.set(url, { fetchedAt, rec: lhrEntry(lhr, file) })
+    }
+  }
+
+  return [...latest.values()].map((v) => v.rec)
+}
+
 const collectLighthouse = () => {
   const manifest = readJson(path.join(LHCI_DIR, 'manifest.json'))
-  if (!Array.isArray(manifest) || !manifest.length) return null
+  const runs = Array.isArray(manifest) && manifest.length ? manifest : scanLhrFiles()
+
+  if (!runs.length) return null
 
   const keep = new Set()
 
-  const urls = manifest
+  const urls = runs
     .filter((run) => run.isRepresentativeRun)
     .map((run) => {
       const lhr = run.jsonPath ? readJson(path.resolve(LHCI_DIR, run.jsonPath)) : null
