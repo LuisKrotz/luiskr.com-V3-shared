@@ -4,6 +4,7 @@
  */
 
 import { ANIMATION_DURATIONS } from '@core/tokens/motion/animation.js'
+import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 import { STATE_CLASSES } from '@core/tokens/classes/state.js'
 import { VIEW_TAGS } from '@core/tokens/elements/views.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
@@ -63,6 +64,17 @@ export function updateAppViewContent(
  * @param outlet The #view-outlet element.
  * @param _to Destination descriptor — the tag is read from c.currentViewTag.
  */
+/**
+ * Parks the prerendered reader article offscreen once a real view owns
+ * the outlet. Until then it stays painted under the intro veil so its
+ * content counts as early FCP/LCP. Idempotent — safe on every swap.
+ */
+const parkReaderArticle = (): void => {
+  document
+    .querySelector(`article.${READER_CLASSES.CONTENT}`)
+    ?.classList.add(READER_CLASSES.OFFSCREEN)
+}
+
 export async function flipAppView(
   c: AppRoot,
   outlet: Element,
@@ -105,6 +117,7 @@ export async function flipAppView(
   if (reduced || !outlet.firstElementChild) {
     // Instant swap — no animation
     outlet.replaceChildren(document.createElement(toTag))
+    parkReaderArticle()
     return
   }
 
@@ -117,6 +130,7 @@ export async function flipAppView(
 
     incoming.classList.add(STATE_CLASSES.PAGE_FADE_IN)
     outlet.replaceChildren(incoming)
+    parkReaderArticle()
 
     // Intentional transition-restart flush — committed styles are needed
     // before removing the fade-in class in the same frame.

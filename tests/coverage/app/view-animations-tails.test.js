@@ -7,6 +7,7 @@
  */
 import { VIEW_TAGS } from '@core/tokens/elements/views.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
+import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 
 const { flipAppView } = await import('@/app/view.js')
 
@@ -18,5 +19,21 @@ describe('view animations tail', () => {
     await flipAppView(c, outlet)
 
     expect(outlet.firstElementChild?.tagName.toLowerCase()).toBe(VIEW_TAGS.VIEW_ANIMATIONS)
+  })
+
+  test('a parked reader article goes offscreen once the view lands', async () => {
+    const article = document.createElement('article')
+
+    article.className = READER_CLASSES.CONTENT
+    document.body.appendChild(article)
+
+    const outlet = document.createElement(HTML_TAGS.DIV)
+    const c = { _sectionsMeasured: true, currentViewTag: VIEW_TAGS.VIEW_ANIMATIONS }
+
+    await flipAppView(c, outlet)
+
+    expect(article.classList.contains(READER_CLASSES.OFFSCREEN)).toBe(true)
+
+    article.remove()
   })
 })
