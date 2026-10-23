@@ -36,6 +36,18 @@ budget treats video like reduced-motion: the poster stays painted and
 no stream bytes are fetched — a 14 MB muted loop can never become the
 LCP tax on a metered connection.
 
+### `smallMediaBox`
+
+Whether a rendered media box is small enough that the 768px-wide
+`-mobile` derivative stem already over-resolves it — at ≤768 CSS px
+every full-width rung (original/uncompressed are multi-MB) is
+guaranteed waste regardless of connection. A 0/unknown width stays
+false: the ladder then keeps the full stem and only the connection
+term applies.
+
+- `@param` boxWidthCssPx Rendered width of the media box in CSS px.
+- `@returns` True when the mobile stem is the correct ladder.
+
 ### `ladderCeiling`
 
 Highest ladder index the climb may reach. Rung order is fixed

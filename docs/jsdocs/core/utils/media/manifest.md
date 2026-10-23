@@ -2,9 +2,9 @@
 
 Runtime knowledge of which CDN objects exist, backed by the
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\media\manifest.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\media\manifest.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -33,12 +33,14 @@ Whether the manifest has arrived. Lets the media-figure probe distinguish
 Whether the manifest lists the CDN object behind `url`. Absolute URLs
 get the CDN_BASE prefix stripped to their bucket key; non-CDN URLs
 (gravatars, data URIs) always report false — they have no siblings.
+
 - `@param` url Full media URL or a raw bucket key.
 
 ### `webpIfExists`
 
 webp sibling of a .jpg URL when the manifest confirms it was generated,
 '' otherwise — safe srcset input for a <source>: empty means "no source".
+
 - `@param` url Original .jpg media URL.
 
 ### `webmIfExists`
@@ -46,6 +48,7 @@ webp sibling of a .jpg URL when the manifest confirms it was generated,
 webm sibling of an .mp4 URL when it exists in the manifest, '' otherwise.
 `<video><source>` DOES retry the next source on network failure, so this
 gate is belt-and-suspenders for saving a doomed request, not correctness.
+
 - `@param` url Original .mp4 media URL.
 
 ### (module scope)
@@ -84,8 +87,15 @@ webp matching `src`, '' when not proven.
 ### `rungs`
 
 Ascending display-quality rungs the high layer climbs (coverLadderStep
- walks them, highest proven quality last) — empty when no LQIP
- exists, since `src` is then already the original.
+walks them, highest proven quality last) — empty when no LQIP
+exists, since `src` is then already the original.
+
+### `mobileRungs`
+
+Ascending rungs on the 768px `{stem}-mobile` derivative ladder —
+the correct climb for boxes ≤768 CSS px (the same stem grammar, so
+every rung is a fraction of its full-width twin's bytes). Empty when
+the manifest proves no mobile tier.
 
 ### `LADDER_SUFFIXES`
 
@@ -101,6 +111,7 @@ every derivative rung is `mediaKeyExists`-proven so a swapped-in src
 can never 404; the original row ('' suffix) is always trusted because
 it IS the URL the database points at. Non-.jpg input keeps its stem
 whole and resolves to just the passthrough original rung.
+
 - `@param` stemJpg Emission-encoded media URL ending in .jpg (original).
 - `@returns` Ascending rungs — lowest quality first, highest last.
 
@@ -113,6 +124,7 @@ Fully manifest-gated quality ladder for an extensionless media stem
 suffixed tiers, so an untrusted passthrough could 404. Returns [] when
 the manifest is absent or proves nothing; callers then fall back to
 the historic "the request IS the check" probe.
+
 - `@param` stem Emission-encoded media URL without an extension.
 - `@returns` Ascending proven rungs — lowest quality first, highest last.
 
@@ -126,5 +138,6 @@ uncompressed, highest proven tier last. Every variant is gated on
 `mediaKeyExists` so an unproven object can never become a card's only
 image; a missing/never-loaded manifest yields the original URL with
 its own webp probe and no ladder (`rungs` stays empty).
+
 - `@param` coverJpg Emission-encoded covers/*.jpg URL (original).
 - `@returns` Bound URLs for picture/img — empty strings mean "omit".

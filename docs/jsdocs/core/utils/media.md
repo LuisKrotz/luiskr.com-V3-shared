@@ -2,9 +2,9 @@
 
 Media-URL builders — the single place where CDN filename
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\media.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\media.ts`                                 |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -28,6 +28,7 @@ subdomain like `secure.gravatar.com`). Non-Gravatar URLs must not get
 `size=` rewrites — that param is Gravatar-specific. `new URL` throws on
 malformed input and relative URLs without a base — the try/catch maps
 both to `false` (not-Gravatar) since either case is unrewritable anyway.
+
 - `@param` urlStr Candidate URL (absolute or relative).
 - `@returns` Whether the host is gravatar.com or a subdomain.
 
@@ -38,6 +39,7 @@ Builds responsive Gravatar srcset with 1x, 2x, 3x density descriptors —
 param is stripped first so the rewrite is idempotent; `sep` picks `?` or
 `&` depending on whether other query params remain (stripping `size=`
 may have consumed the `?`).
+
 - `@param` urlStr Gravatar URL to expand.
 - `@returns` srcset string, or '' for non-Gravatar input.
 
@@ -46,6 +48,7 @@ may have consumed the `?`).
 Replaces the `size=` parameter on a Gravatar URL. Non-Gravatar URLs pass
 through unchanged (the param is meaningless off-domain), and a URL with
 no `size=` is left alone since the regex finds no match.
+
 - `@param` urlStr Candidate Gravatar URL.
 - `@param` size Pixel edge to request (default 300 — the rendered avatar box).
 - `@returns` Rewritten URL, original URL, or '' for non-string input.
@@ -60,6 +63,7 @@ RFC-3986-strict contexts (sitemap locs, JSON-LD image/contentUrl).
 Idempotent: already-encoded input decodes first, so a %20 never
 becomes %2520 (encodeURI escapes '%' itself). Malformed escapes make
 decodeURI throw — the catch emits the input with bare '%' → %25.
+
 - `@param` url Raw or encoded media URL (may contain spaces/non-ASCII).
 - `@returns` The emission-safe URL ('' stays '').
 
@@ -70,6 +74,7 @@ convention replaces only the extension, so the webp sits beside the
 original at the same path ("if webp exists" is decided by the request,
 no manifest lookup). Returns '' for non-.jpg input so callers can
 conditionally render a <source>.
+
 - `@param` url JPG media URL.
 - `@returns` The same URL with .webp instead of .jpg, or '' when not .jpg.
 
@@ -78,6 +83,7 @@ conditionally render a <source>.
 Derives the .webm sibling of an .mp4 URL — same convention as
 webpSibling: `x.mp4` → `x.webm` and `x.mp4-scaledown-2x.mp4` →
 `x.mp4-scaledown-2x.webm`. Returns '' for non-.mp4 input.
+
 - `@param` url MP4 media URL.
 - `@returns` The same URL with .webm instead of .mp4, or '' when not .mp4.
 
@@ -95,35 +101,38 @@ reassigns the painted img's `src` (that blanks the box while the new
 resource re-decodes); instead the confirmed tier mounts as a NEW
 stacked sibling whose own `load` retires the layer underneath, so no
 frame ever paints empty.
+
 - `@param` registry Host map of cover key → highest confirmed painted URL
 - `@param` coverKey Stable identity of the cover (the original URL).
 - `@param` img The high-layer img that fired `load` (event currentTarget).
 - `@param` rungs Ascending proven tiers from coverVariants — last is top.
 - `@param` loadedClass Class token that turns the layer's opacity on.
+- `@param` mobileRungs Ascending rungs on the `{stem}-mobile` ladder —
 
 ### `advance`
 
 Publishes a confirmed tier as a new layer stacked over the painted
- one. Reassigning the live img.src would drop its painted frame while
- the upgraded resource re-decodes — the visible blink — so instead a
- clone (every attribute carried: classes, sizes, loading, aria-hidden)
- mounts empty on top — an img with no resolved bitmap paints nothing,
- the rung below stays visible — and only when its own `load` fires
- does the layer underneath retire, making the swap atomic per frame.
- On `error` the successor removes itself and the painted rung stands.
- The clone carries no listeners (cloneNode doesn't copy them), so the
- climb continues through the explicit re-entry below.
+one. Reassigning the live img.src would drop its painted frame while
+the upgraded resource re-decodes — the visible blink — so instead a
+clone (every attribute carried: classes, sizes, loading, aria-hidden)
+mounts empty on top — an img with no resolved bitmap paints nothing,
+the rung below stays visible — and only when its own `load` fires
+does the layer underneath retire, making the swap atomic per frame.
+On `error` the successor removes itself and the painted rung stands.
+The clone carries no listeners (cloneNode doesn't copy them), so the
+climb continues through the explicit re-entry below.
 
 ### `buildMediaUrls`
 
 Constructs media URLs for images and videos following the project's
 compression pipeline. URL grammar:
-  image source : storage + folder + src + '-mozjpg-uncompressed.jpg'   (full quality)
-  image thumb  : storage + folder + src + '-mozjpg3-MSSIM-tuned-kodak.jpg' (blur-up)
-  video source : storage + folder + src + '.mp4'
-  video thumb  : storage + folder + src + '.mp4.jpg-thumb.jpg'         (poster frame)
+image source : storage + folder + src + '-mozjpg-uncompressed.jpg' (full quality)
+image thumb : storage + folder + src + '-mozjpg3-MSSIM-tuned-kodak.jpg' (blur-up)
+video source : storage + folder + src + '.mp4'
+video thumb : storage + folder + src + '.mp4.jpg-thumb.jpg' (poster frame)
 `src` in the DB never carries an extension — the pipeline's suffix is
 appended here, which is why an unsuffixed URL 404s.
+
 - `@param` storage - Base storage URL (store.getters.getStorage())
 - `@param` folder - Project folder prefix, e.g. 'aboutmarco/'
 - `@param` item - Media item descriptor `{ src, isVideo }`
