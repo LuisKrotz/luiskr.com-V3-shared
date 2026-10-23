@@ -92,7 +92,7 @@ describe('main.js branch warm-ups', () => {
     window.history.pushState({}, '', '/')
   })
 
-  test('mount hoists the prerendered reader article offscreen', async () => {
+  test('mount hoists the prerendered reader article into body still painted', async () => {
     jest.resetModules()
 
     const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
@@ -104,13 +104,16 @@ describe('main.js branch warm-ups', () => {
     await (await import('@/main.js')).bootPromise.catch(() => {})
     await waitFor(() => window.router, 90000)
 
-    const parked = document.body.querySelector(`article.${READER_CLASSES.CONTENT}`)
+    const hoisted = document.body.querySelector(`article.${READER_CLASSES.CONTENT}`)
 
-    expect(parked).toBeTruthy()
-    expect(parked.classList.contains(READER_CLASSES.OFFSCREEN)).toBe(true)
-    expect(app.contains(parked)).toBe(false)
+    expect(hoisted).toBeTruthy()
+    // Painted under the intro veil until flipAppView parks it — the
+    // mount-time offscreen stamp was removed so the article's content
+    // stays an early FCP/LCP candidate.
+    expect(hoisted.classList.contains(READER_CLASSES.OFFSCREEN)).toBe(false)
+    expect(app.contains(hoisted)).toBe(false)
 
-    parked.remove()
+    hoisted.remove()
   })
 
   test('missing #app container arms the mount retry loop', async () => {

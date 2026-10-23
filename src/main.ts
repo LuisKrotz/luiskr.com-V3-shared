@@ -69,9 +69,10 @@ const isSafari =
 /**
  * Inserts <app-root> into #app. Idempotent — safe to call on a timer while
  * the document finishes parsing. Prerendered pages ship a reader-content
- * <article> inside #app: it is hoisted offscreen (never deleted) before the
- * swap so reader modes, no-JS crawlers and AI agents keep the full document
- * after the shell mounts — Readability can't pierce the app's shadow DOM.
+ * <article> inside #app: it is hoisted to <body> (never deleted, still
+ * painted under the intro veil) before the swap so reader modes, no-JS
+ * crawlers and AI agents keep the full document after the shell mounts —
+ * Readability can't pierce the app's shadow DOM.
  * @returns {boolean} true when the root element exists in the DOM
  */
 const mount = () => {
@@ -83,8 +84,11 @@ const mount = () => {
 
   const article = appContainer.querySelector(`article.${READER_CLASSES.CONTENT}`)
 
+  // Hoist out of #app WITHOUT parking: the article keeps painting under
+  // the opaque intro veil, so its headings/posters are early LCP
+  // candidates. flipAppView adds --offscreen when the view actually
+  // lands — before that it is also the visible fallback if boot stalls.
   if (article) {
-    article.classList.add(READER_CLASSES.OFFSCREEN)
     document.body.appendChild(article)
   }
 
