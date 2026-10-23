@@ -31,6 +31,13 @@ const win = new GlobalWindow({
 // Specifically attach browser DOM APIs without overriding Node/Jest internals
 globalThis.window = win
 globalThis.document = win.document
+// `navigator` must come from the same happy-dom window: left as Node's
+// built-in global it is SHARED across every test file in a worker, so a
+// suite stubbing navigator.userAgent (mobile-UA branches) and restoring
+// late poisons later files nondeterministically — initGPU()'s mobile
+// gate, getGPUInfo()'s capable flag. Pinning it per file stops leaks at
+// the file boundary and makes window.navigator === navigator truthful.
+globalThis.navigator = win.navigator
 globalThis.customElements = win.customElements
 globalThis.HTMLElement = win.HTMLElement
 globalThis.Element = win.Element
