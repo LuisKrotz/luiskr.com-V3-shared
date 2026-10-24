@@ -94,6 +94,7 @@ export const InstancedMesh = chain()
 export const InstancedBufferAttribute = chain()
 export const DynamicDrawUsage = 35048
 export const BufferGeometry = chain()
+export const InstancedBufferGeometry = chain()
 export const BoxGeometry = chain()
 export const IcosahedronGeometry = chain()
 export const TetrahedronGeometry = chain()
@@ -108,6 +109,7 @@ export const Matrix4 = chain()
 export const Object3D = chain()
 export const AmbientLight = chain()
 export const Fog = chain()
+export const FogExp2 = chain()
 
 export const ACESFilmicToneMapping = 1
 export const AdditiveBlending = 1
