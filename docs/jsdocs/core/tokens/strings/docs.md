@@ -88,6 +88,18 @@ In-place skeleton label while a mermaid diagram renders.
 Visible chip captioning the backdrop scene so the interactive
 architecture map is obvious to a first-time viewer.
 
+### `MAP_LABEL`
+
+Landmark label for the right-hand map column and its zoom dialog.
+
+### `MAP_ZOOM`
+
+Zoom trigger aria-label — opens the enlarged modal scene.
+
+### `MAP_CLOSE`
+
+Close control aria-label inside the map zoom dialog.
+
 ### `SCENE_ATTR_ALPHA`
 
 Instanced-attribute names on the scene's node geometries — the

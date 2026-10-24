@@ -45,6 +45,11 @@ Star-field instructions hint — aria-describedby target for the dialog.
 Star-field navigator item description id PREFIX — the per-body
 describedby target is `<prefix><body-id>` inside each row button.
 
+### `SF_MUSIC_LIST`
+
+Star-field playlist track list — aria-controls target for the
+card's collapse toggle.
+
 ### `NAV_MENU_PANEL`
 
 Nav menu overlay — aria-controls target for the burger toggles.

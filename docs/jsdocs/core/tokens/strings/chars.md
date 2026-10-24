@@ -12,3 +12,11 @@ Punctuation, unit and single-character string tokens —
 ### `ARROW_KEYS`
 
 Keycap glyph rows for shortcut documentation (arrows + Escape).
+
+### `EXPAND_GLYPH`
+
+Zoom/expand control glyph (diagonal arrows to corners).
+
+### `CLOSE_GLYPH`
+
+Dismiss/close control glyph (multiplication cross).

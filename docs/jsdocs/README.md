@@ -1185,7 +1185,9 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                               | What it does                                               |
 | -------------------------------------------------- | ---------------------------------------------------------- |
+| [`badge.ts`](core\tokens\starfield/badge.md)       | "Featured on Three.js Resources" showcase-badge tokens —   |
 | [`kinds.ts`](core\tokens\starfield/kinds.md)       | Star-field taxonomy + action tokens: the region groups the |
+| [`music.ts`](core\tokens\starfield/music.md)       | Ambient playlist for the Star Field experiment — the MP3   |
 | [`params.ts`](core\tokens\starfield/params.md)     | Star-field engine parameters — camera rig, fly-to tween    |
 | [`textures.ts`](core\tokens\starfield/textures.md) | CDN URLs for the Star Field experiment texture set —       |
 
@@ -1523,6 +1525,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`mermaid.ts`](experiments\docs/mermaid.md)             | Diagram rendering for docs payloads — markdown                  |
 | [`render.tsx`](experiments\docs/render.md)              | JSX template for &lt;view-docs&gt; — extracted from Docs.tsx.   |
 | [`telemetry.ts`](experiments\docs/telemetry.md)         | Copy-attempt telemetry for the docs source viewer.              |
+| [`tree-icon.tsx`](experiments\docs/tree-icon.md)        | Animated SVG row icons for the docs treeview — the              |
 | [`vite.config.js`](experiments\docs/vite.config.md)     | Library build for the `docs` experiment — the in-app            |
 
 ## Entry points
@@ -1553,10 +1556,12 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`docs-tails-generated-folder-artwork.test.js`](experiments\docs\tests\coverage/docs-tails-generated-folder-artwork.test.md)   | Split from docs-tails.test.js — covers the "generated folder artwork" describe. |
 | [`docs-tails-input-guards.test.js`](experiments\docs\tests\coverage/docs-tails-input-guards.test.md)                           | Coverage tails for the docs portal's non-plain input guards —                   |
 | [`docs-tails-loader.test.js`](experiments\docs\tests\coverage/docs-tails-loader.test.md)                                       | Coverage tails for docs/loader.ts + the Docs.tsx loader                         |
+| [`docs-tails-map-zoom.test.js`](experiments\docs\tests\coverage/docs-tails-map-zoom.test.md)                                   | Coverage tail for the architecture-map zoom surface —                           |
 | [`docs-tails-onmounted-empty-docs-path.test.js`](experiments\docs\tests\coverage/docs-tails-onmounted-empty-docs-path.test.md) | Coverage tail for experiments/docs/Docs.tsx — onMounted's                       |
 | [`docs-tails-print-prepare.test.js`](experiments\docs\tests\coverage/docs-tails-print-prepare.test.md)                         | Coverage tails for ViewDocs._onPrintPrepare — the printprepare                  |
 | [`mermaid.test.js`](experiments\docs\tests\coverage/mermaid.test.md)                                                           | Coverage tails for docs/mermaid.ts — lazy wasm diagram                          |
 | [`render-index-tails.test.js`](experiments\docs\tests\coverage/render-index-tails.test.md)                                     | Coverage tail for docs render.tsx — the index-streaming                         |
+| [`tree-icon-tails.test.js`](experiments\docs\tests\coverage/tree-icon-tails.test.md)                                           | Coverage tail for tree-icon.tsx — the node-shape arms the                       |
 
 ## Entry points
 
@@ -1820,6 +1825,22 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
+| File                                                                                                                                                                           | What it does |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| [`onnxruntime-web_webgpu.js`](experiments\star-field\node_modules.vite\deps/onnxruntime-web_webgpu.md)                                                                         | —            |
+| [`three.core-REoVBtYN.js`](experiments\star-field\node_modules.vite\deps/three.core-REoVBtYN.md)                                                                               | —            |
+| [`three.js`](experiments\star-field\node_modules.vite\deps/three.md)                                                                                                           | —            |
+| [`three_examples_jsm_controls_OrbitControls__js.js`](experiments\star-field\node_modules.vite\deps/three_examples_jsm_controls_OrbitControls__js.md)                           | —            |
+| [`three_examples_jsm_tsl_display_BloomNode__js.js`](experiments\star-field\node_modules.vite\deps/three_examples_jsm_tsl_display_BloomNode__js.md)                             | —            |
+| [`three_examples_jsm_tsl_display_ChromaticAberrationNode__js.js`](experiments\star-field\node_modules.vite\deps/three_examples_jsm_tsl_display_ChromaticAberrationNode__js.md) | —            |
+| [`three_examples_jsm_tsl_display_FilmNode__js.js`](experiments\star-field\node_modules.vite\deps/three_examples_jsm_tsl_display_FilmNode__js.md)                               | —            |
+| [`three_tsl.js`](experiments\star-field\node_modules.vite\deps/three_tsl.md)                                                                                                   | —            |
+| [`three_webgpu.js`](experiments\star-field\node_modules.vite\deps/three_webgpu.md)                                                                                             | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
 | File                                                                                 | What it does |
 | ------------------------------------------------------------------------------------ | ------------ |
 | [`block-navigation.js`](experiments\star-field\reports\coverage/block-navigation.md) | —            |
@@ -1835,6 +1856,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`boot.ts`](experiments\star-field\star/boot.md)       | Engine bootstrap for StarField — constructs StarFieldEngine |
 | [`dossier.ts`](experiments\star-field\star/dossier.md) | Lazy dossier loader for star-field bodies — fetches         |
 | [`i18n.ts`](experiments\star-field\star/i18n.md)       | Locale handling for StarField — fetches the                 |
+| [`music.ts`](experiments\star-field\star/music.md)     | Ambient playlist player for the star-field view — one       |
 | [`render.tsx`](experiments\star-field\star/render.md)  | JSX for StarField's render() — boot loader overlay (same    |
 
 ## Entry points
@@ -1873,10 +1895,11 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                                                                                    | What it does                                                |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| [`star-boot-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-boot-tails.test.md)               | Coverage tails for star/boot.ts — the engine-event wiring   |
-| [`star-render-mock-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-render-mock-tails.test.md) | Coverage tails for star/render.tsx — the catalog-mock arms: |
+| File                                                                                                                    | What it does                                                    |
+| ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [`star-boot-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-boot-tails.test.md)               | Coverage tails for star/boot.ts — the engine-event wiring       |
+| [`star-music-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-music-tails.test.md)             | Coverage tails for star/music.ts — the persistent &lt;audio&gt; |
+| [`star-render-mock-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-render-mock-tails.test.md) | Coverage tails for star/render.tsx — the catalog-mock arms:     |
 
 ## Entry points
 

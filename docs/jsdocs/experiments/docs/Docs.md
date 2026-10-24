@@ -37,11 +37,30 @@ Dirs the treeview shows expanded.
 
 Mobile nav-panel open state (the tree collapses under a toggle <1024).
 
+### `_mapZoomed`
+
+Architecture-map zoom modal — the persistent scene canvas re-seats
+into the centered glass dialog while open.
+
 ### (module scope)
 
 Path whose tree/grid button regains focus after the next re-render —
 arrow-key expand/collapse re-creates the DOM, so focus would
 otherwise drop to the body.
+
+### (module scope)
+
+Map-column visibility watcher — ≤1024 the aside is display:none and
+the scene's rAF loop is paused so hidden canvases cost zero GPU.
+The zoom dialog overrides the pause (the modal can open at any
+width once the column control exists… but the column only renders
+
+> 1024, so the dialog is reachable only there — the listener still
+> keeps the paused flag honest across resizes).
+
+### (module scope)
+
+Bound change handler for _mapMq — removed in onDestroy.
 
 ### (module scope)
 
@@ -103,6 +122,12 @@ Back button — navigates to the file's parent folder (or the root).
 ### `toggleNav`
 
 Mobile "browse" toggle — shows/hides the tree panel on small screens.
+
+### `toggleMapZoom`
+
+Map zoom toggle — opens/closes the centered glass dialog. The
+persistent scene canvas re-seats into the dialog's stage on the next
+render pass (no context loss, no remount); the column keeps its frame.
 
 ### `toggleDir`
 
@@ -178,10 +203,27 @@ still counts as settled so the loader can never strand the page.
 
 ### (module scope)
 
+The persistent scene canvas — created once with its id/class/label
+and the `webglcontextrestored` recovery listener, then re-seated by
+onUpdated into whichever stage this render produced. Re-parenting a
+canvas preserves its WebGL context, so the scene survives renders,
+column↔dialog moves and tree toggles without a remount.
+
+- `@returns` The shared scene canvas element.
+
+### (module scope)
+
 Mounts/remounts the 3D scene on the given canvas. `onLost` marks the
 canvas with the scene-off class and clears the handle so a later
 `webglcontextrestored` can rebuild it — the portal stays usable the
 whole time.
+
+### (module scope)
+
+Pause-state sync — the scene loop halts while the map column is
+display:none (≤1024) AND the zoom dialog is closed; at wider widths,
+or while the glass dialog is open, the loop runs. Called from
+onUpdated, the mq change listener, and toggleMapZoom.
 
 ### (module scope)
 
