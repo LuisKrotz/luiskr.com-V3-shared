@@ -2,9 +2,9 @@
 
 Native DOM event-name tokens split by input modality —
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\events\dom.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\events\dom.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -84,6 +84,21 @@ events (user gesture start/end, per-frame change).
 
 Frozen clipboard event-name map — copy/cut/selection events the docs
 portal intercepts for its source-code copy guard.
+
+### `PRINT_EVENTS`
+
+App-level print lifecycle — `beforeprint`/`afterprint` are browser-native
+window events (in CLIPBOARD_EVENTS for legacy grouping); these two let live
+engines answer a canvas-capture request and views sync generated content
+into the printable mirror before the print sheet opens.
+
+### `CAPTURE`
+
+Dispatched on a canvas before toDataURL — engines re-render then set detail.dataUrl.
+
+### `PREPARE`
+
+Dispatched on window before the print walk — views sync printable DOM first.
 
 ### `SW_EVENTS`
 

@@ -2,9 +2,9 @@
 
 Multi-target build orchestrator.
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\build\build-targets.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\build-targets.mjs`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -18,10 +18,10 @@ LK_BUILD_WORKERS overrides for hosts with different budgets.
 
 ### `buildTier`
 
-Runs `vite build` for one tier. Derived tiers (`babelFrom`) are skipped
-here — they lower an already-emitted bundle in the post-pass below.
-`first` marks the owner build: it alone wipes dist/ (emptyOutDir) and
-copies the public dir, so it must run BEFORE the parallel wave starts.
+Runs `vite build` for one tier. `first` marks the owner build: it alone
+wipes dist/ (emptyOutDir) and copies the public dir, so it must run
+BEFORE the parallel wave starts.
+
 - `@param` {object} t ES_TARGETS entry
 - `@param` {number} i index in buildList (banner display only)
 - `@param` {boolean} first whether this build owns dist/ initialization

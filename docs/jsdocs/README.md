@@ -728,6 +728,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`bezier-tails.test.js`](core\tests\coverage\utils\motion/bezier-tails.test.md)                             | Coverage for core/utils/motion/bezier.ts — the                                  |
 | [`frame-budget-tails.test.js`](core\tests\coverage\utils\motion/frame-budget-tails.test.md)                 | Coverage tails for core/tokens/motion/frame-budget.ts —                         |
 | [`genie-tails.test.js`](core\tests\coverage\utils\motion/genie-tails.test.md)                               | Split from coverage-tails.test.js — covers the "genie tails" describe.          |
+| [`intent-tails.test.js`](core\tests\coverage\utils\motion/intent-tails.test.md)                             | Coverage tails for core/utils/motion/intent.ts — intent                         |
 | [`scroll-spring-tails.test.js`](core\tests\coverage\utils\motion/scroll-spring-tails.test.md)               | Coverage for core/utils/motion/scroll-spring.ts — the                           |
 | [`scroll-state-tails-test-js.test.js`](core\tests\coverage\utils\motion/scroll-state-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "scroll-state tails" describe.   |
 | [`scroll-state-tails.test.js`](core\tests\coverage\utils\motion/scroll-state-tails.test.md)                 | Split from coverage-tails-4.test.js — covers the "scroll-state tails" describe. |
@@ -741,6 +742,14 @@ _Shared primitives every surface builds on — no direct UI._
 | [`stats-engine-tails.test.js`](core\tests\coverage\utils\perf/stats-engine-tails.test.md) | Split from coverage-tails-5.test.js — covers the "stats-engine tails" describe. |
 | [`statshud-tails-2.test.js`](core\tests\coverage\utils\perf/statshud-tails-2.test.md)     | Split from coverage-tails-6.test.js — covers the "StatsHud tails 2" describe.   |
 | [`statshud-tails.test.js`](core\tests\coverage\utils\perf/statshud-tails.test.md)         | Split from coverage-tails-3.test.js — covers the "StatsHud tails" describe.     |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
+| File                                                                         | What it does                                              |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------- |
+| [`print-tails.test.js`](core\tests\coverage\utils\print/print-tails.test.md) | Coverage for core/utils/print/print.ts — the beforeprint/ |
 
 ## Core engine
 
@@ -1004,6 +1013,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`nav.ts`](core\tokens\classes/nav.md)                         | Navigation class tokens — links, burger button and the            |
 | [`playground.ts`](core\tokens\classes/playground.md)           | Earth/Space playground class tokens (`sp-*` block) —              |
 | [`preferences.ts`](core\tokens\classes/preferences.md)         | Preferences modal class tokens — all composed from the `pref`     |
+| [`print.ts`](core\tokens\classes/print.md)                     | Print-mode class tokens — injected by core/utils/print/print.ts   |
 | [`project.ts`](core\tokens\classes/project.md)                 | Project/internal page class tokens (`internal-*` block) —         |
 | [`reader.ts`](core\tokens\classes/reader.md)                   | Reader-mode content class tokens — the prerendered article        |
 | [`related.ts`](core\tokens\classes/related.md)                 | Related-projects mosaic class tokens — grouped subset of          |
@@ -1436,6 +1446,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`bezier.ts`](core\utils\motion/bezier.md)               | Cubic-bezier easing evaluator — the CSS `cubic-bezier(x1,y1,x2,y2)` |
 | [`frame.ts`](core\utils\motion/frame.md)                 | Shared frame scheduler — one requestAnimationFrame pump             |
 | [`genie.ts`](core\utils\motion/genie.md)                 | "Genie" dialog transition shared by the preferences modal and       |
+| [`intent.ts`](core\utils\motion/intent.md)               | User-intent gate for warm-path work                                 |
 | [`route-warmer.ts`](core\utils\motion/route-warmer.md)   | Post-load route-chunk warming.                                      |
 | [`scroll-spring.ts`](core\utils\motion/scroll-spring.md) | Scroll-position chase spring — the shared driver both               |
 | [`scroll-state.ts`](core\utils\motion/scroll-state.md)   | Global "is the window currently scrolling" flag plus an             |
@@ -1458,6 +1469,14 @@ _Shared primitives every surface builds on — no direct UI._
 | [`flush.ts`](core\utils\perf\stats/flush.md)     | Flush interval for the stats engine: every INTERVAL_MS it |
 | [`fps.ts`](core\utils\perf\stats/fps.md)         | FPS sampler for the stats engine: counts rAF ticks and    |
 | [`network.ts`](core\utils\perf\stats/network.md) | Network sampler for the stats engine: a resource-timing   |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
+| File                                    | What it does           |
+| --------------------------------------- | ---------------------- |
+| [`print.ts`](core\utils\print/print.md) | Print-mode DOM adapter |
 
 ## Core engine
 
@@ -1535,6 +1554,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`docs-tails-input-guards.test.js`](experiments\docs\tests\coverage/docs-tails-input-guards.test.md)                           | Coverage tails for the docs portal's non-plain input guards —                   |
 | [`docs-tails-loader.test.js`](experiments\docs\tests\coverage/docs-tails-loader.test.md)                                       | Coverage tails for docs/loader.ts + the Docs.tsx loader                         |
 | [`docs-tails-onmounted-empty-docs-path.test.js`](experiments\docs\tests\coverage/docs-tails-onmounted-empty-docs-path.test.md) | Coverage tail for experiments/docs/Docs.tsx — onMounted's                       |
+| [`docs-tails-print-prepare.test.js`](experiments\docs\tests\coverage/docs-tails-print-prepare.test.md)                         | Coverage tails for ViewDocs._onPrintPrepare — the printprepare                  |
 | [`mermaid.test.js`](experiments\docs\tests\coverage/mermaid.test.md)                                                           | Coverage tails for docs/mermaid.ts — lazy wasm diagram                          |
 | [`render-index-tails.test.js`](experiments\docs\tests\coverage/render-index-tails.test.md)                                     | Coverage tail for docs render.tsx — the index-streaming                         |
 
@@ -2055,16 +2075,18 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                               | What it does                                               |
 | ------------------------------------------------------------------ | ---------------------------------------------------------- |
+| [`preview-h2.mjs`](shared\scripts\serve/preview-h2.md)             | HTTP/2 + brotli static preview for the production build —  |
 | [`security-headers.mjs`](shared\scripts\serve/security-headers.md) | Cross-origin isolation headers shared by every site-facing |
 
 ## Entry points
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                          | What it does                                                 |
-| ------------------------------------------------------------- | ------------------------------------------------------------ |
-| [`merge-coverage.mjs`](shared\scripts\test/merge-coverage.md) | Unions the raw coverage maps each module's Jest run wrote to |
-| [`run-modules.mjs`](shared\scripts\test/run-modules.md)       | Runs the Jest suite of every module workspace — shared,      |
+| File                                                                    | What it does                                                 |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [`lighthouse-parallel.mjs`](shared\scripts\test/lighthouse-parallel.md) | Parallel replacement for `lhci autorun`'s collect phase.     |
+| [`merge-coverage.mjs`](shared\scripts\test/merge-coverage.md)           | Unions the raw coverage maps each module's Jest run wrote to |
+| [`run-modules.mjs`](shared\scripts\test/run-modules.md)                 | Runs the Jest suite of every module workspace — shared,      |
 
 ## Entry points
 

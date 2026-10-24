@@ -79,8 +79,11 @@ export const ES_TARGETS = [
     ],
   },
   {
+    // The floor — iOS 16 (iPhone 8/X) / Chrome 93+. Anything older fails the
+    // probes and gets the loader's "needs a newer browser" notice; there is
+    // no ES5/IIFE fallback tier anymore.
     name: 'es2022',
-    label: 'ES2022 — Object.hasOwn / .at / private class fields (Chrome 93+)',
+    label: 'ES2022 — Object.hasOwn / .at / private class fields (Chrome 93+, iOS 16)',
     viteTarget: 'es2022',
     terserEcma: 2022,
     cssTarget: 'chrome93',
@@ -90,102 +93,6 @@ export const ES_TARGETS = [
       `typeof Array.prototype.at === 'function'`,
       `(function(){ return (class { #f = 1; g(){ return this.#f } }).prototype.g.call(new (class { #f = 1; g(){ return this.#f } })()) === 1 })()`,
     ],
-  },
-  {
-    name: 'es2021',
-    label: 'ES2021 — replaceAll / Promise.any / ??= (Chrome 85+, Safari 14+)',
-    viteTarget: 'es2021',
-    terserEcma: 2021,
-    cssTarget: 'chrome85',
-    format: 'module',
-    test: [
-      `typeof String.prototype.replaceAll === 'function'`,
-      `typeof Promise.any === 'function'`,
-      `(function(){ var o = {}; o.x ??= 1; return o.x === 1 })()`,
-    ],
-  },
-  {
-    name: 'es2020',
-    label: 'ES2020 — ?. ?? globalThis (Chrome 80+, Safari 13.1+)',
-    viteTarget: 'es2020',
-    terserEcma: 2020,
-    cssTarget: 'chrome80',
-    format: 'module',
-    test: [
-      `(function(){ var o = { a: 1 }; return (o?.a ?? 0) === 1 })()`,
-      `typeof globalThis === 'object'`,
-      `typeof Promise.allSettled === 'function'`,
-    ],
-  },
-  {
-    name: 'es2019',
-    label: 'ES2019 — flat / fromEntries / optional catch (Chrome 73+)',
-    viteTarget: 'es2019',
-    terserEcma: 2019,
-    cssTarget: 'chrome73',
-    format: 'module',
-    test: [
-      `typeof Array.prototype.flat === 'function'`,
-      `typeof Object.fromEntries === 'function'`,
-      `(function(){ try { throw 0 } catch { return true } })()`,
-    ],
-  },
-  {
-    name: 'es2018',
-    label: 'ES2018 — async iteration / object spread / lookbehind (Chrome 64+)',
-    viteTarget: 'es2018',
-    terserEcma: 2018,
-    cssTarget: 'chrome64',
-    format: 'module',
-    test: [
-      `(async function(){ for await (const x of []) { return x } })`,
-      `typeof Promise.prototype.finally === 'function'`,
-      `/a(?<=x)a/.test('xa')`,
-    ],
-  },
-  {
-    name: 'es2017',
-    label: 'ES2017 — async/await / Object.values (Chrome 55+, Safari 11+)',
-    viteTarget: 'es2017',
-    terserEcma: 2017,
-    cssTarget: 'chrome55',
-    format: 'module',
-    test: [
-      `(async function(){ return await Promise.resolve(1) })`,
-      `typeof Object.values === 'function'`,
-      `typeof String.prototype.padStart === 'function'`,
-    ],
-  },
-  {
-    name: 'es2016',
-    label:
-      'ES2016 — ** / includes. IIFE classic bundle for pre-module browsers (EdgeHTML, Safari 10, Samsung ≤7)',
-    viteTarget: 'es2015',
-    terserEcma: 2015,
-    cssTarget: 'ie11',
-    format: 'iife',
-    legacy: true,
-    test: [
-      `typeof Array.prototype.includes === 'function'`,
-      `(function(){ return 2 ** 3 === 8 })()`,
-    ],
-  },
-  {
-    name: 'ie',
-    label:
-      'ES5 — the floor: IE10/IE11 and anything that fails every probe. Derived by Babel-lowering the es2016 IIFE (preset-env ie11) — no separate vite build.',
-    viteTarget: 'es2015',
-    terserEcma: 5,
-    cssTarget: 'ie11',
-    format: 'iife',
-    legacy: true,
-    // `babelFrom` marks a derived tier: build-targets.mjs skips its vite
-    // build and instead lowers the named tier's emitted bundle to ES5.
-    babelFrom: 'es2016',
-    // Empty probe list = unconditional pass — this tier is the last
-    // resort, so EVERY engine that survived to it loads it rather than
-    // the "needs a newer browser" message.
-    test: [],
   },
 ]
 

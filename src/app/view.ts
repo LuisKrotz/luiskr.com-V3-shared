@@ -54,17 +54,6 @@ export function updateAppViewContent(
 }
 
 /**
- * View swap: lazy-imports the target view's chunk (each import is in its
- * own branch so bundlers keep per-route code-splitting), then either
- * instant-replaces the outlet (reduced motion / empty outlet) or plays
- * the two-leg cross-fade — fade-out for PAGE_FADE_HALF, then mount the
- * incoming view with a fade-in class removed on the next frame.
- * `_sectionsMeasured` resets so the new view's sections re-measure lazily.
- * @param c The AppRoot element.
- * @param outlet The #view-outlet element.
- * @param _to Destination descriptor — the tag is read from c.currentViewTag.
- */
-/**
  * Parks the prerendered reader article offscreen once a real view owns
  * the outlet. Until then it stays painted under the intro veil so its
  * content counts as early FCP/LCP. Idempotent — safe on every swap.
@@ -75,6 +64,17 @@ const parkReaderArticle = (): void => {
     ?.classList.add(READER_CLASSES.OFFSCREEN)
 }
 
+/**
+ * View swap: lazy-imports the target view's chunk (each import is in its
+ * own branch so bundlers keep per-route code-splitting), then either
+ * instant-replaces the outlet (reduced motion / empty outlet) or plays
+ * the two-leg cross-fade — fade-out for PAGE_FADE_HALF, then mount the
+ * incoming view with a fade-in class removed on the next frame.
+ * `_sectionsMeasured` resets so the new view's sections re-measure lazily.
+ * @param c The AppRoot element.
+ * @param outlet The #view-outlet element.
+ * @param _to Destination descriptor — the tag is read from c.currentViewTag.
+ */
 export async function flipAppView(
   c: AppRoot,
   outlet: Element,

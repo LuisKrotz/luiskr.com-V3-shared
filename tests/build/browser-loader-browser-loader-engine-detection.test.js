@@ -80,9 +80,9 @@ const mkManifest = (over = {}) => ({
       tests: ['typeof Promise === "function"'],
     },
     {
-      name: 'es2016',
-      js: '/v/es2016/app.js',
-      css: '/v/es2016/app.css',
+      name: 'es2022',
+      js: '/v/es2022/app.js',
+      css: '/v/es2022/app.css',
       module: false,
       tests: ['true'],
     },

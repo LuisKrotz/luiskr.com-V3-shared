@@ -98,23 +98,18 @@ word index `wi` via the closure below.
 - `@param` withChars false → emit plain word text (pre/post-anim state).
 - `@returns` The word's `<span>` HTML.
 
-### `plainChunkToHtml`
-
-One plain-mode token → markup. Words become escaped text (no span —
-a pending paragraph needs zero per-word nodes), top-level spaces
-become literal spaces, tags recurse through plainTagToHtml.
-
-- `@param` chunk The parsed token.
-- `@returns` HTML string for the token.
-
 ### `plainTagToHtml`
 
-Plain-mode tag — real markup with a single aria-hidden wrapper for the
-inner text (every visual copy stays hidden so the host's sr-only twin
-is the one announcement). Anchors additionally carry the sr-only-alpha
-twin — identical accessible-name topology to the animated render —
-and keep their authored attrStr minus aria-label for the same
-label-in-name parity reason documented at tagToHtml.
+Plain-mode tag — the element itself stays a real, reachable node while
+its text content collapses via the recursive plainTokensToHtml call
+(runs wrap in per-run aria-hidden spans so the host's sr-only twin is
+the one announcement). The single outer aria-hidden wrapper this
+replaced hid interactive descendants too — `<strong><a>…` mounted a
+focusable link inside an aria-hidden subtree (axe aria-hidden-focus,
+and the link vanished from the accessibility tree entirely). Anchors
+additionally carry the sr-only-alpha twin — identical accessible-name
+topology to the animated render — and keep their authored attrStr
+minus aria-label for the label-in-name parity reason at tagToHtml.
 
 - `@param` token The tag token.
 - `@returns` HTML for the tag block.
@@ -124,10 +119,13 @@ label-in-name parity reason documented at tagToHtml.
 Plain-mode assembly — consecutive word/space/br tokens collapse into
 ONE aria-hidden span per run (a run can hold an entire paragraph), and
 tag tokens emit real elements via plainTagToHtml so interactive
-content stays reachable. Spaces inside a run are literal (natural
-width — the same metrics the span modes use at top level).
+content stays reachable. Top-level spaces are literal (natural
+width — the same metrics the span modes use); inside a tag they are
+nbsp — the same unbreakable rule the animated render applies inside
+links (a link's words stay one visual unit).
 
 - `@param` tokens Parsed top-level tokens.
+- `@param` insideTag True when collapsing a tag's inner chunks — spaces
 - `@returns` The assembled plain-mode HTML.
 
 ### `renderContent`

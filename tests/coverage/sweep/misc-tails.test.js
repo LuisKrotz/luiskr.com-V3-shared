@@ -4,7 +4,7 @@
  */
 
 import { jest } from '@jest/globals'
-import { FORM_EVENTS } from '@core/tokens/events/dom.js'
+import { FORM_EVENTS, POINTER_EVENTS } from '@core/tokens/events/dom.js'
 import { DEBUG_PARAMS, WEBGL_MODES } from '@core/tokens/strings/debug.js'
 import { wasmImageDecoder } from '@core/utils/wasm/wasm-image-decoder.js'
 import { wasmPool } from '@core/utils/wasm/wasm-pool.js'
@@ -143,6 +143,11 @@ describe('utils tails', () => {
 
     store.commit(PREF_MUTATIONS.SET_THEME, THEME.DARK)
     onSchemeChange()
+
+    // Release the intent gate armed by mountAppShell so the lazy global
+    // imports land inside this suite rather than on the 20s quiet timer.
+    window.dispatchEvent(new window.Event(POINTER_EVENTS.POINTERDOWN))
+    await new Promise((r) => setTimeout(r, 10))
   })
 
   test('predictiveLoader._schedule — setTimeout fallback arm', () => {

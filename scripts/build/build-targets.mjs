@@ -3,10 +3,10 @@
  * @description Multi-target build orchestrator.
  *
  *   1. `vite build` once per tier in build/es-targets.mjs — each emits
- *      dist/v/<tier>/assets/{js,css,misc}/<name>-<hash>.* (module tiers) or a
- *      self-contained IIFE bundle (es2016). The default tier additionally
- *      emits dist/index.html, dist/cms/index.html, public/ assets and the
- *      service worker.
+ *      dist/v/<tier>/assets/{js,css,misc}/<name>-<hash>.* as ES modules.
+ *      The tier floor is es2022 (iOS 16 / iPhone 8+X); the default tier
+ *      additionally emits dist/index.html, dist/cms/index.html, public/
+ *      assets and the service worker.
  *   2. esbuild each core/legacy-polyfills/* entry to
  *      dist/assets/polyfills/<name>-<hash>.js — fetched ONLY by engines
  *      whose runtime guards fail.
@@ -104,18 +104,15 @@ const BUILD_WORKERS = (() => {
 })()
 
 /**
- * Runs `vite build` for one tier. Derived tiers (`babelFrom`) are skipped
- * here — they lower an already-emitted bundle in the post-pass below.
- * `first` marks the owner build: it alone wipes dist/ (emptyOutDir) and
- * copies the public dir, so it must run BEFORE the parallel wave starts.
+ * Runs `vite build` for one tier. `first` marks the owner build: it alone
+ * wipes dist/ (emptyOutDir) and copies the public dir, so it must run
+ * BEFORE the parallel wave starts.
  * @param {object} t ES_TARGETS entry
  * @param {number} i index in buildList (banner display only)
  * @param {boolean} first whether this build owns dist/ initialization
  * @returns {Promise<void>} resolves on child exit 0
  */
 const buildTier = (t, i, first) => {
-  if (t.babelFrom) return Promise.resolve()
-
   console.log(`\n═══ build ${i + 1}/${buildList.length}: ${t.name} (${t.format}) ═══`)
 
   // LK_KEEP_DIST keeps emptyOutDir off, so a rebuilt tier must clear its own
@@ -135,7 +132,7 @@ const buildTier = (t, i, first) => {
   )
 }
 
-const viteTiers = buildList.filter((t) => !t.babelFrom)
+const viteTiers = buildList
 
 // ONNX model + ORT runtime artifacts regenerate into website/public
 // BEFORE build 0 — that tier alone copies public/ into dist/, so the
@@ -167,51 +164,6 @@ await Promise.all(
   })
 )
 
-// ── 1b. Derived ES5 tiers ───────────────────────────────────────────────────
-// Babel lowers the source tier's emitted IIFE to parse-level ES5 — the only
-// thing IE10/IE11 execute. preset-env with ie targets also lowers
-// generators (regenerator), classes, const/let, template literals —
-// everything esbuild's es2015 floor leaves behind.
-for (const t of buildList.filter((t) => t.babelFrom)) {
-  const srcDir = path.join(DIST, 'v', t.babelFrom, 'assets', 'js')
-  const srcFile = fs.readdirSync(srcDir).find((f) => f.startsWith('index-') && f.endsWith('.js'))
-
-  if (!srcFile) throw new Error(`tier ${t.name}: source bundle for ${t.babelFrom} missing`)
-
-  console.log(`\n═══ babel ${t.babelFrom} → ${t.name} (ES5) ═══`)
-
-  const babel = await import('@babel/core')
-  const presetEnv = (await import('@babel/preset-env')).default
-  const { code } = await babel.transformFileAsync(path.join(srcDir, srcFile), {
-    babelrc: false,
-    configFile: false,
-    // modules:false — the input is already an IIFE, not a module graph;
-    // transpiling its (nonexistent) modules would wrap it wrongly.
-    presets: [[presetEnv, { targets: { ie: '11' }, modules: false }]],
-    compact: true,
-    comments: false,
-  })
-
-  const { minify: terserMinify } = await import('terser')
-  const { code: min } = await terserMinify(code, {
-    ecma: 5,
-    compress: { passes: 2 },
-    mangle: true,
-    format: { ascii_only: true },
-  })
-
-  const outDir = path.join(DIST, 'v', t.name, 'assets', 'js')
-
-  withFsRetry(() => fs.rmSync(path.join(DIST, 'v', t.name), { recursive: true, force: true }))
-  withFsRetry(() => fs.mkdirSync(outDir, { recursive: true }))
-
-  const hash = crypto.createHash('md5').update(min).digest('hex').slice(0, 8)
-  const name = `index-${hash}.js`
-
-  withFsRetry(() => fs.writeFileSync(path.join(outDir, name), min))
-  console.log(`  ${t.name}: ${name} (${(min.length / 1024).toFixed(0)}KB)`)
-}
-
 // ── 2. Polyfill bundles ─────────────────────────────────────────────────────
 console.log('\n═══ polyfill bundles ═══')
 
@@ -221,12 +173,14 @@ const { rolldown } = await import('rolldown')
 // entry gets its own single-file build. Rolldown holds the graph in Rust
 // off the JS thread, so the builds overlap cleanly under Promise.all —
 // each bundle only ~100-300KB, six concurrent is well under any RAM cap.
+// The es2022 tier floor bounds the syntax target too: polyfills are only
+// fetched after a tier probe passed, so nothing older ever executes them.
 await Promise.all(
   POLYFILLS.map(async (p) => {
     const bundle = await rolldown({
       input: { [p.name]: path.join(ROOT, p.entry) },
       platform: 'browser',
-      transform: { target: 'es2015' },
+      transform: { target: 'es2022' },
     })
 
     try {
@@ -245,37 +199,6 @@ await Promise.all(
   })
 )
 
-// Polyfill bundles ship to the ES5 floor too — rolldown's es2015 output
-// still uses const/arrow/class syntax IE can't parse, so every emitted
-// file gets the same preset-env pass the `ie` tier receives. Modern
-// browsers pay nothing (ES5 is equally executable everywhere).
-{
-  const babel = await import('@babel/core')
-  const presetEnv = (await import('@babel/preset-env')).default
-  const dir = path.join(DIST, 'assets/polyfills')
-
-  // babel's transform pipeline is CPU-only JS — transformFileAsync releases
-  // the await between plugin phases so the files interleave; the sync write
-  // per completion is ~ms, so Promise.all is the whole win here.
-  await Promise.all(
-    fs
-      .readdirSync(dir)
-      .filter((f) => f.endsWith('.js'))
-      .map(async (f) => {
-        const file = path.join(dir, f)
-        const { code } = await babel.transformFileAsync(file, {
-          babelrc: false,
-          configFile: false,
-          presets: [[presetEnv, { targets: { ie: '11' }, modules: false }]],
-          compact: true,
-          comments: false,
-        })
-
-        withFsRetry(() => fs.writeFileSync(file, code))
-      })
-  )
-}
-
 // Hash-named files → runtime paths for the loader manifest.
 const polyDir = path.join(DIST, 'assets/polyfills')
 
@@ -290,10 +213,10 @@ const polyManifest = POLYFILLS.map((p) => ({
   guard: p.guard,
 }))
 
-// ── 3. Missing CSS for IIFE tiers ───────────────────────────────────────────
-// Rolldown emits no CSS asset when codeSplitting is off (iife), so compile
-// the global sheet directly: sass → lightningcss with the tier's prefix
-// target. Only tiers that produced no css get this pass.
+// ── 3. Missing per-tier CSS ─────────────────────────────────────────────────
+// Any tier whose vite build produced no css/ asset (rolldown emits none when
+// code-splitting is off) gets the global sheet compiled directly:
+// sass → lightningcss with the tier's prefix target.
 const cssTargetMap = (cssTarget) => {
   if (cssTarget === 'esnext') return undefined
   const m = cssTarget.match(/^([a-z]+)(\d+)$/)

@@ -2,9 +2,9 @@
 
 &lt;view-docs&gt; — the English-only docs portal route.
 
-| | |
-|---|---|
-| **Source** | `src/experiments\docs\Docs.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\docs\Docs.tsx`                         |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -81,6 +81,7 @@ Localized toast copy for the copy guard — componentText already English-falls-
 ### `navigateDocs`
 
 Navigates within the portal — a bare path resolves against /docs.
+
 - `@param` subPath Manifest-relative path ('' → portal root).
 
 ### `pickNode`
@@ -145,6 +146,15 @@ tearing down GL/observability state.
 ### (module scope)
 
 Lifecycle: store sub + path resolution + guards.
+
+### (module scope)
+
+Print-prepare answer — the print adapter fires `printprepare` before
+its media walk so generated DOM reaches the readable mirror: the
+payload box's rendered form (mermaid SVG diagrams, istanbul tables)
+replaces the article's static copy. Cloned canvases are dead buffers
+and get stripped — the live canvases inject their own captured
+stills during the walk.
 
 ### (module scope)
 

@@ -505,8 +505,14 @@ describe('Style Governance & Zero-Hardcoding Enforcement', () => {
 
     const buildSrc = fs.readFileSync(path.join(rootDir, 'shared/scripts/build/build.mjs'), 'utf-8')
 
+    // Lighthouse runs only after the tier build: the parallel collector
+    // feeds fresh LHRs to `lhci assert`, replacing the serial autorun.
     expect(buildSrc.lastIndexOf('build-targets.mjs')).toBeLessThan(
-      buildSrc.lastIndexOf("['lhci', 'autorun']")
+      buildSrc.lastIndexOf('lighthouse-parallel.mjs')
+    )
+
+    expect(buildSrc.lastIndexOf('lighthouse-parallel.mjs')).toBeLessThan(
+      buildSrc.lastIndexOf("['lhci', 'assert']")
     )
 
     const preCommit = fs.readFileSync(

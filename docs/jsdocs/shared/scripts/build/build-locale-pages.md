@@ -78,6 +78,45 @@ through the shared queue so the emit loop never blocks on a ~30-60ms
 brotli-11 pass per page — drainCompressedWrites() runs them across the
 libuv threadpool at the end of the fan-out.
 
+### `LCP_THUMB_MAX`
+
+Largest fetched thumb payload worth inlining as a data URI.
+
+### `LCP_THUMBS`
+
+Resolved media URL → `data:` LQIP payload for the injected early-LCP
+image (`null` = fetched variant unusable or oversized). localize()
+stays synchronous so the map is populated by prefetchLcpThumbs()
+ahead of each emit batch; URLs repeat across 15 locales so the cache
+collapses the network work to one fetch per unique asset.
+
+### `lcpImageOf`
+
+The painted-under-veil article's early LCP media — first figure's
+<source srcset> (what the browser actually selects), then <img src>,
+then a <video> poster — falling back to the route's hero for pages
+whose emitter puts no media first.
+
+### `lcpThumbUrlOf`
+
+Maps a resolved CDN media URL to its smallest sibling variant — the
+q3 kodak blur pass for images (mobile derivative first), the
+-scaledown-4x poster frame for video — keeping the inlined LQIP in
+the few-KB range. Manifest membership decides; with no listing (or
+no variant) the original URL is returned and the fetch-size cap
+filters oversized payloads instead.
+
+### (module scope)
+
+Downloads each URL's smallest variant once into LCP_THUMBS as a
+base64 data URI. Oversized/failed fetches cache `null` so localize()
+simply skips the LQIP for that route — the network image preload
+still applies. Mirrors prefetchStarMediaDims(): build-time fetches,
+silent failures.
+
+- `@param` {Iterable<string>} urls - resolved media URLs (CDN or not)
+- `@param` {Set<string>|null} manifest - bucket listing for variant checks
+
 ### `localize`
 
 Rewrites the English shell into a localized document.

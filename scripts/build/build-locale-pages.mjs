@@ -46,6 +46,8 @@ import { fileURLToPath } from 'node:url'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '../../../core/tokens/routes/aliases.ts'
 import { GENERIC_DIMENSIONS } from '../../../core/tokens/media/dimensions.ts'
+import { MEDIA } from '../../../core/tokens/media/suffixes.ts'
+import { MEDIA_ATTRS } from '../../../core/tokens/attrs/media.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
 import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
 import { withFsRetry } from './fs-retry.mjs'
@@ -301,6 +303,125 @@ function* walkMedia(node) {
  */
 const writeCompressed = (file, html) => queueCompressedWrite(file, html)
 
+/** Largest fetched thumb payload worth inlining as a data URI. */
+const LCP_THUMB_MAX = 16384
+
+/**
+ * Resolved media URL → `data:` LQIP payload for the injected early-LCP
+ * image (`null` = fetched variant unusable or oversized). localize()
+ * stays synchronous so the map is populated by prefetchLcpThumbs()
+ * ahead of each emit batch; URLs repeat across 15 locales so the cache
+ * collapses the network work to one fetch per unique asset.
+ */
+const LCP_THUMBS = new Map()
+
+/**
+ * The painted-under-veil article's early LCP media — first figure's
+ * <source srcset> (what the browser actually selects), then <img src>,
+ * then a <video> poster — falling back to the route's hero for pages
+ * whose emitter puts no media first.
+ */
+const lcpImageOf = (content, image) => {
+  const firstFigure = content && content.match(/<figure[\s\S]*?<\/figure>/)?.[0]
+
+  return (
+    firstFigure?.match(/<source srcset="([^"]+)"/)?.[1] ||
+    firstFigure?.match(/<img[^>]* src="([^"]+)"/)?.[1] ||
+    firstFigure?.match(/poster="([^"]+)"/)?.[1] ||
+    image
+  )
+}
+
+/**
+ * Maps a resolved CDN media URL to its smallest sibling variant — the
+ * q3 kodak blur pass for images (mobile derivative first), the
+ * -scaledown-4x poster frame for video — keeping the inlined LQIP in
+ * the few-KB range. Manifest membership decides; with no listing (or
+ * no variant) the original URL is returned and the fetch-size cap
+ * filters oversized payloads instead.
+ */
+const lcpThumbUrlOf = (url, manifest) => {
+  if (!url.startsWith(CDN_BASE)) return url
+
+  const key = dec(url.slice(CDN_BASE.length))
+  const at = key.indexOf(MEDIA.VIDEO_EXT)
+
+  const stem = at >= 0 ? key.slice(0, at) : key
+
+  const candidates =
+    at >= 0
+      ? [
+          // Both bucket generations: newer keys keep the .mp4 marker before
+          // -scaledown-Nx, older ones drop it — cover each spelling, webp
+          // first (the webp thumb form is .jpg-thumb.webp — it replaces the
+          // trailing .jpg, it is never .jpg-thumb.jpg.webp).
+          `${stem}${MEDIA.VIDEO_SCALE_4X}${MEDIA.VIDEO_THUMB_WEBP_EXT}`,
+          `${stem}${MEDIA.VIDEO_SCALE_4X}${MEDIA.VIDEO_THUMB_EXT}`,
+          `${stem}${MEDIA.VIDEO_SCALE_BARE_4X}${MEDIA.VIDEO_THUMB_WEBP_EXT}`,
+          `${stem}${MEDIA.VIDEO_SCALE_BARE_4X}${MEDIA.VIDEO_THUMB_EXT}`,
+          `${stem}${MEDIA.VIDEO_SCALE}${MEDIA.VIDEO_THUMB_WEBP_EXT}`,
+          `${stem}${MEDIA.VIDEO_SCALE}${MEDIA.VIDEO_THUMB_EXT}`,
+          `${stem}${MEDIA.VIDEO_SCALE_BARE}${MEDIA.VIDEO_THUMB_WEBP_EXT}`,
+          `${stem}${MEDIA.VIDEO_SCALE_BARE}${MEDIA.VIDEO_THUMB_EXT}`,
+          `${stem}${MEDIA.VIDEO_THUMB_WEBP_EXT}`,
+          `${stem}${MEDIA.VIDEO_THUMB_EXT}`,
+          `${stem}${MEDIA.THUMB_WEBP_EXT}`,
+          `${stem}${MEDIA.THUMB_EXT}`,
+        ]
+      : [
+          `${key.replace(/(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i, '')}${MEDIA.MOBILE_SUFFIX}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.WEBP_EXT}`,
+          `${key.replace(/(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i, '')}${MEDIA.MOBILE_SUFFIX}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.EXT}`,
+          `${key.replace(/(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i, '')}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.WEBP_EXT}`,
+          `${key.replace(/(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i, '')}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.EXT}`,
+        ]
+
+  for (const candidate of candidates) {
+    if (manifest?.has(candidate)) return `${CDN_BASE}${candidate}`
+  }
+
+  return url
+}
+
+/**
+ * Downloads each URL's smallest variant once into LCP_THUMBS as a
+ * base64 data URI. Oversized/failed fetches cache `null` so localize()
+ * simply skips the LQIP for that route — the network image preload
+ * still applies. Mirrors prefetchStarMediaDims(): build-time fetches,
+ * silent failures.
+ * @param {Iterable<string>} urls - resolved media URLs (CDN or not)
+ * @param {Set<string>|null} manifest - bucket listing for variant checks
+ */
+export async function prefetchLcpThumbs(urls, manifest) {
+  await Promise.all(
+    [...new Set(urls)]
+      .filter((u) => u && !LCP_THUMBS.has(u))
+      .map(async (url) => {
+        const thumb = lcpThumbUrlOf(url, manifest)
+
+        try {
+          const res = await fetch(thumb)
+
+          if (!res.ok) {
+            LCP_THUMBS.set(url, null)
+
+            return
+          }
+
+          const buf = Buffer.from(await res.arrayBuffer())
+
+          LCP_THUMBS.set(
+            url,
+            buf.length <= LCP_THUMB_MAX
+              ? `data:${thumb.endsWith(MEDIA.WEBP_EXT) ? MEDIA_ATTRS.IMAGE_WEBP : MEDIA_ATTRS.IMAGE_JPEG};base64,${buf.toString('base64')}`
+              : null
+          )
+        } catch {
+          LCP_THUMBS.set(url, null)
+        }
+      })
+  )
+}
+
 /**
  * Rewrites the English shell into a localized document.
  * @param {string} html - post-loader dist/index.html source
@@ -426,19 +547,40 @@ export function localize(
     (match, open, close) => `${open}${graphJson}${close}`
   )
 
+  // The preload must land BEFORE the modulepreload fan-out: Lantern
+  // queues same-priority requests in document order, so a mid-body
+  // image loses ~6s behind the boot graph.
+  const lcpImage = lcpImageOf(content, image)
+
+  // The early-LCP paint itself is an LQIP: prefetchLcpThumbs() inlined
+  // the smallest bucket variant as a data URI, so the candidate paints
+  // in the first frame with zero network wait while the real hero (the
+  // preload above + the runtime mount) still streams in. It lands inside
+  // the statically-emitted intro veil (class mirrors
+  // LOADER_CLASSES.INTRO_LOADER_LQIP) — the veil paints with the first
+  // frame so the image's paint time coincides with FCP, and the veil's
+  // removal on mount retires the candidate with zero overlay risk.
+  const lcpThumb = lcpImage && LCP_THUMBS.get(lcpImage)
+
+  if (lcpThumb) {
+    out = out.replace(
+      /(<div class="intro-loader"[^>]*>)/,
+      `$1<img class="intro-loader-lqip" src="${lcpThumb}" alt="" aria-hidden="true">`
+    )
+  }
+
+  if (lcpImage) {
+    out = out.replace(
+      /(<link rel="modulepreload")/,
+      `  <link rel="preload" as="image" href="${esc(lcpImage)}" fetchpriority="high">\n  $1`
+    )
+  }
+
   // og:locale + hreflang alternates + x-default, inserted before </head>.
   const alt = alternates
     .map((a) => `  <link rel="alternate" hreflang="${a.bcp}" href="${a.url}">`)
     .join('\n')
   const inject = [
-    // LCP discovery — the route's hero (project cover / media poster) is
-    // the runtime LCP element, but the SPA mounts it only after the JS
-    // graph evaluates. Preloading at document level decouples the image
-    // fetch from the module chain: the bytes are already in cache when
-    // the media-figure mounts its poster/<img>.
-    ...(image
-      ? [`  <link rel="preload" as="image" href="${esc(image)}" fetchpriority="high">`]
-      : []),
     `  <meta property="og:locale" content="${ogLocale}">`,
     ...alternates
       .filter((a) => a.og !== ogLocale)
@@ -467,13 +609,19 @@ export function localize(
     // reader-mode document signal.
     const parked = content.replace(/^<main>/, '<div>').replace(/<\/main>$/, '</div>')
 
+    // Media-less routes get no veil LQIP, so the article carries the
+    // reader-content--painted modifier (mirrors READER_CLASSES.PAINTED)
+    // and stays painted under the opaque veil — its own text becomes the
+    // early LCP candidate instead of a late runtime <draw-text>.
+    const articleClass = lcpThumb ? 'reader-content' : 'reader-content reader-content--painted'
+
     out = out.replace(
       /<div id="app">\s*(?:<div class="boot-veil"[^>]*>[\s\S]*?<\/div>\s*)?(?:<article class="reader-content"[^>]*>[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?\s*<\/div>/,
       // The parked copy is a labelled region landmark (IBM's DOM-level
       // aria_content_in_landmark counts <article> children as un-landmarked
       // content) while aria-hidden + inert keep the mirror out of the AT
       // tree and focus order — screen readers hear the live app instead.
-      `<div id="app"><article class="reader-content" role="region" aria-label="Static page copy" aria-hidden="true" inert>${parked}</article></div>`
+      `<div id="app"><article class="${articleClass}" role="region" aria-label="Static page copy" aria-hidden="true" inert>${parked}</article></div>`
     )
   }
 
@@ -954,28 +1102,25 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const label = esc(m.label || '')
     const wh = dimsAttr(m.size?.[0], m.size?.[1])
 
-    // <video><source> retries the next entry on 404, but <picture><source>
-    // does not — a missing webp renders as broken. webp is emitted only
-    // when the bucket manifest confirms the sibling was generated. webm
-    // gets the same gate: video falls back gracefully, but an unconverted
-    // <source> is still a doomed request on every page view.
-    const webm =
-      source.endsWith('.mp4') &&
-      mediaManifest?.has(`${dec(source.slice(CDN_BASE.length, -4))}.webm`)
-        ? `${source.slice(0, -4)}.webm`
-        : ''
+    // <picture><source> does not retry the next entry on 404 — webp is
+    // emitted only when the bucket manifest confirms the sibling was
+    // generated, otherwise the unconverted source is a doomed request.
     const webp = (u) =>
       u.endsWith('.jpg') && mediaManifest?.has(`${dec(u.slice(CDN_BASE.length, -4))}.webp`)
         ? `${u.slice(0, -4)}.webp`
         : ''
 
-    // A <video controls> inside the deep-link anchor is nested
-    // interactive content (video controls are tabbable inside the link —
-    // widget_tabbable_single) — inside the link it's a preview only, the
-    // deep page carries the real player. Standalone figures keep their
-    // controls so the media stays usable without the link.
+    // Video figures mirror as the poster <img>, not a <video>: the parked
+    // article is inert (controls could never run anyway), a poster attr
+    // fetches at parse even inside a content-visibility:hidden subtree —
+    // ~100+ eager thumbs per media-heavy page — while the lazy offscreen
+    // img costs zero requests and still shows the same still to no-JS
+    // readers, AI agents, and print. The playable URL stays discoverable
+    // through the figcaption link + deep-link target.
     const media = isVideo
-      ? `<video${thumb ? ` poster="${esc(thumb)}"` : ''}${deepHref ? '' : ' controls'} muted playsinline preload="none"${wh}>${webm ? `<source src="${esc(webm)}" type="video/webm">` : ''}<source src="${esc(source)}" type="video/mp4"></video>`
+      ? thumb
+        ? `<picture>${webp(thumb) ? `<source srcset="${esc(webp(thumb))}" type="image/webp">` : ''}<img src="${esc(thumb)}" alt="${esc(deepHref ? '' : label)}" loading="lazy" decoding="async"${wh}></picture>`
+        : ''
       : // Inside the labelled deep-link the image is decorative — the
         // anchor's aria-label + figcaption already carry the name, so a
         // repeated alt is redundant verbosity for screen readers.
@@ -1732,6 +1877,11 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     ...(crumbs ? { breadcrumb: { '@id': `${url}#breadcrumbs` } } : {}),
   })
 
+  // Prime the LQIP cache for the root document's early-LCP image.
+  const enHome = homeContent('en')
+
+  await prefetchLcpThumbs([lcpImageOf(enHome)], mediaManifest)
+
   const rootHtml = localize(template, {
     bcpLang: 'en',
     ogLocale: 'en_US',
@@ -1748,7 +1898,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       }),
       ...homeEntities('en'),
     ],
-    content: homeContent('en'),
+    content: enHome,
     loader: loaderCopyFor('en'),
   })
 
@@ -1761,7 +1911,16 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
     const tags = LOCALE_TAGS[loc]
 
-    for (const route of routesFor(loc)) {
+    // Prime the LQIP cache once per locale — media URLs are identical
+    // across locales so only the first locale's pass hits the network.
+    const routes = routesFor(loc)
+
+    await prefetchLcpThumbs(
+      routes.map((route) => lcpImageOf(route.content, route.image)),
+      mediaManifest
+    )
+
+    for (const route of routes) {
       if (!route.path) continue // en home — dist/index.html written by the root pass
 
       const pageUrl = route.canonical
@@ -1842,11 +2001,15 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   // emit child listings) so the whole docs surface reads without JS.
   const docsContentDir = path.join(distDir, 'docs-content')
 
-  const emitDocsPages = () => {
+  const emitDocsPages = async () => {
     const { roots } = scanManifest(ROOT)
 
     // /docs/<root> — index page per manifest root, then every child node.
-    const writeDocsPage = ({ urlPath, name, description, body, crumbs }) => {
+    const writeDocsPage = async ({ urlPath, name, description, body, crumbs }) => {
+      // Docs bodies rarely carry figures, but when they do the first
+      // image is the same early-LCP candidate as the route pages.
+      await prefetchLcpThumbs([lcpImageOf(body)], mediaManifest)
+
       const pageUrl = `${SITE_URL}${urlPath}`
 
       const entities = [
@@ -1908,7 +2071,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         )
         .join('')}</ul>`
 
-    const emit = (node, trail) => {
+    const emit = async (node, trail) => {
       const urlPath = `/docs/${node.path}`
       const isDir = node.type === 'dir'
       let body
@@ -1939,7 +2102,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         { name: node.name, url: `${SITE_URL}${urlPath}` },
       ]
 
-      writeDocsPage({
+      await writeDocsPage({
         urlPath,
         name: node.name,
         description,
@@ -1949,13 +2112,13 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
       if (isDir) {
         for (const child of node.children || []) {
-          emit(child, [...trail, { name: node.name, url: `${SITE_URL}${urlPath}` }])
+          await emit(child, [...trail, { name: node.name, url: `${SITE_URL}${urlPath}` }])
         }
       }
     }
 
     // /docs itself — index over every manifest root.
-    writeDocsPage({
+    await writeDocsPage({
       urlPath: '/docs',
       name: 'Docs',
       description: 'Documentation portal — source, reports, coverage and module docs.',
@@ -1975,7 +2138,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         { name: root.label || root.root, url: `${SITE_URL}/docs/${root.root}` },
       ]
 
-      writeDocsPage({
+      await writeDocsPage({
         urlPath: `/docs/${root.root}`,
         name: root.label || root.root,
         description: `${root.label || root.root} — documentation index`,
@@ -1984,13 +2147,13 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       })
 
       for (const child of root.children || []) {
-        emit(child, rootTrail.slice(1))
+        await emit(child, rootTrail.slice(1))
       }
     }
   }
 
   try {
-    emitDocsPages()
+    await emitDocsPages()
   } catch (err) {
     console.warn('[locale-pages] docs emit skipped:', err?.message || err)
   }

@@ -80,9 +80,9 @@ const mkManifest = (over = {}) => ({
       tests: ['typeof Promise === "function"'],
     },
     {
-      name: 'es2016',
-      js: '/v/es2016/app.js',
-      css: '/v/es2016/app.css',
+      name: 'es2022',
+      js: '/v/es2022/app.js',
+      css: '/v/es2022/app.css',
       module: false,
       tests: ['true'],
     },
@@ -109,7 +109,7 @@ describe('browser-loader — tier + polyfill selection', () => {
 
   test('skips module tiers entirely when type=module is unsupported', () => {
     const { head } = runLoader(TEST_UA.CHROME, mkManifest(), { canModule: false })
-    const script = head.find((n) => n.src === '/v/es2016/app.js')
+    const script = head.find((n) => n.src === '/v/es2022/app.js')
 
     expect(script.type).toBeUndefined()
   })
@@ -121,7 +121,7 @@ describe('browser-loader — tier + polyfill selection', () => {
 
     const fallback = runLoader(TEST_UA.CHROME, manifest)
 
-    expect(fallback.head.find((n) => n.src === '/v/es2016/app.js')).toBeTruthy()
+    expect(fallback.head.find((n) => n.src === '/v/es2022/app.js')).toBeTruthy()
 
     const dead = runLoader(TEST_UA.CHROME, mkManifest({ targets: [] }))
     const dead2 = runLoader(
@@ -144,12 +144,12 @@ describe('browser-loader — tier + polyfill selection', () => {
   test('non-default tier injects its stylesheet before the bundle', () => {
     const manifest = mkManifest()
 
-    manifest.targets = manifest.targets.slice(1) // es2016 (not default)
+    manifest.targets = manifest.targets.slice(1) // es2022 (not default)
 
     const { head } = runLoader(TEST_UA.CHROME, manifest)
 
-    expect(head.find((n) => n.href === '/v/es2016/app.css')).toBeTruthy()
-    expect(head.find((n) => n.src === '/v/es2016/app.js')).toBeTruthy()
+    expect(head.find((n) => n.href === '/v/es2022/app.css')).toBeTruthy()
+    expect(head.find((n) => n.src === '/v/es2022/app.js')).toBeTruthy()
   })
 
   test('runs during <head> parsing — document.body is null, nothing must throw', () => {

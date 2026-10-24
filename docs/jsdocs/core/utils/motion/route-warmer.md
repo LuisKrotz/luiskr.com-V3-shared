@@ -2,9 +2,9 @@
 
 Post-load route-chunk warming.
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\motion\route-warmer.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\motion\route-warmer.ts`                   |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -18,6 +18,7 @@ Small route chunks safe to warm during idle time.
 Runs `cb` at the next idle slice — requestIdleCallback with a bounded
 timeout when available, a short setTimeout fallback otherwise. Evaluated
 per call so the probe reflects the live environment in tests.
+
 - `@param` {Function} cb — the unit of warm work to defer
 
 ### `_warmNext`
@@ -25,6 +26,7 @@ per call so the probe reflects the live environment in tests.
 Schedules the next route chunk import. Stops early when warming was
 halted or the chain is exhausted; each chunk resolves or rejects into
 `advance` so a failed chunk never stalls the rest of the chain.
+
 - `@param` {number} index — position into ROUTE_CHUNKS
 
 ### `stopRouteWarming`
@@ -33,4 +35,7 @@ Halts the idle warm chain — any pending scheduled imports are skipped.
 
 ### `startRouteWarming`
 
-Starts idle warming once `load` has fired (or immediately if it already has).
+Arms warming on the first interaction signal (or the long quiet-window
+bound) — each chunk still resolves inside an idle slice once released.
+Warming at load put the unused-route chunk evals inside the interactive
+window for users who never navigated at all.

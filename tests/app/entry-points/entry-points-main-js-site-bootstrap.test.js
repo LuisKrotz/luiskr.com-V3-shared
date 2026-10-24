@@ -5,7 +5,9 @@
 import { describe, test, expect, jest } from '@jest/globals'
 import { waitFor } from '@tests/fixtures/test-constants.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
+import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
+import { POINTER_EVENTS } from '@core/tokens/events/dom.js'
 
 const registerMock = jest.fn()
 
@@ -70,5 +72,19 @@ describe('main.js site bootstrap', () => {
     await waitFor(() => window.router, 90000)
 
     expect(window.router).toBeTruthy()
+
+    // mountAppShell lazy-imports the dialog/HUD chunks on the first
+    // interaction signal — fire one and wait for their registrations so
+    // the dynamic imports land inside this test instead of racing the
+    // environment teardown.
+    window.dispatchEvent(new window.Event(POINTER_EVENTS.POINTERDOWN))
+
+    await waitFor(
+      () =>
+        customElements.get(COMPONENT_TAGS.PREFERENCES_MODAL) &&
+        customElements.get(COMPONENT_TAGS.LANG_DIALOG) &&
+        customElements.get(COMPONENT_TAGS.STATS_HUD),
+      90000
+    )
   }, 60000)
 })
