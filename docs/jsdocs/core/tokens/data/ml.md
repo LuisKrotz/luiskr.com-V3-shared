@@ -2,9 +2,9 @@
 
 ONNX Runtime Web / WebNN engine tokens — sole declaration
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\data\ml.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\data\ml.ts`                              |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -105,6 +105,18 @@ Tier-name prefix and the non-numeric newest tier name.
 ### `WINDOW_TIER`
 
 Window property the ES5 browser-loader stamps with the picked tier name.
+
+### `ML_WASM_EP_MODELS`
+
+Slugs pinned to the wasm EP — the interaction-path models (frametime
+every 30 frames, diagram-cost mid-render). ORT's webgpu/webnn session
+create issues synchronous pipeline-compile IPCs that can deadlock the
+renderer main thread while the GPU process is busy (scene shader
+compiles) — observed as a full-page freeze on docs routes with
+mermaid blocks and on weak Android GPUs. These models are
+single-layer MLPs: wasm answers in microseconds, so the accelerator
+EPs buy nothing and only add contention. Larger/idle-time models
+(intent, superres) keep the full webnn → webgpu → wasm chain.
 
 ### `ML_SESSION`
 

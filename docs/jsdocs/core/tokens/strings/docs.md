@@ -175,6 +175,11 @@ semantic-index streaming — elements appended per idle slice (~a few
 ms each, far under a frame budget), the rIC starvation bound per
 slice, and the setTimeout fallback delay where rIC is absent
 
+### `TREE_SHEET_CAP`
+
+folder paper-stack cap — beyond this many children the pile stops
+growing so the glyph stays readable instead of a wall of paper
+
 ### `SCENE_DIR_RADIUS`
 
 node sphere radii (chart units) — sized to read at the mid-zoom
@@ -217,3 +222,21 @@ a speck — framing the inner rings keeps the navigable structure
 (root, buckets, first levels) legible while the outer rings bleed
 off-frame (orbit/zoom still reaches them). LIFT ≈ 40° elevation
 lets the concentric ring layout read as a map.
+
+### `SCENE_FOCUS_DAMP`
+
+location-driven focus — when the docs location changes the map
+glides its orbit target onto the active node and dollies to a
+depth-scaled distance so the current branch fills the frame.
+DAMP is the per-frame lerp share toward the goal, MIN/STEP shape
+the focus distance (base + depth·step, capped at camDist so the
+root overview never zooms), EPS is the settle epsilon that ends
+the glide.
+
+### `SCENE_FOCUS_Y_BIAS`
+
+vertical framing bias — the orbit target rides this far below the
+focused point so the graph renders in the TOP half of the map
+panel instead of dead-center (content top-anchored by design).
+Sized against the fov-55 half-frame (~0.52·dist): ~20% up-shift at
+the full-graph distance, ~30% at node-focus distances.

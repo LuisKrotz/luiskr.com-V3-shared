@@ -27,6 +27,10 @@ World position — picking ray sphere-test center.
 
 Sphere radius for hit tests (pulse widened).
 
+### `depth`
+
+Ring depth — the focus-glide dolly distance input.
+
 ### `path`
 
 Manifest path — onPick payload + highlight key.
@@ -115,6 +119,20 @@ Root group — the intro-settle euler target (three's scene.rotation).
 ### `activePath`
 
 Docs path currently highlighted — '' matches the portal-root node.
+
+### `focus`
+
+Location-focus glide — setActive retargets; the tick eases the orbit
+rig's target + distance toward the goal (the rig's setTarget/setPose
+snap, so per-frame lerped writes ARE the animation). '' or an
+unknown path falls back to the origin at the full-graph distance.
+
+### `startFocus`
+
+Arms the focus glide for a docs location — placed nodes aim at their
+world position with a depth-scaled dolly; the portal root keeps the
+full-graph distance. Re-armed at the end of buildGraph so a location
+set before positions landed still centers once they arrive.
 
 ### `applyActive`
 

@@ -44,6 +44,19 @@ into the centered glass dialog while open.
 
 ### (module scope)
 
+The dialog's animated close button — a CloseButtonWebGL mounted on
+the pref-close canvas each render that produces a fresh dialog. The
+widget binds click on the parent button; the DOM onClick does the
+same, so closeMapZoom must stay idempotent (double-fire safe).
+
+### (module scope)
+
+Focus hand-off consumed by onUpdated: opening the zoom dialog puts
+focus on its close button (the expand-modal pattern), closing it
+returns focus to the map column's zoom trigger.
+
+### (module scope)
+
 Path whose tree/grid button regains focus after the next re-render —
 arrow-key expand/collapse re-creates the DOM, so focus would
 otherwise drop to the body.
@@ -123,11 +136,22 @@ Back button — navigates to the file's parent folder (or the root).
 
 Mobile "browse" toggle — shows/hides the tree panel on small screens.
 
+### `openMapZoom`
+
+Map zoom open — the dialog's first-focusable is its close button
+(expand-modal pattern: AT/keyboard reach the dismiss affordance
+first). The scene canvas re-seats into the dialog stage on the next
+render pass — no context loss, no remount.
+
+### `closeMapZoom`
+
+Map zoom close — idempotent: the close button fires this from both
+its DOM click and the widget's own listener on the same gesture.
+Returns focus to the zoom trigger.
+
 ### `toggleMapZoom`
 
-Map zoom toggle — opens/closes the centered glass dialog. The
-persistent scene canvas re-seats into the dialog's stage on the next
-render pass (no context loss, no remount); the column keeps its frame.
+Zoom trigger — toggles the dialog (delegates to the explicit arms).
 
 ### `toggleDir`
 
@@ -184,6 +208,14 @@ stills during the walk.
 ### (module scope)
 
 Lifecycle: (re)mounts the GL strip, scene and viewer content.
+
+### (module scope)
+
+Mounts/refreshes the zoom dialog's animated close button on its live
+canvas — same mount contract as the preferences/expand-modal close
+(the canvas is re-created with each render that produces the dialog,
+so a stale handle is destroyed and remounted). No dialog → the
+widget is destroyed outright so it holds no GL context slot.
 
 ### `_updateLoader`
 

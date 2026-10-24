@@ -1516,7 +1516,6 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`copy-guard.ts`](experiments\docs/copy-guard.md)       | Copy-protection layer for the docs source viewer.               |
 | [`coverage-nav.ts`](experiments\docs/coverage-nav.md)   | Istanbul coverage-report interactivity for the docs viewer.     |
 | [`dev.ts`](experiments\docs/dev.md)                     | Standalone dev entry for the docs-portal experiment —           |
-| [`folder-svg.tsx`](experiments\docs/folder-svg.md)      | Deterministic animated folder glyphs for the docs grid.         |
 | [`gl-strip.ts`](experiments\docs/gl-strip.md)           | WebGL thread-field backdrop for the docs navigation region.     |
 | [`index.ts`](experiments\docs/index.md)                 | Barrel for the `docs` experiment module — the in-app            |
 | [`jest.config.mjs`](experiments\docs/jest.config.md)    | —                                                               |
@@ -1525,8 +1524,18 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`mermaid.ts`](experiments\docs/mermaid.md)             | Diagram rendering for docs payloads — markdown                  |
 | [`render.tsx`](experiments\docs/render.md)              | JSX template for &lt;view-docs&gt; — extracted from Docs.tsx.   |
 | [`telemetry.ts`](experiments\docs/telemetry.md)         | Copy-attempt telemetry for the docs source viewer.              |
-| [`tree-icon.tsx`](experiments\docs/tree-icon.md)        | Animated SVG row icons for the docs treeview — the              |
+| [`tree-icon.tsx`](experiments\docs/tree-icon.md)        | Animated SVG row icons for the docs treeview — a real           |
 | [`vite.config.js`](experiments\docs/vite.config.md)     | Library build for the `docs` experiment — the in-app            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                               | What it does |
+| ---------------------------------------------------------------------------------- | ------------ |
+| [`block-navigation.js`](experiments\docs\reports\coverage-run/block-navigation.md) | —            |
+| [`prettify.js`](experiments\docs\reports\coverage-run/prettify.md)                 | —            |
+| [`sorter.js`](experiments\docs\reports\coverage-run/sorter.md)                     | —            |
 
 ## Entry points
 
@@ -1553,7 +1562,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`docs-tails-copy-guard-surface.test.js`](experiments\docs\tests\coverage/docs-tails-copy-guard-surface.test.md)               | Split from docs-tails.test.js — covers the "copy guard surface" describe.       |
 | [`docs-tails-docs-gl-strip.test.js`](experiments\docs\tests\coverage/docs-tails-docs-gl-strip.test.md)                         | Split from docs-tails.test.js — covers the "docs GL strip" describe.            |
 | [`docs-tails-docs-manifest-resolution.test.js`](experiments\docs\tests\coverage/docs-tails-docs-manifest-resolution.test.md)   | Split from docs-tails.test.js — covers the "docs manifest resolution" describe. |
-| [`docs-tails-generated-folder-artwork.test.js`](experiments\docs\tests\coverage/docs-tails-generated-folder-artwork.test.md)   | Split from docs-tails.test.js — covers the "generated folder artwork" describe. |
+| [`docs-tails-generated-folder-artwork.test.js`](experiments\docs\tests\coverage/docs-tails-generated-folder-artwork.test.md)   | Covers the tree icon pack as used by BOTH nav surfaces:                         |
 | [`docs-tails-input-guards.test.js`](experiments\docs\tests\coverage/docs-tails-input-guards.test.md)                           | Coverage tails for the docs portal's non-plain input guards —                   |
 | [`docs-tails-loader.test.js`](experiments\docs\tests\coverage/docs-tails-loader.test.md)                                       | Coverage tails for docs/loader.ts + the Docs.tsx loader                         |
 | [`docs-tails-map-zoom.test.js`](experiments\docs\tests\coverage/docs-tails-map-zoom.test.md)                                   | Coverage tail for the architecture-map zoom surface —                           |
@@ -2401,6 +2410,22 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`index.ts`](website/index.md)              | Barrel for the `website` module — the public site's routable |
 | [`jest.config.mjs`](website/jest.config.md) | —                                                            |
 | [`vite.config.js`](website/vite.config.md)  | Library build for the `website` module — the public site's   |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                                                                                            | What it does |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| [`onnxruntime-web_webgpu.js`](website\node_modules.vite\deps/onnxruntime-web_webgpu.md)                                                                         | —            |
+| [`three.core-D58llBw2.js`](website\node_modules.vite\deps/three.core-D58llBw2.md)                                                                               | —            |
+| [`three.js`](website\node_modules.vite\deps/three.md)                                                                                                           | —            |
+| [`three_examples_jsm_controls_OrbitControls__js.js`](website\node_modules.vite\deps/three_examples_jsm_controls_OrbitControls__js.md)                           | —            |
+| [`three_examples_jsm_tsl_display_BloomNode__js.js`](website\node_modules.vite\deps/three_examples_jsm_tsl_display_BloomNode__js.md)                             | —            |
+| [`three_examples_jsm_tsl_display_ChromaticAberrationNode__js.js`](website\node_modules.vite\deps/three_examples_jsm_tsl_display_ChromaticAberrationNode__js.md) | —            |
+| [`three_examples_jsm_tsl_display_FilmNode__js.js`](website\node_modules.vite\deps/three_examples_jsm_tsl_display_FilmNode__js.md)                               | —            |
+| [`three_tsl.js`](website\node_modules.vite\deps/three_tsl.md)                                                                                                   | —            |
+| [`three_webgpu.js`](website\node_modules.vite\deps/three_webgpu.md)                                                                                             | —            |
 
 ## Entry points
 

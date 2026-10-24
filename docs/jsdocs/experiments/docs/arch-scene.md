@@ -179,6 +179,29 @@ no GL context can be acquired; the composite then reports `onLost`.
 
 Serializes camera pose + interaction flag into sessionStorage.
 
+### `activePath`
+
+Docs path currently highlighted — '' matches the portal-root node.
+
+### `nodeTargets`
+
+Manifest path → placed world position + ring depth — buildGraph
+fills it so the map can glide the camera onto the active location.
+
+### `focusNode`
+
+Focus glide state — the orbit target eases toward the active
+node's position and the camera dollies to a depth-scaled distance,
+so picking a route re-centers the map on that location.
+
+### `startFocus`
+
+Arms the focus glide for a docs location — '' or an unknown path
+falls back to the portal root at origin with the full-graph camera
+distance; placed nodes aim at their position with a depth-scaled
+dolly. Positions land async (worker) — buildGraph re-arms the focus
+for whatever path is active when they arrive.
+
 ### `dirMesh`
 
 Node draw calls — every dir sphere renders through ONE InstancedMesh,
@@ -201,10 +224,6 @@ Shared pulse clock — patched into both node materials' shaders.
 ### `lineGeo`
 
 Edge geometry — assigned inside buildGraph, disposed in destroy().
-
-### `activePath`
-
-Docs path currently highlighted — '' matches the portal-root node.
 
 ### `writeActive`
 

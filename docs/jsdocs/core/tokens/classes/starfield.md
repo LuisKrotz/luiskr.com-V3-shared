@@ -15,10 +15,6 @@ Frozen sf class-name map — sole declaration site for these tokens; consumers r
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the
 token contract immutable at runtime.
 
-### `SF_DISCLAIMER`
-
-Bottom-edge scale disclaimer strip (localized per locale node).
-
 ### `SF_TIP_EDGE`
 
 Edge-hint mode — marker clamped to the canvas edge; line rotates to point.

@@ -35,15 +35,21 @@ Zoom trigger — opens the centered glass modal.
 
 ### `DOCS_MAP_MODAL`
 
-Fullscreen overlay behind the zoom dialog (dismiss target).
+Fullscreen overlay behind the zoom dialog — the glass backdrop.
+
+### `DOCS_MAP_CLOSE_AREA`
+
+Fullscreen click-catcher between backdrop and dialog — the
+expand-modal close-area pattern.
 
 ### `DOCS_MAP_DIALOG`
 
 The centered glass dialog hosting the enlarged scene.
 
-### `DOCS_MAP_CLOSE`
+### `DOCS_MAP_CLOSE_BOTTOM`
 
-Dialog close control.
+Bottom close button under the dialog content — the expand-modal
+close-bottom pattern (labelled, corner-bracket styled).
 
 ### `DOCS_NAV_PANEL`
 
@@ -59,9 +65,35 @@ tree+breadcrumb surface shown ≤1280px (the main crumb bar hides).
 
 Per-row node icon — the animated SVG glyph (folder/file by ext).
 
-### `DOCS_TREE_COUNT`
+### `DOCS_TREE_CHEVRON`
 
-Child-count badge drawn inside the folder glyph.
+Per-row disclosure chevron — dir rows carry the arrow glyph,
+file rows an empty spacer so every icon column stays aligned.
+
+### `DOCS_TREE_PAPER`
+
+Paper sheet peeking out of a folder glyph — count ∝ children.
+
+### `DOCS_ICON_LINE`
+
+Stroked icon part — inked with the kind's `--icon-ink`.
+
+### `DOCS_ICON_FILL`
+
+Filled icon part — inked with the kind's `--icon-ink`.
+
+### `DOCS_ICON_TILE`
+
+Icon backdrop tile — a light kind-tinted wash behind the glyph.
+
+### `DOCS_ICON_ON`
+
+Letterform/detail drawn on a filled tile — reads paper-colored.
+
+### `DOCS_ICON_KINDS`
+
+File-kind names — `${DOCS_TREE_ICON}--${kind}` modifier classes
+pick each filetype's ink in the docs SCSS.
 
 ### `DOCS_LOADER`
 

@@ -2,9 +2,9 @@
 
 Diagram rendering for docs payloads — markdown
 
-| | |
-|---|---|
-| **Source** | `src/experiments\docs\mermaid.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\docs\mermaid.ts`                       |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -25,11 +25,14 @@ Counts regex matches without allocating a match array.
 ### `predictDiagramCost`
 
 Scores a diagram's predicted render+layout cost through the ONNX
-`diagram-cost` model (WebNN → WebGPU → wasm EP). When the predicted
+`diagram-cost` model (wasm EP — the slug is in ML_WASM_EP_MODELS so
+the session never issues GPU pipeline-compile IPCs while the docs
+scene compiles its own shaders). When the predicted
 cost clears DIAGRAM_DEFER_MS the caller yields one task turn before
 rendering so a large graph can't long-task the docs view between
 blocks. A null score (no runtime/model) means render immediately —
 the same behavior as before the model existed.
+
 - `@param` source Raw mermaid source for the block.
 - `@returns` Predicted cost in ms, or null when ML is unavailable.
 
@@ -48,6 +51,7 @@ root, NOT documentElement: the docs page never sets a font on `html`,
 so the root's computed `fontFamily` is the UA default (serif) while
 the block inherits `.docs`'s `var(--font-primary)` and the rendered
 content's real size.
+
 - `@param` style Computed style of a `.docs-mermaid` block.
 - `@returns` JSON string for `render_diagram`'s `Theme::from_json`.
 
@@ -57,4 +61,5 @@ Renders every unprocessed `.docs-mermaid` block inside `container`
 into an inline SVG diagram. Safe to call repeatedly — processed
 nodes are marked (`data-processed`), so later payloads don't
 re-render earlier diagrams.
+
 - `@param` container The docs-content box holding rendered payload HTML.
