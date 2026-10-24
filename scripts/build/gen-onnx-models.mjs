@@ -146,74 +146,75 @@ const intentModel = () => {
  * exponential average + quality uplift; output ≈ predicted frame ms/100.
  */
 const frametimeModel = () => {
-  // Exponential-decay averages over the 5-frame window + quality bias —
-  // 8 hidden units each emphasizing a different recency band.
-  const w1 = [
-    // h0 recent-heavy, h1 mid, h2 old, h3 mean, h4 h5 quality ramps, h6 h7 jitter
-    0.5,
-    0.2,
-    0.1,
-    0.2,
-    0.0,
-    0.0,
-    -0.3,
-    -0.3,
-    0.25,
-    0.3,
-    0.15,
-    0.2,
-    0.0,
-    0.0,
-    0.4,
-    0.0,
-    0.1,
-    0.2,
-    0.3,
-    0.2,
-    0.0,
-    0.0,
-    -0.2,
-    -0.2,
-    0.05,
-    0.15,
-    0.25,
-    0.2,
-    0.0,
-    0.0,
-    0.0,
-    0.4,
-    0.02,
-    0.1,
-    0.2,
-    0.2,
-    0.0,
-    0.0,
-    0.3,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0, // column 5 = quality input row 5
-  ]
-
-  // The [6,8] weight matrix is row-major input-dim × hidden-dim.
+  // features = [f0..f4 normalized frame times (oldest→newest), quality].
+  // The [6,8] weight matrix is row-major input-dim × hidden-dim:
+  //   h0..h3 recency bands across the window, h4 a mean band, h5 the
+  //   variance probe (mixed-sign frame weights — a spiking window feeds
+  //   it, a steady window cancels to ~0), h6/h7 dormant. Frame-column
+  //   sums total 8.30 → prediction reads ≈ 1.04·mean(window) +
+  //   0.02·quality + b2 — the small quality uplift makes a raised pixel
+  //   ratio predict slightly more work. The previous calibration leaked
+  //   ~0.10 per unit quality into the output, so a healthy ~10ms frame
+  //   at q=1 predicted ~0.24 — over the 0.17 down-threshold — and
+  //   ratcheted every surface to the 0.5 floor where it could never
+  //   climb back (recovery needs a prediction under 0.12).
   const w1Mat = [
-    0.5, 0.2, 0.1, 0.2, 0.02, -0.3, 0.0, 0.0, 0.25, 0.3, 0.15, 0.2, 0.1, 0.4, 0.0, 0.0, 0.1, 0.2,
-    0.3, 0.2, 0.15, -0.2, 0.0, 0.0, 0.05, 0.15, 0.25, 0.2, 0.2, -0.2, 0.0, 0.0, 0.05, 0.05, 0.05,
-    0.2, 0.2, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.33, 0.0, 0.5, -0.3,
+    // h0    h1     h2     h3     h4     h5     h6    h7
+    0.95,
+    0.38,
+    0.19,
+    0.38,
+    0.038,
+    -0.57,
+    0.0,
+    0.0, // f0 oldest
+    0.475,
+    0.57,
+    0.285,
+    0.38,
+    0.19,
+    0.76,
+    0.0,
+    0.0, // f1
+    0.19,
+    0.38,
+    0.57,
+    0.38,
+    0.285,
+    -0.38,
+    0.0,
+    0.0, // f2
+    0.095,
+    0.285,
+    0.475,
+    0.38,
+    0.38,
+    -0.38,
+    0.0,
+    0.0, // f3
+    0.095,
+    0.095,
+    0.095,
+    0.38,
+    0.38,
+    0.57,
+    0.0,
+    0.0, // f4 newest
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.06,
+    0.0,
+    0.1,
+    -0.3, // quality
   ]
 
   const b1 = new Array(8).fill(0)
 
   const w2 = new Array(8).fill(0.125) // mean of hidden bands
 
-  const b2 = [0.08] // ≈8ms floor — a perfect frame is never predicted 0
-
-  void w1 // kept for the band documentation above
+  const b2 = [0.02] // ≈2ms floor — a perfect frame is never predicted 0
 
   const nodes = [
     node('MatMul', ['features', 'w1'], ['mm1']),

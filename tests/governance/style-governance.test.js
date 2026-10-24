@@ -576,6 +576,18 @@ describe('Style Governance & Zero-Hardcoding Enforcement', () => {
     expect(agents).toContain('wasm-pool')
   })
 
+  // The no-shortcuts rule is a judgment contract — the gate asserts the
+  // rule + its memory file stay documented so it cannot silently rot.
+  test('Rule 31: AGENTS.md + .agents/rules document the no-lazy-solutions rule', () => {
+    const agents = fs.readFileSync(path.join(rootDir, 'AGENTS.md'), 'utf-8')
+
+    expect(agents).toContain('No Lazy Solutions')
+
+    const rulesDir = path.join(rootDir, '.agents', 'rules')
+
+    expect(fs.readdirSync(rulesDir).some((f) => /lazy|shortcut/i.test(f))).toBe(true)
+  })
+
   // ── 16. Zero-console: src must never call console.* ────────────────────────
   test('Rule 12b: ZERO console.* callsites in src/ (devlog sink only)', () => {
     const consoleRe =
