@@ -56,7 +56,7 @@ describe('Lighthouse CI configuration', () => {
     )
 
     for (const audit of [
-      'image-delivery',
+      'image-delivery-insight',
       'modern-image-formats',
       'uses-optimized-images',
       'uses-responsive-images',

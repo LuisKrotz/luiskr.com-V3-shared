@@ -23,6 +23,7 @@ import {
   initSync,
   markdown_to_html,
 } from '../../../website/public/wasm/markdown/luiskr_markdown.js'
+import { highlightCode } from './highlight.mjs'
 
 /**
  * Repo root — same `fileURLToPath(new URL('../..', …))` convention as
@@ -476,10 +477,10 @@ export const renderFile = (format, content, ext, opts = {}) => {
     case 'code': {
       const lang = LANG_BY_EXT[ext] || ext || 'text'
 
-      return `<pre class="docs-code"><code class="lang-${lang}">${escapeHtml(content)}</code></pre>`
+      return `<pre class="docs-code"><code class="lang-${lang}">${highlightCode(content, ext)}</code></pre>`
     }
 
     default:
-      return `<pre class="docs-code">${escapeHtml(content)}</pre>`
+      return `<pre class="docs-code">${highlightCode(content, ext)}</pre>`
   }
 }
