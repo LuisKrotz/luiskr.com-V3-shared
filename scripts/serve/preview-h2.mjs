@@ -22,6 +22,7 @@
 import { createSecureServer } from 'node:http2'
 import { existsSync, mkdirSync, readFileSync, statSync } from 'node:fs'
 import { execSync } from 'node:child_process'
+import { brotliCompressSync, gzipSync } from 'node:zlib'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { CMS_PATH_RE, CMS_SECURITY_HEADERS, SITE_SECURITY_HEADERS } from './security-headers.mjs'
@@ -100,6 +101,52 @@ const shouldRedirect = (reqPath) => {
   return resolveFile(`${reqPath}/`) !== null
 }
 
+/**
+ * MIME classes worth a dynamic encode — Firebase Hosting gzips every
+ * text-shaped response that lacks a precompressed sibling (public/-copied
+ * JSON like media-manifest.json, service-worker.js), so the preview
+ * mirrors that for the same MIME set instead of serving raw bytes the
+ * wire would never carry.
+ */
+const COMPRESSIBLE = /^text\/|^application\/(json|javascript|xml|manifest|wasm)/
+
+/**
+ * `${filePath}|${encoding}` → compressed Buffer for sibling-less text
+ * assets — Lighthouse hits each URL several times, so the one-shot
+ * encode result is memoized rather than re-deflated per request.
+ */
+const DYNAMIC_COMPRESSION = new Map()
+
+/**
+ * Cache-Control contract mirrored from firebase.json — Firebase applies
+ * every matching header block and the LAST match wins, so cacheControlOf
+ * scans the whole table instead of first-matching. Order mirrors the
+ * hosting config: path-prefixed rules first, extension rules after.
+ */
+const CACHE_RULES = [
+  [/^\/(?:assets|v|fonts|scripts\/wasm)\//, 'public, max-age=31536000, immutable'],
+  [/^\/scripts\/workers\//, 'public, max-age=86400'],
+  [/^\/docs-content\//, 'public, max-age=0, must-revalidate'],
+  [/^\/(?:service-worker|registerSW)\.js$/, 'no-cache'],
+  [/\.(?:png|jpe?g|gif|svg|webp|avif|ico)$/, 'public, max-age=31536000, immutable'],
+  [/\.html$/, 'public, max-age=0, must-revalidate'],
+  [/\/\.well-known\/|\/ai-catalog\.json$|\/llms\.txt$|\/auth\.md$/, 'public, max-age=3600'],
+]
+
+/**
+ * Resolves the Cache-Control value Firebase would emit for `reqPath`,
+ * or null when no hosting rule covers it (meta JSON, sitemaps, txt).
+ * @param {string} reqPath Decoded pathname.
+ * @returns {string | null} Header value.
+ */
+const cacheControlOf = (reqPath) => {
+  let value = null
+
+  for (const [re, cc] of CACHE_RULES) if (re.test(reqPath)) value = cc
+
+  return value
+}
+
 const server = () => {
   ensureCert()
 
@@ -115,6 +162,10 @@ const server = () => {
       const headers = CMS_PATH_RE.test(reqPath) ? CMS_SECURITY_HEADERS : SITE_SECURITY_HEADERS
 
       for (const [key, value] of Object.entries(headers)) res.setHeader(key, value)
+
+      const cacheControl = cacheControlOf(reqPath)
+
+      if (cacheControl) res.setHeader('Cache-Control', cacheControl)
 
       if (shouldRedirect(reqPath)) {
         const query = rawUrl.split('?')[1]
@@ -147,13 +198,39 @@ const server = () => {
         : null
       const encodedPath =
         encoding && existsSync(`${filePath}.${encoding}`) ? `${filePath}.${encoding}` : null
-      const served = encodedPath || filePath
+
+      // Dynamic pass for sibling-less text payloads — the same response
+      // Firebase would emit, so Lantern's transfer sizes match production.
+      let payload = encodedPath || filePath
+
+      let contentEncoding = encodedPath ? (encoding === 'gz' ? 'gzip' : 'br') : null
+
+      if (!encodedPath && encoding && COMPRESSIBLE.test(mime)) {
+        const key = `${filePath}|${encoding}`
+
+        let compressed = DYNAMIC_COMPRESSION.get(key)
+
+        if (!compressed) {
+          const body = readFileSync(filePath)
+
+          compressed = encoding === 'br' ? brotliCompressSync(body) : gzipSync(body)
+
+          DYNAMIC_COMPRESSION.set(key, compressed)
+        }
+
+        payload = compressed
+
+        contentEncoding = encoding === 'gz' ? 'gzip' : 'br'
+      }
 
       res.setHeader('Content-Type', mime)
       res.setHeader('Vary', 'Accept-Encoding')
-      res.setHeader('Content-Length', statSync(served).size)
+      res.setHeader(
+        'Content-Length',
+        typeof payload === 'string' ? statSync(payload).size : payload.length
+      )
 
-      if (encodedPath) res.setHeader('Content-Encoding', encoding === 'gz' ? 'gzip' : 'br')
+      if (contentEncoding) res.setHeader('Content-Encoding', contentEncoding)
 
       res.writeHead(200)
 
@@ -162,7 +239,7 @@ const server = () => {
         return
       }
 
-      res.end(readFileSync(served))
+      res.end(typeof payload === 'string' ? readFileSync(payload) : payload)
     }
   )
 

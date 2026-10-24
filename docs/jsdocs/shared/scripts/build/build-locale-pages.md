@@ -90,12 +90,19 @@ stays synchronous so the map is populated by prefetchLcpThumbs()
 ahead of each emit batch; URLs repeat across 15 locales so the cache
 collapses the network work to one fetch per unique asset.
 
+### `mediaFigureOf`
+
+First parked <figure> that carries paintable media — link-only
+attachment figures (a bare <a> + figcaption) are skipped so LCP
+detection binds the figure the browser will actually paint.
+
 ### `lcpImageOf`
 
-The painted-under-veil article's early LCP media — first figure's
+The painted-under-veil article's early LCP media — first media figure's
 <source srcset> (what the browser actually selects), then <img src>,
 then a <video> poster — falling back to the route's hero for pages
-whose emitter puts no media first.
+whose emitter puts no media first. Link-only figures (bare <a> video
+attachments with a figcaption) carry no paintable media and are skipped.
 
 ### `lcpThumbUrlOf`
 

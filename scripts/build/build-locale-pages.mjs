@@ -176,6 +176,12 @@ const enc = (u) => {
  */
 const dec = (u) => (u.includes('%') && !/%(?![0-9a-fA-F]{2})/.test(u) ? decodeURI(u) : u)
 
+// Mobile-viewport media condition — MUST stay byte-identical to
+// MOBILE_MEDIA in core/tokens/primitives.ts (primitives re-imports
+// `./strings/chars.js`, which the standalone Node loader can't
+// resolve, so the query is mirrored, not imported).
+const MOBILE_MEDIA = '(max-width: 768px)'
+
 /**
  * Strips markup from a translated rich-text string and compacts it into a
  * meta-description-sized plain-text snippet (≤160 chars, cut at a word
@@ -307,6 +313,17 @@ const writeCompressed = (file, html) => queueCompressedWrite(file, html)
 const LCP_THUMB_MAX = 16384
 
 /**
+ * Minimum intrinsic video width (px) for the `-scaledown-2x` poster to be
+ * the runtime pick on a ≤768px viewport. The runtime rule is
+ * `box × dpr ≤ mediaWidth / 2` (prefersScaledVideo): a 3072px source at
+ * the widest mobile box (768 × 2dpr) exactly halves, so anything wider is
+ * guaranteed scaled on mobile while narrower videos keep the full poster —
+ * emitting the scaled source/preload for them warms a URL the <video>
+ * never requests.
+ */
+const SCALED_POSTER_MIN_WIDTH = 3072
+
+/**
  * Resolved media URL → `data:` LQIP payload for the injected early-LCP
  * image (`null` = fetched variant unusable or oversized). localize()
  * stays synchronous so the map is populated by prefetchLcpThumbs()
@@ -316,13 +333,24 @@ const LCP_THUMB_MAX = 16384
 const LCP_THUMBS = new Map()
 
 /**
- * The painted-under-veil article's early LCP media — first figure's
+ * First parked <figure> that carries paintable media — link-only
+ * attachment figures (a bare <a> + figcaption) are skipped so LCP
+ * detection binds the figure the browser will actually paint.
+ */
+const mediaFigureOf = (content) =>
+  ((content && content.match(/<figure[\s\S]*?<\/figure>/g)) || []).find((figure) =>
+    /<img|<source|<video/.test(figure)
+  )
+
+/**
+ * The painted-under-veil article's early LCP media — first media figure's
  * <source srcset> (what the browser actually selects), then <img src>,
  * then a <video> poster — falling back to the route's hero for pages
- * whose emitter puts no media first.
+ * whose emitter puts no media first. Link-only figures (bare <a> video
+ * attachments with a figcaption) carry no paintable media and are skipped.
  */
 const lcpImageOf = (content, image) => {
-  const firstFigure = content && content.match(/<figure[\s\S]*?<\/figure>/)?.[0]
+  const firstFigure = mediaFigureOf(content)
 
   return (
     firstFigure?.match(/<source srcset="([^"]+)"/)?.[1] ||
@@ -569,11 +597,36 @@ export function localize(
     )
   }
 
-  if (lcpImage) {
-    out = out.replace(
-      /(<link rel="modulepreload")/,
-      `  <link rel="preload" as="image" href="${esc(lcpImage)}" fetchpriority="high">\n  $1`
-    )
+  // A media-scoped <source> in the first figure means ≤768px viewports
+  // paint the mobile tier, not lcpImage — each preload is gated by the
+  // complementary media query so a viewport preloads exactly the
+  // resource its <picture> will select (a cross-scoped preload is a
+  // wasted fetch and flags preload-not-used in Lighthouse). For video
+  // figures the runtime hero is a <video poster> — the poster attr only
+  // ever fetches the .jpg — so the preload binds the img src (the same
+  // `x.mp4.jpg-thumb.jpg` key the runtime resolves as poster[0]), never
+  // the parked picture's webp source.
+  const firstFigure = mediaFigureOf(content) || ''
+
+  const posterImg = firstFigure.match(/<img[^>]* src="([^"]+\.mp4\.jpg-thumb\.jpg)"/)?.[1] || ''
+
+  const lcpPreload = posterImg || lcpImage
+
+  const lcpMobile = lcpPreload
+    ? firstFigure.match(/<source media="[^"]*" srcset="([^"]+)"/)?.[1] || ''
+    : ''
+
+  if (lcpPreload) {
+    const preloads = [
+      `  <link rel="preload" as="image" href="${esc(lcpPreload)}"${lcpMobile ? ` media="not ${MOBILE_MEDIA}"` : ''} fetchpriority="high">`,
+      ...(lcpMobile
+        ? [
+            `  <link rel="preload" as="image" href="${esc(lcpMobile)}" media="${MOBILE_MEDIA}" fetchpriority="high">`,
+          ]
+        : []),
+    ]
+
+    out = out.replace(/(<link rel="modulepreload")/, `${preloads.join('\n  ')}\n  $1`)
   }
 
   // og:locale + hreflang alternates + x-default, inserted before </head>.
@@ -602,6 +655,22 @@ export function localize(
   // earlier template revision) so re-runs strip it instead of leaving
   // stale markup.
   if (content) {
+    // The parked article's first figure is the painted LCP element —
+    // the same image the <link rel="preload"> above already races for.
+    // A lazy attr on it defers its fetch past parse (and flags
+    // lcp-lazy-loaded), so it goes eager + high-priority, matching the
+    // runtime hero contract in media/figure/render.tsx.
+    if (lcpImage) {
+      const lcpFigure = mediaFigureOf(content)
+
+      if (lcpFigure) {
+        content = content.replace(
+          lcpFigure,
+          lcpFigure.replace(/ loading="lazy"/, ' loading="eager" fetchpriority="high"')
+        )
+      }
+    }
+
     // Emitters return a <main> wrapper (meaningful for a standalone
     // document), but parked inside #app it would be a second landmark
     // competing with the shell's <main id="main-content"> — demote it to
@@ -1087,6 +1156,46 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     return `<section id="contact"><h2>${esc(heading)}</h2><ul>${links(c.line1)}</ul><ul>${links(c.line2)}</ul></section>`
   }
 
+  // <picture><source> does not retry the next entry on 404 — webp is
+  // emitted only when the bucket manifest confirms the sibling was
+  // generated, otherwise the unconverted source is a doomed request.
+  const webpSibling = (u) =>
+    u.endsWith('.jpg') && mediaManifest?.has(`${dec(u.slice(CDN_BASE.length, -4))}.webp`)
+      ? `${u.slice(0, -4)}.webp`
+      : ''
+
+  // Manifest-proven `{stem}-mobile` derivative (the 768px ladder —
+  // mirrors mediaRungs(`${stem}-mobile`) in core/utils/media/manifest.ts)
+  // for a media-scoped <source>: ≤768px viewports fetch the mobile tier
+  // instead of the full-width original — the LCP img is often a 3840px
+  // uncompressed pass rendered at a few hundred CSS px. jpg carries the
+  // rung; webp is its proven sibling ('' when unproven).
+  const mobileTier = (u) => {
+    if (!u.startsWith(CDN_BASE) || !mediaManifest) return { jpg: '', webp: '' }
+
+    const stem = dec(u.slice(CDN_BASE.length)).replace(
+      /(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i,
+      ''
+    )
+
+    for (const suffix of [
+      `${MEDIA.MOZ}${MEDIA.Q100}${MEDIA.EXT}`,
+      MEDIA.EXT,
+      `${MEDIA.MOZ}${MEDIA.Q75}${MEDIA.EXT}`,
+      `${MEDIA.MOZ}${MEDIA.Q50}${MEDIA.EXT}`,
+    ]) {
+      const key = `${stem}${MEDIA.MOBILE_SUFFIX}${suffix}`
+
+      if (mediaManifest.has(key)) {
+        const url = `${CDN_BASE}${key}`
+
+        return { jpg: enc(url), webp: webpSibling(enc(url)) }
+      }
+    }
+
+    return { jpg: '', webp: '' }
+  }
+
   /**
    * One media item as crawlable markup — the figure's <img> carries the
    * best-quality source itself (uncompressed pass preferred) so crawlers
@@ -1102,14 +1211,6 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const label = esc(m.label || '')
     const wh = dimsAttr(m.size?.[0], m.size?.[1])
 
-    // <picture><source> does not retry the next entry on 404 — webp is
-    // emitted only when the bucket manifest confirms the sibling was
-    // generated, otherwise the unconverted source is a doomed request.
-    const webp = (u) =>
-      u.endsWith('.jpg') && mediaManifest?.has(`${dec(u.slice(CDN_BASE.length, -4))}.webp`)
-        ? `${u.slice(0, -4)}.webp`
-        : ''
-
     // Video figures mirror as the poster <img>, not a <video>: the parked
     // article is inert (controls could never run anyway), a poster attr
     // fetches at parse even inside a content-visibility:hidden subtree —
@@ -1117,14 +1218,37 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     // img costs zero requests and still shows the same still to no-JS
     // readers, AI agents, and print. The playable URL stays discoverable
     // through the figcaption link + deep-link target.
+    const mobileSrc = !isVideo ? mobileTier(source) : { jpg: '', webp: '' }
+
+    // Scaled-poster tier for video figures — the runtime <video> picks
+    // the `-scaledown-2x` poster when prefersScaledVideo holds (figure
+    // box × dpr ≤ half the media width — always true for ≥1440px-wide
+    // sources under the 768px media condition). Emitting it as a
+    // media-scoped <source> lets localize() bind a matching mobile
+    // preload so the poster fetch starts at parse, not at mount; it is
+    // also the byte-cheaper still for no-JS readers on small viewports.
+    // Manifest-gated: a <source> never retries on 404.
+    const scaledPoster = (() => {
+      const key = thumb.startsWith(CDN_BASE) ? dec(thumb.slice(CDN_BASE.length)) : ''
+
+      if (!key.endsWith(MEDIA.VIDEO_THUMB_EXT) || (m.size?.[0] || 0) < SCALED_POSTER_MIN_WIDTH)
+        return ''
+
+      const scaled = `${key.slice(0, -MEDIA.VIDEO_THUMB_EXT.length)}${MEDIA.VIDEO_SCALE}${MEDIA.VIDEO_THUMB_EXT}`
+
+      return mediaManifest?.has(scaled) ? enc(`${CDN_BASE}${scaled}`) : ''
+    })()
+
     const media = isVideo
       ? thumb
-        ? `<picture>${webp(thumb) ? `<source srcset="${esc(webp(thumb))}" type="image/webp">` : ''}<img src="${esc(thumb)}" alt="${esc(deepHref ? '' : label)}" loading="lazy" decoding="async"${wh}></picture>`
+        ? `<picture>${scaledPoster ? `<source media="${MOBILE_MEDIA}" srcset="${esc(scaledPoster)}">` : ''}${webpSibling(thumb) ? `<source srcset="${esc(webpSibling(thumb))}" type="image/webp">` : ''}<img src="${esc(thumb)}" alt="${esc(deepHref ? '' : label)}" loading="lazy" decoding="async"${wh}></picture>`
         : ''
       : // Inside the labelled deep-link the image is decorative — the
         // anchor's aria-label + figcaption already carry the name, so a
         // repeated alt is redundant verbosity for screen readers.
-        `<picture>${webp(source) ? `<source srcset="${esc(webp(source))}" type="image/webp">` : ''}<img src="${esc(source)}" alt="${esc(deepHref ? '' : label)}" loading="lazy" decoding="async"${wh}></picture>`
+        // <source> order matters: the media-scoped mobile tier leads so
+        // ≤768px viewports pick it before the unscoped webp/original.
+        `<picture>${mobileSrc.webp ? `<source media="${MOBILE_MEDIA}" srcset="${esc(mobileSrc.webp)}" type="image/webp">` : ''}${mobileSrc.jpg ? `<source media="${MOBILE_MEDIA}" srcset="${esc(mobileSrc.jpg)}">` : ''}${webpSibling(source) ? `<source srcset="${esc(webpSibling(source))}" type="image/webp">` : ''}<img src="${esc(source)}" alt="${esc(deepHref ? '' : label)}" loading="lazy" decoding="async"${wh}></picture>`
 
     // The deep-link anchor wraps bare media — no text content — so it
     // carries the caption as its accessible name (axe link-name).
@@ -1145,8 +1269,9 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const coverWh = dimsAttr(i.width?.[0], i.height?.[0])
     // The card link's own text (h3 + caption) already names the image —
     // a duplicate alt inside the anchor is redundant for screen readers.
+    const coverMobile = coverSrc ? mobileTier(coverSrc) : { jpg: '', webp: '' }
     const img = coverSrc
-      ? `<figure><picture>${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="" loading="lazy" decoding="async"${coverWh}></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
+      ? `<figure><picture>${coverMobile.webp ? `<source media="${MOBILE_MEDIA}" srcset="${esc(coverMobile.webp)}" type="image/webp">` : ''}${coverMobile.jpg ? `<source media="${MOBILE_MEDIA}" srcset="${esc(coverMobile.jpg)}">` : ''}${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="" loading="lazy" decoding="async"${coverWh}></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
       : ''
     const desc = i.description ? `<p>${i.description}</p>` : ''
 

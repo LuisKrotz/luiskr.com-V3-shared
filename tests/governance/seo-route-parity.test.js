@@ -526,4 +526,87 @@ describe('SEO route parity', () => {
 
     expect(untouched).toContain('<article class="reader-content">keep</article>')
   })
+
+  test('localize() promotes the parked article’s first figure to the eager LCP fetch', () => {
+    // The parked reader article paints under the intro veil — its first
+    // figure's <img> is the LCP element, so a lazy attr would defer the
+    // fetch past parse. The first figure goes eager + high-priority;
+    // later figures stay lazy.
+    const shell = `<!doctype html>
+<html lang="en"><head><title>s</title>
+<link rel="canonical" href="${SITE}/">
+<meta property="og:url" content="${SITE}/">
+<meta name="twitter:url" content="${SITE}/">
+<meta name="description" content="d">
+<meta property="og:description" content="d">
+<meta name="twitter:description" content="d">
+<meta name="DC.Description" content="d">
+<meta name="DC.Language" content="en-us">
+<meta property="og:image:alt" content="d">
+<meta property="og:title" content="t"><meta name="twitter:title" content="t">
+<meta name="DC.Title" content="t">
+<link rel="modulepreload" href="/x.js">
+<script type="application/ld+json" id="jsonld-graph">{}</script>
+</head><body><div id="app"></div></body></html>`
+
+    const out = localize(shell, {
+      bcpLang: 'en',
+      ogLocale: 'en_US',
+      title: 'Project',
+      description: 'd',
+      url: `${SITE}/portfolio/x/`,
+      alternates: [{ bcp: 'en', og: 'en_US', url: `${SITE}/portfolio/x/` }],
+      content:
+        '<main><figure><a href="/x"><picture><img src="https://cdn.test/hero.jpg" alt="" loading="lazy" decoding="async"></picture></a></figure><figure><img src="https://cdn.test/later.jpg" alt="" loading="lazy" decoding="async"></figure></main>',
+    })
+
+    // First figure — the LCP candidate — upgraded to an eager,
+    // high-priority fetch; the preload link is emitted for it.
+    expect(out).toContain('loading="eager" fetchpriority="high"')
+    expect(out).toContain('<link rel="preload" as="image"')
+
+    // Later figures keep lazy loading — only the LCP candidate upgrades.
+    expect(out).toContain('src="https://cdn.test/later.jpg" alt="" loading="lazy"')
+  })
+
+  test('localize() skips link-only figures when picking the LCP candidate', () => {
+    // Video attachments emit a bare <a>+figcaption figure with no paintable
+    // media. The eager promotion + preload must bind the first figure that
+    // actually carries an image — otherwise the real LCP img stays lazy and
+    // no preload lands (observed on video-first project pages).
+    const shell = `<!doctype html>
+<html lang="en"><head><title>s</title>
+<link rel="canonical" href="${SITE}/">
+<meta property="og:url" content="${SITE}/">
+<meta name="twitter:url" content="${SITE}/">
+<meta name="description" content="d">
+<meta property="og:description" content="d">
+<meta name="twitter:description" content="d">
+<meta name="DC.Description" content="d">
+<meta name="DC.Language" content="en-us">
+<meta property="og:image:alt" content="d">
+<meta property="og:title" content="t"><meta name="twitter:title" content="t">
+<meta name="DC.Title" content="t">
+<link rel="modulepreload" href="/x.js">
+<script type="application/ld+json" id="jsonld-graph">{}</script>
+</head><body><div id="app"></div></body></html>`
+
+    const out = localize(shell, {
+      bcpLang: 'en',
+      ogLocale: 'en_US',
+      title: 'Project',
+      description: 'd',
+      url: `${SITE}/portfolio/x/`,
+      alternates: [{ bcp: 'en', og: 'en_US', url: `${SITE}/portfolio/x/` }],
+      content:
+        '<main><figure><figcaption><a href="https://cdn.test/tour.mp4">tour</a></figcaption></figure><figure><a href="/x"><picture><img src="https://cdn.test/hero.jpg" alt="" loading="lazy" decoding="async"></picture></a></figure></main>',
+    })
+
+    // The link-only video figure stays untouched; the second figure — the
+    // first with real media — is promoted and preloaded.
+    expect(out).toContain(
+      'src="https://cdn.test/hero.jpg" alt="" loading="eager" fetchpriority="high"'
+    )
+    expect(out).toContain('href="https://cdn.test/hero.jpg"')
+  })
 })

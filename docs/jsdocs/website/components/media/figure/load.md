@@ -36,6 +36,19 @@ ascends serially, so warming the top rung early would fight the low
 rung's fetch for bandwidth and warm a resource that may never publish.
 Never publishes, never marks loaded — pure network warm.
 
+### `ladderBoxWidth`
+
+The figure's rendered box width for stem/ladder picks — read once and
+memoized. clientWidth is a synchronous layout query: with ~100 figures
+on a media page, one read per warm AND per climb re-entrant during the
+mount/publish storms stacks into the forced-reflow budget Lighthouse
+attributes to this callsite. A stale-after-resize value only shifts
+which quality tier loads — never correctness — so the cached read is
+the right trade.
+
+- `@param` fig The mounted figure.
+- `@returns` Rendered CSS-pixel width (0 before first layout).
+
 ### `figureLadder`
 
 The ascending rung ladder a figure climbs — the 768px-wide

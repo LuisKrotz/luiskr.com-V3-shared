@@ -36,3 +36,32 @@ directory index exists on disk.
 
 - `@param` {string} reqPath Decoded pathname.
 - `@returns` {boolean} True when the request should redirect to `${reqPath}/`.
+
+### `COMPRESSIBLE`
+
+MIME classes worth a dynamic encode — Firebase Hosting gzips every
+text-shaped response that lacks a precompressed sibling (public/-copied
+JSON like media-manifest.json, service-worker.js), so the preview
+mirrors that for the same MIME set instead of serving raw bytes the
+wire would never carry.
+
+### `DYNAMIC_COMPRESSION`
+
+`${filePath}|${encoding}` → compressed Buffer for sibling-less text
+assets — Lighthouse hits each URL several times, so the one-shot
+encode result is memoized rather than re-deflated per request.
+
+### `CACHE_RULES`
+
+Cache-Control contract mirrored from firebase.json — Firebase applies
+every matching header block and the LAST match wins, so cacheControlOf
+scans the whole table instead of first-matching. Order mirrors the
+hosting config: path-prefixed rules first, extension rules after.
+
+### `cacheControlOf`
+
+Resolves the Cache-Control value Firebase would emit for `reqPath`,
+or null when no hosting rule covers it (meta JSON, sitemaps, txt).
+
+- `@param` {string} reqPath Decoded pathname.
+- `@returns` {string | null} Header value.

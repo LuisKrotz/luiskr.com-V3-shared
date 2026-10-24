@@ -144,8 +144,18 @@ const FORMAT_BY_EXT = Object.freeze({
 
 /** Directory entries never published, whatever the format. `tests` and
  * per-module `reports`/`coverage` trees are reached through their own
- * dedicated roots instead of leaking into a source bucket. */
-const SKIP_DIRS = new Set(['node_modules', '.git', 'coverage', 'dist', 'tests', 'reports'])
+ * dedicated roots instead of leaking into a source bucket. `coverage-run`
+ * is the transient raw-map staging dir jest writes before merge-coverage
+ * promotes it — publishable output lives under `coverage/` only. */
+const SKIP_DIRS = new Set([
+  'node_modules',
+  '.git',
+  'coverage',
+  'coverage-run',
+  'dist',
+  'tests',
+  'reports',
+])
 
 /**
  * Entry names that can never be published: characters illegal in Windows
