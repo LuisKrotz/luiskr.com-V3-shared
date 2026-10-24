@@ -23,8 +23,8 @@
  * live in chunk-budget-exceptions.json with justification + review date —
  * every other file past the cap fails the gate.
  *
- * The legacy tiers (es2016/ie) are exempt by design: engines that old cannot
- * load ES module chunks, so each ships as one self-contained IIFE.
+ * Every emitted tier is a native ES-module build (the matrix floor is
+ * es2022 — no monolithic IIFE targets exist to exempt).
  *
  * Output: experiments/docs/reports/chunk-budget.json → bundled into
  * dist/deploy-info/ by scripts/build/deploy-info.mjs.
@@ -33,7 +33,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { ES_TARGETS } from '../../build/es-targets.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 const DIST = path.join(ROOT, 'dist', 'v')
@@ -43,12 +42,6 @@ const EXCEPTIONS_FILE = path.join(ROOT, 'chunk-budget-exceptions.json')
 
 /** Hard caps on emitted file size (bytes). */
 const BUDGETS = { js: 50 * 1024, css: 32 * 1024 }
-
-/**
- * Tiers exempt from the gate — every `legacy` tier is intentionally
- * monolithic because ES5-era engines cannot load module chunks.
- */
-const EXEMPT_TIERS = new Set(ES_TARGETS.filter((t) => t.legacy).map((t) => t.name))
 
 const loadExceptions = () => {
   if (!fs.existsSync(EXCEPTIONS_FILE)) return []
@@ -89,8 +82,6 @@ const tiers = fs.existsSync(DIST) ? fs.readdirSync(DIST) : []
 const files = []
 
 for (const tier of tiers) {
-  if (EXEMPT_TIERS.has(tier)) continue
-
   collectFiles(path.join(DIST, tier, 'assets'), files)
 }
 
@@ -118,7 +109,6 @@ fs.writeFileSync(
     {
       budgets: BUDGETS,
       preferred: { js: 10 * 1024, css: 8 * 1024 },
-      exemptTiers: [...EXEMPT_TIERS],
       scanned,
       violations,
       exempted,

@@ -18,6 +18,7 @@ import type { LangDialogEl, PrefModalEl } from './types.js'
 import type { AppRoot } from '../App.js'
 import { ANIMATION_DURATIONS } from '@core/tokens/motion/animation.js'
 import { webglPool } from '@core/utils/canvas/webgl-pool.js'
+import { onUserIntent } from '@core/utils/motion/intent.js'
 import { syncCyrillicFont } from '@core/locale/cyrillic-font.js'
 import { updateReaderContent } from '@core/locale/reader-content.js'
 import { initMediaManifest } from '@core/utils/media/manifest.js'
@@ -68,10 +69,11 @@ export function mountAppShell(c: AppRoot): void {
   syncCyrillicFont(store.getters.getLang())
   store.subscribe(() => syncCyrillicFont(store.getters.getLang()))
 
-  // Lazy-load heavy global components once the main thread is idle —
-  // firing these import()s at boot puts their fetch+eval on the critical
-  // path even though none of them can render before first paint anyway.
-  deferIdle(() => {
+  // Lazy-load heavy global components on the first interaction signal —
+  // they only render in answer to user actions, so warming at idle pays
+  // their fetch+eval inside the interactive window for sessions that
+  // never open a dialog at all.
+  onUserIntent(() => {
     import('@website/components/dialogs/PreferencesModal.js')
     import('@website/components/dialogs/LangDialog.js')
     import('@website/components/feedback/StatsHud.js')

@@ -5,6 +5,7 @@
 import { describe, test, expect, jest, beforeEach } from '@jest/globals'
 import { waitFor } from '@tests/fixtures/test-constants.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
+import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 
@@ -92,7 +93,7 @@ describe('main.js branch warm-ups', () => {
     window.history.pushState({}, '', '/')
   })
 
-  test('mount hoists the prerendered reader article into body still painted', async () => {
+  test('mount hoists the prerendered reader article into body', async () => {
     jest.resetModules()
 
     const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
@@ -102,14 +103,16 @@ describe('main.js branch warm-ups', () => {
     document.body.appendChild(app)
 
     await (await import('@/main.js')).bootPromise.catch(() => {})
-    await waitFor(() => window.router, 90000)
+    // Mount defers two frames now — and a previous boot may have left
+    // window.router set — so wait on the mount artifact, not the router.
+    await waitFor(() => document.querySelector(COMPONENT_TAGS.APP_ROOT), 90000)
 
     const hoisted = document.body.querySelector(`article.${READER_CLASSES.CONTENT}`)
 
     expect(hoisted).toBeTruthy()
-    // Painted under the intro veil until flipAppView parks it — the
-    // mount-time offscreen stamp was removed so the article's content
-    // stays an early FCP/LCP candidate.
+    // Parked offscreen by the html.js stylesheet — mount never stamps
+    // the --offscreen modifier itself, and flipAppView only adds it when
+    // the runtime view lands in the outlet.
     expect(hoisted.classList.contains(READER_CLASSES.OFFSCREEN)).toBe(false)
     expect(app.contains(hoisted)).toBe(false)
 
@@ -126,18 +129,35 @@ describe('main.js branch warm-ups', () => {
 
     document.getElementById(APP_IDS.APP)?.remove()
 
-    await (await import('@/main.js')).bootPromise.catch(() => {})
+    const boot = (await import('@/main.js')).bootPromise.catch(() => {})
+
+    // Mount defers past the first-paint bound now — advance far enough for
+    // the deferred attempt to run while #app is still missing so the retry
+    // interval actually arms.
+    await jest.advanceTimersByTimeAsync(900)
 
     const app = document.createElement(HTML_TAGS.DIV)
 
     app.id = APP_IDS.APP
     document.body.appendChild(app)
 
-    await jest.advanceTimersByTimeAsync(200)
-
-    jest.useRealTimers()
+    await jest.advanceTimersByTimeAsync(300)
 
     expect(app.firstElementChild).toBeTruthy()
+
+    await boot
+
+    // Re-boot over the now-mounted container — mount()'s idempotent
+    // already-mounted guard must early-return instead of duplicating.
+    jest.resetModules()
+
+    const reboot = (await import('@/main.js')).bootPromise.catch(() => {})
+
+    await jest.advanceTimersByTimeAsync(900)
+
+    await reboot
+
+    jest.useRealTimers()
   })
 
   test('non-home non-portfolio pathname skips route pre-warming', async () => {
@@ -166,8 +186,14 @@ describe('main.js branch warm-ups', () => {
 
     document.getElementById(APP_IDS.APP)?.remove()
 
-    await (await import('@/main.js')).bootPromise.catch(() => {})
+    const boot = (await import('@/main.js')).bootPromise.catch(() => {})
+
+    // The retry-clear bound arms inside the deferred mount attempt (~800ms)
+    // — 900 releases the mount, then a further 3200 runs the bound out.
+    await jest.advanceTimersByTimeAsync(900)
     await jest.advanceTimersByTimeAsync(3200)
+
+    await boot
 
     jest.useRealTimers()
 
@@ -267,27 +293,24 @@ describe('main.js branch warm-ups', () => {
   })
 
   test('document-less eval skips the mount block', async () => {
+    // Fake timers so the two-frame mount defer fires while document is
+    // still missing — restoring early would let the guard see it again.
+    jest.useFakeTimers()
     jest.resetModules()
 
     const savedDoc = globalThis.document
 
     delete globalThis.document
 
-    // Restore inside the import's microtask chain — the eval's typeof check
-    // sees document missing, and the restore lands before any macrotask timer
-    // (earlier module instances keep 20ms mount-retry intervals alive for 3s).
-    await (
-      await import('@/main.js')
-    ).bootPromise
-      .catch(() => {})
-      .then(
-        () => {
-          globalThis.document = savedDoc
-        },
-        () => {
-          globalThis.document = savedDoc
-        }
-      )
+    const boot = (await import('@/main.js')).bootPromise.catch(() => {})
+
+    await jest.advanceTimersByTimeAsync(900)
+
+    globalThis.document = savedDoc
+
+    await boot
+
+    jest.useRealTimers()
 
     await new Promise((resolve) => setTimeout(resolve, 50))
 

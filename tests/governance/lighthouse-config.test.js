@@ -14,7 +14,7 @@ import { ROUTE_STRINGS } from '@core/tokens/strings/routes.js'
 import { ROUTE_PATHS } from '@core/tokens/routes/paths.js'
 import { WINDOW_EVENTS } from '@core/tokens/events/dom.js'
 
-const LIGHTHOUSE_BASE = 'http://localhost:4173'
+const LIGHTHOUSE_BASE = 'https://localhost:4173'
 const SAMPLE_PROJECT_MELISSA = 'melissa'
 const SAMPLE_PROJECT_METCHA = TEST_PROJECTS.METCHA
 
@@ -31,13 +31,13 @@ describe('Lighthouse CI configuration', () => {
 
     const required = [
       `${LIGHTHOUSE_BASE}/`,
-      `${LIGHTHOUSE_BASE}/${ROUTE_STRINGS.ABOUT}`,
-      `${LIGHTHOUSE_BASE}/${ROUTE_STRINGS.CONTACT}`,
-      `${LIGHTHOUSE_BASE}${ROUTE_PATHS.TERMS_OF_USE}`,
-      `${LIGHTHOUSE_BASE}${ROUTE_PATHS.PRIVACY_POLICY}`,
-      `${LIGHTHOUSE_BASE}${ROUTE_PATHS.GDPR}`,
-      `${LIGHTHOUSE_BASE}/${ROUTE_PATHS.PORTFOLIO_SEGMENT}/${SAMPLE_PROJECT_MELISSA}`,
-      `${LIGHTHOUSE_BASE}/${ROUTE_PATHS.PORTFOLIO_SEGMENT}/${SAMPLE_PROJECT_METCHA}`,
+      `${LIGHTHOUSE_BASE}/${ROUTE_STRINGS.ABOUT}/`,
+      `${LIGHTHOUSE_BASE}/${ROUTE_STRINGS.CONTACT}/`,
+      `${LIGHTHOUSE_BASE}${ROUTE_PATHS.TERMS_OF_USE}/`,
+      `${LIGHTHOUSE_BASE}${ROUTE_PATHS.PRIVACY_POLICY}/`,
+      `${LIGHTHOUSE_BASE}${ROUTE_PATHS.GDPR}/`,
+      `${LIGHTHOUSE_BASE}/${ROUTE_PATHS.PORTFOLIO_SEGMENT}/${SAMPLE_PROJECT_MELISSA}/`,
+      `${LIGHTHOUSE_BASE}/${ROUTE_PATHS.PORTFOLIO_SEGMENT}/${SAMPLE_PROJECT_METCHA}/`,
     ]
 
     for (const route of required) {

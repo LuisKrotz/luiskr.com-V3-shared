@@ -2,9 +2,9 @@
 
 Minified chunk-size gate. Scans dist/v/&lt;tier&gt;/assets/{js,css}
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\verify\chunk-budget.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\verify\chunk-budget.mjs`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -12,11 +12,6 @@ Minified chunk-size gate. Scans dist/v/&lt;tier&gt;/assets/{js,css}
 ### `BUDGETS`
 
 Hard caps on emitted file size (bytes).
-
-### `EXEMPT_TIERS`
-
-Tiers exempt from the gate — every `legacy` tier is intentionally
-monolithic because ES5-era engines cannot load module chunks.
 
 ### `nameKey`
 

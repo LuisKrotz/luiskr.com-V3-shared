@@ -7,7 +7,8 @@
  * Boot sequence:
  *   1. Feature ladder — walks build/es-targets.mjs tests newest→oldest.
  *      Module builds additionally require `type=module` AND dynamic import()
- *      support; engines missing either fall to the es2016 IIFE bundle.
+ *      support; engines that fail every probe (pre-iOS 16 / pre-ES2022)
+ *      get the "needs a newer browser" notice instead.
  *   2. Polyfill gates — each polyfill group is fetched ONLY when its guard
  *      API is actually missing. Modern browsers fetch zero polyfills.
  *   3. Tier assets — injects the tier's stylesheet, then the bundle
@@ -172,8 +173,8 @@
     document.head.appendChild(l)
   }
 
-  /** Graceful notice — only reachable if the manifest ships no floor tier
-   *  (the `ie` tier's empty probe list passes unconditionally). */
+  /** Graceful notice — reached by engines that fail every tier probe
+   *  (below the es2022 floor: pre-iOS 16, legacy Edge, IE). */
   function showFallback() {
     var box = document.createElement('div')
     box.setAttribute(

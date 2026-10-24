@@ -8,7 +8,7 @@
  * complete, then re-packages deploy diagnostics with the fresh audit output.
  */
 
-import { execFileSync } from 'node:child_process'
+import { execFileSync, execFile } from 'node:child_process'
 
 const VERIFY_LIGHTHOUSE_FLAG = '--verify-lighthouse'
 const verifyLighthouse = process.argv.includes(VERIFY_LIGHTHOUSE_FLAG)
@@ -29,11 +29,29 @@ const runNode = (script, args = []) => execFileSync(process.execPath, [script, .
  */
 const runYarn = (args) => execFileSync('yarn', args, inherited)
 
+/**
+ * Async variant of runNode — lets independent post-build steps overlap.
+ * @param {string[]} argv executable + arguments
+ * @returns {Promise<void>} resolves on exit 0
+ */
+const runAsync = (argv) =>
+  new Promise((resolve, reject) =>
+    execFile(argv[0], argv.slice(1), inherited, (err) => (err ? reject(err) : resolve()))
+  )
+
 runNode('shared/scripts/build/build-targets.mjs')
-runNode('shared/scripts/build/deploy-info.mjs')
-runYarn(['docs:jsdocs'])
+
+// deploy-info reads dist/reports, jsdocs scans sources — independent of
+// each other, so they run concurrently.
+await Promise.all([
+  runAsync([process.execPath, 'shared/scripts/build/deploy-info.mjs']),
+  runAsync(['yarn', 'docs:jsdocs']),
+])
 
 if (verifyLighthouse) {
-  runYarn(['lhci', 'autorun'])
+  // Parallel collect across all routes × runs (lhci autorun is serial);
+  // lhci assert then applies the configured gates to the fresh LHRs.
+  runNode('shared/scripts/test/lighthouse-parallel.mjs')
+  runYarn(['lhci', 'assert'])
   runNode('shared/scripts/build/deploy-info.mjs')
 }

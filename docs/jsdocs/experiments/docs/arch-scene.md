@@ -224,6 +224,15 @@ One frame: zoom-reveal label pass + renderer.render. Returns false
 when the GPU/driver threw — the caller treats it exactly like a
 context loss (the host rebuilds on restore).
 
+### `onPrintCapture`
+
+Print-capture answer — the print adapter dispatches `printcapture` on
+every canvas before reading it; this scene clears its buffer each frame
+(no preserveDrawingBuffer), so a toDataURL read mid-loop would return a
+blank. Re-paint once, then hand the PNG back through event.detail.
+
+- `@param` e CustomEvent carrying { dataUrl } — written here on success.
+
 ### `mountArchScene`
 
 Dual-path mount — the scene3d (rust/WebGPU) engine takes the scene

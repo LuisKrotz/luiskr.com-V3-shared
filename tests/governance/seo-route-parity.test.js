@@ -27,6 +27,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { LANG_SLUGS } from '@core/i18n.js'
 import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '@core/tokens/routes/aliases.js'
+import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 import { scanManifest } from '../../build/docs/scan.mjs'
 import { localize } from '../../scripts/build/build-locale-pages.mjs'
@@ -508,8 +509,10 @@ describe('SEO route parity', () => {
     ]) {
       const out = localize(shell(prior), args)
 
+      // No lcpThumb → media-less route → the article emits the painted
+      // modifier so its own text stays the early LCP candidate.
       expect(out).toContain(
-        '<div id="app"><article class="reader-content" role="region" aria-label="Static page copy" aria-hidden="true" inert><div><h1>Privacy Policy</h1></div></article></div>'
+        `<div id="app"><article class="${READER_CLASSES.CONTENT} ${READER_CLASSES.PAINTED}" role="region" aria-label="Static page copy" aria-hidden="true" inert><div><h1>Privacy Policy</h1></div></article></div>`
       )
       expect(out).not.toContain('boot-veil')
       expect(out).not.toContain('Stale')
