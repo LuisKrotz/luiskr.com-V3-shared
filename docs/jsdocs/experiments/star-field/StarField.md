@@ -186,6 +186,33 @@ loads the dossier panel and flies the camera to the body.
 
 Closes the dossier panel and clears the selection.
 
+### `_playMusic`
+
+Playlist track pick — delegates to star/music.ts: loads the src
+(when changed), plays, and re-renders the active row marker.
+
+- `@param` index Track index into SF_MUSIC_TRACKS.
+
+### `_prevMusic`
+
+Steps the playlist back one track — wraps to the last from the first.
+
+### `_nextMusic`
+
+Advances the playlist one track — wraps to the first from the last.
+
+### `_toggleMusicPlay`
+
+Play/pause toggle for the transport row's play button.
+
+### `_toggleMusicRepeat`
+
+Repeat-loop toggle — engages the element's `loop` flag.
+
+### `_toggleMusicList`
+
+Expands/collapses the track list — the card starts collapsed.
+
 ### `_baseStarPath`
 
 Current-route base path — the star-field URL minus a trailing
@@ -217,8 +244,9 @@ stale or hand-typed URLs never break the view.
 ### `_applyDeepLink`
 
 Deep-link entry — after the engine reports ready, selects the body
-named in the URL (flies the camera + opens the dossier). Defaults
-to the Sun when no specific body was deep-linked.
+named in the URL (flies the camera + opens the dossier). No body
+(or an unresolvable segment) leaves the chart at the overview pose —
+the experiment always opens on the full field, never on a body.
 
 ### `_takeScreenshot`
 

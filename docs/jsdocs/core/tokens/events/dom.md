@@ -63,6 +63,18 @@ Frozen media event-name map — sole declaration site for these tokens; consumer
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes
 the token contract immutable at runtime.
 
+### `ENDED`
+
+`ended` — media element reached the end of its current source.
+
+### `PLAY`
+
+`play` — playback began (autoplay, native controls or script).
+
+### `PAUSE`
+
+`pause` — playback paused (native controls or script).
+
 ### `ANIMATION_EVENTS`
 
 Frozen animation event-name map — sole declaration site for these tokens; consumers read

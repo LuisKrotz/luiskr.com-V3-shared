@@ -120,6 +120,12 @@ renders; real DOM so crawlers index it.
 - `@param` view The host view (links delegate navigation to it).
 - `@returns` The memoized index nav element.
 
+### (module scope)
+
+Editable breadcrumb strip — each crumb is a jump-to link; the trailing
+input carries the full relative path and commits on Enter (Escape
+restores the current path).
+
 ### `crumbBar`
 
 Editable breadcrumb strip — each crumb is a jump-to link; the trailing

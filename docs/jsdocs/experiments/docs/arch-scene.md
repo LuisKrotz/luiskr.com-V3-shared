@@ -21,6 +21,20 @@ applies to whatever nodes exist and is re-applied when they arrive.
 
 - `@param` _path Manifest path of the active location ('' = portal root).
 
+### `resize`
+
+Re-fits the renderer + camera to the canvas's current box — called
+by the ResizeObserver on column↔dialog moves and any layout shift.
+
+### `setPaused`
+
+Stops/restarts the rAF loop — the host pauses while the map column
+is display:none (≤1024) so no GPU frame or CPU wakeup is spent on
+an invisible surface. Unpausing re-arms the loop; a resize() right
+after re-fits whatever box the canvas re-seated into.
+
+- `@param` _paused True to stop scheduling, false to resume.
+
 ### (module scope)
 
 A flattened manifest node with its ring depth and ring angle.
@@ -233,6 +247,13 @@ blank. Re-paint once, then hand the PNG back through event.detail.
 
 - `@param` e CustomEvent carrying { dataUrl } — written here on success.
 
+### `paused`
+
+Host-driven pause — true while the map column is display:none. The
+loop stops scheduling entirely (no rAF wakeup, no GPU frame); the
+flag is also re-checked at tick entry so a pause that lands between
+schedule and fire still dead-ends the frame.
+
 ### `mountArchScene`
 
 Dual-path mount — the scene3d (rust/WebGPU) engine takes the scene
@@ -258,6 +279,10 @@ Whichever arm is live — filled when the wasm mount resolves.
 
 setActive called before the arm resolves — replayed on mount.
 
+### `pendingPaused`
+
+setPaused called before the arm resolves — replayed on mount.
+
 ### `disposed`
 
 Teardown while the async mount is in flight.
@@ -276,3 +301,12 @@ canvas (a canvas bound 'webgpu' earlier by the attempt cannot hand
 out webgl — mountScene3d only binds after device+artifact land, so
 a timeout here means the canvas is still clean in practice; when it
 isn't, the three probe resolves null and onLost hides the section).
+
+### `resize`
+
+Delegates to whichever arm won the mount race (3d or three).
+
+### `setPaused`
+
+Pause/unpause passthrough — a pause that lands before the async
+arm resolves is replayed onto `inner` right after mount.

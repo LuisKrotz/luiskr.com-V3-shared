@@ -49,6 +49,11 @@ export const i18nFallbackPlugin = ({ root }) => {
         pages: {
           'not-found': en.pages['not-found'],
           'earth-playground': en.pages['earth-playground'],
+          // Star field + license pages — the view mounts before the
+          // per-locale chunk lands; the playlist/HUD labels read this
+          // node synchronously, so it must be in the snapshot.
+          'star-field': en.pages['star-field'],
+          license: en.pages.license,
           // Animations-reference chrome — title + intro/meta description —
           // inlined so the hub renders before Firebase resolves.
           animations: en.pages.animations,
