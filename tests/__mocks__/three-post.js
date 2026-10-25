@@ -17,6 +17,7 @@ export class OrbitControls {
   constructor() {
     this.target = { x: 0, y: 0, z: 0, set: () => {}, copy: () => {} }
     this.mouseButtons = {}
+    this.autoRotate = false
     this._listeners = {}
 
     OrbitControls.lastInstance = this
