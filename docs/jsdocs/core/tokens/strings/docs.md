@@ -106,6 +106,24 @@ Instanced-attribute names on the scene's node geometries — the
 names are part of the patched GLSL program (attribute decls read
 them too), so a rename must land in both streams at once.
 
+### `SCENE_ATTR_OFFSET`
+
+Wireframe-glyph instanced attributes — per-instance world offset,
+per-kind ink color, bob phase, and initial spin angle. Same
+name-contract as the alpha/active pair: rename in GLSL + buffers
+together.
+
+### `SCENE_ICON_INK_PROP`
+
+`--icon-ink` custom property — the icon pack's per-kind themed
+color; the map probes it off `docs-tree-icon--<kind>` elements so
+scene nodes wear the exact palette the treeview icons do.
+
+### `AGGREGATE_MARK`
+
+`+N` aggregate-leaf name prefix — surplus file leaves collapsed
+by the scene leaf cap; the scene colors them with the dir ink.
+
 ### `INDEX_TITLE`
 
 sr-only heading + landmark names for the complete document index —
@@ -115,6 +133,21 @@ and crawlers reach all docs without walking the tree.
 ### `VIEWER_HEADING_PREFIX`
 
 Viewer heading shown when a file is open — labels the content region.
+
+### `GROUP_DOCS_LABEL`
+
+Portal section labels — the flat root buckets re-seat under four
+disclosure groups in the treeview and sectioned portal grid.
+
+### `GROUP_PATH_PREFIX`
+
+Synthetic path prefix for the section-group rows — ids under it are
+view-only (a section has no manifest path), so tree bookkeeping
+('group/docs'…) can never collide with a real docs route.
+
+### `ARCH_DIR`
+
+The docs-root child promoted into its own Architecture section.
 
 ### `DOCS_LOADER_PCT`
 
@@ -159,9 +192,48 @@ texture (~85kB VRAM), so an unlabeled deep tier keeps the scene
 inside low-power GPU memory; deep dirs stay navigable via the
 treeview and the dots themselves.
 
+### `SCENE_MIN_ORBIT`
+
+hierarchical-sphere layout (the procedural-directory reference):
+every node's children orbit it on a Fibonacci sphere at the
+parent's cluster radius — shared with the wasm worker op. Cluster
+radii come from subtree-extent packing: MIN_ORBIT floors a cluster
+so a lone child never collapses onto its parent glyph; MIN_SEP is
+the guaranteed clear-space gap between sibling subtree clouds
+(≥20px at the fit-zoom framing — the hairball fix).
+
+### `SCENE_CHILD_SCALE`
+
+reference shrink ratio — a dir's child orbit is never smaller
+than this fraction of the orbit the dir itself sits on (the
+procedural-directory map's 12→5 ≈ 0.42 taper), so nested clouds
+compress geometrically instead of summing subtree extents.
+
+### `SCENE_GLYPH_MAX`
+
+Largest rendered glyph radius in chart units — the scale cap for
+the orbit-proportional glyph size AND the sibling-clearance term
+(orbits are sized so two max-size glyphs keep MIN_SEP between
+their wireframe edges).
+
+### `SCENE_RELAX_ITERS`
+
+Pairwise relax iterations after placement — sibling-chord sizing
+covers siblings, but deep subtree clouds can interpenetrate
+cross-branch; a few Jacobi passes push the rare colliding glyphs
+apart (each pass moves a pair by the full deficit, so the loop
+count covers only chained collisions — layout-time O(n²·iters)
+on the capped scene tree).
+
 ### `SCENE_BASE_RADIUS`
 
-radial-tree geometry shared with the wasm worker op
+orbit clamp — also the camera's minimum distance token (reused
+as SCENE_BASE_RADIUS's successor on the scene3d arm).
+
+### `SCENE_Y_HASH`
+
+golden angle (π(3−√5) ≈ 2.399963 rad) — the Fibonacci-sphere
+azimuth step AND the decorrelation hash for bob phases.
 
 ### `SCENE_ROTATE_SPEED`
 
@@ -169,26 +241,65 @@ slow backdrop motion — autorotate deg/frame-ish + node pulse.
 Speeds run far under OrbitControls' default (2.0) so the graph
 reads as a calm ambient layer, not a spinner.
 
+### `SCENE_NODE_SPIN`
+
+Per-node wireframe motion (the procedural-directory reference):
+every glyph yaws about its own Y at SPIN rad/s with a hashed
+initial angle, and bobs ±BOB_AMP chart units at BOB_SPEED rad/s
+off a decorrelated phase. SPIN_HASH walks the node index through
+a golden-angle-ish sequence so neighbors never spin in lockstep.
+
+### `SCENE_FOG_DENSITY`
+
+Exponential fog — density = FOG_DENSITY / graphR, so the far rim
+fades into the page backdrop (light or dark) like the reference's
+dark-slate depth cue, scaled to whatever radius the manifest
+actually spans. Kept low enough that the cloud's center mass stays
+inked — on light surfaces pastel inks washed >80% toward the fog
+color disappear entirely.
+
 ### `INDEX_CHUNK`
 
 semantic-index streaming — elements appended per idle slice (~a few
 ms each, far under a frame budget), the rIC starvation bound per
 slice, and the setTimeout fallback delay where rIC is absent
 
-### `TREE_SHEET_CAP`
+### `TREE_SHEET_CAP_CLOSED`
 
-folder paper-stack cap — beyond this many children the pile stops
-growing so the glyph stays readable instead of a wall of paper
+folder paper-stack caps — closed folders peek at most this many
+page tops above the tab; open folders fan up to this many colored
+sheets, so the pile stops growing before it walls off the glyph
 
 ### `SCENE_DIR_RADIUS`
 
-node sphere radii (chart units) — sized to read at the mid-zoom
-camera distance without smearing into blobs at near clip
+node sphere radii (chart units) — base glyph sizes before the
+per-node proportional scale. SCENE_GLYPH_FIT = the reference's
+icon-to-orbit ratio: a node's rendered glyph inflates to this
+fraction of the orbit it sits on, so every icon stays readable
+and proportional to its local spacing at any depth — the big
+center hub + shrinking satellites look.
+
+### `SCENE_FILE_CAP`
+
+File leaves drawn per dir before the rest collapse into a `+N`
+aggregate — the cap that keeps 300-file dirs from combing out. It
+shrinks by SCENE_FILE_CAP_STEP per ring: buckets get the full cap,
+deep dirs aggregate everything.
+
+### `SCENE_DIR_CAP`
+
+Dir fan-out + depth budgets — the raw manifest is ~4.4k nodes,
+which no guaranteed-separation layout can render readably, so dir
+children past SCENE_DIR_CAP (shrinking by _STEP per ring down to
+_MIN) and whole subtrees past SCENE_DEPTH_CAP collapse into the
+same `+N` aggregate leaf the file cap uses. The aggregate keeps
+its parent dir's path — picking it still opens that dir's page.
 
 ### `SCENE_DIR_OPACITY`
 
-node/edge alpha — faint enough to stay a backdrop layer, strong
-enough that the radial tree reads as a structure, not a smudge
+node/edge alpha — hairline wireframe carries far less ink than a
+filled surface, so glyphs and edges run near-full alpha or they
+ghost out on light glass; on dark slate they stay neon anyway.
 
 ### `SCENE_EDGE_HALF`
 

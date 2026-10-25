@@ -58,3 +58,16 @@ Nav menu overlay — aria-controls target for the burger toggles.
 
 Nav menu overlay title — aria-labelledby target for the open menu
 navigation landmark.
+
+### `COOKIES_INFO`
+
+Cookie-banner message text — aria-labelledby target giving the
+consent aside a _visible_ label (aria-label alone is invisible).
+
+### `READER_CONTENT`
+
+Parked reader article — the light-DOM skip link's static target.
+Deliberately different from MAIN_CONTENT (which lives inside the
+app-root shadow tree): identical ids across trees are legal, but
+DOM-wide uniqueness checkers count the composed tree. At runtime a
+delegated handler re-aims the link at the shadow #main-content.

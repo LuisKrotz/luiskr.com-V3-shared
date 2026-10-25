@@ -15,6 +15,18 @@ One manifest node — dir carries children, file carries id + mtime.
 
 ### (module scope)
 
+Scene-only flag — `+N` aggregate leaves the leaf cap synthesizes
+for surplus file children; the map colors them with the dir ink.
+
+### (module scope)
+
+View-synthesized section node — a disclosure wrapper the portal
+tree/grid renders above the real roots (Source Code, Documentation,
+Architecture Docs, Reports). Toggles only: no manifest path or
+route exists for a section, so group rows never navigate.
+
+### (module scope)
+
 A publishable root bucket (docs / reports / coverage-* / source modules).
 
 ### (module scope)
@@ -58,6 +70,44 @@ cheap accessor.
 ### `getDocsManifest`
 
 The scanned manifest — the vite plugin + jest stub always emit one.
+
+### `_groupParents`
+
+Direct-member path → its section's path (e.g. 'src' → 'group/source').
+
+### `_groups`
+
+Memoized section nodes — the manifest is static per build.
+
+### `buildGroups`
+
+Builds the four portal section nodes. The docs root's children flatten
+straight into Documentation (the 'docs' bucket itself is not a tree
+row — its URL stays reachable via crumbs/links); the `architecture`
+subtree is promoted into its own Architecture Docs section. Source and
+reports/coverage roots keep their bucket nodes as section members —
+every member carries its real path, so /docs/<path> URLs never change.
+
+- `@returns` Ordered section nodes (empty sections dropped).
+
+### `docsGroups`
+
+The four section nodes that parent the flat manifest roots in the
+treeview and the portal-root grid. Built once — the manifest never
+changes after hydration.
+
+- `@returns` Ordered section dir-nodes flagged `group: true`.
+
+### `docsGroupParent`
+
+The section-group path containing a manifest path — walks ancestors so
+deep paths ('docs/sassdoc/index.html') resolve through their section
+member ('docs/sassdoc') to the owning group ('group/docs'). Used to
+auto-open the group row for a routed path and to climb Arrow-Left out
+of a section member (its real path parent is not a rendered row).
+
+- `@param` path Manifest-relative docs path.
+- `@returns` The owning 'group/<id>' path, or undefined outside the tree.
 
 ### `docsGeneratedAt`
 

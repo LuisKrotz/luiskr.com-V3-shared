@@ -29,6 +29,10 @@ import {
 import { INPUT_STRINGS } from '@core/tokens/strings/input.js'
 import { ANIMATION_DURATIONS } from '@core/tokens/motion/animation.js'
 import { ATTR_VALUES } from '@core/tokens/attrs/values.js'
+import { A11Y_CLASSES } from '@core/tokens/classes/a11y.js'
+import { ARIA_ATTRS } from '@core/tokens/attrs/aria.js'
+import { LINK_ATTRS } from '@core/tokens/attrs/link.js'
+import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { APP_CLASSES } from '@core/tokens/classes/app.js'
 import { STATE_CLASSES } from '@core/tokens/classes/state.js'
 import { APP_EVENTS } from '@core/tokens/events/app.js'
@@ -434,6 +438,22 @@ describe('AppRoot tails', () => {
     el.onUpdated()
 
     globalThis.fetch = origFetch
+  })
+
+  test('the skip link lives inside a labelled nav landmark', async () => {
+    const { el } = await mountApp()
+
+    // aria_content_in_landmark — every page-level node must sit in a
+    // landmark; the labelled <nav> wrapper contains the link (a second
+    // <header> would create a duplicate banner against the light-DOM
+    // shell's header).
+    const link = el.shadowRoot.querySelector(`.${A11Y_CLASSES.SKIP_LINK}`)
+    const wrapper = link?.parentElement
+
+    expect(link).toBeTruthy()
+    expect(wrapper.tagName).toBe(HTML_TAGS.NAV.toUpperCase())
+    expect(wrapper.getAttribute(ARIA_ATTRS.ARIA_LABEL)).toBeTruthy()
+    expect(link.getAttribute(LINK_ATTRS.HREF)).toBe(`#${APP_IDS.MAIN_CONTENT}`)
   })
 
   test('AppRoot re-eval skips custom-element redefinition', async () => {

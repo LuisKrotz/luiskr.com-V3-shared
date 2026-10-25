@@ -439,11 +439,12 @@ describe('AppNav tails', () => {
     keydown(KEYS.ARROW_LEFT)
     expect(el._menuOpen).toBe(true)
 
-    shadow.querySelector(`.${NAV_CLASSES.NAV_PREF_BTN}`).click()
+    // Prefs/lang left the modal — they're the strip chips now.
+    shadow.querySelector(`.${NAV_CLASSES.NAV_GEAR_BTN}`).click()
     expect(store.getters.getPreferencesOpen()).toBe(true)
     store.commit(MODAL_MUTATIONS.TOGGLE_PREFERENCES_MODAL, false)
 
-    shadow.querySelector(`.${NAV_CLASSES.NAV_LANG_OPEN_BTN}`).click()
+    shadow.querySelector(`.${NAV_CLASSES.NAV_FLAG_BTN}`).click()
     expect(store.getters.getLangDialogOpen()).toBe(true)
     store.commit(MODAL_MUTATIONS.TOGGLE_LANG_DIALOG, false)
 
@@ -569,9 +570,14 @@ describe('AppNav tails', () => {
     store.state.lang.locale = LOCALES.DE
     expect(el._flagCanvas()).not.toBe(firstCanvas)
 
+    // The flag chip lives in the nav strip now — closing the menu no
+    // longer churns its widget; element teardown destroys it instead.
     el._closeMenu()
 
     await flush(ANIMATION_DURATIONS.MENU_CLOSE_DURATION + 100)
+    expect(el._navFlags.length).toBeGreaterThan(0)
+
+    el.remove()
     expect(el._navFlags).toHaveLength(0)
 
     store.state.lang.locale = prevLocale

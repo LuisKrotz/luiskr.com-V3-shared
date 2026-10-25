@@ -309,8 +309,28 @@ function* walkMedia(node) {
  */
 const writeCompressed = (file, html) => queueCompressedWrite(file, html)
 
-/** Largest fetched thumb payload worth inlining as a data URI. */
-const LCP_THUMB_MAX = 16384
+/**
+ * Largest fetched thumb payload worth inlining as a data URI. The old
+ * 16 KB cap assumed the veil image shared the preloaded hero's fetch —
+ * it doesn't (the veil binds the smallest proven variant, a different
+ * object), so on media-heavy routes the thumb queues behind megabytes
+ * of boot-graph media and the simulated LCP lands at ~8 s even though
+ * the request is discoverable and high-priority. Inlining keeps the
+ * candidate at zero network wait; ~96 KB pays ~+0.4 s on the HTML
+ * fetch to buy back ~6 s of LCP under simulated 4G.
+ */
+const LCP_THUMB_MAX = 98304
+
+/**
+ * Smallest fetched payload trusted to keep its LCP candidacy at
+ * near-full-viewport coverage. Paint-timing drops viewport-dominating
+ * images with too few bytes behind the painted area (measured live: an
+ * 846-byte webp never produced a candidate at 80–99% coverage while an
+ * ~8KB payload still reported at 99%), so prefetchLcpThumbs() walks the
+ * variant ladder until a payload clears this floor — only those LQIPs
+ * get the 96%-coverage box that out-sizes every mounted hero media.
+ */
+const LCP_THUMB_MIN = 8192
 
 /**
  * Minimum intrinsic video width (px) for the `-scaledown-2x` poster to be
@@ -324,13 +344,25 @@ const LCP_THUMB_MAX = 16384
 const SCALED_POSTER_MIN_WIDTH = 3072
 
 /**
- * Resolved media URL → `data:` LQIP payload for the injected early-LCP
- * image (`null` = fetched variant unusable or oversized). localize()
- * stays synchronous so the map is populated by prefetchLcpThumbs()
- * ahead of each emit batch; URLs repeat across 15 locales so the cache
- * collapses the network work to one fetch per unique asset.
+ * Resolved media URL → `{ src, url, bytes }` LQIP record for the
+ * injected early-LCP image — `src` is the data URI when the fetched
+ * variant fit the inline cap (else null), `url` is the resolved variant
+ * for the URL fallback, `bytes` drives the 70%-vs-96% coverage tier
+ * (LCP_THUMB_MIN). `null` entries mean every candidate failed or was
+ * oversized. localize() stays synchronous so the map is populated by
+ * prefetchLcpThumbs() ahead of each emit batch; URLs repeat across 15
+ * locales so the cache collapses the network work to one fetch chain
+ * per unique asset.
  */
 const LCP_THUMBS = new Map()
+
+/**
+ * Last bucket manifest handed to prefetchLcpThumbs() — localize() runs
+ * after it in every build path, so stashing the set here keeps the
+ * localize signature unchanged while still letting the veil <img> bind
+ * the smallest proven variant via lcpThumbUrlOf.
+ */
+let lcpManifest = null
 
 /**
  * First parked <figure> that carries paintable media — link-only
@@ -361,20 +393,31 @@ const lcpImageOf = (content, image) => {
 }
 
 /**
- * Maps a resolved CDN media URL to its smallest sibling variant — the
- * q3 kodak blur pass for images (mobile derivative first), the
- * -scaledown-4x poster frame for video — keeping the inlined LQIP in
- * the few-KB range. Manifest membership decides; with no listing (or
- * no variant) the original URL is returned and the fetch-size cap
- * filters oversized payloads instead.
+ * Streams a resolved CDN media URL's sibling variants smallest-first —
+ * the q3 kodak blur pass for images (mobile derivative first), the
+ * -scaledown-4x poster frame for video. Manifest membership decides;
+ * the generator yields only proven keys so prefetchLcpThumbs() can keep
+ * climbing when the smallest payload is too small to survive Chrome's
+ * viewport-entropy LCP check. Non-CDN URLs yield the URL unchanged.
  */
-const lcpThumbUrlOf = (url, manifest) => {
-  if (!url.startsWith(CDN_BASE)) return url
+const lcpThumbCandidatesOf = function* (url, manifest) {
+  if (!url.startsWith(CDN_BASE)) {
+    yield url
+
+    return
+  }
 
   const key = dec(url.slice(CDN_BASE.length))
   const at = key.indexOf(MEDIA.VIDEO_EXT)
 
   const stem = at >= 0 ? key.slice(0, at) : key
+
+  // Image stem without any existing quality/mobile marker, so variant
+  // spellings compose from the base object name.
+  const imgStem = key.replace(
+    /(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i,
+    ''
+  )
 
   const candidates =
     at >= 0
@@ -397,55 +440,95 @@ const lcpThumbUrlOf = (url, manifest) => {
           `${stem}${MEDIA.THUMB_EXT}`,
         ]
       : [
-          `${key.replace(/(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i, '')}${MEDIA.MOBILE_SUFFIX}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.WEBP_EXT}`,
-          `${key.replace(/(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i, '')}${MEDIA.MOBILE_SUFFIX}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.EXT}`,
-          `${key.replace(/(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i, '')}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.WEBP_EXT}`,
-          `${key.replace(/(-mobile)?(-mozjpg(3-MSSIM-tuned-kodak|-uncompressed|-75|-50))?\.(jpg|webp)$/i, '')}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.EXT}`,
+          `${imgStem}${MEDIA.MOBILE_SUFFIX}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.WEBP_EXT}`,
+          `${imgStem}${MEDIA.MOBILE_SUFFIX}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.EXT}`,
+          `${imgStem}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.WEBP_EXT}`,
+          `${imgStem}${MEDIA.MOZ}${MEDIA.THUMB_SUFFIX}${MEDIA.EXT}`,
+          // Veil-fallback rungs: when no kodak blur pass exists the q50
+          // derivative is still a fraction of the original — the veil's
+          // eager <img> binds it by URL (no inline cap applies), so an
+          // LCP candidate lands sooner than the full-size hero.
+          `${imgStem}${MEDIA.MOBILE_SUFFIX}${MEDIA.MOZ}${MEDIA.Q50}${MEDIA.WEBP_EXT}`,
+          `${imgStem}${MEDIA.MOBILE_SUFFIX}${MEDIA.MOZ}${MEDIA.Q50}${MEDIA.EXT}`,
+          `${imgStem}${MEDIA.MOZ}${MEDIA.Q50}${MEDIA.WEBP_EXT}`,
+          `${imgStem}${MEDIA.MOZ}${MEDIA.Q50}${MEDIA.EXT}`,
         ]
 
   for (const candidate of candidates) {
-    if (manifest?.has(candidate)) return `${CDN_BASE}${candidate}`
+    if (manifest?.has(candidate)) yield `${CDN_BASE}${candidate}`
   }
 
-  return url
+  yield url
 }
 
 /**
- * Downloads each URL's smallest variant once into LCP_THUMBS as a
- * base64 data URI. Oversized/failed fetches cache `null` so localize()
- * simply skips the LQIP for that route — the network image preload
- * still applies. Mirrors prefetchStarMediaDims(): build-time fetches,
- * silent failures.
+ * Maps a resolved CDN media URL to its smallest proven sibling variant —
+ * the generator's first yield; the original URL when nothing is listed.
+ */
+const lcpThumbUrlOf = (url, manifest) => lcpThumbCandidatesOf(url, manifest).next().value || url
+
+/**
+ * Downloads each URL's smallest *entropy-qualified* variant into
+ * LCP_THUMBS. The ladder yields variants smallest-first; a payload
+ * below LCP_THUMB_MIN can't hold an LCP candidacy at 96% coverage, so
+ * the walk keeps climbing — the first ≥MIN payload wins, otherwise the
+ * largest undersized fetch is kept as a last resort (still eligible at
+ * the 70% box). Payloads over LCP_THUMB_MAX stay URL-bound. Failed
+ * candidates are skipped; all-failed caches `null` so localize() falls
+ * back to the ladder's smallest URL or no LQIP. Mirrors
+ * prefetchStarMediaDims(): build-time fetches, silent failures.
  * @param {Iterable<string>} urls - resolved media URLs (CDN or not)
  * @param {Set<string>|null} manifest - bucket listing for variant checks
  */
 export async function prefetchLcpThumbs(urls, manifest) {
+  lcpManifest = manifest || lcpManifest
+
   await Promise.all(
     [...new Set(urls)]
       .filter((u) => u && !LCP_THUMBS.has(u))
       .map(async (url) => {
-        const thumb = lcpThumbUrlOf(url, manifest)
+        // Recursion over the lazy candidate stream: each level fetches
+        // the next proven variant, returning it when ≥MIN (or the best
+        // undersized fetch once the ladder runs out / a payload oversizes).
+        const fetchThumb = async (gen, undersized) => {
+          const { value: thumb, done } = gen.next()
 
-        try {
-          const res = await fetch(thumb)
+          if (done) return undersized
 
-          if (!res.ok) {
-            LCP_THUMBS.set(url, null)
+          try {
+            const res = await fetch(thumb, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) })
 
-            return
+            const buf = res.ok ? Buffer.from(await res.arrayBuffer()) : null
+
+            if (buf && buf.length > LCP_THUMB_MAX) {
+              // Variants only grow deeper in the ladder — stop climbing;
+              // an undersized inliner still beats an oversized URL.
+              return undersized || { thumb, buf }
+            }
+
+            if (buf && buf.length >= LCP_THUMB_MIN) return { thumb, buf }
+
+            return fetchThumb(gen, buf ? { thumb, buf } : undersized)
+          } catch {
+            return fetchThumb(gen, undersized)
           }
-
-          const buf = Buffer.from(await res.arrayBuffer())
-
-          LCP_THUMBS.set(
-            url,
-            buf.length <= LCP_THUMB_MAX
-              ? `data:${thumb.endsWith(MEDIA.WEBP_EXT) ? MEDIA_ATTRS.IMAGE_WEBP : MEDIA_ATTRS.IMAGE_JPEG};base64,${buf.toString('base64')}`
-              : null
-          )
-        } catch {
-          LCP_THUMBS.set(url, null)
         }
+
+        const pick = await fetchThumb(lcpThumbCandidatesOf(url, manifest), null)
+
+        LCP_THUMBS.set(
+          url,
+          pick
+            ? {
+                src:
+                  pick.buf.length <= LCP_THUMB_MAX
+                    ? `data:${pick.thumb.endsWith(MEDIA.WEBP_EXT) ? MEDIA_ATTRS.IMAGE_WEBP : MEDIA_ATTRS.IMAGE_JPEG};base64,${pick.buf.toString('base64')}`
+                    : null,
+                url: pick.thumb,
+                bytes: pick.buf.length,
+              }
+            : null
+        )
       })
   )
 }
@@ -476,6 +559,9 @@ export async function prefetchLcpThumbs(urls, manifest) {
  *   for the statically-emitted intro-loader veil (class names mirror
  *   LOADER_CLASSES) — title + first stage line, retexted by the runtime
  *   the instant JS adopts the node.
+ * @param {string} [o.skip] - per-locale APP.skip text for the light-DOM
+ *   skip link — localized like the veil copy so the bypass affordance
+ *   reads in the page's own language before (and without) JS.
  */
 export function localize(
   html,
@@ -491,6 +577,7 @@ export function localize(
     entities,
     content,
     loader,
+    skip,
   }
 ) {
   const canon = canonicalUrl || url
@@ -581,47 +668,138 @@ export function localize(
   const lcpImage = lcpImageOf(content, image)
 
   // The early-LCP paint itself is an LQIP: prefetchLcpThumbs() inlined
-  // the smallest bucket variant as a data URI, so the candidate paints
-  // in the first frame with zero network wait while the real hero (the
-  // preload above + the runtime mount) still streams in. It lands inside
-  // the statically-emitted intro veil (class mirrors
-  // LOADER_CLASSES.INTRO_LOADER_LQIP) — the veil paints with the first
-  // frame so the image's paint time coincides with FCP, and the veil's
-  // removal on mount retires the candidate with zero overlay risk.
-  const lcpThumb = lcpImage && LCP_THUMBS.get(lcpImage)
-
-  if (lcpThumb) {
-    out = out.replace(
-      /(<div class="intro-loader"[^>]*>)/,
-      `$1<img class="intro-loader-lqip" src="${lcpThumb}" alt="" aria-hidden="true">`
-    )
-  }
+  // a bucket variant as a data URI, so the candidate paints in the
+  // first frame with zero network wait while the real hero (the preload
+  // above + the runtime mount) still streams in. It lands inside the
+  // statically-emitted intro veil (classes mirror LOADER_CLASSES
+  // .INTRO_LOADER_LQIP/.INTRO_LOADER_LQIP_FULL) — the veil paints with
+  // the first frame so the image's paint time coincides with FCP, and
+  // the veil's retirement parks the painted candidate offscreen so the
+  // record survives mount. The --full modifier (96% viewport coverage)
+  // only ships for ≥LCP_THUMB_MIN payloads: paint-timing disqualifies
+  // viewport-dominating images with too few bytes behind their painted
+  // area, and the mounted hero can paint ~130–200k px² — bigger than
+  // the 113k the 70% box reports — so undersized thumbs stay on the
+  // entropy-safe box while qualified ones out-size every hero. The
+  // figure media and the route cover were both prefetched — pick the
+  // heavier record so video posters whose ladder tops out below the
+  // floor (a ~3KB thumb can't hold candidacy anywhere near full-viewport
+  // coverage) fall back to the cover's richer variant instead.
+  const lcpThumb = [lcpImage, image]
+    .map((u) => (u ? LCP_THUMBS.get(u) : null))
+    .filter(Boolean)
+    .sort((a, b) => b.bytes - a.bytes)[0]
 
   // A media-scoped <source> in the first figure means ≤768px viewports
   // paint the mobile tier, not lcpImage — each preload is gated by the
   // complementary media query so a viewport preloads exactly the
   // resource its <picture> will select (a cross-scoped preload is a
   // wasted fetch and flags preload-not-used in Lighthouse). For video
-  // figures the runtime hero is a <video poster> — the poster attr only
-  // ever fetches the .jpg — so the preload binds the img src (the same
-  // `x.mp4.jpg-thumb.jpg` key the runtime resolves as poster[0]), never
-  // the parked picture's webp source.
+  // figures the runtime hero is a <video poster>: on desktop it fetches
+  // the .jpg (poster[0]), but prefersScaledVideo() switches small boxes
+  // to the `-scaledown-2x` tier (poster[1]) — box × dpr ≤ width ÷ 2 —
+  // so the mobile preload must warm the scaled key or the runtime LCP
+  // resource stays cold until mount.
   const firstFigure = mediaFigureOf(content) || ''
 
   const posterImg = firstFigure.match(/<img[^>]* src="([^"]+\.mp4\.jpg-thumb\.jpg)"/)?.[1] || ''
 
   const lcpPreload = posterImg || lcpImage
 
+  // Mobile preload for the figure's own media-scoped <source> — parked
+  // video pictures carry none, so the runtime's scaled poster tier is
+  // bound separately below.
   const lcpMobile = lcpPreload
     ? firstFigure.match(/<source media="[^"]*" srcset="([^"]+)"/)?.[1] || ''
     : ''
 
+  // Runtime video-poster mirror of prefersScaledVideo(): the scaled tier
+  // wins when `box × dpr ≤ mediaWidth ÷ 2`. The media query spells that
+  // out in dpr buckets — ≤w/2 @≤1dppx, ≤w/3 @≤1.5, ≤w/4 @≤2, ≤w/6 above —
+  // each clamped to the mobile band — so only viewports whose runtime
+  // poster really is the scaled variant fetch this preload; the parked
+  // figure's img width carries the intrinsic video width.
+  const posterWidth = Number(firstFigure.match(/<img[^>]* width="(\d+)"/)?.[1]) || 0
+
+  const scaledPoster = (() => {
+    if (!posterImg || !posterImg.startsWith(CDN_BASE) || !posterWidth) return ''
+
+    const stem = dec(posterImg.slice(CDN_BASE.length)).slice(0, -MEDIA.VIDEO_THUMB_EXT.length)
+
+    const key = [
+      `${stem}${MEDIA.VIDEO_SCALE}${MEDIA.VIDEO_THUMB_EXT}`,
+      `${stem}${MEDIA.VIDEO_SCALE_BARE}${MEDIA.VIDEO_THUMB_EXT}`,
+    ].find((k) => lcpManifest?.has(k))
+
+    return key ? enc(`${CDN_BASE}${key}`) : ''
+  })()
+
+  const scaledMedia = scaledPoster
+    ? [
+        `(max-width: ${Math.min(768, Math.floor(posterWidth / 2))}px) and (max-resolution: 1dppx)`,
+        `(max-width: ${Math.min(768, Math.floor(posterWidth / 3))}px) and (min-resolution: 1.01dppx) and (max-resolution: 1.5dppx)`,
+        `(max-width: ${Math.min(768, Math.floor(posterWidth / 4))}px) and (min-resolution: 1.51dppx) and (max-resolution: 2dppx)`,
+        `(max-width: ${Math.min(768, Math.floor(posterWidth / 6))}px) and (min-resolution: 2.01dppx)`,
+      ].join(', ')
+    : ''
+
+  // Veil LQIP source: the inlined thumb data-URI, else the resolved
+  // variant URL when the payload oversizes the inline cap (bytes >MAX
+  // still lands while the boot graph streams), else the ladder's
+  // smallest proven derivative (kodak blur, then q50 — lcpThumbUrlOf
+  // yields them smallest-first and the URL unchanged when nothing is
+  // proven). A shell without the intro veil can't host the image —
+  // resolving a source anyway would park the article without --painted
+  // while its own figure stays lazy and nothing paints the candidate.
+  const hasVeil = /<div class="intro-loader"/.test(out)
+
+  const lcpPaint = hasVeil
+    ? lcpThumb?.src || lcpThumb?.url || (firstFigure ? lcpThumbUrlOf(lcpPreload, lcpManifest) : '')
+    : ''
+
+  // ≥MIN payloads pass the viewport-entropy check at 96% coverage;
+  // undersized ones (or the unmeasured ladder fallback) keep the 70%
+  // box that preserves their candidacy (mirrors
+  // LOADER_CLASSES.INTRO_LOADER_LQIP + _FULL).
+  const lqipClass =
+    (lcpThumb?.bytes || 0) >= LCP_THUMB_MIN
+      ? 'intro-loader-lqip intro-loader-lqip--full'
+      : 'intro-loader-lqip'
+
+  // Idempotent injection: the standalone pass feeds the previous
+  // dist/index.html — en-home's LQIP img and preload hints included —
+  // back through localize(), so without this sweep every document would
+  // stack the home route's early-LCP artifacts on top of its own (or, on
+  // media-less routes, inherit an LQIP the --painted contract forbids).
+  out = out
+    .replace(/<img class="intro-loader-lqip[^"]*"[^>]*>/g, '')
+    .replace(/^[ \t]*<link rel="preload" as="image"[^>]*>\n?/gm, '')
+
+  if (lcpPaint) {
+    out = out.replace(
+      /(<div class="intro-loader"[^>]*>)/,
+      `$1<img class="${lqipClass}" src="${esc(lcpPaint)}" fetchpriority="high" alt="" aria-hidden="true">`
+    )
+  }
+
   if (lcpPreload) {
+    // ≥3072px videos already carry the scaled key in their parked
+    // media-scoped <source> (picked up as lcpMobile) — no second hint.
+    const scaledHint = scaledPoster && scaledPoster !== lcpMobile
+
+    // The unscaled poster/jpg stays ungated when a separate scaled hint
+    // exists — on non-scaled phones (high-dpr boxes) poster[0] is still
+    // the runtime pick, and desktop media selection is identical.
     const preloads = [
-      `  <link rel="preload" as="image" href="${esc(lcpPreload)}"${lcpMobile ? ` media="not ${MOBILE_MEDIA}"` : ''} fetchpriority="high">`,
+      `  <link rel="preload" as="image" href="${esc(lcpPreload)}"${lcpMobile && !scaledHint ? ` media="not ${MOBILE_MEDIA}"` : ''} fetchpriority="high">`,
       ...(lcpMobile
         ? [
             `  <link rel="preload" as="image" href="${esc(lcpMobile)}" media="${MOBILE_MEDIA}" fetchpriority="high">`,
+          ]
+        : []),
+      ...(scaledHint
+        ? [
+            `  <link rel="preload" as="image" href="${esc(scaledPoster)}" media="${scaledMedia}" fetchpriority="high">`,
           ]
         : []),
     ]
@@ -655,12 +833,16 @@ export function localize(
   // earlier template revision) so re-runs strip it instead of leaving
   // stale markup.
   if (content) {
-    // The parked article's first figure is the painted LCP element —
-    // the same image the <link rel="preload"> above already races for.
-    // A lazy attr on it defers its fetch past parse (and flags
-    // lcp-lazy-loaded), so it goes eager + high-priority, matching the
-    // runtime hero contract in media/figure/render.tsx.
-    if (lcpImage) {
+    // The parked article's first figure is the painted LCP element on
+    // media-less routes — the same image the <link rel="preload"> above
+    // already races for. A lazy attr on it defers its fetch past parse
+    // (and flags lcp-lazy-loaded), so it goes eager + high-priority,
+    // matching the runtime hero contract in media/figure/render.tsx.
+    // Media routes park the article --offscreen: its media never paints,
+    // so the img+webp-source pair must stay lazy (c-v:hidden + lazy =
+    // zero fetches) — an eager upgrade would burn two boot-graph fetches
+    // on bytes nothing ever displays.
+    if (lcpImage && !lcpPaint) {
       const lcpFigure = mediaFigureOf(content)
 
       if (lcpFigure) {
@@ -682,15 +864,15 @@ export function localize(
     // reader-content--painted modifier (mirrors READER_CLASSES.PAINTED)
     // and stays painted under the opaque veil — its own text becomes the
     // early LCP candidate instead of a late runtime <draw-text>.
-    const articleClass = lcpThumb ? 'reader-content' : 'reader-content reader-content--painted'
+    const articleClass = lcpPaint ? 'reader-content' : 'reader-content reader-content--painted'
 
     out = out.replace(
-      /<div id="app">\s*(?:<div class="boot-veil"[^>]*>[\s\S]*?<\/div>\s*)?(?:<article class="reader-content"[^>]*>[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?\s*<\/div>/,
+      /<div id="app">\s*(?:<div class="boot-veil"[^>]*>[\s\S]*?<\/div>\s*)?(?:<article[^>]*class="reader-content"[^>]*>[\s\S]*?<\/article>|<main>[\s\S]*?<\/main>)?\s*<\/div>/,
       // The parked copy is a labelled region landmark (IBM's DOM-level
       // aria_content_in_landmark counts <article> children as un-landmarked
       // content) while aria-hidden + inert keep the mirror out of the AT
       // tree and focus order — screen readers hear the live app instead.
-      `<div id="app"><article class="${articleClass}" role="region" aria-label="Static page copy" aria-hidden="true" inert>${parked}</article></div>`
+      `<div id="app"><article id="reader-content" class="${articleClass}" role="region" aria-label="Static page copy" aria-hidden="true" inert>${parked}</article></div>`
     )
   }
 
@@ -710,6 +892,11 @@ export function localize(
   if (loader?.msg)
     out = out.replace(/(<div class="intro-loader-msg">)[^<]*/, `$1${esc(loader.msg)}`)
 
+  // Localize the light-DOM skip link — same copy contract as the veil:
+  // English ships in the shell, each locale page swaps APP.skip text.
+  if (skip)
+    out = out.replace(/(<a class="skip-link" href="#reader-content">)[^<]*/, `$1${esc(skip)}`)
+
   return out
 }
 
@@ -723,6 +910,14 @@ const starMediaDims = new Map()
 
 /** Bytes fetched per image-dims probe — SOF/IHDR headers live in the head. */
 const DIMS_PROBE_BYTES = 64 * 1024
+
+/**
+ * Per-request ceiling for every build-time prefetch (translations, dims
+ * probes, LCP thumbs). Without a signal a stalled CDN connection hangs
+ * the whole locale pass silently — every caller already degrades
+ * gracefully on fetch failure, so a timeout just takes the fallback.
+ */
+const FETCH_TIMEOUT_MS = 20 * 1000
 
 /**
  * ` width="W" height="H"` attribute fragment for emitted media — every
@@ -791,7 +986,9 @@ let liveTranslations = null
  */
 export async function prefetchTranslations() {
   try {
-    const res = await fetch(`${FIREBASE_DB}/translations.json`)
+    const res = await fetch(`${FIREBASE_DB}/translations.json`, {
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    })
 
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
 
@@ -846,7 +1043,10 @@ export async function prefetchStarMediaDims() {
   await Promise.all(
     [...srcs].map(async (url) => {
       try {
-        const res = await fetch(url, { headers: { Range: `bytes=0-${DIMS_PROBE_BYTES - 1}` } })
+        const res = await fetch(url, {
+          headers: { Range: `bytes=0-${DIMS_PROBE_BYTES - 1}` },
+          signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+        })
 
         if (!res.ok) return
 
@@ -910,6 +1110,9 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const node = t(loc, (x) => x.APP?.loader)
     return node ? { title: node.title, msg: node.stages?.[0] } : undefined
   }
+
+  /** Per-locale APP.skip text for the light-DOM skip link. */
+  const skipCopyFor = (loc) => t(loc, (x) => x.APP?.skip)
 
   // hreflang alternates — built per route: every emitted page points its
   // alternates at the *equivalent* route in each locale, never back to the
@@ -2025,6 +2228,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     ],
     content: enHome,
     loader: loaderCopyFor('en'),
+    skip: skipCopyFor('en'),
   })
 
   // ── Per-route documents ───────────────────────────────────────────────────
@@ -2040,8 +2244,13 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     // across locales so only the first locale's pass hits the network.
     const routes = routesFor(loc)
 
+    // Prime each route's figure media AND its cover — video-hero posters
+    // sometimes top out at ~2–3KB variants (no entropy-qualified LQIP
+    // exists along their ladder), where the cover's kodak blur pass is
+    // far larger. localize() then binds whichever prefetched record
+    // clears the coverage-entropy floor.
     await prefetchLcpThumbs(
-      routes.map((route) => lcpImageOf(route.content, route.image)),
+      routes.flatMap((route) => [lcpImageOf(route.content, route.image), route.image]),
       mediaManifest
     )
 
@@ -2097,6 +2306,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         entities,
         content: route.content,
         loader: loaderCopyFor(loc),
+        skip: skipCopyFor(loc),
       })
 
       // en → dist/<route>/; every other locale emits at its PUBLIC path
@@ -2168,6 +2378,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         entities,
         content: body,
         loader: loaderCopyFor('en'),
+        skip: skipCopyFor('en'),
       })
 
       // `.html` file nodes (generated sassdoc/jsdoc pages) emit AT their

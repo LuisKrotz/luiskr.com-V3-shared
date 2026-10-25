@@ -1531,6 +1531,22 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
+| File                                                                                                                                                                     | What it does |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| [`onnxruntime-web_webgpu.js`](experiments\docs\node_modules.vite\deps/onnxruntime-web_webgpu.md)                                                                         | —            |
+| [`three.core-REoVBtYN.js`](experiments\docs\node_modules.vite\deps/three.core-REoVBtYN.md)                                                                               | —            |
+| [`three.js`](experiments\docs\node_modules.vite\deps/three.md)                                                                                                           | —            |
+| [`three_examples_jsm_controls_OrbitControls__js.js`](experiments\docs\node_modules.vite\deps/three_examples_jsm_controls_OrbitControls__js.md)                           | —            |
+| [`three_examples_jsm_tsl_display_BloomNode__js.js`](experiments\docs\node_modules.vite\deps/three_examples_jsm_tsl_display_BloomNode__js.md)                             | —            |
+| [`three_examples_jsm_tsl_display_ChromaticAberrationNode__js.js`](experiments\docs\node_modules.vite\deps/three_examples_jsm_tsl_display_ChromaticAberrationNode__js.md) | —            |
+| [`three_examples_jsm_tsl_display_FilmNode__js.js`](experiments\docs\node_modules.vite\deps/three_examples_jsm_tsl_display_FilmNode__js.md)                               | —            |
+| [`three_tsl.js`](experiments\docs\node_modules.vite\deps/three_tsl.md)                                                                                                   | —            |
+| [`three_webgpu.js`](experiments\docs\node_modules.vite\deps/three_webgpu.md)                                                                                             | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
 | File                                                                               | What it does |
 | ---------------------------------------------------------------------------------- | ------------ |
 | [`block-navigation.js`](experiments\docs\reports\coverage-run/block-navigation.md) | —            |
@@ -1951,12 +1967,13 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                        | What it does                                                |
-| ------------------------------------------- | ----------------------------------------------------------- |
-| [`encode.mjs`](shared\build\docs/encode.md) | Manifest → compact wire tuples for `virtual:docs-manifest`. |
-| [`redact.mjs`](shared\build\docs/redact.md) | Secret scrubbing for the public source-code viewer.         |
-| [`render.mjs`](shared\build\docs/render.md) | Build-time file → HTML renderers for the docs portal.       |
-| [`scan.mjs`](shared\build\docs/scan.md)     | Filesystem → manifest tree for the docs portal.             |
+| File                                              | What it does                                                |
+| ------------------------------------------------- | ----------------------------------------------------------- |
+| [`encode.mjs`](shared\build\docs/encode.md)       | Manifest → compact wire tuples for `virtual:docs-manifest`. |
+| [`highlight.mjs`](shared\build\docs/highlight.md) | Build-time syntax highlighter for the docs portal's code    |
+| [`redact.mjs`](shared\build\docs/redact.md)       | Secret scrubbing for the public source-code viewer.         |
+| [`render.mjs`](shared\build\docs/render.md)       | Build-time file → HTML renderers for the docs portal.       |
+| [`scan.mjs`](shared\build\docs/scan.md)           | Filesystem → manifest tree for the docs portal.             |
 
 ## Entry points
 

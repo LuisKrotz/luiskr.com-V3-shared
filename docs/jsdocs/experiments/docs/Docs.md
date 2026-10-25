@@ -63,6 +63,13 @@ otherwise drop to the body.
 
 ### (module scope)
 
+The treeview's roving tab stop — path of the single tabindex="0"
+row. APG trees take ONE tab stop: Tab enters the widget once,
+arrows move inside it. Every other row carries tabindex="-1" so
+keyboard users aren't forced through thousands of links.
+
+### (module scope)
+
 Map-column visibility watcher — ≤1024 the aside is display:none and
 the scene's rAF loop is paused so hidden canvases cost zero GPU.
 The zoom dialog overrides the pause (the modal can open at any
@@ -90,9 +97,16 @@ settled. Mirrors the space playground's `_earthReady` contract.
 
 Current boot stage copy + percent rendered inside the loader.
 
+### (module scope)
+
+Section nodes parenting the manifest roots — memoized; the group
+rows seed open so the grouped tree lands with its members visible
+like the flat list it replaced.
+
 ### `rootsAsNodes`
 
-Manifest roots reshaped as dir-nodes for the treeview.
+Manifest roots grouped under the four section nodes for the
+treeview and the portal-root grid.
 
 ### `generatedAt`
 
@@ -101,6 +115,23 @@ ISO generated stamp shown under the title.
 ### `isDirOpen`
 
 Whether a dir path is expanded in the treeview.
+
+### `treeTabIndex`
+
+Roving tabindex for a rendered tree row — '0' only on the current
+tab-stop path so the treeview exposes exactly one Tab entry per the
+ARIA treeview pattern (IBM widget_tabbable_single).
+
+- `@param` path Manifest path of the row being rendered.
+
+### `treeFocusItem`
+
+Focus landed on a tree row (arrow move, click-focus, or the
+_focusPath restore): make it the widget's single tab stop by
+flipping tabindex across the live rows — an attribute flip, not a
+re-render, so focus never churns mid-gesture.
+
+- `@param` path Manifest path of the focused row.
 
 ### `isProtectedView`
 
@@ -120,6 +151,7 @@ Navigates within the portal — a bare path resolves against /docs.
 
 Grid/tree click — dirs toggle expansion AND navigate so the grid lands
 on the folder; files navigate straight to their file route.
+Section-group nodes have no route — they only toggle disclosure.
 
 ### `pickTreeNode`
 
@@ -131,6 +163,10 @@ and navigates; files navigate.
 ### `closeFile`
 
 Back button — navigates to the file's parent folder (or the root).
+A non-source index.html IS the folder's open state: its parent dir
+re-opens it on entry (_applyPath), so back must climb past the
+owning dir to the grandparent — otherwise the button loops on the
+same file. Under source roots index.html is a plain file: one level.
 
 ### `toggleNav`
 
@@ -242,6 +278,17 @@ canvas preserves its WebGL context, so the scene survives renders,
 column↔dialog moves and tree toggles without a remount.
 
 - `@returns` The shared scene canvas element.
+
+### (module scope)
+
+Maps a manifest path to the path the scene knows — section groups
+are scene nodes ('group/…'), manifest members are scene nodes, but
+a bucket root whose children were promoted into a section (the
+docs bucket → Documentation) exists only in the URL space, so its
+highlight maps to the owning group node.
+
+- `@param` path Manifest-relative docs path.
+- `@returns` The scene node's path for the highlight/focus lookup.
 
 ### (module scope)
 

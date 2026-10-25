@@ -426,16 +426,23 @@ const sanitizeHtmlDoc = (doc, linkResolver = null) => {
     .replace(/\son\w+="[^"]*"/giu, '')
     .replace(/\son\w+='[^']*'/giu, '')
     .replace(/\son\w+=[^\s>]+/giu, '')
-    // Third-party report markup (istanbul) ships unlabeled inputs — name
-    // them from their id so the embedded report satisfies
-    // input_label_exists inside the portal's shadow viewer.
+    // App-shell structural ids — a payload that embeds the shell's own
+    // markup (the source index.html rendered as a doc) would otherwise
+    // duplicate them in the prerendered article (element_id_unique).
+    .replace(/\bid="(app|main-content|view-outlet)"/giu, 'id="docs-payload-$1"')
+    // Third-party report markup (istanbul) ships unlabeled inputs —
+    // name them from their id AND emit a real <label> so the report's
+    // filter boxes carry a VISIBLE label, not just an aria-label
+    // (input_label_visible). Id-less inputs keep the aria fallback.
     .replace(/<input\b[^>]*>/giu, (tag) => {
-      if (/aria-label(?:ledby)?\s*=/iu.test(tag)) return tag
-
       const id = /\bid\s*=\s*"([^"]*)"/iu.exec(tag)?.[1]
       const label = id ? id.replace(/[-_]+/gu, ' ').replace(/([a-z])([A-Z])/gu, '$1 $2') : 'input'
 
-      return tag.replace(/\s*\/?\s*>$/u, ` aria-label="${label}">`)
+      const labelled = /aria-label(?:ledby)?\s*=/iu.test(tag)
+        ? tag
+        : tag.replace(/\s*\/?\s*>$/u, ` aria-label="${label}">`)
+
+      return id ? `<label for="${id}">${label}</label>${labelled}` : labelled
     })
     // istanbul's sortable coverage headers are interactive <th> cells
     // with no text — name them from data-col (humanized like the input

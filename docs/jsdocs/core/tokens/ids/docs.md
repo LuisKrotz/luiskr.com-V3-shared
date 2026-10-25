@@ -24,3 +24,9 @@ treeview container), distinct from the tree list id.
 ### `MAP_MODAL`
 
 Zoom trigger's aria-controls target — the architecture-map dialog.
+
+### `MAP_LABEL`
+
+Visible label element the map landmark names itself from
+(aria_complementary_label_visible — landmarks should name from
+rendered text, not an invisible aria-label).

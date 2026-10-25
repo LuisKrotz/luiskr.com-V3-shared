@@ -227,10 +227,20 @@ export class AppRoot extends BaseComponent {
             until :focus, jumps to the routed <main>. Lives in THIS shadow
             tree: a #fragment link can only resolve an id inside its own
             root, so a skip link inside <app-nav>'s shadow could never
-            reach #main-content (axe skip-link + real keyboard jump). */}
-        <a className={A11Y_CLASSES.SKIP_LINK} href={`${CHAR_STRINGS.HASH}${APP_IDS.MAIN_CONTENT}`}>
-          {appText(NAV_UI_KEYS.SKIP) as string}
-        </a>
+            reach #main-content (axe skip-link + real keyboard jump). The
+            labelled <nav> wrapper puts it inside a landmark — bare nodes
+            outside landmarks trip aria_content_in_landmark — and a nav
+            (not header) keeps the composed page to a single banner: the
+            light-DOM shell's header. The skip-text label keeps this nav
+            uniquely named next to the site-title and menu navs. */}
+        <nav aria-label={appText(NAV_UI_KEYS.SKIP) as string}>
+          <a
+            className={A11Y_CLASSES.SKIP_LINK}
+            href={`${CHAR_STRINGS.HASH}${APP_IDS.MAIN_CONTENT}`}
+          >
+            {appText(NAV_UI_KEYS.SKIP) as string}
+          </a>
+        </nav>
 
         <AppNav />
 

@@ -34,12 +34,20 @@ const PKGS = {
 
 /**
  * Windows cjpeg guidance — no winget/choco mozjpeg package exists, so the
- * npm binary wrapper is the manager-free path (it drops a prebuilt
- * cjpeg.exe into npm's global bin dir, which is already on PATH for any
- * Node user). vcpkg (`vcpkg install mozjpeg`) or the GitHub release zip
- * are the alternatives.
+ * yarn binary wrapper is the manager-free path (the `mozjpeg` package is
+ * imagemin's bin-wrapper: it drops a prebuilt cjpeg.exe into yarn's
+ * global bin dir). vcpkg (`vcpkg install mozjpeg`) or the GitHub release
+ * zip are the alternatives.
  */
-const WIN_CJPEG_HINT = 'npm install -g mozjpeg'
+const WIN_CJPEG_HINT = 'yarn global add mozjpeg'
+
+/**
+ * Windows cjpeg install command for the auto-run plan — yarn resolves
+ * through %PATHEXT% only inside cmd, and modern Node refuses to spawn
+ * .cmd shims directly (CVE-2024-27980), so the step shells out
+ * explicitly: `cmd /d /s /c yarn global add mozjpeg`.
+ */
+const WIN_CJPEG_CMD = ['cmd', ['/d', '/s', '/c', 'yarn', 'global', 'add', 'mozjpeg']]
 
 /** Maps the raw tool map onto the three installable groups. */
 const needs = (t) => ({
@@ -87,7 +95,12 @@ export function plan(t, manager) {
         : 'Install ffmpeg (and optionally ImageMagick) with your system package manager',
     ]
 
-    if (missing.cjpeg && process.platform === 'win32') manual.push(WIN_CJPEG_HINT)
+    // No system manager on Windows still has the yarn path — yarn ships
+    // with the project's toolchain, so the bin-wrapper can auto-install.
+    if (missing.cjpeg && process.platform === 'win32') {
+      manual.push(WIN_CJPEG_HINT)
+      return { manager, needsRoot: false, commands: [WIN_CJPEG_CMD], manual }
+    }
 
     return { manager, needsRoot: false, commands: [], manual }
   }
@@ -117,15 +130,13 @@ export function plan(t, manager) {
       if (missing.ffmpeg) commands.push(['winget', [...args, '--id', 'Gyan.FFmpeg']])
       if (missing.imagemagick)
         commands.push(['winget', [...args, '--id', 'ImageMagick.ImageMagick']])
+      if (missing.cjpeg) commands.push(WIN_CJPEG_CMD)
 
       return {
         manager,
         needsRoot: false,
         commands,
-        manual: [
-          ...commands.map(([c, a]) => display(c, a)),
-          ...(missing.cjpeg ? [WIN_CJPEG_HINT] : []),
-        ],
+        manual: [...commands.map(([c, a]) => display(c, a))],
       }
     }
     case 'choco': {
@@ -133,15 +144,16 @@ export function plan(t, manager) {
       const pkgs = [missing.ffmpeg && p.ffmpeg, missing.imagemagick && p.imagemagick].filter(
         Boolean
       )
+      const commands = [
+        ...(pkgs.length ? [['choco', ['install', '-y', ...pkgs]]] : []),
+        ...(missing.cjpeg ? [WIN_CJPEG_CMD] : []),
+      ]
 
       return {
         manager,
         needsRoot: false,
-        commands: pkgs.length ? [['choco', ['install', '-y', ...pkgs]]] : [],
-        manual: [
-          ...(pkgs.length ? [display('choco', ['install', '-y', ...pkgs])] : []),
-          ...(missing.cjpeg ? [WIN_CJPEG_HINT] : []),
-        ],
+        commands,
+        manual: commands.map(([c, a]) => display(c, a)),
       }
     }
     default: {
@@ -224,5 +236,6 @@ export async function installTools() {
 
   // Judge by the post-install probe, not exit codes: winget exits nonzero
   // for "already installed / no newer version", which is success here.
-  return { ok: !after.missing.ffmpeg, log, report: after }
+  // imagemagick stays optional — the pipeline falls back when absent.
+  return { ok: !after.missing.ffmpeg && !after.missing.cjpeg, log, report: after }
 }

@@ -15,3 +15,5 @@ Reads the instanced alpha + active flag for a manifest path. Nodes
 render as TWO InstancedMesh tiers — dir spheres first, file spheres
 second, in scene-add order — and a path's instance slot is the index
 it holds inside its own tier (the same partition buildGraph runs).
+`placed` overrides the fixture tree — the ViewDocs mounts feed the
+section groups, not the local ROOTS.

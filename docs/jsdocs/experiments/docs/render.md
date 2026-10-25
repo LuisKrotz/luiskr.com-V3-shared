@@ -78,11 +78,13 @@ from both the AX tree and crawlers without a heading per file.
 
 ### (module scope)
 
-Streams the root buckets + their subtrees — h3 bucket links first, then
-each root's nodes in document order. Generator shape per the
+Streams the section groups + member subtrees — an h3 label per group
+(sections are disclosure-only, so the heading carries no link), then
+each member's nodes in document order (dirs as heading links one level
+under the group, files as bare anchors). Generator shape per the
 self-similar-traversal rule; the puller controls pacing.
 
-- `@param` roots The manifest roots.
+- `@param` groups The four section nodes parenting the manifest roots.
 
 ### `scheduleIndexSlice`
 

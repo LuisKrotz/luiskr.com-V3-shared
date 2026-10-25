@@ -2,9 +2,9 @@
 
 Path tokens split by function — public URL routes, Firebase
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\routes\paths.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\routes\paths.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -48,3 +48,10 @@ ONNX Runtime wasm/glue binaries — `/ort/ort-wasm-…`.
 ### `ML_MODELS_PREFIX`
 
 Generated ONNX model files — `/models/<slug>.onnx`.
+
+### `EMPTY_CAPTIONS`
+
+Shared empty WebVTT caption track — muted ambient/showcase videos
+carry no meaningful audio, so the caption file is intentionally
+empty; its presence satisfies caption_track_exists with an honest
+"nothing to caption" track.

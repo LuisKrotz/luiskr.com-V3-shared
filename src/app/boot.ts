@@ -24,6 +24,7 @@ import { updateReaderContent } from '@core/locale/reader-content.js'
 import { initMediaManifest } from '@core/utils/media/manifest.js'
 import { applyAnimationDesc } from '@core/utils/a11y/animation-desc.js'
 import { ANIMATION_IDS } from '@core/tokens/data/animation-ids.js'
+import { IntroLoader } from '@core/utils/canvas/loaders/intro-loader.js'
 
 /**
  * Schedules non-urgent work during idle time; falls back to a short
@@ -45,11 +46,15 @@ export function deferIdle(cb: () => void): void {
 export function mountAppShell(c: AppRoot): void {
   store.commit(PREF_MUTATIONS.INIT_THEME)
   store.commit(PREF_MUTATIONS.INIT_REDUCED_MOTION)
+  store.commit(PREF_MUTATIONS.INIT_HIGH_CONTRAST)
   c.initInputListeners()
 
-  // Warm the media-variant manifest early (non-blocking) — until it lands,
-  // renders omit webp <source>s and serve originals, which is always safe.
-  void initMediaManifest()
+  // Warm the media-variant manifest at idle — it's ~430KB of bucket keys,
+  // and pulling it during boot steals the simulated-4G pipe from the
+  // LCP-critical requests on every route (including text pages that never
+  // consult it). Until it lands, renders omit webp <source>s and serve
+  // originals, which is always safe.
+  deferIdle(() => void initMediaManifest())
 
   c.loadData()
 
@@ -216,7 +221,9 @@ export function mountAppShell(c: AppRoot): void {
     )
   }
 
-  import('@core/utils/canvas/loaders/intro-loader.js').then(({ IntroLoader }) => {
-    c._introLoader = new IntroLoader(document.body)
-  })
+  // Static import: the intro-loader chunk's dynamic fetch used to sit
+  // between mount and veil removal — the veil could only lift once that
+  // extra hop landed, stretching Speed Index under throttle. The ~1.4KB
+  // module rides the entry graph instead, so adoption is synchronous.
+  c._introLoader = new IntroLoader(document.body)
 }

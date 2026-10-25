@@ -80,15 +80,53 @@ libuv threadpool at the end of the fan-out.
 
 ### `LCP_THUMB_MAX`
 
-Largest fetched thumb payload worth inlining as a data URI.
+Largest fetched thumb payload worth inlining as a data URI. The old
+16 KB cap assumed the veil image shared the preloaded hero's fetch —
+it doesn't (the veil binds the smallest proven variant, a different
+object), so on media-heavy routes the thumb queues behind megabytes
+of boot-graph media and the simulated LCP lands at ~8 s even though
+the request is discoverable and high-priority. Inlining keeps the
+candidate at zero network wait; ~96 KB pays ~+0.4 s on the HTML
+fetch to buy back ~6 s of LCP under simulated 4G.
+
+### `LCP_THUMB_MIN`
+
+Smallest fetched payload trusted to keep its LCP candidacy at
+near-full-viewport coverage. Paint-timing drops viewport-dominating
+images with too few bytes behind the painted area (measured live: an
+846-byte webp never produced a candidate at 80–99% coverage while an
+~8KB payload still reported at 99%), so prefetchLcpThumbs() walks the
+variant ladder until a payload clears this floor — only those LQIPs
+get the 96%-coverage box that out-sizes every mounted hero media.
+
+### `SCALED_POSTER_MIN_WIDTH`
+
+Minimum intrinsic video width (px) for the `-scaledown-2x` poster to be
+the runtime pick on a ≤768px viewport. The runtime rule is
+`box × dpr ≤ mediaWidth / 2` (prefersScaledVideo): a 3072px source at
+the widest mobile box (768 × 2dpr) exactly halves, so anything wider is
+guaranteed scaled on mobile while narrower videos keep the full poster —
+emitting the scaled source/preload for them warms a URL the <video>
+never requests.
 
 ### `LCP_THUMBS`
 
-Resolved media URL → `data:` LQIP payload for the injected early-LCP
-image (`null` = fetched variant unusable or oversized). localize()
-stays synchronous so the map is populated by prefetchLcpThumbs()
-ahead of each emit batch; URLs repeat across 15 locales so the cache
-collapses the network work to one fetch per unique asset.
+Resolved media URL → `{ src, url, bytes }` LQIP record for the
+injected early-LCP image — `src` is the data URI when the fetched
+variant fit the inline cap (else null), `url` is the resolved variant
+for the URL fallback, `bytes` drives the 70%-vs-96% coverage tier
+(LCP_THUMB_MIN). `null` entries mean every candidate failed or was
+oversized. localize() stays synchronous so the map is populated by
+prefetchLcpThumbs() ahead of each emit batch; URLs repeat across 15
+locales so the cache collapses the network work to one fetch chain
+per unique asset.
+
+### `lcpManifest`
+
+Last bucket manifest handed to prefetchLcpThumbs() — localize() runs
+after it in every build path, so stashing the set here keeps the
+localize signature unchanged while still letting the veil <img> bind
+the smallest proven variant via lcpThumbUrlOf.
 
 ### `mediaFigureOf`
 
@@ -104,22 +142,31 @@ then a <video> poster — falling back to the route's hero for pages
 whose emitter puts no media first. Link-only figures (bare <a> video
 attachments with a figcaption) carry no paintable media and are skipped.
 
+### `lcpThumbCandidatesOf`
+
+Streams a resolved CDN media URL's sibling variants smallest-first —
+the q3 kodak blur pass for images (mobile derivative first), the
+-scaledown-4x poster frame for video. Manifest membership decides;
+the generator yields only proven keys so prefetchLcpThumbs() can keep
+climbing when the smallest payload is too small to survive Chrome's
+viewport-entropy LCP check. Non-CDN URLs yield the URL unchanged.
+
 ### `lcpThumbUrlOf`
 
-Maps a resolved CDN media URL to its smallest sibling variant — the
-q3 kodak blur pass for images (mobile derivative first), the
--scaledown-4x poster frame for video — keeping the inlined LQIP in
-the few-KB range. Manifest membership decides; with no listing (or
-no variant) the original URL is returned and the fetch-size cap
-filters oversized payloads instead.
+Maps a resolved CDN media URL to its smallest proven sibling variant —
+the generator's first yield; the original URL when nothing is listed.
 
 ### (module scope)
 
-Downloads each URL's smallest variant once into LCP_THUMBS as a
-base64 data URI. Oversized/failed fetches cache `null` so localize()
-simply skips the LQIP for that route — the network image preload
-still applies. Mirrors prefetchStarMediaDims(): build-time fetches,
-silent failures.
+Downloads each URL's smallest _entropy-qualified_ variant into
+LCP_THUMBS. The ladder yields variants smallest-first; a payload
+below LCP_THUMB_MIN can't hold an LCP candidacy at 96% coverage, so
+the walk keeps climbing — the first ≥MIN payload wins, otherwise the
+largest undersized fetch is kept as a last resort (still eligible at
+the 70% box). Payloads over LCP_THUMB_MAX stay URL-bound. Failed
+candidates are skipped; all-failed caches `null` so localize() falls
+back to the ladder's smallest URL or no LQIP. Mirrors
+prefetchStarMediaDims(): build-time fetches, silent failures.
 
 - `@param` {Iterable<string>} urls - resolved media URLs (CDN or not)
 - `@param` {Set<string>|null} manifest - bucket listing for variant checks
@@ -141,6 +188,7 @@ Rewrites the English shell into a localized document.
 - `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
 - `@param` {string} [o.content] - prerendered body markup injected into
 - `@param` {{title:string,msg:string}} [o.loader] - per-locale APP.loader copy
+- `@param` {string} [o.skip] - per-locale APP.skip text for the light-DOM
 
 ### `starMediaDims`
 
@@ -152,6 +200,13 @@ range request and shared across all 15 locales).
 ### `DIMS_PROBE_BYTES`
 
 Bytes fetched per image-dims probe — SOF/IHDR headers live in the head.
+
+### `FETCH_TIMEOUT_MS`
+
+Per-request ceiling for every build-time prefetch (translations, dims
+probes, LCP thumbs). Without a signal a stalled CDN connection hangs
+the whole locale pass silently — every caller already degrades
+gracefully on fetch failure, so a timeout just takes the fallback.
 
 ### `dimsAttr`
 
@@ -211,6 +266,10 @@ Per-locale lookup with English fallback (mirrors runtime appText).
 
 Per-locale APP.loader copy for the statically-emitted intro-loader
 veil — title + first stage line (mirrors runtime loaderCopy).
+
+### `skipCopyFor`
+
+Per-locale APP.skip text for the light-DOM skip link.
 
 ### `firstPara`
 

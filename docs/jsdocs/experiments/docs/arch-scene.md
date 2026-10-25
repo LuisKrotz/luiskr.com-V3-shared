@@ -37,7 +37,15 @@ after re-fits whatever box the canvas re-seated into.
 
 ### (module scope)
 
-A flattened manifest node with its ring depth and ring angle.
+A flattened manifest node with its depth, sibling slot and parent.
+
+### `sib`
+
+Index among this node's siblings (0-based) — the Fibonacci slot.
+
+### `sibCount`
+
+Sibling count sharing the same parent — sizes the sphere fan.
 
 ### (module scope)
 
@@ -65,28 +73,111 @@ transformed *= (1 + sin(uTime·SPEED + gl_InstanceID·PHASE) · AMP)
 `aActive` the 0/1 active flag — both are instanced attributes written
 only when the highlight path changes, never per frame.
 
-### `patchNodeMaterial`
+### `glyphVertexPreamble`
+
+Wireframe-glyph shader contract — the procedural-directory reference's
+per-node motion and per-kind ink run entirely in the vertex/fragment
+stages so ~7k glyph instances cost one draw call per tier and ZERO
+per-frame CPU writes:
+
+p = rotY(uTime·SPIN + aSpin) · position — node self-yaw
+p *= aScale — orbit-proportional glyph
+p *= (1 + sin(uTime·PULSE + i·0.7)·AMP) — ambient pulse
+· (1 + aActive·(SCENE_ACTIVE_SCALE − 1)) — active pop
+off = aOffset + (0, sin(uTime·BOB + aPhase)·BAMP, 0)
+result = p + off — bob + place
+
+`aColor` carries the file's icon-pack ink (dir accent for folders and
++N aggregates); `aAlpha`/`aActive` are the highlight-pass streams —
+all instanced, written only when the graph or highlight changes.
+
+### `edgeVertexPreamble`
+
+Edge shader contract — each endpoint vertex carries its node's bob
+phase in `aPhase`, so the parent→child link endpoints ride the exact
+same sine the glyph centers do and links stay glued while the
+network floats. No per-frame CPU rewrites of edge buffers.
+
+### `patchGlyphMaterial`
 
 Patches a node material so the pulse scale and per-instance alpha run
 in-shader: `uTime` is the shared clock, `aAlpha`/`aActive` are the
 instanced attribute streams the highlight pass rewrites on demand.
 
+### `patchEdgeMaterial`
+
+Patches the edge material with the shared clock so link endpoints
+bob in phase with their node glyphs.
+
+### `subtreeWeight`
+
+Subtree node count — the balloon-layout weight. Recursive per the
+self-similar-traversal rule; each node's weight is computed once, at
+the level that allocates its parent's sector.
+
+- `@param` node Manifest node whose subtree is weighed.
+- `@returns` Total nodes in the subtree, self included (min 1).
+
 ### `layoutNodes`
 
 Flattens the manifest tree into positioned node descriptors: depth sets
-the ring radius, sibling order spreads the angle. Recursive per the
+the ring radius, sibling order spreads the angle. Sectors split
+proportionally to subtree weight (balloon-tree), not sibling count —
+a 300-file branch gets the angular room its leaf count needs while a
+single-file branch takes a thin slice; equal splits are what packed
+dense subtrees into unreadable blobs. Recursive per the
 self-similar-traversal rule.
+
+### `clusterRadii`
+
+Subtree-extent cluster packing — the hairball fix. The orbit radius at
+which node `i`'s children fan around it must clear the whole bounding
+sphere of the FATTEST child subtree, not just a sibling-count chord:
+two siblings MIN_SEP apart each carrying a descendant cloud of radius
+`ext` need their centers ≥ 2·ext + MIN_SEP units apart or the clouds
+interpenetrate and weld into the glued mess the old sep-only radii
+produced.
+
+Runs as a bottom-up pass (reverse `placed` order — `layoutNodes`
+always emits parents before children, so reversed iteration resolves
+every child before its parent):
+
+ext[i] = leaf → glyph radius
+= inner → cluster[i] + max(ext over children)
+cluster[i] = max(
+SCENE_MIN_ORBIT, // lone-child floor
+(2·maxChildExt + MIN_SEP) / (2·sin(π/kids)), // sibling clear
+glyphRadius(i) + maxChildExt + MIN_SEP // glyph clears cloud
+)
+
+The sibling-clear term is the ring bound `chord = 2R·sin(π/n)` solved
+for R — conservative for the Fibonacci sphere (whose uniform spread
+beats the ring's worst-case chord), and `ext[0]` ends up the exact
+bounding radius of the whole graph for the camera fit.
+
+- `@param` parents Parent index per node (-1 = root).
+- `@param` dirs 1 for directory nodes, 0 for file leaves.
+- `@returns` `{ cluster, ext }` — child-orbit radius and subtree bounding
 
 ### `layoutPositionsJs`
 
-Main-thread twin of the DOCS_SCENE_LAYOUT worker op — the batch
-fallback for when the wasm pool is unavailable (tests, worker-less
-environments). Ring radius grows with depth; y alternates per ring and
-adds a slow sine wave for vertical separation.
+Hierarchical-sphere layout — the procedural-directory reference's
+model: every node's children orbit it on a Fibonacci sphere
+(phi = acos(1 − 2·(s+0.5)/n), theta = s·golden-angle) at the
+parent's cluster radius. Cluster radii come from `clusterRadii` —
+the reference's shrink-ratio orbits with a sibling-glyph clearance
+floor, so icons keep ≥SCENE_MIN_SEP of wireframe clear space while
+subtree clouds compress geometrically (the hairball fix: strict
+non-interpenetration grows exponentially and is unreadable past a
+few hundred nodes).
+Runs iteratively: `layoutNodes` always emits a parent before
+its children, so `placed`-order evaluation sees resolved parents.
 
-- `@param` depths Ring depth per node.
-- `@param` angles Ring angle (radians) per node.
-- `@returns` Flat xyz triplets in node order.
+- `@param` parents Parent index per node (-1 = root).
+- `@param` sibs Sibling slot per node.
+- `@param` sibCounts Sibling count per node.
+- `@param` dirs 1 for directory nodes, 0 for file leaves.
+- `@returns` `{ xyz, scale }` — position triplets and the proportional
 
 ### `computePositions`
 
@@ -96,6 +187,51 @@ the plain-object result also survives when transfer is unsupported.
 
 - `@param` placed Flattened tree nodes.
 - `@returns` xyz triplets, or null when nothing resolved.
+
+### `dirWireVerts`
+
+Wireframe folder glyph — the procedural-directory reference shape:
+a front panel (top edge slightly lower, the open-mouth read), a
+taller back panel, a tab on the back's top-left, and the depth
+connectors that make it read as a 3D box from any orbit angle.
+Pure vertex math — no textures, no imported geometry. Scaled to
+SCENE_DIR_RADIUS. Exported: the scene3d arm ribbons the same verts.
+
+- `@returns` Flat xyz pairs — segment list for LINES drawing.
+
+### `fileWireVerts`
+
+Wireframe document glyph — folded-corner page outline + inner fold
+diagonal + three text-rule lines (the reference file shape). Scaled
+to SCENE_FILE_RADIUS·1.3 so leaf glyphs read smaller than folders
+(the container/item size ratio of the reference). Exported: the
+scene3d arm ribbons the same verts.
+
+- `@returns` Flat xyz pairs — segment list for LINES drawing.
+
+### `wireBound`
+
+Bounding radius of a wire segment list — the invisible pick-sphere
+radius (wire glyphs have no triangle surface to raycast, so picking
+runs against instanced spheres sized to the glyph's exact bound).
+Exported: the scene3d arm sizes its JS-side pick spheres from the
+same bound.
+
+- `@param` verts Flat xyz pairs.
+
+### `probeIconInks`
+
+Per-kind ink probe — the map colors file nodes with the EXACT ink
+the treeview icon pack paints that extension's glyph, sampled off
+`docs-tree-icon docs-tree-icon--<kind>` probe elements parked inside
+the portal's shadow root (icon SCSS is shadow-scoped; probes must
+live inside it for --icon-ink to resolve). `hidden` keeps the probe
+invisible — custom properties still compute. Returns null entries
+for unparseable/no-stylesheet environments (tests) — callers fall
+back to the dir accent ink.
+
+- `@param` host Element inside the .docs shadow tree (canvas's parent).
+- `@param` kinds Distinct icon kinds to sample.
 
 ### (module scope)
 
@@ -137,6 +273,39 @@ Mounts the architecture scene on `canvas`.
 - `@param` onLost Called once when the GL context dies mid-flight so the
 - `@returns` Scene handle, or null when WebGL is unavailable.
 
+### `countSceneSubtree`
+
+Counts a node's whole subtree — the `+N` on a depth-capped dir's
+aggregate leaf. Recursive per the self-similar-traversal rule.
+
+- `@param` node Subtree root.
+- `@returns` Total descendant count.
+
+### `placeRoots`
+
+The manifest buckets hang off a synthetic center node — the portal
+root level IS the tree root, so the scene reads as one rooted graph
+(center = "In-depth project docs", ring 1 = the four buckets, …).
+Buckets are { root, label, children } — mapped to dir nodes here so
+they carry a real path (pickable + highlightable) and a real label.
+File leaves are capped per dir (capSceneLeaves) so giant coverage
+dirs don't weld into combs. Shared by the three.js and scene3d arms.
+
+- `@param` roots Manifest root buckets.
+- `@returns` The flattened placed tree.
+
+### `resolveScenePath`
+
+Resolves an active docsPath to a placed node — the exact match, or
+when the scene caps ('+N' aggregates, depth budget) folded the path
+away, the nearest visible ancestor (longest string-prefix + deepest
+match wins). Returns -1 for ''/unresolvable paths so the focus falls
+back to the portal root. Shared by both arms.
+
+- `@param` placed Flattened placed tree.
+- `@param` path Active docsPath.
+- `@returns` placed index of the node to light/focus, or -1.
+
 ### (module scope)
 
 Camera-fit numbers for a placed tree — shared by both arms.
@@ -155,10 +324,11 @@ Far plane — clears the opposite rim at this distance.
 
 ### `graphFit`
 
-Fit the camera to the real graph radius — a deep manifest (outer
-rings past ~60 units) left the default pose sitting INSIDE the tree,
-which rendered nodes as giant blobs instead of a legible radial
-map. dist = r/sin(fov/2) with ~20% margin frames the whole graph.
+Fit the camera to the real graph radius — the sphere layout spreads
+clusters along parent orbits, so the bound is the longest orbit
+chain: distance(node) = orbit(parent→node) + distance(parent),
+accumulated down each branch. dist = r/sin(fov/2) with ~20% margin
+frames the whole graph.
 
 - `@param` placed The flattened placed tree.
 
@@ -204,10 +374,18 @@ for whatever path is active when they arrive.
 
 ### `dirMesh`
 
-Node draw calls — every dir sphere renders through ONE InstancedMesh,
-every file sphere through another, so the multi-thousand-node graph
-costs two draws instead of one call per node (plus the line set and
-the revealed labels). Weak GPUs/tablets keep their frame budget.
+Node draw calls — the procedural-directory look: every directory
+renders the wireframe folder glyph, every file the folded-page
+glyph, each through ONE instanced LineSegments draw so the
+multi-thousand-node graph costs two draw calls (plus the edge set
+and revealed labels). Picking runs against invisible instanced
+spheres — wire lines have no surface to raycast and three's line
+raycast has no instancing path; the pick tier shares the highlight
+attribute buffers with the glyph geometry.
+
+### `dirGlyph`
+
+The instanced wireframe glyph draws — disposed with the scene.
 
 ### `dirPlaced`
 
@@ -223,7 +401,7 @@ Shared pulse clock — patched into both node materials' shaders.
 
 ### `lineGeo`
 
-Edge geometry — assigned inside buildGraph, disposed in destroy().
+Edge geometry + material — assigned inside buildGraph, disposed in destroy().
 
 ### `writeActive`
 
@@ -232,17 +410,30 @@ the exact path match pops to SCENE_ACTIVE_OPACITY with the larger
 pulse scale (aActive=1), and ancestor dirs on its branch lift to
 SCENE_ANCESTOR_OPACITY so the route's lineage reads on the map.
 Everything else keeps the faint backdrop alpha for its tier.
+Ancestry walks the placed parent chain — section-group paths
+('group/…') aren't string prefixes of their members' manifest
+paths, so path-prefix matching can't see them.
 
 ### `buildGraph`
 
 Populates the scene once the (possibly worker-computed) positions
 land — meshes, edges, then dir-name labels on top of dir nodes.
+`scale` carries each node's orbit-proportional glyph factor.
 
 ### `buildTier`
 
-Builds one instanced tier — shared sphere geometry, one material,
-static instance matrices, and the two instanced attribute streams
-(alpha / active) the highlight pass owns.
+Builds one instanced tier — the wireframe glyph as a single
+instanced LineSegments draw (aOffset/aColor/aPhase/aSpin +
+aAlpha/aActive drive the vertex shader) plus the invisible
+instanced pick sphere. The pick geometry SHARES the alpha/active
+attribute objects with the glyph geometry, so the highlight pass
+keeps writing one buffer both visuals read.
+
+- `@param` verts Wire segment list (flat xyz pairs).
+- `@param` baseOpacity Resting alpha for the tier.
+- `@param` idxs placed[] indexes in this tier.
+- `@param` rgbOf Per-node ink resolver (icon-pack palette).
+- `@returns` {glyph, pick} — draw object + pick mesh.
 
 ### `pathForHit`
 

@@ -16,6 +16,16 @@ consumers read members and never re-declare the strings
 (zero-hardcoding rules 4–5). Object.freeze makes the token contract
 immutable at runtime.
 
+### `DOCS_TREE_GROUP`
+
+Section-group row modifier — the four disclosure rows (Source /
+Docs / Architecture / Reports) that parent the flat root buckets.
+
+### `DOCS_GRID_GROUP`
+
+Portal-root section wrapper — one per disclosure group, each its
+own card grid under a real group heading.
+
 ### `DOCS_MAP`
 
 The right-hand map column — interactive alternative nav surface.
@@ -74,6 +84,12 @@ file rows an empty spacer so every icon column stays aligned.
 
 Paper sheet peeking out of a folder glyph — count ∝ children.
 
+### `DOCS_TREE_PAPER_TONES`
+
+Per-sheet ink modifiers for the open folder's fanned papers —
+the reference pack colors each sheet differently
+(red/blue/green/purple), applied by index modulo the list.
+
 ### `DOCS_ICON_LINE`
 
 Stroked icon part — inked with the kind's `--icon-ink`.
@@ -86,9 +102,22 @@ Filled icon part — inked with the kind's `--icon-ink`.
 
 Icon backdrop tile — a light kind-tinted wash behind the glyph.
 
+### `DOCS_ICON_PAGE`
+
+File page shell — the folded-corner document silhouette every file
+icon is drawn on; `-fold`/`-flap` parts hang off it.
+
 ### `DOCS_ICON_ON`
 
 Letterform/detail drawn on a filled tile — reads paper-colored.
+
+### `DOCS_ICON_ALT`
+
+Secondary-ink strokes — two-tone glyphs (the python tail).
+
+### `DOCS_ICON_TEXT`
+
+Wordmark text inside a page — the shield labels ("HTML"/"CSS").
 
 ### `DOCS_ICON_KINDS`
 

@@ -30,10 +30,17 @@ mozjpeg (brew/pacman) or libjpeg-turbo's utils package elsewhere.
 ### `WIN_CJPEG_HINT`
 
 Windows cjpeg guidance — no winget/choco mozjpeg package exists, so the
-npm binary wrapper is the manager-free path (it drops a prebuilt
-cjpeg.exe into npm's global bin dir, which is already on PATH for any
-Node user). vcpkg (`vcpkg install mozjpeg`) or the GitHub release zip
-are the alternatives.
+yarn binary wrapper is the manager-free path (the `mozjpeg` package is
+imagemin's bin-wrapper: it drops a prebuilt cjpeg.exe into yarn's
+global bin dir). vcpkg (`vcpkg install mozjpeg`) or the GitHub release
+zip are the alternatives.
+
+### `WIN_CJPEG_CMD`
+
+Windows cjpeg install command for the auto-run plan — yarn resolves
+through %PATHEXT% only inside cmd, and modern Node refuses to spawn
+.cmd shims directly (CVE-2024-27980), so the step shells out
+explicitly: `cmd /d /s /c yarn global add mozjpeg`.
 
 ### `needs`
 

@@ -512,7 +512,7 @@ describe('SEO route parity', () => {
       // No lcpThumb → media-less route → the article emits the painted
       // modifier so its own text stays the early LCP candidate.
       expect(out).toContain(
-        `<div id="app"><article class="${READER_CLASSES.CONTENT} ${READER_CLASSES.PAINTED}" role="region" aria-label="Static page copy" aria-hidden="true" inert><div><h1>Privacy Policy</h1></div></article></div>`
+        `<div id="app"><article id="reader-content" class="${READER_CLASSES.CONTENT} ${READER_CLASSES.PAINTED}" role="region" aria-label="Static page copy" aria-hidden="true" inert><div><h1>Privacy Policy</h1></div></article></div>`
       )
       expect(out).not.toContain('boot-veil')
       expect(out).not.toContain('Stale')
@@ -561,7 +561,9 @@ describe('SEO route parity', () => {
     })
 
     // First figure — the LCP candidate — upgraded to an eager,
-    // high-priority fetch; the preload link is emitted for it.
+    // high-priority fetch; the preload link is emitted for it. (No
+    // intro veil in this shell → the article stays --painted and owns
+    // its own early fetch.)
     expect(out).toContain('loading="eager" fetchpriority="high"')
     expect(out).toContain('<link rel="preload" as="image"')
 

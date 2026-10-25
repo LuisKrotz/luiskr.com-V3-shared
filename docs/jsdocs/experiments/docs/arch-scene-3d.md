@@ -35,6 +35,10 @@ Ring depth — the focus-glide dolly distance input.
 
 Manifest path — onPick payload + highlight key.
 
+### `pi`
+
+placed[] index — the parent chain walk for ancestor highlights.
+
 ### `baseOpacity`
 
 Resting opacity (dir/file token).
@@ -42,6 +46,15 @@ Resting opacity (dir/file token).
 ### `activeScale`
 
 Active-highlight scale multiplier applied in the pulse write.
+
+### `rgb`
+
+Per-kind ink rgb — restored by the highlight pass; the wireframe
+palette is per-node now, not one global ink.
+
+### `phase`
+
+Bob phase / initial yaw — decorrelated per node (golden hashes).
 
 ### (module scope)
 
@@ -84,13 +97,23 @@ spherical pose — the inverse of the Rust rig's
 - `@param` t Saved orbit target.
 - `@returns` [distance, yaw, pitch].
 
-### `buildEdges`
+### `segmentsToRibbons`
 
-Expands the parent→child edge list into cross-quad ribbon geometry —
-two perpendicular quads per edge (the engine draws triangles only;
+Expands a raw segment list into cross-quad ribbon geometry — two
+perpendicular quads per segment (the engine draws triangles only;
 a crossed pair reads as a 1px line strip from every angle). SoA
 upload: positions + zero normals (basic material is unlit) + zero
-uvs + triangle indices.
+uvs + triangle indices. Shared by the edge fan and the wireframe
+node glyphs.
+
+- `@param` segs Flat xyz pairs — every six floats are one segment.
+- `@param` half Ribbon half-width in chart units.
+- `@returns` The four attribute arrays for `upload_geometry`.
+
+### `buildEdges`
+
+Expands the parent→child edge list into cross-quad ribbon geometry
+via `segmentsToRibbons` at the edge half-width.
 
 - `@param` placed Flattened tree.
 - `@param` positions xyz triplets per node.
@@ -146,7 +169,7 @@ Populates the scene once positions land — shared dir/file sphere
 geometries, per-node materials (opacity arms), cross-quad edges,
 then dir-name labels on top.
 
-- `@param` xyz Worker/local position triplets.
+- `@param` positions Worker/local result — `xyz` position triplets plus
 
 ### `pick`
 

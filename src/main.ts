@@ -16,7 +16,8 @@
  */
 
 import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
-import { WINDOW_EVENTS } from '@core/tokens/events/dom.js'
+import { HTML_TAGS } from '@core/tokens/elements/html.js'
+import { MOUSE_EVENTS, WINDOW_EVENTS } from '@core/tokens/events/dom.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 import { ROUTE_PATHS } from '@core/tokens/routes/paths.js'
 import { CHAR_STRINGS } from '@core/tokens/strings/chars.js'
@@ -35,6 +36,7 @@ import { startRouteWarming } from '@core/utils/motion/route-warmer.js'
 import { initGlobalErrorHandlers } from '@core/utils/notify.js'
 import { runDebugActions } from '@core/debug/params.js'
 import { READER_CLASSES } from '@core/tokens/classes/reader.js'
+import { A11Y_CLASSES } from '@core/tokens/classes/a11y.js'
 
 /**
  * Absolute bound for waiting on the first-paint signal — a suppressed
@@ -181,6 +183,28 @@ const mount = () => {
   }
 
   appContainer.replaceChildren(document.createElement(COMPONENT_TAGS.APP_ROOT))
+
+  // Light-DOM skip link — its static href targets the parked article
+  // (#reader-content) so no-JS documents and crawlers get a real jump;
+  // live, the anchor's own root can't see the shadow #main-content, so
+  // activation is re-aimed here: preventDefault + focus() the routed
+  // <main> through the app-root shadow boundary. Enter on a link
+  // dispatches click, so keyboard + pointer share this path.
+  document.addEventListener(MOUSE_EVENTS.CLICK, (e) => {
+    const link = (e.target as Element | null)?.closest?.(`${HTML_TAGS.A}.${A11Y_CLASSES.SKIP_LINK}`)
+
+    if (!link) return
+
+    const main = appContainer
+      .querySelector(COMPONENT_TAGS.APP_ROOT)
+      ?.shadowRoot?.getElementById(APP_IDS.MAIN_CONTENT)
+
+    if (!main) return
+
+    e.preventDefault()
+
+    main.focus()
+  })
 
   return true
 }
