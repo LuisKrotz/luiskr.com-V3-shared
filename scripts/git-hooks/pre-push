@@ -22,6 +22,16 @@ SUPER="$(git rev-parse --show-superproject-working-tree 2>/dev/null || true)"
 
 cd "$(git rev-parse --show-toplevel)"
 
+# rev-parse emits host-native paths (C:/… on Windows) while $PWD is a
+# POSIX path under Git Bash — normalize SUPER through cd so the REL
+# prefix-strip below compares like with like. Without this the strip
+# silently no-ops, SCOPE resolves empty, and the fallback below gates a
+# module push with jest only — skipping tsc/eslint/stylelint/governance
+# and never stamping reports/gate-result.json.
+if [[ -n "$SUPER" ]]; then
+  SUPER="$(cd "$SUPER" 2>/dev/null && pwd || printf '%s' "$SUPER")"
+fi
+
 # ── Module context ────────────────────────────────────────────────────────────
 if [[ -n "$SUPER" ]]; then
   SG="$SUPER/shared/scripts/verify/scope-gates.mjs"
