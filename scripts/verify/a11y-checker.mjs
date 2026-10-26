@@ -505,7 +505,7 @@ const main = async () => {
         // loops (star field) are skipped via the endTime guard.
         // Runs after the last long wait: reveals triggered during the
         // settle waits start fresh animations that must also be finished.
-        await page.evaluate(() => {
+        const settleAnimations = () => {
           const finishAll = (root) => {
             for (const a of root.getAnimations({ subtree: true })) {
               const end = a.effect?.getComputedTiming?.().endTime
@@ -537,9 +537,18 @@ const main = async () => {
           }
 
           finishAll(document)
-        })
+        }
+
+        await page.evaluate(settleAnimations)
 
         await new Promise((r) => setTimeout(r, 200))
+
+        // Second pass immediately before the scan — lazily-mounted
+        // sections (docs stream-in chunks, loader veils finishing their
+        // fade) can reveal fresh --pending chars during the 200ms gap,
+        // and a char sampled mid-mount reports a bogus low-contrast
+        // violation on a transition state no reader ever sees.
+        await page.evaluate(settleAnimations)
 
         const { report } = await getCompliance(page, label)
         const results = report?.results || []
