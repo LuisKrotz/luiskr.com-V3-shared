@@ -9,30 +9,20 @@ Emits per-locale, per-route static index.html files into
 
 ## Members
 
+### `llmPathsFor`
+
+`/llm/` mirror-tree paths for a canonical page URL — thin wrapper over
+route-media.mjs's llmTreePaths so emitted <link rel="alternate"> tags
+and generate-llm-pages.mjs always agree on the replica location.
+
+- `@param` {string} pageUrl absolute canonical URL (`https://luiskr.com/…`)
+- `@returns` {{md: string, json: string} | null} replica paths, null on bad input
+
 ### (module scope)
 
 The match below tolerates a legacy .boot-veil emitted inside #app by an
 earlier template revision so re-runs normalize older documents back to
 the clean article shape.
-
-### `slugify`
-
-Media-slug transform — MUST match generate-sitemap.js's slugify byte for
-byte: emitted /portfolio/<slug>/<media> file names have to line up with
-the URLs the sitemap already lists (diacritics fold to ASCII).
-
-### `capSlug`
-
-Caps a media deep-link slug at MEDIA_SLUG_MAX_LENGTH so
-prerendered dist paths stay under Windows MAX_PATH — the cut drops the
-trailing partial word (and a dangling hyphen) so the slug always ends
-on a hyphen boundary. Byte-identical to the cap in mediaSlugSeq
-(core/utils/string.ts) so emitted file names, sitemap <loc>s and the
-runtime resolver agree.
-
-### `esc`
-
-Escape a string for use inside an HTML attribute or text node.
 
 ### `enc`
 
@@ -240,6 +230,16 @@ Fetches the live `translations` node once per build so every prerendered
 page carries the per-locale text authors actually published. Offline or
 unreachable host → warn and keep the database.json snapshot as the source.
 
+### `loadTranslations`
+
+Resolves the translations map for build-time generators — the live
+RTDB payload when prefetchTranslations() succeeded this run, else the
+committed database.json snapshot, else an empty map (English fallbacks
+only). Shared with generate-llm-pages.mjs so replicas and prerendered
+pages always render the same per-locale copy.
+
+- `@returns` {object} locale → translations map
+
 ### (module scope)
 
 Probes every unique star-field dossier image once (64 KB range request
@@ -314,6 +314,16 @@ and no-JS viewers index the full-resolution asset, not the thumb;
 the caption links to the same source as a first-class crawl target.
 `deepHref` wraps the media in the /portfolio/<p>/<media> deep link.
 
+### `mediaWatchFigure`
+
+Watch-page figure for a media deep link — on the asset's own
+/portfolio/<p>/<media> URL the media IS the page's main content, so
+video items emit a real playable <video controls> (mp4 source +
+poster still), not the inert poster <img> the parked project
+figures carry. One player per page is exactly the watch-page
+contract Google's video indexing requires; stills keep
+mediaFigure's <img> markup.
+
 ### `cardTile`
 
 One portfolio card as crawlable markup — cover figure, title, and
@@ -346,7 +356,11 @@ Project interna — title, hero cover, all section text + every figure.
 
 ### `mediaContent`
 
-Media-modal deep link — the single asset + its caption + project context.
+Media-modal deep link — the asset's own watch page: its label as
+the <h1>, the playable/paintable figure as the page's main content,
+then the back-link into the parent project for context. The media
+leads so the rendered page reads as single-asset-first — Google's
+video watch-page contract — not as a project page with a modal.
 
 ### `experienceContent`
 
@@ -382,12 +396,6 @@ heading-navigable and indexable without JS.
 ### `pageNameFromTitle`
 
 /** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names.
-
-### `mediaRowsOf`
-
-Labelled-media {slug,label,media} rows of a project — mirrors
-generate-sitemap's walk and the runtime modal: every labelled item with
-a src is addressable through /portfolio/<slug>/<media>.
 
 ### `routesFor`
 

@@ -20,3 +20,7 @@ Zoom/expand control glyph (diagonal arrows to corners).
 ### `CLOSE_GLYPH`
 
 Dismiss/close control glyph (multiplication cross).
+
+### `PLAY_GLYPH`
+
+Playback toggle glyphs for ambient-media controls (triangle / pause bars).

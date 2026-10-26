@@ -17,6 +17,8 @@ Renders custom animated graphical draw elements referent to each toggle's contex
 - 'stats': Live ECG oscilloscope waveform + pulsing chip matrix (Stats for Nerds)
 - 'grid': Glowing blueprint column grid lines + scanning crosshairs (Show Grid)
 - 'motion': Subtle ambient drift (OFF) vs calm still horizon datum (ON) (Reduced Motion)
+- 'contrast': Sweeping luminance split — a dark/light comparison wipe
+  riding back and forth across the track behind an amber seam (High Contrast)
   All switches share an identical solid centered knob indicator dot.
 
 ### `velP`
@@ -59,8 +61,9 @@ inside the capsule's rounded caps at both extremes.
 ### `_contextCode`
 
 Context → shader's u_context float id (0=stats, 1=grid/cyan/space,
-2=motion). The fragment shader branches on ranges (<0.5, <1.5, else)
-so several visual aliases can share the grid animation.
+2=motion, 3=contrast). The fragment shader branches on ranges
+(<0.5, <1.5, <2.5, else) so several visual aliases can share the
+grid animation.
 
 - `@returns` {number}
 

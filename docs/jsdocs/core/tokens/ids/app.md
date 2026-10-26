@@ -71,3 +71,26 @@ Deliberately different from MAIN_CONTENT (which lives inside the
 app-root shadow tree): identical ids across trees are legal, but
 DOM-wide uniqueness checkers count the composed tree. At runtime a
 delegated handler re-aims the link at the shadow #main-content.
+
+### `NAV_GEAR_IDS`
+
+Frozen nav-gear SVG gradient-id map — the defs↔url(#…) link ids inside
+the machined-gear glyph (nav gear.tsx). Sole declaration site; the
+markup reads members via the `url()` ref helper instead of re-declaring
+the literals (zero-hardcoding rules 4–5).
+
+### `FACE`
+
+Radial face ramp — the tooth ring's base metal fill.
+
+### `RIM`
+
+Linear rim ramp — top-lit edge stroke on the outline + groove.
+
+### `HUB`
+
+Radial hub ramp — the raised center cylinder.
+
+### `HOLE`
+
+Linear cavity ramp — drilled lightening holes + the center bore.

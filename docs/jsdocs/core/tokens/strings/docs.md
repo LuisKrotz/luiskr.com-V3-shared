@@ -86,7 +86,7 @@ In-place skeleton label while a mermaid diagram renders.
 ### `SCENE_HINT`
 
 Visible chip captioning the backdrop scene so the interactive
-architecture map is obvious to a first-time viewer.
+file cloud is obvious to a first-time viewer.
 
 ### `MAP_LABEL`
 
@@ -108,8 +108,8 @@ them too), so a rename must land in both streams at once.
 
 ### `SCENE_ATTR_OFFSET`
 
-Wireframe-glyph instanced attributes — per-instance world offset,
-per-kind ink color, bob phase, and initial spin angle. Same
+Glyph instanced attributes — per-instance world offset,
+per-kind ink color, bob phase, and orbit-proportional scale. Same
 name-contract as the alpha/active pair: rename in GLSL + buffers
 together.
 
@@ -182,15 +182,20 @@ world-space sprite size + lift above the node sphere
 
 ### `LABEL_REVEAL_BASE`
 
-zoom reveal: labels fade in when controls distance drops under
-(LABEL_REVEAL_BASE − depth·LABEL_DEPTH_STEP), over LABEL_FADE px
+zoom reveal — fractions of the full-graph camera distance, not
+absolute units, so names stay readable at the overview framing of
+any manifest size: a label fades in once the orbit distance drops
+under (LABEL_REVEAL_BASE − depth·LABEL_DEPTH_STEP)·camDist, over a
+LABEL_FADE·camDist window. BASE > √(1+LIFT²) ≈ 1.28 keeps the root
+and bucket names already inked at the default view; deeper rings
+reveal as the camera closes in.
 
 ### `SCENE_LABEL_MAX_DEPTH`
 
 deepest ring that gets a sprite label — each label is a canvas
-texture (~85kB VRAM), so an unlabeled deep tier keeps the scene
-inside low-power GPU memory; deep dirs stay navigable via the
-treeview and the dots themselves.
+texture (~147kB VRAM at 384×96), so an unlabeled deep tier keeps
+the scene inside low-power GPU memory; deep dirs stay navigable
+via the treeview and the dots themselves.
 
 ### `SCENE_MIN_ORBIT`
 
@@ -199,31 +204,33 @@ every node's children orbit it on a Fibonacci sphere at the
 parent's cluster radius — shared with the wasm worker op. Cluster
 radii come from subtree-extent packing: MIN_ORBIT floors a cluster
 so a lone child never collapses onto its parent glyph; MIN_SEP is
-the guaranteed clear-space gap between sibling subtree clouds
-(≥20px at the fit-zoom framing — the hairball fix).
+the guaranteed clear-space gap between sibling subtree clouds —
+2 glyph diameters so filled icons never read as one mass and every
+link keeps a visible run between the cards it joins.
 
 ### `SCENE_CHILD_SCALE`
 
 reference shrink ratio — a dir's child orbit is never smaller
-than this fraction of the orbit the dir itself sits on (the
-procedural-directory map's 12→5 ≈ 0.42 taper), so nested clouds
-compress geometrically instead of summing subtree extents.
+than this fraction of the orbit the dir itself sits on (looser
+than the procedural-directory map's 12→5 ≈ 0.42 taper), so nested
+clouds compress geometrically instead of summing subtree extents
+while keeping real air between rings.
 
 ### `SCENE_GLYPH_MAX`
 
 Largest rendered glyph radius in chart units — the scale cap for
 the orbit-proportional glyph size AND the sibling-clearance term
 (orbits are sized so two max-size glyphs keep MIN_SEP between
-their wireframe edges).
+their glyph faces).
 
 ### `SCENE_RELAX_ITERS`
 
 Pairwise relax iterations after placement — sibling-chord sizing
 covers siblings, but deep subtree clouds can interpenetrate
-cross-branch; a few Jacobi passes push the rare colliding glyphs
-apart (each pass moves a pair by the full deficit, so the loop
-count covers only chained collisions — layout-time O(n²·iters)
-on the capped scene tree).
+cross-branch; enough Jacobi passes to push the wider MIN_SEP
+clearances through chained collisions (each pass moves a pair by
+the full deficit — layout-time O(n²·iters) on the capped scene
+tree).
 
 ### `SCENE_BASE_RADIUS`
 
@@ -235,19 +242,14 @@ as SCENE_BASE_RADIUS's successor on the scene3d arm).
 golden angle (π(3−√5) ≈ 2.399963 rad) — the Fibonacci-sphere
 azimuth step AND the decorrelation hash for bob phases.
 
-### `SCENE_ROTATE_SPEED`
+### `SCENE_PULSE_SPEED`
 
-slow backdrop motion — autorotate deg/frame-ish + node pulse.
-Speeds run far under OrbitControls' default (2.0) so the graph
-reads as a calm ambient layer, not a spinner.
-
-### `SCENE_NODE_SPIN`
-
-Per-node wireframe motion (the procedural-directory reference):
-every glyph yaws about its own Y at SPIN rad/s with a hashed
-initial angle, and bobs ±BOB_AMP chart units at BOB_SPEED rad/s
-off a decorrelated phase. SPIN_HASH walks the node index through
-a golden-angle-ish sequence so neighbors never spin in lockstep.
+Ambient node motion — the map never rotates (no autorotate, no
+intro turn, glyphs billboard to the camera): nodes only breathe
+(PULSE scale) and float ±BOB_AMP chart units at BOB_SPEED rad/s
+off a decorrelated phase so links stay glued. SPIN_HASH walks the
+node index through a golden-angle-ish sequence — the Fibonacci
+azimuth decorrelator and the coincident-pair push direction.
 
 ### `SCENE_FOG_DENSITY`
 
@@ -297,9 +299,33 @@ its parent dir's path — picking it still opens that dir's page.
 
 ### `SCENE_DIR_OPACITY`
 
-node/edge alpha — hairline wireframe carries far less ink than a
-filled surface, so glyphs and edges run near-full alpha or they
-ghost out on light glass; on dark slate they stay neon anyway.
+node/edge alpha — filled faces carry far more ink than hairlines,
+so glyphs hold high alpha for a solid read and edges stay a notch
+fainter so links never outshine the icons they connect.
+
+### `SCENE_EDGE_LEAF`
+
+Leaf-link dim factor — file→parent edges are the majority of the
+link web and read as clutter at full ink, so they draw at this
+fraction of SCENE_LINE_OPACITY while the dir skeleton stays lit.
+
+### `SCENE_EDGE_GAP`
+
+Clear space kept between a link's trimmed end and the glyph face it
+aims at — edges clip at radius+gap on BOTH ends so lines never
+enter an icon's filled faces. A hair of clearance: the opaque card
+covers the trim, so links read as attached to their icons rather
+than floating mid-air between them.
+
+### `SCENE_SEAM_GROW`
+
+Filled-glyph seam pass — the detail strokes printed over the solid
+icon (outline, fold crease, text rules, shelf line). SEAM_GROW
+expands the outline strokes past the silhouette so they key the
+edge instead of z-fighting it; SEAM_LIFT (× the card half-
+thickness) floats face details just proud of the panel; SEAM_SHADE
+dims the icon ink as the seam fallback when the themed fog color
+can't resolve.
 
 ### `SCENE_EDGE_HALF`
 
@@ -311,12 +337,6 @@ stand in for 1px LineSegments under the engine (chart units)
 active-location highlight — the node matching the open docsPath pops
 to near-full alpha with a larger pulse; ancestor dirs along its path
 lift a notch above the base dir alpha so the branch reads.
-
-### `SCENE_INTRO_TURN`
-
-intro settle — a first (unrestored) mount eases the whole graph in
-from SCENE_INTRO_TURN radians over SCENE_INTRO_MS, then hands off to
-the ambient autorotate. Restored poses skip the intro entirely.
 
 ### `SCENE3D_MOUNT_TIMEOUT`
 

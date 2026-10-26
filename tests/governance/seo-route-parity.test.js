@@ -7,8 +7,9 @@
  *
  *  - every locale's canonical slugs (LANG_SLUGS) appear in its sitemap +
  *    firebase rewrites — including earthPlayground and starField;
- *  - the English sitemap lists the full unprefixed surface, docs included —
- *    locale prefixes never leak in (docs are English-only by design);
+ *  - the English sitemap lists the full unprefixed indexable surface —
+ *    the /docs tree is excluded (noindex agent surface, not a crawl
+ *    target) and locale prefixes never leak in;
  *  - every localized sitemap carries the shared unprefixed surface plus
  *    its own /<loc>/… routes so each discovers ≥ the English URL count;
  *  - noncanonical aliases (legacy project slugs, /space-playground,
@@ -29,7 +30,6 @@ import { LANG_SLUGS } from '@core/i18n.js'
 import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '@core/tokens/routes/aliases.js'
 import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
-import { scanManifest } from '../../build/docs/scan.mjs'
 import { localize } from '../../scripts/build/build-locale-pages.mjs'
 
 const META_DIR = path.join(ROOT_DIR, 'website', 'public', 'meta')
@@ -37,8 +37,10 @@ const META_DIR = path.join(ROOT_DIR, 'website', 'public', 'meta')
 /** Absolute site origin every generated artifact is built against. */
 const SITE = 'https://luiskr.com'
 
-/** Minimum discovered-page count every locale sitemap must expose. */
-const MIN_SITEMAP_URLS = 7000
+/** Minimum discovered-page count every locale sitemap must expose —
+ * the en surface shrank to ~690 when the noindex /docs tree left the
+ * crawl surface; the floor guards accidental mass-drops, not volume. */
+const MIN_SITEMAP_URLS = 500
 
 const NON_EN = Object.keys(LANG_SLUGS).filter((loc) => loc !== 'en')
 
@@ -175,7 +177,6 @@ describe('SEO route parity', () => {
       `/${LANG_SLUGS.en.license}`,
       `/${LANG_SLUGS.en.earthPlayground}`,
       `/${LANG_SLUGS.en.starField}`,
-      '/docs',
     ]
 
     for (const route of expected) {
@@ -183,8 +184,8 @@ describe('SEO route parity', () => {
     }
   })
 
-  test('English sitemap keeps the English-only docs portal', () => {
-    expect(enLocs.some((u) => u.startsWith(`${SITE}/docs/`))).toBe(true)
+  test('English sitemap excludes the noindex docs surface', () => {
+    expect(enLocs.some((u) => u === `${SITE}/docs` || u.startsWith(`${SITE}/docs/`))).toBe(false)
   })
 
   test('English sitemap contains no locale-prefixed URLs', () => {
@@ -284,24 +285,13 @@ describe('SEO route parity', () => {
     }
   })
 
-  test('every docs manifest node is listed in the sitemaps', () => {
-    const { roots } = scanManifest(ROOT_DIR)
-    const paths = []
+  test('no sitemap advertises a /docs route in any locale', () => {
+    for (const loc of ['en', ...NON_EN]) {
+      const locs = locsOf(read(path.join(META_DIR, `sitemap-${loc}.xml`)))
 
-    const walk = (node) => {
-      paths.push(`/docs/${node.path}`)
-
-      if (node.type === 'dir') for (const c of node.children || []) walk(c)
-    }
-
-    for (const root of roots) for (const c of root.children || []) walk(c)
-
-    expect(paths.length).toBeGreaterThan(0)
-
-    const enSet = new Set(enLocs)
-
-    for (const p of paths) {
-      expect(enSet.has(`${SITE}${p}`)).toBe(true)
+      for (const u of locs) {
+        expect(u === `${SITE}/docs` || u.startsWith(`${SITE}/docs/`)).toBe(false)
+      }
     }
   })
 
@@ -452,7 +442,15 @@ describe('SEO route parity', () => {
 
     expect(robots).toContain('Disallow: /cms')
     expect(robots).toContain('Disallow: /admin')
-    expect(robots).not.toContain('Disallow: /docs')
+    // /docs stays crawlable so its X-Robots-Tag: noindex is seen — a
+    // Disallow would hide the header and strand already-indexed URLs.
+    // Line-exact: /docs-content/ legitimately shares the prefix.
+    const lines = robots.split('\n').map((l) => l.trim())
+
+    expect(lines).not.toContain('Disallow: /docs')
+    expect(lines).not.toContain('Disallow: /docs/')
+    expect(robots).toContain('Disallow: /docs-content/')
+    expect(robots).toContain('Disallow: /langs/')
     expect(robots).toContain(`Sitemap: ${SITE}/sitemap.xml`)
   })
 

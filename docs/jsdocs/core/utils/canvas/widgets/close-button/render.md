@@ -40,6 +40,18 @@ hover-state still applies (without animating).
 
 Starts the shared-pool render loop (skipped under reduced motion).
 
+### (module scope)
+
+Subset of the wasm widget surface renderWasm pushes per frame.
+
+### (module scope)
+
+Optional eased-channel setter — present on the droplet crate only.
+
+### `frame`
+
+Advances the widget one frame by the given delta time.
+
 ### `renderWasm`
 
 Per-frame wasm render: pushes the three eased channels + one frame tick.

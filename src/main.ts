@@ -149,13 +149,14 @@ if (typeof window !== TYPE_STRINGS.UNDEFINED) {
 
 // Triple-probe Safari detection: vendor string is spoofable, so GestureEvent
 // (WebKit-only) and missing container-type support (pre-16 iOS) are fallbacks.
-const isSafari =
-  typeof window !== TYPE_STRINGS.UNDEFINED &&
-  ((typeof navigator !== TYPE_STRINGS.UNDEFINED &&
-    navigator.vendor === VENDOR_STRINGS.APPLE_VENDOR) ||
-    VENDOR_STRINGS.GESTURE_EVENT in window ||
-    (typeof CSS !== TYPE_STRINGS.UNDEFINED &&
-      !CSS.supports(QUERY_STRINGS.CONTAINER_TYPE, QUERY_STRINGS.INLINE_SIZE)))
+const hasWindow = typeof window !== TYPE_STRINGS.UNDEFINED
+const hasNavigator = typeof navigator !== TYPE_STRINGS.UNDEFINED
+const vendorApple = hasNavigator && navigator.vendor === VENDOR_STRINGS.APPLE_VENDOR
+const hasGesture = hasWindow && VENDOR_STRINGS.GESTURE_EVENT in window
+const hasCss = typeof CSS !== TYPE_STRINGS.UNDEFINED
+const noContainerType =
+  hasCss && !CSS.supports(QUERY_STRINGS.CONTAINER_TYPE, QUERY_STRINGS.INLINE_SIZE)
+const isSafari = hasWindow && (vendorApple || hasGesture || noContainerType)
 
 /**
  * Inserts <app-root> into #app. Idempotent — safe to call on a timer while

@@ -19,6 +19,14 @@ the token contract immutable at runtime.
 
 Architecture-map visibility bound — the docs map column only exists at $vw-1024+1.
 
+### `FORCED_COLORS`
+
+Windows HC mode — the OS flag the High Contrast pref defaults from.
+
+### `PREFERS_CONTRAST`
+
+Non-Windows increased-contrast signal — pairs with forced-colors.
+
 ### `KEYS`
 
 Frozen keys key map — sole declaration site for these tokens; consumers read members and

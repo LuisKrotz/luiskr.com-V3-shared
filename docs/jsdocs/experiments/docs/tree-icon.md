@@ -71,11 +71,12 @@ Rising-and-fading loop — steam, status dots, uplink marks.
 
 Bold typewriter wordmark — the reference pack's letterform icons
 (JS/TS/GO/PHP/C++/C#/…) are set in a heavy geometric sans filling
-~60% of the content width. One tspan per character, each looping an
-opacity ripple staggered a beat apart — each letter dims to a low
-floor and brightens back, so the word stays legible in every frame
-(a cinemagraph-strength shimmer, not letters vanishing); `seed`
-negative-phases the loop so sibling rows never ripple in lockstep.
+~60% of the content width. One tspan per character, each looping a
+deep opacity wave staggered a beat apart — each letter dims hard to
+a low floor and brightens back, so the pulse travels left→right
+across the word (a typewriter carriage sweep, clearly readable at
+icon size); `seed` negative-phases the loop so sibling rows never
+ripple in lockstep.
 Sizing is geometric — translate + a
 non-uniform `scale()` gives the sheet's condensed-bold look; the
 font itself (family/size/weight) lives on the `-icon-text` SCSS
@@ -89,7 +90,7 @@ rule, never inline.
 - `@param` dur Loop seconds.
 - `@returns` The text node.
 
-### `paperSheet`
+### `fx`
 
 One paper sheet in the folder stack, drawn in the reference pack's
 two distinct poses. CLOSED folders only show the sheet's top edge —
@@ -105,7 +106,18 @@ the front sheet (i = 0, painted last) carries the bob.
 - `@param` top True for the front sheet — it gets the bob motion.
 - `@returns` The sheet node.
 
-### `FOLDER_BODY_CLOSED`
+### `sheetShape`
+
+Page-top strip — the reference pack's paper sheet: the two top
+corners are gently rounded; the bottom edge sits below the folder
+rim where the opaque front flap occludes it, so the sheet reads as
+a page standing inside the folder.
+
+- `@param` x Left edge. @param y Top edge. @param w Width.
+- `@param` bot Bottom edge — occluded by the front flap's opaque fill.
+- `@returns` SVG path data.
+
+### (module scope)
 
 macOS/Windows-style folder silhouette — the raised left tab and the
 rounded body are what make the glyph read as a folder at row size.
@@ -114,15 +126,46 @@ truncate the back plate at the mouth and swing the front flap
 forward — a trapezoid whose bottom edge is wider than the top, the
 perspective cue of a cover leaning toward the viewer.
 
+### `FOLDER_BACK`
+
+Closed-folder BACK PLATE — the taller rear wall of the reference
+pack's two-piece silhouette: the left side rises straight to the tab
+plateau (~30% of the width), an angled shoulder slopes down-right to
+the back top edge, and the right wall drops toward the seam. Its
+lower half hides behind the front flap's opaque fill.
+
+### `FOLDER_FLAP`
+
+Closed-folder FRONT FLAP — the wide rounded panel overlapping the
+back plate's lower half; its top edge is the full-width seam the
+reference prints as the flap/body junction, and it juts past the
+back wall on the right (the reference's little step). Opaque fill
+tucks the paper sheets' bottoms away behind it.
+
+### `FOLDER_BACK_OPEN`
+
+Open folder's back plate — the same rear wall as the closed state,
+drawn only down to the mouth line: left wall, tab plateau, shoulder,
+and right top edge peek above the swung-forward flap.
+
+### `FOLDER_FLAP_OPEN`
+
+Open folder — the cover swung all the way forward: a trapezoid
+splayed wider at the bottom (the reference's lean-toward-the-viewer
+perspective) in front of the back plate's rim.
+
 ### `folderIcon`
 
-Directory glyph — a single-stroke wireframe like the reference pack:
-the rounded body + raised tab outline (closed) or the truncated back
-plate + swung-forward flap trapezoid (open). Children show as paper:
-closed folders peek page tops above the back edge, open folders fan
-colored sheets out of the mouth; counts cap at the TREE_SHEET_CAP_*
-unit tokens. The flap plays a one-shot swing on mount so the open
-transition reads as motion.
+Directory glyph — the reference pack's two-piece wireframe: the
+closed folder is a tall back plate (left tab + shoulder) overlapped
+by a wider opaque front flap; the open folder is the flap alone as a
+forward-leaning trapezoid plus the back wall's left-corner stub.
+Children show as paper drawn BETWEEN back wall and flap — closed
+folders stack nested page tops rising above the back edge, open
+folders fan colored sheets out of the mouth; counts cap at the
+TREE_SHEET_CAP_* unit tokens and every sheet's fill is opaque so the
+pile nests and the flap occludes it like the reference. The open
+flap plays a one-shot swing on mount.
 
 - `@param` node The directory manifest node.
 - `@param` open Whether the branch is expanded in the treeview.
@@ -150,11 +193,13 @@ sibling rows never animate in lockstep.
 
 ### `ts`
 
-TypeScript — the bold TS wordmark typing itself on.
+TypeScript — the bold TS wordmark plus a blinking block cursor
+riding its right edge (the editor caret pulse).
 
 ### `js`
 
-JavaScript — the bold JS wordmark, same typewriter reveal.
+JavaScript — the bold JS wordmark plus a blinking underscore
+cursor parked at its baseline (the REPL prompt pulse).
 
 ### `py`
 
@@ -182,15 +227,18 @@ line below, two steam wisps rising and fading above.
 
 ### `cpp`
 
-C++ — the bold C++ wordmark typing on.
+C++ — the bold C++ wordmark with a twinkling increment tick —
+a small `+` spark flashing at the page's upper right.
 
 ### `cs`
 
-C# — the bold C# wordmark typing on.
+C# — the bold C# wordmark with a scan block sweeping back and
+forth on the underline track below it (a compile-progress beat).
 
 ### `php`
 
-PHP — the bold PHP wordmark typing on.
+PHP — the bold PHP wordmark flanked by the `<? … ?>` tag's angle
+brackets, breathing apart on a slow loop.
 
 ### `rb`
 
@@ -204,7 +252,9 @@ lines, body; a scan band sweeping down through it.
 
 ### `json`
 
-JSON — the large pair of curly braces breathing apart.
+JSON — the curly-brace pair redrawing itself on a staggered loop
+while the `"key":value` colon blinks between them in alternating
+dots — the structured-data pulse.
 
 ### `sass`
 
@@ -213,12 +263,15 @@ Sass — the ribbon S with the underline swash, drawn live.
 ### `css`
 
 CSS — the shield emblem: tiny "CSS" wordmark above the shield's
-top band, the big "3" numeral centered inside it.
+top band, the big "3" numeral inside it, and a single dot that
+cascades down the shield's left interior in discrete steps —
+the stylesheet's cascade made literal.
 
 ### `html`
 
 HTML — the same shield emblem: tiny "HTML" wordmark above the
-top band, the big "5" numeral centered inside it.
+top band, the big "5" numeral inside it, and a row of browser
+chrome dots blinking in sequence across the shield's top band.
 
 ### `xml`
 
@@ -226,26 +279,32 @@ XML — `<xml>`: breathing angle brackets around the wordmark.
 
 ### `md`
 
-Markdown — the bold M with the down-arrow dropping beside it.
+Markdown — the bold M beside a down-arrow that plunges into place
+on a brisk stamp loop: raised, dropped, held, reset — the M↓ mark
+given a readable download beat.
 
 ### `img`
 
-Raster image — frame + sun + mountain line; the sun radiates.
+Raster image — frame + sun + mountain line; the sun radiates on
+a clear pulse.
 
 ### `photo`
 
 Photo (jpg) — the same landscape frame but carrying the little
-camera glyph bottom-right instead of the sun (the sheet's jpg).
+camera glyph bottom-right: the lens iris contracts and opens on
+a loop, an aperture breathing (the sheet's jpg).
 
 ### `gif`
 
 GIF — the rounded box on two little feet, the GIF wordmark
-strobing inside like cycling frames.
+strobing inside while a frame square hops left→right across the
+top of the box in discrete steps — cycling frames.
 
 ### `vec`
 
 Vector file — the pen-tool mark: anchor squares at the ends of a
-sagging bezier, handles wiggling, the nib hanging below center.
+sagging bezier, handles wiggling wide, the nib hanging below
+center and bobbing as it inks the curve.
 
 ### `yml`
 
@@ -263,7 +322,8 @@ Lockfile — padlock, the shackle swaying gently.
 ### `font`
 
 Font files — the large light 'A' (font-weight drops to 300 via
-the --font kind's -icon-text override in the SCSS).
+the --font kind's -icon-text override in the SCSS) over a metrics
+baseline guide that draws itself on in a loop.
 
 ### `wasm`
 
@@ -275,7 +335,10 @@ Test/spec files — the flask with rising bubbles.
 
 ### `cert`
 
-License/notice — the rosette seal + ribbon tails.
+License/notice — the rosette seal + ribbon tails: a scalloped
+(dashed) outer ring rotating like a notary stamp, the medallion
+heart pulsing, and the ribbon tails swinging on a pendulum wiggle
+pivoted at the seal's center.
 
 ### `archive`
 
@@ -300,13 +363,15 @@ outline carrying a slowly spinning optical disc on its face.
 
 ### `video`
 
-Video/mp4 — the film frame with sprocket holes top and bottom and
-the pulsing play triangle inside (the reference's mp4 mark).
+Video/mp4 — the film frame with sprocket holes top and bottom,
+the pulsing play triangle inside, and a playhead scrubbing along
+the bottom edge then rewinding (the reference's mp4 mark).
 
 ### `cam`
 
 QuickTime/mov — the video camera: rounded body with the play
-triangle inside, lens horn trapezoid on the right.
+triangle inside, a blinking REC dot at its top-left, and the lens
+horn trapezoid on the right.
 
 ### `audio`
 
@@ -321,7 +386,8 @@ stems, one beam) bobbing on the beat (mp3/m4a/flac/aac).
 ### `web`
 
 Webpage (index.html) — the browser window: chrome bar, traffic
-dots and the page's content lines.
+dots, and the page's content lines typing on row by row like a
+loading render pass.
 
 ### `txt`
 
@@ -334,21 +400,25 @@ around its own waist before the tail sweeps out.
 
 ### `docx`
 
-Word docs — the W box with the three text lines beside it.
+Word docs — the W box with the three text lines beside it typing
+themselves on row by row.
 
 ### `xlsx`
 
-Spreadsheets — the X box with the 2×2 cell grid beside it.
+Spreadsheets — the X box with the 2×2 cell grid beside it and a
+selection square marching through the quadrants in discrete hops
+(a cell cursor roaming the sheet).
 
 ### `ppt`
 
-Presentations — the P box with the little pie chart (circle +
-one wedge) beside it.
+Presentations — the P box with the little pie chart beside it,
+the wedge sweeping around the circle like a chart redrawing.
 
 ### `csv`
 
-CSV — the `{;}` mark: breathing braces around a semicolon-ish
-dot pair (the sheet's dotted-braces csv glyph).
+CSV — the `{;}` mark: braces breathing wide around a
+semicolon-ish dot pair that flickers alternating (the sheet's
+dotted-braces csv glyph).
 
 ### `crate`
 

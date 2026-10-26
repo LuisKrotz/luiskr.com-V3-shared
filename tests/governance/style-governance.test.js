@@ -11,7 +11,13 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import * as CORE_TOKENS from '@core/constants.js'
-import { TEST_AWARDS, TEST_PROJECTS, TEST_TAGS, TEST_TEXT } from '@tests/fixtures/test-constants.js'
+import {
+  ISTANBUL_BASELINE,
+  TEST_AWARDS,
+  TEST_PROJECTS,
+  TEST_TAGS,
+  TEST_TEXT,
+} from '@tests/fixtures/test-constants.js'
 import { DOM_STRINGS } from '@core/tokens/strings/dom.js'
 import { CHAR_STRINGS } from '@core/tokens/strings/chars.js'
 import { SKELETON_CLASSES } from '@core/tokens/classes/skeleton.js'
@@ -646,5 +652,51 @@ describe('Style Governance & Zero-Hardcoding Enforcement', () => {
     }
 
     expect(offenders).toEqual([])
+  })
+
+  // ── 18. Rule 32: zero istanbul coverage suppressions ───────────────────────
+  // Coverage suppressions are forbidden for agents — uncovered arms get real
+  // tests, never `istanbul ignore` comments. ISTANBUL_BASELINE pins each
+  // grandfathered file's occurrence count so the set can only shrink.
+  test('Rule 32: ZERO istanbul ignore comments outside the grandfathered baseline', () => {
+    const istanbulRe = /istanbul\s+ignore/g
+    const offenders = []
+
+    for (const file of allSourceFiles(['.ts', '.tsx', '.js', '.mjs', '.cjs'])) {
+      const raw = fs.readFileSync(file, 'utf-8')
+      const count = (raw.match(istanbulRe) || []).length
+
+      if (count === 0) continue
+
+      const rel = path.relative(rootDir, file).split(path.sep).join('/')
+      const allowed = ISTANBUL_BASELINE[rel] || 0
+
+      if (count > allowed) offenders.push(`${rel}: ${count} found, ${allowed} allowed`)
+    }
+
+    expect(offenders).toEqual([])
+  })
+
+  // The suppression ban is codified in the memory files so every agent sees
+  // it — the gate asserts both docs exist so the rule cannot silently rot.
+  test('Rule 32b: AGENTS.md + .agents/rules document the istanbul-suppression ban', () => {
+    const agents = fs.readFileSync(path.join(rootDir, 'AGENTS.md'), 'utf-8')
+
+    expect(agents).toContain('Istanbul Coverage Suppressions')
+
+    const rulesDir = path.join(rootDir, '.agents', 'rules')
+
+    expect(fs.readdirSync(rulesDir).some((f) => /istanbul/i.test(f))).toBe(true)
+  })
+
+  // The never-stop-early contract is likewise memory — assert both docs.
+  test('Rule 33: AGENTS.md + .agents/rules document the full-delivery checklist', () => {
+    const agents = fs.readFileSync(path.join(rootDir, 'AGENTS.md'), 'utf-8')
+
+    expect(agents).toContain('Never Stop Before Full Delivery')
+
+    const rulesDir = path.join(rootDir, '.agents', 'rules')
+
+    expect(fs.readdirSync(rulesDir).some((f) => /delivery|checklist/i.test(f))).toBe(true)
   })
 })

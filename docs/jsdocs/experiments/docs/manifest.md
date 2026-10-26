@@ -27,6 +27,12 @@ route exists for a section, so group rows never navigate.
 
 ### (module scope)
 
+A view-synthesized section node — `buildGroups` always supplies the
+children array and flags the node `group: true`, so the section type
+narrows both fields required for scene/tree consumers.
+
+### (module scope)
+
 A publishable root bucket (docs / reports / coverage-* / source modules).
 
 ### (module scope)

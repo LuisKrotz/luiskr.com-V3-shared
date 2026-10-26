@@ -1,22 +1,24 @@
 #!/usr/bin/env node
 /**
  * @file stamp-content-signal.mjs
- * @description Firebase `predeploy` step — stamps the AI-usage opt-out
+ * @description Firebase `predeploy` step — stamps the AI-usage declaration
  * into every `dist` robots.txt before upload.
  *
  * The declaration lives at deploy time, not in source: the live site
- * opts out of AI training/answer-input while the local/preview artifact
- * stays minimal. The IETF-draft `Content-Signal` directive was the
- * original stamp, but Lighthouse's robots-txt audit scores unknown
- * directives as a parse error (SEO −8) — the deployed file now uses the
- * spec-valid equivalent: named User-agent groups with `Disallow: /`,
- * which actually *enforces* the opt-out for crawlers that respect
- * robots.txt. The intent mirrors `ai-train=no, ai-input=no` — search
- * crawlers (Googlebot, Bingbot, OAI-SearchBot…) stay allowed
- * (`search=yes`); the HTTP `Content-Signal` header in firebase.json
- * still carries the draft preference for agents that read headers.
- * Idempotent — repeated deploys leave files untouched; `--revert`
- * (postdeploy) removes the block so the tree stays clean.
+ * explicitly ALLOWS AI training, search and agent input — the HTTP
+ * `Content-Signal` header in firebase.json carries the draft-signal
+ * `ai-train=yes, search=yes, ai-input=yes`, and the build emits a
+ * full-content replica surface under `/llm/` (generate-llm-pages.mjs)
+ * plus `<route>.md`/`.json` siblings so agents can consume every page
+ * without executing the SPA.
+ *
+ * The stamp is a spec-safe comment block (robots.txt has no allow
+ * directive — absence of Disallow IS the allow), and it doubles as the
+ * cleanup pass: any legacy `# ai-opt-out:*` block list stamped by an
+ * earlier revision is removed so re-deploys can never republish the old
+ * GPTBot/ClaudeBot/CCBot Disallow groups. Idempotent — repeated deploys
+ * leave files untouched; `--revert` (postdeploy) removes the marker so
+ * the tree stays clean.
  */
 
 import fs from 'node:fs'
@@ -26,41 +28,16 @@ import { fileURLToPath } from 'node:url'
 /** Repo root — this file sits at shared/scripts/build/. */
 const DIST = path.resolve(fileURLToPath(new URL('../../..', import.meta.url)), 'dist')
 
-/** Marker lines delimiting the stamped block — revert keys off these. */
-const BLOCK_BEGIN = '# ai-opt-out:begin'
-const BLOCK_END = '# ai-opt-out:end'
+/** Marker lines delimiting the stamped allow block — revert keys off these. */
+const BLOCK_BEGIN = '# ai-usage:begin'
+const BLOCK_END = '# ai-usage:end'
 
-/**
- * AI training / AI-input crawlers — each becomes its own
- * `User-agent: X / Disallow: /` group. Deliberately excludes search
- * crawlers (Googlebot, Bingbot, OAI-SearchBot, DuckDuckBot): the signal
- * is `search=yes`, only training and AI-answer input are refused.
- */
-const AI_AGENTS = [
-  'GPTBot',
-  'ChatGPT-User',
-  'ClaudeBot',
-  'anthropic-ai',
-  'Claude-User',
-  'CCBot',
-  'Google-Extended',
-  'Applebot-Extended',
-  'Bytespider',
-  'Meta-ExternalAgent',
-  'FacebookBot',
-  'Amazonbot',
-  'PerplexityBot',
-  'YouBot',
-  'Diffbot',
-  'Omgilibot',
-  'cohere-ai',
-  'img2dataset',
-  'ImagesiftBot',
-  'TikTokSpider',
-]
+/** Markers of the retired opt-out revision — always stripped, never restamped. */
+const LEGACY_BEGIN = '# ai-opt-out:begin'
+const LEGACY_END = '# ai-opt-out:end'
 
 /** The stamped block — marker-delimited for idempotency + clean revert. */
-const BLOCK = `${BLOCK_BEGIN}\n${AI_AGENTS.map((a) => `User-agent: ${a}\nDisallow: /`).join('\n\n')}\n${BLOCK_END}\n`
+const BLOCK = `${BLOCK_BEGIN}\n# Content-Signal: ai-train=yes, search=yes, ai-input=yes\n# Full-content Markdown + JSON replicas of every page live under /llm/\n# (and as <route>.md / <route>.json siblings); see /llms.txt for the index.\n${BLOCK_END}\n`
 
 /**
  * Recursively collects every robots.txt under a directory.
@@ -80,19 +57,31 @@ const collectRobots = (dir) =>
         )
     : []
 
-/** `--revert` (postdeploy) removes the block so the tree stays clean. */
+/** `--revert` (postdeploy) removes the marker so the tree stays clean. */
 const REVERT = process.argv.includes('--revert')
 
 /** Revert pattern — the marker-delimited block plus its leading blank line. */
 const BLOCK_RE = new RegExp(`\\n?${BLOCK_BEGIN}[\\s\\S]*?${BLOCK_END}\\n?`)
 
+/** Legacy opt-out block — removed unconditionally, regardless of --revert. */
+const LEGACY_RE = new RegExp(`\\n?${LEGACY_BEGIN}[\\s\\S]*?${LEGACY_END}\\n?`)
+
 /** Count of files stamped or reverted this run — logged for diagnostics. */
 let stamped = 0
 
 for (const file of collectRobots(DIST)) {
-  const text = fs.readFileSync(file, 'utf8')
+  let text = fs.readFileSync(file, 'utf8')
 
-  if (REVERT ? !text.includes(BLOCK_BEGIN) : text.includes(BLOCK_BEGIN)) continue
+  // The retired opt-out list is always stripped first — an old dist must
+  // never republish Disallow groups for AI crawlers under the allow policy.
+  text = text.replace(LEGACY_RE, '')
+
+  const alreadyStamped = text.includes(BLOCK_BEGIN)
+
+  if (REVERT ? !alreadyStamped : alreadyStamped) {
+    fs.writeFileSync(file, text, 'utf8')
+    continue
+  }
 
   // Insert before the Sitemap line when present (keeps the non-group
   // directive last), else append — groups may sit anywhere in the file.

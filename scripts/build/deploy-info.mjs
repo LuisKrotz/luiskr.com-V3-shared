@@ -346,10 +346,21 @@ const fileSizes = (file) => {
   let brotli = fileSize(`${file}.br`) || 0
 
   if ((!gzip || !brotli) && bytes && bytes <= COMPUTE_MAX_BYTES) {
-    const buf = fs.readFileSync(file)
+    // stat'd-then-vanished files (pending deletes, hardlink churn during
+    // the sibling fan-out) read as ENOENT here — a missing byte count in
+    // the report beats a dead build.
+    let buf = null
 
-    if (!gzip) gzip = zlib.gzipSync(buf).length
-    if (!brotli) brotli = zlib.brotliCompressSync(buf).length
+    try {
+      buf = fs.readFileSync(file)
+    } catch {
+      // File vanished between stat and read — report zeros for it.
+    }
+
+    if (buf) {
+      if (!gzip) gzip = zlib.gzipSync(buf).length
+      if (!brotli) brotli = zlib.brotliCompressSync(buf).length
+    }
   }
 
   return { bytes, gzip, brotli }

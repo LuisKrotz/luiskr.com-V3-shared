@@ -8,6 +8,7 @@ import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 import { READER_CLASSES } from '@core/tokens/classes/reader.js'
+import { WINDOW_EVENTS } from '@core/tokens/events/dom.js'
 
 const registerMock = jest.fn()
 
@@ -315,5 +316,147 @@ describe('main.js branch warm-ups', () => {
     await new Promise((resolve) => setTimeout(resolve, 50))
 
     expect(true).toBe(true)
+  })
+
+  test('Safari triple-probe — Apple vendor short-circuits to the true arm', async () => {
+    jest.resetModules()
+
+    // navigator.vendor is getter-only — override the property on the
+    // navigator object itself for this import.
+    Object.defineProperty(window.navigator, 'vendor', {
+      value: 'Apple Computer, Inc.',
+      configurable: true,
+    })
+
+    const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
+
+    app.id = APP_IDS.APP
+    document.body.appendChild(app)
+
+    await (await import('@/main.js')).bootPromise.catch(() => {})
+
+    delete window.navigator.vendor
+  })
+
+  test('Safari probe — GestureEvent presence arm', async () => {
+    jest.resetModules()
+
+    window.GestureEvent = class GestureEvent {}
+
+    const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
+
+    app.id = APP_IDS.APP
+    document.body.appendChild(app)
+
+    await (await import('@/main.js')).bootPromise.catch(() => {})
+
+    delete window.GestureEvent
+  })
+
+  test('Safari probe — CSS container-type unsupported arm', async () => {
+    jest.resetModules()
+
+    const origCss = globalThis.CSS
+    const origSupports = origCss?.supports
+
+    Object.defineProperty(globalThis, 'CSS', {
+      configurable: true,
+      value: { ...origCss, supports: () => false },
+    })
+
+    const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
+
+    app.id = APP_IDS.APP
+    document.body.appendChild(app)
+
+    await (await import('@/main.js')).bootPromise.catch(() => {})
+
+    Object.defineProperty(globalThis, 'CSS', {
+      configurable: true,
+      value: origSupports ? { ...origCss, supports: origSupports } : origCss,
+    })
+  })
+
+  test('Safari probe — absent navigator takes the typeof short-circuit arm', async () => {
+    jest.resetModules()
+
+    const nav = globalThis.navigator
+
+    delete globalThis.navigator
+
+    const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
+
+    app.id = APP_IDS.APP
+    document.body.appendChild(app)
+
+    await (await import('@/main.js')).bootPromise.catch(() => {})
+
+    globalThis.navigator = nav
+  })
+
+  test('Safari probe — absent CSS takes the typeof short-circuit arm', async () => {
+    jest.resetModules()
+
+    const css = globalThis.CSS
+
+    delete globalThis.CSS
+
+    const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
+
+    app.id = APP_IDS.APP
+    document.body.appendChild(app)
+
+    await (await import('@/main.js')).bootPromise.catch(() => {})
+
+    globalThis.CSS = css
+  })
+
+  test('final full-env import — last-instance counters carry the base arms', async () => {
+    jest.resetModules()
+
+    expect(typeof window).not.toBe('undefined')
+
+    // No #app container → mount() early-returns false and boot arms the
+    // DOMContentLoaded listener + bounded retry interval.
+    document.getElementById(APP_IDS.APP)?.remove()
+
+    // A paint-entry PerformanceObserver drives afterFirstPaint's observer
+    // callback + the some() predicate both ways; the bounded setTimeout
+    // re-fires run() into the `if (fired) return` early arm.
+    const PO = globalThis.PerformanceObserver
+
+    globalThis.PerformanceObserver = class {
+      constructor(cb) {
+        this.cb = cb
+      }
+      observe() {
+        this.cb({
+          getEntries: () => [{ name: 'other' }, { name: 'first-contentful-paint' }],
+        })
+      }
+      disconnect() {}
+    }
+
+    const boot = (await import('@/main.js')).bootPromise.catch(() => {})
+
+    // Park the container with a reader article — the mount's hoist arm
+    // moves it to <body> before <app-root> is inserted.
+    const app = document.createElement(HTML_TAGS.DIV)
+    const article = document.createElement('article')
+
+    article.className = READER_CLASSES.CONTENT
+    app.id = APP_IDS.APP
+    app.appendChild(article)
+    document.body.appendChild(app)
+
+    document.dispatchEvent(new Event(WINDOW_EVENTS.DOM_CONTENT_LOADED))
+
+    await boot
+
+    // afterFirstPaint's bounded timer (FIRST_PAINT_BOOT_MS = 800) fires the
+    // warm callback and the retry interval's mount() poll — wait past it.
+    await new Promise((r) => setTimeout(r, 1000))
+
+    globalThis.PerformanceObserver = PO
   })
 })

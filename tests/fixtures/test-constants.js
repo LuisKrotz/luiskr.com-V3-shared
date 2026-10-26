@@ -293,6 +293,71 @@ export const TEST_UA = Object.freeze({
 })
 
 /**
+ * Grandfathered `istanbul ignore` baseline — repo-root-relative POSIX path →
+ * maximum allowed occurrence count in that file. Rule 32 forbids agents from
+ * adding coverage suppressions; this map only shrinks (drop an entry or lower
+ * a count when a suppression is removed) — it may never grow.
+ */
+export const ISTANBUL_BASELINE = Object.freeze({
+  'shared/scripts/verify/coverage-gate.mjs': 3,
+  'shared/tests/jest.preset.mjs': 1,
+  'shared/src/app/types.ts': 1,
+  'website/index.ts': 2,
+  'website/vite.config.js': 1,
+  'website/dev.ts': 1,
+  'website/views/project/types.ts': 1,
+  'website/views/home/types.ts': 1,
+  'website/components/portfolio/related/types.ts': 1,
+  'website/components/portfolio/related/match.ts': 1,
+  'website/components/media/draw-text/types.ts': 1,
+  'website/components/media/draw-text/gpu.ts': 1,
+  'website/components/carousel/awards-carousel/types.ts': 1,
+  'experiments/star-field/vite.config.js': 1,
+  'experiments/star-field/index.ts': 1,
+  'experiments/star-field/dev.ts': 1,
+  'experiments/star-field/star/music.ts': 1,
+  'experiments/star-field/engine/types.ts': 1,
+  'experiments/earth-playground/vite.config.js': 1,
+  'experiments/earth-playground/index.ts': 1,
+  'experiments/earth-playground/dev.ts': 1,
+  'experiments/docs/vite.config.js': 1,
+  'experiments/docs/index.ts': 1,
+  'experiments/docs/dev.ts': 1,
+  'core/index.ts': 2,
+  'core/constants.ts': 1,
+  'core/vite.config.js': 1,
+  'core/utils/index.ts': 1,
+  'core/utils/wasm/wasm-pool.ts': 1,
+  'core/utils/gpu/webgpu-widget.ts': 1,
+  'core/safari/types.ts': 1,
+  'core/safari/loader.ts': 1,
+  'core/router/types.ts': 1,
+  'core/tokens/theme.ts': 1,
+  'core/tokens/selectors.ts': 1,
+  'core/tokens/motion.ts': 1,
+  'core/tokens/media.ts': 1,
+  'core/tokens/layout.ts': 1,
+  'core/tokens/jsx.ts': 1,
+  'core/tokens/ids.ts': 1,
+  'core/tokens/events.ts': 1,
+  'core/tokens/elements.ts': 1,
+  'core/tokens/data.ts': 1,
+  'core/tokens/css.ts': 1,
+  'core/tokens/classes.ts': 1,
+  'core/tokens/attrs.ts': 1,
+  'core/legacy-polyfills/webcomponents.ts': 1,
+  'core/legacy-polyfills/io.ts': 1,
+  'core/legacy-polyfills/fetch.ts': 1,
+  'core/legacy-polyfills/es-core.ts': 1,
+  'cms/vite.config.js': 1,
+  'cms/index.ts': 1,
+  'cms/portfolio/types.ts': 1,
+  'cms/footer/types.ts': 1,
+  'cms/dev/firebase-mock.ts': 1,
+  'cms/deploy-info/types.ts': 1,
+})
+
+/**
  * Poll `fn` until truthy or `ms` elapses. Replaces fixed `setTimeout` waits —
  * under parallel-suite CPU contention a 200ms wait can fire late while the
  * work it waits on hasn't finished, which produced load-dependent flakes.

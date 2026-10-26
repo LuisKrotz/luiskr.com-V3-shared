@@ -144,9 +144,11 @@ Chooses reduced-motion static render vs the rAF loop.
 ### `_drawFrame`
 
 Renders one frame at time t (seconds) — shared by the RAF loop and the
-static reduced-motion path. u_dark is re-evaluated per frame from the
-live DOM classes (dark theme OR nav-on-dark over the contact band) so
-the icon recolors instantly on theme/scroll changes with no listener.
+static reduced-motion path. u_dark/u_hc are re-evaluated per frame from
+the live DOM classes (dark theme OR nav-on-dark over the contact band,
+and the high-contrast flag) so the icon recolors instantly on
+theme/scroll/preference changes with no listener. Under HC u_dark
+carries the DISC's pole instead of the theme's — see _drawFrame.
 
 - `@param` {number} t - seconds since construction
 

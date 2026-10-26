@@ -9,6 +9,14 @@ Coverage tails for the docs architecture scene — mounts
 
 ## Members
 
+### `glyphTiers`
+
+The two instanced glyph FILL tiers — dir first, file second, in
+scene-add order. Their InstancedBufferGeometry carries a positive
+instanceCount and they are Meshes; the seam strokes share the count
+but are LineSegments, pick spheres are SphereGeometry, the edge fan
+a plain BufferGeometry and labels are sprites.
+
 ### `instanceAttrs`
 
 Reads the instanced alpha + active flag for a manifest path. Nodes

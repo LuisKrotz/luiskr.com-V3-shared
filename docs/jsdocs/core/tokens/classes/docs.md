@@ -43,6 +43,11 @@ Map header row — caption + zoom trigger.
 
 Zoom trigger — opens the centered glass modal.
 
+### `DOCS_MAP_ZOOM_ICON`
+
+The ⤢ glyph inside the zoom trigger — wrapped in a span so hover
+can transform it (bare text nodes take no transform).
+
 ### `DOCS_MAP_MODAL`
 
 Fullscreen overlay behind the zoom dialog — the glass backdrop.
@@ -119,10 +124,22 @@ Secondary-ink strokes — two-tone glyphs (the python tail).
 
 Wordmark text inside a page — the shield labels ("HTML"/"CSS").
 
+### `DOCS_ICON_GLINT`
+
+Rim-light glint — the bright segment orbiting each icon's outline
+stroke (the reference pack's traveling shine), inked from the
+icon's `--icon-ink` lifted toward white.
+
 ### `DOCS_ICON_KINDS`
 
 File-kind names — `${DOCS_TREE_ICON}--${kind}` modifier classes
 pick each filetype's ink in the docs SCSS.
+
+### `FOLDER`
+
+Directory glyph — the `--folder` modifier pins the folder's gold
+currentColor as `--icon-ink` so shared pack parts (the sheen
+sweep) ink themselves correctly inside a folder svg.
 
 ### `DOCS_LOADER`
 

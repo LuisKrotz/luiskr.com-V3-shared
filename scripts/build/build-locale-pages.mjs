@@ -44,7 +44,8 @@ import { Buffer } from 'node:buffer'
 import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
-import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '../../../core/tokens/routes/aliases.ts'
+import { PROJECT_ALIASES } from '../../../core/tokens/routes/aliases.ts'
+import { slugify, capSlug, mediaRowsOf, llmTreePaths } from './route-media.mjs'
 import { GENERIC_DIMENSIONS } from '../../../core/tokens/media/dimensions.ts'
 import { MEDIA } from '../../../core/tokens/media/suffixes.ts'
 import { MEDIA_ATTRS } from '../../../core/tokens/attrs/media.ts'
@@ -66,80 +67,25 @@ const SCHEMA_CONTEXT = 'https://schema.org'
 const SHARE_IMAGE = `${SITE_URL}/assets/icons/share.png`
 
 /**
+ * `/llm/` mirror-tree paths for a canonical page URL — thin wrapper over
+ * route-media.mjs's llmTreePaths so emitted <link rel="alternate"> tags
+ * and generate-llm-pages.mjs always agree on the replica location.
+ * @param {string} pageUrl absolute canonical URL (`https://luiskr.com/…`)
+ * @returns {{md: string, json: string} | null} replica paths, null on bad input
+ */
+const llmPathsFor = (pageUrl) => {
+  try {
+    return llmTreePaths(new URL(pageUrl).pathname)
+  } catch {
+    return null
+  }
+}
+
+/**
  * The match below tolerates a legacy .boot-veil emitted inside #app by an
  * earlier template revision so re-runs normalize older documents back to
  * the clean article shape.
  */
-
-/**
- * Russian Cyrillic → Latin transliteration — Cyrillic media labels would
- * otherwise slugify to '' and lose their deep-link URL. MUST stay
- * byte-identical to CYRILLIC_SLUG in core/utils/string.ts.
- */
-const CYRILLIC_SLUG = {
-  а: 'a',
-  б: 'b',
-  в: 'v',
-  г: 'g',
-  д: 'd',
-  е: 'e',
-  ё: 'e',
-  ж: 'zh',
-  з: 'z',
-  и: 'i',
-  й: 'y',
-  к: 'k',
-  л: 'l',
-  м: 'm',
-  н: 'n',
-  о: 'o',
-  п: 'p',
-  р: 'r',
-  с: 's',
-  т: 't',
-  у: 'u',
-  ф: 'f',
-  х: 'h',
-  ц: 'c',
-  ч: 'ch',
-  ш: 'sh',
-  щ: 'sch',
-  ъ: '',
-  ы: 'y',
-  ь: '',
-  э: 'e',
-  ю: 'yu',
-  я: 'ya',
-}
-
-/**
- * Media-slug transform — MUST match generate-sitemap.js's slugify byte for
- * byte: emitted /portfolio/<slug>/<media> file names have to line up with
- * the URLs the sitemap already lists (diacritics fold to ASCII).
- */
-const slugify = (text) =>
-  (text || '')
-    .toString()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[а-яё]/g, (ch) => CYRILLIC_SLUG[ch])
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-
-/**
- * Caps a media deep-link slug at MEDIA_SLUG_MAX_LENGTH so
- * prerendered dist paths stay under Windows MAX_PATH — the cut drops the
- * trailing partial word (and a dangling hyphen) so the slug always ends
- * on a hyphen boundary. Byte-identical to the cap in mediaSlugSeq
- * (core/utils/string.ts) so emitted file names, sitemap <loc>s and the
- * runtime resolver agree.
- */
-const capSlug = (base) =>
-  base.length > MEDIA_SLUG_MAX_LENGTH
-    ? base.slice(0, MEDIA_SLUG_MAX_LENGTH).replace(/-[^-]*$/u, '')
-    : base
 
 /** Escape a string for use inside an HTML attribute or text node. */
 const esc = (s) =>
@@ -897,6 +843,21 @@ export function localize(
   if (skip)
     out = out.replace(/(<a class="skip-link" href="#reader-content">)[^<]*/, `$1${esc(skip)}`)
 
+  // LLM replica links — every prerendered page advertises its build-time
+  // .md/.json twins (generate-llm-pages.mjs emits the /llm/ mirror tree)
+  // so agents can swap the HTML document for the canonical replica. The
+  // canonical URL (never an alias) decides the replica path so deep links
+  // and locale pages resolve to the same files the tree holds.
+  const llmPaths = llmPathsFor(canon)
+
+  if (llmPaths) {
+    out = out.replace(
+      '</head>',
+      `  <link rel="alternate" type="text/markdown" href="${SITE_URL}${llmPaths.md}" title="Markdown replica">\n` +
+        `  <link rel="alternate" type="application/json" href="${SITE_URL}${llmPaths.json}" title="JSON replica">\n</head>`
+    )
+  }
+
   return out
 }
 
@@ -1006,6 +967,26 @@ export async function prefetchTranslations() {
 }
 
 /**
+ * Resolves the translations map for build-time generators — the live
+ * RTDB payload when prefetchTranslations() succeeded this run, else the
+ * committed database.json snapshot, else an empty map (English fallbacks
+ * only). Shared with generate-llm-pages.mjs so replicas and prerendered
+ * pages always render the same per-locale copy.
+ * @returns {object} locale → translations map
+ */
+export function loadTranslations() {
+  if (liveTranslations) return liveTranslations
+
+  const dbPath = path.join(ROOT, 'database.json')
+
+  if (fs.existsSync(dbPath)) return JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations || {}
+
+  console.warn('[locale-pages] database.json missing — emitting English fallbacks only')
+
+  return {}
+}
+
+/**
  * Probes every unique star-field dossier image once (64 KB range request
  * each) so emitted <img> tags carry real width/height attrs — the
  * lazy-media CLS budget flagged the bare imgs. Failures are silent:
@@ -1080,15 +1061,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
   // Live RTDB translations win when prefetchTranslations() succeeded;
   // the committed database.json snapshot is the offline fallback.
-  let translations = liveTranslations || {}
-
-  if (!liveTranslations) {
-    const dbPath = path.join(ROOT, 'database.json')
-
-    if (fs.existsSync(dbPath))
-      translations = JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations || {}
-    else console.warn('[locale-pages] database.json missing — emitting English fallbacks only')
-  }
+  const translations = loadTranslations()
 
   const en = translations.en || {}
   const legalEn = en.components?.['legal-footer']?.links || []
@@ -1225,7 +1198,11 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       },
     ]
 
-    if (project.cover?.isVideo && project.cover.src) {
+    // A media deep link (exclude set) is a watch page — it declares
+    // only its own VideoObject (emitted by the caller), never the
+    // project's cover or sibling clips, so the single-video purpose
+    // stays unambiguous to Google's classifier.
+    if (!exclude && project.cover?.isVideo && project.cover.src) {
       entities.push(videoEntity(folder, project.cover, title, description, mediaManifest))
     }
 
@@ -1268,8 +1245,10 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       })
     }
 
-    for (const m of media.filter((x) => x.isVideo && x.src && x !== exclude)) {
-      entities.push(videoEntity(folder, m, title, description, mediaManifest))
+    if (!exclude) {
+      for (const m of media.filter((x) => x.isVideo && x.src)) {
+        entities.push(videoEntity(folder, m, title, description, mediaManifest))
+      }
     }
 
     return entities
@@ -1460,6 +1439,32 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     return `<figure>${deepHref ? `<a href="${esc(deepHref)}"${linkLabel}>` : ''}${media}${deepHref ? '</a>' : ''}<figcaption><a href="${esc(source)}">${label || esc(m.src)}</a></figcaption></figure>`
   }
 
+  /**
+   * Watch-page figure for a media deep link — on the asset's own
+   * /portfolio/<p>/<media> URL the media IS the page's main content, so
+   * video items emit a real playable <video controls> (mp4 source +
+   * poster still), not the inert poster <img> the parked project
+   * figures carry. One player per page is exactly the watch-page
+   * contract Google's video indexing requires; stills keep
+   * mediaFigure's <img> markup.
+   */
+  const mediaWatchFigure = (folder, m) => {
+    const { source, thumb, isVideo } = mediaUrls(folder, m, mediaManifest)
+
+    if (!isVideo) return mediaFigure(folder, m, '')
+
+    if (!source) return ''
+
+    const label = esc(m.label || '')
+    const wh = dimsAttr(m.size?.[0], m.size?.[1])
+    const poster = thumb ? ` poster="${esc(thumb)}"` : ''
+
+    // preload="none" — the parked mirror is inert and the runtime mounts
+    // its own player, so the page never buffers a stream nobody started;
+    // the poster still paints the box and stays the LCP candidate.
+    return `<figure><video controls preload="none"${poster}${wh}><source src="${esc(source)}" type="${MEDIA_ATTRS.VIDEO_MP4}"></video><figcaption><a href="${esc(source)}">${label || esc(m.src)}</a></figcaption></figure>`
+  }
+
   /** One portfolio card as crawlable markup — cover figure, title, and
    *  the description the app reveals on hover/expand. Reader mode and
    *  crawlers cannot trigger the hover, so the desc is emitted inline. */
@@ -1635,11 +1640,15 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     return parts.join('')
   }
 
-  /** Media-modal deep link — the single asset + its caption + project context. */
-  const mediaContent = (loc, slug, label) => {
+  /** Media-modal deep link — the asset's own watch page: its label as
+   *  the <h1>, the playable/paintable figure as the page's main content,
+   *  then the back-link into the parent project for context. The media
+   *  leads so the rendered page reads as single-asset-first — Google's
+   *  video watch-page contract — not as a project page with a modal. */
+  const mediaContent = (loc, slug, label, figure) => {
     const project = t(loc, (x) => x.projects?.[slug]) || {}
 
-    return `<main><p><a href="${locPrefixOf(loc)}/portfolio/${slug}">${esc(project.title || slug)}</a></p><h1>${esc(label || slug)}</h1></main>`
+    return `<main><h1>${esc(label || slug)}</h1>${figure || ''}<p><a href="${locPrefixOf(loc)}/portfolio/${slug}">${esc(project.title || slug)}</a></p></main>`
   }
 
   /** Experience page content — title + every authored label/copy leaf. */
@@ -1711,9 +1720,19 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       )
       .join('')
 
-    const refs = (b.meta?.refs || []).map((r) => `<li>${esc(r)}</li>`).join('')
+    // refs are provenance URLs — link them, but only when the value is
+    // actually an http(s) URL (citation prose stays plain text so a
+    // "Publisher · Author" string can never become a relative href that
+    // crawlers chase into soft-404 URLs).
+    const refs = (b.meta?.refs || [])
+      .map((r) =>
+        /^https?:\/\//.test(r)
+          ? `<li><a href="${esc(enc(r))}" rel="noopener">${esc(r)}</a></li>`
+          : `<li>${esc(r)}</li>`
+      )
+      .join('')
 
-    return `<main><h1>${esc(b.name || bodyId)}</h1><p><em>${esc(b.kind || '')}</em> — ${esc(b.tagline || '')}</p>${facts ? `<dl>${facts}</dl>` : ''}<p>${esc(b.history || '')}</p>${images}${audio}${b.source ? `<p><a href="${esc(enc(b.source))}">${esc(b.source)}</a></p>` : ''}${refs ? `<ul>${refs}</ul>` : ''}</main>`
+    return `<main><h1>${esc(b.name || bodyId)}</h1><p><em>${esc(b.kind || '')}</em> — ${esc(b.tagline || '')}</p>${facts ? `<dl>${facts}</dl>` : ''}<p>${esc(b.history || '')}</p>${images}${audio}${b.source ? `<p>${esc(b.source)}</p>` : ''}${refs ? `<ul>${refs}</ul>` : ''}</main>`
   }
 
   /** Star-field body kinds in index order — voyage-from-home ordering;
@@ -1807,43 +1826,6 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
   const animDescOf = (loc) =>
     toDescription(t(loc, (x) => x.pages?.animations?.description)) || aboutDescOf(loc)
-
-  /** Labelled-media {slug,label,media} rows of a project — mirrors
-   * generate-sitemap's walk and the runtime modal: every labelled item with
-   * a src is addressable through /portfolio/<slug>/<media>. */
-  const mediaRowsOf = (project) => {
-    const out = []
-    const seen = new Map()
-
-    for (const section of project?.sections || []) {
-      const items = Array.isArray(section) ? section : [section]
-
-      for (const item of items) {
-        const media = Array.isArray(item) ? item : [item]
-
-        for (const m of media) {
-          if (m && typeof m === 'object' && m.label && m.src) {
-            const base = capSlug(slugify(m.label))
-
-            if (!base) continue
-
-            // Distinct captions can collapse to the same slug — later
-            // occurrences gain -2, -3… in document order (mediaSlugSeq's
-            // convention) so every item keeps an indexable URL.
-            const ordinal = seen.get(base) ?? 0
-
-            seen.set(base, ordinal + 1)
-
-            const slug = ordinal ? `${base}-${ordinal + 1}` : base
-
-            out.push({ slug, label: m.label, media: m })
-          }
-        }
-      }
-    }
-
-    return out
-  }
 
   // Labelled-media rows per (loc, project) — cached; media identity across
   // locales is aligned by `src`, which is locale-invariant while labels
@@ -2088,20 +2070,26 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         }
         const { source, thumb, isVideo } = mediaUrls(project?.folder || '', media, mediaManifest)
 
+        // Watch-page description names the asset first — without the
+        // label prefix hundreds of media pages would share the project
+        // description verbatim.
+        const mediaDesc = toDescription(`${label} — ${description}`)
+
         routes.push({
           path: `${prefix}portfolio/${slug}/${mediaSlug}`,
           emitAtPublicPath: loc !== 'en',
-          title,
+          // Watch-page title names the asset, not just the project.
+          title: titleOf(`${pageName} | ${label}`),
           pageName: label,
-          description,
+          description: mediaDesc,
           image: source ? (isVideo ? thumb : source) : undefined,
-          content: `${mediaContent(loc, slug, label)}${mediaFigure(project?.folder || '', media, '')}`,
+          content: mediaContent(loc, slug, label, mediaWatchFigure(project?.folder || '', media)),
           // The media page carries the whole project graph plus its own
           // media entity (ImageObject for stills, VideoObject for clips)
           // so Google can index the specific asset at this URL.
           entities: [
             ...(isVideo
-              ? [videoEntity(project?.folder || '', media, pageName, description, mediaManifest)]
+              ? [videoEntity(project?.folder || '', media, pageName, mediaDesc, mediaManifest)]
               : source
                 ? [
                     {

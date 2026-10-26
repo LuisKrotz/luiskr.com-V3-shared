@@ -17,6 +17,7 @@ behave identically.
 
 - `@param` storage CDN base URL from the store.
 - `@param` folder Project folder segment for the media path.
+- `@param` label The resolved media label (both match passes require a
 - `@param` item The matched project media item.
 
 ### `checkAutoOpenModal`

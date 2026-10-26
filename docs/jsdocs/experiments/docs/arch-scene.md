@@ -55,6 +55,11 @@ A dir-name sprite with the depth it answers to (zoom-reveal bucket).
 
 Last written alpha — opacity writes and visibility flips are dirty-gated.
 
+### (module scope)
+
+One rendered node tier — the solid fill, the seam strokes that keep
+the icon's form legible, and the invisible pick spheres.
+
 ### `GLSL_BEGIN_VERTEX`
 
 three.js GLSL anchors the instanced-node materials patch — chunk-include
@@ -75,12 +80,13 @@ only when the highlight path changes, never per frame.
 
 ### `glyphVertexPreamble`
 
-Wireframe-glyph shader contract — the procedural-directory reference's
-per-node motion and per-kind ink run entirely in the vertex/fragment
-stages so ~7k glyph instances cost one draw call per tier and ZERO
-per-frame CPU writes:
+Filled-glyph shader contract — the per-node placement and per-kind
+ink run entirely in the vertex/fragment stages so ~7k glyph instances
+cost one draw call per tier and ZERO per-frame CPU writes:
 
-p = rotY(uTime·SPIN + aSpin) · position — node self-yaw
+p = camRight·x + camUp·y + camBack·z — billboard:
+local card axes ride the camera's world axes (viewMatrix
+rows), so every icon faces the viewer and never spins
 p *= aScale — orbit-proportional glyph
 p *= (1 + sin(uTime·PULSE + i·0.7)·AMP) — ambient pulse
 · (1 + aActive·(SCENE_ACTIVE_SCALE − 1)) — active pop
@@ -166,7 +172,7 @@ model: every node's children orbit it on a Fibonacci sphere
 (phi = acos(1 − 2·(s+0.5)/n), theta = s·golden-angle) at the
 parent's cluster radius. Cluster radii come from `clusterRadii` —
 the reference's shrink-ratio orbits with a sibling-glyph clearance
-floor, so icons keep ≥SCENE_MIN_SEP of wireframe clear space while
+floor, so icons keep ≥SCENE_MIN_SEP of glyph-face clear space while
 subtree clouds compress geometrically (the hairball fix: strict
 non-interpenetration grows exponentially and is unreadable past a
 few hundred nodes).
@@ -188,36 +194,129 @@ the plain-object result also survives when transfer is unsupported.
 - `@param` placed Flattened tree nodes.
 - `@returns` xyz triplets, or null when nothing resolved.
 
-### `dirWireVerts`
+### `pushTri`
 
-Wireframe folder glyph — the procedural-directory reference shape:
-a front panel (top edge slightly lower, the open-mouth read), a
-taller back panel, a tab on the back's top-left, and the depth
-connectors that make it read as a 3D box from any orbit angle.
-Pure vertex math — no textures, no imported geometry. Scaled to
-SCENE_DIR_RADIUS. Exported: the scene3d arm ribbons the same verts.
+Pushes one triangle (3 verts = 9 floats) onto a flat soup list.
 
-- `@returns` Flat xyz pairs — segment list for LINES drawing.
+- `@param` v The accumulating vert list.
+- `@param` a First vertex xyz.
+- `@param` b Second vertex xyz.
+- `@param` c Third vertex xyz.
 
-### `fileWireVerts`
+### `pushQuad`
 
-Wireframe document glyph — folded-corner page outline + inner fold
-diagonal + three text-rule lines (the reference file shape). Scaled
+Pushes one quad as two triangles — vertices arrive in perimeter
+order a→b→c→d. The glyph materials are DoubleSide, so winding is
+descriptive only.
+
+- `@param` v The accumulating vert list.
+
+### `pushRim`
+
+Pushes a prism's rim — one wall quad per 2D outline edge spanning
+the −t..+t thickness, so a die-cut silhouette keeps a clean edge
+from side-on orbit angles.
+
+- `@param` v The accumulating vert list.
+- `@param` poly 2D outline points in CCW order.
+- `@param` t Prism half-thickness.
+
+### `dirShape`
+
+The folder card's shared 2D anchors — the six-point silhouette
+(rectangle body + slant-shouldered tab on the top-left, non-convex
+at the tab foot) plus the shelf height the seam pass inks as the
+flap line. Fill soup and seam segments both build on these so every
+draw pass describes the same solid.
+
+- `@returns` {poly, shelf, w, t} — outline, shelf y, half-width, half-
+
+### `fileShape`
+
+The file card's shared 2D anchors — the folded-corner pentagon
+outline plus the crease point and text-rule heights the seam pass
+draws. Fill soup and seam segments both build on these so every
+draw pass describes the same solid.
+
+- `@returns` {poly, fold, rules, ruleW, t} — outline, crease point, rule
+
+### `dirFillVerts`
+
+Filled folder glyph — the classic filled-icon silhouette (rect body
+
+- tab bump) as a thin extruded card, so the tab reads IN the outline
+  from front, back and glancing angles. The silhouette is non-convex
+  at the tab foot, so the faces split on the shelf: body quad + tab
+  quad, no fan. Pure vertex math — no textures, no imported geometry.
+  Exported: the scene3d arm uploads the same soup.
+
+* `@returns` Flat xyz triplets — triangle soup, every 9 floats one tri.
+
+### `fileFillVerts`
+
+Filled document glyph — the folded-corner page as a thin extruded
+pentagon prism (the cut corner reads as the fold; the card thickness
+keeps the solid visible through the edge-on part of its yaw). Scaled
 to SCENE_FILE_RADIUS·1.3 so leaf glyphs read smaller than folders
 (the container/item size ratio of the reference). Exported: the
-scene3d arm ribbons the same verts.
+scene3d arm uploads the same soup.
 
-- `@returns` Flat xyz pairs — segment list for LINES drawing.
+- `@returns` Flat xyz triplets — triangle soup, every 9 floats one tri.
 
-### `wireBound`
+### `pushSeamOutline`
 
-Bounding radius of a wire segment list — the invisible pick-sphere
-radius (wire glyphs have no triangle surface to raycast, so picking
-runs against instanced spheres sized to the glyph's exact bound).
-Exported: the scene3d arm sizes its JS-side pick spheres from the
-same bound.
+Pushes the two seam passes every glyph shares: the silhouette
+outline on BOTH faces (grown by SCENE_SEAM_GROW so the stroke keys
+the edge instead of z-fighting it) and the corner struts tying the
+two outlines into the card's rim.
 
-- `@param` verts Flat xyz pairs.
+- `@param` v The accumulating segment list (flat xyz pairs).
+- `@param` poly 2D outline points in CCW order.
+- `@param` t Prism half-thickness.
+
+### `dirSeamVerts`
+
+Folder seam segments — the detail strokes a filled icon pack prints
+on the card: the silhouette outline on both faces, rim struts, and
+the shelf line that splits flap from body. Face details ride
+SCENE_SEAM_LIFT·t proud of the panel so they never z-fight the fill.
+
+- `@returns` Flat xyz pairs — segment list for the seam LineSegments.
+
+### `fileSeamVerts`
+
+File seam segments — the silhouette outline on both faces, rim
+struts, the dog-ear crease and two text rules: the detail a filled
+file icon carries once the fill covers the wireframe's empty page.
+Face details ride SCENE_SEAM_LIFT·t proud of the panel.
+
+- `@returns` Flat xyz pairs — segment list for the seam LineSegments.
+
+### `glyphBound`
+
+Bounding radius of a glyph vert list — the invisible pick-sphere
+radius (instanced BufferGeometry isn't on three's raycast path, so
+picking runs against instanced spheres sized to the glyph's exact
+bound) and the radius edges clip against. Exported: the scene3d arm
+sizes its JS-side pick spheres from the same bound.
+
+- `@param` verts Flat xyz triplets (segment list or triangle soup).
+
+### `clipEdge`
+
+Trims an edge so it stops clear of BOTH glyph faces it connects —
+the reference's links aim at node surfaces, not centers. Each end
+pulls back by that node's glyph bound plus SCENE_EDGE_GAP along the
+edge direction; when nothing is left between the trimmed points the
+edge would draw inside a glyph, so null is returned and the caller
+drops the segment (degenerate over-close pairs only — relaxed
+layouts keep every edge longer than the two radii).
+
+- `@param` a Child endpoint xyz.
+- `@param` b Parent endpoint xyz.
+- `@param` rA Child glyph radius (glyphBound·scale).
+- `@param` rB Parent glyph radius.
+- `@returns` Six clipped coords, or null when fully covered.
 
 ### `probeIconInks`
 
@@ -233,6 +332,18 @@ back to the dir accent ink.
 - `@param` host Element inside the .docs shadow tree (canvas's parent).
 - `@param` kinds Distinct icon kinds to sample.
 
+### `probeFolderInk`
+
+Folder-ink probe — directory glyphs wear the treeview folder's own
+`color` (the reference pack's gold), sampled off a `--folder` probe
+span parked inside the portal's shadow root. The custom property
+resolves to `currentColor` there, so the seam ink comes from the
+computed text color — the real resolved rgb. Returns null where
+styles can't compute (tests) — callers fall back to the accent ink.
+
+- `@param` host Element inside the .docs shadow tree (canvas's parent).
+- `@returns` [r,g,b] 0-1 channels, or null.
+
 ### (module scope)
 
 Builds a dir-name sprite label — a 2d-canvas texture on a THREE.Sprite.
@@ -244,7 +355,7 @@ so the scene still mounts label-free.
 
 ### (module scope)
 
-Persisted camera pose + rotation-off flag across scene remounts.
+Persisted camera pose across scene remounts.
 
 ### `p`
 
@@ -253,10 +364,6 @@ camera.position xyz
 ### `t`
 
 controls.target xyz
-
-### `off`
-
-true once the user has taken control — autoRotate stays off.
 
 ### `readCamState`
 
@@ -347,7 +454,7 @@ no GL context can be acquired; the composite then reports `onLost`.
 
 ### `saveCamState`
 
-Serializes camera pose + interaction flag into sessionStorage.
+Serializes camera pose into sessionStorage.
 
 ### `activePath`
 
@@ -374,18 +481,19 @@ for whatever path is active when they arrive.
 
 ### `dirMesh`
 
-Node draw calls — the procedural-directory look: every directory
-renders the wireframe folder glyph, every file the folded-page
-glyph, each through ONE instanced LineSegments draw so the
-multi-thousand-node graph costs two draw calls (plus the edge set
-and revealed labels). Picking runs against invisible instanced
-spheres — wire lines have no surface to raycast and three's line
-raycast has no instancing path; the pick tier shares the highlight
-attribute buffers with the glyph geometry.
+Node draw calls — the filled-icon look: every directory renders the
+folder card, every file the folded-page card, each as ONE instanced
+Mesh (the solid fill) plus ONE instanced LineSegments (the seams —
+outline, crease and rule strokes in the page's own background ink,
+the icon-pack cutout read) so the graph costs four draw calls plus
+the edge set and revealed labels. Picking runs against invisible
+instanced spheres — instanced BufferGeometry isn't on three's
+raycast path; the pick tier shares the highlight attribute buffers
+with the glyph geometries.
 
 ### `dirGlyph`
 
-The instanced wireframe glyph draws — disposed with the scene.
+The instanced glyph draws per tier — fill + seams + pick.
 
 ### `dirPlaced`
 
@@ -399,7 +507,7 @@ Mesh → its placed-index table, so a raycast hit maps back to a path.
 
 Shared pulse clock — patched into both node materials' shaders.
 
-### `lineGeo`
+### (module scope)
 
 Edge geometry + material — assigned inside buildGraph, disposed in destroy().
 
@@ -422,18 +530,30 @@ land — meshes, edges, then dir-name labels on top of dir nodes.
 
 ### `buildTier`
 
-Builds one instanced tier — the wireframe glyph as a single
-instanced LineSegments draw (aOffset/aColor/aPhase/aSpin +
-aAlpha/aActive drive the vertex shader) plus the invisible
-instanced pick sphere. The pick geometry SHARES the alpha/active
-attribute objects with the glyph geometry, so the highlight pass
-keeps writing one buffer both visuals read.
+Builds one instanced tier — the filled glyph as a single
+instanced Mesh draw plus the seam strokes as a single instanced
+LineSegments draw (aOffset/aColor/aPhase/aScale +
+aAlpha/aActive drive the same vertex shader in both), and the
+invisible instanced pick sphere. All three geometries SHARE the
+instanced attribute objects, so the highlight pass keeps writing
+one buffer every visual in the tier reads.
 
-- `@param` verts Wire segment list (flat xyz pairs).
+- `@param` fillVerts Glyph triangle soup (flat xyz triplets).
+- `@param` seamVerts Detail strokes (flat xyz segment pairs).
 - `@param` baseOpacity Resting alpha for the tier.
 - `@param` idxs placed[] indexes in this tier.
-- `@param` rgbOf Per-node ink resolver (icon-pack palette).
-- `@returns` {glyph, pick} — draw object + pick mesh.
+- `@param` rgbOf Per-node ink resolver (icon-pack palette) —
+- `@param` faceRgb Card-body ink — the page bg so glyph faces read
+- `@returns` {fill, seam, pick} — the tier's draw objects.
+
+### `bindShared`
+
+Attaches the tier's shared instanced streams to one geometry —
+fill, seams and pick proxy all read the same attribute buffer
+objects, so writeActive's edits land in every draw at once.
+
+- `@param` geo The target instanced geometry.
+- `@param` colAttr Per-instance ink (fill ink or seam ink).
 
 ### `pathForHit`
 

@@ -17,7 +17,12 @@ Engine node id (set_position/set_scale/set_euler target).
 
 ### `mat`
 
-Material id — `set_color` writes the live opacity.
+Fill material id — `set_color` writes the live opacity.
+
+### `seamMat`
+
+Seam material id — the knockout strokes' material; the highlight
+pass writes the same alpha to it so fills and seams fade together.
 
 ### `x`
 
@@ -49,12 +54,12 @@ Active-highlight scale multiplier applied in the pulse write.
 
 ### `rgb`
 
-Per-kind ink rgb — restored by the highlight pass; the wireframe
+Per-kind ink rgb — restored by the highlight pass; the glyph
 palette is per-node now, not one global ink.
 
 ### `phase`
 
-Bob phase / initial yaw — decorrelated per node (golden hashes).
+Bob phase — decorrelated per node (golden-angle hash).
 
 ### (module scope)
 
@@ -103,11 +108,21 @@ Expands a raw segment list into cross-quad ribbon geometry — two
 perpendicular quads per segment (the engine draws triangles only;
 a crossed pair reads as a 1px line strip from every angle). SoA
 upload: positions + zero normals (basic material is unlit) + zero
-uvs + triangle indices. Shared by the edge fan and the wireframe
-node glyphs.
+uvs + triangle indices. Used by the edge fan; the filled glyphs
+upload through `trisToGeometry` instead.
 
 - `@param` segs Flat xyz pairs — every six floats are one segment.
 - `@param` half Ribbon half-width in chart units.
+- `@returns` The four attribute arrays for `upload_geometry`.
+
+### `trisToGeometry`
+
+Packages a glyph triangle soup into the engine's SoA geometry
+payload — sequential indices over the unindexed soup, zero normals
+(the basic material is unlit) and zero uvs. Mirrors
+`segmentsToRibbons`'s return shape so both upload identically.
+
+- `@param` tris Flat xyz triplets — every 9 floats one triangle.
 - `@returns` The four attribute arrays for `upload_geometry`.
 
 ### `buildEdges`
@@ -133,11 +148,11 @@ never regress the portal.
 
 ### `saveCamState`
 
-Serializes camera pose + interaction flag into sessionStorage.
+Serializes camera pose into sessionStorage.
 
 ### `graphRoot`
 
-Root group — the intro-settle euler target (three's scene.rotation).
+Root group — every node/edge/label parents under it.
 
 ### `activePath`
 

@@ -37,6 +37,7 @@ import {
   prefetchStarMediaDims,
   prefetchTranslations,
 } from './build-locale-pages.mjs'
+import { buildLlmPages } from './generate-llm-pages.mjs'
 import { withFsRetry, withFsRetryAsync } from './fs-retry.mjs'
 import { queueCompressedWrite, drainCompressedWrites } from './compress-queue.mjs'
 import { genOnnxModels } from './gen-onnx-models.mjs'
@@ -402,6 +403,13 @@ await Promise.all([prefetchStarMediaDims(), prefetchTranslations()])
 // ~19k-page fan-out's .br/.gz siblings land on the threadpool, not here.
 const localePages = await buildLocalePages(DIST, html)
 
+// LLM/agent replica surface — every public route emits a full-content
+// .md + structured .json replica in every locale (canonical /llm/<loc>/
+// mirror tree plus <route>.{md,json} siblings). Runs after locale-pages
+// so the same prefetched RTDB translations feed both fan-outs and the
+// <link rel="alternate"> tags injected by localize() resolve to files.
+const llmPages = await buildLlmPages(DIST)
+
 html = localePages.html
 
 // Compressed index.html siblings (Firebase serves .br/.gz when present) —
@@ -438,6 +446,7 @@ console.log(`\n  compressed siblings: ${compressed} documents via queue`)
 console.log(
   `\n  locale-pages: ${localePages.written + 1} localized documents across ${localePages.locales} locales`
 )
+console.log(`  llm-pages: ${llmPages.written} replica files across ${llmPages.routes} routes`)
 console.log('\n═══ done ═══')
 for (const t of tierManifest) console.log(`  ${t.name}: ${t.js}`)
 for (const p of polyManifest) console.log(`  polyfill ${p.name}: ${p.file}`)

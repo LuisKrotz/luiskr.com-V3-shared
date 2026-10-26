@@ -2,9 +2,9 @@
 
 &lt;awards-carousel&gt; — lightweight carousel used by the awards
 
-| | |
-|---|---|
-| **Source** | `src/website\components\carousel\AwardsCarousel.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\carousel\AwardsCarousel.tsx`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -61,7 +61,7 @@ Pending clone→real jump watchdog timer (rAF-starvation fallback).
 ### `pendingTeleport`
 
 Clone→real teleport armed by _scheduleTeleport — the scroll spring's
- settle fires it; the timer is only the rAF-starvation watchdog.
+settle fires it; the timer is only the rAF-starvation watchdog.
 
 ### `touchStartX`
 
@@ -115,7 +115,12 @@ after each render rather than JSX-wired.
 
 ### (module scope)
 
-Reduced-motion commit → kill autoplay immediately (no residual RAF).
+Overlay/pref commits → kill autoplay immediately (no residual RAF);
+an overlay closing resumes a stopped cycle only when the carousel is
+still ≥50% on screen. The !autoplayRunning guard matters: store
+commits arrive for unrelated state too, and a bare _startAutoplay
+would re-base the dwell clock (and stack a second RAF chain) on
+every commit.
 
 ### `_setupCarousel`
 

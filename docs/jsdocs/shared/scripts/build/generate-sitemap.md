@@ -2,9 +2,9 @@
 
 Emits the whole crawl surface under `website/public/meta/`:
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\build\generate-sitemap.js` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\generate-sitemap.js`          |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -12,15 +12,6 @@ Emits the whole crawl surface under `website/public/meta/`:
 ### `URLSET_XMLNS`
 
 XML namespaces emitted on every <urlset>.
-
-### `capSlug`
-
-Caps a media deep-link slug at MEDIA_SLUG_MAX_LENGTH so
-prerendered dist paths stay under Windows MAX_PATH — the cut drops the
-trailing partial word (and a dangling hyphen) so the slug always ends
-on a hyphen boundary. Byte-identical to the cap in mediaSlugSeq
-(core/utils/string.ts) so sitemap <loc>s, emitted pages and the runtime
-resolver agree.
 
 ### `escXml`
 
@@ -35,22 +26,6 @@ first keeps it idempotent (encodeURI escapes '%' itself).
 ### `titleOf`
 
 Truncates a media title to Google's 100-char video-title bound.
-
-### `mediaItemsOf`
-
-Media items of a project — mirrors `website/views/project/modal.ts`'s
-traversal exactly: sections → groups (arrays whose head is NOT a string —
-string-head groups are text blocks) → media objects. Every object with a
-`src` is a real asset on the page and gets indexed; items with a label
-additionally get their own `/portfolio/<slug>/<media>` deep-link URL.
-
-### `mediaRowsOf`
-
-Labelled-media deep links of a project — slug → media item. Distinct
-captions can collapse to the same slug, so occurrences after the first
-gain `-2`, `-3`, … in document order — byte-identical to mediaSlugSeq
-in core/utils/string.ts so every item keeps an indexable URL and the
-emitted pages + runtime resolver agree.
 
 ### `mediaTagXml`
 

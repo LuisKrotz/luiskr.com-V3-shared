@@ -10,8 +10,10 @@
  *   routes, `/earth-playground`, `/star-field-experiment`,
  *   `/portfolio/<slug>` plus a media-modal deep link for every labelled
  *   media item (matching `website/views/project/modal.ts`), every
- *   `/star-field-experiment/<body>` catalog deep link, and every
- *   publishable `/docs/<root>/<path>` manifest node.
+ *   `/star-field-experiment/<body>` catalog deep link. The `/docs/**`
+ *   surface is deliberately absent — it carries X-Robots-Tag: noindex
+ *   (generated typedoc/coverage/source mirrors are agent/human docs,
+ *   not indexable content), and a sitemap may only name indexable URLs.
  * - Per locale `/<loc>/…` — the locale's localized slugs for
  *   about/contact/legal/earthPlayground/starField, `/<loc>/portfolio/<slug>`
  *   project routes AND localized media-modal deep links, and localized
@@ -34,8 +36,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
-import { MEDIA_SLUG_MAX_LENGTH } from '../../../core/tokens/routes/aliases.ts'
-import { scanManifest } from '../../build/docs/scan.mjs'
+import { mediaItemsOf, mediaRowsOf } from './route-media.mjs'
 import {
   fetchMediaManifest,
   persistMediaManifest,
@@ -68,70 +69,6 @@ for (const slugs of Object.values(LANG_SLUGS)) {
   EXPERIENCE_SEGMENTS.add(slugs.starField)
 }
 
-// Russian Cyrillic → Latin transliteration — Cyrillic media labels would
-// otherwise slugify to '' and lose their deep-link URL. MUST stay
-// byte-identical to CYRILLIC_SLUG in core/utils/string.ts.
-const CYRILLIC_SLUG = {
-  а: 'a',
-  б: 'b',
-  в: 'v',
-  г: 'g',
-  д: 'd',
-  е: 'e',
-  ё: 'e',
-  ж: 'zh',
-  з: 'z',
-  и: 'i',
-  й: 'y',
-  к: 'k',
-  л: 'l',
-  м: 'm',
-  н: 'n',
-  о: 'o',
-  п: 'p',
-  р: 'r',
-  с: 's',
-  т: 't',
-  у: 'u',
-  ф: 'f',
-  х: 'h',
-  ц: 'c',
-  ч: 'ch',
-  ш: 'sh',
-  щ: 'sch',
-  ъ: '',
-  ы: 'y',
-  ь: '',
-  э: 'e',
-  ю: 'yu',
-  я: 'ya',
-}
-
-function slugify(text) {
-  return (text || '')
-    .toString()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[а-яё]/g, (ch) => CYRILLIC_SLUG[ch])
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
-/**
- * Caps a media deep-link slug at MEDIA_SLUG_MAX_LENGTH so
- * prerendered dist paths stay under Windows MAX_PATH — the cut drops the
- * trailing partial word (and a dangling hyphen) so the slug always ends
- * on a hyphen boundary. Byte-identical to the cap in mediaSlugSeq
- * (core/utils/string.ts) so sitemap <loc>s, emitted pages and the runtime
- * resolver agree.
- */
-const capSlug = (base) =>
-  base.length > MEDIA_SLUG_MAX_LENGTH
-    ? base.slice(0, MEDIA_SLUG_MAX_LENGTH).replace(/-[^-]*$/u, '')
-    : base
-
 /** Escapes text for XML element bodies (media titles/descriptions). */
 const escXml = (s) =>
   String(s || '')
@@ -157,59 +94,6 @@ const titleOf = (label, max = 100) => {
   const t = String(label || '').trim()
 
   return t.length <= max ? t : `${t.slice(0, max - 1).trimEnd()}…`
-}
-
-/**
- * Media items of a project — mirrors `website/views/project/modal.ts`'s
- * traversal exactly: sections → groups (arrays whose head is NOT a string —
- * string-head groups are text blocks) → media objects. Every object with a
- * `src` is a real asset on the page and gets indexed; items with a label
- * additionally get their own `/portfolio/<slug>/<media>` deep-link URL.
- */
-const mediaItemsOf = (project) => {
-  const items = []
-
-  for (const section of project?.sections || []) {
-    for (const group of section) {
-      if (!Array.isArray(group) || typeof group[0] === 'string') continue
-
-      for (const m of group) {
-        if (m && typeof m === 'object' && m.src) items.push(m)
-      }
-    }
-  }
-
-  return items
-}
-
-/**
- * Labelled-media deep links of a project — slug → media item. Distinct
- * captions can collapse to the same slug, so occurrences after the first
- * gain `-2`, `-3`, … in document order — byte-identical to mediaSlugSeq
- * in core/utils/string.ts so every item keeps an indexable URL and the
- * emitted pages + runtime resolver agree.
- */
-const mediaRowsOf = (project) => {
-  const rows = new Map()
-  const seen = new Map()
-
-  for (const m of mediaItemsOf(project)) {
-    if (!m.label) continue
-
-    const base = capSlug(slugify(m.label))
-
-    if (!base) continue
-
-    const ordinal = seen.get(base) ?? 0
-
-    seen.set(base, ordinal + 1)
-
-    const slug = ordinal ? `${base}-${ordinal + 1}` : base
-
-    rows.set(slug, m)
-  }
-
-  return rows
 }
 
 async function run() {
@@ -408,7 +292,7 @@ async function run() {
 
     // Deep links — every labelled item addressable through the media modal,
     // en + every locale prefix. Each deep link carries its own asset tag.
-    for (const [mediaSlug, m] of mediaRowsOf(projectData)) {
+    for (const { slug: mediaSlug, media: m } of mediaRowsOf(projectData)) {
       const mediaPath = `/portfolio/${projectSlug}/${mediaSlug}`
 
       urlSet.add(mediaPath)
@@ -434,7 +318,7 @@ async function run() {
         projectPageTags(folder, locProject || data?.[projectSlug], projectTitle)
       )
 
-      for (const [mediaSlug, m] of mediaRowsOf(locProject || data?.[projectSlug])) {
+      for (const { slug: mediaSlug, media: m } of mediaRowsOf(locProject || data?.[projectSlug])) {
         const locMedia = `/${lang}/portfolio/${projectSlug}/${mediaSlug}`
 
         urlSet.add(locMedia)
@@ -468,26 +352,12 @@ async function run() {
     }
   }
 
-  // Docs portal — English-only SPA; every publishable manifest file is a
-  // crawlable '/docs/<root>/<relpath>' route (files only — dirs resolve to
-  // the same portal page, and media payloads render inline in the viewer).
-  urlSet.add('/docs')
-
-  try {
-    const { roots } = scanManifest(REPO_ROOT)
-
-    const walkDocs = (nodes) => {
-      for (const node of nodes) {
-        urlSet.add(`/docs/${node.path}`)
-
-        if (node.type === 'dir') walkDocs(node.children)
-      }
-    }
-
-    for (const root of roots) walkDocs(root.children)
-  } catch (err) {
-    console.error('Failed to scan docs manifest for sitemap — /docs routes skipped', err)
-  }
+  // Docs portal — deliberately EXCLUDED from the crawl surface: the docs
+  // tree mirrors generated artifacts (typedoc, coverage reports, source
+  // viewers) whose only audience is humans/agents, not search indexes.
+  // /docs** carries X-Robots-Tag: noindex in firebase.json, so listing it
+  // here would advertise pages we explicitly do not want indexed — a
+  // sitemap must only ever name indexable canonical 200 routes.
 
   const allUrls = Array.from(urlSet).sort()
   console.log('Total unique URLs:', allUrls.length)
@@ -606,7 +476,7 @@ async function run() {
     fs.mkdirSync(locDir, { recursive: true })
     fs.writeFileSync(
       path.join(locDir, 'robots.txt'),
-      `User-agent: *\nDisallow: /cms\nDisallow: /admin\nDisallow: /langs/\n\nSitemap: ${base}/sitemap-${loc}.xml\n`,
+      `User-agent: *\nDisallow: /cms\nDisallow: /admin\nDisallow: /langs/\nDisallow: /docs-content/\nDisallow: /deploy-info/\nDisallow: /meta/\n\nSitemap: ${base}/sitemap-${loc}.xml\n`,
       'utf-8'
     )
     fs.writeFileSync(

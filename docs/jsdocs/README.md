@@ -663,19 +663,21 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                                                                   | What it does                                                                 |
-| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| [`dom-arm-guard-tails.test.js`](core\tests\coverage\utils/dom-arm-guard-tails.test.md)                 | Coverage tails for the residual-input guard in core/utils/dom.ts —           |
-| [`dom-utils-tails.test.js`](core\tests\coverage\utils/dom-utils-tails.test.md)                         | Split from coverage-tails-5.test.js — covers the "dom-utils tails" describe. |
-| [`media-manifest-encode-tails.test.js`](core\tests\coverage\utils/media-manifest-encode-tails.test.md) | Coverage tail for the percent-decoded lookup arm of                          |
-| [`media-manifest-tails-2.test.js`](core\tests\coverage\utils/media-manifest-tails-2.test.md)           | Second coverage tail for utils/media/manifest.ts — the                       |
-| [`media-manifest-tails-3.test.js`](core\tests\coverage\utils/media-manifest-tails-3.test.md)           | Third coverage tail for utils/media/manifest.ts — the                        |
-| [`media-manifest-tails-4.test.js`](core\tests\coverage\utils/media-manifest-tails-4.test.md)           | Fourth coverage tail for utils/media/manifest.ts —                           |
-| [`media-manifest-tails.test.js`](core\tests\coverage\utils/media-manifest-tails.test.md)               | Coverage tail for utils/media/manifest.ts — the runtime gate                 |
-| [`media-tails.test.js`](core\tests\coverage\utils/media-tails.test.md)                                 | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
-| [`media-utils-tails.test.js`](core\tests\coverage\utils/media-utils-tails.test.md)                     | Split from coverage-tails.test.js — covers the "media utils tails" describe. |
-| [`service-worker-tails.test.js`](core\tests\coverage\utils/service-worker-tails.test.md)               | Coverage tail for utils/service-worker.ts — the local                        |
-| [`string-tails.test.js`](core\tests\coverage\utils/string-tails.test.md)                               | Coverage tails for core/utils/string.ts — iterated HTML                      |
+| File                                                                                                           | What it does                                                                 |
+| -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [`dom-arm-guard-tails.test.js`](core\tests\coverage\utils/dom-arm-guard-tails.test.md)                         | Coverage tails for the residual-input guard in core/utils/dom.ts —           |
+| [`dom-utils-tails.test.js`](core\tests\coverage\utils/dom-utils-tails.test.md)                                 | Split from coverage-tails-5.test.js — covers the "dom-utils tails" describe. |
+| [`media-manifest-encode-tails.test.js`](core\tests\coverage\utils/media-manifest-encode-tails.test.md)         | Coverage tail for the percent-decoded lookup arm of                          |
+| [`media-manifest-failed-tails.test.js`](core\tests\coverage\utils/media-manifest-failed-tails.test.md)         | Coverage tail for the manifest fetch-failure arm — the                       |
+| [`media-manifest-onmanifest-tails.test.js`](core\tests\coverage\utils/media-manifest-onmanifest-tails.test.md) | Coverage tail for onMediaManifest — the arrival-subscription                 |
+| [`media-manifest-tails-2.test.js`](core\tests\coverage\utils/media-manifest-tails-2.test.md)                   | Second coverage tail for utils/media/manifest.ts — the                       |
+| [`media-manifest-tails-3.test.js`](core\tests\coverage\utils/media-manifest-tails-3.test.md)                   | Third coverage tail for utils/media/manifest.ts — the                        |
+| [`media-manifest-tails-4.test.js`](core\tests\coverage\utils/media-manifest-tails-4.test.md)                   | Fourth coverage tail for utils/media/manifest.ts —                           |
+| [`media-manifest-tails.test.js`](core\tests\coverage\utils/media-manifest-tails.test.md)                       | Coverage tail for utils/media/manifest.ts — the runtime gate                 |
+| [`media-tails.test.js`](core\tests\coverage\utils/media-tails.test.md)                                         | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
+| [`media-utils-tails.test.js`](core\tests\coverage\utils/media-utils-tails.test.md)                             | Split from coverage-tails.test.js — covers the "media utils tails" describe. |
+| [`service-worker-tails.test.js`](core\tests\coverage\utils/service-worker-tails.test.md)                       | Coverage tail for utils/service-worker.ts — the local                        |
+| [`string-tails.test.js`](core\tests\coverage\utils/string-tails.test.md)                                       | Coverage tails for core/utils/string.ts — iterated HTML                      |
 
 ## Core engine
 
@@ -877,6 +879,7 @@ _Shared primitives every surface builds on — no direct UI._
 | File                                                                                                      | What it does                                                               |
 | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | [`constants.test.js`](core\tests\unit\tokens/constants.test.md)                                           | Verifies all values in core/constants.js match the original Vue source.    |
+| [`nav-css-tokens.test.js`](core\tests\unit\tokens/nav-css-tokens.test.md)                                 | Coverage tail for core/tokens/css/nav.ts — asserts every                   |
 | [`schema-shims-entry-shims.test.js`](core\tests\unit\tokens/schema-shims-entry-shims.test.md)             | Split from schema-shims.test.js — covers the "entry shims" describe.       |
 | [`schema-shims-polyfills.test.js`](core\tests\unit\tokens/schema-shims-polyfills.test.md)                 | Split from schema-shims.test.js — covers the "polyfills" describe.         |
 | [`schema-shims-schema-generators.test.js`](core\tests\unit\tokens/schema-shims-schema-generators.test.md) | Split from schema-shims.test.js — covers the "schema generators" describe. |
@@ -1034,6 +1037,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`cookies.ts`](core\tokens\css/cookies.md)     | Cookie-banner CSS custom-property names — grouped subset of |
 | [`genie.ts`](core\tokens\css/genie.md)         | Genie-transition origin CSS custom-property names — grouped |
 | [`menu.ts`](core\tokens\css/menu.md)           | Menu ink CSS custom-property names — grouped subset of      |
+| [`nav.ts`](core\tokens\css/nav.md)             | Nav gear SVG paint CSS custom-property names — the steel    |
 | [`skeleton.ts`](core\tokens\css/skeleton.md)   | Skeleton-field palette CSS custom-property names — grouped  |
 | [`starfield.ts`](core\tokens\css/starfield.md) | Star-field CSS custom-property names set from JS — grouped  |
 | [`theme.ts`](core\tokens\css/theme.md)         | Theme/ink CSS custom-property names — grouped subset of     |
@@ -1576,14 +1580,21 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`docs-reregister.test.js`](experiments\docs\tests\coverage/docs-reregister.test.md)                                           | Covers the custom-elements registration guard's else arm —                      |
 | [`docs-tails-copy-attempt-telemetry.test.js`](experiments\docs\tests\coverage/docs-tails-copy-attempt-telemetry.test.md)       | Split from docs-tails.test.js — covers the "copy-attempt telemetry" describe.   |
 | [`docs-tails-copy-guard-surface.test.js`](experiments\docs\tests\coverage/docs-tails-copy-guard-surface.test.md)               | Split from docs-tails.test.js — covers the "copy guard surface" describe.       |
+| [`docs-tails-diropen-onupdated.test.js`](experiments\docs\tests\coverage/docs-tails-diropen-onupdated.test.md)                 | Coverage tails — isDirOpen's open/closed arms, the repeated                     |
 | [`docs-tails-docs-gl-strip.test.js`](experiments\docs\tests\coverage/docs-tails-docs-gl-strip.test.md)                         | Split from docs-tails.test.js — covers the "docs GL strip" describe.            |
 | [`docs-tails-docs-manifest-resolution.test.js`](experiments\docs\tests\coverage/docs-tails-docs-manifest-resolution.test.md)   | Split from docs-tails.test.js — covers the "docs manifest resolution" describe. |
+| [`docs-tails-edges-layout-fallback.test.js`](experiments\docs\tests\coverage/docs-tails-edges-layout-fallback.test.md)         | Coverage tails — segmentsToRibbons' degenerate-segment and                      |
 | [`docs-tails-generated-folder-artwork.test.js`](experiments\docs\tests\coverage/docs-tails-generated-folder-artwork.test.md)   | Covers the tree icon pack as used by BOTH nav surfaces:                         |
+| [`docs-tails-ink-crumbs-gridkey.test.js`](experiments\docs\tests\coverage/docs-tails-ink-crumbs-gridkey.test.md)               | Coverage tails — parseInk's short-hex arm, the tree                             |
 | [`docs-tails-input-guards.test.js`](experiments\docs\tests\coverage/docs-tails-input-guards.test.md)                           | Coverage tails for the docs portal's non-plain input guards —                   |
 | [`docs-tails-loader.test.js`](experiments\docs\tests\coverage/docs-tails-loader.test.md)                                       | Coverage tails for docs/loader.ts + the Docs.tsx loader                         |
 | [`docs-tails-map-zoom.test.js`](experiments\docs\tests\coverage/docs-tails-map-zoom.test.md)                                   | Coverage tail for the architecture-map zoom surface —                           |
 | [`docs-tails-onmounted-empty-docs-path.test.js`](experiments\docs\tests\coverage/docs-tails-onmounted-empty-docs-path.test.md) | Coverage tail for experiments/docs/Docs.tsx — onMounted's                       |
+| [`docs-tails-picknode-scenepath-3d.test.js`](experiments\docs\tests\coverage/docs-tails-picknode-scenepath-3d.test.md)         | Coverage tails — pickNode's group-row arm, _scenePath's                         |
 | [`docs-tails-print-prepare.test.js`](experiments\docs\tests\coverage/docs-tails-print-prepare.test.md)                         | Coverage tails for ViewDocs._onPrintPrepare — the printprepare                  |
+| [`docs-tails-scene-pick-scenepath.test.js`](experiments\docs\tests\coverage/docs-tails-scene-pick-scenepath.test.md)           | Coverage tails — the scene pick callback's group-prefix                         |
+| [`docs-tails-scenepath-handlers.test.js`](experiments\docs\tests\coverage/docs-tails-scenepath-handlers.test.md)               | Coverage tails — resolveScenePath's empty/miss arms,                            |
+| [`manifest-nodocsroot-tails.test.js`](experiments\docs\tests\coverage/manifest-nodocsroot-tails.test.md)                       | Coverage tail for manifest.ts — buildGroups' `docsRoot`                         |
 | [`mermaid.test.js`](experiments\docs\tests\coverage/mermaid.test.md)                                                           | Coverage tails for docs/mermaid.ts — lazy wasm diagram                          |
 | [`render-index-tails.test.js`](experiments\docs\tests\coverage/render-index-tails.test.md)                                     | Coverage tail for docs render.tsx — the index-streaming                         |
 | [`tree-icon-tails.test.js`](experiments\docs\tests\coverage/tree-icon-tails.test.md)                                           | Coverage tail for tree-icon.tsx — the node-shape arms the                       |
@@ -2051,10 +2062,12 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`deploy-info.mjs`](shared\scripts\build/deploy-info.md)                   | Assembles `dist/deploy-info/` — the "last deploy" bundle the CMS |
 | [`fs-retry.mjs`](shared\scripts\build/fs-retry.md)                         | Bounded retry for fs operations that race Windows file locks.    |
 | [`gen-onnx-models.mjs`](shared\scripts\build/gen-onnx-models.md)           | Emits the site's tiny ONNX models into                           |
+| [`generate-llm-pages.mjs`](shared\scripts\build/generate-llm-pages.md)     | LLM/agent replica surface — emits a full-content Markdown        |
 | [`generate-sitemap.js`](shared\scripts\build/generate-sitemap.md)          | Emits the whole crawl surface under `website/public/meta/`:      |
 | [`media-manifest.mjs`](shared\scripts\build/media-manifest.md)             | CDN media inventory + best-variant resolution shared by the      |
 | [`predeploy.mjs`](shared\scripts\build/predeploy.md)                       | Firebase Hosting predeploy chain — the quality gate that a       |
-| [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md) | Firebase `predeploy` step — stamps the AI-usage opt-out          |
+| [`route-media.mjs`](shared\scripts\build/route-media.md)                   | Route media helpers shared by the build-time generators          |
+| [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md) | Firebase `predeploy` step — stamps the AI-usage declaration      |
 
 ## Entry points
 
@@ -2393,6 +2406,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | --------------------------------------------------- | ----------------------------------------------------------------- |
 | [`AppNav.tsx`](website\components\nav/AppNav.md)    | &lt;app-nav&gt; — the persistent top navigation bar: logo, burger |
 | [`flag.tsx`](website\components\nav/flag.md)        | Locale flag rendering + FlagWebGL lifecycle for &lt;app-nav&gt;,  |
+| [`gear.tsx`](website\components\nav/gear.md)        | The settings gear glyph for &lt;app-nav&gt; — a parametric        |
 | [`handlers.ts`](website\components\nav/handlers.md) | —                                                                 |
 | [`menu.tsx`](website\components\nav/menu.md)        | Fullscreen menu overlay behavior for &lt;app-nav&gt;, extracted   |
 | [`render.tsx`](website\components\nav/render.md)    | JSX template for &lt;app-nav&gt;, extracted from AppNav.tsx —     |
@@ -2761,6 +2775,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | File                                                                                | What it does                                                  |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------- |
 | [`nav-component.test.js`](website\tests\components\nav/nav-component.test.md)       | Deep tests for AppNav web component: render HTML, attributes, |
+| [`nav-gear.test.js`](website\tests\components\nav/nav-gear.test.md)                 | Coverage tail for nav/gear.tsx — renderNavGear builds the     |
 | [`nav-interactions.test.js`](website\tests\components\nav/nav-interactions.test.md) | Deep coverage for AppNav interaction branches: menu           |
 
 ## Entry points
@@ -2775,6 +2790,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`delegate-tails-misc-attr-guard-arms.test.js`](website\tests\coverage\components\carousel/delegate-tails-misc-attr-guard-arms.test.md)                                                 | Split from delegate-tails.test.js — covers the "misc attr/guard arms" describe.                         |
 | [`delegate-tails-mosaic-draw-text-tails.test.js`](website\tests\coverage\components\carousel/delegate-tails-mosaic-draw-text-tails.test.md)                                             | Split from delegate-tails.test.js — covers the "mosaic + draw-text tails" describe.                     |
 | [`delegate-tails-spring-nav-tails.test.js`](website\tests\coverage\components\carousel/delegate-tails-spring-nav-tails.test.md)                                                         | Coverage tails for the scroll-spring navigation paths in                                                |
+| [`lifecycle-manifest-arrival-tails.test.js`](website\tests\coverage\components\carousel/lifecycle-manifest-arrival-tails.test.md)                                                       | Covers the media-manifest arrival arm in custom-carousel                                                |
 | [`sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.md)   | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit guard tails" describe.  |
 | [`sizing-tails-custom-carousel-sizing-measurefit-ladder-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-measurefit-ladder-tails.test.md) | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit ladder tails" describe. |
 | [`sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.md)     | Coverage tails for custom-carousel/sizing — the mobile-src                                              |

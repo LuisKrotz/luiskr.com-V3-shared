@@ -17,6 +17,22 @@ Parsed bucket key set — null until (or unless) the manifest fetch lands.
 
 In-flight fetch dedupe — multiple boot callers share one request.
 
+### `failed`
+
+Fetch-failure latch — true once the manifest request rejects and the
+caller settles into originals-only mode. Separate from `keys` (which
+stays null on failure) so render gates can distinguish "still
+unknown — hold off the heavy <img> fetch" from "proven absent — serve
+the original". A later successful retry clears the latch.
+
+### `listeners`
+
+Arrival subscribers — media-gated renders (mosaics, related cards,
+figures) run before the manifest lands and emit originals-only markup;
+each subscriber re-renders on arrival so manifest-proven thumb/webp
+rungs replace the heavy fallbacks. Drained on fire — one-shot by
+design: the manifest never invalidates after it loads.
+
 ### `initMediaManifest`
 
 Fetches the bucket key manifest once; resolves immediately on repeat
@@ -27,6 +43,28 @@ simply emit no <source>, which is the safe path.
 
 Whether the manifest has arrived. Lets the media-figure probe distinguish
 "unknown — try webp" from "known-absent — skip straight to the original".
+
+### `mediaManifestFailed`
+
+Whether the manifest request settled into failure. Paired with
+`mediaManifestReady()` it lets renders tell "manifest still in flight"
+(hold the heavy original <img> — the LQIP box paints) from "proven
+unmanifested" (emit the original — no variants exist to wait for).
+
+- `@returns` true once the fetch rejected; cleared on a later success.
+
+### `onMediaManifest`
+
+Fires `cb` when the manifest lands — components that rendered
+originals-only pictures subscribe here and re-render so proven
+thumb/webp siblings replace the heavy fallbacks. When the manifest is
+already loaded `cb` runs synchronously (subscribe-then-render callers
+emit the upgraded markup on their first pass). The returned disposer
+detaches the listener — call it in disconnectedCallback/onDestroy so
+nothing re-renders a torn-down element.
+
+- `@param` cb Re-render callback, one-shot.
+- `@returns` Unsubscribe disposer.
 
 ### `mediaKeyExists`
 
