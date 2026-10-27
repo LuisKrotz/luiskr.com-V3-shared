@@ -47,10 +47,14 @@ describe('Lighthouse CI configuration', () => {
 
   test('config enforces minimum performance and 100% other categories', async () => {
     const config = await import(configPath)
-    const assertions = config?.default?.ci?.assert?.assertions || {}
+    const matrix = config?.default?.ci?.assert?.assertMatrix || []
 
-    // Performance gates at 0.80 — every non-image finding must be fixed;
-    // only image-delivery audits are warn-level (accepted findings).
+    // The catch-all entry (every URL but /not-found) keeps the full gate:
+    // performance at 0.80 — every non-image finding must be fixed; only
+    // image-delivery audits are warn-level (accepted findings).
+    const assertions =
+      matrix.find((e) => e.matchingUrlPattern === '^(?!.*not-found).*$')?.assertions || {}
+
     expect(assertions['categories:performance']).toEqual(
       expect.arrayContaining([WINDOW_EVENTS.ERROR, expect.objectContaining({ minScore: 0.8 })])
     )
@@ -76,5 +80,25 @@ describe('Lighthouse CI configuration', () => {
     expect(assertions['categories:seo']).toEqual(
       expect.arrayContaining([WINDOW_EVENTS.ERROR, expect.objectContaining({ minScore: 1 })])
     )
+  })
+
+  test('not-found keeps all asserts except the noindex-seo conflict', async () => {
+    const config = await import(configPath)
+    const matrix = config?.default?.ci?.assert?.assertMatrix || []
+    const notFound = matrix.find((e) => e.matchingUrlPattern === '/not-found')?.assertions || {}
+
+    // /not-found must serve noindex by the indexation contract — the
+    // is-crawlable audit fails BY DESIGN there, so the seo category can
+    // never reach 1 and stays out of its assertion set. Every other
+    // category still gates at the same minimum.
+    expect(notFound['categories:seo']).toBeUndefined()
+
+    for (const audit of [
+      'categories:performance',
+      'categories:accessibility',
+      'categories:best-practices',
+    ]) {
+      expect(notFound[audit]).toBeTruthy()
+    }
   })
 })
