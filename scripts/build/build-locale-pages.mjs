@@ -603,6 +603,9 @@ export async function prefetchLcpThumbs(urls, manifest) {
  *   instead of being dropped
  * @param {string} [o.keywords] - localized comma-joined search themes for
  *   the <meta name="keywords"> tag (Yandex/Bing still read it)
+ * @param {string} [o.feedUrl] - absolute RSS feed URL for this locale —
+ *   advertised as <link rel="alternate" type="application/rss+xml"> so
+ *   feed readers and feed-aware crawlers discover the channel
  * @param {boolean} [o.noLcp] - the route's media (heavyweight CDN
  *   captures, WebGL-rendered pages) is never the painted LCP element —
  *   skips the preload hint + veil LQIP + prefetch entirely instead of
@@ -637,6 +640,7 @@ export function localize(
     extraImages,
     imageDims,
     keywords,
+    feedUrl,
     noLcp,
     entities,
     content,
@@ -690,9 +694,11 @@ export function localize(
 
   // Route-specific search themes — Yandex/Bing still consume
   // <meta name="keywords">; Google ignores it but the JSON-LD keywords
-  // carry the same terms for it.
+  // carry the same terms for it. The [^>]* spans are whitespace-tolerant —
+  // index.html wraps the tag across lines, so a literal
+  // `<meta name="keywords" content=` match never fires.
   if (keywords) {
-    out = out.replace(/(<meta name="keywords" content=")[^"]*(")/, `$1${esc(keywords)}$2`)
+    out = out.replace(/(<meta[^>]*name="keywords"[^>]*content=")[^"]*(")/, `$1${esc(keywords)}$2`)
   }
 
   // Route-specific share image — the three image metas swap together so
@@ -1004,6 +1010,15 @@ export function localize(
     )
   }
 
+  // RSS autodiscovery — the locale's own feed (generate-sitemap.js emits
+  // /meta/<loc>/feed.xml; /feed.xml + /rss.xml serve the English one).
+  if (feedUrl) {
+    out = out.replace(
+      '</head>',
+      `  <link rel="alternate" type="application/rss+xml" title="${esc(BASE_TITLE)} — RSS Feed" href="${esc(feedUrl)}">\n</head>`
+    )
+  }
+
   return out
 }
 
@@ -1245,6 +1260,22 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   const translations = loadTranslations()
 
   const en = translations.en || {}
+
+  // Committed snapshot — the searchThemes vocabulary lands in
+  // database.json ahead of its RTDB mirror, so keyword consumers fall
+  // back to the snapshot when the live payload predates the patch.
+  const snapshotDb = (() => {
+    try {
+      return JSON.parse(fs.readFileSync(path.join(ROOT, 'database.json'), 'utf8'))
+    } catch {
+      return {}
+    }
+  })()
+
+  const snapshotThemes = (loc, kind, key) =>
+    snapshotDb.translations?.[loc]?.[kind]?.[key]?.searchThemes ||
+    snapshotDb.translations?.en?.[kind]?.[key]?.searchThemes ||
+    []
   const legalEn = en.components?.['legal-footer']?.links || []
 
   // CDN media manifest — resolveMediaUrls picks per-item best variants when
@@ -1952,10 +1983,44 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     return Array.isArray(page.searchThemes) ? page.searchThemes : []
   }
 
-  /** Search-theme keywords for a star body page — the locale's star-field theme list as a comma-joined meta keywords string. */
-  const sfBodyShareFields = (loc) => ({
-    keywords: sfThemesOf(loc).join(', ') || undefined,
+  /** Search-theme keywords for a star body page — the body's own
+   *  name/kind lead the locale's star-field theme list so each dossier
+   *  ranks for its object, not only the experiment's generic terms. */
+  const sfBodyShareFields = (loc, body) => ({
+    keywords: [body?.name, body?.kind, ...sfThemesOf(loc)].filter(Boolean).join(', ') || undefined,
   })
+
+  /** Localized search-theme list for one CMS page node — every page
+   *  carries `searchThemes` (patch-all-pages-search-themes.js), the
+   *  array form the <meta name="keywords"> tag, the WebPage JSON-LD
+   *  `keywords` property and sitemap image captions all read. Live
+   *  translations win; the committed snapshot covers nodes RTDB has
+   *  not been re-uploaded for yet. */
+  const pageThemesOf = (loc, key) => {
+    const page = t(loc, (x) => x.pages?.[key]) || {}
+
+    return Array.isArray(page.searchThemes) && page.searchThemes.length
+      ? page.searchThemes
+      : snapshotThemes(loc, 'pages', key)
+  }
+
+  /** Comma-joined page keywords — undefined when the node has no list. */
+  const pageKeywords = (loc, key) => pageThemesOf(loc, key).join(', ') || undefined
+
+  /** Comma-joined project keywords — the locale's project searchThemes
+   *  with the snapshot/English lists as fallback when the locale has
+   *  none. */
+  const projectKeywords = (loc, slug) => {
+    const p = t(loc, (x) => x.projects?.[slug]) || {}
+    const list =
+      Array.isArray(p.searchThemes) && p.searchThemes.length
+        ? p.searchThemes
+        : snapshotThemes(loc, 'projects', slug).length
+          ? snapshotThemes(loc, 'projects', slug)
+          : en.projects?.[slug]?.searchThemes
+
+    return (Array.isArray(list) ? list : []).join(', ') || undefined
+  }
 
   /**
    * Parked-article gallery — every share capture as crawlable markup so
@@ -2431,6 +2496,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         description: aboutDescOf(loc),
         alt: homePath,
         isHome: true,
+        keywords: pageKeywords(loc, 'HOME'),
         entities: homeEntities(loc),
         content: homeContent(loc),
       },
@@ -2498,6 +2564,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           title: titleOf(t(loc, (x) => x.APP?.about?.description)),
           description: aboutDescOf(loc),
           alt: slugPath('about'),
+          keywords: pageKeywords(loc, 'about'),
           content: homeContent(loc),
         },
         {
@@ -2505,6 +2572,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           title: titleOf(t(loc, (x) => x.APP?.contact)),
           description: contactDescOf(loc),
           alt: slugPath('contact'),
+          keywords: pageKeywords(loc, 'contact') || pageKeywords(loc, 'about'),
           content: homeContent(loc),
         },
         {
@@ -2512,6 +2580,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           title: titleOf(pageName(1)),
           description: legalDescOf(loc, 'privacy-policy'),
           alt: slugPath('privacy'),
+          keywords: pageKeywords(loc, 'privacy-policy'),
           content: legalContent(loc, 'privacy-policy'),
         },
         {
@@ -2519,6 +2588,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           title: titleOf(pageName(2)),
           description: legalDescOf(loc, 'GDPR'),
           alt: slugPath('gdpr'),
+          keywords: pageKeywords(loc, 'GDPR'),
           content: legalContent(loc, 'GDPR'),
         },
         {
@@ -2526,6 +2596,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           title: titleOf(pageName(3)),
           description: legalDescOf(loc, 'terms-of-use'),
           alt: slugPath('terms'),
+          keywords: pageKeywords(loc, 'terms-of-use'),
           content: legalContent(loc, 'terms-of-use'),
         },
         {
@@ -2536,6 +2607,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           title: titleOf(pageName(4) || t(loc, (x) => x.pages?.license?.title) || 'License'),
           description: legalDescOf(loc, 'license'),
           alt: slugPath('license'),
+          keywords: pageKeywords(loc, 'license'),
           content: legalContent(loc, 'license'),
         },
         (() => {
@@ -2674,6 +2746,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           title: titleOf(t(loc, (x) => x.pages?.animations?.title)),
           description: animDescOf(loc),
           alt: slugPath('animations'),
+          keywords: pageKeywords(loc, 'animations'),
           content: animationsContent(loc),
         }
       )
@@ -2734,6 +2807,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         pageName,
         description,
         image: projectImageOf(loc, slug),
+        keywords: projectKeywords(loc, slug),
         entities: projectEntities(loc, slug),
         alt: portfolioAlt(slug),
         content: projectContent(loc, slug),
@@ -2748,6 +2822,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
               pageName,
               description,
               image: projectImageOf(loc, slug),
+              keywords: projectKeywords(loc, slug),
               entities: projectEntities(loc, slug),
               alt: portfolioAlt(slug),
               canonical: portfolioAlt(slug)('en'),
@@ -2785,6 +2860,9 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           pageName: label,
           description: mediaDesc,
           image: source ? (isVideo ? thumb : source) : undefined,
+          // The asset's own label leads — the watch page ranks for its
+          // asset first, the project's theme set second.
+          keywords: [label, projectKeywords(loc, slug)].filter(Boolean).join(', ') || undefined,
           content: mediaContent(loc, slug, label, mediaWatchFigure(project?.folder || '', media)),
           // The media page carries the whole project graph plus its own
           // media entity (ImageObject for stills, VideoObject for clips)
@@ -2833,7 +2911,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           pageName: bodyName,
           description: toDescription(body?.tagline || '') || sfDescOf(loc),
           content: starBodyContent(loc, bodyId),
-          ...sfBodyShareFields(loc),
+          ...sfBodyShareFields(loc, body),
           entities: [
             {
               '@context': SCHEMA_CONTEXT,
@@ -2921,12 +2999,15 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     description: rootDescription,
     url: `${SITE_URL}/`,
     alternates: alternatesFor(homePath),
+    keywords: pageKeywords('en', 'HOME'),
+    feedUrl: `${SITE_URL}/feed.xml`,
     entities: [
       webPageEntity({
         url: `${SITE_URL}/`,
         name: BASE_TITLE,
         description: rootDescription,
         bcp: 'en',
+        keywords: pageKeywords('en', 'HOME'),
       }),
       ...homeEntities('en'),
     ],
@@ -3020,6 +3101,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         extraImages: route.extraImages,
         imageDims: route.imageDims,
         keywords: route.keywords,
+        feedUrl: loc === 'en' ? `${SITE_URL}/feed.xml` : `${SITE_URL}/${loc}/feed.xml`,
         noLcp: route.noLcp,
         entities,
         content: route.content,
@@ -3366,6 +3448,7 @@ const META_FILE_REWRITES = Object.freeze([
   'urllist.txt',
   'llms.txt',
   'ai-catalog.json',
+  'feed.xml',
 ])
 
 const STATIC_REWRITES = Object.freeze([
@@ -3374,6 +3457,10 @@ const STATIC_REWRITES = Object.freeze([
   { source: '/urllist.txt', destination: '/meta/urllist.txt' },
   { source: '/llms.txt', destination: '/meta/llms.txt' },
   { source: '/ai-catalog.json', destination: '/meta/ai-catalog.json' },
+  // RSS — the English feed answers both conventional paths; locales
+  // resolve /<loc>/feed.xml → /meta/<loc>/feed.xml via META_FILE_REWRITES.
+  { source: '/feed.xml', destination: '/meta/feed.xml' },
+  { source: '/rss.xml', destination: '/meta/feed.xml' },
   { source: '/.well-known/ai-catalog.json', destination: '/meta/.well-known/ai-catalog.json' },
   { source: '/.well-known/api-catalog', destination: '/meta/.well-known/api-catalog' },
   { source: '/openapi.json', destination: '/meta/openapi.json' },

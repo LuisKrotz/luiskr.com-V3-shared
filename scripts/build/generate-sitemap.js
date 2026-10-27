@@ -36,6 +36,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
+import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
 import { EARTH_SHARE, STAR_SHARE } from '../../../core/tokens/playground/share.ts'
 import { mediaItemsOf, mediaRowsOf } from './route-media.mjs'
 import {
@@ -97,6 +98,25 @@ const titleOf = (label, max = 100) => {
 
   return t.length <= max ? t : `${t.slice(0, max - 1).trimEnd()}…`
 }
+
+/** Localized search-theme list for one CMS node — every page/project
+ *  carries `searchThemes` (patch-all-pages-search-themes.js); the list
+ *  feeds <image:caption> and <video:tag> so image/video search indexes
+ *  the asset under the page's own query vocabulary. */
+const themesOf = (node) => (Array.isArray(node?.searchThemes) ? node.searchThemes : [])
+
+/** `<image:caption>` element for a theme list — '' when empty. */
+const themeCaption = (themes) =>
+  themes.length
+    ? `\n      <image:caption>${escXml(titleOf(themes.join(' — '), 500))}</image:caption>`
+    : ''
+
+/** `<video:tag>` elements for a theme list — Google accepts ≤32 tags. */
+const videoThemeTags = (themes) =>
+  themes
+    .slice(0, 32)
+    .map((t) => `\n      <video:tag>${escXml(titleOf(t, 255))}</video:tag>`)
+    .join('')
 
 async function run() {
   const base = 'https://luiskr.com'
@@ -209,6 +229,7 @@ async function run() {
   // are localized per sitemap so image titles carry the locale's own text.
   const coverTagsFor = (loc) => {
     const list = loc === 'en' ? homeList : translations[loc]?.pages?.HOME?.portfoliolist || homeList
+    const caption = themeCaption(themesOf(translations[loc]?.pages?.HOME))
 
     const tags = []
 
@@ -221,7 +242,7 @@ async function run() {
       // be RFC-3986-encoded or the sitemap URLs are invalid.
       tags.push(
         `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</image:loc>` +
-          `\n      <image:title>${escXml(titleOf(item.label || item.image))}</image:title>\n    </image:image>`
+          `\n      <image:title>${escXml(titleOf(item.label || item.image))}</image:title>${caption}\n    </image:image>`
       )
     }
 
@@ -340,8 +361,10 @@ async function run() {
   }
 
   // ── Portfolio routes, media deep links + per-URL media tags ─────────────
-  /** XML media tags for one media item — image:image or video:video. */
-  const mediaTagXml = (folder, m, label, projectTitle) => {
+  /** XML media tags for one media item — image:image or video:video.
+   *  `themes` is the parent page's localized searchThemes list: images
+   *  get it as <image:caption>, videos as <video:tag> elements. */
+  const mediaTagXml = (folder, m, label, projectTitle, themes = []) => {
     const { source, thumb, isVideo } = resolveMediaUrls(folder, m, manifest)
 
     if (!source || (isVideo && !thumb)) return []
@@ -354,13 +377,13 @@ async function run() {
           `\n      <video:title>${title}</video:title>\n      <video:description>${escXml(
             titleOf(`${projectTitle} — ${label || projectTitle}`, 2048)
           )}</video:description>` +
-          `\n      <video:content_loc>${escXml(encLoc(`${CDN_BASE}${source}`))}</video:content_loc>\n    </video:video>`,
+          `\n      <video:content_loc>${escXml(encLoc(`${CDN_BASE}${source}`))}</video:content_loc>${videoThemeTags(themes)}\n    </video:video>`,
       ]
     }
 
     return [
       `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${source}`))}</image:loc>` +
-        `\n      <image:title>${title}</image:title>\n    </image:image>`,
+        `\n      <image:title>${title}</image:title>${themeCaption(themes)}\n    </image:image>`,
     ]
   }
 
@@ -369,6 +392,7 @@ async function run() {
   const projectPageTags = (folder, projectData, projectTitle) => {
     const tags = []
     const seenSources = new Set()
+    const themes = themesOf(projectData)
 
     const pushMediaTag = (m, label) => {
       const { source } = resolveMediaUrls(folder, m, manifest)
@@ -376,7 +400,7 @@ async function run() {
       if (!source || seenSources.has(source)) return
 
       seenSources.add(source)
-      tags.push(...mediaTagXml(folder, m, label || m?.label, projectTitle))
+      tags.push(...mediaTagXml(folder, m, label || m?.label, projectTitle, themes))
     }
 
     if (projectData?.cover) pushMediaTag(projectData.cover)
@@ -395,7 +419,14 @@ async function run() {
     const folder = projectData?.folder || ''
     const projectTitle = projectData?.title || projectSlug
 
-    addTags(`/portfolio/${projectSlug}`, projectPageTags(folder, projectData, projectTitle))
+    // Live Firebase may lag the database.json snapshot — fall back to the
+    // snapshot's searchThemes so the captions/tags never drop.
+    const themes = themesOf(projectData).length
+      ? themesOf(projectData)
+      : themesOf(translations.en?.projects?.[projectSlug])
+    const themed = { ...projectData, searchThemes: themes }
+
+    addTags(`/portfolio/${projectSlug}`, projectPageTags(folder, themed, projectTitle))
 
     // Deep links — every labelled item addressable through the media modal,
     // en + every locale prefix. Each deep link carries its own asset tag.
@@ -403,7 +434,7 @@ async function run() {
       const mediaPath = `/portfolio/${projectSlug}/${mediaSlug}`
 
       urlSet.add(mediaPath)
-      addTags(mediaPath, mediaTagXml(folder, m, m.label, projectTitle))
+      addTags(mediaPath, mediaTagXml(folder, m, m.label, projectTitle, themes))
     }
   }
 
@@ -419,17 +450,19 @@ async function run() {
       const locProject = translations[lang]?.projects?.[projectSlug]
       const folder = data?.[projectSlug]?.folder || locProject?.folder || ''
       const projectTitle = locProject?.title || data?.[projectSlug]?.title || projectSlug
+      const locNode = locProject || data?.[projectSlug]
+      const locThemes = themesOf(locNode)
 
       addTags(
         `/${lang}/portfolio/${projectSlug}`,
-        projectPageTags(folder, locProject || data?.[projectSlug], projectTitle)
+        projectPageTags(folder, { ...locNode, searchThemes: locThemes }, projectTitle)
       )
 
-      for (const { slug: mediaSlug, media: m } of mediaRowsOf(locProject || data?.[projectSlug])) {
+      for (const { slug: mediaSlug, media: m } of mediaRowsOf(locNode)) {
         const locMedia = `/${lang}/portfolio/${projectSlug}/${mediaSlug}`
 
         urlSet.add(locMedia)
-        addTags(locMedia, mediaTagXml(folder, m, m.label, projectTitle))
+        addTags(locMedia, mediaTagXml(folder, m, m.label, projectTitle, locThemes))
       }
     }
   }
@@ -607,6 +640,152 @@ async function run() {
     allUrls.map((u) => `${base}${u === '/' ? '' : u}`).join('\n') + '\n',
     'utf-8'
   )
+
+  // ── RSS 2.0 + Media RSS feeds — one per locale ──────────────────────────
+  // /<loc>/feed.xml (and /feed.xml + /rss.xml for English) give RSS/Atom
+  // consumers — readers, aggregators, Bing/Brave feed crawlers — the
+  // localized surface with each project's cover attached as media:content.
+  const plain = (s) =>
+    String(s || '')
+      .replace(/<br\s*\/?>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&amp;/gi, '&')
+      .replace(/\s+/g, ' ')
+      .trim()
+
+  const firstSectionText = (node) => {
+    if (typeof node === 'string') return node
+
+    if (Array.isArray(node)) {
+      for (const item of node) {
+        const found = firstSectionText(item)
+
+        if (found) return found
+      }
+    }
+
+    return ''
+  }
+
+  /** Localized channel description — the locale's about bio, else en. */
+  const bioOf = (loc) =>
+    plain(translations[loc]?.pages?.about?.col1?.[0]) ||
+    plain(translations.en?.pages?.about?.col1?.[0])
+
+  /** One RSS <item> — media rows emit media:content (image) or
+   *  media:content+media:thumbnail (video). */
+  const rssItem = ({ title, link, desc, media }) => {
+    const m = media
+      ? media.isVideo
+        ? `\n    <media:content url="${escXml(encLoc(media.thumb))}" medium="image"/>` +
+          `\n    <media:content url="${escXml(encLoc(media.source))}" medium="video"/>`
+        : `\n    <media:content url="${escXml(encLoc(media.source))}" medium="image"/>`
+      : ''
+
+    return (
+      `  <item>\n    <title>${escXml(title)}</title>\n    <link>${escXml(link)}</link>` +
+      `\n    <guid>${escXml(link)}</guid>` +
+      `\n    <description>${escXml(titleOf(desc, 500))}</description>${m}\n  </item>`
+    )
+  }
+
+  /** Full RSS 2.0 document for one locale — pages first, then every
+   *  project with its cover media. */
+  const rssDoc = (loc) => {
+    const prefix = loc === 'en' ? '' : `/${loc}`
+    const feedUrl = `${base}${prefix}/feed.xml`
+    const slugs = LANG_SLUGS[loc] || LANG_SLUGS.en || {}
+    const tr = translations[loc] || translations.en || {}
+    const legal = tr.components?.['legal-footer']?.links || []
+    const bio = bioOf(loc)
+    const desc = (v) => plain(v) || bio
+
+    const items = [
+      rssItem({
+        title: 'Luis Krötz — Portfolio',
+        link: `${base}${prefix}/`,
+        desc: bio,
+      }),
+    ]
+
+    // Localized content pages — same title sources build-locale-pages uses.
+    /** First authored paragraph of a legal page — falls back to its title. */
+    const legalDesc = (key) =>
+      tr.pages?.[key]?.sections?.[0]?.content?.[0] || tr.pages?.[key]?.title
+
+    const pageItems = [
+      [slugs.about, tr.APP?.about?.description, bio],
+      [slugs.contact, tr.APP?.contact, tr.components?.contact?.title],
+      [slugs.privacy, legal?.[1]?.page, legalDesc('privacy-policy')],
+      [slugs.gdpr, legal?.[2]?.page, legalDesc('GDPR')],
+      [slugs.terms, legal?.[3]?.page, legalDesc('terms-of-use')],
+      [slugs.license, tr.pages?.license?.title, legalDesc('license')],
+      [slugs.animations, tr.pages?.animations?.title, tr.pages?.animations?.description],
+      [slugs.earthPlayground, tr.APP?.earthPlayground, tr.pages?.['earth-playground']?.description],
+      [slugs.starField, tr.APP?.starField, tr.pages?.['star-field']?.overview],
+    ]
+
+    for (const [seg, name, d] of pageItems) {
+      if (!seg) continue
+
+      items.push(rssItem({ title: name || seg, link: `${base}${prefix}/${seg}`, desc: desc(d) }))
+    }
+
+    // Projects — localized title + first text paragraph + cover media.
+    for (const projectSlug of projectSlugs) {
+      const locProject = tr.projects?.[projectSlug] || translations.en?.projects?.[projectSlug]
+      const title = locProject?.title || data?.[projectSlug]?.title || projectSlug
+      const folder = data?.[projectSlug]?.folder || locProject?.folder || ''
+
+      let media = null
+
+      if (locProject?.cover || data?.[projectSlug]?.cover) {
+        const { source, thumb, isVideo } = resolveMediaUrls(
+          folder,
+          locProject?.cover || data?.[projectSlug]?.cover,
+          manifest
+        )
+
+        if (source)
+          media = { source: `${CDN_BASE}${source}`, thumb: thumb && `${CDN_BASE}${thumb}`, isVideo }
+      }
+
+      items.push(
+        rssItem({
+          title,
+          link: `${base}${prefix}/portfolio/${projectSlug}`,
+          desc: desc(
+            firstSectionText(locProject?.sections) ||
+              firstSectionText(data?.[projectSlug]?.sections)
+          ),
+          media,
+        })
+      )
+    }
+
+    const lastBuild = new Date().toUTCString()
+
+    return (
+      `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">\n` +
+      `<channel>\n  <title>Luis Krötz</title>\n  <link>${base}${prefix}/</link>` +
+      `\n  <atom:link href="${escXml(feedUrl)}" rel="self" type="application/rss+xml"/>` +
+      `\n  <description>${escXml(bio)}</description>\n  <language>${LOCALE_TAGS[loc]?.bcp || loc}</language>` +
+      `\n  <lastBuildDate>${lastBuild}</lastBuildDate>` +
+      `\n  <image><url>${base}/assets/icons/share.png</url><title>Luis Krötz</title><link>${base}${prefix}/</link></image>` +
+      `\n${items.join('\n')}\n</channel>\n</rss>\n`
+    )
+  }
+
+  fs.writeFileSync(path.join(META_DIR, 'feed.xml'), rssDoc('en'), 'utf-8')
+
+  for (const loc of VALID_LANGS) {
+    if (loc === 'en') continue
+
+    fs.writeFileSync(path.join(META_DIR, loc, 'feed.xml'), rssDoc(loc), 'utf-8')
+  }
+
   console.log(
     `Generated sitemap index + ${VALID_LANGS.length} locale sitemaps and localized meta files under ${META_DIR}/`
   )

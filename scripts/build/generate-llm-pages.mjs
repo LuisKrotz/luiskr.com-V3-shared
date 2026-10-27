@@ -474,6 +474,25 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
   const translations = loadTranslations()
   const en = translations.en || {}
 
+  // Committed snapshot — searchThemes can land in database.json ahead
+  // of its RTDB mirror; replicas fall back to it when the live payload
+  // predates the patch (same convention build-locale-pages uses).
+  const snapshotDb = (() => {
+    try {
+      return JSON.parse(fs.readFileSync(path.join(ROOT, 'database.json'), 'utf8'))
+    } catch {
+      return {}
+    }
+  })()
+
+  /** Node's own searchThemes, else the snapshot's — undefined when none. */
+  const themesOr = (node, loc, kind, key) =>
+    Array.isArray(node?.searchThemes) && node.searchThemes.length
+      ? node.searchThemes
+      : snapshotDb.translations?.[loc]?.[kind]?.[key]?.searchThemes ||
+        snapshotDb.translations?.en?.[kind]?.[key]?.searchThemes ||
+        undefined
+
   const mediaManifest = loadMediaManifest(META_DIR)
   const generated = new Date().toISOString()
   const t = (loc, get) => localized(translations, loc, get)
@@ -600,7 +619,12 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         locale: loc,
         alternates: replicaAlternates(homePath),
         body,
-        content: { bio, featured: home.featured || home.message, projects },
+        content: {
+          bio,
+          featured: home.featured || home.message,
+          projects,
+          searchThemes: themesOr(home, loc, 'pages', 'HOME'),
+        },
         media: homeMedia(loc),
       })
     )
@@ -625,6 +649,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
             col1: (about.col1 || []).map(htmlToMd),
             col2: (about.col2 || []).map(htmlToMd),
           },
+          searchThemes: themesOr(about, loc, 'pages', 'about'),
         },
       })
     )
@@ -632,6 +657,12 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
 
   const emitContact = (loc) => {
     const contact = t(loc, (x) => x.components?.contact) || {}
+    const themes = themesOr(
+      t(loc, (x) => x.pages?.contact),
+      loc,
+      'pages',
+      'contact'
+    )
     const title = `${contact.title || 'Contact'} | ${BASE_TITLE}`
 
     const linkLine = (i) =>
@@ -662,6 +693,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           title: contact.title,
           channels: contact.line1 || [],
           legal: contact.line2 || [],
+          searchThemes: themes,
         },
       })
     )
@@ -698,7 +730,11 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         locale: loc,
         alternates: replicaAlternates(slugRoute(slugKey)),
         body,
-        content: { name: pageName, sections },
+        content: {
+          name: pageName,
+          sections,
+          searchThemes: themesOr(page, loc, 'pages', pageKey),
+        },
       })
     )
   }
@@ -729,7 +765,11 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         locale: loc,
         alternates: replicaAlternates(slugRoute('animations')),
         body,
-        content: { description: htmlToMd(page.description || ''), records },
+        content: {
+          description: htmlToMd(page.description || ''),
+          records,
+          searchThemes: themesOr(page, loc, 'pages', 'animations'),
+        },
       })
     )
   }
@@ -863,7 +903,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           ? {
               shareGallery: sfShareImgs,
               shareManifest: `${SITE_URL}${STAR_SHARE.MANIFEST_URL}`,
-              searchThemes: Array.isArray(page.searchThemes) ? page.searchThemes : undefined,
+              searchThemes: themesOr(page, loc, 'pages', 'star-field'),
             }
           : {}),
       },
@@ -970,7 +1010,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
             ? {
                 shareGallery: shareImgs,
                 shareManifest: `${SITE_URL}${EARTH_SHARE.MANIFEST_URL}`,
-                searchThemes: Array.isArray(page.searchThemes) ? page.searchThemes : undefined,
+                searchThemes: themesOr(page, loc, 'pages', 'earth-playground'),
               }
             : {}),
         },
@@ -1065,7 +1105,15 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         locale: loc,
         alternates: replicaAlternates(projectAlt),
         body,
-        content: { slug, title: project.title || slug, folder, cover, sections, mediaLinks },
+        content: {
+          slug,
+          title: project.title || slug,
+          folder,
+          cover,
+          sections,
+          mediaLinks,
+          searchThemes: themesOr(project, loc, 'projects', slug),
+        },
         media: cover ? [cover, ...media] : media,
       })
     )
@@ -1128,6 +1176,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           label: row.label,
           slug: row.slug,
           project: { slug, title: project.title || slug, route: `${SITE_URL}${projectRoute}` },
+          searchThemes: themesOr(project, loc, 'projects', slug),
         },
         media: [rec],
       })
