@@ -18,6 +18,14 @@ real href so crawlers, reader mode, and new-tab gestures all resolve.
 - `@param` subPath Manifest-relative path ('' → portal root).
 - `@returns` The portal-relative URL.
 
+### `mapLoadingVeil`
+
+Map-stage loading veil — status-labelled spinner + caption covering the
+canvas seat while the scene's async graph build (worker layout →
+geometry/label upload) runs. Both stage hosts (the column and the zoom
+dialog) emit the identical subtree so the veil follows the persistent
+canvas on a mid-build re-seat.
+
 ### `treeHref`
 
 The URL a tree-row click actually lands on: an expanded dir the viewer

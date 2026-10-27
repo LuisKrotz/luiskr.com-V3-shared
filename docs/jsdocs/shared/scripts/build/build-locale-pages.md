@@ -226,6 +226,16 @@ probes, LCP thumbs). Without a signal a stalled CDN connection hangs
 the whole locale pass silently — every caller already degrades
 gracefully on fetch failure, so a timeout just takes the fallback.
 
+### `TRANSLATIONS_TIMEOUT_MS`
+
+Ceiling for the live `translations` node fetch specifically — unlike
+the 64 KB dims probes this is a multi-megabyte bulk download (the
+committed database.json snapshot runs ~3.8 MB across 16 locales), so
+the shared probe budget is too tight on slow or throttled links and a
+single stalled read used to force the stale snapshot for the whole
+build. Three attempts with a fixed backoff give a transient stall two
+more chances before the fallback is taken.
+
 ### `dimsAttr`
 
 ` width="W" height="H"` attribute fragment for emitted media — every
@@ -255,8 +265,11 @@ the exact gap that made localized pages render English/fallback text).
 ### (module scope)
 
 Fetches the live `translations` node once per build so every prerendered
-page carries the per-locale text authors actually published. Offline or
-unreachable host → warn and keep the database.json snapshot as the source.
+page carries the per-locale text authors actually published. The fetch
+retries TRANSLATIONS_ATTEMPTS times under TRANSLATIONS_TIMEOUT_MS — a
+slow or throttled link gets retries, not an instant snapshot fallback —
+and logs verbosely (url, per-attempt elapsed, locale list, payload
+size). Total failure → warn once and keep the database.json snapshot.
 
 ### (module scope)
 

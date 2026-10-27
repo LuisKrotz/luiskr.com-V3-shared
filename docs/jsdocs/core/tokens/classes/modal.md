@@ -2,9 +2,9 @@
 
 Generic modal + media expand-modal class tokens — grouped
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\classes\modal.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\modal.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -26,6 +26,15 @@ Staged glass — mounts post-paint so the backdrop-blur snapshot never delays th
 ### `EXPAND_MODAL_MEDIA_FIGURE_LOADED`
 
 Terminal media state — releases the figure's skeleton shimmer.
+
+### `EXPAND_MODAL_MEDIA_LOAD`
+
+Full-res fetch indicator — bottom load bar over the figure while
+the original asset streams through the cache/decode pipeline.
+
+### `EXPAND_MODAL_MEDIA_SPIN`
+
+Centered spinner ring over the figure — pairs with the load bar.
 
 ### `EXPAND_MODAL_BRACKET_CANVAS`
 

@@ -450,6 +450,7 @@ no GL context can be acquired; the composite then reports `onLost`.
 - `@param` roots Manifest root buckets.
 - `@param` onPick Called with the manifest path on a node pick.
 - `@param` onLost Called when the WebGL context is lost mid-flight.
+- `@param` onReady Called once the async graph build lands — the host
 - `@returns` The scene handle, or null when no GL context exists.
 
 ### `saveCamState`
@@ -599,6 +600,7 @@ handle (or `onLost` when GL is also absent).
 - `@param` roots Manifest root buckets.
 - `@param` onPick Called with the manifest path on a node pick.
 - `@param` onLost Called once when no GPU path can mount — the host
+- `@param` onReady Called once when the winning arm's graph build lands
 - `@returns` Scene handle, or null only when the synchronous three
 
 ### `inner`

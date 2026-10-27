@@ -20,6 +20,11 @@
  *    a missing project snapshot, a media deep-link slug that fails to
  *    resolve in the active locale, and a star-field body segment that
  *    matches no catalog id.
+ *  - Indexable routes ship an explicit robots meta with
+ *    `max-image-preview:large` + unlimited snippet/video previews — the
+ *    opt-in Google/Bing require for large image cards and Discover
+ *    previews; the runtime authority re-arms it on every indexable
+ *    navigation instead of leaving the meta absent.
  */
 
 import { describe, test, expect } from '@jest/globals'
@@ -27,6 +32,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { LANG_SLUGS } from '@core/i18n.js'
 import { PROJECT_ALIASES } from '@core/tokens/routes/aliases.js'
+import { SCHEMA_STRINGS } from '@core/tokens/strings/schema.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 
 const META_DIR = path.join(ROOT_DIR, 'website', 'public', 'meta')
@@ -160,5 +166,22 @@ describe('SEO indexation contract', () => {
 
     // unresolvable star-field body segment → noindex.
     expect(starfield).toContain('setRobotsMeta(true)')
+  })
+
+  test('indexable pages ship index-rich robots directives', () => {
+    const indexHtml = read(path.join(ROOT_DIR, 'index.html'))
+    const schema = read(path.join(ROOT_DIR, 'core', 'utils', 'schema.ts'))
+
+    // Large image cards and Discover previews require the explicit
+    // max-image-preview:large opt-in — an absent meta only grants
+    // standard-size image previews.
+    expect(indexHtml).toContain(`content="${SCHEMA_STRINGS.INDEX_RICH_DIRECTIVES}"`)
+
+    // The runtime head authority must re-arm the same directive on
+    // indexable routes rather than remove the meta — otherwise every
+    // client-side navigation would silently downgrade back to
+    // standard-size previews.
+    expect(schema).toContain('SCHEMA_STRINGS.INDEX_RICH_DIRECTIVES')
+    expect(schema).toContain('SCHEMA_STRINGS.NOINDEX_NOFOLLOW')
   })
 })

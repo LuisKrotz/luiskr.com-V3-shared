@@ -20,6 +20,10 @@ immutable at runtime.
 
 Scene-canvas seat — the column stage or the zoom-dialog stage.
 
+### `MAP_LOADING`
+
+Map-stage loading veil — dismissed once the scene's graph lands.
+
 ### `UNCOVERED`
 
 Istanbul uncovered-block markers — the coverage-report key nav.

@@ -97,6 +97,14 @@ settled. Mirrors the space playground's `_earthReady` contract.
 
 Current boot stage copy + percent rendered inside the loader.
 
+### `_sceneLoading`
+
+Scene-graph build state — true while the worker-computed layout →
+mesh/label upload is in flight (initial mount AND context-restore
+remounts). The map stage's loading veil renders on this flag and is
+dismissed imperatively on the scene's ready/lost signal so a slow
+build never reads as a blank black box.
+
 ### (module scope)
 
 Section nodes parenting the manifest roots — memoized; the group

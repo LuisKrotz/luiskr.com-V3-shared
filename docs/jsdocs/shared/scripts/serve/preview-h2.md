@@ -9,6 +9,16 @@ HTTP/2 + brotli static preview for the production build —
 
 ## Members
 
+### `PROBE_HEADER`
+
+Marker response header used by the post-listen localhost probe to prove
+the socket that answered belongs to this process — see
+selfCheckLocalhost for why that proof is needed.
+
+### `INSTANCE_TOKEN`
+
+Per-process marker value; the probe compares it against PROBE_HEADER.
+
 ### `MIME`
 
 Content-Types for every artifact class under dist/. Kept local to this
@@ -65,3 +75,22 @@ or null when no hosting rule covers it (meta JSON, sitemaps, txt).
 
 - `@param` {string} reqPath Decoded pathname.
 - `@returns` {string | null} Header value.
+
+### `reportPortConflict`
+
+Exits non-zero with an actionable message when `localhost` is answered
+by a foreign process — the OS does not surface this as EADDRINUSE
+because the squatter typically owns only the `[::1]` alias while this
+server binds `::`.
+
+- `@param` {string} detail What the probe observed.
+- `@returns` {never}
+
+### `selfCheckLocalhost`
+
+Probes `localhost` after listen so a port squatter fails the gate fast
+with a clear message. `localhost` resolves to ::1 first on Windows; a
+foreign listener there (e.g. a plaintext `vite preview`) otherwise turns
+Lighthouse's TLS handshake into CHROME_INTERSTITIAL_ERROR on every run,
+far removed from the actual cause. The marker header distinguishes this
+instance even from another preview-h2 bound on a different alias.

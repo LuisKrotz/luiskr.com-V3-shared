@@ -100,6 +100,11 @@ Zoom trigger aria-label — opens the enlarged modal scene.
 
 Close control aria-label inside the map zoom dialog.
 
+### `MAP_LOADING`
+
+role=status caption inside the map stage while the file cloud's
+async graph build (worker layout → geometry/label upload) runs.
+
 ### `SCENE_ATTR_ALPHA`
 
 Instanced-attribute names on the scene's node geometries — the

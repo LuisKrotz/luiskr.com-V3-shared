@@ -144,6 +144,7 @@ never regress the portal.
 - `@param` canvas Target canvas (same element the three path uses).
 - `@param` roots Manifest root buckets.
 - `@param` onPick Called with the manifest path on a node pick.
+- `@param` onReady Called once the async graph build lands — the host
 - `@returns` The scene handle, or null when the engine can't mount.
 
 ### `saveCamState`

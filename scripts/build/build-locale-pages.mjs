@@ -1042,6 +1042,19 @@ const DIMS_PROBE_BYTES = 64 * 1024
 const FETCH_TIMEOUT_MS = 20 * 1000
 
 /**
+ * Ceiling for the live `translations` node fetch specifically — unlike
+ * the 64 KB dims probes this is a multi-megabyte bulk download (the
+ * committed database.json snapshot runs ~3.8 MB across 16 locales), so
+ * the shared probe budget is too tight on slow or throttled links and a
+ * single stalled read used to force the stale snapshot for the whole
+ * build. Three attempts with a fixed backoff give a transient stall two
+ * more chances before the fallback is taken.
+ */
+const TRANSLATIONS_TIMEOUT_MS = 90 * 1000
+const TRANSLATIONS_ATTEMPTS = 3
+const TRANSLATIONS_RETRY_DELAY_MS = 1500
+
+/**
  * ` width="W" height="H"` attribute fragment for emitted media — every
  * lazy <img>/<video> must carry explicit dims or Lighthouse flags the
  * bare tag and the pre-load box collapses to 0x0 (CLS). Missing source
@@ -1103,8 +1116,11 @@ let liveTranslations = null
 
 /**
  * Fetches the live `translations` node once per build so every prerendered
- * page carries the per-locale text authors actually published. Offline or
- * unreachable host → warn and keep the database.json snapshot as the source.
+ * page carries the per-locale text authors actually published. The fetch
+ * retries TRANSLATIONS_ATTEMPTS times under TRANSLATIONS_TIMEOUT_MS — a
+ * slow or throttled link gets retries, not an instant snapshot fallback —
+ * and logs verbosely (url, per-attempt elapsed, locale list, payload
+ * size). Total failure → warn once and keep the database.json snapshot.
  */
 /**
  * Playground share-capture dims — image URL → `[w, h]` pair, seeded
@@ -1142,24 +1158,60 @@ export async function prefetchShareDims(urls) {
 }
 
 export async function prefetchTranslations() {
-  try {
-    const res = await fetch(`${FIREBASE_DB}/translations.json`, {
-      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-    })
+  const url = `${FIREBASE_DB}/translations.json`
+  const startedAt = Date.now()
 
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  // Verbose by design — this fetch decides whether ~2,000 prerendered
+  // pages carry live CMS copy or the stale snapshot, so every attempt is
+  // timed and logged.
+  console.log(
+    `[locale-pages] fetching live translations — ${url} ` +
+      `(timeout ${TRANSLATIONS_TIMEOUT_MS}ms, ${TRANSLATIONS_ATTEMPTS} attempts)`
+  )
 
-    const data = await res.json()
+  for (let attempt = 1; attempt <= TRANSLATIONS_ATTEMPTS; attempt += 1) {
+    const attemptAt = Date.now()
 
-    if (!data?.en || typeof data.en !== 'object') throw new Error('payload missing `en` root')
+    try {
+      const res = await fetch(url, {
+        signal: AbortSignal.timeout(TRANSLATIONS_TIMEOUT_MS),
+      })
 
-    liveTranslations = data
-    console.log(`[locale-pages] live translations: ${Object.keys(data).length} locales`)
-  } catch (e) {
-    console.warn(
-      `[locale-pages] live translations unavailable (${e.message}) — using database.json snapshot`
-    )
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+
+      const data = await res.json()
+
+      if (!data?.en || typeof data.en !== 'object') throw new Error('payload missing `en` root')
+
+      const locales = Object.keys(data)
+      const bytes = Buffer.byteLength(JSON.stringify(data))
+
+      liveTranslations = data
+      console.log(
+        `[locale-pages] live translations ready — ${locales.length} locales ` +
+          `(${locales.join(', ')}), ~${Math.round(bytes / 1024)} KB, ` +
+          `attempt ${attempt}/${TRANSLATIONS_ATTEMPTS} in ${Date.now() - attemptAt}ms ` +
+          `(total ${Date.now() - startedAt}ms)`
+      )
+
+      return
+    } catch (e) {
+      const last = attempt === TRANSLATIONS_ATTEMPTS
+
+      console.warn(
+        `[locale-pages] translations attempt ${attempt}/${TRANSLATIONS_ATTEMPTS} failed ` +
+          `in ${Date.now() - attemptAt}ms (${e.message})` +
+          (last ? '' : ` — retrying in ${TRANSLATIONS_RETRY_DELAY_MS}ms`)
+      )
+
+      if (!last) await new Promise((resolve) => setTimeout(resolve, TRANSLATIONS_RETRY_DELAY_MS))
+    }
   }
+
+  console.warn(
+    `[locale-pages] live translations unavailable after ${TRANSLATIONS_ATTEMPTS} attempts ` +
+      `(${Date.now() - startedAt}ms total) — using database.json snapshot`
+  )
 }
 
 /**
@@ -1171,11 +1223,27 @@ export async function prefetchTranslations() {
  * @returns {object} locale → translations map
  */
 export function loadTranslations() {
-  if (liveTranslations) return liveTranslations
+  if (liveTranslations) {
+    console.log(
+      `[locale-pages] translations source: live RTDB ` +
+        `(${Object.keys(liveTranslations).length} locales)`
+    )
+
+    return liveTranslations
+  }
 
   const dbPath = path.join(ROOT, 'database.json')
 
-  if (fs.existsSync(dbPath)) return JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations || {}
+  if (fs.existsSync(dbPath)) {
+    const snapshot = JSON.parse(fs.readFileSync(dbPath, 'utf8')).translations || {}
+
+    console.log(
+      `[locale-pages] translations source: database.json snapshot ` +
+        `(${Object.keys(snapshot).length} locales)`
+    )
+
+    return snapshot
+  }
 
   console.warn('[locale-pages] database.json missing — emitting English fallbacks only')
 

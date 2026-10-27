@@ -127,7 +127,7 @@ Writes one replica file under distDir.
 - `@param` {string} content file bytes
 - `@returns` {string} absolute written path
 
-### `linkReplica`
+### (module scope)
 
 Links (or copies, when hardlinks are unavailable) a canonical replica
 to its sibling path so both URLs serve byte-identical content.

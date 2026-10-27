@@ -69,17 +69,23 @@ describe('component render tails', () => {
     expect(parseTokens('a <em>b</em> c').length).toBeGreaterThan(1)
   })
 
-  test('updateRobotsMeta create/reuse/remove/absent arms', async () => {
+  test('updateRobotsMeta create/reuse/index/noindex arms', async () => {
     const { updateRobotsMeta } = await import('@website/views/project/data.js')
+    const { QUERY_STRINGS } = await import('@core/tokens/strings/queries.js')
+    const { SCHEMA_STRINGS } = await import('@core/tokens/strings/schema.js')
+
     updateRobotsMeta(true)
 
-    const meta = document.querySelector('meta[name="robots"]')
+    const meta = document.querySelector(QUERY_STRINGS.META_ROBOTS)
 
     expect(meta).toBeTruthy()
+    expect(meta?.content).toBe(SCHEMA_STRINGS.NOINDEX_NOFOLLOW)
 
     updateRobotsMeta(true)
     updateRobotsMeta(false)
-    expect(document.querySelector('meta[name="robots"]')).toBeNull()
+    expect(document.querySelector(QUERY_STRINGS.META_ROBOTS)?.content).toBe(
+      SCHEMA_STRINGS.INDEX_RICH_DIRECTIVES
+    )
 
     updateRobotsMeta(false)
   })

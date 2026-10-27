@@ -401,6 +401,13 @@ const writeReplica = (distDir, rel, content) => {
  * @param {string} relDest slash-joined sibling path relative to distDir
  * @returns {number} 1 (a file was emitted at dest)
  */
+/**
+ * Sibling paths skipped because a prerendered page directory already
+ * owns the slot — collected by linkReplica and printed once at the end
+ * (one summary line instead of ~70 warnings flooding the build log).
+ */
+const skippedReplicaPaths = []
+
 const linkReplica = (distDir, srcAbs, relDest) => {
   const dest = path.join(distDir, ...relDest.split('/'))
 
@@ -413,7 +420,7 @@ const linkReplica = (distDir, srcAbs, relDest) => {
   // sibling slot is skipped rather than clobbered.
   try {
     if (fs.statSync(dest).isDirectory()) {
-      console.warn(`[llm-pages] replica skipped, page dir owns the path: ${relDest}`)
+      skippedReplicaPaths.push(relDest)
 
       return 0
     }
@@ -1541,6 +1548,14 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
   writeReplica(distDir, `${LLM_TREE_ROOT.slice(1)}/index.md`, `${indexMd}\n`)
 
   files += 2
+
+  if (skippedReplicaPaths.length > 0) {
+    console.log(
+      `[llm-pages] ${skippedReplicaPaths.length} sibling replica slot(s) already owned ` +
+        `by prerendered page dirs — canonical ${LLM_TREE_ROOT}/ replicas are unaffected:` +
+        skippedReplicaPaths.map((p) => `\n  - ${p}`).join('')
+    )
+  }
 
   console.log(
     `[llm-pages] ${routes} routes → ${files} replica files under ${LLM_TREE_ROOT}/ + siblings`

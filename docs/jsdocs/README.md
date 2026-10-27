@@ -1601,6 +1601,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`docs-tails-onmounted-empty-docs-path.test.js`](experiments\docs\tests\coverage/docs-tails-onmounted-empty-docs-path.test.md) | Coverage tail for experiments/docs/Docs.tsx — onMounted's                       |
 | [`docs-tails-picknode-scenepath-3d.test.js`](experiments\docs\tests\coverage/docs-tails-picknode-scenepath-3d.test.md)         | Coverage tails — pickNode's group-row arm, _scenePath's                         |
 | [`docs-tails-print-prepare.test.js`](experiments\docs\tests\coverage/docs-tails-print-prepare.test.md)                         | Coverage tails for ViewDocs._onPrintPrepare — the printprepare                  |
+| [`docs-tails-scene-loading.test.js`](experiments\docs\tests\coverage/docs-tails-scene-loading.test.md)                         | Coverage tails for the map-stage loading veil — the                             |
 | [`docs-tails-scene-pick-scenepath.test.js`](experiments\docs\tests\coverage/docs-tails-scene-pick-scenepath.test.md)           | Coverage tails — the scene pick callback's group-prefix                         |
 | [`docs-tails-scenepath-handlers.test.js`](experiments\docs\tests\coverage/docs-tails-scenepath-handlers.test.md)               | Coverage tails — resolveScenePath's empty/miss arms,                            |
 | [`manifest-nodocsroot-tails.test.js`](experiments\docs\tests\coverage/manifest-nodocsroot-tails.test.md)                       | Coverage tail for manifest.ts — buildGroups' `docsRoot`                         |
