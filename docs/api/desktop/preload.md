@@ -1,8 +1,8 @@
-# `desktop/preload.mjs`
+# `desktop\preload.mjs`
 
 |                |                                                                     |
 | -------------- | ------------------------------------------------------------------- |
-| **Source**     | `src/desktop/preload.mjs`                                           |
+| **Source**     | `src/desktop\preload.mjs`                                           |
 | **UX surface** | Electron main/launcher/preload — wraps dist/ as an installable app. |
 
 ## Members

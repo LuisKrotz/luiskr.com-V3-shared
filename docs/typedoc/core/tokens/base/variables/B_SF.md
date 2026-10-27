@@ -8,7 +8,7 @@
 const _B_SF: 'sf' = 'sf'
 ```
 
-Defined in: core/tokens/base.ts:153
+Defined in: core/tokens/base.ts:158
 
 BEM block fragment `sf` — star-field experiment class names compose from
 this single declaration (zero-hardcoding rule 9).

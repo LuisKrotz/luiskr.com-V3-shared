@@ -1,11 +1,11 @@
-# `core/utils/canvas/loaders/menu-background/shaders.ts`
+# `core\utils\canvas\loaders\menu-background\shaders.ts`
 
 GLSL sources for MenuBackgroundWebGL, extracted from
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/loaders/menu-background/shaders.ts` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                            |
+| -------------- | ---------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\menu-background\shaders.ts` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.  |
 
 ## Members
 

@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/controls](../README.md) / SpGroup
 
-Defined in: experiments/earth-playground/space/controls.ts:72
+Defined in: experiments/earth-playground/space/controls.ts:73
 
 One collapsible panel section.
 
@@ -13,26 +13,26 @@ One collapsible panel section.
 ### label
 
 ```ts
-label: string;
+label: string
 ```
 
-Defined in: experiments/earth-playground/space/controls.ts:74
+Defined in: experiments/earth-playground/space/controls.ts:75
 
 Translation key for the group header.
 
-***
+---
 
 ### collapsed
 
 ```ts
-collapsed: boolean;
+collapsed: boolean
 ```
 
-Defined in: experiments/earth-playground/space/controls.ts:76
+Defined in: experiments/earth-playground/space/controls.ts:77
 
 Whether the group starts folded.
 
-***
+---
 
 ### controls
 
@@ -40,11 +40,11 @@ Whether the group starts folded.
 controls: SpControl[];
 ```
 
-Defined in: experiments/earth-playground/space/controls.ts:78
+Defined in: experiments/earth-playground/space/controls.ts:79
 
 The group's input rows.
 
-***
+---
 
 ### actions?
 
@@ -52,6 +52,6 @@ The group's input rows.
 optional actions?: SpAction[];
 ```
 
-Defined in: experiments/earth-playground/space/controls.ts:80
+Defined in: experiments/earth-playground/space/controls.ts:81
 
 Optional buttons rendered under the controls.

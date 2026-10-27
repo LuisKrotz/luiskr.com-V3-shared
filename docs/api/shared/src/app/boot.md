@@ -1,10 +1,10 @@
-# `shared/src/app/boot.ts`
+# `shared\src\app\boot.ts`
 
 App shell bootstrap — preference init, data load, lazy dialog/HUD chunk imports, router subscription with progress bar, scroll/resize/theme listeners, and the intro loader.
 
-| | |
-|---|---|
-| **Source** | `src/shared/src/app/boot.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\src\app\boot.ts`                            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -18,4 +18,5 @@ so the probe always reflects the live environment.
 ### `mountAppShell`
 
 Mounts app shell.
+
 - `@param` c — the component

@@ -1,10 +1,10 @@
-# `core/tests/coverage/canvas/infra/dom-font-tails.test.js`
+# `core\tests\coverage\canvas\infra\dom-font-tails.test.js`
 
 Coverage tails for core/utils/canvas/dom-font.ts — the
 
 |                |                                                               |
 | -------------- | ------------------------------------------------------------- |
-| **Source**     | `src/core/tests/coverage/canvas/infra/dom-font-tails.test.js` |
+| **Source**     | `src/core\tests\coverage\canvas\infra\dom-font-tails.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.     |
 
 ## Members

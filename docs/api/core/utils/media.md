@@ -1,10 +1,10 @@
-# `core/utils/media.ts`
+# `core\utils\media.ts`
 
 Media-URL builders — the single place where CDN filename
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/media.ts`                                 |
+| **Source**     | `src/core\utils\media.ts`                                 |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -53,6 +53,20 @@ no `size=` is left alone since the regex finds no match.
 - `@param` size Pixel edge to request (default 300 — the rendered avatar box).
 - `@returns` Rewritten URL, original URL, or '' for non-string input.
 
+### `encodeMediaUrl`
+
+Percent-encodes a media URL for attribute/markup emission — bucket keys
+can carry literal spaces ('brazilian leather/…', '…PARIS FASHION-WEEK…')
+and non-ASCII ('garçonne'), which the bucket serves fine but which break
+<source srcset> candidates (its grammar splits on whitespace) and
+RFC-3986-strict contexts (sitemap locs, JSON-LD image/contentUrl).
+Idempotent: already-encoded input decodes first, so a %20 never
+becomes %2520 (encodeURI escapes '%' itself). Malformed escapes make
+decodeURI throw — the catch emits the input with bare '%' → %25.
+
+- `@param` url Raw or encoded media URL (may contain spaces/non-ASCII).
+- `@returns` The emission-safe URL ('' stays '').
+
 ### `webpSibling`
 
 Derives the .webp sibling of a .jpg URL — the compressed-variant naming
@@ -72,6 +86,41 @@ webpSibling: `x.mp4` → `x.webm` and `x.mp4-scaledown-2x.mp4` →
 
 - `@param` url MP4 media URL.
 - `@returns` The same URL with .webm instead of .mp4, or '' when not .mp4.
+
+### `coverLadderStep`
+
+`load` step on a progressive cover's high layer — the ladder walker.
+Records the painted URL in the host registry (re-renders rebuild the
+shadow DOM wholesale via replaceChildren, so the registry is what
+re-emits the reached tier instead of replaying from the LQIP) and
+publishes the loaded class driving the CSS crossfade. When rungs
+remain above the painted one it preloads the next tier through a
+detached Image — the probe request doubles as the webp decode check —
+and only once bytes confirm does the tier go live. The upgrade never
+reassigns the painted img's `src` (that blanks the box while the new
+resource re-decodes); instead the confirmed tier mounts as a NEW
+stacked sibling whose own `load` retires the layer underneath, so no
+frame ever paints empty.
+
+- `@param` registry Host map of cover key → highest confirmed painted URL
+- `@param` coverKey Stable identity of the cover (the original URL).
+- `@param` img The high-layer img that fired `load` (event currentTarget).
+- `@param` rungs Ascending proven tiers from coverVariants — last is top.
+- `@param` loadedClass Class token that turns the layer's opacity on.
+- `@param` mobileRungs Ascending rungs on the `{stem}-mobile` ladder —
+
+### `advance`
+
+Publishes a confirmed tier as a new layer stacked over the painted
+one. Reassigning the live img.src would drop its painted frame while
+the upgraded resource re-decodes — the visible blink — so instead a
+clone (every attribute carried: classes, sizes, loading, aria-hidden)
+mounts empty on top — an img with no resolved bitmap paints nothing,
+the rung below stays visible — and only when its own `load` fires
+does the layer underneath retire, making the swap atomic per frame.
+On `error` the successor removes itself and the painted rung stands.
+The clone carries no listeners (cloneNode doesn't copy them), so the
+climb continues through the explicit re-entry below.
 
 ### `buildMediaUrls`
 

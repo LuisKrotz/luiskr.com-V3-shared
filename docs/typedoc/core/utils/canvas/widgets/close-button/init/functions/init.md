@@ -8,7 +8,7 @@
 function init(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/close-button/init.ts:103
+Defined in: core/utils/canvas/widgets/close-button/init.ts:104
 
 Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
 

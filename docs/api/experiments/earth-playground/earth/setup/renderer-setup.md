@@ -1,11 +1,11 @@
-# `experiments/earth-playground/earth/setup/renderer-setup.ts`
+# `experiments\earth-playground\earth\setup\renderer-setup.ts`
 
 Renderer creation for the Earth engine: probes for a
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth/setup/renderer-setup.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                  |
+| -------------- | ---------------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth\setup\renderer-setup.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.          |
 
 ## Members
 

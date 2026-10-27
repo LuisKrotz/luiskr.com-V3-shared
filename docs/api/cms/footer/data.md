@@ -1,9 +1,9 @@
-# `cms/footer/data.ts`
+# `cms\footer\data.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/footer/data.ts` |
-| **UX surface** | Footer + legal links editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\footer\data.ts`                        |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

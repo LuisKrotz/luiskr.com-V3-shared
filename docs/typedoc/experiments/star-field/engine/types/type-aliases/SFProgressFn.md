@@ -8,7 +8,7 @@
 type SFProgressFn = (msg, pct) => void
 ```
 
-Defined in: experiments/star-field/engine/types.ts:445
+Defined in: experiments/star-field/engine/types.ts:446
 
 Progress callback — loader overlay message + 0–100 percent.
 

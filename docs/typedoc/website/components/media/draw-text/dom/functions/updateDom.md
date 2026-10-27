@@ -8,7 +8,7 @@
 function updateDom(host): void
 ```
 
-Defined in: website/components/media/draw-text/dom.ts:17
+Defined in: website/components/media/draw-text/dom.ts:19
 
 Re-renders the shadow DOM for current props.
 

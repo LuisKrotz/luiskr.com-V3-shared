@@ -5,10 +5,10 @@
 [luiskr.com](../../../../README.md) / [experiments/docs/arch-scene](../README.md) / mountArchScene
 
 ```ts
-function mountArchScene(canvas, roots, onPick, onLost?): ArchSceneHandle | null
+function mountArchScene(canvas, roots, onPick, onLost?, onReady?): ArchSceneHandle | null
 ```
 
-Defined in: experiments/docs/arch-scene.ts:743
+Defined in: experiments/docs/arch-scene.ts:2157
 
 Dual-path mount — the scene3d (rust/WebGPU) engine takes the scene
 on capable hardware and the three.js arm remains the fallback for
@@ -46,6 +46,13 @@ Called with the manifest path on a node pick.
 Called once when no GPU path can mount — the host
 hides the section (the three arm's own null return
 already covered the no-WebGPU case).
+
+### onReady?
+
+() => `void`
+
+Called once when the winning arm's graph build lands
+— the host drops the stage's loading veil on it.
 
 ## Returns
 

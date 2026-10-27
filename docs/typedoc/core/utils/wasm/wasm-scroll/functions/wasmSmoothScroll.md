@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-scroll](../README.md) / wasmSmoothScroll
 
 ```ts
-function wasmSmoothScroll(options?): void;
+function wasmSmoothScroll(options?): void
 ```
 
-Defined in: core/utils/wasm/wasm-scroll.ts:48
+Defined in: core/utils/wasm/wasm-scroll.ts:49
 
 Smoothly scrolls a container (or the window) to a target element or
 numeric offset. Target resolution order: `element` (bounding rect

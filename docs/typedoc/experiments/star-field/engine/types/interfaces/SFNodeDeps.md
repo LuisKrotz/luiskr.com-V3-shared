@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFNodeDeps
 
-Defined in: experiments/star-field/engine/types.ts:30
+Defined in: experiments/star-field/engine/types.ts:31
 
 Lazily-loaded node-material context — the renderer is WebGPURenderer
 (WebGPU or forced-WebGL backend), whose node pipeline rejects classic
@@ -21,7 +21,7 @@ ctor so the body builders stay pure/mockable.
 TSL: __module
 ```
 
-Defined in: experiments/star-field/engine/types.ts:32
+Defined in: experiments/star-field/engine/types.ts:33
 
 The `three/tsl` module namespace.
 
@@ -33,7 +33,7 @@ The `three/tsl` module namespace.
 mats: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:34
+Defined in: experiments/star-field/engine/types.ts:35
 
 Node-material constructors re-exported by `three/webgpu`.
 

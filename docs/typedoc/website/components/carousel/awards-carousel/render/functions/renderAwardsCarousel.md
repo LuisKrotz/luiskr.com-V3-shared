@@ -8,7 +8,7 @@
 function renderAwardsCarousel(host): Element
 ```
 
-Defined in: website/components/carousel/awards-carousel/render.tsx:121
+Defined in: website/components/carousel/awards-carousel/render.tsx:127
 
 JSX template for the component's shadow DOM — the track is
 `[clone(last)] …real slides… [clone(first)]`; the clone ends are what

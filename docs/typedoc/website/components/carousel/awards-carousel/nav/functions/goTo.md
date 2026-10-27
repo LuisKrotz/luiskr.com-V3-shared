@@ -8,7 +8,7 @@
 function goTo(host, idx): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:185
+Defined in: website/components/carousel/awards-carousel/nav.ts:191
 
 Navigate to slide idx. idx may be out-of-range (−1 or len): the call
 scrolls to the matching CLONE slide at that edge and schedules an

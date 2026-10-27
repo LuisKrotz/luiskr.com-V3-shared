@@ -8,7 +8,7 @@
 function mountDividerSheen(hr, canvasClass): () => void
 ```
 
-Defined in: core/utils/gpu/divider-sheen.ts:185
+Defined in: core/utils/gpu/divider-sheen.ts:188
 
 Mounts the divider-sheen widget over an `<hr>` divider. Returns a
 disposer that releases the widget, the overlay canvas, the IO, and

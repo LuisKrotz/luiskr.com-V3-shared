@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/widgets/flag-webgl](../README.md) / FlagWebGL
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:46
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:47
 
 WebGL Flag Animator for Language Selection Buttons
 Each flag has a completely unique animated kinetic effect and wave physics:
@@ -30,7 +30,7 @@ Each flag has a completely unique animated kinetic effect and wave physics:
 new FlagWebGL(canvas, langOption): FlagWebGL;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:74
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 
 #### Parameters
 
@@ -181,7 +181,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:74
 canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:47
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:48
 
 ---
 
@@ -319,7 +319,7 @@ lang:
 };
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:48
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:49
 
 ---
 
@@ -329,7 +329,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:48
 height: number
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:49
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:50
 
 ---
 
@@ -339,7 +339,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:49
 aspect1: number
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:50
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:51
 
 ---
 
@@ -349,7 +349,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:50
 aspect2: number
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:51
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:52
 
 ---
 
@@ -359,7 +359,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:51
 width: number
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:52
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:53
 
 ---
 
@@ -369,7 +369,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:52
 isHovered: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:53
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:54
 
 ---
 
@@ -379,7 +379,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:53
 hoverLevel: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:54
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:55
 
 ---
 
@@ -389,7 +389,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:54
 useWebGL: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:55
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:56
 
 ---
 
@@ -399,7 +399,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:55
 _paused: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:56
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:57
 
 ---
 
@@ -409,7 +409,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:56
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:57
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:58
 
 ---
 
@@ -419,7 +419,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:57
 startTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:58
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:61
 
 ---
 
@@ -429,7 +429,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:58
 ctx: CanvasRenderingContext2D | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:59
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:62
 
 ---
 
@@ -439,7 +439,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:59
 renderer: FlagRenderer | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:60
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:63
 
 ---
 
@@ -449,7 +449,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:60
 isLoaded: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:61
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:64
 
 ---
 
@@ -459,7 +459,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:61
 onMouseEnter: (() => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:62
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:65
 
 ---
 
@@ -469,7 +469,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:62
 onMouseLeave: (() => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:63
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:66
 
 ---
 
@@ -479,7 +479,7 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:63
 boundTarget: HTMLElement | undefined
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:64
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:67
 
 ---
 
@@ -491,7 +491,7 @@ _wasm:
   | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:66
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:69
 
 Live WebGPU wasm handle — the preferred backend when it mounts.
 
@@ -503,7 +503,7 @@ Live WebGPU wasm handle — the preferred backend when it mounts.
 _wasmFailed: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:68
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:71
 
 Latch — a failed wasm mount never retries on this instance.
 
@@ -515,7 +515,7 @@ Latch — a failed wasm mount never retries on this instance.
 _wasmPending: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:70
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:73
 
 In-flight mount — restore() must not double-mount on re-entry.
 
@@ -527,11 +527,27 @@ In-flight mount — restore() must not double-mount on re-entry.
 _wasmT: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:72
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:75
 
 Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
 ## Methods
+
+### \_frameTick()
+
+```ts
+_frameTick(): void;
+```
+
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:60
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
+
+#### Returns
+
+`void`
+
+---
 
 ### \_displayAspect()
 
@@ -539,7 +555,7 @@ Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 _displayAspect(): number;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:120
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:123
 
 Natural aspect ratio the flag should display at (from its source SVG).
 
@@ -555,7 +571,7 @@ Natural aspect ratio the flag should display at (from its source SVG).
 _splitPoint(): number;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:130
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:133
 
 Normalized 0–1 x where a hybrid flag's two halves meet: the first
 flag's share of the combined aspect widths (aspect1/(aspect1+aspect2))
@@ -573,7 +589,7 @@ so each half keeps its natural proportions instead of stretching 50/50.
 _resizeToNaturalAspect(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:136
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:139
 
 Sizes the canvas to the flag's natural aspect ratio.
 
@@ -589,7 +605,7 @@ Sizes the canvas to the flag's natural aspect ratio.
 _getAnimType(): number;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:142
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:145
 
 Picks the shader's animation mode (wave / gentle ripple / static).
 
@@ -605,7 +621,7 @@ Picks the shader's animation mode (wave / gentle ripple / static).
 init(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:148
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:151
 
 Boot sequence: wasm mount → GL init → event binding → render start; fully degrades to the fallback path.
 
@@ -621,7 +637,7 @@ Boot sequence: wasm mount → GL init → event binding → render start; fully 
 _tryWasm(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:171
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:174
 
 Attempts the WebGPU wasm flag (~52KB artifact, own GPUDevice).
 MANUAL drive: this class keeps its own loop + hover easing, so the
@@ -640,7 +656,7 @@ renderer 2D path runs exactly as before.
 loadWasmImages(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:219
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:222
 
 Decodes the locale's flag SVG(s) through the wasm image-decoder
 worker and uploads them as textures — the GPU→GPU bitmap path
@@ -659,7 +675,7 @@ bind the same bitmap twice (the shader's cheapest no-op).
 init2d(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:272
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:275
 
 The shared-renderer 2D boot — ran directly on no-WebGPU browsers
 and after a wasm mount failure.
@@ -676,7 +692,7 @@ and after a wasm mount failure.
 purge(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:309
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:312
 
 webglPool hook — offscreen: stops the loop and releases the shared
 renderer reference so the pooled GL context can be disposed once
@@ -694,7 +710,7 @@ every flag is out of view (or destroyed).
 restore(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:332
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:335
 
 Re-acquires the shared renderer and resumes the wave loop after a purge.
 
@@ -710,7 +726,7 @@ Re-acquires the shared renderer and resumes the wave loop after a purge.
 _triggerFallback(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:362
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:365
 
 Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on context loss or init failure.
 
@@ -726,7 +742,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 loadImages(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:368
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:371
 
 Loads the flag's SVG source(s) into the texture cache.
 
@@ -742,7 +758,7 @@ Loads the flag's SVG source(s) into the texture cache.
 bindEvents(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:404
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:407
 
 Wires pointer/hover listeners that drive the widget's interactive state.
 
@@ -758,7 +774,7 @@ Wires pointer/hover listeners that drive the widget's interactive state.
 setHover(hovered): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:428
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:431
 
 Updates hover state — the shader renders the hover accent when true.
 
@@ -780,7 +796,7 @@ Updates hover state — the shader renders the hover accent when true.
 setReducedMotion(isReduced): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:438
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:441
 
 Applies prefers-reduced-motion: swaps the animation loop for one static frame render.
 
@@ -802,7 +818,7 @@ Applies prefers-reduced-motion: swaps the animation loop for one static frame re
 _renderStatic(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:451
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:454
 
 Draws a single settled frame — used under reduced motion or when the loop is stopped.
 
@@ -818,7 +834,7 @@ Draws a single settled frame — used under reduced motion or when the loop is s
 animate(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:457
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:460
 
 Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
@@ -834,7 +850,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 _renderWebGL(now): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:463
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:466
 
 Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 
@@ -856,7 +872,7 @@ Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/flag-webgl.ts:469
+Defined in: core/utils/canvas/widgets/flag-webgl.ts:472
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

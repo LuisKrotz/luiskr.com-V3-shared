@@ -8,7 +8,7 @@
 function renderDocs(view): HTMLElement
 ```
 
-Defined in: experiments/docs/render.tsx:181
+Defined in: experiments/docs/render.tsx:452
 
 The docs template — assembled for ViewDocs.render().
 

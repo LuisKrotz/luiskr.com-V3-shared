@@ -1,11 +1,11 @@
-# `experiments/earth-playground/earth/scene/atmos-shells.ts`
+# `experiments\earth-playground\earth\scene\atmos-shells.ts`
 
 Atmosphere shells for the Earth background — the BackSide
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth/scene/atmos-shells.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                |
+| -------------- | -------------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth\scene\atmos-shells.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.        |
 
 ## Members
 
@@ -44,9 +44,9 @@ FrontSide fresnel rim hugging the surface (+0.02u).
 ### `buildAtmosShells`
 
 Builds both atmosphere shells sharing one scattering model:
-  atmosMesh — BackSide additive shell (10.2u): the camera looks
-              *through* the shell, so each fragment is the air between
-              the viewer and the far wall
-  innerMesh — FrontSide fresnel rim (+0.02u): (1 − view·n)⁶ is
-              near-zero everywhere except the extreme grazing rim,
-              producing the thin bright line at the limb
+atmosMesh — BackSide additive shell (10.2u): the camera looks
+_through_ the shell, so each fragment is the air between
+the viewer and the far wall
+innerMesh — FrontSide fresnel rim (+0.02u): (1 − view·n)⁶ is
+near-zero everywhere except the extreme grazing rim,
+producing the thin bright line at the limb

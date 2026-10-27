@@ -8,6 +8,6 @@
 const _B_ABOUT_PROFILE_TEXT: 'about-profile-text'
 ```
 
-Defined in: core/tokens/base.ts:217
+Defined in: core/tokens/base.ts:222
 
 BEM block fragment "b about profile text" — composed by the token groups below into full class names.

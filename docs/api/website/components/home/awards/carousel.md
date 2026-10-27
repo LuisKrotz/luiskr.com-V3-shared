@@ -1,10 +1,10 @@
-# `website/components/home/awards/carousel.ts`
+# `website\components\home\awards\carousel.ts`
 
 Carousel wiring for &lt;awards-mentions&gt;: configures the
 
-| | |
-|---|---|
-| **Source** | `src/website/components/home/awards/carousel.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\awards\carousel.ts`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

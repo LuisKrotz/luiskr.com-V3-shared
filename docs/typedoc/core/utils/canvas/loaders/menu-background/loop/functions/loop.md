@@ -8,7 +8,7 @@
 function loop(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:168
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:169
 
 rAF callback — draws the animated contour field each frame.
 

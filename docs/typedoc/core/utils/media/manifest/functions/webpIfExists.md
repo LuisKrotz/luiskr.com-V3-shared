@@ -8,7 +8,7 @@
 function webpIfExists(url): string
 ```
 
-Defined in: core/utils/media/manifest.ts:83
+Defined in: core/utils/media/manifest.ts:147
 
 webp sibling of a .jpg URL when the manifest confirms it was generated,
 '' otherwise — safe srcset input for a <source>: empty means "no source".

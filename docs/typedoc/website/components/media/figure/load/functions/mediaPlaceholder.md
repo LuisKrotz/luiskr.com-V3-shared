@@ -8,7 +8,7 @@
 function mediaPlaceholder(w, h): string
 ```
 
-Defined in: website/components/media/figure/load.ts:78
+Defined in: website/components/media/figure/load.ts:90
 
 Inline SVG placeholder — a URL-encoded empty <svg> carrying the media's
 real width/height (definite intrinsic size) plus the viewBox aspect.

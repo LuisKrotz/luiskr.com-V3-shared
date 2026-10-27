@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/types](../README.md) / ConsoleScanReport
 
-Defined in: cms/deploy-info/types.ts:72
+Defined in: cms/deploy-info/types.ts:105
 
 Shape of the console-scan gate output — `ok` is the pass/fail,
 `violations` lists each `console.*` callsite found under src/ (file, line,
@@ -18,9 +18,9 @@ method) since src is a zero-console zone (AGENTS.md rule 12).
 optional ok?: boolean;
 ```
 
-Defined in: cms/deploy-info/types.ts:73
+Defined in: cms/deploy-info/types.ts:106
 
-***
+---
 
 ### totals?
 
@@ -28,9 +28,9 @@ Defined in: cms/deploy-info/types.ts:73
 optional totals?: Record<string, number>;
 ```
 
-Defined in: cms/deploy-info/types.ts:74
+Defined in: cms/deploy-info/types.ts:107
 
-***
+---
 
 ### violations?
 
@@ -38,7 +38,7 @@ Defined in: cms/deploy-info/types.ts:74
 optional violations?: object[];
 ```
 
-Defined in: cms/deploy-info/types.ts:75
+Defined in: cms/deploy-info/types.ts:108
 
 #### file?
 

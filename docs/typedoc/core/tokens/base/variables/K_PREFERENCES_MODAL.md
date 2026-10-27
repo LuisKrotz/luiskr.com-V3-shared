@@ -8,7 +8,7 @@
 const _K_PREFERENCES_MODAL: 'preferences-modal' = 'preferences-modal'
 ```
 
-Defined in: core/tokens/base.ts:463
+Defined in: core/tokens/base.ts:468
 
 Shared key token `preferences-modal` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

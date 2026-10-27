@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/manifest](../README.md) / DocsFilePayload
 
-Defined in: experiments/docs/manifest.ts:50
+Defined in: experiments/docs/manifest.ts:66
 
 Rendered payload returned by /docs-content/<id>.json.
 
@@ -13,57 +13,57 @@ Rendered payload returned by /docs-content/<id>.json.
 ### name
 
 ```ts
-name: string;
+name: string
 ```
 
-Defined in: experiments/docs/manifest.ts:51
+Defined in: experiments/docs/manifest.ts:67
 
-***
+---
 
 ### path
 
 ```ts
-path: string;
+path: string
 ```
 
-Defined in: experiments/docs/manifest.ts:52
+Defined in: experiments/docs/manifest.ts:68
 
-***
+---
 
 ### format
 
 ```ts
-format: string;
+format: string
 ```
 
-Defined in: experiments/docs/manifest.ts:53
+Defined in: experiments/docs/manifest.ts:69
 
-***
+---
 
 ### html
 
 ```ts
-html: string | null;
+html: string | null
 ```
 
-Defined in: experiments/docs/manifest.ts:54
+Defined in: experiments/docs/manifest.ts:70
 
-***
+---
 
 ### media
 
 ```ts
-media: string | null;
+media: string | null
 ```
 
-Defined in: experiments/docs/manifest.ts:55
+Defined in: experiments/docs/manifest.ts:71
 
-***
+---
 
 ### mtime
 
 ```ts
-mtime: string;
+mtime: string
 ```
 
-Defined in: experiments/docs/manifest.ts:56
+Defined in: experiments/docs/manifest.ts:72

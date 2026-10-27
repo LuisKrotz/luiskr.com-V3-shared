@@ -1,10 +1,10 @@
-# `core/tokens/data/ui-keys.ts`
+# `core\tokens\data\ui-keys.ts`
 
 UI copy keys — dotted paths into translations/&lt;locale&gt;/APP,
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/data/ui-keys.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\data\ui-keys.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -20,6 +20,10 @@ token contract immutable at runtime.
 Frozen nav ui key map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
+
+### `SKIP`
+
+Keyboard skip-link label ('skip' in the APP dictionary).
 
 ### `COOKIE_UI_KEYS`
 
@@ -72,3 +76,11 @@ token contract immutable at runtime.
 ### `NOTIFY_UI_KEYS`
 
 Notifies ui keys.
+
+### `A11Y_UI_KEYS`
+
+Frozen a11y ui key map — sole declaration site for these tokens; consumers read members
+and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the
+token contract immutable at runtime. Each value is a template carrying
+the `{index}` placeholder (see A11Y_INDEX_TOKEN) — resolved by
+indexedText() into the hidden navigation headings.

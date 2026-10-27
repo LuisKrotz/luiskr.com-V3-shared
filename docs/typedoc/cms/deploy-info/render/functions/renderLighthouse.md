@@ -8,7 +8,7 @@
 function renderLighthouse(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:59
+Defined in: cms/deploy-info/render.tsx:221
 
 Renders the Lighthouse section (scores + failing audits).
 

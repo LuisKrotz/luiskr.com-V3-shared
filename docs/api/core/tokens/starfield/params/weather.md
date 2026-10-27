@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/weather.ts`
+# `core\tokens\starfield\params\weather.ts`
 
 Living-planet parameters — the procedural weather field
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/weather.ts`             |
+| **Source**     | `src/core\tokens\starfield\params\weather.ts`             |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

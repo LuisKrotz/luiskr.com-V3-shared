@@ -1,10 +1,10 @@
-# `core/tokens/selectors/draw-text.ts`
+# `core\tokens\selectors\draw-text.ts`
 
 DrawText selector tokens — token group.
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/selectors/draw-text.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\selectors\draw-text.ts`                  |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

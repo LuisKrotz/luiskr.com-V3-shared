@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/manifest](../README.md) / fetchDocsFile
 
 ```ts
-function fetchDocsFile(id): Promise<DocsFilePayload | null>;
+function fetchDocsFile(id): Promise<DocsFilePayload | null>
 ```
 
-Defined in: experiments/docs/manifest.ts:155
+Defined in: experiments/docs/manifest.ts:336
 
 Lazily fetches one rendered file payload. Ids come straight from the
 manifest, so the URL is encoded segment-wise — never user-derived.

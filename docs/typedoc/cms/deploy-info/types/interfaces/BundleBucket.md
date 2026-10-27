@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/types](../README.md) / BundleBucket
 
-Defined in: cms/deploy-info/types.ts:84
+Defined in: cms/deploy-info/types.ts:117
 
 One file-type rollup in the bundle-stats report — `bytes` is the
 emitted (minified) size, `unminified` the pre-minification source
@@ -19,7 +19,7 @@ compressed wire sizes.
 optional files?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:85
+Defined in: cms/deploy-info/types.ts:118
 
 ---
 
@@ -29,7 +29,7 @@ Defined in: cms/deploy-info/types.ts:85
 optional bytes?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:86
+Defined in: cms/deploy-info/types.ts:119
 
 ---
 
@@ -39,7 +39,7 @@ Defined in: cms/deploy-info/types.ts:86
 optional unminified?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:87
+Defined in: cms/deploy-info/types.ts:120
 
 ---
 
@@ -49,7 +49,7 @@ Defined in: cms/deploy-info/types.ts:87
 optional gzip?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:88
+Defined in: cms/deploy-info/types.ts:121
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: cms/deploy-info/types.ts:88
 optional brotli?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:89
+Defined in: cms/deploy-info/types.ts:122

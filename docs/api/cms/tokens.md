@@ -1,10 +1,10 @@
-# `cms/tokens.ts`
+# `cms\tokens.ts`
 
 CMS-restricted tokens, tags, classes, and actions.
 
-| | |
-|---|---|
-| **Source** | `src/cms/tokens.ts` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\tokens.ts`                             |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members

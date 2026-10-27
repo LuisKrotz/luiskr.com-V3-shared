@@ -8,7 +8,7 @@
 function openMediaModal(c): void
 ```
 
-Defined in: website/components/media/figure/modal.ts:21
+Defined in: website/components/media/figure/modal.ts:62
 
 Opens media modal.
 

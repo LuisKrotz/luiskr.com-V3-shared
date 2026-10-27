@@ -1,15 +1,11 @@
-# `core/utils/canvas/widgets/theme-slider/render.ts`
+# `core\utils\canvas\widgets\theme-slider\render.ts`
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/theme-slider/render.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\theme-slider\render.ts`    |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
-
-### `SPRING`
-
-Spring constant — each frame closes 14% of the remaining distance.
 
 ### `renderStatic`
 
@@ -19,7 +15,11 @@ visibly apply without animating.
 
 ### `animate`
 
-Starts the requestAnimationFrame render loop (skipped under reduced motion).
+Starts the shared-pool render loop (skipped under reduced motion).
+
+### `renderWasm`
+
+Per-frame wasm render: pushes spring state + one frame tick.
 
 ### `renderWebGL`
 

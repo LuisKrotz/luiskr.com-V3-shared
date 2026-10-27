@@ -8,7 +8,7 @@
 const BASE_HOST_STYLES: string
 ```
 
-Defined in: core/tokens/styles.ts:98
+Defined in: core/tokens/styles.ts:101
 
 The base stylesheet string injected into every component shadow root.
 UX notes per rule group:

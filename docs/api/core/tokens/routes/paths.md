@@ -1,10 +1,10 @@
-# `core/tokens/routes/paths.ts`
+# `core\tokens\routes\paths.ts`
 
 Path tokens split by function — public URL routes, Firebase
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/routes/paths.ts`                         |
+| **Source**     | `src/core\tokens\routes\paths.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -33,10 +33,25 @@ Frozen asset path map — sole declaration site for these tokens; consumers read
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
 
-### `WASM_OVERLAY_PREFIX`
+### `WASM_WIDGETS_PREFIX`
 
-wasm-pack `--target web` artifacts — JS glue beside the .wasm.
+wasm-pack `--target web` widget artifacts — `/wasm/<slug>/`.
 
 ### `WASM_DIAGRAM_PREFIX`
 
 `rust/diagram` artifacts — the mermaid-subset SVG engine.
+
+### `ORT_WASM_PREFIX`
+
+ONNX Runtime wasm/glue binaries — `/ort/ort-wasm-…`.
+
+### `ML_MODELS_PREFIX`
+
+Generated ONNX model files — `/models/<slug>.onnx`.
+
+### `EMPTY_CAPTIONS`
+
+Shared empty WebVTT caption track — muted ambient/showcase videos
+carry no meaningful audio, so the caption file is intentionally
+empty; its presence satisfies caption_track_exists with an honest
+"nothing to caption" track.

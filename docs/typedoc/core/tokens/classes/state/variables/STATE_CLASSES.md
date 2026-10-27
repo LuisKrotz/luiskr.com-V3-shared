@@ -13,11 +13,15 @@ const STATE_CLASSES: Readonly<{
   HAS_FALLBACK: 'has-fallback'
   IS_SAFARI: 'is-safari'
   REDUCED_MOTION: 'reduced-motion'
+  HIGH_CONTRAST: 'high-contrast'
   DARK_MODE: 'dark-mode'
   SHOW_GRID: 'show-grid'
   PAGE_FADE_IN: 'page-fade-in'
   PAGE_FADE_OUT: 'page-fade-out'
   CYRILLIC_FONT: 'cyrillic-font'
+  JS: 'js'
+  NO_JS: 'no-js'
+  INTRO_SKIP: 'intro-skip'
 }>
 ```
 

@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/fly.ts`
+# `experiments\star-field\engine\fly.ts`
 
 Camera fly-to tween for the star-field engine — when a body
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/fly.ts`              |
+| **Source**     | `src/experiments\star-field\engine\fly.ts`              |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

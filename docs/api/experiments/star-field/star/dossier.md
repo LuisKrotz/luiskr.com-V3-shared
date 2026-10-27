@@ -1,10 +1,10 @@
-# `experiments/star-field/star/dossier.ts`
+# `experiments\star-field\star\dossier.ts`
 
 Lazy dossier loader for star-field bodies — fetches
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/star/dossier.ts`            |
+| **Source**     | `src/experiments\star-field\star\dossier.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

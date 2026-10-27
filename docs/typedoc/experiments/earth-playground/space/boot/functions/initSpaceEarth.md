@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/boot](../README.md) / initSpaceEarth
 
 ```ts
-function initSpaceEarth(c): void;
+function initSpaceEarth(c): void
 ```
 
-Defined in: experiments/earth-playground/space/boot.ts:48
+Defined in: experiments/earth-playground/space/boot.ts:49
 
 Constructs the EarthBackground engine on the persistent canvas and
 wires its lifecycle: progress → loader overlay, ready → apply persisted

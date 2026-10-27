@@ -1,10 +1,10 @@
-# `core/store/mutations/lang.ts`
+# `core\store\mutations\lang.ts`
 
 Locale + translation-dictionary mutations: setLang
 
-| | |
-|---|---|
-| **Source** | `src/core/store/mutations/lang.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\store\mutations\lang.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

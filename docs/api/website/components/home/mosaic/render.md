@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/render.tsx`
+# `website\components\home\mosaic\render.tsx`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/home/mosaic/render.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\mosaic\render.tsx`         |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/burn/front.ts`
+# `website\components\home\mosaic\burn\front.ts`
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/mosaic/burn/front.ts`      |
+| **Source**     | `src/website\components\home\mosaic\burn\front.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

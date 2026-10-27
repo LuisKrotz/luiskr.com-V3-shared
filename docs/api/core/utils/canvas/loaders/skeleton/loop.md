@@ -1,8 +1,8 @@
-# `core/utils/canvas/loaders/skeleton/loop.ts`
+# `core\utils\canvas\loaders\skeleton\loop.ts`
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/loaders/skeleton/loop.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\skeleton\loop.ts`          |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -17,7 +17,7 @@ rAF callback — animates the shimmer until resolved.
 
 ### `render`
 
-Renders a frame via the shared renderer.
+Renders a frame via the live backend — wasm widget or shared 2D renderer.
 
 ### `resolve`
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / isGravatarUrl
 
 ```ts
-function isGravatarUrl(urlStr): boolean;
+function isGravatarUrl(urlStr): boolean
 ```
 
-Defined in: core/utils/media.ts:45
+Defined in: core/utils/media.ts:49
 
 Checks if a given URL belongs to gravatar.com (exact host or any
 subdomain like `secure.gravatar.com`). Non-Gravatar URLs must not get

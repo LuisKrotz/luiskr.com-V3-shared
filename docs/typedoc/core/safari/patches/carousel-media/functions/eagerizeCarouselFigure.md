@@ -8,7 +8,7 @@
 function eagerizeCarouselFigure(el): void
 ```
 
-Defined in: core/safari/patches/carousel-media.ts:55
+Defined in: core/safari/patches/carousel-media.ts:81
 
 Eager image path for carousel-hosted figures: flip the thumbnail to
 loading="eager" (lazy never fires for iOS WebKit inside the scrolled

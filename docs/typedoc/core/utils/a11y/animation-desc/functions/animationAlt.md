@@ -8,9 +8,9 @@
 function animationAlt(id): string
 ```
 
-Defined in: core/utils/a11y/animation-desc.ts:78
+Defined in: core/utils/a11y/animation-desc.ts:79
 
-The one-sentence animation label — the `alt`/`aria-label` source.
+The one-sentence animation label — the `alt`-equivalent record field.
 
 ## Parameters
 

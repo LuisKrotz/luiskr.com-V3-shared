@@ -8,7 +8,7 @@
 function renderStaticFlag(flag): void
 ```
 
-Defined in: core/utils/canvas/widgets/flag/loop.ts:41
+Defined in: core/utils/canvas/widgets/flag/loop.ts:42
 
 Draws a single settled frame — used under reduced motion or when the loop is stopped.
 

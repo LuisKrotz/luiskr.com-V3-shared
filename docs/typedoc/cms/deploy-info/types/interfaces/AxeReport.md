@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/types](../README.md) / AxeReport
 
-Defined in: cms/deploy-info/types.ts:40
+Defined in: cms/deploy-info/types.ts:42
 
 Shape of the axe-scan report — `engine` names the axe-core version and
 `surfaces` lists each mounted DOM surface with its violations (id, impact, help)
@@ -18,9 +18,9 @@ so the CMS tab can render them grouped by page area.
 optional engine?: string;
 ```
 
-Defined in: cms/deploy-info/types.ts:41
+Defined in: cms/deploy-info/types.ts:43
 
-***
+---
 
 ### totals?
 
@@ -28,9 +28,9 @@ Defined in: cms/deploy-info/types.ts:41
 optional totals?: Record<string, number>;
 ```
 
-Defined in: cms/deploy-info/types.ts:42
+Defined in: cms/deploy-info/types.ts:44
 
-***
+---
 
 ### surfaces?
 
@@ -38,12 +38,12 @@ Defined in: cms/deploy-info/types.ts:42
 optional surfaces?: object[];
 ```
 
-Defined in: cms/deploy-info/types.ts:43
+Defined in: cms/deploy-info/types.ts:45
 
 #### surface
 
 ```ts
-surface: string;
+surface: string
 ```
 
 #### violations?

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/boot](../README.md) / dismissSpaceLoader
 
 ```ts
-function dismissSpaceLoader(c): void;
+function dismissSpaceLoader(c): void
 ```
 
-Defined in: experiments/earth-playground/space/boot.ts:101
+Defined in: experiments/earth-playground/space/boot.ts:102
 
 Fades the loader overlay to transparent, then removes it after the CSS
 transition completes — removing earlier would clip the fade, removing

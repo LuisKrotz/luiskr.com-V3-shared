@@ -8,7 +8,7 @@
 function triggerFallback(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider/init.ts:34
+Defined in: core/utils/canvas/widgets/switch-slider/init.ts:35
 
 Switches to the non-WebGL path — releases any live GL, then hides the canvas so the CSS fallback shows.
 

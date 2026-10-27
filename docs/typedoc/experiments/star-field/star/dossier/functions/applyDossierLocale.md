@@ -8,7 +8,7 @@
 function applyDossierLocale(c): void
 ```
 
-Defined in: experiments/star-field/star/dossier.ts:307
+Defined in: experiments/star-field/star/dossier.ts:308
 
 Re-derives the panel dossier for the current locale — called on store
 locale changes so the open panel swaps language; cached files resolve

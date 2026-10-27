@@ -1,9 +1,9 @@
-# `cms/deploy-info/types.ts`
+# `cms\deploy-info\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/deploy-info/types.ts` |
-| **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\deploy-info\types.ts`                  |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
@@ -20,15 +20,23 @@ URL with its category scores (performance, a11y, best-practices, SEO).
 
 ### (module scope)
 
-Shape of the Jest coverage summary consumed by the Deploy Info tab —
+Shape of the Jest coverage summary consumed by the Build tab —
 `total` holds per-metric {covered,total,pct} aggregates (statements, branches,
-functions, lines).
+functions, lines); `modules` carries the same per-metric shape keyed by
+module workspace name so the tab can show each module's coverage.
 
 ### (module scope)
 
 Shape of the axe-scan report — `engine` names the axe-core version and
 `surfaces` lists each mounted DOM surface with its violations (id, impact, help)
 so the CMS tab can render them grouped by page area.
+
+### (module scope)
+
+Shape of the IBM Equal Access full-site scan summary — written by
+deploy-info.mjs from a11y-checker.json. `rules` aggregates findings by
+rule+level (count + page coverage + one example message); `routes`
+lists only the routes carrying gated findings so the table stays short.
 
 ### (module scope)
 
@@ -44,5 +52,29 @@ method) since src is a zero-console zone (AGENTS.md rule 12).
 
 ### (module scope)
 
-Tri-state of the Deploy Info fetch: still `loading`, the bundle
+One file-type rollup in the bundle-stats report — `bytes` is the
+emitted (minified) size, `unminified` the pre-minification source
+bytes recovered from sourcemap sourcesContent, `gzip`/`brotli` the
+compressed wire sizes.
+
+### (module scope)
+
+One ES-target tier row — the js/css/misc buckets emitted under
+dist/v/<tier>/ plus that tier's ten heaviest chunks.
+
+### (module scope)
+
+One wasm artifact crate row — .wasm module bytes + .js glue bytes.
+
+### (module scope)
+
+Shape of the bundle-stats report — the post-build dist/ inventory:
+file-type totals (js/css/html/wasm/assets) with minified vs
+unminified vs compressed bytes, per-tier rows, the per-crate wasm
+table, prerendered-HTML grouped by top-level directory, and the
+heaviest emitted chunks overall.
+
+### (module scope)
+
+Tri-state of the Build tab fetch: still `loading`, the bundle
 is `missing` (no deploy-info/ in this build), or the index parsed `ready`.

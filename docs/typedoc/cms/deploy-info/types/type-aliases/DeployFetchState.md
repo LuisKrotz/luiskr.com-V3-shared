@@ -8,7 +8,7 @@
 type DeployFetchState = 'loading' | 'missing' | 'ready'
 ```
 
-Defined in: cms/deploy-info/types.ts:139
+Defined in: cms/deploy-info/types.ts:172
 
-Tri-state of the Deploy Info fetch: still `loading`, the bundle
+Tri-state of the Build tab fetch: still `loading`, the bundle
 is `missing` (no deploy-info/ in this build), or the index parsed `ready`.

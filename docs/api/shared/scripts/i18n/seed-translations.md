@@ -1,9 +1,9 @@
-# `shared/scripts/i18n/seed-translations.js`
+# `shared\scripts\i18n\seed-translations.js`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/i18n/seed-translations.js`                            |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\i18n\seed-translations.js`          |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

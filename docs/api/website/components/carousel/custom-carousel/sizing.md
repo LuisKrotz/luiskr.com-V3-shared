@@ -1,10 +1,10 @@
-# `website/components/carousel/custom-carousel/sizing.ts`
+# `website\components\carousel\custom-carousel\sizing.ts`
 
 Fit/height measurement for CustomCarousel — the
 
 |                |                                                             |
 | -------------- | ----------------------------------------------------------- |
-| **Source**     | `src/website/components/carousel/custom-carousel/sizing.ts` |
+| **Source**     | `src/website\components\carousel\custom-carousel\sizing.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.     |
 
 ## Members
@@ -27,12 +27,14 @@ the scroll track. Side-by-side requires: ≤2 items, viewport
 ≥ SIDE_BY_SIDE_BREAKPOINT, and projected total width ≤ host width.
 The projection mirrors the shadow-DOM contract in media-figure.scss +
 carousel-host.scss exactly: strip height is --mf-h (70dvh minus a pad
-under 1024, fixed $space-* steps above), media width is
-ratio·stripH floored at MEDIA_MIN_WIDTH on ≥375px viewports and capped
-by the regular gutter cap or the landscape --mf-max-w ladder, and each
-item adds its breakpoint padding + desktop side margin. Items missing
-intrinsic sizes use GENERIC_DIMENSIONS defaults (conservative portrait)
-so a partial CMS row can't silently flip to scroll mode.
+under 1024, fixed $space-* steps above) clamped to the file's natural
+height, media width is aspect-driven and capped by the regular gutter
+cap, the landscape --mf-max-w ladder, AND the natural pixel width
+(calcMediaBox — WASM-backed, never upscales), floored at
+min(MEDIA_MIN_WIDTH, naturalW) on ≥375px viewports; each item adds its
+breakpoint padding + desktop side margin. Items missing intrinsic
+sizes use GENERIC_DIMENSIONS defaults (conservative portrait) so a
+partial CMS row can't silently flip to scroll mode.
 
 - `@param` c The CustomCarousel element.
 - `@param` observedWidth Fresh RO width when known — avoids a layout read.
@@ -96,5 +98,8 @@ Publishes --carousel-item-height on the enclosing <section> and
 --carousel-media-height on the host: the aspect-corrected height
 ensuring all slides share one uniform height. In mixed carousels on
 mobile, the uniform height anchors to the shortest portrait item.
+The published height is also capped at the smallest natural item
+height — the strip may be _less_ tall than the projection, but no
+slide may ever render taller than its source file's real pixels.
 
 - `@param` c The CustomCarousel element.

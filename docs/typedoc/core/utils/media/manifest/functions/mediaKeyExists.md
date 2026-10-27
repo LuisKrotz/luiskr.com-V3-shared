@@ -8,7 +8,7 @@
 function mediaKeyExists(url): boolean
 ```
 
-Defined in: core/utils/media/manifest.ts:62
+Defined in: core/utils/media/manifest.ts:126
 
 Whether the manifest lists the CDN object behind `url`. Absolute URLs
 get the CDN_BASE prefix stripped to their bucket key; non-CDN URLs

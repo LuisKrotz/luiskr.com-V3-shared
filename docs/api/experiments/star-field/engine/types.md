@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/types.ts`
+# `experiments\star-field\engine\types.ts`
 
 Shared types for the star-field engine — the static body
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/types.ts`            |
+| **Source**     | `src/experiments\star-field\engine\types.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -641,6 +641,14 @@ Last tick timestamp for dt-based animation.
 ### `t`
 
 Elapsed scene time (seconds) — drives orbits/spins.
+
+### `predictor`
+
+ML frame-time predictor — drives adaptive pixel-ratio quality.
+
+### `appliedQuality`
+
+Last quality applied to the renderer — dedupes setPixelRatio calls.
 
 ### `hoverId`
 

@@ -1,11 +1,11 @@
-# `cms/about/CmsAboutEditor.tsx`
+# `cms\about\CmsAboutEditor.tsx`
 
 CMS about-page editor: bio paragraphs per column, the
 
-| | |
-|---|---|
-| **Source** | `src/cms/about/CmsAboutEditor.tsx` |
-| **UX surface** | About-section editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\about\CmsAboutEditor.tsx`              |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

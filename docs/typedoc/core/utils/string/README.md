@@ -7,6 +7,7 @@
 ## Functions
 
 - [stripHtml](functions/stripHtml.md)
+- [excerptHeading](functions/excerptHeading.md)
 - [toMetaDescription](functions/toMetaDescription.md)
 - [escapeHtml](functions/escapeHtml.md)
 - [slugify](functions/slugify.md)

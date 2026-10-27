@@ -1,9 +1,9 @@
-# `shared/scripts/media-convert/pipeline.js`
+# `shared\scripts\media-convert\pipeline.js`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/media-convert/pipeline.js`                            |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\media-convert\pipeline.js`          |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -33,6 +33,16 @@ Tool preference per the original scripts: ImageMagick `convert` + mozjpeg
 WebP/WebM are always ffmpeg (libwebp / libvpx-vp9) — light compression,
 and an output that lands >= its input is discarded so the jpg/mp4
 original remains the served variant.
+
+### `refreshWindowsPath`
+
+Merges the persisted Machine+User PATH from the Windows registry into
+process.env.PATH. winget/choco persist PATH updates to the registry on
+install, but a terminal (or IDE) spawned before the install keeps the
+stale snapshot — every spawn below inherits this process env, so
+refreshing here makes just-installed tools (ffmpeg, gcloud, …)
+discoverable within the same setup run. No-op off win32 and when
+PowerShell is unavailable.
 
 ### `imgMagick`
 

@@ -1,10 +1,10 @@
-# `core/router/router.ts`
+# `core\router\router.ts`
 
 History-API SPA router for the public site.
 
-| | |
-|---|---|
-| **Source** | `src/core/router/router.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\router\router.ts`                               |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -56,6 +56,7 @@ Registers a post-navigation hook (analytics, side effects).
 ### `subscribe`
 
 Subscribes a listener to route changes.
+
 - `@param` listener Callback receiving (to, from) descriptors.
 - `@returns` unsubscribe function
 
@@ -63,6 +64,7 @@ Subscribes a listener to route changes.
 
 Fans the route change out to subscribers; each call is wrapped so one
 throwing listener can't break the rest (logged via devError).
+
 - `@param` to Destination descriptor.
 - `@param` from Origin descriptor — null on first navigation.
 
@@ -70,6 +72,7 @@ throwing listener can't break the rest (logged via devError).
 
 Pure URL → route-descriptor resolution — see parse-path.ts for the
 route table and slug priority order.
+
 - `@param` pathname Raw URL pathname (+search/hash tolerated).
 - `@returns` The matched descriptor (404-shaped when nothing matches).
 
@@ -85,6 +88,7 @@ Public alias of parsePath kept for API compatibility.
 
 Full navigation pipeline — guards → history → meta → notify; see
 navigate.ts for the stage order.
+
 - `@param` path Destination URL path.
 - `@param` replace When true, replace the current history entry instead of pushing.
 

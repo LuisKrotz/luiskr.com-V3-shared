@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/earth-playground/SpacePlayground](../README.md) / SpacePlayground
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:63
+Defined in: experiments/earth-playground/SpacePlayground.tsx:64
 
 The SpacePlayground — playground class.
 
@@ -20,7 +20,7 @@ The SpacePlayground — playground class.
 new SpacePlayground(): SpacePlayground;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:81
+Defined in: experiments/earth-playground/SpacePlayground.tsx:82
 
 #### Returns
 
@@ -185,7 +185,7 @@ _earthBg:
   | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:64
+Defined in: experiments/earth-playground/SpacePlayground.tsx:65
 
 ---
 
@@ -195,7 +195,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:64
 _panelOpen: boolean = true
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:65
+Defined in: experiments/earth-playground/SpacePlayground.tsx:66
 
 ---
 
@@ -205,7 +205,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:65
 _isDark: boolean = true
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:66
+Defined in: experiments/earth-playground/SpacePlayground.tsx:67
 
 ---
 
@@ -215,7 +215,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:66
 _lastLocale: string | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:67
+Defined in: experiments/earth-playground/SpacePlayground.tsx:68
 
 ---
 
@@ -225,7 +225,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:67
 translations: Record<string, unknown> | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:68
+Defined in: experiments/earth-playground/SpacePlayground.tsx:69
 
 ---
 
@@ -235,7 +235,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:68
 _collapsedMap: Record<string, boolean> = {}
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:69
+Defined in: experiments/earth-playground/SpacePlayground.tsx:70
 
 ---
 
@@ -245,7 +245,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:69
 _savedSettings: SpSavedSettings = {}
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:70
+Defined in: experiments/earth-playground/SpacePlayground.tsx:71
 
 ---
 
@@ -255,7 +255,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:70
 _posRafId: number | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:71
+Defined in: experiments/earth-playground/SpacePlayground.tsx:72
 
 ---
 
@@ -270,7 +270,7 @@ _posEls:
   | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:72
+Defined in: experiments/earth-playground/SpacePlayground.tsx:73
 
 ---
 
@@ -280,7 +280,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:72
 _posLast: [number, number, number, number, number, number] | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:73
+Defined in: experiments/earth-playground/SpacePlayground.tsx:74
 
 ---
 
@@ -290,7 +290,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:73
 _checkboxes: Record<string, CheckboxWebGL> = {}
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:74
+Defined in: experiments/earth-playground/SpacePlayground.tsx:75
 
 ---
 
@@ -300,7 +300,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:74
 _canvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:75
+Defined in: experiments/earth-playground/SpacePlayground.tsx:76
 
 ---
 
@@ -310,7 +310,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:75
 _isInitializingEarth: boolean = false
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:76
+Defined in: experiments/earth-playground/SpacePlayground.tsx:77
 
 ---
 
@@ -320,7 +320,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:76
 _earthReady: boolean = false
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:77
+Defined in: experiments/earth-playground/SpacePlayground.tsx:78
 
 ---
 
@@ -330,7 +330,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:77
 _earthFailed: boolean = false
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:78
+Defined in: experiments/earth-playground/SpacePlayground.tsx:79
 
 ---
 
@@ -340,7 +340,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:78
 _keyboardExpandedGroups: WeakSet<Element>
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:79
+Defined in: experiments/earth-playground/SpacePlayground.tsx:80
 
 ---
 
@@ -4916,7 +4916,7 @@ Render result from render().
 _getCanvasEl(): HTMLCanvasElement;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:87
+Defined in: experiments/earth-playground/SpacePlayground.tsx:88
 
 The WebGL canvas the EarthBackground engine renders into.
 
@@ -4932,7 +4932,7 @@ The WebGL canvas the EarthBackground engine renders into.
 onMounted(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:101
+Defined in: experiments/earth-playground/SpacePlayground.tsx:102
 
 Lifecycle: loads translations, binds controls, boots the Earth engine.
 
@@ -4952,7 +4952,7 @@ Lifecycle: loads translations, binds controls, boots the Earth engine.
 onUpdated(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:142
+Defined in: experiments/earth-playground/SpacePlayground.tsx:145
 
 Lifecycle: re-mounts checkbox canvases after re-render.
 
@@ -4972,7 +4972,7 @@ Lifecycle: re-mounts checkbox canvases after re-render.
 onDestroy(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:160
+Defined in: experiments/earth-playground/SpacePlayground.tsx:163
 
 Lifecycle: destroys the Earth engine + checkbox widgets.
 
@@ -4992,7 +4992,7 @@ Lifecycle: destroys the Earth engine + checkbox widgets.
 onStoreUpdate(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:186
+Defined in: experiments/earth-playground/SpacePlayground.tsx:189
 
 Re-syncs settings on store changes.
 
@@ -5012,7 +5012,7 @@ Re-syncs settings on store changes.
 _loadTranslations(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:202
+Defined in: experiments/earth-playground/SpacePlayground.tsx:205
 
 Loads the playground label translations via SWR.
 
@@ -5028,7 +5028,7 @@ Loads the playground label translations via SWR.
 _updateLoader(msg, pct): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:237
+Defined in: experiments/earth-playground/SpacePlayground.tsx:242
 
 Mirrors engine bootstrap progress into the loader overlay — each node is
 optional because the loader can already be dismissed or re-rendered away.
@@ -5059,7 +5059,7 @@ progress label
 _initEarth(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:243
+Defined in: experiments/earth-playground/SpacePlayground.tsx:248
 
 Creates the EarthBackground engine with ready/progress callbacks.
 
@@ -5075,7 +5075,7 @@ Creates the EarthBackground engine with ready/progress callbacks.
 _dismissLoader(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:249
+Defined in: experiments/earth-playground/SpacePlayground.tsx:254
 
 Hides the loading overlay after the first usable frame.
 
@@ -5091,7 +5091,7 @@ Hides the loading overlay after the first usable frame.
 _applyPersistedSettings(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:255
+Defined in: experiments/earth-playground/SpacePlayground.tsx:260
 
 Replays saved localStorage settings onto the panel + engine.
 
@@ -5107,7 +5107,7 @@ Replays saved localStorage settings onto the panel + engine.
 _bindControls(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:261
+Defined in: experiments/earth-playground/SpacePlayground.tsx:266
 
 Wires sliders, checkboxes and action buttons.
 
@@ -5123,7 +5123,7 @@ Wires sliders, checkboxes and action buttons.
 _startPositionLoop(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:267
+Defined in: experiments/earth-playground/SpacePlayground.tsx:272
 
 Periodically reports camera position for the HUD/persistence.
 
@@ -5139,7 +5139,7 @@ Periodically reports camera position for the HUD/persistence.
 _handleAction(action, btn): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:273
+Defined in: experiments/earth-playground/SpacePlayground.tsx:278
 
 Runs a button action (screenshot, reset, music toggle).
 
@@ -5165,7 +5165,7 @@ Runs a button action (screenshot, reset, music toggle).
 _handleInput(input): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:279
+Defined in: experiments/earth-playground/SpacePlayground.tsx:284
 
 Applies a slider/checkbox input to the engine and persists it.
 
@@ -5187,7 +5187,7 @@ Applies a slider/checkbox input to the engine and persists it.
 _persistParam(param, val): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:285
+Defined in: experiments/earth-playground/SpacePlayground.tsx:290
 
 Writes one param value into the persisted settings.
 
@@ -5213,7 +5213,7 @@ Writes one param value into the persisted settings.
 _syncPanel(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:291
+Defined in: experiments/earth-playground/SpacePlayground.tsx:296
 
 Pushes engine state back into the panel controls.
 
@@ -5229,7 +5229,7 @@ Pushes engine state back into the panel controls.
 _mountCheckboxCanvases(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:297
+Defined in: experiments/earth-playground/SpacePlayground.tsx:302
 
 Mounts CheckboxWebGL widgets onto the panel checkboxes.
 
@@ -5245,7 +5245,7 @@ Mounts CheckboxWebGL widgets onto the panel checkboxes.
 _destroyCheckboxCanvases(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:303
+Defined in: experiments/earth-playground/SpacePlayground.tsx:308
 
 Tears down the checkbox widgets.
 
@@ -5261,7 +5261,7 @@ Tears down the checkbox widgets.
 _renderControl(ctrl, t): Element;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:308
+Defined in: experiments/earth-playground/SpacePlayground.tsx:313
 
 #### Parameters
 
@@ -5285,7 +5285,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:308
 _renderAction(act, t): Element;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:312
+Defined in: experiments/earth-playground/SpacePlayground.tsx:317
 
 #### Parameters
 
@@ -5309,7 +5309,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:312
 render(): Element;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:316
+Defined in: experiments/earth-playground/SpacePlayground.tsx:321
 
 Subclasses render() to return a JSX DOM Node or HTML string for the content area.
 The base implementation returns an empty string so instantiating the base

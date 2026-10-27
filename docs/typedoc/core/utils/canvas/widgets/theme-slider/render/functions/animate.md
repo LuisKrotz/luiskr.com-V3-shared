@@ -8,9 +8,9 @@
 function animate(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider/render.ts:40
+Defined in: core/utils/canvas/widgets/theme-slider/render.ts:41
 
-Starts the requestAnimationFrame render loop (skipped under reduced motion).
+Starts the shared-pool render loop (skipped under reduced motion).
 
 ## Parameters
 

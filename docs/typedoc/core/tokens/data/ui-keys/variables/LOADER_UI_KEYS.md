@@ -1,17 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/data/ui-keys](../README.md) / LOADER\_UI\_KEYS
 
 ```ts
 const LOADER_UI_KEYS: Readonly<{
-  LOADER_LINES: "loader.lines";
-  LOADER_INIT_WEBGPU: "loader.initWebGpu";
-}>;
+  LOADER_LINES: 'loader.lines'
+  LOADER_INIT_WEBGPU: 'loader.initWebGpu'
+}>
 ```
 
-Defined in: core/tokens/data/ui-keys.ts:101
+Defined in: core/tokens/data/ui-keys.ts:109
 
 Frozen loader ui key map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the

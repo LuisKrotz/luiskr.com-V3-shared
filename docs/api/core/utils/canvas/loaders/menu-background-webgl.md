@@ -1,10 +1,10 @@
-# `core/utils/canvas/loaders/menu-background-webgl.ts`
+# `core\utils\canvas\loaders\menu-background-webgl.ts`
 
 Fullscreen WebGL background for the nav menu overlay: an
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/loaders/menu-background-webgl.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\menu-background-webgl.ts`  |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -24,9 +24,32 @@ unavailable or the shader fails to compile/link.
 
 - `@param` {HTMLCanvasElement} canvas - fullscreen canvas behind the menu
 
+### `_frameTick`
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
+
+### `_wasm`
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+### `_wasmFailed`
+
+Latch — a failed wasm mount never retries on this instance.
+
+### `_wasmPending`
+
+In-flight mount — restore() must not double-mount on re-entry.
+
 ### `_initGL`
 
 Creates the WebGL context + shader program; falls back to the CSS/DOM path on failure.
+
+### `_tryWasm`
+
+Attempts the WebGPU wasm menu background (~50KB artifact, own
+GPUDevice). MANUAL drive: this class keeps its own reveal ease +
+loop, so the bridge only initializes the surface. On any failure
+the WebGL path runs exactly as before.
 
 ### `_triggerFallback`
 

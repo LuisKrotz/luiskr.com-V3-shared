@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/star-cloud.ts`
+# `experiments\star-field\engine\star-cloud.ts`
 
 Real-catalogue deep field — decodes
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/star-cloud.ts`       |
+| **Source**     | `src/experiments\star-field\engine\star-cloud.ts`       |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,11 +1,11 @@
-# `experiments/earth-playground/space/checkbox-webgl.ts`
+# `experiments\earth-playground\space\checkbox-webgl.ts`
 
 Canvas checkbox widget for the playground controls panel.
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/space/checkbox-webgl.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                            |
+| -------------- | ---------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\space\checkbox-webgl.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.    |
 
 ## Members
 

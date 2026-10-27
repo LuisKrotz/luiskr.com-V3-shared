@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/registry](../README.md) / SFRegistryManifest
 
-Defined in: experiments/star-field/engine/registry.ts:31
+Defined in: experiments/star-field/engine/registry.ts:29
 
 Manifest shape for `index/manifest.json` — per-kind record counts
 and the shard file list so the directory can show totals before any
@@ -18,7 +18,7 @@ shard has been fetched.
 total: number
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:33
+Defined in: experiments/star-field/engine/registry.ts:31
 
 Total records across all kinds (139,563).
 
@@ -30,7 +30,7 @@ Total records across all kinds (139,563).
 shardSize: number
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:35
+Defined in: experiments/star-field/engine/registry.ts:33
 
 Records per shard file (1,000).
 
@@ -48,6 +48,6 @@ kinds: Record<
 >
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:37
+Defined in: experiments/star-field/engine/registry.ts:35
 
 Per-kind stats: count + ordered shard filenames.

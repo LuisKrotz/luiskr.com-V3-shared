@@ -8,7 +8,7 @@
 const _K_ACTIVE: 'active' = 'active'
 ```
 
-Defined in: core/tokens/base.ts:423
+Defined in: core/tokens/base.ts:428
 
 Shared key token `active` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

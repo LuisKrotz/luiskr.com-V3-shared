@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/burn/particles.ts`
+# `website\components\home\mosaic\burn\particles.ts`
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/mosaic/burn/particles.ts`  |
+| **Source**     | `src/website\components\home\mosaic\burn\particles.ts`  |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

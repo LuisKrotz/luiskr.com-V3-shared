@@ -8,7 +8,7 @@
 function componentText(path): unknown
 ```
 
-Defined in: core/locale/ui-text.ts:51
+Defined in: core/locale/ui-text.ts:55
 
 Same lookup for the components dictionary (store.lang.components).
 

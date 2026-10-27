@@ -1,16 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/events/mutations](../README.md) / MODAL\_MUTATIONS
 
 ```ts
 const MODAL_MUTATIONS: Readonly<{
-  SET_MODAL_ORIGIN: "setModalOrigin";
-  TOGGLE_LANG_DIALOG: "toggleLangDialog";
-  TOGGLE_PREFERENCES_MODAL: "togglePreferencesModal";
-  SET_MODAL: "setModal";
-}>;
+  SET_MODAL_ORIGIN: 'setModalOrigin'
+  TOGGLE_LANG_DIALOG: 'toggleLangDialog'
+  TOGGLE_PREFERENCES_MODAL: 'togglePreferencesModal'
+  SET_MODAL: 'setModal'
+  SET_NAV_MENU: 'setNavMenu'
+}>
 ```
 
 Defined in: core/tokens/events/mutations.ts:12

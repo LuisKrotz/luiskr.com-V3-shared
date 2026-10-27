@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/procedural/shared.ts`
+# `experiments\star-field\engine\bodies\procedural\shared.ts`
 
 Shared paint primitives for the seeded texture
 
 |                |                                                                 |
 | -------------- | --------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/procedural/shared.ts` |
+| **Source**     | `src/experiments\star-field\engine\bodies\procedural\shared.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.         |
 
 ## Members

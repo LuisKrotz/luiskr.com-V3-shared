@@ -1,11 +1,11 @@
-# `shared/scripts/modules.mjs`
+# `shared\scripts\modules.mjs`
 
 Single source of truth for the workspace module registry.
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/modules.mjs`                                          |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\modules.mjs`                        |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

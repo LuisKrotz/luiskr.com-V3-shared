@@ -8,7 +8,7 @@
 function rightsText(): string
 ```
 
-Defined in: core/locale/ui-text.ts:75
+Defined in: core/locale/ui-text.ts:92
 
 Localized copyright line for the site footers — resolves
 `source-code.rights` through the live-then-fallback dictionaries and

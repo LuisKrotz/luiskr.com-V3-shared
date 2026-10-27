@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/home/AboutSection](../README.md) / AboutSection
 
-Defined in: website/components/home/AboutSection.tsx:52
+Defined in: website/components/home/AboutSection.tsx:55
 
 The AboutSection — section class.
 
@@ -20,7 +20,7 @@ The AboutSection — section class.
 new AboutSection(): AboutSection;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:58
+Defined in: website/components/home/AboutSection.tsx:61
 
 #### Returns
 
@@ -185,7 +185,7 @@ _glitch:
   | null = null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:56
+Defined in: website/components/home/AboutSection.tsx:59
 
 Active TV-glitch session on the portrait — see about/glitch.ts.
 
@@ -4248,7 +4248,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get aboutTranslations(): AboutTranslations | null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:93
+Defined in: website/components/home/AboutSection.tsx:96
 
 ##### Returns
 
@@ -4260,7 +4260,7 @@ Defined in: website/components/home/AboutSection.tsx:93
 set aboutTranslations(val): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:88
+Defined in: website/components/home/AboutSection.tsx:91
 
 Setter/getter — the about-page translation node pushed by the parent view.
 
@@ -4284,7 +4284,7 @@ Setter/getter — the about-page translation node pushed by the parent view.
 get profilePicture(): string | null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:104
+Defined in: website/components/home/AboutSection.tsx:107
 
 ##### Returns
 
@@ -4296,7 +4296,7 @@ Defined in: website/components/home/AboutSection.tsx:104
 set profilePicture(val): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:99
+Defined in: website/components/home/AboutSection.tsx:102
 
 Setter/getter — raw Gravatar URL for the profile photo.
 
@@ -4320,7 +4320,7 @@ Setter/getter — raw Gravatar URL for the profile photo.
 get optimizedProfilePicture(): string;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:110
+Defined in: website/components/home/AboutSection.tsx:113
 
 CDN-resized Gravatar URL for the profile img.
 
@@ -4338,7 +4338,7 @@ CDN-resized Gravatar URL for the profile img.
 get profilePictureSrcset(): string;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:116
+Defined in: website/components/home/AboutSection.tsx:119
 
 Responsive srcset candidates for the profile photo.
 
@@ -4356,7 +4356,7 @@ Responsive srcset candidates for the profile photo.
 get aboutDrawData(): DrawData;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:128
+Defined in: website/components/home/AboutSection.tsx:131
 
 Draw-timing plan for the two bio columns. Both columns share ONE
 1500ms animation budget: charDelay = 1500ms ÷ totalChars (both
@@ -4918,7 +4918,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:64
+Defined in: website/components/home/AboutSection.tsx:67
 
 Binds the portrait glitch handlers once the shadow root exists.
 
@@ -4938,7 +4938,7 @@ Binds the portrait glitch handlers once the shadow root exists.
 onDestroy(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:70
+Defined in: website/components/home/AboutSection.tsx:73
 
 Stops any running glitch loop when the element leaves the DOM.
 
@@ -4958,7 +4958,7 @@ Stops any running glitch loop when the element leaves the DOM.
 onUpdated(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:80
+Defined in: website/components/home/AboutSection.tsx:83
 
 Re-binds the bio's continuous type-in description — the two-column
 paragraph cascade is ONE coordinated animation (col2 starts as col1
@@ -4981,7 +4981,7 @@ of each <draw-text>'s own TEXT_DRAW binding.
 render(): Element;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:152
+Defined in: website/components/home/AboutSection.tsx:155
 
 JSX template for the component's shadow DOM.
 

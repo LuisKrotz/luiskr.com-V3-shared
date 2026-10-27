@@ -1,10 +1,10 @@
-# `core/Component.ts`
+# `core\Component.ts`
 
 BaseComponent — Custom Element base class with Shadow DOM encapsulation,
 
-| | |
-|---|---|
-| **Source** | `src/core/Component.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\Component.ts`                                   |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -34,12 +34,13 @@ pass a stub without importing the full singleton graph.
 
 Base class every view/component extends. Owns the four things the app
 relies on being uniform:
- 1. Shadow root + one stylesheet injection strategy (adoptedStyleSheets
+
+1.  Shadow root + one stylesheet injection strategy (adoptedStyleSheets
     with a shared-sheet cache, `<style>` fallback on old engines);
- 2. `setState → render → _updateDom` reactive cycle;
- 3. automatic teardown — scoped listeners, store subs, and the WebGL
+2.  `setState → render → _updateDom` reactive cycle;
+3.  automatic teardown — scoped listeners, store subs, and the WebGL
     skeleton layer are released in disconnectedCallback;
- 4. lifecycle hooks subclasses implement: render(), onInit, onMounted,
+4.  lifecycle hooks subclasses implement: render(), onInit, onMounted,
     onUpdated, onStoreUpdate(store), onDestroy.
 
 ### (module scope)
@@ -93,6 +94,7 @@ Attach an open shadow root and stash the component's `?inline` CSS text.
 `mode: 'open'` keeps `element.shadowRoot` readable — the codebase and the
 happy-dom tests both rely on that handle for assertions and scoped
 queries; 'closed' would break both without buying real encapsulation.
+
 - `@param` styles Component-local CSS text (Vite `?inline` import).
 
 ### `setState`
@@ -103,6 +105,7 @@ required when the next state derives from the previous state, since
 reads of `this.state` outside the updater can race with queued renders.
 The merge is a shallow spread: keys not present in `next` survive, which
 lets components update one field without re-sending the whole bag.
+
 - `@param` updater Partial state patch, or (prevState) => patch.
 
 ### `connectedCallback`
@@ -126,6 +129,7 @@ subscribe() rather than rendering into a disconnecting root.
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
+
 - `@param` selector CSS selector evaluated against this.shadowRoot.
 - `@returns` First matching element or null.
 
@@ -134,6 +138,7 @@ throwing when the shadow root is absent (detached construction in tests).
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
 iteration methods on older engines).
+
 - `@param` selector CSS selector evaluated against this.shadowRoot.
 - `@returns` Array of matching elements (never null).
 
@@ -144,6 +149,7 @@ Prevents duplicate listeners: the DOM itself dedupes identical
 (type, listener, capture) tuples per MDN addEventListener semantics, and
 every registration is mirrored into _eventDisposers so disconnect removes
 it even when the listener captured instance state.
+
 - `@param` target EventTarget to listen on (null → no-op).
 - `@param` event Event type token.
 - `@param` handler Listener callback or listener object.
@@ -155,6 +161,7 @@ Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
 (mid-move or already removed) is dropped instead of rendering into a
 dead shadow root — the next connectedCallback renders fresh state anyway.
+
 - `@param` store Store-like object exposing subscribe(); null/invalid → no-op.
 
 ### (module scope)
@@ -177,11 +184,12 @@ tracked element on every state change).
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
- - Node → `replaceChildren(node)` — the JSX fast path, keeps DOM identity.
- - Array → `replaceChildren(...filtered)` — fragment-style multi-root
-   render; nullish entries are filtered so conditional JSX slots can just
-   return null.
- - string/nullish → `innerHTML` — legacy string templates; '' clears.
+
+- Node → `replaceChildren(node)` — the JSX fast path, keeps DOM identity.
+- Array → `replaceChildren(...filtered)` — fragment-style multi-root
+  render; nullish entries are filtered so conditional JSX slots can just
+  return null.
+- string/nullish → `innerHTML` — legacy string templates; '' clears.
 - `@param` output Render result from render().
 
 ### `render`
@@ -189,4 +197,5 @@ Three accepted shapes, resolved in priority order:
 Subclasses render() to return a JSX DOM Node or HTML string for the content area.
 The base implementation returns an empty string so instantiating the base
 class directly (tests, scaffolding) produces an empty-but-valid shadow root.
+
 - `@returns` DOM output for _applyRenderOutput.

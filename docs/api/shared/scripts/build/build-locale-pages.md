@@ -1,29 +1,68 @@
-# `shared/scripts/build/build-locale-pages.mjs`
+# `shared\scripts\build\build-locale-pages.mjs`
 
 Emits per-locale, per-route static index.html files into
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/build-locale-pages.mjs`                         |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\build-locale-pages.mjs`       |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
-### `CYRILLIC_SLUG`
+### `STAR_DATA_BASE`
 
-Russian Cyrillic → Latin transliteration — Cyrillic media labels would
-otherwise slugify to '' and lose their deep-link URL. MUST stay
-byte-identical to CYRILLIC_SLUG in core/utils/string.ts.
+Mirrors SF_DATA_BASE (core/tokens/starfield/textures.ts — alias chain
+makes it non-importable here) — public root of the star-field data
+surface: `…/index/` registry shards, `…/deep-field.bin`, `…/<loc>/*.json` dossiers.
 
-### `slugify`
+### `SP_PARAM_WIRES`
 
-Media-slug transform — MUST match generate-sitemap.js's slugify byte for
-byte: emitted /portfolio/<slug>/<media> file names have to line up with
-the URLs the sitemap already lists (diacritics fold to ASCII).
+SP_*_PARAMS wire strings keyed by member name — resolves each
+SP_CONTROL_GROUPS row `key` to its data-param value.
 
-### `esc`
+### `SP_ENGINE_DEFAULTS`
 
-Escape a string for use inside an HTML attribute or text node.
+DEFAULT_SP_GUI composition — mirrors core/tokens/playground.ts (its
+relative `.js` imports don't resolve under plain-node type stripping,
+so the leaf maps are composed here in the same subsystem order).
+
+### `starCatalogManifest`
+
+Star-field deep-catalog manifest — record totals + per-kind shard
+lists. Drives the index page's catalog section and the DataCatalog
+JSON-LD so the 139,563-object registry is enumerable without WebGL.
+
+### `llmPathsFor`
+
+`/llm/` mirror-tree paths for a canonical page URL — thin wrapper over
+route-media.mjs's llmTreePaths so emitted <link rel="alternate"> tags
+and generate-llm-pages.mjs always agree on the replica location.
+
+- `@param` {string} pageUrl absolute canonical URL (`https://luiskr.com/…`)
+- `@returns` {{md: string, json: string} | null} replica paths, null on bad input
+
+### (module scope)
+
+The match below tolerates a legacy .boot-veil emitted inside #app by an
+earlier template revision so re-runs normalize older documents back to
+the clean article shape.
+
+### `enc`
+
+Percent-encodes a URL for markup/JSON-LD emission — bucket keys can
+carry literal spaces ('brazilian leather/…', '…PARIS FASHION-WEEK…') and
+non-ASCII, which break srcset candidate parsing (whitespace-separated
+grammar) and RFC-3986-strict contexts (JSON-LD, sitemap locs). Mirrors
+core/utils/media.ts encodeMediaUrl — that module uses @core aliases so
+this standalone Node path can't import it. decodeURI-first keeps it
+idempotent on already-encoded input (encodeURI escapes '%' itself).
+
+### `dec`
+
+Reverses enc() for manifest-key lookups — bucket keys are stored raw,
+so a '%XX'-encoded URL must decode before `manifest.has`. Malformed
+escapes (a '%' not followed by two hex digits) make decodeURI throw, so
+those short-circuit to the raw form.
 
 ### `toDescription`
 
@@ -46,7 +85,104 @@ Recursively yields every sections node that carries a `src`.
 
 ### `writeCompressed`
 
-Brotil + gzip siblings next to each emitted index.html (Firebase serves them).
+Brotli + gzip siblings next to each emitted index.html (Firebase serves
+them). The plain file lands synchronously; the compressed siblings go
+through the shared queue so the emit loop never blocks on a ~30-60ms
+brotli-11 pass per page — drainCompressedWrites() runs them across the
+libuv threadpool at the end of the fan-out.
+
+### `LCP_THUMB_MAX`
+
+Largest fetched thumb payload worth inlining as a data URI. The old
+16 KB cap assumed the veil image shared the preloaded hero's fetch —
+it doesn't (the veil binds the smallest proven variant, a different
+object), so on media-heavy routes the thumb queues behind megabytes
+of boot-graph media and the simulated LCP lands at ~8 s even though
+the request is discoverable and high-priority. Inlining keeps the
+candidate at zero network wait; ~96 KB pays ~+0.4 s on the HTML
+fetch to buy back ~6 s of LCP under simulated 4G.
+
+### `LCP_THUMB_MIN`
+
+Smallest fetched payload trusted to keep its LCP candidacy at
+near-full-viewport coverage. Paint-timing drops viewport-dominating
+images with too few bytes behind the painted area (measured live: an
+846-byte webp never produced a candidate at 80–99% coverage while an
+~8KB payload still reported at 99%), so prefetchLcpThumbs() walks the
+variant ladder until a payload clears this floor — only those LQIPs
+get the 96%-coverage box that out-sizes every mounted hero media.
+
+### `SCALED_POSTER_MIN_WIDTH`
+
+Minimum intrinsic video width (px) for the `-scaledown-2x` poster to be
+the runtime pick on a ≤768px viewport. The runtime rule is
+`box × dpr ≤ mediaWidth / 2` (prefersScaledVideo): a 3072px source at
+the widest mobile box (768 × 2dpr) exactly halves, so anything wider is
+guaranteed scaled on mobile while narrower videos keep the full poster —
+emitting the scaled source/preload for them warms a URL the <video>
+never requests.
+
+### `LCP_THUMBS`
+
+Resolved media URL → `{ src, url, bytes }` LQIP record for the
+injected early-LCP image — `src` is the data URI when the fetched
+variant fit the inline cap (else null), `url` is the resolved variant
+for the URL fallback, `bytes` drives the 70%-vs-96% coverage tier
+(LCP_THUMB_MIN). `null` entries mean every candidate failed or was
+oversized. localize() stays synchronous so the map is populated by
+prefetchLcpThumbs() ahead of each emit batch; URLs repeat across 15
+locales so the cache collapses the network work to one fetch chain
+per unique asset.
+
+### `lcpManifest`
+
+Last bucket manifest handed to prefetchLcpThumbs() — localize() runs
+after it in every build path, so stashing the set here keeps the
+localize signature unchanged while still letting the veil <img> bind
+the smallest proven variant via lcpThumbUrlOf.
+
+### `mediaFigureOf`
+
+First parked <figure> that carries paintable media — link-only
+attachment figures (a bare <a> + figcaption) are skipped so LCP
+detection binds the figure the browser will actually paint.
+
+### `lcpImageOf`
+
+The painted-under-veil article's early LCP media — first media figure's
+<source srcset> (what the browser actually selects), then <img src>,
+then a <video> poster — falling back to the route's hero for pages
+whose emitter puts no media first. Link-only figures (bare <a> video
+attachments with a figcaption) carry no paintable media and are skipped.
+
+### `lcpThumbCandidatesOf`
+
+Streams a resolved CDN media URL's sibling variants smallest-first —
+the q3 kodak blur pass for images (mobile derivative first), the
+-scaledown-4x poster frame for video. Manifest membership decides;
+the generator yields only proven keys so prefetchLcpThumbs() can keep
+climbing when the smallest payload is too small to survive Chrome's
+viewport-entropy LCP check. Non-CDN URLs yield the URL unchanged.
+
+### `lcpThumbUrlOf`
+
+Maps a resolved CDN media URL to its smallest proven sibling variant —
+the generator's first yield; the original URL when nothing is listed.
+
+### (module scope)
+
+Downloads each URL's smallest _entropy-qualified_ variant into
+LCP_THUMBS. The ladder yields variants smallest-first; a payload
+below LCP_THUMB_MIN can't hold an LCP candidacy at 96% coverage, so
+the walk keeps climbing — the first ≥MIN payload wins, otherwise the
+largest undersized fetch is kept as a last resort (still eligible at
+the 70% box). Payloads over LCP_THUMB_MAX stay URL-bound. Failed
+candidates are skipped; all-failed caches `null` so localize() falls
+back to the ladder's smallest URL or no LQIP. Mirrors
+prefetchStarMediaDims(): build-time fetches, silent failures.
+
+- `@param` {Iterable<string>} urls - resolved media URLs (CDN or not)
+- `@param` {Set<string>|null} manifest - bucket listing for variant checks
 
 ### `localize`
 
@@ -62,10 +198,104 @@ Rewrites the English shell into a localized document.
 - `@param` {string} [o.canonicalUrl] - canonical/og:url override for alias pages
 - `@param` {Array<{bcp:string,url:string}>} o.alternates - hreflang rows
 - `@param` {string} [o.image] - route-specific share image (project cover /
+- `@param` {Array<string>} [o.extraImages] - additional og:image candidates
+- `@param` {{w:number,h:number}} [o.imageDims] - intrinsic dims of `image`;
+- `@param` {string} [o.keywords] - localized comma-joined search themes for
+- `@param` {string} [o.feedUrl] - absolute RSS feed URL for this locale —
+- `@param` {boolean} [o.noLcp] - the route's media (heavyweight CDN
 - `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
 - `@param` {string} [o.content] - prerendered body markup injected into
+- `@param` {{title:string,msg:string}} [o.loader] - per-locale APP.loader copy
+- `@param` {string} [o.skip] - per-locale APP.skip text for the light-DOM
 
-### `buildLocalePages`
+### `starMediaDims`
+
+Star-field dossier image dims cache — image URL → ` width="W" height="H"`
+attribute fragment, seeded by `prefetchStarMediaDims` (dossier JSONs store
+no intrinsic size, so each unique CDN image is probed once via a small
+range request and shared across all 15 locales).
+
+### `DIMS_PROBE_BYTES`
+
+Bytes fetched per image-dims probe — SOF/IHDR headers live in the head.
+
+### `FETCH_TIMEOUT_MS`
+
+Per-request ceiling for every build-time prefetch (translations, dims
+probes, LCP thumbs). Without a signal a stalled CDN connection hangs
+the whole locale pass silently — every caller already degrades
+gracefully on fetch failure, so a timeout just takes the fallback.
+
+### `TRANSLATIONS_TIMEOUT_MS`
+
+Ceiling for the live `translations` node fetch specifically — unlike
+the 64 KB dims probes this is a multi-megabyte bulk download (the
+committed database.json snapshot runs ~3.8 MB across 16 locales), so
+the shared probe budget is too tight on slow or throttled links and a
+single stalled read used to force the stale snapshot for the whole
+build. Three attempts with a fixed backoff give a transient stall two
+more chances before the fallback is taken.
+
+### `dimsAttr`
+
+` width="W" height="H"` attribute fragment for emitted media — every
+lazy <img>/<video> must carry explicit dims or Lighthouse flags the
+bare tag and the pre-load box collapses to 0x0 (CLS). Missing source
+metadata falls back to the runtime's own GENERIC_DIMENSIONS defaults
+(the same 800×450 attr box <media-figure> declares when `size` is absent).
+
+- `@param` {number} [w] - intrinsic width when known
+- `@param` {number} [h] - intrinsic height when known
+
+### `scanImageDims`
+
+Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
+or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
+are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
+
+- `@param` {Buffer} buf - head bytes of the image
+
+### `liveTranslations`
+
+Live `translations` node pulled from the RTDB by prefetchTranslations().
+When set, buildLocalePages emits current per-locale CMS text instead of
+the committed database.json snapshot (which lags behind content edits —
+the exact gap that made localized pages render English/fallback text).
+
+### (module scope)
+
+Fetches the live `translations` node once per build so every prerendered
+page carries the per-locale text authors actually published. The fetch
+retries TRANSLATIONS_ATTEMPTS times under TRANSLATIONS_TIMEOUT_MS — a
+slow or throttled link gets retries, not an instant snapshot fallback —
+and logs verbosely (url, per-attempt elapsed, locale list, payload
+size). Total failure → warn once and keep the database.json snapshot.
+
+### (module scope)
+
+Probes every share capture once for its intrinsic dims. Failures are
+silent: a missing probe emits attr-less dims, same as before.
+
+- `@param` {string[]} urls - absolute CDN share-image URLs
+
+### `loadTranslations`
+
+Resolves the translations map for build-time generators — the live
+RTDB payload when prefetchTranslations() succeeded this run, else the
+committed database.json snapshot, else an empty map (English fallbacks
+only). Shared with generate-llm-pages.mjs so replicas and prerendered
+pages always render the same per-locale copy.
+
+- `@returns` {object} locale → translations map
+
+### (module scope)
+
+Probes every unique star-field dossier image once (64 KB range request
+each) so emitted <img> tags carry real width/height attrs — the
+lazy-media CLS budget flagged the bare imgs. Failures are silent:
+a missing probe falls back to the GENERIC_DIMENSIONS default box.
+
+### (module scope)
 
 Generates all localized pages under `distDir`. When `template` is omitted
 the post-loader dist/index.html is read from disk; when provided (the
@@ -79,6 +309,15 @@ returned so the caller can run its own compress/SW-stamp pass.
 ### `t`
 
 Per-locale lookup with English fallback (mirrors runtime appText).
+
+### `loaderCopyFor`
+
+Per-locale APP.loader copy for the statically-emitted intro-loader
+veil — title + first stage line (mirrors runtime loaderCopy).
+
+### `skipCopyFor`
+
+Per-locale APP.skip text for the light-DOM skip link.
 
 ### `firstPara`
 
@@ -103,13 +342,16 @@ Carousel ItemList for locale home pages — portfolio tiles → covers.
 
 Authored rich-text array → <p> markup (trusted CMS html).
 
-### `leafParagraphs`
+### `LEAF_SKIP`
 
 Every authored leaf string under a CMS node → <p> markup (trusted CMS
 html). Experience pages carry their copy as UI labels rather than a
 single description field — walking the whole object guarantees none of
 the authored text is left JavaScript-only. `skip` drops keys already
-rendered as headings.
+rendered as headings. The share-vocabulary keys (searchThemes,
+shareGallery, shareCapture) feed the gallery section + keywords
+surfaces instead — emitting them as bare paragraphs would read as
+keyword stuffing.
 
 ### `contactBlock`
 
@@ -117,11 +359,39 @@ Contact block — channel links + legal links from components.contact.
 
 ### `mediaFigure`
 
-One media item as crawlable markup — the figure shows the light
-preview variant (<img> thumb / <video> poster+mp4); the caption links
-straight to the best-quality source so the uncompressed asset is a
-first-class crawl target. `deepHref` wraps the media in the
-/portfolio/<p>/<media> deep link.
+One media item as crawlable markup — the figure's <img> carries the
+best-quality source itself (uncompressed pass preferred) so crawlers
+and no-JS viewers index the full-resolution asset, not the thumb;
+the caption links to the same source as a first-class crawl target.
+`deepHref` wraps the media in the /portfolio/<p>/<media> deep link.
+
+### `mediaWatchFigure`
+
+Watch-page figure for a media deep link — on the asset's own
+/portfolio/<p>/<media> URL the media IS the page's main content, so
+video items emit a real playable <video controls> (mp4 source +
+poster still), not the inert poster <img> the parked project
+figures carry. One player per page is exactly the watch-page
+contract Google's video indexing requires; stills keep
+mediaFigure's <img> markup.
+
+### `cardTile`
+
+One portfolio card as crawlable markup — cover figure, title, and
+the description the app reveals on hover/expand. Reader mode and
+crawlers cannot trigger the hover, so the desc is emitted inline.
+
+### `relatedContent`
+
+Related-projects footer — the crawlable mirror of the app's
+<portfolio-related> strip. Mirrors related/match.ts: the related
+node's {link,page,featured} rows join home.portfoliolist (the
+image/description join table) via normalized link/image/label
+matching. Card descriptions ride along even though the app only
+reveals them on hover — reader mode can't hover, so the content
+must already be in the emitted markup.
+
+- `@param` {string} loc - locale code
 
 ### `homeContent`
 
@@ -137,11 +407,117 @@ Project interna — title, hero cover, all section text + every figure.
 
 ### `mediaContent`
 
-Media-modal deep link — the single asset + its caption + project context.
+Media-modal deep link — the asset's own watch page: its label as
+the <h1>, the playable/paintable figure as the page's main content,
+then the back-link into the parent project for context. The media
+leads so the rendered page reads as single-asset-first — Google's
+video watch-page contract — not as a project page with a modal.
 
-### `experienceContent`
+### `earthContent`
 
-Experience page content — title + every authored label/copy leaf.
+Earth Playground page — title + authored copy + the full control
+surface as structured markup. The panel is a WebGL canvas at
+runtime, so this static mirror (every control group's localized
+label, resolved data-param, input kind, range geometry and
+effective default, expanded from SP_CONTROL_GROUPS — the same
+schema the runtime panel consumes) is what crawlers/agents read;
+the engine's DEFAULT_SP_GUI start state follows as a nested
+definition list so the whole tunable scene is in the DOM.
+
+### `nextShareImage`
+
+Next shuffled share pick — wraps so every capture gets card turns.
+
+### `nextStarShareImage`
+
+Next shuffled star share pick — wraps so every capture gets card turns.
+
+### `shareDimsAttr`
+
+` width="W" height="H"` for a share URL — probed dims or the generic box.
+
+### `epThemesOf`
+
+Localized search-theme list for one locale's playground page.
+
+### `sfThemesOf`
+
+Localized search-theme list for one locale's star-field page.
+
+### `sfBodyShareFields`
+
+Search-theme keywords for a star body page — the body's own
+name/kind lead the locale's star-field theme list so each dossier
+ranks for its object, not only the experiment's generic terms.
+
+### `pageThemesOf`
+
+Localized search-theme list for one CMS page node — every page
+carries `searchThemes` (patch-all-pages-search-themes.js), the
+array form the <meta name="keywords"> tag, the WebPage JSON-LD
+`keywords` property and sitemap image captions all read. Live
+translations win; the committed snapshot covers nodes RTDB has
+not been re-uploaded for yet.
+
+### `pageKeywords`
+
+Comma-joined page keywords — undefined when the node has no list.
+
+### `projectKeywords`
+
+Comma-joined project keywords — the locale's project searchThemes
+with the snapshot/English lists as fallback when the locale has
+none.
+
+### `shareGallerySection`
+
+Parked-article gallery — every share capture as crawlable markup so
+image search indexes the whole set off the page itself (the sitemap
+image tags + JSON-LD ItemList mirror it). Anchored + captioned like
+mediaFigure so each capture is also a first-class crawl target.
+
+### `starShareGallerySection`
+
+Star-field parked-article gallery — every star share capture as
+crawlable markup so image search indexes the whole set off the index
+page itself (the sitemap image tags + JSON-LD ItemList mirror it).
+Anchored + captioned like mediaFigure so each capture is also a
+first-class crawl target.
+
+### `earthShareEntities`
+
+ImageObject ItemList for the whole share set — every capture becomes
+a named, captioned, language-tagged entity carrying the locale's
+earth-image search themes, so image search in every language links
+the renders to the portfolio. The deck pick is marked
+representativeOfPage.
+
+### `starShareEntities`
+
+ImageObject ItemList for the whole star share set — every capture
+becomes a named, captioned, language-tagged entity carrying the
+locale's star-image search themes, so star/space image searches in
+every language link the renders to the portfolio. The deck pick is
+marked representativeOfPage.
+
+### `EP_ABOUT`
+
+Linked-data anchors for the playground WebPage — binds the page to
+the Earth/Planet concepts so theme searches resolve through the
+knowledge graph, not just the text.
+
+### `SF_ABOUT`
+
+Linked-data anchors for the star-field WebPage — binds the page to
+the Star/Galaxy concepts so star and space searches resolve through
+the knowledge graph, not just the text.
+
+### `animationsContent`
+
+Animations-reference hub — title + intro + every animation record's
+alt/longdesc as a definition list. The static mirror of the runtime
+<view-animations> listing: crawlers, AI agents and reader mode read the
+same components.animations records without running JavaScript.
 
 ### `readStarBody`
 
@@ -151,19 +527,21 @@ Star-field body dossier JSON — locale file with English fallback.
 
 Star-field body page — dossier text, facts table, credited media.
 
+### `STAR_KIND_ORDER`
+
+Star-field body kinds in index order — voyage-from-home ordering;
+any kind absent here still emits, appended after the ordered ones.
+
 ### `starIndexContent`
 
-Star-field index — description + the full localized body catalog.
+Star-field index — description plus the full localized body catalog
+grouped by kind: every object is a real <h3> heading with a link to
+its dossier page and its localized tagline, so the whole chart is
+heading-navigable and indexable without JS.
 
 ### `pageNameFromTitle`
 
 /** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names.
-
-### `mediaRowsOf`
-
-Labelled-media {slug,label,media} rows of a project — mirrors
-generate-sitemap's walk and the runtime modal: every labelled item with
-a src is addressable through /portfolio/<slug>/<media>.
 
 ### `routesFor`
 
@@ -236,6 +614,12 @@ if (loc === 'en') continue
     addRedirect(`/${loc}/star-field-experiment`, sfTarget)
     addRedirect(`/${loc}/star-field-experiment/**`, `${sfTarget}/:splat`)
 
+    // English-segment animations alias → localized canonical slug.
+    addRedirect(
+      `/${loc}/${enSlugs.animations}`,
+      `/${loc}/${slugs.animations || enSlugs.animations}`
+    )
+
     // Docs are English-only — a locale-prefixed docs URL canonicalizes to
     // the unprefixed route, so it redirects rather than rendering.
     addRedirect(`/${loc}/docs`, '/docs')
@@ -245,7 +629,7 @@ if (loc === 'en') continue
 
 cfg.hosting.redirects = redirects
 
-fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`)
+withFsRetry(() => fs.writeFileSync(firebasePath, `${JSON.stringify(cfg, null, 2)}\n`))
 }
 
 /** Rewrites that sit before the locale table — meta files moved into

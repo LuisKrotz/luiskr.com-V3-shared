@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/comet.ts`
+# `experiments\star-field\engine\bodies\comet.ts`
 
 Comet builder — a `SF_KINDS.COMET` body is a dark
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/comet.ts`     |
+| **Source**     | `src/experiments\star-field\engine\bodies\comet.ts`     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

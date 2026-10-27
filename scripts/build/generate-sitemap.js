@@ -4,6 +4,8 @@
  * `sitemap.xml` (an index over the per-locale `sitemap-<loc>.xml` files),
  * the global `urllist.txt`, and localized `robots.txt` / `urllist.txt` /
  * `llms.txt` / `ai-catalog.json` files per locale.
+ * `LK_OFFLINE=1` uses `database.json` and the cached media manifest
+ * instead of requesting Firebase and Storage listings.
  *
  * Route inventory mirrors `core/router/parse-path.ts` + `LANG_SLUGS`:
  * - English unprefixed surface — `/`, `/about`, `/contact`, the legal
@@ -37,10 +39,12 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
+import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 import { EARTH_SHARE, STAR_SHARE } from '../../../core/tokens/playground/share.ts'
 import { mediaItemsOf, mediaRowsOf } from './route-media.mjs'
 import {
   fetchMediaManifest,
+  loadMediaManifest,
   persistMediaManifest,
   resolveMediaUrls,
   resolveCoverKey,
@@ -103,7 +107,7 @@ const titleOf = (label, max = 100) => {
  *  carries `searchThemes` (patch-all-pages-search-themes.js); the list
  *  feeds <image:caption> and <video:tag> so image/video search indexes
  *  the asset under the page's own query vocabulary. */
-const themesOf = (node) => (Array.isArray(node?.searchThemes) ? node.searchThemes : [])
+const themesOf = (node) => (Array.isArray(node?.[SEARCH_THEMES_KEY]) ? node[SEARCH_THEMES_KEY] : [])
 
 /** `<image:caption>` element for a theme list — '' when empty. */
 const themeCaption = (themes) =>
@@ -124,11 +128,14 @@ async function run() {
 
   // Bucket manifest — variant resolution guarantees every emitted media
   // URL exists; on failure the historic suffix convention is emitted.
-  const manifest = await fetchMediaManifest()
+  const cachedManifest = loadMediaManifest(META_DIR)
+  const remoteManifest = process.env.LK_OFFLINE === '1' ? null : await fetchMediaManifest()
+  const manifest = remoteManifest || cachedManifest
 
   if (manifest) {
-    persistMediaManifest(META_DIR, manifest)
-    console.log(`Media manifest: ${manifest.size} bucket objects`)
+    if (remoteManifest) persistMediaManifest(META_DIR, remoteManifest)
+
+    console.log(`Media manifest: ${manifest.size} ${remoteManifest ? 'bucket' : 'cached'} objects`)
   } else {
     console.error('Media manifest listing failed — emitting suffix-convention URLs')
   }
@@ -195,32 +202,42 @@ async function run() {
 
   // Fetch projects data + home portfolio covers in parallel; both fall
   // back to the local database.json snapshot when the remote read fails.
-  const [projectsRes, homeRes] = await Promise.all([
-    fetch('https://luiskr-com.firebaseio.com/translations/en/projects.json').catch(() => null),
-    fetch('https://luiskr-com.firebaseio.com/translations/en/pages/HOME/portfoliolist.json').catch(
-      () => null
-    ),
-  ])
+  const [projectsRes, homeRes] =
+    process.env.LK_OFFLINE === '1'
+      ? [null, null]
+      : await Promise.all([
+          fetch('https://luiskr-com.firebaseio.com/translations/en/projects.json').catch(
+            () => null
+          ),
+          fetch(
+            'https://luiskr-com.firebaseio.com/translations/en/pages/HOME/portfoliolist.json'
+          ).catch(() => null),
+        ])
 
   const translations = fs.existsSync('database.json')
     ? JSON.parse(fs.readFileSync('database.json', 'utf-8')).translations || {}
     : {}
 
-  let data
+  let data = null
 
   try {
-    data = (await projectsRes?.json()) || {}
+    data = await projectsRes?.json()
   } catch {
-    data = translations.en?.projects || {}
+    data = null
   }
 
-  let homeList
+  if (!data || !Object.keys(data).length) data = translations.en?.projects || {}
+
+  let homeList = null
 
   try {
-    homeList = (await homeRes?.json()) || []
+    homeList = await homeRes?.json()
   } catch {
+    homeList = null
+  }
+
+  if (!Array.isArray(homeList) || !homeList.length)
     homeList = translations.en?.pages?.HOME?.portfoliolist || []
-  }
 
   // ── Home cover images ────────────────────────────────────────────────────
   // The mosaic's `<img src>` points at `covers/<image>.jpg`; indexing gets
@@ -283,7 +300,10 @@ async function run() {
     const capture = page.shareCapture || 'Earth render'
     const caption = escXml(
       titleOf(
-        [pageTitle, ...((Array.isArray(page.searchThemes) && page.searchThemes) || [])].join(' — '),
+        [
+          pageTitle,
+          ...(Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []),
+        ].join(' — '),
         500
       )
     )
@@ -335,7 +355,10 @@ async function run() {
     const capture = page.shareCapture || 'Star render'
     const caption = escXml(
       titleOf(
-        [pageTitle, ...((Array.isArray(page.searchThemes) && page.searchThemes) || [])].join(' — '),
+        [
+          pageTitle,
+          ...(Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []),
+        ].join(' — '),
         500
       )
     )
@@ -424,7 +447,7 @@ async function run() {
     const themes = themesOf(projectData).length
       ? themesOf(projectData)
       : themesOf(translations.en?.projects?.[projectSlug])
-    const themed = { ...projectData, searchThemes: themes }
+    const themed = { ...projectData, [SEARCH_THEMES_KEY]: themes }
 
     addTags(`/portfolio/${projectSlug}`, projectPageTags(folder, themed, projectTitle))
 
@@ -455,7 +478,7 @@ async function run() {
 
       addTags(
         `/${lang}/portfolio/${projectSlug}`,
-        projectPageTags(folder, { ...locNode, searchThemes: locThemes }, projectTitle)
+        projectPageTags(folder, { ...locNode, [SEARCH_THEMES_KEY]: locThemes }, projectTitle)
       )
 
       for (const { slug: mediaSlug, media: m } of mediaRowsOf(locNode)) {
@@ -593,6 +616,10 @@ async function run() {
     }
   }
 
+  /** Emits root or localized crawl policy with its sitemap discovery URL. */
+  const robotsDoc = (sitemapUrl) =>
+    `User-agent: *\nDisallow: /cms\nDisallow: /admin\nDisallow: /langs/\nDisallow: /docs-content/\nDisallow: /deploy-info/\nDisallow: /meta/\n\nSitemap: ${sitemapUrl}\n`
+
   fs.writeFileSync(path.join(META_DIR, 'sitemap-en.xml'), sitemapDoc(enUrls), 'utf-8')
 
   const indexEntries = [
@@ -616,7 +643,7 @@ async function run() {
     fs.mkdirSync(locDir, { recursive: true })
     fs.writeFileSync(
       path.join(locDir, 'robots.txt'),
-      `User-agent: *\nDisallow: /cms\nDisallow: /admin\nDisallow: /langs/\nDisallow: /docs-content/\nDisallow: /deploy-info/\nDisallow: /meta/\n\nSitemap: ${base}/sitemap-${loc}.xml\n`,
+      robotsDoc(`${base}/sitemap-${loc}.xml`),
       'utf-8'
     )
     fs.writeFileSync(
@@ -635,6 +662,7 @@ async function run() {
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexEntries.join('\n')}\n</sitemapindex>\n`
 
   fs.writeFileSync(path.join(META_DIR, 'sitemap.xml'), sitemapIndex, 'utf-8')
+  fs.writeFileSync(path.join(META_DIR, 'robots.txt'), robotsDoc(`${base}/sitemap.xml`), 'utf-8')
   fs.writeFileSync(
     path.join(META_DIR, 'urllist.txt'),
     allUrls.map((u) => `${base}${u === '/' ? '' : u}`).join('\n') + '\n',
@@ -673,12 +701,13 @@ async function run() {
     plain(translations[loc]?.pages?.about?.col1?.[0]) ||
     plain(translations.en?.pages?.about?.col1?.[0])
 
-  /** One RSS <item> — media rows emit media:content (image) or
-   *  media:content+media:thumbnail (video). */
+  /** One RSS item with a valid image enclosure or video plus optional poster. */
   const rssItem = ({ title, link, desc, media }) => {
+    // Some videos have no bucket-backed poster; omitting it avoids an
+    // empty media URL while preserving the source video enclosure.
     const m = media
       ? media.isVideo
-        ? `\n    <media:content url="${escXml(encLoc(media.thumb))}" medium="image"/>` +
+        ? `${media.thumb ? `\n    <media:thumbnail url="${escXml(encLoc(media.thumb))}"/>` : ''}` +
           `\n    <media:content url="${escXml(encLoc(media.source))}" medium="video"/>`
         : `\n    <media:content url="${escXml(encLoc(media.source))}" medium="image"/>`
       : ''

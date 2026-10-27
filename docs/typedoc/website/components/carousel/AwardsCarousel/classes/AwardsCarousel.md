@@ -5069,9 +5069,14 @@ after each render rather than JSX-wired.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:157
+Defined in: website/components/carousel/AwardsCarousel.tsx:164
 
-Reduced-motion commit → kill autoplay immediately (no residual RAF).
+Overlay/pref commits → kill autoplay immediately (no residual RAF);
+an overlay closing resumes a stopped cycle only when the carousel is
+still ≥50% on screen. The !autoplayRunning guard matters: store
+commits arrive for unrelated state too, and a bare _startAutoplay
+would re-base the dwell clock (and stack a second RAF chain) on
+every commit.
 
 #### Returns
 
@@ -5089,7 +5094,7 @@ Reduced-motion commit → kill autoplay immediately (no residual RAF).
 _setupCarousel(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:165
+Defined in: website/components/carousel/AwardsCarousel.tsx:174
 
 Initializes the carousel: bind → jump → observer → clone a11y. The work runs inside one RAF so layout is settled before jump/observer measure positions.
 
@@ -5105,7 +5110,7 @@ Initializes the carousel: bind → jump → observer → clone a11y. The work ru
 onDestroy(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:177
+Defined in: website/components/carousel/AwardsCarousel.tsx:186
 
 Teardown: stop RAF + observer + timers — every async handle is released so nothing fires after disconnect.
 
@@ -5125,7 +5130,7 @@ Teardown: stop RAF + observer + timers — every async handle is released so not
 _bindEvents(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:194
+Defined in: website/components/carousel/AwardsCarousel.tsx:203
 
 Binds scroll/touch/dot listeners (awards-carousel/events.ts).
 
@@ -5141,7 +5146,7 @@ Binds scroll/touch/dot listeners (awards-carousel/events.ts).
 onDotClick(idx): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:198
+Defined in: website/components/carousel/AwardsCarousel.tsx:207
 
 Dot-nav click → goTo.
 
@@ -5163,7 +5168,7 @@ Dot-nav click → goTo.
 goTo(idx): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:202
+Defined in: website/components/carousel/AwardsCarousel.tsx:211
 
 Navigate to real-slide index (wraps via clone path).
 
@@ -5185,7 +5190,7 @@ Navigate to real-slide index (wraps via clone path).
 _scrollToElement(el): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:206
+Defined in: website/components/carousel/AwardsCarousel.tsx:215
 
 Scrolls the track so `el` lands at the carousel start edge.
 
@@ -5207,7 +5212,7 @@ Scrolls the track so `el` lands at the carousel start edge.
 _scrollToSlide(idx): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:210
+Defined in: website/components/carousel/AwardsCarousel.tsx:219
 
 Scrolls to slide `idx` — real index, resolved through the clone map.
 
@@ -5229,7 +5234,7 @@ Scrolls to slide `idx` — real index, resolved through the clone map.
 _scheduleTeleport(targetIdx): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:214
+Defined in: website/components/carousel/AwardsCarousel.tsx:223
 
 Schedules the post-wrap teleport from a clone position back to the real slide.
 
@@ -5251,7 +5256,7 @@ Schedules the post-wrap teleport from a clone position back to the real slide.
 _cancelNavSpring(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:218
+Defined in: website/components/carousel/AwardsCarousel.tsx:227
 
 User-gesture takeover — kills the scroll spring + pending teleport.
 
@@ -5267,7 +5272,7 @@ User-gesture takeover — kills the scroll spring + pending teleport.
 _jumpToSlide(idx, smooth?): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:222
+Defined in: website/components/carousel/AwardsCarousel.tsx:231
 
 Positions the track on slide `idx` (smooth=false for instant jumps).
 
@@ -5293,7 +5298,7 @@ Positions the track on slide `idx` (smooth=false for instant jumps).
 _setupObserver(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:226
+Defined in: website/components/carousel/AwardsCarousel.tsx:235
 
 Creates the IntersectionObserver driving isEnteredViewport/isFullyVisible.
 
@@ -5309,7 +5314,7 @@ Creates the IntersectionObserver driving isEnteredViewport/isFullyVisible.
 _onResize(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:230
+Defined in: website/components/carousel/AwardsCarousel.tsx:239
 
 Resize handler — remeasures slide width and re-jumps without animation.
 
@@ -5325,7 +5330,7 @@ Resize handler — remeasures slide width and re-jumps without animation.
 _disableClonesFocus(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:234
+Defined in: website/components/carousel/AwardsCarousel.tsx:243
 
 Strips focusability from clone slides so Tab order only visits real slides.
 
@@ -5341,7 +5346,7 @@ Strips focusability from clone slides so Tab order only visits real slides.
 _startAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:238
+Defined in: website/components/carousel/AwardsCarousel.tsx:247
 
 Starts the autoplay RAF cycle (gated by visibility + reduced-motion).
 
@@ -5357,7 +5362,7 @@ Starts the autoplay RAF cycle (gated by visibility + reduced-motion).
 _stopAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:242
+Defined in: website/components/carousel/AwardsCarousel.tsx:251
 
 Stops the autoplay RAF cycle.
 
@@ -5373,7 +5378,7 @@ Stops the autoplay RAF cycle.
 _tickAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:246
+Defined in: website/components/carousel/AwardsCarousel.tsx:255
 
 One autoplay frame — advances when dwell elapsed, then self-schedules.
 
@@ -5391,7 +5396,7 @@ renderItem(item):
   | null;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:250
+Defined in: website/components/carousel/AwardsCarousel.tsx:259
 
 Renders one slide JSX (variant-aware).
 
@@ -5415,7 +5420,7 @@ Renders one slide JSX (variant-aware).
 render(): Element;
 ```
 
-Defined in: website/components/carousel/AwardsCarousel.tsx:256
+Defined in: website/components/carousel/AwardsCarousel.tsx:265
 
 JSX template (delegate — ./awards-carousel/render.tsx).
 

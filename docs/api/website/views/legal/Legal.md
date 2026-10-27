@@ -1,10 +1,10 @@
-# `website/views/legal/Legal.tsx`
+# `website\views\legal\Legal.tsx`
 
 &lt;view-legal&gt; — the legal-page route (privacy policy, GDPR,
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/views/legal/Legal.tsx`                     |
+| **Source**     | `src/website\views\legal\Legal.tsx`                     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -47,9 +47,11 @@ seamless. Text-only route: no media fetches at all.
 
 ### `drawPlan`
 
-Ordered reveal plan — one running cursor across the whole document
-so titles and paragraphs cascade in reading order even when several
-sections are in the viewport at once. Each item's offset is the
-cumulative duration of every item before it (chars × its section's
-per-char delay) plus a global index step; the `ordered` attribute
-makes draw-text read that offset against the shared session clock.
+Ordered reveal plan for the TITLE cascade — one running cursor over
+h1 + section h2s so titles still draw in reading order. Paragraphs
+render as plain HTML instead of draw-text elements: the parked
+article already painted this text, and a draw-text upgrade re-hides
+every char (opacity-0 spans) then re-cascades — a long legal doc was
+un-painting seconds of already-visible body text at mount (SI), on
+top of ~50 shadow-root upgrades (TBT). Plain paragraphs paint once
+and stay painted.

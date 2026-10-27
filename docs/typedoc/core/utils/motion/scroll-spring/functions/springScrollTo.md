@@ -8,7 +8,7 @@
 function springScrollTo(track, target, animClass, onSettle?, instant?): void
 ```
 
-Defined in: core/utils/motion/scroll-spring.ts:107
+Defined in: core/utils/motion/scroll-spring.ts:116
 
 Spring-scrolls `track` to `target` scrollLeft. Mid-flight retargets
 preserve velocity (the organic part — a rapid double-tap nav curves

@@ -1,11 +1,11 @@
-# `shared/scripts/build/browser-loader.js`
+# `shared\scripts\build\browser-loader.js`
 
 Runtime bundle dispatcher, inlined into dist/index.html by
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/browser-loader.js`                              |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\browser-loader.js`            |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -59,8 +59,8 @@ Appends the tier stylesheet to <head>.
 
 ### `showFallback`
 
-Graceful notice — only reachable if the manifest ships no floor tier
-(the `ie` tier's empty probe list passes unconditionally).
+Graceful notice — reached by engines that fail every tier probe
+(below the es2022 floor: pre-iOS 16, legacy Edge, IE).
 
 ### `boot`
 

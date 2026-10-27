@@ -1,10 +1,10 @@
-# `core/safari/patches/carousel-media.ts`
+# `core\safari\patches\carousel-media.ts`
 
 Carousel-hosted media overrides for iOS/Safari — WebKit
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/safari/patches/carousel-media.ts`               |
+| **Source**     | `src/core\safari\patches\carousel-media.ts`               |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

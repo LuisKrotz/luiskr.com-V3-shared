@@ -8,7 +8,7 @@
 function renderFlagWasm(flag, now): void
 ```
 
-Defined in: core/utils/canvas/widgets/flag/loop.ts:52
+Defined in: core/utils/canvas/widgets/flag/loop.ts:53
 
 Per-frame wasm render: pushes hover/anim/split state + one frame tick.
 

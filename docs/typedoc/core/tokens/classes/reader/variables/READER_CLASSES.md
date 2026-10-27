@@ -8,6 +8,7 @@
 const READER_CLASSES: Readonly<{
   CONTENT: 'reader-content'
   OFFSCREEN: 'reader-content--offscreen'
+  PAINTED: 'reader-content--painted'
 }>
 ```
 

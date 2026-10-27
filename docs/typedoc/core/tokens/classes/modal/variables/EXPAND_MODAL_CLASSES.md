@@ -20,6 +20,8 @@ const EXPAND_MODAL_CLASSES: Readonly<{
   EXPAND_MODAL_MEDIA_FIGURE_VIDEO: 'expand-modal-media-figure--video'
   EXPAND_MODAL_MEDIA_FIGURE_LOADED: 'expand-modal-media-figure--loaded'
   EXPAND_MODAL_MEDIA_PLACEHOLDER: 'expand-modal-media-placeholder'
+  EXPAND_MODAL_MEDIA_LOAD: 'expand-modal-media-load'
+  EXPAND_MODAL_MEDIA_SPIN: 'expand-modal-media-spin'
   EXPAND_MODAL_MEDIA_ITEM: 'expand-modal-media-item'
   EXPAND_MODAL_MEDIA_ITEM_VIDEO: 'expand-modal-media-item--video'
   EXPAND_MODAL_OPEN_1: 'expand-modal-open-1'

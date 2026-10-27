@@ -25,6 +25,10 @@ const STATE_STRINGS: Readonly<{
   LANDSCAPE: 'landscape'
   PORTRAIT: 'portrait'
   MOBILE: 'mobile'
+  PLAYING: 'playing'
+  PAUSED: 'paused'
+  COMPLETE: 'complete'
+  LOADING: 'loading'
   SYSTEM: 'system'
 }>
 ```

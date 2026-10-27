@@ -1,8 +1,8 @@
-# `core/utils/canvas/loaders/menu-background/init.ts`
+# `core\utils\canvas\loaders\menu-background\init.ts`
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/loaders/menu-background/init.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\menu-background\init.ts`   |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

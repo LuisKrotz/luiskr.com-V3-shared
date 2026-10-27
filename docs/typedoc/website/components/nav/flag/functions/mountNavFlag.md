@@ -8,7 +8,7 @@
 function mountNavFlag(host): void
 ```
 
-Defined in: website/components/nav/flag.tsx:102
+Defined in: website/components/nav/flag.tsx:105
 
 Creates the FlagWebGL instance on the flag button's canvas.
 

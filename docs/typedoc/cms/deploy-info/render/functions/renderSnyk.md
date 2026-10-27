@@ -8,7 +8,7 @@
 function renderSnyk(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:181
+Defined in: cms/deploy-info/render.tsx:518
 
 Renders the dependency vulnerability scan (Snyk or yarn-audit fallback).
 

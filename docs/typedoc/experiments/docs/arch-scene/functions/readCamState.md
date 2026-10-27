@@ -8,7 +8,7 @@
 function readCamState(): SceneCamState | null
 ```
 
-Defined in: experiments/docs/arch-scene.ts:216
+Defined in: experiments/docs/arch-scene.ts:972
 
 Reads the session-persisted camera pose — null when storage is
 unavailable (tests, privacy mode) or the payload is malformed.

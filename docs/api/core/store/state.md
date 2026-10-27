@@ -1,10 +1,10 @@
-# `core/store/state.ts`
+# `core\store\state.ts`
 
 StoreState shape + initial-state factory — locale nodes,
 
-| | |
-|---|---|
-| **Source** | `src/core/store/state.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\store\state.ts`                                 |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -34,6 +34,14 @@ the box before the asset lands), and the video discriminator.
 
 ### (module scope)
 
+Viewport-space rectangle the expand-modal genie transition warps
+from/to — the clicked figure's `getBoundingClientRect()` snapshot.
+Kept on the descriptor (not the media item) because it's transition
+state, not media data; null on deep-link auto-opens (the genie
+resolves the figure at mount time instead).
+
+### (module scope)
+
 Expand-modal descriptor written by MediaExpanded and read by the modal
 component: `open` drives mount/visibility, `class` carries the figure's
 orientation class so the lightbox inherits aspect styling, `transform` is
@@ -56,6 +64,7 @@ the translation payload contract).
 One named mutation: receives an optional payload, mutates store.state,
 and returns `false` to suppress notify() for no-op writes (any other
 return value means "state changed, fan out").
+
 - `@param` _payload Caller-supplied mutation input.
 
 ### (module scope)
@@ -66,6 +75,7 @@ Map of mutation name → mutator built by createMutations().
 
 Subscriber callback — invoked by notify() with the state bag after every
 commit that didn't suppress notification.
+
 - `@param` _state The post-mutation state.
 
 ### (module scope)

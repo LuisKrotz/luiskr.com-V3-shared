@@ -1,31 +1,37 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/classes/nav](../README.md) / NAV\_CLASSES
 
 ```ts
 const NAV_CLASSES: Readonly<{
-  NAV: "nav";
-  NAV_LINK: "nav-link";
-  NAV_LINK_ACTIVE: "router-link-exact-active";
-  NAV_ON_DARK: "nav--on-dark";
-  NAV_PLAYGROUND: "nav--playground";
-  NAV_DESKTOP: "nav-desktop";
-  NAV_DESKTOP_RIGHT: "nav-desktop-right";
-  NAV_SEPARATOR: "nav-separator";
-  NAV_MOBILE_STRIP: "nav-mobile-strip";
-  NAV_LOGO_BTN: "nav-logo-btn";
-  NAV_ABOUT_BTN: "nav-about-btn";
-  NAV_ACTION_BTN: "nav-action-btn";
-  NAV_PREF_BTN: "nav-pref-btn";
-  NAV_LANG_OPEN_BTN: "nav-lang-open-btn";
-  NAV_FLAG_WRAPPER: "nav-flag-wrapper";
-  NAV_BACK: "back";
-  NAV_SELECTED_WORK: "selected-work";
-  NAV_SCROLL_DOWN: "scroll-down";
-  NAV_ACTIVE: "active";
-}>;
+  NAV: 'nav'
+  NAV_LINK: 'nav-link'
+  NAV_LINK_ACTIVE: 'router-link-exact-active'
+  NAV_ON_DARK: 'nav--on-dark'
+  NAV_PLAYGROUND: 'nav--playground'
+  NAV_DESKTOP: 'nav-desktop'
+  NAV_DESKTOP_RIGHT: 'nav-desktop-right'
+  NAV_SEPARATOR: 'nav-separator'
+  NAV_MOBILE_STRIP: 'nav-mobile-strip'
+  NAV_LOGO_BTN: 'nav-logo-btn'
+  NAV_FLAG_BTN: 'nav-flag-btn'
+  NAV_FLAG_LABEL: 'nav-flag-label'
+  NAV_GEAR_BTN: 'nav-gear-btn'
+  NAV_GEAR_SVG: 'nav-gear-svg'
+  NAV_GEAR_ROTOR: 'nav-gear-rotor'
+  NAV_GEAR_GLINT: 'nav-gear-glint'
+  NAV_ABOUT_BTN: 'nav-about-btn'
+  NAV_ACTION_BTN: 'nav-action-btn'
+  NAV_PREF_BTN: 'nav-pref-btn'
+  NAV_LANG_OPEN_BTN: 'nav-lang-open-btn'
+  NAV_FLAG_WRAPPER: 'nav-flag-wrapper'
+  NAV_BACK: 'back'
+  NAV_SELECTED_WORK: 'selected-work'
+  NAV_SCROLL_DOWN: 'scroll-down'
+  NAV_ACTIVE: 'active'
+}>
 ```
 
 Defined in: core/tokens/classes/nav.ts:20

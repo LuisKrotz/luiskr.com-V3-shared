@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/menu-background/loop](../README.md) / start
 
 ```ts
-function start(host): void;
+function start(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:31
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:32
 
 Begins the render loop on menu open: resamples theme inks, sizes the
 buffer, attaches the ResizeObserver, and either starts RAF or — under

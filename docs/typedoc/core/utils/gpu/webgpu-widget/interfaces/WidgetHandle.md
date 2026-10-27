@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/gpu/webgpu-widget](../README.md) / WidgetHandle
 
-Defined in: core/utils/gpu/webgpu-widget.ts:71
+Defined in: core/utils/gpu/webgpu-widget.ts:72
 
 Live widget handle returned by `mountWebGpuWidget`.
 
@@ -16,7 +16,7 @@ Live widget handle returned by `mountWebGpuWidget`.
 canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:73
+Defined in: core/utils/gpu/webgpu-widget.ts:74
 
 The canvas the widget draws into (the caller's element).
 
@@ -28,7 +28,7 @@ The canvas the widget draws into (the caller's element).
 widget: WasmWidget
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:81
+Defined in: core/utils/gpu/webgpu-widget.ts:82
 
 The wasm widget instance — kind-specific methods
 (`set_state`, `tap`, `click`, `upload_textures`, `write_sheet`,
@@ -44,7 +44,7 @@ The wasm widget instance — kind-specific methods
 optional probe?: (ms) => Promise<number | null>;
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:90
+Defined in: core/utils/gpu/webgpu-widget.ts:91
 
 Worker-routed probes — renders an end-state frame and reports the
 painted-pixel coverage ratio of the live canvas. Present only on
@@ -69,7 +69,7 @@ caller); returns null on failure.
 destroy(): void;
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:83
+Defined in: core/utils/gpu/webgpu-widget.ts:84
 
 Tears down the rAF loop + listeners (the canvas is caller-owned).
 

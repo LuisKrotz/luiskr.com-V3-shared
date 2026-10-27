@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / website/components/nav/menu
 
@@ -12,7 +12,6 @@
 
 - [navBurgerCanvas](functions/navBurgerCanvas.md)
 - [navMenuCanvas](functions/navMenuCanvas.md)
-- [navMenuCloseCanvas](functions/navMenuCloseCanvas.md)
 - [toggleNavMenu](functions/toggleNavMenu.md)
 - [openNavMenu](functions/openNavMenu.md)
 - [mountNavMenuWebGL](functions/mountNavMenuWebGL.md)

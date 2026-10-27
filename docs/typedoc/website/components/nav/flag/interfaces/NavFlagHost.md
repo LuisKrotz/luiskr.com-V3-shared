@@ -17,12 +17,14 @@ Host surface the flag helpers need (satisfied by AppNav).
 ### \_navFlags
 
 ```ts
-_navFlags: FlagWebGL[];
+_navFlags:
+  | FlagWebGL[]
+| Set<FlagWebGL>;
 ```
 
 Defined in: website/components/nav/flag.tsx:27
 
-Live flag widgets (max one — the menu flag).
+Live flag widgets (max one — the menu flag); a Set works too.
 
 ---
 

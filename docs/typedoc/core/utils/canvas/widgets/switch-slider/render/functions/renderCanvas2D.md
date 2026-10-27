@@ -8,7 +8,7 @@
 function renderCanvas2D(host, now): void
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider/render.ts:136
+Defined in: core/utils/canvas/widgets/switch-slider/render.ts:137
 
 Per-frame Canvas2D fallback render — same visual language as the shader.
 

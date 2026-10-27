@@ -8,7 +8,7 @@
 function mountWebGLControls(host): void
 ```
 
-Defined in: website/components/dialogs/preferences/webgl.ts:144
+Defined in: website/components/dialogs/preferences/webgl.ts:146
 
 Mounts all WebGL widgets onto the freshly rendered canvases.
 

@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
+import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..', '..', '..')
@@ -66,29 +67,29 @@ for (const loc of locales) {
 
   if (!tr) continue
 
-  console.log(`Uploading searchThemes for locale [${loc}]...`)
+  console.log(`Uploading ${SEARCH_THEMES_KEY} for locale [${loc}]...`)
 
   for (const [pageKey, page] of Object.entries(tr.pages || {})) {
-    if (!Array.isArray(page?.searchThemes) || !page.searchThemes.length) continue
+    if (!Array.isArray(page?.[SEARCH_THEMES_KEY]) || !page[SEARCH_THEMES_KEY].length) continue
 
     push(
-      `/translations/${loc}/pages/${pageKey}/searchThemes`,
-      page.searchThemes,
+      `/translations/${loc}/pages/${pageKey}/${SEARCH_THEMES_KEY}`,
+      page[SEARCH_THEMES_KEY],
       `${loc}-p-${pageKey}`
     )
     pushed++
   }
 
   for (const [slug, project] of Object.entries(tr.projects || {})) {
-    if (!Array.isArray(project?.searchThemes) || !project.searchThemes.length) continue
+    if (!Array.isArray(project?.[SEARCH_THEMES_KEY]) || !project[SEARCH_THEMES_KEY].length) continue
 
     push(
-      `/translations/${loc}/projects/${slug}/searchThemes`,
-      project.searchThemes,
+      `/translations/${loc}/projects/${slug}/${SEARCH_THEMES_KEY}`,
+      project[SEARCH_THEMES_KEY],
       `${loc}-j-${slug}`
     )
     pushed++
   }
 }
 
-console.log(`🎉 Finished uploading ${pushed} searchThemes nodes to Firebase!`)
+console.log(`🎉 Finished uploading ${pushed} ${SEARCH_THEMES_KEY} nodes to Firebase!`)

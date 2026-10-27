@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/runtime/state](../README.md) / EarthState
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:114
+Defined in: experiments/earth-playground/earth/runtime/state.ts:115
 
 The single mutable bag for the whole engine — every async-created GPU
 handle is nullable because bootstrap fills them progressively and a
@@ -15,64 +15,64 @@ mid-boot dispose must see exactly what's live.
 ### animId
 
 ```ts
-animId: number | null;
+animId: number | null
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:116
+Defined in: experiments/earth-playground/earth/runtime/state.ts:117
 
 RAF handle for the render loop; null while paused/reduced-motion.
 
-***
+---
 
 ### disposed
 
 ```ts
-disposed: boolean;
+disposed: boolean
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:119
+Defined in: experiments/earth-playground/earth/runtime/state.ts:120
 
 Set by destroy(); checked after every await so a mid-load dispose
- aborts scene assembly without touching the GPU again.
+aborts scene assembly without touching the GPU again.
 
-***
+---
 
 ### reduced
 
 ```ts
-reduced: boolean;
+reduced: boolean
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:121
+Defined in: experiments/earth-playground/earth/runtime/state.ts:122
 
 Mirrors the store's reduced-motion flag; freezes the loop.
 
-***
+---
 
 ### failed
 
 ```ts
-failed: boolean;
+failed: boolean
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:124
+Defined in: experiments/earth-playground/earth/runtime/state.ts:125
 
 Set when bootstrap threw or bailed before the scene assembled — the
- host swaps in the CSS fallback surface instead of a dead canvas.
+host swaps in the CSS fallback surface instead of a dead canvas.
 
-***
+---
 
 ### isDarkTheme
 
 ```ts
-isDarkTheme: boolean;
+isDarkTheme: boolean
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:126
+Defined in: experiments/earth-playground/earth/runtime/state.ts:127
 
 UI theme flag — stored for the sun-rotation feature (not yet wired).
 
-***
+---
 
 ### onReady
 
@@ -80,319 +80,343 @@ UI theme flag — stored for the sun-rotation feature (not yet wired).
 onReady: (() => void) | null | undefined;
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:127
+Defined in: experiments/earth-playground/earth/runtime/state.ts:128
 
-***
+---
 
 ### onProgress
 
 ```ts
-onProgress: EarthProgressFn | null;
-```
-
-Defined in: experiments/earth-playground/earth/runtime/state.ts:128
-
-***
-
-### canvas
-
-```ts
-canvas: HTMLCanvasElement | null;
+onProgress: EarthProgressFn | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:129
 
-***
+---
 
-### renderer
+### canvas
 
 ```ts
-renderer: WebGPURenderer | null;
+canvas: HTMLCanvasElement | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:130
 
-***
+---
 
-### scene
+### renderer
 
 ```ts
-scene: Scene<Object3DEventMap> | null;
+renderer: WebGPURenderer | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:131
 
-***
+---
 
-### camera
+### scene
 
 ```ts
-camera: PerspectiveCamera | null;
+scene: Scene<Object3DEventMap> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:132
 
-***
+---
 
-### controls
+### camera
 
 ```ts
-controls: OrbitControls | null;
+camera: PerspectiveCamera | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:133
 
-***
+---
 
-### pipeline
+### controls
 
 ```ts
-pipeline: RenderPipeline | null;
+controls: OrbitControls | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:134
 
-***
+---
 
-### earth
+### pipeline
 
 ```ts
-earth: Group<Object3DEventMap> | null;
+pipeline: RenderPipeline | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:135
 
-***
+---
 
-### moon
+### earth
 
 ```ts
-moon: LOD<Object3DEventMap> | null;
+earth: Group<Object3DEventMap> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:136
 
-***
+---
 
-### sunMesh
+### moon
 
 ```ts
-sunMesh: 
-  | Mesh<BufferGeometry<NormalBufferAttributes, BufferGeometryEventMap>, Material<MaterialEventMap> | Material<MaterialEventMap>[], Object3DEventMap>
-  | null;
+moon: LOD<Object3DEventMap> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:137
 
-***
+---
 
-### sunLight
-
-```ts
-sunLight: DirectionalLight | null;
-```
-
-Defined in: experiments/earth-playground/earth/runtime/state.ts:138
-
-***
-
-### loader
+### sunMesh
 
 ```ts
-loader: TextureLoader | null;
-```
-
-Defined in: experiments/earth-playground/earth/runtime/state.ts:139
-
-***
-
-### cloudsMesh
-
-```ts
-cloudsMesh: 
+sunMesh:
   | Mesh<BufferGeometry<NormalBufferAttributes, BufferGeometryEventMap>, Material<MaterialEventMap> | Material<MaterialEventMap>[], Object3DEventMap>
   | null;
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:140
+Defined in: experiments/earth-playground/earth/runtime/state.ts:138
 
-***
+---
 
-### sunDirU
+### sunLight
 
 ```ts
-sunDirU: UniformNode<"vec3", Vector3> | null;
+sunLight: DirectionalLight | null
+```
+
+Defined in: experiments/earth-playground/earth/runtime/state.ts:139
+
+---
+
+### loader
+
+```ts
+loader: TextureLoader | null
+```
+
+Defined in: experiments/earth-playground/earth/runtime/state.ts:140
+
+---
+
+### cloudsMesh
+
+```ts
+cloudsMesh:
+  | Mesh<BufferGeometry<NormalBufferAttributes, BufferGeometryEventMap>, Material<MaterialEventMap> | Material<MaterialEventMap>[], Object3DEventMap>
+  | null;
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:141
 
-***
+---
 
-### moonPosU
+### sunDirU
 
 ```ts
-moonPosU: UniformNode<"vec3", Vector3> | null;
+sunDirU: UniformNode<'vec3', Vector3> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:142
 
-***
+---
 
-### cgUniforms
+### moonPosU
 
 ```ts
-cgUniforms: Record<string, UniformNode<"float", number>> | null;
+moonPosU: UniformNode<'vec3', Vector3> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:143
 
-***
+---
 
-### caUniforms
+### cgUniforms
 
 ```ts
-caUniforms: Record<string, UniformNode<"float", number>> | null;
+cgUniforms: Record<string, UniformNode<'float', number>> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:144
 
-***
+---
 
-### vigUniforms
+### caUniforms
 
 ```ts
-vigUniforms: Record<string, UniformNode<"float", number>> | null;
+caUniforms: Record<string, UniformNode<'float', number>> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:145
 
-***
+---
 
-### filmU
+### vigUniforms
 
 ```ts
-filmU: UniformNode<"float", number> | null;
+vigUniforms: Record<string, UniformNode<'float', number>> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:146
 
-***
+---
 
-### bloomPass
+### filmU
 
 ```ts
-bloomPass: BloomNode | null;
+filmU: UniformNode<'float', number> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:147
 
-***
+---
 
-### earthMatUniforms
+### bloomPass
 
 ```ts
-earthMatUniforms: Record<string, UniformNode<"float", number>> | null;
+bloomPass: BloomNode | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:148
 
-***
+---
 
-### sun
+### earthMatUniforms
 
 ```ts
-sun: EarthSunState | null;
+earthMatUniforms: Record<string, UniformNode<'float', number>> | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:149
 
-***
+---
 
-### moonCfg
+### sun
 
 ```ts
-moonCfg: EarthMoonState | null;
+sun: EarthSunState | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:150
 
-***
+---
 
-### earthSpin
+### moonCfg
 
 ```ts
-earthSpin: EarthSpinState | null;
+moonCfg: EarthMoonState | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:151
 
-***
+---
 
-### bloom
+### earthSpin
 
 ```ts
-bloom: EarthBloomState | null;
+earthSpin: EarthSpinState | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:152
 
-***
+---
 
-### ca
+### bloom
 
 ```ts
-ca: EarthCaState | null;
+bloom: EarthBloomState | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:153
 
-***
+---
 
-### vig
+### ca
 
 ```ts
-vig: EarthVigState | null;
+ca: EarthCaState | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:154
 
-***
+---
 
-### film
+### vig
 
 ```ts
-film: EarthFilmState | null;
+vig: EarthVigState | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:155
 
-***
+---
 
-### cg
+### film
 
 ```ts
-cg: EarthGradeState | null;
+film: EarthFilmState | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:156
 
-***
+---
 
-### render
+### cg
 
 ```ts
-render: object;
+cg: EarthGradeState | null
 ```
 
 Defined in: experiments/earth-playground/earth/runtime/state.ts:157
 
+---
+
+### render
+
+```ts
+render: object
+```
+
+Defined in: experiments/earth-playground/earth/runtime/state.ts:158
+
 #### resolutionScale
 
 ```ts
-resolutionScale: number;
+resolutionScale: number
 ```
 
-***
+#### predictor
+
+```ts
+predictor: FrameTimePredictor
+```
+
+ML frame-time predictor — adaptive pixel-ratio quality driver.
+
+#### lastFrameMs
+
+```ts
+lastFrameMs: number
+```
+
+Timestamp of the previous tick — predictor's frame-delta input.
+
+#### appliedQuality
+
+```ts
+appliedQuality: number
+```
+
+Last quality applied to the renderer — dedupes setPixelRatio.
+
+---
 
 ### onResize
 
@@ -400,6 +424,6 @@ resolutionScale: number;
 onResize: (() => void) | null;
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:159
+Defined in: experiments/earth-playground/earth/runtime/state.ts:168
 
 Stable resize-listener identity so destroy() can removeEventListener.

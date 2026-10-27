@@ -1,10 +1,10 @@
-# `core/locale/reader-content.ts`
+# `core\locale\reader-content.ts`
 
 Keeps the reader-content &lt;article&gt; in sync with SPA
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/locale/reader-content.ts`                       |
+| **Source**     | `src/core\locale\reader-content.ts`                       |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

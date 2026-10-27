@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/menu-background/loop](../README.md) / release
 
 ```ts
-function release(host): void;
+function release(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:70
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:71
 
 Eases the reveal back to 0 — used when the menu closes so the field
 dissolves instead of cutting out. Rendering continues until stop()

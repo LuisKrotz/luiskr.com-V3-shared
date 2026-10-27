@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/state.ts`
+# `experiments\star-field\engine\state.ts`
 
 Factory for the star-field engine state bag — one mutable
 
-| | |
-|---|---|
-| **Source** | `src/experiments/star-field/engine/state.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\star-field\engine\state.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -23,6 +23,7 @@ swaps in the 2D fallback instead of leaving a dead canvas.
 Builds the initial engine state — everything null/empty until bootstrap
 fills it; `disposed`/`failed`/`reduced` are the flags every async stage
 re-checks before touching the scene.
+
 - `@param` canvas Persistent canvas the host renders into.
 - `@param` events Host callbacks (ready/progress/select/approach/hover).
 - `@returns` Fresh SFState.

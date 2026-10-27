@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/gpu/npu-predict](../README.md) / PredictionResult
 
-Defined in: core/utils/gpu/npu-predict.ts:31
+Defined in: core/utils/gpu/npu-predict.ts:33
 
 Outcome of one likelihood prediction.
 
@@ -13,14 +13,14 @@ Outcome of one likelihood prediction.
 ### probability
 
 ```ts
-probability: number;
+probability: number
 ```
 
-Defined in: core/utils/gpu/npu-predict.ts:33
+Defined in: core/utils/gpu/npu-predict.ts:35
 
 Estimated navigation probability 0–1.
 
-***
+---
 
 ### preloaded?
 
@@ -28,11 +28,11 @@ Estimated navigation probability 0–1.
 optional preloaded?: boolean;
 ```
 
-Defined in: core/utils/gpu/npu-predict.ts:35
+Defined in: core/utils/gpu/npu-predict.ts:37
 
 true when the target was already prefetched.
 
-***
+---
 
 ### npuAccelerated?
 
@@ -40,11 +40,11 @@ true when the target was already prefetched.
 optional npuAccelerated?: boolean;
 ```
 
-Defined in: core/utils/gpu/npu-predict.ts:37
+Defined in: core/utils/gpu/npu-predict.ts:39
 
 Which tier scored it — WebNN NPU.
 
-***
+---
 
 ### gpuAccelerated?
 
@@ -52,6 +52,6 @@ Which tier scored it — WebNN NPU.
 optional gpuAccelerated?: boolean;
 ```
 
-Defined in: core/utils/gpu/npu-predict.ts:39
+Defined in: core/utils/gpu/npu-predict.ts:41
 
 Which tier scored it — shared GPU.

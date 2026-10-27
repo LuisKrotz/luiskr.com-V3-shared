@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/dialogs/preferences/types](../README.md) / PrefNode
 
@@ -13,43 +13,43 @@ Defined in: website/components/dialogs/preferences/types.ts:14
 ### title
 
 ```ts
-title: string;
+title: string
 ```
 
 Defined in: website/components/dialogs/preferences/types.ts:16
 
 Dialog heading.
 
-***
+---
 
 ### done
 
 ```ts
-done: string;
+done: string
 ```
 
 Defined in: website/components/dialogs/preferences/types.ts:18
 
 Confirmation text after the apply action.
 
-***
+---
 
 ### closeLabel
 
 ```ts
-closeLabel: string;
+closeLabel: string
 ```
 
 Defined in: website/components/dialogs/preferences/types.ts:20
 
 aria-label for the close button.
 
-***
+---
 
 ### appearance
 
 ```ts
-appearance: object;
+appearance: object
 ```
 
 Defined in: website/components/dialogs/preferences/types.ts:22
@@ -59,7 +59,7 @@ Appearance section — theme picker copy.
 #### title
 
 ```ts
-title: string;
+title: string
 ```
 
 Section heading.
@@ -67,7 +67,7 @@ Section heading.
 #### desc
 
 ```ts
-desc: string;
+desc: string
 ```
 
 Section description under the heading.
@@ -75,7 +75,7 @@ Section description under the heading.
 #### dark
 
 ```ts
-dark: PrefThemeOption;
+dark: PrefThemeOption
 ```
 
 Dark-theme radio option.
@@ -83,7 +83,7 @@ Dark-theme radio option.
 #### system
 
 ```ts
-system: PrefThemeOption;
+system: PrefThemeOption
 ```
 
 Follow-OS radio option.
@@ -91,67 +91,43 @@ Follow-OS radio option.
 #### light
 
 ```ts
-light: PrefThemeOption;
+light: PrefThemeOption
 ```
 
 Light-theme radio option.
 
-***
+---
 
-### devTools
+### a11y
 
 ```ts
-devTools: object;
+a11y: object
 ```
 
 Defined in: website/components/dialogs/preferences/types.ts:35
 
-Developer-tools section — diagnostic toggles copy.
+Accessibility section — contrast and motion toggles copy.
 
 #### title
 
 ```ts
-title: string;
+title: string
 ```
 
 Section heading.
 
-#### statsForNerds
+#### desc
 
 ```ts
-statsForNerds: string;
+desc: string
 ```
 
-Label for the stats-for-nerds toggle.
-
-#### statsForNerdsDesc
-
-```ts
-statsForNerdsDesc: string;
-```
-
-Description under the stats toggle.
-
-#### showGrid
-
-```ts
-showGrid: string;
-```
-
-Label for the layout-grid overlay toggle.
-
-#### showGridDesc
-
-```ts
-showGridDesc: string;
-```
-
-Description under the grid toggle.
+Section description under the heading.
 
 #### reducedMotion
 
 ```ts
-reducedMotion: string;
+reducedMotion: string
 ```
 
 Label for the reduced-motion override toggle.
@@ -159,7 +135,75 @@ Label for the reduced-motion override toggle.
 #### reducedMotionDesc
 
 ```ts
-reducedMotionDesc: string;
+reducedMotionDesc: string
 ```
 
 Description under the reduced-motion toggle.
+
+#### highContrast
+
+```ts
+highContrast: string
+```
+
+Label for the high-contrast toggle.
+
+#### highContrastDesc
+
+```ts
+highContrastDesc: string
+```
+
+Description under the high-contrast toggle.
+
+---
+
+### devTools
+
+```ts
+devTools: object
+```
+
+Defined in: website/components/dialogs/preferences/types.ts:50
+
+Developer-tools section — diagnostic toggles copy.
+
+#### title
+
+```ts
+title: string
+```
+
+Section heading.
+
+#### statsForNerds
+
+```ts
+statsForNerds: string
+```
+
+Label for the stats-for-nerds toggle.
+
+#### statsForNerdsDesc
+
+```ts
+statsForNerdsDesc: string
+```
+
+Description under the stats toggle.
+
+#### showGrid
+
+```ts
+showGrid: string
+```
+
+Label for the layout-grid overlay toggle.
+
+#### showGridDesc
+
+```ts
+showGridDesc: string
+```
+
+Description under the grid toggle.

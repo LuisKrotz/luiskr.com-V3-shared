@@ -1,8 +1,8 @@
-# `website/components/dialogs/preferences/sync.ts`
+# `website\components\dialogs\preferences\sync.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/dialogs/preferences/sync.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\dialogs\preferences\sync.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

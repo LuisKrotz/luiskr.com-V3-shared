@@ -8,7 +8,7 @@
 function webgpuWidgetsEnabled(): boolean
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:109
+Defined in: core/utils/gpu/webgpu-widget.ts:110
 
 `webgpuWidgetsEnabled` — the layer kill-switch. The WebGPU widget
 mounts (worker `OffscreenCanvas` route OR in-page) only run under

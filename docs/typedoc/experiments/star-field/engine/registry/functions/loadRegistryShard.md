@@ -8,7 +8,7 @@
 function loadRegistryShard(kind, shardIx): Promise<SFRegistryRecord[] | null>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:130
+Defined in: experiments/star-field/engine/registry.ts:134
 
 Fetches (or returns the cached promise for) one 1,000-record shard —
 shards are the lazy-load unit so browsing the catalogue never pulls

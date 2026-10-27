@@ -1,11 +1,11 @@
-# `shared/scripts/scaffold/new-experiment.mjs`
+# `shared\scripts\scaffold\new-experiment.mjs`
 
 Scaffolds a new experiment workspace under experiments/&lt;name&gt;/
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/scaffold/new-experiment.mjs`                          |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\scaffold\new-experiment.mjs`        |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

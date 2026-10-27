@@ -1,10 +1,10 @@
-# `cms/tokens/editors/deploy.ts`
+# `cms\tokens\editors\deploy.ts`
 
 Deploy-info classes — score badges and deploy report table.
 
-| | |
-|---|---|
-| **Source** | `src/cms/tokens/editors/deploy.ts` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\tokens\editors\deploy.ts`              |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members

@@ -1,8 +1,8 @@
-# `website/components/portfolio/related/types.ts`
+# `website\components\portfolio\related\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/portfolio/related/types.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\portfolio\related\types.ts`     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -31,6 +31,22 @@ join key, `image`/`label`/`title`/`description` fill the card.
 
 ### (module scope)
 
+[main, scaled] cover pixel widths as stored in the DB row.
+
+### (module scope)
+
+[main, scaled] cover pixel heights — same pairing as `width`.
+
+### (module scope)
+
 The resolved display card — every field concrete (no optionals) because
 hydration already merged the pointer row with its home-list data. `fullPath` is
 the computed route to the project page.
+
+### `imageW`
+
+Cover's intrinsic width — 0 when the home row carries no dims.
+
+### `imageH`
+
+Cover's intrinsic height — pairs with `imageW`.

@@ -8,7 +8,7 @@
 const _B_EXPAND_MODAL_GENIE: 'expand-modal-genie'
 ```
 
-Defined in: core/tokens/base.ts:283
+Defined in: core/tokens/base.ts:288
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

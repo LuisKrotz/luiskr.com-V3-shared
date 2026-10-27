@@ -8,7 +8,7 @@
 const SOURCE_YEAR_TOKEN: '{year}' = '{year}'
 ```
 
-Defined in: core/tokens/data/component-keys.ts:66
+Defined in: core/tokens/data/component-keys.ts:67
 
 Placeholder inside `source-code.rights` translations — the renderers swap
 it for the live `new Date().getFullYear()` so the copyright line never

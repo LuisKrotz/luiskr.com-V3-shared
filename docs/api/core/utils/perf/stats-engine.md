@@ -1,10 +1,10 @@
-# `core/utils/perf/stats-engine.ts`
+# `core\utils\perf\stats-engine.ts`
 
 Live performance-metrics collector behind the Stats-for-nerds
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/perf/stats-engine.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\perf\stats-engine.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -130,12 +130,14 @@ Whether samplers are currently live.
 
 Registers a metrics callback and cold-starts the observers if needed —
 lazy start keeps the engine free until the HUD opens.
+
 - `@param` fn Subscriber receiving each StatsSnapshot.
 
 ### `unsubscribe`
 
 Removes a callback; tears down all sampling when the last one leaves
 so a closed HUD leaves zero observers running.
+
 - `@param` fn The callback to remove.
 
 ### `getSnapshot`

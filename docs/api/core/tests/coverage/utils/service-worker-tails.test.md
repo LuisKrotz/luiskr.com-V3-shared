@@ -1,10 +1,10 @@
-# `core/tests/coverage/utils/service-worker-tails.test.js`
+# `core\tests\coverage\utils\service-worker-tails.test.js`
 
 Coverage tail for utils/service-worker.ts — the local
 
 |                |                                                              |
 | -------------- | ------------------------------------------------------------ |
-| **Source**     | `src/core/tests/coverage/utils/service-worker-tails.test.js` |
+| **Source**     | `src/core\tests\coverage\utils\service-worker-tails.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.    |
 
 ## Members

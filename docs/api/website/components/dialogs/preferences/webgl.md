@@ -1,8 +1,8 @@
-# `website/components/dialogs/preferences/webgl.ts`
+# `website\components\dialogs\preferences\webgl.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/dialogs/preferences/webgl.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\dialogs\preferences\webgl.ts`   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -26,6 +26,13 @@ Mounts one SwitchWebGL per `data-switch` canvas.
 ### `mountCloseButton`
 
 Mounts the header close button on its live canvas.
+
+### `mountDoneBrackets`
+
+Mounts the corner-brackets WebGPU widget on the done button. The
+overlay canvas is a button child — re-renders remove it with the
+button, so a stored teardown whose button left the DOM is dropped and
+a fresh mount attempted (mountCornerBrackets no-ops without WebGPU).
 
 ### `mountWebGLControls`
 

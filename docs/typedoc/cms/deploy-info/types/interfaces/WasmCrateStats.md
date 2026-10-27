@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/types](../README.md) / WasmCrateStats
 
-Defined in: cms/deploy-info/types.ts:105
+Defined in: cms/deploy-info/types.ts:138
 
 One wasm artifact crate row — .wasm module bytes + .js glue bytes.
 
@@ -16,7 +16,7 @@ One wasm artifact crate row — .wasm module bytes + .js glue bytes.
 optional crate?: string;
 ```
 
-Defined in: cms/deploy-info/types.ts:106
+Defined in: cms/deploy-info/types.ts:139
 
 ---
 
@@ -26,7 +26,7 @@ Defined in: cms/deploy-info/types.ts:106
 optional files?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:107
+Defined in: cms/deploy-info/types.ts:140
 
 ---
 
@@ -36,7 +36,7 @@ Defined in: cms/deploy-info/types.ts:107
 optional wasmBytes?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:108
+Defined in: cms/deploy-info/types.ts:141
 
 ---
 
@@ -46,7 +46,7 @@ Defined in: cms/deploy-info/types.ts:108
 optional jsBytes?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:109
+Defined in: cms/deploy-info/types.ts:142
 
 ---
 
@@ -56,4 +56,4 @@ Defined in: cms/deploy-info/types.ts:109
 optional jsFiles?: number;
 ```
 
-Defined in: cms/deploy-info/types.ts:110
+Defined in: cms/deploy-info/types.ts:143

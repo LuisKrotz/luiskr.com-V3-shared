@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFDossier
 
-Defined in: experiments/star-field/engine/types.ts:401
+Defined in: experiments/star-field/engine/types.ts:402
 
 Lazy-loaded dossier JSON shape — `public/data/<locale>/<id>.json`.
 Facts render as a definition list; `history`/`sections` are prose;
@@ -23,7 +23,7 @@ curated gallery; `meta` carries the acquisition/translation signature.
 id: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:402
+Defined in: experiments/star-field/engine/types.ts:403
 
 ---
 
@@ -33,7 +33,7 @@ Defined in: experiments/star-field/engine/types.ts:402
 name: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:403
+Defined in: experiments/star-field/engine/types.ts:404
 
 ---
 
@@ -43,7 +43,7 @@ Defined in: experiments/star-field/engine/types.ts:403
 kind: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:404
+Defined in: experiments/star-field/engine/types.ts:405
 
 ---
 
@@ -53,7 +53,7 @@ Defined in: experiments/star-field/engine/types.ts:404
 tagline: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:405
+Defined in: experiments/star-field/engine/types.ts:406
 
 ---
 
@@ -63,7 +63,7 @@ Defined in: experiments/star-field/engine/types.ts:405
 facts: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:406
+Defined in: experiments/star-field/engine/types.ts:407
 
 #### label
 
@@ -85,7 +85,7 @@ value: string
 history: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:407
+Defined in: experiments/star-field/engine/types.ts:408
 
 ---
 
@@ -95,7 +95,7 @@ Defined in: experiments/star-field/engine/types.ts:407
 source: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:408
+Defined in: experiments/star-field/engine/types.ts:409
 
 ---
 
@@ -105,7 +105,7 @@ Defined in: experiments/star-field/engine/types.ts:408
 optional sections?: SFDossierSection[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:410
+Defined in: experiments/star-field/engine/types.ts:411
 
 Optional prose subsections for deep-history bodies.
 
@@ -117,7 +117,7 @@ Optional prose subsections for deep-history bodies.
 optional media?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:412
+Defined in: experiments/star-field/engine/types.ts:413
 
 Downloaded gallery — images, videos, audio recordings.
 
@@ -147,6 +147,6 @@ optional audio?: SFDossierMedia[];
 optional meta?: SFDossierMeta;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:418
+Defined in: experiments/star-field/engine/types.ts:419
 
 Acquisition/translation signature.

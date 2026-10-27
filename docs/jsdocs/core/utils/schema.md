@@ -111,7 +111,7 @@ BreadcrumbList entity from an ordered crumb trail — positions are
 callers can spread the result unconditionally.
 
 - `@param` items Ordered crumbs ending at the current page.
-- `@param` id Optional @id the page entity's `breadcrumb` can point at.
+- `@param` id Optional entity identifier the page's `breadcrumb` can point at.
 - `@returns` BreadcrumbList entity or null.
 
 ### `generateRouteSchema`

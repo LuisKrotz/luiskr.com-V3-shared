@@ -8,7 +8,7 @@
 function carouselOnScroll(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:339
+Defined in: website/components/carousel/custom-carousel/nav.ts:348
 
 Scroll handler — debounces SCROLL_DEBOUNCE_MS (150ms) then runs the
 clone-teleport check. Skipped while isNavigating (a programmatic scroll

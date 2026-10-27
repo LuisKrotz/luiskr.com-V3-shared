@@ -1,11 +1,11 @@
-# `shared/scripts/verify/security-scan.mjs`
+# `shared\scripts\verify\security-scan.mjs`
 
 Dependency vulnerability scan. Primary engine: Snyk
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/verify/security-scan.mjs`                             |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\verify\security-scan.mjs`           |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

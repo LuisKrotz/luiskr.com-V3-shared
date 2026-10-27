@@ -59,6 +59,7 @@ import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
+import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 import { SP_CONTROL_GROUPS } from '../../../core/tokens/playground/control-groups.ts'
 import {
   SF_REGISTRY_INDEX_DIR,
@@ -494,10 +495,10 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
 
   /** Node's own searchThemes, else the snapshot's — undefined when none. */
   const themesOr = (node, loc, kind, key) =>
-    Array.isArray(node?.searchThemes) && node.searchThemes.length
-      ? node.searchThemes
-      : snapshotDb.translations?.[loc]?.[kind]?.[key]?.searchThemes ||
-        snapshotDb.translations?.en?.[kind]?.[key]?.searchThemes ||
+    Array.isArray(node?.[SEARCH_THEMES_KEY]) && node[SEARCH_THEMES_KEY].length
+      ? node[SEARCH_THEMES_KEY]
+      : snapshotDb.translations?.[loc]?.[kind]?.[key]?.[SEARCH_THEMES_KEY] ||
+        snapshotDb.translations?.en?.[kind]?.[key]?.[SEARCH_THEMES_KEY] ||
         undefined
 
   const mediaManifest = loadMediaManifest(META_DIR)
@@ -630,7 +631,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           bio,
           featured: home.featured || home.message,
           projects,
-          searchThemes: themesOr(home, loc, 'pages', 'HOME'),
+          [SEARCH_THEMES_KEY]: themesOr(home, loc, 'pages', 'HOME'),
         },
         media: homeMedia(loc),
       })
@@ -656,7 +657,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
             col1: (about.col1 || []).map(htmlToMd),
             col2: (about.col2 || []).map(htmlToMd),
           },
-          searchThemes: themesOr(about, loc, 'pages', 'about'),
+          [SEARCH_THEMES_KEY]: themesOr(about, loc, 'pages', 'about'),
         },
       })
     )
@@ -700,7 +701,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           title: contact.title,
           channels: contact.line1 || [],
           legal: contact.line2 || [],
-          searchThemes: themes,
+          [SEARCH_THEMES_KEY]: themes,
         },
       })
     )
@@ -740,7 +741,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         content: {
           name: pageName,
           sections,
-          searchThemes: themesOr(page, loc, 'pages', pageKey),
+          [SEARCH_THEMES_KEY]: themesOr(page, loc, 'pages', pageKey),
         },
       })
     )
@@ -775,7 +776,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         content: {
           description: htmlToMd(page.description || ''),
           records,
-          searchThemes: themesOr(page, loc, 'pages', 'animations'),
+          [SEARCH_THEMES_KEY]: themesOr(page, loc, 'pages', 'animations'),
         },
       })
     )
@@ -910,7 +911,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           ? {
               shareGallery: sfShareImgs,
               shareManifest: `${SITE_URL}${STAR_SHARE.MANIFEST_URL}`,
-              searchThemes: themesOr(page, loc, 'pages', 'star-field'),
+              [SEARCH_THEMES_KEY]: themesOr(page, loc, 'pages', 'star-field'),
             }
           : {}),
       },
@@ -1017,7 +1018,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
             ? {
                 shareGallery: shareImgs,
                 shareManifest: `${SITE_URL}${EARTH_SHARE.MANIFEST_URL}`,
-                searchThemes: themesOr(page, loc, 'pages', 'earth-playground'),
+                [SEARCH_THEMES_KEY]: themesOr(page, loc, 'pages', 'earth-playground'),
               }
             : {}),
         },
@@ -1119,7 +1120,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           cover,
           sections,
           mediaLinks,
-          searchThemes: themesOr(project, loc, 'projects', slug),
+          [SEARCH_THEMES_KEY]: themesOr(project, loc, 'projects', slug),
         },
         media: cover ? [cover, ...media] : media,
       })
@@ -1183,7 +1184,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           label: row.label,
           slug: row.slug,
           project: { slug, title: project.title || slug, route: `${SITE_URL}${projectRoute}` },
-          searchThemes: themesOr(project, loc, 'projects', slug),
+          [SEARCH_THEMES_KEY]: themesOr(project, loc, 'projects', slug),
         },
         media: [rec],
       })

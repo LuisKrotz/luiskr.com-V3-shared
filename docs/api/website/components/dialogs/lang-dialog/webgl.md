@@ -1,8 +1,8 @@
-# `website/components/dialogs/lang-dialog/webgl.ts`
+# `website\components\dialogs\lang-dialog\webgl.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/dialogs/lang-dialog/webgl.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\dialogs\lang-dialog\webgl.ts`   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

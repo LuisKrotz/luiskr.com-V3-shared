@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/flag/renderer.ts`
+# `core\utils\canvas\widgets\flag\renderer.ts`
 
 Shared WebGL renderer for FlagWebGL. One GL context serves
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/flag/renderer.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\flag\renderer.ts`          |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -46,6 +46,7 @@ Frees GL program, textures and buffers.
 Builds (once) and caches the flag's composited <img> for country code
 cc — composite means the base flag plus any overlays (e.g. the EU
 circle for split-locale flags) baked into one source image.
+
 - `@param` {string} cc
 - `@returns` {HTMLImageElement}
 

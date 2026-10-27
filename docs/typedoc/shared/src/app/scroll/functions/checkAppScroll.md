@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [shared/src/app/scroll](../README.md) / checkAppScroll
 
 ```ts
-function checkAppScroll(c): void;
+function checkAppScroll(c): void
 ```
 
-Defined in: shared/src/app/scroll.ts:38
+Defined in: shared/src/app/scroll.ts:43
 
 Checks app scroll.
 

@@ -8,7 +8,7 @@
 function tryWasm(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider/init.ts:90
+Defined in: core/utils/canvas/widgets/switch-slider/init.ts:91
 
 Attempts the WebGPU wasm switch (~48KB artifact, own GPUDevice).
 MANUAL drive: this class keeps its own spring loop, so the bridge

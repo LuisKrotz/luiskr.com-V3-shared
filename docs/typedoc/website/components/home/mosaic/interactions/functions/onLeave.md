@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/interactions](../README.md) / onLeave
 
 ```ts
-function onLeave(host): void;
+function onLeave(host): void
 ```
 
-Defined in: website/components/home/mosaic/interactions.ts:115
+Defined in: website/components/home/mosaic/interactions.ts:120
 
 Pointer-leave: clears hover state.
 

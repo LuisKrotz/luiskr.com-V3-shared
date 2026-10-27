@@ -1,10 +1,10 @@
-# `core/utils/gpu/gpu-accel.ts`
+# `core\utils\gpu\gpu-accel.ts`
 
 Hardware GPU acceleration singleton: a lazily-created
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/gpu/gpu-accel.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\gpu\gpu-accel.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -54,6 +54,7 @@ design; failures degrade silently to the CPU path.
 
 Compiles a GLSL stage on the lazy context; deletes + returns null on
 failure so a bad shader never leaks a shader object.
+
 - `@param` type gl.VERTEX_SHADER | gl.FRAGMENT_SHADER.
 - `@param` source GLSL source text.
 - `@returns` The compiled shader, or null.
@@ -63,6 +64,7 @@ failure so a bad shader never leaks a shader object.
 Promotes an element to its own GPU compositor layer (will-change +
 translate3d + backface-visibility) for smooth transforms. Root/body get
 scroll-position instead so scroll stays composited without a giant layer.
+
 - `@param` el Element to promote (no-op on null/styleless).
 
 ### `releaseElementGPU`
@@ -70,6 +72,7 @@ scroll-position instead so scroll stays composited without a giant layer.
 Reverses accelerateElementGPU — returns the element to normal
 compositing. Transform/backface are only cleared off root/body (those
 never got them, and clearing body transforms could clobber author styles).
+
 - `@param` el Element to release.
 
 ### (module scope)
@@ -86,6 +89,7 @@ primed) is the point.
 
 Uploads the current video frame to the GPU texture; needs readyState
 ≥ 2 (HAVE_CURRENT_DATA) — earlier states have no frame to upload.
+
 - `@param` videoEl Source video element.
 - `@param` targetW Upload width hint (defaults to VIDEO_DIMENSIONS default).
 - `@param` targetH Upload height hint.
@@ -94,6 +98,7 @@ Uploads the current video frame to the GPU texture; needs readyState
 ### `processImageGPU`
 
 Uploads an Image element to the GPU texture.
+
 - `@param` imageEl Source image element.
 - `@param` targetW Upload width hint.
 - `@param` targetH Upload height hint.
@@ -102,6 +107,7 @@ Uploads an Image element to the GPU texture.
 ### `processTextureGPU`
 
 Back-compat alias of processImageGPU — kept so older call sites keep working.
+
 - `@param` imageEl Source image element.
 - `@param` targetW Optional width hint.
 - `@param` targetH Optional height hint.
@@ -111,6 +117,7 @@ Back-compat alias of processImageGPU — kept so older call sites keep working.
 
 Uploads a pre-decoded ImageBitmap (from the WASM decoder path) —
 zero-copy into VRAM; the driver accepts ImageBitmap directly.
+
 - `@param` bitmap Decoded bitmap.
 - `@param` targetW Upload width hint.
 - `@param` targetH Upload height hint.

@@ -8,7 +8,7 @@
 function renderBundle(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:280
+Defined in: cms/deploy-info/render.tsx:621
 
 Renders the post-build bundle inventory (emitted sizes per type, tier, crate).
 

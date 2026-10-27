@@ -8,7 +8,7 @@
 function routeSlugs(lang): LangSlugMap
 ```
 
-Defined in: core/locale/ui-text.ts:62
+Defined in: core/locale/ui-text.ts:79
 
 Route slugs for a locale: CMS-editable overrides (translations/<loc>/slugs,
 loaded into store.lang.slugs) merged over the build-time LANG_SLUGS defaults.

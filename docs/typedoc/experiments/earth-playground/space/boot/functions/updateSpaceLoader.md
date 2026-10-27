@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/boot](../README.md) / updateSpaceLoader
 
 ```ts
-function updateSpaceLoader(
-   c, 
-   msg, 
-   pct
-): void;
+function updateSpaceLoader(c, msg, pct): void
 ```
 
-Defined in: experiments/earth-playground/space/boot.ts:29
+Defined in: experiments/earth-playground/space/boot.ts:30
 
 Mirrors an engine progress event into the loader overlay — message,
 rounded percent text, and the bar's width style. All three nodes are

@@ -1,10 +1,10 @@
-# `shared/src/App.tsx`
+# `shared\src\App.tsx`
 
 &lt;app-root&gt; — the application's shell custom element.
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/shared/src/App.tsx`                                |
+| **Source**     | `src/shared\src\App.tsx`                                |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -13,6 +13,10 @@
 
 Application shell element. Extends the shared BaseComponent (shadow DOM,
 scoped listeners, store subscription, _updateDom re-render pipeline).
+
+### `_scrollH`
+
+Cached document height — refreshed by updateSectionTops on body resize.
 
 ### `_docObserver`
 

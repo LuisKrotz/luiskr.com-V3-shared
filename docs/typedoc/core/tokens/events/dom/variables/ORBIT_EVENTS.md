@@ -12,7 +12,7 @@ const ORBIT_EVENTS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/events/dom.ts:150
+Defined in: core/tokens/events/dom.ts:156
 
 Frozen orbit-control event-name map — three.js OrbitControls lifecycle
 events (user gesture start/end, per-frame change).

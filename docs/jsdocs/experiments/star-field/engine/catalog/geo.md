@@ -2,9 +2,9 @@
 
 Shared chart-geometry helpers for the catalog — galactic-
 
-| | |
-|---|---|
-| **Source** | `src/experiments\star-field\engine\catalog\geo.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\star-field\engine\catalog\geo.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -15,6 +15,7 @@ Galactic-coordinate placement — every deep-sky body lands on its real
 galactic (l, b) direction at the multi-tier compressed distance, in the
 same tilted frame the Milky Way particle disc and the deep-field cloud
 render. Directions stay astronomically true; only radii compress.
+
 - `@param` l Galactic longitude in degrees.
 - `@param` b Galactic latitude in degrees.
 - `@param` dLy Heliocentric distance in light-years.
@@ -55,5 +56,6 @@ only the fly-to/zoom tier reveals.
 so internal proportions stay authored. Exported so coverage tails can
 pin every arm — no current solar def carries satellites, but the arm
 keeps a future moon-bearing def honest.
-- `@param` def Solar-tier body at authored diagram scale.
+
+- `@param` d Solar-tier body at authored diagram scale.
 - `@returns` Copy with every spatial field scaled by SOLAR_SCALE.

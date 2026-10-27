@@ -8,7 +8,7 @@
 function initRest(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider/init.ts:138
+Defined in: core/utils/canvas/widgets/switch-slider/init.ts:139
 
 The classic boot tail — WebGL attempt → 2D fallback → events +
 loop. Runs directly on no-WebGPU browsers and after a wasm mount

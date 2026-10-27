@@ -1,10 +1,10 @@
-# `core/tests/unit/browser/safari-patch-safari-patch-carouselmedia-patch.test.js`
+# `core\tests\unit\browser\safari-patch-safari-patch-carouselmedia-patch.test.js`
 
 Carousel-hosted media overrides — isCarouselHosted shadow-host
 
 |                |                                                                                     |
 | -------------- | ----------------------------------------------------------------------------------- |
-| **Source**     | `src/core/tests/unit/browser/safari-patch-safari-patch-carouselmedia-patch.test.js` |
+| **Source**     | `src/core\tests\unit\browser\safari-patch-safari-patch-carouselmedia-patch.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.                           |
 
 ## Members

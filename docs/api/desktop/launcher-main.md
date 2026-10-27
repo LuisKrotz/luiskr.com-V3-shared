@@ -1,10 +1,10 @@
-# `desktop/launcher-main.mjs`
+# `desktop\launcher-main.mjs`
 
 Electron launcher window for setup/run/verify/build.
 
 |                |                                                                     |
 | -------------- | ------------------------------------------------------------------- |
-| **Source**     | `src/desktop/launcher-main.mjs`                                     |
+| **Source**     | `src/desktop\launcher-main.mjs`                                     |
 | **UX surface** | Electron main/launcher/preload — wraps dist/ as an installable app. |
 
 ## Members

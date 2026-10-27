@@ -8,7 +8,7 @@
 const _B_CAROUSEL_BTN: 'carousel-btn'
 ```
 
-Defined in: core/tokens/base.ts:187
+Defined in: core/tokens/base.ts:192
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

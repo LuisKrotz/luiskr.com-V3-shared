@@ -90,6 +90,12 @@ Re-exports [CLIPBOARD_EVENTS](dom/variables/CLIPBOARD_EVENTS.md)
 
 ---
 
+### PRINT\_EVENTS
+
+Re-exports [PRINT_EVENTS](dom/variables/PRINT_EVENTS.md)
+
+---
+
 ### SW\_EVENTS
 
 Re-exports [SW_EVENTS](dom/variables/SW_EVENTS.md)

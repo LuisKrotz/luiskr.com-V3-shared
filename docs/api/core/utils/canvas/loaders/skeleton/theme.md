@@ -1,8 +1,8 @@
-# `core/utils/canvas/loaders/skeleton/theme.ts`
+# `core\utils\canvas\loaders\skeleton\theme.ts`
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/loaders/skeleton/theme.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\skeleton\theme.ts`         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

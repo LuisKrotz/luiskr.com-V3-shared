@@ -1,11 +1,11 @@
-# `experiments/earth-playground/earth/scene/surface-material.ts`
+# `experiments\earth-playground\earth\scene\surface-material.ts`
 
 Surface material node graph for the Earth shell —
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth/scene/surface-material.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                    |
+| -------------- | ------------------------------------------------------------------ |
+| **Source**     | `src/experiments\earth-playground\earth\scene\surface-material.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.            |
 
 ## Members
 
@@ -93,6 +93,6 @@ Bump-strength fade node (kills normal map at twilight).
 
 Builds the Earth's surface material — all TSL so the same node graph
 compiles to WGSL (WebGPU) or GLSL (WebGL fallback):
-  albedo × cloud-shadow × twilight-tint × terrain-self-shadow ×
-  eclipse-dim, specular-masked PBR, sun-faded bump, night-lights +
-  dark-side ambient emissive.
+albedo × cloud-shadow × twilight-tint × terrain-self-shadow ×
+eclipse-dim, specular-masked PBR, sun-faded bump, night-lights +
+dark-side ambient emissive.

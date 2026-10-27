@@ -1,8 +1,8 @@
-# `shared/local-modules/braces/lib/utils.js`
+# `shared\local-modules\braces\lib\utils.js`
 
-| | |
-|---|---|
-| **Source** | `src/shared/local-modules/braces/lib/utils.js` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\local-modules\braces\lib\utils.js`          |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

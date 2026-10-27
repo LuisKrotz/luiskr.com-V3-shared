@@ -1,11 +1,11 @@
-# `shared/build/docs/scan.mjs`
+# `shared\build\docs\scan.mjs`
 
 Filesystem → manifest tree for the docs portal.
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/docs/scan.mjs`                                         |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\build\docs\scan.mjs`                        |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -26,7 +26,17 @@ Extension → portal format tag.
 
 Directory entries never published, whatever the format. `tests` and
 per-module `reports`/`coverage` trees are reached through their own
-dedicated roots instead of leaking into a source bucket.
+dedicated roots instead of leaking into a source bucket. `coverage-run`
+is the transient raw-map staging dir jest writes before merge-coverage
+promotes it — publishable output lives under `coverage/` only.
+
+### `ILLEGAL_NAME`
+
+Entry names that can never be published: characters illegal in Windows
+filenames (`* ? " < > | :`) break `git checkout` on win32 clones, and
+`?`/`*` inside a URL path segment corrupt query/glob semantics for
+crawlers. Typedoc renders ambient `declare module '*.scss'` shims as
+directories named after the glob pattern — those must be skipped.
 
 ### `MEDIA_INLINE_LIMIT`
 
@@ -36,6 +46,25 @@ Largest media payload inlined as a data-URL (bytes on disk).
 
 Resolves a file extension to its format tag; unknown/binary shapes fall
 back to 'text' so every listed file still renders as readable HTML.
+
+### `byDirThenName`
+
+Manifest ordering — dirs before files, then alphabetically by name. The
+same convention scanDir produces via its dirs/files split; used to
+re-order the concatenated children of merged case-collision dirs.
+
+### `mergeCaseCollisions`
+
+Merges sibling nodes whose names collide case-insensitively — required
+because Windows checkouts live on case-insensitive NTFS, where `App/` and
+`app/` (typedoc emits both shapes for a module next to a folder) map to
+the same directory and each emitted `index.html` would overwrite the
+other. Colliding dirs keep the first-seen node and absorb the later
+dirs' children; colliding files keep the first and drop the rest.
+Recursion handles collisions introduced inside the merged children.
+
+- `@param` {Array<object>} nodes Sibling manifest nodes in scan order.
+- `@returns` {Array<object>} Deduped nodes, scan order preserved.
 
 ### `scanDir`
 

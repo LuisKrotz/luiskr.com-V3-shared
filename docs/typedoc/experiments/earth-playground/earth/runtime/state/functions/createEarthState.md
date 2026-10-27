@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/runtime/state](../README.md) / createEarthState
 
 ```ts
-function createEarthState(
-   canvas, 
-   onReady, 
-   onProgress
-): EarthState;
+function createEarthState(canvas, onReady, onProgress): EarthState
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:171
+Defined in: experiments/earth-playground/earth/runtime/state.ts:180
 
 Builds the initial null-everything state bag — every GPU handle starts
 null so bootstrap can fill them in any order and dispose can skip

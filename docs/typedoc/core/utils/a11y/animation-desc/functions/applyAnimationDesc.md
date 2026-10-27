@@ -8,12 +8,14 @@
 function applyAnimationDesc(el, id): void
 ```
 
-Defined in: core/utils/a11y/animation-desc.ts:199
+Defined in: core/utils/a11y/animation-desc.ts:203
 
-Binds an animated element to its translated description — sets the
-accessible name (alt/aria-label), `aria-describedby` (+ `longdesc`
-on imgs, fallback content on canvases) pointing at a hidden desc
-node injected into the element's own root.
+Places an animated element's translated description into the DOM —
+a crawler-only `<span class="sr-only" aria-hidden="true">` sibling
+node carrying the longdesc. No ARIA wiring and no canvas fallback
+text: the element's own accessibility is left untouched (inner text
+on a labelled canvas would mismatch its accessible name — the
+Label-in-Name failure).
 
 Safe to call on every mount/locale-change: the desc node is created
 once per (root, id) and only re-texted afterwards. Elements without

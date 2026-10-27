@@ -1,17 +1,18 @@
-# `website/views/project/data.ts`
+# `website\views\project\data.ts`
 
 Data plumbing for &lt;view-project&gt;: slug resolution from the
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/views/project/data.ts`                     |
+| **Source**     | `src/website\views\project\data.ts`                     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
 ### `updateRobotsMeta`
 
-Toggles the noindex meta for draft/hidden projects.
+Toggles the noindex meta for draft/hidden projects — delegates to the
+shared head authority in core/utils/schema so every surface agrees.
 
 ### `firstParagraph`
 

@@ -8,6 +8,6 @@
 const _K_TERMS_OF_USE: 'terms-of-use' = 'terms-of-use'
 ```
 
-Defined in: core/tokens/base.ts:431
+Defined in: core/tokens/base.ts:436
 
 Token key "k terms of use" — single source for the repeated literal.

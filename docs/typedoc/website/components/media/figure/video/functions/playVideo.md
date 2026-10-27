@@ -8,7 +8,7 @@
 function playVideo(fig, target): void
 ```
 
-Defined in: website/components/media/figure/video.ts:43
+Defined in: website/components/media/figure/video.ts:59
 
 Starts muted playback honoring reduced-motion/autoplay prefs.
 

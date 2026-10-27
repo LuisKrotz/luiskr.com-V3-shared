@@ -8,7 +8,7 @@
 function encodeMediaUrl(url): string
 ```
 
-Defined in: core/utils/media.ts:112
+Defined in: core/utils/media.ts:116
 
 Percent-encodes a media URL for attribute/markup emission — bucket keys
 can carry literal spaces ('brazilian leather/…', '…PARIS FASHION-WEEK…')

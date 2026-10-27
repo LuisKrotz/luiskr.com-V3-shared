@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/gl-strip](../README.md) / DocsGlHandle
 
-Defined in: experiments/docs/gl-strip.ts:29
+Defined in: experiments/docs/gl-strip.ts:31
 
 Live GL resources for the mounted strip.
 
@@ -16,7 +16,7 @@ Live GL resources for the mounted strip.
 destroy(): void;
 ```
 
-Defined in: experiments/docs/gl-strip.ts:31
+Defined in: experiments/docs/gl-strip.ts:33
 
 Frees program/buffer/context and stops the rAF loop.
 

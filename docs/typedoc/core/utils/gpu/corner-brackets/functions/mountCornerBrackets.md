@@ -8,7 +8,7 @@
 function mountCornerBrackets(button, spec): () => void
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:151
+Defined in: core/utils/gpu/corner-brackets.ts:152
 
 Mounts the corner-brackets widget inside `button`. The canvas is a
 `position:absolute; inset:0` child — it follows the button's box for

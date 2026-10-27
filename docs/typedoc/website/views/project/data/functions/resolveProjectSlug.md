@@ -8,7 +8,7 @@
 function resolveProjectSlug(_view): string
 ```
 
-Defined in: website/views/project/data.ts:75
+Defined in: website/views/project/data.ts:56
 
 Derives the project key from the route params, falling back to the URL.
 

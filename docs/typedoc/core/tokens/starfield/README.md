@@ -6,6 +6,12 @@
 
 ## References
 
+### SF\_BADGE
+
+Re-exports [SF_BADGE](badge/variables/SF_BADGE.md)
+
+---
+
 ### SF\_GROUPS
 
 Re-exports [SF_GROUPS](kinds/variables/SF_GROUPS.md)
@@ -27,6 +33,24 @@ Re-exports [SF_SURFACES](kinds/variables/SF_SURFACES.md)
 ### SF\_ACTIONS
 
 Re-exports [SF_ACTIONS](kinds/variables/SF_ACTIONS.md)
+
+---
+
+### SFMusicTrack
+
+Re-exports [SFMusicTrack](music/interfaces/SFMusicTrack.md)
+
+---
+
+### SF\_MUSIC\_TRACKS
+
+Re-exports [SF_MUSIC_TRACKS](music/variables/SF_MUSIC_TRACKS.md)
+
+---
+
+### SF\_MUSIC\_GLYPHS
+
+Re-exports [SF_MUSIC_GLYPHS](music/variables/SF_MUSIC_GLYPHS.md)
 
 ---
 

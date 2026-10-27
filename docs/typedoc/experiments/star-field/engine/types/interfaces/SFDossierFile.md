@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFDossierFile
 
-Defined in: experiments/star-field/engine/types.ts:426
+Defined in: experiments/star-field/engine/types.ts:427
 
 Raw `public/data/<locale>/<id>.json` file shape — each locale folder
 ships one self-contained dossier per body so only the active language
@@ -22,7 +22,7 @@ downloads; `id`, `kind` and `source` are locale-neutral.
 id: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:402
+Defined in: experiments/star-field/engine/types.ts:403
 
 #### Inherited from
 
@@ -36,7 +36,7 @@ Defined in: experiments/star-field/engine/types.ts:402
 name: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:403
+Defined in: experiments/star-field/engine/types.ts:404
 
 #### Inherited from
 
@@ -50,7 +50,7 @@ Defined in: experiments/star-field/engine/types.ts:403
 kind: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:404
+Defined in: experiments/star-field/engine/types.ts:405
 
 #### Inherited from
 
@@ -64,7 +64,7 @@ Defined in: experiments/star-field/engine/types.ts:404
 tagline: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:405
+Defined in: experiments/star-field/engine/types.ts:406
 
 #### Inherited from
 
@@ -78,7 +78,7 @@ Defined in: experiments/star-field/engine/types.ts:405
 facts: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:406
+Defined in: experiments/star-field/engine/types.ts:407
 
 #### label
 
@@ -104,7 +104,7 @@ value: string
 history: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:407
+Defined in: experiments/star-field/engine/types.ts:408
 
 #### Inherited from
 
@@ -118,7 +118,7 @@ Defined in: experiments/star-field/engine/types.ts:407
 source: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:408
+Defined in: experiments/star-field/engine/types.ts:409
 
 #### Inherited from
 
@@ -132,7 +132,7 @@ Defined in: experiments/star-field/engine/types.ts:408
 optional sections?: SFDossierSection[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:410
+Defined in: experiments/star-field/engine/types.ts:411
 
 Optional prose subsections for deep-history bodies.
 
@@ -148,7 +148,7 @@ Optional prose subsections for deep-history bodies.
 optional media?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:412
+Defined in: experiments/star-field/engine/types.ts:413
 
 Downloaded gallery — images, videos, audio recordings.
 
@@ -182,7 +182,7 @@ optional audio?: SFDossierMedia[];
 optional meta?: SFDossierMeta;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:418
+Defined in: experiments/star-field/engine/types.ts:419
 
 Acquisition/translation signature.
 
@@ -198,7 +198,7 @@ Acquisition/translation signature.
 optional namedStars?: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:432
+Defined in: experiments/star-field/engine/types.ts:433
 
 Locale-neutral proper-named star table shipped inside
 `en/milky-way.json` — real HYG catalogue entries (heliocentric

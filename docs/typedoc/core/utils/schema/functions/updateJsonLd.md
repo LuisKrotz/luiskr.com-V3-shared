@@ -8,7 +8,7 @@
 function updateJsonLd(graph): void
 ```
 
-Defined in: core/utils/schema.ts:583
+Defined in: core/utils/schema.ts:805
 
 Dynamically updates the JSON-LD script graph in the document head.
 Maintains exactly one `<script type="application/ld+json">` node — an

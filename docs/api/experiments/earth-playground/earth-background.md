@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth-background.ts`
+# `experiments\earth-playground\earth-background.ts`
 
 Three.js WebGPU Earth background engine.
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth-background.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth-background.ts`  |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -59,6 +59,7 @@ disposed after each await and bail).
 Snapshot of every tunable, shaped exactly like DEFAULT_SP_GUI so the
 playground control panel can render sliders without knowing which
 values are live uniforms vs build-time constants.
+
 - `@returns` {object} settings tree keyed like DEFAULT_SP_GUI
 
 ### `getCameraState`

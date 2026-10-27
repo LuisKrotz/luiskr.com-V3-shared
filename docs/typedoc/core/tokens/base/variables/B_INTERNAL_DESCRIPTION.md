@@ -8,6 +8,6 @@
 const _B_INTERNAL_DESCRIPTION: 'internal-description'
 ```
 
-Defined in: core/tokens/base.ts:287
+Defined in: core/tokens/base.ts:292
 
 BEM block fragment "b internal description" — composed by the token groups below into full class names.

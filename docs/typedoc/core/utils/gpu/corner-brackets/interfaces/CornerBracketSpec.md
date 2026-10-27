@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/gpu/corner-brackets](../README.md) / CornerBracketSpec
 
-Defined in: core/utils/gpu/corner-brackets.ts:45
+Defined in: core/utils/gpu/corner-brackets.ts:46
 
 Per-surface parameters for `mountCornerBrackets` — the pieces the
 button styles differ in.
@@ -17,7 +17,7 @@ button styles differ in.
 canvasClass: string
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:47
+Defined in: core/utils/gpu/corner-brackets.ts:48
 
 Overlay canvas class (the `:has()` gate keys on it).
 
@@ -29,7 +29,7 @@ Overlay canvas class (the `:has()` gate keys on it).
 insetVar: string
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:49
+Defined in: core/utils/gpu/corner-brackets.ts:50
 
 CSS var the hover inset resolves from — `calc(100% − var)`.
 
@@ -41,7 +41,7 @@ CSS var the hover inset resolves from — `calc(100% − var)`.
 ease: readonly[(number, number, number, number)]
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:51
+Defined in: core/utils/gpu/corner-brackets.ts:52
 
 Cubic-bezier control points of the surface's CSS transition.
 
@@ -53,7 +53,7 @@ Cubic-bezier control points of the surface's CSS transition.
 ms: number
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:53
+Defined in: core/utils/gpu/corner-brackets.ts:54
 
 Expansion ramp duration (ms) — ANIMATION_DURATIONS.BRACKET* tokens.
 
@@ -65,7 +65,7 @@ Expansion ramp duration (ms) — ANIMATION_DURATIONS.BRACKET* tokens.
 optional hoverOn?: HTMLElement;
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:59
+Defined in: core/utils/gpu/corner-brackets.ts:60
 
 Element whose hover/focus drives the ramp — defaults to `button`.
 `.expand-modal-open-1` animates on `.internal-expand:hover &`
@@ -79,7 +79,7 @@ Element whose hover/focus drives the ramp — defaults to `button`.
 optional hoverParentSelector?: string;
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:64
+Defined in: core/utils/gpu/corner-brackets.ts:65
 
 Ancestor selector alternative to `hoverOn` — resolved per button
 (`button.closest(...)`) so batch mounts each watch their own parent.

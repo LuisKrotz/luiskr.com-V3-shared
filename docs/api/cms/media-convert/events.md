@@ -1,13 +1,14 @@
-# `cms/media-convert/events.ts`
+# `cms\media-convert\events.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/media-convert/events.ts` |
-| **UX surface** | Batch image→WebP conversion pipeline UI. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\media-convert\events.ts`               |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
 ### `bindEvents`
 
 Binds events.
+
 - `@param` host — the host component

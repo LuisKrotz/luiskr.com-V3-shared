@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/CmsDeployInfo](../README.md) / CmsDeployInfo
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:43
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:47
 
 The CmsDeployInfo — deploy info class.
 
@@ -20,7 +20,7 @@ The CmsDeployInfo — deploy info class.
 new CmsDeployInfo(): CmsDeployInfo;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:53
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:58
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: cms/deploy-info/CmsDeployInfo.tsx:53
 _fetchState: DeployFetchState = 'loading'
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:44
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:48
 
 ---
 
@@ -48,7 +48,7 @@ Defined in: cms/deploy-info/CmsDeployInfo.tsx:44
 index: DeployIndex | null = null;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:45
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:49
 
 ---
 
@@ -58,7 +58,7 @@ Defined in: cms/deploy-info/CmsDeployInfo.tsx:45
 lighthouse: LighthouseReport | null = null;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:46
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:50
 
 ---
 
@@ -68,7 +68,7 @@ Defined in: cms/deploy-info/CmsDeployInfo.tsx:46
 coverage: CoverageReport | null = null;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:47
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:51
 
 ---
 
@@ -80,7 +80,7 @@ bundle:
   | null = null;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:48
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:52
 
 ---
 
@@ -90,7 +90,17 @@ Defined in: cms/deploy-info/CmsDeployInfo.tsx:48
 axe: AxeReport | null = null;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:49
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:53
+
+---
+
+### a11y
+
+```ts
+a11y: A11yReport | null = null;
+```
+
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:54
 
 ---
 
@@ -100,7 +110,7 @@ Defined in: cms/deploy-info/CmsDeployInfo.tsx:49
 snyk: SnykReport | null = null;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:50
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:55
 
 ---
 
@@ -112,7 +122,7 @@ consoleScan:
   | null = null;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:51
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:56
 
 ---
 
@@ -4484,7 +4494,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 onMounted(): Promise<void>;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:62
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:67
 
 Fetches the manifest then all five reports in parallel — the index
 is the gate (missing bundle → "run yarn deploy:info" hint), each
@@ -4506,7 +4516,7 @@ report degrades independently so a partial bundle still renders.
 _scoreClass(value): string;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:68
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:73
 
 Maps a 0–1 score to the green/amber/red chip class (Lighthouse conventions).
 
@@ -4528,7 +4538,7 @@ Maps a 0–1 score to the green/amber/red chip class (Lighthouse conventions).
 _pct(value): string;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:74
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:79
 
 Formats a 0–1 score as a whole percentage; non-numbers render an em-dash.
 
@@ -4544,13 +4554,29 @@ Formats a 0–1 score as a whole percentage; non-numbers render an em-dash.
 
 ---
 
+### \_renderBuildMeta()
+
+```ts
+_renderBuildMeta(): Element;
+```
+
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:85
+
+Renders the last-build manifest metadata (timestamp, commit, report inventory).
+
+#### Returns
+
+[`Element`](../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+
+---
+
 ### \_renderLighthouse()
 
 ```ts
 _renderLighthouse(): Element;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:80
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:91
 
 Renders the Lighthouse section (scores + failing audits).
 
@@ -4568,7 +4594,7 @@ _renderScores(scores):
   | null;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:86
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:97
 
 Renders the Lighthouse category score cells for one URL entry.
 
@@ -4591,7 +4617,7 @@ Renders the Lighthouse category score cells for one URL entry.
 _renderCoverage(): Element;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:92
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:103
 
 Renders the Jest coverage summary table.
 
@@ -4607,7 +4633,7 @@ Renders the Jest coverage summary table.
 _renderBundle(): Element;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:98
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:109
 
 Renders the bundle inventory (per-type sizes, tiers, wasm crates).
 
@@ -4623,9 +4649,25 @@ Renders the bundle inventory (per-type sizes, tiers, wasm crates).
 _renderAxe(): Element;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:104
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:115
 
 Renders the axe-core accessibility scan (violations grouped by surface).
+
+#### Returns
+
+[`Element`](../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+
+---
+
+### \_renderA11y()
+
+```ts
+_renderA11y(): Element;
+```
+
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:121
+
+Renders the IBM Equal Access full-site scan (rule rollup + flagged routes).
 
 #### Returns
 
@@ -4639,7 +4681,7 @@ Renders the axe-core accessibility scan (violations grouped by surface).
 _renderSnyk(): Element;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:110
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:127
 
 Renders the dependency vulnerability scan (Snyk or yarn-audit fallback).
 
@@ -4655,7 +4697,7 @@ Renders the dependency vulnerability scan (Snyk or yarn-audit fallback).
 _renderConsoleScan(): Element;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:116
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:133
 
 Renders the console.* usage scan (debug-leftover policy).
 
@@ -4671,7 +4713,7 @@ Renders the console.* usage scan (debug-leftover policy).
 render(): Element;
 ```
 
-Defined in: cms/deploy-info/CmsDeployInfo.tsx:122
+Defined in: cms/deploy-info/CmsDeployInfo.tsx:139
 
 JSX template — loading/missing gates then the report wall.
 

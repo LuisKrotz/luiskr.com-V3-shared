@@ -1,15 +1,16 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/strings/svg](../README.md) / SVG\_STRINGS
 
 ```ts
 const SVG_STRINGS: Readonly<{
-  SVG_XMLNS: "http://www.w3.org/2000/svg";
-  SVG_DATA_URI_PREFIX: "data:image/svg+xml,";
-  SVG_EXT: ".svg";
-}>;
+  SVG_XMLNS: 'http://www.w3.org/2000/svg'
+  SVG_DATA_URI_PREFIX: 'data:image/svg+xml,'
+  SVG_EXT: '.svg'
+  GRADIENT_USER_SPACE: 'userSpaceOnUse'
+}>
 ```
 
 Defined in: core/tokens/strings/svg.ts:12

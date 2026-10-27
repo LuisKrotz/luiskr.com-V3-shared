@@ -8,9 +8,9 @@
 function renderDeployInfo(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:454
+Defined in: cms/deploy-info/render.tsx:843
 
-JSX template — loading/missing gates then the five-section report wall.
+JSX template — loading/missing gates then the report wall.
 
 ## Parameters
 

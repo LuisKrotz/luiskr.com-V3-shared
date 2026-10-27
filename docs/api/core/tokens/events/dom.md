@@ -1,10 +1,10 @@
-# `core/tokens/events/dom.ts`
+# `core\tokens\events\dom.ts`
 
 Native DOM event-name tokens split by input modality —
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/events/dom.ts`                           |
+| **Source**     | `src/core\tokens\events\dom.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -63,6 +63,18 @@ Frozen media event-name map — sole declaration site for these tokens; consumer
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes
 the token contract immutable at runtime.
 
+### `ENDED`
+
+`ended` — media element reached the end of its current source.
+
+### `PLAY`
+
+`play` — playback began (autoplay, native controls or script).
+
+### `PAUSE`
+
+`pause` — playback paused (native controls or script).
+
 ### `ANIMATION_EVENTS`
 
 Frozen animation event-name map — sole declaration site for these tokens; consumers read
@@ -84,6 +96,21 @@ events (user gesture start/end, per-frame change).
 
 Frozen clipboard event-name map — copy/cut/selection events the docs
 portal intercepts for its source-code copy guard.
+
+### `PRINT_EVENTS`
+
+App-level print lifecycle — `beforeprint`/`afterprint` are browser-native
+window events (in CLIPBOARD_EVENTS for legacy grouping); these two let live
+engines answer a canvas-capture request and views sync generated content
+into the printable mirror before the print sheet opens.
+
+### `CAPTURE`
+
+Dispatched on a canvas before toDataURL — engines re-render then set detail.dataUrl.
+
+### `PREPARE`
+
+Dispatched on window before the print walk — views sync printable DOM first.
 
 ### `SW_EVENTS`
 

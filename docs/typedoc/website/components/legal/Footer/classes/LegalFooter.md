@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/legal/Footer](../README.md) / LegalFooter
 
-Defined in: website/components/legal/Footer.tsx:43
+Defined in: website/components/legal/Footer.tsx:45
 
 The LegalFooter — footer class.
 
@@ -20,7 +20,7 @@ The LegalFooter — footer class.
 new LegalFooter(): LegalFooter;
 ```
 
-Defined in: website/components/legal/Footer.tsx:48
+Defined in: website/components/legal/Footer.tsx:50
 
 #### Returns
 
@@ -4749,7 +4749,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/legal/Footer.tsx:52
+Defined in: website/components/legal/Footer.tsx:54
 
 #### Returns
 
@@ -4767,7 +4767,7 @@ Defined in: website/components/legal/Footer.tsx:52
 onUpdated(): void;
 ```
 
-Defined in: website/components/legal/Footer.tsx:99
+Defined in: website/components/legal/Footer.tsx:101
 
 #### Returns
 
@@ -4785,7 +4785,7 @@ Defined in: website/components/legal/Footer.tsx:99
 onDestroy(): void;
 ```
 
-Defined in: website/components/legal/Footer.tsx:115
+Defined in: website/components/legal/Footer.tsx:117
 
 #### Returns
 
@@ -4803,7 +4803,7 @@ Defined in: website/components/legal/Footer.tsx:115
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/legal/Footer.tsx:127
+Defined in: website/components/legal/Footer.tsx:129
 
 #### Returns
 
@@ -4821,7 +4821,7 @@ Defined in: website/components/legal/Footer.tsx:127
 render(): Element;
 ```
 
-Defined in: website/components/legal/Footer.tsx:133
+Defined in: website/components/legal/Footer.tsx:135
 
 JSX template for the component's shadow DOM.
 

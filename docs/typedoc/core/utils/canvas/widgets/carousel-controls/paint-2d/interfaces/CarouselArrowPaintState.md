@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/widgets/carousel-controls/paint-2d](../README.md) / CarouselArrowPaintState
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:12
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:50
 
 Everything the 2D paint pass needs from the widget instance.
 
@@ -13,117 +13,117 @@ Everything the 2D paint pass needs from the widget instance.
 ### dpr
 
 ```ts
-dpr: number;
+dpr: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:13
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:51
 
-***
+---
 
 ### width
 
 ```ts
-width: number;
+width: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:14
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:52
 
-***
+---
 
 ### height
 
 ```ts
-height: number;
+height: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:15
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:53
 
-***
+---
 
 ### canvasWidth
 
 ```ts
-canvasWidth: number;
+canvasWidth: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:16
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:54
 
-***
+---
 
 ### canvasHeight
 
 ```ts
-canvasHeight: number;
+canvasHeight: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:17
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:55
 
-***
+---
 
 ### type
 
 ```ts
-type: string;
+type: string
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:18
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:56
 
-***
+---
 
 ### startTime
 
 ```ts
-startTime: number;
+startTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:19
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:57
 
-***
+---
 
 ### isHovered
 
 ```ts
-isHovered: boolean;
+isHovered: boolean
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:20
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:58
 
-***
+---
 
 ### hoverLevel
 
 ```ts
-hoverLevel: number;
+hoverLevel: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:21
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:59
 
-***
+---
 
 ### isPlaying
 
 ```ts
-isPlaying: boolean;
+isPlaying: boolean
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:22
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:60
 
-***
+---
 
 ### progress
 
 ```ts
-progress: number;
+progress: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:23
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:61
 
-***
+---
 
 ### clickTime
 
 ```ts
-clickTime: number;
+clickTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:24
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:62

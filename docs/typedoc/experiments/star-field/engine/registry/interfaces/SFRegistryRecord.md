@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/registry](../README.md) / SFRegistryRecord
 
-Defined in: experiments/star-field/engine/registry.ts:49
+Defined in: experiments/star-field/engine/registry.ts:47
 
 One catalogued record inside a shard — field keys are short on
 purpose (the 14 MB index would double with long names): `n` display
@@ -22,7 +22,7 @@ light-years, `i` registry id.
 i: string
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:50
+Defined in: experiments/star-field/engine/registry.ts:48
 
 ---
 
@@ -32,7 +32,7 @@ Defined in: experiments/star-field/engine/registry.ts:50
 n: string
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:51
+Defined in: experiments/star-field/engine/registry.ts:49
 
 ---
 
@@ -42,7 +42,7 @@ Defined in: experiments/star-field/engine/registry.ts:51
 optional m?: number | null;
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:52
+Defined in: experiments/star-field/engine/registry.ts:50
 
 ---
 
@@ -52,7 +52,7 @@ Defined in: experiments/star-field/engine/registry.ts:52
 optional d?: number;
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:53
+Defined in: experiments/star-field/engine/registry.ts:51
 
 ---
 
@@ -62,7 +62,7 @@ Defined in: experiments/star-field/engine/registry.ts:53
 optional s?: string;
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:54
+Defined in: experiments/star-field/engine/registry.ts:52
 
 ---
 
@@ -72,7 +72,7 @@ Defined in: experiments/star-field/engine/registry.ts:54
 optional c?: string;
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:55
+Defined in: experiments/star-field/engine/registry.ts:53
 
 ---
 
@@ -82,7 +82,7 @@ Defined in: experiments/star-field/engine/registry.ts:55
 optional h?: string;
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:56
+Defined in: experiments/star-field/engine/registry.ts:54
 
 ---
 
@@ -92,7 +92,7 @@ Defined in: experiments/star-field/engine/registry.ts:56
 optional t?: string;
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:57
+Defined in: experiments/star-field/engine/registry.ts:55
 
 ---
 
@@ -102,7 +102,7 @@ Defined in: experiments/star-field/engine/registry.ts:57
 optional r?: number | null;
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:58
+Defined in: experiments/star-field/engine/registry.ts:56
 
 ---
 
@@ -112,7 +112,7 @@ Defined in: experiments/star-field/engine/registry.ts:58
 optional y2?: string;
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:59
+Defined in: experiments/star-field/engine/registry.ts:57
 
 ---
 
@@ -122,7 +122,7 @@ Defined in: experiments/star-field/engine/registry.ts:59
 x: number
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:60
+Defined in: experiments/star-field/engine/registry.ts:58
 
 ---
 
@@ -132,7 +132,7 @@ Defined in: experiments/star-field/engine/registry.ts:60
 y: number
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:61
+Defined in: experiments/star-field/engine/registry.ts:59
 
 ---
 
@@ -142,4 +142,4 @@ Defined in: experiments/star-field/engine/registry.ts:61
 z: number
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:62
+Defined in: experiments/star-field/engine/registry.ts:60

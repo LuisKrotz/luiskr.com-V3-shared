@@ -1059,6 +1059,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`log.ts`](core\tokens\data/log.md)                       | Dev-log severity levels + the globalThis inspection key.           |
 | [`ml.ts`](core\tokens\data/ml.md)                         | ONNX Runtime Web / WebNN engine tokens — sole declaration          |
 | [`notify.ts`](core\tokens\data/notify.md)                 | Toast severity levels — drives the `site-toast--&lt;type&gt;` BEM  |
+| [`search-themes.js`](core\tokens\data/search-themes.md)   | Shared CMS field key for localized search vocabulary.              |
 | [`storage.ts`](core\tokens\data/storage.md)               | localStorage/sessionStorage key tokens split by scope —            |
 | [`ui-keys.ts`](core\tokens\data/ui-keys.md)               | UI copy keys — dotted paths into translations/&lt;locale&gt;/APP,  |
 | [`wasm.ts`](core\tokens\data/wasm.md)                     | WASM worker action tokens — message `type` values understood       |
@@ -1146,7 +1147,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`notify.ts`](core\tokens\motion/notify.md)             | Notification/toast runtime tuning tokens.                   |
 | [`prefetch.ts`](core\tokens\motion/prefetch.md)         | Predictive-prefetch tuning tokens.                          |
 | [`skeleton.ts`](core\tokens\motion/skeleton.md)         | WebGL skeleton-field configuration tokens — grouped subsets |
-| [`slider.ts`](core\tokens\motion/slider.md)             | Knob-spring tunables for the slider widgets (theme          |
+| [`slider.ts`](core\tokens\motion/slider.md)             | —                                                           |
 
 ## Core engine
 
@@ -1199,7 +1200,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`badge.ts`](core\tokens\starfield/badge.md)       | "Featured on Three.js Resources" showcase-badge tokens —   |
 | [`kinds.ts`](core\tokens\starfield/kinds.md)       | Star-field taxonomy + action tokens: the region groups the |
 | [`music.ts`](core\tokens\starfield/music.md)       | Ambient playlist for the Star Field experiment — the MP3   |
-| [`params.ts`](core\tokens\starfield/params.md)     | Star-field engine parameters — camera rig, fly-to tween    |
+| [`params.ts`](core\tokens\starfield/params.md)     | —                                                          |
 | [`registry.ts`](core\tokens\starfield/registry.md) | Deep-catalog registry vocabulary — the shard-directory     |
 | [`textures.ts`](core\tokens\starfield/textures.md) | CDN URLs for the Star Field experiment texture set —       |
 
@@ -1530,7 +1531,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`coverage-nav.ts`](experiments\docs/coverage-nav.md)   | Istanbul coverage-report interactivity for the docs viewer.     |
 | [`dev.ts`](experiments\docs/dev.md)                     | Standalone dev entry for the docs-portal experiment —           |
 | [`gl-strip.ts`](experiments\docs/gl-strip.md)           | WebGL thread-field backdrop for the docs navigation region.     |
-| [`index.ts`](experiments\docs/index.md)                 | Barrel for the `docs` experiment module — the in-app            |
+| [`index.ts`](experiments\docs/index.md)                 | —                                                               |
 | [`jest.config.mjs`](experiments\docs/jest.config.md)    | —                                                               |
 | [`loader.ts`](experiments\docs/loader.md)               | Boot-loader lifecycle for &lt;view-docs&gt; — mirrors the space |
 | [`manifest.ts`](experiments\docs/manifest.md)           | Build-time docs manifest access + path resolution.              |
@@ -1640,7 +1641,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`SpacePlayground.tsx`](experiments\earth-playground/SpacePlayground.md)  | &lt;view-space-playground&gt; — the space/earth playground route: |
 | [`dev.ts`](experiments\earth-playground/dev.md)                           | Standalone dev entry for the earth-playground experiment —        |
 | [`earth-background.ts`](experiments\earth-playground/earth-background.md) | Three.js WebGPU Earth background engine.                          |
-| [`index.ts`](experiments\earth-playground/index.md)                       | Barrel for the `earth-playground` experiment module — the         |
+| [`index.ts`](experiments\earth-playground/index.md)                       | —                                                                 |
 | [`jest.config.mjs`](experiments\earth-playground/jest.config.md)          | —                                                                 |
 | [`vite.config.js`](experiments\earth-playground/vite.config.md)           | Library build for the `earth-playground` experiment — the         |
 
@@ -1767,7 +1768,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | ------------------------------------------------------------------- | ------------------------------------------------------------ |
 | [`StarField.tsx`](experiments\star-field/StarField.md)              | &lt;view-star-field&gt; — the star-field experiment route: a |
 | [`dev.ts`](experiments\star-field/dev.md)                           | Standalone dev entry for the star-field experiment —         |
-| [`index.ts`](experiments\star-field/index.md)                       | Barrel for the `star-field` experiment module — the          |
+| [`index.ts`](experiments\star-field/index.md)                       | —                                                            |
 | [`jest.config.mjs`](experiments\star-field/jest.config.md)          | —                                                            |
 | [`starfield-engine.ts`](experiments\star-field/starfield-engine.md) | Facade for the star-field three.js engine — owns the SFState |
 | [`vite.config.js`](experiments\star-field/vite.config.md)           | Library build for the `star-field` experiment                |
@@ -1785,7 +1786,6 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`fill-worker.ts`](experiments\star-field\engine/fill-worker.md)       | Multi-threaded fill dispatcher — the star-field's heavy     |
 | [`fly.ts`](experiments\star-field\engine/fly.md)                       | Camera fly-to tween for the star-field engine — when a body |
 | [`frame.ts`](experiments\star-field\engine/frame.md)                   | Per-frame orchestrator for the star-field engine: the       |
-| [`ios.ts`](experiments\star-field\engine/ios.md)                       | iOS/iPadOS capability bail-out for the star-field engine.   |
 | [`materials.ts`](experiments\star-field\engine/materials.md)           | Material-parameter hygiene for the body builders            |
 | [`picking.ts`](experiments\star-field\engine/picking.md)               | Pointer picking for the star-field canvas: pointerdown      |
 | [`post-nodes.ts`](experiments\star-field\engine/post-nodes.md)         | Custom TSL post nodes for the star-field RenderPipeline     |
@@ -1797,7 +1797,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`scale.ts`](experiments\star-field\engine/scale.md)                   | Multi-tier astronomical scale model for the star-field      |
 | [`scene.ts`](experiments\star-field\engine/scene.md)                   | Scene-graph foundation for the star-field engine: the       |
 | [`screenshot.ts`](experiments\star-field\engine/screenshot.md)         | PNG capture for the star-field engine: renders one frame,   |
-| [`spiral.ts`](experiments\star-field\engine/spiral.md)                 | Barrel for the spiral-galaxy surface — the deterministic    |
+| [`spiral.ts`](experiments\star-field\engine/spiral.md)                 | —                                                           |
 | [`star-cloud.ts`](experiments\star-field\engine/star-cloud.md)         | Real-catalogue deep field — decodes                         |
 | [`state.ts`](experiments\star-field\engine/state.md)                   | Factory for the star-field engine state bag — one mutable   |
 | [`types.ts`](experiments\star-field\engine/types.md)                   | Shared types for the star-field engine — the static body    |
@@ -1816,7 +1816,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`mask.ts`](experiments\star-field\engine\bodies/mask.md)             | Photo-texture edge feathering for deep-sky billboards.   |
 | [`plumes.ts`](experiments\star-field\engine\bodies/plumes.md)         | Cryovolcanic and volcanic plume systems — the moving     |
 | [`primitives.ts`](experiments\star-field\engine\bodies/primitives.md) | Per-body mesh builders for the scene-graph assembler in  |
-| [`procedural.ts`](experiments\star-field\engine\bodies/procedural.md) | Barrel for the seeded canvas texture generators — each   |
+| [`procedural.ts`](experiments\star-field\engine\bodies/procedural.md) | —                                                        |
 | [`structures.ts`](experiments\star-field\engine\bodies/structures.md) | Cosmic-hierarchy bodies — boundary spheres + member      |
 | [`weather.ts`](experiments\star-field\engine\bodies/weather.md)       | Living-planet systems — everything that makes Earth (and |
 
@@ -1965,7 +1965,6 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                  | What it does                                                  |
 | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| [`engine-ios.test.js`](experiments\star-field\tests\starfield/engine-ios.test.md)                     | engine/ios.ts — isIOSDevice UA-detection arms (iPhone/iPad    |
 | [`star-boot.test.js`](experiments\star-field\tests\starfield/star-boot.test.md)                       | StarField boot helpers — loader progress mirroring, engine    |
 | [`star-dossier.test.js`](experiments\star-field\tests\starfield/star-dossier.test.md)                 | Lazy dossier loader — fetchDossier caches per body id and     |
 | [`star-field-component.test.js`](experiments\star-field\tests\starfield/star-field-component.test.md) | Full lifecycle for the real &lt;view-star-field&gt; element — |
@@ -2410,13 +2409,14 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                      | What it does                                                                                                    |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| [`load.ts`](website\components\media\figure/load.md)      | Media URL matrix + progressive loading for &lt;media-figure&gt;:                                                |
-| [`modal.ts`](website\components\media\figure/modal.md)    | Expand-modal open for MediaFigure — commits the media descriptor to the store and deep-links the caption slug … |
-| [`mount.ts`](website\components\media\figure/mount.md)    | Mount lifecycle for MediaFigure — GPU-layer promotion, store subscription, expand-click binding, hover-to-play… |
-| [`render.tsx`](website\components\media\figure/render.md) | JSX for MediaFigure — layered placeholder/thumb/high-res crossfade stack (or the muted looping video path) plu… |
-| [`video.ts`](website\components\media\figure/video.md)    | Video playback plumbing for &lt;media-figure&gt;: lazy &lt;source&gt;                                           |
+| File                                                                       | What it does                                                                                                    |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [`load.ts`](website\components\media\figure/load.md)                       | Media URL matrix + progressive loading for &lt;media-figure&gt;:                                                |
+| [`modal.ts`](website\components\media\figure/modal.md)                     | Expand-modal open for MediaFigure — commits the media descriptor to the store and deep-links the caption slug … |
+| [`mount.ts`](website\components\media\figure/mount.md)                     | Mount lifecycle for MediaFigure — GPU-layer promotion, store subscription, expand-click binding, hover-to-play… |
+| [`render.tsx`](website\components\media\figure/render.md)                  | JSX for MediaFigure — layered placeholder/thumb/high-res crossfade stack (or the muted looping video path) plu… |
+| [`shared-observer.ts`](website\components\media\figure/shared-observer.md) | Shared IntersectionObserver pool for media figures                                                              |
+| [`video.ts`](website\components\media\figure/video.md)                     | Video playback plumbing for &lt;media-figure&gt;: lazy &lt;source&gt;                                           |
 
 ## Entry points
 
@@ -2455,12 +2455,12 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                        | What it does                                                 |
-| ------------------------------------------- | ------------------------------------------------------------ |
-| [`dev.ts`](website/dev.md)                  | Standalone dev entry for the website module — `yarn dev` in  |
-| [`index.ts`](website/index.md)              | Barrel for the `website` module — the public site's routable |
-| [`jest.config.mjs`](website/jest.config.md) | —                                                            |
-| [`vite.config.js`](website/vite.config.md)  | Library build for the `website` module — the public site's   |
+| File                                        | What it does                                                |
+| ------------------------------------------- | ----------------------------------------------------------- |
+| [`dev.ts`](website/dev.md)                  | Standalone dev entry for the website module — `yarn dev` in |
+| [`index.ts`](website/index.md)              | —                                                           |
+| [`jest.config.mjs`](website/jest.config.md) | —                                                           |
+| [`vite.config.js`](website/vite.config.md)  | Library build for the `website` module — the public site's  |
 
 ## Entry points
 
@@ -2811,6 +2811,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`delegate-tails-mosaic-draw-text-tails.test.js`](website\tests\coverage\components\carousel/delegate-tails-mosaic-draw-text-tails.test.md)                                             | Split from delegate-tails.test.js — covers the "mosaic + draw-text tails" describe.                     |
 | [`delegate-tails-spring-nav-tails.test.js`](website\tests\coverage\components\carousel/delegate-tails-spring-nav-tails.test.md)                                                         | Coverage tails for the scroll-spring navigation paths in                                                |
 | [`lifecycle-manifest-arrival-tails.test.js`](website\tests\coverage\components\carousel/lifecycle-manifest-arrival-tails.test.md)                                                       | Covers the media-manifest arrival arm in custom-carousel                                                |
+| [`nav-tails-carousel-scroll-gate.test.js`](website\tests\coverage\components\carousel/nav-tails-carousel-scroll-gate.test.md)                                                           | Coverage tails for the scroll-gate paths: observer entries                                              |
 | [`sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.md)   | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit guard tails" describe.  |
 | [`sizing-tails-custom-carousel-sizing-measurefit-ladder-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-measurefit-ladder-tails.test.md) | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit ladder tails" describe. |
 | [`sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.md)     | Coverage tails for custom-carousel/sizing — the mobile-src                                              |
@@ -2893,11 +2894,13 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`expanded-genie-tails.test.js`](website\tests\coverage\components\media/expanded-genie-tails.test.md)                             | Coverage for website/components/media/expanded/genie.ts +                           |
 | [`expanded-genie-texture-tails.test.js`](website\tests\coverage\components\media/expanded-genie-texture-tails.test.md)             | Coverage for website/components/media/expanded/genie-texture.ts —                   |
 | [`expanded-mount-tails.test.js`](website\tests\coverage\components\media/expanded-mount-tails.test.md)                             | Coverage tails for components/media/expanded/mount.ts —                             |
+| [`media-figure-mount-tails.test.js`](website\tests\coverage\components\media/media-figure-mount-tails.test.md)                     | Covers MediaFigure's keyboard listener independently of the                         |
 | [`media-figure-retire-tails.test.js`](website\tests\coverage\components\media/media-figure-retire-tails.test.md)                   | Coverage tails for figure/load.ts's crossfade-retire arms —                         |
 | [`media-figure-tails.test.js`](website\tests\coverage\components\media/media-figure-tails.test.md)                                 | Coverage tails for components/media/figure/modal.ts +                               |
 | [`media-figure-warm-tails.test.js`](website\tests\coverage\components\media/media-figure-warm-tails.test.md)                       | Coverage tail for the CDN warm-up path — warmFirstRung's                            |
 | [`media-manifest-mobile-source-tails.test.js`](website\tests\coverage\components\media/media-manifest-mobile-source-tails.test.md) | Coverage tails for the mobile-tier &lt;source&gt; emission — the                    |
 | [`media-manifest-webp-source-tails.test.js`](website\tests\coverage\components\media/media-manifest-webp-source-tails.test.md)     | Coverage tail for the manifest-gated &lt;source&gt; emission —                      |
+| [`shared-observer-tails.test.js`](website\tests\coverage\components\media/shared-observer-tails.test.md)                           | Coverage tails for the pooled IntersectionObserver: pool                            |
 
 ## Entry points
 

@@ -5,16 +5,13 @@
 [luiskr.com](../../../../README.md) / [experiments/docs/arch-scene-3d](../README.md) / buildEdges
 
 ```ts
-function buildEdges(placed, positions): object
+function buildEdges(placed, positions, scale): object
 ```
 
-Defined in: experiments/docs/arch-scene-3d.ts:139
+Defined in: experiments/docs/arch-scene-3d.ts:296
 
-Expands the parent→child edge list into cross-quad ribbon geometry —
-two perpendicular quads per edge (the engine draws triangles only;
-a crossed pair reads as a 1px line strip from every angle). SoA
-upload: positions + zero normals (basic material is unlit) + zero
-uvs + triangle indices.
+Expands the parent→child edge list into cross-quad ribbon geometry
+via `segmentsToRibbons` at the edge half-width.
 
 ## Parameters
 
@@ -30,31 +27,71 @@ Flattened tree.
 
 xyz triplets per node.
 
+### scale
+
+`Float32Array`
+
 ## Returns
 
 `object`
 
 The four attribute arrays for `upload_geometry`.
 
-### pos
+### dir
+
+```ts
+dir: object
+```
+
+#### dir.pos
 
 ```ts
 pos: Float32Array
 ```
 
-### nrm
+#### dir.nrm
 
 ```ts
 nrm: Float32Array
 ```
 
-### uv
+#### dir.uv
 
 ```ts
 uv: Float32Array
 ```
 
-### idx
+#### dir.idx
+
+```ts
+idx: Uint32Array
+```
+
+### leaf
+
+```ts
+leaf: object
+```
+
+#### leaf.pos
+
+```ts
+pos: Float32Array
+```
+
+#### leaf.nrm
+
+```ts
+nrm: Float32Array
+```
+
+#### leaf.uv
+
+```ts
+uv: Float32Array
+```
+
+#### leaf.idx
 
 ```ts
 idx: Uint32Array

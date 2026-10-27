@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/belt.ts`
+# `experiments\star-field\engine\bodies\belt.ts`
 
 Small-body annulus renderer — asteroid belt and Kuiper
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/belt.ts`      |
+| **Source**     | `src/experiments\star-field\engine\bodies\belt.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

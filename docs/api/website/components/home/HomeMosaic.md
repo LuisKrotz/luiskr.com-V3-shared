@@ -1,10 +1,10 @@
-# `website/components/home/HomeMosaic.tsx`
+# `website\components\home\HomeMosaic.tsx`
 
 &lt;home-mosaic&gt; — the masonry project grid on the home page:
 
-| | |
-|---|---|
-| **Source** | `src/website/components/home/HomeMosaic.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\HomeMosaic.tsx`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -80,3 +80,24 @@ Style object for one skeleton placeholder box.
 ### (module scope)
 
 JSX template for the component's shadow DOM.
+
+### `_syncAnimDescs`
+
+Binds the mosaic-tile description to every card — each tile's
+hover/press/displacement spring is the animated surface. Runs
+post-render so the shared desc node lands in the shadow root
+(detached-node application would mint duplicate ids).
+
+### `_syncRingSheen`
+
+Keeps the instanced ring-sheen overlay bound to the live
+`.home-mosaic` wall — renders recreate the container, so a session
+on a detached node is torn down and remounted; a live one just
+gets a dirty-mark (the layout pass may have moved tiles).
+
+### `_syncBrackets`
+
+Mounts the corner-brackets WebGPU widget on each card CTA —
+re-queries every update so a repacked/re-rendered card wall drops
+stale mounts. The CTA is a span inside the card link; its own
+:hover drives the ramp (matching _cta.scss).

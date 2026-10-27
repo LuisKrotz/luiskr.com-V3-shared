@@ -1,21 +1,41 @@
-# `core/tokens/motion/animation.ts`
+# `core\tokens\motion\animation.ts`
 
 Easing curve + transition duration tokens — grouped subsets
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/motion/animation.ts`                     |
+| **Source**     | `src/core\tokens\motion\animation.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### `_CSS_EASE_PTS`
+
+The CSS `ease` keyword as cubic-bezier control points — W3C defines it
+as cubic-bezier(0.25, 0.1, 0.25, 1); SCSS surfaces that transition
+with `ease` need the same curve evaluated in JS/WGSL.
+
+### `EASING`
+
+Easing curve + transition duration tokens. Sole declaration site — consumers import members
+from this frozen map rather than re-declaring the literals
+(zero-hardcoding rule).
 
 ### `EASING`
 
 Smooth cubic-bezier used throughout the design system
 
+### `EASING_POINTS`
+
+`EASING` as control points for bezierEase()/WGSL ramps
+
 ### `PAGE_EASING`
 
 Page transition easing
+
+### `CSS_EASE_POINTS`
+
+The CSS `ease` keyword as control points
 
 ### `ANIMATION_DURATIONS`
 
@@ -78,3 +98,24 @@ Default smooth-scroll animation length (ms) — long enough to read the ease, sh
 ### `SCROLL_MIN_DISTANCE`
 
 Minimum scroll distance (px) below which the animation is skipped — sub-2px moves are invisible and would only churn frames
+
+### `BRACKET_MS`
+
+Corner-bracket arm expansion ramp (ms) — the 0.25s CSS transition on the ::before/::after bracket box
+
+### `BRACKET_FAST_MS`
+
+Faster bracket ramp (ms) — the 0.2s variant on expand-modal/cookies bracket buttons
+
+### `MEDIA_LAYER_FADE`
+
+Media-figure cross-fade (ms) — the 0.5s opacity transition on
+.render-media--high in media-figure/_media.scss. Under-layers are
+retired only after the successor is fully opaque, never mid-fade
+(the quality-swap blink).
+
+### `MEDIA_LAYER_RETIRE`
+
+Under-layer retire fallback (ms) — transitionend normally ends the
+cross-fade; this timeout covers reduced-motion/no-transition engines
+where the event never lands. Must outlast MEDIA_LAYER_FADE.

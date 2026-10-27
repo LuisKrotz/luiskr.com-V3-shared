@@ -1,11 +1,11 @@
-# `cms/playground-editor/CmsPlaygroundEditor.tsx`
+# `cms\playground-editor\CmsPlaygroundEditor.tsx`
 
 &lt;cms-playground-editor&gt; — playground + slugs editor:
 
-| | |
-|---|---|
-| **Source** | `src/cms/playground-editor/CmsPlaygroundEditor.tsx` |
-| **UX surface** | Earth-playground labels, defaults and route slugs editor. |
+|                |                                                     |
+| -------------- | --------------------------------------------------- |
+| **Source**     | `src/cms\playground-editor\CmsPlaygroundEditor.tsx` |
+| **UX surface** | Admin bundle — editors for every database node.     |
 
 ## Members
 

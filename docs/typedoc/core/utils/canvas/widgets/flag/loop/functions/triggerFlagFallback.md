@@ -8,7 +8,7 @@
 function triggerFlagFallback(flag): void
 ```
 
-Defined in: core/utils/canvas/widgets/flag/loop.ts:17
+Defined in: core/utils/canvas/widgets/flag/loop.ts:18
 
 Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on context loss or init failure.
 

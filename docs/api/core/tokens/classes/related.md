@@ -1,10 +1,10 @@
-# `core/tokens/classes/related.ts`
+# `core\tokens\classes\related.ts`
 
 Related-projects mosaic class tokens — grouped subset of
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/classes/related.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\related.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -14,3 +14,16 @@ Related-projects mosaic class tokens — grouped subset of
 Frozen related class-name map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes
 the token contract immutable at runtime.
+
+### `RELATED_MOSAIC_IMG_PLACEHOLDER`
+
+Progressive-cover layers — intrinsic-size SVG reserves the painted
+box, LQIP first paint, then the display ladder fades in over it.
+
+### `RELATED_MOSAIC_IMG_LOADED`
+
+Published on the high layer's `load` — the CSS crossfade trigger.
+
+### `RELATED_MOSAIC_RING_CANVAS`
+
+WebGPU overlay canvas for the instanced border-sheen rings.

@@ -10,7 +10,7 @@
     />
   </head>
   <body>
-    <h1>Sass API — luiskr.com 0.1.0</h1>
+    <h1>Sass API — luiskr.com 0.2.0</h1>
     <p>
       Generated from
       <code>///</code>
@@ -20,39 +20,51 @@
     <nav aria-label="Files">
       <ul>
         <li>
-          <a href="#file-core-sass-base-_mixins-scss">core/sass/base/_mixins.scss</a>
-          (29)
+          <a href="#file-core-sass-base-_mixins-scss">core\sass\base\_mixins.scss</a>
+          (30)
         </li>
         <li>
-          <a href="#file-core-sass-base-_placeholders-scss">core/sass/base/_placeholders.scss</a>
+          <a href="#file-core-sass-base-_placeholders-scss">core\sass\base\_placeholders.scss</a>
           (5)
         </li>
         <li>
-          <a href="#file-core-sass-base-_variables-scss">core/sass/base/_variables.scss</a>
-          (147)
+          <a href="#file-core-sass-base-_variables-scss">core\sass\base\_variables.scss</a>
+          (198)
+        </li>
+        <li>
+          <a href="#file-core-sass-components-carousel-_dot-nav-scss">
+            core\sass\components\carousel\_dot-nav.scss
+          </a>
+          (1)
+        </li>
+        <li>
+          <a href="#file-core-sass-components-carousel-awards-carousel-scss">
+            core\sass\components\carousel\awards-carousel.scss
+          </a>
+          (1)
         </li>
         <li>
           <a href="#file-core-sass-components-carousel-awards-carousel-_base-scss">
-            core/sass/components/carousel/awards-carousel/_base.scss
+            core\sass\components\carousel\awards-carousel\_base.scss
           </a>
-          (3)
+          (4)
         </li>
         <li>
           <a href="#file-core-sass-components-carousel-carousel-host-scss">
-            core/sass/components/carousel/carousel-host.scss
+            core\sass\components\carousel\carousel-host.scss
           </a>
           (1)
         </li>
         <li>
           <a href="#file-core-sass-components-carousel-carousel-scss">
-            core/sass/components/carousel/carousel.scss
+            core\sass\components\carousel\carousel.scss
           </a>
           (6)
         </li>
       </ul>
     </nav>
     <section id="file-core-sass-base-_mixins-scss">
-      <h2>core/sass/base/_mixins.scss</h2>
+      <h2>core\sass\base\_mixins.scss</h2>
       <article class="sd-item sd-item--function" id="function-decimal-round">
         <h3>
           <code>decimal-round</code>
@@ -557,6 +569,19 @@
           Inked by `--focus-ring` so the affordance matches the theme accent in both light and dark.
         </p>
       </article>
+      <article class="sd-item sd-item--mixin" id="mixin-focus-ring-targets">
+        <h3>
+          <code>focus-ring-targets</code>
+          <span class="sd-kind">mixin</span>
+        </h3>
+        <pre class="sd-sig"><code>@mixin focus-ring-targets {</code></pre>
+        <p>
+          Emits the `:focus-visible` selector list for every tabbable element type in the current
+          scope, applying @content to each — the single source for &#34;which elements get the
+          ring&#34;. `[tabindex=&#39;-1&#39;]` is excluded: those are programmatically-focused
+          containers, not controls.
+        </p>
+      </article>
       <article class="sd-item sd-item--mixin" id="mixin-focus-ring-scope">
         <h3>
           <code>focus-ring-scope</code>
@@ -564,15 +589,13 @@
         </h3>
         <pre class="sd-sig"><code>@mixin focus-ring-scope {</code></pre>
         <p>
-          Emits `:focus-visible` rules for every tabbable element type in the current scope —
-          component sheets pull this in because document-level focus rules never pierce shadow DOM.
-          `[tabindex=&#39;-1&#39;]` is excluded: those are programmatically-focused containers, not
-          controls.
+          Emits the focus ring for every tabbable element in the current scope — component sheets
+          pull this in because document-level focus rules never pierce shadow DOM.
         </p>
       </article>
     </section>
     <section id="file-core-sass-base-_placeholders-scss">
-      <h2>core/sass/base/_placeholders.scss</h2>
+      <h2>core\sass\base\_placeholders.scss</h2>
       <article class="sd-item sd-item--placeholder" id="placeholder-RESETBTN">
         <h3>
           <code>RESETBTN</code>
@@ -627,7 +650,7 @@
       </article>
     </section>
     <section id="file-core-sass-base-_variables-scss">
-      <h2>core/sass/base/_variables.scss</h2>
+      <h2>core\sass\base\_variables.scss</h2>
       <article class="sd-item sd-item--variable" id="variable-color-white">
         <h3>
           <code>color-white</code>
@@ -1735,6 +1758,407 @@
         <pre class="sd-sig"><code>$space-10xl: 1597;</code></pre>
         <p>Fib(17) — 1597px, ultra-wide layout slots</p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-low-strong">
+        <h3>
+          <code>cov-low-strong</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-low-strong: #c21f39;</code></pre>
+        <p>Light theme — istanbul&#39;s own dark red (low-status bar, chart border).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-low-mid">
+        <h3>
+          <code>cov-low-mid</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-low-mid: #f6c6ce;</code></pre>
+        <p>Light theme — istanbul&#39;s medium red cell fill (cstat/fstat misses).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-low-soft">
+        <h3>
+          <code>cov-low-soft</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-low-soft: #fce1e5;</code></pre>
+        <p>Light theme — istanbul&#39;s light red row tint (low rows, cline-no).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-high-soft">
+        <h3>
+          <code>cov-high-soft</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-high-soft: #e6f5d0;</code></pre>
+        <p>Light theme — istanbul&#39;s light green row tint (high rows, cline-yes).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-high-mid">
+        <h3>
+          <code>cov-high-mid</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-high-mid: #a1d76a;</code></pre>
+        <p>Light theme — istanbul&#39;s medium green cell fill (cstat-yes).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-high-strong">
+        <h3>
+          <code>cov-high-strong</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-high-strong: #4d9221;</code></pre>
+        <p>Light theme — istanbul&#39;s dark green (high-status bar, chart border).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-med-soft">
+        <h3>
+          <code>cov-med-soft</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-med-soft: #fff4c2;</code></pre>
+        <p>Light theme — istanbul&#39;s light gold row tint (medium rows).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-med-strong">
+        <h3>
+          <code>cov-med-strong</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-med-strong: #f9cd0b;</code></pre>
+        <p>Light theme — istanbul&#39;s gold (medium-status bar, chart border).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-warn">
+        <h3>
+          <code>cov-warn</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-warn: #ffea00;</code></pre>
+        <p>Light theme — istanbul&#39;s branch-miss yellow cell.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-skip">
+        <h3>
+          <code>cov-skip</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-skip: #dddddd;</code></pre>
+        <p>Light theme — istanbul&#39;s skipped-stat grey.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-neutral">
+        <h3>
+          <code>cov-neutral</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-neutral: #eaeaea;</code></pre>
+        <p>Light theme — istanbul&#39;s neutral line marker grey.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-stripe">
+        <h3>
+          <code>cov-stripe</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-stripe: #eeeeee;</code></pre>
+        <p>Light theme — istanbul&#39;s zebra stripe for even source lines.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-missing-bg">
+        <h3>
+          <code>cov-missing-bg</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-missing-bg: #333333;</code></pre>
+        <p>Both themes — istanbul&#39;s missing-branch chip stays a dark slab.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-missing-ink">
+        <h3>
+          <code>cov-missing-ink</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-missing-ink: #ffe600;</code></pre>
+        <p>Light theme — istanbul&#39;s missing-branch ink (yellow on the dark slab).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-fraction-bg">
+        <h3>
+          <code>cov-fraction-bg</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-fraction-bg: #e8e8e8;</code></pre>
+        <p>Light theme — istanbul&#39;s fraction chip background.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-fraction-ink">
+        <h3>
+          <code>cov-fraction-ink</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-fraction-ink: #555555;</code></pre>
+        <p>Light theme — istanbul&#39;s fraction chip ink.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-border">
+        <h3>
+          <code>cov-border</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-border: #bbbbbb;</code></pre>
+        <p>Light theme — istanbul&#39;s table/grid border grey.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-link">
+        <h3>
+          <code>cov-link</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-link: #0074d9;</code></pre>
+        <p>Light theme — istanbul&#39;s link blue.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-low-strong-dark">
+        <h3>
+          <code>cov-low-strong-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-low-strong-dark: #d84a60;</code></pre>
+        <p>Dark theme — low-status red brightened for dark surfaces.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-low-mid-dark">
+        <h3>
+          <code>cov-low-mid-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-low-mid-dark: #7a2530;</code></pre>
+        <p>Dark theme — mid red cell fill deepened so dark text areas stay quiet.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-low-soft-dark">
+        <h3>
+          <code>cov-low-soft-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-low-soft-dark: #381318;</code></pre>
+        <p>Dark theme — light red row tint → deep desaturated maroon.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-high-soft-dark">
+        <h3>
+          <code>cov-high-soft-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-high-soft-dark: #14230d;</code></pre>
+        <p>Dark theme — light green row tint → deep olive-black.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-high-mid-dark">
+        <h3>
+          <code>cov-high-mid-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-high-mid-dark: #5d9435;</code></pre>
+        <p>Dark theme — medium green cell fill.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-high-strong-dark">
+        <h3>
+          <code>cov-high-strong-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-high-strong-dark: #8fd356;</code></pre>
+        <p>Dark theme — high-status green brightened for dark surfaces.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-med-soft-dark">
+        <h3>
+          <code>cov-med-soft-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-med-soft-dark: #2e280f;</code></pre>
+        <p>Dark theme — light gold row tint → deep umber.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-med-strong-dark">
+        <h3>
+          <code>cov-med-strong-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-med-strong-dark: #d4ac09;</code></pre>
+        <p>Dark theme — medium-status gold dimmed for dark surfaces.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-warn-dark">
+        <h3>
+          <code>cov-warn-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-warn-dark: #8a7a00;</code></pre>
+        <p>Dark theme — branch-miss yellow → deep mustard.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-skip-dark">
+        <h3>
+          <code>cov-skip-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-skip-dark: #3d3d3d;</code></pre>
+        <p>Dark theme — skipped-stat grey lifted above the black surface.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-neutral-dark">
+        <h3>
+          <code>cov-neutral-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-neutral-dark: $color-black;</code></pre>
+        <p>Dark theme — neutral line marker.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-stripe-dark">
+        <h3>
+          <code>cov-stripe-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-stripe-dark: #141414;</code></pre>
+        <p>Dark theme — zebra stripe for even source lines.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-missing-ink-dark">
+        <h3>
+          <code>cov-missing-ink-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-missing-ink-dark: #ffe600;</code></pre>
+        <p>Dark theme — missing-branch ink keeps the yellow signal on the slab.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-fraction-bg-dark">
+        <h3>
+          <code>cov-fraction-bg-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-fraction-bg-dark: #1e1e1e;</code></pre>
+        <p>Dark theme — fraction chip background.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-fraction-ink-dark">
+        <h3>
+          <code>cov-fraction-ink-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-fraction-ink-dark: #b8b1ac;</code></pre>
+        <p>Dark theme — fraction chip ink.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-border-dark">
+        <h3>
+          <code>cov-border-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-border-dark: #3a3a3a;</code></pre>
+        <p>Dark theme — table/grid border.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-link-dark">
+        <h3>
+          <code>cov-link-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-link-dark: #58a6ff;</code></pre>
+        <p>Dark theme — link blue lifted for contrast on dark.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-str">
+        <h3>
+          <code>cov-syn-str</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-str: #33691e;</code></pre>
+        <p>
+          Light theme — strings/attribute values (Material Light green, deepened to ~6:1 on
+          --bg-secondary for WCAG AA text).
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-kwd">
+        <h3>
+          <code>cov-syn-kwd</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-kwd: #5e35b1;</code></pre>
+        <p>Light theme — keywords/tags (deep purple 600 — 7.5:1 AAA).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-com">
+        <h3>
+          <code>cov-syn-com</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-com: #4a5560;</code></pre>
+        <p>
+          Light theme — comments (slate — 7.1:1 AAA; the original Material Light slate sat at 1.8:1
+          and was unreadable on the code pane).
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-typ">
+        <h3>
+          <code>cov-syn-typ</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-typ: #8f5b00;</code></pre>
+        <p>Light theme — types/attrs/decls/vars (amber 900 — 5.4:1 AA).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-lit">
+        <h3>
+          <code>cov-syn-lit</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-lit: #c62800;</code></pre>
+        <p>Light theme — literals (deep orange-red — 5.3:1 AA).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-pun">
+        <h3>
+          <code>cov-syn-pun</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-pun: #455a64;</code></pre>
+        <p>Light theme — punctuation/operators/closers (blue-grey 700 — 6.8:1).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-fun">
+        <h3>
+          <code>cov-syn-fun</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-fun: #34518f;</code></pre>
+        <p>Light theme — function names (indigo 800 — 7.2:1 AAA).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-str-dark">
+        <h3>
+          <code>cov-syn-str-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-str-dark: #f1fa8c;</code></pre>
+        <p>Dark theme — strings (Dracula yellow).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-kwd-dark">
+        <h3>
+          <code>cov-syn-kwd-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-kwd-dark: #ff79c6;</code></pre>
+        <p>Dark theme — keywords/tags (Dracula pink).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-com-dark">
+        <h3>
+          <code>cov-syn-com-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-com-dark: #93a1bd;</code></pre>
+        <p>
+          Dark theme — comments (lighter Dracula slate — 7.9:1 AAA on --bg-secondary; the original
+          4.38:1 sat under the AA floor).
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-typ-dark">
+        <h3>
+          <code>cov-syn-typ-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-typ-dark: #8be9fd;</code></pre>
+        <p>Dark theme — types/attrs/decls/vars (Dracula cyan).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-lit-dark">
+        <h3>
+          <code>cov-syn-lit-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-lit-dark: #bd93f9;</code></pre>
+        <p>Dark theme — literals (Dracula purple).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-pun-dark">
+        <h3>
+          <code>cov-syn-pun-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-pun-dark: #f8f8f2;</code></pre>
+        <p>Dark theme — punctuation (Dracula foreground).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-cov-syn-fun-dark">
+        <h3>
+          <code>cov-syn-fun-dark</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$cov-syn-fun-dark: #50fa7b;</code></pre>
+        <p>Dark theme — function names (Dracula green).</p>
+      </article>
       <article class="sd-item sd-item--variable" id="variable-z-header">
         <h3>
           <code>z-header</code>
@@ -1807,24 +2231,120 @@
         <pre class="sd-sig"><code>$font-mono:</code></pre>
         <p>Monospace stack — system fonts only, so no webfont download blocks paint.</p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-ease-spring">
+        <h3>
+          <code>ease-spring</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$ease-spring: linear(</code></pre>
+        <p>
+          Damped-spring easing for hover morphs (mosaic tiles, related strips) — a physical spring
+          response (ζ=0.6, ~1.3 cycles) sampled at 4% intervals into a CSS linear() easing: ~10%
+          overshoot, one settle lobe, lands exactly at 1. Browsers without linear() keep the
+          cubic-bezier fallback declared alongside it at each callsite.
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-ease-water">
+        <h3>
+          <code>ease-water</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$ease-water: linear(</code></pre>
+        <p>
+          Critically-damped spring easing (ζ=1, ωT=8) sampled at 4% intervals into a CSS linear()
+          easing — the fastest possible settle with zero overshoot: value rises, decelerates, and
+          lands exactly on target like water coming to rest. Used where motion should feel organic
+          and fluid rather than bouncy (nav chip reveals, gear spin). Browsers without linear() keep
+          the cubic-bezier fallback declared alongside it at each callsite.
+        </p>
+      </article>
+    </section>
+    <section id="file-core-sass-components-carousel-_dot-nav-scss">
+      <h2>core\sass\components\carousel\_dot-nav.scss</h2>
+      <article class="sd-item sd-item--mixin" id="mixin-dot-nav">
+        <h3>
+          <code>dot-nav</code>
+          <span class="sd-kind">mixin</span>
+        </h3>
+        <pre class="sd-sig"><code>@mixin dot-nav($B, $dot-size, $dot-pill, $dot-gap) {</code></pre>
+        <p>
+          Emits the complete dot-nav component for the BEM block `$B`: `.#{$B}-dots` (flex row),
+          `.#{$B}-dot` (24×24 pointer target whose ::after disc morphs disc→pill on
+          `&#38;--active`), and `.#{$B}-dot-num` (the absolutely-centred visible index). The
+          button&#39;s min-width and the disc width ride the same damped-spring curve, so the morph,
+          the gap opening around the pill, and the numeral&#39;s recentering land together on every
+          activation. at 800-weight still clear the rim). it can&#39;t read as a slightly-wide
+          circle).
+        </p>
+        <h4>Parameters</h4>
+        <ul>
+          <li>
+            <code>$B</code>
+            <span class="sd-type">String</span>
+            — — consumer BEM block prefix (&#39;carousel&#39;, &#39;aw-c&#39;).
+          </li>
+          <li>
+            <code>$dot-size</code>
+            <span class="sd-type">Number</span>
+            — — resting disc diameter (16px: two digits
+          </li>
+          <li>
+            <code>$dot-pill</code>
+            <span class="sd-type">Number</span>
+            — — active stadium length (~2× the disc so
+          </li>
+          <li>
+            <code>$dot-gap</code>
+            <span class="sd-type">Number</span>
+            — — row gap between dots.
+          </li>
+        </ul>
+      </article>
+    </section>
+    <section id="file-core-sass-components-carousel-awards-carousel-scss">
+      <h2>core\sass\components\carousel\awards-carousel.scss</h2>
+      <article class="sd-item sd-item--variable" id="variable-_B_AWC">
+        <h3>
+          <code>_B_AWC</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_B_AWC: &#39;aw-c&#39;;</code></pre>
+        <p>
+          BEM block fragment — composed via interpolation so the &#39;aw-c&#39; prefix is declared
+          exactly once (DRY selector rule).
+        </p>
+      </article>
     </section>
     <section id="file-core-sass-components-carousel-awards-carousel-_base-scss">
-      <h2>core/sass/components/carousel/awards-carousel/_base.scss</h2>
+      <h2>core\sass\components\carousel\awards-carousel\_base.scss</h2>
       <article class="sd-item sd-item--variable" id="variable-awc-dot-size">
         <h3>
           <code>awc-dot-size</code>
           <span class="sd-kind">variable</span>
         </h3>
-        <pre class="sd-sig"><code>$awc-dot-size: to-rem($space-md);</code></pre>
-        <p>Dot diameter — inactive nav dots are small squares.</p>
+        <pre
+          class="sd-sig"
+        ><code>$awc-dot-size: calc(#{to-rem($space-lg)} + #{to-rem($space-xs)});</code></pre>
+        <p>Dot diameter — each disc carries its slide number inside (16px).</p>
       </article>
       <article class="sd-item sd-item--variable" id="variable-awc-dot-pill">
         <h3>
           <code>awc-dot-pill</code>
           <span class="sd-kind">variable</span>
         </h3>
-        <pre class="sd-sig"><code>$awc-dot-pill: to-rem($space-xl);</code></pre>
-        <p>Pill length — the active dot stretches to a rounded pill.</p>
+        <pre class="sd-sig"><code>$awc-dot-pill: to-rem($space-2xl);</code></pre>
+        <p>
+          Pill length — the active dot stretches to a rounded pill; ~2× the disc diameter so the
+          stadium shape can&#39;t read as a slightly-wide circle.
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-awc-dot-gap">
+        <h3>
+          <code>awc-dot-gap</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$awc-dot-gap: to-rem($space-xs);</code></pre>
+        <p>Gap between nav dots.</p>
       </article>
       <article class="sd-item sd-item--variable" id="variable-awc-peek">
         <h3>
@@ -1836,7 +2356,7 @@
       </article>
     </section>
     <section id="file-core-sass-components-carousel-carousel-host-scss">
-      <h2>core/sass/components/carousel/carousel-host.scss</h2>
+      <h2>core\sass\components\carousel\carousel-host.scss</h2>
       <article class="sd-item sd-item--variable" id="variable-_B_CAROUSEL">
         <h3>
           <code>_B_CAROUSEL</code>
@@ -1850,7 +2370,7 @@
       </article>
     </section>
     <section id="file-core-sass-components-carousel-carousel-scss">
-      <h2>core/sass/components/carousel/carousel.scss</h2>
+      <h2>core\sass\components\carousel\carousel.scss</h2>
       <article class="sd-item sd-item--variable" id="variable-_B_CAROUSEL">
         <h3>
           <code>_B_CAROUSEL</code>
@@ -1875,16 +2395,24 @@
           <code>carousel-dot-size</code>
           <span class="sd-kind">variable</span>
         </h3>
-        <pre class="sd-sig"><code>$carousel-dot-size: to-rem($space-md);</code></pre>
-        <p>Dot diameter — inactive nav dots are small squares.</p>
+        <pre
+          class="sd-sig"
+        ><code>$carousel-dot-size: calc(#{to-rem($space-lg)} + #{to-rem($space-xs)});</code></pre>
+        <p>
+          Dot diameter — each disc carries its slide number inside; 16px is the compact sweet spot
+          (two digits at 800-weight still clear the rim).
+        </p>
       </article>
       <article class="sd-item sd-item--variable" id="variable-carousel-dot-pill">
         <h3>
           <code>carousel-dot-pill</code>
           <span class="sd-kind">variable</span>
         </h3>
-        <pre class="sd-sig"><code>$carousel-dot-pill: to-rem($space-xl);</code></pre>
-        <p>Pill length — the active dot stretches to a rounded pill.</p>
+        <pre class="sd-sig"><code>$carousel-dot-pill: to-rem($space-2xl);</code></pre>
+        <p>
+          Pill length — the active dot stretches to a rounded pill; ~2× the disc diameter so the
+          stadium shape can&#39;t read as a slightly-wide circle.
+        </p>
       </article>
       <article class="sd-item sd-item--variable" id="variable-carousel-dot-gap">
         <h3>

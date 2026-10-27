@@ -8,6 +8,6 @@
 const _B_CAROUSEL_SLIDE: 'carousel-slide'
 ```
 
-Defined in: core/tokens/base.ts:191
+Defined in: core/tokens/base.ts:196
 
 BEM block fragment "b carousel slide" — composed by the token groups below into full class names.

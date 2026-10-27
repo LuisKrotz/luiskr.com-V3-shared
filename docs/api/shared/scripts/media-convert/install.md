@@ -1,9 +1,9 @@
-# `shared/scripts/media-convert/install.js`
+# `shared\scripts\media-convert\install.js`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/media-convert/install.js`                             |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\media-convert\install.js`           |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -26,6 +26,21 @@ Package managers probed per platform, in preference order.
 Tool → package names per manager. `ffmpeg` bundles `ffprobe` on every
 platform; ImageMagick ships as `magick`/`convert`; `cjpeg` comes from
 mozjpeg (brew/pacman) or libjpeg-turbo's utils package elsewhere.
+
+### `WIN_CJPEG_HINT`
+
+Windows cjpeg guidance — no winget/choco mozjpeg package exists, so the
+yarn binary wrapper is the manager-free path (the `mozjpeg` package is
+imagemin's bin-wrapper: it drops a prebuilt cjpeg.exe into yarn's
+global bin dir). vcpkg (`vcpkg install mozjpeg`) or the GitHub release
+zip are the alternatives.
+
+### `WIN_CJPEG_CMD`
+
+Windows cjpeg install command for the auto-run plan — yarn resolves
+through %PATHEXT% only inside cmd, and modern Node refuses to spawn
+.cmd shims directly (CVE-2024-27980), so the step shells out
+explicitly: `cmd /d /s /c yarn global add mozjpeg`.
 
 ### `needs`
 

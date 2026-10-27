@@ -1,9 +1,9 @@
-# `cms/projects/types.ts`
+# `cms\projects\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/projects/types.ts` |
-| **UX surface** | Per-project sections editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\projects\types.ts`                     |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
@@ -60,6 +60,7 @@ Ordered content sections.
 Builds the CDN URL for a media filename the same way the public site
 does — videos resolve to their poster frame, images to the mozjpeg
 thumb variant — so CMS previews show exactly what visitors will see.
+
 - `@param` filename Extensionless CDN stem (folder + name).
 - `@param` isVideo When true, resolves the generated poster frame instead.
 - `@returns` The full preview URL.

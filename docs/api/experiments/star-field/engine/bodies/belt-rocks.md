@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/belt-rocks.ts`
+# `experiments\star-field\engine\bodies\belt-rocks.ts`
 
 Hero asteroids for the two belts — COUNT individual
 
 |                |                                                          |
 | -------------- | -------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/belt-rocks.ts` |
+| **Source**     | `src/experiments\star-field\engine\bodies\belt-rocks.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
 
 ## Members

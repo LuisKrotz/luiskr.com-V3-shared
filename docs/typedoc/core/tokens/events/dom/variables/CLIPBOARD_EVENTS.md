@@ -11,10 +11,11 @@ const CLIPBOARD_EVENTS: Readonly<{
   SELECTSTART: 'selectstart'
   VISIBILITY_CHANGE: 'visibilitychange'
   BEFORE_PRINT: 'beforeprint'
+  AFTER_PRINT: 'afterprint'
 }>
 ```
 
-Defined in: core/tokens/events/dom.ts:160
+Defined in: core/tokens/events/dom.ts:166
 
 Frozen clipboard event-name map — copy/cut/selection events the docs
 portal intercepts for its source-code copy guard.

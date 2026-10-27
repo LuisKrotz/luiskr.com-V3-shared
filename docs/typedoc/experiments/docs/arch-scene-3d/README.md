@@ -8,5 +8,7 @@
 
 - [parseInk](functions/parseInk.md)
 - [poseFromPos](functions/poseFromPos.md)
+- [segmentsToRibbons](functions/segmentsToRibbons.md)
+- [trisToGeometry](functions/trisToGeometry.md)
 - [buildEdges](functions/buildEdges.md)
 - [mountArchScene3d](functions/mountArchScene3d.md)

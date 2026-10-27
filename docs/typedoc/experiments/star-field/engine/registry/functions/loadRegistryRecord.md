@@ -8,7 +8,7 @@
 function loadRegistryRecord(id): Promise<SFRegistryRecord | null>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:168
+Defined in: experiments/star-field/engine/registry.ts:172
 
 Resolves a registry id to its full record — pure shard arithmetic
 (`shard = rank ÷ 1000`, `slot = rank mod 1000`), one fetch worst

@@ -8,7 +8,7 @@
 function mountAppShell(c): void
 ```
 
-Defined in: shared/src/app/boot.ts:44
+Defined in: shared/src/app/boot.ts:46
 
 Mounts app shell.
 

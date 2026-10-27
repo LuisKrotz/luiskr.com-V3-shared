@@ -1,10 +1,10 @@
-# `core/utils/wasm/wasm-scroll.ts`
+# `core\utils\wasm\wasm-scroll.ts`
 
 rAF-driven smooth scroller: animates window (or a container)
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/wasm/wasm-scroll.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\wasm\wasm-scroll.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -49,4 +49,5 @@ gets a GPU compositor promotion (will-change/transform) so the browser
 repaints a layer instead of relayouting, then `releaseElementGPU`
 restores it on the last frame. `updateHistory` rewrites `#id` via
 replaceState so it never pushes a history entry.
+
 - `@param` options Container/target/duration configuration.

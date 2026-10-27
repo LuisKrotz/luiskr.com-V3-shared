@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/post-nodes.ts`
+# `experiments\star-field\engine\post-nodes.ts`
 
 Custom TSL post nodes for the star-field RenderPipeline
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/post-nodes.ts`       |
+| **Source**     | `src/experiments\star-field\engine\post-nodes.ts`       |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

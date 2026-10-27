@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/expanded/genie](../README.md) / GenieRect
 
-Defined in: website/components/media/expanded/genie.ts:42
+Defined in: website/components/media/expanded/genie.ts:44
 
 Viewport-space rect the genie field interpolates between.
 
@@ -16,7 +16,7 @@ Viewport-space rect the genie field interpolates between.
 x: number
 ```
 
-Defined in: website/components/media/expanded/genie.ts:43
+Defined in: website/components/media/expanded/genie.ts:45
 
 ---
 
@@ -26,7 +26,7 @@ Defined in: website/components/media/expanded/genie.ts:43
 y: number
 ```
 
-Defined in: website/components/media/expanded/genie.ts:44
+Defined in: website/components/media/expanded/genie.ts:46
 
 ---
 
@@ -36,7 +36,7 @@ Defined in: website/components/media/expanded/genie.ts:44
 w: number
 ```
 
-Defined in: website/components/media/expanded/genie.ts:45
+Defined in: website/components/media/expanded/genie.ts:47
 
 ---
 
@@ -46,4 +46,4 @@ Defined in: website/components/media/expanded/genie.ts:45
 h: number
 ```
 
-Defined in: website/components/media/expanded/genie.ts:46
+Defined in: website/components/media/expanded/genie.ts:48

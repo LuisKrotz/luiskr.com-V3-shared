@@ -8,7 +8,7 @@
 function renderAxe(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:126
+Defined in: cms/deploy-info/render.tsx:354
 
 Renders the axe-core accessibility scan (violations grouped by surface).
 

@@ -1,10 +1,10 @@
-# `core/tokens/attrs/aria.ts`
+# `core\tokens\attrs\aria.ts`
 
 ARIA attribute + role-value tokens — token group.
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/attrs/aria.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\attrs\aria.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -18,3 +18,7 @@ the token contract immutable at runtime.
 ### `ROLE_TREE`
 
 `tree`/`treeitem`/`none` — the ARIA treeview contract for the docs nav.
+
+### `ROLE_APPLICATION`
+
+`application` — the only widget role ARIA permits on <video>.

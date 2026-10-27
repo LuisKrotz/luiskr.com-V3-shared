@@ -120,6 +120,12 @@ Re-exports [webmSibling](media/functions/webmSibling.md)
 
 ---
 
+### coverLadderStep
+
+Re-exports [coverLadderStep](media/functions/coverLadderStep.md)
+
+---
+
 ### buildMediaUrls
 
 Re-exports [buildMediaUrls](media/functions/buildMediaUrls.md)
@@ -156,6 +162,24 @@ Re-exports [generateRouteSchema](schema/functions/generateRouteSchema.md)
 
 ---
 
+### generateEarthPlaygroundSchema
+
+Re-exports [generateEarthPlaygroundSchema](schema/functions/generateEarthPlaygroundSchema.md)
+
+---
+
+### generateStarIndexSchema
+
+Re-exports [generateStarIndexSchema](schema/functions/generateStarIndexSchema.md)
+
+---
+
+### generateStarBodySchema
+
+Re-exports [generateStarBodySchema](schema/functions/generateStarBodySchema.md)
+
+---
+
 ### generateProjectSchema
 
 Re-exports [generateProjectSchema](schema/functions/generateProjectSchema.md)
@@ -174,9 +198,21 @@ Re-exports [updateJsonLd](schema/functions/updateJsonLd.md)
 
 ---
 
+### setRobotsMeta
+
+Re-exports [setRobotsMeta](schema/functions/setRobotsMeta.md)
+
+---
+
 ### stripHtml
 
 Re-exports [stripHtml](string/functions/stripHtml.md)
+
+---
+
+### excerptHeading
+
+Re-exports [excerptHeading](string/functions/excerptHeading.md)
 
 ---
 

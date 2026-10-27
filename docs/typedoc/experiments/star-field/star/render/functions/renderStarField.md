@@ -8,7 +8,7 @@
 function renderStarField(host): Element
 ```
 
-Defined in: experiments/star-field/star/render.tsx:211
+Defined in: experiments/star-field/star/render.tsx:270
 
 Renders the StarField view.
 

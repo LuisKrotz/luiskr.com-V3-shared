@@ -8,7 +8,7 @@
 function initRest(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider/init.ts:163
+Defined in: core/utils/canvas/widgets/theme-slider/init.ts:164
 
 The classic boot tail — context-loss watch → WebGL attempt →
 events + loop. Runs directly on no-WebGPU browsers and after a

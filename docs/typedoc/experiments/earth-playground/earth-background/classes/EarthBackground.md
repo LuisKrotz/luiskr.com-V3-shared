@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/earth-playground/earth-background](../README.md) / EarthBackground
 
@@ -60,7 +60,7 @@ should swap in the CSS fallback surface instead of a dead canvas.
 
 `boolean`
 
-***
+---
 
 ### settings
 
@@ -70,7 +70,7 @@ should swap in the CSS fallback surface instead of a dead canvas.
 get settings(): object;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:194
+Defined in: experiments/earth-playground/earth-background.ts:196
 
 Snapshot of every tunable, shaped exactly like DEFAULT_SP_GUI so the
 playground control panel can render sliders without knowing which
@@ -85,367 +85,367 @@ settings tree keyed like DEFAULT_SP_GUI
 ###### SHOW
 
 ```ts
-SHOW: boolean = true;
+SHOW: boolean = true
 ```
 
 ###### COLOR\_GRADING
 
 ```ts
-COLOR_GRADING: object;
+COLOR_GRADING: object
 ```
 
 ###### COLOR\_GRADING.CONTRAST
 
 ```ts
-CONTRAST: number;
+CONTRAST: number
 ```
 
 ###### COLOR\_GRADING.SATURATION
 
 ```ts
-SATURATION: number;
+SATURATION: number
 ```
 
 ###### COLOR\_GRADING.BLACK\_LEVEL
 
 ```ts
-BLACK_LEVEL: number;
+BLACK_LEVEL: number
 ```
 
 ###### COLOR\_GRADING.BLUE\_GREEN\_BOOST
 
 ```ts
-BLUE_GREEN_BOOST: number;
+BLUE_GREEN_BOOST: number
 ```
 
 ###### MOON
 
 ```ts
-MOON: object;
+MOON: object
 ```
 
 ###### MOON.ENABLED
 
 ```ts
-ENABLED: boolean;
+ENABLED: boolean
 ```
 
 ###### MOON.SPEED
 
 ```ts
-SPEED: number;
+SPEED: number
 ```
 
 ###### MOON.DISTANCE
 
 ```ts
-DISTANCE: number;
+DISTANCE: number
 ```
 
 ###### MOON.INCLINATION
 
 ```ts
-INCLINATION: number;
+INCLINATION: number
 ```
 
 ###### LENS\_FLARE
 
 ```ts
-LENS_FLARE: object;
+LENS_FLARE: object
 ```
 
 ###### LENS\_FLARE.ENABLED
 
 ```ts
-ENABLED: true = DEFAULT_SP_GUI.LENS_FLARE.ENABLED;
+ENABLED: true = DEFAULT_SP_GUI.LENS_FLARE.ENABLED
 ```
 
 ###### LENS\_FLARE.INTENSITY
 
 ```ts
-INTENSITY: 0.15 = DEFAULT_SP_GUI.LENS_FLARE.INTENSITY;
+INTENSITY: 0.15 = DEFAULT_SP_GUI.LENS_FLARE.INTENSITY
 ```
 
 ###### ANAMORPHIC
 
 ```ts
-ANAMORPHIC: object;
+ANAMORPHIC: object
 ```
 
 ###### ANAMORPHIC.ENABLED
 
 ```ts
-ENABLED: false = DEFAULT_SP_GUI.ANAMORPHIC.ENABLED;
+ENABLED: false = DEFAULT_SP_GUI.ANAMORPHIC.ENABLED
 ```
 
 ###### ANAMORPHIC.INTENSITY
 
 ```ts
-INTENSITY: 0.5 = DEFAULT_SP_GUI.ANAMORPHIC.INTENSITY;
+INTENSITY: 0.5 = DEFAULT_SP_GUI.ANAMORPHIC.INTENSITY
 ```
 
 ###### ANAMORPHIC.THICKNESS
 
 ```ts
-THICKNESS: 2 = DEFAULT_SP_GUI.ANAMORPHIC.THICKNESS;
+THICKNESS: 2 = DEFAULT_SP_GUI.ANAMORPHIC.THICKNESS
 ```
 
 ###### ANAMORPHIC.SIZE
 
 ```ts
-SIZE: 0.2 = DEFAULT_SP_GUI.ANAMORPHIC.SIZE;
+SIZE: 0.2 = DEFAULT_SP_GUI.ANAMORPHIC.SIZE
 ```
 
 ###### ANAMORPHIC.COLOR
 
 ```ts
-COLOR: 16777215 = DEFAULT_SP_GUI.ANAMORPHIC.COLOR;
+COLOR: 16777215 = DEFAULT_SP_GUI.ANAMORPHIC.COLOR
 ```
 
 ###### ANAMORPHIC.INNER\_FADE
 
 ```ts
-INNER_FADE: 0.08 = DEFAULT_SP_GUI.ANAMORPHIC.INNER_FADE;
+INNER_FADE: 0.08 = DEFAULT_SP_GUI.ANAMORPHIC.INNER_FADE
 ```
 
 ###### ANAMORPHIC.OUTER\_FADE
 
 ```ts
-OUTER_FADE: 0.08 = DEFAULT_SP_GUI.ANAMORPHIC.OUTER_FADE;
+OUTER_FADE: 0.08 = DEFAULT_SP_GUI.ANAMORPHIC.OUTER_FADE
 ```
 
 ###### BLOOM
 
 ```ts
-BLOOM: object;
+BLOOM: object
 ```
 
 ###### BLOOM.ENABLED
 
 ```ts
-ENABLED: boolean;
+ENABLED: boolean
 ```
 
 ###### BLOOM.STRENGTH
 
 ```ts
-STRENGTH: number;
+STRENGTH: number
 ```
 
 ###### BLOOM.RADIUS
 
 ```ts
-RADIUS: number;
+RADIUS: number
 ```
 
 ###### BLOOM.THRESHOLD
 
 ```ts
-THRESHOLD: number;
+THRESHOLD: number
 ```
 
 ###### VIGNETTE
 
 ```ts
-VIGNETTE: object;
+VIGNETTE: object
 ```
 
 ###### VIGNETTE.ENABLED
 
 ```ts
-ENABLED: boolean;
+ENABLED: boolean
 ```
 
 ###### VIGNETTE.DARKNESS
 
 ```ts
-DARKNESS: number;
+DARKNESS: number
 ```
 
 ###### VIGNETTE.OFFSET
 
 ```ts
-OFFSET: number;
+OFFSET: number
 ```
 
 ###### CHROMATIC\_ABERRATION
 
 ```ts
-CHROMATIC_ABERRATION: object;
+CHROMATIC_ABERRATION: object
 ```
 
 ###### CHROMATIC\_ABERRATION.ENABLED
 
 ```ts
-ENABLED: boolean;
+ENABLED: boolean
 ```
 
 ###### CHROMATIC\_ABERRATION.STRENGTH
 
 ```ts
-STRENGTH: number;
+STRENGTH: number
 ```
 
 ###### CHROMATIC\_ABERRATION.SCALE
 
 ```ts
-SCALE: number;
+SCALE: number
 ```
 
 ###### FILM\_GRAIN
 
 ```ts
-FILM_GRAIN: object;
+FILM_GRAIN: object
 ```
 
 ###### FILM\_GRAIN.ENABLED
 
 ```ts
-ENABLED: boolean;
+ENABLED: boolean
 ```
 
 ###### FILM\_GRAIN.INTENSITY
 
 ```ts
-INTENSITY: number;
+INTENSITY: number
 ```
 
 ###### ATMOSPHERE
 
 ```ts
-ATMOSPHERE: object;
+ATMOSPHERE: object
 ```
 
 ###### ATMOSPHERE.MODE
 
 ```ts
-MODE: "Airglow" = DEFAULT_SP_GUI.ATMOSPHERE.MODE;
+MODE: 'Airglow' = DEFAULT_SP_GUI.ATMOSPHERE.MODE
 ```
 
 ###### ATMOSPHERE.DENSITY
 
 ```ts
-DENSITY: 20 = DEFAULT_SP_GUI.ATMOSPHERE.DENSITY;
+DENSITY: 20 = DEFAULT_SP_GUI.ATMOSPHERE.DENSITY
 ```
 
 ###### ATMOSPHERE.RAYLEIGH\_COLOR
 
 ```ts
-RAYLEIGH_COLOR: 3373055 = DEFAULT_SP_GUI.ATMOSPHERE.RAYLEIGH_COLOR;
+RAYLEIGH_COLOR: 3373055 = DEFAULT_SP_GUI.ATMOSPHERE.RAYLEIGH_COLOR
 ```
 
 ###### ATMOSPHERE.MIE\_COLOR
 
 ```ts
-MIE_COLOR: 866122 = DEFAULT_SP_GUI.ATMOSPHERE.MIE_COLOR;
+MIE_COLOR: 866122 = DEFAULT_SP_GUI.ATMOSPHERE.MIE_COLOR
 ```
 
 ###### ATMOSPHERE.TWILIGHT\_COLOR
 
 ```ts
-TWILIGHT_COLOR: 16733491 = DEFAULT_SP_GUI.ATMOSPHERE.TWILIGHT_COLOR;
+TWILIGHT_COLOR: 16733491 = DEFAULT_SP_GUI.ATMOSPHERE.TWILIGHT_COLOR
 ```
 
 ###### ATMOSPHERE.AIRGLOW\_COLOR
 
 ```ts
-AIRGLOW_COLOR: 4521813 = DEFAULT_SP_GUI.ATMOSPHERE.AIRGLOW_COLOR;
+AIRGLOW_COLOR: 4521813 = DEFAULT_SP_GUI.ATMOSPHERE.AIRGLOW_COLOR
 ```
 
 ###### CLOUD\_SHADOWS
 
 ```ts
-CLOUD_SHADOWS: object;
+CLOUD_SHADOWS: object
 ```
 
 ###### CLOUD\_SHADOWS.DISTANCE
 
 ```ts
-DISTANCE: 1.2 = DEFAULT_SP_GUI.CLOUD_SHADOWS.DISTANCE;
+DISTANCE: 1.2 = DEFAULT_SP_GUI.CLOUD_SHADOWS.DISTANCE
 ```
 
 ###### CLOUD\_SHADOWS.INTENSITY
 
 ```ts
-INTENSITY: 0.8 = DEFAULT_SP_GUI.CLOUD_SHADOWS.INTENSITY;
+INTENSITY: 0.8 = DEFAULT_SP_GUI.CLOUD_SHADOWS.INTENSITY
 ```
 
 ###### CLOUD\_SHADOWS.COLOR
 
 ```ts
-COLOR: 3358809 = DEFAULT_SP_GUI.CLOUD_SHADOWS.COLOR;
+COLOR: 3358809 = DEFAULT_SP_GUI.CLOUD_SHADOWS.COLOR
 ```
 
 ###### OCEAN
 
 ```ts
-OCEAN: object;
+OCEAN: object
 ```
 
 ###### OCEAN.ROUGHNESS
 
 ```ts
-ROUGHNESS: 0 = DEFAULT_SP_GUI.OCEAN.ROUGHNESS;
+ROUGHNESS: 0 = DEFAULT_SP_GUI.OCEAN.ROUGHNESS
 ```
 
 ###### OCEAN.METALNESS
 
 ```ts
-METALNESS: number;
+METALNESS: number
 ```
 
 ###### EARTH
 
 ```ts
-EARTH: object;
+EARTH: object
 ```
 
 ###### EARTH.ROTATION\_SPEED
 
 ```ts
-ROTATION_SPEED: number;
+ROTATION_SPEED: number
 ```
 
 ###### EARTH.BUMP\_SCALE
 
 ```ts
-BUMP_SCALE: number;
+BUMP_SCALE: number
 ```
 
 ###### EARTH.TERRAIN\_SHADOW\_INTENSITY
 
 ```ts
-TERRAIN_SHADOW_INTENSITY: number;
+TERRAIN_SHADOW_INTENSITY: number
 ```
 
 ###### EARTH.TERRAIN\_SHADOW\_OFFSET
 
 ```ts
-TERRAIN_SHADOW_OFFSET: number;
+TERRAIN_SHADOW_OFFSET: number
 ```
 
 ###### EARTH.TRUE\_INCLINATION
 
 ```ts
-TRUE_INCLINATION: boolean;
+TRUE_INCLINATION: boolean
 ```
 
 ###### CAMERA
 
 ```ts
-CAMERA: object;
+CAMERA: object
 ```
 
 ###### CAMERA.FOV
 
 ```ts
-FOV: number;
+FOV: number
 ```
 
 ###### CAMERA.POSITION
 
 ```ts
-POSITION: 
+POSITION:
   | Readonly<{
   x: 21.856154240766372;
   y: -3.6712368727086657;
@@ -461,7 +461,7 @@ POSITION:
 ###### CAMERA.TARGET
 
 ```ts
-TARGET: 
+TARGET:
   | Readonly<{
   x: 0;
   y: 0;
@@ -477,109 +477,109 @@ TARGET:
 ###### CAMERA.AUTO\_ROTATE
 
 ```ts
-AUTO_ROTATE: boolean;
+AUTO_ROTATE: boolean
 ```
 
 ###### CAMERA.AUTO\_ROTATE\_SPEED
 
 ```ts
-AUTO_ROTATE_SPEED: number;
+AUTO_ROTATE_SPEED: number
 ```
 
 ###### ENVIRONMENT
 
 ```ts
-ENVIRONMENT: object;
+ENVIRONMENT: object
 ```
 
 ###### ENVIRONMENT.SKYBOX\_INTENSITY
 
 ```ts
-SKYBOX_INTENSITY: 0.5 = DEFAULT_SP_GUI.ENVIRONMENT.SKYBOX_INTENSITY;
+SKYBOX_INTENSITY: 0.5 = DEFAULT_SP_GUI.ENVIRONMENT.SKYBOX_INTENSITY
 ```
 
 ###### ENVIRONMENT.SKYBOX\_AZIMUTH
 
 ```ts
-SKYBOX_AZIMUTH: 1.75 = DEFAULT_SP_GUI.ENVIRONMENT.SKYBOX_AZIMUTH;
+SKYBOX_AZIMUTH: 1.75 = DEFAULT_SP_GUI.ENVIRONMENT.SKYBOX_AZIMUTH
 ```
 
 ###### ENVIRONMENT.SKYBOX\_PITCH
 
 ```ts
-SKYBOX_PITCH: 0 = DEFAULT_SP_GUI.ENVIRONMENT.SKYBOX_PITCH;
+SKYBOX_PITCH: 0 = DEFAULT_SP_GUI.ENVIRONMENT.SKYBOX_PITCH
 ```
 
 ###### ENVIRONMENT.SKYBOX\_ROLL
 
 ```ts
-SKYBOX_ROLL: 0 = DEFAULT_SP_GUI.ENVIRONMENT.SKYBOX_ROLL;
+SKYBOX_ROLL: 0 = DEFAULT_SP_GUI.ENVIRONMENT.SKYBOX_ROLL
 ```
 
 ###### ENVIRONMENT.DARK\_SIDE\_BRIGHTNESS
 
 ```ts
-DARK_SIDE_BRIGHTNESS: 0.055 = DEFAULT_SP_GUI.ENVIRONMENT.DARK_SIDE_BRIGHTNESS;
+DARK_SIDE_BRIGHTNESS: 0.055 = DEFAULT_SP_GUI.ENVIRONMENT.DARK_SIDE_BRIGHTNESS
 ```
 
 ###### ENVIRONMENT.CITY\_LIGHTS
 
 ```ts
-CITY_LIGHTS: 6.3 = DEFAULT_SP_GUI.ENVIRONMENT.CITY_LIGHTS;
+CITY_LIGHTS: 6.3 = DEFAULT_SP_GUI.ENVIRONMENT.CITY_LIGHTS
 ```
 
 ###### DEBUG
 
 ```ts
-DEBUG: object;
+DEBUG: object
 ```
 
 ###### DEBUG.STATS
 
 ```ts
-STATS: false = DEFAULT_SP_GUI.DEBUG.STATS;
+STATS: false = DEFAULT_SP_GUI.DEBUG.STATS
 ```
 
 ###### DEBUG.RESOLUTION\_SCALE
 
 ```ts
-RESOLUTION_SCALE: number = s.render.resolutionScale;
+RESOLUTION_SCALE: number = s.render.resolutionScale
 ```
 
 ###### SUN
 
 ```ts
-SUN: object;
+SUN: object
 ```
 
 ###### SUN.INTENSITY
 
 ```ts
-INTENSITY: number;
+INTENSITY: number
 ```
 
 ###### SUN.COLOR
 
 ```ts
-COLOR: 16777215 = DEFAULT_SP_GUI.SUN.COLOR;
+COLOR: 16777215 = DEFAULT_SP_GUI.SUN.COLOR
 ```
 
 ###### SUN.AUTO\_ROTATE
 
 ```ts
-AUTO_ROTATE: boolean;
+AUTO_ROTATE: boolean
 ```
 
 ###### SUN.SPEED
 
 ```ts
-SPEED: number;
+SPEED: number
 ```
 
 ###### SUN.INCLINATION
 
 ```ts
-INCLINATION: number;
+INCLINATION: number
 ```
 
 ## Methods
@@ -596,7 +596,7 @@ Defined in: experiments/earth-playground/earth-background.ts:81
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### setReducedMotion()
 
@@ -620,7 +620,7 @@ background — motion just stops.
 
 `void`
 
-***
+---
 
 ### setTheme()
 
@@ -643,7 +643,7 @@ into the scene — kept as public API for the playground controls).
 
 `void`
 
-***
+---
 
 ### setVisible()
 
@@ -666,7 +666,7 @@ page is the only consumer, so hiding releases GPU work entirely.
 
 `void`
 
-***
+---
 
 ### takeScreenshot()
 
@@ -684,7 +684,7 @@ so the saved image is sharper than the live viewport.
 
 `Promise`\<`void`\>
 
-***
+---
 
 ### destroy()
 
@@ -703,7 +703,7 @@ disposed after each await and bail).
 
 `void`
 
-***
+---
 
 ### updateBloom()
 
@@ -711,7 +711,7 @@ disposed after each await and bail).
 updateBloom(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:218
+Defined in: experiments/earth-playground/earth-background.ts:220
 
 #### Parameters
 
@@ -737,7 +737,7 @@ Defined in: experiments/earth-playground/earth-background.ts:218
 
 `void`
 
-***
+---
 
 ### updateColorGrading()
 
@@ -745,7 +745,7 @@ Defined in: experiments/earth-playground/earth-background.ts:218
 updateColorGrading(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:224
+Defined in: experiments/earth-playground/earth-background.ts:226
 
 #### Parameters
 
@@ -771,7 +771,7 @@ Defined in: experiments/earth-playground/earth-background.ts:224
 
 `void`
 
-***
+---
 
 ### updateCamera()
 
@@ -779,7 +779,7 @@ Defined in: experiments/earth-playground/earth-background.ts:224
 updateCamera(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:230
+Defined in: experiments/earth-playground/earth-background.ts:232
 
 #### Parameters
 
@@ -801,7 +801,7 @@ Defined in: experiments/earth-playground/earth-background.ts:230
 
 `void`
 
-***
+---
 
 ### updateEarth()
 
@@ -809,7 +809,7 @@ Defined in: experiments/earth-playground/earth-background.ts:230
 updateEarth(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:234
+Defined in: experiments/earth-playground/earth-background.ts:236
 
 #### Parameters
 
@@ -827,7 +827,7 @@ Defined in: experiments/earth-playground/earth-background.ts:234
 
 `void`
 
-***
+---
 
 ### updateEarthMaterial()
 
@@ -835,7 +835,7 @@ Defined in: experiments/earth-playground/earth-background.ts:234
 updateEarthMaterial(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:238
+Defined in: experiments/earth-playground/earth-background.ts:240
 
 #### Parameters
 
@@ -865,7 +865,7 @@ Defined in: experiments/earth-playground/earth-background.ts:238
 
 `void`
 
-***
+---
 
 ### updateVignette()
 
@@ -873,7 +873,7 @@ Defined in: experiments/earth-playground/earth-background.ts:238
 updateVignette(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:250
+Defined in: experiments/earth-playground/earth-background.ts:252
 
 #### Parameters
 
@@ -895,7 +895,7 @@ Defined in: experiments/earth-playground/earth-background.ts:250
 
 `void`
 
-***
+---
 
 ### updateChromatic()
 
@@ -903,7 +903,7 @@ Defined in: experiments/earth-playground/earth-background.ts:250
 updateChromatic(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:254
+Defined in: experiments/earth-playground/earth-background.ts:256
 
 #### Parameters
 
@@ -925,7 +925,7 @@ Defined in: experiments/earth-playground/earth-background.ts:254
 
 `void`
 
-***
+---
 
 ### updateRender()
 
@@ -933,7 +933,7 @@ Defined in: experiments/earth-playground/earth-background.ts:254
 updateRender(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:258
+Defined in: experiments/earth-playground/earth-background.ts:260
 
 #### Parameters
 
@@ -947,7 +947,7 @@ Defined in: experiments/earth-playground/earth-background.ts:258
 
 `void`
 
-***
+---
 
 ### updateFilm()
 
@@ -955,7 +955,7 @@ Defined in: experiments/earth-playground/earth-background.ts:258
 updateFilm(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:262
+Defined in: experiments/earth-playground/earth-background.ts:264
 
 #### Parameters
 
@@ -973,7 +973,7 @@ Defined in: experiments/earth-playground/earth-background.ts:262
 
 `void`
 
-***
+---
 
 ### updateSun()
 
@@ -981,7 +981,7 @@ Defined in: experiments/earth-playground/earth-background.ts:262
 updateSun(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:266
+Defined in: experiments/earth-playground/earth-background.ts:268
 
 #### Parameters
 
@@ -1003,12 +1003,12 @@ Defined in: experiments/earth-playground/earth-background.ts:266
 
 `void`
 
-***
+---
 
 ### getCameraState()
 
 ```ts
-getCameraState(): 
+getCameraState():
   | {
   position: {
      x: number;
@@ -1024,28 +1024,28 @@ getCameraState():
   | null;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:274
+Defined in: experiments/earth-playground/earth-background.ts:276
 
 Current camera position + orbit target, rounded to 2 decimals — used
 to persist/restore the view in the playground's settings snapshot.
 
 #### Returns
 
-  \| \{
-  `position`: \{
-     `x`: `number`;
-     `y`: `number`;
-     `z`: `number`;
-  \};
-  `target`: \{
-     `x`: `number`;
-     `y`: `number`;
-     `z`: `number`;
-  \};
+\| \{
+`position`: \{
+`x`: `number`;
+`y`: `number`;
+`z`: `number`;
+\};
+`target`: \{
+`x`: `number`;
+`y`: `number`;
+`z`: `number`;
+\};
 \}
-  \| `null`
+\| `null`
 
-***
+---
 
 ### resetView()
 
@@ -1053,7 +1053,7 @@ to persist/restore the view in the playground's settings snapshot.
 resetView(): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:283
+Defined in: experiments/earth-playground/earth-background.ts:285
 
 Restore the default framing: OrbitControls.reset() replays saveState()
 (captured at bootstrap), then fov/position/target are pinned to

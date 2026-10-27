@@ -15,7 +15,7 @@ function registryWorldPos(
 } | null
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:266
+Defined in: experiments/star-field/engine/registry.ts:270
 
 World-space position of a registry record — delegates to the shared
 `sfGalacticVec` Cartesian path so fly-to lands exactly on the

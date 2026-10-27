@@ -29,6 +29,8 @@ keeps a future moon-bearing def honest.
 
 [`SFBodyDef`](../../../types/interfaces/SFBodyDef.md)
 
+Solar-tier body at authored diagram scale.
+
 ## Returns
 
 [`SFBodyDef`](../../../types/interfaces/SFBodyDef.md)

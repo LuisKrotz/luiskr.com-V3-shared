@@ -1,10 +1,10 @@
-# `website/tests/coverage/components/media/draw-text-fit-tails.test.js`
+# `website\tests\coverage\components\media\draw-text-fit-tails.test.js`
 
 Coverage tails for draw-text/fit.ts — the opt-in `fit`
 
 |                |                                                                           |
 | -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/website/tests/coverage/components/media/draw-text-fit-tails.test.js` |
+| **Source**     | `src/website\tests\coverage\components\media\draw-text-fit-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                   |
 
 ## Members

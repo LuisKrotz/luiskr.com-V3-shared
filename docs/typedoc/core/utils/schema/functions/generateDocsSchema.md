@@ -8,7 +8,7 @@
 function generateDocsSchema(docsPath, node): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:516
+Defined in: core/utils/schema.ts:738
 
 Generates the docs-portal JSON-LD graph for a resolved docs path:
 a `BreadcrumbList` mirroring the on-page crumb trail plus one page

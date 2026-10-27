@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/bodies.ts`
+# `core\tokens\starfield\params\bodies.ts`
 
 Per-body feature tuning — the Sgr A* black-hole composite
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/bodies.ts`              |
+| **Source**     | `src/core\tokens\starfield\params\bodies.ts`              |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

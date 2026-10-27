@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/menu-background/loop](../README.md) / animateReveal
 
 ```ts
-function animateReveal(
-   host, 
-   target, 
-   dur
-): void;
+function animateReveal(host, target, dur): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:79
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:80
 
 Starts (or restarts mid-flight) a timed reveal ease. Capturing the
 current value as `_revealFrom` means an open→close→open sequence

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/widgets/close-button](../README.md) / CloseButtonWebGL
 
-Defined in: core/utils/canvas/widgets/close-button.ts:31
+Defined in: core/utils/canvas/widgets/close-button.ts:32
 
 WebGL Animated Close Button
 Features:
@@ -23,7 +23,7 @@ Features:
 new CloseButtonWebGL(canvas, onClickAction?): CloseButtonWebGL;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:84
+Defined in: core/utils/canvas/widgets/close-button.ts:89
 
 #### Parameters
 
@@ -53,7 +53,7 @@ shockwave always fires; the host's close handler runs alongside)
 canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:32
+Defined in: core/utils/canvas/widgets/close-button.ts:33
 
 ---
 
@@ -63,7 +63,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:32
 onClickAction: (() => void) | null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:33
+Defined in: core/utils/canvas/widgets/close-button.ts:34
 
 ---
 
@@ -73,7 +73,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:33
 width: number
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:34
+Defined in: core/utils/canvas/widgets/close-button.ts:35
 
 ---
 
@@ -83,7 +83,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:34
 height: number
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:35
+Defined in: core/utils/canvas/widgets/close-button.ts:36
 
 ---
 
@@ -93,7 +93,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:35
 isHovered: boolean
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:36
+Defined in: core/utils/canvas/widgets/close-button.ts:37
 
 ---
 
@@ -103,7 +103,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:36
 hoverLevel: number
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:37
+Defined in: core/utils/canvas/widgets/close-button.ts:38
 
 ---
 
@@ -113,7 +113,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:37
 drawProgress: number
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:38
+Defined in: core/utils/canvas/widgets/close-button.ts:39
 
 ---
 
@@ -123,7 +123,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:38
 rotation: number
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:39
+Defined in: core/utils/canvas/widgets/close-button.ts:40
 
 ---
 
@@ -133,7 +133,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:39
 clickTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:40
+Defined in: core/utils/canvas/widgets/close-button.ts:41
 
 ---
 
@@ -143,7 +143,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:40
 useWebGL: boolean
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:41
+Defined in: core/utils/canvas/widgets/close-button.ts:42
 
 ---
 
@@ -153,7 +153,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:41
 animId: number | null
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:42
+Defined in: core/utils/canvas/widgets/close-button.ts:43
 
 ---
 
@@ -163,7 +163,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:42
 startTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:43
+Defined in: core/utils/canvas/widgets/close-button.ts:46
 
 ---
 
@@ -173,7 +173,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:43
 gl: WebGLRenderingContext | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:44
+Defined in: core/utils/canvas/widgets/close-button.ts:47
 
 ---
 
@@ -183,7 +183,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:44
 program: WebGLProgram | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:45
+Defined in: core/utils/canvas/widgets/close-button.ts:48
 
 ---
 
@@ -193,7 +193,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:45
 quadBuffer: WebGLBuffer | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:46
+Defined in: core/utils/canvas/widgets/close-button.ts:49
 
 ---
 
@@ -203,7 +203,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:46
 uResolution: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:47
+Defined in: core/utils/canvas/widgets/close-button.ts:50
 
 ---
 
@@ -213,7 +213,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:47
 uTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:48
+Defined in: core/utils/canvas/widgets/close-button.ts:51
 
 ---
 
@@ -223,7 +223,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:48
 uLiquid: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:49
+Defined in: core/utils/canvas/widgets/close-button.ts:52
 
 ---
 
@@ -233,7 +233,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:49
 uDraw: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:50
+Defined in: core/utils/canvas/widgets/close-button.ts:53
 
 ---
 
@@ -243,7 +243,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:50
 uRot: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:51
+Defined in: core/utils/canvas/widgets/close-button.ts:54
 
 ---
 
@@ -253,7 +253,27 @@ Defined in: core/utils/canvas/widgets/close-button.ts:51
 uClickTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:52
+Defined in: core/utils/canvas/widgets/close-button.ts:55
+
+---
+
+### uHc
+
+```ts
+uHc: WebGLUniformLocation | null = null;
+```
+
+Defined in: core/utils/canvas/widgets/close-button.ts:56
+
+---
+
+### uDark
+
+```ts
+uDark: WebGLUniformLocation | null = null;
+```
+
+Defined in: core/utils/canvas/widgets/close-button.ts:57
 
 ---
 
@@ -263,7 +283,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:52
 aPos: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:53
+Defined in: core/utils/canvas/widgets/close-button.ts:58
 
 ---
 
@@ -273,7 +293,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:53
 _ro: ResizeObserver | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:54
+Defined in: core/utils/canvas/widgets/close-button.ts:59
 
 ---
 
@@ -283,7 +303,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:54
 _onContextLost: EventListener | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:55
+Defined in: core/utils/canvas/widgets/close-button.ts:60
 
 ---
 
@@ -293,7 +313,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:55
 _purged: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:56
+Defined in: core/utils/canvas/widgets/close-button.ts:61
 
 ---
 
@@ -305,7 +325,7 @@ _wasm:
   | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:58
+Defined in: core/utils/canvas/widgets/close-button.ts:63
 
 Live WebGPU wasm handle — the preferred backend when it mounts.
 
@@ -317,7 +337,7 @@ Live WebGPU wasm handle — the preferred backend when it mounts.
 _wasmFailed: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:60
+Defined in: core/utils/canvas/widgets/close-button.ts:65
 
 Latch — a failed wasm mount never retries on this instance.
 
@@ -329,7 +349,7 @@ Latch — a failed wasm mount never retries on this instance.
 _wasmPending: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:62
+Defined in: core/utils/canvas/widgets/close-button.ts:67
 
 In-flight mount — restore() must not double-mount on re-entry.
 
@@ -341,7 +361,7 @@ In-flight mount — restore() must not double-mount on re-entry.
 _wasmT: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:64
+Defined in: core/utils/canvas/widgets/close-button.ts:69
 
 Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
@@ -353,9 +373,25 @@ Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 boundTarget: Element | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:65
+Defined in: core/utils/canvas/widgets/close-button.ts:70
 
 ## Methods
+
+### \_frameTick()
+
+```ts
+_frameTick(): void;
+```
+
+Defined in: core/utils/canvas/widgets/close-button.ts:45
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
+
+#### Returns
+
+`void`
+
+---
 
 ### onMouseEnter()
 
@@ -363,7 +399,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:65
 onMouseEnter(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:66
+Defined in: core/utils/canvas/widgets/close-button.ts:71
 
 #### Returns
 
@@ -377,7 +413,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:66
 onMouseLeave(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:69
+Defined in: core/utils/canvas/widgets/close-button.ts:74
 
 #### Returns
 
@@ -391,7 +427,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:69
 onClick(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:72
+Defined in: core/utils/canvas/widgets/close-button.ts:77
 
 #### Returns
 
@@ -405,7 +441,7 @@ Defined in: core/utils/canvas/widgets/close-button.ts:72
 init(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:121
+Defined in: core/utils/canvas/widgets/close-button.ts:126
 
 Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
 
@@ -421,7 +457,7 @@ Boot sequence: GL init → event binding → render start; fully degrades to the
 initWebGL(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:127
+Defined in: core/utils/canvas/widgets/close-button.ts:132
 
 Creates the WebGL context, compiles the shader program and sets up uniforms/buffers; falls back on any failure.
 
@@ -437,7 +473,7 @@ Creates the WebGL context, compiles the shader program and sets up uniforms/buff
 bindEvents(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:136
+Defined in: core/utils/canvas/widgets/close-button.ts:141
 
 Wires hover + click on the parent button (not the canvas) — the canvas
 is a decorative overlay so interaction belongs to the semantic button.
@@ -455,7 +491,7 @@ boundTarget is remembered for destroy().
 setHover(hovered): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:154
+Defined in: core/utils/canvas/widgets/close-button.ts:159
 
 Updates hover state — the shader renders the hover accent when true.
 
@@ -477,7 +513,7 @@ Updates hover state — the shader renders the hover accent when true.
 triggerClick(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:163
+Defined in: core/utils/canvas/widgets/close-button.ts:173
 
 Records the click timestamp — the shader reads u_click_time to expand
 the shockwave ring over its 0.4s window. The onClickAction callback is
@@ -495,7 +531,7 @@ invoked separately by the click handler, not here.
 setReducedMotion(isReduced): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:175
+Defined in: core/utils/canvas/widgets/close-button.ts:189
 
 Applies prefers-reduced-motion: swaps the animation loop for one
 static frame render, or restarts the loop when motion is re-allowed.
@@ -518,7 +554,7 @@ static frame render, or restarts the loop when motion is re-allowed.
 _renderStatic(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:187
+Defined in: core/utils/canvas/widgets/close-button.ts:201
 
 Draws one settled frame with the X fully drawn — used under reduced
 motion or when the loop is stopped.
@@ -535,7 +571,7 @@ motion or when the loop is stopped.
 animate(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:193
+Defined in: core/utils/canvas/widgets/close-button.ts:207
 
 Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
@@ -551,7 +587,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 _renderWebGL(now): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:199
+Defined in: core/utils/canvas/widgets/close-button.ts:213
 
 Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 
@@ -573,7 +609,7 @@ Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 purge(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:208
+Defined in: core/utils/canvas/widgets/close-button.ts:222
 
 webglPool hook — offscreen: stops the loop and force-loses the GL
 context so offscreen widgets hold no context slots; restore()
@@ -591,7 +627,7 @@ rebuilds the program on re-entry.
 restore(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:233
+Defined in: core/utils/canvas/widgets/close-button.ts:247
 
 Recreates the GL context + program and resumes the loop after a purge.
 
@@ -607,7 +643,7 @@ Recreates the GL context + program and resumes the loop after a purge.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/close-button.ts:265
+Defined in: core/utils/canvas/widgets/close-button.ts:279
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

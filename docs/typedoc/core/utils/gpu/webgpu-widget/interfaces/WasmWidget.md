@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/gpu/webgpu-widget](../README.md) / WasmWidget
 
-Defined in: core/utils/gpu/webgpu-widget.ts:42
+Defined in: core/utils/gpu/webgpu-widget.ts:43
 
 Public surface every widget crate shares (`init`/`resize`/`frame`
 are the contract; `set_size`/`set_state`/`tap`/`click`/
@@ -27,7 +27,7 @@ Kind-specific setters — see each crate's lib.rs exports.
 init(canvas, device): Promise<unknown>;
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:44
+Defined in: core/utils/gpu/webgpu-widget.ts:45
 
 Async init on the widget's canvas, bound to the shared device.
 
@@ -53,7 +53,7 @@ Async init on the widget's canvas, bound to the shared device.
 resize(w, h): void;
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:46
+Defined in: core/utils/gpu/webgpu-widget.ts:47
 
 Surface re-configure after a bitmap resize (device px).
 
@@ -79,7 +79,7 @@ Surface re-configure after a bitmap resize (device px).
 set_size(w, h): void;
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:48
+Defined in: core/utils/gpu/webgpu-widget.ts:49
 
 Canvas CSS size — feeds the shader's res/rect uniforms.
 
@@ -105,7 +105,7 @@ Canvas CSS size — feeds the shader's res/rect uniforms.
 frame(dt): boolean;
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:54
+Defined in: core/utils/gpu/webgpu-widget.ts:55
 
 One rAF tick; `dt` in seconds. Returns false when the surface is
 stale/lost (the caller disarms its loop); the wasm-pack signature
@@ -129,7 +129,7 @@ declares `boolean | undefined`, so callers must tolerate undefined.
 optional free(): void;
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:65
+Defined in: core/utils/gpu/webgpu-widget.ts:66
 
 wasm-bindgen `free()` — drops the boxed struct AND unregisters the
 FinalizationRegistry entry, so the object never re-enters

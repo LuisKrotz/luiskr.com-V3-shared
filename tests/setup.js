@@ -51,12 +51,30 @@ globalThis.MouseEvent = win.MouseEvent || win.Event
 globalThis.localStorage = win.localStorage
 globalThis.sessionStorage = win.sessionStorage
 globalThis.DOMParser = win.DOMParser
+/** Tracks frames so self-rescheduling loops can be stopped at file teardown. */
+const pendingAnimationFrames = new Set()
+
 globalThis.requestAnimationFrame = (cb) => {
-  const t = setTimeout(() => cb(performance.now()), 16)
+  let t
+
+  t = setTimeout(() => {
+    pendingAnimationFrames.delete(t)
+
+    cb(performance.now())
+  }, 16)
+
+  pendingAnimationFrames.add(t)
+
   if (t && typeof t.unref === TYPE_STRINGS.FUNCTION) t.unref()
+
   return t
 }
-globalThis.cancelAnimationFrame = (id) => clearTimeout(id)
+globalThis.cancelAnimationFrame = (id) => {
+  pendingAnimationFrames.delete(id)
+
+  clearTimeout(id)
+}
+
 // Unref every timer so component timeouts left pending past teardown
 // (menu close, teleport, autoplay) can't hold a jest worker alive — the
 // "worker failed to exit gracefully" warning under parallel load. The
@@ -81,6 +99,10 @@ globalThis.setInterval = (cb, ms, ...rest) => {
 // manager owns ref'd Node timers (async fetches, deferred reactions) that
 // otherwise keep the jest worker alive after the suite finishes.
 afterAll(async () => {
+  for (const frame of pendingAnimationFrames) clearTimeout(frame)
+
+  pendingAnimationFrames.clear()
+
   try {
     // abort() is synchronous and cancels the async-task timers; close() is
     // NOT used — it returns a promise whose rejection escapes this hook and

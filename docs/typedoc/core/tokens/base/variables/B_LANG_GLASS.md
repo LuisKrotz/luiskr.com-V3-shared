@@ -8,6 +8,6 @@
 const _B_LANG_GLASS: 'lang-glass-follower' = 'lang-glass-follower'
 ```
 
-Defined in: core/tokens/base.ts:142
+Defined in: core/tokens/base.ts:147
 
 BEM block fragment "b lang glass" — composed by the token groups below into full class names.

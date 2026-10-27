@@ -8,6 +8,6 @@
 const _B_SPP_CHECK: 'sp-panel-check'
 ```
 
-Defined in: core/tokens/base.ts:395
+Defined in: core/tokens/base.ts:400
 
 BEM block fragment "b spp check" — composed by the token groups below into full class names.

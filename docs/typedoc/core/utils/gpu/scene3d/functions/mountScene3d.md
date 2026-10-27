@@ -8,7 +8,7 @@
 function mountScene3d(canvas, loadModule?): Promise<Scene3dHandle | null>
 ```
 
-Defined in: core/utils/gpu/scene3d.ts:264
+Defined in: core/utils/gpu/scene3d.ts:280
 
 Mounts the scene3d engine on `canvas`: loads the artifact, runs the
 async mount (adapter + device + configure), wires a ResizeObserver

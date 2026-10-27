@@ -8,7 +8,7 @@
 function webpSibling(url): string
 ```
 
-Defined in: core/utils/media.ts:131
+Defined in: core/utils/media.ts:135
 
 Derives the .webp sibling of a .jpg URL — the compressed-variant naming
 convention replaces only the extension, so the webp sits beside the

@@ -1,10 +1,10 @@
-# `core/utils/canvas/dom-font.ts`
+# `core\utils\canvas\dom-font.ts`
 
 DOM-faithful canvas font helpers shared by every effect that
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/dom-font.ts`                       |
+| **Source**     | `src/core\utils\canvas\dom-font.ts`                       |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

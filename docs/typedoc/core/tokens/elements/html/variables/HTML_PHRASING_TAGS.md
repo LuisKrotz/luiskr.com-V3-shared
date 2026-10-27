@@ -53,7 +53,7 @@ const HTML_PHRASING_TAGS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/elements/html.ts:53
+Defined in: core/tokens/elements/html.ts:56
 
 Frozen phrasing/text-bearing host map — elements whose textContent
 would absorb an injected sibling text node, polluting the host's

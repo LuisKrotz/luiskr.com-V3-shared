@@ -1,10 +1,10 @@
-# `core/utils/notify.ts`
+# `core\utils\notify.ts`
 
 User-facing notification service. A failure is surfaced as a
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/notify.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\notify.ts`                                |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -39,6 +39,7 @@ of duplicated.
 ### `_toast`
 
 Pushes an item into the toast element.
+
 - `@returns` false when no DOM is available to host the element
 
 ### `_resolvePermission`
@@ -57,6 +58,7 @@ channel is absent or fails as well.
 
 Surfaces a message to the user — native notification when allowed, the
 in-page toast otherwise.
+
 - `@param` message - body copy (localized by the caller)
 - `@returns` which surface took the message
 
@@ -74,4 +76,5 @@ Resource/section load failure shortcut.
 
 Wires window 'error' + 'unhandledrejection' to the generic error toast so
 uncaught failures surface gracefully instead of only logging. Idempotent.
+
 - `@returns` false outside a windowed context

@@ -12,7 +12,7 @@ const ANIMATION_EVENTS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/events/dom.ts:130
+Defined in: core/tokens/events/dom.ts:136
 
 Frozen animation event-name map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

@@ -8,6 +8,9 @@
 const MEDIA_EVENTS: Readonly<{
   LOADEDDATA: 'loadeddata'
   ABORT: 'abort'
+  ENDED: 'ended'
+  PLAY: 'play'
+  PAUSE: 'pause'
 }>
 ```
 

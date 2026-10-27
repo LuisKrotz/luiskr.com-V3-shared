@@ -8,7 +8,7 @@
 function searchRegistry(query, limit?): Promise<SFRegistryRecord[]>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:227
+Defined in: experiments/star-field/engine/registry.ts:231
 
 Incremental registry search — pulls shards sequentially and collects
 records whose display name or catalogue designation contains the

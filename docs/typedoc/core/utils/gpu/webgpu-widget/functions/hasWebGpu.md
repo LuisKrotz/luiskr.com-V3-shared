@@ -8,7 +8,7 @@
 function hasWebGpu(): boolean
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:97
+Defined in: core/utils/gpu/webgpu-widget.ts:98
 
 Capability gate — `navigator.gpu` is the WebGPU entry point.
 Separate from mount so callers can decide without touching the DOM.

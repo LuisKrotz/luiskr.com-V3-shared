@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / core/utils/canvas/webgl-mode
 
@@ -13,3 +13,4 @@
 - [webglMode](functions/webglMode.md)
 - [webglAllowed](functions/webglAllowed.md)
 - [webglContext](functions/webglContext.md)
+- [webglContextDead](functions/webglContextDead.md)

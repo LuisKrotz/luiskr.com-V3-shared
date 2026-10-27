@@ -8,7 +8,7 @@
 function renderFrame(host, staticTime?): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:177
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:178
 
 Renders the noise field; a fixed staticTime renders one settled frame.
 

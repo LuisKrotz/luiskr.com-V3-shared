@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/manifest](../README.md) / DocsRoot
 
-Defined in: experiments/docs/manifest.ts:31
+Defined in: experiments/docs/manifest.ts:47
 
 A publishable root bucket (docs / reports / coverage-* / source modules).
 
@@ -13,22 +13,22 @@ A publishable root bucket (docs / reports / coverage-* / source modules).
 ### root
 
 ```ts
-root: string;
+root: string
 ```
 
-Defined in: experiments/docs/manifest.ts:32
+Defined in: experiments/docs/manifest.ts:48
 
-***
+---
 
 ### label
 
 ```ts
-label: string;
+label: string
 ```
 
-Defined in: experiments/docs/manifest.ts:33
+Defined in: experiments/docs/manifest.ts:49
 
-***
+---
 
 ### kind?
 
@@ -36,13 +36,13 @@ Defined in: experiments/docs/manifest.ts:33
 optional kind?: "docs" | "source" | "coverage" | "reports";
 ```
 
-Defined in: experiments/docs/manifest.ts:39
+Defined in: experiments/docs/manifest.ts:55
 
 Behavior class emitted by shared/build/docs/scan.mjs: 'source' roots
 are protected (copy-guard, no index auto-open); 'coverage' roots are
 per-module test reports; 'docs'/'reports' are browsable content.
 
-***
+---
 
 ### children
 
@@ -50,4 +50,4 @@ per-module test reports; 'docs'/'reports' are browsable content.
 children: DocsNode[];
 ```
 
-Defined in: experiments/docs/manifest.ts:40
+Defined in: experiments/docs/manifest.ts:56

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/docs/Docs](../README.md) / ViewDocs
 
-Defined in: experiments/docs/Docs.tsx:57
+Defined in: experiments/docs/Docs.tsx:67
 
 The ViewDocs — docs portal route element.
 
@@ -20,7 +20,7 @@ The ViewDocs — docs portal route element.
 new ViewDocs(): ViewDocs;
 ```
 
-Defined in: experiments/docs/Docs.tsx:108
+Defined in: experiments/docs/Docs.tsx:167
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 docsPath: string = CHAR_STRINGS.EMPTY
 ```
 
-Defined in: experiments/docs/Docs.tsx:59
+Defined in: experiments/docs/Docs.tsx:69
 
 Current '/docs/<path>' suffix from the route param.
 
@@ -195,7 +195,7 @@ Current '/docs/<path>' suffix from the route param.
 node: DocsNode | null = null;
 ```
 
-Defined in: experiments/docs/Docs.tsx:62
+Defined in: experiments/docs/Docs.tsx:72
 
 Resolved manifest node for docsPath (null at the portal root).
 
@@ -209,7 +209,7 @@ filePayload:
   | null = null;
 ```
 
-Defined in: experiments/docs/Docs.tsx:65
+Defined in: experiments/docs/Docs.tsx:75
 
 Open file payload state.
 
@@ -221,7 +221,7 @@ Open file payload state.
 fileLoading: boolean = false
 ```
 
-Defined in: experiments/docs/Docs.tsx:68
+Defined in: experiments/docs/Docs.tsx:78
 
 File fetch in flight.
 
@@ -233,9 +233,22 @@ File fetch in flight.
 navOpen: boolean = false
 ```
 
-Defined in: experiments/docs/Docs.tsx:74
+Defined in: experiments/docs/Docs.tsx:84
 
 Mobile nav-panel open state (the tree collapses under a toggle <1024).
+
+---
+
+### \_mapZoomed
+
+```ts
+_mapZoomed: boolean = false
+```
+
+Defined in: experiments/docs/Docs.tsx:88
+
+Architecture-map zoom modal — the persistent scene canvas re-seats
+into the centered glass dialog while open.
 
 ---
 
@@ -245,7 +258,7 @@ Mobile nav-panel open state (the tree collapses under a toggle <1024).
 _docsReady: boolean = false
 ```
 
-Defined in: experiments/docs/Docs.tsx:102
+Defined in: experiments/docs/Docs.tsx:152
 
 Boot-loader lifecycle — the overlay stays up until the portal's first
 usable state: manifest resolved, the architecture scene mount
@@ -260,7 +273,7 @@ settled. Mirrors the space playground's `_earthReady` contract.
 _loaderMsg: string = DOCS_STRINGS.LOADER_MSG_INIT
 ```
 
-Defined in: experiments/docs/Docs.tsx:105
+Defined in: experiments/docs/Docs.tsx:155
 
 Current boot stage copy + percent rendered inside the loader.
 
@@ -272,7 +285,23 @@ Current boot stage copy + percent rendered inside the loader.
 _loaderPct: number = 0
 ```
 
-Defined in: experiments/docs/Docs.tsx:106
+Defined in: experiments/docs/Docs.tsx:156
+
+---
+
+### \_sceneLoading
+
+```ts
+_sceneLoading: boolean = true
+```
+
+Defined in: experiments/docs/Docs.tsx:165
+
+Scene-graph build state — true while the worker-computed layout →
+mesh/label upload is in flight (initial mount AND context-restore
+remounts). The map stage's loading veil renders on this flag and is
+dismissed imperatively on the scene's ready/lost signal so a slow
+build never reads as a blank black box.
 
 ---
 
@@ -4872,9 +4901,10 @@ Render result from render().
 rootsAsNodes(): DocsNode[];
 ```
 
-Defined in: experiments/docs/Docs.tsx:113
+Defined in: experiments/docs/Docs.tsx:178
 
-Manifest roots reshaped as dir-nodes for the treeview.
+Manifest roots grouped under the four section nodes for the
+treeview and the portal-root grid.
 
 #### Returns
 
@@ -4888,7 +4918,7 @@ Manifest roots reshaped as dir-nodes for the treeview.
 generatedAt(): string;
 ```
 
-Defined in: experiments/docs/Docs.tsx:123
+Defined in: experiments/docs/Docs.tsx:191
 
 ISO generated stamp shown under the title.
 
@@ -4904,7 +4934,7 @@ ISO generated stamp shown under the title.
 isDirOpen(path): boolean;
 ```
 
-Defined in: experiments/docs/Docs.tsx:128
+Defined in: experiments/docs/Docs.tsx:196
 
 Whether a dir path is expanded in the treeview.
 
@@ -4920,13 +4950,66 @@ Whether a dir path is expanded in the treeview.
 
 ---
 
+### treeTabIndex()
+
+```ts
+treeTabIndex(path): string;
+```
+
+Defined in: experiments/docs/Docs.tsx:206
+
+Roving tabindex for a rendered tree row — '0' only on the current
+tab-stop path so the treeview exposes exactly one Tab entry per the
+ARIA treeview pattern (IBM widget_tabbable_single).
+
+#### Parameters
+
+##### path
+
+`string`
+
+Manifest path of the row being rendered.
+
+#### Returns
+
+`string`
+
+---
+
+### treeFocusItem()
+
+```ts
+treeFocusItem(path): void;
+```
+
+Defined in: experiments/docs/Docs.tsx:217
+
+Focus landed on a tree row (arrow move, click-focus, or the
+_focusPath restore): make it the widget's single tab stop by
+flipping tabindex across the live rows — an attribute flip, not a
+re-render, so focus never churns mid-gesture.
+
+#### Parameters
+
+##### path
+
+`string`
+
+Manifest path of the focused row.
+
+#### Returns
+
+`void`
+
+---
+
 ### isProtectedView()
 
 ```ts
 isProtectedView(): boolean;
 ```
 
-Defined in: experiments/docs/Docs.tsx:133
+Defined in: experiments/docs/Docs.tsx:231
 
 Whether the open file sits under a protected source-module root.
 
@@ -4942,7 +5025,7 @@ Whether the open file sits under a protected source-module root.
 navigateDocs(subPath): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:147
+Defined in: experiments/docs/Docs.tsx:245
 
 Navigates within the portal — a bare path resolves against /docs.
 
@@ -4966,10 +5049,11 @@ Manifest-relative path ('' → portal root).
 pickNode(node): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:157
+Defined in: experiments/docs/Docs.tsx:256
 
 Grid/tree click — dirs toggle expansion AND navigate so the grid lands
 on the folder; files navigate straight to their file route.
+Section-group nodes have no route — they only toggle disclosure.
 
 #### Parameters
 
@@ -4989,7 +5073,7 @@ on the folder; files navigate straight to their file route.
 pickTreeNode(node): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:169
+Defined in: experiments/docs/Docs.tsx:274
 
 Tree-row click — clicking an already-expanded dir collapses it (and,
 when the viewer sits inside that folder, navigates back to its parent
@@ -5014,9 +5098,13 @@ and navigates; files navigate.
 closeFile(): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:191
+Defined in: experiments/docs/Docs.tsx:302
 
 Back button — navigates to the file's parent folder (or the root).
+A non-source index.html IS the folder's open state: its parent dir
+re-opens it on entry (_applyPath), so back must climb past the
+owning dir to the grandparent — otherwise the button loops on the
+same file. Under source roots index.html is a plain file: one level.
 
 #### Returns
 
@@ -5030,9 +5118,62 @@ Back button — navigates to the file's parent folder (or the root).
 toggleNav(): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:198
+Defined in: experiments/docs/Docs.tsx:316
 
 Mobile "browse" toggle — shows/hides the tree panel on small screens.
+
+#### Returns
+
+`void`
+
+---
+
+### openMapZoom()
+
+```ts
+openMapZoom(): void;
+```
+
+Defined in: experiments/docs/Docs.tsx:328
+
+Map zoom open — the dialog's first-focusable is its close button
+(expand-modal pattern: AT/keyboard reach the dismiss affordance
+first). The scene canvas re-seats into the dialog stage on the next
+render pass — no context loss, no remount.
+
+#### Returns
+
+`void`
+
+---
+
+### closeMapZoom()
+
+```ts
+closeMapZoom(): void;
+```
+
+Defined in: experiments/docs/Docs.tsx:342
+
+Map zoom close — idempotent: the close button fires this from both
+its DOM click and the widget's own listener on the same gesture.
+Returns focus to the zoom trigger.
+
+#### Returns
+
+`void`
+
+---
+
+### toggleMapZoom()
+
+```ts
+toggleMapZoom(): void;
+```
+
+Defined in: experiments/docs/Docs.tsx:352
+
+Zoom trigger — toggles the dialog (delegates to the explicit arms).
 
 #### Returns
 
@@ -5046,7 +5187,7 @@ Mobile "browse" toggle — shows/hides the tree panel on small screens.
 toggleDir(path): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:205
+Defined in: experiments/docs/Docs.tsx:358
 
 Expands or collapses a dir in place (keyboard left/right) without navigating.
 
@@ -5068,7 +5209,7 @@ Expands or collapses a dir in place (keyboard left/right) without navigating.
 onTreeKey(e): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:230
+Defined in: experiments/docs/Docs.tsx:383
 
 ARIA treeview keys on the nav: ↑/↓ move between visible rows, → opens
 a closed dir (or descends into an open one), ← closes an open dir (or
@@ -5094,7 +5235,7 @@ Space like buttons do.
 onGridKey(e): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:293
+Defined in: experiments/docs/Docs.tsx:450
 
 Arrow-key roving on the folder grid — ←/→/↑/↓ step between cards in
 DOM order (the grid's column count is layout-derived, so linear
@@ -5118,7 +5259,7 @@ traversal is the robust choice on every breakpoint).
 onViewKey(e): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:322
+Defined in: experiments/docs/Docs.tsx:479
 
 Host-level keys — Escape backs out of the open file (or closes the
 mobile nav panel) without leaving the portal.
@@ -5141,7 +5282,7 @@ mobile nav panel) without leaving the portal.
 onCrumbKey(e): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:338
+Defined in: experiments/docs/Docs.tsx:497
 
 Editable-breadcrumb commit — Enter navigates to the typed path,
 Escape restores the input to the live path.
@@ -5164,7 +5305,7 @@ Escape restores the input to the live path.
 onRouteParamChange(to?): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:358
+Defined in: experiments/docs/Docs.tsx:517
 
 Same-tag navigation (file → sibling): resolves the new path without
 tearing down GL/observability state.
@@ -5187,7 +5328,7 @@ tearing down GL/observability state.
 onMounted(): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:363
+Defined in: experiments/docs/Docs.tsx:522
 
 Lifecycle: store sub + path resolution + guards.
 
@@ -5207,7 +5348,7 @@ Lifecycle: store sub + path resolution + guards.
 onUpdated(): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:379
+Defined in: experiments/docs/Docs.tsx:581
 
 Lifecycle: (re)mounts the GL strip, scene and viewer content.
 
@@ -5227,7 +5368,7 @@ Lifecycle: (re)mounts the GL strip, scene and viewer content.
 _updateLoader(msg, pct): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:433
+Defined in: experiments/docs/Docs.tsx:714
 
 Mirrors a boot stage into the loader overlay (delegates to loader.ts).
 
@@ -5253,7 +5394,7 @@ Mirrors a boot stage into the loader overlay (delegates to loader.ts).
 _dismissLoader(): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:438
+Defined in: experiments/docs/Docs.tsx:719
 
 Fades + removes the loader overlay (delegates to loader.ts).
 
@@ -5269,7 +5410,7 @@ Fades + removes the loader overlay (delegates to loader.ts).
 onDestroy(): void;
 ```
 
-Defined in: experiments/docs/Docs.tsx:504
+Defined in: experiments/docs/Docs.tsx:899
 
 Lifecycle: disposes guard + GL surfaces.
 
@@ -5289,7 +5430,7 @@ Lifecycle: disposes guard + GL surfaces.
 render(): HTMLElement;
 ```
 
-Defined in: experiments/docs/Docs.tsx:681
+Defined in: experiments/docs/Docs.tsx:1092
 
 JSX template — lives in render.tsx.
 

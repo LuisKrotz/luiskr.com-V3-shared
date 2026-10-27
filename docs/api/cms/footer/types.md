@@ -1,9 +1,9 @@
-# `cms/footer/types.ts`
+# `cms\footer\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/footer/types.ts` |
-| **UX surface** | Footer + legal links editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\footer\types.ts`                       |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

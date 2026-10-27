@@ -8,7 +8,7 @@
 function destroyWebGLControls(host): void
 ```
 
-Defined in: website/components/dialogs/preferences/webgl.ts:159
+Defined in: website/components/dialogs/preferences/webgl.ts:161
 
 Tears down the mounted GL widgets.
 

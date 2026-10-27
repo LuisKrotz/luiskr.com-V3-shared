@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..', '..', '..')
@@ -19,7 +20,7 @@ const STAR_MAP = {
   en: {
     shareGallery: 'Share captures',
     shareCapture: 'Star render',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'star field',
       'star images',
       'galaxy render',
@@ -42,7 +43,7 @@ const STAR_MAP = {
   br: {
     shareGallery: 'Capturas para compartilhar',
     shareCapture: 'Render estelar',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'campo estelar',
       'imagens de estrelas',
       'galáxia 3d',
@@ -65,7 +66,7 @@ const STAR_MAP = {
   es: {
     shareGallery: 'Capturas para compartir',
     shareCapture: 'Render estelar',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'campo estelar',
       'imágenes de estrellas',
       'galaxia 3d',
@@ -88,7 +89,7 @@ const STAR_MAP = {
   de: {
     shareGallery: 'Aufnahmen zum Teilen',
     shareCapture: 'Stern-Rendering',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'sternenfeld',
       'sterne bilder',
       '3d-galaxie',
@@ -111,7 +112,7 @@ const STAR_MAP = {
   gn: {
     shareGallery: "Mbyja ra'angakuéra",
     shareCapture: "Mbyja ra'anga",
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'mbyja',
       "mbyja ra'angakuéra",
       'galaxia 3d',
@@ -133,7 +134,7 @@ const STAR_MAP = {
   it: {
     shareGallery: 'Catture da condividere',
     shareCapture: 'Rendering stellare',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'campo stellare',
       'immagini di stelle',
       'galassia 3d',
@@ -156,7 +157,7 @@ const STAR_MAP = {
   ru: {
     shareGallery: 'Снимки для публикации',
     shareCapture: 'Рендер звёзд',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'звёздное поле',
       'изображения звёзд',
       'галактика 3d',
@@ -180,7 +181,7 @@ const STAR_MAP = {
   fr: {
     shareGallery: 'Captures à partager',
     shareCapture: 'Rendu stellaire',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'champ stellaire',
       "images d'étoiles",
       'galaxie 3d',
@@ -203,7 +204,7 @@ const STAR_MAP = {
   nl: {
     shareGallery: 'Captures om te delen',
     shareCapture: 'Sterren-rendering',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'sterrenveld',
       'sterrenbeelden',
       '3d-sterrenstelsel',
@@ -226,7 +227,7 @@ const STAR_MAP = {
   ca: {
     shareGallery: 'Captures per compartir',
     shareCapture: 'Render estel·lar',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'camp estel·lar',
       "imatges d'estrelles",
       'galàxia 3d',
@@ -249,7 +250,7 @@ const STAR_MAP = {
   gl: {
     shareGallery: 'Capturas para compartir',
     shareCapture: 'Render estelar',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'campo estelar',
       'imaxes de estrelas',
       'galaxia 3d',
@@ -272,7 +273,7 @@ const STAR_MAP = {
   ga: {
     shareGallery: 'Gabhálacha le roinnt',
     shareCapture: 'Rindreáil réaltaí',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'réimse réaltaí',
       'íomhánna réaltaí',
       'réaltra 3d',
@@ -309,7 +310,7 @@ for (const [locale, data] of Object.entries(STAR_MAP)) {
 
   page.shareGallery = data.shareGallery
   page.shareCapture = data.shareCapture
-  page.searchThemes = data.searchThemes
+  page[SEARCH_THEMES_KEY] = data[SEARCH_THEMES_KEY]
 }
 
 fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8')

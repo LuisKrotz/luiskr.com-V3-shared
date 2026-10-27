@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/primitives.ts`
+# `experiments\star-field\engine\bodies\primitives.ts`
 
 Per-body mesh builders for the scene-graph assembler in
 
 |                |                                                          |
 | -------------- | -------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/primitives.ts` |
+| **Source**     | `src/experiments\star-field\engine\bodies\primitives.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
 
 ## Members

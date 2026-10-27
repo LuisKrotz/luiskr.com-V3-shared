@@ -1,17 +1,18 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/theme/switches](../README.md) / SWITCH\_TYPES
 
 ```ts
 const SWITCH_TYPES: Readonly<{
-  STATS: "stats";
-  GRID: "grid";
-  MOTION: "motion";
-  CYAN: "cyan";
-  SPACE: "space";
-}>;
+  STATS: 'stats'
+  GRID: 'grid'
+  MOTION: 'motion'
+  CYAN: 'cyan'
+  SPACE: 'space'
+  CONTRAST: 'contrast'
+}>
 ```
 
 Defined in: core/tokens/theme/switches.ts:13

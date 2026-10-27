@@ -1,11 +1,11 @@
-# `cms/playground-editor/render.tsx`
+# `cms\playground-editor\render.tsx`
 
 JSX sections for &lt;cms-playground-editor&gt;: the playground
 
-| | |
-|---|---|
-| **Source** | `src/cms/playground-editor/render.tsx` |
-| **UX surface** | Earth-playground labels, defaults and route slugs editor. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\playground-editor\render.tsx`          |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

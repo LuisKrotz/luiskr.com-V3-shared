@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / core/tokens/data/ui-keys
 
@@ -17,3 +17,4 @@
 - [MEDIA\_UI\_KEYS](variables/MEDIA_UI_KEYS.md)
 - [AWARDS\_UI\_KEYS](variables/AWARDS_UI_KEYS.md)
 - [NOTIFY\_UI\_KEYS](variables/NOTIFY_UI_KEYS.md)
+- [A11Y\_UI\_KEYS](variables/A11Y_UI_KEYS.md)

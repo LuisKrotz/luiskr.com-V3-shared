@@ -8,7 +8,7 @@
 function render(host, t, resolve): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton/loop.ts:92
+Defined in: core/utils/canvas/loaders/skeleton/loop.ts:93
 
 Renders a frame via the live backend — wasm widget or shared 2D renderer.
 

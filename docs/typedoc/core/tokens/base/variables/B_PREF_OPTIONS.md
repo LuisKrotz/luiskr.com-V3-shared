@@ -8,7 +8,7 @@
 const _B_PREF_OPTIONS: 'pref-options'
 ```
 
-Defined in: core/tokens/base.ts:309
+Defined in: core/tokens/base.ts:314
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

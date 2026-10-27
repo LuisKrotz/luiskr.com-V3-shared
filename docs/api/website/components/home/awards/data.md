@@ -1,10 +1,10 @@
-# `website/components/home/awards/data.ts`
+# `website\components\home\awards\data.ts`
 
 Data helpers for &lt;awards-mentions&gt;: the legal-links list
 
-| | |
-|---|---|
-| **Source** | `src/website/components/home/awards/data.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\awards\data.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -43,6 +43,7 @@ link in the same list, but the footer must only show real legal pages.
 Legal-page links for the footer row — CMS `legal-footer` list preferred,
 bundled per-locale fallback when empty. Both lists are filtered through
 HAS_LINK so a bare locale-root row (the stored home link) never renders.
+
 - `@returns` Validated {link, page} rows.
 
 ### `ensureAwardsData`
@@ -50,4 +51,5 @@ HAS_LINK so a bare locale-root row (the stored home link) never renders.
 Loads the components dictionary node for the current locale when missing
 (stale-while-revalidate) — commits SET_COMPONENT_LANG so the footer
 links/mentions re-render once the snapshot lands.
+
 - `@param` _el The AwardsMentions element (unused — data flows via the store).

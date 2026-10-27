@@ -1,8 +1,8 @@
-# `website/components/portfolio/related/data.ts`
+# `website\components\portfolio\related\data.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/portfolio/related/data.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\portfolio\related\data.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

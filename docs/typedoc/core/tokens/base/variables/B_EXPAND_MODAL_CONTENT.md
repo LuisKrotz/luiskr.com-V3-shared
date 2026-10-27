@@ -8,6 +8,6 @@
 const _B_EXPAND_MODAL_CONTENT: 'expand-modal-content'
 ```
 
-Defined in: core/tokens/base.ts:256
+Defined in: core/tokens/base.ts:261
 
 BEM block fragment "b expand modal content" — composed by the token groups below into full class names.

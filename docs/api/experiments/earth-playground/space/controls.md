@@ -1,10 +1,10 @@
-# `experiments/earth-playground/space/controls.ts`
+# `experiments\earth-playground\space\controls.ts`
 
 Control schema + persistence for &lt;view-space-playground&gt;,
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/space/controls.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\space\controls.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -107,18 +107,33 @@ Persisted settings blob shape: param → value.
 
 Input-type discriminator shared with the panel renderer/binder.
 
+### `_SP_PARAM_WIRES`
+
+Every param wire token keyed by member name — resolves each control
+schema row's `key` to the SP_*_PARAMS wire string so params.ts stays
+the sole declaration site for the literals.
+
+### `_SP_ACTION_WIRES`
+
+SP_ACTIONS as a plain lookup — resolves each action row's `key` to its wire string.
+
 ### `SLIDER_GROUPS`
 
 Declarative control schema — the panel renders straight from this so a
-new engine knob needs no JSX change. Per control:
-  label   translation key looked up in the earth-playground node (and
-          the key used by the CMS `defaults` map)
-  param   SP_PARAMS token — the persisted-settings key + data-param attr
-  type    _R range slider | _C WebGL checkbox
-  min/max/step/def   range geometry; `def` is the shipped default until
-                     the CMS `defaults` map or a saved user value wins
-  checked checkbox shipped state — same precedence as `def`
-  actions group-level buttons (reset view, screenshot, copy settings)
+new engine knob needs no JSX change. The group tree ships as data in
+`core/tokens/playground/control-groups.ts` (a zero-import leaf the
+Node build scripts read too — the same schema describes the
+canvas-rendered panel to crawlers); each row expands here with:
+label translation key looked up in the earth-playground node (and
+the key used by the CMS `defaults` map)
+param SP_PARAMS token — resolved from the row's `key`; the
+persisted-settings key + data-param attr
+type _R range slider | _C WebGL checkbox — shape-derived:
+`checked` rows are checkboxes, the rest sliders
+min/max/step/def range geometry; `def` is the shipped default until
+the CMS `defaults` map or a saved user value wins
+checked checkbox shipped state — same precedence as `def`
+actions group-level buttons (reset view, screenshot, copy settings)
 `collapsed` controls whether the group starts folded in the panel.
 
 ### `SP_DEF_BASELINE`
@@ -155,6 +170,7 @@ are discarded instead of applying out-of-range values to the engine.
 Reads the persisted panel settings, discarding blobs from another
 SP_VERSION or corrupted JSON — both collapse to "no saved state" so a
 stale/corrupt blob can never apply out-of-range engine values.
+
 - `@returns` The saved param map, or null.
 
 ### `saveSpaceSettings`
@@ -162,4 +178,5 @@ stale/corrupt blob can never apply out-of-range engine values.
 Persists the panel settings as a {_v, settings} blob — the version tag
 lets loadSpaceSettings reject blobs written by a different schema.
 Quota/security failures are swallowed: the panel works fine session-only.
+
 - `@param` settings The full param → value map.

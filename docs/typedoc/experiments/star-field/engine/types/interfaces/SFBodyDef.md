@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFBodyDef
 
-Defined in: experiments/star-field/engine/types.ts:45
+Defined in: experiments/star-field/engine/types.ts:46
 
 Static catalog entry — everything the scene needs to place a body,
 declared once per body in catalog.ts. Orbiting bodies set `orbit` +
@@ -18,7 +18,7 @@ declared once per body in catalog.ts. Orbiting bodies set `orbit` +
 id: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:47
+Defined in: experiments/star-field/engine/types.ts:48
 
 Body id — matches `public/data/<id>.json` and `data-body` attrs.
 
@@ -30,7 +30,7 @@ Body id — matches `public/data/<id>.json` and `data-body` attrs.
 name: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:49
+Defined in: experiments/star-field/engine/types.ts:50
 
 Display fallback before the dossier JSON loads.
 
@@ -42,7 +42,7 @@ Display fallback before the dossier JSON loads.
 kind: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:51
+Defined in: experiments/star-field/engine/types.ts:52
 
 SF_KINDS value — drives badge label + material recipe.
 
@@ -54,7 +54,7 @@ SF_KINDS value — drives badge label + material recipe.
 group: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:53
+Defined in: experiments/star-field/engine/types.ts:54
 
 SF_GROUPS value — navigator drawer bucket.
 
@@ -66,7 +66,7 @@ SF_GROUPS value — navigator drawer bucket.
 radius: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:55
+Defined in: experiments/star-field/engine/types.ts:56
 
 Visual radius in scene units (compressed chart, not to scale).
 
@@ -78,7 +78,7 @@ Visual radius in scene units (compressed chart, not to scale).
 optional orbit?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:57
+Defined in: experiments/star-field/engine/types.ts:58
 
 Orbit radius around `parent` — omit for fixed positions.
 
@@ -90,7 +90,7 @@ Orbit radius around `parent` — omit for fixed positions.
 optional parent?: string;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:59
+Defined in: experiments/star-field/engine/types.ts:60
 
 Id of the body it orbits (default: scene origin).
 
@@ -102,7 +102,7 @@ Id of the body it orbits (default: scene origin).
 optional speed?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:61
+Defined in: experiments/star-field/engine/types.ts:62
 
 Orbit angular speed multiplier (0 for fixed bodies).
 
@@ -114,7 +114,7 @@ Orbit angular speed multiplier (0 for fixed bodies).
 optional spin?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:63
+Defined in: experiments/star-field/engine/types.ts:64
 
 Self-rotation speed multiplier.
 
@@ -126,7 +126,7 @@ Self-rotation speed multiplier.
 optional phase?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:65
+Defined in: experiments/star-field/engine/types.ts:66
 
 Starting angle on the orbit (radians).
 
@@ -138,7 +138,7 @@ Starting angle on the orbit (radians).
 optional inc?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:74
+Defined in: experiments/star-field/engine/types.ts:75
 
 Orbital inclination about the parent's x-axis (radians) — tilts the
 whole orbit plane, not the body. Real multi-planet systems share
@@ -155,7 +155,7 @@ survives the per-frame `rotation.y` orbit sweep.
 optional ecc?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:82
+Defined in: experiments/star-field/engine/types.ts:83
 
 Orbital eccentricity 0–1 — when set, the pivot still sweeps the
 angle uniformly but the mesh's radial distance follows the conic
@@ -171,7 +171,7 @@ as the semi-major axis and `phase` as the periapsis longitude.
 optional tilt?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:84
+Defined in: experiments/star-field/engine/types.ts:85
 
 Axial tilt (radians).
 
@@ -183,7 +183,7 @@ Axial tilt (radians).
 optional texture?: string;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:86
+Defined in: experiments/star-field/engine/types.ts:87
 
 SF_TEXTURES key material map — omit for procedural bodies.
 
@@ -195,7 +195,7 @@ SF_TEXTURES key material map — omit for procedural bodies.
 optional color?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:88
+Defined in: experiments/star-field/engine/types.ts:89
 
 SF_COLORS hex for procedural material/emissive tint.
 
@@ -207,7 +207,7 @@ SF_COLORS hex for procedural material/emissive tint.
 optional rim?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:95
+Defined in: experiments/star-field/engine/types.ts:96
 
 Limb tint override (SF_COLORS hex) — the fresnel mixes toward this
 at the silhouette instead of the default hot `STAR_RIM`. A darker
@@ -222,7 +222,7 @@ we see deeper hotter layers at centre, cooler gas at the limb.
 optional activity?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:101
+Defined in: experiments/star-field/engine/types.ts:102
 
 Corona activity scale (1 = quiet star) — stretches prominences,
 adds eruption plumes and sunspots, and enlarges the corona sprite.
@@ -236,7 +236,7 @@ The Sun runs above 1 so its surface reads as an active photosphere.
 optional shellTexture?: string;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:103
+Defined in: experiments/star-field/engine/types.ts:104
 
 Secondary texture for translucent shells (Venus atmosphere, Saturn ring).
 
@@ -248,7 +248,7 @@ Secondary texture for translucent shells (Venus atmosphere, Saturn ring).
 optional shellRing?: boolean;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:109
+Defined in: experiments/star-field/engine/types.ts:110
 
 Shell is a flat ring disc rather than an atmosphere sphere — with
 no `shellTexture` a seeded procedural band strip is painted instead
@@ -262,7 +262,7 @@ no `shellTexture` a seeded procedural band strip is painted instead
 optional ringInner?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:116
+Defined in: experiments/star-field/engine/types.ts:117
 
 Ring radii as body-radius multiples — default to Saturn's strip
 (SF_DETAIL.RING_INNER/OUTER); ice giants override with their honest
@@ -277,7 +277,7 @@ plate).
 optional ringOuter?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:117
+Defined in: experiments/star-field/engine/types.ts:118
 
 ---
 
@@ -287,7 +287,7 @@ Defined in: experiments/star-field/engine/types.ts:117
 optional ringBands?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:124
+Defined in: experiments/star-field/engine/types.ts:125
 
 Procedural band count override for `ringStripFor` — default
 SF_DETAIL.RING_BANDS; real systems differ wildly (Jupiter 4 faint
@@ -302,7 +302,7 @@ catalog pins the honest count per body.
 optional normalTexture?: string;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:126
+Defined in: experiments/star-field/engine/types.ts:127
 
 Bump/relief map (Earth terrain shading) — lit-materials only.
 
@@ -314,7 +314,7 @@ Bump/relief map (Earth terrain shading) — lit-materials only.
 optional bumpTexture?: string;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:128
+Defined in: experiments/star-field/engine/types.ts:129
 
 Grayscale elevation map — bumpMap gives terrain real depth relief.
 
@@ -326,7 +326,7 @@ Grayscale elevation map — bumpMap gives terrain real depth relief.
 optional emissiveTexture?: string;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:130
+Defined in: experiments/star-field/engine/types.ts:131
 
 Night-lights emissive map — glows only where the map is lit.
 
@@ -338,7 +338,7 @@ Night-lights emissive map — glows only where the map is lit.
 optional atmosphere?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:136
+Defined in: experiments/star-field/engine/types.ts:137
 
 Atmosphere rim shell (0 = off) — a fresnel-limb translucent sphere
 just past the surface whose tint migrates day→dusk→night with the
@@ -352,7 +352,7 @@ sun direction (Earth); the value scales the shell's opacity.
 optional cloudTexture?: string;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:138
+Defined in: experiments/star-field/engine/types.ts:139
 
 Cloud deck texture — extra translucent sphere one layer up.
 
@@ -364,7 +364,7 @@ Cloud deck texture — extra translucent sphere one layer up.
 optional pos?: [number, number, number];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:140
+Defined in: experiments/star-field/engine/types.ts:141
 
 Fixed scene position `[x,y,z]` for non-orbiting deep-sky objects.
 
@@ -376,7 +376,7 @@ Fixed scene position `[x,y,z]` for non-orbiting deep-sky objects.
 optional spiralDisc?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:151
+Defined in: experiments/star-field/engine/types.ts:152
 
 Procedural spiral galaxy — render the seeded Points disc instead of
 a flat sprite. `count` is the star-particle target (capped by
@@ -453,7 +453,7 @@ disc stars never overlap the solar-system meshes (Milky Way only).
 optional jets?: boolean;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:173
+Defined in: experiments/star-field/engine/types.ts:174
 
 Relativistic-jet cones on a black-hole body — bipolar additive
 cylinders along the disc normal sized by `SF_BH`.
@@ -466,7 +466,7 @@ cylinders along the disc normal sized by `SF_BH`.
 optional structure?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:186
+Defined in: experiments/star-field/engine/types.ts:187
 
 Hierarchy structure — `radius` sizes the volume, `speckles` the
 interior point cloud, `shell: false` suppresses the boundary sphere
@@ -499,7 +499,7 @@ optional shell?: boolean;
 optional belt?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:195
+Defined in: experiments/star-field/engine/types.ts:196
 
 Small-body annulus (asteroid/Kuiper belt) — `inner`/`outer` are the
 ring bounds in chart units, `count` the particle budget, `puff` the
@@ -546,7 +546,7 @@ optional gapFreq?: number;
 optional pulse?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:201
+Defined in: experiments/star-field/engine/types.ts:202
 
 Luminosity pulse — slow breathing scale oscillation for variable
 stars, pulsars and flaring cores; `period` in seconds, `amp` the
@@ -572,7 +572,7 @@ amp: number
 optional cycle?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:207
+Defined in: experiments/star-field/engine/types.ts:208
 
 Climate cycle — oscillates the surface material tint toward
 `SF_COLORS.EARTH_ICE` (glaciation winter→summer analogy); `period`
@@ -592,7 +592,7 @@ period: number
 optional weather?: boolean;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:214
+Defined in: experiments/star-field/engine/types.ts:215
 
 Procedural weather — replaces the static `cloudTexture` deck with
 the full `weather.ts` field: evolving coverage, jet streams, ITCZ
@@ -616,7 +616,7 @@ optional aurora?:
 };
 ```
 
-Defined in: experiments/star-field/engine/types.ts:227
+Defined in: experiments/star-field/engine/types.ts:228
 
 Aurora shell — a thin rayed emission OVAL centered on the magnetic
 pole (not the spin pole), driven by the shared solar-wind uniform
@@ -694,7 +694,7 @@ False → boreal oval only (Earth); default shows both poles.
 optional flares?: boolean;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:242
+Defined in: experiments/star-field/engine/types.ts:243
 
 Solar flares — limb prominence sprites on the photosphere edge that
 breathe and stretch outward with the shared solar-wind cycle (Sun).
@@ -707,7 +707,7 @@ breathe and stretch outward with the shared solar-wind cycle (Sun).
 optional constellation?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:253
+Defined in: experiments/star-field/engine/types.ts:254
 
 LEO constellation shell — `count` point glints sharing one inclined
 orbital plane at `orbit`× radius, sweeping as a unit (the Starlink
@@ -750,7 +750,7 @@ optional name?: string;
 optional meteors?: boolean;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:261
+Defined in: experiments/star-field/engine/types.ts:262
 
 Meteor strikes — airless cratered bodies still take impacts; a
 pooled flash sprite fires at a random surface point every
@@ -766,7 +766,7 @@ crater record readable as a live process.
 optional irregular?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:272
+Defined in: experiments/star-field/engine/types.ts:273
 
 Irregular rubble-pile body — replaces the perfect SphereGeometry
 with a seeded noise-crumpled icosahedron: each vertex displaces
@@ -801,7 +801,7 @@ Triaxial proportions [x, y, z] — the body's three radii normalized to x=1 (Pho
 optional surface?: string;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:285
+Defined in: experiments/star-field/engine/types.ts:286
 
 Procedural-surface recipe pin — one of `SF_SURFACES` (`rock`,
 `ice`, `gas`, `lava`, `ocean`). The painter's kind bias still seeds
@@ -817,7 +817,7 @@ Absent → seeded pick inside the kind's palette as before.
 dist: string
 ```
 
-Defined in: experiments/star-field/engine/types.ts:291
+Defined in: experiments/star-field/engine/types.ts:292
 
 Authored distance label for the hover tooltip — semi-major axis in
 AU for Solar-System bodies, light-years for deep-sky objects. Units
@@ -831,7 +831,7 @@ are universal abbreviations so the string needs no translation.
 optional satellites?: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:301
+Defined in: experiments/star-field/engine/types.ts:302
 
 Companion bodies orbiting this body's mesh — the representation for
 a galactic star's planetary system (TRAPPIST-1 b–h, Epsilon Eridani
@@ -924,7 +924,7 @@ around the circular pivot sweep.
 optional atmoColor?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:333
+Defined in: experiments/star-field/engine/types.ts:334
 
 Atmosphere tint override (SF_COLORS hex) — the rim shell normally
 migrates Earth's day/dusk/night palette; bodies with a chemically
@@ -938,7 +938,7 @@ different sky (Titan's tholin haze) pin the limb to their own hue.
 optional plumes?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:341
+Defined in: experiments/star-field/engine/types.ts:342
 
 Cryovolcanic/volcanic plume system — animated geyser/volcano vents
 that throw ejecta sprites into space (Enceladus' south-polar tiger

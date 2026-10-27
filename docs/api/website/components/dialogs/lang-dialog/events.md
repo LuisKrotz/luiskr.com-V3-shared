@@ -1,8 +1,8 @@
-# `website/components/dialogs/lang-dialog/events.ts`
+# `website\components\dialogs\lang-dialog\events.ts`
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/dialogs/lang-dialog/events.ts`  |
+| **Source**     | `src/website\components\dialogs\lang-dialog\events.ts`  |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

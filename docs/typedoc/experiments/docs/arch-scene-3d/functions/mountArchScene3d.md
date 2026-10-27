@@ -5,10 +5,10 @@
 [luiskr.com](../../../../README.md) / [experiments/docs/arch-scene-3d](../README.md) / mountArchScene3d
 
 ```ts
-function mountArchScene3d(canvas, roots, onPick): Promise<ArchSceneHandle | null>
+function mountArchScene3d(canvas, roots, onPick, onReady?): Promise<ArchSceneHandle | null>
 ```
 
-Defined in: experiments/docs/arch-scene-3d.ts:252
+Defined in: experiments/docs/arch-scene-3d.ts:352
 
 Mounts the scene3d arm: engine → orbit rig → async graph build →
 rAF loop. Returns null on ANY engine/artifact failure — the caller
@@ -34,6 +34,13 @@ Manifest root buckets.
 (`_path`) => `void`
 
 Called with the manifest path on a node pick.
+
+### onReady?
+
+() => `void`
+
+Called once the async graph build lands — the host
+drops the stage's loading veil on this signal.
 
 ## Returns
 

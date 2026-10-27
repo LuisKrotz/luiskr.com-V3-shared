@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/frame/updates.ts`
+# `experiments\star-field\engine\frame\updates.ts`
 
 Per-frame scene updates driven by `tickFrame` — approach
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/frame/updates.ts`    |
+| **Source**     | `src/experiments\star-field\engine\frame\updates.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

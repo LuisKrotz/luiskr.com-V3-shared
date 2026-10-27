@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/burn/paper.ts`
+# `website\components\home\mosaic\burn\paper.ts`
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/mosaic/burn/paper.ts`      |
+| **Source**     | `src/website\components\home\mosaic\burn\paper.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -14,7 +14,7 @@ theme publishes a cyan-blue plasma ramp, light theme an airy
 paper-fire ramp. Falls back to the fixed canvas inks when the
 properties are absent (older stylesheet, non-themed host).
 
-- `@returns` The four-stop combustion ink ramp.
+- `@returns` The combustion ink ramp (embers ×3, scorch, smoke).
 
 ### (module scope)
 
@@ -53,7 +53,7 @@ free. Returns null when the API or a usable text node is absent.
 ### `rasterizeTitle`
 
 Rasterizes the h2 text into the paper canvas. Words are drawn at their
-DOM Range fragment positions (see {@link titleWordBoxes}), so the raster
+DOM Range fragment positions (see `titleWordBoxes`), so the raster
 is pixel-faithful to the rendered title — same wraps, same spacing.
 Engines without Range fall back to a measured word-pack matching the
 DOM box, drawn bottom-anchored like the overlay's `align-items:

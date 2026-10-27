@@ -1,20 +1,21 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/selectors/common](../README.md) / COMMON\_SELECTORS
 
 ```ts
 const COMMON_SELECTORS: Readonly<{
-  HOST: ":host";
-  STYLE: "style";
-  DATA_CONTENT: "[data-content]";
-  PREF_THEME_CANVAS: ".pref-theme-canvas";
-  BUTTON_OR_ANCHOR: "button, a";
-  MEDIA_ELEMENTS: "img, video, audio";
-  ID_ABOUT: "#about";
-  ID_CONTACT: "#contact";
-}>;
+  HOST: ':host'
+  STYLE: 'style'
+  DATA_CONTENT: '[data-content]'
+  PREF_THEME_CANVAS: '.pref-theme-canvas'
+  BUTTON_OR_ANCHOR: 'button, a'
+  MEDIA_ELEMENTS: 'img, video, audio'
+  ID_ABOUT: '#about'
+  ID_CONTACT: '#contact'
+  INTERACTIVE_CONTENT: 'a[href], button, input, select, textarea, summary, details, video[controls], audio[controls], [tabindex], [contenteditable]'
+}>
 ```
 
 Defined in: core/tokens/selectors/common.ts:15

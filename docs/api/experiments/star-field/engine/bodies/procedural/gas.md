@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/procedural/gas.ts`
+# `experiments\star-field\engine\bodies\procedural\gas.ts`
 
 Seeded wispy nebula-gas texture for photo-less nebulae
 
 |                |                                                              |
 | -------------- | ------------------------------------------------------------ |
-| **Source**     | `src/experiments/star-field/engine/bodies/procedural/gas.ts` |
+| **Source**     | `src/experiments\star-field\engine\bodies\procedural\gas.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.      |
 
 ## Members

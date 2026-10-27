@@ -8,7 +8,7 @@
 function webmIfExists(url): string
 ```
 
-Defined in: core/utils/media/manifest.ts:95
+Defined in: core/utils/media/manifest.ts:159
 
 webm sibling of an .mp4 URL when it exists in the manifest, '' otherwise.
 `<video><source>` DOES retry the next source on network failure, so this

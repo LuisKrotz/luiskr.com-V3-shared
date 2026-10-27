@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/runtime/state](../README.md) / EarthBloomState
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:62
+Defined in: experiments/earth-playground/earth/runtime/state.ts:63
 
 Bloom post-pass settings.
 
@@ -13,43 +13,43 @@ Bloom post-pass settings.
 ### enabled
 
 ```ts
-enabled: boolean;
+enabled: boolean
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:63
+Defined in: experiments/earth-playground/earth/runtime/state.ts:64
 
-***
+---
 
 ### strength
 
 ```ts
-strength: number;
+strength: number
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:65
+Defined in: experiments/earth-playground/earth/runtime/state.ts:66
 
 Bloom intensity multiplier.
 
-***
+---
 
 ### radius
 
 ```ts
-radius: number;
+radius: number
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:67
+Defined in: experiments/earth-playground/earth/runtime/state.ts:68
 
 Bloom kernel radius.
 
-***
+---
 
 ### threshold
 
 ```ts
-threshold: number;
+threshold: number
 ```
 
-Defined in: experiments/earth-playground/earth/runtime/state.ts:69
+Defined in: experiments/earth-playground/earth/runtime/state.ts:70
 
 Luminance threshold above which pixels bleed.

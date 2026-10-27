@@ -1,10 +1,10 @@
-# `core/utils/wasm/wasm-diagram.ts`
+# `core\utils\wasm\wasm-diagram.ts`
 
 Lazy loader for the `rust/diagram` wasm engine — the
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/wasm/wasm-diagram.ts`                     |
+| **Source**     | `src/core\utils\wasm\wasm-diagram.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

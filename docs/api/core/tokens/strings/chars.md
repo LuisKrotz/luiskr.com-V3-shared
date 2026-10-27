@@ -1,8 +1,26 @@
-# `core/tokens/strings/chars.ts`
+# `core\tokens\strings\chars.ts`
 
 Punctuation, unit and single-character string tokens —
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/strings/chars.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\strings\chars.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
+
+## Members
+
+### `ARROW_KEYS`
+
+Keycap glyph rows for shortcut documentation (arrows + Escape).
+
+### `EXPAND_GLYPH`
+
+Zoom/expand control glyph (diagonal arrows to corners).
+
+### `CLOSE_GLYPH`
+
+Dismiss/close control glyph (multiplication cross).
+
+### `PLAY_GLYPH`
+
+Playback toggle glyphs for ambient-media controls (triangle / pause bars).

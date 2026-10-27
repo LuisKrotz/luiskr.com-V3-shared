@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/switch-slider.ts`
+# `core\utils\canvas\widgets\switch-slider.ts`
 
 WebGL toggle switch for preferences/stats contexts: a pill
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/switch-slider.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\switch-slider.ts`          |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -13,24 +13,58 @@ WebGL toggle switch for preferences/stats contexts: a pill
 
 Contextual WebGL Switch Slider for Developer Tools
 Renders custom animated graphical draw elements referent to each toggle's context:
+
 - 'stats': Live ECG oscilloscope waveform + pulsing chip matrix (Stats for Nerds)
 - 'grid': Glowing blueprint column grid lines + scanning crosshairs (Show Grid)
 - 'motion': Subtle ambient drift (OFF) vs calm still horizon datum (ON) (Reduced Motion)
-All switches share an identical solid centered knob indicator dot.
+- 'contrast': Sweeping luminance split — a dark/light comparison wipe
+  riding back and forth across the track behind an amber seam (High Contrast)
+  All switches share an identical solid centered knob indicator dot.
+
+### `velP`
+
+Chase-spring velocity (track units/s) — feeds the elastic settle.
+
+### `_animT`
+
+Last animate() timestamp — the spring's dt source.
+
+### `_frameTick`
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
+
+### `_wasm`
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+### `_wasmFailed`
+
+Latch — a failed wasm mount never retries on this instance.
+
+### `_wasmPending`
+
+In-flight mount — restore() must not double-mount on re-entry.
+
+### `_wasmT`
+
+Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
 ### `_pToKnobX`
 
 Progress 0–1 → knob pixel X. The knob (radius 11) is inset 14px from
 each end — exactly half the 28px track height — so it sits centered
 inside the capsule's rounded caps at both extremes.
+
 - `@param` {number} p
 - `@returns` {number} CSS px
 
 ### `_contextCode`
 
 Context → shader's u_context float id (0=stats, 1=grid/cyan/space,
-2=motion). The fragment shader branches on ranges (<0.5, <1.5, else)
-so several visual aliases can share the grid animation.
+2=motion, 3=contrast). The fragment shader branches on ranges
+(<0.5, <1.5, <2.5, else) so several visual aliases can share the
+grid animation.
+
 - `@returns` {number}
 
 ### `init`
@@ -61,6 +95,7 @@ Sets the knob position programmatically (animates the slide).
 
 Applies prefers-reduced-motion: swaps the animation loop for one
 static frame render, or restarts the loop when motion is re-allowed.
+
 - `@param` {boolean} isReduced
 
 ### `_renderStatic`

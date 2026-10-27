@@ -8,7 +8,7 @@
 function scheduleFit(host): void
 ```
 
-Defined in: website/components/media/draw-text/fit.ts:200
+Defined in: website/components/media/draw-text/fit.ts:211
 
 Queues a fit pass for the host on the next animation frame instead of
 measuring synchronously. All draw-text siblings mount in the same task

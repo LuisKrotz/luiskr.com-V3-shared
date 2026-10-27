@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/catalog.ts`
+# `experiments\star-field\engine\catalog.ts`
 
 The star-field body catalog — one static SFBodyDef per
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog.ts`          |
+| **Source**     | `src/experiments\star-field\engine\catalog.ts`          |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

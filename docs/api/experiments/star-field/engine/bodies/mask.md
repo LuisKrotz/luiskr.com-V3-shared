@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/mask.ts`
+# `experiments\star-field\engine\bodies\mask.ts`
 
 Photo-texture edge feathering for deep-sky billboards.
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/mask.ts`      |
+| **Source**     | `src/experiments\star-field\engine\bodies\mask.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

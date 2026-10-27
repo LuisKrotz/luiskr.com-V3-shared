@@ -1,11 +1,11 @@
-# `shared/scripts/media/webp-webm-convert.mjs`
+# `shared\scripts\media\webp-webm-convert.mjs`
 
 Batch CDN transcode — every image (jpg/png) and video (mp4)
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/media/webp-webm-convert.mjs`                          |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\media\webp-webm-convert.mjs`        |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

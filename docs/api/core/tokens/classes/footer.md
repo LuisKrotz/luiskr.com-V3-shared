@@ -1,10 +1,10 @@
-# `core/tokens/classes/footer.ts`
+# `core\tokens\classes\footer.ts`
 
 Footer source-code row class tokens — grouped subset of
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/classes/footer.ts`                       |
+| **Source**     | `src/core\tokens\classes\footer.ts`                       |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -22,3 +22,7 @@ Docs-portal footer entry — link + localized English-only note.
 ### `FOOTER_DIVIDER`
 
 Self-made credit + copyright block below the source row.
+
+### `FOOTER_DIVIDER_CANVAS`
+
+WebGPU overlay canvas for the divider sheen (`divider-sheen` widget).

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/feedback/CookieBanner](../README.md) / CookieBanner
 
-Defined in: website/components/feedback/CookieBanner.tsx:39
+Defined in: website/components/feedback/CookieBanner.tsx:40
 
 The CookieBanner — banner class.
 
@@ -20,7 +20,7 @@ The CookieBanner — banner class.
 new CookieBanner(): CookieBanner;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:44
+Defined in: website/components/feedback/CookieBanner.tsx:45
 
 #### Returns
 
@@ -4234,7 +4234,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get translations(): CookieTranslations | null;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:64
+Defined in: website/components/feedback/CookieBanner.tsx:65
 
 ##### Returns
 
@@ -4246,7 +4246,7 @@ Defined in: website/components/feedback/CookieBanner.tsx:64
 set translations(val): void;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:52
+Defined in: website/components/feedback/CookieBanner.tsx:53
 
 Setter/getter — APP translations for the banner copy.
 
@@ -4809,7 +4809,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:68
+Defined in: website/components/feedback/CookieBanner.tsx:69
 
 #### Returns
 
@@ -4827,7 +4827,7 @@ Defined in: website/components/feedback/CookieBanner.tsx:68
 onUpdated(): void;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:85
+Defined in: website/components/feedback/CookieBanner.tsx:86
 
 Lifecycle: re-measures after any render flips banner visibility.
 
@@ -4847,7 +4847,7 @@ Lifecycle: re-measures after any render flips banner visibility.
 onDestroy(): void;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:91
+Defined in: website/components/feedback/CookieBanner.tsx:92
 
 Lifecycle: releases the height observer when the element detaches.
 
@@ -4867,7 +4867,7 @@ Lifecycle: releases the height observer when the element detaches.
 _bindEvents(): void;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:171
+Defined in: website/components/feedback/CookieBanner.tsx:172
 
 Wires accept/decline button clicks.
 
@@ -4883,7 +4883,7 @@ Wires accept/decline button clicks.
 handleAction(accepted): void;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:187
+Defined in: website/components/feedback/CookieBanner.tsx:188
 
 Persists the consent answer and hides the banner.
 
@@ -4907,7 +4907,7 @@ render():
   | null;
 ```
 
-Defined in: website/components/feedback/CookieBanner.tsx:203
+Defined in: website/components/feedback/CookieBanner.tsx:204
 
 JSX template for the component's shadow DOM.
 

@@ -17,6 +17,7 @@ const CAROUSEL_CLASSES: Readonly<{
   CAROUSEL_DOTS: 'carousel-dots'
   CAROUSEL_DOT: 'carousel-dot'
   CAROUSEL_DOT_ACTIVE: 'carousel-dot--active'
+  CAROUSEL_DOT_NUM: 'carousel-dot-num'
   CAROUSEL_IN_VIEW: 'carousel--in-view'
   CAROUSEL_FALLBACK: 'carousel-fallback'
   CAROUSEL_FALLBACK_SIDE: 'carousel-fallback carousel-fallback--side'

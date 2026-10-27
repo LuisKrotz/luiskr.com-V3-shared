@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/types](../README.md) / BundleStatsReport
 
-Defined in: cms/deploy-info/types.ts:120
+Defined in: cms/deploy-info/types.ts:153
 
 Shape of the bundle-stats report — the post-build dist/ inventory:
 file-type totals (js/css/html/wasm/assets) with minified vs
@@ -20,7 +20,7 @@ heaviest emitted chunks overall.
 optional generatedAt?: string;
 ```
 
-Defined in: cms/deploy-info/types.ts:121
+Defined in: cms/deploy-info/types.ts:154
 
 ---
 
@@ -30,7 +30,7 @@ Defined in: cms/deploy-info/types.ts:121
 optional totals?: object;
 ```
 
-Defined in: cms/deploy-info/types.ts:122
+Defined in: cms/deploy-info/types.ts:155
 
 #### js?
 
@@ -70,7 +70,7 @@ optional assets?: BundleBucket;
 optional tiers?: BundleTier[];
 ```
 
-Defined in: cms/deploy-info/types.ts:129
+Defined in: cms/deploy-info/types.ts:162
 
 ---
 
@@ -80,7 +80,7 @@ Defined in: cms/deploy-info/types.ts:129
 optional wasm?: WasmCrateStats[];
 ```
 
-Defined in: cms/deploy-info/types.ts:130
+Defined in: cms/deploy-info/types.ts:163
 
 ---
 
@@ -90,7 +90,7 @@ Defined in: cms/deploy-info/types.ts:130
 optional html?: BundleBucket & object;
 ```
 
-Defined in: cms/deploy-info/types.ts:131
+Defined in: cms/deploy-info/types.ts:164
 
 #### Type Declaration
 
@@ -108,7 +108,7 @@ optional byDir?: object[];
 optional largest?: object[];
 ```
 
-Defined in: cms/deploy-info/types.ts:132
+Defined in: cms/deploy-info/types.ts:165
 
 #### file?
 

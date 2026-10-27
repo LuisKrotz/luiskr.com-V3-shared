@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/gpu/ring-sheen](../README.md) / RingSheenSession
 
-Defined in: core/utils/gpu/ring-sheen.ts:66
+Defined in: core/utils/gpu/ring-sheen.ts:67
 
 Live ring-sheen overlay — the return surface callers hold.
 
@@ -16,7 +16,7 @@ Live ring-sheen overlay — the return surface callers hold.
 refresh: () => void;
 ```
 
-Defined in: core/utils/gpu/ring-sheen.ts:68
+Defined in: core/utils/gpu/ring-sheen.ts:69
 
 Re-measure tiles + repush the sheet NOW (host-driven repacks).
 
@@ -32,7 +32,7 @@ Re-measure tiles + repush the sheet NOW (host-driven repacks).
 destroy: () => void;
 ```
 
-Defined in: core/utils/gpu/ring-sheen.ts:70
+Defined in: core/utils/gpu/ring-sheen.ts:71
 
 Tear down canvas/widget/observers/listeners.
 

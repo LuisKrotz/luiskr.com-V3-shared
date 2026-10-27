@@ -1,10 +1,10 @@
-# `website/components/legal/Footer.tsx`
+# `website\components\legal\Footer.tsx`
 
 &lt;legal-footer&gt; — footer strip shared by internals and the
 
-| | |
-|---|---|
-| **Source** | `src/website/components/legal/Footer.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\legal\Footer.tsx`               |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

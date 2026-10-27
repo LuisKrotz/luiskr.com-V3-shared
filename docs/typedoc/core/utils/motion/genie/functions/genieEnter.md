@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/motion/genie](../README.md) / genieEnter
 
 ```ts
-function genieEnter(component): void;
+function genieEnter(component): void
 ```
 
-Defined in: core/utils/motion/genie.ts:27
+Defined in: core/utils/motion/genie.ts:28
 
 Genie open/close shared by the preferences and language dialogs.
 The dialog scales from the control that opened it (store.modalOrigin) and

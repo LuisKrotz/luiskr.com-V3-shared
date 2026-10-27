@@ -1,13 +1,18 @@
-# `shared/build/docs/render.mjs`
+# `shared\build\docs\render.mjs`
 
 Build-time file → HTML renderers for the docs portal.
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/docs/render.mjs`                                       |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\build\docs\render.mjs`                      |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
+
+### `REPO`
+
+Repo root — same `fileURLToPath(new URL('../..', …))` convention as
+`shared/build/module-public.mjs`, one level deeper for docs/.
 
 ### `escapeHtml`
 
@@ -21,9 +26,12 @@ intra-document links keep working.
 
 ### `renderMarkdown`
 
-Full markdown → HTML via `marked` with GFM enabled (tables, task lists,
-fenced code, strikethrough, autolinks). A post-pass adds `id` anchors to
-headings the same way GitHub does, and adds `loading="lazy"` to images.
+Full markdown → HTML via the Rust `markdown` wasm artifact
+(pulldown-cmark with the same GFM surface `marked` exposed: tables,
+task lists, fenced code, strikethrough, autolinks). A post-pass adds
+`id` anchors to headings the same way GitHub does, normalizes the
+void-element ` />` closers pulldown emits to marked's `>` form, and
+adds `loading="lazy"` to images.
 
 ### `JSON_DEPTH_CAP`
 

@@ -1,10 +1,10 @@
-# `experiments/star-field/tests/coverage/starfield/engine/star-engine-tails.test.js`
+# `experiments\star-field\tests\coverage\starfield\engine\star-engine-tails.test.js`
 
 Coverage tails for the star-field engine internals — the
 
 |                |                                                                                        |
 | -------------- | -------------------------------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/tests/coverage/starfield/engine/star-engine-tails.test.js` |
+| **Source**     | `src/experiments\star-field\tests\coverage\starfield\engine\star-engine-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                                |
 
 ## Members

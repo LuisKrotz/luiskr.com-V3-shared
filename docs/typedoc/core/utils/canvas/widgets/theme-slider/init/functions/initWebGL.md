@@ -8,7 +8,7 @@
 function initWebGL(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider/init.ts:203
+Defined in: core/utils/canvas/widgets/theme-slider/init.ts:204
 
 Creates the WebGL context, compiles the shader program and sets up uniforms/buffers; falls back on any failure.
 

@@ -8,9 +8,12 @@
 function renderSpAction(act, t): Element
 ```
 
-Defined in: experiments/earth-playground/space/panel-render.tsx:89
+Defined in: experiments/earth-playground/space/panel-render.tsx:135
 
 One group-level action button (reset view / screenshot / copy settings).
+Preceded by a sr-only h4 — every action is a heading so AT heading-jump
+lists it like the controls; the button carries a describedby technical
+line naming the dispatched action token.
 
 ## Parameters
 

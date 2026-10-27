@@ -1,9 +1,9 @@
-# `cms/deploy-info/data.ts`
+# `cms\deploy-info\data.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/deploy-info/data.ts` |
-| **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\deploy-info\data.ts`                   |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

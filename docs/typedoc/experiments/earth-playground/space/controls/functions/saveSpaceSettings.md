@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/controls](../README.md) / saveSpaceSettings
 
 ```ts
-function saveSpaceSettings(settings): void;
+function saveSpaceSettings(settings): void
 ```
 
-Defined in: experiments/earth-playground/space/controls.ts:433
+Defined in: experiments/earth-playground/space/controls.ts:269
 
 Persists the panel settings as a {_v, settings} blob — the version tag
 lets loadSpaceSettings reject blobs written by a different schema.

@@ -11,6 +11,6 @@ const AWC_VARIANTS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/classes/awards-carousel.ts:60
+Defined in: core/tokens/classes/awards-carousel.ts:62
 
 <awards-carousel> render-mode names — awards strip vs selected work.

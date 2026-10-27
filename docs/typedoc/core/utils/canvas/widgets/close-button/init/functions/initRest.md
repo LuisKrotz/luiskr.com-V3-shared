@@ -8,7 +8,7 @@
 function initRest(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/close-button/init.ts:211
+Defined in: core/utils/canvas/widgets/close-button/init.ts:223
 
 The classic boot tail — context-loss watch → WebGL attempt → CSS-X
 fallback → events + loop. Runs directly on no-WebGPU browsers and

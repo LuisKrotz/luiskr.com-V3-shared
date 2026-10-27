@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/post.ts`
+# `experiments\star-field\engine\post.ts`
 
 Post-processing chain for the star-field engine —
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/post.ts`             |
+| **Source**     | `src/experiments\star-field\engine\post.ts`             |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

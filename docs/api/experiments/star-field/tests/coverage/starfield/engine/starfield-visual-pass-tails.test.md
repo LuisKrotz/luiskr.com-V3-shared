@@ -1,10 +1,10 @@
-# `experiments/star-field/tests/coverage/starfield/engine/starfield-visual-pass-tails.test.js`
+# `experiments\star-field\tests\coverage\starfield\engine\starfield-visual-pass-tails.test.js`
 
 Coverage tails for the visual-quality pass added to the
 
 |                |                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------ |
-| **Source**     | `src/experiments/star-field/tests/coverage/starfield/engine/starfield-visual-pass-tails.test.js` |
+| **Source**     | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-visual-pass-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                                          |
 
 ## Members

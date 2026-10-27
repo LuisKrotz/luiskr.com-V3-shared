@@ -1,10 +1,10 @@
-# `website/components/nav/flag.tsx`
+# `website\components\nav\flag.tsx`
 
 Locale flag rendering + FlagWebGL lifecycle for &lt;app-nav&gt;,
 
-| | |
-|---|---|
-| **Source** | `src/website/components/nav/flag.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\nav\flag.tsx`                   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -15,7 +15,7 @@ Host surface the flag helpers need (satisfied by AppNav).
 
 ### `_navFlags`
 
-Live flag widgets (max one — the menu flag).
+Live flag widgets (max one — the menu flag); a Set works too.
 
 ### `_menuFlagCanvasEl`
 
@@ -38,6 +38,7 @@ The active LANG_OPTIONS entry (code + label + flag cc).
 Returns the persistent flag canvas for the current locale, rebuilding
 it only when the locale changed — a new canvas means a new GL context,
 so the old widget is destroyed first to keep total contexts bounded.
+
 - `@param` host AppNav instance.
 - `@returns` The per-locale canvas element.
 

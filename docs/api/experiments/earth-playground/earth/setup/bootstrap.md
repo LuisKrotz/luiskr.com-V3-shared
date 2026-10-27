@@ -1,11 +1,11 @@
-# `experiments/earth-playground/earth/setup/bootstrap.ts`
+# `experiments\earth-playground\earth\setup\bootstrap.ts`
 
 Async scene assembly for the Earth engine, extracted from
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth/setup/bootstrap.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                             |
+| -------------- | ----------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth\setup\bootstrap.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.     |
 
 ## Members
 
@@ -18,5 +18,6 @@ non-fatal — the renderer recompiles lazily on first draw.
 ### `bootstrapEarth`
 
 bootstraps earth.
+
 - `@param` s — the source value
 - `@returns` Promise<void>

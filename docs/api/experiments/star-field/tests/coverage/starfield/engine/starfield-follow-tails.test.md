@@ -1,10 +1,10 @@
-# `experiments/star-field/tests/coverage/starfield/engine/starfield-follow-tails.test.js`
+# `experiments\star-field\tests\coverage\starfield\engine\starfield-follow-tails.test.js`
 
 Coverage tails for frame.ts's floating-origin follow —
 
 |                |                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/tests/coverage/starfield/engine/starfield-follow-tails.test.js` |
+| **Source**     | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-follow-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                                     |
 
 ## Members

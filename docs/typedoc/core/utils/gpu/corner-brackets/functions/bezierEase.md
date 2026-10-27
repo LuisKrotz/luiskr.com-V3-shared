@@ -8,7 +8,7 @@
 function bezierEase(p, x1, y1, x2, y2): number
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:99
+Defined in: core/utils/gpu/corner-brackets.ts:100
 
 `bezierEase` — evaluate cubic-bezier(x1,y1,x2,y2) at progress `p`.
 CSS resolves y at the parameter t where x(t)=p — Newton's method on

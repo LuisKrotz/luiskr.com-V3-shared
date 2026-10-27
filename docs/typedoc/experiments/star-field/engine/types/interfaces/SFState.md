@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFState
 
-Defined in: experiments/star-field/engine/types.ts:455
+Defined in: experiments/star-field/engine/types.ts:456
 
 Mutable engine state — one bag threaded through bootstrap/frame/fly so
 every stage shares renderer, scene graph, tweens and dispose flags
@@ -18,7 +18,7 @@ without a class field soup.
 canvas: HTMLCanvasElement | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:457
+Defined in: experiments/star-field/engine/types.ts:458
 
 Persistent canvas the host owns (replaced on renderer retry).
 
@@ -35,7 +35,7 @@ renderer:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:459
+Defined in: experiments/star-field/engine/types.ts:460
 
 three.js WebGPURenderer (WebGPU or forced-WebGL backend).
 
@@ -52,7 +52,7 @@ pipeline:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:466
+Defined in: experiments/star-field/engine/types.ts:467
 
 RenderPipeline post chain (scene → +bloom → vignette → film grain) —
 null when the pipeline failed to build or the backend rejected it;
@@ -67,7 +67,7 @@ that case, losing post FX but never the scene.
 scene: Scene<Object3DEventMap> | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:467
+Defined in: experiments/star-field/engine/types.ts:468
 
 ---
 
@@ -77,7 +77,7 @@ Defined in: experiments/star-field/engine/types.ts:467
 world: Object3D<Object3DEventMap> | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:478
+Defined in: experiments/star-field/engine/types.ts:479
 
 Floating-origin world root — every catalog body, cloud and rider
 parents under this group instead of the scene directly. The follow
@@ -96,7 +96,7 @@ so they always enclose/light whatever the camera follows.
 sunLight: Object3D<Object3DEventMap> | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:485
+Defined in: experiments/star-field/engine/types.ts:486
 
 Sun stand-in point light — created in the scene at the origin (the
 pin point), then re-parented onto the Sun anchor once bodies build
@@ -111,7 +111,7 @@ body the floating origin currently pins.
 camera: PerspectiveCamera | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:486
+Defined in: experiments/star-field/engine/types.ts:487
 
 ---
 
@@ -121,7 +121,7 @@ Defined in: experiments/star-field/engine/types.ts:486
 controls: OrbitControls | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:487
+Defined in: experiments/star-field/engine/types.ts:488
 
 ---
 
@@ -131,7 +131,7 @@ Defined in: experiments/star-field/engine/types.ts:487
 nodes: Map<string, SFNode>
 ```
 
-Defined in: experiments/star-field/engine/types.ts:489
+Defined in: experiments/star-field/engine/types.ts:490
 
 id → runtime body node record.
 
@@ -143,7 +143,7 @@ id → runtime body node record.
 anchors: Map<string, Object3D<Object3DEventMap>>
 ```
 
-Defined in: experiments/star-field/engine/types.ts:491
+Defined in: experiments/star-field/engine/types.ts:492
 
 id → center Object3D the camera targets (equals mesh for most).
 
@@ -155,7 +155,7 @@ id → center Object3D the camera targets (equals mesh for most).
 pickables: Object3D < Object3DEventMap > []
 ```
 
-Defined in: experiments/star-field/engine/types.ts:493
+Defined in: experiments/star-field/engine/types.ts:494
 
 Pickable meshes for raycasting.
 
@@ -167,7 +167,7 @@ Pickable meshes for raycasting.
 dayNight: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:502
+Defined in: experiments/star-field/engine/types.ts:503
 
 Day/night shader registry — bodies with sun-direction-dependent
 shading (night-lights emissive gating, atmosphere rim shells).
@@ -209,7 +209,7 @@ still lit by the real Sun.
 approached: Set<string>
 ```
 
-Defined in: experiments/star-field/engine/types.ts:516
+Defined in: experiments/star-field/engine/types.ts:517
 
 ids whose dossier was already prefetched — approach fires once.
 
@@ -225,7 +225,7 @@ solarWind:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:524
+Defined in: experiments/star-field/engine/types.ts:525
 
 Shared solar-wind uniform — `updateSolarWind` writes the 0–1+
 activity level each frame; aurora shells, the sun's flare sprites
@@ -245,7 +245,7 @@ fxTime:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:530
+Defined in: experiments/star-field/engine/types.ts:531
 
 Shared scene-time uniform (scene seconds) — the weather field,
 aurora curtains and any other TSL effect reads this instead of
@@ -259,7 +259,7 @@ baking `s.t` so a single per-frame write animates every shader.
 starCloud: Object3D<Object3DEventMap> | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:536
+Defined in: experiments/star-field/engine/types.ts:537
 
 Real-star cloud Points (HYG catalogue field on the Milky Way disc)
 — set by star-cloud.ts once the packed binary decodes; kept on
@@ -273,7 +273,7 @@ state so destroy() can dispose its geometry/material.
 starCloudLoading: boolean
 ```
 
-Defined in: experiments/star-field/engine/types.ts:538
+Defined in: experiments/star-field/engine/types.ts:539
 
 Guard flag — the star-cloud fetch fires only once per boot.
 
@@ -285,7 +285,7 @@ Guard flag — the star-cloud fetch fires only once per boot.
 THREE: __module | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:546
+Defined in: experiments/star-field/engine/types.ts:547
 
 Post-boot handles kept for lazy registry-body spawns — the deep
 catalog's 139k records are plain cloud points until selected, when
@@ -301,7 +301,7 @@ sprite here so spawn code never re-imports lazily-loaded modules.
 deps: SFNodeDeps | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:547
+Defined in: experiments/star-field/engine/types.ts:548
 
 ---
 
@@ -311,7 +311,7 @@ Defined in: experiments/star-field/engine/types.ts:547
 glowTex: Texture<unknown, TextureEventMap> | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:549
+Defined in: experiments/star-field/engine/types.ts:550
 
 Shared soft-disc sprite — registry halos reuse it, never own it.
 
@@ -323,7 +323,7 @@ Shared soft-disc sprite — registry halos reuse it, never own it.
 registryBodies: Map<string, Object3D<Object3DEventMap>>
 ```
 
-Defined in: experiments/star-field/engine/types.ts:555
+Defined in: experiments/star-field/engine/types.ts:556
 
 Spawned registry bodies (`star-NNNNNN`… → Object3D) mounted on the
 Sun's pivot — an LRU map capped at `SF_STAR_CLOUD.BODY_CACHE` so a
@@ -337,7 +337,7 @@ long browsing session never accumulates 139k meshes.
 fly: SFFly | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:557
+Defined in: experiments/star-field/engine/types.ts:558
 
 Active fly-to tween or null when controls are free.
 
@@ -349,7 +349,7 @@ Active fly-to tween or null when controls are free.
 animId: number | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:559
+Defined in: experiments/star-field/engine/types.ts:560
 
 Active RAF id.
 
@@ -361,7 +361,7 @@ Active RAF id.
 disposed: boolean
 ```
 
-Defined in: experiments/star-field/engine/types.ts:561
+Defined in: experiments/star-field/engine/types.ts:562
 
 Set by destroy() — every async stage checks before continuing.
 
@@ -373,7 +373,7 @@ Set by destroy() — every async stage checks before continuing.
 failed: boolean
 ```
 
-Defined in: experiments/star-field/engine/types.ts:563
+Defined in: experiments/star-field/engine/types.ts:564
 
 Bootstrap failed or bailed — host swaps in the CSS fallback.
 
@@ -385,7 +385,7 @@ Bootstrap failed or bailed — host swaps in the CSS fallback.
 reduced: boolean
 ```
 
-Defined in: experiments/star-field/engine/types.ts:565
+Defined in: experiments/star-field/engine/types.ts:566
 
 Reduced-motion flag — pauses the RAF loop.
 
@@ -397,7 +397,7 @@ Reduced-motion flag — pauses the RAF loop.
 onResize: (() => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:567
+Defined in: experiments/star-field/engine/types.ts:568
 
 Resize listener to detach on destroy.
 
@@ -409,7 +409,7 @@ Resize listener to detach on destroy.
 onPointerDown: ((e) => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:569
+Defined in: experiments/star-field/engine/types.ts:570
 
 Pointer listeners to detach on destroy.
 
@@ -421,7 +421,7 @@ Pointer listeners to detach on destroy.
 onPointerMove: ((e) => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:570
+Defined in: experiments/star-field/engine/types.ts:571
 
 ---
 
@@ -431,7 +431,7 @@ Defined in: experiments/star-field/engine/types.ts:570
 onPointerUp: ((e) => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:571
+Defined in: experiments/star-field/engine/types.ts:572
 
 ---
 
@@ -441,7 +441,7 @@ Defined in: experiments/star-field/engine/types.ts:571
 onWheel: ((e) => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:572
+Defined in: experiments/star-field/engine/types.ts:573
 
 ---
 
@@ -456,7 +456,7 @@ downXY:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:574
+Defined in: experiments/star-field/engine/types.ts:575
 
 last pointer-down position for click-vs-drag discrimination.
 
@@ -468,7 +468,7 @@ last pointer-down position for click-vs-drag discrimination.
 pickX: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:581
+Defined in: experiments/star-field/engine/types.ts:582
 
 Pending hover-pick position — the freshest coalesced pointer sample.
 High-rate mice (1000Hz+) fire several pointermoves per frame; the
@@ -483,7 +483,7 @@ frame against the latest pair, never once per event.
 pickY: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:582
+Defined in: experiments/star-field/engine/types.ts:583
 
 ---
 
@@ -493,7 +493,7 @@ Defined in: experiments/star-field/engine/types.ts:582
 pickRaf: number | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:584
+Defined in: experiments/star-field/engine/types.ts:585
 
 Non-null while a per-frame pick tick is queued — dedupes rAF arms.
 
@@ -505,7 +505,7 @@ Non-null while a per-frame pick tick is queued — dedupes rAF arms.
 viewW: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:593
+Defined in: experiments/star-field/engine/types.ts:594
 
 Cached canvas box in CSS px — refreshed by `handleStarResize`. The
 per-frame projection (`anchorScreenPos`/`worldScreenPos`) and
@@ -522,7 +522,7 @@ back to a one-time live read).
 viewH: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:594
+Defined in: experiments/star-field/engine/types.ts:595
 
 ---
 
@@ -532,7 +532,7 @@ Defined in: experiments/star-field/engine/types.ts:594
 lastT: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:596
+Defined in: experiments/star-field/engine/types.ts:597
 
 Last tick timestamp for dt-based animation.
 
@@ -544,9 +544,35 @@ Last tick timestamp for dt-based animation.
 t: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:598
+Defined in: experiments/star-field/engine/types.ts:599
 
 Elapsed scene time (seconds) — drives orbits/spins.
+
+---
+
+### predictor
+
+```ts
+predictor:
+  | FrameTimePredictor
+  | null;
+```
+
+Defined in: experiments/star-field/engine/types.ts:601
+
+ML frame-time predictor — drives adaptive pixel-ratio quality.
+
+---
+
+### appliedQuality
+
+```ts
+appliedQuality: number
+```
+
+Defined in: experiments/star-field/engine/types.ts:603
+
+Last quality applied to the renderer — dedupes setPixelRatio calls.
 
 ---
 
@@ -556,7 +582,7 @@ Elapsed scene time (seconds) — drives orbits/spins.
 hoverId: string | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:600
+Defined in: experiments/star-field/engine/types.ts:605
 
 Camera hover state — last picked body id for the HUD.
 
@@ -575,7 +601,7 @@ hint:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:611
+Defined in: experiments/star-field/engine/types.ts:616
 
 Navigator-hover position hint — while the pointer (or focus) rests
 on a catalog row the engine reports the body's projected screen
@@ -594,7 +620,7 @@ frame). Null when no nav row is hovered; takes precedence over
 selectedId: string | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:617
+Defined in: experiments/star-field/engine/types.ts:622
 
 Selected body id (panel open).
 
@@ -606,7 +632,7 @@ Selected body id (panel open).
 followId: string | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:625
+Defined in: experiments/star-field/engine/types.ts:630
 
 Camera-follow anchor — which catalog id the camera rides with when
 no fly tween runs. Selections set it to the picked body; the solar
@@ -622,7 +648,7 @@ dossier selection. Null = free camera.
 optional onReady?: () => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:627
+Defined in: experiments/star-field/engine/types.ts:632
 
 Lifecycle callbacks from the host.
 
@@ -638,7 +664,7 @@ Lifecycle callbacks from the host.
 optional onProgress?: SFProgressFn;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:628
+Defined in: experiments/star-field/engine/types.ts:633
 
 ---
 
@@ -648,7 +674,7 @@ Defined in: experiments/star-field/engine/types.ts:628
 optional onSelect?: SFBodyFn;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:629
+Defined in: experiments/star-field/engine/types.ts:634
 
 ---
 
@@ -658,7 +684,7 @@ Defined in: experiments/star-field/engine/types.ts:629
 optional onApproach?: SFBodyFn;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:630
+Defined in: experiments/star-field/engine/types.ts:635
 
 ---
 
@@ -668,7 +694,7 @@ Defined in: experiments/star-field/engine/types.ts:630
 optional onHover?: (bodyId) => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:631
+Defined in: experiments/star-field/engine/types.ts:636
 
 #### Parameters
 
@@ -688,7 +714,7 @@ Defined in: experiments/star-field/engine/types.ts:631
 optional onHoverMove?: (bodyId, x, y, edge?, angle?) => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:640
+Defined in: experiments/star-field/engine/types.ts:645
 
 Per-frame hover tracking — fires every tick while a body is hovered
 with its projected canvas-space pixel position, so the tooltip and
@@ -731,7 +757,7 @@ degrees for the leader-line arrow.
 optional onLost?: () => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:642
+Defined in: experiments/star-field/engine/types.ts:647
 
 Fires once when a frame throws — host swaps to the 2D fallback.
 

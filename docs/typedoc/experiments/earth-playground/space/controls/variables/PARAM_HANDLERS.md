@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/controls](../README.md) / PARAM\_HANDLERS
 
 ```ts
-const PARAM_HANDLERS: Readonly<Record<string, (_bg, v) => void>>;
+const PARAM_HANDLERS: Readonly<Record<string, (_bg, v) => void>>
 ```
 
-Defined in: experiments/earth-playground/space/controls.ts:345
+Defined in: experiments/earth-playground/space/controls.ts:181
 
 Param → EarthBackground setter dispatch. Each entry adapts a raw UI
 value (slider units / checkbox boolean) into the matching engine update

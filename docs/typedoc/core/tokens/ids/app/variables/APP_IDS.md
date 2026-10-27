@@ -12,6 +12,16 @@ const APP_IDS: Readonly<{
   VIEW_OUTLET: 'view-outlet'
   SF_NAV_PANEL: 'sf-nav-panel'
   SF_INSTRUCTIONS_PANEL: 'sf-instructions-panel'
+  SF_PANEL_TITLE: 'sf-panel-title'
+  SF_NAV_DESC: 'sf-nav-desc'
+  SF_PANEL_TAGLINE: 'sf-panel-tagline'
+  SF_INSTRUCTIONS_HINT: 'sf-instructions-hint'
+  SF_ITEM_DESC_PREFIX: 'sf-item-desc-'
+  SF_MUSIC_LIST: 'sf-music-list'
+  NAV_MENU_PANEL: 'nav-menu-panel'
+  NAV_MENU_TITLE: 'nav-menu-title'
+  COOKIES_INFO: 'cookies-info'
+  READER_CONTENT: 'reader-content'
 }>
 ```
 

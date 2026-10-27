@@ -8,6 +8,6 @@
 const _B_SKELETON_FOOTER: 'skeleton--footer'
 ```
 
-Defined in: core/tokens/base.ts:169
+Defined in: core/tokens/base.ts:174
 
 BEM block fragment "b skeleton footer" — composed by the token groups below into full class names.

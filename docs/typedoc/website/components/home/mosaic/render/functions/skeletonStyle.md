@@ -8,7 +8,7 @@
 function skeletonStyle(box): string
 ```
 
-Defined in: website/components/home/mosaic/render.tsx:32
+Defined in: website/components/home/mosaic/render.tsx:38
 
 Style object for one skeleton placeholder box.
 

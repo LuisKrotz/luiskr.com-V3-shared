@@ -1,10 +1,10 @@
-# `website/components/carousel/custom-carousel/autoplay.ts`
+# `website\components\carousel\custom-carousel\autoplay.ts`
 
 Autoplay/progress-ring engine for &lt;custom-carousel&gt;,
 
 |                |                                                               |
 | -------------- | ------------------------------------------------------------- |
-| **Source**     | `src/website/components/carousel/custom-carousel/autoplay.ts` |
+| **Source**     | `src/website\components\carousel\custom-carousel\autoplay.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.       |
 
 ## Members

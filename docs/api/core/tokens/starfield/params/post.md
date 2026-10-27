@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/post.ts`
+# `core\tokens\starfield\params\post.ts`
 
 Post-processing chain tuning for the star-field engine —
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/post.ts`                |
+| **Source**     | `src/core\tokens\starfield\params\post.ts`                |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

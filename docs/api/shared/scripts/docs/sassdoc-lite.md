@@ -1,11 +1,11 @@
-# `shared/scripts/docs/sassdoc-lite.mjs`
+# `shared\scripts\docs\sassdoc-lite.mjs`
 
 Security-focused replacement for the unmaintained `sassdoc`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/docs/sassdoc-lite.mjs`                                |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\docs\sassdoc-lite.mjs`              |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

@@ -1,11 +1,11 @@
-# `shared/scripts/build/generate-sitemap.js`
+# `shared\scripts\build\generate-sitemap.js`
 
 Emits the whole crawl surface under `website/public/meta/`:
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/generate-sitemap.js`                            |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\generate-sitemap.js`          |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -17,29 +17,46 @@ XML namespaces emitted on every <urlset>.
 
 Escapes text for XML element bodies (media titles/descriptions).
 
+### `encLoc`
+
+Percent-encodes a URL for sitemap loc emission — bucket keys can carry
+literal spaces/non-ASCII which make RFC-3986-invalid URLs. decodeURI-
+first keeps it idempotent (encodeURI escapes '%' itself).
+
 ### `titleOf`
 
 Truncates a media title to Google's 100-char video-title bound.
 
-### `mediaItemsOf`
+### `themesOf`
 
-Media items of a project — mirrors `website/views/project/modal.ts`'s
-traversal exactly: sections → groups (arrays whose head is NOT a string —
-string-head groups are text blocks) → media objects. Every object with a
-`src` is a real asset on the page and gets indexed; items with a label
-additionally get their own `/portfolio/<slug>/<media>` deep-link URL.
+Localized search-theme list for one CMS node — every page/project
+carries `searchThemes` (patch-all-pages-search-themes.js); the list
+feeds <image:caption> and <video:tag> so image/video search indexes
+the asset under the page's own query vocabulary.
 
-### `mediaRowsOf`
+### `themeCaption`
 
-Labelled-media deep links of a project — slug → media item. Distinct
-captions can collapse to the same slug, so occurrences after the first
-gain `-2`, `-3`, … in document order — byte-identical to mediaSlugSeq
-in core/utils/string.ts so every item keeps an indexable URL and the
-emitted pages + runtime resolver agree.
+`<image:caption>` element for a theme list — '' when empty.
+
+### `videoThemeTags`
+
+`<video:tag>` elements for a theme list — Google accepts ≤32 tags.
+
+### `epShareTagsFor`
+
+Localized <image:image> tags for the whole share set — titles and
+captions carry the locale's own earth-image search themes.
+
+### `sfShareTagsFor`
+
+Localized <image:image> tags for the whole star share set — titles
+and captions carry the locale's own star-image search themes.
 
 ### `mediaTagXml`
 
 XML media tags for one media item — image:image or video:video.
+`themes` is the parent page's localized searchThemes list: images
+get it as <image:caption>, videos as <video:tag> elements.
 
 ### `projectPageTags`
 
@@ -62,3 +79,24 @@ Localized llms.txt — swaps the intro line for the locale's about text.
 ### `localizedCatalog`
 
 Localized ai-catalog — entry URLs get the /<loc> prefix (docs stay EN).
+
+### `robotsDoc`
+
+Emits root or localized crawl policy with its sitemap discovery URL.
+
+### `bioOf`
+
+Localized channel description — the locale's about bio, else en.
+
+### `rssItem`
+
+One RSS item with a valid image enclosure or video plus optional poster.
+
+### `rssDoc`
+
+Full RSS 2.0 document for one locale — pages first, then every
+project with its cover media.
+
+### `legalDesc`
+
+First authored paragraph of a legal page — falls back to its title.

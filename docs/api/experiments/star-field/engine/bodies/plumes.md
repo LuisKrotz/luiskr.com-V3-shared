@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/plumes.ts`
+# `experiments\star-field\engine\bodies\plumes.ts`
 
 Cryovolcanic and volcanic plume systems — the moving
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/plumes.ts`    |
+| **Source**     | `src/experiments\star-field\engine\bodies\plumes.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

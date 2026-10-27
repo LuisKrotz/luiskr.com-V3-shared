@@ -8,7 +8,7 @@
 function triggerFallback(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider/init.ts:184
+Defined in: core/utils/canvas/widgets/theme-slider/init.ts:185
 
 Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on context loss or init failure; releases any live GL first.
 

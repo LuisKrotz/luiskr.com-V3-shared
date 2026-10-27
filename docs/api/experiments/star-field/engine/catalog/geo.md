@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/catalog/geo.ts`
+# `experiments\star-field\engine\catalog\geo.ts`
 
 Shared chart-geometry helpers for the catalog — galactic-
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog/geo.ts`      |
+| **Source**     | `src/experiments\star-field\engine\catalog\geo.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -57,5 +57,5 @@ so internal proportions stay authored. Exported so coverage tails can
 pin every arm — no current solar def carries satellites, but the arm
 keeps a future moon-bearing def honest.
 
-- `@param` def Solar-tier body at authored diagram scale.
+- `@param` d Solar-tier body at authored diagram scale.
 - `@returns` Copy with every spatial field scaled by SOLAR_SCALE.

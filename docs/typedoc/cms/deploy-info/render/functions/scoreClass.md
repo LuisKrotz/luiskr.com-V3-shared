@@ -8,7 +8,7 @@
 function scoreClass(value): string
 ```
 
-Defined in: cms/deploy-info/render.tsx:27
+Defined in: cms/deploy-info/render.tsx:32
 
 Maps a 0–1 score to the green/amber/red chip class (Lighthouse conventions).
 

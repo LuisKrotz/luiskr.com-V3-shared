@@ -8,7 +8,7 @@
 function webmSibling(url): string
 ```
 
-Defined in: core/utils/media.ts:143
+Defined in: core/utils/media.ts:147
 
 Derives the .webm sibling of an .mp4 URL — same convention as
 webpSibling: `x.mp4` → `x.webm` and `x.mp4-scaledown-2x.mp4` →

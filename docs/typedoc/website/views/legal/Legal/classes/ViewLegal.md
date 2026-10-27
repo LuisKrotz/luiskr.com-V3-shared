@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/views/legal/Legal](../README.md) / ViewLegal
 
-Defined in: website/views/legal/Legal.tsx:51
+Defined in: website/views/legal/Legal.tsx:52
 
 The ViewLegal — legal class.
 
@@ -20,7 +20,7 @@ The ViewLegal — legal class.
 new ViewLegal(): ViewLegal;
 ```
 
-Defined in: website/views/legal/Legal.tsx:56
+Defined in: website/views/legal/Legal.tsx:57
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 translations: LegalDoc | null = null;
 ```
 
-Defined in: website/views/legal/Legal.tsx:52
+Defined in: website/views/legal/Legal.tsx:53
 
 ---
 
@@ -4777,7 +4777,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/views/legal/Legal.tsx:62
+Defined in: website/views/legal/Legal.tsx:63
 
 Lifecycle: kicks off document loading.
 
@@ -4797,7 +4797,7 @@ Lifecycle: kicks off document loading.
 onRouteParamChange(to): void;
 ```
 
-Defined in: website/views/legal/Legal.tsx:80
+Defined in: website/views/legal/Legal.tsx:81
 
 Router hook — swapping between legal pages reloads the document without remounting.
 
@@ -4820,7 +4820,7 @@ Router hook — swapping between legal pages reloads the document without remoun
 onDestroy(): void;
 ```
 
-Defined in: website/views/legal/Legal.tsx:94
+Defined in: website/views/legal/Legal.tsx:95
 
 Lifecycle: cleans up listeners.
 
@@ -4840,7 +4840,7 @@ Lifecycle: cleans up listeners.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/views/legal/Legal.tsx:103
+Defined in: website/views/legal/Legal.tsx:104
 
 Reloads when the locale changes.
 
@@ -4860,7 +4860,7 @@ Reloads when the locale changes.
 loadData(wait?): void;
 ```
 
-Defined in: website/views/legal/Legal.tsx:118
+Defined in: website/views/legal/Legal.tsx:119
 
 Fetches the legal document node (privacy-policy | gdpr | terms-of-use | license)
 for the current locale. `wait` defers the DOM write — used after a
@@ -4886,7 +4886,7 @@ callback fires immediately on cache hit AND on network revalidation.
 render(): Element;
 ```
 
-Defined in: website/views/legal/Legal.tsx:164
+Defined in: website/views/legal/Legal.tsx:165
 
 JSX template — two states: loaded renders the document's sections
 (CMS HTML paragraphs via dangerouslySetInnerHTML — trusted content,

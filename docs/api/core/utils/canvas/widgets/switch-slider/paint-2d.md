@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/switch-slider/paint-2d.ts`
+# `core\utils\canvas\widgets\switch-slider\paint-2d.ts`
 
 Canvas2D renderer for SwitchSliderWebGL, extracted from
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/switch-slider/paint-2d.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\switch-slider\paint-2d.ts` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

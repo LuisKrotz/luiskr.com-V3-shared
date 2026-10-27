@@ -1,10 +1,10 @@
-# `experiments/earth-playground/earth/consts.ts`
+# `experiments\earth-playground\earth\consts.ts`
 
 Scene-graph scale constants + shared TSL arg types for the
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth/consts.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth\consts.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -34,8 +34,8 @@ the silhouette stays smooth when the camera zooms to 1.2× radius — below
 ### (module scope)
 
 Arg shapes for the Fn-defined post nodes — per-node-type annotations
- unlock the typed swizzle/fluent-op surface (vec4 gets .rgb/.a, float
- gets .mul/.add etc.).
+unlock the typed swizzle/fluent-op surface (vec4 gets .rgb/.a, float
+gets .mul/.add etc.).
 
 ### (module scope)
 

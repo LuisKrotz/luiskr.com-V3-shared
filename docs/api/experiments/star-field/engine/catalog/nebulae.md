@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/catalog/nebulae.ts`
+# `experiments\star-field\engine\catalog\nebulae.ts`
 
 Nebulae + globular clusters — billboard sprites at real
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog/nebulae.ts`  |
+| **Source**     | `src/experiments\star-field\engine\catalog\nebulae.ts`  |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

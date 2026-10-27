@@ -8,7 +8,7 @@
 function slugify(text): string
 ```
 
-Defined in: core/utils/string.ts:150
+Defined in: core/utils/string.ts:183
 
 Converts a string into a clean, URL-safe and DOM-id-safe slug.
 Pipeline: NFD-fold diacritics to ASCII → lowercase → transliterate

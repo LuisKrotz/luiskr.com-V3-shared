@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/manifest](../README.md) / DocsManifest
 
-Defined in: experiments/docs/manifest.ts:44
+Defined in: experiments/docs/manifest.ts:60
 
 Manifest object emitted by the vite plugin.
 
@@ -13,12 +13,12 @@ Manifest object emitted by the vite plugin.
 ### generated
 
 ```ts
-generated: string;
+generated: string
 ```
 
-Defined in: experiments/docs/manifest.ts:45
+Defined in: experiments/docs/manifest.ts:61
 
-***
+---
 
 ### roots
 
@@ -26,4 +26,4 @@ Defined in: experiments/docs/manifest.ts:45
 roots: DocsRoot[];
 ```
 
-Defined in: experiments/docs/manifest.ts:46
+Defined in: experiments/docs/manifest.ts:62

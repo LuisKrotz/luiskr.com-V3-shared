@@ -1,10 +1,10 @@
-# `experiments/star-field/starfield-engine.ts`
+# `experiments\star-field\starfield-engine.ts`
 
 Facade for the star-field three.js engine — owns the SFState
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/starfield-engine.ts`        |
+| **Source**     | `src/experiments\star-field\starfield-engine.ts`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

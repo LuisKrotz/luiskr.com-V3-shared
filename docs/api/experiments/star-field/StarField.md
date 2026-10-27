@@ -1,10 +1,10 @@
-# `experiments/star-field/StarField.tsx`
+# `experiments\star-field\StarField.tsx`
 
 &lt;view-star-field&gt; — the star-field experiment route: a
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/StarField.tsx`              |
+| **Source**     | `src/experiments\star-field\StarField.tsx`              |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -25,6 +25,18 @@ Pre-built id → distance-label lookup for tooltip upgrades.
 
 Arrow-key → view-rotation delta map — left/right change azimuth,
 up/down change polar (up lifts the camera = negative polar step).
+
+### `_HOTKEY_ACTIONS`
+
+Printable-key → action shortcut map — `/` opens the navigator with the
+catalog search focused, `n` toggles it, `o` flies home, `s` saves a
+frame and `i` toggles the instructions sheet. Keys are matched
+case-folded and only with no Ctrl/Meta/Alt held so browser and OS
+chords pass straight through.
+
+### `_TYPING_TAGS`
+
+Field tags whose focus means a keystroke is typing, not a shortcut.
 
 ### `StarField`
 
@@ -105,6 +117,20 @@ then drawer) and the arrow keys orbit the camera, so the chart is
 fully navigable without pointer input even when nothing inside the
 view holds focus.
 
+### `_isTyping`
+
+Typing guard — true while the shadow root's focused element is a text
+field or editable region, so `/` and the letter shortcuts never steal
+input from the catalog search (or any future field).
+
+- `@returns` Whether keystrokes should be treated as typing.
+
+### `_focusSearch`
+
+`/` shortcut — opens the navigator drawer (starting the lazy registry
+manifest too) and moves focus straight into the catalog search, the
+one-gesture path into a targeted body lookup.
+
 ### `_setSearch`
 
 Search-filter setter — re-renders the navigator list narrowed to
@@ -160,6 +186,33 @@ loads the dossier panel and flies the camera to the body.
 
 Closes the dossier panel and clears the selection.
 
+### `_playMusic`
+
+Playlist track pick — delegates to star/music.ts: loads the src
+(when changed), plays, and re-renders the active row marker.
+
+- `@param` index Track index into SF_MUSIC_TRACKS.
+
+### `_prevMusic`
+
+Steps the playlist back one track — wraps to the last from the first.
+
+### `_nextMusic`
+
+Advances the playlist one track — wraps to the first from the last.
+
+### `_toggleMusicPlay`
+
+Play/pause toggle for the transport row's play button.
+
+### `_toggleMusicRepeat`
+
+Repeat-loop toggle — engages the element's `loop` flag.
+
+### `_toggleMusicList`
+
+Expands/collapses the track list — the card starts collapsed.
+
 ### `_baseStarPath`
 
 Current-route base path — the star-field URL minus a trailing
@@ -191,8 +244,9 @@ stale or hand-typed URLs never break the view.
 ### `_applyDeepLink`
 
 Deep-link entry — after the engine reports ready, selects the body
-named in the URL (flies the camera + opens the dossier). Defaults
-to the Sun when no specific body was deep-linked.
+named in the URL (flies the camera + opens the dossier). No body
+(or an unresolvable segment) leaves the chart at the overview pose —
+the experiment always opens on the full field, never on a body.
 
 ### `_takeScreenshot`
 

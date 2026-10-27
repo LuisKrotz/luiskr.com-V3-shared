@@ -8,7 +8,7 @@
 function renderWebGL(host, now): void
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider/render.ts:107
+Defined in: core/utils/canvas/widgets/theme-slider/render.ts:108
 
 Per-frame WebGL render: updates time/knob uniforms and draws the quad.
 

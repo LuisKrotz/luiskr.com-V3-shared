@@ -10,6 +10,7 @@ const CACHE_STORAGE_KEYS: Readonly<{
   SESSION_FB_CACHE_PREFIX: 'fb_cache_'
   DOCS_SCENE_STATE: 'docs_scene_state'
   INTRO_SHOWN: 'lk_intro_shown'
+  INTRO_T0: 'lk_intro_t0'
   CMS_AUTH_REDIRECT: 'cms_auth_redirect'
   CMS_AUTH_ERROR: 'cms_auth_error'
   CMS_AUTH_POPUP_ERROR: 'cms_auth_popup_error'
@@ -17,6 +18,6 @@ const CACHE_STORAGE_KEYS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/data/storage.ts:26
+Defined in: core/tokens/data/storage.ts:27
 
 Caches storage keys.

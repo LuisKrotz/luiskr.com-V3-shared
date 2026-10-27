@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/catalog/solar.ts`
+# `experiments\star-field\engine\catalog\solar.ts`
 
 Solar-system tier — the Sun, planets, moons, dwarf
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog/solar.ts`    |
+| **Source**     | `src/experiments\star-field\engine\catalog\solar.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -1,9 +1,9 @@
-# `shared/scripts/media-convert/index.js`
+# `shared\scripts\media-convert\index.js`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/media-convert/index.js`                               |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\media-convert\index.js`             |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

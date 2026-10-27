@@ -1,10 +1,10 @@
-# `cms/tokens/base.ts`
+# `cms\tokens\base.ts`
 
 CMS-private BEM block names — the shared fragments every
 
-| | |
-|---|---|
-| **Source** | `src/cms/tokens/base.ts` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\tokens\base.ts`                        |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/locale/lang-slugs.ts`
+# `core\locale\lang-slugs.ts`
 
 Canonical localized route-slug table — the per-locale path
 
-| | |
-|---|---|
-| **Source** | `src/core/locale/lang-slugs.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\locale\lang-slugs.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

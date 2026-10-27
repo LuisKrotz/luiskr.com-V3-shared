@@ -98,6 +98,14 @@ active one (±2 positions, wrapping).
 
 ≥50% visible — the autoplay gate.
 
+### `isInViewport`
+
+Live intersection state — unlike isEnteredViewport it flips false on exit.
+
+### `_scrollSettleQueued`
+
+True while a scroll-settle visibility pass is queued — collapses churn.
+
 ### `isEnteredViewport`
 
 Any viewport visibility ever observed.
@@ -181,6 +189,18 @@ Whether the carousel is currently auto-advancing.
 ### `onUnmounted`
 
 Extra unmount hook the Safari patch calls — releases the fit observer early.
+
+### (module scope)
+
+Post-render hook — republishes --carousel-media-height on the host and
+--carousel-item-height on the enclosing section synchronously after
+every render, so the first painted frame already carries the
+aspect-corrected strip height. Without it, carousel shapes with no CSS
+ratio class (mixed, portrait, or unlabeled media below the 768px
+breakpoint) render at the ~70dvh --mf-h fallback until the deferred
+RAF in _setupAfterRender runs — a visible wrong→right size jump (CLS).
+The RAF copy stays as the post-layout refinement; setHeightVar's
+guards make repeat calls no-ops.
 
 ### `_setupAfterRender`
 

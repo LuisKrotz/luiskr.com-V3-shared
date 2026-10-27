@@ -1,10 +1,10 @@
-# `core/safari/patches/carousel.ts`
+# `core\safari\patches\carousel.ts`
 
 CustomCarousel patch: injects the safari-carousel stylesheet into the
 
-| | |
-|---|---|
-| **Source** | `src/core/safari/patches/carousel.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\safari\patches\carousel.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

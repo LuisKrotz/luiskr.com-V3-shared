@@ -1,11 +1,11 @@
-# `core/tests/unit/platform/polyfill-coverage-registerserviceworker.test.js`
+# `core\tests\unit\platform\polyfill-coverage-registerserviceworker.test.js`
 
 Split from polyfill-coverage.test.js — covers the "registerServiceWorker" describe.
 
-| | |
-|---|---|
-| **Source** | `src/core/tests/unit/platform/polyfill-coverage-registerserviceworker.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                                |
+| -------------- | ------------------------------------------------------------------------------ |
+| **Source**     | `src/core\tests\unit\platform\polyfill-coverage-registerserviceworker.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.                      |
 
 ## Members
 

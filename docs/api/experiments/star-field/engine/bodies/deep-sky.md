@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/deep-sky.ts`
+# `experiments\star-field\engine\bodies\deep-sky.ts`
 
 Real-imagery surface for deep-sky bodies — nebulae, star
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/deep-sky.ts`  |
+| **Source**     | `src/experiments\star-field\engine\bodies\deep-sky.ts`  |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

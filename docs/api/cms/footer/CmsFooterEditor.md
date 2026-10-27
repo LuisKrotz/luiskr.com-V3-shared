@@ -1,11 +1,11 @@
-# `cms/footer/CmsFooterEditor.tsx`
+# `cms\footer\CmsFooterEditor.tsx`
 
 CMS footer editor: credit/source lines and the social/other
 
-| | |
-|---|---|
-| **Source** | `src/cms/footer/CmsFooterEditor.tsx` |
-| **UX surface** | Footer + legal links editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\footer\CmsFooterEditor.tsx`            |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

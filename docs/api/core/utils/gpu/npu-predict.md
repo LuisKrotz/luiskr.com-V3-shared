@@ -1,10 +1,10 @@
-# `core/utils/gpu/npu-predict.ts`
+# `core\utils\gpu\npu-predict.ts`
 
 Hardware-tiered prefetch predictor: scores navigation
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/gpu/npu-predict.ts`                       |
+| **Source**     | `src/core\utils\gpu\npu-predict.ts`                       |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

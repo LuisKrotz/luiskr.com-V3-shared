@@ -8,7 +8,7 @@
 const _B_SKELETON_ABOUT: 'skeleton-about'
 ```
 
-Defined in: core/tokens/base.ts:161
+Defined in: core/tokens/base.ts:166
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

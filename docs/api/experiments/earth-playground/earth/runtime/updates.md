@@ -1,11 +1,11 @@
-# `experiments/earth-playground/earth/runtime/updates.ts`
+# `experiments\earth-playground\earth\runtime\updates.ts`
 
 Live-tweak API for the Earth engine, extracted from
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth/runtime/updates.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                             |
+| -------------- | ----------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth\runtime\updates.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.     |
 
 ## Members
 
@@ -19,18 +19,18 @@ free (no shader rebuild).
 
 Live-tweak the color-grade node. Every arg mirrors straight into a TSL
 uniform; see makePostNodes for the per-term math.
-  contrast      - multiplier around mid-grey (1 = neutral)
-  saturation    - lerp weight between luma and color
-  blackLevel    - floor subtracted before output
-  blueGreenBoost - extra gain on G+B channels
+contrast - multiplier around mid-grey (1 = neutral)
+saturation - lerp weight between luma and color
+blackLevel - floor subtracted before output
+blueGreenBoost - extra gain on G+B channels
 
 ### `updateEarthCamera`
 
 Camera tweaks. `fov` needs updateProjectionMatrix() to rebuild the
 frustum; orbit flags write straight into OrbitControls.
-  fov             - vertical field of view in degrees
-  autoRotate      - slow turntable orbit
-  autoRotateSpeed - degrees/sec equivalent (three's scale: 2.0 ≈ 30s/rev)
+fov - vertical field of view in degrees
+autoRotate - slow turntable orbit
+autoRotateSpeed - degrees/sec equivalent (three's scale: 2.0 ≈ 30s/rev)
 
 ### `updateEarthSpin`
 
@@ -42,20 +42,20 @@ trueInclination toggles the fixed 23.44° axial tilt on rotation.z.
 Surface-shader uniforms: ocean PBR (specular mask drives the land/ocean
 blend), relief bump scale, and the fake terrain self-shadowing terms
 (see the offset-normal trick in buildEarthShells).
-  terrainShadowOffset - UV-space offset along the sun-projected tangent
+terrainShadowOffset - UV-space offset along the sun-projected tangent
 
 ### `updateEarthVignette`
 
 Vignette tweaks — enabled collapses darkness to 0 (same zero-cost
 toggle pattern as bloom).
-  darkness - exponent + lerp weight of the falloff
-  offset   - radial distance scale before the falloff
+darkness - exponent + lerp weight of the falloff
+offset - radial distance scale before the falloff
 
 ### `updateEarthChromatic`
 
 Chromatic aberration tweaks — enabled collapses strength to 0.
-  strength - fringe offset in normalized UV units
-  scale    - radial falloff of the fringe
+strength - fringe offset in normalized UV units
+scale - radial falloff of the fringe
 
 ### `updateEarthRender`
 

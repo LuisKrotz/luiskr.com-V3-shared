@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/interactions](../README.md) / projectHref
 
 ```ts
-function projectHref(item): string;
+function projectHref(item): string
 ```
 
-Defined in: website/components/home/mosaic/interactions.ts:134
+Defined in: website/components/home/mosaic/interactions.ts:143
 
 Builds the localized destination URL for one mosaic project card.
 

@@ -1,8 +1,8 @@
-# `website/components/dialogs/lang-dialog/sync.ts`
+# `website\components\dialogs\lang-dialog\sync.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/dialogs/lang-dialog/sync.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\dialogs\lang-dialog\sync.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

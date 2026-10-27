@@ -1,8 +1,8 @@
-# `core/router/types.ts`
+# `core\router\types.ts`
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/router/types.ts`                                |
+| **Source**     | `src/core\router\types.ts`                                |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

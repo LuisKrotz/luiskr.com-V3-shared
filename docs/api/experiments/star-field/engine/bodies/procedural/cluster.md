@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/procedural/cluster.ts`
+# `experiments\star-field\engine\bodies\procedural\cluster.ts`
 
 Seeded globular-cluster starfield texture — the no-photo
 
 |                |                                                                  |
 | -------------- | ---------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/procedural/cluster.ts` |
+| **Source**     | `src/experiments\star-field\engine\bodies\procedural\cluster.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.          |
 
 ## Members

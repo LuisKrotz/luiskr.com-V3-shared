@@ -8,7 +8,7 @@
 function mountWebGpuWidget(kind, canvas, loadModule?, options?): Promise<WidgetHandle | null>
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:269
+Defined in: core/utils/gpu/webgpu-widget.ts:270
 
 Mounts a widget artifact on `canvas`: loads its wasm module, calls
 `init`, wires resize + visibility-paused rAF, and returns the live

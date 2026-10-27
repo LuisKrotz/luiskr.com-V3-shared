@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies-scene.ts`
+# `experiments\star-field\engine\bodies-scene.ts`
 
 Scene-graph assembler for the star-field catalog — turns
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies-scene.ts`     |
+| **Source**     | `src/experiments\star-field\engine\bodies-scene.ts`     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

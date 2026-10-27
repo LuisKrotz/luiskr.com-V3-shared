@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/fill-worker.ts`
+# `experiments\star-field\engine\fill-worker.ts`
 
 Multi-threaded fill dispatcher — the star-field's heavy
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/fill-worker.ts`      |
+| **Source**     | `src/experiments\star-field\engine\fill-worker.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

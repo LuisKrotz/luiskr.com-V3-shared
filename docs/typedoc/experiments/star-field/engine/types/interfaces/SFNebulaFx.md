@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFNebulaFx
 
-Defined in: experiments/star-field/engine/types.ts:836
+Defined in: experiments/star-field/engine/types.ts:841
 
 Living-nebula fx record — the per-layer swirl state for a deep-sky
 sprite. Each entry owns one SpriteMaterial (primary photo, rotated
@@ -22,7 +22,7 @@ sprite can breathe without losing the photo's aspect.
 layers: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:837
+Defined in: experiments/star-field/engine/types.ts:842
 
 #### material
 
@@ -68,7 +68,7 @@ opBase: number
 baseScale: object
 ```
 
-Defined in: experiments/star-field/engine/types.ts:843
+Defined in: experiments/star-field/engine/types.ts:848
 
 #### x
 
@@ -90,6 +90,6 @@ y: number
 phase: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:845
+Defined in: experiments/star-field/engine/types.ts:850
 
 Seeded phase offset for the whole-sprite breathing wave.

@@ -8,7 +8,7 @@
 function tickStar(s, now?): void
 ```
 
-Defined in: experiments/star-field/engine/frame.ts:52
+Defined in: experiments/star-field/engine/frame.ts:53
 
 Per-frame update, self-rescheduling via RAF:
 orbits — pivot.rotation.y = phase + t·ORBIT_SPEED·speed

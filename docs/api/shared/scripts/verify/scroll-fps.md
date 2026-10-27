@@ -1,9 +1,9 @@
-# `shared/scripts/verify/scroll-fps.mjs`
+# `shared\scripts\verify\scroll-fps.mjs`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/verify/scroll-fps.mjs`                                |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\verify\scroll-fps.mjs`              |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

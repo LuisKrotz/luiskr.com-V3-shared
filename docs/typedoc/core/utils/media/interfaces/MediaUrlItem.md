@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / MediaUrlItem
 
-Defined in: core/utils/media.ts:20
+Defined in: core/utils/media.ts:24
 
 A media entry's URL-relevant fields as stored in the DB: `src` is the
 extensionless stem the CDN grammar appends suffixes to, and `isVideo`
@@ -18,9 +18,9 @@ selects between the image and video suffix sets.
 optional src?: string;
 ```
 
-Defined in: core/utils/media.ts:21
+Defined in: core/utils/media.ts:25
 
-***
+---
 
 ### isVideo?
 
@@ -28,4 +28,4 @@ Defined in: core/utils/media.ts:21
 optional isVideo?: boolean;
 ```
 
-Defined in: core/utils/media.ts:22
+Defined in: core/utils/media.ts:26

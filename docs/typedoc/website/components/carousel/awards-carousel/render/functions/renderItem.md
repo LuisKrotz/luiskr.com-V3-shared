@@ -8,7 +8,7 @@
 function renderItem(host, item): Element | null
 ```
 
-Defined in: website/components/carousel/awards-carousel/render.tsx:30
+Defined in: website/components/carousel/awards-carousel/render.tsx:32
 
 JSX for one slide — two shapes by variant: `awards` renders an outbound
 link (target=_blank + rel=noopener — external sites get no opener

@@ -8,7 +8,7 @@
 function initMediaManifest(): Promise<void>
 ```
 
-Defined in: core/utils/media/manifest.ts:26
+Defined in: core/utils/media/manifest.ts:45
 
 Fetches the bucket key manifest once; resolves immediately on repeat
 calls. Fire-and-forget at boot — renders that happen before it lands

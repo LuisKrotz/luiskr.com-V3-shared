@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/types](../README.md) / BundleTier
 
-Defined in: cms/deploy-info/types.ts:96
+Defined in: cms/deploy-info/types.ts:129
 
 One ES-target tier row — the js/css/misc buckets emitted under
 dist/v/<tier>/ plus that tier's ten heaviest chunks.
@@ -17,7 +17,7 @@ dist/v/<tier>/ plus that tier's ten heaviest chunks.
 optional name?: string;
 ```
 
-Defined in: cms/deploy-info/types.ts:97
+Defined in: cms/deploy-info/types.ts:130
 
 ---
 
@@ -27,7 +27,7 @@ Defined in: cms/deploy-info/types.ts:97
 optional js?: BundleBucket;
 ```
 
-Defined in: cms/deploy-info/types.ts:98
+Defined in: cms/deploy-info/types.ts:131
 
 ---
 
@@ -37,7 +37,7 @@ Defined in: cms/deploy-info/types.ts:98
 optional css?: BundleBucket;
 ```
 
-Defined in: cms/deploy-info/types.ts:99
+Defined in: cms/deploy-info/types.ts:132
 
 ---
 
@@ -47,7 +47,7 @@ Defined in: cms/deploy-info/types.ts:99
 optional misc?: BundleBucket;
 ```
 
-Defined in: cms/deploy-info/types.ts:100
+Defined in: cms/deploy-info/types.ts:133
 
 ---
 
@@ -57,7 +57,7 @@ Defined in: cms/deploy-info/types.ts:100
 optional largest?: object[];
 ```
 
-Defined in: cms/deploy-info/types.ts:101
+Defined in: cms/deploy-info/types.ts:134
 
 #### file?
 

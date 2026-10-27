@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/registry-body.ts`
+# `experiments\star-field\engine\registry-body.ts`
 
 Lazy registry-body spawner — the 139,563-record deep
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/registry-body.ts`    |
+| **Source**     | `src/experiments\star-field\engine\registry-body.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

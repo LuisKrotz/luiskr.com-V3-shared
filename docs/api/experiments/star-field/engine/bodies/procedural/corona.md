@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/procedural/corona.ts`
+# `experiments\star-field\engine\bodies\procedural\corona.ts`
 
 Seeded star-corona sprite — the "alive" layer that turns
 
 |                |                                                                 |
 | -------------- | --------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/procedural/corona.ts` |
+| **Source**     | `src/experiments\star-field\engine\bodies\procedural\corona.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.         |
 
 ## Members

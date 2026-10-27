@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/render](../README.md) / renderProject
 
 ```ts
-function renderProject(c): Element;
+function renderProject(c): Element
 ```
 
-Defined in: website/views/project/render.tsx:28
+Defined in: website/views/project/render.tsx:55
 
 Renders project.
 

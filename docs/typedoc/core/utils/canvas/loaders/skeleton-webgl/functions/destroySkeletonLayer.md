@@ -8,7 +8,7 @@
 function destroySkeletonLayer(component): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:396
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:406
 
 Component-unmount teardown — destroys the layer immediately (no
 resolve-out: the host is going away, so a fade would never be seen) and

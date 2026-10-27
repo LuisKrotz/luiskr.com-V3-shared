@@ -1,9 +1,9 @@
-# `shared/scripts/install-hooks.mjs`
+# `shared\scripts\install-hooks.mjs`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/install-hooks.mjs`                                    |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\install-hooks.mjs`                  |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

@@ -5,10 +5,10 @@
 [luiskr.com](../../../../README.md) / [core/router/navigate](../README.md) / buildRouteJsonLd
 
 ```ts
-function buildRouteJsonLd(to, canonicalOverride?, description?): Record<string, unknown>[]
+function buildRouteJsonLd(to, canonicalOverride?, description?, image?): Record<string, unknown>[]
 ```
 
-Defined in: core/router/navigate.ts:137
+Defined in: core/router/navigate.ts:164
 
 Base JSON-LD entities for a resolved route — exported so views whose
 localized descriptions resolve post-navigation (home/about) can
@@ -36,6 +36,13 @@ Canonical URL; recomputed from `to` when absent.
 `string`
 
 Description override (post-fetch localized text).
+
+### image?
+
+`string`
+
+primaryImageOfPage override — the share-gallery rotation
+passes its random capture so the graph matches the card metas.
 
 ## Returns
 

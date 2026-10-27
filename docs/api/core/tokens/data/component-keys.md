@@ -1,10 +1,10 @@
-# `core/tokens/data/component-keys.ts`
+# `core\tokens\data\component-keys.ts`
 
 Dotted paths into translations/&lt;locale&gt;/components — grouped
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/data/component-keys.ts`                  |
+| **Source**     | `src/core\tokens\data\component-keys.ts`                  |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -38,6 +38,12 @@ the token contract immutable at runtime.
 Placeholder inside `source-code.rights` translations — the renderers swap
 it for the live `new Date().getFullYear()` so the copyright line never
 goes stale.
+
+### `A11Y_INDEX_TOKEN`
+
+Placeholder inside the `a11y.*` heading templates — renderers swap it for
+the 1-based ordinal so translators may position the number freely
+('Section {index}' vs '{index}. Bölüm').
 
 ### `SECTION_COMPONENT_KEYS`
 

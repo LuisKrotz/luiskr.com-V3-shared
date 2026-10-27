@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/spiral/galaxy.ts`
+# `experiments\star-field\engine\spiral\galaxy.ts`
 
 Spiral-galaxy assembly — `makeSpiralGalaxy` composes a
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/spiral/galaxy.ts`    |
+| **Source**     | `src/experiments\star-field\engine\spiral\galaxy.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

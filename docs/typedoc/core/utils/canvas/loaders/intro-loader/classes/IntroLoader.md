@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/loaders/intro-loader](../README.md) / IntroLoader
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:47
+Defined in: core/utils/canvas/loaders/intro-loader.ts:72
 
 Experiments-style intro loader — spinner ring + percent + stage readout
 
@@ -19,7 +19,7 @@ Experiments-style intro loader — spinner ring + percent + stage readout
 new IntroLoader(rootContainer?, onComplete?): IntroLoader;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:59
+Defined in: core/utils/canvas/loaders/intro-loader.ts:84
 
 #### Parameters
 
@@ -43,7 +43,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:59
 rootContainer: HTMLElement
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:48
+Defined in: core/utils/canvas/loaders/intro-loader.ts:73
 
 ---
 
@@ -53,7 +53,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:48
 onComplete: (() => void) | null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:49
+Defined in: core/utils/canvas/loaders/intro-loader.ts:74
 
 ---
 
@@ -63,7 +63,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:49
 container: HTMLElement | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:50
+Defined in: core/utils/canvas/loaders/intro-loader.ts:75
 
 ---
 
@@ -73,7 +73,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:50
 percentEl: HTMLElement | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:51
+Defined in: core/utils/canvas/loaders/intro-loader.ts:76
 
 ---
 
@@ -83,7 +83,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:51
 msgEl: HTMLElement | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:52
+Defined in: core/utils/canvas/loaders/intro-loader.ts:77
 
 ---
 
@@ -93,7 +93,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:52
 barEl: HTMLElement | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:53
+Defined in: core/utils/canvas/loaders/intro-loader.ts:78
 
 ---
 
@@ -103,7 +103,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:53
 progress: number = 0
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:54
+Defined in: core/utils/canvas/loaders/intro-loader.ts:79
 
 ---
 
@@ -113,7 +113,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:54
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:55
+Defined in: core/utils/canvas/loaders/intro-loader.ts:80
 
 ---
 
@@ -123,7 +123,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:55
 startTime: number
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:56
+Defined in: core/utils/canvas/loaders/intro-loader.ts:81
 
 ---
 
@@ -133,7 +133,7 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:56
 copy: LoaderCopy
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:57
+Defined in: core/utils/canvas/loaders/intro-loader.ts:82
 
 ## Methods
 
@@ -143,9 +143,26 @@ Defined in: core/utils/canvas/loaders/intro-loader.ts:57
 init(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:71
+Defined in: core/utils/canvas/loaders/intro-loader.ts:104
 
-Builds the overlay DOM + starts the progress sequence.
+Builds or adopts the overlay DOM + starts the progress sequence.
+
+#### Returns
+
+`void`
+
+---
+
+### buildOverlay()
+
+```ts
+buildOverlay(): void;
+```
+
+Defined in: core/utils/canvas/loaders/intro-loader.ts:150
+
+Builds the overlay DOM from scratch — used when the document did not
+ship the static loader markup (dev server, non-prerendered shells).
 
 #### Returns
 
@@ -159,7 +176,7 @@ Builds the overlay DOM + starts the progress sequence.
 runAnimation(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:164
+Defined in: core/utils/canvas/loaders/intro-loader.ts:228
 
 Steps percent + the localized stage line across the boot budget.
 
@@ -175,9 +192,9 @@ Steps percent + the localized stage line across the boot budget.
 finish(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:203
+Defined in: core/utils/canvas/loaders/intro-loader.ts:267
 
-Completes the loader: fades the overlay and calls onComplete.
+Completes the loader: fades the overlay, retires it, calls onComplete.
 
 #### Returns
 
@@ -191,9 +208,10 @@ Completes the loader: fades the overlay and calls onComplete.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:220
+Defined in: core/utils/canvas/loaders/intro-loader.ts:283
 
-Releases the rAF handle and removes the overlay so it can be GC'd.
+Releases the rAF handle and retires the overlay (kept connected so a
+painted LQIP's LCP candidacy survives teardown — see retireVeil).
 
 #### Returns
 

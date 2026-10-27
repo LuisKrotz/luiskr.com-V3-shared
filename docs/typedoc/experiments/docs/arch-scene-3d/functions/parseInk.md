@@ -8,7 +8,7 @@
 function parseInk(css): [number, number, number]
 ```
 
-Defined in: experiments/docs/arch-scene-3d.ts:81
+Defined in: experiments/docs/arch-scene-3d.ts:106
 
 Parses a CSS color string into 0-1 rgb channels — the engine takes
 raw f32 triplets where the three path passed a `THREE.Color`.

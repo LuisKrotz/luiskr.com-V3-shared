@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/engine/types](../README.md) / SFNode
 
-Defined in: experiments/star-field/engine/types.ts:646
+Defined in: experiments/star-field/engine/types.ts:651
 
 Per-body runtime node — pivot (orbit rotation), mesh, and its def.
 
@@ -16,7 +16,7 @@ Per-body runtime node — pivot (orbit rotation), mesh, and its def.
 def: SFBodyDef
 ```
 
-Defined in: experiments/star-field/engine/types.ts:647
+Defined in: experiments/star-field/engine/types.ts:652
 
 ---
 
@@ -26,7 +26,7 @@ Defined in: experiments/star-field/engine/types.ts:647
 pivot: Object3D
 ```
 
-Defined in: experiments/star-field/engine/types.ts:649
+Defined in: experiments/star-field/engine/types.ts:654
 
 Object3D that orbits — rotates around the parent's center.
 
@@ -38,7 +38,7 @@ Object3D that orbits — rotates around the parent's center.
 mesh: Object3D
 ```
 
-Defined in: experiments/star-field/engine/types.ts:651
+Defined in: experiments/star-field/engine/types.ts:656
 
 The pickable mesh/sprite — carries `userData.bodyId`.
 
@@ -50,7 +50,7 @@ The pickable mesh/sprite — carries `userData.bodyId`.
 spinner: Object3D
 ```
 
-Defined in: experiments/star-field/engine/types.ts:653
+Defined in: experiments/star-field/engine/types.ts:658
 
 Spin target (mesh or its inner group) for self-rotation.
 
@@ -62,7 +62,7 @@ Spin target (mesh or its inner group) for self-rotation.
 optional center?: Object3D<Object3DEventMap>;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:664
+Defined in: experiments/star-field/engine/types.ts:669
 
 Body-system center — the group that carries the orbit radius
 (`position.x = def.orbit`) and hosts everything that must share the
@@ -81,7 +81,7 @@ frame.ts rewrites its `position.x` with the conic radius.
 optional lock?: Object3D<Object3DEventMap>;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:674
+Defined in: experiments/star-field/engine/types.ts:679
 
 Inertial axis lock — a group between the orbit pivot and the mesh
 carrying `rotation.z = tilt` and counter-rotated on Y each frame.
@@ -99,7 +99,7 @@ orbiting tilted bodies.
 optional rotor?: Object3D<Object3DEventMap>;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:680
+Defined in: experiments/star-field/engine/types.ts:685
 
 Differential-rotation subgroup — a volumetric galaxy's inner-disc
 Points cloud; tickFrame spins it at ROTOR_DIFF× the whole-disc rate
@@ -113,7 +113,7 @@ so the core laps the rim the way real rotation curves do.
 optional clouds?: Object3D<Object3DEventMap>;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:688
+Defined in: experiments/star-field/engine/types.ts:693
 
 Cloud-deck shell — Earth's cloud sphere rides inside `mesh` so it
 inherits surface spin; with `def.weather` the deck is the
@@ -129,7 +129,7 @@ differential drift for static-texture decks.
 optional flares?: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:694
+Defined in: experiments/star-field/engine/types.ts:699
 
 Solar limb flares — prominence sprites from `makeSolarFlares`;
 updateFx scales/opacities them by `solarWind × sin⁴(t·rate+phase)`
@@ -167,7 +167,7 @@ base: number
 optional meteorPool?: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:705
+Defined in: experiments/star-field/engine/types.ts:710
 
 Meteor flash pool — `SF_METEOR.POOL` sprites parented to the mesh,
 recycled across strikes so impact flashes never allocate per frame;
@@ -201,7 +201,7 @@ active: boolean
 optional meteorNext?: number;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:712
+Defined in: experiments/star-field/engine/types.ts:717
 
 Next scheduled meteor strike time (scene seconds).
 
@@ -213,7 +213,7 @@ Next scheduled meteor strike time (scene seconds).
 satPivots: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:714
+Defined in: experiments/star-field/engine/types.ts:719
 
 Satellite pivots (decorative companions) — rotate per frame.
 
@@ -274,7 +274,7 @@ the orbit sweep so debris reads as tumbling rubble, not rails.
 optional detail?: Object3D<Object3DEventMap>[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:734
+Defined in: experiments/star-field/engine/types.ts:739
 
 LOD-toggleable secondary geometry — atmosphere shells, ring discs,
 satellite pivots; frame.ts hides these
@@ -288,7 +288,7 @@ beyond the detail distance so far bodies draw as one primitive.
 optional volPoints?: Object3D<Object3DEventMap> | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:741
+Defined in: experiments/star-field/engine/types.ts:746
 
 Volumetric-galaxy Points cache — `updateGalaxyClouds` resolves the
 `userData.volumetric` child once and parks the handle here so the
@@ -303,7 +303,7 @@ allocates its predicate closure every frame otherwise).
 optional corona?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:747
+Defined in: experiments/star-field/engine/types.ts:752
 
 Star corona sprite — the seeded streamer texture from
 `procedural.coronaFor`; updateFx rotates `material.rotation` and
@@ -347,7 +347,7 @@ phase: number
 optional farGlow?: Object3D<Object3DEventMap>;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:755
+Defined in: experiments/star-field/engine/types.ts:760
 
 Interstellar-collapse glyph — a flat point-glow sprite riding the
 pivot beside the real mesh, plus its own pick proxy. updateLod
@@ -363,7 +363,7 @@ star like every other sun in the neighborhood. Solar stars only.
 optional farPick?: Object3D<Object3DEventMap>;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:757
+Defined in: experiments/star-field/engine/types.ts:762
 
 Invisible pick bubble kept live while `farGlow` shows.
 
@@ -375,7 +375,7 @@ Invisible pick bubble kept live while `farGlow` shows.
 optional farGlyph?: Object3D<Object3DEventMap>;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:766
+Defined in: experiments/star-field/engine/types.ts:771
 
 Galactic-star far glyph — the flat point-glow sprite a point star
 wears at chart distances. updateLod hides it while the node's
@@ -392,7 +392,7 @@ close.
 optional nebula?: SFNebulaFx;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:772
+Defined in: experiments/star-field/engine/types.ts:777
 
 Living-nebula animation record — parked on the sprite's userData by
 `makeNebulaSprite` (`SF_USER_NEBULA`) and lifted here so updateFx
@@ -406,7 +406,7 @@ can churn the depth layers each frame.
 optional comet?: object;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:782
+Defined in: experiments/star-field/engine/types.ts:787
 
 Comet tail/coma animation record — updateFx reads the live conic
 radius off `center.position.x` (frame.ts writes it for `ecc`
@@ -494,7 +494,7 @@ y: number
 optional plumes?: object[];
 ```
 
-Defined in: experiments/star-field/engine/types.ts:803
+Defined in: experiments/star-field/engine/types.ts:808
 
 Cryovolcanic plume system — per-vent jet + cycling puff sprite
 records built by `makePlumes`; updateFx rises each puff along its

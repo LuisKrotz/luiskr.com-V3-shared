@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..', '..', '..')
@@ -19,7 +20,7 @@ const TRANSLATIONS_MAP = {
   en: {
     shareGallery: 'Share captures',
     shareCapture: 'Earth render',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'earth',
       'earth images',
       'planet earth',
@@ -42,7 +43,7 @@ const TRANSLATIONS_MAP = {
   br: {
     shareGallery: 'Capturas para compartilhar',
     shareCapture: 'Render da Terra',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'terra',
       'imagens da terra',
       'planeta terra',
@@ -66,7 +67,7 @@ const TRANSLATIONS_MAP = {
   es: {
     shareGallery: 'Capturas para compartir',
     shareCapture: 'Render de la Tierra',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'tierra',
       'imágenes de la tierra',
       'planeta tierra',
@@ -90,7 +91,7 @@ const TRANSLATIONS_MAP = {
   de: {
     shareGallery: 'Aufnahmen zum Teilen',
     shareCapture: 'Erde-Rendering',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'erde',
       'erde-bilder',
       'planet erde',
@@ -114,7 +115,7 @@ const TRANSLATIONS_MAP = {
   gn: {
     shareGallery: "Yvy ra'angakuéra",
     shareCapture: "Yvy ra'anga",
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'yvy',
       "yvy ra'angakuéra",
       'planeta yvy',
@@ -137,7 +138,7 @@ const TRANSLATIONS_MAP = {
   it: {
     shareGallery: 'Catture da condividere',
     shareCapture: 'Rendering della Terra',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'terra',
       'immagini della terra',
       'pianeta terra',
@@ -161,7 +162,7 @@ const TRANSLATIONS_MAP = {
   ru: {
     shareGallery: 'Снимки для публикации',
     shareCapture: 'Рендер Земли',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'земля',
       'изображения земли',
       'планета земля',
@@ -186,7 +187,7 @@ const TRANSLATIONS_MAP = {
   fr: {
     shareGallery: 'Captures à partager',
     shareCapture: 'Rendu de la Terre',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'terre',
       'images de la terre',
       'planète terre',
@@ -210,7 +211,7 @@ const TRANSLATIONS_MAP = {
   nl: {
     shareGallery: 'Captures om te delen',
     shareCapture: 'Aarde-rendering',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'aarde',
       'aardbeelden',
       'planeet aarde',
@@ -234,7 +235,7 @@ const TRANSLATIONS_MAP = {
   ca: {
     shareGallery: 'Captures per compartir',
     shareCapture: 'Render de la Terra',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'terra',
       'imatges de la terra',
       'planeta terra',
@@ -258,7 +259,7 @@ const TRANSLATIONS_MAP = {
   gl: {
     shareGallery: 'Capturas para compartir',
     shareCapture: 'Render da Terra',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'terra',
       'imaxes da terra',
       'planeta terra',
@@ -282,7 +283,7 @@ const TRANSLATIONS_MAP = {
   ga: {
     shareGallery: 'Gabhálacha le roinnt',
     shareCapture: 'Rindreáil an Domhain',
-    searchThemes: [
+    [SEARCH_THEMES_KEY]: [
       'domhan',
       'íomhánna an domhain',
       'an domhan',
@@ -322,7 +323,7 @@ for (const [locale, data] of Object.entries(TRANSLATIONS_MAP)) {
 
     page.shareGallery = data.shareGallery
     page.shareCapture = data.shareCapture
-    page.searchThemes = data.searchThemes
+    page[SEARCH_THEMES_KEY] = data[SEARCH_THEMES_KEY]
   }
 }
 

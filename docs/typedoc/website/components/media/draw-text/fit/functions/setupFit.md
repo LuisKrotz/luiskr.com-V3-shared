@@ -8,7 +8,7 @@
 function setupFit(host): void
 ```
 
-Defined in: website/components/media/draw-text/fit.ts:215
+Defined in: website/components/media/draw-text/fit.ts:226
 
 Installs the fit pipeline for a fitted host: immediate measure, a
 ResizeObserver on the parent (the sizing constraint) for breakpoint /

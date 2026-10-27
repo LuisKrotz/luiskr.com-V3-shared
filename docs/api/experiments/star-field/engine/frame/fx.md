@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/frame/fx.ts`
+# `experiments\star-field\engine\frame\fx.ts`
 
 Ambient-life per-frame effects — `pulse` bodies (variable
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/frame/fx.ts`         |
+| **Source**     | `src/experiments\star-field\engine\frame\fx.ts`         |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

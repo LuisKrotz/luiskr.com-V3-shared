@@ -1,10 +1,10 @@
-# `core/store.ts`
+# `core\store.ts`
 
 Framework-free reactive state container (tiny pub/sub).
 
-| | |
-|---|---|
-| **Source** | `src/core/store.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\store.ts`                                       |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -41,12 +41,14 @@ Runs a named mutation then notifies subscribers — unless the mutation
 explicitly returns false (its way of saying "no state change"). Unknown
 names warn through devlog instead of throwing so a typo in one component
 can't crash an unrelated render pass.
+
 - `@param` mutationName Key into MUTATIONS (token, not a literal).
 - `@param` payload Optional value forwarded to the mutator.
 
 ### `subscribe`
 
 Subscribes to state changes.
+
 - `@param` listener Callback receiving the state bag on every notify().
 - `@returns` unsubscribe function
 

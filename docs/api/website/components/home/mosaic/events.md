@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/events.ts`
+# `website\components\home\mosaic\events.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/home/mosaic/events.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\mosaic\events.ts`          |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

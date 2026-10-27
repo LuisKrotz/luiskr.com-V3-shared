@@ -1,44 +1,48 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/manifest](../README.md) / DocsNode
 
-Defined in: experiments/docs/manifest.ts:18
+Defined in: experiments/docs/manifest.ts:21
 
-One manifest node — dir carries children, file carries format/size/id.
+One manifest node — dir carries children, file carries id + mtime.
+
+## Extended by
+
+- [`DocsGroup`](DocsGroup.md)
 
 ## Properties
 
 ### type
 
 ```ts
-type: "dir" | "file";
+type: 'dir' | 'file'
 ```
 
-Defined in: experiments/docs/manifest.ts:19
+Defined in: experiments/docs/manifest.ts:22
 
-***
+---
 
 ### name
 
 ```ts
-name: string;
+name: string
 ```
 
-Defined in: experiments/docs/manifest.ts:20
+Defined in: experiments/docs/manifest.ts:23
 
-***
+---
 
 ### path
 
 ```ts
-path: string;
+path: string
 ```
 
-Defined in: experiments/docs/manifest.ts:21
+Defined in: experiments/docs/manifest.ts:24
 
-***
+---
 
 ### children?
 
@@ -46,9 +50,9 @@ Defined in: experiments/docs/manifest.ts:21
 optional children?: DocsNode[];
 ```
 
-Defined in: experiments/docs/manifest.ts:22
+Defined in: experiments/docs/manifest.ts:25
 
-***
+---
 
 ### id?
 
@@ -56,29 +60,9 @@ Defined in: experiments/docs/manifest.ts:22
 optional id?: string;
 ```
 
-Defined in: experiments/docs/manifest.ts:23
+Defined in: experiments/docs/manifest.ts:26
 
-***
-
-### format?
-
-```ts
-optional format?: string;
-```
-
-Defined in: experiments/docs/manifest.ts:24
-
-***
-
-### size?
-
-```ts
-optional size?: number;
-```
-
-Defined in: experiments/docs/manifest.ts:25
-
-***
+---
 
 ### mtime?
 
@@ -86,14 +70,32 @@ Defined in: experiments/docs/manifest.ts:25
 optional mtime?: string;
 ```
 
-Defined in: experiments/docs/manifest.ts:26
+Defined in: experiments/docs/manifest.ts:27
 
-***
+---
 
-### embedded?
+### aggregate?
 
 ```ts
-optional embedded?: boolean;
+optional aggregate?: boolean;
 ```
 
-Defined in: experiments/docs/manifest.ts:27
+Defined in: experiments/docs/manifest.ts:30
+
+Scene-only flag — `+N` aggregate leaves the leaf cap synthesizes
+for surplus file children; the map colors them with the dir ink.
+
+---
+
+### group?
+
+```ts
+optional group?: boolean;
+```
+
+Defined in: experiments/docs/manifest.ts:35
+
+View-synthesized section node — a disclosure wrapper the portal
+tree/grid renders above the real roots (Source Code, Documentation,
+Architecture Docs, Reports). Toggles only: no manifest path or
+route exists for a section, so group rows never navigate.

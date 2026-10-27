@@ -143,13 +143,23 @@ Defined in: core/store/state.ts:126
 
 ---
 
+### highContrast
+
+```ts
+highContrast: boolean
+```
+
+Defined in: core/store/state.ts:127
+
+---
+
 ### theme
 
 ```ts
 theme: string
 ```
 
-Defined in: core/store/state.ts:127
+Defined in: core/store/state.ts:128
 
 ---
 
@@ -159,7 +169,7 @@ Defined in: core/store/state.ts:127
 showStatsForNerds: boolean
 ```
 
-Defined in: core/store/state.ts:128
+Defined in: core/store/state.ts:129
 
 ---
 
@@ -169,7 +179,7 @@ Defined in: core/store/state.ts:128
 showGrid: boolean
 ```
 
-Defined in: core/store/state.ts:129
+Defined in: core/store/state.ts:130
 
 ---
 
@@ -179,7 +189,7 @@ Defined in: core/store/state.ts:129
 videoAutoplay: boolean
 ```
 
-Defined in: core/store/state.ts:130
+Defined in: core/store/state.ts:131
 
 ---
 
@@ -189,7 +199,7 @@ Defined in: core/store/state.ts:130
 effectiveTheme: string
 ```
 
-Defined in: core/store/state.ts:131
+Defined in: core/store/state.ts:132
 
 ---
 
@@ -199,7 +209,7 @@ Defined in: core/store/state.ts:131
 preferencesOpen: boolean
 ```
 
-Defined in: core/store/state.ts:132
+Defined in: core/store/state.ts:133
 
 ---
 
@@ -209,7 +219,17 @@ Defined in: core/store/state.ts:132
 langDialogOpen: boolean
 ```
 
-Defined in: core/store/state.ts:133
+Defined in: core/store/state.ts:134
+
+---
+
+### navMenuOpen
+
+```ts
+navMenuOpen: boolean
+```
+
+Defined in: core/store/state.ts:135
 
 ---
 
@@ -224,7 +244,7 @@ modalOrigin:
   | null;
 ```
 
-Defined in: core/store/state.ts:134
+Defined in: core/store/state.ts:136
 
 ---
 
@@ -234,4 +254,4 @@ Defined in: core/store/state.ts:134
 portfoliolist: unknown[];
 ```
 
-Defined in: core/store/state.ts:135
+Defined in: core/store/state.ts:137

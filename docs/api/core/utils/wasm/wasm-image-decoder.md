@@ -1,10 +1,10 @@
-# `core/utils/wasm/wasm-image-decoder.ts`
+# `core\utils\wasm\wasm-image-decoder.ts`
 
 Image decode pipeline: fetch → worker-side createImageBitmap
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/wasm/wasm-image-decoder.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\wasm\wasm-image-decoder.ts`               |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -51,6 +51,7 @@ resizes in hardware at decode time, not in software afterward.
 `fetch(cache:'force-cache')` reuses the HTTP cache so a prior <img>
 warm-up doesn't double-download. Every failure arm resolves null —
 callers fall back to plain <img> decode.
+
 - `@param` url CDN image URL.
 - `@param` targetW GPU resize-hint width.
 - `@param` targetH GPU resize-hint height.
@@ -61,6 +62,7 @@ callers fall back to plain <img> decode.
 Batch decode: splits the pending list across the pool's workers and
 decodes in parallel, returning a url→ImageBitmap Map. Cached URLs are
 served from bitmapCache without a worker hop.
+
 - `@param` items Decode requests; entries without a URL are skipped.
 - `@returns` url→bitmap map — missing URLs simply have no entry.
 

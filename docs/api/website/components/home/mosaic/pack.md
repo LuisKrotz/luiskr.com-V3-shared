@@ -1,10 +1,10 @@
-# `website/components/home/mosaic/pack.ts`
+# `website\components\home\mosaic\pack.ts`
 
 Masonry packing engine for &lt;home-mosaic&gt;, extracted from
 
-| | |
-|---|---|
-| **Source** | `src/website/components/home/mosaic/pack.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\mosaic\pack.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -82,6 +82,7 @@ Placeholder height.
 Resolves column count + pixel column width for a viewport — null when
 the content width collapses to ≤0 (ultra-narrow/zero-size viewports get
 no layout rather than NaN styles).
+
 - `@param` vw Viewport width in px.
 - `@returns` {N, colW} or null.
 
@@ -90,6 +91,7 @@ no layout rather than NaN styles).
 Lowest-column placement: a span-N tile sits on the tallest column in
 its footprint; pick the column range whose peak is lowest so the wall
 stays roughly level instead of column-by-column fill.
+
 - `@param` colH Per-column occupied heights.
 - `@param` span Columns the tile covers.
 - `@returns` The best column index + its top y.
@@ -100,6 +102,7 @@ Style objects for one placed tile — the card shell gets the absolute
 box (top/left/width, height = image+bottom), the media region gets the
 image height, and the bottom region reserves the expanded-details slot
 (0px when closed so the DOM stays mounted but invisible).
+
 - `@param` top Placement y.
 - `@param` left Placement x.
 - `@param` itemW Tile width incl. covered gap.
@@ -114,6 +117,7 @@ Full packing pass: returns per-card style objects + packed height.
 the card GROWS the wall rather than overlaying so expanding a tile
 reflows the cards below it. The container height subtracts the trailing
 gap so it hugs the last tile.
+
 - `@param` vw Viewport width.
 - `@param` items The tile list.
 - `@param` bottomHFor Expanded-bottom height lookup per index.
@@ -124,5 +128,6 @@ gap so it hugs the last tile.
 Skeleton variant: packs placeholder tiles (no items needed — featured
 count + aspect cycle come from SKELETON/LAYOUT tokens) so the loading
 wall matches the real geometry.
+
 - `@param` vw Viewport width.
 - `@returns` {boxes, height} — empty boxes on degenerate grids.

@@ -1,8 +1,8 @@
-# `website/components/home/about/glitch/fx.ts`
+# `website\components\home\about\glitch\fx.ts`
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/about/glitch/fx.ts`        |
+| **Source**     | `src/website\components\home\about\glitch\fx.ts`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

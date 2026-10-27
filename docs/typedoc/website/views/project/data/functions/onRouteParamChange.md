@@ -8,7 +8,7 @@
 function onRouteParamChange(view, to): void
 ```
 
-Defined in: website/views/project/data.ts:170
+Defined in: website/views/project/data.ts:156
 
 Router hook — project→project navigations reload data without remounting.
 

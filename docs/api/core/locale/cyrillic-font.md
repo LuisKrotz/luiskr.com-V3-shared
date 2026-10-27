@@ -1,10 +1,10 @@
-# `core/locale/cyrillic-font.ts`
+# `core\locale\cyrillic-font.ts`
 
 Cyrillic font plumbing — Russian (`ru`) renders in Fira
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/locale/cyrillic-font.ts`                        |
+| **Source**     | `src/core\locale\cyrillic-font.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

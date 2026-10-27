@@ -1,9 +1,9 @@
-# `cms/footer/lists.ts`
+# `cms\footer\lists.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/footer/lists.ts` |
-| **UX surface** | Footer + legal links editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\footer\lists.ts`                       |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
@@ -22,7 +22,7 @@ Moves an item up/down within its list.
 ### `renderChannelList`
 
 One editable channel list: label input + link/URL input + move/delete
-controls per row. `prefix` namespaces every class (line1-*, legal-*,
+controls per row. `prefix` namespaces every class (line1-_, legal-_,
 social-*) so bindListEvents can bind by convention; `labelField`
 picks which property holds the row label ('description' for contact
 channels, 'page' for legal links, 'network' for socials) — matching

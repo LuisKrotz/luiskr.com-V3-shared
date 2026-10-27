@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/spiral/fill.ts`
+# `experiments\star-field\engine\spiral\fill.ts`
 
 Deterministic point-cloud fills for galaxies — the math
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/spiral/fill.ts`      |
+| **Source**     | `src/experiments\star-field\engine\spiral\fill.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

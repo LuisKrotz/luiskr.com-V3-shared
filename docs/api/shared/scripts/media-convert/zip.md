@@ -1,9 +1,9 @@
-# `shared/scripts/media-convert/zip.js`
+# `shared\scripts\media-convert\zip.js`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/media-convert/zip.js`                                 |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\media-convert\zip.js`               |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

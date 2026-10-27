@@ -8,6 +8,6 @@
 const DEPLOY_INFO_BASE: '/deploy-info' = '/deploy-info'
 ```
 
-Defined in: cms/deploy-info/data.ts:22
+Defined in: cms/deploy-info/data.ts:23
 
 Scalar token `/deploy-info` — the sole declaration site for this literal.

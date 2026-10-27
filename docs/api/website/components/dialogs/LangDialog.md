@@ -1,10 +1,10 @@
-# `website/components/dialogs/LangDialog.tsx`
+# `website\components\dialogs\LangDialog.tsx`
 
 &lt;lang-dialog&gt; — locale picker: a grid of language options
 
-| | |
-|---|---|
-| **Source** | `src/website/components/dialogs/LangDialog.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\dialogs\LangDialog.tsx`         |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

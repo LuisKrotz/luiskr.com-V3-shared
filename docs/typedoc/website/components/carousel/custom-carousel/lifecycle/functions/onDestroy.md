@@ -8,7 +8,7 @@
 function onDestroy(host): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/lifecycle.ts:62
+Defined in: website/components/carousel/custom-carousel/lifecycle.ts:71
 
 Teardown: autoplay clock, WebGL arrows, observers, timers — every async handle released so nothing fires after disconnect.
 

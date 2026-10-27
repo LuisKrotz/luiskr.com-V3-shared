@@ -1,17 +1,18 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/motion/prefetch](../README.md) / PREFETCH\_CONFIG
 
 ```ts
 const PREFETCH_CONFIG: Readonly<{
-  IDLE_TIMEOUT: 2000;
-  FALLBACK_DELAY: 120;
-  ROOT_MARGIN: "200px 0px";
-  THRESHOLD: 0.1;
-  PORTFOLIO_REGEX: RegExp;
-}>;
+  IDLE_TIMEOUT: 2000
+  FALLBACK_DELAY: 120
+  ROOT_MARGIN: '200px 0px'
+  THRESHOLD: 0.1
+  PORTFOLIO_REGEX: RegExp
+  INTENT_FALLBACK: 20000
+}>
 ```
 
 Defined in: core/tokens/motion/prefetch.ts:11

@@ -1,9 +1,9 @@
-# `website/components/carousel/awards-carousel/types.ts`
+# `website\components\carousel\awards-carousel\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/carousel/awards-carousel/types.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                            |
+| -------------- | ---------------------------------------------------------- |
+| **Source**     | `src/website\components\carousel\awards-carousel\types.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.    |
 
 ## Members
 

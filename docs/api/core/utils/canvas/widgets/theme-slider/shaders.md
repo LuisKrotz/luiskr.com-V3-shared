@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/theme-slider/shaders.ts`
+# `core\utils\canvas\widgets\theme-slider\shaders.ts`
 
 GLSL sources for ThemeSliderWebGL's day/night scene,
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/theme-slider/shaders.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\theme-slider\shaders.ts`   |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

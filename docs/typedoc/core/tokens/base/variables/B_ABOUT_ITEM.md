@@ -8,6 +8,6 @@
 const _B_ABOUT_ITEM: 'about-item'
 ```
 
-Defined in: core/tokens/base.ts:221
+Defined in: core/tokens/base.ts:226
 
 BEM block fragment "b about item" — composed by the token groups below into full class names.

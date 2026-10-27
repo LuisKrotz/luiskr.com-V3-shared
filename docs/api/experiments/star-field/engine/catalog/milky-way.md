@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/catalog/milky-way.ts`
+# `experiments\star-field\engine\catalog\milky-way.ts`
 
 Milky Way neighborhood — famous nearby systems at
 
 |                |                                                          |
 | -------------- | -------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog/milky-way.ts` |
+| **Source**     | `src/experiments\star-field\engine\catalog\milky-way.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/spiral.ts`
+# `core\tokens\starfield\params\spiral.ts`
 
 Procedural spiral-galaxy point-cloud parameters — the
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/spiral.ts`              |
+| **Source**     | `src/core\tokens\starfield\params\spiral.ts`              |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

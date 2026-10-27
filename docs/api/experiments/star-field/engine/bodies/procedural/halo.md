@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/procedural/halo.ts`
+# `experiments\star-field\engine\bodies\procedural\halo.ts`
 
 Additive star-glow annulus texture — the halo sprite is
 
 |                |                                                               |
 | -------------- | ------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/procedural/halo.ts` |
+| **Source**     | `src/experiments\star-field\engine\bodies\procedural\halo.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.       |
 
 ## Members

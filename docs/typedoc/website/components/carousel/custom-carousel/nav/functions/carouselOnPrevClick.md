@@ -8,7 +8,7 @@
 function carouselOnPrevClick(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:396
+Defined in: website/components/carousel/custom-carousel/nav.ts:405
 
 Prev-arrow click — replays the WebGL arrow's click animation
 (triggerClick), permanently stops autoplay (user intent overrides the

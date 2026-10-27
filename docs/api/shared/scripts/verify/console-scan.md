@@ -1,11 +1,11 @@
-# `shared/scripts/verify/console-scan.mjs`
+# `shared\scripts\verify\console-scan.mjs`
 
 Scans every .ts/.tsx/.js file under src/ for console usage. Policy:
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/verify/console-scan.mjs`                              |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\verify\console-scan.mjs`            |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

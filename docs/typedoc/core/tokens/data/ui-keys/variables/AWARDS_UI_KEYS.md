@@ -1,17 +1,17 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/data/ui-keys](../README.md) / AWARDS\_UI\_KEYS
 
 ```ts
 const AWARDS_UI_KEYS: Readonly<{
-  AWARDS_NEXT: "awards.nextAward";
-  AWARDS_LEGAL_NAV: "awards.legalNav";
-}>;
+  AWARDS_NEXT: 'awards.nextAward'
+  AWARDS_LEGAL_NAV: 'awards.legalNav'
+}>
 ```
 
-Defined in: core/tokens/data/ui-keys.ts:139
+Defined in: core/tokens/data/ui-keys.ts:147
 
 Frozen awards ui key map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the

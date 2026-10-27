@@ -8,7 +8,7 @@
 function fmtBytes(value): string
 ```
 
-Defined in: cms/deploy-info/render.tsx:244
+Defined in: cms/deploy-info/render.tsx:585
 
 Formats a byte count as a compact human size (B/KB/MB/GB, one
 decimal past the byte unit); non-numbers render an em-dash.

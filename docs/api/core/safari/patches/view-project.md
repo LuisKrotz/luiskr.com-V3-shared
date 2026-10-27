@@ -1,10 +1,10 @@
-# `core/safari/patches/view-project.ts`
+# `core\safari\patches\view-project.ts`
 
 ViewProject patch: manual modal positioning — iOS doesn't layer
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/safari/patches/view-project.ts`                 |
+| **Source**     | `src/core\safari\patches\view-project.ts`                 |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

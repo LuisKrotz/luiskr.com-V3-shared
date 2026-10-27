@@ -4410,7 +4410,7 @@ Convenience getter — pref translations shorthand used in render.
 get isOpen(): boolean;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:89
+Defined in: website/components/dialogs/PreferencesModal.tsx:90
 
 Whether the modal is shown.
 
@@ -4428,7 +4428,7 @@ Whether the modal is shown.
 get currentTheme(): string;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:95
+Defined in: website/components/dialogs/PreferencesModal.tsx:96
 
 The store's theme value (light/dark/system).
 
@@ -4446,9 +4446,27 @@ The store's theme value (light/dark/system).
 get reducedMotion(): boolean;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:101
+Defined in: website/components/dialogs/PreferencesModal.tsx:102
 
 Whether reduced motion is enabled.
+
+##### Returns
+
+`boolean`
+
+---
+
+### highContrast
+
+#### Get Signature
+
+```ts
+get highContrast(): boolean;
+```
+
+Defined in: website/components/dialogs/PreferencesModal.tsx:108
+
+Whether high contrast is enabled.
 
 ##### Returns
 
@@ -4464,7 +4482,7 @@ Whether reduced motion is enabled.
 get npuAnalytics(): NpuAnalytics & object;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:107
+Defined in: website/components/dialogs/PreferencesModal.tsx:114
 
 Live analytics from the NPU predictor for the dev-tools readout.
 
@@ -4482,7 +4500,7 @@ Live analytics from the NPU predictor for the dev-tools readout.
 get npuStatus(): unknown;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:116
+Defined in: website/components/dialogs/PreferencesModal.tsx:123
 
 Human-readable acceleration tier for the dev-tools readout. Ordered
 best→fallback: NPU (neural inference available) → GPU → WASM — the
@@ -5017,7 +5035,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:122
+Defined in: website/components/dialogs/PreferencesModal.tsx:129
 
 #### Returns
 
@@ -5035,7 +5053,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:122
 onDestroy(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:131
+Defined in: website/components/dialogs/PreferencesModal.tsx:138
 
 #### Returns
 
@@ -5053,7 +5071,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:131
 _syncOpenState(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:137
+Defined in: website/components/dialogs/PreferencesModal.tsx:144
 
 Reflects the open flag into DOM/classes and runs the genie enter/leave.
 
@@ -5069,7 +5087,7 @@ Reflects the open flag into DOM/classes and runs the genie enter/leave.
 _mountWebGLControls(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:143
+Defined in: website/components/dialogs/PreferencesModal.tsx:150
 
 Mounts the WebGL widgets onto the freshly rendered canvases.
 
@@ -5085,7 +5103,7 @@ Mounts the WebGL widgets onto the freshly rendered canvases.
 _destroyWebGLControls(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:149
+Defined in: website/components/dialogs/PreferencesModal.tsx:156
 
 Tears down the mounted GL widgets.
 
@@ -5101,7 +5119,7 @@ Tears down the mounted GL widgets.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:162
+Defined in: website/components/dialogs/PreferencesModal.tsx:169
 
 Store-driven sync. Two paths:
 open-state flipped → full re-render + mount widgets + genie-enter
@@ -5127,7 +5145,7 @@ widgets and re-derive switch/theme states without a re-render
 _updateThemeUI(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:210
+Defined in: website/components/dialogs/PreferencesModal.tsx:217
 
 Syncs the theme slider widget with the store's theme.
 
@@ -5143,7 +5161,7 @@ Syncs the theme slider widget with the store's theme.
 _updateSwitchesUI(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:216
+Defined in: website/components/dialogs/PreferencesModal.tsx:223
 
 Syncs each switch widget with its pref value.
 
@@ -5159,7 +5177,7 @@ Syncs each switch widget with its pref value.
 onUpdated(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:220
+Defined in: website/components/dialogs/PreferencesModal.tsx:227
 
 #### Returns
 
@@ -5177,7 +5195,7 @@ Defined in: website/components/dialogs/PreferencesModal.tsx:220
 _bindBackdropEvents(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:233
+Defined in: website/components/dialogs/PreferencesModal.tsx:240
 
 Wires Escape dismissal + the residual-input guard — both bound once on
 the persistent element; everything else is JSX onClick on rendered
@@ -5195,7 +5213,7 @@ controls.
 close(): void;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:251
+Defined in: website/components/dialogs/PreferencesModal.tsx:258
 
 Close flow: play the genie-leave shrink-back-to-trigger animation
 first, THEN commit the closed state — committing early would unmount
@@ -5216,7 +5234,7 @@ render():
   | null;
 ```
 
-Defined in: website/components/dialogs/PreferencesModal.tsx:271
+Defined in: website/components/dialogs/PreferencesModal.tsx:278
 
 JSX template (delegate — ./preferences/render.tsx).
 

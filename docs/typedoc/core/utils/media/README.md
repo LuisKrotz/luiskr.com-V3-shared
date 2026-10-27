@@ -17,4 +17,5 @@
 - [encodeMediaUrl](functions/encodeMediaUrl.md)
 - [webpSibling](functions/webpSibling.md)
 - [webmSibling](functions/webmSibling.md)
+- [coverLadderStep](functions/coverLadderStep.md)
 - [buildMediaUrls](functions/buildMediaUrls.md)

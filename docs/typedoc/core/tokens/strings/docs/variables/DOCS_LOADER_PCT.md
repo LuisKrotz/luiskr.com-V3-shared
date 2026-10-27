@@ -13,7 +13,7 @@ const DOCS_LOADER_PCT: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/strings/docs.ts:74
+Defined in: core/tokens/strings/docs.ts:126
 
 Staged boot-loader progress marks — the manifest is inlined at build
 time so real fetch percentages don't exist; discrete stage numbers

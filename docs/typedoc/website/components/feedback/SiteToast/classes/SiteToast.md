@@ -4788,18 +4788,20 @@ Render result from render().
 ### push()
 
 ```ts
-push(__namedParameters?): number | null;
+push(options?): number | null;
 ```
 
-Defined in: website/components/feedback/SiteToast.tsx:63
+Defined in: website/components/feedback/SiteToast.tsx:60
 
 Queues a toast item and starts its auto-dismiss clock.
 
 #### Parameters
 
-##### \_\_namedParameters?
+##### options?
 
 `Partial`\<`ToastItem`\> = `{}`
+
+Toast text, severity, optional title, and dismiss duration.
 
 #### Returns
 
@@ -4815,7 +4817,7 @@ the item id (null when text was empty)
 onDestroy(): void;
 ```
 
-Defined in: website/components/feedback/SiteToast.tsx:125
+Defined in: website/components/feedback/SiteToast.tsx:124
 
 Lifecycle: releases every pending dismiss timer.
 
@@ -4835,7 +4837,7 @@ Lifecycle: releases every pending dismiss timer.
 onUpdated(): void;
 ```
 
-Defined in: website/components/feedback/SiteToast.tsx:138
+Defined in: website/components/feedback/SiteToast.tsx:137
 
 Re-binds the toast slide-in description on the live items — the
 slide/fade entry is the animated surface. Runs post-render so the
@@ -4859,7 +4861,7 @@ render():
   | null;
 ```
 
-Defined in: website/components/feedback/SiteToast.tsx:146
+Defined in: website/components/feedback/SiteToast.tsx:145
 
 JSX template for the component's shadow DOM.
 

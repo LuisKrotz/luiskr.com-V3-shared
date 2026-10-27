@@ -8,7 +8,7 @@
 function renderWasm(host, now): void
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider/render.ts:81
+Defined in: core/utils/canvas/widgets/switch-slider/render.ts:82
 
 Per-frame wasm render: pushes spring/context state + one frame tick.
 

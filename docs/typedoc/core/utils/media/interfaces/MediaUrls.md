@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / MediaUrls
 
-Defined in: core/utils/media.ts:30
+Defined in: core/utils/media.ts:34
 
 Resolved media URL triple — the full-quality `source`, the progressive
 `thumb` (mozjpeg small variant or video poster frame), and the `isVideo`
@@ -15,27 +15,27 @@ discriminator echoed back so consumers don't re-inspect the item.
 ### source
 
 ```ts
-source: string;
+source: string
 ```
 
-Defined in: core/utils/media.ts:31
+Defined in: core/utils/media.ts:35
 
-***
+---
 
 ### thumb
 
 ```ts
-thumb: string;
+thumb: string
 ```
 
-Defined in: core/utils/media.ts:32
+Defined in: core/utils/media.ts:36
 
-***
+---
 
 ### isVideo
 
 ```ts
-isVideo: boolean;
+isVideo: boolean
 ```
 
-Defined in: core/utils/media.ts:33
+Defined in: core/utils/media.ts:37

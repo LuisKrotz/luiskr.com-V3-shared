@@ -1,11 +1,11 @@
-# `shared/scripts/build/media-manifest.mjs`
+# `shared\scripts\build\media-manifest.mjs`
 
 CDN media inventory + best-variant resolution shared by the
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/media-manifest.mjs`                             |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\media-manifest.mjs`           |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -67,7 +67,3 @@ matching the runtime URL builders in `core/utils/media.ts`.
 ### `resolveCoverKey`
 
 Resolves a home-mosaic cover image to its best indexable key.
-
-### `resolveCoverThumbKey`
-
-Resolves a home-mosaic cover to its lightweight preview key (<img src>).

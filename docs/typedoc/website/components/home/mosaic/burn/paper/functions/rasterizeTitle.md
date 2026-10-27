@@ -11,7 +11,7 @@ function rasterizeTitle(title, paper, cssW, cssH, ink): void
 Defined in: website/components/home/mosaic/burn/paper.ts:132
 
 Rasterizes the h2 text into the paper canvas. Words are drawn at their
-DOM Range fragment positions (see titleWordBoxes), so the raster
+DOM Range fragment positions (see `titleWordBoxes`), so the raster
 is pixel-faithful to the rendered title — same wraps, same spacing.
 Engines without Range fall back to a measured word-pack matching the
 DOM box, drawn bottom-anchored like the overlay's `align-items:

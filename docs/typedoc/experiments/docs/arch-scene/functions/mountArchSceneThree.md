@@ -5,10 +5,10 @@
 [luiskr.com](../../../../README.md) / [experiments/docs/arch-scene](../README.md) / mountArchSceneThree
 
 ```ts
-function mountArchSceneThree(canvas, roots, onPick, onLost?): ArchSceneHandle | null
+function mountArchSceneThree(canvas, roots, onPick, onLost?, onReady?): ArchSceneHandle | null
 ```
 
-Defined in: experiments/docs/arch-scene.ts:311
+Defined in: experiments/docs/arch-scene.ts:1197
 
 The three.js/WebGL arm of the architecture scene — the original
 renderer, kept as the synchronous fallback for every device without
@@ -40,6 +40,13 @@ Called with the manifest path on a node pick.
 () => `void`
 
 Called when the WebGL context is lost mid-flight.
+
+### onReady?
+
+() => `void`
+
+Called once the async graph build lands — the host
+drops the stage's loading veil on this signal.
 
 ## Returns
 

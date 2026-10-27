@@ -8,7 +8,7 @@
 function init(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider/init.ts:74
+Defined in: core/utils/canvas/widgets/theme-slider/init.ts:75
 
 Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
 

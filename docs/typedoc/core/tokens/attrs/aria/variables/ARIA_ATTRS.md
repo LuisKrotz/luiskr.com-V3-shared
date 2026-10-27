@@ -12,6 +12,7 @@ const ARIA_ATTRS: Readonly<{
   ARIA_LABELLEDBY: 'aria-labelledby'
   ARIA_DESCRIBEDBY: 'aria-describedby'
   ARIA_MODAL: 'aria-modal'
+  ARIA_DESCRIPTION: 'aria-description'
   ARIA_HIDDEN: 'aria-hidden'
   ARIA_LIVE: 'aria-live'
   ARIA_PRESSED: 'aria-pressed'
@@ -25,10 +26,12 @@ const ARIA_ATTRS: Readonly<{
   ROLE_NAVIGATION: 'navigation'
   ROLE_ALERT: 'alert'
   ROLE_STATUS: 'status'
+  ROLE_REGION: 'region'
   ROLE_TREE: 'tree'
   ROLE_TREEITEM: 'treeitem'
   ROLE_NONE: 'none'
   ROLE_IMG: 'img'
+  ROLE_APPLICATION: 'application'
   TABINDEX: 'tabindex'
 }>
 ```

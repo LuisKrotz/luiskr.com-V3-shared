@@ -8,7 +8,7 @@
 const _K_RELATED: 'related' = 'related'
 ```
 
-Defined in: core/tokens/base.ts:410
+Defined in: core/tokens/base.ts:415
 
 Shared key token `related` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

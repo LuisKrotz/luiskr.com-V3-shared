@@ -8,10 +8,14 @@
 function layoutNodes(nodes, depth?, from?, to?, parent?, acc?): PlacedNode[]
 ```
 
-Defined in: experiments/docs/arch-scene.ts:69
+Defined in: experiments/docs/arch-scene.ts:241
 
 Flattens the manifest tree into positioned node descriptors: depth sets
-the ring radius, sibling order spreads the angle. Recursive per the
+the ring radius, sibling order spreads the angle. Sectors split
+proportionally to subtree weight (balloon-tree), not sibling count —
+a 300-file branch gets the angular room its leaf count needs while a
+single-file branch takes a thin slice; equal splits are what packed
+dense subtrees into unreadable blobs. Recursive per the
 self-similar-traversal rule.
 
 ## Parameters

@@ -1,10 +1,10 @@
-# `cms/tokens/fields/form.ts`
+# `cms\tokens\fields\form.ts`
 
 Form-field classes — field groups/rows, subsections, labels,
 
-| | |
-|---|---|
-| **Source** | `src/cms/tokens/fields/form.ts` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\tokens\fields\form.ts`                 |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members

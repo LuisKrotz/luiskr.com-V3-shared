@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/awards-carousel/autoplay](../README.md) / tickAutoplay
 
 ```ts
-function tickAutoplay(host): void;
+function tickAutoplay(host): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/autoplay.ts:60
+Defined in: website/components/carousel/awards-carousel/autoplay.ts:62
 
 Autoplay RAF tick — advances once `duration` has elapsed. The elapsed
 calculation `now - start + accumulated` lets pause/resume continue a

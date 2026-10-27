@@ -8,7 +8,7 @@
 function tryWasm(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/close-button/init.ts:161
+Defined in: core/utils/canvas/widgets/close-button/init.ts:162
 
 Attempts the WebGPU wasm close button (~48KB artifact, own
 GPUDevice). MANUAL drive: this class keeps its own eased-channel

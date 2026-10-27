@@ -9,6 +9,7 @@ const MEDIA_COMPONENT_KEYS: Readonly<{
   MEDIA_CLOSE: 'media.close'
   MEDIA_TO_OPEN: 'media.toOpen'
   MEDIA_AUDIO_NOTE: 'media.audioNote'
+  MEDIA_TOGGLE: 'media.toggle'
 }>
 ```
 

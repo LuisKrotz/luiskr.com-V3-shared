@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/weather.ts`
+# `experiments\star-field\engine\bodies\weather.ts`
 
 Living-planet systems — everything that makes Earth (and
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/weather.ts`   |
+| **Source**     | `src/experiments\star-field\engine\bodies\weather.ts`   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

@@ -17,13 +17,9 @@ const SLIDER_SPRING: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/motion/slider.ts:19
+Defined in: core/tokens/motion/slider.ts:20
 
-## File
-
-tokens/motion/slider.ts
-
-## Description
+Slider spring tokens.
 
 Knob-spring tunables for the slider widgets (theme
 slider, switch slider). Sole declaration site (zero-hardcoding

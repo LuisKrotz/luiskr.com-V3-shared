@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/data/sanitize](../README.md) / sanitizeHtml
 
 ```ts
-function sanitizeHtml(html): string;
+function sanitizeHtml(html): string
 ```
 
-Defined in: core/utils/data/sanitize.ts:75
+Defined in: core/utils/data/sanitize.ts:76
 
 Sanitize an HTML string, preserving allowed tags and attributes only.
 

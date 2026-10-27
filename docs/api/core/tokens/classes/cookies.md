@@ -1,10 +1,10 @@
-# `core/tokens/classes/cookies.ts`
+# `core\tokens\classes\cookies.ts`
 
 Cookie banner class tokens — token group.
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/classes/cookies.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\cookies.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -14,3 +14,7 @@ Cookie banner class tokens — token group.
 Frozen cookie class-name map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes
 the token contract immutable at runtime.
+
+### `COOKIES_BUTTONS_CANVAS`
+
+WebGPU overlay canvas shared by the accept/refuse corner brackets.

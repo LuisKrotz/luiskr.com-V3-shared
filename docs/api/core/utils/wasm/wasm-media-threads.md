@@ -1,10 +1,10 @@
-# `core/utils/wasm/wasm-media-threads.ts`
+# `core\utils\wasm\wasm-media-threads.ts`
 
 Off-main-thread media pipeline built on the WASM worker pool:
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/wasm/wasm-media-threads.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\wasm\wasm-media-threads.ts`               |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -109,6 +109,7 @@ Decodes one image URL to an ImageBitmap in a pool worker, then uploads
 it to GPU at the requested display size. Cache hit → GPU re-upload only
 (the bitmap is already resident). Any worker/decode failure resolves
 null so callers fall back to <img> decode.
+
 - `@param` url CDN image URL.
 - `@param` width GPU-upload resize-hint width.
 - `@param` height GPU-upload resize-hint height.
@@ -121,6 +122,7 @@ detect codec, total size, and range-request support — without
 downloading the full file. Used by the NPU predictor before the user
 navigates so quality-variant choice is informed, not guessed.
 Memoized per URL — repeat probes short-circuit.
+
 - `@param` url Video URL to header-probe.
 - `@returns` The probe result, or null on failure.
 
@@ -132,6 +134,7 @@ variant URL and a zero-copy poster ImageBitmap. The cache key is the
 first variant's URL (the canonical "this video" identifier).
 A successful poster is uploaded to GPU VRAM immediately at FHD
 fallback dimensions.
+
 - `@param` variants Rendition list; `variants[0].url` is the cache key.
 - `@param` posterUrl Optional poster image to decode alongside.
 - `@returns` {best, poster} or null on failure.
@@ -143,6 +146,7 @@ round-robins to a different pool worker, so ranges genuinely download
 in parallel threads. Returns zero-copy results for MediaSource or
 WebCodecs consumption; failed segments are filtered out (partial
 results are still usable — the caller decides if gaps are fatal).
+
 - `@param` segmentList Byte-range requests over the same or related URLs.
 - `@returns` Array of segment payloads (failures filtered out).
 
@@ -152,6 +156,7 @@ After prefetchVideoVariants resolves: sets the winning URL on the
 element (skipped when already identical to avoid a reload) and
 uploads the poster to GPU at the element's rendered size, falling
 back to FHD dimensions when the element isn't laid out yet.
+
 - `@param` videoEl Target video element.
 - `@param` prefetchResult Result from prefetchVideoVariants.
 

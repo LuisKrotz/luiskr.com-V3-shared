@@ -8,7 +8,7 @@
 function pauseVideo(fig, target): void
 ```
 
-Defined in: website/components/media/figure/video.ts:61
+Defined in: website/components/media/figure/video.ts:82
 
 Pauses playback (offscreen or pref change).
 

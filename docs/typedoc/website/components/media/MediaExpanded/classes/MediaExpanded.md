@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/media/MediaExpanded](../README.md) / MediaExpanded
 
-Defined in: website/components/media/MediaExpanded.tsx:29
+Defined in: website/components/media/MediaExpanded.tsx:30
 
 The MediaExpanded — expanded class.
 
@@ -20,7 +20,7 @@ The MediaExpanded — expanded class.
 new MediaExpanded(): MediaExpanded;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:47
+Defined in: website/components/media/MediaExpanded.tsx:64
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 isClosing: boolean = false
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:30
+Defined in: website/components/media/MediaExpanded.tsx:31
 
 ---
 
@@ -193,7 +193,7 @@ Defined in: website/components/media/MediaExpanded.tsx:30
 currentSrc: string = ATTR_VALUES.EMPTY
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:31
+Defined in: website/components/media/MediaExpanded.tsx:32
 
 ---
 
@@ -207,7 +207,7 @@ _closeBtn:
   | null = null;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:32
+Defined in: website/components/media/MediaExpanded.tsx:33
 
 ---
 
@@ -217,7 +217,7 @@ Defined in: website/components/media/MediaExpanded.tsx:32
 _brackets: (() => void) | null = null;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:33
+Defined in: website/components/media/MediaExpanded.tsx:34
 
 ---
 
@@ -229,7 +229,33 @@ _genie:
   | null = null;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:34
+Defined in: website/components/media/MediaExpanded.tsx:35
+
+---
+
+### \_genieSheet
+
+```ts
+_genieSheet:
+  | {
+  content: HTMLElement;
+  dpr: number;
+  vw: number;
+  vh: number;
+  dark: boolean;
+  sheet: GenieSheet;
+}
+  | null = null;
+```
+
+Defined in: website/components/media/MediaExpanded.tsx:44
+
+Baked warp sheet reused across this modal's open→close pair — keyed
+on (content, dpr, viewport, theme): any of those changing rebakes.
+Invalidated when the media item's pixels or box change after the
+bake (full-res swap, figure-loaded flip). The sheet's restamp
+sources are live element refs, so a <video> sheet stays current
+frame-by-frame without a rebake.
 
 ---
 
@@ -4290,7 +4316,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get static observedAttributes(): string[];
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:36
+Defined in: website/components/media/MediaExpanded.tsx:53
 
 ##### Returns
 
@@ -4306,7 +4332,7 @@ Defined in: website/components/media/MediaExpanded.tsx:36
 get source(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:53
+Defined in: website/components/media/MediaExpanded.tsx:70
 
 Full-res media URL (from the source attribute).
 
@@ -4324,7 +4350,7 @@ Full-res media URL (from the source attribute).
 get sourceWebm(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:61
+Defined in: website/components/media/MediaExpanded.tsx:78
 
 Webm sibling of an .mp4 source — first <source> when it exists
 (manifest-known absent ⇒ '', same doomed-request gate as the
@@ -4344,7 +4370,7 @@ figure's resolveMediaSources).
 get thumb(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:69
+Defined in: website/components/media/MediaExpanded.tsx:86
 
 Low-res thumbnail URL shown while the full asset loads.
 
@@ -4362,7 +4388,7 @@ Low-res thumbnail URL shown while the full asset loads.
 get alt(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:75
+Defined in: website/components/media/MediaExpanded.tsx:92
 
 Alt text for the media.
 
@@ -4380,7 +4406,7 @@ Alt text for the media.
 get mediaWidth(): number;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:81
+Defined in: website/components/media/MediaExpanded.tsx:98
 
 Natural media width attribute.
 
@@ -4398,7 +4424,7 @@ Natural media width attribute.
 get mediaHeight(): number;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:90
+Defined in: website/components/media/MediaExpanded.tsx:107
 
 Natural media height attribute.
 
@@ -4416,7 +4442,7 @@ Natural media height attribute.
 get isVideo(): boolean;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:99
+Defined in: website/components/media/MediaExpanded.tsx:116
 
 Whether the source is a video.
 
@@ -4969,7 +4995,7 @@ Render result from render().
 onInit(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:106
+Defined in: website/components/media/MediaExpanded.tsx:123
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4991,7 +5017,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 onMounted(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:110
+Defined in: website/components/media/MediaExpanded.tsx:127
 
 #### Returns
 
@@ -5009,7 +5035,7 @@ Defined in: website/components/media/MediaExpanded.tsx:110
 placeholder(width, height): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:116
+Defined in: website/components/media/MediaExpanded.tsx:133
 
 Placeholder box style while the full asset loads.
 
@@ -5035,7 +5061,7 @@ Placeholder box style while the full asset loads.
 startClose(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:122
+Defined in: website/components/media/MediaExpanded.tsx:139
 
 Dismissal sequence — CSS zoom-out, then URL/dialog/scroll teardown (see expanded-close.ts).
 
@@ -5051,7 +5077,7 @@ Dismissal sequence — CSS zoom-out, then URL/dialog/scroll teardown (see expand
 onDestroy(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:126
+Defined in: website/components/media/MediaExpanded.tsx:143
 
 #### Returns
 
@@ -5069,7 +5095,7 @@ Defined in: website/components/media/MediaExpanded.tsx:126
 render(): Element;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:149
+Defined in: website/components/media/MediaExpanded.tsx:168
 
 JSX template (see expanded-render.tsx).
 

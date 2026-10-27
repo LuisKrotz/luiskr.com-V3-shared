@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/frame.ts`
+# `experiments\star-field\engine\frame.ts`
 
 Per-frame orchestrator for the star-field engine: the
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/frame.ts`            |
+| **Source**     | `src/experiments\star-field\engine\frame.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

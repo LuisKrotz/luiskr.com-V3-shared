@@ -1,10 +1,10 @@
-# `core/utils/data/db.ts`
+# `core\utils\data\db.ts`
 
 SWR-style data layer over Firebase RTDB.
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/data/db.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\data\db.ts`                               |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

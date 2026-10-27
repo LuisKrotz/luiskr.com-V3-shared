@@ -8,7 +8,7 @@
 function renderNavLocaleFlag(host): string | Element
 ```
 
-Defined in: website/components/nav/flag.tsx:60
+Defined in: website/components/nav/flag.tsx:63
 
 Flag button content: GL canvas + <img> fallback (split flag for dual-cc locales).
 

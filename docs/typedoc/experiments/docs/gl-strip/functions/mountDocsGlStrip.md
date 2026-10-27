@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/gl-strip](../README.md) / mountDocsGlStrip
 
 ```ts
-function mountDocsGlStrip(canvas, host): DocsGlHandle | null;
+function mountDocsGlStrip(canvas, host): DocsGlHandle | null
 ```
 
-Defined in: experiments/docs/gl-strip.ts:52
+Defined in: experiments/docs/gl-strip.ts:57
 
 Mounts the animated strip on `canvas`.
 
@@ -19,7 +19,7 @@ Mounts the animated strip on `canvas`.
 `HTMLCanvasElement`
 
 Target canvas (already sized by CSS; backing store syncs
-  to devicePixelRatio each resize).
+to devicePixelRatio each resize).
 
 ### host
 

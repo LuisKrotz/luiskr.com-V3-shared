@@ -8,7 +8,7 @@
 function syncSkeletonLayer(component): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:360
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:370
 
 Keeps a component's skeleton layer in sync with its rendered content.
 Call from onUpdated()/onMounted(): creates the layer while skeleton nodes

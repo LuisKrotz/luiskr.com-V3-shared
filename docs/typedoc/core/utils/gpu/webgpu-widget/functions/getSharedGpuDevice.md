@@ -8,7 +8,7 @@
 function getSharedGpuDevice(): Promise<GPUDevice | null>
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:149
+Defined in: core/utils/gpu/webgpu-widget.ts:150
 
 `getSharedGpuDevice` — request the adapter+device once and cache
 the promise so concurrent mounts share one acquisition. Keyed on

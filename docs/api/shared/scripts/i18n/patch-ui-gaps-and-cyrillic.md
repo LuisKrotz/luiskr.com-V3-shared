@@ -1,9 +1,9 @@
-# `shared/scripts/i18n/patch-ui-gaps-and-cyrillic.js`
+# `shared\scripts\i18n\patch-ui-gaps-and-cyrillic.js`
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/i18n/patch-ui-gaps-and-cyrillic.js`                   |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\i18n\patch-ui-gaps-and-cyrillic.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

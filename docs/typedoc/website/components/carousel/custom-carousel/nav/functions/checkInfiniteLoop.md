@@ -8,7 +8,7 @@
 function checkInfiniteLoop(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:356
+Defined in: website/components/carousel/custom-carousel/nav.ts:365
 
 Clone-teleport check — runs after the scroll debounce: when a clone is
 parked at the track's center, instant-jump to its real twin and re-sync

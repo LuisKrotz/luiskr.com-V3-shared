@@ -8,7 +8,7 @@
 function registryDist(ly): string
 ```
 
-Defined in: experiments/star-field/star/dossier.ts:175
+Defined in: experiments/star-field/star/dossier.ts:176
 
 Distance label for a registry record — light-years under a million,
 "Mly" above, so far-field NGC galaxies read "52 Mly" instead of

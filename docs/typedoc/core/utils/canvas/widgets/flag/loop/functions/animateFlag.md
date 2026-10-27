@@ -8,9 +8,9 @@
 function animateFlag(flag): void
 ```
 
-Defined in: core/utils/canvas/widgets/flag/loop.ts:92
+Defined in: core/utils/canvas/widgets/flag/loop.ts:93
 
-Starts the requestAnimationFrame render loop (skipped under reduced motion).
+Starts the shared-pool render loop (skipped under reduced motion).
 
 ## Parameters
 

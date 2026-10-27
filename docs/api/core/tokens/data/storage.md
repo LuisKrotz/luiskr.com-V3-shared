@@ -1,10 +1,10 @@
-# `core/tokens/data/storage.ts`
+# `core\tokens\data\storage.ts`
 
 localStorage/sessionStorage key tokens split by scope —
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/data/storage.ts`                         |
+| **Source**     | `src/core\tokens\data\storage.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -20,6 +20,12 @@ Docs 3D-scene camera pose + rotation-off flag (session-scoped).
 ### `INTRO_SHOWN`
 
 Boot loader shown-once flag (session-scoped).
+
+### `INTRO_T0`
+
+Boot-loader animation start stamp — a `window` field (not storage)
+written by the index.html head script at parse time so the veil's
+duration budget measures the whole boot, not just post-mount.
 
 ### `CMS_AUTH_REDIRECT`
 

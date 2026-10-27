@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/gpu/webgpu-widget](../README.md) / WidgetModule
 
-Defined in: core/utils/gpu/webgpu-widget.ts:29
+Defined in: core/utils/gpu/webgpu-widget.ts:30
 
 The generated wasm-pack glue module shape. Each crate exports a
 differently-named widget class, so the registry carries the class
@@ -26,7 +26,7 @@ The crate's widget class — indexed by `GPU_WIDGET_ARTIFACTS[kind].cls`.
 default: (input?) => Promise<unknown>;
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:31
+Defined in: core/utils/gpu/webgpu-widget.ts:32
 
 Async initializer returning the wasm exports (includes memory).
 

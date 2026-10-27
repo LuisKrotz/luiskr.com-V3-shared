@@ -8,12 +8,13 @@
 function graphFit(placed): GraphFit
 ```
 
-Defined in: experiments/docs/arch-scene.ts:288
+Defined in: experiments/docs/arch-scene.ts:1155
 
-Fit the camera to the real graph radius — a deep manifest (outer
-rings past ~60 units) left the default pose sitting INSIDE the tree,
-which rendered nodes as giant blobs instead of a legible radial
-map. dist = r/sin(fov/2) with ~20% margin frames the whole graph.
+Fit the camera to the real graph radius — the sphere layout spreads
+clusters along parent orbits, so the bound is the longest orbit
+chain: distance(node) = orbit(parent→node) + distance(parent),
+accumulated down each branch. dist = r/sin(fov/2) with ~20% margin
+frames the whole graph.
 
 ## Parameters
 

@@ -1,13 +1,20 @@
-# `core/utils/canvas/widgets/flag/texture.ts`
+# `core\utils\canvas\widgets\flag\texture.ts`
 
 Flag asset caches for FlagRenderer: per-country-code
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/widgets/flag/texture.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\flag\texture.ts`           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### `flagUrl`
+
+Flag SVG source URL for a country code — shared by the `<img>`
+decode path and the WebGPU wasm texture upload.
+
+- `@param` cc Country code segment.
 
 ### `kickWasmDecode`
 

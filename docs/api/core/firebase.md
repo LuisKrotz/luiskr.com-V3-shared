@@ -1,10 +1,10 @@
-# `core/firebase.ts`
+# `core\firebase.ts`
 
 Firebase client bootstrap — split between the site (read-only)
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/firebase.ts`                                    |
+| **Source**     | `src/core\firebase.ts`                                    |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -8,14 +8,15 @@
 function placeRoots(roots): PlacedNode[]
 ```
 
-Defined in: experiments/docs/arch-scene.ts:254
+Defined in: experiments/docs/arch-scene.ts:1082
 
 The manifest buckets hang off a synthetic center node — the portal
 root level IS the tree root, so the scene reads as one rooted graph
 (center = "In-depth project docs", ring 1 = the four buckets, …).
 Buckets are { root, label, children } — mapped to dir nodes here so
 they carry a real path (pickable + highlightable) and a real label.
-Shared by the three.js and scene3d arms.
+File leaves are capped per dir (capSceneLeaves) so giant coverage
+dirs don't weld into combs. Shared by the three.js and scene3d arms.
 
 ## Parameters
 

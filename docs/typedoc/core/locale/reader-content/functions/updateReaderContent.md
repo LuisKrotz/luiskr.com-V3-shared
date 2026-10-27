@@ -8,7 +8,7 @@
 function updateReaderContent(path): Promise<void>
 ```
 
-Defined in: core/locale/reader-content.ts:58
+Defined in: core/locale/reader-content.ts:80
 
 Replaces the reader article's markup with the prerendered article of
 `path`'s static page. Responses are cached per path; fetches race

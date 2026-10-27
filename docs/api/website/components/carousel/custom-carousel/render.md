@@ -1,10 +1,10 @@
-# `website/components/carousel/custom-carousel/render.tsx`
+# `website\components\carousel\custom-carousel\render.tsx`
 
 Pure JSX render helpers for &lt;custom-carousel&gt;, extracted
 
 |                |                                                              |
 | -------------- | ------------------------------------------------------------ |
-| **Source**     | `src/website/components/carousel/custom-carousel/render.tsx` |
+| **Source**     | `src/website\components\carousel\custom-carousel\render.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.      |
 
 ## Members
@@ -87,7 +87,8 @@ starts at dashoffset=circumference (empty) — autoplay shrinks it.
 
 ### `renderDots`
 
-Dot-navigation strip: localized "N of M" counter + one button per real slide.
+Dot-navigation strip — one numbered disc per real slide (the visible
+index lives inside each dot, IBM input_label_visible).
 
 ### `renderCarousel`
 

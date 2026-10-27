@@ -1,8 +1,8 @@
-# `website/components/dialogs/preferences/types.ts`
+# `website\components\dialogs\preferences\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/dialogs/preferences/types.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\dialogs\preferences\types.ts`   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -55,6 +55,34 @@ Follow-OS radio option.
 
 Light-theme radio option.
 
+### `a11y`
+
+Accessibility section — contrast and motion toggles copy.
+
+### `title`
+
+Section heading.
+
+### `desc`
+
+Section description under the heading.
+
+### `reducedMotion`
+
+Label for the reduced-motion override toggle.
+
+### `reducedMotionDesc`
+
+Description under the reduced-motion toggle.
+
+### `highContrast`
+
+Label for the high-contrast toggle.
+
+### `highContrastDesc`
+
+Description under the high-contrast toggle.
+
 ### `devTools`
 
 Developer-tools section — diagnostic toggles copy.
@@ -78,14 +106,6 @@ Label for the layout-grid overlay toggle.
 ### `showGridDesc`
 
 Description under the grid toggle.
-
-### `reducedMotion`
-
-Label for the reduced-motion override toggle.
-
-### `reducedMotionDesc`
-
-Description under the reduced-motion toggle.
 
 ### `PREF_DEFAULTS`
 

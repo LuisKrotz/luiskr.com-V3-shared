@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../../README.md) / [core/utils/canvas/loaders/menu-background/loop](../README.md) / handleResize
 
 ```ts
-function handleResize(host): void;
+function handleResize(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:129
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:130
 
 Syncs buffer size + u_res uniform with the viewport.
 

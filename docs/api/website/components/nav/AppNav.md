@@ -1,10 +1,10 @@
-# `website/components/nav/AppNav.tsx`
+# `website\components\nav\AppNav.tsx`
 
 &lt;app-nav&gt; — the persistent top navigation bar: logo, burger
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/nav/AppNav.tsx`                 |
+| **Source**     | `src/website\components\nav\AppNav.tsx`                 |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -74,7 +74,7 @@ Close animation in flight — blocks re-entry/double-close.
 
 ### `_menuSettled`
 
-Open animation completed — close X can snap to drawn state on reopen.
+Open animation completed — entrance animations settle to final state.
 
 ### `_menuSettleTimer`
 
@@ -84,13 +84,9 @@ Handle for the settle delay; cleared on destroy so no timer outlives the element
 
 MenuBackgroundWebGL instance — owns the fullscreen contour canvas.
 
-### `_menuCloseBtn`
-
-CloseButtonWebGL on the menu's X.
-
 ### `_burgerBtn`
 
-BurgerButtonWebGL on the persistent burger canvas.
+BurgerButtonWebGL on the persistent burger canvas — morphs into the close control while the menu is open.
 
 ### `_burgerCanvasEl`
 
@@ -99,10 +95,6 @@ Burger button canvas host.
 ### `_menuCanvasEl`
 
 Fullscreen menu background canvas host.
-
-### `_menuCloseCanvasEl`
-
-Menu close-X canvas host.
 
 ### `_menuFlagCanvasEl`
 
@@ -269,10 +261,6 @@ Persistent burger canvas (aria-labeled) — created once, survives re-renders so
 ### `_menuCanvas`
 
 Canvas JSX for the WebGL menu background.
-
-### `_menuCloseCanvas`
-
-Canvas JSX for the WebGL menu close (X) icon.
 
 ### `_toggleMenu`
 

@@ -8,7 +8,7 @@
 function buildMediaUrls(storage, folder, item): MediaUrls
 ```
 
-Defined in: core/utils/media.ts:161
+Defined in: core/utils/media.ts:319
 
 Constructs media URLs for images and videos following the project's
 compression pipeline. URL grammar:

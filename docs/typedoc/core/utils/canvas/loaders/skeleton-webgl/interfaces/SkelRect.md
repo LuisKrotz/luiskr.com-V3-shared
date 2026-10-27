@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/loaders/skeleton-webgl](../README.md) / SkelRect
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:41
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:42
 
 One measured placeholder: geometry (CSS px) + sampled palette for the shader.
 
@@ -16,7 +16,7 @@ One measured placeholder: geometry (CSS px) + sampled palette for the shader.
 x: number
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:43
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:44
 
 Left edge relative to the layer canvas origin.
 
@@ -28,7 +28,7 @@ Left edge relative to the layer canvas origin.
 y: number
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:45
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:46
 
 Top edge relative to the layer canvas origin.
 
@@ -40,7 +40,7 @@ Top edge relative to the layer canvas origin.
 w: number
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:47
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:48
 
 Box width in CSS px.
 
@@ -52,7 +52,7 @@ Box width in CSS px.
 h: number
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:49
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:50
 
 Box height in CSS px.
 
@@ -64,7 +64,7 @@ Box height in CSS px.
 radius: number
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:51
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:52
 
 Corner radius in CSS px — matches the placeholder's own border-radius.
 
@@ -76,7 +76,7 @@ Corner radius in CSS px — matches the placeholder's own border-radius.
 cell: number
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:53
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:54
 
 Glyph cell size driving the procedural 0/1 grid density.
 
@@ -88,7 +88,7 @@ Glyph cell size driving the procedural 0/1 grid density.
 row: number
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:55
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:56
 
 Row index within a text placeholder (0 for media blocks).
 
@@ -100,7 +100,7 @@ Row index within a text placeholder (0 for media blocks).
 base: number[];
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:57
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:58
 
 Parsed [r,g,b,a] base fill 0–1 floats for the u_sbase uniform array.
 
@@ -112,6 +112,6 @@ Parsed [r,g,b,a] base fill 0–1 floats for the u_sbase uniform array.
 ink: number[];
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:59
+Defined in: core/utils/canvas/loaders/skeleton-webgl.ts:60
 
 Parsed [r,g,b,a] ink/glyph floats for the u_sink uniform array.

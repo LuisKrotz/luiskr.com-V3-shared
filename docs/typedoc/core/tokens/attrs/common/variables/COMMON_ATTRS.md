@@ -26,6 +26,7 @@ const COMMON_ATTRS: Readonly<{
   TRIGGER_VIEWPORT: 'viewport'
   TOUCH: 'touch'
   POINTER: 'pointer'
+  INERT: 'inert'
   FIT: 'fit'
   LONGDESC: 'longdesc'
 }>

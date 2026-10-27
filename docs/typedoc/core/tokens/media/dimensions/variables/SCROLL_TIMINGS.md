@@ -1,18 +1,18 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/media/dimensions](../README.md) / SCROLL\_TIMINGS
 
 ```ts
 const SCROLL_TIMINGS: Readonly<{
-  SCROLL_DURATION_FULL: 1000;
-  SCROLL_DURATION_REDUCED: 2500;
-  SCROLL_INIT_DELAY: 500;
-}>;
+  SCROLL_DURATION_FULL: 1000
+  SCROLL_DURATION_REDUCED: 2500
+  SCROLL_INIT_DELAY: 500
+}>
 ```
 
-Defined in: core/tokens/media/dimensions.ts:112
+Defined in: core/tokens/media/dimensions.ts:119
 
 Frozen scroll-timing map (ms) — `SCROLL_DURATION_FULL` paces animated
 page scrolls, `SCROLL_DURATION_REDUCED` is the slower ramp under

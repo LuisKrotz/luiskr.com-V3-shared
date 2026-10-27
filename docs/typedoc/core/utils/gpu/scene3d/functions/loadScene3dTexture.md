@@ -8,7 +8,7 @@
 function loadScene3dTexture(surface, url, targetW, targetH): Promise<number | null>
 ```
 
-Defined in: core/utils/gpu/scene3d.ts:334
+Defined in: core/utils/gpu/scene3d.ts:375
 
 Decodes `url` through the shared wasm image pipeline (fetch → worker
 createImageBitmap → GPU texture, zero CPU readback) and uploads it —

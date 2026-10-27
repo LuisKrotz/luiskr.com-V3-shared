@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/gpu/npu-predict](../README.md) / NpuAnalytics
 
-Defined in: core/utils/gpu/npu-predict.ts:43
+Defined in: core/utils/gpu/npu-predict.ts:45
 
 HUD-facing predictor metrics.
 
@@ -13,81 +13,81 @@ HUD-facing predictor metrics.
 ### npuAccelerated
 
 ```ts
-npuAccelerated: boolean;
-```
-
-Defined in: core/utils/gpu/npu-predict.ts:45
-
-Whether the WebNN NPU tier is live.
-
-***
-
-### gpuAccelerated
-
-```ts
-gpuAccelerated: boolean;
+npuAccelerated: boolean
 ```
 
 Defined in: core/utils/gpu/npu-predict.ts:47
 
-Whether the shared GPU tier is live.
+Whether the WebNN NPU tier is live.
 
-***
+---
 
-### wasmAccelerated
+### gpuAccelerated
 
 ```ts
-wasmAccelerated: boolean;
+gpuAccelerated: boolean
 ```
 
 Defined in: core/utils/gpu/npu-predict.ts:49
 
-Whether the WASM worker tier is live (always true — the last resort).
+Whether the shared GPU tier is live.
 
-***
+---
 
-### totalPredictions
+### wasmAccelerated
 
 ```ts
-totalPredictions: number;
+wasmAccelerated: boolean
 ```
 
 Defined in: core/utils/gpu/npu-predict.ts:51
 
-Lifetime prediction count.
+Whether the WASM worker tier is live (always true — the last resort).
 
-***
+---
 
-### successfulPreloads
+### totalPredictions
 
 ```ts
-successfulPreloads: number;
+totalPredictions: number
 ```
 
 Defined in: core/utils/gpu/npu-predict.ts:53
 
-Successful prefetch injections.
+Lifetime prediction count.
 
-***
+---
 
-### lastPredictionConfidence
+### successfulPreloads
 
 ```ts
-lastPredictionConfidence: number;
+successfulPreloads: number
 ```
 
 Defined in: core/utils/gpu/npu-predict.ts:55
 
+Successful prefetch injections.
+
+---
+
+### lastPredictionConfidence
+
+```ts
+lastPredictionConfidence: number
+```
+
+Defined in: core/utils/gpu/npu-predict.ts:57
+
 Most recent probability, rounded to cents.
 
-***
+---
 
 ### avgComputeMs
 
 ```ts
-avgComputeMs: number;
+avgComputeMs: number
 ```
 
-Defined in: core/utils/gpu/npu-predict.ts:57
+Defined in: core/utils/gpu/npu-predict.ts:59
 
 Exponential-ish running mean of scoring time in ms.

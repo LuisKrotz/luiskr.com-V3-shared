@@ -1,8 +1,8 @@
-# `website/components/home/mosaic/burn/types.ts`
+# `website\components\home\mosaic\burn\types.ts`
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/home/mosaic/burn/types.ts`      |
+| **Source**     | `src/website\components\home\mosaic\burn\types.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -10,6 +10,27 @@
 ### `canvas`
 
 Overlay canvas absolutely positioned over the title box.
+
+### (module scope)
+
+Optional WebGPU particle canvas — mounted over `canvas` when the
+per-widget wasm burn artifact loads; the paper raster stays 2D
+(canvas contexts are mutually exclusive per element), particles
+move to the GPU canvas.
+
+### (module scope)
+
+Live WebGPU wasm handle — the particle sim+renderer runs in the
+artifact (begin/set_letters/set_ink/set_colors/set_dir/set_stage/
+frame); unset on failure or before the mount resolves.
+
+### (module scope)
+
+In-flight mount — teardown must not double-resolve.
+
+### (module scope)
+
+Latch — a failed wasm mount never retries this session.
 
 ### `paper`
 
@@ -102,6 +123,10 @@ Combustion ink ramp — resolved from `--burn-*` CSS custom properties
 (dark theme: cyan-blue plasma fire on the accent ramp; light theme:
 airy paper-fire). Falls back to the fixed canvas inks where a runtime
 lacks the custom properties.
+
+### `smoke`
+
+Smoke-puff tint — the rising ash column behind the embers.
 
 ### (module scope)
 

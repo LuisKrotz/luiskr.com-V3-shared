@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/worker.ts`
+# `core\tokens\starfield\params\worker.ts`
 
 Worker-dispatch and deep-field layer parameters — the
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/worker.ts`              |
+| **Source**     | `src/core\tokens\starfield\params\worker.ts`              |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

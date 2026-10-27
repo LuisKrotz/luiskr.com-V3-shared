@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/widgets/theme-slider](../README.md) / ThemeSliderWebGL
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:31
+Defined in: core/utils/canvas/widgets/theme-slider.ts:32
 
 Full Animated Day/Night/System Theme Slider
 Powered by WebGL with robust Canvas 2D fallback.
@@ -25,7 +25,7 @@ new ThemeSliderWebGL(
 ): ThemeSliderWebGL;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:86
+Defined in: core/utils/canvas/widgets/theme-slider.ts:89
 
 #### Parameters
 
@@ -53,7 +53,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:86
 canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:32
+Defined in: core/utils/canvas/widgets/theme-slider.ts:33
 
 ---
 
@@ -63,7 +63,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:32
 onThemeChange: ((_theme) => void) | null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:33
+Defined in: core/utils/canvas/widgets/theme-slider.ts:34
 
 ---
 
@@ -73,7 +73,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:33
 currentTheme: string
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:34
+Defined in: core/utils/canvas/widgets/theme-slider.ts:35
 
 ---
 
@@ -83,7 +83,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:34
 width: number
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:35
+Defined in: core/utils/canvas/widgets/theme-slider.ts:36
 
 ---
 
@@ -93,7 +93,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:35
 height: number
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:36
+Defined in: core/utils/canvas/widgets/theme-slider.ts:37
 
 ---
 
@@ -103,7 +103,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:36
 targetP: number
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:37
+Defined in: core/utils/canvas/widgets/theme-slider.ts:38
 
 ---
 
@@ -113,7 +113,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:37
 currentP: number
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:38
+Defined in: core/utils/canvas/widgets/theme-slider.ts:39
 
 ---
 
@@ -123,7 +123,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:38
 velP: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:40
+Defined in: core/utils/canvas/widgets/theme-slider.ts:41
 
 Chase-spring velocity (track units/s) — feeds the elastic settle.
 
@@ -135,7 +135,7 @@ Chase-spring velocity (track units/s) — feeds the elastic settle.
 knobX: number
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:41
+Defined in: core/utils/canvas/widgets/theme-slider.ts:42
 
 ---
 
@@ -145,7 +145,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:41
 isDragging: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:42
+Defined in: core/utils/canvas/widgets/theme-slider.ts:43
 
 ---
 
@@ -155,7 +155,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:42
 _animT: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:44
+Defined in: core/utils/canvas/widgets/theme-slider.ts:45
 
 Last animate() timestamp — the spring's dt source.
 
@@ -167,7 +167,7 @@ Last animate() timestamp — the spring's dt source.
 dragRectLeft: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:50
+Defined in: core/utils/canvas/widgets/theme-slider.ts:51
 
 Cached canvas rect for the active drag — captured once at
 pointerdown so the high-rate pointermove path performs zero layout
@@ -181,7 +181,7 @@ reads (the rect cannot change mid-gesture; cleared on pointerup).
 dragRectWidth: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:51
+Defined in: core/utils/canvas/widgets/theme-slider.ts:52
 
 ---
 
@@ -191,7 +191,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:51
 startX: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:52
+Defined in: core/utils/canvas/widgets/theme-slider.ts:53
 
 ---
 
@@ -201,7 +201,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:52
 useWebGL: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:53
+Defined in: core/utils/canvas/widgets/theme-slider.ts:54
 
 ---
 
@@ -211,7 +211,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:53
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:54
+Defined in: core/utils/canvas/widgets/theme-slider.ts:55
 
 ---
 
@@ -221,7 +221,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:54
 startTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:55
+Defined in: core/utils/canvas/widgets/theme-slider.ts:58
 
 ---
 
@@ -231,7 +231,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:55
 rippleTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:56
+Defined in: core/utils/canvas/widgets/theme-slider.ts:59
 
 ---
 
@@ -241,7 +241,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:56
 ripplePos: number
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:57
+Defined in: core/utils/canvas/widgets/theme-slider.ts:60
 
 ---
 
@@ -251,7 +251,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:57
 gl: WebGLRenderingContext | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:58
+Defined in: core/utils/canvas/widgets/theme-slider.ts:61
 
 ---
 
@@ -261,7 +261,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:58
 ctx: CanvasRenderingContext2D | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:59
+Defined in: core/utils/canvas/widgets/theme-slider.ts:62
 
 ---
 
@@ -271,7 +271,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:59
 program: WebGLProgram | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:60
+Defined in: core/utils/canvas/widgets/theme-slider.ts:63
 
 ---
 
@@ -281,7 +281,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:60
 quadBuffer: WebGLBuffer | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:61
+Defined in: core/utils/canvas/widgets/theme-slider.ts:64
 
 ---
 
@@ -291,7 +291,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:61
 uResolution: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:62
+Defined in: core/utils/canvas/widgets/theme-slider.ts:65
 
 ---
 
@@ -301,7 +301,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:62
 uTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:63
+Defined in: core/utils/canvas/widgets/theme-slider.ts:66
 
 ---
 
@@ -311,7 +311,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:63
 uProgress: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:64
+Defined in: core/utils/canvas/widgets/theme-slider.ts:67
 
 ---
 
@@ -321,7 +321,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:64
 uKnobX: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:65
+Defined in: core/utils/canvas/widgets/theme-slider.ts:68
 
 ---
 
@@ -331,7 +331,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:65
 uRippleTime: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:66
+Defined in: core/utils/canvas/widgets/theme-slider.ts:69
 
 ---
 
@@ -341,7 +341,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:66
 uRipplePos: WebGLUniformLocation | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:67
+Defined in: core/utils/canvas/widgets/theme-slider.ts:70
 
 ---
 
@@ -351,7 +351,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:67
 aPos: number = -1
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:68
+Defined in: core/utils/canvas/widgets/theme-slider.ts:71
 
 ---
 
@@ -361,7 +361,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:68
 _resizeObserver: ResizeObserver | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:69
+Defined in: core/utils/canvas/widgets/theme-slider.ts:72
 
 ---
 
@@ -371,7 +371,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:69
 _onContextLost: EventListener | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:70
+Defined in: core/utils/canvas/widgets/theme-slider.ts:73
 
 ---
 
@@ -381,7 +381,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:70
 _purged: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:71
+Defined in: core/utils/canvas/widgets/theme-slider.ts:74
 
 ---
 
@@ -393,7 +393,7 @@ _wasm:
   | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:73
+Defined in: core/utils/canvas/widgets/theme-slider.ts:76
 
 Live WebGPU wasm handle — the preferred backend when it mounts.
 
@@ -405,7 +405,7 @@ Live WebGPU wasm handle — the preferred backend when it mounts.
 _wasmFailed: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:75
+Defined in: core/utils/canvas/widgets/theme-slider.ts:78
 
 Latch — a failed wasm mount never retries on this instance.
 
@@ -417,7 +417,7 @@ Latch — a failed wasm mount never retries on this instance.
 _wasmPending: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:77
+Defined in: core/utils/canvas/widgets/theme-slider.ts:80
 
 In-flight mount — restore() must not double-mount on re-entry.
 
@@ -429,7 +429,7 @@ In-flight mount — restore() must not double-mount on re-entry.
 _wasmT: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:79
+Defined in: core/utils/canvas/widgets/theme-slider.ts:82
 
 Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
@@ -441,7 +441,7 @@ Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 onPointerDown: ((_e) => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:80
+Defined in: core/utils/canvas/widgets/theme-slider.ts:83
 
 ---
 
@@ -451,7 +451,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:80
 onPointerMove: ((_e) => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:81
+Defined in: core/utils/canvas/widgets/theme-slider.ts:84
 
 ---
 
@@ -461,7 +461,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:81
 onPointerUp: ((_e) => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:82
+Defined in: core/utils/canvas/widgets/theme-slider.ts:85
 
 ---
 
@@ -471,7 +471,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:82
 onClick: ((_e) => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:83
+Defined in: core/utils/canvas/widgets/theme-slider.ts:86
 
 ---
 
@@ -481,9 +481,25 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:83
 onKeyDown: ((_e) => void) | undefined;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:84
+Defined in: core/utils/canvas/widgets/theme-slider.ts:87
 
 ## Methods
+
+### \_frameTick()
+
+```ts
+_frameTick(): void;
+```
+
+Defined in: core/utils/canvas/widgets/theme-slider.ts:57
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
+
+#### Returns
+
+`void`
+
+---
 
 ### \_themeToP()
 
@@ -491,7 +507,7 @@ Defined in: core/utils/canvas/widgets/theme-slider.ts:84
 _themeToP(theme): number;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:135
+Defined in: core/utils/canvas/widgets/theme-slider.ts:138
 
 THEME → normalized track position. Positions are the integer stops
 0/1/2 — fractional values only exist mid-animation.
@@ -514,7 +530,7 @@ THEME → normalized track position. Positions are the integer stops
 _pToTheme(p): string;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:141
+Defined in: core/utils/canvas/widgets/theme-slider.ts:144
 
 Maps a normalized track position back to the nearest THEME value.
 
@@ -536,7 +552,7 @@ Maps a normalized track position back to the nearest THEME value.
 _pToKnobX(p): number;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:149
+Defined in: core/utils/canvas/widgets/theme-slider.ts:152
 
 Normalized position → knob pixel X inside the track — see
 theme-slider-math.ts for the inset geometry.
@@ -559,7 +575,7 @@ theme-slider-math.ts for the inset geometry.
 init(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:155
+Defined in: core/utils/canvas/widgets/theme-slider.ts:158
 
 Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
 
@@ -575,7 +591,7 @@ Boot sequence: GL init → event binding → render start; fully degrades to the
 _triggerFallback(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:161
+Defined in: core/utils/canvas/widgets/theme-slider.ts:164
 
 Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on context loss or init failure.
 
@@ -591,7 +607,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 initWebGL(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:167
+Defined in: core/utils/canvas/widgets/theme-slider.ts:170
 
 Creates the WebGL context, compiles the shader program and sets up uniforms/buffers; falls back on any failure.
 
@@ -607,7 +623,7 @@ Creates the WebGL context, compiles the shader program and sets up uniforms/buff
 bindEvents(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:173
+Defined in: core/utils/canvas/widgets/theme-slider.ts:176
 
 Wires pointer drag + tap-to-snap; supports keyboard arrows for a11y.
 
@@ -623,7 +639,7 @@ Wires pointer drag + tap-to-snap; supports keyboard arrows for a11y.
 _tapWasm(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:186
+Defined in: core/utils/canvas/widgets/theme-slider.ts:189
 
 Forwards the latest ripple stamp to the wasm widget's `tap()` —
 the crate's clock shares this.startTime's domain (its first
@@ -641,7 +657,7 @@ frame() absorbs the full elapsed t as dt).
 _xToContinuousP(x, rectWidth?): number;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:196
+Defined in: core/utils/canvas/widgets/theme-slider.ts:199
 
 Pointer pixel X → continuous (unclamped-drag) normalized position —
 see theme-slider-math.ts for the 12%–88% active band.
@@ -668,7 +684,7 @@ see theme-slider-math.ts for the 12%–88% active band.
 _xToP(x): number;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:204
+Defined in: core/utils/canvas/widgets/theme-slider.ts:207
 
 Pointer pixel X → normalized position using the fixed 32px insets
 (same span as _pToKnobX). Retained for non-drag hit paths.
@@ -691,7 +707,7 @@ Pointer pixel X → normalized position using the fixed 32px insets
 setTheme(theme): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:210
+Defined in: core/utils/canvas/widgets/theme-slider.ts:213
 
 Moves the knob to the given theme's stop (spring-animated).
 
@@ -713,7 +729,7 @@ Moves the knob to the given theme's stop (spring-animated).
 setReducedMotion(isReduced): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:229
+Defined in: core/utils/canvas/widgets/theme-slider.ts:232
 
 Applies prefers-reduced-motion: swaps the animation loop for one
 static frame render, or restarts the loop when motion is re-allowed.
@@ -736,7 +752,7 @@ static frame render, or restarts the loop when motion is re-allowed.
 _renderStatic(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:241
+Defined in: core/utils/canvas/widgets/theme-slider.ts:244
 
 Snap state to target and draw a single settled frame — used under
 reduced motion or when the loop is stopped.
@@ -753,7 +769,7 @@ reduced motion or when the loop is stopped.
 animate(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:247
+Defined in: core/utils/canvas/widgets/theme-slider.ts:250
 
 Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
@@ -769,7 +785,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 _renderWebGL(now): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:253
+Defined in: core/utils/canvas/widgets/theme-slider.ts:256
 
 Per-frame WebGL render: updates time/knob uniforms and draws the quad.
 
@@ -791,7 +807,7 @@ Per-frame WebGL render: updates time/knob uniforms and draws the quad.
 _renderCanvas2D(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:262
+Defined in: core/utils/canvas/widgets/theme-slider.ts:265
 
 Canvas2D fallback renderer — dormant defensive code; the real
 fallback hides the canvas and activates the CSS/DOM fallback
@@ -809,7 +825,7 @@ fallback hides the canvas and activates the CSS/DOM fallback
 purge(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:271
+Defined in: core/utils/canvas/widgets/theme-slider.ts:274
 
 webglPool hook — offscreen: stops the loop and force-loses the GL
 context so offscreen widgets hold no context slots; restore()
@@ -827,7 +843,7 @@ rebuilds the program on re-entry.
 restore(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:296
+Defined in: core/utils/canvas/widgets/theme-slider.ts:299
 
 Recreates the GL context + program and resumes the loop after a purge.
 
@@ -843,7 +859,7 @@ Recreates the GL context + program and resumes the loop after a purge.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider.ts:332
+Defined in: core/utils/canvas/widgets/theme-slider.ts:335
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

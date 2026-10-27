@@ -80,14 +80,17 @@ Localized llms.txt — swaps the intro line for the locale's about text.
 
 Localized ai-catalog — entry URLs get the /<loc> prefix (docs stay EN).
 
+### `robotsDoc`
+
+Emits root or localized crawl policy with its sitemap discovery URL.
+
 ### `bioOf`
 
 Localized channel description — the locale's about bio, else en.
 
 ### `rssItem`
 
-One RSS <item> — media rows emit media:content (image) or
-media:content+media:thumbnail (video).
+One RSS item with a valid image enclosure or video plus optional poster.
 
 ### `rssDoc`
 

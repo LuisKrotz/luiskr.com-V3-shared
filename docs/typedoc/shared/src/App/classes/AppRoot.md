@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [shared/src/App](../README.md) / AppRoot
 
-Defined in: shared/src/App.tsx:56
+Defined in: shared/src/App.tsx:59
 
 Application shell element. Extends the shared BaseComponent (shadow DOM,
 scoped listeners, store subscription, _updateDom re-render pipeline).
@@ -21,7 +21,7 @@ scoped listeners, store subscription, _updateDom re-render pipeline).
 new AppRoot(): AppRoot;
 ```
 
-Defined in: shared/src/App.tsx:80
+Defined in: shared/src/App.tsx:85
 
 #### Returns
 
@@ -186,7 +186,7 @@ translations:
   | null = null;
 ```
 
-Defined in: shared/src/App.tsx:58
+Defined in: shared/src/App.tsx:61
 
 ---
 
@@ -196,7 +196,7 @@ Defined in: shared/src/App.tsx:58
 routeLoading: boolean = false
 ```
 
-Defined in: shared/src/App.tsx:60
+Defined in: shared/src/App.tsx:63
 
 ---
 
@@ -206,7 +206,7 @@ Defined in: shared/src/App.tsx:60
 activeSection: string = SECTIONS.HOME
 ```
 
-Defined in: shared/src/App.tsx:62
+Defined in: shared/src/App.tsx:65
 
 ---
 
@@ -216,7 +216,7 @@ Defined in: shared/src/App.tsx:62
 onBottom: boolean = false
 ```
 
-Defined in: shared/src/App.tsx:64
+Defined in: shared/src/App.tsx:67
 
 ---
 
@@ -226,7 +226,7 @@ Defined in: shared/src/App.tsx:64
 currentViewTag: string
 ```
 
-Defined in: shared/src/App.tsx:66
+Defined in: shared/src/App.tsx:69
 
 ---
 
@@ -236,7 +236,7 @@ Defined in: shared/src/App.tsx:66
 _aboutTop: number = 600
 ```
 
-Defined in: shared/src/App.tsx:69
+Defined in: shared/src/App.tsx:72
 
 ---
 
@@ -246,7 +246,7 @@ Defined in: shared/src/App.tsx:69
 _contactTop: number = 1500
 ```
 
-Defined in: shared/src/App.tsx:70
+Defined in: shared/src/App.tsx:73
 
 ---
 
@@ -256,7 +256,7 @@ Defined in: shared/src/App.tsx:70
 _sectionsMeasured: boolean = false
 ```
 
-Defined in: shared/src/App.tsx:71
+Defined in: shared/src/App.tsx:74
 
 ---
 
@@ -266,7 +266,19 @@ Defined in: shared/src/App.tsx:71
 _lastMeasureAttempt: number = 0
 ```
 
-Defined in: shared/src/App.tsx:72
+Defined in: shared/src/App.tsx:75
+
+---
+
+### \_scrollH
+
+```ts
+_scrollH: number = 0
+```
+
+Defined in: shared/src/App.tsx:77
+
+Cached document height — refreshed by updateSectionTops on body resize.
 
 ---
 
@@ -276,7 +288,7 @@ Defined in: shared/src/App.tsx:72
 _loadedLang: string | null = null;
 ```
 
-Defined in: shared/src/App.tsx:73
+Defined in: shared/src/App.tsx:78
 
 ---
 
@@ -288,7 +300,7 @@ _introLoader:
   | null = null;
 ```
 
-Defined in: shared/src/App.tsx:74
+Defined in: shared/src/App.tsx:79
 
 ---
 
@@ -298,7 +310,7 @@ Defined in: shared/src/App.tsx:74
 _docObserver: ResizeObserver | null = null;
 ```
 
-Defined in: shared/src/App.tsx:76
+Defined in: shared/src/App.tsx:81
 
 Watches document height so onBottom/activeSection never go stale.
 
@@ -310,7 +322,7 @@ Watches document height so onBottom/activeSection never go stale.
 _scrollRaf: number = 0
 ```
 
-Defined in: shared/src/App.tsx:78
+Defined in: shared/src/App.tsx:83
 
 Pending rAF coalescing burst scroll events into one checkScroll per frame.
 
@@ -4373,7 +4385,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get modal(): ModalObject;
 ```
 
-Defined in: shared/src/App.tsx:85
+Defined in: shared/src/App.tsx:90
 
 Current modal descriptor from the store ({ open, class, transform }).
 
@@ -4391,7 +4403,7 @@ Current modal descriptor from the store ({ open, class, transform }).
 get locale(): string;
 ```
 
-Defined in: shared/src/App.tsx:90
+Defined in: shared/src/App.tsx:95
 
 Active locale code (en, pt, gl, …).
 
@@ -4924,7 +4936,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: shared/src/App.tsx:100
+Defined in: shared/src/App.tsx:105
 
 Lifecycle: runs once when <app-root> connects to the DOM.
 Applies persisted preferences, boots data loading, wires the router
@@ -4947,7 +4959,7 @@ modal/dialog/HUD chunks so they aren't on the critical path.
 onDestroy(): void;
 ```
 
-Defined in: shared/src/App.tsx:105
+Defined in: shared/src/App.tsx:110
 
 Lifecycle: releases the intro loader + document observer when the element disconnects.
 
@@ -4967,7 +4979,7 @@ Lifecycle: releases the intro loader + document observer when the element discon
 onStoreUpdate(): void;
 ```
 
-Defined in: shared/src/App.tsx:121
+Defined in: shared/src/App.tsx:126
 
 Store-subscription callback: reloads locale data when the language
 changes and re-applies modal open/close state to the shell.
@@ -4988,7 +5000,7 @@ changes and re-applies modal open/close state to the shell.
 _updateModalState(): void;
 ```
 
-Defined in: shared/src/App.tsx:140
+Defined in: shared/src/App.tsx:145
 
 Syncs modal state into the DOM without a full re-render:
 
@@ -5010,7 +5022,7 @@ Syncs modal state into the DOM without a full re-render:
 initInputListeners(): void;
 ```
 
-Defined in: shared/src/App.tsx:151
+Defined in: shared/src/App.tsx:156
 
 Tracks the input method ('pointer' vs 'touch') in the store so styles
 can suppress sticky hover states on touch devices. Prefers the unified
@@ -5030,7 +5042,7 @@ imagery shouldn't be right-click-saved or dragged).
 loadData(): void;
 ```
 
-Defined in: shared/src/App.tsx:160
+Defined in: shared/src/App.tsx:165
 
 Loads the locale's translation nodes (APP, slugs, components) via the
 static-first SWR layer and pushes them into the store + already-mounted
@@ -5048,7 +5060,7 @@ children. Skips nodes already cached for the current locale.
 updateSectionTops(): void;
 ```
 
-Defined in: shared/src/App.tsx:170
+Defined in: shared/src/App.tsx:175
 
 Measures the document offsets of the #about and #contact section markers
 inside the home view's shadow DOM (deepQuerySelector pierces it) and
@@ -5067,7 +5079,7 @@ _sectionsMeasured false so checkScroll retries lazily.
 checkScroll(): void;
 ```
 
-Defined in: shared/src/App.tsx:180
+Defined in: shared/src/App.tsx:185
 
 Scroll handler: computes near-bottom state and the active home section
 (home/about/contact) from measured tops, then pushes both to <app-nav>
@@ -5086,7 +5098,7 @@ No-ops on non-home routes except still feeding the nav its state.
 _updateViewContent(to?, _from?): void;
 ```
 
-Defined in: shared/src/App.tsx:189
+Defined in: shared/src/App.tsx:194
 
 Reconciles #view-outlet with the target route's view tag. If the same
 view type is already mounted (e.g. project→project), delegates to its
@@ -5115,7 +5127,7 @@ onRouteParamChange instead of remounting; otherwise flips the view.
 _flipToView(outlet, _to?): Promise<void>;
 ```
 
-Defined in: shared/src/App.tsx:200
+Defined in: shared/src/App.tsx:205
 
 Swaps the outlet's child for a new route view element. Dynamically
 imports the route chunk first (each route is a separate lazy chunk),
@@ -5145,7 +5157,7 @@ first-mount take the instant-swap path.
 render(): Element;
 ```
 
-Defined in: shared/src/App.tsx:208
+Defined in: shared/src/App.tsx:213
 
 JSX template: persistent chrome + routed outlet. The view tag is a
 dynamic component (CurrentView = this.currentViewTag).
@@ -5166,7 +5178,7 @@ dynamic component (CurrentView = this.currentViewTag).
 onUpdated(): void;
 ```
 
-Defined in: shared/src/App.tsx:241
+Defined in: shared/src/App.tsx:265
 
 Lifecycle: after each re-render, re-pushes translations and modal state into children.
 

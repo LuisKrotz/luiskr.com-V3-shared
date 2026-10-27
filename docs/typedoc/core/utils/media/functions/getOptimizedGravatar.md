@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / getOptimizedGravatar
 
 ```ts
-function getOptimizedGravatar(urlStr, size?): string;
+function getOptimizedGravatar(urlStr, size?): string
 ```
 
-Defined in: core/utils/media.ts:90
+Defined in: core/utils/media.ts:94
 
 Replaces the `size=` parameter on a Gravatar URL. Non-Gravatar URLs pass
 through unchanged (the param is meaningless off-domain), and a URL with

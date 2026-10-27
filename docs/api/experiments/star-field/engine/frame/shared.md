@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/frame/shared.ts`
+# `experiments\star-field\engine\frame\shared.ts`
 
 Lazily-armed frame state — bootstrap injects the real
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/frame/shared.ts`     |
+| **Source**     | `src/experiments\star-field\engine\frame\shared.ts`     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

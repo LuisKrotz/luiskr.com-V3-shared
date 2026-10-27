@@ -8,7 +8,7 @@
 function startExpandedClose(el): void
 ```
 
-Defined in: website/components/media/expanded/close.ts:82
+Defined in: website/components/media/expanded/close.ts:91
 
 Starts expanded close.
 

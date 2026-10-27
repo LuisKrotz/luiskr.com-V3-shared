@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..', '..', '..')
@@ -1151,10 +1152,12 @@ for (const [locale, shared] of Object.entries(SHARED)) {
     // re-runs stay idempotent.
     const preserve = key === 'star-field' || key === 'earth-playground'
     const existing =
-      preserve && Array.isArray(tr.pages[key]?.searchThemes) ? tr.pages[key].searchThemes : []
+      preserve && Array.isArray(tr.pages[key]?.[SEARCH_THEMES_KEY])
+        ? tr.pages[key][SEARCH_THEMES_KEY]
+        : []
 
     tr.pages[key] = tr.pages[key] || {}
-    tr.pages[key].searchThemes = dedupe([
+    tr.pages[key][SEARCH_THEMES_KEY] = dedupe([
       ...existing,
       ...derivedPageTerms(tr, key),
       ...(pageTerms[key] || []),
@@ -1168,7 +1171,7 @@ for (const [locale, shared] of Object.entries(SHARED)) {
   for (const [slug, project] of Object.entries(tr.projects || {})) {
     const titleTerm = String(project?.title || slug).toLowerCase()
 
-    project.searchThemes = dedupe([
+    project[SEARCH_THEMES_KEY] = dedupe([
       titleTerm,
       slug.replace(/-/g, ' '),
       ...mediaLabels(project),

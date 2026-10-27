@@ -8,7 +8,7 @@
 function renderWebGL(host, now): void
 ```
 
-Defined in: core/utils/canvas/widgets/close-button/render.ts:107
+Defined in: core/utils/canvas/widgets/close-button/render.ts:145
 
 Per-frame WebGL render: updates time/hover uniforms and draws the quad.
 

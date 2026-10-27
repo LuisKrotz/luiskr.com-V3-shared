@@ -1,9 +1,9 @@
-# `cms/footer/render.tsx`
+# `cms\footer\render.tsx`
 
-| | |
-|---|---|
-| **Source** | `src/cms/footer/render.tsx` |
-| **UX surface** | Footer + legal links editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\footer\render.tsx`                     |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

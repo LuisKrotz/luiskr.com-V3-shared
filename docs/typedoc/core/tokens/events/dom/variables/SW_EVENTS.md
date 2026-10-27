@@ -13,7 +13,7 @@ const SW_EVENTS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/events/dom.ts:174
+Defined in: core/tokens/events/dom.ts:194
 
 Frozen service-worker event/state map — registration lifecycle
 (`updatefound` on the registration, `statechange`/`installed` on the

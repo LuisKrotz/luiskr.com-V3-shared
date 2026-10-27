@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/deploy-info/types](../README.md) / SnykReport
 
-Defined in: cms/deploy-info/types.ts:54
+Defined in: cms/deploy-info/types.ts:87
 
 Shape of the security-scan report — `scanner` records whether snyk or
 yarn audit produced it, `ok` the gate outcome, `vulnerabilities` the advisory
@@ -18,9 +18,9 @@ rows (acceptedRisk marks entries waived via security-exceptions.json).
 optional scanner?: string;
 ```
 
-Defined in: cms/deploy-info/types.ts:55
+Defined in: cms/deploy-info/types.ts:88
 
-***
+---
 
 ### ok?
 
@@ -28,9 +28,9 @@ Defined in: cms/deploy-info/types.ts:55
 optional ok?: boolean;
 ```
 
-Defined in: cms/deploy-info/types.ts:56
+Defined in: cms/deploy-info/types.ts:89
 
-***
+---
 
 ### totals?
 
@@ -38,9 +38,9 @@ Defined in: cms/deploy-info/types.ts:56
 optional totals?: Record<string, number>;
 ```
 
-Defined in: cms/deploy-info/types.ts:57
+Defined in: cms/deploy-info/types.ts:90
 
-***
+---
 
 ### vulnerabilities?
 
@@ -48,7 +48,7 @@ Defined in: cms/deploy-info/types.ts:57
 optional vulnerabilities?: object[];
 ```
 
-Defined in: cms/deploy-info/types.ts:58
+Defined in: cms/deploy-info/types.ts:91
 
 #### packageName?
 

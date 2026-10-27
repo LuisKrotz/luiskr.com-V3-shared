@@ -8,7 +8,7 @@
 function ensureRegistryManifest(): Promise<SFRegistryManifest | null>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:101
+Defined in: experiments/star-field/engine/registry.ts:99
 
 Fetches the registry manifest once per session — the directory needs
 it for the per-kind counts and shard lists; selection paths don't

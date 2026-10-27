@@ -1,10 +1,10 @@
-# `core/utils/string.ts`
+# `core\utils\string.ts`
 
 Small pure string transforms — HTML stripping for
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/string.ts`                                |
+| **Source**     | `src/core\utils\string.ts`                                |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -25,6 +25,25 @@ Pure ESM utility function, tree-shakeable.
 ### `META_DESCRIPTION_MAX`
 
 Meta descriptions cap at ~160 chars — Google's SERP snippet budget.
+
+### `HEADING_EXCERPT_WORDS`
+
+Word budget for a generated a11y heading — enough leading content to
+identify the block in a heading list, short enough to stay a label.
+
+### `excerptHeading`
+
+Builds a short heading from a block of content text: markup strips via
+the iterated sanitizer, whitespace collapses, and the first
+HEADING_EXCERPT_WORDS words are kept with a trailing ellipsis when the
+text runs longer — the incipit names the block after its own content
+("Joining Dell on June 6th, 2022…") instead of a meaningless ordinal.
+Returns '' for empty/non-string input so callers can fall back to a
+generic localized label.
+Pure ESM utility function, tree-shakeable.
+
+- `@param` text Raw block text (markup tolerated).
+- `@returns` Heading excerpt or ''.
 
 ### `toMetaDescription`
 
@@ -75,6 +94,18 @@ or indexed /portfolio/<p>/<media> links stop auto-opening.
 - `@param` text Display text to slug.
 - `@returns` URL/id-safe slug, or '' for non-string input.
 
+### `splitDrawSentences`
+
+Splits a paragraph into sentence runs for staged draw-text reveals.
+A boundary is terminal punctuation (. ! ? …) followed by whitespace —
+mid-word dots without a following space ("Three.js", CDN paths) never
+split. The delimiter whitespace is consumed; callers join runs with a
+real space node so inline wrapping is preserved. Text with no
+boundary returns as a single run; empty input returns [].
+
+- `@param` text Raw paragraph text.
+- `@returns` Sentence strings in document order, whitespace-trimmed.
+
 ### `mediaSlugSeq`
 
 Assigns the canonical deep-link slug for one media item within a
@@ -83,6 +114,11 @@ project's traversal. Distinct captions can collapse to the same slug
 silently drop the second item's indexable URL everywhere. The first
 occurrence keeps the base slug; later ones gain `-2`, `-3`, … in
 document order — every labelled item stays uniquely addressable.
+The base slug is first capped at MEDIA_SLUG_MAX_LENGTH so
+prerendered dist paths stay under Windows MAX_PATH — the cap cuts at
+the length then drops the trailing partial word (and a dangling
+hyphen) so the slug always ends on a hyphen boundary; ordinal suffixes
+disambiguate any collisions the cut introduces.
 Callers iterate items in traversal order sharing one `seen` map; the
 same map/count convention is mirrored in the build scripts
 (generate-sitemap.js + build-locale-pages.mjs) so emitted file names,

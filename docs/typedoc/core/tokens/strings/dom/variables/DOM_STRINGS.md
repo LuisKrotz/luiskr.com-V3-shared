@@ -23,6 +23,7 @@ const DOM_STRINGS: Readonly<{
   AS_FONT: 'font'
   BLANK: '_blank'
   NOOPENER: 'noopener noreferrer'
+  NO_AUDIO_LABEL: 'No audio'
   DATA_ROUTE: 'data-route'
   A_TAG: 'a'
   BR_TAG: '<br>'

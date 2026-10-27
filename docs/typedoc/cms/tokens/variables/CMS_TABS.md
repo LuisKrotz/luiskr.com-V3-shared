@@ -1,20 +1,20 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / [cms/tokens](../README.md) / CMS\_TABS
 
 ```ts
 const CMS_TABS: Readonly<{
-  PORTFOLIO: "portfolio";
-  PROJECTS: "projects";
-  ABOUT: "about";
-  FOOTER: "footer";
-  PLAYGROUND: "playground";
-  LANGUAGES: "languages";
-  MEDIA: "media";
-  DEPLOY: "deploy";
-}>;
+  PORTFOLIO: 'portfolio'
+  PROJECTS: 'projects'
+  ABOUT: 'about'
+  FOOTER: 'footer'
+  PLAYGROUND: 'playground'
+  LANGUAGES: 'languages'
+  MEDIA: 'media'
+  BUILD: 'build'
+}>
 ```
 
 Defined in: cms/tokens.ts:26

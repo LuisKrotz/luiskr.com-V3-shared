@@ -11,7 +11,7 @@ function parseRegistryId(id): {
 } | null
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:89
+Defined in: experiments/star-field/engine/registry.ts:87
 
 Splits a registry id into its kind and global rank — the two numbers
 the shard math needs (`shard = rank ÷ shardSize`, `slot = rank mod

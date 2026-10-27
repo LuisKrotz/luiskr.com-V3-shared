@@ -13,7 +13,7 @@ const SOURCE_COMPONENT_KEYS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/data/component-keys.ts:54
+Defined in: core/tokens/data/component-keys.ts:55
 
 Frozen source component key map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

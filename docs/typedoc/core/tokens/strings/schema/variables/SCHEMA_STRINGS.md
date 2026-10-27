@@ -8,6 +8,7 @@
 const SCHEMA_STRINGS: Readonly<{
   SCHEMA_CONTEXT: 'https://schema.org'
   NOINDEX_NOFOLLOW: 'noindex, nofollow'
+  INDEX_RICH_DIRECTIVES: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
   JSON_LD_SCRIPT_TYPE: 'application/ld+json'
   JSON_LD_SCRIPT_ID: 'jsonld-graph'
   SCHEMA_PUBLISHED_DATE: '2021-01-01T00:00:00+00:00'

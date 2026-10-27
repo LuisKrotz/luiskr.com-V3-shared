@@ -1,10 +1,10 @@
-# `website/components/carousel/CustomCarousel.tsx`
+# `website\components\carousel\CustomCarousel.tsx`
 
 &lt;custom-carousel&gt; — infinite-loop horizontal carousel used by
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/carousel/CustomCarousel.tsx`    |
+| **Source**     | `src/website\components\carousel\CustomCarousel.tsx`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -69,7 +69,12 @@ Scroll debounce — _checkInfiniteLoop runs 150ms after the last event.
 
 ### `teleportTimer`
 
-Pending clone→real instant jump (CAROUSEL_TIMING.TELEPORT_DELAY).
+Pending clone→real instant jump watchdog (CAROUSEL_TIMING.TELEPORT_DELAY).
+
+### `pendingTeleport`
+
+Clone→real teleport armed by _scheduleTeleport — the scroll spring's
+settle fires it; the timer is only the rAF-starvation watchdog.
 
 ### `isNavigating`
 
@@ -108,6 +113,10 @@ True when ≤2 items fit side-by-side at ≥960px — no carousel chrome.
 ### `_fitObserver`
 
 ResizeObserver on the host for _measureFit re-runs.
+
+### `_unsubManifest`
+
+Media-manifest arrival sub — re-renders slides with proven webp thumbs.
 
 ### `_lastObservedWidth`
 
@@ -172,6 +181,18 @@ Whether the carousel is currently auto-advancing.
 ### `onUnmounted`
 
 Extra unmount hook the Safari patch calls — releases the fit observer early.
+
+### (module scope)
+
+Post-render hook — republishes --carousel-media-height on the host and
+--carousel-item-height on the enclosing section synchronously after
+every render, so the first painted frame already carries the
+aspect-corrected strip height. Without it, carousel shapes with no CSS
+ratio class (mixed, portrait, or unlabeled media below the 768px
+breakpoint) render at the ~70dvh --mf-h fallback until the deferred
+RAF in _setupAfterRender runs — a visible wrong→right size jump (CLS).
+The RAF copy stays as the post-layout refinement; setHeightVar's
+guards make repeat calls no-ops.
 
 ### `_setupAfterRender`
 
@@ -252,6 +273,10 @@ Instant position jump — used for the clone teleports.
 ### `onScroll`
 
 Scroll handler: detects when the track lands on a clone edge to teleport.
+
+### `_cancelNavSpring`
+
+User-gesture takeover — kills the scroll spring + pending teleport.
 
 ### `_checkInfiniteLoop`
 

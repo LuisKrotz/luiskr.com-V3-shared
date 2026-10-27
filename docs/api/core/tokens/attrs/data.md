@@ -1,10 +1,10 @@
-# `core/tokens/attrs/data.ts`
+# `core\tokens\attrs\data.ts`
 
 `data-*` attribute tokens — token group. Every name is
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/attrs/data.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\attrs\data.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -114,3 +114,15 @@ the token contract immutable at runtime.
 ### `DATA_WIRED`
 
 Marks a docs-content box whose delegated link handler is attached.
+
+### `DATA_ANIM_LABEL`
+
+`data-anim-label` — the alt the animation-desc helper last stamped;
+lets locale re-applies refresh only helper-owned names (an author
+name that diverges from the stamp is never clobbered).
+
+### `DATA_ANIM_DESC`
+
+`data-anim-desc` — marks canvas fallback text owned by the
+animation-desc helper (value = the ANIMATION_IDS entry, so the
+marker doubles as the element's animation identity).

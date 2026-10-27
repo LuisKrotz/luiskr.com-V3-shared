@@ -1,10 +1,10 @@
-# `experiments/star-field/tests/coverage/starfield/engine/starfield-procedural-tails.test.js`
+# `experiments\star-field\tests\coverage\starfield\engine\starfield-procedural-tails.test.js`
 
 Coverage tails for the procedural imagery layer —
 
 |                |                                                                                                 |
 | -------------- | ----------------------------------------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/tests/coverage/starfield/engine/starfield-procedural-tails.test.js` |
+| **Source**     | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-procedural-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                                         |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/utils/canvas/gl-program.ts`
+# `core\utils\canvas\gl-program.ts`
 
 Shared WebGL boilerplate for the canvas widgets — every
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/gl-program.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\gl-program.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -29,7 +29,7 @@ any stage failure — the caller treats it as "no WebGL" and falls back.
 ### (module scope)
 
 Quad vertex layout — defaults to the 6-vertex TRIANGLES quad;
- TRIANGLE_STRIP callers pass their 4-vertex ordering instead.
+TRIANGLE_STRIP callers pass their 4-vertex ordering instead.
 
 ### (module scope)
 
@@ -38,7 +38,7 @@ Custom warn sink — stage is 'VS' | 'FS' | 'Link' | 'fallback'.
 ### (module scope)
 
 Blend factors — default premultiplied (ONE, ONE_MINUS_SRC_ALPHA);
- false gives straight-alpha (SRC_ALPHA, ONE_MINUS_SRC_ALPHA).
+false gives straight-alpha (SRC_ALPHA, ONE_MINUS_SRC_ALPHA).
 
 ### `createQuadProgram`
 
@@ -47,7 +47,7 @@ Creates quad program.
 ### `getUniforms`
 
 Resolves a uniform-location map — keys are the caller's shorthand,
- values are the shader's `u_*` names (identical keys work too).
+values are the shader's `u_*` names (identical keys work too).
 
 ### `bindQuad`
 

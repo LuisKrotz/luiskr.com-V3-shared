@@ -8,7 +8,7 @@
 function generateRouteSchema(options): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:332
+Defined in: core/utils/schema.ts:337
 
 Base per-route JSON-LD graph — Organization + WebSite (localized
 inLanguage) + WebPage + optional BreadcrumbList. Emitted on every

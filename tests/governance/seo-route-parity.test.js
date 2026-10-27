@@ -18,6 +18,8 @@
  *  - media deep links (/portfolio/<slug>/<media>) exist for every
  *    labelled project media item, in every locale;
  *  - image/video sitemap extensions point at real bucket keys;
+ *  - searchThemes captions and localized RSS feeds stay attached to the
+ *    canonical content routes without empty Media RSS URLs;
  *  - urllist.txt covers every sitemap <loc>;
  *  - index.html carries exactly one JSON-LD graph with stable entity ids
  *    matching the runtime schema builders.
@@ -27,6 +29,7 @@ import { describe, test, expect } from '@jest/globals'
 import fs from 'node:fs'
 import path from 'node:path'
 import { LANG_SLUGS } from '@core/i18n.js'
+import { CMS_KEYS } from '@core/tokens/data/cms-keys.js'
 import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '@core/tokens/routes/aliases.js'
 import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
@@ -349,9 +352,12 @@ describe('SEO route parity', () => {
   test('image/video sitemap extensions index real media at best quality', () => {
     const imageLocs = [...enSitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((m) => m[1])
     const videoTags = enSitemap.match(/<video:video>/g) || []
+    const database = JSON.parse(read(path.join(ROOT_DIR, 'database.json')))
+    const homeThemes = database.translations.en.pages.HOME[CMS_KEYS.SEARCH_THEMES]
 
     expect(imageLocs.length).toBeGreaterThan(0)
     expect(videoTags.length).toBeGreaterThan(0)
+    expect(enSitemap).toContain(`<image:caption>${homeThemes[0]}`)
 
     const manifest = JSON.parse(read(path.join(META_DIR, 'media-manifest.json')))
     const keys = new Set(manifest)
@@ -373,6 +379,48 @@ describe('SEO route parity', () => {
 
     for (const m of enSitemap.matchAll(/<video:(?:content_loc|thumbnail_loc)>([^<]+)<\//g)) {
       expect(keys.has(keyOf(m[1]))).toBe(true)
+    }
+  })
+
+  test('RSS routes serve localized feeds with valid media URLs', () => {
+    const feedRewrites = firebase.hosting.rewrites.filter(({ source }) =>
+      /(?:feed|rss)\.xml$/.test(source)
+    )
+
+    expect(feedRewrites).toHaveLength(Object.keys(LANG_SLUGS).length + 1)
+
+    for (const rule of feedRewrites) {
+      const feedFile = path.join(
+        ROOT_DIR,
+        'website',
+        'public',
+        ...rule.destination.split('/').slice(1)
+      )
+      const feed = read(feedFile)
+      const canonicalRoute = rule.source.replace(/rss\.xml$/, 'feed.xml')
+      const selfLinks = [...feed.matchAll(/<atom:link href="([^"]+)" rel="self"/g)].map(
+        (match) => match[1]
+      )
+      const itemCount = (feed.match(/<item>/g) || []).length
+
+      expect(selfLinks).toHaveLength(1)
+      expect(selfLinks[0]).toBe(`${SITE}${canonicalRoute}`)
+      expect(itemCount).toBeGreaterThan(0)
+      expect(feed).not.toMatch(/(?:media:content|media:thumbnail)\s+url=""/)
+    }
+
+    const englishFeed = read(path.join(META_DIR, 'feed.xml'))
+    const mediaUrls = [
+      ...englishFeed.matchAll(/<(?:media:content|media:thumbnail)\s+url="([^"]+)"/g),
+    ].map((match) => match[1])
+
+    expect(mediaUrls.length).toBeGreaterThan(0)
+    expect(englishFeed).toMatch(/<media:thumbnail url="[^"]+"\/>/)
+    expect(englishFeed).toMatch(/<media:content url="[^"]+" medium="video"\/>/)
+    expect(englishFeed).toMatch(/<media:content url="[^"]+" medium="image"\/>/)
+
+    for (const mediaUrl of mediaUrls) {
+      expect(() => new URL(mediaUrl)).not.toThrow()
     }
   })
 

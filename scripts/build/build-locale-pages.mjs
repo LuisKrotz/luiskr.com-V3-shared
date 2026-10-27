@@ -45,6 +45,7 @@ import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { PROJECT_ALIASES } from '../../../core/tokens/routes/aliases.ts'
+import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 import { slugify, capSlug, mediaRowsOf, llmTreePaths } from './route-media.mjs'
 import { GENERIC_DIMENSIONS } from '../../../core/tokens/media/dimensions.ts'
 import { MEDIA } from '../../../core/tokens/media/suffixes.ts'
@@ -1341,8 +1342,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   })()
 
   const snapshotThemes = (loc, kind, key) =>
-    snapshotDb.translations?.[loc]?.[kind]?.[key]?.searchThemes ||
-    snapshotDb.translations?.en?.[kind]?.[key]?.searchThemes ||
+    snapshotDb.translations?.[loc]?.[kind]?.[key]?.[SEARCH_THEMES_KEY] ||
+    snapshotDb.translations?.en?.[kind]?.[key]?.[SEARCH_THEMES_KEY] ||
     []
   const legalEn = en.components?.['legal-footer']?.links || []
 
@@ -1585,7 +1586,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
    * surfaces instead — emitting them as bare paragraphs would read as
    * keyword stuffing.
    */
-  const LEAF_SKIP = new Set(['title', 'searchThemes', 'shareGallery', 'shareCapture'])
+  const LEAF_SKIP = new Set(['title', SEARCH_THEMES_KEY, 'shareGallery', 'shareCapture'])
 
   const leafParagraphs = (obj, skip = LEAF_SKIP) => {
     const out = []
@@ -1955,7 +1956,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     // (searchThemes, shareGallery, shareCapture) feed the gallery
     // section + keywords surfaces instead — bare paragraphs of theme
     // terms would read as keyword stuffing.
-    const skip = new Set(['title', 'defaults', 'searchThemes', 'shareGallery', 'shareCapture'])
+    const skip = new Set(['title', 'defaults', SEARCH_THEMES_KEY, 'shareGallery', 'shareCapture'])
 
     const effDefault = (c) =>
       c.label in defaults ? defaults[c.label] : 'checked' in c ? c.checked : c.def
@@ -2041,14 +2042,14 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   const epThemesOf = (loc) => {
     const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
 
-    return Array.isArray(page.searchThemes) ? page.searchThemes : []
+    return Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []
   }
 
   /** Localized search-theme list for one locale's star-field page. */
   const sfThemesOf = (loc) => {
     const page = t(loc, (x) => x.pages?.['star-field']) || {}
 
-    return Array.isArray(page.searchThemes) ? page.searchThemes : []
+    return Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []
   }
 
   /** Search-theme keywords for a star body page — the body's own
@@ -2067,8 +2068,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   const pageThemesOf = (loc, key) => {
     const page = t(loc, (x) => x.pages?.[key]) || {}
 
-    return Array.isArray(page.searchThemes) && page.searchThemes.length
-      ? page.searchThemes
+    return Array.isArray(page[SEARCH_THEMES_KEY]) && page[SEARCH_THEMES_KEY].length
+      ? page[SEARCH_THEMES_KEY]
       : snapshotThemes(loc, 'pages', key)
   }
 
@@ -2081,11 +2082,11 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   const projectKeywords = (loc, slug) => {
     const p = t(loc, (x) => x.projects?.[slug]) || {}
     const list =
-      Array.isArray(p.searchThemes) && p.searchThemes.length
-        ? p.searchThemes
+      Array.isArray(p[SEARCH_THEMES_KEY]) && p[SEARCH_THEMES_KEY].length
+        ? p[SEARCH_THEMES_KEY]
         : snapshotThemes(loc, 'projects', slug).length
           ? snapshotThemes(loc, 'projects', slug)
-          : en.projects?.[slug]?.searchThemes
+          : en.projects?.[slug]?.[SEARCH_THEMES_KEY]
 
     return (Array.isArray(list) ? list : []).join(', ') || undefined
   }
@@ -2465,7 +2466,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         'catalog',
         'navDesc',
         'records',
-        'searchThemes',
+        SEARCH_THEMES_KEY,
         'shareGallery',
         'shareCapture',
         'magnitude',

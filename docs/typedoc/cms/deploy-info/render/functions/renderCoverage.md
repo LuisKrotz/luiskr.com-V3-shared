@@ -8,9 +8,9 @@
 function renderCoverage(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:90
+Defined in: cms/deploy-info/render.tsx:260
 
-Renders the Jest coverage summary table.
+Renders the Jest coverage summary table plus the per-module rollup.
 
 ## Parameters
 

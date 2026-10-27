@@ -1,10 +1,10 @@
-# `core/tests/coverage/ui/reader-content-tails.test.js`
+# `core\tests\coverage\ui\reader-content-tails.test.js`
 
 Covers core/locale/reader-content.ts — holder creation and
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tests/coverage/ui/reader-content-tails.test.js` |
+| **Source**     | `src/core\tests\coverage\ui\reader-content-tails.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

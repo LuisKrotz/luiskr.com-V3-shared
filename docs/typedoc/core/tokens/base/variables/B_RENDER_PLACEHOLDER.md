@@ -8,6 +8,6 @@
 const _B_RENDER_PLACEHOLDER: 'render-placeholder'
 ```
 
-Defined in: core/tokens/base.ts:182
+Defined in: core/tokens/base.ts:187
 
 BEM block fragment "b render placeholder" — composed by the token groups below into full class names.

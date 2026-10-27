@@ -8,11 +8,15 @@
 function safariLoadHighRes(el): void
 ```
 
-Defined in: core/safari/patches/media-figure/image-load.ts:25
+Defined in: core/safari/patches/media-figure/image-load.ts:30
 
 Safari loadHighRes: requests the Q50 (medium) variant instead of the
-uncompressed source — iOS Safari hard-fails canvas/decode on images
-above ~4096px and the Q100 asset frequently exceeds texture memory.
+uncompressed source — the medium tier is the decode-safe asset for
+WebKit's ~4096px image ceiling, so every source (however large the
+original) gets a real high-res paint instead of a permanent thumb.
+The URL is emission-encoded exactly like load.ts's path — raw
+concatenation breaks on bucket keys carrying spaces/non-ASCII, which
+Safari resolves to a 404 where Chromium tolerated the literal.
 
 ## Parameters
 

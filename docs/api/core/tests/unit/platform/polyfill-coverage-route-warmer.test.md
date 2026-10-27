@@ -1,11 +1,11 @@
-# `core/tests/unit/platform/polyfill-coverage-route-warmer.test.js`
+# `core\tests\unit\platform\polyfill-coverage-route-warmer.test.js`
 
 Split from polyfill-coverage.test.js — covers the "route-warmer" describe.
 
-| | |
-|---|---|
-| **Source** | `src/core/tests/unit/platform/polyfill-coverage-route-warmer.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                       |
+| -------------- | --------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\unit\platform\polyfill-coverage-route-warmer.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.             |
 
 ## Members
 

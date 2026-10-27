@@ -1,10 +1,10 @@
-# `core/tokens/attrs/microdata.ts`
+# `core\tokens\attrs\microdata.ts`
 
 HTML microdata attribute tokens (`itemscope`/`itemtype`/
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/attrs/microdata.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\attrs\microdata.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

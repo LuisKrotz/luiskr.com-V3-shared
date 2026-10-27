@@ -1,10 +1,10 @@
-# `cms/tokens/shell/admin.ts`
+# `cms\tokens\shell\admin.ts`
 
 Admin/login classes — login wrapper/card, Google auth
 
-| | |
-|---|---|
-| **Source** | `src/cms/tokens/shell/admin.ts` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\tokens\shell\admin.ts`                 |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members

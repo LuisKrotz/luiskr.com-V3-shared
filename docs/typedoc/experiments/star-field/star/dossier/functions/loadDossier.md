@@ -8,7 +8,7 @@
 function loadDossier(c, id): void
 ```
 
-Defined in: experiments/star-field/star/dossier.ts:320
+Defined in: experiments/star-field/star/dossier.ts:321
 
 Selection path — marks the panel loading, prefetches, then assigns the
 resolved dossier only when the selection is still current (a fast

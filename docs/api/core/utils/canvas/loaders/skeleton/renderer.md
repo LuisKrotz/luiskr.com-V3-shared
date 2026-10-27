@@ -1,10 +1,10 @@
-# `core/utils/canvas/loaders/skeleton/renderer.ts`
+# `core\utils\canvas\loaders\skeleton\renderer.ts`
 
 Shared WebGL shimmer renderer for skeleton layers,
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/loaders/skeleton/renderer.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\skeleton\renderer.ts`      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -69,6 +69,7 @@ each failure self-releases the context so nothing leaks.
 Detects CPU rasterizers (SwiftShader/llvmpipe) via the unmasked
 renderer string — software GL pays per-frame CPU cost, so those take
 the CSS fallback instead.
+
 - `@param` gl The just-acquired context.
 - `@returns` true when the renderer matches SKELETON_WARN.SOFTWARE_RENDERERS.
 
@@ -88,6 +89,7 @@ The shared canvas only ever grows (never shrinks), so per-frame draws
 don't thrash GPU allocations; the scissor box limits the draw to the
 layer's w×h corner (GL origin is bottom-left — hence the
 canvas.height−h blit offset).
+
 - `@param` layer The skeleton layer requesting the frame.
 - `@param` t Animation clock in seconds — feeds u_time.
 - `@param` resolve Content-arrival cross-fade 0→1.
@@ -99,6 +101,7 @@ Compiles the shimmer shaders and resolves every uniform location up
 front — getUniformLocation during draw would cost a driver round-trip
 per frame. A compile/link failure returns false so _init can release
 the context instead of leaving a broken half-pipeline.
+
 - `@param` gl The live shared context.
 - `@returns` true when the program is bound and uniforms resolved.
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/motion/genie](../README.md) / genieLeave
 
 ```ts
-function genieLeave(component, done): void;
+function genieLeave(component, done): void
 ```
 
-Defined in: core/utils/motion/genie.ts:75
+Defined in: core/utils/motion/genie.ts:76
 
 Plays the collapse-back-to-origin animation, then runs done() so the
 caller can finish unmounting. Instant (done() immediately) under reduced

@@ -8,7 +8,7 @@
 function rightsParts(): object
 ```
 
-Defined in: core/locale/ui-text.ts:91
+Defined in: core/locale/ui-text.ts:108
 
 Segmented copyright line for the site footers — the same resolved
 `rightsText()` split around the © glyph and the year so renderers can

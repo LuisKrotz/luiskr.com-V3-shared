@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [experiments/docs/manifest](../README.md) / isSourceRoot
 
 ```ts
-function isSourceRoot(rootName): boolean;
+function isSourceRoot(rootName): boolean
 ```
 
-Defined in: experiments/docs/manifest.ts:73
+Defined in: experiments/docs/manifest.ts:254
 
 Whether a manifest root name ('src', 'core', …) is a protected source
 bucket — source roots get the copy-guard and never auto-open index.html.

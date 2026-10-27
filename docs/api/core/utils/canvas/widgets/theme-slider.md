@@ -1,10 +1,10 @@
-# `core/utils/canvas/widgets/theme-slider.ts`
+# `core\utils\canvas\widgets\theme-slider.ts`
 
 WebGL three-position theme slider (light / system / dark)
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/utils/canvas/widgets/theme-slider.ts`           |
+| **Source**     | `src/core\utils\canvas\widgets\theme-slider.ts`           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -18,11 +18,39 @@ Position 0: Dark (Night - Lunar moon with craters, twinkling stars, starry canyo
 Position 1: System (Twilight - Balanced orb, sun rings rising on left, crescent on right)
 Position 2: Light (Day - Sun knob on right, peach/coral sky, radiant sun on left)
 
+### `velP`
+
+Chase-spring velocity (track units/s) — feeds the elastic settle.
+
+### `_animT`
+
+Last animate() timestamp — the spring's dt source.
+
 ### `dragRectLeft`
 
 Cached canvas rect for the active drag — captured once at
 pointerdown so the high-rate pointermove path performs zero layout
 reads (the rect cannot change mid-gesture; cleared on pointerup).
+
+### `_frameTick`
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
+
+### `_wasm`
+
+Live WebGPU wasm handle — the preferred backend when it mounts.
+
+### `_wasmFailed`
+
+Latch — a failed wasm mount never retries on this instance.
+
+### `_wasmPending`
+
+In-flight mount — restore() must not double-mount on re-entry.
+
+### `_wasmT`
+
+Last wasm-painted t — frame(dt) consumes deltas, not absolutes.
 
 ### `_themeToP`
 
@@ -53,6 +81,12 @@ Creates the WebGL context, compiles the shader program and sets up uniforms/buff
 ### `bindEvents`
 
 Wires pointer drag + tap-to-snap; supports keyboard arrows for a11y.
+
+### `_tapWasm`
+
+Forwards the latest ripple stamp to the wasm widget's `tap()` —
+the crate's clock shares this.startTime's domain (its first
+frame() absorbs the full elapsed t as dt).
 
 ### `_xToContinuousP`
 

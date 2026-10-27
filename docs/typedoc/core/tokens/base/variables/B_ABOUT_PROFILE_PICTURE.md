@@ -8,7 +8,7 @@
 const _B_ABOUT_PROFILE_PICTURE: 'about-profile-picture'
 ```
 
-Defined in: core/tokens/base.ts:213
+Defined in: core/tokens/base.ts:218
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

@@ -1,27 +1,28 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/attrs/values](../README.md) / ATTR\_VALUES
 
 ```ts
 const ATTR_VALUES: Readonly<{
-  EMPTY: "";
-  TRUE: "true";
-  FALSE: "false";
-  NONE: "none";
-  BLOCK: "block";
-  FLEX: "flex";
-  AUTO: "auto";
-  HIDDEN: "hidden";
-  VISIBLE: "visible";
-  SMOOTH: "smooth";
-  INSTANT: "instant";
-  DELAY_25: "25";
-  NEGATIVE_TABINDEX: "-1";
-  HTTP: "http";
-  LAZY: "lazy";
-}>;
+  EMPTY: ''
+  TRUE: 'true'
+  FALSE: 'false'
+  NONE: 'none'
+  BLOCK: 'block'
+  FLEX: 'flex'
+  AUTO: 'auto'
+  HIDDEN: 'hidden'
+  VISIBLE: 'visible'
+  SMOOTH: 'smooth'
+  INSTANT: 'instant'
+  DELAY_25: '25'
+  NEGATIVE_TABINDEX: '-1'
+  TABINDEX_ZERO: '0'
+  HTTP: 'http'
+  LAZY: 'lazy'
+}>
 ```
 
 Defined in: core/tokens/attrs/values.ts:11

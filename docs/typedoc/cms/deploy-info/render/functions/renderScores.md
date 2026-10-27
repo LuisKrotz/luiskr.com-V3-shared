@@ -8,7 +8,7 @@
 function renderScores(scores): Element[] | null
 ```
 
-Defined in: cms/deploy-info/render.tsx:48
+Defined in: cms/deploy-info/render.tsx:210
 
 Renders the score chips for one Lighthouse category set.
 

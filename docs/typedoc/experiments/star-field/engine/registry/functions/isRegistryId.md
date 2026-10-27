@@ -8,7 +8,7 @@
 function isRegistryId(id): boolean
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:78
+Defined in: experiments/star-field/engine/registry.ts:76
 
 Type predicate — distinguishes the 139k registry ids from the 66
 authored catalog slugs so selection/deep-link code can route each

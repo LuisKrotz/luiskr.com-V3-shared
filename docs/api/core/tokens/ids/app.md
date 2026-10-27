@@ -1,10 +1,10 @@
-# `core/tokens/ids/app.ts`
+# `core\tokens\ids\app.ts`
 
 App shell element id tokens — token group.
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/ids/app.ts`                              |
+| **Source**     | `src/core\tokens\ids\app.ts`                              |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -22,3 +22,75 @@ Star-field navigator drawer — aria-controls target for its toggle.
 ### `SF_INSTRUCTIONS_PANEL`
 
 Star-field mobile instructions drawer — aria-controls target for its toggle.
+
+### `SF_PANEL_TITLE`
+
+Star-field dossier panel title — aria-labelledby target for the aside landmark.
+
+### `SF_NAV_DESC`
+
+Star-field navigator description node — aria-describedby target for
+the drawer landmark and its toggle button.
+
+### `SF_PANEL_TAGLINE`
+
+Star-field dossier tagline — aria-describedby target for the panel.
+
+### `SF_INSTRUCTIONS_HINT`
+
+Star-field instructions hint — aria-describedby target for the dialog.
+
+### `SF_ITEM_DESC_PREFIX`
+
+Star-field navigator item description id PREFIX — the per-body
+describedby target is `<prefix><body-id>` inside each row button.
+
+### `SF_MUSIC_LIST`
+
+Star-field playlist track list — aria-controls target for the
+card's collapse toggle.
+
+### `NAV_MENU_PANEL`
+
+Nav menu overlay — aria-controls target for the burger toggles.
+
+### `NAV_MENU_TITLE`
+
+Nav menu overlay title — aria-labelledby target for the open menu
+navigation landmark.
+
+### `COOKIES_INFO`
+
+Cookie-banner message text — aria-labelledby target giving the
+consent aside a _visible_ label (aria-label alone is invisible).
+
+### `READER_CONTENT`
+
+Parked reader article — the light-DOM skip link's static target.
+Deliberately different from MAIN_CONTENT (which lives inside the
+app-root shadow tree): identical ids across trees are legal, but
+DOM-wide uniqueness checkers count the composed tree. At runtime a
+delegated handler re-aims the link at the shadow #main-content.
+
+### `NAV_GEAR_IDS`
+
+Frozen nav-gear SVG gradient-id map — the defs↔url(#…) link ids inside
+the machined-gear glyph (nav gear.tsx). Sole declaration site; the
+markup reads members via the `url()` ref helper instead of re-declaring
+the literals (zero-hardcoding rules 4–5).
+
+### `FACE`
+
+Radial face ramp — the tooth ring's base metal fill.
+
+### `RIM`
+
+Linear rim ramp — top-lit edge stroke on the outline + groove.
+
+### `HUB`
+
+Radial hub ramp — the raised center cylinder.
+
+### `HOLE`
+
+Linear cavity ramp — drilled lightening holes + the center bore.

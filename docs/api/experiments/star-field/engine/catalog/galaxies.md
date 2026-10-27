@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/catalog/galaxies.ts`
+# `experiments\star-field\engine\catalog\galaxies.ts`
 
 The three grand spirals — the Milky Way volumetric
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/catalog/galaxies.ts` |
+| **Source**     | `src/experiments\star-field\engine\catalog\galaxies.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

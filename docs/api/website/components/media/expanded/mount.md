@@ -1,10 +1,10 @@
-# `website/components/media/expanded/mount.ts`
+# `website\components\media\expanded\mount.ts`
 
 Mount wiring for &lt;media-expanded&gt;: scroll reset, Escape /
 
-| | |
-|---|---|
-| **Source** | `src/website/components/media/expanded/mount.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\media\expanded\mount.ts`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

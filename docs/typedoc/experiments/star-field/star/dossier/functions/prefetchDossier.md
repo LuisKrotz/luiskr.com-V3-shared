@@ -8,7 +8,7 @@
 function prefetchDossier(id): void
 ```
 
-Defined in: experiments/star-field/star/dossier.ts:342
+Defined in: experiments/star-field/star/dossier.ts:345
 
 Approach path — warms the cache without touching the panel; the select
 path later resolves instantly from `_cache`.

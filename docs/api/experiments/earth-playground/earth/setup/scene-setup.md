@@ -1,11 +1,11 @@
-# `experiments/earth-playground/earth/setup/scene-setup.ts`
+# `experiments\earth-playground\earth\setup\scene-setup.ts`
 
 Scene assembly for the Earth engine: scene/camera/
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth/setup/scene-setup.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                               |
+| -------------- | ------------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth\setup\scene-setup.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.       |
 
 ## Members
 

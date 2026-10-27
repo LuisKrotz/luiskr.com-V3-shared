@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / getGravatarSrcset
 
 ```ts
-function getGravatarSrcset(urlStr): string;
+function getGravatarSrcset(urlStr): string
 ```
 
-Defined in: core/utils/media.ts:72
+Defined in: core/utils/media.ts:76
 
 Builds responsive Gravatar srcset with 1x, 2x, 3x density descriptors —
 200/300/400 px variants chosen by GRAVATAR_SIZE_*. Any existing `size=`

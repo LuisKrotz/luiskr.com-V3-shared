@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bootstrap.ts`
+# `experiments\star-field\engine\bootstrap.ts`
 
 Async scene assembly for the star-field engine. Loads
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bootstrap.ts`        |
+| **Source**     | `src/experiments\star-field\engine\bootstrap.ts`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

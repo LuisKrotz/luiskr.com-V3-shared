@@ -1,10 +1,10 @@
-# `core/tokens/attrs/common.ts`
+# `core\tokens\attrs\common.ts`
 
 Generic DOM attribute + attribute-value tokens — the
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/attrs/common.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\attrs\common.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -97,6 +97,17 @@ start on the shared clock instead of a delay after its own trigger.
 
 `pointer` input-method value — fine pointer (mouse/trackpad) primary input.
 
+### `INERT`
+
+`inert` — global boolean attribute: subtree is non-interactive and non-focusable.
+
 ### `FIT`
 
 `fit` — sizing/fit field name used by media layout contracts.
+
+### `LONGDESC`
+
+`longdesc` — the long-description URL attribute (HTML4 semantics,
+valid on <img>/<iframe>). Points at a same-document fragment
+(`#lk-anim-desc-<id>`) carrying the full animation description —
+the machine-readable contract AI agents + SEO crawlers read.

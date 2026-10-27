@@ -8,7 +8,7 @@
 function scrollToSlide(host, idx): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:161
+Defined in: website/components/carousel/awards-carousel/nav.ts:167
 
 Smooth scroll to slide idx (children offset +1 skips the last-clone).
 Same centering math as scrollToElement but reads rects fresh — the

@@ -1,10 +1,10 @@
-# `core/utils/canvas/css-color.ts`
+# `core\utils\canvas\css-color.ts`
 
 Shared CSS-color parser for the canvas widgets — converts
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/css-color.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\css-color.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

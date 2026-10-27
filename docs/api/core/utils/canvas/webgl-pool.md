@@ -1,10 +1,10 @@
-# `core/utils/canvas/webgl-pool.ts`
+# `core\utils\canvas\webgl-pool.ts`
 
 Lifecycle pool for the shared WebGL contexts: registers
 
-| | |
-|---|---|
-| **Source** | `src/core/utils/canvas/webgl-pool.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\webgl-pool.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -42,6 +42,7 @@ Compressed-texture extension handles keyed by format family (null = unsupported)
 WebGL VRAM Lifecycle & Texture Pool Manager
 
 Automatically monitors registered WebGL canvases with an IntersectionObserver.
+
 - Purges GPU textures & buffers and halts render loops when off-screen.
 - Seamlessly restores textures & buffers and resumes render loops when visible.
 - Provides compressed texture format detection for VRAM footprint reduction.
@@ -96,6 +97,7 @@ recovery attempts.
 Associates a widget instance with its canvas for purge/restore/retry.
 Registered entries start `isActive: true` — the observer's first
 callback corrects it if the canvas mounted offscreen.
+
 - `@param` element The canvas element to watch.
 - `@param` instance The widget implementing the poolable contract.
 
@@ -103,6 +105,7 @@ callback corrects it if the canvas mounted offscreen.
 
 Removes an element from pool management — unobserves it and drops the
 entry so a destroyed widget can't be resurrected by a queued callback.
+
 - `@param` element The canvas element to release.
 
 ### `getSupportedCompression`
@@ -110,6 +113,7 @@ entry so a destroyed widget can't be resurrected by a queued callback.
 Queries the context's compressed-texture format support — probes each
 family (incl. vendor-prefixed s3tc variants) so callers can pick the
 smallest uploadable format. Nulls inside the result mean unsupported.
+
 - `@param` gl A live GL context; null short-circuits to null.
 - `@returns` Per-family extension handles, or null without a context.
 

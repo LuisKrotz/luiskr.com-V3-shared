@@ -8,7 +8,7 @@
 function loop(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton/loop.ts:53
+Defined in: core/utils/canvas/loaders/skeleton/loop.ts:54
 
 rAF callback — animates the shimmer until resolved.
 

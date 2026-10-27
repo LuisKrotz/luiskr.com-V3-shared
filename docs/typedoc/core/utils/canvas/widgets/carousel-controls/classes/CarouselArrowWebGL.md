@@ -1,12 +1,13 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [core/utils/canvas/widgets/carousel-controls](../README.md) / CarouselArrowWebGL
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:29
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:40
 
 WebGL Carousel Arrow Controls with Circular Loading Progress & Gestural Microinteractions
+
 - Prev button: Swipe-left gesture (tablet card outline + hand pointing left + arrow) with expanding kinetic ripples
 - Next button: Swipe-right gesture (tablet card outline + hand pointing right + forward kinetic arrow burst)
 - Circular WebGL loading ring with glowing leading particle head synchronized to autoplay timer
@@ -19,13 +20,13 @@ WebGL Carousel Arrow Controls with Circular Loading Progress & Gestural Microint
 
 ```ts
 new CarouselArrowWebGL(
-   canvas, 
-   type?, 
+   canvas,
+   type?,
    onAction?
 ): CarouselArrowWebGL;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:53
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:66
 
 #### Parameters
 
@@ -50,22 +51,22 @@ Defined in: core/utils/canvas/widgets/carousel-controls.ts:53
 ### canvas
 
 ```ts
-canvas: HTMLCanvasElement;
+canvas: HTMLCanvasElement
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:30
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:41
 
-***
+---
 
 ### type
 
 ```ts
-type: string;
+type: string
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:31
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:42
 
-***
+---
 
 ### onAction
 
@@ -73,89 +74,89 @@ Defined in: core/utils/canvas/widgets/carousel-controls.ts:31
 onAction: (() => void) | null;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:32
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:43
 
-***
+---
 
 ### width
 
 ```ts
-width: number = 44;
+width: number = 44
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:33
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:44
 
-***
+---
 
 ### height
 
 ```ts
-height: number = 44;
+height: number = 44
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:34
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:45
 
-***
+---
 
 ### dpr
 
 ```ts
-dpr: number = 2;
+dpr: number = 2
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:35
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:46
 
-***
+---
 
 ### progress
 
 ```ts
-progress: number = 0;
+progress: number = 0
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:36
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:47
 
-***
+---
 
 ### isHovered
 
 ```ts
-isHovered: boolean = false;
+isHovered: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:37
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:48
 
-***
+---
 
 ### hoverLevel
 
 ```ts
-hoverLevel: number = 0.0;
+hoverLevel: number = 0.0
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:38
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:49
 
-***
+---
 
 ### isPlaying
 
 ```ts
-isPlaying: boolean = true;
+isPlaying: boolean = true
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:39
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:50
 
-***
+---
 
 ### clickTime
 
 ```ts
-clickTime: number = -10.0;
+clickTime: number = -10.0
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:40
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:51
 
-***
+---
 
 ### animId
 
@@ -163,29 +164,29 @@ Defined in: core/utils/canvas/widgets/carousel-controls.ts:40
 animId: number | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:41
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:52
 
-***
+---
 
 ### startTime
 
 ```ts
-startTime: number;
+startTime: number
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:42
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:55
 
-***
+---
 
 ### ctx
 
 ```ts
-ctx: CanvasRenderingContext2D | null | undefined;
+ctx: CanvasRenderingContext2D | null | undefined
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:43
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:56
 
-***
+---
 
 ### gl
 
@@ -193,9 +194,9 @@ Defined in: core/utils/canvas/widgets/carousel-controls.ts:43
 gl: WebGLRenderingContext | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:44
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:57
 
-***
+---
 
 ### program
 
@@ -203,9 +204,9 @@ Defined in: core/utils/canvas/widgets/carousel-controls.ts:44
 program: WebGLProgram | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:45
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:58
 
-***
+---
 
 ### quadBuffer
 
@@ -213,59 +214,75 @@ Defined in: core/utils/canvas/widgets/carousel-controls.ts:45
 quadBuffer: WebGLBuffer | null = null;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:46
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:59
 
-***
+---
 
 ### \_paused
 
 ```ts
-_paused: boolean = false;
+_paused: boolean = false
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:47
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:60
 
-***
+---
 
 ### boundTarget
 
 ```ts
-boundTarget: HTMLElement | undefined;
+boundTarget: HTMLElement | undefined
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:48
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:61
 
-***
+---
 
 ### onMouseEnter
 
 ```ts
-onMouseEnter: EventListener | undefined;
+onMouseEnter: EventListener | undefined
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:49
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:62
 
-***
+---
 
 ### onMouseLeave
 
 ```ts
-onMouseLeave: EventListener | undefined;
+onMouseLeave: EventListener | undefined
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:50
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:63
 
-***
+---
 
 ### onClick
 
 ```ts
-onClick: EventListener | undefined;
+onClick: EventListener | undefined
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:51
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:64
 
 ## Methods
+
+### \_frameTick()
+
+```ts
+_frameTick(): void;
+```
+
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:54
+
+Bound per-frame tick — allocated once so the pooled re-arm never allocs.
+
+#### Returns
+
+`void`
+
+---
 
 ### init()
 
@@ -273,7 +290,7 @@ Defined in: core/utils/canvas/widgets/carousel-controls.ts:51
 init(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:69
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:82
 
 Boot sequence: GL init → event binding → render start; fully degrades to the fallback path.
 
@@ -281,7 +298,7 @@ Boot sequence: GL init → event binding → render start; fully degrades to the
 
 `void`
 
-***
+---
 
 ### purge()
 
@@ -289,7 +306,7 @@ Boot sequence: GL init → event binding → render start; fully degrades to the
 purge(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:126
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:139
 
 webglPool hook — viewport left: pauses the loop; GL stays warm (the pool owns context lifecycle).
 
@@ -297,7 +314,7 @@ webglPool hook — viewport left: pauses the loop; GL stays warm (the pool owns 
 
 `void`
 
-***
+---
 
 ### restore()
 
@@ -305,7 +322,7 @@ webglPool hook — viewport left: pauses the loop; GL stays warm (the pool owns 
 restore(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:137
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:150
 
 webglPool hook — back in view: resumes the render loop; counterpart of purge().
 
@@ -313,7 +330,7 @@ webglPool hook — back in view: resumes the render loop; counterpart of purge()
 
 `void`
 
-***
+---
 
 ### \_triggerFallback()
 
@@ -321,7 +338,7 @@ webglPool hook — back in view: resumes the render loop; counterpart of purge()
 _triggerFallback(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:145
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:158
 
 Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on context loss or init failure.
 
@@ -329,7 +346,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 
 `void`
 
-***
+---
 
 ### bindEvents()
 
@@ -337,7 +354,7 @@ Switches to the non-WebGL path (CSS class on the host / Canvas2D) — used on co
 bindEvents(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:157
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:170
 
 Wires pointer/hover listeners that drive the widget's interactive state.
 
@@ -345,7 +362,7 @@ Wires pointer/hover listeners that drive the widget's interactive state.
 
 `void`
 
-***
+---
 
 ### setHover()
 
@@ -353,7 +370,7 @@ Wires pointer/hover listeners that drive the widget's interactive state.
 setHover(hovered): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:185
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:198
 
 Updates hover state — the shader renders the hover accent when true.
 
@@ -367,7 +384,7 @@ Updates hover state — the shader renders the hover accent when true.
 
 `void`
 
-***
+---
 
 ### triggerClick()
 
@@ -375,7 +392,7 @@ Updates hover state — the shader renders the hover accent when true.
 triggerClick(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:191
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:209
 
 Programmatic activation — runs the bound onAction.
 
@@ -383,7 +400,7 @@ Programmatic activation — runs the bound onAction.
 
 `void`
 
-***
+---
 
 ### setPlaying()
 
@@ -391,7 +408,7 @@ Programmatic activation — runs the bound onAction.
 setPlaying(playing): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:197
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:219
 
 Morphs the icon between play and pause states.
 
@@ -405,7 +422,7 @@ Morphs the icon between play and pause states.
 
 `void`
 
-***
+---
 
 ### setProgress()
 
@@ -413,7 +430,7 @@ Morphs the icon between play and pause states.
 setProgress(p, isPlaying?): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:203
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:228
 
 Updates the progress ring's fill fraction (and syncs play state).
 
@@ -431,7 +448,7 @@ Updates the progress ring's fill fraction (and syncs play state).
 
 `void`
 
-***
+---
 
 ### setReducedMotion()
 
@@ -439,7 +456,7 @@ Updates the progress ring's fill fraction (and syncs play state).
 setReducedMotion(isReduced): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:217
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:246
 
 Applies prefers-reduced-motion: swaps the animation loop for one static frame render.
 
@@ -453,7 +470,7 @@ Applies prefers-reduced-motion: swaps the animation loop for one static frame re
 
 `void`
 
-***
+---
 
 ### \_renderStatic()
 
@@ -461,7 +478,7 @@ Applies prefers-reduced-motion: swaps the animation loop for one static frame re
 _renderStatic(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:230
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:259
 
 Draws a single settled frame — used under reduced motion or when the loop is stopped.
 
@@ -469,7 +486,7 @@ Draws a single settled frame — used under reduced motion or when the loop is s
 
 `void`
 
-***
+---
 
 ### animate()
 
@@ -477,7 +494,7 @@ Draws a single settled frame — used under reduced motion or when the loop is s
 animate(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:242
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:271
 
 Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
@@ -485,7 +502,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 
 `void`
 
-***
+---
 
 ### \_renderCanvas2D()
 
@@ -493,7 +510,7 @@ Starts the requestAnimationFrame render loop (skipped under reduced motion).
 _renderCanvas2D(now): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:275
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:318
 
 Per-frame Canvas2D fallback render — same visual language as the shader.
 
@@ -507,7 +524,7 @@ Per-frame Canvas2D fallback render — same visual language as the shader.
 
 `void`
 
-***
+---
 
 ### destroy()
 
@@ -515,7 +532,7 @@ Per-frame Canvas2D fallback render — same visual language as the shader.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls.ts:298
+Defined in: core/utils/canvas/widgets/carousel-controls.ts:341
 
 Releases the context, buffers, listeners and rAF handle so the canvas can be GC'd.
 

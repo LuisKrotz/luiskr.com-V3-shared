@@ -8,7 +8,7 @@
 function appText(path): unknown
 ```
 
-Defined in: core/locale/ui-text.ts:42
+Defined in: core/locale/ui-text.ts:46
 
 Resolves a UI string from the live APP dictionary (store.lang.app, loaded
 from Firebase for the current locale) with the English snapshot as fallback.

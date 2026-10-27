@@ -1,8 +1,8 @@
 # `website\components\home\mosaic\burn\paper.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website\components\home\mosaic\burn\paper.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\mosaic\burn\paper.ts`      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -13,6 +13,7 @@ Resolves the burn palette from the root CSS custom properties — dark
 theme publishes a cyan-blue plasma ramp, light theme an airy
 paper-fire ramp. Falls back to the fixed canvas inks when the
 properties are absent (older stylesheet, non-themed host).
+
 - `@returns` The combustion ink ramp (embers ×3, scorch, smoke).
 
 ### (module scope)
@@ -45,13 +46,14 @@ its last word — burning only that fragment (the "title cut to its last
 word" bug). Positioning each word at its DOM fragment makes phantom
 wraps impossible and also reproduces justified/aligned spacing for
 free. Returns null when the API or a usable text node is absent.
+
 - `@param` title The h2 element holding the title text.
 - `@returns` Per-word boxes in title-relative CSS px, or null to fall back.
 
 ### `rasterizeTitle`
 
 Rasterizes the h2 text into the paper canvas. Words are drawn at their
-DOM Range fragment positions (see {@link titleWordBoxes}), so the raster
+DOM Range fragment positions (see `titleWordBoxes`), so the raster
 is pixel-faithful to the rendered title — same wraps, same spacing.
 Engines without Range fall back to a measured word-pack matching the
 DOM box, drawn bottom-anchored like the overlay's `align-items:
@@ -62,6 +64,7 @@ store is device px (cssW × dpr): canvas font and measureText units are
 CSS px, so the context is scaled cssW→paper.width first — without the
 transform the glyphs land at 1/dpr size on hidpi/fractional displays
 (the "burn text renders smaller than the title" bug).
+
 - `@param` title The h2 element whose glyphs are re-rendered.
 - `@param` paper Offscreen canvas sized in device px.
 - `@param` cssW Title box width in CSS px.
@@ -75,18 +78,19 @@ columns that carry ink form runs — a space leaves a transparent gap,
 so each contiguous run IS one letter (kerned pairs may fuse, which
 just makes them burn as a unit). Builds:
 
- - `colInk`: 1 where a paper-x column has any glyph pixel — ember
-   spawning and the char band use it so nothing glows in the spaces.
- - `letters`: per-run ink bounds (x0..x1, y0..y1) plus a random burn
-   speed and ignition delay. Speeds spread 0.55..1.45×, delays up to
-   22% of total progress — letters catch at different moments and
-   burn at different paces.
- - `colLetter`: paper-x → owning letter index; gap columns bind to
-   the nearest run so the erase polygon stays coherent across spaces.
+- `colInk`: 1 where a paper-x column has any glyph pixel — ember
+  spawning and the char band use it so nothing glows in the spaces.
+- `letters`: per-run ink bounds (x0..x1, y0..y1) plus a random burn
+  speed and ignition delay. Speeds spread 0.55..1.45×, delays up to
+  22% of total progress — letters catch at different moments and
+  burn at different paces.
+- `colLetter`: paper-x → owning letter index; gap columns bind to
+  the nearest run so the erase polygon stays coherent across spaces.
 
 Finally every letter's speed is normalized so the SLOWEST ignitor
 finishes at ~98% progress — the burn ends with the description's
 typing, never after.
+
 - `@param` s The live session — fills letters/colInk/colLetter + work size.
 
 ### `syncPaper`
@@ -99,4 +103,5 @@ reported font-reduction bug). Freezing the raster keeps the title the
 size it was when it caught fire — only the canvas slides along the
 moving box. `lastBox`/`lastPos` signatures skip all work when nothing
 moved.
+
 - `@param` s The live session — owns the canvases and DOM elements.

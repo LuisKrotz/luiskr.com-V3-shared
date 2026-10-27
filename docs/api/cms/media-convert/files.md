@@ -1,9 +1,9 @@
-# `cms/media-convert/files.ts`
+# `cms\media-convert\files.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms/media-convert/files.ts` |
-| **UX surface** | Batch image→WebP conversion pipeline UI. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\media-convert\files.ts`                |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
@@ -26,5 +26,6 @@ collects drop.
 ### `collectInput`
 
 collects input.
+
 - `@param` host — the host component
 - `@param` input — the value

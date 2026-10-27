@@ -8,7 +8,7 @@
 function renderMosaic(host): Element
 ```
 
-Defined in: website/components/home/mosaic/render.tsx:131
+Defined in: website/components/home/mosaic/render.tsx:221
 
 JSX template for the component's shadow DOM.
 

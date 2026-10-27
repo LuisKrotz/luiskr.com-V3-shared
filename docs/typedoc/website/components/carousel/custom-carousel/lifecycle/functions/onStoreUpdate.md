@@ -8,12 +8,13 @@
 function onStoreUpdate(host): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/lifecycle.ts:45
+Defined in: website/components/carousel/custom-carousel/lifecycle.ts:54
 
 Store change → propagate reduced-motion to both arrows and gate
-autoplay on reduced-motion / open-modal. The resume arm requires BOTH
+autoplay on reduced-motion / any open overlay (expand modal, nav
+menu, preferences or language dialog). The resume arm requires BOTH
 `isActive` (carousel mode, not side-by-side) and `isFullyVisible` —
-a modal closing must not revive a carousel that's offscreen.
+an overlay closing must not revive a carousel that's offscreen.
 
 ## Parameters
 

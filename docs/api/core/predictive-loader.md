@@ -1,10 +1,10 @@
-# `core/predictive-loader.ts`
+# `core\predictive-loader.ts`
 
 Intent-based predictive prefetching engine.
 
-| | |
-|---|---|
-| **Source** | `src/core/predictive-loader.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\predictive-loader.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -13,12 +13,13 @@ Intent-based predictive prefetching engine.
 
 Predictive prefetch engine — makes internal navigation feel instant by
 warming a link's data before the click lands. Two triggers:
- 1. IntersectionObserver — a link scrolling within 200px of the viewport
+
+1.  IntersectionObserver — a link scrolling within 200px of the viewport
     is treated as "user may click soon";
- 2. intent events — pointerenter/focus/touchstart fire a prefetch
+2.  intent events — pointerenter/focus/touchstart fire a prefetch
     immediately (hover ≈ click intent on desktop).
-Actual fetches are deferred to idle time so prefetching never competes
-with the user's current frame work.
+    Actual fetches are deferred to idle time so prefetching never competes
+    with the user's current frame work.
 
 ### (module scope)
 
@@ -41,6 +42,7 @@ falls back to a short setTimeout. Evaluated per call so the probe always
 reflects the live environment. The timeout bound guarantees the prefetch
 still fires within ~2s even on a continuously busy main thread — without
 it requestIdleCallback may starve indefinitely.
+
 - `@param` cb Work to run in the next idle gap.
 
 ### (module scope)
@@ -56,6 +58,7 @@ Listens for viewport entrance, mouse hover, focus, and touchstart.
 link is prefetched at most once, so the listener is dead weight after
 that. `passive: true` keeps touch/wheel-adjacent handlers off the
 scroll-blocking path per MDN passive-listener semantics.
+
 - `@param` element Anchor-like element carrying href or data-route.
 
 ### `scanAndObserve`
@@ -63,6 +66,7 @@ scroll-blocking path per MDN passive-listener semantics.
 Scans root for unobserved links and attaches observers. Runs against a
 Document, a ShadowRoot, or any Element — the querySelectorAll presence
 check is what makes all three shapes safe.
+
 - `@param` root Scope to scan; defaults to document when present.
 
 ### `prefetchRoute`

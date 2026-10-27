@@ -1,10 +1,10 @@
-# `website/components/home/AwardsMentions.tsx`
+# `website\components\home\AwardsMentions.tsx`
 
 &lt;awards-mentions&gt; — the footer band on internals/home: an
 
-| | |
-|---|---|
-| **Source** | `src/website/components/home/AwardsMentions.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\AwardsMentions.tsx`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -28,6 +28,18 @@ Legal-page links for the footer row (see awards/data.ts).
 ### `_ensureData`
 
 Loads the mentions + legal-links nodes when missing (SWR).
+
+### `_mountDividerSheen`
+
+Re-mounts the divider-sheen WebGPU widgets on the footer's `<hr>`
+divider — the node is recreated on every render, so each update
+disposes the stale mounts first (canvas + IO + rAF + widget).
+Without `navigator.gpu` or under reduced-motion the mount helper
+is a no-op and the CSS `::after` sweep stays the render path.
+
+### (module scope)
+
+Lifecycle: releases the divider mounts before the shadow root goes.
 
 ### `_setupCarousel`
 

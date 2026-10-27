@@ -8,6 +8,7 @@
 
 - [appText](functions/appText.md)
 - [componentText](functions/componentText.md)
+- [indexedText](functions/indexedText.md)
 - [routeSlugs](functions/routeSlugs.md)
 - [rightsText](functions/rightsText.md)
 - [rightsParts](functions/rightsParts.md)

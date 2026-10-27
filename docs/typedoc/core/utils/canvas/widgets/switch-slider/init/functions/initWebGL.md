@@ -8,7 +8,7 @@
 function initWebGL(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/switch-slider/init.ts:167
+Defined in: core/utils/canvas/widgets/switch-slider/init.ts:168
 
 Creates the WebGL context, compiles the shader program and sets up uniforms/buffers; falls back on any failure.
 

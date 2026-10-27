@@ -1,10 +1,10 @@
-# `core/tokens/playground.ts`
+# `core\tokens\playground.ts`
 
 Playground-scoped registries — Space/Earth Playground action
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/playground.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\playground.ts`                           |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

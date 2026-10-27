@@ -25,14 +25,19 @@
  *    opt-in Google/Bing require for large image cards and Discover
  *    previews; the runtime authority re-arms it on every indexable
  *    navigation instead of leaving the meta absent.
+ *  - Every localized CMS page and project carries a non-empty
+ *    searchThemes list so prerendered keywords and media metadata stay
+ *    grounded in localized content.
  */
 
 import { describe, test, expect } from '@jest/globals'
 import fs from 'node:fs'
 import path from 'node:path'
 import { LANG_SLUGS } from '@core/i18n.js'
+import { CMS_KEYS } from '@core/tokens/data/cms-keys.js'
 import { PROJECT_ALIASES } from '@core/tokens/routes/aliases.js'
 import { SCHEMA_STRINGS } from '@core/tokens/strings/schema.js'
+import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 
 const META_DIR = path.join(ROOT_DIR, 'website', 'public', 'meta')
@@ -101,6 +106,31 @@ describe('SEO indexation contract', () => {
 
     expect(lines).not.toContain('Disallow: /docs')
     expect(lines).not.toContain('Disallow: /docs/')
+  })
+
+  test('all localized page and project nodes have search-theme metadata', () => {
+    const database = JSON.parse(read(path.join(ROOT_DIR, 'database.json')))
+
+    for (const locale of Object.keys(LANG_SLUGS)) {
+      const translation = database.translations?.[locale]
+
+      expect(translation).toBeDefined()
+
+      for (const nodesByKey of [translation?.pages, translation?.projects]) {
+        const nodes = Object.values(nodesByKey || {})
+
+        expect(nodes.length).toBeGreaterThan(0)
+
+        for (const node of nodes) {
+          const themes = node?.[CMS_KEYS.SEARCH_THEMES]
+
+          expect(Array.isArray(themes)).toBe(true)
+          expect(themes.length).toBeGreaterThan(0)
+          expect(themes.every((theme) => typeof theme === TYPE_STRINGS.STRING)).toBe(true)
+          expect(themes.every((theme) => theme.trim().length > 0)).toBe(true)
+        }
+      }
+    }
   })
 
   test('every sitemap <loc> is a final canonical URL', () => {

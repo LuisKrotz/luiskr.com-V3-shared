@@ -8,7 +8,7 @@
 function renderConsoleScan(host): Element
 ```
 
-Defined in: cms/deploy-info/render.tsx:412
+Defined in: cms/deploy-info/render.tsx:764
 
 Renders the console.* usage scan (debug-leftover policy).
 

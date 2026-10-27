@@ -8,7 +8,7 @@
 type SFBodyFn = (bodyId) => void
 ```
 
-Defined in: experiments/star-field/engine/types.ts:448
+Defined in: experiments/star-field/engine/types.ts:449
 
 Body-approach/select notification — the host fetches the dossier JSON.
 

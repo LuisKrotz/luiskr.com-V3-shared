@@ -1,8 +1,8 @@
-# `core/router/navigate.ts`
+# `core\router\navigate.ts`
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/router/navigate.ts`                             |
+| **Source**     | `src/core\router\navigate.ts`                             |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -55,6 +55,7 @@ computed for the <link canonical> so both stay identical.
 - `@param` to Resolved route descriptor.
 - `@param` canonicalOverride Canonical URL; recomputed from `to` when absent.
 - `@param` description Description override (post-fetch localized text).
+- `@param` image primaryImageOfPage override — the share-gallery rotation
 - `@returns` JSON-LD entity array for updateJsonLd().
 
 ### `syncScroll`

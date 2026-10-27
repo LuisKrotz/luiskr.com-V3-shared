@@ -8,7 +8,7 @@
 function toMetaDescription(str, max?): string
 ```
 
-Defined in: core/utils/string.ts:53
+Defined in: core/utils/string.ts:86
 
 Compacts markup-bearing CMS text into a meta-description string:
 `<br>` collapses to a space (it is a line break, not a word boundary),

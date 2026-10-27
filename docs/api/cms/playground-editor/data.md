@@ -1,11 +1,11 @@
-# `cms/playground-editor/data.ts`
+# `cms\playground-editor\data.ts`
 
 Firebase read/write for &lt;cms-playground-editor&gt;: loads the
 
-| | |
-|---|---|
-| **Source** | `src/cms/playground-editor/data.ts` |
-| **UX surface** | Earth-playground labels, defaults and route slugs editor. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\playground-editor\data.ts`             |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

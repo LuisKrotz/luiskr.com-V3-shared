@@ -22,6 +22,10 @@ const NET_STRINGS: Readonly<{
   MIME_JSON: 'application/json'
   JOB_RUNNING: 'running'
   JOB_UPLOADING: 'uploading'
+  EFFECTIVE_SLOW_2G: 'slow-2g'
+  EFFECTIVE_2G: '2g'
+  EFFECTIVE_3G: '3g'
+  EFFECTIVE_4G: '4g'
 }>
 ```
 

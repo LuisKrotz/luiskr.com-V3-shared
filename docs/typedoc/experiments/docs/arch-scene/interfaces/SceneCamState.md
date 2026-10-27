@@ -4,9 +4,9 @@
 
 [luiskr.com](../../../../README.md) / [experiments/docs/arch-scene](../README.md) / SceneCamState
 
-Defined in: experiments/docs/arch-scene.ts:203
+Defined in: experiments/docs/arch-scene.ts:961
 
-Persisted camera pose + rotation-off flag across scene remounts.
+Persisted camera pose across scene remounts.
 
 ## Properties
 
@@ -16,7 +16,7 @@ Persisted camera pose + rotation-off flag across scene remounts.
 p: [number, number, number]
 ```
 
-Defined in: experiments/docs/arch-scene.ts:205
+Defined in: experiments/docs/arch-scene.ts:963
 
 camera.position xyz
 
@@ -28,18 +28,6 @@ camera.position xyz
 t: [number, number, number]
 ```
 
-Defined in: experiments/docs/arch-scene.ts:207
+Defined in: experiments/docs/arch-scene.ts:965
 
 controls.target xyz
-
----
-
-### off
-
-```ts
-off: boolean
-```
-
-Defined in: experiments/docs/arch-scene.ts:209
-
-true once the user has taken control — autoRotate stays off.

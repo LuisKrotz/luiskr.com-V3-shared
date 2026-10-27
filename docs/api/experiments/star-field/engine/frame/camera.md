@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/frame/camera.ts`
+# `experiments\star-field\engine\frame\camera.ts`
 
 Camera-side per-frame behavior — world/screen anchor
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/frame/camera.ts`     |
+| **Source**     | `src/experiments\star-field\engine\frame\camera.ts`     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

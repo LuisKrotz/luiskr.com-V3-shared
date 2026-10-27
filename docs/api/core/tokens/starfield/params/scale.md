@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/scale.ts`
+# `core\tokens\starfield\params\scale.ts`
 
 Astronomical-scale and hierarchy-structure parameters —
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/scale.ts`               |
+| **Source**     | `src/core\tokens\starfield\params\scale.ts`               |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

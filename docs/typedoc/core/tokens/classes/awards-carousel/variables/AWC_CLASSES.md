@@ -12,6 +12,7 @@ const AWC_CLASSES: Readonly<{
   AWC_DOTS: 'aw-c-dots'
   AWC_DOT: 'aw-c-dot'
   AWC_DOT_ACTIVE: 'aw-c-dot--active'
+  AWC_DOT_NUM: 'aw-c-dot-num'
   AWC_TRACK: 'aw-c-track'
   AWC_TRACK_ANIMATING: 'aw-c-track--animating'
   AWC_SLIDE: 'aw-c-slide'

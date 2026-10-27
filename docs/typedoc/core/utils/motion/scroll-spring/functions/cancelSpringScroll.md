@@ -8,7 +8,7 @@
 function cancelSpringScroll(track, animClass): void
 ```
 
-Defined in: core/utils/motion/scroll-spring.ts:169
+Defined in: core/utils/motion/scroll-spring.ts:181
 
 Cancels a live spring — user-input takeover (wheel/touch): the track
 stays wherever the spring left it and mandatory snap re-engages from

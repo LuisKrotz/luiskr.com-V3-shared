@@ -8,6 +8,6 @@
 const _B_INTERNAL_FOOTER_ITEMS: 'internal-footer-items'
 ```
 
-Defined in: core/tokens/base.ts:300
+Defined in: core/tokens/base.ts:305
 
 BEM block fragment "b internal footer items" — composed by the token groups below into full class names.

@@ -1,8 +1,8 @@
-# `cms/tests/coverage/app/cms-deep-coverage-cmsdashboard-registration.test.js`
+# `cms\tests\coverage\app\cms-deep-coverage-cmsdashboard-registration.test.js`
 
 Split from cms-deep-coverage.test.js — covers the "CmsDashboard registration" describe.
 
 |                |                                                                                  |
 | -------------- | -------------------------------------------------------------------------------- |
-| **Source**     | `src/cms/tests/coverage/app/cms-deep-coverage-cmsdashboard-registration.test.js` |
+| **Source**     | `src/cms\tests\coverage\app\cms-deep-coverage-cmsdashboard-registration.test.js` |
 | **UX surface** | Admin bundle — editors for every database node.                                  |

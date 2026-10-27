@@ -1,10 +1,10 @@
-# `core/tokens/classes/project.ts`
+# `core\tokens\classes\project.ts`
 
 Project/internal page class tokens (`internal-*` block) —
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/classes/project.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\project.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -16,6 +16,10 @@ Internals (project-detail) page classes on the `internal-*` block family:
 block, `internal-extra` scroll strip, `internal-footer` related/notes
 area, `internal-expand` trigger. `ZTF_VIDEO` is a standalone modifier
 (zoom-to-fill) applied alongside items, not an internal-* descendant.
+
+### `INTERNAL_FOOTER_ITEMS_DIVIDER_CANVAS`
+
+WebGPU overlay canvas for the divider sheen (`divider-sheen` widget).
 
 ### `PROJECT_CLASSES`
 

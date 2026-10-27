@@ -1,8 +1,8 @@
-# `website/components/dialogs/preferences/render.tsx`
+# `website\components\dialogs\preferences\render.tsx`
 
-| | |
-|---|---|
-| **Source** | `src/website/components/dialogs/preferences/render.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\dialogs\preferences\render.tsx` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

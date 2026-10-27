@@ -1,11 +1,11 @@
-# `shared/scripts/build/stamp-content-signal.mjs`
+# `shared\scripts\build\stamp-content-signal.mjs`
 
-Firebase `predeploy` step — stamps the IETF-draft
+Firebase `predeploy` step — stamps the AI-usage declaration
 
-|                |                                                                           |
-| -------------- | ------------------------------------------------------------------------- |
-| **Source**     | `src/shared/scripts/build/stamp-content-signal.mjs`                       |
-| **UX surface** | The repo verbs — build, verify, test, docs, i18n, media, setup, scaffold. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\stamp-content-signal.mjs`     |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 
@@ -13,9 +13,17 @@ Firebase `predeploy` step — stamps the IETF-draft
 
 Repo root — this file sits at shared/scripts/build/.
 
-### `DIRECTIVE`
+### `BLOCK_BEGIN`
 
-Directive line inserted directly under `User-agent: *` per the spec.
+Marker lines delimiting the stamped allow block — revert keys off these.
+
+### `LEGACY_BEGIN`
+
+Markers of the retired opt-out revision — always stripped, never restamped.
+
+### `BLOCK`
+
+The stamped block — marker-delimited for idempotency + clean revert.
 
 ### `collectRobots`
 
@@ -24,9 +32,17 @@ Recursively collects every robots.txt under a directory.
 - `@param` {string} dir directory to walk
 - `@returns` {string[]} absolute robots.txt paths
 
-### (module scope)
+### `REVERT`
 
-Count of files stamped this run — logged for deploy diagnostics.
+`--revert` (postdeploy) removes the marker so the tree stays clean.
+
+### `BLOCK_RE`
+
+Revert pattern — the marker-delimited block plus its leading blank line.
+
+### `LEGACY_RE`
+
+Legacy opt-out block — removed unconditionally, regardless of --revert.
 
 ### `stamped`
 

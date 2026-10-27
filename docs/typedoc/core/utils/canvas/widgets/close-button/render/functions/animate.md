@@ -8,9 +8,9 @@
 function animate(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/close-button/render.ts:42
+Defined in: core/utils/canvas/widgets/close-button/render.ts:55
 
-Starts the requestAnimationFrame render loop (skipped under reduced motion).
+Starts the shared-pool render loop (skipped under reduced motion).
 
 ## Parameters
 

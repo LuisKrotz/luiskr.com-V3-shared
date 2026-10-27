@@ -1,10 +1,10 @@
-# `website/components/carousel/AwardsCarousel.tsx`
+# `website\components\carousel\AwardsCarousel.tsx`
 
 &lt;awards-carousel&gt; — lightweight carousel used by the awards
 
-| | |
-|---|---|
-| **Source** | `src/website/components/carousel/AwardsCarousel.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\carousel\AwardsCarousel.tsx`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -56,7 +56,12 @@ Autoplay RAF handle.
 
 ### `teleportTimer`
 
-Pending clone→real jump timer (teleport after wrap settles).
+Pending clone→real jump watchdog timer (rAF-starvation fallback).
+
+### `pendingTeleport`
+
+Clone→real teleport armed by _scheduleTeleport — the scroll spring's
+settle fires it; the timer is only the rAF-starvation watchdog.
 
 ### `touchStartX`
 
@@ -82,6 +87,10 @@ IntersectionObserver handle driving the visibility flags.
 
 Pending one-shot init frame (setup runs after first paint so layout exists).
 
+### `_bracketTeardown`
+
+Teardown for the corner-brackets WebGPU widgets on CMS action buttons.
+
 ### `items`
 
 Slide entries pushed by the host. The identity-equality early-return
@@ -97,9 +106,21 @@ Mount: render items, wire events/observer, subscribe to the store for reduced-mo
 
 Re-render: re-strip clone focusability (clones get re-created).
 
+### `_syncBrackets`
+
+Mounts the corner-brackets WebGPU widget on any action buttons inside
+CMS slide content (`aw-c-card-action`/`aw-c-label-action`) — the
+buttons are part of the injected card markup, so they are queried
+after each render rather than JSX-wired.
+
 ### (module scope)
 
-Reduced-motion commit → kill autoplay immediately (no residual RAF).
+Overlay/pref commits → kill autoplay immediately (no residual RAF);
+an overlay closing resumes a stopped cycle only when the carousel is
+still ≥50% on screen. The !autoplayRunning guard matters: store
+commits arrive for unrelated state too, and a bare _startAutoplay
+would re-base the dwell clock (and stack a second RAF chain) on
+every commit.
 
 ### `_setupCarousel`
 
@@ -132,6 +153,10 @@ Scrolls to slide `idx` — real index, resolved through the clone map.
 ### `_scheduleTeleport`
 
 Schedules the post-wrap teleport from a clone position back to the real slide.
+
+### `_cancelNavSpring`
+
+User-gesture takeover — kills the scroll spring + pending teleport.
 
 ### `_jumpToSlide`
 

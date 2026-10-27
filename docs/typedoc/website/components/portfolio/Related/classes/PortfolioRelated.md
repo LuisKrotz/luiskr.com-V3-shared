@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/portfolio/Related](../README.md) / PortfolioRelated
 
-Defined in: website/components/portfolio/Related.tsx:34
+Defined in: website/components/portfolio/Related.tsx:36
 
 The PortfolioRelated — related class.
 
@@ -20,7 +20,7 @@ The PortfolioRelated — related class.
 new PortfolioRelated(): PortfolioRelated;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:57
+Defined in: website/components/portfolio/Related.tsx:67
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 translations: RelatedTranslations = {}
 ```
 
-Defined in: website/components/portfolio/Related.tsx:35
+Defined in: website/components/portfolio/Related.tsx:37
 
 ---
 
@@ -193,7 +193,7 @@ Defined in: website/components/portfolio/Related.tsx:35
 homePortfolio: HomeItem[] = [];
 ```
 
-Defined in: website/components/portfolio/Related.tsx:37
+Defined in: website/components/portfolio/Related.tsx:39
 
 ---
 
@@ -203,7 +203,17 @@ Defined in: website/components/portfolio/Related.tsx:37
 _unsubRouter: (() => void) | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:39
+Defined in: website/components/portfolio/Related.tsx:41
+
+---
+
+### \_unsubManifest
+
+```ts
+_unsubManifest: (() => void) | null = null;
+```
+
+Defined in: website/components/portfolio/Related.tsx:43
 
 ---
 
@@ -213,7 +223,7 @@ Defined in: website/components/portfolio/Related.tsx:39
 _noteOpen: boolean = false
 ```
 
-Defined in: website/components/portfolio/Related.tsx:41
+Defined in: website/components/portfolio/Related.tsx:45
 
 ---
 
@@ -223,7 +233,7 @@ Defined in: website/components/portfolio/Related.tsx:41
 _noteTruncated: boolean = false
 ```
 
-Defined in: website/components/portfolio/Related.tsx:43
+Defined in: website/components/portfolio/Related.tsx:47
 
 ---
 
@@ -233,7 +243,27 @@ Defined in: website/components/portfolio/Related.tsx:43
 _noteEl: Element | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:45
+Defined in: website/components/portfolio/Related.tsx:49
+
+---
+
+### \_noteSeen
+
+```ts
+_noteSeen: boolean = false
+```
+
+Defined in: website/components/portfolio/Related.tsx:51
+
+---
+
+### \_noteIO
+
+```ts
+_noteIO: IntersectionObserver | null = null;
+```
+
+Defined in: website/components/portfolio/Related.tsx:53
 
 ---
 
@@ -243,7 +273,7 @@ Defined in: website/components/portfolio/Related.tsx:45
 _noteRO: ResizeObserver | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:47
+Defined in: website/components/portfolio/Related.tsx:55
 
 ---
 
@@ -253,7 +283,7 @@ Defined in: website/components/portfolio/Related.tsx:47
 _measureRaf: number = 0
 ```
 
-Defined in: website/components/portfolio/Related.tsx:49
+Defined in: website/components/portfolio/Related.tsx:57
 
 ---
 
@@ -263,7 +293,7 @@ Defined in: website/components/portfolio/Related.tsx:49
 _dividerTeardowns: () => void[] = [];
 ```
 
-Defined in: website/components/portfolio/Related.tsx:51
+Defined in: website/components/portfolio/Related.tsx:59
 
 #### Returns
 
@@ -279,7 +309,7 @@ _ringSession:
   | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:53
+Defined in: website/components/portfolio/Related.tsx:61
 
 ---
 
@@ -289,7 +319,17 @@ Defined in: website/components/portfolio/Related.tsx:53
 _ringEl: Element | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:55
+Defined in: website/components/portfolio/Related.tsx:63
+
+---
+
+### \_loadedCovers
+
+```ts
+_loadedCovers: Map<string, string>
+```
+
+Defined in: website/components/portfolio/Related.tsx:65
 
 ---
 
@@ -4350,7 +4390,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get storage(): string;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:137
+Defined in: website/components/portfolio/Related.tsx:185
 
 CDN base URL for project media.
 
@@ -4368,7 +4408,7 @@ CDN base URL for project media.
 get projectsList(): RelatedCard[];
 ```
 
-Defined in: website/components/portfolio/Related.tsx:146
+Defined in: website/components/portfolio/Related.tsx:194
 
 Maps the DB `related.projects` rows into display-ready cards — see
 related/match.ts for the fuzzy link/image/title join against the
@@ -4903,7 +4943,7 @@ Render result from render().
 _toggleNote(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:63
+Defined in: website/components/portfolio/Related.tsx:73
 
 Toggles the clamped footer disclaimer between one-line and full text.
 
@@ -4919,7 +4959,7 @@ Toggles the clamped footer disclaimer between one-line and full text.
 _measureNote(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:75
+Defined in: website/components/portfolio/Related.tsx:85
 
 Detects whether the clamped note actually overflows — CSS cannot
 detect line-clamp truncation, so scrollHeight vs clientHeight does
@@ -4939,7 +4979,7 @@ is unclamped by definition, and the affordance hides anyway).
 _queueNoteMeasure(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:99
+Defined in: website/components/portfolio/Related.tsx:109
 
 Schedules a single truncation measure on the next animation frame.
 Reads inside rAF hit clean layout, so the scrollHeight query costs
@@ -4959,7 +4999,7 @@ flagged). Bursts (render → RO fire → render) collapse into one read.
 _watchNoteTruncation(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:114
+Defined in: website/components/portfolio/Related.tsx:124
 
 Binds a ResizeObserver to the note button so font loads, viewport
 resizes and locale swaps re-evaluate truncation. The element is
@@ -4978,7 +5018,7 @@ node identity changes instead of watching a detached element.
 onMounted(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:156
+Defined in: website/components/portfolio/Related.tsx:204
 
 Lifecycle: seeds translations from the store (they may already be
 loaded by the view), kicks the SWR fetch for the two DB nodes it
@@ -5001,7 +5041,7 @@ re-runs the fuzzy match against the new page's related list.
 onDestroy(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:171
+Defined in: website/components/portfolio/Related.tsx:226
 
 Lifecycle: removes the router subscription + the note observer.
 
@@ -5021,7 +5061,7 @@ Lifecycle: removes the router subscription + the note observer.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:200
+Defined in: website/components/portfolio/Related.tsx:267
 
 #### Returns
 
@@ -5039,7 +5079,7 @@ Defined in: website/components/portfolio/Related.tsx:200
 onUpdated(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:208
+Defined in: website/components/portfolio/Related.tsx:275
 
 #### Returns
 
@@ -5057,7 +5097,7 @@ Defined in: website/components/portfolio/Related.tsx:208
 _syncAnimDescs(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:226
+Defined in: website/components/portfolio/Related.tsx:293
 
 Binds animation descriptions to the animated nodes the render just
 produced — every related tile's hover lift, and the disclaimer's
@@ -5078,7 +5118,7 @@ Re-rendered nodes are re-bound; idempotent on repeats.
 _syncRingSheen(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:242
+Defined in: website/components/portfolio/Related.tsx:309
 
 Keeps the instanced ring-sheen overlay bound to the live
 `.related-mosaic` node — renders recreate the strip, so a session
@@ -5097,7 +5137,7 @@ WebGPU the mount is a no-op and the CSS pseudo rings stay.
 _mountDividerSheen(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:273
+Defined in: website/components/portfolio/Related.tsx:340
 
 Re-mounts the divider-sheen WebGPU widgets on the footer's `<hr>`
 dividers — the nodes are recreated on every render, so each update
@@ -5117,7 +5157,7 @@ is a no-op and the CSS `::after` sweep stays the render path.
 fetchData(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:290
+Defined in: website/components/portfolio/Related.tsx:357
 
 Fires two SWR reads in parallel: the home page node (for the
 portfoliolist join table) and the components/related node — see
@@ -5135,7 +5175,7 @@ related/data.ts.
 render(): Element;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:296
+Defined in: website/components/portfolio/Related.tsx:363
 
 JSX template for the component's shadow DOM.
 

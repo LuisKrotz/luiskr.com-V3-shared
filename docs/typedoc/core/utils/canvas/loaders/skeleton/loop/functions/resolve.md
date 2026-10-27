@@ -8,7 +8,7 @@
 function resolve(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/skeleton/loop.ts:129
+Defined in: core/utils/canvas/loaders/skeleton/loop.ts:130
 
 Content has arrived: fades the real content in, plays the shimmer
 resolve-out animation, then tears down and releases the shared GL

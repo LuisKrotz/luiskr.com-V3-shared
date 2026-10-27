@@ -10,6 +10,9 @@ const ASSET_PATHS: Readonly<{
   SVG_EXT: '.svg'
   WASM_WIDGETS_PREFIX: '/wasm/'
   WASM_DIAGRAM_PREFIX: '/wasm/diagram/'
+  ORT_WASM_PREFIX: '/ort/'
+  ML_MODELS_PREFIX: '/models/'
+  EMPTY_CAPTIONS: '/assets/empty-captions.vtt'
 }>
 ```
 

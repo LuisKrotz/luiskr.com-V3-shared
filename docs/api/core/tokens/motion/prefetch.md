@@ -1,13 +1,18 @@
-# `core/tokens/motion/prefetch.ts`
+# `core\tokens\motion\prefetch.ts`
 
 Predictive-prefetch tuning tokens.
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/motion/prefetch.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\motion\prefetch.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### `INTENT_FALLBACK`
+
+Quiet-window bound for intent-gated warm work — long enough that an
+engaged user always beats it through the interaction listeners.
 
 ### `NPU_PREDICT`
 

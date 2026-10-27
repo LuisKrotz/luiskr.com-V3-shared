@@ -8,7 +8,7 @@
 function openNavMenu(host): void
 ```
 
-Defined in: website/components/nav/menu.tsx:129
+Defined in: website/components/nav/menu.tsx:118
 
 Opens the menu: flips the state flags and re-renders — the new DOM
 mounts the menu canvases, then onUpdated → mountNavMenuWebGL attaches

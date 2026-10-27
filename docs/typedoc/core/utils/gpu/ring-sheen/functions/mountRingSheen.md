@@ -8,7 +8,7 @@
 function mountRingSheen(container, tilesSelector, canvasClass): RingSheenSession | null
 ```
 
-Defined in: core/utils/gpu/ring-sheen.ts:83
+Defined in: core/utils/gpu/ring-sheen.ts:84
 
 `mountRingSheen` — overlays one instanced ring canvas on a tile
 container. Returns null when the surface can't mount (no GPU, no

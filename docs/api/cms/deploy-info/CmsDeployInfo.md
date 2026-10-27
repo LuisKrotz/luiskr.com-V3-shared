@@ -1,11 +1,11 @@
-# `cms/deploy-info/CmsDeployInfo.tsx`
+# `cms\deploy-info\CmsDeployInfo.tsx`
 
-&lt;cms-deploy-info&gt; — the Deploy Info tab: renders the
+&lt;cms-deploy-info&gt; — the Build tab: renders the
 
-| | |
-|---|---|
-| **Source** | `src/cms/deploy-info/CmsDeployInfo.tsx` |
-| **UX surface** | Deploy reports viewer — lighthouse, coverage, scans. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\deploy-info\CmsDeployInfo.tsx`         |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
@@ -27,6 +27,10 @@ Maps a 0–1 score to the green/amber/red chip class (Lighthouse conventions).
 
 Formats a 0–1 score as a whole percentage; non-numbers render an em-dash.
 
+### `_renderBuildMeta`
+
+Renders the last-build manifest metadata (timestamp, commit, report inventory).
+
 ### `_renderLighthouse`
 
 Renders the Lighthouse section (scores + failing audits).
@@ -39,9 +43,17 @@ Renders the Lighthouse category score cells for one URL entry.
 
 Renders the Jest coverage summary table.
 
+### `_renderBundle`
+
+Renders the bundle inventory (per-type sizes, tiers, wasm crates).
+
 ### `_renderAxe`
 
 Renders the axe-core accessibility scan (violations grouped by surface).
+
+### `_renderA11y`
+
+Renders the IBM Equal Access full-site scan (rule rollup + flagged routes).
 
 ### `_renderSnyk`
 

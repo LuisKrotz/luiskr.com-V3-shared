@@ -8,7 +8,7 @@
 function teardownFit(host): void
 ```
 
-Defined in: website/components/media/draw-text/fit.ts:235
+Defined in: website/components/media/draw-text/fit.ts:246
 
 Disconnects the fit observer, drops any queued batch entry, and
 restores the stylesheet font sizing — called on disconnect and when

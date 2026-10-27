@@ -1,10 +1,10 @@
-# `core/locale/fallback.ts`
+# `core\locale\fallback.ts`
 
 Build-time English translation snapshot. The Vite plugin
 
-| | |
-|---|---|
-| **Source** | `src/core/locale/fallback.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\locale\fallback.ts`                             |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -32,7 +32,7 @@ Shape of the translations/<locale> DB node inlined by the Vite plugin.
 ### `loaderLocales`
 
 locale → loader copy — inlined for ALL locales so the boot loader
- localizes before the per-locale i18n chunks resolve.
+localizes before the per-locale i18n chunks resolve.
 
 ### `FALLBACK`
 

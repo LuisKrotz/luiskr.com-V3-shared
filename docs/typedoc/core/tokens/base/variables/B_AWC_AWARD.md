@@ -8,6 +8,6 @@
 const _B_AWC_AWARD: 'aw-c-award'
 ```
 
-Defined in: core/tokens/base.ts:382
+Defined in: core/tokens/base.ts:387
 
 BEM block fragment "b awc award" — composed by the token groups below into full class names.

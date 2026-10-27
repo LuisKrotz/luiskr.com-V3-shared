@@ -8,7 +8,7 @@
 function loadData(view, wait?): void
 ```
 
-Defined in: website/views/project/data.ts:97
+Defined in: website/views/project/data.ts:78
 
 Fetches the project node for the route's slug via SWR (optionally deferred).
 

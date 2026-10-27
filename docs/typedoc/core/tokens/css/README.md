@@ -24,6 +24,12 @@ Re-exports [MENU_CSS_PROPS](menu/variables/MENU_CSS_PROPS.md)
 
 ---
 
+### NAV\_GEAR\_CSS\_PROPS
+
+Re-exports [NAV_GEAR_CSS_PROPS](nav/variables/NAV_GEAR_CSS_PROPS.md)
+
+---
+
 ### SKELETON\_CSS\_PROPS
 
 Re-exports [SKELETON_CSS_PROPS](skeleton/variables/SKELETON_CSS_PROPS.md)

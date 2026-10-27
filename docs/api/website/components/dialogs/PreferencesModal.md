@@ -1,10 +1,10 @@
-# `website/components/dialogs/PreferencesModal.tsx`
+# `website\components\dialogs\PreferencesModal.tsx`
 
 &lt;preferences-modal&gt; — settings dialog: theme slider
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/dialogs/PreferencesModal.tsx`   |
+| **Source**     | `src/website\components\dialogs\PreferencesModal.tsx`   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -36,6 +36,10 @@ The store's theme value (light/dark/system).
 ### `reducedMotion`
 
 Whether reduced motion is enabled.
+
+### `highContrast`
+
+Whether high contrast is enabled.
 
 ### `npuAnalytics`
 

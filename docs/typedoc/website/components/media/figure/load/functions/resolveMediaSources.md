@@ -8,7 +8,7 @@
 function resolveMediaSources(fig): void
 ```
 
-Defined in: website/components/media/figure/load.ts:27
+Defined in: website/components/media/figure/load.ts:39
 
 Builds the media's CDN URL matrix on init: [poster, webm, mp4] per tier
 for videos (full size + VIDEO_SCALE'd fallback — the browser walks the

@@ -8,7 +8,7 @@
 function bindEvents(host): void
 ```
 
-Defined in: website/components/home/mosaic/events.ts:15
+Defined in: website/components/home/mosaic/events.ts:20
 
 Binds click/hover/leave/resize handlers inside the shadow root.
 

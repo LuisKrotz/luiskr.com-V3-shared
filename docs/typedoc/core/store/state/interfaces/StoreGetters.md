@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / StoreGetters
 
-Defined in: core/store/state.ts:163
+Defined in: core/store/state.ts:165
 
 The getter facade — components read state exclusively through these
 accessors so the StoreState layout can evolve without touching every
@@ -20,7 +20,7 @@ call-site compatibility.
 getTheme: () => string
 ```
 
-Defined in: core/store/state.ts:164
+Defined in: core/store/state.ts:166
 
 #### Returns
 
@@ -34,7 +34,7 @@ Defined in: core/store/state.ts:164
 getEffectiveTheme: () => string
 ```
 
-Defined in: core/store/state.ts:165
+Defined in: core/store/state.ts:167
 
 #### Returns
 
@@ -48,7 +48,7 @@ Defined in: core/store/state.ts:165
 getPreferencesOpen: () => boolean
 ```
 
-Defined in: core/store/state.ts:166
+Defined in: core/store/state.ts:168
 
 #### Returns
 
@@ -62,7 +62,35 @@ Defined in: core/store/state.ts:166
 getLangDialogOpen: () => boolean
 ```
 
-Defined in: core/store/state.ts:167
+Defined in: core/store/state.ts:169
+
+#### Returns
+
+`boolean`
+
+---
+
+### getNavMenuOpen
+
+```ts
+getNavMenuOpen: () => boolean
+```
+
+Defined in: core/store/state.ts:170
+
+#### Returns
+
+`boolean`
+
+---
+
+### getOverlayOpen
+
+```ts
+getOverlayOpen: () => boolean
+```
+
+Defined in: core/store/state.ts:171
 
 #### Returns
 
@@ -81,7 +109,7 @@ getModalOrigin: () =>
   | null;
 ```
 
-Defined in: core/store/state.ts:168
+Defined in: core/store/state.ts:172
 
 #### Returns
 
@@ -99,7 +127,21 @@ Defined in: core/store/state.ts:168
 getReducedMotion: () => boolean
 ```
 
-Defined in: core/store/state.ts:169
+Defined in: core/store/state.ts:173
+
+#### Returns
+
+`boolean`
+
+---
+
+### getHighContrast
+
+```ts
+getHighContrast: () => boolean
+```
+
+Defined in: core/store/state.ts:174
 
 #### Returns
 
@@ -113,7 +155,7 @@ Defined in: core/store/state.ts:169
 getVideoAutoplay: () => boolean
 ```
 
-Defined in: core/store/state.ts:170
+Defined in: core/store/state.ts:175
 
 #### Returns
 
@@ -127,7 +169,7 @@ Defined in: core/store/state.ts:170
 getStatsForNerds: () => boolean
 ```
 
-Defined in: core/store/state.ts:171
+Defined in: core/store/state.ts:176
 
 #### Returns
 
@@ -141,7 +183,7 @@ Defined in: core/store/state.ts:171
 getShowGrid: () => boolean
 ```
 
-Defined in: core/store/state.ts:172
+Defined in: core/store/state.ts:177
 
 #### Returns
 
@@ -155,7 +197,7 @@ Defined in: core/store/state.ts:172
 getMentions: () => MentionsState
 ```
 
-Defined in: core/store/state.ts:173
+Defined in: core/store/state.ts:178
 
 #### Returns
 
@@ -169,7 +211,7 @@ Defined in: core/store/state.ts:173
 getClickOrTap: () => string
 ```
 
-Defined in: core/store/state.ts:174
+Defined in: core/store/state.ts:179
 
 #### Returns
 
@@ -183,7 +225,7 @@ Defined in: core/store/state.ts:174
 getInputMethod: () => string
 ```
 
-Defined in: core/store/state.ts:175
+Defined in: core/store/state.ts:180
 
 #### Returns
 
@@ -197,7 +239,7 @@ Defined in: core/store/state.ts:175
 getHover: () => boolean
 ```
 
-Defined in: core/store/state.ts:176
+Defined in: core/store/state.ts:181
 
 #### Returns
 
@@ -211,7 +253,7 @@ Defined in: core/store/state.ts:176
 getlang: () => LangState
 ```
 
-Defined in: core/store/state.ts:177
+Defined in: core/store/state.ts:182
 
 #### Returns
 
@@ -225,7 +267,7 @@ Defined in: core/store/state.ts:177
 getLang: () => string
 ```
 
-Defined in: core/store/state.ts:178
+Defined in: core/store/state.ts:183
 
 #### Returns
 
@@ -239,7 +281,7 @@ Defined in: core/store/state.ts:178
 getCarouselLang: () => Record<string, unknown>
 ```
 
-Defined in: core/store/state.ts:179
+Defined in: core/store/state.ts:184
 
 #### Returns
 
@@ -253,7 +295,7 @@ Defined in: core/store/state.ts:179
 getStatsHudLang: () => Record<string, unknown>
 ```
 
-Defined in: core/store/state.ts:180
+Defined in: core/store/state.ts:185
 
 #### Returns
 
@@ -267,7 +309,7 @@ Defined in: core/store/state.ts:180
 getMarqueeAmount: () => number
 ```
 
-Defined in: core/store/state.ts:181
+Defined in: core/store/state.ts:186
 
 #### Returns
 
@@ -281,7 +323,7 @@ Defined in: core/store/state.ts:181
 getModal: () => ModalObject
 ```
 
-Defined in: core/store/state.ts:182
+Defined in: core/store/state.ts:187
 
 #### Returns
 
@@ -295,7 +337,7 @@ Defined in: core/store/state.ts:182
 getOnMouseMove: () => PagePos
 ```
 
-Defined in: core/store/state.ts:183
+Defined in: core/store/state.ts:188
 
 #### Returns
 
@@ -309,7 +351,7 @@ Defined in: core/store/state.ts:183
 getStorage: () => string
 ```
 
-Defined in: core/store/state.ts:184
+Defined in: core/store/state.ts:189
 
 #### Returns
 
@@ -323,7 +365,7 @@ Defined in: core/store/state.ts:184
 getTouch: () => boolean
 ```
 
-Defined in: core/store/state.ts:185
+Defined in: core/store/state.ts:190
 
 #### Returns
 
@@ -337,7 +379,7 @@ Defined in: core/store/state.ts:185
 getPortfolioList: () => unknown[];
 ```
 
-Defined in: core/store/state.ts:186
+Defined in: core/store/state.ts:191
 
 #### Returns
 
@@ -351,7 +393,7 @@ Defined in: core/store/state.ts:186
 getPortfoliolist: () => unknown[];
 ```
 
-Defined in: core/store/state.ts:187
+Defined in: core/store/state.ts:192
 
 #### Returns
 

@@ -8,7 +8,7 @@
 function initProject(view): void
 ```
 
-Defined in: website/views/project/data.ts:90
+Defined in: website/views/project/data.ts:71
 
 Initializes the resolved project record for the current route.
 

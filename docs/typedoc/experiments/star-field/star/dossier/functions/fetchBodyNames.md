@@ -8,7 +8,7 @@
 function fetchBodyNames(locale?): Promise<SFBodyNames | null>
 ```
 
-Defined in: experiments/star-field/star/dossier.ts:146
+Defined in: experiments/star-field/star/dossier.ts:147
 
 Fetches the locale's body-name table — `data/<locale>/names.json`,
 with the canonical English file as fallback. One ~6 KB document per

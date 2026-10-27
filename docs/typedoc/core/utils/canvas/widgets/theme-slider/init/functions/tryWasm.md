@@ -8,7 +8,7 @@
 function tryWasm(host): void
 ```
 
-Defined in: core/utils/canvas/widgets/theme-slider/init.ts:113
+Defined in: core/utils/canvas/widgets/theme-slider/init.ts:114
 
 Attempts the WebGPU wasm theme slider (~52KB artifact, own
 GPUDevice). MANUAL drive: this class keeps its own spring loop and

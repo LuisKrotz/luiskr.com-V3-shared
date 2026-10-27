@@ -8,7 +8,7 @@
 function warmWidgetArtifacts(loadModule?): void
 ```
 
-Defined in: core/utils/gpu/webgpu-widget.ts:246
+Defined in: core/utils/gpu/webgpu-widget.ts:247
 
 Fire-and-forget fetch+compile for every `eager` artifact in the
 registry — currently just the skeleton, the loading placeholder

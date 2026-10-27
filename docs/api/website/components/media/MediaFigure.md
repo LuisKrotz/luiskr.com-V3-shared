@@ -1,10 +1,10 @@
-# `website/components/media/MediaFigure.tsx`
+# `website\components\media\MediaFigure.tsx`
 
 &lt;media-figure&gt; — the site's core media card: renders a
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/media/MediaFigure.tsx`          |
+| **Source**     | `src/website\components\media\MediaFigure.tsx`          |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

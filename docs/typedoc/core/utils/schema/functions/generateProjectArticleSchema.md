@@ -5,10 +5,15 @@
 [luiskr.com](../../../../README.md) / [core/utils/schema](../README.md) / generateProjectArticleSchema
 
 ```ts
-function generateProjectArticleSchema(project, slug, locale?): Record<string, unknown>[]
+function generateProjectArticleSchema(
+  project,
+  slug,
+  locale?,
+  omitCoverVideo?
+): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:233
+Defined in: core/utils/schema.ts:237
 
 Generates an Article and cover VideoObject graph for a project detail
 page. The Article `image` carries the real CDN asset — the full
@@ -35,6 +40,13 @@ Project URL slug
 `string` = `LOCALES.EN`
 
 Page locale (defaults to LOCALES.EN)
+
+### omitCoverVideo?
+
+`boolean` = `false`
+
+Skip the cover VideoObject (deep-link watch
+pages declare only their own media entity)
 
 ## Returns
 

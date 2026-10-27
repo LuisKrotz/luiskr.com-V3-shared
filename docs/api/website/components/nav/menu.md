@@ -1,10 +1,10 @@
-# `website/components/nav/menu.tsx`
+# `website\components\nav\menu.tsx`
 
 Fullscreen menu overlay behavior for &lt;app-nav&gt;, extracted
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/nav/menu.tsx`                   |
+| **Source**     | `src/website\components\nav\menu.tsx`                   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -27,7 +27,7 @@ Close animation in flight — guards double-close.
 
 ### `_menuSettled`
 
-Open animation completed — close X may snap to drawn state.
+Open animation completed — entrance animations stop re-running.
 
 ### `_menuSettleTimer`
 
@@ -37,13 +37,9 @@ Settle-delay timer handle; cleared on destroy/close.
 
 Live menu-background widget over the fullscreen canvas.
 
-### `_menuCloseBtn`
-
-Live close-X widget.
-
 ### `_burgerBtn`
 
-Live burger widget.
+Live burger widget — doubles as the menu's close control when open.
 
 ### `_burgerCanvasEl`
 
@@ -52,10 +48,6 @@ Persistent burger canvas (survives re-renders).
 ### `_menuCanvasEl`
 
 Persistent menu background canvas.
-
-### `_menuCloseCanvasEl`
-
-Persistent close-X canvas.
 
 ### `_onDark`
 
@@ -84,10 +76,6 @@ those change without recreating the element.
 ### `navMenuCanvas`
 
 Canvas JSX for the WebGL menu background.
-
-### `navMenuCloseCanvas`
-
-Canvas JSX for the WebGL menu close (X) icon.
 
 ### `toggleNavMenu`
 

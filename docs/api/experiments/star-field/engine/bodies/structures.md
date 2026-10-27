@@ -1,10 +1,10 @@
-# `experiments/star-field/engine/bodies/structures.ts`
+# `experiments\star-field\engine\bodies\structures.ts`
 
 Cosmic-hierarchy bodies — boundary spheres + member
 
 |                |                                                          |
 | -------------- | -------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/engine/bodies/structures.ts` |
+| **Source**     | `src/experiments\star-field\engine\bodies\structures.ts` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
 
 ## Members

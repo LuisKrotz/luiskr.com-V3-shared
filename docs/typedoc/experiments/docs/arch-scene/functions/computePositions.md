@@ -5,10 +5,13 @@
 [luiskr.com](../../../../README.md) / [experiments/docs/arch-scene](../README.md) / computePositions
 
 ```ts
-function computePositions(placed): Promise<Float32Array<ArrayBufferLike>>
+function computePositions(placed): Promise<{
+  xyz: Float32Array
+  scale: Float32Array
+}>
 ```
 
-Defined in: experiments/docs/arch-scene.ts:126
+Defined in: experiments/docs/arch-scene.ts:481
 
 Batch position compute — wasm worker first, local math on failure. The
 worker replies with a transferable Float32Array; `structuredClone` of
@@ -24,6 +27,9 @@ Flattened tree nodes.
 
 ## Returns
 
-`Promise`\<`Float32Array`\<`ArrayBufferLike`\>\>
+`Promise`\<\{
+`xyz`: `Float32Array`;
+`scale`: `Float32Array`;
+\}\>
 
 xyz triplets, or null when nothing resolved.

@@ -1,10 +1,10 @@
-# `website/views/not-found/NotFound.tsx`
+# `website\views\not-found\NotFound.tsx`
 
 &lt;view-not-found&gt; — the 404 route: the "signal lost" page with
 
-| | |
-|---|---|
-| **Source** | `src/website/views/not-found/NotFound.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\views\not-found\NotFound.tsx`              |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members

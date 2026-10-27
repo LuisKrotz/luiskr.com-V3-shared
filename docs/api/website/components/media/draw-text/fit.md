@@ -1,8 +1,8 @@
-# `website/components/media/draw-text/fit.ts`
+# `website\components\media\draw-text\fit.ts`
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
-| **Source**     | `src/website/components/media/draw-text/fit.ts`         |
+| **Source**     | `src/website\components\media\draw-text\fit.ts`         |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -32,6 +32,17 @@ letter spacing so the widest word fits the parent's content box.
 Clears the inline overrides first so re-measurement is always relative
 to the stylesheet ramp. No-ops without the `fit` attribute, without a
 measurable box, or when the text already fits.
+
+- `@param` host — the draw-text element
+
+### `clearFitStyles`
+
+Clears a host's inline fit overrides — but only when one is actually
+set. Writing `style.fontSize = ''` on a host that never received an
+override still serializes+mutates the style attribute, invalidating
+layout for nothing; first-fit hosts (the common flush case) can go
+straight to measurement against the pending layout instead of paying
+an extra clear→reflow cycle.
 
 - `@param` host — the draw-text element
 

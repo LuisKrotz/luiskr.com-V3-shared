@@ -8,7 +8,7 @@
 function mediaManifestReady(): boolean
 ```
 
-Defined in: core/utils/media/manifest.ts:52
+Defined in: core/utils/media/manifest.ts:80
 
 Whether the manifest has arrived. Lets the media-figure probe distinguish
 "unknown — try webp" from "known-absent — skip straight to the original".

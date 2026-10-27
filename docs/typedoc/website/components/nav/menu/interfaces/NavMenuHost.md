@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/menu](../README.md) / NavMenuHost
 
-Defined in: website/components/nav/menu.tsx:27
+Defined in: website/components/nav/menu.tsx:29
 
 Host surface the menu helpers need (satisfied by AppNav).
 
@@ -17,12 +17,14 @@ Host surface the menu helpers need (satisfied by AppNav).
 ### \_navFlags
 
 ```ts
-_navFlags: FlagWebGL[];
+_navFlags:
+  | FlagWebGL[]
+| Set<FlagWebGL>;
 ```
 
 Defined in: website/components/nav/flag.tsx:27
 
-Live flag widgets (max one — the menu flag).
+Live flag widgets (max one — the menu flag); a Set works too.
 
 #### Inherited from
 
@@ -229,7 +231,7 @@ The active LANG_OPTIONS entry (code + label + flag cc).
 _menuOpen: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:29
+Defined in: website/components/nav/menu.tsx:31
 
 Menu overlay open flag.
 
@@ -241,7 +243,7 @@ Menu overlay open flag.
 _menuOpenedAt: number
 ```
 
-Defined in: website/components/nav/menu.tsx:31
+Defined in: website/components/nav/menu.tsx:33
 
 performance.now() of the open transition — feeds the residual-input guard.
 
@@ -253,7 +255,7 @@ performance.now() of the open transition — feeds the residual-input guard.
 _menuClosing: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:33
+Defined in: website/components/nav/menu.tsx:35
 
 Close animation in flight — guards double-close.
 
@@ -265,9 +267,9 @@ Close animation in flight — guards double-close.
 _menuSettled: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:35
+Defined in: website/components/nav/menu.tsx:37
 
-Open animation completed — close X may snap to drawn state.
+Open animation completed — entrance animations stop re-running.
 
 ---
 
@@ -277,7 +279,7 @@ Open animation completed — close X may snap to drawn state.
 _menuSettleTimer: number | null
 ```
 
-Defined in: website/components/nav/menu.tsx:37
+Defined in: website/components/nav/menu.tsx:39
 
 Settle-delay timer handle; cleared on destroy/close.
 
@@ -291,23 +293,9 @@ _menuBg:
   | null;
 ```
 
-Defined in: website/components/nav/menu.tsx:39
-
-Live menu-background widget over the fullscreen canvas.
-
----
-
-### \_menuCloseBtn
-
-```ts
-_menuCloseBtn:
-  | CloseButtonWebGL
-  | null;
-```
-
 Defined in: website/components/nav/menu.tsx:41
 
-Live close-X widget.
+Live menu-background widget over the fullscreen canvas.
 
 ---
 
@@ -321,7 +309,7 @@ _burgerBtn:
 
 Defined in: website/components/nav/menu.tsx:43
 
-Live burger widget.
+Live burger widget — doubles as the menu's close control when open.
 
 ---
 
@@ -349,25 +337,13 @@ Persistent menu background canvas.
 
 ---
 
-### \_menuCloseCanvasEl
-
-```ts
-_menuCloseCanvasEl: HTMLCanvasElement | null
-```
-
-Defined in: website/components/nav/menu.tsx:49
-
-Persistent close-X canvas.
-
----
-
 ### \_onDark
 
 ```ts
 _onDark: boolean
 ```
 
-Defined in: website/components/nav/menu.tsx:51
+Defined in: website/components/nav/menu.tsx:49
 
 True while the nav floats over a dark band (contrast variant).
 
@@ -379,7 +355,7 @@ True while the nav floats over a dark band (contrast variant).
 $(selector): Element | null;
 ```
 
-Defined in: website/components/nav/menu.tsx:53
+Defined in: website/components/nav/menu.tsx:51
 
 Shadow-scoped querySelector.
 
@@ -401,7 +377,7 @@ Shadow-scoped querySelector.
 _updateDom(): void;
 ```
 
-Defined in: website/components/nav/menu.tsx:55
+Defined in: website/components/nav/menu.tsx:53
 
 Triggers a template re-render.
 

@@ -8,7 +8,7 @@
 function renderCarousel(host): Element
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:259
+Defined in: website/components/carousel/custom-carousel/render.tsx:271
 
 JSX template. Two shapes:
 inactive (≤1 item, or items fit side-by-side) → a plain flex row,

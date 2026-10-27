@@ -1,19 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/draw-text/render](../README.md) / renderContent
 
 ```ts
-function renderContent(
-   text, 
-   delay, 
-   offset, 
-   withChars?
-): string;
+function renderContent(text, delay, offset, mode?): string
 ```
 
-Defined in: website/components/media/draw-text/render.ts:228
+Defined in: website/components/media/draw-text/render.ts:357
 
 Full pipeline: text → tokens → HTML string. The `wi` closure counter
 assigns each rendered word a sequential index so the word-level
@@ -41,11 +36,14 @@ Per-char stagger delay in ms.
 
 Base delay offset in ms.
 
-### withChars?
+### mode?
 
-`boolean` = `true`
+[`DrawRenderMode`](../type-aliases/DrawRenderMode.md) = `RENDER_MODES.CHARS`
 
-Whether to emit per-char spans (false = plain text).
+Which render to emit — 'chars' mounts the animating char
+spans, 'words' mounts measureable word spans (the `fit` fallback),
+'plain' collapses text into per-run aria-hidden spans (default for
+pending/done — O(paragraphs) nodes, not O(words)).
 
 ## Returns
 

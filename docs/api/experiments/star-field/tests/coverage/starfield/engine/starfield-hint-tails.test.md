@@ -1,10 +1,10 @@
-# `experiments/star-field/tests/coverage/starfield/engine/starfield-hint-tails.test.js`
+# `experiments\star-field\tests\coverage\starfield\engine\starfield-hint-tails.test.js`
 
 Coverage tails for the navigator-hover position hint —
 
 |                |                                                                                           |
 | -------------- | ----------------------------------------------------------------------------------------- |
-| **Source**     | `src/experiments/star-field/tests/coverage/starfield/engine/starfield-hint-tails.test.js` |
+| **Source**     | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-hint-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                                   |
 
 ## Members

@@ -1,11 +1,11 @@
-# `experiments/earth-playground/earth/runtime/screenshot.ts`
+# `experiments\earth-playground\earth\runtime\screenshot.ts`
 
 PNG capture for the Earth engine, extracted from
 
-| | |
-|---|---|
-| **Source** | `src/experiments/earth-playground/earth/runtime/screenshot.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                |
+| -------------- | -------------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth\runtime\screenshot.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.        |
 
 ## Members
 

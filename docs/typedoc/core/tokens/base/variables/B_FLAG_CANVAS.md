@@ -8,7 +8,7 @@
 const _B_FLAG_CANVAS: 'flag-canvas'
 ```
 
-Defined in: core/tokens/base.ts:348
+Defined in: core/tokens/base.ts:353
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

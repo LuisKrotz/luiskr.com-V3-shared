@@ -1,10 +1,10 @@
-# `core/tokens/starfield/params/catalog.ts`
+# `core\tokens\starfield\params\catalog.ts`
 
 Catalog-facing parameters — well-known body ids and the
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/starfield/params/catalog.ts`             |
+| **Source**     | `src/core\tokens\starfield\params\catalog.ts`             |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

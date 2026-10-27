@@ -8,7 +8,7 @@
 function streamRegistryShards(kind): AsyncGenerator<SFRegistryRecord[], void, void>
 ```
 
-Defined in: experiments/star-field/engine/registry.ts:202
+Defined in: experiments/star-field/engine/registry.ts:206
 
 Streams registry shards for a kind in order — the directory's
 incremental "load more" path; yields each parsed shard so callers can

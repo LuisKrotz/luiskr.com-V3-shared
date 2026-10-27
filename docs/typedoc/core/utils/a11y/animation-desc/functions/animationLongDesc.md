@@ -8,7 +8,7 @@
 function animationLongDesc(id): string
 ```
 
-Defined in: core/utils/a11y/animation-desc.ts:86
+Defined in: core/utils/a11y/animation-desc.ts:87
 
 The full animation description — element, behavior, triggers, tech
 and purpose in one paragraph.

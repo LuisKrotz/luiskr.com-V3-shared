@@ -1,10 +1,10 @@
-# `experiments/star-field/star/render.tsx`
+# `experiments\star-field\star\render.tsx`
 
 JSX for StarField's render() — boot loader overlay (same
 
-| | |
-|---|---|
-| **Source** | `src/experiments/star-field/star/render.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\star-field\star\render.tsx`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -17,17 +17,32 @@ English snapshot for the pages/star-field node — pre-fetch labels.
 
 Stable aria-controls id for the navigator drawer.
 
+### `itemDescId`
+
+Per-body describedby id — `<prefix><body-id>`, unique per row.
+
+### `shortcutRows`
+
+Keyboard-map rows for the instructions sheet — [keycap, localized
+action label] pairs mirroring `_HOTKEY_ACTIONS` + the arrow/Escape
+bindings in StarField._bindKeys, so the documented map can never
+drift from the live handler by more than the pairing in this table.
+
+- `@param` t Locale label map.
+- `@returns` Keycap/description row pairs.
+
 ### `renderFacts`
 
 Renders the dossier facts list — one row per {label,value} pair. A
- malformed dossier payload renders the rest of the panel instead of
- crashing the whole view.
+malformed dossier payload renders the rest of the panel instead of
+crashing the whole view.
 
 ### `mediaUrl`
 
 Resolves a dossier media `src` — absolute http(s) URLs (remote NASA /
 Commons streams) pass through untouched; relative paths join under the
 module's public-asset root (`/experiments/star-field/media/…`).
+
 - `@param` src Media entry src from the dossier JSON.
 - `@returns` The URL to hand to img/video/audio elements.
 
@@ -56,6 +71,7 @@ One registry directory row — a real focusable button per catalogued
 object (the keyboard/AT path into all 139k bodies): display name,
 kind badge and distance from the shard record, selecting flies the
 camera to the rendered point and opens the synthesized dossier.
+
 - `@param` host The StarField component.
 - `@param` rec The registry record.
 - `@param` t Locale label map.
@@ -63,4 +79,5 @@ camera to the rendered point and opens the synthesized dossier.
 ### `renderStarField`
 
 Renders the StarField view.
+
 - `@param` host The StarField component.

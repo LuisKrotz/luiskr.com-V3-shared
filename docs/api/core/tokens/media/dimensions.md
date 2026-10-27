@@ -1,10 +1,10 @@
-# `core/tokens/media/dimensions.ts`
+# `core\tokens\media\dimensions.ts`
 
 Canonical pixel dimensions + media timing tokens split per
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/media/dimensions.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\media\dimensions.ts`                     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -30,6 +30,13 @@ Image decode budgets shared by progressive media pipelines.
 ### `MAX_DECODE_PIXELS`
 
 4096² pixels: preserves the former memory ceiling without rejecting tall, narrow screenshots.
+
+### `SMALL_BOX_PX`
+
+CSS-pixel media-box edge at/below which a ladder climb skips the
+heaviest rungs (original + uncompressed). Matches the 768px
+`-mobile` cover tier: a box this small can never resolve the extra
+resolution a top rung carries, so the bytes are pure waste.
 
 ### `VIDEO_DIMENSIONS`
 

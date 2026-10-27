@@ -1,11 +1,11 @@
-# `shared/build/vite-lib.mjs`
+# `shared\build\vite-lib.mjs`
 
 Shared factory for the per-module Vite library builds. Every
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/vite-lib.mjs`                                          |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\build\vite-lib.mjs`                         |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

@@ -1,11 +1,11 @@
-# `shared/build/module-public.mjs`
+# `shared\build\module-public.mjs`
 
 Multi-source public-asset merge for the modular workspace.
 
-|                |                                                                          |
-| -------------- | ------------------------------------------------------------------------ |
-| **Source**     | `src/shared/build/module-public.mjs`                                     |
-| **UX surface** | Vite machinery every module build consumes — never shipped to a browser. |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\build\module-public.mjs`                    |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
 

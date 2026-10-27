@@ -19,6 +19,9 @@ const LOADER_CLASSES: Readonly<{
   INTRO_LOADER_BAR: 'intro-loader-bar'
   INTRO_LOADER_BAR_FILL: 'intro-loader-bar-fill'
   INTRO_LOADER_HIDDEN: 'intro-loader--hidden'
+  INTRO_LOADER_RETIRED: 'intro-loader--retired'
+  INTRO_LOADER_LQIP: 'intro-loader-lqip'
+  INTRO_LOADER_LQIP_FULL: 'intro-loader-lqip--full'
 }>
 ```
 

@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-scroll](../README.md) / WasmScrollOptions
 
-Defined in: core/utils/wasm/wasm-scroll.ts:20
+Defined in: core/utils/wasm/wasm-scroll.ts:21
 
 Options bag for [wasmSmoothScroll](../functions/wasmSmoothScroll.md).
 
@@ -13,17 +13,17 @@ Options bag for [wasmSmoothScroll](../functions/wasmSmoothScroll.md).
 ### container?
 
 ```ts
-optional container?: 
+optional container?:
   | string
   | Window
   | Element;
 ```
 
-Defined in: core/utils/wasm/wasm-scroll.ts:22
+Defined in: core/utils/wasm/wasm-scroll.ts:23
 
 Scroll container — selector (pierces shadow DOM), element, or window.
 
-***
+---
 
 ### element?
 
@@ -31,16 +31,16 @@ Scroll container — selector (pierces shadow DOM), element, or window.
 optional element?: string | Element;
 ```
 
-Defined in: core/utils/wasm/wasm-scroll.ts:24
+Defined in: core/utils/wasm/wasm-scroll.ts:25
 
 Target element — selector or element.
 
-***
+---
 
 ### scrollTo?
 
 ```ts
-optional scrollTo?: 
+optional scrollTo?:
   | number
   | {
   y?: number;
@@ -48,11 +48,11 @@ optional scrollTo?:
 };
 ```
 
-Defined in: core/utils/wasm/wasm-scroll.ts:26
+Defined in: core/utils/wasm/wasm-scroll.ts:27
 
 Numeric offset or {y}/{top} shape.
 
-***
+---
 
 ### offset?
 
@@ -60,11 +60,11 @@ Numeric offset or {y}/{top} shape.
 optional offset?: number;
 ```
 
-Defined in: core/utils/wasm/wasm-scroll.ts:28
+Defined in: core/utils/wasm/wasm-scroll.ts:29
 
 Extra px offset applied to the target.
 
-***
+---
 
 ### duration?
 
@@ -72,11 +72,11 @@ Extra px offset applied to the target.
 optional duration?: number;
 ```
 
-Defined in: core/utils/wasm/wasm-scroll.ts:30
+Defined in: core/utils/wasm/wasm-scroll.ts:31
 
 Animation length in ms (default 600).
 
-***
+---
 
 ### updateHistory?
 
@@ -84,6 +84,6 @@ Animation length in ms (default 600).
 optional updateHistory?: boolean;
 ```
 
-Defined in: core/utils/wasm/wasm-scroll.ts:32
+Defined in: core/utils/wasm/wasm-scroll.ts:33
 
 Replace the URL hash on arrival.

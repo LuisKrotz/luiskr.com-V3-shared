@@ -8,7 +8,7 @@
 function patchCarouselMedia(): void
 ```
 
-Defined in: core/safari/patches/carousel-media.ts:122
+Defined in: core/safari/patches/carousel-media.ts:171
 
 Installs the eager-image wrap on both carousel elements — see
 eagerizeShadowImages for the mechanics.

@@ -1,18 +1,21 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/ids/docs](../README.md) / DOCS\_IDS
 
 ```ts
 const DOCS_IDS: Readonly<{
-  GL: "docs-gl";
-  TREE: "docs-tree";
-  CRUMBS: "docs-crumbs";
-  GRID: "docs-grid";
-  VIEWER: "docs-viewer";
-  SCENE: "docs-scene";
-}>;
+  GL: 'docs-gl'
+  TREE: 'docs-tree'
+  NAV_PANEL: 'docs-nav-panel'
+  CRUMBS: 'docs-crumbs'
+  GRID: 'docs-grid'
+  VIEWER: 'docs-viewer'
+  SCENE: 'docs-scene'
+  MAP_MODAL: 'docs-map-modal'
+  MAP_LABEL: 'docs-map-label'
+}>
 ```
 
 Defined in: core/tokens/ids/docs.ts:14

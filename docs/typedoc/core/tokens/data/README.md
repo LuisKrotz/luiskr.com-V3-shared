@@ -54,6 +54,12 @@ Re-exports [SOURCE_YEAR_TOKEN](component-keys/variables/SOURCE_YEAR_TOKEN.md)
 
 ---
 
+### A11Y\_INDEX\_TOKEN
+
+Re-exports [A11Y_INDEX_TOKEN](component-keys/variables/A11Y_INDEX_TOKEN.md)
+
+---
+
 ### SECTION\_COMPONENT\_KEYS
 
 Re-exports [SECTION_COMPONENT_KEYS](component-keys/variables/SECTION_COMPONENT_KEYS.md)
@@ -63,6 +69,12 @@ Re-exports [SECTION_COMPONENT_KEYS](component-keys/variables/SECTION_COMPONENT_K
 ### NOTIFY\_TYPES
 
 Re-exports [NOTIFY_TYPES](notify/variables/NOTIFY_TYPES.md)
+
+---
+
+### SEARCH\_THEMES\_KEY
+
+Re-exports [SEARCH_THEMES_KEY](search-themes/variables/SEARCH_THEMES_KEY.md)
 
 ---
 
@@ -141,6 +153,12 @@ Re-exports [AWARDS_UI_KEYS](ui-keys/variables/AWARDS_UI_KEYS.md)
 ### NOTIFY\_UI\_KEYS
 
 Re-exports [NOTIFY_UI_KEYS](ui-keys/variables/NOTIFY_UI_KEYS.md)
+
+---
+
+### A11Y\_UI\_KEYS
+
+Re-exports [A11Y_UI_KEYS](ui-keys/variables/A11Y_UI_KEYS.md)
 
 ---
 

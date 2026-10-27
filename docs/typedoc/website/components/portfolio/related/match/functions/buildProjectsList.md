@@ -8,7 +8,7 @@
 function buildProjectsList(translations, homePortfolio, storage): RelatedCard[]
 ```
 
-Defined in: website/components/portfolio/related/match.ts:75
+Defined in: website/components/portfolio/related/match.ts:79
 
 Maps the DB `related.projects` rows into display-ready cards.
 

@@ -8,7 +8,7 @@
 function fetchJson(url): Promise<unknown>
 ```
 
-Defined in: cms/deploy-info/data.ts:25
+Defined in: cms/deploy-info/data.ts:26
 
 Fetches a report JSON; any missing/corrupt file degrades to null (section shows its "no data" hint).
 

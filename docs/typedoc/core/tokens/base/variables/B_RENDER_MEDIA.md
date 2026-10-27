@@ -8,6 +8,6 @@
 const _B_RENDER_MEDIA: 'render-media'
 ```
 
-Defined in: core/tokens/base.ts:178
+Defined in: core/tokens/base.ts:183
 
 BEM block fragment "b render media" — composed by the token groups below into full class names.

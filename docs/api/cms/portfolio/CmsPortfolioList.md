@@ -1,11 +1,11 @@
-# `cms/portfolio/CmsPortfolioList.tsx`
+# `cms\portfolio\CmsPortfolioList.tsx`
 
 CMS portfolio-list editor: the home page's ordered project
 
-| | |
-|---|---|
-| **Source** | `src/cms/portfolio/CmsPortfolioList.tsx` |
-| **UX surface** | Portfolio list + related-projects editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\portfolio\CmsPortfolioList.tsx`        |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

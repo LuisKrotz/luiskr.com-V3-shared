@@ -8,7 +8,7 @@
 function poseFromPos(p, t): [number, number, number]
 ```
 
-Defined in: experiments/docs/arch-scene-3d.ts:117
+Defined in: experiments/docs/arch-scene-3d.ts:142
 
 Converts a saved world-space camera position into the orbit rig's
 spherical pose — the inverse of the Rust rig's

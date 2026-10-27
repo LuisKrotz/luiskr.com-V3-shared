@@ -1,11 +1,11 @@
-# `cms/lang/CmsLangEditor.tsx`
+# `cms\lang\CmsLangEditor.tsx`
 
 &lt;cms-lang-editor&gt; — raw JSON dictionary editor: any
 
-| | |
-|---|---|
-| **Source** | `src/cms/lang/CmsLangEditor.tsx` |
-| **UX surface** | Raw JSON dictionary editor card. |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\lang\CmsLangEditor.tsx`                |
+| **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 

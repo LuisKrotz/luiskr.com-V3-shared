@@ -1,10 +1,10 @@
-# `core/tokens/classes/about.ts`
+# `core\tokens\classes\about.ts`
 
 About section class tokens — token group.
 
-| | |
-|---|---|
-| **Source** | `src/core/tokens/classes/about.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\about.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members

@@ -1,10 +1,10 @@
-# `core/tokens/base.ts`
+# `core\tokens\base.ts`
 
 Internal shared composites for the token modules — the
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
-| **Source**     | `src/core/tokens/base.ts`                                 |
+| **Source**     | `src/core\tokens\base.ts`                                 |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -127,10 +127,10 @@ composes from this fragment (zero-hardcoding rule 9).
 
 BEM block fragment "b distort" — composed by the token groups below into full class names.
 
-### `_B_GPU_OVERLAY`
+### `_B_FOOTER`
 
-BEM block fragment "b webgpu overlay" — composed by the token groups into
-the dual-layer render canvas class names (zero-hardcoding rules 4–5).
+BEM block fragment "b footer" — composed by the token groups below into full class names
+and dotted ui keys (e.g. `a11y.footer`).
 
 ### `_B_FOOTER_SOURCE`
 
@@ -273,6 +273,11 @@ BEM block fragment "b expand modal media" — composed by the token groups below
 BEM block fragment "b expand modal media figure" — composed by the token groups below into full class names.
 
 ### `_B_EXPAND_MODAL_MEDIA_ITEM`
+
+BEM block fragment `…` — declared once here; every domain class token composes from this
+fragment (zero-hardcoding rule 9).
+
+### `_B_EXPAND_MODAL_GENIE`
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).
@@ -438,6 +443,11 @@ Shared key token `earthPlayground` — single source for a literal repeated acro
 Shared key token `starField` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).
 
+### `_K_ANIMATIONS`
+
+Shared key token `animations` — single source for the animations-reference
+dictionary key and the route's English segment (zero-hardcoding rule 5).
+
 ### `_K_ABOUT_SECTION`
 
 Token key "k about section" — single source for the repeated literal.
@@ -510,6 +520,12 @@ Token key "k pointerenter" — single source for the repeated literal.
 
 Shared key token `focus` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).
+
+### `_K_A11Y`
+
+Shared key token `a11y` — the APP dictionary node holding the hidden
+navigation-heading templates (a11y.section / a11y.carousel /
+a11y.paragraph).
 
 ### `_K_SITE_URL`
 

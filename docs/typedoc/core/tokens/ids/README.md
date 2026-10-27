@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../README.md) / core/tokens/ids
 
@@ -10,25 +10,31 @@
 
 Re-exports [APP_IDS](app/variables/APP_IDS.md)
 
-***
+---
+
+### NAV\_GEAR\_IDS
+
+Re-exports [NAV_GEAR_IDS](app/variables/NAV_GEAR_IDS.md)
+
+---
 
 ### ASSET\_IDS
 
 Re-exports [ASSET_IDS](assets/variables/ASSET_IDS.md)
 
-***
+---
 
 ### CMS\_IDS
 
 Re-exports [CMS_IDS](cms/variables/CMS_IDS.md)
 
-***
+---
 
 ### DIALOG\_IDS
 
 Re-exports [DIALOG_IDS](dialogs/variables/DIALOG_IDS.md)
 
-***
+---
 
 ### SECTION\_IDS
 

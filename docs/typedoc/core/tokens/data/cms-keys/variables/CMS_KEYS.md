@@ -23,10 +23,11 @@ const CMS_KEYS: Readonly<{
   ANIMATIONS: 'animations'
   SOURCE_CODE: 'source-code'
   PREFERENCES_MODAL: 'preferences-modal'
+  SEARCH_THEMES: string
 }>
 ```
 
-Defined in: core/tokens/data/cms-keys.ts:28
+Defined in: core/tokens/data/cms-keys.ts:29
 
 Frozen cms key map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token

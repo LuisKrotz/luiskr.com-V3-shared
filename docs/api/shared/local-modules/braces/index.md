@@ -1,8 +1,8 @@
-# `shared/local-modules/braces/index.js`
+# `shared\local-modules\braces\index.js`
 
-| | |
-|---|---|
-| **Source** | `src/shared/local-modules/braces/index.js` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\local-modules\braces\index.js`              |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -21,6 +21,7 @@ ceiling closes the hole without changing any legitimate behavior.
 Scans a pattern for unescaped `{`/`}` nesting depth and throws before the
 recursive parser/expander can be driven into stack exhaustion. Backslash
 escapes are honored so `\{` does not count toward the depth.
+
 - `@param` {String} input Brace pattern to validate.
 - `@param` {Number} [depth] Recursion accumulator for the character loop.
 
@@ -29,10 +30,11 @@ escapes are honored so `\{` does not count toward the depth.
 Expand the given pattern or create a regex-compatible string.
 
 ```js
-const braces = require('braces');
-console.log(braces('{a,b,c}', { compile: true })); //=> ['(a|b|c)']
-console.log(braces('{a,b,c}')); //=> ['a', 'b', 'c']
+const braces = require('braces')
+console.log(braces('{a,b,c}', { compile: true })) //=> ['(a|b|c)']
+console.log(braces('{a,b,c}')) //=> ['a', 'b', 'c']
 ```
+
 - `@param` {String} `str`
 - `@param` {Object} `options`
 
@@ -42,9 +44,10 @@ Parse the given `str` with the given `options`.
 
 ```js
 // braces.parse(pattern, [, options]);
-const ast = braces.parse('a/{b,c}/d');
-console.log(ast);
+const ast = braces.parse('a/{b,c}/d')
+console.log(ast)
 ```
+
 - `@param` {String} pattern Brace pattern to parse
 - `@param` {Object} options
 
@@ -53,10 +56,11 @@ console.log(ast);
 Creates a braces string from an AST, or an AST node.
 
 ```js
-const braces = require('braces');
-let ast = braces.parse('foo/{a,b}/bar');
-console.log(stringify(ast.nodes[2])); //=> '{a,b}'
+const braces = require('braces')
+let ast = braces.parse('foo/{a,b}/bar')
+console.log(stringify(ast.nodes[2])) //=> '{a,b}'
 ```
+
 - `@param` {String} `input` Brace pattern or AST.
 - `@param` {Object} `options`
 
@@ -66,10 +70,11 @@ Compiles a brace pattern into a regex-compatible, optimized string.
 This method is called by the main [braces](#braces) function by default.
 
 ```js
-const braces = require('braces');
-console.log(braces.compile('a/{b,c}/d'));
+const braces = require('braces')
+console.log(braces.compile('a/{b,c}/d'))
 //=> ['a/(b|c)/d']
 ```
+
 - `@param` {String} `input` Brace pattern or AST.
 - `@param` {Object} `options`
 
@@ -81,10 +86,11 @@ using this method it's recommended that you read the [performance notes](#perfor
 and advantages of using [.compile](#compile) instead.
 
 ```js
-const braces = require('braces');
-console.log(braces.expand('a/{b,c}/d'));
+const braces = require('braces')
+console.log(braces.expand('a/{b,c}/d'))
 //=> ['a/b/d', 'a/c/d'];
 ```
+
 - `@param` {String} `pattern` Brace pattern
 - `@param` {Object} `options`
 
@@ -95,10 +101,11 @@ Processes a brace pattern and returns either an expanded array
 This method is called by the main [braces](#braces) function.
 
 ```js
-const braces = require('braces');
+const braces = require('braces')
 console.log(braces.create('user-{200..300}/project-{a,b,c}-{1..10}'))
 //=> 'user-(20[0-9]|2[1-9][0-9]|300)/project-(a|b|c)-([1-9]|10)'
 ```
+
 - `@param` {String} `pattern` Brace pattern
 - `@param` {Object} `options`
 

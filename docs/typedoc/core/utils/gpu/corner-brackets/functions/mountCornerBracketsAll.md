@@ -8,7 +8,7 @@
 function mountCornerBracketsAll(root, selector, spec): () => void
 ```
 
-Defined in: core/utils/gpu/corner-brackets.ts:390
+Defined in: core/utils/gpu/corner-brackets.ts:391
 
 Batch mount — one `mountCornerBrackets` per matching element under
 `root` (a component shadow root or any parent). Returns a single

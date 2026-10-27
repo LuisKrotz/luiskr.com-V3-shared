@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/earth-playground/space/render](../README.md) / renderSpacePlayground
 
 ```ts
-function renderSpacePlayground(host): Element;
+function renderSpacePlayground(host): Element
 ```
 
-Defined in: experiments/earth-playground/space/render.tsx:29
+Defined in: experiments/earth-playground/space/render.tsx:31
 
 Renders space playground.
 
