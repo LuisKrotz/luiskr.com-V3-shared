@@ -9,6 +9,28 @@ LLM/agent replica surface — emits a full-content Markdown
 
 ## Members
 
+### `STAR_DATA_BASE`
+
+Mirrors SF_DATA_BASE (core/tokens/starfield/textures.ts — alias chain
+makes it non-importable here) — public root of the star-field data
+surface: `…/index/` registry shards, `…/deep-field.bin`, `…/<loc>/*.json` dossiers.
+
+### `SP_PARAM_WIRES`
+
+SP_*_PARAMS / SP_ACTIONS wire strings keyed by member name — resolves
+each SP_CONTROL_GROUPS row `key` to its data-param/data-action value.
+
+### `SP_ENGINE_DEFAULTS`
+
+DEFAULT_SP_GUI composition — mirrors core/tokens/playground.ts (its
+relative `.js` imports don't resolve under plain-node type stripping,
+so the leaf maps are composed here in the same subsystem order).
+
+### `starCatalogManifest`
+
+Star-field deep-catalog manifest — record totals + per-kind shard
+lists for the 139,563-object registry behind the canvas star cloud.
+
 ### `CONTENT_POLICY`
 
 The site's declared AI-usage policy — mirrors the `Content-Signal`
@@ -156,6 +178,14 @@ the route in its locale index.
 ### `homeMedia`
 
 Home mosaic media — the same covers the sitemap's image tags list.
+
+### `emitEarthPlayground`
+
+Earth Playground replica — page copy plus the whole canvas-rendered
+control surface: every control group's localized label, resolved
+data-param, input kind, range geometry and effective default
+(CMS `defaults` over shipped `def`/`checked`), and the engine's
+DEFAULT_SP_GUI start state — the full tunable scene as data.
 
 ### `docsFileMd`
 

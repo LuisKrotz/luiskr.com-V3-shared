@@ -27,6 +27,16 @@ first keeps it idempotent (encodeURI escapes '%' itself).
 
 Truncates a media title to Google's 100-char video-title bound.
 
+### `epShareTagsFor`
+
+Localized <image:image> tags for the whole share set — titles and
+captions carry the locale's own earth-image search themes.
+
+### `sfShareTagsFor`
+
+Localized <image:image> tags for the whole star share set — titles
+and captions carry the locale's own star-image search themes.
+
 ### `mediaTagXml`
 
 XML media tags for one media item — image:image or video:video.

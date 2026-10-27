@@ -36,6 +36,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
+import { EARTH_SHARE, STAR_SHARE } from '../../../core/tokens/playground/share.ts'
 import { mediaItemsOf, mediaRowsOf } from './route-media.mjs'
 import {
   fetchMediaManifest,
@@ -43,6 +44,7 @@ import {
   resolveMediaUrls,
   resolveCoverKey,
 } from './media-manifest.mjs'
+import { shareImageKeys, shareImageUrls, shareManifestDoc } from './playground-share.mjs'
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
@@ -230,6 +232,111 @@ async function run() {
 
   for (const lang of VALID_LANGS) {
     if (lang !== 'en') addTags(`/${lang}`, coverTagsFor(lang))
+  }
+
+  // ── Earth Playground share captures ──────────────────────────────────
+  // Every screenshot under the bucket's share/ prefix is a social-card
+  // candidate AND a Google-Images index target: each earth-playground URL
+  // (canonical English segment + every localized slug) lists the whole
+  // set with locale-localized titles + search-theme captions, so earth-
+  // image searches in every language resolve to the portfolio.
+  const shareKeys = shareImageKeys(manifest)
+
+  if (shareKeys.length) {
+    fs.writeFileSync(
+      path.join(META_DIR, EARTH_SHARE.MANIFEST_URL.split('/').pop()),
+      `${JSON.stringify(shareManifestDoc(shareImageUrls(manifest, CDN_BASE), CDN_BASE), null, 2)}\n`,
+      'utf-8'
+    )
+  }
+
+  /** Localized <image:image> tags for the whole share set — titles and
+   *  captions carry the locale's own earth-image search themes. */
+  const epShareTagsFor = (loc) => {
+    const page =
+      translations[loc]?.pages?.['earth-playground'] ||
+      translations.en?.pages?.['earth-playground'] ||
+      {}
+
+    const pageTitle = page.title || 'Earth Playground'
+    const capture = page.shareCapture || 'Earth render'
+    const caption = escXml(
+      titleOf(
+        [pageTitle, ...((Array.isArray(page.searchThemes) && page.searchThemes) || [])].join(' — '),
+        500
+      )
+    )
+
+    return shareKeys.map(
+      (key, i) =>
+        `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</image:loc>` +
+        `\n      <image:title>${escXml(titleOf(`${pageTitle} — ${capture} ${i + 1}`))}</image:title>` +
+        `\n      <image:caption>${caption}</image:caption>\n    </image:image>`
+    )
+  }
+
+  if (shareKeys.length) {
+    addTags('/earth-playground', epShareTagsFor('en'))
+
+    for (const lang of VALID_LANGS) {
+      if (lang === 'en') continue
+
+      const epSlug = LANG_SLUGS[lang]?.earthPlayground
+
+      if (epSlug) addTags(`/${lang}/${epSlug}`, epShareTagsFor(lang))
+    }
+  }
+
+  // ── Star Field share captures ──────────────────────────────────────
+  // Same contract as the earth set: every screenshot under the bucket's
+  // star-field share/ prefix is a social-card candidate AND a Google-
+  // Images index target — each star-field index URL (canonical English
+  // segment + every localized slug) lists the whole set with locale-
+  // localized titles + search-theme captions, so star/space searches in
+  // every language resolve to the portfolio.
+  const starShareKeys = shareImageKeys(manifest, STAR_SHARE)
+
+  if (starShareKeys.length) {
+    fs.writeFileSync(
+      path.join(META_DIR, STAR_SHARE.MANIFEST_URL.split('/').pop()),
+      `${JSON.stringify(shareManifestDoc(shareImageUrls(manifest, CDN_BASE, STAR_SHARE), CDN_BASE, STAR_SHARE), null, 2)}\n`,
+      'utf-8'
+    )
+  }
+
+  /** Localized <image:image> tags for the whole star share set — titles
+   *  and captions carry the locale's own star-image search themes. */
+  const sfShareTagsFor = (loc) => {
+    const page =
+      translations[loc]?.pages?.['star-field'] || translations.en?.pages?.['star-field'] || {}
+
+    const pageTitle = page.title || 'Star Field'
+    const capture = page.shareCapture || 'Star render'
+    const caption = escXml(
+      titleOf(
+        [pageTitle, ...((Array.isArray(page.searchThemes) && page.searchThemes) || [])].join(' — '),
+        500
+      )
+    )
+
+    return starShareKeys.map(
+      (key, i) =>
+        `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</image:loc>` +
+        `\n      <image:title>${escXml(titleOf(`${pageTitle} — ${capture} ${i + 1}`))}</image:title>` +
+        `\n      <image:caption>${caption}</image:caption>\n    </image:image>`
+    )
+  }
+
+  if (starShareKeys.length) {
+    addTags('/star-field-experiment', sfShareTagsFor('en'))
+
+    for (const lang of VALID_LANGS) {
+      if (lang === 'en') continue
+
+      const sfSlug = LANG_SLUGS[lang]?.starField
+
+      if (sfSlug) addTags(`/${lang}/${sfSlug}`, sfShareTagsFor(lang))
+    }
   }
 
   // ── Portfolio routes, media deep links + per-URL media tags ─────────────

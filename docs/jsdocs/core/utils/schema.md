@@ -125,6 +125,141 @@ TechArticle) replace or extend this graph once their data resolves.
 - `@param` options Route URL/name/description/locale/image/breadcrumb.
 - `@returns` JSON-LD entities for updateJsonLd().
 
+### (module scope)
+
+Inputs for the Earth Playground graph — route base + WebApplication declaring the canvas-rendered control surface.
+
+### `url`
+
+Canonical absolute page URL — also the app entity @id base.
+
+### `name`
+
+Localized page name.
+
+### (module scope)
+
+Localized meta description; falls back to the site description.
+
+### (module scope)
+
+Locale code — resolved to BCP-47 via LOCALE_TAGS.
+
+### `features`
+
+Localized labels of every control group, row and action — WebApplication.featureList.
+
+### `generateEarthPlaygroundSchema`
+
+Earth Playground JSON-LD graph — the route base plus a WebApplication
+entity whose `featureList` enumerates the whole localized control
+surface (the panel is a WebGL canvas at runtime, so the schema is the
+crawler-legible form of it). Mirrors the build-time entity emitted by
+build-locale-pages.mjs so the post-hydration graph keeps parity with
+the served document.
+
+- `@param` options Route URL/name/description/locale + localized feature labels.
+- `@returns` JSON-LD entities for updateJsonLd().
+
+### (module scope)
+
+One distribution file for a Dataset entity — absolute URL + encoding format.
+
+### (module scope)
+
+Prepared Dataset input — name/description/credit plus its downloadable files.
+
+### `kind`
+
+Dataset @id slug appended to the index URL (e.g. 'star' → #dataset-star).
+
+### (module scope)
+
+Inputs for the star-field index graph — route base + body ItemList + registry DataCatalog.
+
+### `url`
+
+Canonical absolute index URL — entity @id bases derive from it.
+
+### `name`
+
+Localized page name.
+
+### (module scope)
+
+Localized meta description; falls back to the site description.
+
+### (module scope)
+
+Locale code — resolved to BCP-47 via LOCALE_TAGS.
+
+### `items`
+
+Authored-body deep links — ItemList entries in catalog order.
+
+### (module scope)
+
+Localized heading for the registry DataCatalog (falls back to `name`).
+
+### (module scope)
+
+Prepared registry datasets — omitted when the manifest is unavailable.
+
+### `generateStarIndexSchema`
+
+Star-field index JSON-LD graph — the route base plus an ItemList that
+enumerates every authored body deep link and a DataCatalog whose
+Datasets point at the registry manifest, shard JSONs and the packed
+binary, so the canvas star cloud's underlying 139,563-record catalog
+is enumerable without WebGL. Mirrors the build-time entities emitted
+by build-locale-pages.mjs for post-hydration parity.
+
+- `@param` options Index URL/name/locale, body items, prepared datasets.
+- `@returns` JSON-LD entities for updateJsonLd().
+
+### (module scope)
+
+Inputs for a star-field body dossier graph — route base + Article describing the catalogued object.
+
+### `url`
+
+Canonical absolute body-page URL — Article/object @id bases.
+
+### `indexUrl`
+
+Absolute star-field index URL — isPartOf + crumb target.
+
+### `indexName`
+
+Localized index name (the middle crumb + isPartOf label).
+
+### `name`
+
+Body display name — Article headline.
+
+### (module scope)
+
+Dossier tagline — Article/Thing description.
+
+### (module scope)
+
+Technical dossier facts — emitted as PropertyValue pairs on the object.
+
+### (module scope)
+
+Locale code — resolved to BCP-47 via LOCALE_TAGS.
+
+### `generateStarBodySchema`
+
+Star-field body JSON-LD graph — the route base (with a Home →
+Star Field → body crumb) plus an Article whose `about` Thing carries
+the dossier's technical facts as PropertyValue pairs. Mirrors the
+build-time body entity so hydrated dossier deep links keep the same
+structured data the static dossier pages serve.
+
+- `@param` options Body/index URLs, names, tagline, facts, locale.
+- `@returns` JSON-LD entities for updateJsonLd().
+
 ### `generateProjectSchema`
 
 Complete project-page JSON-LD graph — the route base (Org + WebSite

@@ -59,9 +59,47 @@ import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
+import { SP_CONTROL_GROUPS } from '../../../core/tokens/playground/control-groups.ts'
+import {
+  SF_REGISTRY_INDEX_DIR,
+  SF_REGISTRY_MANIFEST,
+  SF_REGISTRY_KINDS,
+  SF_REGISTRY_FIELDS,
+} from '../../../core/tokens/starfield/registry.ts'
+import { SF_STAR_CLOUD } from '../../../core/tokens/starfield/params/worker.ts'
+import {
+  SP_CAMERA_PARAMS,
+  SP_SCENE_PARAMS,
+  SP_POST_PARAMS,
+  SP_GRADE_PARAMS,
+  SP_DEBUG_PARAMS,
+} from '../../../core/tokens/playground/params.ts'
+import { SP_ACTIONS } from '../../../core/tokens/playground/actions.ts'
+import {
+  SP_MOON_DEFAULTS,
+  SP_ATMOSPHERE_DEFAULTS,
+  SP_CLOUD_SHADOW_DEFAULTS,
+  SP_OCEAN_DEFAULTS,
+  SP_EARTH_DEFAULTS,
+  SP_CAMERA_DEFAULTS,
+  SP_ENVIRONMENT_DEFAULTS,
+  SP_SUN_DEFAULTS,
+} from '../../../core/tokens/playground/gui-scene.ts'
+import {
+  SP_COLOR_GRADING_DEFAULTS,
+  SP_LENS_FLARE_DEFAULTS,
+  SP_ANAMORPHIC_DEFAULTS,
+  SP_BLOOM_DEFAULTS,
+  SP_VIGNETTE_DEFAULTS,
+  SP_CHROMATIC_DEFAULTS,
+  SP_FILM_GRAIN_DEFAULTS,
+  SP_DEBUG_DEFAULTS,
+} from '../../../core/tokens/playground/gui-post.ts'
 import { mediaRowsOf, llmTreePaths, llmSiblingPaths, LLM_TREE_ROOT } from './route-media.mjs'
 import { loadTranslations, prefetchTranslations } from './build-locale-pages.mjs'
 import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
+import { EARTH_SHARE, STAR_SHARE } from '../../../core/tokens/playground/share.ts'
+import { shareImageUrls } from './playground-share.mjs'
 import { scanManifest, resolveFileId, MEDIA_INLINE_LIMIT } from '../../build/docs/scan.mjs'
 import { redactSource } from '../../build/docs/redact.mjs'
 import { withFsRetry } from './fs-retry.mjs'
@@ -77,6 +115,69 @@ const CDN_BASE = 'https://storage.googleapis.com/luiskr.com/public/_v3/'
 const SCHEMA_CONTEXT = 'https://schema.org'
 const REPLICA_SPEC = 'llm-replica/1.0'
 const GENERATOR = 'generate-llm-pages.mjs'
+
+/** Mirrors SF_DATA_BASE (core/tokens/starfield/textures.ts — alias chain
+ *  makes it non-importable here) — public root of the star-field data
+ *  surface: `…/index/` registry shards, `…/deep-field.bin`, `…/<loc>/*.json` dossiers. */
+const STAR_DATA_BASE = '/experiments/star-field/data'
+
+/** SP_*_PARAMS / SP_ACTIONS wire strings keyed by member name — resolves
+ *  each SP_CONTROL_GROUPS row `key` to its data-param/data-action value. */
+const SP_PARAM_WIRES = {
+  ...SP_CAMERA_PARAMS,
+  ...SP_SCENE_PARAMS,
+  ...SP_POST_PARAMS,
+  ...SP_GRADE_PARAMS,
+  ...SP_DEBUG_PARAMS,
+}
+const SP_ACTION_WIRES = { ...SP_ACTIONS }
+
+/** DEFAULT_SP_GUI composition — mirrors core/tokens/playground.ts (its
+ *  relative `.js` imports don't resolve under plain-node type stripping,
+ *  so the leaf maps are composed here in the same subsystem order). */
+const SP_ENGINE_DEFAULTS = {
+  COLOR_GRADING: SP_COLOR_GRADING_DEFAULTS,
+  MOON: SP_MOON_DEFAULTS,
+  LENS_FLARE: SP_LENS_FLARE_DEFAULTS,
+  ANAMORPHIC: SP_ANAMORPHIC_DEFAULTS,
+  BLOOM: SP_BLOOM_DEFAULTS,
+  VIGNETTE: SP_VIGNETTE_DEFAULTS,
+  CHROMATIC_ABERRATION: SP_CHROMATIC_DEFAULTS,
+  FILM_GRAIN: SP_FILM_GRAIN_DEFAULTS,
+  ATMOSPHERE: SP_ATMOSPHERE_DEFAULTS,
+  CLOUD_SHADOWS: SP_CLOUD_SHADOW_DEFAULTS,
+  OCEAN: SP_OCEAN_DEFAULTS,
+  EARTH: SP_EARTH_DEFAULTS,
+  CAMERA: SP_CAMERA_DEFAULTS,
+  ENVIRONMENT: SP_ENVIRONMENT_DEFAULTS,
+  DEBUG: SP_DEBUG_DEFAULTS,
+  SUN: SP_SUN_DEFAULTS,
+}
+
+/**
+ * Star-field deep-catalog manifest — record totals + per-kind shard
+ * lists for the 139,563-object registry behind the canvas star cloud.
+ */
+const starCatalogManifest = (() => {
+  try {
+    return JSON.parse(
+      fs.readFileSync(
+        path.join(
+          ROOT,
+          'experiments',
+          'star-field',
+          'public',
+          'data',
+          SF_REGISTRY_INDEX_DIR,
+          SF_REGISTRY_MANIFEST
+        ),
+        'utf8'
+      )
+    )
+  } catch {
+    return null
+  }
+})()
 
 /**
  * The site's declared AI-usage policy — mirrors the `Content-Signal`
@@ -683,6 +784,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         alternates: replicaAlternates(slugRoute(slugKey)),
         body,
         content: { copy: page, ...extra.content },
+        media: extra.media,
       })
     )
   }
@@ -690,6 +792,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
   const emitStarField = (loc) => {
     const sfSlug = LANG_SLUGS[loc]?.starField || enSlugs.starField
     const prefix = loc === 'en' ? '' : `/${loc}`
+    const page = t(loc, (x) => x.pages?.['star-field']) || {}
 
     const bodies = starBodyIds.map((id) => ({
       id,
@@ -697,10 +800,187 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
       replica: `${SITE_URL}${encUrl(llmTreePaths(`${prefix}/${sfSlug}/${id}`).md)}`,
     }))
 
+    // Deep-catalog surface — the 139,563-record registry behind the
+    // canvas star cloud, enumerable as JSON shards + the packed binary,
+    // so agents see every object, not just the authored dossiers.
+    const deepCatalog = starCatalogManifest
+      ? {
+          manifest: `${SITE_URL}${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${SF_REGISTRY_MANIFEST}`,
+          binary: `${SITE_URL}${STAR_DATA_BASE}/${SF_STAR_CLOUD.FILE}`,
+          binaryFormat:
+            'uint32 record count + count × 6 float32-LE values per record (x, y, z heliocentric light-years, apparent magnitude, B-V colour index, kind: 0 star / 1 exoplanet / 2 deep-sky object)',
+          dossierJsons: `${SITE_URL}${STAR_DATA_BASE}/<locale>/<body-id>.json`,
+          total: starCatalogManifest.total,
+          shardSize: starCatalogManifest.shardSize,
+          kinds: SF_REGISTRY_KINDS.map(({ kind, labelKey, credit }) => {
+            const meta = starCatalogManifest.kinds?.[kind]
+
+            return {
+              kind,
+              label: page[labelKey] || kind,
+              credit,
+              count: meta?.count ?? 0,
+              fields: SF_REGISTRY_FIELDS[kind],
+              shards: (meta?.shards || []).map(
+                (s) => `${SITE_URL}${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${s}`
+              ),
+            }
+          }),
+        }
+      : undefined
+
+    const catalogMd = deepCatalog
+      ? `\n## ${page.catalog || 'Deep Catalog'}\n\n${deepCatalog.kinds
+          .map(
+            (k) =>
+              `- **${k.label}** — ${k.count} records (${k.credit}) — \`${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${k.kind}-NNN.json\` (${k.shards.length} × ${deepCatalog.shardSize}-record shards)`
+          )
+          .join(
+            '\n'
+          )}\n\n- Manifest: ${deepCatalog.manifest}\n- Packed binary: ${deepCatalog.binary} — ${deepCatalog.binaryFormat}\n- Dossier JSONs: ${deepCatalog.dossierJsons}`
+      : ''
+
+    // Share-capture set — every screenshot under the bucket's star-field
+    // share/ prefix, resolved off the bucket manifest so agents enumerate
+    // the same URLs the emitted pages and sitemaps advertise. The runtime
+    // share manifest URL rides along for live og:image rotation.
+    const sfShareImgs = shareImageUrls(mediaManifest, CDN_BASE, STAR_SHARE)
+    const capture = page.shareCapture || 'Star render'
+    const pageTitle = page.title || 'Star Field'
+
+    const galleryMd = sfShareImgs.length
+      ? `\n## ${page.shareGallery || 'Share captures'}\n\n${sfShareImgs
+          .map((u, i) => `![${pageTitle} — ${capture} ${i + 1}](${u})`)
+          .join('\n')}\n\nShare manifest: ${SITE_URL}${STAR_SHARE.MANIFEST_URL}`
+      : ''
+
     emitExperience(loc, 'starField', 'star-field', {
-      body: `\n## Bodies\n\n${bodies.map((b) => `- [${b.id}](${b.replica})`).join('\n')}`,
-      content: { bodies },
+      body: `\n## Bodies\n\n${bodies.map((b) => `- [${b.id}](${b.replica})`).join('\n')}${catalogMd}${galleryMd}`,
+      content: {
+        bodies,
+        deepCatalog,
+        ...(sfShareImgs.length
+          ? {
+              shareGallery: sfShareImgs,
+              shareManifest: `${SITE_URL}${STAR_SHARE.MANIFEST_URL}`,
+              searchThemes: Array.isArray(page.searchThemes) ? page.searchThemes : undefined,
+            }
+          : {}),
+      },
+      media: sfShareImgs.map((u, i) => ({
+        label: `${pageTitle} — ${capture} ${i + 1}`,
+        type: 'image',
+        src: u,
+      })),
     })
+  }
+
+  /**
+   * Earth Playground replica — page copy plus the whole canvas-rendered
+   * control surface: every control group's localized label, resolved
+   * data-param, input kind, range geometry and effective default
+   * (CMS `defaults` over shipped `def`/`checked`), and the engine's
+   * DEFAULT_SP_GUI start state — the full tunable scene as data.
+   */
+  const emitEarthPlayground = (loc) => {
+    const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
+    const defaults = page.defaults || {}
+    const title = `${page.title || 'earth-playground'} | ${BASE_TITLE}`
+
+    const effDefault = (c) =>
+      c.label in defaults ? defaults[c.label] : 'checked' in c ? c.checked : c.def
+
+    const controls = SP_CONTROL_GROUPS.map((g) => ({
+      group: g.label,
+      label: page[g.label] || g.label,
+      controls: g.controls.map((c) => ({
+        key: c.label,
+        label: page[c.label] || c.label,
+        param: SP_PARAM_WIRES[c.key] || c.key,
+        type: 'checked' in c ? 'checkbox' : 'range',
+        ...('checked' in c ? {} : { min: c.min, max: c.max, step: c.step }),
+        default: effDefault(c),
+        shippedDefault: 'checked' in c ? c.checked : c.def,
+      })),
+      actions: (g.actions || []).map((a) => ({
+        label: page[a.label] || a.label,
+        action: SP_ACTION_WIRES[a.key] || a.key,
+      })),
+    }))
+
+    const controlsMd = controls
+      .map(
+        (g) =>
+          `### ${g.label}\n\n${g.controls
+            .map(
+              (c) =>
+                `- **${c.label}** (\`${c.param}\`) — ${
+                  c.type === 'range'
+                    ? `range ${c.min} – ${c.max}, step ${c.step}, default ${c.default}`
+                    : `checkbox, default ${c.default}`
+                }`
+            )
+            .join('\n')}${
+            g.actions.length
+              ? `\n\n${g.actions.map((a) => `- ${a.label} (\`${a.action}\`)`).join('\n')}`
+              : ''
+          }`
+      )
+      .join('\n\n')
+
+    // Share-capture set — every screenshot under the bucket's share/
+    // prefix, resolved off the bucket manifest so agents enumerate the
+    // same URLs the emitted pages and sitemaps advertise. The runtime
+    // share manifest URL rides along for live og:image rotation.
+    const shareImgs = shareImageUrls(mediaManifest, CDN_BASE)
+    const capture = page.shareCapture || 'Earth render'
+    const pageTitle = page.title || 'Earth Playground'
+
+    const galleryMd = shareImgs.length
+      ? `\n## ${page.shareGallery || 'Share captures'}\n\n${shareImgs
+          .map((u, i) => `![${pageTitle} — ${capture} ${i + 1}](${u})`)
+          .join('\n')}\n\nShare manifest: ${SITE_URL}${EARTH_SHARE.MANIFEST_URL}`
+      : ''
+
+    const body = [
+      htmlToMd(page.description || ''),
+      page.hint ? `\n${htmlToMd(page.hint)}` : '',
+      `\n## ${page.experienceSettings || 'Experience Settings'}\n\n${controlsMd}`,
+      `\n## ${page.copyConstants || 'GUI constants'}\n\n\`\`\`json\n${JSON.stringify(SP_ENGINE_DEFAULTS, null, 2)}\n\`\`\``,
+      page.music ? `## ${page.music}\n\n${htmlToMd(page.musicDesc || '')}` : '',
+      galleryMd,
+    ]
+      .filter(Boolean)
+      .join('\n\n')
+
+    emit(
+      shellFor({
+        type: 'experience',
+        title,
+        description: toDescription(page.description || ''),
+        route: slugRoute('earthPlayground')(loc),
+        locale: loc,
+        alternates: replicaAlternates(slugRoute('earthPlayground')),
+        body,
+        content: {
+          copy: page,
+          controls,
+          engineDefaults: SP_ENGINE_DEFAULTS,
+          ...(shareImgs.length
+            ? {
+                shareGallery: shareImgs,
+                shareManifest: `${SITE_URL}${EARTH_SHARE.MANIFEST_URL}`,
+                searchThemes: Array.isArray(page.searchThemes) ? page.searchThemes : undefined,
+              }
+            : {}),
+        },
+        media: shareImgs.map((u, i) => ({
+          label: `${pageTitle} — ${capture} ${i + 1}`,
+          type: 'image',
+          src: u,
+        })),
+      })
+    )
   }
 
   // ── Portfolio — project pages + labelled-media deep links ──
@@ -1107,7 +1387,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
     for (const legal of LEGAL_PAGES) emitLegal(loc, legal)
 
     emitAnimations(loc)
-    emitExperience(loc, 'earthPlayground', 'earth-playground')
+    emitEarthPlayground(loc)
     emitStarField(loc)
 
     for (const slug of projectSlugs) {
@@ -1162,6 +1442,12 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
       perLocaleIndex: `${SITE_URL}${LLM_TREE_ROOT}/<locale>/routes.json`,
       alternates:
         'each page advertises its replicas via <link rel="alternate" type="text/markdown|application/json">',
+      dataEndpoints: {
+        starFieldCatalog: `${SITE_URL}${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${SF_REGISTRY_MANIFEST} — 139,563-record registry; ${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/<kind>-NNN.json shards`,
+        starFieldDossiers: `${SITE_URL}${STAR_DATA_BASE}/<locale>/<body-id>.json — authored body dossier JSONs`,
+        starFieldBinary: `${SITE_URL}${STAR_DATA_BASE}/${SF_STAR_CLOUD.FILE} — packed float32 catalog`,
+        earthPlayground: `${SITE_URL}/earth-playground.json — control schema + engine defaults live in the replica's content.controls / content.engineDefaults`,
+      },
     },
     locales: VALID_LANGS.map((loc) => ({
       locale: loc,
@@ -1190,6 +1476,8 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
     `- Per-locale route lists: ${VALID_LANGS.map((loc) => `[${loc}](${SITE_URL}${LLM_TREE_ROOT}/${loc}/routes.json)`).join(' · ')}`,
     `- Sibling convention: append \`.md\` or \`.json\` to any page URL — e.g. ${SITE_URL}/portfolio/metcha.md`,
     `- Canonical tree: ${SITE_URL}${LLM_TREE_ROOT}/<locale>/<route>.{md,json} — English under ${LLM_TREE_ROOT}/en/ (docs are English-only)`,
+    `- Star-field data: ${SITE_URL}${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${SF_REGISTRY_MANIFEST} (139,563-record registry manifest, shard lists per kind) · ${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/<kind>-NNN.json shards · ${STAR_DATA_BASE}/${SF_STAR_CLOUD.FILE} · ${STAR_DATA_BASE}/<locale>/<body-id>.json dossiers`,
+    `- Earth Playground data: ${SITE_URL}/earth-playground.json — replica content.controls (group/label/param/range/default) + content.engineDefaults (engine start state)`,
     '',
     `## Routes by locale`,
     '',

@@ -9,6 +9,29 @@ Emits per-locale, per-route static index.html files into
 
 ## Members
 
+### `STAR_DATA_BASE`
+
+Mirrors SF_DATA_BASE (core/tokens/starfield/textures.ts — alias chain
+makes it non-importable here) — public root of the star-field data
+surface: `…/index/` registry shards, `…/deep-field.bin`, `…/<loc>/*.json` dossiers.
+
+### `SP_PARAM_WIRES`
+
+SP_*_PARAMS wire strings keyed by member name — resolves each
+SP_CONTROL_GROUPS row `key` to its data-param value.
+
+### `SP_ENGINE_DEFAULTS`
+
+DEFAULT_SP_GUI composition — mirrors core/tokens/playground.ts (its
+relative `.js` imports don't resolve under plain-node type stripping,
+so the leaf maps are composed here in the same subsystem order).
+
+### `starCatalogManifest`
+
+Star-field deep-catalog manifest — record totals + per-kind shard
+lists. Drives the index page's catalog section and the DataCatalog
+JSON-LD so the 139,563-object registry is enumerable without WebGL.
+
 ### `llmPathsFor`
 
 `/llm/` mirror-tree paths for a canonical page URL — thin wrapper over
@@ -175,6 +198,10 @@ Rewrites the English shell into a localized document.
 - `@param` {string} [o.canonicalUrl] - canonical/og:url override for alias pages
 - `@param` {Array<{bcp:string,url:string}>} o.alternates - hreflang rows
 - `@param` {string} [o.image] - route-specific share image (project cover /
+- `@param` {Array<string>} [o.extraImages] - additional og:image candidates
+- `@param` {{w:number,h:number}} [o.imageDims] - intrinsic dims of `image`;
+- `@param` {string} [o.keywords] - localized comma-joined search themes for
+- `@param` {boolean} [o.noLcp] - the route's media (heavyweight CDN
 - `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
 - `@param` {string} [o.content] - prerendered body markup injected into
 - `@param` {{title:string,msg:string}} [o.loader] - per-locale APP.loader copy
@@ -229,6 +256,13 @@ the exact gap that made localized pages render English/fallback text).
 Fetches the live `translations` node once per build so every prerendered
 page carries the per-locale text authors actually published. Offline or
 unreachable host → warn and keep the database.json snapshot as the source.
+
+### (module scope)
+
+Probes every share capture once for its intrinsic dims. Failures are
+silent: a missing probe emits attr-less dims, same as before.
+
+- `@param` {string[]} urls - absolute CDN share-image URLs
 
 ### `loadTranslations`
 
@@ -294,13 +328,16 @@ Carousel ItemList for locale home pages — portfolio tiles → covers.
 
 Authored rich-text array → <p> markup (trusted CMS html).
 
-### `leafParagraphs`
+### `LEAF_SKIP`
 
 Every authored leaf string under a CMS node → <p> markup (trusted CMS
 html). Experience pages carry their copy as UI labels rather than a
 single description field — walking the whole object guarantees none of
 the authored text is left JavaScript-only. `skip` drops keys already
-rendered as headings.
+rendered as headings. The share-vocabulary keys (searchThemes,
+shareGallery, shareCapture) feed the gallery section + keywords
+surfaces instead — emitting them as bare paragraphs would read as
+keyword stuffing.
 
 ### `contactBlock`
 
@@ -362,9 +399,83 @@ then the back-link into the parent project for context. The media
 leads so the rendered page reads as single-asset-first — Google's
 video watch-page contract — not as a project page with a modal.
 
-### `experienceContent`
+### `earthContent`
 
-Experience page content — title + every authored label/copy leaf.
+Earth Playground page — title + authored copy + the full control
+surface as structured markup. The panel is a WebGL canvas at
+runtime, so this static mirror (every control group's localized
+label, resolved data-param, input kind, range geometry and
+effective default, expanded from SP_CONTROL_GROUPS — the same
+schema the runtime panel consumes) is what crawlers/agents read;
+the engine's DEFAULT_SP_GUI start state follows as a nested
+definition list so the whole tunable scene is in the DOM.
+
+### `nextShareImage`
+
+Next shuffled share pick — wraps so every capture gets card turns.
+
+### `nextStarShareImage`
+
+Next shuffled star share pick — wraps so every capture gets card turns.
+
+### `shareDimsAttr`
+
+` width="W" height="H"` for a share URL — probed dims or the generic box.
+
+### `epThemesOf`
+
+Localized search-theme list for one locale's playground page.
+
+### `sfThemesOf`
+
+Localized search-theme list for one locale's star-field page.
+
+### `sfBodyShareFields`
+
+Search-theme keywords for a star body page — the locale's star-field theme list as a comma-joined meta keywords string.
+
+### `shareGallerySection`
+
+Parked-article gallery — every share capture as crawlable markup so
+image search indexes the whole set off the page itself (the sitemap
+image tags + JSON-LD ItemList mirror it). Anchored + captioned like
+mediaFigure so each capture is also a first-class crawl target.
+
+### `starShareGallerySection`
+
+Star-field parked-article gallery — every star share capture as
+crawlable markup so image search indexes the whole set off the index
+page itself (the sitemap image tags + JSON-LD ItemList mirror it).
+Anchored + captioned like mediaFigure so each capture is also a
+first-class crawl target.
+
+### `earthShareEntities`
+
+ImageObject ItemList for the whole share set — every capture becomes
+a named, captioned, language-tagged entity carrying the locale's
+earth-image search themes, so image search in every language links
+the renders to the portfolio. The deck pick is marked
+representativeOfPage.
+
+### `starShareEntities`
+
+ImageObject ItemList for the whole star share set — every capture
+becomes a named, captioned, language-tagged entity carrying the
+locale's star-image search themes, so star/space image searches in
+every language link the renders to the portfolio. The deck pick is
+marked representativeOfPage.
+
+### `EP_ABOUT`
+
+Linked-data anchors for the playground WebPage — binds the page to
+the Earth/Planet concepts so theme searches resolve through the
+knowledge graph, not just the text.
+
+### `SF_ABOUT`
+
+Linked-data anchors for the star-field WebPage — binds the page to
+the Star/Galaxy concepts so star and space searches resolve through
+the knowledge graph, not just the text.
 
 ### `animationsContent`
 

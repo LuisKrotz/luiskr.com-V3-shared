@@ -50,7 +50,44 @@ import { GENERIC_DIMENSIONS } from '../../../core/tokens/media/dimensions.ts'
 import { MEDIA } from '../../../core/tokens/media/suffixes.ts'
 import { MEDIA_ATTRS } from '../../../core/tokens/attrs/media.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
+import { SP_CONTROL_GROUPS } from '../../../core/tokens/playground/control-groups.ts'
+import {
+  SF_REGISTRY_INDEX_DIR,
+  SF_REGISTRY_MANIFEST,
+  SF_REGISTRY_KINDS,
+} from '../../../core/tokens/starfield/registry.ts'
+import { SF_STAR_CLOUD } from '../../../core/tokens/starfield/params/worker.ts'
+import {
+  SP_CAMERA_PARAMS,
+  SP_SCENE_PARAMS,
+  SP_POST_PARAMS,
+  SP_GRADE_PARAMS,
+  SP_DEBUG_PARAMS,
+} from '../../../core/tokens/playground/params.ts'
+import { SP_ACTIONS } from '../../../core/tokens/playground/actions.ts'
+import {
+  SP_MOON_DEFAULTS,
+  SP_ATMOSPHERE_DEFAULTS,
+  SP_CLOUD_SHADOW_DEFAULTS,
+  SP_OCEAN_DEFAULTS,
+  SP_EARTH_DEFAULTS,
+  SP_CAMERA_DEFAULTS,
+  SP_ENVIRONMENT_DEFAULTS,
+  SP_SUN_DEFAULTS,
+} from '../../../core/tokens/playground/gui-scene.ts'
+import {
+  SP_COLOR_GRADING_DEFAULTS,
+  SP_LENS_FLARE_DEFAULTS,
+  SP_ANAMORPHIC_DEFAULTS,
+  SP_BLOOM_DEFAULTS,
+  SP_VIGNETTE_DEFAULTS,
+  SP_CHROMATIC_DEFAULTS,
+  SP_FILM_GRAIN_DEFAULTS,
+  SP_DEBUG_DEFAULTS,
+} from '../../../core/tokens/playground/gui-post.ts'
 import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
+import { STAR_SHARE } from '../../../core/tokens/playground/share.ts'
+import { shareImageUrls, shuffled } from './playground-share.mjs'
 import { withFsRetry } from './fs-retry.mjs'
 import { queueCompressedWrite, drainCompressedWrites } from './compress-queue.mjs'
 import { scanManifest } from '../../build/docs/scan.mjs'
@@ -65,6 +102,69 @@ const CDN_BASE = 'https://storage.googleapis.com/luiskr.com/public/_v3/'
 const FIREBASE_DB = 'https://luiskr-com.firebaseio.com'
 const SCHEMA_CONTEXT = 'https://schema.org'
 const SHARE_IMAGE = `${SITE_URL}/assets/icons/share.png`
+
+/** Mirrors SF_DATA_BASE (core/tokens/starfield/textures.ts — alias chain
+ *  makes it non-importable here) — public root of the star-field data
+ *  surface: `…/index/` registry shards, `…/deep-field.bin`, `…/<loc>/*.json` dossiers. */
+const STAR_DATA_BASE = '/experiments/star-field/data'
+
+/** SP_*_PARAMS wire strings keyed by member name — resolves each
+ *  SP_CONTROL_GROUPS row `key` to its data-param value. */
+const SP_PARAM_WIRES = {
+  ...SP_CAMERA_PARAMS,
+  ...SP_SCENE_PARAMS,
+  ...SP_POST_PARAMS,
+  ...SP_GRADE_PARAMS,
+  ...SP_DEBUG_PARAMS,
+}
+
+/** DEFAULT_SP_GUI composition — mirrors core/tokens/playground.ts (its
+ *  relative `.js` imports don't resolve under plain-node type stripping,
+ *  so the leaf maps are composed here in the same subsystem order). */
+const SP_ENGINE_DEFAULTS = {
+  COLOR_GRADING: SP_COLOR_GRADING_DEFAULTS,
+  MOON: SP_MOON_DEFAULTS,
+  LENS_FLARE: SP_LENS_FLARE_DEFAULTS,
+  ANAMORPHIC: SP_ANAMORPHIC_DEFAULTS,
+  BLOOM: SP_BLOOM_DEFAULTS,
+  VIGNETTE: SP_VIGNETTE_DEFAULTS,
+  CHROMATIC_ABERRATION: SP_CHROMATIC_DEFAULTS,
+  FILM_GRAIN: SP_FILM_GRAIN_DEFAULTS,
+  ATMOSPHERE: SP_ATMOSPHERE_DEFAULTS,
+  CLOUD_SHADOWS: SP_CLOUD_SHADOW_DEFAULTS,
+  OCEAN: SP_OCEAN_DEFAULTS,
+  EARTH: SP_EARTH_DEFAULTS,
+  CAMERA: SP_CAMERA_DEFAULTS,
+  ENVIRONMENT: SP_ENVIRONMENT_DEFAULTS,
+  DEBUG: SP_DEBUG_DEFAULTS,
+  SUN: SP_SUN_DEFAULTS,
+}
+
+/**
+ * Star-field deep-catalog manifest — record totals + per-kind shard
+ * lists. Drives the index page's catalog section and the DataCatalog
+ * JSON-LD so the 139,563-object registry is enumerable without WebGL.
+ */
+const starCatalogManifest = (() => {
+  try {
+    return JSON.parse(
+      fs.readFileSync(
+        path.join(
+          ROOT,
+          'experiments',
+          'star-field',
+          'public',
+          'data',
+          SF_REGISTRY_INDEX_DIR,
+          SF_REGISTRY_MANIFEST
+        ),
+        'utf8'
+      )
+    )
+  } catch {
+    return null
+  }
+})()
 
 /**
  * `/llm/` mirror-tree paths for a canonical page URL — thin wrapper over
@@ -494,6 +594,20 @@ export async function prefetchLcpThumbs(urls, manifest) {
  * @param {Array<{bcp:string,url:string}>} o.alternates - hreflang rows
  * @param {string} [o.image] - route-specific share image (project cover /
  *   media asset); omitted → the shell's share.png stays
+ * @param {Array<string>} [o.extraImages] - additional og:image candidates
+ *   emitted as repeated tags after the primary — every share capture of a
+ *   set stays associated with the page so image crawlers index all of
+ *   them, not just the card pick
+ * @param {{w:number,h:number}} [o.imageDims] - intrinsic dims of `image`;
+ *   when present og:image:width/height keep their tags with real values
+ *   instead of being dropped
+ * @param {string} [o.keywords] - localized comma-joined search themes for
+ *   the <meta name="keywords"> tag (Yandex/Bing still read it)
+ * @param {boolean} [o.noLcp] - the route's media (heavyweight CDN
+ *   captures, WebGL-rendered pages) is never the painted LCP element —
+ *   skips the preload hint + veil LQIP + prefetch entirely instead of
+ *   eagerly fetching a multi-MB PNG on every view; the parked article
+ *   keeps the --painted modifier like media-less routes
  * @param {Array<object>} [o.entities] - extra JSON-LD entities appended to
  *   the @graph after Organization + WebSite (WebPage, BreadcrumbList,
  *   Article, ItemList, VideoObject…)
@@ -520,6 +634,10 @@ export function localize(
     canonicalUrl,
     alternates,
     image,
+    extraImages,
+    imageDims,
+    keywords,
+    noLcp,
     entities,
     content,
     loader,
@@ -570,10 +688,20 @@ export function localize(
   out = out.replace(/(<meta name="DC\.Description"\s+content=")[^"]*(")/, `$1${d}$2`)
   out = out.replace(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${d}$2`)
 
+  // Route-specific search themes — Yandex/Bing still consume
+  // <meta name="keywords">; Google ignores it but the JSON-LD keywords
+  // carry the same terms for it.
+  if (keywords) {
+    out = out.replace(/(<meta name="keywords" content=")[^"]*(")/, `$1${esc(keywords)}$2`)
+  }
+
   // Route-specific share image — the three image metas swap together so
   // card crawlers never mix a project cover with share.png. The shell's
-  // fixed og:image:width/height describe share.png; they are dropped for
-  // custom images since wrong dimensions are worse than none.
+  // fixed og:image:width/height describe share.png; they are rewritten
+  // to the picked image's probed dims when known, dropped otherwise —
+  // wrong dimensions are worse than none. extraImages emit as repeated
+  // og:image tags after the primary so the whole capture set stays
+  // associated with the page for image crawlers.
   if (image) {
     for (const re of [
       /(<meta itemprop="image" content=")[^"]*(")/,
@@ -583,7 +711,23 @@ export function localize(
       out = out.replace(re, `$1${esc(image)}$2`)
     }
 
-    out = out.replace(/\s*<meta property="og:image:(?:width|height)"[^>]*>/g, '')
+    if (imageDims) {
+      out = out.replace(/(<meta property="og:image:width" content=")[^"]*(")/, `$1${imageDims.w}$2`)
+      out = out.replace(
+        /(<meta property="og:image:height" content=")[^"]*(")/,
+        `$1${imageDims.h}$2`
+      )
+    } else {
+      out = out.replace(/\s*<meta property="og:image:(?:width|height)"[^>]*>/g, '')
+    }
+
+    if (extraImages?.length) {
+      const extra = extraImages
+        .map((u) => `<meta property="og:image" content="${esc(u)}" />`)
+        .join('\n    ')
+
+      out = out.replace(/(<meta property="og:image" content="[^"]*"[^>]*>)/, `$1\n    ${extra}`)
+    }
   }
 
   // Language declarations
@@ -610,8 +754,10 @@ export function localize(
 
   // The preload must land BEFORE the modulepreload fan-out: Lantern
   // queues same-priority requests in document order, so a mid-body
-  // image loses ~6s behind the boot graph.
-  const lcpImage = lcpImageOf(content, image)
+  // image loses ~6s behind the boot graph. noLcp routes (the playground's
+  // heavyweight share captures) opt out — their images are card/parked
+  // surfaces, never the painted element.
+  const lcpImage = noLcp ? '' : lcpImageOf(content, image)
 
   // The early-LCP paint itself is an LQIP: prefetchLcpThumbs() inlined
   // a bucket variant as a data URI, so the candidate paints in the
@@ -631,7 +777,7 @@ export function localize(
   // heavier record so video posters whose ladder tops out below the
   // floor (a ~3KB thumb can't hold candidacy anywhere near full-viewport
   // coverage) fall back to the cover's richer variant instead.
-  const lcpThumb = [lcpImage, image]
+  const lcpThumb = (noLcp ? [] : [lcpImage, image])
     .map((u) => (u ? LCP_THUMBS.get(u) : null))
     .filter(Boolean)
     .sort((a, b) => b.bytes - a.bytes)[0]
@@ -945,6 +1091,41 @@ let liveTranslations = null
  * page carries the per-locale text authors actually published. Offline or
  * unreachable host → warn and keep the database.json snapshot as the source.
  */
+/**
+ * Playground share-capture dims — image URL → `[w, h]` pair, seeded
+ * by prefetchShareDims (the captures live on the bucket, so each is
+ * probed once via a 64 KB range request — PNG IHDR/JPEG SOF headers sit
+ * in the head — and shared across every emitted page). Feeds the real
+ * og:image:width/height, gallery <img> attrs and ImageObject sizes.
+ */
+const shareMediaDims = new Map()
+
+/**
+ * Probes every share capture once for its intrinsic dims. Failures are
+ * silent: a missing probe emits attr-less dims, same as before.
+ * @param {string[]} urls - absolute CDN share-image URLs
+ */
+export async function prefetchShareDims(urls) {
+  await Promise.all(
+    [...new Set(urls)].map(async (url) => {
+      try {
+        const res = await fetch(url, {
+          headers: { Range: `bytes=0-${DIMS_PROBE_BYTES - 1}` },
+          signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+        })
+
+        if (!res.ok) return
+
+        const dims = scanImageDims(Buffer.from(await res.arrayBuffer()))
+
+        if (dims) shareMediaDims.set(url, dims)
+      } catch {
+        /* unreachable host → attr-less dims, same as before */
+      }
+    })
+  )
+}
+
 export async function prefetchTranslations() {
   try {
     const res = await fetch(`${FIREBASE_DB}/translations.json`, {
@@ -1300,9 +1481,14 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
    * html). Experience pages carry their copy as UI labels rather than a
    * single description field — walking the whole object guarantees none of
    * the authored text is left JavaScript-only. `skip` drops keys already
-   * rendered as headings.
+   * rendered as headings. The share-vocabulary keys (searchThemes,
+   * shareGallery, shareCapture) feed the gallery section + keywords
+   * surfaces instead — emitting them as bare paragraphs would read as
+   * keyword stuffing.
    */
-  const leafParagraphs = (obj, skip = new Set(['title'])) => {
+  const LEAF_SKIP = new Set(['title', 'searchThemes', 'shareGallery', 'shareCapture'])
+
+  const leafParagraphs = (obj, skip = LEAF_SKIP) => {
     const out = []
 
     const walk = (o) => {
@@ -1651,12 +1837,298 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     return `<main><h1>${esc(label || slug)}</h1>${figure || ''}<p><a href="${locPrefixOf(loc)}/portfolio/${slug}">${esc(project.title || slug)}</a></p></main>`
   }
 
-  /** Experience page content — title + every authored label/copy leaf. */
-  const experienceContent = (loc, pageKey) => {
-    const page = t(loc, (x) => x.pages?.[pageKey]) || {}
+  /**
+   * Earth Playground page — title + authored copy + the full control
+   * surface as structured markup. The panel is a WebGL canvas at
+   * runtime, so this static mirror (every control group's localized
+   * label, resolved data-param, input kind, range geometry and
+   * effective default, expanded from SP_CONTROL_GROUPS — the same
+   * schema the runtime panel consumes) is what crawlers/agents read;
+   * the engine's DEFAULT_SP_GUI start state follows as a nested
+   * definition list so the whole tunable scene is in the DOM.
+   */
+  const earthContent = (loc) => {
+    const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
+    const defaults = page.defaults || {}
 
-    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${leafParagraphs(page)}</main>`
+    // Keys rendered structurally below are skipped by leafParagraphs so
+    // no label duplicates as a loose paragraph. The share-vocabulary keys
+    // (searchThemes, shareGallery, shareCapture) feed the gallery
+    // section + keywords surfaces instead — bare paragraphs of theme
+    // terms would read as keyword stuffing.
+    const skip = new Set(['title', 'defaults', 'searchThemes', 'shareGallery', 'shareCapture'])
+
+    const effDefault = (c) =>
+      c.label in defaults ? defaults[c.label] : 'checked' in c ? c.checked : c.def
+
+    const groupRows = SP_CONTROL_GROUPS.map((g) => {
+      skip.add(g.label)
+
+      const rows = g.controls
+        .map((c) => {
+          skip.add(c.label)
+
+          const spec =
+            'checked' in c
+              ? `checkbox, default ${esc(String(effDefault(c)))}`
+              : `range ${c.min} – ${c.max}, step ${c.step}, default ${esc(String(effDefault(c)))}`
+
+          return `<div><dt>${esc(page[c.label] || c.label)} <code>${esc(SP_PARAM_WIRES[c.key] || c.key)}</code></dt><dd>${spec}</dd></div>`
+        })
+        .join('')
+
+      for (const a of g.actions || []) skip.add(a.label)
+
+      const actions = (g.actions || [])
+        .map(
+          (a) =>
+            `<li>${esc(page[a.label] || a.label)} <code>${esc(SP_ACTIONS[a.key] || a.key)}</code></li>`
+        )
+        .join('')
+
+      return `<section><h3>${esc(page[g.label] || g.label)}</h3><dl>${rows}</dl>${actions ? `<ul>${actions}</ul>` : ''}</section>`
+    }).join('')
+
+    const engineRows = Object.entries(SP_ENGINE_DEFAULTS)
+      .map(
+        ([system, params]) =>
+          `<h4>${esc(system.toLowerCase().replace(/_/g, ' '))}</h4><dl>${Object.entries(params)
+            .map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(String(v))}</dd></div>`)
+            .join('')}</dl>`
+      )
+      .join('')
+
+    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${leafParagraphs(page, skip)}<section id="controls"><h2>${esc(page.experienceSettings || 'Experience Settings')}</h2>${groupRows}<h3>${esc(page.copyConstants || 'GUI constants')}</h3>${engineRows}</section>${shareGallerySection(loc)}</main>`
   }
+
+  // ── Earth Playground share set ──────────────────────────────────────
+  // Every capture under the bucket's share/ prefix joins the og:image
+  // rotation (a shuffled deck — each emitted page draws the next pick so
+  // the whole set cycles through card images build-over-build), the
+  // parked-article gallery, and the JSON-LD ImageObject ItemList. Empty
+  // when the manifest listing is unavailable — routes keep share.png.
+  const shareImgs = shareImageUrls(mediaManifest, CDN_BASE)
+  const shareDeck = shuffled(shareImgs)
+
+  let shareDeckIdx = 0
+
+  /** Next shuffled share pick — wraps so every capture gets card turns. */
+  const nextShareImage = () =>
+    shareDeck.length ? shareDeck[shareDeckIdx++ % shareDeck.length] : undefined
+
+  // ── Star Field share set ──────────────────────────────────────────
+  // Same contract as the earth set: every capture under the bucket's
+  // star-field share/ prefix joins the og:image rotation (a shuffled
+  // deck — each emitted star page draws the next pick), the parked
+  // gallery section, and the JSON-LD ImageObject ItemList. Empty when
+  // the manifest listing is unavailable — routes keep share.png.
+  const starShareImgs = shareImageUrls(mediaManifest, CDN_BASE, STAR_SHARE)
+  const starShareDeck = shuffled(starShareImgs)
+
+  let starShareDeckIdx = 0
+
+  /** Next shuffled star share pick — wraps so every capture gets card turns. */
+  const nextStarShareImage = () =>
+    starShareDeck.length ? starShareDeck[starShareDeckIdx++ % starShareDeck.length] : undefined
+
+  /** ` width="W" height="H"` for a share URL — probed dims or the generic box. */
+  const shareDimsAttr = (u) => {
+    const d = shareMediaDims.get(u)
+
+    return d ? dimsAttr(d[0], d[1]) : dimsAttr()
+  }
+
+  /** Localized search-theme list for one locale's playground page. */
+  const epThemesOf = (loc) => {
+    const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
+
+    return Array.isArray(page.searchThemes) ? page.searchThemes : []
+  }
+
+  /** Localized search-theme list for one locale's star-field page. */
+  const sfThemesOf = (loc) => {
+    const page = t(loc, (x) => x.pages?.['star-field']) || {}
+
+    return Array.isArray(page.searchThemes) ? page.searchThemes : []
+  }
+
+  /** Search-theme keywords for a star body page — the locale's star-field theme list as a comma-joined meta keywords string. */
+  const sfBodyShareFields = (loc) => ({
+    keywords: sfThemesOf(loc).join(', ') || undefined,
+  })
+
+  /**
+   * Parked-article gallery — every share capture as crawlable markup so
+   * image search indexes the whole set off the page itself (the sitemap
+   * image tags + JSON-LD ItemList mirror it). Anchored + captioned like
+   * mediaFigure so each capture is also a first-class crawl target.
+   */
+  const shareGallerySection = (loc) => {
+    if (!shareImgs.length) return ''
+
+    const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
+    const title = page.title || 'Earth Playground'
+    const capture = page.shareCapture || 'Earth render'
+    const themes = epThemesOf(loc)
+
+    const figs = shareImgs
+      .map((u, i) => {
+        const label = `${title} — ${capture} ${i + 1}`
+
+        return `<figure><a href="${enc(u)}" aria-label="${esc(label)}"><img src="${enc(u)}" alt="${esc(label)}" loading="lazy" decoding="async"${shareDimsAttr(u)}></a><figcaption>${esc(`${capture} ${i + 1}`)}</figcaption></figure>`
+      })
+      .join('')
+
+    return `<section id="share-gallery"><h2>${esc(page.shareGallery || 'Share captures')}</h2>${
+      themes.length ? `<p>${esc(themes.join(', '))}</p>` : ''
+    }${figs}</section>`
+  }
+
+  /**
+   * Star-field parked-article gallery — every star share capture as
+   * crawlable markup so image search indexes the whole set off the index
+   * page itself (the sitemap image tags + JSON-LD ItemList mirror it).
+   * Anchored + captioned like mediaFigure so each capture is also a
+   * first-class crawl target.
+   */
+  const starShareGallerySection = (loc) => {
+    if (!starShareImgs.length) return ''
+
+    const page = t(loc, (x) => x.pages?.['star-field']) || {}
+    const title = page.title || 'Star Field'
+    const capture = page.shareCapture || 'Star render'
+    const themes = sfThemesOf(loc)
+
+    const figs = starShareImgs
+      .map((u, i) => {
+        const label = `${title} — ${capture} ${i + 1}`
+
+        return `<figure><a href="${enc(u)}" aria-label="${esc(label)}"><img src="${enc(u)}" alt="${esc(label)}" loading="lazy" decoding="async"${shareDimsAttr(u)}></a><figcaption>${esc(`${capture} ${i + 1}`)}</figcaption></figure>`
+      })
+      .join('')
+
+    return `<section id="share-gallery"><h2>${esc(page.shareGallery || 'Share captures')}</h2>${
+      themes.length ? `<p>${esc(themes.join(', '))}</p>` : ''
+    }${figs}</section>`
+  }
+
+  /**
+   * ImageObject ItemList for the whole share set — every capture becomes
+   * a named, captioned, language-tagged entity carrying the locale's
+   * earth-image search themes, so image search in every language links
+   * the renders to the portfolio. The deck pick is marked
+   * representativeOfPage.
+   */
+  const earthShareEntities = (loc, pageUrl, pick) => {
+    if (!shareImgs.length) return []
+
+    const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
+    const bcp = LOCALE_TAGS[loc].bcp
+    const title = page.title || 'Earth Playground'
+    const capture = page.shareCapture || 'Earth render'
+    const keywords = epThemesOf(loc).join(', ')
+
+    return [
+      {
+        '@context': SCHEMA_CONTEXT,
+        '@type': 'ItemList',
+        '@id': `${pageUrl}#share-gallery`,
+        name: page.shareGallery || 'Share captures',
+        inLanguage: bcp,
+        numberOfItems: shareImgs.length,
+        itemListElement: shareImgs.map((u, i) => {
+          const url = enc(u)
+          const d = shareMediaDims.get(u)
+
+          return {
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+              '@type': 'ImageObject',
+              '@id': `${pageUrl}#share-${i + 1}`,
+              url,
+              contentUrl: url,
+              name: `${title} — ${capture} ${i + 1}`,
+              ...(keywords ? { caption: `${title}: ${keywords}`, keywords } : {}),
+              inLanguage: bcp,
+              ...(d ? { width: d[0], height: d[1] } : {}),
+              author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+              creator: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+              isPartOf: { '@id': `${pageUrl}#webpage` },
+              representativeOfPage: u === pick,
+            },
+          }
+        }),
+      },
+    ]
+  }
+
+  /**
+   * ImageObject ItemList for the whole star share set — every capture
+   * becomes a named, captioned, language-tagged entity carrying the
+   * locale's star-image search themes, so star/space image searches in
+   * every language link the renders to the portfolio. The deck pick is
+   * marked representativeOfPage.
+   */
+  const starShareEntities = (loc, pageUrl, pick) => {
+    if (!starShareImgs.length) return []
+
+    const page = t(loc, (x) => x.pages?.['star-field']) || {}
+    const bcp = LOCALE_TAGS[loc].bcp
+    const title = page.title || 'Star Field'
+    const capture = page.shareCapture || 'Star render'
+    const keywords = sfThemesOf(loc).join(', ')
+
+    return [
+      {
+        '@context': SCHEMA_CONTEXT,
+        '@type': 'ItemList',
+        '@id': `${pageUrl}#share-gallery`,
+        name: page.shareGallery || 'Share captures',
+        inLanguage: bcp,
+        numberOfItems: starShareImgs.length,
+        itemListElement: starShareImgs.map((u, i) => {
+          const url = enc(u)
+          const d = shareMediaDims.get(u)
+
+          return {
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+              '@type': 'ImageObject',
+              '@id': `${pageUrl}#share-${i + 1}`,
+              url,
+              contentUrl: url,
+              name: `${title} — ${capture} ${i + 1}`,
+              ...(keywords ? { caption: `${title}: ${keywords}`, keywords } : {}),
+              inLanguage: bcp,
+              ...(d ? { width: d[0], height: d[1] } : {}),
+              author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+              creator: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+              isPartOf: { '@id': `${pageUrl}#webpage` },
+              representativeOfPage: u === pick,
+            },
+          }
+        }),
+      },
+    ]
+  }
+
+  /** Linked-data anchors for the playground WebPage — binds the page to
+   *  the Earth/Planet concepts so theme searches resolve through the
+   *  knowledge graph, not just the text. */
+  const EP_ABOUT = Object.freeze([
+    { '@type': 'Thing', name: 'Earth', sameAs: 'https://www.wikidata.org/wiki/Q2' },
+    { '@type': 'Thing', name: 'Planet', sameAs: 'https://www.wikidata.org/wiki/Q634' },
+  ])
+
+  /** Linked-data anchors for the star-field WebPage — binds the page to
+   *  the Star/Galaxy concepts so star and space searches resolve through
+   *  the knowledge graph, not just the text. */
+  const SF_ABOUT = Object.freeze([
+    { '@type': 'Thing', name: 'Star', sameAs: 'https://www.wikidata.org/wiki/Q523' },
+    { '@type': 'Thing', name: 'Galaxy', sameAs: 'https://www.wikidata.org/wiki/Q321' },
+  ])
 
   /** Animations-reference hub — title + intro + every animation record's
    *  alt/longdesc as a definition list. The static mirror of the runtime
@@ -1803,7 +2275,84 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       })
       .join('')
 
-    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${leafParagraphs(page)}${sections}</main>`
+    // Deep-catalog block — the 139,563-record registry behind the canvas
+    // star cloud: per-kind counts, source credits, the shard-JSON field
+    // dictionary and the manifest/binary/dossier URL surface, so robots
+    // enumerate every object without rendering a frame.
+    const pl = (k) => page[k] || k
+
+    const catalogFields = {
+      star: [
+        ['n', 'name'],
+        ['m', pl('magnitude')],
+        ['d', `${pl('distance')} (ly)`],
+        ['s', pl('spectralType')],
+        ['c', pl('constellation')],
+        ['x, y, z', `${pl('coordinates')} (ly)`],
+        ['i', 'catalog id'],
+      ],
+      exoplanet: [
+        ['n', 'name'],
+        ['h', pl('hostStar')],
+        ['d', `${pl('distance')} (ly)`],
+        ['s', `${pl('spectralType')} — ${pl('hostStar')}`],
+        ['y2', `${pl('discovery')} (year)`],
+        ['x, y, z', `${pl('coordinates')} (ly)`],
+        ['i', 'catalog id'],
+      ],
+      dso: [
+        ['n', 'name'],
+        ['c', `${pl('designation')} (NGC/IC)`],
+        ['t', pl('dsoType')],
+        ['m', pl('magnitude')],
+        ['d', pl('distance')],
+        ['r', pl('redshift')],
+        ['x, y, z', pl('coordinates')],
+        ['i', 'catalog id'],
+      ],
+    }
+
+    const catalogRows = SF_REGISTRY_KINDS.map(({ kind, labelKey, aboutKey, credit }) => {
+      const meta = starCatalogManifest?.kinds?.[kind]
+      const fields = (catalogFields[kind] || [])
+        .map(([k, v]) => `<code>${esc(k)}</code> ${esc(v || k)}`)
+        .join('; ')
+
+      return `<li><b>${esc(page[labelKey] || kind)}</b> — ${meta?.count ?? 0} ${esc(page.records || 'records')} (${esc(credit)}). ${esc(page[aboutKey] || '')} Fields: ${fields}. <a href="${SITE_URL}${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${esc(meta?.shards?.[0] || '')}">${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${kind}-NNN.json</a> — ${(meta?.shards || []).length} × ${starCatalogManifest?.shardSize || 0}-record JSON shards</li>`
+    }).join('')
+
+    const catalogBlock = starCatalogManifest
+      ? `<section id="catalog"><h2>${esc(page.catalog || 'Catalog')}</h2>${page.navDesc ? `<p>${esc(page.navDesc)}</p>` : ''}<ul>${catalogRows}</ul><p>${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${SF_REGISTRY_MANIFEST} · ${STAR_DATA_BASE}/${SF_STAR_CLOUD.FILE} (uint32 count + count × 6 float32-LE records: x, y, z ly, magnitude, B-V, kind) · ${STAR_DATA_BASE}/&lt;locale&gt;/&lt;body-id&gt;.json</p></section>`
+      : ''
+
+    return `<main><h1>${esc(page.title || BASE_TITLE)}</h1>${leafParagraphs(
+      page,
+      new Set([
+        'title',
+        'catalog',
+        'navDesc',
+        'records',
+        'searchThemes',
+        'shareGallery',
+        'shareCapture',
+        'magnitude',
+        'distance',
+        'spectralType',
+        'constellation',
+        'designation',
+        'hostStar',
+        'dsoType',
+        'discovery',
+        'redshift',
+        'coordinates',
+        'registry_star',
+        'registry_star_about',
+        'registry_exoplanet',
+        'registry_exoplanet_about',
+        'registry_dso',
+        'registry_dso_about',
+      ])
+    )}${sections}${catalogBlock}${starShareGallerySection(loc)}</main>`
   }
 
   /**  /** Strips the `Luis Krötz | ` prefix / ` | Luis Krötz` suffix for crumb names. */
@@ -1890,6 +2439,59 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     if (slugs) {
       const epCanonical = slugPath('earthPlayground')(loc)
 
+      // Shared share-set fields for every earth-playground surface — the
+      // canonical slug and both alias segments each draw a card pick off
+      // the deck, list the remaining captures as extra og:image
+      // candidates, and carry the ImageObject gallery in their JSON-LD.
+      const epShareFields = () => {
+        const pick = nextShareImage()
+        const d = pick ? shareMediaDims.get(pick) : null
+        const canon = `${SITE_URL}${epCanonical}`
+
+        return {
+          image: pick ? enc(pick) : undefined,
+          imageDims: d ? { w: d[0], h: d[1] } : undefined,
+          extraImages: pick ? shareImgs.filter((u) => u !== pick).map((u) => enc(u)) : undefined,
+          keywords: epThemesOf(loc).join(', ') || undefined,
+          // Multi-MB capture set — card/parked surfaces only, never the
+          // painted LCP element (the WebGL canvas owns that).
+          noLcp: true,
+          about: EP_ABOUT,
+          mainEntity: shareImgs.length ? { '@id': `${canon}#share-gallery` } : undefined,
+          entities: earthShareEntities(loc, canon, pick),
+        }
+      }
+
+      const sfCanonical = slugPath('starField')(loc)
+
+      // Shared share-set fields for every star-field surface — the
+      // canonical slug and the English-segment alias each draw a card
+      // pick off the star deck, list the remaining captures as extra
+      // og:image candidates, and carry the ImageObject gallery in their
+      // JSON-LD. Body dossier pages keep only the keywords (the runtime
+      // share rotation still draws them a random card pick per visit) so
+      // their dossier-figure LQIP keeps painting.
+      const sfShareFields = () => {
+        const pick = nextStarShareImage()
+        const d = pick ? shareMediaDims.get(pick) : null
+        const canon = `${SITE_URL}${sfCanonical}`
+
+        return {
+          image: pick ? enc(pick) : undefined,
+          imageDims: d ? { w: d[0], h: d[1] } : undefined,
+          extraImages: pick
+            ? starShareImgs.filter((u) => u !== pick).map((u) => enc(u))
+            : undefined,
+          keywords: sfThemesOf(loc).join(', ') || undefined,
+          // Multi-MB capture set — card/parked surfaces only, never the
+          // painted LCP element (the WebGL canvas owns that).
+          noLcp: true,
+          about: SF_ABOUT,
+          mainEntity: starShareImgs.length ? { '@id': `${canon}#share-gallery` } : undefined,
+          entities: starShareEntities(loc, canon, pick),
+        }
+      }
+
       routes.push(
         {
           path: `${prefix}${slugs.about}`,
@@ -1936,41 +2538,137 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           alt: slugPath('license'),
           content: legalContent(loc, 'license'),
         },
-        {
-          path: `${prefix}${slugs.earthPlayground}`,
-          title: pgTitle(),
-          description: epDescOf(loc),
-          alt: slugPath('earthPlayground'),
-          content: experienceContent(loc, 'earth-playground'),
-        },
-        {
-          path: `${prefix}${slugs.starField}`,
-          title: sfTitle(),
-          description: sfDescOf(loc),
-          alt: slugPath('starField'),
-          content: starIndexContent(loc, starBodyIds),
-          // ItemList — the whole charted catalog with deep links, so the
-          // index page itself enumerates every 3D object for crawlers and
-          // agents without executing a frame of WebGL.
-          entities: [
-            {
-              '@context': SCHEMA_CONTEXT,
-              '@type': 'ItemList',
-              '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}#catalog`,
-              name: t(loc, (x) => x.APP?.starField) || 'Star Field',
-              itemListElement: starBodyIds.map((bodyId, i) => {
-                const body = readStarBody(loc, bodyId)
+        (() => {
+          const share = epShareFields()
 
-                return {
-                  '@type': 'ListItem',
-                  position: i + 1,
-                  url: `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}/${bodyId}`,
-                  name: body?.name || bodyId,
-                }
-              }),
-            },
-          ],
-        },
+          return {
+            path: `${prefix}${slugs.earthPlayground}`,
+            title: pgTitle(),
+            description: epDescOf(loc),
+            alt: slugPath('earthPlayground'),
+            content: earthContent(loc),
+            ...share,
+            // WebApplication — the canvas-rendered control surface
+            // declared as schema so the playground's whole feature set is
+            // legible to crawlers without executing a frame of WebGL —
+            // plus the share-set ImageObject gallery.
+            entities: [
+              {
+                '@context': SCHEMA_CONTEXT,
+                '@type': 'WebApplication',
+                '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.earthPlayground}#app`,
+                name: t(loc, (x) => x.APP?.earthPlayground) || 'Earth Playground',
+                url: `${SITE_URL}${locPrefixOf(loc)}/${slugs.earthPlayground}`,
+                applicationCategory: 'MultimediaApplication',
+                operatingSystem: 'Web browser',
+                browserRequirements: 'Requires WebGL; WebGPU preferred',
+                inLanguage: LOCALE_TAGS[loc].bcp,
+                isAccessibleForFree: true,
+                isPartOf: {
+                  '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.earthPlayground}#webpage`,
+                },
+                author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+                featureList: SP_CONTROL_GROUPS.flatMap((g) => [
+                  t(loc, (x) => x.pages?.['earth-playground']?.[g.label]) || g.label,
+                  ...g.controls.map(
+                    (c) => t(loc, (x) => x.pages?.['earth-playground']?.[c.label]) || c.label
+                  ),
+                  ...(g.actions || []).map(
+                    (a) => t(loc, (x) => x.pages?.['earth-playground']?.[a.label]) || a.label
+                  ),
+                ]),
+              },
+              ...share.entities,
+            ],
+          }
+        })(),
+        (() => {
+          const share = sfShareFields()
+
+          return {
+            path: `${prefix}${slugs.starField}`,
+            title: sfTitle(),
+            description: sfDescOf(loc),
+            alt: slugPath('starField'),
+            content: starIndexContent(loc, starBodyIds),
+            ...share,
+            // ItemList — the whole charted catalog with deep links, so the
+            // index page itself enumerates every 3D object for crawlers and
+            // agents without executing a frame of WebGL — plus the
+            // share-set ImageObject gallery.
+            entities: [
+              {
+                '@context': SCHEMA_CONTEXT,
+                '@type': 'ItemList',
+                '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}#catalog`,
+                name: t(loc, (x) => x.APP?.starField) || 'Star Field',
+                itemListElement: starBodyIds.map((bodyId, i) => {
+                  const body = readStarBody(loc, bodyId)
+
+                  return {
+                    '@type': 'ListItem',
+                    position: i + 1,
+                    url: `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}/${bodyId}`,
+                    name: body?.name || bodyId,
+                  }
+                }),
+              },
+              // DataCatalog — the 139,563-record registry (HYG stars, NASA
+              // exoplanets, OpenNGC DSOs) plus its packed-binary form, so
+              // the canvas star cloud's underlying data is enumerable as
+              // schema + fetchable JSON shards without WebGL.
+              {
+                '@context': SCHEMA_CONTEXT,
+                '@type': 'DataCatalog',
+                '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}#data-catalog`,
+                name: t(loc, (x) => x.pages?.['star-field']?.catalog) || 'Deep Catalog',
+                inLanguage: LOCALE_TAGS[loc].bcp,
+                dataset: [
+                  ...SF_REGISTRY_KINDS.map(({ kind, labelKey, aboutKey, credit }) => {
+                    const meta = starCatalogManifest?.kinds?.[kind]
+
+                    return {
+                      '@type': 'Dataset',
+                      '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}#dataset-${kind}`,
+                      name: t(loc, (x) => x.pages?.['star-field']?.[labelKey]) || kind,
+                      description: t(loc, (x) => x.pages?.['star-field']?.[aboutKey]) || '',
+                      creditText: credit,
+                      isAccessibleForFree: true,
+                      distribution: [
+                        {
+                          '@type': 'DataDownload',
+                          encodingFormat: 'application/json',
+                          contentUrl: `${SITE_URL}${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${SF_REGISTRY_MANIFEST}`,
+                        },
+                        ...(meta?.shards || []).map((shard) => ({
+                          '@type': 'DataDownload',
+                          encodingFormat: 'application/json',
+                          contentUrl: `${SITE_URL}${STAR_DATA_BASE}/${SF_REGISTRY_INDEX_DIR}/${shard}`,
+                        })),
+                      ],
+                    }
+                  }),
+                  {
+                    '@type': 'Dataset',
+                    '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.starField}#dataset-deep-field`,
+                    name: 'Deep field — packed binary',
+                    description:
+                      'Every registry record packed little-endian Float32 (x, y, z heliocentric light-years, apparent magnitude, B-V colour index, kind: 0 star / 1 exoplanet / 2 deep-sky object) behind a uint32 record-count header — the renderer-side form of the same catalog.',
+                    isAccessibleForFree: true,
+                    distribution: [
+                      {
+                        '@type': 'DataDownload',
+                        encodingFormat: 'application/octet-stream',
+                        contentUrl: `${SITE_URL}${STAR_DATA_BASE}/${SF_STAR_CLOUD.FILE}`,
+                      },
+                    ],
+                  },
+                ],
+              },
+              ...share.entities,
+            ],
+          }
+        })(),
         {
           path: `${prefix}${slugs.animations}`,
           title: titleOf(t(loc, (x) => x.pages?.animations?.title)),
@@ -1991,6 +2689,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           description: epDescOf(loc),
           alt: slugPath('earthPlayground'),
           canonical: epCanonical,
+          ...epShareFields(),
         })
       }
 
@@ -2000,6 +2699,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         description: epDescOf(loc),
         alt: slugPath('earthPlayground'),
         canonical: epCanonical,
+        ...epShareFields(),
       })
 
       if (loc !== 'en' || slugs.starField !== 'star-field-experiment') {
@@ -2009,6 +2709,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           description: sfDescOf(loc),
           alt: slugPath('starField'),
           canonical: slugPath('starField')(loc),
+          content: starIndexContent(loc, starBodyIds),
+          ...sfShareFields(),
         })
       }
     }
@@ -2131,6 +2833,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           pageName: bodyName,
           description: toDescription(body?.tagline || '') || sfDescOf(loc),
           content: starBodyContent(loc, bodyId),
+          ...sfBodyShareFields(loc),
           entities: [
             {
               '@context': SCHEMA_CONTEXT,
@@ -2179,7 +2882,17 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     en.pages?.about?.col1?.[0] || 'Front-End Developer focused on creating beautiful experiences.'
   )
 
-  const webPageEntity = ({ url, name, description, bcp, image, crumbs }) => ({
+  const webPageEntity = ({
+    url,
+    name,
+    description,
+    bcp,
+    image,
+    crumbs,
+    keywords,
+    about,
+    mainEntity,
+  }) => ({
     '@context': SCHEMA_CONTEXT,
     '@type': 'WebPage',
     '@id': `${url}#webpage`,
@@ -2191,6 +2904,9 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     publisher: { '@id': `${SITE_URL}#organization` },
     primaryImageOfPage: { '@type': 'ImageObject', url: image || SHARE_IMAGE },
     ...(crumbs ? { breadcrumb: { '@id': `${url}#breadcrumbs` } } : {}),
+    ...(keywords ? { keywords } : {}),
+    ...(about ? { about } : {}),
+    ...(mainEntity ? { mainEntity } : {}),
   })
 
   // Prime the LQIP cache for the root document's early-LCP image.
@@ -2219,6 +2935,11 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     skip: skipCopyFor('en'),
   })
 
+  // Probe the whole share sets once — the dims feed every emitted
+  // page's og:image:width/height, gallery <img> attrs and ImageObject
+  // sizes, so it runs before the locale fan-out, not per-locale.
+  await prefetchShareDims([...shareImgs, ...starShareImgs])
+
   // ── Per-route documents ───────────────────────────────────────────────────
   // English emits straight to dist/<route>/index.html — exact-match static
   // files win over the `**` SPA rewrite, so no firebase.json entry is
@@ -2238,7 +2959,9 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     // far larger. localize() then binds whichever prefetched record
     // clears the coverage-entropy floor.
     await prefetchLcpThumbs(
-      routes.flatMap((route) => [lcpImageOf(route.content, route.image), route.image]),
+      routes.flatMap((route) =>
+        route.noLcp ? [] : [lcpImageOf(route.content, route.image), route.image]
+      ),
       mediaManifest
     )
 
@@ -2273,6 +2996,9 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           bcp: tags.bcp,
           image: route.image,
           crumbs,
+          keywords: route.keywords,
+          about: route.about,
+          mainEntity: route.mainEntity,
         }),
         ...(crumbs ? [breadcrumbEntity(crumbs, `${pageUrl}#breadcrumbs`)] : []),
         ...(route.entities || []),
@@ -2291,6 +3017,10 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           : undefined,
         alternates: route.alternates || alternatesFor(route.alt),
         image: route.image,
+        extraImages: route.extraImages,
+        imageDims: route.imageDims,
+        keywords: route.keywords,
+        noLcp: route.noLcp,
         entities,
         content: route.content,
         loader: loaderCopyFor(loc),

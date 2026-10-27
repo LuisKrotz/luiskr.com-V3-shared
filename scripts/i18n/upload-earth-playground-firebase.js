@@ -9,7 +9,9 @@ const dbPath = path.join(rootDir, 'database.json')
 
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 
-const locales = ['en', 'br', 'es', 'de', 'fr', 'it', 'ru', 'hrk', 'cas', 'riv', 'gn', 'tln']
+const locales = Object.keys(db.translations).filter((loc) =>
+  Boolean(db.translations[loc]?.pages?.['earth-playground'])
+)
 
 for (const loc of locales) {
   const earthData = db.translations[loc]?.pages?.['earth-playground']

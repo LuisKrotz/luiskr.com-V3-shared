@@ -618,6 +618,7 @@ _Shared primitives every surface builds on — no direct UI._
 | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | [`docs-schema-generatedocsschema.test.js`](core\tests\coverage\schema/docs-schema-generatedocsschema.test.md)         | Split from docs-schema.test.js — covers the "generateDocsSchema" describe.     |
 | [`docs-schema-updatejsonld-clear-arm.test.js`](core\tests\coverage\schema/docs-schema-updatejsonld-clear-arm.test.md) | Split from docs-schema.test.js — covers the "updateJsonLd clear arm" describe. |
+| [`schema-experiments-tails.test.js`](core\tests\coverage\schema/schema-experiments-tails.test.md)                     | Coverage tails for the experiment JSON-LD builders in                          |
 | [`schema-tails-test-js.test.js`](core\tests\coverage\schema/schema-tails-test-js.test.md)                             | Split from coverage-tails.test.js — covers the "schema tails" describe.        |
 | [`schema-tails.test.js`](core\tests\coverage\schema/schema-tails.test.md)                                             | Split from coverage-tails-4.test.js — covers the "schema tails" describe.      |
 
@@ -677,6 +678,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`media-tails.test.js`](core\tests\coverage\utils/media-tails.test.md)                                         | Split from coverage-tails-4.test.js — covers the "media tails" describe.     |
 | [`media-utils-tails.test.js`](core\tests\coverage\utils/media-utils-tails.test.md)                             | Split from coverage-tails.test.js — covers the "media utils tails" describe. |
 | [`service-worker-tails.test.js`](core\tests\coverage\utils/service-worker-tails.test.md)                       | Coverage tail for utils/service-worker.ts — the local                        |
+| [`share-gallery-tails.test.js`](core\tests\coverage\utils/share-gallery-tails.test.md)                         | Coverage for core/utils/share-gallery.ts — the playground                    |
 | [`string-tails.test.js`](core\tests\coverage\utils/string-tails.test.md)                                       | Coverage tails for core/utils/string.ts — iterated HTML                      |
 
 ## Core engine
@@ -880,9 +882,12 @@ _Shared primitives every surface builds on — no direct UI._
 | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | [`constants.test.js`](core\tests\unit\tokens/constants.test.md)                                           | Verifies all values in core/constants.js match the original Vue source.    |
 | [`nav-css-tokens.test.js`](core\tests\unit\tokens/nav-css-tokens.test.md)                                 | Coverage tail for core/tokens/css/nav.ts — asserts every                   |
+| [`playground-control-groups.test.js`](core\tests\unit\tokens/playground-control-groups.test.md)           | Coverage tail for core/tokens/playground/control-groups.ts —               |
+| [`playground-share.test.js`](core\tests\unit\tokens/playground-share.test.md)                             | Coverage tail for core/tokens/playground/share.ts — the                    |
 | [`schema-shims-entry-shims.test.js`](core\tests\unit\tokens/schema-shims-entry-shims.test.md)             | Split from schema-shims.test.js — covers the "entry shims" describe.       |
 | [`schema-shims-polyfills.test.js`](core\tests\unit\tokens/schema-shims-polyfills.test.md)                 | Split from schema-shims.test.js — covers the "polyfills" describe.         |
 | [`schema-shims-schema-generators.test.js`](core\tests\unit\tokens/schema-shims-schema-generators.test.md) | Split from schema-shims.test.js — covers the "schema generators" describe. |
+| [`starfield-registry.test.js`](core\tests\unit\tokens/starfield-registry.test.md)                         | Coverage tail for core/tokens/starfield/registry.ts —                      |
 
 ## Core engine
 
@@ -1147,14 +1152,16 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                  | What it does                                                  |
-| ----------------------------------------------------- | ------------------------------------------------------------- |
-| [`actions.ts`](core\tokens\playground/actions.md)     | Toolbar/panel action names dispatched by the playground UI.   |
-| [`gui-post.ts`](core\tokens\playground/gui-post.md)   | Post-processing start values for the Earth Playground —       |
-| [`gui-scene.ts`](core\tokens\playground/gui-scene.md) | Scene-subsystem start values for the Earth Playground —       |
-| [`music.ts`](core\tokens\playground/music.md)         | Ambient soundtrack for the Earth Playground — OGG first       |
-| [`params.ts`](core\tokens\playground/params.md)       | `data-param` values on playground sliders/checkboxes split by |
-| [`textures.ts`](core\tokens\playground/textures.md)   | CDN URLs for the Earth Playground texture set — every map     |
+| File                                                            | What it does                                                  |
+| --------------------------------------------------------------- | ------------------------------------------------------------- |
+| [`actions.ts`](core\tokens\playground/actions.md)               | Toolbar/panel action names dispatched by the playground UI.   |
+| [`control-groups.ts`](core\tokens\playground/control-groups.md) | Declarative control-panel schema for the Earth Playground —   |
+| [`gui-post.ts`](core\tokens\playground/gui-post.md)             | Post-processing start values for the Earth Playground —       |
+| [`gui-scene.ts`](core\tokens\playground/gui-scene.md)           | Scene-subsystem start values for the Earth Playground —       |
+| [`music.ts`](core\tokens\playground/music.md)                   | Ambient soundtrack for the Earth Playground — OGG first       |
+| [`params.ts`](core\tokens\playground/params.md)                 | `data-param` values on playground sliders/checkboxes split by |
+| [`share.ts`](core\tokens\playground/share.md)                   | Playground share-capture contract — the bucket key            |
+| [`textures.ts`](core\tokens\playground/textures.md)             | CDN URLs for the Earth Playground texture set — every map     |
 
 ## Core engine
 
@@ -1193,6 +1200,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`kinds.ts`](core\tokens\starfield/kinds.md)       | Star-field taxonomy + action tokens: the region groups the |
 | [`music.ts`](core\tokens\starfield/music.md)       | Ambient playlist for the Star Field experiment — the MP3   |
 | [`params.ts`](core\tokens\starfield/params.md)     | Star-field engine parameters — camera rig, fly-to tween    |
+| [`registry.ts`](core\tokens\starfield/registry.md) | Deep-catalog registry vocabulary — the shard-directory     |
 | [`textures.ts`](core\tokens\starfield/textures.md) | CDN URLs for the Star Field experiment texture set —       |
 
 ## Core engine
@@ -1270,6 +1278,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`notify.ts`](core\utils/notify.md)                 | User-facing notification service                            |
 | [`schema.ts`](core\utils/schema.md)                 | JSON-LD structured-data builders (Schema.org entities for   |
 | [`service-worker.ts`](core\utils/service-worker.md) | —                                                           |
+| [`share-gallery.ts`](core\utils/share-gallery.md)   | Runtime playground share-capture rotation                   |
 | [`string.ts`](core\utils/string.md)                 | Small pure string transforms — HTML stripping for           |
 
 ## Core engine
@@ -1698,6 +1707,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`i18n.ts`](experiments\earth-playground\space/i18n.md)                     | Locale handling for SpacePlayground — fetches the               |
 | [`panel-render.tsx`](experiments\earth-playground\space/panel-render.md)    | Pure JSX renderers for the space-playground control panel,      |
 | [`render.tsx`](experiments\earth-playground\space/render.md)                | JSX for SpacePlayground's render() — boot loader overlay        |
+| [`schema.ts`](experiments\earth-playground\space/schema.md)                 | Runtime JSON-LD parity for the Earth Playground route —         |
 | [`wiring.ts`](experiments\earth-playground\space/wiring.md)                 | Control wiring for SpacePlayground — panel event binding,       |
 
 ## Entry points
@@ -1718,6 +1728,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | [`space-boot-tails.test.js`](experiments\earth-playground\tests\coverage\playground\space/space-boot-tails.test.md)                 | Split from coverage-tails-7.test.js — covers the "space boot tails" describe.         |
 | [`space-panel-render-tails.test.js`](experiments\earth-playground\tests\coverage\playground\space/space-panel-render-tails.test.md) | Split from coverage-tails-7.test.js — covers the "space panel render tails" describe. |
+| [`space-schema-tails.test.js`](experiments\earth-playground\tests\coverage\playground\space/space-schema-tails.test.md)             | Coverage tails for space/schema.ts — emitSpaceJsonLd                                  |
 
 ## Entry points
 
@@ -1894,6 +1905,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`i18n.ts`](experiments\star-field\star/i18n.md)       | Locale handling for StarField — fetches the                 |
 | [`music.ts`](experiments\star-field\star/music.md)     | Ambient playlist player for the star-field view — one       |
 | [`render.tsx`](experiments\star-field\star/render.md)  | JSX for StarField's render() — boot loader overlay (same    |
+| [`schema.ts`](experiments\star-field\star/schema.md)   | Runtime JSON-LD parity for the star-field route — the       |
 
 ## Entry points
 
@@ -1936,6 +1948,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`star-boot-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-boot-tails.test.md)               | Coverage tails for star/boot.ts — the engine-event wiring       |
 | [`star-music-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-music-tails.test.md)             | Coverage tails for star/music.ts — the persistent &lt;audio&gt; |
 | [`star-render-mock-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-render-mock-tails.test.md) | Coverage tails for star/render.tsx — the catalog-mock arms:     |
+| [`star-schema-tails.test.js`](experiments\star-field\tests\coverage\starfield\star/star-schema-tails.test.md)           | Coverage tails for star/schema.ts — the runtime JSON-LD         |
 
 ## Entry points
 
@@ -2065,6 +2078,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`generate-llm-pages.mjs`](shared\scripts\build/generate-llm-pages.md)     | LLM/agent replica surface — emits a full-content Markdown        |
 | [`generate-sitemap.js`](shared\scripts\build/generate-sitemap.md)          | Emits the whole crawl surface under `website/public/meta/`:      |
 | [`media-manifest.mjs`](shared\scripts\build/media-manifest.md)             | CDN media inventory + best-variant resolution shared by the      |
+| [`playground-share.mjs`](shared\scripts\build/playground-share.md)         | Playground share-capture helpers shared by the build-time        |
 | [`predeploy.mjs`](shared\scripts\build/predeploy.md)                       | Firebase Hosting predeploy chain — the quality gate that a       |
 | [`route-media.mjs`](shared\scripts\build/route-media.md)                   | Route media helpers shared by the build-time generators          |
 | [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md) | Firebase `predeploy` step — stamps the AI-usage declaration      |
@@ -2087,10 +2101,13 @@ _Boot surfaces: what the user sees first on each bundle._
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
 | [`ast-string-extract.js`](shared\scripts\i18n/ast-string-extract.md)                                   | AST-based static analysis tool to detect repeated non-syntactic string literals |
 | [`patch-animation-descriptions.js`](shared\scripts\i18n/patch-animation-descriptions.md)               | Seeds the animated-element accessibility descriptions into                      |
+| [`patch-earth-playground-share-themes.js`](shared\scripts\i18n/patch-earth-playground-share-themes.md) | —                                                                               |
 | [`patch-earth-playground-translations.js`](shared\scripts\i18n/patch-earth-playground-translations.md) | —                                                                               |
+| [`patch-star-field-share-themes.js`](shared\scripts\i18n/patch-star-field-share-themes.md)             | —                                                                               |
 | [`patch-ui-gaps-and-cyrillic.js`](shared\scripts\i18n/patch-ui-gaps-and-cyrillic.md)                   | —                                                                               |
 | [`seed-translations.js`](shared\scripts\i18n/seed-translations.md)                                     | —                                                                               |
 | [`upload-earth-playground-firebase.js`](shared\scripts\i18n/upload-earth-playground-firebase.md)       | —                                                                               |
+| [`upload-star-field-firebase.js`](shared\scripts\i18n/upload-star-field-firebase.md)                   | —                                                                               |
 
 ## Entry points
 

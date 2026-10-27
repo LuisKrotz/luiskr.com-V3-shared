@@ -2,9 +2,9 @@
 
 State/display value string tokens — grouped subset of
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\strings\state.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\strings\state.ts`                        |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -14,3 +14,11 @@ State/display value string tokens — grouped subset of
 Frozen state string map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the
 token contract immutable at runtime.
+
+### `COMPLETE`
+
+`document.readyState` terminal value — page load fully settled.
+
+### `LOADING`
+
+`document.readyState` in-flight value — document still loading.
