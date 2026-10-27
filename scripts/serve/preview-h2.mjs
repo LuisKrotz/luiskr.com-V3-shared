@@ -17,9 +17,13 @@
  * TLS uses the self-signed localhost pair the CMS-auth dev flow already
  * generates (cms/dev/https); Lighthouse runs pass
  * `--ignore-certificate-errors` via lighthouserc settings.chromeFlags.
+ *
+ * After listen the server probes `localhost` and exits non-zero when the
+ * socket that answers is not this process — see selfCheckLocalhost.
  */
 
 import { createSecureServer } from 'node:http2'
+import { get as httpsGet } from 'node:https'
 import { existsSync, mkdirSync, readFileSync, statSync } from 'node:fs'
 import { execSync } from 'node:child_process'
 import { brotliCompressSync, gzipSync } from 'node:zlib'
@@ -34,6 +38,16 @@ const KEY_FILE = path.join(CERT_DIR, 'localhost-key.pem')
 const CERT_FILE = path.join(CERT_DIR, 'localhost.pem')
 
 const PORT = Number(process.env.PORT || process.argv.find((a) => /^\d{4,5}$/.test(a)) || 4173)
+
+/**
+ * Marker response header used by the post-listen localhost probe to prove
+ * the socket that answered belongs to this process — see
+ * selfCheckLocalhost for why that proof is needed.
+ */
+const PROBE_HEADER = 'x-preview-instance'
+
+/** Per-process marker value; the probe compares it against PROBE_HEADER. */
+const INSTANCE_TOKEN = String(process.pid)
 
 /**
  * Content-Types for every artifact class under dist/. Kept local to this
@@ -147,6 +161,47 @@ const cacheControlOf = (reqPath) => {
   return value
 }
 
+/**
+ * Exits non-zero with an actionable message when `localhost` is answered
+ * by a foreign process — the OS does not surface this as EADDRINUSE
+ * because the squatter typically owns only the `[::1]` alias while this
+ * server binds `::`.
+ * @param {string} detail What the probe observed.
+ * @returns {never}
+ */
+const reportPortConflict = (detail) => {
+  console.error(
+    `preview-h2: ${detail}. Another process already answers https://localhost:${PORT} ` +
+      '(often a stale `vite preview` or an older preview-h2) — stop it and retry.'
+  )
+
+  process.exit(1)
+}
+
+/**
+ * Probes `localhost` after listen so a port squatter fails the gate fast
+ * with a clear message. `localhost` resolves to ::1 first on Windows; a
+ * foreign listener there (e.g. a plaintext `vite preview`) otherwise turns
+ * Lighthouse's TLS handshake into CHROME_INTERSTITIAL_ERROR on every run,
+ * far removed from the actual cause. The marker header distinguishes this
+ * instance even from another preview-h2 bound on a different alias.
+ */
+const selfCheckLocalhost = () => {
+  const request = httpsGet(
+    { hostname: 'localhost', port: PORT, path: '/', rejectUnauthorized: false, timeout: 5000 },
+    (res) => {
+      res.resume()
+
+      if (res.headers[PROBE_HEADER] !== INSTANCE_TOKEN) {
+        reportPortConflict(`localhost:${PORT} is served by a different process`)
+      }
+    }
+  )
+
+  request.on('timeout', () => request.destroy(new Error(`localhost:${PORT} probe timed out`)))
+  request.on('error', (err) => reportPortConflict(err.message))
+}
+
 const server = () => {
   ensureCert()
 
@@ -162,6 +217,8 @@ const server = () => {
       const headers = CMS_PATH_RE.test(reqPath) ? CMS_SECURITY_HEADERS : SITE_SECURITY_HEADERS
 
       for (const [key, value] of Object.entries(headers)) res.setHeader(key, value)
+
+      res.setHeader(PROBE_HEADER, INSTANCE_TOKEN)
 
       const cacheControl = cacheControlOf(reqPath)
 
@@ -243,10 +300,14 @@ const server = () => {
     }
   )
 
+  srv.on('error', (err) => reportPortConflict(err.message))
+
   srv.listen(PORT, () => {
     // The word "listening" is the contract — lhci's startServerReadyPattern
     // matches on stdout, not on a TCP probe.
     console.log(`preview-h2 listening on https://localhost:${PORT}`)
+
+    selfCheckLocalhost()
   })
 }
 
