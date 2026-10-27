@@ -28,6 +28,11 @@ export function updateAppSectionTops(c: AppRoot): void {
     c._contactTop = rect.top + window.scrollY - 250
   }
 
+  // Document height changes only when the DOM grows (this runs from the
+  // body's ResizeObserver + the mount-time lazy pass) — caching it here
+  // keeps the per-scroll-frame read in checkAppScroll off the layout path.
+  c._scrollH = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
+
   c._sectionsMeasured = !!(aboutEl && contactEl)
 }
 
@@ -37,8 +42,12 @@ export function updateAppSectionTops(c: AppRoot): void {
  */
 export function checkAppScroll(c: AppRoot): void {
   const y = window.scrollY
-  const scrollH = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
-  c.onBottom = scrollH - y <= window.innerHeight + 200
+  // Cached by updateSectionTops — a scrollHeight read on a dirty layout
+  // forces a synchronous reflow every scroll frame, which the 120/240fps
+  // contract cannot afford. The 0-fallback covers the pre-measure window.
+  const scrollH =
+    c._scrollH || Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
+  const onBottom = scrollH - y <= window.innerHeight + 200
 
   const isHomePage =
     router.currentRoute?.name?.startsWith(ROUTE_PREFIXES.HOME) ||
@@ -58,8 +67,18 @@ export function checkAppScroll(c: AppRoot): void {
   }
 
   if (!isHomePage) {
-    const nav = c.$<AppNavEl>(COMPONENT_TAGS.APP_NAV)
-    if (nav) nav.updateScrollState(c.activeSection, c.onBottom)
+    // The nav's scroll state only needs writing on transitions — pushing
+    // identical values every scroll frame runs a no-op attribute write
+    // plus a nav-internal style flush per frame.
+    const bottomChanged = c.onBottom !== onBottom
+
+    c.onBottom = onBottom
+
+    if (bottomChanged) {
+      const nav = c.$<AppNavEl>(COMPONENT_TAGS.APP_NAV)
+      if (nav) nav.updateScrollState(c.activeSection, c.onBottom)
+    }
+
     return
   }
 
@@ -67,7 +86,7 @@ export function checkAppScroll(c: AppRoot): void {
   const contactTop = c._contactTop ?? 1500
 
   let newSection: string
-  if (y >= contactTop || c.onBottom) {
+  if (y >= contactTop || onBottom) {
     newSection = SECTIONS.CONTACT
   } else if (y >= aboutTop) {
     newSection = SECTIONS.ABOUT
@@ -75,10 +94,13 @@ export function checkAppScroll(c: AppRoot): void {
     newSection = SECTIONS.HOME
   }
 
-  if (c.activeSection !== newSection) {
-    c.activeSection = newSection
-  }
+  const changed = c.onBottom !== onBottom || c.activeSection !== newSection
 
-  const nav = c.$<AppNavEl>(COMPONENT_TAGS.APP_NAV)
-  if (nav) nav.updateScrollState(c.activeSection, c.onBottom)
+  c.onBottom = onBottom
+  c.activeSection = newSection
+
+  if (changed) {
+    const nav = c.$<AppNavEl>(COMPONENT_TAGS.APP_NAV)
+    if (nav) nav.updateScrollState(c.activeSection, c.onBottom)
+  }
 }

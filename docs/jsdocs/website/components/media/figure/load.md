@@ -79,7 +79,7 @@ shimmer forever.
 
 Highest confirmed probe — the bitmap handed to the GPU at chain end.
 
-### `publish`
+### `publishDom`
 
 Publishes a confirmed tier into the visible high layer — the probe
 already holds the bytes. The tier mounts as a NEW img stacked over
@@ -100,6 +100,20 @@ quality-swap blink. transitionend fires at fade completion;
 the timeout covers reduced-motion/no-transition environments
 where the event never lands. Index order is recomputed at
 retire time so a newer layer mounted above is never pruned.
+
+### `publish`
+
+Scroll-gesture park for the DOM swap — clone/insert/transition churn
+mid-fling spends the frame budget the scroll itself needs (scroll-fps
+gate floors: 120fps mobile / 240fps desktop). Probes keep fetching and
+decoding off the gesture path; only the visible layer swap waits for
+scroll-idle, and the painted thumb already owns the box so nothing
+blanks. onScrollStop fires immediately when the window isn't
+scrolling, so a static viewport sees no added latency. Parked calls
+fire in registration order — the climb confirms rungs serially, so
+the LAST publish is always the highest proven tier.
+
+- `@param` url Confirmed rung URL ready to paint.
 
 ### `climb`
 

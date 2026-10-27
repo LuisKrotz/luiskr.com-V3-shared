@@ -201,6 +201,7 @@ Rewrites the English shell into a localized document.
 - `@param` {Array<string>} [o.extraImages] - additional og:image candidates
 - `@param` {{w:number,h:number}} [o.imageDims] - intrinsic dims of `image`;
 - `@param` {string} [o.keywords] - localized comma-joined search themes for
+- `@param` {string} [o.feedUrl] - absolute RSS feed URL for this locale —
 - `@param` {boolean} [o.noLcp] - the route's media (heavyweight CDN
 - `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
 - `@param` {string} [o.content] - prerendered body markup injected into
@@ -432,7 +433,28 @@ Localized search-theme list for one locale's star-field page.
 
 ### `sfBodyShareFields`
 
-Search-theme keywords for a star body page — the locale's star-field theme list as a comma-joined meta keywords string.
+Search-theme keywords for a star body page — the body's own
+name/kind lead the locale's star-field theme list so each dossier
+ranks for its object, not only the experiment's generic terms.
+
+### `pageThemesOf`
+
+Localized search-theme list for one CMS page node — every page
+carries `searchThemes` (patch-all-pages-search-themes.js), the
+array form the <meta name="keywords"> tag, the WebPage JSON-LD
+`keywords` property and sitemap image captions all read. Live
+translations win; the committed snapshot covers nodes RTDB has
+not been re-uploaded for yet.
+
+### `pageKeywords`
+
+Comma-joined page keywords — undefined when the node has no list.
+
+### `projectKeywords`
+
+Comma-joined project keywords — the locale's project searchThemes
+with the snapshot/English lists as fallback when the locale has
+none.
 
 ### `shareGallerySection`
 

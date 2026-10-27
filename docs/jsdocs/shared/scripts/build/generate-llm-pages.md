@@ -163,6 +163,10 @@ Runs the whole replica fan-out into `distDir`.
 - `@param` {string} [distDir] absolute dist path
 - `@returns` {Promise<{written: number, routes: number, locales: number}>} emit counts
 
+### `themesOr`
+
+Node's own searchThemes, else the snapshot's — undefined when none.
+
 ### `indexRows`
 
 Per-locale index rows accumulated for routes.json + the global index.

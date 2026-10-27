@@ -11,6 +11,8 @@ import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
 import { KEYBOARD_EVENTS } from '@core/tokens/events/dom.js'
 
 import { ROUTE_NAMES, SECTIONS } from '@core/constants.js'
+import { SECTION_IDS } from '@core/tokens/ids/sections.js'
+import { deepQuerySelector } from '@core/utils/dom.js'
 
 const flush = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
@@ -63,6 +65,13 @@ describe('AppRoot — scroll tracking', () => {
 
     expect(el.onBottom).toBeDefined()
 
+    // onBottom transition — the nav write fires only when the computed
+    // state actually changed (same-value frames skip it entirely).
+    el.onBottom = false
+    el.checkScroll()
+
+    expect(el.onBottom).toBe(true)
+
     // Home route + measured markers → section resolution. scrollHeight
     // must exceed innerHeight + 200 or onBottom pins the section to contact.
     Object.defineProperty(document.documentElement, 'scrollHeight', {
@@ -96,6 +105,50 @@ describe('AppRoot — scroll tracking', () => {
     el.checkScroll()
 
     expect(el._lastMeasureAttempt).toBeGreaterThan(0)
+
+    // A second check inside the 400ms throttle window skips the re-measure —
+    // _sectionsMeasured re-forced because updateSectionTops inside the first
+    // call re-finds the live markers and flips it back to true.
+    const lastAttempt = el._lastMeasureAttempt
+    el._sectionsMeasured = false
+    el.checkScroll()
+
+    expect(el._lastMeasureAttempt).toBe(lastAttempt)
+
+    // No #about/#contact markers in the document → updateSectionTops'
+    // missing-marker else arms leave the tops at their fallbacks. The
+    // markers live inside the view's shadow root — removal has to go
+    // through the same deep query the measure uses.
+    deepQuerySelector(`#${SECTION_IDS.ABOUT}`)?.remove()
+    deepQuerySelector(`#${SECTION_IDS.CONTACT}`)?.remove()
+    el.updateSectionTops()
+
+    expect(el._sectionsMeasured).toBe(false)
+
+    // Pre-measure _scrollH → the || fallback reads the live document.
+    el._scrollH = 0
+    el.checkScroll()
+
+    // Nav absent at a real bottom transition → the if(nav) guard's null arm.
+    // onBottom starts opposite the computed value (the 5000px scrollHeight
+    // stub makes the current check resolve false) so bottomChanged fires
+    // while no <app-nav> exists to update.
+    router.currentRoute = { name: 'Project', view: VIEW_TAGS.VIEW_PROJECT, meta: {} }
+    el.onBottom = true
+    el.shadowRoot.querySelector(COMPONENT_TAGS.APP_NAV)?.remove()
+    el.checkScroll()
+
+    // Same-state check on a non-home route → bottomChanged's else arm.
+    el.checkScroll()
+
+    // Nullish section tops → the ?? 600/1500 fallbacks; a same-state
+    // second check skips the nav write entirely (changed === false).
+    router.currentRoute = { name: ROUTE_NAMES.HOME, view: VIEW_TAGS.VIEW_HOME, meta: {} }
+    el._sectionsMeasured = true
+    el._aboutTop = null
+    el._contactTop = null
+    el.checkScroll()
+    el.checkScroll()
 
     globalThis.fetch = origFetch
   })

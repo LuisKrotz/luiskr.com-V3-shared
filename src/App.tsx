@@ -73,6 +73,8 @@ export class AppRoot extends BaseComponent {
   _contactTop = 1500
   _sectionsMeasured = false
   _lastMeasureAttempt = 0
+  /** Cached document height — refreshed by updateSectionTops on body resize. */
+  _scrollH = 0
   _loadedLang: string | null = null
   _introLoader: IntroLoader | null = null
   /** Watches document height so onBottom/activeSection never go stale. */

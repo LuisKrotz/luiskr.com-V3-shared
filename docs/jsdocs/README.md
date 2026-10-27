@@ -2100,6 +2100,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | File                                                                                                   | What it does                                                                    |
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
 | [`ast-string-extract.js`](shared\scripts\i18n/ast-string-extract.md)                                   | AST-based static analysis tool to detect repeated non-syntactic string literals |
+| [`patch-all-pages-search-themes.js`](shared\scripts\i18n/patch-all-pages-search-themes.md)             | —                                                                               |
 | [`patch-animation-descriptions.js`](shared\scripts\i18n/patch-animation-descriptions.md)               | Seeds the animated-element accessibility descriptions into                      |
 | [`patch-earth-playground-share-themes.js`](shared\scripts\i18n/patch-earth-playground-share-themes.md) | —                                                                               |
 | [`patch-earth-playground-translations.js`](shared\scripts\i18n/patch-earth-playground-translations.md) | —                                                                               |
@@ -2107,6 +2108,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`patch-ui-gaps-and-cyrillic.js`](shared\scripts\i18n/patch-ui-gaps-and-cyrillic.md)                   | —                                                                               |
 | [`seed-translations.js`](shared\scripts\i18n/seed-translations.md)                                     | —                                                                               |
 | [`upload-earth-playground-firebase.js`](shared\scripts\i18n/upload-earth-playground-firebase.md)       | —                                                                               |
+| [`upload-search-themes-firebase.js`](shared\scripts\i18n/upload-search-themes-firebase.md)             | —                                                                               |
 | [`upload-star-field-firebase.js`](shared\scripts\i18n/upload-star-field-firebase.md)                   | —                                                                               |
 
 ## Entry points
