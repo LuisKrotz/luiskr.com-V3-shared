@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * @file scroll-fps.mjs — mobile scroll frame-rate gate.
+ * @file scroll-fps.mjs — scroll frame-rate gate.
  *
  * Serves the production build (`vite preview`), then scrolls key routes
- * under iOS and Android device profiles with 4x CPU throttling while a
- * rAF ticker records per-frame deltas. Every route/profile pair must hold
- * `FPS_MIN` (default 60 fps — the user's stated floor); a lower average or
- * a p95 frame above one dropped frame (33.3ms) fails the gate.
+ * under iOS/Android mobile profiles (4x CPU throttling) and a desktop
+ * profile while a rAF ticker records per-frame deltas. Every
+ * route/profile pair must hold its floor — `FRAME_BUDGET.MOBILE_HZ`
+ * (120fps) on mobile, `FRAME_BUDGET.DESKTOP_HZ` (240fps) on desktop —
+ * and a p95 frame above one dropped frame fails the gate.
  *
  * Chrome resolution order: `$SCROLL_FPS_CHROME` →
  * `$PUPPETEER_EXECUTABLE_PATH` → the newest `~/.cache/puppeteer` install →
@@ -14,7 +15,8 @@
  * Chrome lib bundles keep working.
  *
  * Usage: `yarn test:fps` — requires a prior `yarn build` (preview serves
- * `dist/`). Tune via env: `FPS_MIN`, `FPS_PORT`, `FPS_ROUTES` (comma list).
+ * `dist/`). Tune via env: `FPS_MIN` (overrides every profile floor),
+ * `FPS_PORT`, `FPS_ROUTES` (comma list).
  */
 
 import { spawn, execFileSync } from 'node:child_process'
@@ -22,21 +24,55 @@ import { existsSync, readdirSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 import puppeteer from 'puppeteer-core'
+import { FRAME_BUDGET } from '../../../core/tokens/motion/frame-budget.ts'
 
 const PORT = Number(process.env.FPS_PORT || 4173)
 const BASE = `http://localhost:${PORT}`
-const FPS_MIN = Number(process.env.FPS_MIN || 60)
-const P95_MAX_MS = 33.3
+const FPS_MIN_OVERRIDE = Number(process.env.FPS_MIN || 0)
 const ROUTES = (process.env.FPS_ROUTES || '/,/portfolio/melissa').split(',')
-const VIEWPORT = { width: 390, height: 844, deviceScaleFactor: 3, isMobile: true, hasTouch: true }
-const CPU_THROTTLE = 4
+const MOBILE_VIEWPORT = {
+  width: 390,
+  height: 844,
+  deviceScaleFactor: 3,
+  isMobile: true,
+  hasTouch: true,
+}
+const DESKTOP_VIEWPORT = {
+  width: 1920,
+  height: 1080,
+  deviceScaleFactor: 1,
+  isMobile: false,
+  hasTouch: false,
+}
 const SCROLL_MS = 6000
 const NAV_TIMEOUT_MS = 90000
 
+// One dropped frame at the floor rate — a p95 beyond this means the
+// route janks under its own budget, not just misses the average.
+const droppedFrameMs = (hz) => 2000 / hz
+
 const PROFILES = {
-  ios: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
-  android:
-    'Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Mobile Safari/537.36',
+  ios: {
+    ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+    viewport: MOBILE_VIEWPORT,
+    throttle: 4,
+    minFps: FRAME_BUDGET.MOBILE_HZ,
+  },
+  android: {
+    ua: 'Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Mobile Safari/537.36',
+    viewport: MOBILE_VIEWPORT,
+    throttle: 4,
+    minFps: FRAME_BUDGET.MOBILE_HZ,
+  },
+  // Desktop runs unthrottled — the 240Hz floor already bounds the frame
+  // to ~4.16ms, and throttling on top of it measures the emulator, not
+  // the page.
+  desktop: {
+    ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36',
+    viewport: DESKTOP_VIEWPORT,
+    throttle: 1,
+    minFps: FRAME_BUDGET.DESKTOP_HZ,
+  },
 }
 
 /**
@@ -170,20 +206,31 @@ try {
     executablePath: chromePath,
     headless: 'new',
     env: { ...process.env, LD_LIBRARY_PATH: process.env.LD_LIBRARY_PATH || '' },
-    args: ['--no-sandbox', '--disable-dev-shm-usage'],
+    // Uncapped frame production — headless otherwise follows the host
+    // display's vsync (~144-165Hz here) and the 240Hz desktop floor
+    // could never be measured. Throttling still emulates slower CPUs.
+    args: [
+      '--no-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-frame-rate-limit',
+      '--disable-gpu-vsync',
+    ],
   })
 
-  for (const [name, ua] of Object.entries(PROFILES)) {
+  for (const [name, profile] of Object.entries(PROFILES)) {
+    const minFps = FPS_MIN_OVERRIDE || profile.minFps
+    const p95MaxMs = droppedFrameMs(minFps)
+
     for (const route of ROUTES) {
       const page = await browser.newPage()
 
       try {
-        await page.setViewport(VIEWPORT)
-        await page.setUserAgent(ua)
+        await page.setViewport(profile.viewport)
+        await page.setUserAgent(profile.ua)
 
         const client = await page.createCDPSession()
 
-        await client.send('Emulation.setCPUThrottlingRate', { rate: CPU_THROTTLE })
+        await client.send('Emulation.setCPUThrottlingRate', { rate: profile.throttle })
         await page.goto(`${BASE}${route}`, {
           waitUntil: 'domcontentloaded',
           timeout: NAV_TIMEOUT_MS,
@@ -191,13 +238,14 @@ try {
         await new Promise((resolve) => setTimeout(resolve, 8000))
 
         const metrics = summarize(await page.evaluate(collectScrollFrames, SCROLL_MS))
-        const pass = metrics.fps >= FPS_MIN && metrics.p95 <= P95_MAX_MS
+        const pass = metrics.fps >= minFps && metrics.p95 <= p95MaxMs
         console.log(
           `${pass ? 'PASS' : 'FAIL'} ${name} ${route} — fps=${metrics.fps} ` +
             `avg=${metrics.avg}ms p95=${metrics.p95}ms frames=${metrics.count}`
         )
 
-        if (!pass) failures.push(`${name} ${route} (${metrics.fps}fps, p95 ${metrics.p95}ms)`)
+        if (!pass)
+          failures.push(`${name} ${route} (${metrics.fps}fps < ${minFps}, p95 ${metrics.p95}ms)`)
       } finally {
         await page.close()
       }
@@ -214,7 +262,9 @@ try {
 }
 
 if (failures.length) {
-  console.error(`scroll-fps gate failed — below ${FPS_MIN}fps or p95>${P95_MAX_MS}ms:`)
+  console.error(
+    `scroll-fps gate failed — below its profile floor (mobile ${FRAME_BUDGET.MOBILE_HZ}fps, desktop ${FRAME_BUDGET.DESKTOP_HZ}fps):`
+  )
 
   for (const failure of failures) {
     console.error(`  - ${failure}`)
