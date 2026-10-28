@@ -685,6 +685,14 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
+| File                                                                                           | What it does                                           |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [`shared-observer-tails.test.js`](core\tests\coverage\utils\dom/shared-observer-tails.test.md) | Core-side coverage for the pooled IntersectionObserver |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
 | File                                                                                                     | What it does                                                                     |
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | [`corner-brackets-tails.test.js`](core\tests\coverage\utils\gpu/corner-brackets-tails.test.md)           | Coverage tail for utils/gpu/corner-brackets.ts — the                             |
@@ -1415,6 +1423,14 @@ _Shared primitives every surface builds on — no direct UI._
 | [`db.ts`](core\utils\data/db.md)                   | SWR-style data layer over Firebase RTDB.                    |
 | [`legal-links.ts`](core\utils\data/legal-links.md) | Builds the bundled legal link list (home / privacy / GDPR / |
 | [`sanitize.ts`](core\utils\data/sanitize.md)       | —                                                           |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
+| File                                                      | What it does                                       |
+| --------------------------------------------------------- | -------------------------------------------------- |
+| [`shared-observer.ts`](core\utils\dom/shared-observer.md) | Shared IntersectionObserver pool for media figures |
 
 ## Core engine
 
@@ -2409,14 +2425,13 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                                       | What it does                                                                                                    |
-| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| [`load.ts`](website\components\media\figure/load.md)                       | Media URL matrix + progressive loading for &lt;media-figure&gt;:                                                |
-| [`modal.ts`](website\components\media\figure/modal.md)                     | Expand-modal open for MediaFigure — commits the media descriptor to the store and deep-links the caption slug … |
-| [`mount.ts`](website\components\media\figure/mount.md)                     | Mount lifecycle for MediaFigure — GPU-layer promotion, store subscription, expand-click binding, hover-to-play… |
-| [`render.tsx`](website\components\media\figure/render.md)                  | JSX for MediaFigure — layered placeholder/thumb/high-res crossfade stack (or the muted looping video path) plu… |
-| [`shared-observer.ts`](website\components\media\figure/shared-observer.md) | Shared IntersectionObserver pool for media figures                                                              |
-| [`video.ts`](website\components\media\figure/video.md)                     | Video playback plumbing for &lt;media-figure&gt;: lazy &lt;source&gt;                                           |
+| File                                                      | What it does                                                                                                    |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [`load.ts`](website\components\media\figure/load.md)      | Media URL matrix + progressive loading for &lt;media-figure&gt;:                                                |
+| [`modal.ts`](website\components\media\figure/modal.md)    | Expand-modal open for MediaFigure — commits the media descriptor to the store and deep-links the caption slug … |
+| [`mount.ts`](website\components\media\figure/mount.md)    | Mount lifecycle for MediaFigure — GPU-layer promotion, store subscription, expand-click binding, hover-to-play… |
+| [`render.tsx`](website\components\media\figure/render.md) | JSX for MediaFigure — layered placeholder/thumb/high-res crossfade stack (or the muted looping video path) plu… |
+| [`video.ts`](website\components\media\figure/video.md)    | Video playback plumbing for &lt;media-figure&gt;: lazy &lt;source&gt;                                           |
 
 ## Entry points
 

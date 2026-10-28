@@ -1,11 +1,11 @@
-# `website\components\media\figure\shared-observer.ts`
+# `core\utils\dom\shared-observer.ts`
 
 Shared IntersectionObserver pool for media figures. A media
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Source**     | `src/website\components\media\figure\shared-observer.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle.  |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\dom\shared-observer.ts`                   |
+| **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
 
