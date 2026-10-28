@@ -24,9 +24,12 @@ describe('cross-file CSS var value consistency', () => {
     expect(ic).toMatch(/--mf-w:\s*calc\(90vw/)
     expect(chc).toMatch(/--mf-w:\s*calc\(90vw/)
   })
-  test('both agree on default --mf-h 70vh formula', () => {
+  test('internals keep the 70vh skeleton box; carousel-host defers to the published height', () => {
+    // Light-DOM skeleton figures keep a fixed fallback box; shadow-side
+    // carousel slides defer to --carousel-media-height and self-size by
+    // intrinsic aspect when it is unset — intentional divergence.
     expect(ic).toMatch(/--mf-h:\s*calc\(70vh/)
-    expect(chc).toMatch(/--mf-h:\s*calc\(70vh/)
+    expect(chc).toMatch(/--mf-h:\s*var\(--carousel-media-height\)/)
   })
   test('both use $space-6xl at 1024px --mf-w', () => {
     expect(ic).toMatch(/layout-1024[\s\S]*?--mf-w:\s*var\(--space-6xl\)/)
@@ -72,8 +75,11 @@ describe('cross-file CSS var value consistency', () => {
     expect(mfc).toMatch(/var\(--mf-w,\s*calc\(90vw/)
     expect(ic).toMatch(/--mf-w:\s*calc\(90vw/)
   })
-  test('media-figure.scss --mf-h fallback equals internals default formula', () => {
-    expect(mfc).toMatch(/var\(--mf-h,\s*calc\(70vh/)
+  test('media-figure.scss --mf-h falls back to auto while internals keeps the skeleton box', () => {
+    // The shadow placeholder defers to intrinsic aspect when --mf-h is
+    // unset (real slides); the light-DOM internals keep a fixed skeleton
+    // box for pre-upgrade markup — intentional divergence, not drift.
+    expect(mfc).toMatch(/var\(--mf-h,\s*auto/)
     expect(ic).toMatch(/--mf-h:\s*calc\(70vh/)
   })
   test('media-figure.scss --mf-max-w carries a vw-cap fallback for landscape', () => {

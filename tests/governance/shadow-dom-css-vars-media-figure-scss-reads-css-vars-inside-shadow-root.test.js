@@ -53,8 +53,11 @@ describe('media-figure.scss reads CSS vars inside Shadow Root', () => {
   test('--mf-w var has 90vw fallback', () => {
     expect(mfc).toMatch(/var\(--mf-w,\s*calc\(90vw/)
   })
-  test('--mf-h var has 70vh fallback', () => {
-    expect(mfc).toMatch(/var\(--mf-h,\s*calc\(70vh/)
+  test('--mf-h var falls back to auto (intrinsic aspect sizes the box)', () => {
+    // Unpublished --mf-h resolves to auto so the placeholder img's
+    // intrinsic width/height attrs drive the slide height — a fixed
+    // fallback pinned every unsized carousel to a wrong-height box.
+    expect(mfc).toMatch(/var\(--mf-h,\s*auto/)
   })
   test('--mf-w is consumed as a max-width cap (never a forced width)', () => {
     // Intrinsic-size contract: the placeholder keeps its natural box and the

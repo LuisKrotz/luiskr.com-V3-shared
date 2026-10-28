@@ -35,8 +35,10 @@ describe('carousel-host.scss redeclares CSS vars for nested media-figure', () =>
   test('default --mf-w is 90vw calc', () => {
     expect(chc).toMatch(/--mf-w:\s*calc\(90vw/)
   })
-  test('default --mf-h is 70vh calc', () => {
-    expect(chc).toMatch(/--mf-h:\s*calc\(70vh/)
+  test('default --mf-h defers to the published --carousel-media-height', () => {
+    // No literal fallback — an unset --mf-h lets the slide self-size from
+    // the placeholder img's intrinsic aspect (the wrong-height fix).
+    expect(chc).toMatch(/--mf-h:\s*var\(--carousel-media-height\)/)
   })
   test('--mf-max-w has no default (landscape-only so var() fallback works)', () => {
     expect(chc).not.toMatch(/--mf-max-w:\s*none/)
@@ -44,8 +46,8 @@ describe('carousel-host.scss redeclares CSS vars for nested media-figure', () =>
   test('768px --mf-w is 90vw calc', () => {
     expect(chc).toMatch(/layout-768[\s\S]*?--mf-w:\s*calc\(90vw/)
   })
-  test('768px --mf-h is 70vh calc', () => {
-    expect(chc).toMatch(/layout-768[\s\S]*?--mf-h:\s*calc\(70vh/)
+  test('768px --mf-h defers to the published --carousel-media-height', () => {
+    expect(chc).toMatch(/layout-768[\s\S]*?--mf-h:\s*var\(--carousel-media-height\)/)
   })
   test('1024px --mf-w is $space-6xl', () => {
     expect(chc).toMatch(/layout-1024[\s\S]*?--mf-w:\s*var\(--space-6xl\)/)
