@@ -55,8 +55,10 @@ describe('Lighthouse CI configuration', () => {
     const assertions =
       matrix.find((e) => e.matchingUrlPattern === '^(?!.*not-found).*$')?.assertions || {}
 
+    // The performance category is warn-level (findings surface without
+    // gating the deploy); the other categories keep the hard error floor.
     expect(assertions['categories:performance']).toEqual(
-      expect.arrayContaining([WINDOW_EVENTS.ERROR, expect.objectContaining({ minScore: 0.8 })])
+      expect.arrayContaining(['warn', expect.objectContaining({ minScore: 0.8 })])
     )
 
     for (const audit of [
