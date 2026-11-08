@@ -18,14 +18,19 @@
  */
 export const COOP = 'Cross-Origin-Opener-Policy'
 
+/** Header name for the embedder policy — mirrors COOP above. */
 export const COEP = 'Cross-Origin-Embedder-Policy'
 
+/** COOP for all site routes — isolates the browsing context group. */
 export const SITE_COOP_VALUE = 'same-origin'
 
+/** COEP for site routes — enables crossOriginIsolated (SAB/threaded WASM). */
 export const SITE_COEP_VALUE = 'credentialless'
 
+/** COOP for /cms — allow-popups keeps the Firebase auth popup flow working. */
 export const CMS_COOP_VALUE = 'same-origin-allow-popups'
 
+/** COEP for /cms — CMS iframes third-party auth UIs it cannot declare. */
 export const CMS_COEP_VALUE = 'unsafe-none'
 
 /** Routes that must stay non-isolated (CMS auth iframes + popups). */

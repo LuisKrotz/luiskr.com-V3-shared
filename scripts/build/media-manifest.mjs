@@ -85,6 +85,8 @@ export async function fetchMediaManifest() {
   try {
     let pageToken = ''
 
+    // Page through the listing until nextPageToken stops — a 1000-item
+    // page ceiling means several round-trips for the full bucket.
     for (;;) {
       const url =
         `${LIST_ENDPOINT}?prefix=${encodeURIComponent(MEDIA_PREFIX)}` +
@@ -97,6 +99,8 @@ export async function fetchMediaManifest() {
 
       const body = await res.json()
 
+      // Keys arrive under the prefix — strip it so the Set holds
+      // the same relative names resolveMediaUrls composes.
       for (const item of body.items || []) {
         if (item.name) keys.add(String(item.name).slice(MEDIA_PREFIX.length))
       }
@@ -108,6 +112,7 @@ export async function fetchMediaManifest() {
 
     return keys
   } catch {
+    // Network/parse failure → null so callers fall back to convention.
     return null
   }
 }

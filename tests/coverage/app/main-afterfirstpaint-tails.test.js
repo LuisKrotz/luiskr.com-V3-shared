@@ -30,6 +30,8 @@ jest.unstable_mockModule('firebase/database', () => ({
   remove: jest.fn(async () => {}),
 }))
 
+// Minimal router stub — init/subscribe no-op so main.js boots without a
+// real route table.
 const mockRouter = { init: () => {}, subscribe: () => () => {}, currentRoute: null }
 
 jest.unstable_mockModule('@core/router/router.js', () => ({
@@ -47,8 +49,11 @@ jest.unstable_mockModule('@core/utils/wasm/wasm-css.js', () => ({}))
 jest.unstable_mockModule('@website/views/home/Home.js', () => ({}))
 jest.unstable_mockModule('@website/views/project/Project.js', () => ({}))
 
+// The PerformanceObserver entry name main.js arms its paint listener on.
 const PAINT_ENTRY = 'first-contentful-paint'
 
+// Idempotent app bootstrap — imports main.js once so its listeners
+// register exactly once per test.
 const ensureApp = () => {
   // window.router survives resetModules across tests — clear it so
   // deferred-mount assertions see only this test's boot.
@@ -92,6 +97,7 @@ const installFakePO = (observeImpl) => {
   return { instances, restore: () => (globalThis.PerformanceObserver = saved) }
 }
 
+// Builds a fake PerformanceObserver entry list for the given entry names.
 const entries = (...names) => ({ getEntries: () => names.map((name) => ({ name })) })
 
 describe('main.js afterFirstPaint tails', () => {

@@ -14,8 +14,14 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..')
+
+// Emit targets — models/ serves the tiny graphs, ort/ the runtime
+// binaries the webgpu bundle's wasmPaths points at.
 const MODELS_DIR = join(ROOT, 'website/public/models')
+
 const ORT_DIR = join(ROOT, 'website/public/ort')
+
+// ORT distribution inside node_modules — the copy source.
 const ORT_DIST = join(ROOT, 'node_modules/onnxruntime-web/dist')
 
 // ── Minimal protobuf writer (ONNX = proto3) ─────────────────────────────────
@@ -367,22 +373,31 @@ export const genOnnxModels = () => {
   mkdirSync(MODELS_DIR, { recursive: true })
   mkdirSync(ORT_DIR, { recursive: true })
 
+  // ── Models — serialize each graph and write <slug>.onnx ────────
   for (const [slug, build] of Object.entries(MODELS)) {
     const buf = build()
+
     const file = join(MODELS_DIR, `${slug}.onnx`)
 
     writeFileSync(file, buf)
+
     written.push(file)
   }
 
+  // ── ORT runtime binaries — copy once, skip existing ────────────
   for (const f of ORT_FILES) {
     const src = join(ORT_DIST, f)
+
     const dst = join(ORT_DIR, f)
 
+    // Missing source → the onnxruntime-web package isn't installed;
+    // skip quietly (the JS fallback tier still works).
     if (!existsSync(src)) continue
+
     if (existsSync(dst)) continue // immutable artifact — never churns
 
     copyFileSync(src, dst)
+
     written.push(dst)
   }
 

@@ -202,6 +202,11 @@ const selfCheckLocalhost = () => {
   request.on('error', (err) => reportPortConflict(err.message))
 }
 
+/**
+ * Boots the h2 secure server: certs, security headers, clean-URL 301s,
+ * precompressed-sibling serving, dynamic compress for sibling-less text,
+ * and the SPA fallback — the Firebase Hosting shape, locally.
+ */
 const server = () => {
   ensureCert()
 

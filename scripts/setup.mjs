@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /**
- * Guided dev-environment installer — `yarn setup`. Cross-platform
+ * @file setup.mjs
+ * @description Guided dev-environment installer — `yarn setup`. Cross-platform
  * (Node-only, no shell): verifies Node/Yarn/Git, initialises git
  * submodules, installs dependencies, wires git hooks, installs the CLI
  * toolchain (firebase-tools, Google Cloud SDK), repairs a partial rust
  * wasm toolchain (wasm32 target, wasm-pack) and the media-convert
- * toolchain (ffmpeg/ImageMagick/mozjpeg), then prints the exact next
+ * toolchain (ffmpeg/ImageMagick/mozjpeg/poppler), then prints the exact next
  * steps. Read-only checks never mutate; installs are the standard yarn +
  * package-manager operations for the detected platform. On Windows the
  * persisted registry PATH is merged into the process env first so tools
@@ -20,7 +21,11 @@ import path from 'node:path'
 import url from 'node:url'
 
 const here = path.dirname(url.fileURLToPath(import.meta.url))
+
+// Repo root — setup.mjs sits at shared/scripts/.
 const root = path.resolve(here, '..', '..')
+
+// --check reports without mutating — the read-only audit mode.
 const checkOnly = process.argv.includes('--check')
 
 const ok = (label) => console.log(`  ✓ ${label}`)
@@ -271,6 +276,7 @@ ok(`ffmpeg: ${report.tools.ffmpeg ? 'found' : 'missing'}`)
 ok(`ffprobe: ${report.tools.ffprobe ? 'found' : 'missing'}`)
 ok(`imagemagick: ${report.tools.magick || report.tools.convert ? 'found' : 'missing (optional)'}`)
 ok(`mozjpeg cjpeg: ${report.tools.cjpeg ? 'found' : 'missing (optional)'}`)
+ok(`poppler pdftoppm: ${report.tools.pdftoppm ? 'found' : 'missing (optional — PDF conversion)'}`)
 
 if (checkOnly || !report.plan.manual.length) {
   if (report.plan.manual.length) {

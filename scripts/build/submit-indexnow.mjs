@@ -195,9 +195,14 @@ const submitParam = async (urls, dryRun) => {
 
   if (dryRun) return urls.map((url) => ({ url, status: DRY_STATUS }))
 
+  // Bounded batches of PARAM_CONCURRENCY — every batch resolves
+  // before the next launches (one big Promise.all would open
+  // thousands of sockets at once).
   for (let i = 0; i < urls.length; i += PARAM_CONCURRENCY) {
     results.push(...(await Promise.all(urls.slice(i, i + PARAM_CONCURRENCY).map(submitParamOne))))
 
+    // Progress heartbeat every 50 batches — the param pass is the
+    // long pole (11k+ pings).
     if ((i / PARAM_CONCURRENCY) % 50 === 0) {
       console.log(`IndexNow param: ${Math.min(i + PARAM_CONCURRENCY, urls.length)}/${urls.length}`)
     }
@@ -206,17 +211,31 @@ const submitParam = async (urls, dryRun) => {
   return results
 }
 
+/**
+ * `run` — the submission pipeline: resolve flags → load inventory →
+ * verify the key file → run the selected form(s) → write the report.
+ * No flag = both forms (json AND param for every route).
+ */
 async function run() {
   const argv = process.argv.slice(2)
+
   const dryRun = argv.includes(FLAG_DRY_RUN)
+
+  // Form selection — a lone flag runs only that form; no flag or
+  // both flags runs both.
   const runJson = argv.includes(FLAG_JSON) || !argv.includes(FLAG_PARAM)
+
   const runParam = argv.includes(FLAG_PARAM) || !argv.includes(FLAG_JSON)
 
   const { file, urls } = loadUrlList()
 
   if (!urls.length) {
+    // No inventory = no submission — a missing artifact fails the
+    // step so the deploy can't silently skip notification.
     console.error('IndexNow: no canonical URL inventory found (dist/meta/urllist.txt missing)')
+
     process.exitCode = 1
+
     return
   }
 
@@ -224,17 +243,23 @@ async function run() {
     `IndexNow: ${urls.length} routes from ${path.relative(REPO_ROOT, file)}${dryRun ? ' (dry run)' : ''}`
   )
 
+  // Key-file preflight — skipped under --dry-run (no network at all).
   const keyFileLive = dryRun ? null : await verifyKeyFile()
 
   if (keyFileLive === false) {
+    // A failed check only warns — the endpoint is the final arbiter.
     console.error(`IndexNow: key check failed at ${INDEXNOW.KEY_LOCATION} — submitting anyway`)
   }
 
   const json = runJson ? await submitJson(urls, dryRun) : null
+
   const paramRows = runParam ? await submitParam(urls, dryRun) : null
+
+  // Param failures = anything that isn't 200/202/dry-run.
   const failures = (paramRows || []).filter(
     (r) => r.status !== 200 && r.status !== 202 && r.status !== DRY_STATUS
   )
+
   const report = {
     submittedAt: new Date().toISOString(),
     dryRun,
@@ -252,6 +277,7 @@ async function run() {
   }
 
   fs.mkdirSync(path.dirname(REPORT_PATH), { recursive: true })
+
   fs.writeFileSync(REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`)
 
   console.log(

@@ -26,10 +26,20 @@ import { join } from 'node:path'
 import puppeteer from 'puppeteer-core'
 import { FRAME_BUDGET } from '../../../core/tokens/motion/frame-budget.ts'
 
+// Preview server port — vite preview's default unless overridden.
 const PORT = Number(process.env.FPS_PORT || 4173)
+
 const BASE = `http://localhost:${PORT}`
+
+// FPS_MIN forces a single floor over every profile — tuning escape
+// hatch for hardware comparisons.
 const FPS_MIN_OVERRIDE = Number(process.env.FPS_MIN || 0)
+
+// Default routes: home + a media-heavy portfolio page (the two
+// shapes that stress the scroll path differently).
 const ROUTES = (process.env.FPS_ROUTES || '/,/portfolio/melissa').split(',')
+
+// iPhone-class viewport — 390×844 @3x with touch.
 const MOBILE_VIEWPORT = {
   width: 390,
   height: 844,
@@ -37,6 +47,8 @@ const MOBILE_VIEWPORT = {
   isMobile: true,
   hasTouch: true,
 }
+
+// 1080p desktop viewport — the 240Hz floor's reference surface.
 const DESKTOP_VIEWPORT = {
   width: 1920,
   height: 1080,
@@ -44,7 +56,11 @@ const DESKTOP_VIEWPORT = {
   isMobile: false,
   hasTouch: false,
 }
+
+// Scroll duration — long enough for several hundred frames of data.
 const SCROLL_MS = 6000
+
+// Navigation timeout — generous for cold preview servers.
 const NAV_TIMEOUT_MS = 90000
 
 // One dropped frame at the floor rate — a p95 beyond this means the
@@ -220,12 +236,16 @@ function collectScrollFrames(scrollMs) {
  * @returns {{ fps: number, avg: number, p95: number, count: number }}
  */
 function summarize(deltas) {
+  // Drop non-positive and >2s deltas — tab-switch stalls and the
+  // trailing buffer aren't frame data.
   const valid = deltas.filter((d) => d > 0 && d < 2000).sort((a, b) => a - b)
 
   if (!valid.length) return { fps: 0, avg: 0, p95: 0, count: 0 }
 
   const avg = valid.reduce((a, b) => a + b, 0) / valid.length
 
+  // fps derives from the mean delta; p95 is the sorted index — the
+  // tail that catches periodic jank the average hides.
   return {
     fps: +(1000 / avg).toFixed(1),
     avg: +avg.toFixed(1),
@@ -234,15 +254,20 @@ function summarize(deltas) {
   }
 }
 
+// Both held for the finally — the gate must release the preview
+// server and browser on any failure path.
 let server = null
+
 let browser = null
 
+// Route/profile pairs that missed their floor — reported at the end.
 const failures = []
 
 try {
   const chromePath = resolveChrome()
 
   server = await startServer()
+
   browser = await puppeteer.launch({
     executablePath: chromePath,
     headless: 'new',
@@ -265,25 +290,40 @@ try {
 
   for (const [name, profile] of Object.entries(PROFILES)) {
     for (const route of ROUTES) {
+      // Enforced floor + its one-dropped-frame p95 ceiling for this
+      // route/profile pair.
       const minFps = routeMinFps(profile, route)
+
       const p95MaxMs = droppedFrameMs(minFps)
+
       const page = await browser.newPage()
 
       try {
         await page.setViewport(profile.viewport)
+
         await page.setUserAgent(profile.ua)
 
+        // CPU throttle via CDP — puppeteer's emulate() doesn't cover
+        // throttling rates.
         const client = await page.createCDPSession()
 
         await client.send('Emulation.setCPUThrottlingRate', { rate: profile.throttle })
+
         await page.goto(`${BASE}${route}`, {
           waitUntil: 'domcontentloaded',
           timeout: NAV_TIMEOUT_MS,
         })
+
+        // Warmup — let hydration, fonts, and lazy mounts settle so
+        // the measured scroll reflects steady-state, not boot churn.
         await new Promise((resolve) => setTimeout(resolve, 8000))
 
         const metrics = summarize(await page.evaluate(collectScrollFrames, SCROLL_MS))
+
+        // Both halves must hold: average at/above the floor AND the
+        // p95 inside one dropped frame.
         const pass = metrics.fps >= minFps && metrics.p95 <= p95MaxMs
+
         console.log(
           `${pass ? 'PASS' : 'FAIL'} ${name} ${route} — fps=${metrics.fps} ` +
             `avg=${metrics.avg}ms p95=${metrics.p95}ms frames=${metrics.count}`
@@ -297,6 +337,8 @@ try {
     }
   }
 } finally {
+  // Always release both processes — a stuck preview or headless
+  // Chrome holds the port and the next run fails its own probe.
   if (browser) {
     await browser.close()
 

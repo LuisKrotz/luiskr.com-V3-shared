@@ -135,19 +135,25 @@ export const mediaItemsOf = (project) => {
  */
 export const mediaRowsOf = (project) => {
   const rows = []
+
+  // base slug → occurrence count — the dedupe counter for -2/-3
+  // suffixes (document order decides which occurrence keeps base).
   const seen = new Map()
 
   for (const m of mediaItemsOf(project)) {
+    // Unlabelled media gets no deep link — captions are the URL source.
     if (!m.label) continue
 
     const base = capSlug(slugify(m.label))
 
+    // A label that slugifies to nothing (punctuation-only) drops out.
     if (!base) continue
 
     const ordinal = seen.get(base) ?? 0
 
     seen.set(base, ordinal + 1)
 
+    // First occurrence keeps the bare slug; repeats gain -2, -3, …
     rows.push({ slug: ordinal ? `${base}-${ordinal + 1}` : base, label: m.label, media: m })
   }
 
@@ -165,11 +171,15 @@ export const mediaRowsOf = (project) => {
  */
 export const llmTreePaths = (pathname) => {
   const m = pathname.match(LOCALE_PREFIX_RE)
+
+  // Strip the locale prefix when present; the tree root ('/') and
+  // bare locale roots ('/br') both land on 'index'.
   const rest = m
     ? pathname.slice(m[1].length + 1) || '/index'
     : pathname === '/'
       ? '/index'
       : pathname
+
   const base = `${LLM_TREE_ROOT}/${m ? m[1] : 'en'}${rest}`
 
   return { base, md: `${base}.md`, json: `${base}.json` }

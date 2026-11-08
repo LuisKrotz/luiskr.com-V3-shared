@@ -15,6 +15,8 @@ import { TRANSLATION_KEYS } from '@core/tokens/routes/translation-keys.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
+// Read the committed database snapshot once — same payload the real
+// i18n-fallback plugin inlines at build time.
 const translations = JSON.parse(readFileSync(path.join(root, 'database.json'), 'utf8')).translations
 
 const en = translations.en

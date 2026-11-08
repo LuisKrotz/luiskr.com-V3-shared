@@ -1234,6 +1234,9 @@ export async function prefetchShareDims(urls) {
   for (const [url, dims] of probed) shareMediaDims.set(url, dims)
 }
 
+/** Fetches live translations from RTDB before prerendering — retries with
+ * timeout per attempt, since this fetch decides whether pages carry live
+ * CMS copy or the stale snapshot. */
 export async function prefetchTranslations() {
   const url = `${FIREBASE_DB}/translations.json`
   const startedAt = Date.now()

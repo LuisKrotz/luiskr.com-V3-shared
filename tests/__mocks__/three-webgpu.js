@@ -12,13 +12,20 @@ import { __chain as chain } from './three.js'
 let __rendererInitDelayMs = 0
 let __pipelineCtorFails = false
 
+/** Test hook: delays renderer.init() by ms — lets a mid-boot destroy land. */
 export const __setRendererInitDelay = (ms) => {
   __rendererInitDelayMs = ms
 }
+/** Test hook: makes the RenderPipeline ctor throw — exercises fallbacks. */
 export const __setPipelineCtorFails = (v) => {
   __pipelineCtorFails = v
 }
 
+/**
+ * WebGPU renderer stub — records render calls and exposes the
+ * backend.device.queue surface engine code touches; init honors the
+ * __setRendererInitDelay hook so boot-race branches stay reachable.
+ */
 export class WebGPURenderer {
   constructor(opts) {
     this.opts = opts
@@ -44,6 +51,10 @@ export class WebGPURenderer {
   }
 }
 
+/**
+ * Render-pipeline stub — counts render() calls; the ctor throws when the
+ * __setPipelineCtorFails hook is armed so fallback paths run.
+ */
 export class RenderPipeline {
   constructor() {
     if (__pipelineCtorFails) throw new Error('pipeline-disabled')

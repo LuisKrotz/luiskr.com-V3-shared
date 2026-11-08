@@ -8,6 +8,7 @@ import { waitFor } from '@tests/fixtures/test-constants.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { CMS_IDS } from '@core/tokens/ids/cms.js'
 
+/** Captures registerComponent calls from the booted entry point. */
 const registerMock = jest.fn()
 
 jest.unstable_mockModule('@core/utils/service-worker.js', () => ({
@@ -15,6 +16,7 @@ jest.unstable_mockModule('@core/utils/service-worker.js', () => ({
   dropStaleServiceWorkers: jest.fn(),
 }))
 
+/** Collects firebase auth-state listeners so tests can fire them. */
 const authCallbacks = []
 
 jest.unstable_mockModule('@core/firebase.js', () => ({
@@ -36,6 +38,7 @@ jest.unstable_mockModule('firebase/database', () => ({
   remove: jest.fn(async () => {}),
 }))
 
+/** Router stub — boot code touches init/subscribe/currentRoute only. */
 const mockRouter = { init: () => {}, subscribe: () => () => {}, currentRoute: null }
 
 jest.unstable_mockModule('@core/router/router.js', () => ({

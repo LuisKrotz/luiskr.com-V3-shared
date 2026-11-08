@@ -312,7 +312,7 @@ export function mediaConvertPlugin() {
       .then((t) =>
         console.log(
           `[media-convert] ready — ffmpeg:${t.ffmpeg} ffprobe:${t.ffprobe} ` +
-            `imagemagick:${t.magick || t.convert} cjpeg:${t.cjpeg}`
+            `imagemagick:${t.magick || t.convert} cjpeg:${t.cjpeg} pdftoppm:${t.pdftoppm}`
         )
       )
       .catch((e) => console.warn(`[media-convert] ${e.message}`))

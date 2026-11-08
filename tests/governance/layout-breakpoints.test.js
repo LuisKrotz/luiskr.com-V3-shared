@@ -26,7 +26,9 @@ import { COVER_DIMENSIONS } from '@core/tokens/media/dimensions.js'
 import { SPACE } from '@core/tokens/layout/space.js'
 import { LAYOUT } from '@core/tokens/layout/masonry.js'
 
-// Derive GRID_GAP from SPACE (Fibonacci scale matches design system)
+// Derive GRID_GAP from SPACE (Fibonacci scale matches design system) —
+// the per-breakpoint outer gutter the Vue reference bakes into its grid;
+// assertions compare the calc functions' output against these constants.
 const GRID_GAP = {
   320: SPACE.XL, // 21
   768: SPACE['3XL'], // 55

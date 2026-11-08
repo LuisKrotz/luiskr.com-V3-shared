@@ -39,6 +39,7 @@ import { LABEL_TEXT } from '@core/tokens/strings/text.js'
 import { MOUSE_EVENTS } from '@core/tokens/events/dom.js'
 import { PREF_STORAGE_KEYS } from '@core/tokens/data/storage.js'
 
+// Repo-root resolution — every scan below paths from the workspace root.
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.join(__dirname, '..', '..', '..')
 
@@ -49,6 +50,9 @@ const AREA_DIRS = ['shared/src', DB_PATHS.CORE_SEGMENT, 'website', 'cms', 'exper
 const areaRoots = AREA_DIRS.map((d) => path.join(rootDir, d))
 const coreDir = path.join(rootDir, DB_PATHS.CORE_SEGMENT)
 const websiteDir = path.join(rootDir, 'website')
+
+// Collectors: component scss (excluding base/ sheets) + all source files
+// matching a given extension set across the five area roots.
 const componentScssFiles = () =>
   areaRoots
     .flatMap((dir) => getAllFiles(dir, ['.scss']))
@@ -72,6 +76,7 @@ const SKIP_DIRS = new Set([
   'public',
 ])
 
+// Recursive file walk honoring SKIP_DIRS — the traversal every scan uses.
 function getAllFiles(dir, exts = ['.scss', '.css', '.js', '.ts', '.tsx']) {
   const results = []
   const list = fs.readdirSync(dir, { withFileTypes: true })

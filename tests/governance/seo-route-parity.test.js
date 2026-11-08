@@ -37,6 +37,7 @@ import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 import { scanManifest } from '../../build/docs/scan.mjs'
 import { localize } from '../../scripts/build/build-locale-pages.mjs'
 
+// Where the build emits per-locale sitemap + robots artifacts.
 const META_DIR = path.join(ROOT_DIR, 'website', 'public', 'meta')
 
 /** Absolute site origin every generated artifact is built against. */
@@ -46,8 +47,10 @@ const SITE = 'https://luiskr.com'
  * floor guards accidental mass-drops, not volume. */
 const MIN_SITEMAP_URLS = 500
 
+// Non-EN locale slugs — parity assertions run per localized sitemap.
 const NON_EN = Object.keys(LANG_SLUGS).filter((loc) => loc !== 'en')
 
+// Synchronous file reader — the fixtures are small generated XML.
 const read = (p) => fs.readFileSync(p, 'utf-8')
 
 /** Extracts every `<loc>` URL (absolute) from a sitemap document. */

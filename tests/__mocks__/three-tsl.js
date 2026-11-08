@@ -6,6 +6,7 @@
  */
 import { __chain as chain } from './three.js'
 
+/** Every TSL helper name the engine code can import — each maps to a chainable. */
 const NAMES = [
   'texture',
   'normalMap',
@@ -72,6 +73,8 @@ const NAMES = [
 
 const api = {}
 
+// Every named export is the same chainable shape — the graph math
+// (mul/add/mix calls on returned nodes) evaluates via the proxy.
 NAMES.forEach((name) => {
   api[name] = chain()
 })

@@ -27,6 +27,7 @@ import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { DATA_MUTATIONS, MODAL_MUTATIONS, PREF_MUTATIONS } from '@core/tokens/events/mutations.js'
 import { CMS_PROJECTS_CLASSES } from '@cms/tokens.js'
 
+/** Rewrites the URL so debug-param branches (webGLMode etc.) activate. */
 const setSearch = (s) => window.history.replaceState(null, '', s)
 
 describe('utils tails', () => {

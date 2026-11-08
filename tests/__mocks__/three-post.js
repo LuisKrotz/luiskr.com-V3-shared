@@ -10,6 +10,12 @@ export const bloom = chain()
 export const chromaticAberration = chain()
 export const film = chain()
 
+/**
+ * OrbitControls stub — records listeners so suites can dispatch control
+ * events ('start'/'end'), exposes target/angles/distance getters, and
+ * keeps the last instance on `OrbitControls.lastInstance` for
+ * camera-state assertions.
+ */
 export class OrbitControls {
   /** Test hook — most recent instance (camera-state assertions). */
   static lastInstance = null

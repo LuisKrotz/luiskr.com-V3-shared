@@ -48,6 +48,8 @@ const describe = (raw, trailing) => {
 const lines = readFileSync(file, 'utf8').split('\n')
 const out = []
 
+// Single pass: each `$var:` declaration gains a /// doc line unless one
+// already precedes it (idempotent), and trailing `// notes` fold in.
 for (const line of lines) {
   const m = line.match(/^(\$[\w-]+):\s*(.+?);\s*(?:\/\/\s*(.*))?$/)
 

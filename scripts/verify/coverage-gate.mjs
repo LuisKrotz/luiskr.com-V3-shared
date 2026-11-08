@@ -35,10 +35,17 @@ const MODULES = Object.fromEntries(
   discoverModules().map((m) => [m.name, { root: m.root, src: m.src }])
 )
 
+// Positional args select modules; --flags are reserved for future
+// options (filtered out so they can't be mistaken for names).
 const only = process.argv.slice(2).filter((a) => !a.startsWith('--'))
+
 const selected = Object.entries(MODULES).filter(([n]) => !only.length || only.includes(n))
 
+// The project rule — 100% on every metric for every file.
 const THRESHOLD = 100
+
+// Opt-out pragma — an absent file with this comment is a deliberate
+// exclusion, not a 0% accident.
 const IGNORE_RE = /istanbul ignore file/
 
 // Generated trees inside module dirs are build output or test code, not
@@ -46,11 +53,14 @@ const IGNORE_RE = /istanbul ignore file/
 // itself are never coverage targets.
 const SKIP_DIRS = new Set(['dist', 'node_modules', 'tests', 'reports', 'public'])
 
+/** Percent covered — an empty metric (0 constructs) counts as 100%. */
 const pct = (covered, total) => (total === 0 ? 100 : (covered / total) * 100)
 
+/** Recursive .ts/.tsx/.js collector honoring the SKIP_DIRS set. */
 const listSrc = (dir) =>
   fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
     const p = path.join(dir, e.name)
+
     return e.isDirectory()
       ? SKIP_DIRS.has(e.name)
         ? []
@@ -60,23 +70,35 @@ const listSrc = (dir) =>
         : []
   })
 
+// Any module failure flips this — checked once at the end so every
+// module reports before the gate exits.
 let failed = false
 
 for (const [name, { root, src: srcDirs }] of selected) {
+  // The module's own report — written by its jest run.
   const file = path.join(ROOT, root, 'reports', 'coverage', 'coverage-final.json')
 
   if (!fs.existsSync(file)) {
+    // No report at all means the suite never ran — a gate miss,
+    // not a pass.
     console.error(
       `coverage-gate[${name}]: ${path.relative(ROOT, file)} not found — run the module's coverage suite first`
     )
+
     failed = true
+
     continue
   }
 
   const data = JSON.parse(fs.readFileSync(file, 'utf-8'))
+
   const uncovered = []
 
+  // ── Per-file metric check ─────────────────────────────────────
   for (const [f, cov] of Object.entries(data)) {
+    // Istanbul's three metric maps: s = statement-id → hits, b =
+    // branch-id → [arm hits], f = function-id → hits. A construct
+    // counts covered when its hit count is > 0.
     const metrics = {
       statements: pct(
         Object.keys(cov.s || {}).filter((k) => cov.s[k] > 0).length,
@@ -95,6 +117,7 @@ for (const [name, { root, src: srcDirs }] of selected) {
     }
 
     const failing = Object.entries(metrics).filter(([, v]) => v < THRESHOLD)
+
     if (failing.length) {
       uncovered.push(
         `${path.relative(ROOT, f)} — ${failing.map(([k, v]) => `${k} ${v.toFixed(1)}%`).join(', ')}`
@@ -102,25 +125,35 @@ for (const [name, { root, src: srcDirs }] of selected) {
     }
   }
 
-  // Absent-file check scoped to this module's source roots.
+  // ── Absent-file check scoped to this module's source roots ────
+  // Files missing from the report entirely have silently 0%.
   const inReport = new Set(Object.keys(data).map((f) => path.resolve(f)))
+
   const absent = srcDirs
     .flatMap((d) => listSrc(path.join(ROOT, d)))
     .filter((f) => !inReport.has(path.resolve(f)) && !IGNORE_RE.test(fs.readFileSync(f, 'utf-8')))
 
   if (uncovered.length || absent.length) {
     failed = true
+
     if (uncovered.length) {
+      // Cap the printout at 40 — a mass failure fills pages anyway.
       console.error(`✗ coverage-gate[${name}]: ${uncovered.length} files below ${THRESHOLD}%:`)
+
       for (const u of uncovered.slice(0, 40)) console.error(`  ${u}`)
+
       if (uncovered.length > 40) console.error(`  …and ${uncovered.length - 40} more`)
     }
+
     if (absent.length) {
       console.error(
         `✗ coverage-gate[${name}]: ${absent.length} src files absent from the report (0% coverage):`
       )
+
       for (const f of absent.slice(0, 40)) console.error(`  ${path.relative(ROOT, f)}`)
+
       if (absent.length > 40) console.error(`  …and ${absent.length - 40} more`)
+
       console.error('  → add tests, or an `istanbul ignore file` pragma with justification')
     }
   } else {

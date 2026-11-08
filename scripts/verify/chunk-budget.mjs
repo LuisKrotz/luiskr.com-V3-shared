@@ -43,8 +43,10 @@ const EXCEPTIONS_FILE = path.join(ROOT, 'chunk-budget-exceptions.json')
 /** Hard caps on emitted file size (bytes). */
 const BUDGETS = { js: 50 * 1024, css: 32 * 1024 }
 
+/** Reads the justified-exceptions list; [] when the file is absent. */
 const loadExceptions = () => {
   if (!fs.existsSync(EXCEPTIONS_FILE)) return []
+
   return JSON.parse(fs.readFileSync(EXCEPTIONS_FILE, 'utf-8')).exceptions || []
 }
 
@@ -55,6 +57,10 @@ const loadExceptions = () => {
  */
 const nameKey = (file) => file.replace(/-[A-Za-z0-9_-]{8}\.(js|css)$/, '')
 
+/**
+ * Tests one emitted file name against the exception table — a `kind: '*'`
+ * entry covers both extensions.
+ */
 const isExcepted = (file, kind, exceptions) => {
   const key = nameKey(file)
 
@@ -89,6 +95,9 @@ const violations = []
 const exempted = []
 let scanned = 0
 
+// Scan pass — every emitted file is classified within-budget / exempted /
+// violation; the report records all three so the CMS Build tab shows the
+// full picture, not just failures.
 for (const file of files) {
   const kind = file.endsWith('.css') ? 'css' : 'js'
   const size = fs.statSync(file).size

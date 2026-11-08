@@ -14,8 +14,10 @@ import { ROUTE_NAMES, SECTIONS } from '@core/constants.js'
 import { SECTION_IDS } from '@core/tokens/ids/sections.js'
 import { deepQuerySelector } from '@core/utils/dom.js'
 
+// Microtask+timer flush — mount/store effects settle across macrotasks.
 const flush = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
+// Teardown registry — each mount pushes its unmount, afterEach runs all.
 let cleanups = []
 
 beforeEach(() => {
@@ -28,6 +30,8 @@ afterEach(() => {
   cleanups = []
 })
 
+// Swaps global fetch for a canned-ok stub and returns the original —
+// the app's boot fetches resolve instantly without network.
 const stableFetch = () => {
   const orig = globalThis.fetch
 
@@ -36,8 +40,10 @@ const stableFetch = () => {
   return orig
 }
 
+// Invalid-locale fixture — exercises the unknown-locale fallback arm.
 const _BAD_LOCALE = 'xx'
 
+// Mounts an <app-nav> element and registers its teardown.
 const _mountNav = () => {
   const el = document.createElement(COMPONENT_TAGS.APP_NAV)
 
@@ -46,6 +52,7 @@ const _mountNav = () => {
   return el
 }
 
+// Dispatches a window keydown with the given key — keyboard-arm trigger.
 const _keydown = (key) =>
   window.dispatchEvent(new window.KeyboardEvent(KEYBOARD_EVENTS.KEYDOWN, { key }))
 

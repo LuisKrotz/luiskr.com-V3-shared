@@ -23,8 +23,10 @@ import { NAV_BURGER_CLASSES, NAV_CLASSES, NAV_MENU_CLASSES } from '@core/tokens/
 
 import { KEYS, ROUTE_NAMES, SECTIONS } from '@core/constants.js'
 
+/** Timer flush — yields one macrotask so mounted element callbacks run. */
 const flush = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
+/** Mount cleanups registered per test — each returns the DOM to empty. */
 let cleanups = []
 
 beforeEach(() => {
@@ -37,6 +39,11 @@ afterEach(() => {
   cleanups = []
 })
 
+/**
+ * Replaces global fetch with a resolved-null stub so route/data calls
+ * inside component mounts never hit the network; returns the original
+ * for restoration.
+ */
 const _stableFetch = () => {
   const orig = globalThis.fetch
 
@@ -45,8 +52,10 @@ const _stableFetch = () => {
   return orig
 }
 
+/** Locale slug guaranteed absent from LANG_SLUGS — exercises miss paths. */
 const BAD_LOCALE = 'xx'
 
+/** Mounts a fresh <app-nav> element and registers its cleanup. */
 const mountNav = () => {
   const el = document.createElement(COMPONENT_TAGS.APP_NAV)
 
@@ -55,6 +64,7 @@ const mountNav = () => {
   return el
 }
 
+/** Dispatches a real window-level keydown for a key name. */
 const keydown = (key) =>
   window.dispatchEvent(new window.KeyboardEvent(KEYBOARD_EVENTS.KEYDOWN, { key }))
 

@@ -45,10 +45,13 @@ import { SCHEMA_STRINGS } from '@core/tokens/strings/schema.js'
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 
+// Where the prerendered sitemaps/meta live + the canonical origin and the
+// non-EN locale slugs sitemap assertions expand over.
 const META_DIR = path.join(ROOT_DIR, 'website', 'public', 'meta')
 const SITE = 'https://luiskr.com'
 const NON_EN = Object.keys(LANG_SLUGS).filter((loc) => loc !== 'en')
 
+// File reader + <loc> extractor — sitemap URLs out of the raw XML.
 const read = (p) => fs.readFileSync(p, 'utf-8')
 const locsOf = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
 

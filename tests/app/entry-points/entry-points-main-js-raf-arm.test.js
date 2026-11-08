@@ -11,6 +11,8 @@ import { describe, test, expect, jest } from '@jest/globals'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 
+// Idempotent app bootstrap — imports main.js once so its rAF/listener
+// arms register exactly once per test.
 const ensureApp = () => {
   const app = document.getElementById(APP_IDS.APP) || document.createElement(HTML_TAGS.DIV)
 

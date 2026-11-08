@@ -44,6 +44,8 @@ const ALLOWED = []
 // zero-console policy has no exemptions.
 const ALLOWLIST = {}
 
+// The callsite pattern — method name captured so the report can
+// tally per-method violations.
 const CONSOLE_RE =
   /console\.(log|debug|trace|table|group|groupEnd|groupCollapsed|warn|error|info)\s*\(/g
 
@@ -52,14 +54,18 @@ const CONSOLE_RE =
 // or build output.
 const SKIP_DIRS = new Set(['dist', 'node_modules', 'tests', 'reports', 'public'])
 
+/** Recursive .ts/.tsx/.js collector honoring the SKIP_DIRS set. */
 const listSrcFiles = (dir) => {
   const out = []
+
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name)
+
     if (entry.isDirectory()) {
       if (!SKIP_DIRS.has(entry.name)) out.push(...listSrcFiles(full))
     } else if (/\.(ts|tsx|js)$/.test(entry.name)) out.push(full)
   }
+
   return out
 }
 
@@ -117,24 +123,41 @@ const scanLines = (src) => {
   return out
 }
 
+// Three buckets: every callsite (the report's census), the policy
+// violations (the gate), and the allowlisted usages (informational).
 const findings = []
+
 const violations = []
+
 const allowedUsage = []
 
 for (const file of SRC_DIRS.flatMap(listSrcFiles)) {
   const rel = path.relative(ROOT, file)
+
   const raw = fs.readFileSync(file, 'utf-8')
+
+  // Comment/string-blanked lines — matches can only be real calls.
   const lines = scanLines(raw)
 
   lines.forEach((line, i) => {
+    // Global regex state resets per line — exec() resumes from
+    // lastIndex otherwise.
     CONSOLE_RE.lastIndex = 0
+
     let m
+
     while ((m = CONSOLE_RE.exec(line))) {
       const method = m[1]
+
       const entry = { file: rel, line: i + 1, method }
+
       findings.push(entry)
 
+      // Route to allowedUsage only when the file has an exemption
+      // naming THIS method — the allowlist is per-method, not
+      // per-file.
       const exemption = ALLOWLIST[rel]
+
       if (exemption?.methods.includes(method)) {
         allowedUsage.push({ ...entry, reason: exemption.reason })
       } else {
@@ -168,9 +191,13 @@ console.log(
 )
 
 if (violations.length) {
+  // Every violation listed before the gate fails — fix in one pass.
   console.error('\n✗ Forbidden console.* usage (debug leftovers):')
+
   for (const v of violations) console.error(`  ${v.file}:${v.line} — console.${v.method}`)
+
   console.error(`\nReport: ${path.relative(ROOT, REPORT_FILE)}`)
+
   process.exit(1)
 }
 

@@ -34,6 +34,7 @@ const collect = (dir, exts, out = []) => {
   return out
 }
 
+// The full authored-source inventory the two assertions scan.
 const CODE_FILES = AREA_ROOTS.flatMap((d) => collect(d, ['.ts', '.tsx', '.js']))
 const SCSS_FILES = AREA_ROOTS.flatMap((d) => collect(d, ['.scss']))
 

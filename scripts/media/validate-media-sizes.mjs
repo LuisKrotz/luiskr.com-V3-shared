@@ -226,13 +226,22 @@ const videoDims = async (key) => {
  * `--push` can write the same leaf remotely.
  */
 const collectMedia = (db) => {
+  // folder+src → { folder, src, size, isVideo, nodes[] } — dedupes the
+  // same capture repeated across the 16 locale trees while keeping a
+  // live reference to every occurrence for --fix/--push.
   const map = new Map()
 
+  /**
+   * `collect` — walks one project's tree: a node carrying
+   * {src: string, size: array} is a media record; everything else
+   * recurses by key.
+   */
   const collect = (node, folder, path) => {
     if (!node || typeof node !== 'object') return
 
     if (typeof node.src === 'string' && Array.isArray(node.size)) {
       const key = folder + node.src
+
       let rec = map.get(key)
 
       if (!rec) {
@@ -243,22 +252,32 @@ const collectMedia = (db) => {
           isVideo: !!node.isVideo,
           nodes: [],
         }
+
         map.set(key, rec)
       }
 
+      // Every locale occurrence registers — node is the live object
+      // (--fix writes through it), path its RTDB location (--push).
       rec.nodes.push({ node, path })
+
       return
     }
 
     for (const k in node) collect(node[k], folder, path ? `${path}/${k}` : k)
   }
 
+  /**
+   * `visit` — finds the `projects` node under any tree position and
+   * collects each project with its folder prefix; recurses past the
+   * locale layer.
+   */
   const visit = (node, path) => {
     if (!node || typeof node !== 'object') return
 
     if (node.projects && typeof node.projects === 'object') {
       for (const p in node.projects) {
         const project = node.projects[p]
+
         collect(project, project.folder || '', `${path}/projects/${p}`)
       }
     }
@@ -269,6 +288,7 @@ const collectMedia = (db) => {
   }
 
   visit(db, '')
+
   return map
 }
 
@@ -301,41 +321,60 @@ const getManifest = async () => {
   return persisted
 }
 
+/**
+ * `main` — the audit pipeline: collect dedupe'd media entries →
+ * resolve each to a bucket object → probe dimensions N-at-a-time →
+ * report diffs/errors → optionally --fix the mirror, --push live,
+ * and --json a report. Exit 1 on drift (unless --fix healed it).
+ */
 const main = async () => {
   const db = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'))
+
   const entries = [...collectMedia(db).values()]
+
   const manifest = await getManifest()
 
   console.log(`media-size-validation: ${entries.length} unique media entries`)
 
   const results = []
+
   let done = 0
+
+  // Shared work queue — each worker shifts entries until drained.
   const queue = [...entries]
 
   const worker = async () => {
     while (queue.length) {
       const entry = queue.shift()
+
       const object = pickObject(entry, manifest)
+
       const rec = { ...entry, object, actual: null, error: null }
 
       try {
         if (!object) rec.error = 'no source-fidelity object in manifest'
         else rec.actual = entry.isVideo ? await videoDims(object) : await imageDims(object)
+
         if (object && !rec.actual) rec.error = 'probe failed'
       } catch (e) {
         rec.error = String(e).slice(0, 200)
       }
 
       results.push(rec)
+
+      // Progress heartbeat every 50 probes — long runs stay observable.
       if (++done % 50 === 0) console.log(`media-size-validation: ${done}/${entries.length}`)
     }
   }
 
   await Promise.all(Array.from({ length: WORKERS }, worker))
 
+  // Two finding classes: declared≠actual (drift — fixable) and probe
+  // errors (unverifiable — report only).
   const diffs = results.filter(
     (r) => r.actual && (r.actual.w !== r.size[0] || r.actual.h !== r.size[1])
   )
+
   const errors = results.filter((r) => r.error)
 
   for (const d of diffs)
@@ -352,6 +391,7 @@ const main = async () => {
       `${diffs.length} mismatched, ${errors.length} errors`
   )
 
+  // --json report — node refs stripped, locale count kept.
   if (JSON_OUT) {
     fs.writeFileSync(
       JSON_OUT,
@@ -361,20 +401,26 @@ const main = async () => {
         2
       ) + '\n'
     )
+
     console.log(`media-size-validation: report written to ${JSON_OUT}`)
   }
 
+  // --fix rewrites every locale occurrence's size in one pass —
+  // the nodes are live object refs into the parsed mirror.
   if (FIX && diffs.length) {
     for (const d of diffs) {
       for (const { node } of d.nodes) node.size = [d.actual.w, d.actual.h]
     }
 
     fs.writeFileSync(DB_PATH, `${JSON.stringify(db, null, 2)}\n`, 'utf-8')
+
     console.log(`media-size-validation: updated ${diffs.length} entries in database.json`)
   }
 
   if (PUSH) await pushLive(results)
 
+  // Gate: unresolved drift or errors fail; --fix that healed every
+  // diff with zero probe errors exits clean.
   if (diffs.length || errors.length) process.exit(FIX && !errors.length ? 0 : 1)
 }
 
@@ -403,6 +449,8 @@ const adcToken = async () => {
  * database (the PATCH body ends up nearly empty).
  */
 const pushLive = async (results) => {
+  // RTDB path → probed [w,h] — every locale occurrence of every
+  // successfully probed entry.
   const wanted = new Map()
 
   for (const r of results) {
@@ -413,11 +461,16 @@ const pushLive = async (results) => {
 
   if (!wanted.size) {
     console.log('media-size-validation: nothing probed — skipping Firebase push')
+
     return
   }
 
+  // Locales the wants touch — one RTDB read per locale.
   const locales = new Set([...wanted.keys()].map((p) => p.split('/')[1]).filter(Boolean))
+
   const token = await adcToken()
+
+  // Multi-path PATCH body — only leaves whose live value differs.
   const updates = {}
 
   for (const loc of locales) {
@@ -427,20 +480,27 @@ const pushLive = async (results) => {
 
     if (!res.ok) {
       console.error(`media-size-validation: RTDB read failed for ${loc} (${res.status})`)
+
       continue
     }
 
     const live = await res.json()
+
+    // Flatten the live tree to path → node so each wanted size can
+    // be compared leaf-to-leaf.
     const flat = new Map()
+
     const walk = (node, path) => {
       if (!node || typeof node !== 'object') return
 
       flat.set(path, node)
+
       for (const k in node) walk(node[k], `${path}/${k}`)
     }
 
     walk(live, `translations/${loc}/projects`)
 
+    // Only drifted leaves write — unchanged rows never re-send.
     for (const [path, size] of wanted) {
       if (!path.startsWith(`translations/${loc}/`)) continue
 
@@ -455,9 +515,12 @@ const pushLive = async (results) => {
 
   if (!paths.length) {
     console.log('media-size-validation: Firebase RTDB already in sync — 0 writes needed')
+
     return
   }
 
+  // One multi-path PATCH — every drifted leaf converges in a
+  // single request.
   const res = await fetch(`${RTDB_URL}/.json?access_token=${token}`, {
     method: 'PATCH',
     headers: { 'content-type': 'application/json' },
@@ -466,6 +529,7 @@ const pushLive = async (results) => {
 
   if (!res.ok) {
     console.error(`media-size-validation: RTDB PATCH failed (${res.status}) ${await res.text()}`)
+
     process.exit(2)
   }
 

@@ -122,10 +122,6 @@ export const attachMock2D = (canvas, ctx = createMock2D()) => {
 }
 
 /**
- * Stubs `canvas.getContext` to always return null — exercises the
- * WebGL-unavailable fallback branches.
- */
-/**
  * Stubs `canvas.getContext` to return a mock 2D context for '2d' and a mock
  * GL context for webgl types — for widgets that probe both paths.
  */

@@ -149,14 +149,23 @@ const renderItem = (it) => {
   </article>`
 }
 
+/**
+ * Entry point — scans every module source dir, parses /// blocks into
+ * items, and emits one escaped index.html with a per-file TOC.
+ */
 const main = () => {
+  // Sorted walk so the emitted TOC/sections are deterministic across runs.
   const files = SRC_DIRS.filter((d) => fs.existsSync(d))
     .flatMap((d) => [...walk(d)])
     .sort()
+
+  // Files with zero documented items drop out — the page lists only
+  // surfaces that actually carry sassdoc annotations.
   const groups = files
     .map((f) => ({ file: path.relative(ROOT, f), items: parseFile(f) }))
     .filter((g) => g.items.length)
 
+  // TOC anchors use the same sanitized id scheme the sections below use.
   const toc = groups
     .map(
       (g) =>

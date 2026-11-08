@@ -11,8 +11,10 @@ import { KEYBOARD_EVENTS } from '@core/tokens/events/dom.js'
 
 import { ROUTE_NAMES } from '@core/constants.js'
 
+/** Timer flush — yields one macrotask so mounted element callbacks run. */
 const _flush = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
+/** Mount cleanups registered per test — each returns the DOM to empty. */
 let cleanups = []
 
 beforeEach(() => {
@@ -25,6 +27,11 @@ afterEach(() => {
   cleanups = []
 })
 
+/**
+ * Replaces global fetch with a resolved-null stub so route/data calls
+ * inside component mounts never hit the network; returns the original
+ * for restoration.
+ */
 const _stableFetch = () => {
   const orig = globalThis.fetch
 
@@ -33,8 +40,10 @@ const _stableFetch = () => {
   return orig
 }
 
+/** Locale slug guaranteed absent from LANG_SLUGS — exercises miss paths. */
 const _BAD_LOCALE = 'xx'
 
+/** Mounts a fresh <app-nav> element and registers its cleanup. */
 const _mountNav = () => {
   const el = document.createElement(COMPONENT_TAGS.APP_NAV)
 
@@ -43,6 +52,7 @@ const _mountNav = () => {
   return el
 }
 
+/** Dispatches a real window-level keydown for a key name. */
 const _keydown = (key) =>
   window.dispatchEvent(new window.KeyboardEvent(KEYBOARD_EVENTS.KEYDOWN, { key }))
 

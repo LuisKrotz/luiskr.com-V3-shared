@@ -32,10 +32,13 @@ import { SP_INPUT_TYPES } from '@earth/space/controls.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { CMS_PROJECTS_CLASSES } from '@cms/tokens.js'
 
+// Dialog paths call window.alert — stub so assertions observe the call.
 globalThis.alert = jest.fn()
 
+/** Generous flush — DOM-driven suites need real timers past mount effects. */
 const flush = (ms = 80) => new Promise((r) => setTimeout(r, ms))
 
+/** Fresh <canvas> element for the WebGL/2D widget attach helpers. */
 const makeCanvas = () => document.createElement(HTML_TAGS.CANVAS)
 
 describe('final tails', () => {

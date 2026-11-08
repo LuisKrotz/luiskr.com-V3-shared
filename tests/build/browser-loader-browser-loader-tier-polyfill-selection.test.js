@@ -7,6 +7,7 @@ import path from 'node:path'
 import { ROOT_DIR, TEST_UA } from '@tests/fixtures/test-constants.js'
 import { BROWSERS } from '@core/browser/detect.js'
 
+/** Raw browser-loader IIFE source — executed in jsdom to observe behavior. */
 const LOADER = fs.readFileSync(
   path.join(ROOT_DIR, 'shared', 'scripts', 'build', 'browser-loader.js'),
   'utf-8'
@@ -16,6 +17,11 @@ const LOADER = fs.readFileSync(
  * Runs the loader IIFE inside a Function sandbox whose `window`/`document`/
  * `navigator` are plain stubs. Returns the stubs so callers can assert on
  * injected nodes, dataset attributes and the __LK_BROWSER hint bag.
+ */
+/**
+ * Evaluates the loader source in a fresh window context with a synthetic
+ * UA + build manifest, returning the DOM state the loader produced so
+ * assertions can inspect the emitted script tags.
  */
 const runLoader = (ua, manifest, { canModule = true, appId = 'app', hasBody = true } = {}) => {
   const head = []
@@ -69,6 +75,7 @@ const runLoader = (ua, manifest, { canModule = true, appId = 'app', hasBody = tr
 }
 
 /** A manifest whose probes all pass — mirrors the emitted __LK shape. */
+/** Minimal build manifest shape the loader reads; `over` merges test vars. */
 const mkManifest = (over = {}) => ({
   targets: [
     {

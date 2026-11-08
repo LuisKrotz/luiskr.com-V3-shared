@@ -203,10 +203,17 @@ const changedFiles = (args) => {
   return execSync(`git diff --name-only ${range}`, opts).split('\n').filter(Boolean)
 }
 
+/** `exists` — repo-relative path check for optional scope inputs. */
 const exists = (p) => fs.existsSync(path.join(ROOT, p))
 
+/**
+ * `run` — synchronous step runner with inherited stdio (serial steps
+ * like the links fallback print straight through; a non-zero exit
+ * throws and aborts the caller).
+ */
 const run = (label, cmd, args) => {
   process.stdout.write(`\n── ${label}: ${cmd} ${args.join(' ')} ──\n`)
+
   execFileSync(cmd, args, { cwd: ROOT, stdio: 'inherit', shell: false })
 }
 
@@ -459,13 +466,19 @@ const runLink = async (modulePath) => {
   }
 }
 
+// ── Mode dispatch ────────────────────────────────────────────────────────
+// argv: scope-gates.mjs <mode> <args…> — each branch is a verb the
+// hooks/build call (see the usage block at the file top).
 const [, , mode, ...args] = process.argv
 
 if (mode === 'areas') {
+  // Git diff → scope list. Hooks call this with a range or --staged.
   const files = changedFiles(args)
 
   if (!files.length) {
+    // Empty diff prints an empty line — callers word-split this.
     console.log('')
+
     process.exit(0)
   }
 
@@ -509,11 +522,14 @@ if (mode === 'areas') {
   // with coverage (the stored results CI/fresh checkouts can't have).
   for (const modulePath of Object.keys(LINK_SCOPES)) {
     const scope = LINK_SCOPES[modulePath]
+
     const moduleRoot = path.join(ROOT, modulePath)
 
+    // Uninitialised submodule → nothing to check.
     if (!fs.existsSync(moduleRoot)) continue
 
     const want = gitlinkSha(modulePath)
+
     let stored = null
 
     try {
@@ -526,17 +542,22 @@ if (mode === 'areas') {
       path.join(moduleRoot, 'reports', 'coverage', 'coverage-summary.json')
     )
 
+    // Valid stamp AND coverage summary → skip; anything missing
+    // triggers the suite fallback below.
     if (stored?.ok && stored.sha === want && coverageOk) {
       process.stdout.write(`── ${scope}: stored gates + coverage ok at ${want.slice(0, 7)} ──\n`)
+
       continue
     }
 
     process.stdout.write(`── ${scope}: stored results incomplete — running suite ──\n`)
+
     run(`${scope} jest`, 'node', [
       'shared/scripts/test/run-modules.mjs',
       '--coverage',
       modulePath === 'shared' ? 'shared' : path.basename(modulePath),
     ])
+
     stamp(scope, ['jest', 'coverage'])
   }
 } else if (mode === 'run') {

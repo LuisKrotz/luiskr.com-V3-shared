@@ -25,9 +25,18 @@ import { redactSource } from './docs/redact.mjs'
  * @returns {import('vite').Plugin} The plugin instance.
  */
 export const docsPortalPlugin = ({ root, emitAssets = true }) => {
+  // Virtual-module id and the emitted payload path prefix — the
+  // manifest travels as a JS module, payloads as fetchable JSON.
   const manifestId = 'virtual:docs-manifest'
+
   const assetBase = 'docs-content/'
 
+  /**
+   * `payloadFor` — builds one file's publishable payload: media under
+   * the inline limit ships as a data-URI, text content renders to
+   * HTML through renderFile, source passes through redactSource.
+   * Returns null when the id doesn't resolve under root.
+   */
   const payloadFor = (fileId) => {
     // URLs carry the id as '<root>/<relpath>'; the manifest's canonical
     // form is '<root>:<relpath>' — normalize before resolving.
@@ -41,13 +50,20 @@ export const docsPortalPlugin = ({ root, emitAssets = true }) => {
 
     const abs = resolveFileId(root, normalized)
 
+    // Unresolvable id — either outside the scanned roots or a bad path.
     if (!abs) return null
 
     const ext = abs.split('.').pop().toLowerCase()
+
+    // The payload's display path — the part after '<root>:'.
     const rel = fileId.slice(fileId.indexOf(':') + 1)
+
     const stat = fs.statSync(abs)
 
+    // ── Binary media ─────────────────────────────────────────────
     if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'webm'].includes(ext)) {
+      // Over the inline limit the payload carries a null media and
+      // the viewer links the asset instead of embedding it.
       if (stat.size > MEDIA_INLINE_LIMIT) {
         return {
           name: path.basename(abs),
@@ -119,6 +135,9 @@ export const docsPortalPlugin = ({ root, emitAssets = true }) => {
       return `export default ${JSON.stringify(encodeManifest(scanManifest(root)))}`
     },
     configureServer(server) {
+      // Dev-server mirror of the emitted payloads — same URL shape,
+      // same JSON, computed on demand so the docs tree is never
+      // duplicated on disk during development.
       server.middlewares.use((req, res, next) => {
         const url = (req.url || '').split('?')[0]
 
@@ -144,6 +163,8 @@ export const docsPortalPlugin = ({ root, emitAssets = true }) => {
       // default-tier flag so every tier shares one dist/docs-content/.
       if (!emitAssets) return
 
+      // Recursive tree walk — every manifest file node emits one
+      // payload asset at docs-content/<root>/<path>.json.
       const walk = (nodes) => {
         for (const node of nodes) {
           if (node.type === 'dir') {
@@ -162,6 +183,7 @@ export const docsPortalPlugin = ({ root, emitAssets = true }) => {
         }
       }
 
+      // Every scanned root's tree contributes its files.
       for (const r of scanManifest(root).roots) walk(r.children)
     },
   }

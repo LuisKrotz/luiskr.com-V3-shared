@@ -10,6 +10,7 @@ import { APP_IDS } from '@core/tokens/ids/app.js'
 import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 import { WINDOW_EVENTS } from '@core/tokens/events/dom.js'
 
+/** Captures registerComponent calls from the booted entry point. */
 const registerMock = jest.fn()
 
 jest.unstable_mockModule('@core/utils/service-worker.js', () => ({
@@ -17,6 +18,7 @@ jest.unstable_mockModule('@core/utils/service-worker.js', () => ({
   dropStaleServiceWorkers: jest.fn(),
 }))
 
+/** Collects firebase auth-state listeners so tests can fire them. */
 const authCallbacks = []
 
 jest.unstable_mockModule('@core/firebase.js', () => ({
@@ -38,6 +40,7 @@ jest.unstable_mockModule('firebase/database', () => ({
   remove: jest.fn(async () => {}),
 }))
 
+/** Router stub — boot code touches init/subscribe/currentRoute only. */
 const mockRouter = { init: () => {}, subscribe: () => () => {}, currentRoute: null }
 
 jest.unstable_mockModule('@core/router/router.js', () => ({

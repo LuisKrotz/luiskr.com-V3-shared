@@ -16,6 +16,9 @@ const translations = JSON.parse(readFileSync(path.join(root, 'database.json'), '
 
 const loaders = {}
 
+// Each locale maps to the same {core, projects} lazy-loader pair the
+// real i18nBootPlugin generates — resolved from the committed snapshot
+// so the dynamic-import graph never runs under Jest.
 for (const [locale, t] of Object.entries(translations)) {
   loaders[locale] = {
     core: () =>

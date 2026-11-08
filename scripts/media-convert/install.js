@@ -20,17 +20,47 @@ const MANAGER_CANDIDATES = {
 /**
  * Tool → package names per manager. `ffmpeg` bundles `ffprobe` on every
  * platform; ImageMagick ships as `magick`/`convert`; `cjpeg` comes from
- * mozjpeg (brew/pacman) or libjpeg-turbo's utils package elsewhere.
+ * mozjpeg (brew/pacman) or libjpeg-turbo's utils package elsewhere;
+ * `pdftoppm` comes from poppler — `poppler-utils` on deb/rpm/alpine,
+ * `poppler-tools` on SUSE, plain `poppler` on brew/pacman/choco.
  */
 const PKGS = {
-  brew: { ffmpeg: 'ffmpeg', imagemagick: 'imagemagick', cjpeg: 'mozjpeg' },
-  apt: { ffmpeg: 'ffmpeg', imagemagick: 'imagemagick', cjpeg: 'libjpeg-turbo-progs' },
-  dnf: { ffmpeg: 'ffmpeg', imagemagick: 'ImageMagick', cjpeg: 'libjpeg-turbo-utils' },
-  pacman: { ffmpeg: 'ffmpeg', imagemagick: 'imagemagick', cjpeg: 'libjpeg-turbo' },
-  zypper: { ffmpeg: 'ffmpeg', imagemagick: 'ImageMagick', cjpeg: 'libjpeg-turbo-utils' },
-  apk: { ffmpeg: 'ffmpeg', imagemagick: 'imagemagick', cjpeg: 'libjpeg-turbo-utils' },
-  choco: { ffmpeg: 'ffmpeg', imagemagick: 'imagemagick' },
+  brew: { ffmpeg: 'ffmpeg', imagemagick: 'imagemagick', cjpeg: 'mozjpeg', poppler: 'poppler' },
+  apt: {
+    ffmpeg: 'ffmpeg',
+    imagemagick: 'imagemagick',
+    cjpeg: 'libjpeg-turbo-progs',
+    poppler: 'poppler-utils',
+  },
+  dnf: {
+    ffmpeg: 'ffmpeg',
+    imagemagick: 'ImageMagick',
+    cjpeg: 'libjpeg-turbo-utils',
+    poppler: 'poppler-utils',
+  },
+  pacman: {
+    ffmpeg: 'ffmpeg',
+    imagemagick: 'imagemagick',
+    cjpeg: 'libjpeg-turbo',
+    poppler: 'poppler',
+  },
+  zypper: {
+    ffmpeg: 'ffmpeg',
+    imagemagick: 'ImageMagick',
+    cjpeg: 'libjpeg-turbo-utils',
+    poppler: 'poppler-tools',
+  },
+  apk: {
+    ffmpeg: 'ffmpeg',
+    imagemagick: 'imagemagick',
+    cjpeg: 'libjpeg-turbo-utils',
+    poppler: 'poppler-utils',
+  },
+  choco: { ffmpeg: 'ffmpeg', imagemagick: 'imagemagick', poppler: 'poppler' },
 }
+
+/** winget id for poppler — no short name; installed via --id like ffmpeg/IM. */
+const WIN_POPPLER_ID = 'oschwartz10612.Poppler'
 
 /**
  * Windows cjpeg guidance — no winget/choco mozjpeg package exists, so the
@@ -49,11 +79,12 @@ const WIN_CJPEG_HINT = 'yarn global add mozjpeg'
  */
 const WIN_CJPEG_CMD = ['cmd', ['/d', '/s', '/c', 'yarn', 'global', 'add', 'mozjpeg']]
 
-/** Maps the raw tool map onto the three installable groups. */
+/** Maps the raw tool map onto the four installable groups. */
 const needs = (t) => ({
   ffmpeg: !t.ffmpeg || !t.ffprobe,
   imagemagick: !t.magick && !t.convert,
   cjpeg: !t.cjpeg,
+  poppler: !t.pdftoppm,
 })
 
 /**
@@ -84,15 +115,15 @@ const display = (cmd, args) => [cmd, ...args].join(' ')
 export function plan(t, manager) {
   const missing = needs(t)
 
-  if (!missing.ffmpeg && !missing.imagemagick && !missing.cjpeg) {
+  if (!missing.ffmpeg && !missing.imagemagick && !missing.cjpeg && !missing.poppler) {
     return { manager, needsRoot: false, commands: [], manual: [] }
   }
 
   if (!manager) {
     const manual = [
       process.platform === 'darwin'
-        ? 'Install Homebrew (https://brew.sh), then: brew install ffmpeg imagemagick mozjpeg'
-        : 'Install ffmpeg (and optionally ImageMagick) with your system package manager',
+        ? 'Install Homebrew (https://brew.sh), then: brew install ffmpeg imagemagick mozjpeg poppler'
+        : 'Install ffmpeg (and optionally ImageMagick and poppler) with your system package manager',
     ]
 
     // No system manager on Windows still has the yarn path — yarn ships
@@ -115,6 +146,7 @@ export function plan(t, manager) {
         missing.ffmpeg && p.ffmpeg,
         missing.imagemagick && p.imagemagick,
         missing.cjpeg && p.cjpeg,
+        missing.poppler && p.poppler,
       ].filter(Boolean)
       return {
         manager,
@@ -130,6 +162,7 @@ export function plan(t, manager) {
       if (missing.ffmpeg) commands.push(['winget', [...args, '--id', 'Gyan.FFmpeg']])
       if (missing.imagemagick)
         commands.push(['winget', [...args, '--id', 'ImageMagick.ImageMagick']])
+      if (missing.poppler) commands.push(['winget', [...args, '--id', WIN_POPPLER_ID]])
       if (missing.cjpeg) commands.push(WIN_CJPEG_CMD)
 
       return {
@@ -141,9 +174,11 @@ export function plan(t, manager) {
     }
     case 'choco': {
       const p = PKGS.choco
-      const pkgs = [missing.ffmpeg && p.ffmpeg, missing.imagemagick && p.imagemagick].filter(
-        Boolean
-      )
+      const pkgs = [
+        missing.ffmpeg && p.ffmpeg,
+        missing.imagemagick && p.imagemagick,
+        missing.poppler && p.poppler,
+      ].filter(Boolean)
       const commands = [
         ...(pkgs.length ? [['choco', ['install', '-y', ...pkgs]]] : []),
         ...(missing.cjpeg ? [WIN_CJPEG_CMD] : []),
@@ -165,6 +200,7 @@ export function plan(t, manager) {
         missing.ffmpeg && p.ffmpeg,
         missing.imagemagick && p.imagemagick,
         missing.cjpeg && p.cjpeg,
+        missing.poppler && p.poppler,
       ].filter(Boolean)
       // Each manager has its own verb/flags — no common 'install -y' form.
       const sudo = {
@@ -237,5 +273,9 @@ export async function installTools() {
   // Judge by the post-install probe, not exit codes: winget exits nonzero
   // for "already installed / no newer version", which is success here.
   // imagemagick stays optional — the pipeline falls back when absent.
-  return { ok: !after.missing.ffmpeg && !after.missing.cjpeg, log, report: after }
+  return {
+    ok: !after.missing.ffmpeg && !after.missing.cjpeg && !after.missing.poppler,
+    log,
+    report: after,
+  }
 }

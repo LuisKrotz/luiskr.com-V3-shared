@@ -13,6 +13,7 @@ import { fileURLToPath } from 'url'
 import * as sass from 'sass'
 import fs from 'fs'
 
+// Base-sass dir — the compiled grid/mixin sheets the overlay asserts on.
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const SASS_BASE = path.join(__dirname, '..', '..', '..', 'core', 'sass', 'base')
 
@@ -35,6 +36,7 @@ const declsByMedia = (css, selectorRe) => {
   return out
 }
 
+// Reads one property's value from a declaration map — lookup shorthand.
 const propValue = (decls, prop) => {
   const m = decls.match(new RegExp(`${prop}:\\s*([^;]+);`))
 

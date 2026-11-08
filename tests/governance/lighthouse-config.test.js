@@ -14,6 +14,7 @@ import { ROUTE_STRINGS } from '@core/tokens/strings/routes.js'
 import { ROUTE_PATHS } from '@core/tokens/routes/paths.js'
 import { WINDOW_EVENTS } from '@core/tokens/events/dom.js'
 
+// Preview origin + the two project slugs the config's audit URLs must hit.
 const LIGHTHOUSE_BASE = 'https://localhost:4173'
 const SAMPLE_PROJECT_MELISSA = 'melissa'
 const SAMPLE_PROJECT_METCHA = TEST_PROJECTS.METCHA

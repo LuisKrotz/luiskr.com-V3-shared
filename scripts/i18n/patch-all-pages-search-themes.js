@@ -1,10 +1,27 @@
+/**
+ * @file patch-all-pages-search-themes.js
+ * @description One-shot migration: rebuilds every page node's and
+ * every project's `searchThemes` keyword array in the local
+ * database.json mirror, in all 16 locales — deriving terms from each
+ * page's own authored content so the keyword surface describes what
+ * the route actually contains. Feeds meta keywords, WebPage JSON-LD,
+ * sitemap image captions and the /llm/ replicas.
+ *
+ * Run: node shared/scripts/i18n/patch-all-pages-search-themes.js
+ * (patches the local mirror only — upload-search-themes-firebase.js
+ * pushes just this key live).
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place, written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
 /**
@@ -1008,6 +1025,7 @@ PAGE_TERMS.cas = PAGE_TERMS.es
 PAGE_TERMS.riv = PAGE_TERMS.es
 PAGE_TERMS.tln = PAGE_TERMS.it
 
+/** Lowercases + trims + dedupes a candidate list, dropping empties. */
 const dedupe = (arr) => [...new Set(arr.map((s) => String(s).toLowerCase().trim()))].filter(Boolean)
 
 /** Strips CMS rich-text markup to plain text — <br>, tags, entities. */
@@ -1046,6 +1064,8 @@ const firstText = (node) => {
 const mediaLabels = (project, cap = 15) => {
   const labels = []
 
+  // Depth-first walk over the sections tree — cap bounds the list so
+  // media-heavy projects can't drown the authored terms.
   const walk = (o) => {
     if (labels.length >= cap) return
 
@@ -1062,6 +1082,7 @@ const mediaLabels = (project, cap = 15) => {
     }
   }
 
+  // Cover label first — it's the project's one-line pitch.
   if (project?.cover?.label) labels.push(term(project.cover.label))
 
   walk(project?.sections)
@@ -1167,42 +1188,54 @@ const derivedPageTerms = (tr, key) => {
 
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 
+// Node counts for the summary line.
 let patchedPages = 0
+
 let patchedProjects = 0
 
 for (const [locale, shared] of Object.entries(SHARED)) {
   const tr = db.translations[locale]
 
+  // Locale without a pages node → skip (never bootstrap a locale).
   if (!tr?.pages) continue
 
   const pageTerms = PAGE_TERMS[locale] || {}
 
+  // ── Page nodes ─────────────────────────────────────────────────
   for (const key of PAGE_KEYS) {
     // star-field/earth-playground/search keep their hand-tuned list
     // first (the seed patches authored it); every other page's list is
     // fully owned by this patch — rebuilt from scratch each run so
     // re-runs stay idempotent.
     const preserve = PRESERVED_KEYS.has(key)
+
     const existing =
       preserve && Array.isArray(tr.pages[key]?.[SEARCH_THEMES_KEY])
         ? tr.pages[key][SEARCH_THEMES_KEY]
         : []
 
     tr.pages[key] = tr.pages[key] || {}
+
+    // Rebuilt list = preserved seeds + content-derived + authored
+    // page terms + the shared site-wide vocabulary, deduped.
     tr.pages[key][SEARCH_THEMES_KEY] = dedupe([
       ...existing,
       ...derivedPageTerms(tr, key),
       ...(pageTerms[key] || []),
       ...shared,
     ])
+
     patchedPages++
   }
 
+  // ── Project nodes ──────────────────────────────────────────────
   const tail = PROJECT_TAIL[locale] || PROJECT_TAIL.en
 
   for (const [slug, project] of Object.entries(tr.projects || {})) {
     const titleTerm = String(project?.title || slug).toLowerCase()
 
+    // List = title + de-slugged slug + media labels + first section
+    // text + curated tags + the project tail + shared vocabulary.
     project[SEARCH_THEMES_KEY] = dedupe([
       titleTerm,
       slug.replace(/-/g, ' '),
@@ -1212,6 +1245,7 @@ for (const [locale, shared] of Object.entries(SHARED)) {
       ...tail,
       ...shared,
     ])
+
     patchedProjects++
   }
 }

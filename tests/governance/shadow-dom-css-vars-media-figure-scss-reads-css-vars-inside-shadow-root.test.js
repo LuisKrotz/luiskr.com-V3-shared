@@ -6,11 +6,14 @@ import path from 'path'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 import { readSassDeep } from '@tests/fixtures/sass-resolve.js'
 
+// Component-sass root + the three sheets these assertions read (resolved
+// through @use/@forward chains by readSassDeep).
 const ROOT = path.join(ROOT_DIR, 'core/sass/components')
 const internals = readSassDeep(path.join(ROOT, 'internals/internals.scss'))
 const mediaFigure = readSassDeep(path.join(ROOT, 'media/media-figure.scss'))
 const carouselHost = readSassDeep(path.join(ROOT, 'carousel/carousel-host.scss'))
 
+// Comment stripper — assertions match against code, never prose.
 const strip = (s) => s.replace(/\/\/[^\n]*/g, '').replace(/\/\*[\s\S]*?\*\//g, '')
 const _ic = strip(internals)
 const mfc = strip(mediaFigure)

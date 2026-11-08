@@ -17,6 +17,7 @@ import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 /** Node paths use the platform separator — every comparison below assumes POSIX '/'. */
 const toPosix = (p) => p.replace(/\\/g, '/')
 
+// POSIX-normalized roots — the import-path assertions string-match these.
 const ROOT = toPosix(ROOT_DIR)
 const COMPONENTS = toPosix(resolve(ROOT, 'website/components'))
 

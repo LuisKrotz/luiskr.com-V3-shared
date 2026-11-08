@@ -26,6 +26,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { FRAME_BUDGET } from '@core/tokens/motion/frame-budget.js'
 
+// Repo-root resolution — frame-budget scans path from the workspace root.
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.join(__dirname, '..', '..', '..')
 

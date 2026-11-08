@@ -16,18 +16,22 @@ import { THEME_CSS_PROPS } from '@core/tokens/css/theme.js'
 import { MENU_CSS_PROPS } from '@core/tokens/css/menu.js'
 import { NAV_SEARCH_CSS_PROPS } from '@core/tokens/css/nav.js'
 
+// Merged token namespace — every asserted pair references C.<PROP>.
 const C = { ...THEME_CSS_PROPS, ...MENU_CSS_PROPS, ...NAV_SEARCH_CSS_PROPS }
 
+// Base-sass dir — the compiled token sheet the pairs are resolved against.
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const SASS_BASE = path.join(__dirname, '..', '..', '..', 'core', 'sass', 'base')
 
 // Relative luminance per WCAG 2.x — sRGB channel linearisation + Rec.709 weights.
 const _lin = (v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+// Per-channel linearise → Rec.709 weighted sum = relative luminance.
 const luminance = (hex) => {
   const [r, g, b] = [0, 2, 4].map((i) => _lin(parseInt(hex.slice(i, i + 2), 16) / 255))
   return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
 
+// WCAG contrast ratio — (lighter + 0.05) / (darker + 0.05).
 const ratio = (fg, bg) => {
   const [hi, lo] = [luminance(fg), luminance(bg)].sort((a, b) => b - a)
   return (hi + 0.05) / (lo + 0.05)
@@ -89,6 +93,7 @@ const LIGHT_PAIRS = [
   [C.NEON_CHROME, C.BORDER_COLOR, 3, 'nav chrome glyph ink on chip disc'],
 ]
 
+// Dark-theme pairs — same contract, [fg, bg, minRatio, label] rows.
 const DARK_PAIRS = [
   [C.TEXT_PRIMARY, C.BG_PRIMARY, 7, 'body text on main surface'],
   [C.TEXT_PRIMARY, C.BG_SECONDARY, 7, 'body text on alt surface'],

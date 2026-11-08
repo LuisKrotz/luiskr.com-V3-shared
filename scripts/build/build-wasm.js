@@ -1,36 +1,313 @@
 /**
  * @file build-wasm.js
- * @description Emits the runtime math engine as a hand-assembled WASM
- * binary — no toolchain (wat2wasm/clang) needed at build time.
+ * @description Emits the runtime math engine as a WASM binary assembled
+ * by the tiny encoder below — no toolchain (wat2wasm/clang/cargo) needed
+ * at build time, but the module is declared READABLY: function signatures
+ * and instruction sequences are written in spec terms, and every section
+ * length/index is LEB128-computed by the encoder instead of being
+ * hand-maintained.
  *
  * The same bytes are written under two names (engine.wasm, layout.wasm):
  * callers fetch whichever name their loader expects, and shipping one
- * binary twice costs nothing because the module is ~200 bytes.
+ * binary twice costs nothing because the module is ~400 bytes.
  *
- * Module contents (all f32 math, 8 exports):
- *   calc_column_width          (i32 cols, f32 container, f32 gap)
- *                              → (container − (cols−1)·gap) / cols
- *   calc_card_height           (f32 w, f32 aspect, f32 pad) → w/aspect + pad
- *   calc_carousel_ring_offset  (f32 a, f32 b, f32 c) → (a/b)·c
+ * Module contents (all f32 math, 8 exports — consumers in
+ * core/utils/wasm/wasm-layout.ts):
+ *   calc_column_width           (i32 cols, f32 container, f32 gap)
+ *                               → (container − (cols−1)·gap) / cols
+ *   calc_card_height            (f32 w, f32 aspect, f32 pad) → w/aspect + pad
+ *   calc_carousel_ring_offset   (f32 a, f32 b, f32 c) → (a/b)·c
  *   calc_carousel_scroll_target (i32 idx, f32 card, f32 gap) → idx·(card+gap)
- *   calc_ease_out_cubic        (f32 t) → 1 − (1−t)³
- *   calc_draw_text_delay       (i32 idx, f32 delay) → delay / max(idx, 1)
- *   calc_draw_text_offset      (i32 idx, f32 a, f32 b) → a·b + idx·30
- *   calc_media_scale           (f32 w,h, cw,ch) → min(cw/w, ch/h, 1)
- *
- * Byte layout below follows the WASM binary format spec verbatim:
- * magic+version → type section (5 signatures) → function section
- * (8 type refs) → export section (8 names) → code section (8 bodies).
- * Opcode legend for the code section: 0x20 local.get, 0x22 local.tee,
- * 0x43 f32.const, 0x92 add, 0x93 sub, 0x94 mul, 0x95 div, 0x96 min,
- * 0x97 max, 0xb2 f32.convert_i32_s, 0x0b end.
+ *   calc_ease_out_cubic         (f32 t) → 1 − (1−t)³
+ *   calc_draw_text_delay        (i32 idx, f32 delay) → delay / max(idx, 1)
+ *   calc_draw_text_offset       (i32 idx, f32 a, f32 b) → a·b + idx·30
+ *   calc_media_scale            (f32 w,h, cw,ch) → min(cw/w, ch/h, 1)
  */
 import fs from 'node:fs'
 import path from 'node:path'
 
-// High-Performance WebAssembly Binary Engine for Carousel, Grid Layout & Animation Math
+// ── WASM spec vocabulary ─────────────────────────────────────────────
+// Opcodes/valtypes/section ids are the binary-format spec's own names —
+// the instruction tables below read like the spec they encode.
+
+/** WASM value-type codes (§5.3.1). */
+const VALTYPE = Object.freeze({
+  I32: 0x7f,
+  F32: 0x7d,
+})
+
+/** WASM opcodes used by the engine's numeric bodies (§A.5). */
+const OP = Object.freeze({
+  LOCAL_GET: 0x20,
+  LOCAL_TEE: 0x22,
+  F32_CONST: 0x43,
+  END: 0x0b,
+  F32_ADD: 0x92,
+  F32_SUB: 0x93,
+  F32_MUL: 0x94,
+  F32_DIV: 0x95,
+  F32_MIN: 0x96,
+  F32_MAX: 0x97,
+  F32_CONVERT_I32_S: 0xb2,
+})
+
+/** WASM section ids in the order they must appear (§5.5). */
+const SECTION = Object.freeze({
+  TYPE: 0x01,
+  FUNCTION: 0x03,
+  EXPORT: 0x07,
+  CODE: 0x0a,
+})
+
+/** External-kind code for a function export (§5.5.8). */
+const EXTERNAL_KIND_FUNCTION = 0x00
+
+/**
+ * Per-character cascade step baked into calc_draw_text_offset — the
+ * wasm mirror of core/tokens/media/dimensions.ts's
+ * DRAW_TIMINGS.DRAW_INDEX_STEP_MS (tokens are .ts, unreachable from a
+ * plain-node build script — keep the two in sync by the documented
+ * contract).
+ */
+const DRAW_INDEX_STEP_MS = 30.0
+
+// ── Instruction shorthand ────────────────────────────────────────────
+// Bodies are written as [mnemonic, ...operands] tuples so the math reads
+// like the spec's stack-machine listing rather than a byte dump.
+
+/** `local.get i` — push parameter i onto the stack. */
+const get = (i) => [OP.LOCAL_GET, i]
+/** `f32.const v` — push the f32 literal v (encoded little-endian). */
+const f32 = (v) => [OP.F32_CONST, v]
+/** `f32.convert_i32_s` — widen the i32 on top of the stack to f32. */
+const i32_to_f32 = [OP.F32_CONVERT_I32_S]
+
+const ADD = [OP.F32_ADD]
+const SUB = [OP.F32_SUB]
+const MUL = [OP.F32_MUL]
+const DIV = [OP.F32_DIV]
+const MIN = [OP.F32_MIN]
+const MAX = [OP.F32_MAX]
+const END = [OP.END]
+
+// ── The module — one entry per exported function ─────────────────────
+
+/** The engine's export table: spec-shaped signatures + bodies. */
+const FUNCTIONS = [
+  {
+    name: 'calc_column_width',
+    params: [VALTYPE.I32, VALTYPE.F32, VALTYPE.F32],
+    result: VALTYPE.F32,
+    // (container − (cols−1)·gap) / cols — grid column width.
+    body: [
+      get(1),
+      get(0),
+      i32_to_f32,
+      f32(1.0),
+      SUB,
+      get(2),
+      MUL,
+      SUB,
+      get(0),
+      i32_to_f32,
+      DIV,
+      END,
+    ],
+  },
+  {
+    name: 'calc_card_height',
+    params: [VALTYPE.F32, VALTYPE.F32, VALTYPE.F32],
+    result: VALTYPE.F32,
+    // width ÷ aspect + padding — grid card height.
+    body: [get(0), get(1), DIV, get(2), ADD, END],
+  },
+  {
+    name: 'calc_carousel_ring_offset',
+    params: [VALTYPE.F32, VALTYPE.F32, VALTYPE.F32],
+    result: VALTYPE.F32,
+    // (elapsed/duration)·circumference — autoplay ring progress.
+    body: [get(0), get(1), DIV, get(2), MUL, END],
+  },
+  {
+    name: 'calc_carousel_scroll_target',
+    params: [VALTYPE.I32, VALTYPE.F32, VALTYPE.F32],
+    result: VALTYPE.F32,
+    // idx·(card+gap) — scrollLeft that centers slide idx.
+    body: [get(0), i32_to_f32, get(1), get(2), ADD, MUL, END],
+  },
+  {
+    name: 'calc_ease_out_cubic',
+    params: [VALTYPE.F32],
+    result: VALTYPE.F32,
+    // 1 − (1−t)³ — fast start, decelerating stop.
+    body: [
+      f32(1.0),
+      f32(1.0),
+      get(0),
+      SUB,
+      f32(1.0),
+      get(0),
+      SUB,
+      MUL,
+      f32(1.0),
+      get(0),
+      SUB,
+      MUL,
+      SUB,
+      END,
+    ],
+  },
+  {
+    name: 'calc_draw_text_delay',
+    params: [VALTYPE.I32, VALTYPE.F32],
+    result: VALTYPE.F32,
+    // delay / max(idx, 1) — per-char delay shrinks with index; the max
+    // guards a zero-index divide.
+    body: [get(1), get(0), i32_to_f32, f32(1.0), MAX, DIV, END],
+  },
+  {
+    name: 'calc_draw_text_offset',
+    params: [VALTYPE.I32, VALTYPE.F32, VALTYPE.F32],
+    result: VALTYPE.F32,
+    // a·b + idx·DRAW_INDEX_STEP_MS — base offset plus the per-char cascade.
+    body: [get(1), get(2), MUL, get(0), i32_to_f32, f32(DRAW_INDEX_STEP_MS), MUL, ADD, END],
+  },
+  {
+    name: 'calc_media_scale',
+    params: [VALTYPE.F32, VALTYPE.F32, VALTYPE.F32, VALTYPE.F32],
+    result: VALTYPE.F32,
+    // min(boundW/w, boundH/h, 1) — contain-fit, never upscales.
+    body: [get(2), get(0), DIV, get(3), get(1), DIV, MIN, f32(1.0), MIN, END],
+  },
+]
+
+// ── The encoder — LEB128 lengths, nothing hand-counted ───────────────
+
+/**
+ * Unsigned LEB128 for a non-negative integer — the encoding every WASM
+ * section size, vector length, and index uses.
+ * @param value Non-negative integer.
+ * @returns Byte list, little-endian base-128 with the continuation bit.
+ */
+const uleb = (value) => {
+  const bytes = []
+  let remaining = value
+
+  do {
+    let byte = remaining & 0x7f
+
+    remaining >>>= 7
+
+    if (remaining !== 0) byte |= 0x80
+
+    bytes.push(byte)
+  } while (remaining !== 0)
+
+  return bytes
+}
+
+/**
+ * IEEE-754 f32 little-endian bytes — the `f32.const` operand form.
+ * @param value JS number.
+ * @returns Four bytes.
+ */
+const f32Bytes = (value) => Array.from(new Uint8Array(new Float32Array([value]).buffer))
+
+/**
+ * WASM vector: uleb(count) followed by each item's flattened bytes.
+ * @param items Array of byte-lists.
+ * @returns Encoded vector.
+ */
+const vec = (items) => [...uleb(items.length), ...items.flat()]
+
+/**
+ * A WASM section: section id + uleb(payload length) + payload. Sizes are
+ * always computed — a stale hand-counted length is how the previous
+ * revision shipped a corrupt (double type-section) binary.
+ * @param id Section id from SECTION.
+ * @param payload Encoded section body.
+ * @returns Encoded section.
+ */
+const section = (id, payload) => [id, ...uleb(payload.length), ...payload]
+
+/**
+ * UTF-8 bytes of an export name — WASM names are length-prefixed UTF-8.
+ * @param name Export name string.
+ * @returns Length-prefixed name bytes.
+ */
+const nameBytes = (name) => {
+  const utf8 = Buffer.from(name, 'utf8')
+
+  return [...uleb(utf8.length), ...utf8]
+}
+
+/**
+ * A function body as instruction tuples → code-section bytes: uleb body
+ * size + 0 locals + flattened instructions.
+ * @param instructions Instruction tuples — opcode byte then operands.
+ * @returns Encoded function body.
+ */
+const bodyBytes = (instructions) => {
+  const ops = instructions.flatMap((instr) => {
+    const [opcode, operand] = instr
+
+    // Operand shape by opcode: f32 const → 4 LE bytes; local ops → uleb
+    // index; stack ops carry no operand.
+    if (opcode === OP.F32_CONST) return [opcode, ...f32Bytes(operand)]
+
+    if (opcode === OP.LOCAL_GET || opcode === OP.LOCAL_TEE) return [opcode, ...uleb(operand)]
+
+    return [opcode]
+  })
+
+  // Body = local-decl count (0) + instruction stream.
+  return [...uleb(1 + ops.length), 0x00, ...ops]
+}
+
+// ── Assemble the module ──────────────────────────────────────────────
+
+/**
+ * Signature table — deduplicated (param,result) shapes so the type
+ * section carries each form once (the previous revision emitted the
+ * whole type section twice — invalid per §5.5 ordering, rejected by
+ * every engine).
+ */
+const signatures = []
+const signatureIndex = new Map()
+
+for (const fn of FUNCTIONS) {
+  const key = `${fn.params.join(',')}->${fn.result}`
+
+  if (!signatureIndex.has(key)) {
+    signatureIndex.set(key, signatures.length)
+
+    signatures.push(fn)
+  }
+}
+
+// Type section: each signature = 0x60 func marker + param vec + 1 result.
+const typeSection = section(
+  SECTION.TYPE,
+  vec(signatures.map((fn) => [0x60, ...vec(fn.params.map((t) => [t])), ...vec([[fn.result]])]))
+)
+
+// Function section: function index → type index.
+const functionSection = section(
+  SECTION.FUNCTION,
+  vec(FUNCTIONS.map((fn) => uleb(signatureIndex.get(`${fn.params.join(',')}->${fn.result}`))))
+)
+
+// Export section: name + kind 0x00 (func) + function index.
+const exportSection = section(
+  SECTION.EXPORT,
+  vec(FUNCTIONS.map((fn, i) => [...nameBytes(fn.name), EXTERNAL_KIND_FUNCTION, ...uleb(i)]))
+)
+
+// Code section: one body per function, same order as the function section.
+const codeSection = section(SECTION.CODE, vec(FUNCTIONS.map((fn) => bodyBytes(fn.body))))
+
 const wasmBytes = new Uint8Array([
-  // ── Module header: \0asm magic + version 1 ───────────────────────
+  // \0asm magic + version 1.
   0x00,
   0x61,
   0x73,
@@ -38,462 +315,14 @@ const wasmBytes = new Uint8Array([
   0x01,
   0x00,
   0x00,
-  0x00, // WASM Header
-
-  // ── Type section (id 0x01): 5 function signatures ────────────────
-  0x01,
-  0x22,
-  0x05,
-  0x60,
-  0x03,
-  0x7f,
-  0x7d,
-  0x7d,
-  0x01,
-  0x7d, // Sig 0: (i32, f32, f32) -> f32
-  0x60,
-  0x03,
-  0x7d,
-  0x7d,
-  0x7d,
-  0x01,
-  0x7d, // Sig 1: (f32, f32, f32) -> f32
-  0x60,
-  0x01,
-  0x7d,
-  0x01,
-  0x7d, // Sig 2: (f32) -> f32
-  0x60,
-  0x02,
-  0x7f,
-  0x7d,
-  0x01,
-  0x7d, // Sig 3: (i32, f32) -> f32
-  0x60,
-  0x04,
-  0x7d,
-  0x7d,
-  0x7d,
-  0x7d,
-  0x01,
-  0x7d, // Sig 4: (f32, f32, f32, f32) -> f32
-
-  0x01,
-  0x22,
-  0x05,
-  0x60,
-  0x03,
-  0x7f,
-  0x7d,
-  0x7d,
-  0x01,
-  0x7d, // Sig 0: (i32, f32, f32) -> f32
-  0x60,
-  0x03,
-  0x7d,
-  0x7d,
-  0x7d,
-  0x01,
-  0x7d, // Sig 1: (f32, f32, f32) -> f32
-  0x60,
-  0x01,
-  0x7d,
-  0x01,
-  0x7d, // Sig 2: (f32) -> f32
-  0x60,
-  0x02,
-  0x7f,
-  0x7d,
-  0x01,
-  0x7d, // Sig 3: (i32, f32) -> f32
-  0x60,
-  0x04,
-  0x7d,
-  0x7d,
-  0x7d,
-  0x7d,
-  0x01,
-  0x7d, // Sig 4: (f32, f32, f32, f32) -> f32
-
-  // ── Function section (id 0x03): 8 funcs → type-sig indices ───────
-  // fn0→sig0, fn1→sig1, fn2→sig1, fn3→sig0, fn4→sig2, fn5→sig3,
-  // fn6→sig0, fn7→sig4.
-  0x03,
-  0x09,
-  0x08,
   0x00,
-  0x01,
-  0x01,
-  0x00,
-  0x02,
-  0x03,
-  0x00,
-  0x04,
-
-  // ── Export section (id 0x07): 8 names → function indices ─────────
-  // Each entry = name length + utf8 bytes + kind 0x00 + func index.
-  0x07,
-  0xba,
-  0x01,
-  0x08,
-  0x11,
-  0x63,
-  0x61,
-  0x6c,
-  0x63,
-  0x5f,
-  0x63,
-  0x6f,
-  0x6c,
-  0x75,
-  0x6d,
-  0x6e,
-  0x5f,
-  0x77,
-  0x69,
-  0x64,
-  0x74,
-  0x68,
-  0x00,
-  0x00,
-  0x10,
-  0x63,
-  0x61,
-  0x6c,
-  0x63,
-  0x5f,
-  0x63,
-  0x61,
-  0x72,
-  0x64,
-  0x5f,
-  0x68,
-  0x65,
-  0x69,
-  0x67,
-  0x68,
-  0x74,
-  0x00,
-  0x01,
-  0x19,
-  0x63,
-  0x61,
-  0x6c,
-  0x63,
-  0x5f,
-  0x63,
-  0x61,
-  0x72,
-  0x6f,
-  0x75,
-  0x73,
-  0x65,
-  0x6c,
-  0x5f,
-  0x72,
-  0x69,
-  0x6e,
-  0x67,
-  0x5f,
-  0x6f,
-  0x66,
-  0x66,
-  0x73,
-  0x65,
-  0x74,
-  0x00,
-  0x02,
-  0x1b,
-  0x63,
-  0x61,
-  0x6c,
-  0x63,
-  0x5f,
-  0x63,
-  0x61,
-  0x72,
-  0x6f,
-  0x75,
-  0x73,
-  0x65,
-  0x6c,
-  0x5f,
-  0x73,
-  0x63,
-  0x72,
-  0x6f,
-  0x6c,
-  0x6c,
-  0x5f,
-  0x74,
-  0x61,
-  0x72,
-  0x67,
-  0x65,
-  0x74,
-  0x00,
-  0x03,
-  0x13,
-  0x63,
-  0x61,
-  0x6c,
-  0x63,
-  0x5f,
-  0x65,
-  0x61,
-  0x73,
-  0x65,
-  0x5f,
-  0x6f,
-  0x75,
-  0x74,
-  0x5f,
-  0x63,
-  0x75,
-  0x62,
-  0x69,
-  0x63,
-  0x00,
-  0x04,
-  0x14,
-  0x63,
-  0x61,
-  0x6c,
-  0x63,
-  0x5f,
-  0x64,
-  0x72,
-  0x61,
-  0x77,
-  0x5f,
-  0x74,
-  0x65,
-  0x78,
-  0x74,
-  0x5f,
-  0x64,
-  0x65,
-  0x6c,
-  0x61,
-  0x79,
-  0x00,
-  0x05,
-  0x15,
-  0x63,
-  0x61,
-  0x6c,
-  0x63,
-  0x5f,
-  0x64,
-  0x72,
-  0x61,
-  0x77,
-  0x5f,
-  0x74,
-  0x65,
-  0x78,
-  0x74,
-  0x5f,
-  0x6f,
-  0x66,
-  0x66,
-  0x73,
-  0x65,
-  0x74,
-  0x00,
-  0x06,
-  0x10,
-  0x63,
-  0x61,
-  0x6c,
-  0x63,
-  0x5f,
-  0x6d,
-  0x65,
-  0x64,
-  0x69,
-  0x61,
-  0x5f,
-  0x73,
-  0x63,
-  0x61,
-  0x6c,
-  0x65,
-  0x00,
-  0x07,
-
-  // ── Code section (id 0x0a): 8 function bodies ────────────────────
-  // fn0 calc_column_width: (p1 − (i0−1)·p2) / i0 — container minus
-  //   inter-column gaps, divided by the column count.
-  0x0a,
-  0x91,
-  0x01,
-  0x08,
-  0x15,
-  0x00,
-  0x20,
-  0x01,
-  0x20,
-  0x00,
-  0xb2,
-  0x43,
-  0x00,
-  0x00,
-  0x80,
-  0x3f,
-  0x93,
-  0x20,
-  0x02,
-  0x94,
-  0x93,
-  0x20,
-  0x00,
-  0xb2,
-  0x95,
-  0x0b,
-
-  // fn1 calc_card_height: p0/p1 + p2 — width ÷ aspect + padding.
-  0x0a,
-  0x00,
-  0x20,
-  0x00,
-  0x20,
-  0x01,
-  0x95,
-  0x20,
-  0x02,
-  0x92,
-  0x0b,
-
-  // fn2 calc_carousel_ring_offset: (p0/p1)·p2 — normalized scroll
-  //   progress scaled to the ring's offset range.
-  0x0a,
-  0x00,
-  0x20,
-  0x00,
-  0x20,
-  0x01,
-  0x95,
-  0x20,
-  0x02,
-  0x94,
-  0x0b,
-
-  // fn3 calc_carousel_scroll_target: i0·(p1+p2) — index × card pitch
-  //   (card + gap) — the pixel offset that centers card i0.
-  0x0b,
-  0x00,
-  0x20,
-  0x00,
-  0xb2,
-  0x20,
-  0x01,
-  0x20,
-  0x02,
-  0x92,
-  0x94,
-  0x0b,
-
-  // fn4 calc_ease_out_cubic: 1 − (1−t)³ — local.tee spills t so the
-  //   (1−t) term is rebuilt three times for the cubic product.
-  0x22,
-  0x00,
-  0x43,
-  0x00,
-  0x00,
-  0x80,
-  0x3f,
-  0x43,
-  0x00,
-  0x00,
-  0x80,
-  0x3f,
-  0x20,
-  0x00,
-  0x93,
-  0x43,
-  0x00,
-  0x00,
-  0x80,
-  0x3f,
-  0x20,
-  0x00,
-  0x93,
-  0x94,
-  0x43,
-  0x00,
-  0x00,
-  0x80,
-  0x3f,
-  0x20,
-  0x00,
-  0x93,
-  0x94,
-  0x93,
-  0x0b,
-
-  // fn5 calc_draw_text_delay: p1 / max(i0, 1.0) — per-character delay
-  //   shrinks with index; the max guards a zero-index divide.
-  0x0e,
-  0x00,
-  0x20,
-  0x01,
-  0x20,
-  0x00,
-  0xb2,
-  0x43,
-  0x00,
-  0x00,
-  0x80,
-  0x3f,
-  0x97,
-  0x95,
-  0x0b,
-
-  // fn6 calc_draw_text_offset: p1·p2 + i0·30 — base offset plus a
-  //   30-unit per-character cascade.
-  0x11,
-  0x00,
-  0x20,
-  0x01,
-  0x20,
-  0x02,
-  0x94,
-  0x20,
-  0x00,
-  0xb2,
-  0x43,
-  0x00,
-  0x00,
-  0xf0,
-  0x41,
-  0x94,
-  0x92,
-  0x0b,
-
-  // fn7 calc_media_scale: min(p2/p0, p3/p1, 1.0) — contain-fit scale,
-  //   capped at 1 so small media never upscales blurry.
-  0x13,
-  0x00,
-  0x20,
-  0x02,
-  0x20,
-  0x00,
-  0x95,
-  0x20,
-  0x03,
-  0x20,
-  0x01,
-  0x95,
-  0x96,
-  0x43,
-  0x00,
-  0x00,
-  0x80,
-  0x3f,
-  0x96,
-  0x0b,
+  ...typeSection,
+  ...functionSection,
+  ...exportSection,
+  ...codeSection,
 ])
+
+// ── Emit + self-check ────────────────────────────────────────────────
 
 // Output dir inside the core module's public assets — served verbatim
 // by the static host, so the .wasm ships untouched by the bundler.
@@ -508,4 +337,18 @@ if (!fs.existsSync(publicWasmDir)) {
 fs.writeFileSync(path.join(publicWasmDir, 'engine.wasm'), wasmBytes)
 fs.writeFileSync(path.join(publicWasmDir, 'layout.wasm'), wasmBytes)
 
-console.log('Successfully generated WASM Engine binaries in core/public/scripts/wasm/')
+// Instantiate the bytes we just wrote — a malformed module must fail
+// THIS build step, not silently degrade every visitor to the JS
+// fallback (the failure mode that hid the corrupt binary for months).
+const { instance } = await WebAssembly.instantiate(wasmBytes)
+const missing = FUNCTIONS.map((fn) => fn.name).filter(
+  (name) => typeof instance.exports[name] !== 'function'
+)
+
+if (missing.length > 0) {
+  throw new Error(`build-wasm: emitted module is missing exports: ${missing.join(', ')}`)
+}
+
+console.log(
+  `Successfully generated WASM Engine binaries (${wasmBytes.length} B, 8 exports) in core/public/scripts/wasm/`
+)

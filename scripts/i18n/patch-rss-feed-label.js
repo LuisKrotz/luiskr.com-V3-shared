@@ -1,9 +1,22 @@
+/**
+ * @file patch-rss-feed-label.js
+ * @description One-shot migration: seeds `APP.rssFeed` — the legal
+ * footer's RSS link label — into every locale of the local
+ * database.json mirror.
+ *
+ * Run: node shared/scripts/i18n/patch-rss-feed-label.js
+ * (patches the local mirror only — upload to Firebase separately).
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place, written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
 /**
@@ -41,13 +54,17 @@ const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 for (const [locale, label] of Object.entries(LABELS)) {
   const app = db.translations?.[locale]?.APP
 
+  // Locale without an APP node → warn + skip (never bootstrap one).
   if (!app) {
     console.warn(`⚠ ${locale}: no APP node — skipped`)
+
     continue
   }
 
   app.rssFeed = label
 }
 
+// Write the mirror back — trailing newline matches the file's format.
 fs.writeFileSync(dbPath, `${JSON.stringify(db, null, 2)}\n`, 'utf8')
+
 console.log(`✅ database.json patched — APP.rssFeed in ${Object.keys(LABELS).length} locales.`)

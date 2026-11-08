@@ -24,8 +24,10 @@ import { createEarthState } from '@earth/earth/runtime/state.js'
 import router from '@core/router/router.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 
+/** Generous flush — mounted render queues need real timers past microtasks. */
 const flush = (ms = 80) => new Promise((r) => setTimeout(r, ms))
 
+/** Sets an input value and dispatches the given event — triggers listeners. */
 const fire = (el, type, value) => {
   if (value !== undefined) el.value = value
 

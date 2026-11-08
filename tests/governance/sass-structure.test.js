@@ -21,7 +21,11 @@ import { readSassDeep } from '@tests/fixtures/sass-resolve.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
 
+// Repo root alias — every sass path below is resolved against it.
 const root = ROOT_DIR
+
+// Reads a sass file relative to root, tolerant of missing files — the
+// structural assertions skip absent optional sheets.
 const readSass = (rel) => {
   try {
     const abs = resolve(root, rel)

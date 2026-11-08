@@ -405,6 +405,13 @@ const scanMarkup = (src) => {
   return out.join('')
 }
 
+/**
+ * Tokenizes inside a single `<…>` slice — the tag name lands on `kwd`,
+ * attribute names on `typ`, `=` on `pun`, values on `str`, and the
+ * angle brackets on `pun`. Malformed tails pass through escaped.
+ * @param {string} tag raw `<…>` source slice
+ * @returns {string} highlighted tag HTML
+ */
 const markTag = (tag) => {
   // tokenize inside a single <…> slice
   const inner = tag.replace(/^<\/?/u, '')
@@ -568,10 +575,14 @@ const scanCss = (src) => {
  */
 export const highlightCode = (src, ext) => {
   const spec = LANG[ext]
+
+  // Unknown extensions emit escaped-but-unclassed text — the <pre>
+  // still renders, just without colors.
   if (!spec) return esc(src)
   if (spec.markup) return scanMarkup(src)
   if (spec.data === 'json') return scanJson(src)
   if (spec.data === 'kv') return scanKv(src, spec)
   if (spec.css) return scanCss(src)
+
   return scanC(src, spec)
 }

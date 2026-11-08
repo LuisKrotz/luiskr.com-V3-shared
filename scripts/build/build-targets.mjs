@@ -48,6 +48,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..', '..', '..')
 const DIST = path.join(ROOT, 'dist')
 
+/**
+ * Spawns a build step with inherited stdio and a 30s heartbeat on stderr —
+ * long silent steps (rolldown chunk render, minify) otherwise look frozen
+ * in CI. Rejects on non-zero exit or spawn error.
+ * @param {string} cmd executable
+ * @param {string[]} args argv
+ * @param {object} [env] extra env merged over process.env
+ * @param {string} [label] heartbeat banner text
+ * @returns {Promise<void>} resolves on exit 0
+ */
 const run = (cmd, args, env = {}, label = '') =>
   new Promise((resolve, reject) => {
     const child = spawn(cmd, args, {
@@ -312,6 +322,15 @@ const emitCssSplits = async (t) => {
   return names
 }
 
+/**
+ * Emits the tier's full document sheet as ONE monolithic hashed file —
+ * the fallback path when vite already produced a css/ asset AND the
+ * debug/sourcemap copy (`prefix 'app-'`). Splits stay the primary ship;
+ * this exists so `index-<hash>.css` consumers keep working.
+ * @param {object} t ES_TARGETS entry
+ * @param {string} [prefix] output file-name prefix
+ * @returns {Promise<string>} emitted file name
+ */
 const emitCss = async (t, prefix = 'index-') => {
   const { code, map } = await transformSheet(t)
 

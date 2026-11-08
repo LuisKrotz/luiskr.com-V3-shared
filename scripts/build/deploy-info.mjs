@@ -132,12 +132,22 @@ const scanLhrFiles = () => {
   return [...latest.values()].map((v) => v.rec)
 }
 
+/**
+ * `collectLighthouse` — representative-run summary (per-URL scores +
+ * failing audits) from the manifest when it exists, else the lhr-*
+ * file scan. ALSO prunes .lighthouseci/ to just those artifacts —
+ * the side effect the header names.
+ */
 const collectLighthouse = () => {
   const manifest = readJson(path.join(LHCI_DIR, 'manifest.json'))
+
+  // Manifest when present; the lhr-* scan otherwise.
   const runs = Array.isArray(manifest) && manifest.length ? manifest : scanLhrFiles()
 
   if (!runs.length) return null
 
+  // Absolute paths of every artifact the last run's representative
+  // entries reference — the prune keeps exactly these + manifest.json.
   const keep = new Set()
 
   const urls = runs
@@ -145,10 +155,13 @@ const collectLighthouse = () => {
     .map((run) => {
       const lhr = run.jsonPath ? readJson(path.resolve(LHCI_DIR, run.jsonPath)) : null
 
+      // Register this run's json + html artifacts as keepable.
       ;[run.jsonPath, run.htmlPath].forEach((p) => {
         if (p) keep.add(path.resolve(LHCI_DIR, p))
       })
 
+      // Only audits with a real score below 1 — informational audits
+      // (score:null) aren't failures.
       const failedAudits = lhr
         ? Object.values(lhr.audits || {})
             .filter((a) => a.score !== null && a.score !== undefined && a.score < 1)
@@ -219,11 +232,15 @@ const collectA11y = () => {
 
   if (!report?.results) return null
 
+  // level|ruleId → aggregate — the CMS renders rules as rows with
+  // a page count, not per-finding rows.
   const rules = {}
 
   const routes = report.results.map((p) => {
+    // Fold each finding into its rule bucket — count + the route set.
     for (const f of p.findings || []) {
       const key = `${f.level}|${f.ruleId}`
+
       const bucket = (rules[key] ||= {
         level: f.level,
         ruleId: f.ruleId,
@@ -233,6 +250,7 @@ const collectA11y = () => {
       })
 
       bucket.count += 1
+
       bucket.pages.add(p.route)
     }
 
@@ -254,9 +272,13 @@ const collectA11y = () => {
     gatingLevels: report.gatingLevels,
     pages: report.pages,
     totals: report.totals,
+    // Set → count for the JSON shape; sorted by frequency so the
+    // widest-reaching rules lead the CMS table.
     rules: Object.values(rules)
       .map(({ pages, ...r }) => ({ ...r, pages: pages.size }))
       .sort((a, b) => b.count - a.count),
+    // Only routes that actually carry findings — clean routes add
+    // nothing to the report.
     routes: routes.filter(
       (r) => r.violation || r.potentialviolation || r.recommendation || r.gated || r.error
     ),
@@ -563,6 +585,11 @@ const collectBundleStats = () => {
 }
 
 // ─── Assemble ────────────────────────────────────────────────────────────────
+/**
+ * `main` — collector fan-in: each collector returns null when its
+ * source is absent, so the bundle only ships sections that exist.
+ * `files` is the manifest map index.json publishes.
+ */
 const main = () => {
   const lighthouse = collectLighthouse()
 
@@ -574,25 +601,30 @@ const main = () => {
 
   fs.mkdirSync(OUT_DIR, { recursive: true })
 
+  // Manifest map — key is the CMS section name, value the emitted file.
   const files = {}
 
   if (bundle) {
     writeJson(path.join(OUT_DIR, 'bundle-stats.json'), bundle)
+
     files.bundle = 'bundle-stats.json'
   }
 
   if (lighthouse) {
     writeJson(path.join(OUT_DIR, 'lighthouse-summary.json'), lighthouse)
+
     files.lighthouse = 'lighthouse-summary.json'
   }
 
   if (coverage) {
     writeJson(path.join(OUT_DIR, 'coverage-summary.json'), coverage)
+
     files.coverage = 'coverage-summary.json'
   }
 
   if (a11y) {
     writeJson(path.join(OUT_DIR, 'a11y-summary.json'), a11y)
+
     files.a11y = 'a11y-summary.json'
   }
 

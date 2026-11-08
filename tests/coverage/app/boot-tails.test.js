@@ -14,6 +14,7 @@ import { ROUTE_NAMES } from '@core/tokens/routes/names.js'
 import { VIEW_TAGS } from '@core/tokens/elements/views.js'
 import { POINTER_EVENTS } from '@core/tokens/events/dom.js'
 
+/** Timer flush — yields one macrotask so deferred boot callbacks run. */
 const flush = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms))
 
 describe('app boot tails', () => {

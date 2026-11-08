@@ -12,12 +12,14 @@ import path from 'node:path'
 import { ROOT_DIR, TEST_UA } from '@tests/fixtures/test-constants.js'
 import { BROWSERS } from '@core/browser/detect.js'
 
+/** Raw browser-loader IIFE source — executed in jsdom to observe behavior. */
 const LOADER = fs.readFileSync(
   path.join(ROOT_DIR, 'shared', 'scripts', 'build', 'browser-loader.js'),
   'utf-8'
 )
 
 /** Cumulative css map shape mirroring the emitted __LK manifest. */
+/** UA-signature → expected html-class map the loader is required to add. */
 const CSS_MAP = {
   mobile: '/v/es2026/assets/css/index-mobile-a1.css',
   tablet: '/v/es2026/assets/css/index-tablet-b2.css',
@@ -26,6 +28,7 @@ const CSS_MAP = {
 }
 
 /** A manifest whose single target selects immediately. */
+/** Minimal build manifest shape the loader reads. */
 const mkManifest = () => ({
   targets: [
     {
@@ -48,6 +51,7 @@ const mkManifest = () => ({
  * recorded flag and dispatches every registered `change` listener —
  * mirroring a real breakpoint cross.
  */
+/** Evaluates the loader with matchMedia stubbed to `matches` map. */
 const runLoader = ({ matches = {}, appId = 'app' } = {}) => {
   const head = []
   const appEl = { appended: [], appendChild: (c) => appEl.appended.push(c) }

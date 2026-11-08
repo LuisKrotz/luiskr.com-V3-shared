@@ -9,6 +9,7 @@ import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 import { POINTER_EVENTS } from '@core/tokens/events/dom.js'
 
+// Records service-worker registration calls — the mock module injects it.
 const registerMock = jest.fn()
 
 jest.unstable_mockModule('@core/utils/service-worker.js', () => ({
@@ -16,6 +17,7 @@ jest.unstable_mockModule('@core/utils/service-worker.js', () => ({
   dropStaleServiceWorkers: jest.fn(),
 }))
 
+// Captured firebase-auth state callbacks — tests fire them to simulate sign-in.
 const authCallbacks = []
 
 jest.unstable_mockModule('@core/firebase.js', () => ({
@@ -37,6 +39,7 @@ jest.unstable_mockModule('firebase/database', () => ({
   remove: jest.fn(async () => {}),
 }))
 
+// No-op router stand-in — lets the entry module boot without a route table.
 const mockRouter = { init: () => {}, subscribe: () => () => {}, currentRoute: null }
 
 jest.unstable_mockModule('@core/router/router.js', () => ({

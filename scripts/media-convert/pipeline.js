@@ -19,36 +19,66 @@
  *     {base}.mp4-scaledown-2x.mp4.jpg           (poster of the scaled video)
  *     {base}.mp4-scaledown-2x.mp4.jpg-thumb.jpg
  *
+ *   pdfs →
+ *     {base}.png                             (all pages merged vertically)
+ *     {base}-thumb.png                       (page 1, ≤512px, natural orientation)
+ *
  * Tool preference per the original scripts: ImageMagick `convert` + mozjpeg
  * `cjpeg` when installed, ffmpeg fallback otherwise (always available).
  * WebP/WebM are always ffmpeg (libwebp / libvpx-vp9) — light compression,
  * and an output that lands >= its input is discarded so the jpg/mp4
- * original remains the served variant.
+ * original remains the served variant. PDFs rasterize through poppler's
+ * `pdftoppm` (ffmpeg cannot read PDFs) and merge through ImageMagick
+ * `-append` — both binaries must be on PATH for the pdf branch.
  */
 import { spawn, spawnSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
+import fsp from 'node:fs/promises'
+import os from 'node:os'
 import path from 'node:path'
-import { IMAGE_EXTS, VIDEO_EXTS, isMediaPath } from '../../../cms/media-convert/exts.ts'
+import { IMAGE_EXTS, PDF_EXTS, VIDEO_EXTS, isMediaPath } from '../../../cms/media-convert/exts.ts'
 
-export { IMAGE_EXTS, VIDEO_EXTS }
+export { IMAGE_EXTS, PDF_EXTS, VIDEO_EXTS }
 
 // ffmpeg -q:v is a 1–31 inverse scale; rough equivalents of cjpeg qualities
 const FFMPEG_Q = { q100: 2, q75: 5, q50: 9, q25blur: 13 }
 const SCALE_4K_THRESHOLD = 3840
 
+// Rasterization DPI for PDF pages — 150 keeps merged strips detailed
+// without exploding memory on long documents.
+const PDF_DPI = 150
+
+// Thumb bounding box for the page-1 preview — the `>` flag makes
+// ImageMagick's -thumbnail shrink-only, never upscaling small pages.
+const PDF_THUMB_GEOMETRY = '512x512>'
+
+/**
+ * `run` — promise wrapper around spawn for one-shot tool calls:
+ * stderr is buffered so a non-zero exit surfaces its tail in the
+ * rejection (ffmpeg progress lives on stderr).
+ */
 const run = (cmd, args) =>
   new Promise((resolve, reject) => {
     const p = spawn(cmd, args, { stdio: ['ignore', 'pipe', 'pipe'] })
+
     let err = ''
+
     p.stderr.on('data', (d) => {
       err += d
     })
+
     p.on('error', reject)
+
     p.on('close', (code) =>
       code === 0 ? resolve() : reject(new Error(`${cmd} exited ${code}: ${err.slice(-400)}`))
     )
   })
 
+/**
+ * `probeVideo` — ffprobe summary of the first video stream:
+ * codec, pixel width and pix_fmt (the three facts the convertVideo
+ * branch conditions on). csv=p=0 gives a clean comma row.
+ */
 const probeVideo = async (file) => {
   const p = spawn(
     'ffprobe',
@@ -65,20 +95,28 @@ const probeVideo = async (file) => {
     ],
     { stdio: ['ignore', 'pipe', 'ignore'] }
   )
+
   let out = ''
+
   p.stdout.on('data', (d) => {
     out += d
   })
+
   await new Promise((res) => p.on('close', res))
+
   const [codec = '', w = '', pixFmt = ''] = out.trim().split(',')
+
   return { codec: codec.trim(), width: parseInt(w, 10) || 0, pixFmt: pixFmt.trim() }
 }
 
-// Every tool accepts -version — probing it works on all platforms and
-// avoids POSIX `which` (Windows has no `which`; `where` is cmd-only and
-// its exit code is unreliable through spawn). On win32 `convert` resolves
-// to Microsoft's built-in filesystem converter, which fails -version →
-// reported absent and ImageMagick's `magick` entrypoint is used instead.
+/**
+ * Probes whether a CLI tool exists by running `cmd -version`. Every tool
+ * accepts -version — probing it works on all platforms and avoids POSIX
+ * `which` (Windows has no `which`; `where` is cmd-only and its exit code
+ * is unreliable through spawn). On win32 `convert` resolves to Microsoft's
+ * built-in filesystem converter, which fails -version → reported absent
+ * and ImageMagick's `magick` entrypoint is used instead.
+ */
 export const hasTool = async (cmd, args = ['-version']) =>
   new Promise((resolve) => {
     const p = spawn(cmd, args, { stdio: ['ignore', 'ignore', 'ignore'] })
@@ -126,21 +164,32 @@ export const refreshWindowsPath = () => {
   process.env.PATH = entries.join(';')
 }
 
+// Cached probe result — detection spawns five processes; one
+// result serves the whole session unless force re-probes.
 let TOOLS = null
 
+/**
+ * `detectTools` — probes the host's media binaries once and caches
+ * the map: which of ffmpeg/ffprobe/convert/cjpeg/magick answered
+ * -version, plus poppler's pdftoppm (its version flag is -v). `force`
+ * re-runs the probe (post-install refresh).
+ */
 export async function detectTools(force = false) {
   refreshWindowsPath()
 
   if (!TOOLS || force) {
-    const [ffmpeg, ffprobe, convert, cjpeg, magick] = await Promise.all([
+    const [ffmpeg, ffprobe, convert, cjpeg, magick, pdftoppm] = await Promise.all([
       hasTool('ffmpeg'),
       hasTool('ffprobe'),
       hasTool('convert'),
       hasTool('cjpeg'),
       hasTool('magick'),
+      hasTool('pdftoppm', ['-v']),
     ])
-    TOOLS = { ffmpeg, ffprobe, convert, cjpeg, magick }
+
+    TOOLS = { ffmpeg, ffprobe, convert, cjpeg, magick, pdftoppm }
   }
+
   return TOOLS
 }
 
@@ -180,23 +229,39 @@ async function jpeg(src, dest, quality, { blur = false } = {}) {
   }
 
   if (t.cjpeg && imOk(t)) {
-    // tasks/image/{50,75,100}: convert src pnm:- | cjpeg -quality N
+    // tasks/image/{50,75,100}: convert src pnm:- | cjpeg -quality N —
+    // a real two-process pipe: ImageMagick decodes to PNM on stdout,
+    // cjpeg re-encodes that stream to the dest file.
     const c1 = t.magick
       ? spawn('magick', ['convert', src, 'pnm:-'], { stdio: ['ignore', 'pipe', 'pipe'] })
       : spawn('convert', [src, 'pnm:-'], { stdio: ['ignore', 'pipe', 'pipe'] })
+
     const c2 = spawn('cjpeg', ['-quality', String(quality)], { stdio: ['pipe', 'pipe', 'pipe'] })
+
     c1.stdout.pipe(c2.stdin)
+
     const fs = await import('node:fs')
+
     const out = fs.createWriteStream(dest)
+
     c2.stdout.pipe(out)
+
+    // Resolution waits for BOTH ends: cjpeg finished encoding AND
+    // the output stream flushed to disk.
     await new Promise((resolve, reject) => {
       let done = 0
+
       const fin = () => (++done === 2 ? resolve() : null)
+
       c2.on('close', fin)
+
       out.on('close', fin)
+
       c1.on('error', reject)
+
       c2.on('error', reject)
     })
+
     return
   }
 
@@ -209,9 +274,14 @@ async function jpeg(src, dest, quality, { blur = false } = {}) {
         : quality >= 50
           ? FFMPEG_Q.q50
           : FFMPEG_Q.q25blur
+
   const args = ['-y', '-i', src]
+
+  // The blur variant inserts a gaussian-blur filter before encode.
   if (blur) args.push('-vf', 'gblur=sigma=10')
+
   args.push('-q:v', String(qv), dest)
+
   await run('ffmpeg', args)
 }
 
@@ -408,21 +478,86 @@ export async function convertVideo(inFile, outDir, baseName) {
   return results
 }
 
+/**
+ * PDF recipe — poppler's `pdftoppm` renders every page at PDF_DPI into a
+ * scratch dir, ImageMagick `-append` merges them into one tall strip
+ * (the single-PNG deliverable), and page 1 shrinks into the portrait-
+ * natural thumbnail. Both binaries are required: ffmpeg cannot parse
+ * PDFs and has no multi-image append. Page renders live in a mkdtemp
+ * workspace outside out/ so intermediates never reach the ZIP — the
+ * finally removes them on success AND failure.
+ */
+export async function convertPdf(inFile, outDir, baseName) {
+  const t = await detectTools()
+
+  if (!t.pdftoppm)
+    throw new Error('pdftoppm (poppler) is required for PDF conversion but was not found on PATH')
+
+  if (!imOk(t))
+    throw new Error('ImageMagick is required to merge PDF pages but was not found on PATH')
+
+  const tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'lk-pdf-'))
+
+  try {
+    const prefix = path.join(tmp, 'page')
+
+    await run('pdftoppm', ['-png', '-r', String(PDF_DPI), inFile, prefix])
+
+    // pdftoppm names pages <prefix>-N.png zero-padded to the last page's
+    // width, so alphabetical order is also page order at every count.
+    const pages = (await fsp.readdir(tmp))
+      .filter((n) => n.startsWith('page-') && n.endsWith('.png'))
+      .sort()
+      .map((n) => path.join(tmp, n))
+
+    if (!pages.length) throw new Error('pdftoppm produced no pages')
+
+    const merged = path.join(outDir, `${baseName}.png`)
+
+    // -append stacks every page vertically on the widest page's canvas;
+    // center gravity keeps narrower pages (mixed-size documents) aligned.
+    await imgMagick(t, [...pages, '-gravity', 'center', '-append', merged])
+
+    const thumb = path.join(outDir, `${baseName}-thumb.png`)
+
+    await imgMagick(t, [pages[0], '-thumbnail', PDF_THUMB_GEOMETRY, '-strip', thumb])
+
+    return [path.basename(merged), path.basename(thumb)]
+  } finally {
+    await fsp.rm(tmp, { recursive: true, force: true }).catch(() => {})
+  }
+}
+
+/**
+ * `convertFile` — the pipeline's entry point: requires ffmpeg (every
+ * path falls back to it), then dispatches on extension to the image,
+ * video or pdf recipe. Unsupported types throw — the job runner records
+ * the error per file.
+ */
 export async function convertFile(inFile, outDir) {
   const t = await detectTools()
+
+  const ext = path.extname(inFile).toLowerCase()
+
+  const baseName = path.basename(inFile, ext)
+
+  // PDFs never touch ffmpeg — poppler/IM own the whole branch, so the
+  // ffmpeg gate below stays scoped to the media formats that need it.
+  if (PDF_EXTS.has(ext)) return convertPdf(inFile, outDir, baseName)
 
   if (!t.ffmpeg)
     throw new Error('ffmpeg is required for media conversion but was not found on PATH')
 
-  const ext = path.extname(inFile).toLowerCase()
-  const baseName = path.basename(inFile, ext)
-
   if (IMAGE_EXTS.has(ext)) return convertImage(inFile, outDir, baseName)
+
   if (VIDEO_EXTS.has(ext)) return convertVideo(inFile, outDir, baseName)
 
   throw new Error(`unsupported file type: ${ext || '(none)'}`)
 }
 
+/** The job runner's litter filter — same predicate the API uses to skip
+ * non-media files inside uploaded folders. */
 export const isSupported = isMediaPath
 
+// Re-exported for consumers that resolve sibling outputs on disk.
 export { existsSync }

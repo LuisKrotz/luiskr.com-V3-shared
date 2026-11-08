@@ -11,10 +11,11 @@ import { describe, test, expect, afterEach, jest } from '@jest/globals'
 import { registerServiceWorker } from '@/registerServiceWorker.js'
 import { WINDOW_EVENTS, SW_EVENTS, SW_STRINGS } from '@core/tokens/events/dom.js'
 
+// Microtask+timer flush — SW registration settles across macrotasks.
 const flush = (ms = 30) => new Promise((r) => setTimeout(r, ms))
 
 /** Collectable fake registration — event handlers land in `handlers`. */
-const makeRegistration = (controllerState) => {
+const makeRegistration = () => {
   const installing = {
     state: SW_STRINGS.INSTALLED,
     handlers: {},

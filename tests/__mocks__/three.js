@@ -6,6 +6,13 @@
  * TextureLoader is real-ish so loadAsync() resolves textures.
  */
 
+/**
+ * Instance-shape proxy: property reads return real stored values when a
+ * test set them, otherwise another chainable — so `mesh.position.x` and
+ * `mesh.material.opacity` resolve at any depth without a GPU. `then`/`catch`
+ * are shadowed to undefined so awaiting a geometry/material never treats
+ * the proxy as a thenable.
+ */
 const autoInst = () =>
   new Proxy(
     {},
@@ -17,6 +24,7 @@ const autoInst = () =>
 
         return chain()
       },
+      // Writes stick — a test can read back what the engine assigned.
       set(t, p, v) {
         t[p] = v
 
@@ -25,6 +33,11 @@ const autoInst = () =>
     }
   )
 
+/**
+ * Call/construct-shape proxy: `new X()`, `x.y.z()`, and `x.y.z.w` all
+ * resolve — chain() for calls/props, autoInst() for construction and
+ * prototype so `new THREE.Mesh()` yields an instance-like object.
+ */
 const chain = () =>
   new Proxy(function () {}, {
     get(_t, p) {
@@ -46,8 +59,13 @@ const chain = () =>
     },
   })
 
+/** Minimal Texture-shaped object the loaders hand to engine code. */
 const makeTex = () => ({ mapping: 0, colorSpace: '', anisotropy: 0 })
 
+/**
+ * Real-ish texture loader — both callback and promise forms resolve a
+ * stub texture synchronously so engine load paths complete in tests.
+ */
 export class TextureLoader {
   load(_url, onLoad) {
     const tex = makeTex()

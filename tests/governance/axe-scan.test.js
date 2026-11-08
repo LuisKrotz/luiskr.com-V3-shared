@@ -46,6 +46,8 @@ import { MEDIA_ATTRS } from '@core/tokens/attrs/media.js'
 import { COVER_DIMENSIONS } from '@core/tokens/media/dimensions.js'
 import { STATE_STRINGS } from '@core/tokens/strings/state.js'
 
+// Report sink — every surface scan lands in axe-report.json under
+// experiments/docs/reports (bundled into deploy-info like the other gates).
 const REPORT_DIR = path.join(ROOT_DIR, 'experiments/docs/reports')
 const REPORT_FILE = path.join(REPORT_DIR, 'axe-report.json')
 // Lighthouse asserts accessibility = 1.0 — every binary audit must pass — so
@@ -55,6 +57,8 @@ const REPORT_FILE = path.join(REPORT_DIR, 'axe-report.json')
 // happy-dom report 'incomplete' for review, violations fail the gate.
 const FAIL_IMPACTS = new Set(['critical', 'serious', 'moderate', 'minor'])
 
+// The WCAG tag set passed to axe.run — all A/AA/AAA rule generations plus
+// best-practice, so the suite matches the Lighthouse audit's rule scope.
 const AXE_RUN_TAGS = [
   'wcag2a',
   'wcag2aa',
@@ -69,8 +73,13 @@ const AXE_RUN_TAGS = [
 // axe needs explicit origin trust inside jsdom-like environments
 axe.configure({ allowedOrigins: ['<unsafe_all_origins>'] })
 
+// Accumulator for every surface's scan entry — flushed to REPORT_FILE
+// by the afterAll hook so the report survives even on gate failure.
 const scanResults = []
 
+// Runs axe on one mounted surface, trims the result to the report schema
+// (violation id/impact/help + node targets, incomplete for review, pass
+// count), records it, and returns the entry for assertions.
 const recordScan = async (name, context, { disabledRules = [] } = {}) => {
   const results = await axe.run(context, {
     resultTypes: ['violations', 'incomplete'],
@@ -107,8 +116,11 @@ const recordScan = async (name, context, { disabledRules = [] } = {}) => {
   return entry
 }
 
+// Counts gate-failing violations on a scan entry — moderate+ impacts.
 const failCount = (entry) => entry.violations.filter((v) => FAIL_IMPACTS.has(v.impact)).length
 
+// Mounts a bare element under <body> — minimal harness for scans that
+// supply their own landmark structure.
 const mountEl = (el) => {
   document.body.appendChild(el)
   return el
@@ -132,6 +144,8 @@ const mountInPageShell = (els, { heading = null } = {}) => {
   return main
 }
 
+// Clears the mounted surface between tests and restores the shell
+// invariants axe checks — lang attribute + a non-empty <title>.
 const resetDocumentShell = () => {
   document.body.innerHTML = ''
   document.documentElement.setAttribute(COMMON_ATTRS.LANG, LOCALES.EN)
@@ -142,6 +156,7 @@ const resetDocumentShell = () => {
   }
 }
 
+// Lets pending store/rAF work settle — a single generous macrotask.
 const flushMicrotasks = () => new Promise((resolve) => setTimeout(resolve, 60))
 
 /**

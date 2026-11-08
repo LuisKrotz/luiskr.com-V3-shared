@@ -2185,13 +2185,25 @@ const SLUGS = {
   ga: 'beochan',
 }
 
-/** Sets `obj`'s leaf at a dot-path, creating intermediate containers. */
+/**
+ * Sets `obj`'s leaf at a dot-path, creating intermediate containers.
+ * Simpler than the sibling scripts' version — every path here is
+ * object-only (no numeric array indexes), so intermediates are {}.
+ *
+ * @param obj Root object to write into (the locale's translations node).
+ * @param dotPath Dotted path ('components.animations', 'APP.animations').
+ * @param value Leaf value to assign.
+ */
 const setPath = (obj, dotPath, value) => {
   const keys = dotPath.split('.')
+
+  // The leaf key — handled after the container walk.
   const last = keys.pop()
 
+  // Walk/create each intermediate object down to the leaf's parent.
   const node = keys.reduce((acc, k) => {
     if (acc[k] === undefined) acc[k] = {}
+
     return acc[k]
   }, obj)
 
@@ -2199,11 +2211,16 @@ const setPath = (obj, dotPath, value) => {
 }
 
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
+
+// Count of written leaves for the summary line.
 let patched = 0
 
 for (const [locale, animations] of Object.entries(DESCS)) {
+  // Skip locales missing their translations node entirely — a warn
+  // is loud enough without aborting the run.
   if (!db.translations?.[locale]) {
     console.warn(`skipping ${locale} — no translations node`)
+
     continue
   }
 
@@ -2214,9 +2231,13 @@ for (const [locale, animations] of Object.entries(DESCS)) {
   // Hub chrome — nav label + page node + slug-override default for the
   // animations-reference route.
   setPath(db.translations[locale], 'APP.animations', APP_LABELS[locale] || APP_LABELS.en)
+
   setPath(db.translations[locale], 'pages.animations', PAGES[locale] || PAGES.en)
+
   setPath(db.translations[locale], 'slugs.animations', SLUGS[locale] || SLUGS.en)
 
+  // Each record carries {alt, longdesc} — counting keys across
+  // records gives the leaf total the summary reports.
   for (const record of Object.values(animations)) {
     patched += Object.keys(record).length
   }
@@ -2228,16 +2249,23 @@ console.log(
 )
 
 // ── Optional Firebase push ────────────────────────────────────────────────
+// --push mirrors the same four nodes to live RTDB after the local
+// write — opt-in so routine mirror patches never touch production.
 if (process.argv.includes('--push')) {
   const keyPath = path.join(rootDir, '.firebase-admin-key.json')
 
+  // Missing service-account key → warn and exit 0 (the mirror write
+  // already succeeded; a skipped push isn't a failure).
   if (!fs.existsSync(keyPath)) {
     console.error(
       '⚠️  .firebase-admin-key.json missing — database.json written, Firebase push skipped'
     )
+
     process.exit(0)
   }
 
+  // Dynamic import — firebase-admin is only needed for the push
+  // path, so routine runs never pay its load cost.
   const { default: admin } = await import('firebase-admin')
 
   admin.initializeApp({
@@ -2247,15 +2275,22 @@ if (process.argv.includes('--push')) {
 
   const rtdb = admin.database()
 
+  // Same four writes per locale as the local patch — the live tree
+  // and the mirror stay identical.
   for (const [locale, animations] of Object.entries(DESCS)) {
     await rtdb.ref(`translations/${locale}/components/animations`).set(animations)
+
     await rtdb.ref(`translations/${locale}/APP/animations`).set(APP_LABELS[locale] || APP_LABELS.en)
+
     await rtdb.ref(`translations/${locale}/pages/animations`).set(PAGES[locale] || PAGES.en)
+
     await rtdb.ref(`translations/${locale}/slugs/animations`).set(SLUGS[locale] || SLUGS.en)
+
     console.log(
       `🔥 pushed translations/${locale}/components/animations + APP/animations + pages/animations + slugs/animations`
     )
   }
 
+  // Release the admin app's connection so the process can exit.
   await admin.app().delete()
 }

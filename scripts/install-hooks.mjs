@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /**
- * Cross-platform port of install-hooks.sh — copies the versioned hooks
- * from shared/scripts/git-hooks/ into the repo's real hooks directory AND
- * into every initialised submodule's hooks dir. The same hook files serve
- * both contexts: they detect `--show-superproject-working-tree` and gate
- * only their own module when invoked inside one.
+ * @file install-hooks.mjs
+ * @description Cross-platform port of install-hooks.sh — copies the
+ * versioned hooks from shared/scripts/git-hooks/ into the repo's real
+ * hooks directory AND into every initialised submodule's hooks dir.
+ * The same hook files serve both contexts: they detect
+ * `--show-superproject-working-tree` and gate only their own module
+ * when invoked inside one.
  *
  * Uses `git rev-parse --git-dir` so worktrees and submodule checkouts
  * resolve their true hooks dir (a `.git` file, not a directory).

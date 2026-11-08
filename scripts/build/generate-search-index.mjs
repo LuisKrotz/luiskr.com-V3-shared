@@ -427,14 +427,18 @@ const docsIndex = () => {
   return [...byPath.values()]
 }
 
+// Build the shared docs artifact once — the corpus is English-only.
 const DOCS_INDEX = docsIndex()
 
 fs.writeFileSync(path.join(META_DIR, 'search-index-docs.json'), JSON.stringify(DOCS_INDEX))
 
+// Running route count across locales for the final tally.
 let total = 0
 
 for (const loc of Object.keys(LANG_SLUGS)) {
+  // Docs paths are excluded — they live only in the shared artifact.
   const paths = sitemapPaths(loc).filter((p) => !isDocsPath(p))
+
   const entries = paths.map((p) => {
     const c = classify(loc, p)
 
@@ -444,6 +448,7 @@ for (const loc of Object.keys(LANG_SLUGS)) {
   // The search page itself must always be searchable — sitemaps generated
   // before this script shipped lack the /search route.
   const slugs = LANG_SLUGS[loc]
+
   const searchPath = loc === 'en' ? `/${slugs.search}` : `/${loc}/${slugs.search}`
 
   if (!entries.some((e) => e.p === searchPath)) {
@@ -455,7 +460,9 @@ for (const loc of Object.keys(LANG_SLUGS)) {
   const out = path.join(META_DIR, `search-index-${loc}.json`)
 
   fs.writeFileSync(out, JSON.stringify(entries))
+
   total += entries.length
+
   console.log(`${loc}: ${entries.length} routes → ${path.relative(REPO_ROOT, out)}`)
 }
 

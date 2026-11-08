@@ -124,19 +124,28 @@
   /** Collects polyfills whose guard APIs are missing, in declared order. */
   function neededPolyfills() {
     var missing = {}
+
     var out = []
+
     var i
+
+    // Pass 1 — probe every polyfill's guard API once.
     for (i = 0; i < LK.polys.length; i++) {
       missing[LK.polys[i].name] = !probe(LK.polys[i].guard)
     }
+
+    // Pass 2 — emit the missing ones in the manifest's load order
+    // (dependencies between fills are the manifest's concern).
     for (i = 0; i < LK.order.length; i++) {
       var name = LK.order[i]
+
       if (missing[name]) {
         for (var j = 0; j < LK.polys.length; j++) {
           if (LK.polys[j].name === name) out.push(LK.polys[j].file)
         }
       }
     }
+
     return out
   }
 
@@ -316,13 +325,21 @@
     document.head.appendChild(s)
   }
 
+  // ── Boot sequence ──────────────────────────────────────────────
+  // 1. Stamp the engine datasets + hint bag first — every later
+  //    stage (CSS hooks, tier gating) reads them.
   applyBrowserHints()
 
+  // 2. Pick the newest tier this engine satisfies.
   var tier = pickTier()
+
   if (!tier) {
     showFallback()
+
     return
   }
+
+  // 3. Fetch only the missing polyfills, then boot the tier.
   loadPolyfills(neededPolyfills(), function () {
     boot(tier)
   })
