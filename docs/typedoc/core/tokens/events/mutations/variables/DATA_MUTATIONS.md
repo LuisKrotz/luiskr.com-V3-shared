@@ -13,7 +13,7 @@ const DATA_MUTATIONS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/events/mutations.ts:60
+Defined in: core/tokens/events/mutations.ts:61
 
 Frozen data store-mutation name map — sole declaration site for these tokens; consumers
 read members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze

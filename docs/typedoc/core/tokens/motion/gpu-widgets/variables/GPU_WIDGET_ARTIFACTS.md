@@ -17,7 +17,7 @@ const GPU_WIDGET_ARTIFACTS: Readonly<
 >
 ```
 
-Defined in: core/tokens/motion/gpu-widgets.ts:70
+Defined in: core/tokens/motion/gpu-widgets.ts:72
 
 Artifact registry — kind → wasm-pack glue URL + exported class name.
 `url` is `/wasm/<slug>/<pkg>.js` under public/; `cls` is the crate's

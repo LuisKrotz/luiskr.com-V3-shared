@@ -8,7 +8,7 @@
 function emitSpaceJsonLd(c): void
 ```
 
-Defined in: experiments/earth-playground/space/schema.ts:43
+Defined in: experiments/earth-playground/space/schema.ts:51
 
 Emits the Earth Playground graph — route base + WebApplication whose
 `featureList` enumerates every control group's localized label, every

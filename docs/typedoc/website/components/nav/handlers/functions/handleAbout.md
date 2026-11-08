@@ -8,7 +8,7 @@
 function handleAbout(host, e?): void
 ```
 
-Defined in: website/components/nav/handlers.ts:77
+Defined in: website/components/nav/handlers.ts:78
 
 About link click: routes to the localized about slug.
 

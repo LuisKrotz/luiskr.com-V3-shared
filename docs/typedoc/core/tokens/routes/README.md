@@ -52,6 +52,18 @@ Re-exports [ASSET_PATHS](paths/variables/ASSET_PATHS.md)
 
 ---
 
+### ROUTE\_SEARCH\_KINDS
+
+Re-exports [ROUTE_SEARCH_KINDS](search/variables/ROUTE_SEARCH_KINDS.md)
+
+---
+
+### ROUTE\_SEARCH\_LIMITS
+
+Re-exports [ROUTE_SEARCH_LIMITS](search/variables/ROUTE_SEARCH_LIMITS.md)
+
+---
+
 ### TRANSLATION\_KEYS
 
 Re-exports [TRANSLATION_KEYS](translation-keys/variables/TRANSLATION_KEYS.md)

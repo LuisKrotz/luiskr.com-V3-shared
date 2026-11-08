@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/autoplay](../README.md) / CarouselAutoplayHost
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:23
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:24
 
 Host surface the autoplay engine needs (satisfied by CustomCarousel).
 
@@ -16,7 +16,7 @@ Host surface the autoplay engine needs (satisfied by CustomCarousel).
 autoplayRunning: boolean
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:25
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:26
 
 RAF cycle active flag.
 
@@ -28,7 +28,7 @@ RAF cycle active flag.
 autoplayStart: number
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:27
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:28
 
 performance.now() the current dwell cycle started at.
 
@@ -40,7 +40,7 @@ performance.now() the current dwell cycle started at.
 autoplayElapsed: number
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:29
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:30
 
 Accumulated ms into the cycle — survives pause→resume.
 
@@ -52,7 +52,7 @@ Accumulated ms into the cycle — survives pause→resume.
 ringProgress: number
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:31
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:32
 
 0–1 fraction of the autoplay cycle — drives ring + arrow arc.
 
@@ -64,7 +64,7 @@ Defined in: website/components/carousel/custom-carousel/autoplay.ts:31
 rafId: number | null
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:33
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:34
 
 RAF handle for cancellation.
 
@@ -76,7 +76,7 @@ RAF handle for cancellation.
 currentIndex: number
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:35
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:36
 
 Logical slide index for goTo(+1) on cycle end.
 
@@ -88,7 +88,7 @@ Logical slide index for goTo(+1) on cycle end.
 circumference: number
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:37
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:38
 
 2πr of the SVG ring — dasharray/dashoffset base.
 
@@ -100,7 +100,7 @@ Defined in: website/components/carousel/custom-carousel/autoplay.ts:37
 _autoplayPermanentlyStopped: boolean
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:39
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:40
 
 Latched by user interaction — blocks all autoplay resumes.
 
@@ -112,7 +112,7 @@ Latched by user interaction — blocks all autoplay resumes.
 _isRegressing: boolean
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:41
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:42
 
 Ring regress animation in flight.
 
@@ -124,7 +124,7 @@ Ring regress animation in flight.
 _prevArrow: CarouselArrowLike | null
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:43
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:44
 
 Prev/next arrow widgets (null until viewport entry mounts them).
 
@@ -136,7 +136,7 @@ Prev/next arrow widgets (null until viewport entry mounts them).
 _nextArrow: CarouselArrowLike | null
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:44
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:45
 
 ---
 
@@ -146,7 +146,7 @@ Defined in: website/components/carousel/custom-carousel/autoplay.ts:44
 _ringFills: Element[] | null;
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:51
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:52
 
 Cached ring-fill elements — `updateCarouselRingDom` queries the
 shadow DOM every frame otherwise; the array is refreshed lazily
@@ -161,7 +161,7 @@ discards the old fills).
 goTo(idx): void;
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:53
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:54
 
 Navigate to slide idx (clone-wrap aware).
 
@@ -183,7 +183,7 @@ Navigate to slide idx (clone-wrap aware).
 $$(selector): Element[];
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:55
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:56
 
 Shadow-scoped querySelectorAll.
 

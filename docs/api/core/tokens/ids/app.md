@@ -64,6 +64,15 @@ navigation landmark.
 Cookie-banner message text — aria-labelledby target giving the
 consent aside a _visible_ label (aria-label alone is invisible).
 
+### `ROUTE_SEARCH_LIST`
+
+Route-search listbox — the combobox's aria-controls target.
+
+### `ROUTE_SEARCH_OPTION_PREFIX`
+
+Route-search option id PREFIX — aria-activedescendant points at
+`<prefix><n>` rows inside the listbox.
+
 ### `READER_CONTENT`
 
 Parked reader article — the light-DOM skip link's static target.
@@ -72,25 +81,50 @@ app-root shadow tree): identical ids across trees are legal, but
 DOM-wide uniqueness checkers count the composed tree. At runtime a
 delegated handler re-aims the link at the shadow #main-content.
 
-### `NAV_GEAR_IDS`
+### `NAV_SEARCH_IDS`
 
-Frozen nav-gear SVG gradient-id map — the defs↔url(#…) link ids inside
-the machined-gear glyph (nav gear.tsx). Sole declaration site; the
-markup reads members via the `url()` ref helper instead of re-declaring
-the literals (zero-hardcoding rules 4–5).
+Gradient ids for the nav search magnifier SVG.
 
-### `FACE`
+### `GLASS`
 
-Radial face ramp — the tooth ring's base metal fill.
+Radial glass ramp — the lens face's soft convex fill.
 
 ### `RIM`
 
-Linear rim ramp — top-lit edge stroke on the outline + groove.
+Linear rim ramp — top-lit metal ring edge.
 
-### `HUB`
+### `HANDLE`
 
-Radial hub ramp — the raised center cylinder.
+Linear handle ramp — the machined grip's edge shading.
 
-### `HOLE`
+### `CHEV`
 
-Linear cavity ramp — drilled lightening holes + the center bore.
+Prompt chevron neon gradient (search glyph).
+
+### `STREAK`
+
+Motion streak gradient (search glyph).
+
+### `SHAFT`
+
+Brush shaft gradient.
+
+### `FERRULE`
+
+Chrome ferrule gradient.
+
+### `TIP`
+
+Bristle tip gradient.
+
+### `SWOOSH`
+
+Paint swoosh gradient.
+
+### `GLOBE`
+
+Globe outline gradient (language glyph).
+
+### `GRID`
+
+Grid outline gradient (menu glyph).

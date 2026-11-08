@@ -8,7 +8,7 @@
 function handleLogo(host, e?): void
 ```
 
-Defined in: website/components/nav/handlers.ts:62
+Defined in: website/components/nav/handlers.ts:63
 
 Logo click: navigates home, or scrolls top when already on home.
 

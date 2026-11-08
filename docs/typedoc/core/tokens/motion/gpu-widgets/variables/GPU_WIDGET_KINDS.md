@@ -22,6 +22,7 @@ const GPU_WIDGET_KINDS: Readonly<{
   CORNER_BRACKETS: 14
   SCENE3D: 15
   GENIE: 16
+  RING_FILL: 17
 }>
 ```
 

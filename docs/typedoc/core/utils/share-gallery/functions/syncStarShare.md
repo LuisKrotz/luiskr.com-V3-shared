@@ -8,7 +8,7 @@
 function syncStarShare(to, canonicalUrl, baseGraphOf): Promise<void>
 ```
 
-Defined in: core/utils/share-gallery.ts:217
+Defined in: core/utils/share-gallery.ts:231
 
 Star Field share sync — binds the generic rotation to the star set's
 manifest.

@@ -7,10 +7,9 @@
  *    firebase.json MUST pin `trailingSlash: false` (directory indexes then
  *    200 at the slashless URL; the slash variant 301s onto it — never the
  *    reverse, which would make every canonical a redirect).
- *  - Internal/agent surfaces (/docs, /docs-content, /deploy-info, /langs,
- *    /cms, /admin) carry `X-Robots-Tag: noindex` — they are excluded from
- *    every sitemap and from urllist.txt, and robots.txt never Disallows
- *    /docs itself (a Disallow would hide the noindex header from crawlers).
+ *  - Public docs pages are indexable; payload/replica surfaces
+ *    (/docs-content, /deploy-info, /langs, /llm, /cms, /admin) carry
+ *    `X-Robots-Tag: noindex` and stay outside sitemaps.
  *  - Every sitemap <loc> is a final canonical URL — no trailing slash
  *    (except the root), no redirect sources, no noindex surface.
  *  - Static emit never turns citation/provenance text into an <a href> —
@@ -28,6 +27,10 @@
  *  - Every localized CMS page and project carries a non-empty
  *    searchThemes list so prerendered keywords and media metadata stay
  *    grounded in localized content.
+ *  - IndexNow: the root key file exists and carries the declared key, and
+ *    the hosting `postdeploy` chain re-submits the whole canonical
+ *    surface (in both json and param forms) after each deploy makes the
+ *    key file live.
  */
 
 import { describe, test, expect } from '@jest/globals'
@@ -36,6 +39,8 @@ import path from 'node:path'
 import { LANG_SLUGS } from '@core/i18n.js'
 import { CMS_KEYS } from '@core/tokens/data/cms-keys.js'
 import { PROJECT_ALIASES } from '@core/tokens/routes/aliases.js'
+import { INDEXNOW } from '@core/tokens/indexnow.js'
+import { ROUTE_PATHS } from '@core/tokens/routes/paths.js'
 import { SCHEMA_STRINGS } from '@core/tokens/strings/schema.js'
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
@@ -75,10 +80,8 @@ describe('SEO indexation contract', () => {
     expect(firebase.hosting?.trailingSlash).toBe(false)
   })
 
-  test('internal and agent surfaces carry X-Robots-Tag: noindex', () => {
+  test('payload and replica surfaces carry X-Robots-Tag: noindex', () => {
     for (const source of [
-      '/docs',
-      '/docs/**',
       '/docs-content/**',
       '/deploy-info/**',
       '/langs/**',
@@ -86,11 +89,20 @@ describe('SEO indexation contract', () => {
       '/admin/**',
       '/llm',
       '/llm/**',
-      '/**/*.md',
-      '/**/*.json',
+      '/!(docs)/**/*.md',
+      '/*.md',
+      '/!(docs)/**/*.json',
+      '/*.json',
     ]) {
       expect(headerMap.get(source)?.['X-Robots-Tag'] || '').toContain('noindex')
     }
+
+    expect(headerMap.get('/**/*.md')?.['X-Robots-Tag']).toBeUndefined()
+    expect(headerMap.get('/**/*.json')?.['X-Robots-Tag']).toBeUndefined()
+    expect(headerMap.get('**/auth.md')).toBeUndefined()
+    expect(headerMap.get('/!(docs)/**/auth.md')?.['Content-Type']).toContain('text/markdown')
+    expect(headerMap.get(ROUTE_PATHS.DOCS)?.['X-Robots-Tag']).toBeUndefined()
+    expect(headerMap.get(`${ROUTE_PATHS.DOCS}/**`)?.['X-Robots-Tag']).toBeUndefined()
   })
 
   test('robots.txt disallows private payloads but keeps /docs crawlable', () => {
@@ -98,10 +110,9 @@ describe('SEO indexation contract', () => {
       expect(robots).toContain(`Disallow: ${d}`)
     }
 
-    // /docs must stay crawlable: its deindexation rides the X-Robots-Tag
-    // header, which a Disallow would hide from the crawler. Line-exact
-    // check — /docs-content/ is a legitimate disallow that shares the
-    // prefix.
+    // Docs pages are indexable, so crawlers must be able to fetch them.
+    // Line-exact checks — /docs-content/ is a payload path that shares the
+    // prefix and remains disallowed.
     const lines = robots.split('\n').map((l) => l.trim())
 
     expect(lines).not.toContain('Disallow: /docs')
@@ -134,7 +145,13 @@ describe('SEO indexation contract', () => {
   })
 
   test('every sitemap <loc> is a final canonical URL', () => {
-    const bannedPrefixes = [`${SITE}/docs`, `${SITE}/langs`, `${SITE}/cms`, `${SITE}/admin`]
+    const bannedPrefixes = [
+      `${SITE}/docs-content`,
+      `${SITE}/deploy-info`,
+      `${SITE}/langs`,
+      `${SITE}/cms`,
+      `${SITE}/admin`,
+    ]
     const aliases = Object.keys(PROJECT_ALIASES).map((a) => `/portfolio/${a}`)
 
     for (const loc of ['en', ...NON_EN]) {
@@ -164,8 +181,9 @@ describe('SEO indexation contract', () => {
       const p = u.slice(SITE.length)
 
       expect(p === '/' || p === '' || !p.endsWith('/')).toBe(true)
-      expect(p === '/docs' || p.startsWith('/docs/')).toBe(false)
     }
+
+    expect(urls).toContain(`${SITE}${ROUTE_PATHS.DOCS}`)
   })
 
   test('static emit never links citation/provenance text as an href', () => {
@@ -186,6 +204,7 @@ describe('SEO indexation contract', () => {
     const data = read(path.join(ROOT_DIR, 'website', 'views', 'project', 'data.ts'))
     const modal = read(path.join(ROOT_DIR, 'website', 'views', 'project', 'modal.ts'))
     const starfield = read(path.join(ROOT_DIR, 'experiments', 'star-field', 'StarField.tsx'))
+    const docs = read(path.join(ROOT_DIR, 'experiments', 'docs', 'Docs.tsx'))
 
     // not-found route → noindex through the shared head authority.
     expect(navigate).toContain('setRobotsMeta(to.name === ROUTE_NAMES.NOT_FOUND)')
@@ -196,6 +215,9 @@ describe('SEO indexation contract', () => {
 
     // unresolvable star-field body segment → noindex.
     expect(starfield).toContain('setRobotsMeta(true)')
+
+    // Missing docs paths are soft-404s even though the docs root is indexable.
+    expect(docs).toContain('setRobotsMeta(Boolean(docsPath && !this.node))')
   })
 
   test('indexable pages ship index-rich robots directives', () => {
@@ -213,5 +235,30 @@ describe('SEO indexation contract', () => {
     // standard-size previews.
     expect(schema).toContain('SCHEMA_STRINGS.INDEX_RICH_DIRECTIVES')
     expect(schema).toContain('SCHEMA_STRINGS.NOINDEX_NOFOLLOW')
+  })
+
+  test('IndexNow key file is hosted and postdeploy submits the whole surface', () => {
+    const submitScript = 'submit-indexnow.mjs'
+
+    // The root key file is the protocol's ownership proof — it must ship
+    // at /<key>.txt and carry exactly the declared key.
+    const keyFile = path.join(ROOT_DIR, 'website', 'public', INDEXNOW.KEY_FILE)
+
+    expect(fs.existsSync(keyFile)).toBe(true)
+    expect(read(keyFile).trim()).toBe(INDEXNOW.KEY)
+    expect(INDEXNOW.KEY_LOCATION).toBe(`${SITE}/${INDEXNOW.KEY_FILE}`)
+
+    // Submission runs postdeploy — the key file only validates once the
+    // new build (and the file itself) is live.
+    expect(firebase.hosting?.postdeploy).toContain(submitScript)
+
+    // The submitter reads the canonical inventory and speaks both
+    // protocol forms — the JSON urlList body and the per-URL url param.
+    const script = read(path.join(ROOT_DIR, 'shared', 'scripts', 'build', submitScript))
+
+    expect(script).toContain('urllist.txt')
+    expect(script).toContain('urlList')
+    expect(script).toContain('keyLocation')
+    expect(script).toContain('INDEXNOW')
   })
 })

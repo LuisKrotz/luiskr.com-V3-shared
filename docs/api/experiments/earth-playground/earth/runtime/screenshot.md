@@ -9,6 +9,10 @@ PNG capture for the Earth engine, extracted from
 
 ## Members
 
+### `FILENAME_STEM`
+
+Download/share-upload filename stem — descriptive enough that captures indexed by image search carry the query vocabulary.
+
 ### `takeEarthScreenshot`
 
 Renders one frame at 2× resolutionScale and downloads it as PNG.

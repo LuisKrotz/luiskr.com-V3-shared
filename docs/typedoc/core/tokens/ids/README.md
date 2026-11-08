@@ -18,6 +18,12 @@ Re-exports [NAV_GEAR_IDS](app/variables/NAV_GEAR_IDS.md)
 
 ---
 
+### NAV\_SEARCH\_IDS
+
+Re-exports [NAV_SEARCH_IDS](app/variables/NAV_SEARCH_IDS.md)
+
+---
+
 ### ASSET\_IDS
 
 Re-exports [ASSET_IDS](assets/variables/ASSET_IDS.md)

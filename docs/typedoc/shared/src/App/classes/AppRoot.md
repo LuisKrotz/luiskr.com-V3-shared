@@ -5178,7 +5178,7 @@ dynamic component (CurrentView = this.currentViewTag).
 onUpdated(): void;
 ```
 
-Defined in: shared/src/App.tsx:265
+Defined in: shared/src/App.tsx:267
 
 Lifecycle: after each re-render, re-pushes translations and modal state into children.
 

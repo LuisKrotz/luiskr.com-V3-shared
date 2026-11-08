@@ -24,3 +24,10 @@ Mobile refresh floor the animation gate enforces, in Hz.
 ### `DESKTOP_HZ`
 
 Desktop refresh floor the animation gate enforces, in Hz.
+
+### `HEAVY_ROUTE_HZ`
+
+Media-heavy route floor — project pages dense with carousels and
+media figures cannot sustain the native-refresh bound under
+full-viewport raster pressure; the fluid-display minimum (60Hz) is
+the honest gate there — anything below it is a real regression.

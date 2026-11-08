@@ -8,7 +8,7 @@
 type FrameCallback = (now) => void
 ```
 
-Defined in: core/utils/motion/frame.ts:28
+Defined in: core/utils/motion/frame.ts:30
 
 A per-frame callback — receives the pump's DOMHighResTimeStamp.
 

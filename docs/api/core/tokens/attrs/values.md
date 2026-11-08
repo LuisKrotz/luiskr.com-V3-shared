@@ -16,3 +16,7 @@ tabindex="0" — the single tab stop inside roving-tabindex widgets.
 ### `HTTP`
 
 URL scheme prefix check + img loading/audio-video preload values.
+
+### `OFF`
+
+`off` — autocomplete/spellcheck disable value.

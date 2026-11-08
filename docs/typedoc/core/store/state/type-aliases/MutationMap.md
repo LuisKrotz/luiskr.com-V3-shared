@@ -8,6 +8,6 @@
 type MutationMap = Record<string, Mutation>
 ```
 
-Defined in: core/store/state.ts:149
+Defined in: core/store/state.ts:150
 
 Map of mutation name → mutator built by createMutations().

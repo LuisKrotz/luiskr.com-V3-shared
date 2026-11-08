@@ -8,6 +8,6 @@
 const _K_LICENSE: 'license' = 'license'
 ```
 
-Defined in: core/tokens/base.ts:440
+Defined in: core/tokens/base.ts:453
 
 Token key "k license" — single source for the repeated literal.

@@ -233,6 +233,16 @@ Defined in: core/store/state.ts:135
 
 ---
 
+### searchModalOpen
+
+```ts
+searchModalOpen: boolean
+```
+
+Defined in: core/store/state.ts:136
+
+---
+
 ### modalOrigin
 
 ```ts
@@ -244,7 +254,7 @@ modalOrigin:
   | null;
 ```
 
-Defined in: core/store/state.ts:136
+Defined in: core/store/state.ts:137
 
 ---
 
@@ -254,4 +264,4 @@ Defined in: core/store/state.ts:136
 portfoliolist: unknown[];
 ```
 
-Defined in: core/store/state.ts:137
+Defined in: core/store/state.ts:138

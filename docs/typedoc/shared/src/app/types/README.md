@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / shared/src/app/types
 
@@ -14,4 +14,5 @@
 - [CookieBannerEl](type-aliases/CookieBannerEl.md)
 - [PrefModalEl](type-aliases/PrefModalEl.md)
 - [LangDialogEl](type-aliases/LangDialogEl.md)
+- [SearchModalEl](type-aliases/SearchModalEl.md)
 - [RoutableView](type-aliases/RoutableView.md)

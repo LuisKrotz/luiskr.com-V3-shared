@@ -8,7 +8,7 @@
 function updateRobotsMeta(noindex): void
 ```
 
-Defined in: website/views/project/data.ts:32
+Defined in: website/views/project/data.ts:38
 
 Toggles the noindex meta for draft/hidden projects — delegates to the
 shared head authority in core/utils/schema so every surface agrees.

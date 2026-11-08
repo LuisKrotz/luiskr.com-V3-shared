@@ -8,7 +8,7 @@
 const _B_PREF_THEME: 'pref-theme'
 ```
 
-Defined in: core/tokens/base.ts:327
+Defined in: core/tokens/base.ts:340
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

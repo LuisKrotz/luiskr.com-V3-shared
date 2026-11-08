@@ -8,7 +8,7 @@
 const framePool: object
 ```
 
-Defined in: core/utils/motion/frame.ts:129
+Defined in: core/utils/motion/frame.ts:142
 
 Shared frame scheduler — the single rAF pump every animation loop
 registers with. Mirrors the requestAnimationFrame/cancelAnimationFrame

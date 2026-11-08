@@ -1,6 +1,6 @@
 # `core\tests\unit\tokens\nav-css-tokens.test.js`
 
-Coverage tail for core/tokens/css/nav.ts — asserts every
+Coverage tail for core/tokens/css/nav.ts — asserts the nav
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |

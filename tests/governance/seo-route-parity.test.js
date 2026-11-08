@@ -7,9 +7,8 @@
  *
  *  - every locale's canonical slugs (LANG_SLUGS) appear in its sitemap +
  *    firebase rewrites — including earthPlayground and starField;
- *  - the English sitemap lists the full unprefixed indexable surface —
- *    the /docs tree is excluded (noindex agent surface, not a crawl
- *    target) and locale prefixes never leak in;
+ *  - the English sitemap lists the full unprefixed indexable surface,
+ *    including every public documentation, source, and coverage page;
  *  - every localized sitemap carries the shared unprefixed surface plus
  *    its own /<loc>/… routes so each discovers ≥ the English URL count;
  *  - noncanonical aliases (legacy project slugs, /space-playground,
@@ -30,9 +29,12 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { LANG_SLUGS } from '@core/i18n.js'
 import { CMS_KEYS } from '@core/tokens/data/cms-keys.js'
+import { SCHEMA_STRINGS } from '@core/tokens/strings/schema.js'
 import { PROJECT_ALIASES, MEDIA_SLUG_MAX_LENGTH } from '@core/tokens/routes/aliases.js'
+import { ROUTE_PATHS } from '@core/tokens/routes/paths.js'
 import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 import { ROOT_DIR } from '@tests/fixtures/test-constants.js'
+import { scanManifest } from '../../build/docs/scan.mjs'
 import { localize } from '../../scripts/build/build-locale-pages.mjs'
 
 const META_DIR = path.join(ROOT_DIR, 'website', 'public', 'meta')
@@ -40,9 +42,8 @@ const META_DIR = path.join(ROOT_DIR, 'website', 'public', 'meta')
 /** Absolute site origin every generated artifact is built against. */
 const SITE = 'https://luiskr.com'
 
-/** Minimum discovered-page count every locale sitemap must expose —
- * the en surface shrank to ~690 when the noindex /docs tree left the
- * crawl surface; the floor guards accidental mass-drops, not volume. */
+/** Minimum discovered-page count every locale sitemap must expose; the
+ * floor guards accidental mass-drops, not volume. */
 const MIN_SITEMAP_URLS = 500
 
 const NON_EN = Object.keys(LANG_SLUGS).filter((loc) => loc !== 'en')
@@ -161,6 +162,45 @@ const starBodyIds = () =>
     .filter((f) => f.endsWith('.json'))
     .map((f) => f.replace(/\.json$/, ''))
 
+/**
+ * Recursively collects every canonical docs route emitted from the
+ * scanner's publishable roots, including root and directory pages.
+ * @param {string} repoRoot Absolute repository root.
+ * @returns {string[]} Slashless public docs route paths.
+ */
+const docsPathsOf = (repoRoot) => {
+  const { roots } = scanManifest(repoRoot)
+  const paths = [ROUTE_PATHS.DOCS]
+
+  const visit = (node) => {
+    paths.push(`${ROUTE_PATHS.DOCS}/${node.path}`)
+
+    for (const child of node.children || []) visit(child)
+  }
+
+  for (const root of roots) {
+    paths.push(`${ROUTE_PATHS.DOCS}/${root.root}`)
+
+    for (const child of root.children) visit(child)
+  }
+
+  return paths
+}
+
+/**
+ * Encodes each path segment without changing slash separators.
+ * @param {string} routePath Canonical route path.
+ * @returns {string} Percent-encoded route path.
+ */
+const encodePath = (routePath) =>
+  routePath
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/')
+
+/** Canonical routes the docs generator emits from the current manifest. */
+const DOCS_PATHS = docsPathsOf(ROOT_DIR)
+
 describe('SEO route parity', () => {
   const enSitemap = read(path.join(META_DIR, 'sitemap-en.xml'))
   const enLocs = locsOf(enSitemap)
@@ -187,8 +227,14 @@ describe('SEO route parity', () => {
     }
   })
 
-  test('English sitemap excludes the noindex docs surface', () => {
-    expect(enLocs.some((u) => u === `${SITE}/docs` || u.startsWith(`${SITE}/docs/`))).toBe(false)
+  test('English sitemap lists every canonical docs portal route', () => {
+    const enSet = new Set(enLocs)
+
+    expect(DOCS_PATHS.length).toBeGreaterThan(0)
+
+    for (const route of DOCS_PATHS) {
+      expect(enSet.has(`${SITE}${encodePath(route)}`)).toBe(true)
+    }
   })
 
   test('English sitemap contains no locale-prefixed URLs', () => {
@@ -288,16 +334,6 @@ describe('SEO route parity', () => {
     }
   })
 
-  test('no sitemap advertises a /docs route in any locale', () => {
-    for (const loc of ['en', ...NON_EN]) {
-      const locs = locsOf(read(path.join(META_DIR, `sitemap-${loc}.xml`)))
-
-      for (const u of locs) {
-        expect(u === `${SITE}/docs` || u.startsWith(`${SITE}/docs/`)).toBe(false)
-      }
-    }
-  })
-
   test('noncanonical aliases never appear in any sitemap', () => {
     const banned = new Set([
       '/space-playground',
@@ -319,7 +355,7 @@ describe('SEO route parity', () => {
           expect(pathOnly).not.toBe(`/${loc}/earth-playground`)
           expect(pathOnly).not.toBe(`/${loc}/space-playground`)
           expect(pathOnly).not.toBe(`/${loc}/star-field-experiment`)
-          expect(pathOnly.startsWith(`/${loc}/docs`)).toBe(false)
+          expect(pathOnly.startsWith(`/${loc}${ROUTE_PATHS.DOCS}`)).toBe(false)
         }
       }
     }
@@ -343,7 +379,7 @@ describe('SEO route parity', () => {
       expect(dest[`/${loc}/star-field-experiment`]).toBe(`/${loc}/${slugs.starField}`)
       expect(dest[`/${loc}/privacy-policy`]).toBe(`/${loc}/${slugs.privacy}`)
       expect(dest[`/${loc}/terms-of-use`]).toBe(`/${loc}/${slugs.terms}`)
-      expect(dest[`/${loc}/docs`]).toBe('/docs')
+      expect(dest[`/${loc}${ROUTE_PATHS.DOCS}`]).toBe(ROUTE_PATHS.DOCS)
     }
 
     for (const r of redirects) expect(r.type).toBe(301)
@@ -382,6 +418,34 @@ describe('SEO route parity', () => {
     }
   })
 
+  test('sitemaps omit synthetic modification dates and unknown video facts', () => {
+    for (const locale of ['en', ...NON_EN]) {
+      const sitemap = read(path.join(META_DIR, `sitemap-${locale}.xml`))
+
+      expect(sitemap).not.toMatch(/<lastmod>/)
+      expect(sitemap).not.toMatch(/<video:duration>/)
+      expect(sitemap).not.toMatch(/<video:publication_date>/)
+    }
+
+    expect(read(path.join(META_DIR, 'sitemap.xml'))).not.toMatch(/<lastmod>/)
+
+    const pageBuilder = read(
+      path.join(ROOT_DIR, 'shared', 'scripts', 'build', 'build-locale-pages.mjs')
+    )
+
+    expect(pageBuilder).not.toContain('SCHEMA_PUBLISHED_DATE')
+    expect(pageBuilder).not.toContain('BUILD_DATE')
+    expect(pageBuilder).not.toContain('BUILD_STAMP')
+    expect(pageBuilder).toContain('...starBodyMediaEntities(loc, body, bodyUrl)')
+    expect(pageBuilder).toContain("mainEntity: { '@id': `${bodyUrl}#article` }")
+
+    const runtimeSchema = read(
+      path.join(ROOT_DIR, 'experiments', 'star-field', 'star', 'schema.ts')
+    )
+
+    expect(runtimeSchema).toContain('media: dossier?.media')
+  })
+
   test('RSS routes serve localized feeds with valid media URLs', () => {
     const feedRewrites = firebase.hosting.rewrites.filter(({ source }) =>
       /(?:feed|rss)\.xml$/.test(source)
@@ -407,7 +471,27 @@ describe('SEO route parity', () => {
       expect(selfLinks[0]).toBe(`${SITE}${canonicalRoute}`)
       expect(itemCount).toBeGreaterThan(0)
       expect(feed).not.toMatch(/(?:media:content|media:thumbnail)\s+url=""/)
+      // Browsers must render the styled sheet, not the raw element tree —
+      // every feed names the shared /feed.css via a text/css stylesheet PI
+      // (client-side XSLT is deprecated and being removed; the CSS PI is
+      // the surviving presentation contract).
+      expect(feed).toContain(
+        `<?xml-stylesheet type="text/css" href="/${ROUTE_PATHS.FEED_CSS_FILE}"?>`
+      )
+      expect(feed).not.toContain('text/xsl')
     }
+
+    // The compiled token sheet ships as a meta payload and is wired to the
+    // feeds: generate-sitemap.js emits it from website/sass/feed.scss and
+    // firebase rewrites the root /feed.css URL onto /meta/feed.css.
+    expect(fs.existsSync(path.join(META_DIR, ROUTE_PATHS.FEED_CSS_FILE))).toBe(true)
+    expect(
+      firebase.hosting.rewrites.some(
+        ({ source, destination }) =>
+          source === `/${ROUTE_PATHS.FEED_CSS_FILE}` &&
+          destination === `/meta/${ROUTE_PATHS.FEED_CSS_FILE}`
+      )
+    ).toBe(true)
 
     const englishFeed = read(path.join(META_DIR, 'feed.xml'))
     const mediaUrls = [
@@ -421,6 +505,36 @@ describe('SEO route parity', () => {
 
     for (const mediaUrl of mediaUrls) {
       expect(() => new URL(mediaUrl)).not.toThrow()
+    }
+  })
+
+  test('RSS items carry author, searchTheme categories and the search page', () => {
+    for (const loc of ['en', ...NON_EN]) {
+      const prefix = loc === 'en' ? '' : `/${loc}`
+      const feed = read(path.join(META_DIR, ...(loc === 'en' ? [] : [loc]), 'feed.xml'))
+      const items = feed.split('<item>').slice(1)
+
+      expect(feed).toContain('xmlns:dc="http://purl.org/dc/elements/1.1/"')
+      expect(feed).toContain(`<link>${SITE}${prefix}/${LANG_SLUGS[loc].search}</link>`)
+
+      for (const item of items) {
+        expect(item).toMatch(/<dc:creator>[^<]+<\/dc:creator>/)
+        expect(item).toMatch(/<guid isPermaLink="true">https:\/\/[^<]+<\/guid>/)
+      }
+
+      // Every page/project node carries searchThemes, so categories are
+      // present on (nearly) every item — require a clear majority.
+      const withCategory = items.filter((item) => item.includes('<category>')).length
+
+      expect(withCategory / items.length).toBeGreaterThan(0.9)
+    }
+  })
+
+  test('footer feed link resolves to a rewritten feed in every locale', () => {
+    for (const loc of Object.keys(LANG_SLUGS)) {
+      const href = `${loc === 'en' ? '' : `/${loc}`}/${ROUTE_PATHS.FEED_FILE}`
+
+      expect(rewriteSources.has(href)).toBe(true)
     }
   })
 
@@ -490,9 +604,8 @@ describe('SEO route parity', () => {
 
     expect(robots).toContain('Disallow: /cms')
     expect(robots).toContain('Disallow: /admin')
-    // /docs stays crawlable so its X-Robots-Tag: noindex is seen — a
-    // Disallow would hide the header and strand already-indexed URLs.
-    // Line-exact: /docs-content/ legitimately shares the prefix.
+    // Public docs pages are indexable, while the docs-content payload is
+    // intentionally disallowed despite sharing the route prefix.
     const lines = robots.split('\n').map((l) => l.trim())
 
     expect(lines).not.toContain('Disallow: /docs')
@@ -534,6 +647,7 @@ describe('SEO route parity', () => {
 <meta property="og:image:alt" content="d">
 <meta property="og:title" content="t"><meta name="twitter:title" content="t">
 <meta name="DC.Title" content="t">
+<meta property="og:type" content="website">
 <script type="application/ld+json" id="jsonld-graph">{}</script>
 </head><body><div id="app">${app}</div></body></html>`
 
@@ -563,6 +677,32 @@ describe('SEO route parity', () => {
       expect(out).not.toContain('boot-veil')
       expect(out).not.toContain('Stale')
     }
+
+    const articleMeta = {
+      section: SCHEMA_STRINGS.SCHEMA_ARTICLE_SECTION,
+      tags: [],
+    }
+    const withoutDates = localize(shell(''), {
+      ...args,
+      ogType: SCHEMA_STRINGS.SCHEMA_OG_ARTICLE,
+      articleMeta,
+    })
+
+    expect(withoutDates).not.toContain(SCHEMA_STRINGS.SCHEMA_ARTICLE_PUBLISHED_TIME)
+    expect(withoutDates).not.toContain(SCHEMA_STRINGS.SCHEMA_ARTICLE_MODIFIED_TIME)
+
+    const withDates = localize(shell(''), {
+      ...args,
+      ogType: SCHEMA_STRINGS.SCHEMA_OG_ARTICLE,
+      articleMeta: {
+        ...articleMeta,
+        published: '2025-01-02T00:00:00+00:00',
+        modified: '2025-02-03T00:00:00+00:00',
+      },
+    })
+
+    expect(withDates).toContain(SCHEMA_STRINGS.SCHEMA_ARTICLE_PUBLISHED_TIME)
+    expect(withDates).toContain(SCHEMA_STRINGS.SCHEMA_ARTICLE_MODIFIED_TIME)
 
     // Content omitted (e.g. non-route emits) must not touch the container.
     const untouched = localize(shell('<article class="reader-content">keep</article>'), {

@@ -8,7 +8,7 @@
 const _K_TITLE: 'title' = 'title'
 ```
 
-Defined in: core/tokens/base.ts:515
+Defined in: core/tokens/base.ts:528
 
 Shared key token `title` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

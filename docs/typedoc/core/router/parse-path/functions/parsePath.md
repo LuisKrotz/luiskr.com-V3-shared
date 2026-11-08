@@ -8,7 +8,7 @@
 function parsePath(pathname): RouteDescriptor
 ```
 
-Defined in: core/router/parse-path.ts:112
+Defined in: core/router/parse-path.ts:143
 
 Pure resolution: pathname → route descriptor { name, view, lang,
 path, meta, params }. meta.scrollTo triggers a post-nav smooth-scroll

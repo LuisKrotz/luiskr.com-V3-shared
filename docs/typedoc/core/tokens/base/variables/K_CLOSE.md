@@ -8,6 +8,6 @@
 const _K_CLOSE: 'close' = 'close'
 ```
 
-Defined in: core/tokens/base.ts:423
+Defined in: core/tokens/base.ts:436
 
 Token key "k close" — single source for the repeated literal.

@@ -7,6 +7,16 @@
 
 ## Members
 
+### `routeMinFps`
+
+Resolves the enforced floor for one route+profile pair: diagnostics
+(minFps 0) never gate, media-heavy routes use the fluid-display floor,
+everything else keeps the profile's native-refresh floor.
+
+- `@param` {object} profile — the PROFILES entry being measured
+- `@param` {string} route — the route being measured
+- `@returns` {number} enforced fps floor (0 = diagnostic, never fails)
+
 ### `resolveChrome`
 
 Locates a Chrome/Chromium binary for puppeteer-core (which ships no

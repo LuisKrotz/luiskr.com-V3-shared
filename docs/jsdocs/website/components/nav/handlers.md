@@ -1,8 +1,8 @@
 # `website\components\nav\handlers.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website\components\nav\handlers.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\nav\handlers.ts`                |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -13,6 +13,7 @@ Shared click preamble: kill the default anchor navigation and bubbling —
 nav links are `<a href>` for SEO/right-click but click interception
 routes through the SPA router, and stopPropagation prevents parent
 gesture handlers (menu swipe, card taps) from double-firing.
+
 - `@param` e DOM event to neutralize.
 
 ### `captureOrigin`
@@ -22,6 +23,7 @@ preferences/lang dialogs read it to zoom their "genie" open animation
 out from the trigger instead of from screen center. Falls back to
 `closest('button,a')` because the click may land on an inner span —
 the origin should be the control's center, not the text node's.
+
 - `@param` e Click event on (or inside) the trigger control.
 
 ### `handleLogo`
@@ -41,6 +43,12 @@ localized home route; otherwise it scrolls to the contact slug/footer.
 ### `handlePreferences`
 
 Opens the preferences modal (fires open-preferences-modal after capturing origin).
+
+### `handleSearch`
+
+Opens the search modal — the menu closes first, then the dialog mounts
+its <route-search> surface. Plain clicks only; modifier clicks fall
+through to the /search href (real navigation for SEO/new-tab).
 
 ### `handleLang`
 

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/views/not-found/NotFound](../README.md) / ViewNotFound
 
-Defined in: website/views/not-found/NotFound.tsx:38
+Defined in: website/views/not-found/NotFound.tsx:39
 
 The ViewNotFound — not found class.
 
@@ -20,7 +20,7 @@ The ViewNotFound — not found class.
 new ViewNotFound(): ViewNotFound;
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:49
+Defined in: website/views/not-found/NotFound.tsx:50
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 translations: NotFoundNode | null
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:45
+Defined in: website/views/not-found/NotFound.tsx:46
 
 Seeded with the build-time English snapshot so the 404 renders
 meaningful copy instantly — and still renders when the Firebase fetch
@@ -4249,7 +4249,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get emojiLine(): string;
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:55
+Defined in: website/views/not-found/NotFound.tsx:56
 
 The decorative emoji/symbol row above the message.
 
@@ -4267,7 +4267,7 @@ The decorative emoji/symbol row above the message.
 get subtitle(): string;
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:62
+Defined in: website/views/not-found/NotFound.tsx:63
 
 Localized 404 message.
 
@@ -4285,7 +4285,7 @@ Localized 404 message.
 get homePath(): string;
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:69
+Defined in: website/views/not-found/NotFound.tsx:70
 
 Localized home URL for the back link.
 
@@ -4860,7 +4860,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:76
+Defined in: website/views/not-found/NotFound.tsx:77
 
 Lifecycle: loads translations.
 
@@ -4880,7 +4880,7 @@ Lifecycle: loads translations.
 onUpdated(): void;
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:84
+Defined in: website/views/not-found/NotFound.tsx:85
 
 Lifecycle: re-binds links after render.
 
@@ -4900,7 +4900,7 @@ Lifecycle: re-binds links after render.
 loadData(): void;
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:105
+Defined in: website/views/not-found/NotFound.tsx:106
 
 Loads the not-found translation node via SWR.
 
@@ -4916,7 +4916,7 @@ Loads the not-found translation node via SWR.
 render(): Element;
 ```
 
-Defined in: website/views/not-found/NotFound.tsx:122
+Defined in: website/views/not-found/NotFound.tsx:123
 
 JSX template for the view's shadow DOM.
 

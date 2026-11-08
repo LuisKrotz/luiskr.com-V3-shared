@@ -16,6 +16,7 @@ const VIEW_TAGS: Readonly<{
   VIEW_STAR_FIELD: 'view-star-field'
   VIEW_DOCS: 'view-docs'
   VIEW_ANIMATIONS: 'view-animations'
+  VIEW_SEARCH: 'view-search'
 }>
 ```
 

@@ -27,6 +27,10 @@ English-only docs portal — suppresses the language switcher.
 
 ### (module scope)
 
+og:type for the resolved route class — SCHEMA_OG_* tokens ('article', 'profile', …).
+
+### (module scope)
+
 A resolved route — everything the nav pipeline and views need.
 
 ### `name`

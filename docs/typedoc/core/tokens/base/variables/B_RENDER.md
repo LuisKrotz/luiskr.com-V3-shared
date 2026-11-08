@@ -8,7 +8,7 @@
 const _B_RENDER: 'render' = 'render'
 ```
 
-Defined in: core/tokens/base.ts:179
+Defined in: core/tokens/base.ts:192
 
 BEM block fragment `render` — declared once here; every domain class token composes from
 this fragment (zero-hardcoding rule 9).

@@ -83,13 +83,25 @@ License page segment.
 
 ---
 
+### search
+
+```ts
+search: string
+```
+
+Defined in: core/i18n.ts:87
+
+Search page segment.
+
+---
+
 ### earthPlayground
 
 ```ts
 earthPlayground: string
 ```
 
-Defined in: core/i18n.ts:87
+Defined in: core/i18n.ts:89
 
 Earth playground segment.
 
@@ -101,7 +113,7 @@ Earth playground segment.
 starField: string
 ```
 
-Defined in: core/i18n.ts:89
+Defined in: core/i18n.ts:91
 
 Star-field experiment segment.
 
@@ -113,6 +125,6 @@ Star-field experiment segment.
 animations: string
 ```
 
-Defined in: core/i18n.ts:91
+Defined in: core/i18n.ts:93
 
 Animations-reference segment.

@@ -14,8 +14,9 @@ import { fileURLToPath } from 'url'
 import * as sass from 'sass'
 import { THEME_CSS_PROPS } from '@core/tokens/css/theme.js'
 import { MENU_CSS_PROPS } from '@core/tokens/css/menu.js'
+import { NAV_SEARCH_CSS_PROPS } from '@core/tokens/css/nav.js'
 
-const C = { ...THEME_CSS_PROPS, ...MENU_CSS_PROPS }
+const C = { ...THEME_CSS_PROPS, ...MENU_CSS_PROPS, ...NAV_SEARCH_CSS_PROPS }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const SASS_BASE = path.join(__dirname, '..', '..', '..', 'core', 'sass', 'base')
@@ -78,6 +79,14 @@ const LIGHT_PAIRS = [
   [C.MENU_INK, C.MENU_BG, 7, 'menu labels (small caps) on menu field'],
   [C.WHITE, C.BG_DARK, 7, 'inverted ink on contact/footer band'],
   [C.COLOR_ACCENT_CONTRAST, C.BG_PRIMARY, 3, 'focus ring / check icon (UI)'],
+  // Nav glyph neon inks on the chip disc (%nav-chip background — the
+  // solid --border-color swatch in light theme). SC 1.4.11 non-text floor.
+  [C.NEON_TEAL, C.BORDER_COLOR, 3, 'nav teal glyph ink on chip disc'],
+  [C.NEON_GREEN, C.BORDER_COLOR, 3, 'nav green glyph ink on chip disc'],
+  [C.NEON_VIOLET, C.BORDER_COLOR, 3, 'nav violet glyph ink on chip disc'],
+  [C.NEON_MAGENTA, C.BORDER_COLOR, 3, 'nav magenta glyph ink on chip disc'],
+  [C.NEON_ORANGE, C.BORDER_COLOR, 3, 'nav orange glyph ink on chip disc'],
+  [C.NEON_CHROME, C.BORDER_COLOR, 3, 'nav chrome glyph ink on chip disc'],
 ]
 
 const DARK_PAIRS = [
@@ -89,6 +98,15 @@ const DARK_PAIRS = [
   [C.TEXT_MUTED_ON_DARK, C.BG_DARK, 7, 'muted text on dark bands/modals'],
   [C.MENU_INK, C.MENU_BG, 7, 'menu labels on menu field'],
   [C.COLOR_ACCENT_CONTRAST, C.BG_PRIMARY, 3, 'focus ring / check icon (UI)'],
+  // Nav glyph neon inks — the dark chip disc is a translucent white veil
+  // (color-mix over the page), so the audit floors them against the page
+  // field the veil sits on.
+  [C.NEON_TEAL, C.BG_PRIMARY, 3, 'nav teal glyph ink on chip disc'],
+  [C.NEON_GREEN, C.BG_PRIMARY, 3, 'nav green glyph ink on chip disc'],
+  [C.NEON_VIOLET, C.BG_PRIMARY, 3, 'nav violet glyph ink on chip disc'],
+  [C.NEON_MAGENTA, C.BG_PRIMARY, 3, 'nav magenta glyph ink on chip disc'],
+  [C.NEON_ORANGE, C.BG_PRIMARY, 3, 'nav orange glyph ink on chip disc'],
+  [C.NEON_CHROME, C.BG_PRIMARY, 3, 'nav chrome glyph ink on chip disc'],
 ]
 
 describe('WCAG AAA token contrast — compiled theme pairs', () => {

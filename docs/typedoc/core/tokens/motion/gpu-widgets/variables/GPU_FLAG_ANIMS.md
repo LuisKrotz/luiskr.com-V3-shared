@@ -21,7 +21,7 @@ const GPU_FLAG_ANIMS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/motion/gpu-widgets.ts:231
+Defined in: core/tokens/motion/gpu-widgets.ts:241
 
 Flag animation personalities — mirrors `u_anim_type` in the flag
 shader and `rust/flag`'s anim doc.

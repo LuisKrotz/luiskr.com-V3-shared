@@ -8,7 +8,7 @@
 function startCarouselAutoplay(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:65
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:66
 
 Starts the autoplay RAF loop unless latched off or already running.
 `autoplayStart` is backdated by `autoplayElapsed` so a pause→resume

@@ -8,7 +8,7 @@
 function jumpToSlide(c, idx, smooth?): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:303
+Defined in: website/components/carousel/custom-carousel/nav.ts:304
 
 Instant (default) or smooth position jump to slide idx — used for the
 clone teleports and resize refits. When layout hasn't produced

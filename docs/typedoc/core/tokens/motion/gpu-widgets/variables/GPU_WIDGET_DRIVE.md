@@ -11,7 +11,7 @@ const GPU_WIDGET_DRIVE: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/motion/gpu-widgets.ts:209
+Defined in: core/tokens/motion/gpu-widgets.ts:219
 
 Drive modes for `mountWebGpuWidget` — who owns the rAF clock.
 Frozen; consumers import members, never redeclare literals.

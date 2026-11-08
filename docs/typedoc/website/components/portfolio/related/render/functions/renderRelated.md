@@ -8,7 +8,7 @@
 function renderRelated(host): Element
 ```
 
-Defined in: website/components/portfolio/related/render.tsx:333
+Defined in: website/components/portfolio/related/render.tsx:338
 
 JSX template for the component's shadow DOM.
 

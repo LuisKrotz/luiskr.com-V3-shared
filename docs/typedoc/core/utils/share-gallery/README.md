@@ -11,4 +11,6 @@
 - [syncEarthShare](functions/syncEarthShare.md)
 - [syncStarShare](functions/syncStarShare.md)
 - [cancelShare](functions/cancelShare.md)
+- [currentShareImage](functions/currentShareImage.md)
+- [shareImagesCached](functions/shareImagesCached.md)
 - [resetShareGallery](functions/resetShareGallery.md)

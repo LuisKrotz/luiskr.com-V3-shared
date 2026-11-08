@@ -44,6 +44,15 @@ Frozen video dimension map — sole declaration site for these tokens; consumers
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes
 the token contract immutable at runtime.
 
+### `MEDIA_OBSERVER_THRESHOLDS`
+
+Frozen IntersectionObserver visibility fractions for media figures —
+`VIDEO_OBSERVER_THRESHOLD` (0.15) is the share of the video box that
+must be on-screen before its poster/stream attach is even scheduled;
+`IMAGE_OBSERVER_THRESHOLD` (0.01) is the hair-trigger for the lazy
+high-res climb and the wider CDN warm band, whose generous rootMargins
+do the real prefetch shaping.
+
 ### `FLAG_DIMENSIONS`
 
 Frozen flag-icon geometry map — flag images are drawn at small pixel

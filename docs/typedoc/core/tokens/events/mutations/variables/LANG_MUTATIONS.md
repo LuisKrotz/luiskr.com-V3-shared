@@ -15,7 +15,7 @@ const LANG_MUTATIONS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/events/mutations.ts:25
+Defined in: core/tokens/events/mutations.ts:26
 
 Frozen lang store-mutation name map — sole declaration site for these tokens; consumers
 read members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze

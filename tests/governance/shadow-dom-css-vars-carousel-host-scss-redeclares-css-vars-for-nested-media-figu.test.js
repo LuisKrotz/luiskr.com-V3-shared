@@ -52,8 +52,9 @@ describe('carousel-host.scss redeclares CSS vars for nested media-figure', () =>
   test('1024px --mf-w is $space-6xl', () => {
     expect(chc).toMatch(/layout-1024[\s\S]*?--mf-w:\s*var\(--space-6xl\)/)
   })
-  test('1024px --mf-h is $space-7xl', () => {
-    expect(chc).toMatch(/layout-1024[\s\S]*?--mf-h:\s*var\(--space-7xl\)/)
+  test('1024px --mf-h defers to the published --carousel-media-height', () => {
+    // Same self-size-by-intrinsic contract as the default and 768 tiers.
+    expect(chc).toMatch(/layout-1024[\s\S]*?--mf-h:\s*var\(--carousel-media-height\)/)
   })
   test('1440px --mf-w is $space-7xl', () => {
     expect(chc).toMatch(/layout-1440[\s\S]*?--mf-w:\s*var\(--space-7xl\)/)

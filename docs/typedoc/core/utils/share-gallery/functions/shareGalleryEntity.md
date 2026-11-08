@@ -5,10 +5,10 @@
 [luiskr.com](../../../../README.md) / [core/utils/share-gallery](../README.md) / shareGalleryEntity
 
 ```ts
-function shareGalleryEntity(pageUrl, name, urls, bcp): Record<string, unknown>
+function shareGalleryEntity(pageUrl, name, urls, bcp, lang?): Record<string, unknown>
 ```
 
-Defined in: core/utils/share-gallery.ts:132
+Defined in: core/utils/share-gallery.ts:134
 
 ImageObject ItemList covering the whole share set — mirrors the
 build-time share entities emitted into the static playground
@@ -39,6 +39,12 @@ the full share set
 `string`
 
 BCP-47 tag for inLanguage
+
+### lang?
+
+`string`
+
+locale code — resolves the license/acquireLicensePage targets
 
 ## Returns
 

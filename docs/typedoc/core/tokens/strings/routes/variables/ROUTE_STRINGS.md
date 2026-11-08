@@ -19,6 +19,7 @@ const ROUTE_STRINGS: Readonly<{
   LICENSE: 'license'
   ABOUT: 'about'
   CONTACT: 'contact'
+  SEARCH_BUSCA: 'busca'
 }>
 ```
 

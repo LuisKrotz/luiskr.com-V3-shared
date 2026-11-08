@@ -44,6 +44,12 @@ localized home route; otherwise it scrolls to the contact slug/footer.
 
 Opens the preferences modal (fires open-preferences-modal after capturing origin).
 
+### `handleSearch`
+
+Opens the search modal — the menu closes first, then the dialog mounts
+its <route-search> surface. Plain clicks only; modifier clicks fall
+through to the /search href (real navigation for SEO/new-tab).
+
 ### `handleLang`
 
 Opens the language dialog (fires open-lang-dialog after capturing origin).

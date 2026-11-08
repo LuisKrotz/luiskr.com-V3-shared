@@ -116,6 +116,10 @@ describe('main.js branch warm-ups', () => {
     // the runtime view lands in the outlet.
     expect(hoisted.classList.contains(READER_CLASSES.OFFSCREEN)).toBe(false)
     expect(app.contains(hoisted)).toBe(false)
+    // The routed view owns the level-one heading — the parked mirror's
+    // h1 demotes to h2 at hoist so the live outline keeps exactly one.
+    expect(hoisted.querySelector(HTML_TAGS.H1)).toBe(null)
+    expect(hoisted.querySelector(HTML_TAGS.H2)).toBeTruthy()
 
     hoisted.remove()
   })

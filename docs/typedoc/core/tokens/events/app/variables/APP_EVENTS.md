@@ -1,21 +1,22 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/events/app](../README.md) / APP\_EVENTS
 
 ```ts
 const APP_EVENTS: Readonly<{
-  COOKIE_ACTION: "cookieAction";
-  SLIDE_CHANGE: "slidechange";
-  AUTOPLAY_STOP: "autoplaystop";
-  AUTOPLAY_START: "autoplaystart";
-  CANCEL: "cancel";
-  CLOSE: "close";
-  OPEN_LANG_DIALOG: "open-lang-dialog";
-  OPEN_PREFERENCES_MODAL: "open-preferences-modal";
-  NOTIFY: "notify";
-}>;
+  COOKIE_ACTION: 'cookieAction'
+  SLIDE_CHANGE: 'slidechange'
+  AUTOPLAY_STOP: 'autoplaystop'
+  AUTOPLAY_START: 'autoplaystart'
+  CANCEL: 'cancel'
+  CLOSE: 'close'
+  OPEN_LANG_DIALOG: 'open-lang-dialog'
+  OPEN_PREFERENCES_MODAL: 'open-preferences-modal'
+  OPEN_SEARCH_MODAL: 'open-search-modal'
+  NOTIFY: 'notify'
+}>
 ```
 
 Defined in: core/tokens/events/app.ts:14

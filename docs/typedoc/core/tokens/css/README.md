@@ -30,6 +30,12 @@ Re-exports [NAV_GEAR_CSS_PROPS](nav/variables/NAV_GEAR_CSS_PROPS.md)
 
 ---
 
+### NAV\_SEARCH\_CSS\_PROPS
+
+Re-exports [NAV_SEARCH_CSS_PROPS](nav/variables/NAV_SEARCH_CSS_PROPS.md)
+
+---
+
 ### SKELETON\_CSS\_PROPS
 
 Re-exports [SKELETON_CSS_PROPS](skeleton/variables/SKELETON_CSS_PROPS.md)

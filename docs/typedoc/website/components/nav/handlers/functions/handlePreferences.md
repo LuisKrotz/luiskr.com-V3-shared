@@ -8,7 +8,7 @@
 function handlePreferences(host, e?): void
 ```
 
-Defined in: website/components/nav/handlers.ts:111
+Defined in: website/components/nav/handlers.ts:112
 
 Opens the preferences modal (fires open-preferences-modal after capturing origin).
 

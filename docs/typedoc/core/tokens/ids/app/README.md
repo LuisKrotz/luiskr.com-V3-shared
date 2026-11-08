@@ -8,3 +8,4 @@
 
 - [APP\_IDS](variables/APP_IDS.md)
 - [NAV\_GEAR\_IDS](variables/NAV_GEAR_IDS.md)
+- [NAV\_SEARCH\_IDS](variables/NAV_SEARCH_IDS.md)

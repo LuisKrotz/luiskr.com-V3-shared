@@ -132,6 +132,18 @@ Re-exports [buildMediaUrls](media/functions/buildMediaUrls.md)
 
 ---
 
+### licenseUrlFor
+
+Re-exports [licenseUrlFor](schema/functions/licenseUrlFor.md)
+
+---
+
+### generatePersonSchema
+
+Re-exports [generatePersonSchema](schema/functions/generatePersonSchema.md)
+
+---
+
 ### generateWebsiteSchema
 
 Re-exports [generateWebsiteSchema](schema/functions/generateWebsiteSchema.md)
@@ -177,6 +189,12 @@ Re-exports [generateStarIndexSchema](schema/functions/generateStarIndexSchema.md
 ### generateStarBodySchema
 
 Re-exports [generateStarBodySchema](schema/functions/generateStarBodySchema.md)
+
+---
+
+### resolveProjectMedia
+
+Re-exports [resolveProjectMedia](schema/functions/resolveProjectMedia.md)
 
 ---
 

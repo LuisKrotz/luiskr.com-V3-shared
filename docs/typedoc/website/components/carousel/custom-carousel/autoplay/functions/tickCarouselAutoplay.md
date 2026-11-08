@@ -8,7 +8,7 @@
 function tickCarouselAutoplay(c, timestamp): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:168
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:169
 
 Autoplay RAF tick: elapsed/duration → ringProgress 0–1 → paint →
 advance when the cycle completes, then rebase the clock for the next

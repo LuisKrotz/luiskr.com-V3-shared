@@ -185,3 +185,80 @@ export function resolveCoverKey(image, manifest) {
 
   return pickVariant(base, IMAGE_VARIANTS, manifest) || `${base}${MEDIA.EXT}`
 }
+
+/** Bytes fetched per image-dims probe — SOF/IHDR headers live in the head. */
+const DIMS_PROBE_BYTES = 64 * 1024
+
+/**
+ * Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
+ * or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
+ * are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
+ * @param {Buffer} buf - head bytes of the image
+ */
+export const scanImageDims = (buf) => {
+  if (buf.length >= 24 && buf.readUInt32BE(0) === 0x89504e47) {
+    return [buf.readUInt32BE(16), buf.readUInt32BE(20)]
+  }
+
+  if (buf.length < 4 || buf.readUInt16BE(0) !== 0xffd8) return null
+
+  let off = 2
+
+  while (off + 9 < buf.length) {
+    if (buf[off] !== 0xff) {
+      off += 1
+
+      continue
+    }
+
+    const marker = buf[off + 1]
+
+    if (marker >= 0xd0 && marker <= 0xd9) {
+      off += 2
+
+      continue
+    }
+
+    if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+      return [buf.readUInt16BE(off + 7), buf.readUInt16BE(off + 5)]
+    }
+
+    off += 2 + buf.readUInt16BE(off + 2)
+  }
+
+  return null
+}
+
+/**
+ * Probes a set of absolute image URLs for intrinsic dims — one 64 KB
+ * range request per unique URL (the IHDR/SOF headers sit in the head).
+ * Failures are silent: an unreachable or unparseable asset simply has
+ * no entry in the returned map.
+ * @param {string[]} urls absolute image URLs to probe
+ * @param {number} timeoutMs per-request ceiling
+ * @returns {Promise<Map<string, number[]>>} URL → [w, h]
+ */
+export async function probeImageDims(urls, timeoutMs = 20 * 1000) {
+  const dims = new Map()
+
+  await Promise.all(
+    [...new Set(urls)].map(async (url) => {
+      try {
+        const res = await fetch(url, {
+          headers: { Range: `bytes=0-${DIMS_PROBE_BYTES - 1}` },
+          signal: AbortSignal.timeout(timeoutMs),
+        })
+
+        if (!res.ok) return
+
+        const pair = scanImageDims(Buffer.from(await res.arrayBuffer()))
+
+        if (pair) dims.set(url, pair)
+      } catch {
+        /* unreachable host → no dims for this asset */
+      }
+    })
+  )
+
+  return dims
+}

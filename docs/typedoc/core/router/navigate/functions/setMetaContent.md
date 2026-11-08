@@ -8,7 +8,7 @@
 function setMetaContent(selector, content): void
 ```
 
-Defined in: core/router/navigate.ts:52
+Defined in: core/router/navigate.ts:53
 
 Writes `content` into one head <meta> selected by `selector`; no-ops when
 absent. Exported for views that resolve their title asynchronously

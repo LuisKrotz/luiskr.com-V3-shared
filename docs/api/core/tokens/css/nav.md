@@ -1,6 +1,6 @@
 # `core\tokens\css\nav.ts`
 
-Nav gear SVG paint CSS custom-property names — the steel
+Nav strip glyph paint CSS custom-property names — the
 
 |                |                                                           |
 | -------------- | --------------------------------------------------------- |
@@ -9,38 +9,30 @@ Nav gear SVG paint CSS custom-property names — the steel
 
 ## Members
 
-### `GEAR_HI`
+### `SEARCH_HI`
 
-Bright steel — face/hub highlight stop.
+Glass highlight — lens face lit center.
 
-### `GEAR_MID`
+### `SEARCH_MID`
 
-Base steel — the metal mid tone (--text-primary pass-through).
+Glass base — lens face mid tone.
 
-### `GEAR_LO`
+### `SEARCH_LO`
 
-Shadowed steel — face/hub edge stop.
+Glass shadow — lens face edge falloff.
 
-### `GEAR_EDGE_HI`
+### `SEARCH_EDGE_HI`
 
-Lit rim — tooth-edge highlight where the light lands.
+Lit rim — ring edge highlight where the light lands.
 
-### `GEAR_EDGE_LO`
+### `SEARCH_EDGE_LO`
 
-Dark rim — tooth-edge underside.
+Dark rim — ring edge underside.
 
-### `GEAR_HOLE`
+### `SEARCH_GLINT`
 
-Hole mid — drilled-cavity wall tone.
+Specular glint — the orbiting lens flare.
 
-### `GEAR_HOLE_LO`
+### `NEON_TEAL`
 
-Hole deep — the unlit cavity core.
-
-### `GEAR_HOLE_HI`
-
-Hole lit — the far inner wall catching the light.
-
-### `GEAR_GLINT`
-
-Specular glint — the fixed top-left rim arc.
+Neon palette — published from the token sheet.

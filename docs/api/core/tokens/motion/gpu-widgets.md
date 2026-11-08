@@ -82,6 +82,10 @@ single-sourced here.
 
 Expand-modal genie — composited-sheet mesh-warp transition.
 
+### `RING_FILL`
+
+Route-search go buttons — instanced conic ring fill on hover.
+
 ### `GPU_WIDGET_ARTIFACTS`
 
 Artifact registry — kind → wasm-pack glue URL + exported class name.
@@ -156,6 +160,10 @@ scene3d — the full-scene engine surface (mount via scene3d.ts).
 
 genie — expand-modal composited-sheet mesh-warp + dock flash.
 
+### (module scope)
+
+ring-fill — route-search go-button conic ring fill.
+
 ### `GPU_WIDGET_UNIFORM_F32S`
 
 Uniform f32 counts per kind — matches `UNIFORM_F32S` in each
@@ -213,6 +221,10 @@ corner: res(2), hover, hair, arm0(2), arm1(2), edge(4), accent(4).
 ### (module scope)
 
 genie: res(2), time, progress, from(4), to(4), reserved(2), dpr, flags, tint(4), uv(4).
+
+### (module scope)
+
+ring-fill: res(2), time, hair, track(4), fill(4), head(4).
 
 ### `GPU_WIDGET_DRIVE`
 

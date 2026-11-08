@@ -10,7 +10,7 @@ const WASM_ACTIONS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/data/wasm.ts:37
+Defined in: core/tokens/data/wasm.ts:38
 
 Frozen `{ NAME: 'NAME' }` action map built from `_WASM_ACTION_LIST` —
 workers dispatch on `type`, and self-keyed entries make typos

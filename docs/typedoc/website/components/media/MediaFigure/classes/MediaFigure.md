@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/media/MediaFigure](../README.md) / MediaFigure
 
-Defined in: website/components/media/MediaFigure.tsx:32
+Defined in: website/components/media/MediaFigure.tsx:33
 
 The MediaFigure — figure class.
 
@@ -20,7 +20,7 @@ The MediaFigure — figure class.
 new MediaFigure(): MediaFigure;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:61
+Defined in: website/components/media/MediaFigure.tsx:62
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 thumbSrc: string = ATTR_VALUES.EMPTY
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:46
+Defined in: website/components/media/MediaFigure.tsx:47
 
 ---
 
@@ -193,7 +193,7 @@ Defined in: website/components/media/MediaFigure.tsx:46
 highResSrc: string = ATTR_VALUES.EMPTY
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:47
+Defined in: website/components/media/MediaFigure.tsx:48
 
 ---
 
@@ -203,7 +203,7 @@ Defined in: website/components/media/MediaFigure.tsx:47
 isLoaded: boolean = false
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:48
+Defined in: website/components/media/MediaFigure.tsx:49
 
 ---
 
@@ -213,7 +213,7 @@ Defined in: website/components/media/MediaFigure.tsx:48
 poster: string[] = [];
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:49
+Defined in: website/components/media/MediaFigure.tsx:50
 
 ---
 
@@ -223,7 +223,7 @@ Defined in: website/components/media/MediaFigure.tsx:49
 video: string[] = [];
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:50
+Defined in: website/components/media/MediaFigure.tsx:51
 
 ---
 
@@ -233,37 +233,43 @@ Defined in: website/components/media/MediaFigure.tsx:50
 videoWebm: string[] = [];
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:51
+Defined in: website/components/media/MediaFigure.tsx:52
 
 ---
 
 ### observer
 
 ```ts
-observer: IntersectionObserver | null = null;
-```
-
-Defined in: website/components/media/MediaFigure.tsx:52
-
----
-
-### imgObserver
-
-```ts
-imgObserver: IntersectionObserver | null = null;
+observer:
+  | SharedObserverHandle
+  | null = null;
 ```
 
 Defined in: website/components/media/MediaFigure.tsx:53
 
 ---
 
-### warmObserver
+### imgObserver
 
 ```ts
-warmObserver: IntersectionObserver | null = null;
+imgObserver:
+  | SharedObserverHandle
+  | null = null;
 ```
 
 Defined in: website/components/media/MediaFigure.tsx:54
+
+---
+
+### warmObserver
+
+```ts
+warmObserver:
+  | SharedObserverHandle
+  | null = null;
+```
+
+Defined in: website/components/media/MediaFigure.tsx:55
 
 ---
 
@@ -273,7 +279,7 @@ Defined in: website/components/media/MediaFigure.tsx:54
 warmed: boolean = false
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:55
+Defined in: website/components/media/MediaFigure.tsx:56
 
 ---
 
@@ -283,7 +289,7 @@ Defined in: website/components/media/MediaFigure.tsx:55
 _scaledVideo: boolean | undefined = undefined;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:56
+Defined in: website/components/media/MediaFigure.tsx:57
 
 ---
 
@@ -293,7 +299,7 @@ Defined in: website/components/media/MediaFigure.tsx:56
 _ladderBox: number = -1
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:57
+Defined in: website/components/media/MediaFigure.tsx:58
 
 ---
 
@@ -303,7 +309,7 @@ Defined in: website/components/media/MediaFigure.tsx:57
 _expandBrackets: (() => void) | null = null;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:58
+Defined in: website/components/media/MediaFigure.tsx:59
 
 ---
 
@@ -313,7 +319,7 @@ Defined in: website/components/media/MediaFigure.tsx:58
 isIntersecting: boolean = false
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:59
+Defined in: website/components/media/MediaFigure.tsx:60
 
 ---
 
@@ -4382,7 +4388,7 @@ get static observedAttributes(): (
   | "auto-play")[];
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:33
+Defined in: website/components/media/MediaFigure.tsx:34
 
 ##### Returns
 
@@ -4406,7 +4412,7 @@ Defined in: website/components/media/MediaFigure.tsx:33
 get canExpand(): boolean;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:67
+Defined in: website/components/media/MediaFigure.tsx:68
 
 Whether the figure may open the expand modal.
 
@@ -4424,7 +4430,7 @@ Whether the figure may open the expand modal.
 get isVideo(): boolean;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:76
+Defined in: website/components/media/MediaFigure.tsx:77
 
 Whether the media is a video.
 
@@ -4442,7 +4448,7 @@ Whether the media is a video.
 get autoPlay(): boolean;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:85
+Defined in: website/components/media/MediaFigure.tsx:86
 
 Whether the video should autoplay.
 
@@ -4460,7 +4466,7 @@ Whether the video should autoplay.
 get mediaWidth(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:94
+Defined in: website/components/media/MediaFigure.tsx:95
 
 Declared media width attribute.
 
@@ -4478,7 +4484,7 @@ Declared media width attribute.
 get mediaHeight(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:103
+Defined in: website/components/media/MediaFigure.tsx:104
 
 Declared media height attribute.
 
@@ -4496,7 +4502,7 @@ Declared media height attribute.
 get label(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:112
+Defined in: website/components/media/MediaFigure.tsx:113
 
 Caption label.
 
@@ -4514,7 +4520,7 @@ Caption label.
 get mediaSrc(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:118
+Defined in: website/components/media/MediaFigure.tsx:119
 
 Base media path on the CDN.
 
@@ -4532,7 +4538,7 @@ Base media path on the CDN.
 get classes(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:124
+Defined in: website/components/media/MediaFigure.tsx:125
 
 Extra host classes passed through the attribute.
 
@@ -4550,7 +4556,7 @@ Extra host classes passed through the attribute.
 get displayWidth(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:134
+Defined in: website/components/media/MediaFigure.tsx:135
 
 Rendered display width. Videos are capped at FHD_WIDTH (1920): the
 player can't visually exceed 1080p, so decode/GPU budgets stay
@@ -4571,7 +4577,7 @@ the CDN serves the right variant instead.
 get displayHeight(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:147
+Defined in: website/components/media/MediaFigure.tsx:148
 
 Rendered display height — pairs with displayWidth's FHD cap:
 aspect-preserving downscale via calcAspectScaled (h·(MAX/w)) so the
@@ -4591,7 +4597,7 @@ layout box never stretches when the video is >1080p.
 get videoSrcMain(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:157
+Defined in: website/components/media/MediaFigure.tsx:158
 
 Primary video source URL.
 
@@ -4609,7 +4615,7 @@ Primary video source URL.
 get videoSrcFallback(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:163
+Defined in: website/components/media/MediaFigure.tsx:164
 
 Fallback (scaled) video source for constrained devices.
 
@@ -4627,7 +4633,7 @@ Fallback (scaled) video source for constrained devices.
 get videoSrcWebmMain(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:169
+Defined in: website/components/media/MediaFigure.tsx:170
 
 Primary webm video source — emitted first in the <source> list.
 
@@ -4645,7 +4651,7 @@ Primary webm video source — emitted first in the <source> list.
 get videoSrcWebmFallback(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:175
+Defined in: website/components/media/MediaFigure.tsx:176
 
 Scaled webm fallback for constrained devices.
 
@@ -5174,7 +5180,7 @@ Render result from render().
 onInit(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:179
+Defined in: website/components/media/MediaFigure.tsx:180
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -5196,7 +5202,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 onMounted(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:183
+Defined in: website/components/media/MediaFigure.tsx:184
 
 #### Returns
 
@@ -5214,7 +5220,7 @@ Defined in: website/components/media/MediaFigure.tsx:183
 _ensureVideoSource(vid): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:189
+Defined in: website/components/media/MediaFigure.tsx:190
 
 Sets the <source> src on a video element when it becomes playable.
 
@@ -5236,7 +5242,7 @@ Sets the <source> src on a video element when it becomes playable.
 onDestroy(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:193
+Defined in: website/components/media/MediaFigure.tsx:194
 
 #### Returns
 
@@ -5254,7 +5260,7 @@ Defined in: website/components/media/MediaFigure.tsx:193
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:219
+Defined in: website/components/media/MediaFigure.tsx:220
 
 #### Returns
 
@@ -5272,7 +5278,7 @@ Defined in: website/components/media/MediaFigure.tsx:219
 playVideo(target): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:225
+Defined in: website/components/media/MediaFigure.tsx:226
 
 Starts muted playback honoring reduced-motion/autoplay prefs.
 
@@ -5294,7 +5300,7 @@ Starts muted playback honoring reduced-motion/autoplay prefs.
 pauseVideo(target): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:231
+Defined in: website/components/media/MediaFigure.tsx:232
 
 Pauses playback (offscreen or pref change).
 
@@ -5316,7 +5322,7 @@ Pauses playback (offscreen or pref change).
 placeholder(w, h): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:237
+Defined in: website/components/media/MediaFigure.tsx:238
 
 Zero-CLS SVG placeholder data-URI at the media's aspect (see media-load.ts).
 
@@ -5342,7 +5348,7 @@ Zero-CLS SVG placeholder data-URI at the media's aspect (see media-load.ts).
 loadHighRes(): Promise<void>;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:243
+Defined in: website/components/media/MediaFigure.tsx:244
 
 Thumb → high-res preload swap (see media-load.ts).
 
@@ -5358,7 +5364,7 @@ Thumb → high-res preload swap (see media-load.ts).
 slugify(text): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:249
+Defined in: website/components/media/MediaFigure.tsx:250
 
 Slugifies a caption for the alt/ARIA text.
 
@@ -5380,7 +5386,7 @@ Slugifies a caption for the alt/ARIA text.
 openModal(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:255
+Defined in: website/components/media/MediaFigure.tsx:256
 
 Opens the expand modal with this media's descriptor via the store.
 
@@ -5396,7 +5402,7 @@ Opens the expand modal with this media's descriptor via the store.
 render(): Element;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:268
+Defined in: website/components/media/MediaFigure.tsx:269
 
 JSX template — a layered stack the CSS crossfades:
 

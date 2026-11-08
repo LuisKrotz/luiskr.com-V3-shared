@@ -15,14 +15,13 @@ import { CHAR_STRINGS } from '@core/tokens/strings/chars.js'
 import { KEYBOARD_EVENTS, MOUSE_EVENTS } from '@core/tokens/events/dom.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { ROUTE_PATHS } from '@core/tokens/routes/paths.js'
-import { FLAG_CLASSES } from '@core/tokens/classes/flags.js'
 import { ANIMATION_DURATIONS } from '@core/tokens/motion/animation.js'
 import { SECTION_IDS } from '@core/tokens/ids/sections.js'
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { ATTR_VALUES } from '@core/tokens/attrs/values.js'
 import { NAV_BURGER_CLASSES, NAV_CLASSES, NAV_MENU_CLASSES } from '@core/tokens/classes/nav.js'
 
-import { KEYS, LOCALES, ROUTE_NAMES, SECTIONS } from '@core/constants.js'
+import { KEYS, ROUTE_NAMES, SECTIONS } from '@core/constants.js'
 
 const flush = (ms = 0) => new Promise((r) => setTimeout(r, ms))
 
@@ -115,52 +114,15 @@ describe('AppNav tails', () => {
     router.currentRoute = prevRoute
   })
 
-  test('locale getters and flag rendering cover option, null and split arms', async () => {
-    const el = mountNav()
-    const prevLocale = store.state.lang.locale
-
-    try {
-      store.state.lang.locale = BAD_LOCALE
-      expect(el.currentLang).toBeNull()
-      expect(el.currentLangLabel).toBe(BAD_LOCALE.toUpperCase())
-      expect(el.renderLocaleFlag()).toBe(BAD_LOCALE.toUpperCase())
-
-      store.state.lang.locale = LOCALES.HRK
-      el._toggleMenu()
-
-      await flush()
-
-      expect(el.shadowRoot.querySelector(`.${FLAG_CLASSES.FLAG_SPLIT}`)).not.toBeNull()
-
-      el._closeMenu()
-
-      // The close path settles on a ~1.3s wall-clock timer — fake the clock
-      // so a starved worker can't stall it past the test timeout, and so the
-      // locale restore below always runs even if the advance throws.
-      jest.useFakeTimers()
-      await jest.advanceTimersByTimeAsync(ANIMATION_DURATIONS.MENU_CLOSE_DURATION + 100)
-    } finally {
-      jest.useRealTimers()
-      store.state.lang.locale = prevLocale
-    }
-  })
-
-  test('_mountNavFlag / _mountBurgerWebGL / _mountMenuWebGL guard arms', () => {
+  test('_mountBurgerWebGL / _mountMenuWebGL guard arms', () => {
     const el = mountNav()
 
     const w = globalThis.window
 
     delete globalThis.window
-    el._mountNavFlag()
     el._mountBurgerWebGL()
     el._mountMenuWebGL()
     globalThis.window = w
-
-    el._menuFlagCanvasEl = null
-    el._mountNavFlag()
-
-    el._menuFlagCanvasEl = document.createElement(HTML_TAGS.CANVAS)
-    el._mountNavFlag()
 
     el._burgerCanvasEl = null
     el._mountBurgerWebGL()
@@ -554,34 +516,6 @@ describe('AppNav tails', () => {
     await router.push(ROUTE_PATHS.CONTACT).catch(() => {})
     expect(updateSpy.mock.calls.length).toBeGreaterThan(1)
   })
-
-  test('_flagCanvas rebuild on locale change and flag widget lifecycle', async () => {
-    const el = mountNav()
-    const prevLocale = store.state.lang.locale
-
-    el._toggleMenu()
-
-    await flush()
-
-    const firstCanvas = el._menuFlagCanvasEl
-
-    expect(firstCanvas).not.toBeNull()
-
-    store.state.lang.locale = LOCALES.DE
-    expect(el._flagCanvas()).not.toBe(firstCanvas)
-
-    // The flag chip lives in the nav strip now — closing the menu no
-    // longer churns its widget; element teardown destroys it instead.
-    el._closeMenu()
-
-    await flush(ANIMATION_DURATIONS.MENU_CLOSE_DURATION + 100)
-    expect(el._navFlags.length).toBeGreaterThan(0)
-
-    el.remove()
-    expect(el._navFlags).toHaveLength(0)
-
-    store.state.lang.locale = prevLocale
-  }, 120000)
 
   test('scrollToContact non-home reduced, catch and document-less arms', () => {
     const el = mountNav()

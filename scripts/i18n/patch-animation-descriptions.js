@@ -145,11 +145,6 @@ const DESCS = {
       longdesc:
         'The related-project cards at the bottom of project pages. Animation: on hover the card lifts, its image zooms gently and title/description slide up — all on damped-spring easing (CSS linear() synthesized springs) so the motion overshoots slightly and settles organically; a border sheen sweeps the frame. Trigger: pointer hover/focus. Tech: CSS transitions on transform/opacity driven by spring easing curves. Purpose: makes the navigation affordance feel physical and inviting.',
     },
-    'note-dot': {
-      alt: 'Note marker pulsing softly',
-      longdesc:
-        'The small note/dot markers used on internals pages (documentation and project internals). Animation: the dot pulses softly — a gentle scale-and-fade breathing loop. Trigger: loops continuously while on screen. Tech: a CSS keyframe (note-dot-pulse). Purpose: marks the element as a live annotation without demanding attention.',
-    },
     'body-glow': {
       alt: 'Ambient page glow drifting slowly behind content',
       longdesc:
@@ -276,11 +271,6 @@ const DESCS = {
       alt: 'Card de projeto relacionado elevando e dando zoom no hover',
       longdesc:
         'Os cards de projetos relacionados no fim das páginas de projeto. Animação: no hover o card se eleva, a imagem dá um zoom suave e título/descrição sobem — tudo em easing de mola amortecida (springs sintetizados em CSS linear()) para o movimento passar levemente e assentar de forma orgânica; um brilho varre a borda do card. Gatilho: hover/foco do ponteiro. Tecnologia: transições CSS em transform/opacity dirigidas por curvas de mola. Propósito: fazer a affordance de navegação parecer física e convidativa.',
-    },
-    'note-dot': {
-      alt: 'Marcador de nota pulsando suavemente',
-      longdesc:
-        'Os pequenos marcadores de nota/ponto usados nas páginas de internals (documentação e internas de projeto). Animação: o ponto pulsa suavemente — um loop respirante de escala e fade. Gatilho: faz loop continuamente em tela. Tecnologia: um keyframe CSS (note-dot-pulse). Propósito: marcar o elemento como anotação viva sem exigir atenção.',
     },
     'body-glow': {
       alt: 'Brilho ambiente da página driftando atrás do conteúdo',
@@ -409,11 +399,6 @@ const DESCS = {
       longdesc:
         'Las tarjetas de proyectos relacionados al final de las páginas de proyecto. Animación: en hover la tarjeta se eleva, la imagen hace un zoom suave y título/descripción suben — todo con easing de resorte amortiguado (springs sintetizados en CSS linear()) para que el movimiento pase ligeramente y se asiente de forma orgánica; un brillo barre el borde de la tarjeta. Disparador: hover/foco del puntero. Tecnología: transiciones CSS en transform/opacity dirigidas por curvas de resorte. Propósito: hacer que la affordance de navegación se sienta física e invitante.',
     },
-    'note-dot': {
-      alt: 'Marcador de nota pulsando suavemente',
-      longdesc:
-        'Los pequeños marcadores de nota/punto usados en las páginas de internals (documentación e internas de proyecto). Animación: el punto pulsa suavemente — un loop respirante de escala y fade. Disparador: hace loop continuamente en pantalla. Tecnología: un keyframe CSS (note-dot-pulse). Propósito: marcar el elemento como anotación viva sin exigir atención.',
-    },
     'body-glow': {
       alt: 'Brillo ambiente de la página derivando detrás del contenido',
       longdesc:
@@ -540,11 +525,6 @@ const DESCS = {
       alt: 'Related-Projektkarte hebt und zoomt bei Hover',
       longdesc:
         'Die Related-Projekt-Karten am Ende der Projektseiten. Animation: bei Hover hebt die Karte, ihr Bild zoomt sanft und Titel/Beschreibung gleiten hoch — alles auf gedämpftem Feder-Easing (in CSS linear() synthetisierte Federn), sodass die Bewegung leicht überschwingt und organisch einpendelt; ein Schimmer fegt über den Kartenrand. Auslöser: Zeiger-Hover/Fokus. Technik: CSS-Transitions auf transform/opacity mit Feder-Easing-Kurven. Zweck: macht die Navigations-Affordance physisch und einladend.',
-    },
-    'note-dot': {
-      alt: 'Notizmarker pulsiert sanft',
-      longdesc:
-        'Die kleinen Notiz-/Punktmarker auf Internals-Seiten (Dokumentation und Projektinterna). Animation: der Punkt pulsiert sanft — ein atmender Skalierungs- und Fade-Loop. Auslöser: läuft kontinuierlich im Bild. Technik: ein CSS-Keyframe (note-dot-pulse). Zweck: markiert das Element als lebendige Anmerkung, ohne Aufmerksamkeit zu fordern.',
     },
     'body-glow': {
       alt: 'Umgebendes Seitenglühen driftet langsam hinter dem Inhalt',
@@ -673,11 +653,6 @@ const DESCS = {
       longdesc:
         'Die Related-Projekt-Karte am End von de Projektseite. Animatsioon: bei Hover hebt die Kart, ihr Bild zoomt sanft un Titel/Beschreibung gleite hoch — alles uf gedämpftem Feier-Easing (in CSS linear() synthetisiarte Feier), sodass die Bewegung leicht überschwingt un organisch einpendelt; e Schimmer fegt über der Karterand. Usslöser: Zeiger-Hover/Fokus. Technik: CSS-Transitions uf transform/opacity mit Feier-Easing-Kurve. Zweck: macht die Navigations-Affordance physisch un einladend.',
     },
-    'note-dot': {
-      alt: 'Notizmarker pulsiert sanft',
-      longdesc:
-        'Die kleine Notiz-/Punktmarker uf Internals-Seite (Dokumentatsioon un Projektinterna). Animatsioon: der Punkt pulsiert sanft — e atmender Skalierungs- un Fade-Loop. Usslöser: lääft kontinuierlich im Bild. Technik: e CSS-Keyframe (note-dot-pulse). Zweck: markiert des Element als lewendige Anmerkung, ohne Uffmerksamkeit zu fordere.',
-    },
     'body-glow': {
       alt: 'Umgebendes Seiteglühe driftet langsom hinner em Inhalt',
       longdesc:
@@ -804,11 +779,6 @@ const DESCS = {
       alt: 'Tarjeta de proyecto relacionado elevándose y haciendo zoom en hover',
       longdesc:
         'Las tarjetas de proyectos relacionados al final de las páginas de proyecto. Animación: en hover la tarjeta se eleva, la imagen hace un zoom suave y título/descripción suben — todo con easing de resorte amortiguado (springs sintetizados en CSS linear()) para que el movimiento pase ligeramente y se asiente de forma orgánica; un brillo barre el borde de la tarjeta. Disparador: hover/foco del puntero. Tecnología: transiciones CSS en transform/opacity dirigidas por curvas de resorte. Propósito: hacer que la affordance de navegación se sienta física e invitante.',
-    },
-    'note-dot': {
-      alt: 'Marcador de nota pulsando suavemente',
-      longdesc:
-        'Los pequeños marcadores de nota/punto usados en las páginas de internals (documentación e internas de proyecto). Animación: el punto pulsa suavemente — un loop respirante de escala y fade. Disparador: hace loop continuamente en pantalla. Tecnología: un keyframe CSS (note-dot-pulse). Propósito: marcar el elemento como anotación viva sin exigir atención.',
     },
     'body-glow': {
       alt: 'Brillo ambiente de la página derivando atrás del contenido',
@@ -937,11 +907,6 @@ const DESCS = {
       longdesc:
         'Las tarjetas de proyectos relacionados al final de las páginas de proyecto. Animación: en hover la tarjeta se eleva, la imagen hace un zoom suave y título/descripción suben — todo con easing de resorte amortiguado (springs sintetizados en CSS linear()) para que el movimiento pase ligeramente y se asiente de forma orgánica; un brillo barre el borde de la tarjeta. Disparador: hover/foco del puntero. Tecnología: transiciones CSS en transform/opacity dirigidas por curvas de resorte. Propósito: hacer que la affordance de navegación se sienta física e invitante.',
     },
-    'note-dot': {
-      alt: 'Marcador de nota pulsando suavemente',
-      longdesc:
-        'Los pequeños marcadores de nota/punto usados en las páginas de internals (documentación e internas de proyecto). Animación: el punto pulsa suavemente — un loop respirante de escala y fade. Disparador: hace loop continuamente en pantalla. Tecnología: un keyframe CSS (note-dot-pulse). Propósito: marcar el elemento como anotación viva sin exigir atención.',
-    },
     'body-glow': {
       alt: 'Brillo ambiente de la página derivando atrás del contenido',
       longdesc:
@@ -1068,11 +1033,6 @@ const DESCS = {
       alt: 'Card progetto correlato che si solleva e zooma su hover',
       longdesc:
         "Le card dei progetti correlati in fondo alle pagine di progetto. Animazione: in hover la card si solleva, la sua immagine zooma dolcemente e titolo/descrizione scivolano su — tutto con easing a molla smorzata (springs sintetizzati in CSS linear()) così il movimento supera leggermente e si assesta in modo organico; un bagliore spazza il bordo della card. Trigger: hover/focus del puntatore. Tecnologia: transizioni CSS su transform/opacity guidate da curve a molla. Scopo: rendere l'affordance di navigazione fisica e invitante.",
-    },
-    'note-dot': {
-      alt: 'Marcatore di nota che pulsa dolcemente',
-      longdesc:
-        "I piccoli marcatori di nota/punto usati nelle pagine internals (documentazione e interne di progetto). Animazione: il punto pulsa dolcemente — un loop respirante di scala e fade. Trigger: gira in loop continuo sullo schermo. Tecnologia: un keyframe CSS (note-dot-pulse). Scopo: segnare l'elemento come annotazione viva senza esigere attenzione.",
     },
     'body-glow': {
       alt: 'Bagliore ambientale della pagina che deriva dietro il contenuto',
@@ -1201,11 +1161,6 @@ const DESCS = {
       longdesc:
         "Les cartes de projets liés en bas des pages de projet. Animation : au survol la carte se soulève, son image zoome doucement et titre/description montent — le tout avec un easing de ressort amorti (springs synthétisés en CSS linear()) pour que le mouvement dépasse légèrement et s'établisse organiquement ; un reflet balaie le bord de la carte. Déclencheur : survol/focus du pointeur. Technologie : transitions CSS sur transform/opacity pilotées par des courbes de ressort. Objectif : rendre l'affordance de navigation physique et invitante.",
     },
-    'note-dot': {
-      alt: 'Marqueur de note pulsant doucement',
-      longdesc:
-        "Les petits marqueurs de note/point utilisés sur les pages internals (documentation et internes de projet). Animation : le point pulse doucement — une boucle respirante d'échelle et de fade. Déclencheur : boucle en continu à l'écran. Technologie : un keyframe CSS (note-dot-pulse). Objectif : marquer l'élément comme annotation vivante sans exiger l'attention.",
-    },
     'body-glow': {
       alt: 'Lueur ambiante de la page dérivant derrière le contenu',
       longdesc:
@@ -1332,11 +1287,6 @@ const DESCS = {
       alt: 'Related-projectkaart heft en zoomt bij hover',
       longdesc:
         "De related-projectkaarten onderaan de projectpagina's. Animatie: bij hover heft de kaart, zoomt de afbeelding zacht en schuiven titel/beschrijving omhoog — alles op gedempte-veer-easing (in CSS linear() gesynthetiseerde veren) zodat de beweging licht overschiet en organisch stabiliseert; een schimmer veegt over de kaartrand. Trigger: pointer-hover/focus. Technologie: CSS-transitions op transform/opacity gedreven door veerkrommes. Doel: maakt de navigatie-affordance fysiek en uitnodigend.",
-    },
-    'note-dot': {
-      alt: 'Notitie-markering pulseert zacht',
-      longdesc:
-        "De kleine notitie-/stipmarkeringen op internals-pagina's (documentatie en projectinterna). Animatie: de stip pulseert zacht — een ademende schaal-en-fade-loop. Trigger: loopt continu in beeld. Technologie: een CSS-keyframe (note-dot-pulse). Doel: markeert het element als levende annotatie zonder aandacht te eisen.",
     },
     'body-glow': {
       alt: 'Omgevende paginagloed drijft traag achter de content',
@@ -1465,11 +1415,6 @@ const DESCS = {
       longdesc:
         'Карточки связанных проектов внизу страниц проектов. Анимация: при ховере карточка приподнимается, её изображение мягко зумируется, а заголовок/описание подъезжают — всё на затухающем пружинном изинге (пружины, синтезированные в CSS linear()), чтобы движение слегка перелетало и органично устанавливалось; блик проносится по краю карточки. Триггер: ховер/фокус указателя. Технология: CSS-транзиции на transform/opacity, ведомые пружинными кривыми. Назначение: делает навигационный намёк физическим и приглашающим.',
     },
-    'note-dot': {
-      alt: 'Маркер заметки мягко пульсирует',
-      longdesc:
-        'Небольшие маркеры-заметки/точки на страницах internals (документация и внутренние страницы проектов). Анимация: точка мягко пульсирует — дышащий цикл масштаба и затухания. Триггер: крутится непрерывно на экране. Технология: один CSS-кейфрейм (note-dot-pulse). Назначение: помечает элемент как живая аннотация, не требуя внимания.',
-    },
     'body-glow': {
       alt: 'Окружающее свечение страницы медленно дрейфует за контентом',
       longdesc:
@@ -1596,11 +1541,6 @@ const DESCS = {
       alt: 'Tarxeta de proxecto relacionado elevándose e facendo zoom en hover',
       longdesc:
         'As tarxetas de proxectos relacionados ao final das páxinas de proxecto. Animación: en hover a tarxeta elévase, a imaxe fai un zoom suave e título/descrición sobem — todo con easing de resorte amortecido (springs sintetizados en CSS linear()) para que o movemento pase lixeiramente e se asente de forma orgánica; un brillo varre o bordo da tarxeta. Disparador: hover/foco do punteiro. Tecnoloxía: transicións CSS en transform/opacity dirixidas por curvas de resorte. Propósito: facer que a affordance de navegación se sinta física e convidante.',
-    },
-    'note-dot': {
-      alt: 'Marcador de nota pulsando suavemente',
-      longdesc:
-        'Os pequenos marcadores de nota/punto usados nas páxinas de internals (documentación e internas de proxecto). Animación: o punto pulsa suavemente — un loop respirante de escala e fade. Disparador: fai loop continuamente en pantalla. Tecnoloxía: un keyframe CSS (note-dot-pulse). Propósito: marcar o elemento como anotación viva sen esixir atención.',
     },
     'body-glow': {
       alt: 'Brillo ambiente da páxina derivando detrás do contido',
@@ -1729,11 +1669,6 @@ const DESCS = {
       longdesc:
         "Les targetes de projectes relacionats al final de les pàgines de projecte. Animació: en hover la targeta s'eleva, la imatge fa un zoom suaument i títol/descripció pugen — tot amb easing de ressort amortit (springs sintetitzats en CSS linear()) perquè el moviment passi lleugerament i s'assenti de forma orgànica; una brillantor escombra la vora de la targeta. Disparador: hover/focus del punter. Tecnologia: transicions CSS en transform/opacity dirigides per corbes de ressort. Propòsit: fer que l'affordance de navegació se senti física i convidant.",
     },
-    'note-dot': {
-      alt: 'Marcador de nota pulsant suaument',
-      longdesc:
-        "Els petits marcadors de nota/punt usats a les pàgines d'internals (documentació i internes de projecte). Animació: el punt pulsa suaument — un loop respirant d'escala i fade. Disparador: fa loop contínuament en pantalla. Tecnologia: un keyframe CSS (note-dot-pulse). Propòsit: marcar l'element com a anotació viva sense exigir atenció.",
-    },
     'body-glow': {
       alt: 'Brillantor ambient de la pàgina derivant darrere el contingut',
       longdesc:
@@ -1860,11 +1795,6 @@ const DESCS = {
       alt: 'Card progeto corelà che la se sólza e la zooma su hover',
       longdesc:
         "Le card dei progetti coreladi in fondo a le pàgine de progeto. Animassion: in hover la card la se sólza, la so imagine la zooma dolcemente e título/descrission i licà su — tuto co easing a moła smorsada (springs sintetissadi in CSS linear()) cussì el movimento el pasa legermente e el se assesta in modo orgànico; un sbarluso el spasa el bordo de la card. Trigger: hover/focus del puntador. Tecnologia: transissioni CSS su transform/opacity guidade da curve a moła. Scopo: render l'affordance de navigassion fìsica e invitante.",
-    },
-    'note-dot': {
-      alt: 'Marcador de nota che el pulsa dolcemente',
-      longdesc:
-        "I picenini marcadori de nota/ponto usadi inte le pàgine internals (documentassion e interne de progeto). Animassion: el ponto el pulsa dolcemente — un loop respirante de scala e fade. Trigger: el gira in loop continuo sullo schermo. Tecnologia: un keyframe CSS (note-dot-pulse). Scopo: segnar l'elemento come anotassion viva sensa esiger atension.",
     },
     'body-glow': {
       alt: 'Sbarluso anbientale de la pàgina che el deriva drìo el contenuto',
@@ -1993,11 +1923,6 @@ const DESCS = {
       longdesc:
         "Proyecto relacionado tarjeta proyecto kuatiarogue opa'ỹvo. Ñemongue'e: hover jave tarjeta oñembotuicha, imagen ojapo zoom mimbu\u1e7f ha título/descrición osẽ yvate — opaite muelle amortiguado easing rehegua (spring sintetizado CSS linear()-pe) movimiento ohasa sa'i ha oñembot\u1e7f orgánicamente; tesa'ỹi ohasa tarjeta borda. Trigger: puntero hover/foco. Tembiporenda: CSS transición transform/opacity muelle curva omboguatareháva. Haguã: ojapo navegación affordance añetegua ha omo\u1e7f\u1e7fva.",
     },
-    'note-dot': {
-      alt: "Nota marcador oñemongu'e mimbu\u1e7f",
-      longdesc:
-        "Nota/ponto marcador michĩ internals kuatiarogue-pe (documentación ha proyecto interna). Ñemongue'e: ponto oñemongu'e mimbu\u1e7f — escala ha fade respiración loop. Trigger: oñembo'ajevýva pantalla-pe. Tembiporenda: peteĩ CSS keyframe (note-dot-pulse). Haguã: omomora'i elemento anotación ikove atención jerure'ỹ.",
-    },
     'body-glow': {
       alt: "Kuatiarogue tesa'ỹi ambiente oñemyasãi contenido rupã",
       longdesc:
@@ -2124,11 +2049,6 @@ const DESCS = {
       alt: 'Cárta tionscadail ghaolmhar ag ardú agus zúmáil ar hover',
       longdesc:
         'Na cártaí tionscadail ghaolmhar ag bun na leathanaigh tionscadail. Beochan: ar hover ardaíonn an cárta, zúmálann a íomhá go bog agus sleamhnaíonn teideal/cur síos suas — ar fad ar easing sprionga maolaithe (springs sintéisithe in CSS linear()) ionas go dtéann an ghluaiseacht thar beagán agus go suíonn sé go orgánach; scuabann loinnir imeall an chárta. Spreagthóir: hover/fócas an pointeora. Teicneolaíocht: aistrithe CSS ar transform/opacity faoi threoir cuair sprionga. Cuspóir: déanann sé an affordance nascleanúna fisiciúil agus cuireadhach.',
-    },
-    'note-dot': {
-      alt: 'Marcálaí nóta ag pulsáil go bog',
-      longdesc:
-        'Na marcálaithe nóta/pointe beaga a úsáidtear ar leathanaigh internals (doiciméadú agus inmheánacha tionscadail). Beochan: pulsann an pointe go bog — lúb análaithe de scála agus fade. Spreagthóir: lúbaíonn go leanúnach ar an scáileán. Teicneolaíocht: keyframe CSS amháin (note-dot-pulse). Cuspóir: an eilimint a chomharthaíocht mar nóta beo gan aird a éileamh.',
     },
     'body-glow': {
       alt: 'Loinnir chomhthimpeallach an leathanaigh ag sreabhadh taobh thiar den ábhar',

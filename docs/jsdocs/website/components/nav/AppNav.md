@@ -2,9 +2,9 @@
 
 &lt;app-nav&gt; — the persistent top navigation bar: logo, burger
 
-| | |
-|---|---|
-| **Source** | `src/website\components\nav\AppNav.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\nav\AppNav.tsx`                 |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -30,11 +30,11 @@ template falls back to English snapshot copy per key.
 
 ### `AppNav`
 
-<app-nav> — persistent top bar (logo, burger, locale flag, preferences
-trigger) plus the fullscreen menu overlay. Owns four WebGL widgets
-(burger, menu background, menu close, locale flag) on persistent
-canvases that are never re-created by re-renders — one GL context per
-widget for the element's lifetime.
+<app-nav> — persistent top bar (logo, burger, language/search/preferences
+chips) plus the fullscreen menu overlay. Owns the burger and menu
+background WebGL widgets on persistent canvases that are never
+re-created by re-renders — one GL context per widget for the element's
+lifetime.
 
 ### `_translations`
 
@@ -52,9 +52,9 @@ Home anchor the scroll position sits in — drives nav-active styles.
 
 Within 200px of document bottom — flips CTA to "selected work".
 
-### `_navFlags`
+### `_navIconAura`
 
-Live FlagWebGL widgets (currently max one — the menu flag).
+Live ring-fill aura session on the strip chips (null without WebGPU).
 
 ### `_onDark`
 
@@ -95,10 +95,6 @@ Burger button canvas host.
 ### `_menuCanvasEl`
 
 Fullscreen menu background canvas host.
-
-### `_menuFlagCanvasEl`
-
-Menu flag canvas + the locale it was built for (rebuilt on change).
 
 ### `_navStoreSig`
 
@@ -146,25 +142,6 @@ Last non-empty URL path segment — shared by the playground checks.
 
 Active locale code.
 
-### `currentLang`
-
-The active LANG_OPTIONS entry (code + label + flag).
-
-### `currentLangLabel`
-
-Display label for the active locale in the flag button.
-
-### `_flagCanvas`
-
-Returns the persistent flag canvas for the current locale, rebuilding
-it only when the locale changed. The element survives re-renders so
-the WebGL context is created once per language, not per render.
-- `@returns` {HTMLCanvasElement}
-
-### `renderLocaleFlag`
-
-Mounts the FlagWebGL widget onto the nav flag button (theme + reduced-motion aware).
-
 ### (module scope)
 
 Lifecycle: wires store subscription, scroll/nav event listeners, router subscription and mounts the WebGL nav widgets.
@@ -175,15 +152,11 @@ Lifecycle: after re-render, re-mounts WebGL widgets that the new DOM replaced.
 
 ### (module scope)
 
-Lifecycle: destroys the burger/menu/flag GL widgets and unbinds listeners.
+Lifecycle: destroys the burger/menu GL widgets + chip aura and unbinds listeners.
 
-### `_mountNavFlag`
+### `_destroyNavIconAura`
 
-Creates the FlagWebGL instance on the flag button's canvas.
-
-### `_destroyNavFlag`
-
-Tears down the FlagWebGL instance.
+Tears down the icon-aura session.
 
 ### `subscribeRouter`
 
@@ -199,8 +172,6 @@ empty behind it) and reduced-motion. Dialog open/close, modal-origin
 and other commits leave the DOM alone — critically, while the menu
 is open behind a dialog this keeps every <draw-text> label mounted
 and already-drawn instead of replaying the letter animation.
-Reduced-motion still reaches live flag widgets on every commit so
-they freeze without waiting for a rebuild.
 
 ### `updateScrollState`
 
@@ -247,6 +218,10 @@ Opens the preferences modal (fires open-preferences-modal after capturing origin
 ### `handleLang`
 
 Opens the language dialog (fires open-lang-dialog after capturing origin).
+
+### `handleSearch`
+
+Opens the search modal (fires open-search-modal; plain clicks only).
 
 ### (module scope)
 

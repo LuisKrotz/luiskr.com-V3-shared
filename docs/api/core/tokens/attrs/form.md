@@ -48,3 +48,11 @@ Form control attribute tokens — token group. Covers the
 ### `LABEL`
 
 `label` — label field/attribute name.
+
+### `PLACEHOLDER`
+
+`placeholder` — empty-field hint attribute.
+
+### `AUTOCOMPLETE`
+
+`autocomplete` — the browser autofill hint attribute.

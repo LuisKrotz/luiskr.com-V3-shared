@@ -28,6 +28,8 @@ const ROUTE_PATHS: Readonly<{
   DOCS: '/docs'
   DOCS_SEGMENT: 'docs'
   ANIMATIONS_SEGMENT: 'animations'
+  SEARCH_SEGMENT: 'search'
+  FEED_FILE: 'feed.xml'
 }>
 ```
 

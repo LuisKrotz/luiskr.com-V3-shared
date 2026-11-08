@@ -7,6 +7,7 @@
 ```ts
 const QUERY_STRINGS: Readonly<{
   SELECTOR_LINKS: 'a[href^="/"], [data-route]'
+  SEARCH_QUERY: 'q'
   LINK_CANONICAL: 'link[rel="canonical"]'
   META_ROBOTS: 'meta[name="robots"]'
   META_DESCRIPTION: 'meta[name="description"]'
@@ -22,6 +23,8 @@ const QUERY_STRINGS: Readonly<{
   META_ITEMPROP_IMAGE: 'meta[itemprop="image"]'
   META_OG_URL: 'meta[property="og:url"]'
   META_TW_URL: 'meta[name="twitter:url"]'
+  META_OG_TYPE: 'meta[property="og:type"]'
+  META_TW_IMAGE_ALT: 'meta[name="twitter:image:alt"]'
   ROOT_MARGIN_600: '600px 0px'
   ROOT_MARGIN_200: '200px 0px'
   ROOT_MARGIN_100: '100px 0px'

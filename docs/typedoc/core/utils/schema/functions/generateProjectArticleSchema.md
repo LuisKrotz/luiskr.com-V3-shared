@@ -13,7 +13,7 @@ function generateProjectArticleSchema(
 ): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:237
+Defined in: core/utils/schema.ts:308
 
 Generates an Article and cover VideoObject graph for a project detail
 page. The Article `image` carries the real CDN asset — the full

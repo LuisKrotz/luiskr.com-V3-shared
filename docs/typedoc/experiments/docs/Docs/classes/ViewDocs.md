@@ -5430,7 +5430,7 @@ Lifecycle: disposes guard + GL surfaces.
 render(): HTMLElement;
 ```
 
-Defined in: experiments/docs/Docs.tsx:1092
+Defined in: experiments/docs/Docs.tsx:1095
 
 JSX template — lives in render.tsx.
 

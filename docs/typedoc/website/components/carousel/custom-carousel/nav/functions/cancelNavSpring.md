@@ -8,7 +8,7 @@
 function cancelNavSpring(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:71
+Defined in: website/components/carousel/custom-carousel/nav.ts:72
 
 Gesture takeover — cancels a live scroll spring (track keeps its
 position and mandatory snap re-engages for the user's own scroll),

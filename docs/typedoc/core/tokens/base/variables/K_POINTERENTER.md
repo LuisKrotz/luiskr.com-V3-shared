@@ -8,6 +8,6 @@
 const _K_POINTERENTER: 'pointerenter' = 'pointerenter'
 ```
 
-Defined in: core/tokens/base.ts:523
+Defined in: core/tokens/base.ts:536
 
 Token key "k pointerenter" — single source for the repeated literal.

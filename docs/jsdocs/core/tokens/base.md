@@ -155,6 +155,18 @@ from this single declaration (zero-hardcoding rule 9).
 BEM block fragment `sf` — star-field experiment class names compose from
 this single declaration (zero-hardcoding rule 9).
 
+### `_B_ROUTE_SEARCH`
+
+BEM block fragment `route-search` — the not-found route-search component's
+tag + class names compose from this single declaration (zero-hardcoding
+rule 9).
+
+### `_B_SEARCH_MODAL`
+
+BEM block fragment `search-modal` — the nav search dialog's tag +
+class names compose from this single declaration (zero-hardcoding
+rule 9).
+
 ### `_B_SKELETON_ABOUT`
 
 BEM block fragment `…` — declared once here; every domain class token composes from this

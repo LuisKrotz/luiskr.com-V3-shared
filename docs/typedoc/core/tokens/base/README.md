@@ -39,6 +39,8 @@
 - [\_B\_LANG\_GLASS](variables/B_LANG_GLASS.md)
 - [\_B\_DOCS](variables/B_DOCS.md)
 - [\_B\_SF](variables/B_SF.md)
+- [\_B\_ROUTE\_SEARCH](variables/B_ROUTE_SEARCH.md)
+- [\_B\_SEARCH\_MODAL](variables/B_SEARCH_MODAL.md)
 - [\_B\_SKELETON\_ABOUT](variables/B_SKELETON_ABOUT.md)
 - [\_B\_SKELETON\_ABOUT\_P](variables/B_SKELETON_ABOUT_P.md)
 - [\_B\_SKELETON\_FOOTER](variables/B_SKELETON_FOOTER.md)

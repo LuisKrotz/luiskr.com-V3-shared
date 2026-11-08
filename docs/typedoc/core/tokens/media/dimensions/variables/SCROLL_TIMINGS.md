@@ -12,7 +12,7 @@ const SCROLL_TIMINGS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/media/dimensions.ts:119
+Defined in: core/tokens/media/dimensions.ts:132
 
 Frozen scroll-timing map (ms) — `SCROLL_DURATION_FULL` paces animated
 page scrolls, `SCROLL_DURATION_REDUCED` is the slower ramp under

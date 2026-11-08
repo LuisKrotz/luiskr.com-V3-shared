@@ -22,3 +22,11 @@ the token contract immutable at runtime.
 ### `ROLE_APPLICATION`
 
 `application` — the only widget role ARIA permits on <video>.
+
+### `ROLE_COMBOBOX`
+
+Combobox autocomplete pattern — input + popup listbox + options.
+
+### `AUTOCOMPLETE_LIST`
+
+`list` — aria-autocomplete value: a popup lists suggestions.

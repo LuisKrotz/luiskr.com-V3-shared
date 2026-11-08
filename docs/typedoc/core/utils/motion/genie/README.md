@@ -1,8 +1,12 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / core/utils/motion/genie
+
+## Interfaces
+
+- [GenieClasses](interfaces/GenieClasses.md)
 
 ## Functions
 

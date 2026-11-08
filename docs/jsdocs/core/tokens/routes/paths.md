@@ -17,6 +17,15 @@ false-positive (e.g. '/portfolio/' vs the bare 'portfolio' segment);
 `PORTFOLIO`/`PORTFOLIO_SLASH` duplicate intentionally so call sites
 read unambiguously by intent.
 
+### `SEARCH_SEGMENT`
+
+English search-page segment — other locales use their LANG_SLUGS entry.
+
+### `FEED_FILE`
+
+Locale RSS feed file — `/feed.xml` (en) or `/<loc>/feed.xml`; both
+are firebase rewrites onto the generated `/meta/…/feed.xml`.
+
 ### `DB_PATHS`
 
 Frozen db path map — sole declaration site for these tokens; consumers read members and

@@ -15,7 +15,7 @@ const NAV_BURGER_CLASSES: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/classes/nav.ts:54
+Defined in: core/tokens/classes/nav.ts:74
 
 Frozen nav burger class-name map — sole declaration site for these tokens; consumers read
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes

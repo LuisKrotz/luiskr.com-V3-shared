@@ -95,6 +95,8 @@ export async function flipAppView(
       await import('@website/views/project/Project.js')
     } else if (toTag === VIEW_TAGS.VIEW_NOT_FOUND) {
       await import('@website/views/not-found/NotFound.js')
+    } else if (toTag === VIEW_TAGS.VIEW_SEARCH) {
+      await import('@website/views/search/Search.js')
     } else if (toTag === VIEW_TAGS.VIEW_SPACE_PLAYGROUND) {
       await import('@earth/SpacePlayground.js')
     } else if (toTag === VIEW_TAGS.VIEW_STAR_FIELD) {
@@ -103,6 +105,8 @@ export async function flipAppView(
       await import('@docs/Docs.js')
     } else if (toTag === VIEW_TAGS.VIEW_ANIMATIONS) {
       await import('@website/views/animations/Animations.js')
+    } else if (toTag === VIEW_TAGS.VIEW_SITEMAP) {
+      await import('@website/views/sitemap/Sitemap.js')
     }
   } catch (err) {
     // Chunk fetch failed (offline, stale deploy/SW): keep the current view

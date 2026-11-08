@@ -8,7 +8,7 @@
 function scrollToSlide(c, idx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:280
+Defined in: website/components/carousel/custom-carousel/nav.ts:281
 
 Smooth-centers real-slide idx — `children[idx + 1]` because a clone of
 the last slide is prepended to the track (index 0 is the clone).

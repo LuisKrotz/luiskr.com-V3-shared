@@ -128,6 +128,56 @@ describe('app boot tails', () => {
     }
   })
 
+  test('?q= deep link — modal opens everywhere except surfaces hosting their own field', async () => {
+    // On the /search view and the 404 the query seeds the in-page
+    // <route-search> — opening the modal there would double the surface.
+    const modal = { open: false }
+
+    const c = () => ({
+      initInputListeners: jest.fn(),
+      loadData: jest.fn(),
+      subscribe: jest.fn(),
+      $: jest.fn(() => modal),
+      addScopedListener: jest.fn(),
+      _updateViewContent: jest.fn(),
+      updateSectionTops: jest.fn(),
+      checkScroll: jest.fn(),
+      routeLoading: false,
+      currentViewTag: null,
+    })
+
+    const prevRoute = router.currentRoute
+    const prevUrl = window.location.href
+
+    try {
+      window.history.replaceState({}, '', '/?q=melissa')
+
+      router.currentRoute = { name: ROUTE_NAMES.NOT_FOUND, view: VIEW_TAGS.VIEW_NOT_FOUND }
+      mountAppShell(c())
+
+      await flush(30)
+
+      expect(modal.open).toBe(false)
+
+      router.currentRoute = { name: ROUTE_NAMES.SEARCH, view: VIEW_TAGS.VIEW_SEARCH }
+      mountAppShell(c())
+
+      await flush(30)
+
+      expect(modal.open).toBe(false)
+
+      router.currentRoute = { name: ROUTE_NAMES.HOME, view: VIEW_TAGS.VIEW_HOME }
+      mountAppShell(c())
+
+      await flush(200)
+
+      expect(modal.open).toBe(true)
+    } finally {
+      router.currentRoute = prevRoute
+      window.history.replaceState({}, '', prevUrl)
+    }
+  })
+
   test('route subscriber — done lands on the live bar when the node was re-created mid-flight', async () => {
     // Regression: if a re-render swaps the progress-bar node between
     // nav-start and the completion tick, --done must land on the node the

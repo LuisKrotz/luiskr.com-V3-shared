@@ -324,8 +324,10 @@ Lifecycle: disposes guard + GL surfaces.
 
 Applies a docsPath: resolves the manifest node, auto-expands the
 ancestor dirs in the treeview, syncs the page title + JSON-LD graph
-(BreadcrumbList + TechArticle/CollectionPage) so every /docs/* route
-is crawlable, and kicks the lazy file fetch.
+(BreadcrumbList + TechArticle/CollectionPage), noindexes unresolved
+paths, and kicks the lazy file fetch.
+
+- `@param` docsPath Manifest-relative docs path.
 
 ### (module scope)
 

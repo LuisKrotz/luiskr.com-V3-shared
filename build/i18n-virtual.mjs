@@ -33,7 +33,11 @@ export const i18nFallbackPlugin = ({ root }) => {
     load(id) {
       if (id !== resolvedId) return null
 
-      const db = JSON.parse(fs.readFileSync(path.resolve(root, 'database.json'), 'utf8'))
+      const dbPath = path.resolve(root, 'database.json')
+
+      this.addWatchFile(dbPath)
+
+      const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 
       const en = db.translations.en
 
@@ -48,22 +52,39 @@ export const i18nFallbackPlugin = ({ root }) => {
         components: en.components,
         pages: {
           'not-found': en.pages['not-found'],
+          // Search page — the route-search component reads its `search`
+          // UI node synchronously before the locale chunk resolves.
+          search: en.pages.search,
           'earth-playground': en.pages['earth-playground'],
           // Star field + license pages — the view mounts before the
           // per-locale chunk lands; the playlist/HUD labels read this
           // node synchronously, so it must be in the snapshot.
           'star-field': en.pages['star-field'],
           license: en.pages.license,
+          // Sitemap page — title/intro/group labels render synchronously
+          // at mount, before the locale chunk resolves.
+          sitemap: en.pages.sitemap,
           // Animations-reference chrome — title + intro/meta description —
           // inlined so the hub renders before Firebase resolves.
           animations: en.pages.animations,
           HOME: {
+            allProjects: en.pages.HOME.allProjects,
             archive: en.pages.HOME.archive,
+            deckHint: en.pages.HOME.deckHint,
+            swipeHint: en.pages.HOME.swipeHint,
             explore: en.pages.HOME.explore,
             featured: en.pages.HOME.featured,
+            featuredTitle: en.pages.HOME.featuredTitle,
             message: en.pages.HOME.message,
+            projectLabel: en.pages.HOME.projectLabel,
+            viewAll: en.pages.HOME.viewAll,
           },
-          about: { title: en.pages.about.title, mentions: en.pages.about.mentions },
+          about: {
+            title: en.pages.about.title,
+            subtitle: en.pages.about.subtitle,
+            mentions: en.pages.about.mentions,
+            locations: en.pages.about.locations,
+          },
         },
       }
 

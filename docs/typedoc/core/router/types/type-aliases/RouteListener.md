@@ -8,7 +8,7 @@
 type RouteListener = (_to, from) => void
 ```
 
-Defined in: core/router/types.ts:43
+Defined in: core/router/types.ts:45
 
 Subscriber signature — fired on every successful navigation.
 

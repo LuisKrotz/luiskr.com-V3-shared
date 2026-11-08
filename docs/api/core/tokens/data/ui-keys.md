@@ -15,6 +15,14 @@ Frozen section ui key map — sole declaration site for these tokens; consumers 
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the
 token contract immutable at runtime.
 
+### `SEARCH`
+
+`search` — the search page's appText title key.
+
+### `RSS_FEED`
+
+`rssFeed` — localized label of the footer's RSS feed link.
+
 ### `NAV_UI_KEYS`
 
 Frozen nav ui key map — sole declaration site for these tokens; consumers read members and

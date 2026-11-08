@@ -15,6 +15,10 @@ Frozen net string map — sole declaration site for these tokens; consumers read
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
 
+### `MIME_RSS`
+
+RSS 2.0 media type — `type` hint on links to the locale feed.
+
 ### `EFFECTIVE_SLOW_2G`
 
 Network Information API effectiveType values (connection quality tiers).

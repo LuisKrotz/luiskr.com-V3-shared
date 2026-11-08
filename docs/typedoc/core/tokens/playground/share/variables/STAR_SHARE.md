@@ -9,10 +9,11 @@ const STAR_SHARE: Readonly<{
   PREFIX: 'experiments/star-field/share/'
   MANIFEST_URL: '/meta/star-field-share.json'
   IMAGE_EXTS: readonly string[]
+  VIDEO_EXTS: readonly string[]
 }>
 ```
 
-Defined in: core/tokens/playground/share.ts:35
+Defined in: core/tokens/playground/share.ts:40
 
 Star Field share-capture tokens — the star-field experiment's parallel
 of EARTH_SHARE: engine screenshots under the star-field share/ prefix

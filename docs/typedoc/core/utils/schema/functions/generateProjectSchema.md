@@ -8,7 +8,7 @@
 function generateProjectSchema(project, slug, locale?, mediaSlug?): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:599
+Defined in: core/utils/schema.ts:802
 
 Complete project-page JSON-LD graph — the route base (Org + WebSite
 

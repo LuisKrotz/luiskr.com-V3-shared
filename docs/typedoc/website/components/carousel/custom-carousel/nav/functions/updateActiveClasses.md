@@ -8,7 +8,7 @@
 function updateActiveClasses(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:207
+Defined in: website/components/carousel/custom-carousel/nav.ts:208
 
 Syncs the -active modifier on slides and dots with currentIndex, then
 rewrites the "N of M" counter in the current locale (ofLabel is

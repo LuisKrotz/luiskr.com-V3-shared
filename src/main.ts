@@ -37,6 +37,7 @@ import { initGlobalErrorHandlers } from '@core/utils/notify.js'
 import { runDebugActions } from '@core/debug/params.js'
 import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 import { A11Y_CLASSES } from '@core/tokens/classes/a11y.js'
+import { demoteReaderH1 } from '@core/locale/reader-content.js'
 
 /**
  * Absolute bound for waiting on the first-paint signal — a suppressed
@@ -178,8 +179,12 @@ const mount = () => {
 
   // Hoist out of #app (never deleted): the parked-offscreen article
   // stays DOM-present for reader modes, no-JS crawlers and AI agents —
-  // Readability can't pierce the app's shadow DOM.
+  // Readability can't pierce the app's shadow DOM. Its <h1> demotes to
+  // <h2>: the routed view owns the document's level-one heading, and the
+  // mirror must not double it in the live outline.
   if (article) {
+    demoteReaderH1(article)
+
     document.body.appendChild(article)
   }
 

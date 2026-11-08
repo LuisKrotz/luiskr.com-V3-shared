@@ -1,22 +1,24 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/attrs/form](../README.md) / FORM\_ATTRS
 
 ```ts
 const FORM_ATTRS: Readonly<{
-  TYPE: "type";
-  TYPE_BUTTON: "button";
-  BUTTON: "button";
-  TEXT: "text";
-  SEARCH: "search";
-  CHECKBOX: "checkbox";
-  RANGE: "range";
-  NAME: "name";
-  VALUE: "value";
-  LABEL: "label";
-}>;
+  TYPE: 'type'
+  TYPE_BUTTON: 'button'
+  BUTTON: 'button'
+  TEXT: 'text'
+  SEARCH: 'search'
+  CHECKBOX: 'checkbox'
+  RANGE: 'range'
+  NAME: 'name'
+  VALUE: 'value'
+  LABEL: 'label'
+  PLACEHOLDER: 'placeholder'
+  AUTOCOMPLETE: 'autocomplete'
+}>
 ```
 
 Defined in: core/tokens/attrs/form.ts:14

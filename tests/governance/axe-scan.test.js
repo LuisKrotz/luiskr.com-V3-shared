@@ -194,7 +194,10 @@ describe('Axe Accessibility Scan — WCAG 2.x (axe-core)', () => {
       about.aboutTranslations = { title: TEST_TEXT.HELLO, col1: ['Line one'], col2: ['Line two'] }
 
       store.commit(LANG_MUTATIONS.SET_COMPONENT_LANG, {
-        contact: { title: NAV_TEXT.CONTACT, line1: ['Get in touch'] },
+        contact: {
+          title: NAV_TEXT.CONTACT,
+          line1: [{ description: 'Get in touch', link: ROUTE_PATHS.ROOT }],
+        },
         [CMS_KEYS.LEGAL_FOOTER]: {
           links: [
             { page: ROUTE_PREFIXES.PRIVACY, link: ROUTE_PATHS.PRIVACY_POLICY },

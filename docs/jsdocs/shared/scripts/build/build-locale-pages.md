@@ -71,13 +71,25 @@ meta-description-sized plain-text snippet (≤160 chars, cut at a word
 boundary). &nbsp; entities decode to regular spaces so the tag can sit
 in a content attribute.
 
+### `personEntity`
+
+Person entity — build-time twin of core/utils/schema.ts
+generatePersonSchema(); author/publisher/uploader/creator refs across
+every emitted entity resolve to this single #person node.
+
+### `PERSON_REF`
+
+Cross-reference to the site's Person entity — author/publisher/uploader/creator all resolve to `#person`.
+
 ### `breadcrumbEntity`
 
 Ordered crumbs → BreadcrumbList entity (positions are 1-based per spec).
 
 ### `videoEntity`
 
-VideoObject for one media descriptor — mp4 contentUrl + poster thumb.
+VideoObject for one media descriptor — mp4 contentUrl + poster thumb
+and eligibility flags. Unknown dates, duration, and player URLs stay
+absent instead of being fabricated from build time or a placeholder.
 
 ### (module scope)
 
@@ -201,6 +213,10 @@ Rewrites the English shell into a localized document.
 - `@param` {Array<string>} [o.extraImages] - additional og:image candidates
 - `@param` {{w:number,h:number}} [o.imageDims] - intrinsic dims of `image`;
 - `@param` {string} [o.keywords] - localized comma-joined search themes for
+- `@param` {string} [o.ogType] - og:type override ('article', 'video.other',
+- `@param` {{published?:string,modified?:string,section?:string,tags?:string[]}} [o.articleMeta]
+- `@param` {{url:string,type?:string,width?:number|string,height?:number|string}} [o.videoMeta]
+- `@param` {{firstName:string,lastName:string,username:string}} [o.profileMeta]
 - `@param` {string} [o.feedUrl] - absolute RSS feed URL for this locale —
 - `@param` {boolean} [o.noLcp] - the route's media (heavyweight CDN
 - `@param` {Array<object>} [o.entities] - extra JSON-LD entities appended to
@@ -438,17 +454,34 @@ Next shuffled star share pick — wraps so every capture gets card turns.
 
 ### `epThemesOf`
 
-Localized search-theme list for one locale's playground page.
+Localized search-theme list for one locale's playground page —
+live RTDB wins; the committed snapshot covers nodes RTDB has not
+been re-uploaded for yet (mirrors pageThemesOf's fallback so
+keywords/captions never silently drop on live builds).
 
 ### `sfThemesOf`
 
-Localized search-theme list for one locale's star-field page.
+Localized search-theme list for one locale's star-field page —
+same live-then-snapshot contract as epThemesOf.
 
 ### `sfBodyShareFields`
 
 Search-theme keywords for a star body page — the body's own
 name/kind lead the locale's star-field theme list so each dossier
 ranks for its object, not only the experiment's generic terms.
+`image` binds the dossier's first gallery asset as og:image +
+primaryImageOfPage so each body card-crawls with its own media,
+not the generic share tile.
+
+### `starBodyMediaEntities`
+
+ImageObject + VideoObject entities for one body dossier's
+credited gallery — the same assets the parked article renders,
+declared so image/video searches bind the dossier page itself as
+the watch/image host (credits ride creditText; NASA/ESA assets
+never claim the portfolio's license). The dossier's first image
+doubles as the video thumbnail when no explicit poster is supplied.
+Unknown upload dates and durations are intentionally omitted.
 
 ### `pageThemesOf`
 
@@ -500,17 +533,18 @@ locale's star-image search themes, so star/space image searches in
 every language link the renders to the portfolio. The deck pick is
 marked representativeOfPage.
 
-### `EP_ABOUT`
+### `licenseUrlOf`
 
-Linked-data anchors for the playground WebPage — binds the page to
-the Earth/Planet concepts so theme searches resolve through the
-knowledge graph, not just the text.
+Localized license-page URL — ImageObject/VideoObject
+license + acquireLicensePage target so Google Images flags the
+share captures as licensable and lands the click on the locale's
+own legal page (mirrors schema.ts's licenseUrlFor).
 
-### `SF_ABOUT`
+### `searchContent`
 
-Linked-data anchors for the star-field WebPage — binds the page to
-the Star/Galaxy concepts so star and space searches resolve through
-the knowledge graph, not just the text.
+Search page — a crawlable link surface: the static routes plus every
+portfolio project, ending at the machine-readable search index so
+agents can reach the full ~1.4k-entry catalog per locale.
 
 ### `animationsContent`
 

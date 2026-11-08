@@ -21,6 +21,10 @@ const APP_IDS: Readonly<{
   NAV_MENU_PANEL: 'nav-menu-panel'
   NAV_MENU_TITLE: 'nav-menu-title'
   COOKIES_INFO: 'cookies-info'
+  ROUTE_SEARCH_LIST: 'route-search-list'
+  ROUTE_SEARCH_INPUT: 'route-search-input'
+  SEARCH_MODAL_TITLE: 'search-modal-title'
+  ROUTE_SEARCH_OPTION_PREFIX: 'route-search-option-'
   READER_CONTENT: 'reader-content'
 }>
 ```

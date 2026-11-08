@@ -8,7 +8,7 @@
 type Mutation = (_payload?) => void | boolean
 ```
 
-Defined in: core/store/state.ts:146
+Defined in: core/store/state.ts:147
 
 One named mutation: receives an optional payload, mutates store.state,
 and returns `false` to suppress notify() for no-op writes (any other

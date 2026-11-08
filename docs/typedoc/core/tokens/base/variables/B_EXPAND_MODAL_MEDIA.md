@@ -8,6 +8,6 @@
 const _B_EXPAND_MODAL_MEDIA: 'expand-modal-media'
 ```
 
-Defined in: core/tokens/base.ts:274
+Defined in: core/tokens/base.ts:287
 
 BEM block fragment "b expand modal media" — composed by the token groups below into full class names.

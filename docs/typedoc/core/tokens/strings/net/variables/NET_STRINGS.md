@@ -20,6 +20,7 @@ const NET_STRINGS: Readonly<{
   HEADER_CONTENT_TYPE: 'content-type'
   MIME_OCTET_STREAM: 'application/octet-stream'
   MIME_JSON: 'application/json'
+  MIME_RSS: 'application/rss+xml'
   JOB_RUNNING: 'running'
   JOB_UPLOADING: 'uploading'
   EFFECTIVE_SLOW_2G: 'slow-2g'

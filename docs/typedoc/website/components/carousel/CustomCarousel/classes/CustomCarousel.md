@@ -25,7 +25,7 @@ mode that drops all chrome when ≤2 items fit. Behavior delegates to
 new CustomCarousel(): CustomCarousel;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:142
+Defined in: website/components/carousel/CustomCarousel.tsx:148
 
 #### Returns
 
@@ -428,13 +428,37 @@ Defined in: website/components/carousel/CustomCarousel.tsx:115
 
 ---
 
+### isInViewport
+
+```ts
+isInViewport: boolean = false
+```
+
+Defined in: website/components/carousel/CustomCarousel.tsx:118
+
+Live intersection state — unlike isEnteredViewport it flips false on exit.
+
+---
+
+### \_scrollSettleQueued
+
+```ts
+_scrollSettleQueued: boolean = false
+```
+
+Defined in: website/components/carousel/CustomCarousel.tsx:121
+
+True while a scroll-settle visibility pass is queued — collapses churn.
+
+---
+
 ### isEnteredViewport
 
 ```ts
 isEnteredViewport: boolean = false
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:117
+Defined in: website/components/carousel/CustomCarousel.tsx:123
 
 Any viewport visibility ever observed.
 
@@ -446,7 +470,7 @@ Any viewport visibility ever observed.
 observer: IntersectionObserver | null = null;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:119
+Defined in: website/components/carousel/CustomCarousel.tsx:125
 
 IntersectionObserver driving the visibility flags + lazy media.
 
@@ -458,7 +482,7 @@ IntersectionObserver driving the visibility flags + lazy media.
 _isSideBySide: boolean = false
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:121
+Defined in: website/components/carousel/CustomCarousel.tsx:127
 
 True when ≤2 items fit side-by-side at ≥960px — no carousel chrome.
 
@@ -470,7 +494,7 @@ True when ≤2 items fit side-by-side at ≥960px — no carousel chrome.
 _fitObserver: ResizeObserver | null = null;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:123
+Defined in: website/components/carousel/CustomCarousel.tsx:129
 
 ResizeObserver on the host for _measureFit re-runs.
 
@@ -482,7 +506,7 @@ ResizeObserver on the host for _measureFit re-runs.
 _unsubManifest: (() => void) | null = null;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:125
+Defined in: website/components/carousel/CustomCarousel.tsx:131
 
 Media-manifest arrival sub — re-renders slides with proven webp thumbs.
 
@@ -494,7 +518,7 @@ Media-manifest arrival sub — re-renders slides with proven webp thumbs.
 _lastObservedWidth: number = 0
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:127
+Defined in: website/components/carousel/CustomCarousel.tsx:133
 
 Last width the fit observer saw — dedups sub-pixel RO noise.
 
@@ -506,7 +530,7 @@ Last width the fit observer saw — dedups sub-pixel RO noise.
 _autoplayPermanentlyStopped: boolean = false
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:129
+Defined in: website/components/carousel/CustomCarousel.tsx:135
 
 Latched by any user interaction — autoplay never resumes after.
 
@@ -518,7 +542,7 @@ Latched by any user interaction — autoplay never resumes after.
 _isRegressing: boolean = false
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:131
+Defined in: website/components/carousel/CustomCarousel.tsx:137
 
 Ring regress animation in flight (drains progress on stop).
 
@@ -530,7 +554,7 @@ Ring regress animation in flight (drains progress on stop).
 isMobile: boolean
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:133
+Defined in: website/components/carousel/CustomCarousel.tsx:139
 
 Viewport under the mobile breakpoint at construct time.
 
@@ -542,7 +566,7 @@ Viewport under the mobile breakpoint at construct time.
 _landscapeRatio: string | null = null;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:138
+Defined in: website/components/carousel/CustomCarousel.tsx:144
 
 Majority landscape aspect ratio key ('16:9' | '21:9' | '32:9') or null.
 
@@ -554,7 +578,7 @@ Majority landscape aspect ratio key ('16:9' | '21:9' | '32:9') or null.
 _isMixed: boolean = false
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:140
+Defined in: website/components/carousel/CustomCarousel.tsx:146
 
 Whether the carousel mixes both landscape and portrait media.
 
@@ -4617,7 +4641,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get landscapeRatio(): string | null;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:149
+Defined in: website/components/carousel/CustomCarousel.tsx:155
 
 Majority landscape aspect ratio key ('16:9' | '21:9' | '32:9') or null.
 
@@ -4635,7 +4659,7 @@ Majority landscape aspect ratio key ('16:9' | '21:9' | '32:9') or null.
 get isMixed(): boolean;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:154
+Defined in: website/components/carousel/CustomCarousel.tsx:160
 
 Whether the carousel mixes both landscape and portrait media.
 
@@ -4653,7 +4677,7 @@ Whether the carousel mixes both landscape and portrait media.
 get items(): CarouselItem[];
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:210
+Defined in: website/components/carousel/CustomCarousel.tsx:216
 
 ##### Returns
 
@@ -4665,7 +4689,7 @@ Defined in: website/components/carousel/CustomCarousel.tsx:210
 set items(val): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:160
+Defined in: website/components/carousel/CustomCarousel.tsx:166
 
 Setter/getter — slide data (media + labels).
 
@@ -4689,7 +4713,7 @@ Setter/getter — slide data (media + labels).
 get folder(): string;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:220
+Defined in: website/components/carousel/CustomCarousel.tsx:226
 
 ##### Returns
 
@@ -4701,7 +4725,7 @@ Defined in: website/components/carousel/CustomCarousel.tsx:220
 set folder(val): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:216
+Defined in: website/components/carousel/CustomCarousel.tsx:222
 
 Setter/getter — CDN media folder prefix for slide assets.
 
@@ -4725,7 +4749,7 @@ Setter/getter — CDN media folder prefix for slide assets.
 get forceActive(): unknown;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:236
+Defined in: website/components/carousel/CustomCarousel.tsx:242
 
 ##### Returns
 
@@ -4737,7 +4761,7 @@ Defined in: website/components/carousel/CustomCarousel.tsx:236
 set forceActive(val): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:226
+Defined in: website/components/carousel/CustomCarousel.tsx:232
 
 Setter/getter — forces the autoplay/running state on.
 
@@ -4761,7 +4785,7 @@ Setter/getter — forces the autoplay/running state on.
 get isActive(): boolean;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:242
+Defined in: website/components/carousel/CustomCarousel.tsx:248
 
 Whether the carousel is currently auto-advancing.
 
@@ -5294,7 +5318,7 @@ Render result from render().
 configure(o): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:186
+Defined in: website/components/carousel/CustomCarousel.tsx:192
 
 Batch-assigns items/folder/forceActive with a single render — the
 setter chain would otherwise re-render per property. Re-applying the
@@ -5329,7 +5353,7 @@ may call it freely from render/update paths.
 onMounted(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:248
+Defined in: website/components/carousel/CustomCarousel.tsx:254
 
 #### Returns
 
@@ -5347,7 +5371,7 @@ Defined in: website/components/carousel/CustomCarousel.tsx:248
 onUnmounted(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:257
+Defined in: website/components/carousel/CustomCarousel.tsx:263
 
 Extra unmount hook the Safari patch calls — releases the fit observer early.
 
@@ -5363,7 +5387,7 @@ Extra unmount hook the Safari patch calls — releases the fit observer early.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:261
+Defined in: website/components/carousel/CustomCarousel.tsx:267
 
 #### Returns
 
@@ -5381,15 +5405,16 @@ Defined in: website/components/carousel/CustomCarousel.tsx:261
 onUpdated(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:276
+Defined in: website/components/carousel/CustomCarousel.tsx:283
 
 Post-render hook — republishes --carousel-media-height on the host and
 --carousel-item-height on the enclosing section synchronously after
 every render, so the first painted frame already carries the
 aspect-corrected strip height. Without it, carousel shapes with no CSS
 ratio class (mixed, portrait, or unlabeled media below the 768px
-breakpoint) render at the ~70dvh --mf-h fallback until the deferred
-RAF in _setupAfterRender runs — a visible wrong→right size jump (CLS).
+breakpoint) keep --mf-h unset and each slide sizes itself from the
+placeholder img's intrinsic aspect — correct per-slide heights but
+ragged across the row until the publish lands a uniform strip.
 The RAF copy stays as the post-layout refinement; setHeightVar's
 guards make repeat calls no-ops.
 
@@ -5409,7 +5434,7 @@ guards make repeat calls no-ops.
 _setupAfterRender(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:282
+Defined in: website/components/carousel/CustomCarousel.tsx:289
 
 Post-render setup: measures, binds controls, starts observers.
 
@@ -5425,7 +5450,7 @@ Post-render setup: measures, binds controls, starts observers.
 _startFitObserver(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:302
+Defined in: website/components/carousel/CustomCarousel.tsx:309
 
 ResizeObserver that re-fits slides when the container size changes.
 
@@ -5441,7 +5466,7 @@ ResizeObserver that re-fits slides when the container size changes.
 _measureFit(observedWidth?): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:314
+Defined in: website/components/carousel/CustomCarousel.tsx:321
 
 Decides whether the items fit side-by-side (no carousel chrome) or
 need the scroll track. Side-by-side requires: exactly ≤2 items, no
@@ -5468,7 +5493,7 @@ per item approximates the flex gap.
 _onResize(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:320
+Defined in: website/components/carousel/CustomCarousel.tsx:327
 
 Window-resize handler: re-fits and re-measures.
 
@@ -5484,7 +5509,7 @@ Window-resize handler: re-fits and re-measures.
 _setHeightVar(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:330
+Defined in: website/components/carousel/CustomCarousel.tsx:337
 
 Publishes --carousel-item-height on the enclosing <section> so all
 slides share one height. Source: the first item's intrinsic ratio
@@ -5503,7 +5528,7 @@ aspect-correct without waiting for image decode.
 _bindControls(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:336
+Defined in: website/components/carousel/CustomCarousel.tsx:343
 
 Wires prev/next/dot controls and mounts the WebGL arrows.
 
@@ -5519,7 +5544,7 @@ Wires prev/next/dot controls and mounts the WebGL arrows.
 _mountWebGLArrows(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:342
+Defined in: website/components/carousel/CustomCarousel.tsx:349
 
 Creates the CarouselArrowWebGL widgets on the prev/next canvases.
 
@@ -5535,7 +5560,7 @@ Creates the CarouselArrowWebGL widgets on the prev/next canvases.
 _destroyWebGLArrows(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:348
+Defined in: website/components/carousel/CustomCarousel.tsx:355
 
 Destroys the WebGL arrow widgets.
 
@@ -5551,7 +5576,7 @@ Destroys the WebGL arrow widgets.
 onDestroy(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:352
+Defined in: website/components/carousel/CustomCarousel.tsx:359
 
 #### Returns
 
@@ -5569,7 +5594,7 @@ Defined in: website/components/carousel/CustomCarousel.tsx:352
 _markAdjacentLoaded(centerIdx): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:362
+Defined in: website/components/carousel/CustomCarousel.tsx:369
 
 Lazy-load window: marks slides within 2 positions of the active index
 as loadable — distance is measured on the ring (min of direct vs
@@ -5594,7 +5619,7 @@ and vice versa. The two explicit edge lines cover len<3 edge cases.
 goTo(idx): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:374
+Defined in: website/components/carousel/CustomCarousel.tsx:381
 
 Navigate to slide idx — accepts out-of-range idx (idx<0 or idx≥len) by
 scrolling to the CLONE slide at that edge, then scheduling an instant
@@ -5621,7 +5646,7 @@ handler's own teleport until the animation settles (~400ms).
 _updateActiveClasses(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:380
+Defined in: website/components/carousel/CustomCarousel.tsx:387
 
 Toggles -active classes on the active slide/dot pair.
 
@@ -5637,7 +5662,7 @@ Toggles -active classes on the active slide/dot pair.
 _scrollToElement(el): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:386
+Defined in: website/components/carousel/CustomCarousel.tsx:393
 
 Smooth-scrolls the track to a slide element.
 
@@ -5659,7 +5684,7 @@ Smooth-scrolls the track to a slide element.
 _scheduleTeleport(targetIdx): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:392
+Defined in: website/components/carousel/CustomCarousel.tsx:399
 
 Schedules the invisible jump from a clone to its real slide.
 
@@ -5681,7 +5706,7 @@ Schedules the invisible jump from a clone to its real slide.
 _scrollToSlide(idx): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:398
+Defined in: website/components/carousel/CustomCarousel.tsx:405
 
 Smooth-scrolls to slide idx.
 
@@ -5703,7 +5728,7 @@ Smooth-scrolls to slide idx.
 _jumpToSlide(idx, smooth?): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:404
+Defined in: website/components/carousel/CustomCarousel.tsx:411
 
 Instant position jump — used for the clone teleports.
 
@@ -5729,7 +5754,7 @@ Instant position jump — used for the clone teleports.
 onScroll(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:410
+Defined in: website/components/carousel/CustomCarousel.tsx:417
 
 Scroll handler: detects when the track lands on a clone edge to teleport.
 
@@ -5745,7 +5770,7 @@ Scroll handler: detects when the track lands on a clone edge to teleport.
 _cancelNavSpring(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:416
+Defined in: website/components/carousel/CustomCarousel.tsx:423
 
 User-gesture takeover — kills the scroll spring + pending teleport.
 
@@ -5761,7 +5786,7 @@ User-gesture takeover — kills the scroll spring + pending teleport.
 _checkInfiniteLoop(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:422
+Defined in: website/components/carousel/CustomCarousel.tsx:429
 
 Teleports between clone and real slides at track edges — the infinite-loop trick.
 
@@ -5777,7 +5802,7 @@ Teleports between clone and real slides at track edges — the infinite-loop tri
 onPrevClick(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:428
+Defined in: website/components/carousel/CustomCarousel.tsx:435
 
 Prev-arrow click.
 
@@ -5793,7 +5818,7 @@ Prev-arrow click.
 onNextClick(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:434
+Defined in: website/components/carousel/CustomCarousel.tsx:441
 
 Next-arrow click.
 
@@ -5809,7 +5834,7 @@ Next-arrow click.
 onDotClick(idx): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:440
+Defined in: website/components/carousel/CustomCarousel.tsx:447
 
 Dot-navigation click to a specific slide.
 
@@ -5831,7 +5856,7 @@ Dot-navigation click to a specific slide.
 _setupIntersectionObserver(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:446
+Defined in: website/components/carousel/CustomCarousel.tsx:453
 
 Observes slides for lazy media loading + autoplay pausing when offscreen.
 
@@ -5847,7 +5872,7 @@ Observes slides for lazy media loading + autoplay pausing when offscreen.
 _startAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:455
+Defined in: website/components/carousel/CustomCarousel.tsx:462
 
 Starts/resumes the autoplay RAF cycle. autoplayStart is backdated by
 the accumulated elapsed so a pause→resume continues mid-cycle rather
@@ -5865,7 +5890,7 @@ than restarting the countdown — the ring picks up where it drained to.
 _stopAutoplay(permanently?): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:460
+Defined in: website/components/carousel/CustomCarousel.tsx:467
 
 Stops autoplay; `permanently` latches _autoplayPermanentlyStopped so no resume follows a user gesture.
 
@@ -5887,7 +5912,7 @@ Stops autoplay; `permanently` latches _autoplayPermanentlyStopped so no resume f
 _regressRingToZero(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:465
+Defined in: website/components/carousel/CustomCarousel.tsx:472
 
 Animates ringProgress back to 0 (drain effect when autoplay stops).
 
@@ -5903,7 +5928,7 @@ Animates ringProgress back to 0 (drain effect when autoplay stops).
 _tick(timestamp): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:470
+Defined in: website/components/carousel/CustomCarousel.tsx:477
 
 Autoplay RAF frame — advances the ring clock, flips slides on cycle end.
 
@@ -5925,7 +5950,7 @@ Autoplay RAF frame — advances the ring clock, flips slides on cycle end.
 _updateRingDom(): void;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:475
+Defined in: website/components/carousel/CustomCarousel.tsx:482
 
 Writes ringProgress into the SVG dashoffset + arrow widget arc.
 
@@ -5943,7 +5968,7 @@ renderSlide(item):
   | null;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:484
+Defined in: website/components/carousel/CustomCarousel.tsx:491
 
 One slide's inner content — a <media-figure> with the item's CDN src
 (folder + src), intrinsic size for aspect-ratio layout, and the
@@ -5969,7 +5994,7 @@ expand/video/label flags. Returns null for placeholder entries.
 render(): Element;
 ```
 
-Defined in: website/components/carousel/CustomCarousel.tsx:492
+Defined in: website/components/carousel/CustomCarousel.tsx:499
 
 JSX template — see carousel-render.tsx for the active/inactive
 shapes (clone slides, dots, ring buttons).

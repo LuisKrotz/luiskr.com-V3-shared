@@ -95,3 +95,15 @@ optional docsRoute?: boolean;
 Defined in: core/router/types.ts:23
 
 English-only docs portal — suppresses the language switcher.
+
+---
+
+### ogType?
+
+```ts
+optional ogType?: string;
+```
+
+Defined in: core/router/types.ts:25
+
+og:type for the resolved route class — SCHEMA_OG_* tokens ('article', 'profile', …).

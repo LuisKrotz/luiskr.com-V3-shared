@@ -2,9 +2,9 @@
 
 Shared structural types for the App shell — the APP
 
-| | |
-|---|---|
-| **Source** | `src/shared\src\app\types.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\src\app\types.ts`                           |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -28,6 +28,10 @@ Shape of the translations/<locale>/APP dictionary node.
 ### (module scope)
 
 <lang-dialog> reached through the shell — only the open flag is driven.
+
+### (module scope)
+
+<search-modal> reached through the shell — only the open flag is driven.
 
 ### (module scope)
 

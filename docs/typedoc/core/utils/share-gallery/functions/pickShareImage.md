@@ -8,7 +8,7 @@
 function pickShareImage(urls): string
 ```
 
-Defined in: core/utils/share-gallery.ts:119
+Defined in: core/utils/share-gallery.ts:120
 
 Uniformly random pick from the share set — every sync draws fresh so
 repeated fetches/navigations surface different card captures.

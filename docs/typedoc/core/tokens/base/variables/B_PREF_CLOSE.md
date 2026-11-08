@@ -8,6 +8,6 @@
 const _B_PREF_CLOSE: 'pref-close'
 ```
 
-Defined in: core/tokens/base.ts:335
+Defined in: core/tokens/base.ts:348
 
 BEM block fragment "b pref close" — composed by the token groups below into full class names.

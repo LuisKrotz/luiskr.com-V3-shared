@@ -8,6 +8,6 @@
 const _B_PREF_OPTION: 'pref-option'
 ```
 
-Defined in: core/tokens/base.ts:318
+Defined in: core/tokens/base.ts:331
 
 BEM block fragment "b pref option" — composed by the token groups below into full class names.

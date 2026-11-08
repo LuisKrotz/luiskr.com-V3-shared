@@ -17,6 +17,7 @@ const TRANSLATION_KEYS: Readonly<{
   STAR_FIELD: 'star-field'
   DOCS: 'docs'
   ANIMATIONS: 'animations'
+  SEARCH: 'search'
 }>
 ```
 

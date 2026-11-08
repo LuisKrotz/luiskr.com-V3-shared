@@ -8,6 +8,6 @@
 const _K_SYSTEM: 'system' = 'system'
 ```
 
-Defined in: core/tokens/base.ts:497
+Defined in: core/tokens/base.ts:510
 
 Token key "k system" — single source for the repeated literal.

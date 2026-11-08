@@ -8,7 +8,7 @@
 function stopCarouselAutoplay(c, permanently?): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:89
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:90
 
 Stops autoplay and drains the progress ring. `permanently` latches
 _autoplayPermanentlyStopped — every user-initiated navigation

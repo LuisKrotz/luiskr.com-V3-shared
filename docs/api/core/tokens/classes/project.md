@@ -21,6 +21,23 @@ area, `internal-expand` trigger. `ZTF_VIDEO` is a standalone modifier
 
 WebGPU overlay canvas for the divider sheen (`divider-sheen` widget).
 
+### `INTERNAL_FOOTER_ITEMS_FEED`
+
+RSS row under the legal links — wraps the locale feed anchor.
+
+### `INTERNAL_FOOTER_ITEMS_FEED_LINK`
+
+The feed anchor itself — the delegated SPA click handler skips it so
+the browser fetches the XML file instead of routing.
+
+### `INTERNAL_FOOTER_ITEMS_FEED_ICON`
+
+Inline RSS glyph (dot + two broadcast arcs) inside the feed anchor.
+
+### `INTERNAL_FOOTER_ITEMS_FEED_WAVE`
+
+One broadcast arc of the RSS glyph — staggered pulse on hover/focus.
+
 ### `PROJECT_CLASSES`
 
 Frozen project class-name map — sole declaration site for these tokens; consumers read

@@ -384,9 +384,21 @@ Re-exports [RELATED_CLASSES](tokens/classes/related/variables/RELATED_CLASSES.md
 
 ---
 
+### ROUTE\_SEARCH\_CLASSES
+
+Re-exports [ROUTE_SEARCH_CLASSES](tokens/classes/route-search/variables/ROUTE_SEARCH_CLASSES.md)
+
+---
+
 ### ROUTER\_CLASSES
 
 Re-exports [ROUTER_CLASSES](tokens/classes/router/variables/ROUTER_CLASSES.md)
+
+---
+
+### SEARCH\_MODAL\_CLASSES
+
+Re-exports [SEARCH_MODAL_CLASSES](tokens/classes/search-modal/variables/SEARCH_MODAL_CLASSES.md)
 
 ---
 
@@ -441,6 +453,12 @@ Re-exports [MENU_CSS_PROPS](tokens/css/menu/variables/MENU_CSS_PROPS.md)
 ### NAV\_GEAR\_CSS\_PROPS
 
 Re-exports [NAV_GEAR_CSS_PROPS](tokens/css/nav/variables/NAV_GEAR_CSS_PROPS.md)
+
+---
+
+### NAV\_SEARCH\_CSS\_PROPS
+
+Re-exports [NAV_SEARCH_CSS_PROPS](tokens/css/nav/variables/NAV_SEARCH_CSS_PROPS.md)
 
 ---
 
@@ -810,6 +828,12 @@ Re-exports [NAV_GEAR_IDS](tokens/ids/app/variables/NAV_GEAR_IDS.md)
 
 ---
 
+### NAV\_SEARCH\_IDS
+
+Re-exports [NAV_SEARCH_IDS](tokens/ids/app/variables/NAV_SEARCH_IDS.md)
+
+---
+
 ### ASSET\_IDS
 
 Re-exports [ASSET_IDS](tokens/ids/assets/variables/ASSET_IDS.md)
@@ -921,6 +945,12 @@ Re-exports [IMAGE_DIMENSIONS](tokens/media/dimensions/variables/IMAGE_DIMENSIONS
 ### VIDEO\_DIMENSIONS
 
 Re-exports [VIDEO_DIMENSIONS](tokens/media/dimensions/variables/VIDEO_DIMENSIONS.md)
+
+---
+
+### MEDIA\_OBSERVER\_THRESHOLDS
+
+Re-exports [MEDIA_OBSERVER_THRESHOLDS](tokens/media/dimensions/variables/MEDIA_OBSERVER_THRESHOLDS.md)
 
 ---
 
@@ -1335,6 +1365,18 @@ Re-exports [DB_PATHS](tokens/routes/paths/variables/DB_PATHS.md)
 ### ASSET\_PATHS
 
 Re-exports [ASSET_PATHS](tokens/routes/paths/variables/ASSET_PATHS.md)
+
+---
+
+### ROUTE\_SEARCH\_KINDS
+
+Re-exports [ROUTE_SEARCH_KINDS](tokens/routes/search/variables/ROUTE_SEARCH_KINDS.md)
+
+---
+
+### ROUTE\_SEARCH\_LIMITS
+
+Re-exports [ROUTE_SEARCH_LIMITS](tokens/routes/search/variables/ROUTE_SEARCH_LIMITS.md)
 
 ---
 
@@ -1908,6 +1950,18 @@ Re-exports [buildMediaUrls](utils/media/functions/buildMediaUrls.md)
 
 ---
 
+### licenseUrlFor
+
+Re-exports [licenseUrlFor](utils/schema/functions/licenseUrlFor.md)
+
+---
+
+### generatePersonSchema
+
+Re-exports [generatePersonSchema](utils/schema/functions/generatePersonSchema.md)
+
+---
+
 ### generateWebsiteSchema
 
 Re-exports [generateWebsiteSchema](utils/schema/functions/generateWebsiteSchema.md)
@@ -1953,6 +2007,12 @@ Re-exports [generateStarIndexSchema](utils/schema/functions/generateStarIndexSch
 ### generateStarBodySchema
 
 Re-exports [generateStarBodySchema](utils/schema/functions/generateStarBodySchema.md)
+
+---
+
+### resolveProjectMedia
+
+Re-exports [resolveProjectMedia](utils/schema/functions/resolveProjectMedia.md)
 
 ---
 

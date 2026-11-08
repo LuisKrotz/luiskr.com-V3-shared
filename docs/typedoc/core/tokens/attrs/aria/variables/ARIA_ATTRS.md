@@ -17,6 +17,9 @@ const ARIA_ATTRS: Readonly<{
   ARIA_LIVE: 'aria-live'
   ARIA_PRESSED: 'aria-pressed'
   ARIA_CHECKED: 'aria-checked'
+  ARIA_ACTIVEDESCENDANT: 'aria-activedescendant'
+  ARIA_AUTOCOMPLETE: 'aria-autocomplete'
+  ARIA_HASPOPUP: 'aria-haspopup'
   POLITE: 'polite'
   ROLE: 'role'
   ROLE_DIALOG: 'dialog'
@@ -32,6 +35,10 @@ const ARIA_ATTRS: Readonly<{
   ROLE_NONE: 'none'
   ROLE_IMG: 'img'
   ROLE_APPLICATION: 'application'
+  ROLE_COMBOBOX: 'combobox'
+  ROLE_LISTBOX: 'listbox'
+  ROLE_OPTION: 'option'
+  AUTOCOMPLETE_LIST: 'list'
   TABINDEX: 'tabindex'
 }>
 ```

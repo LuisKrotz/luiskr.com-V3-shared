@@ -10,6 +10,7 @@ const FRAME_BUDGET: Readonly<{
   DESKTOP_MS: number
   MOBILE_HZ: 120
   DESKTOP_HZ: 240
+  HEAVY_ROUTE_HZ: 60
 }>
 ```
 

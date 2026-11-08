@@ -9,12 +9,13 @@ import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
 import { APP_EVENTS } from '@core/tokens/events/app.js'
 import { FORM_EVENTS, WINDOW_EVENTS } from '@core/tokens/events/dom.js'
 import { PREF_MUTATIONS } from '@core/tokens/events/mutations.js'
+import { ROUTE_NAMES } from '@core/tokens/routes/names.js'
 import { QUERY_STRINGS } from '@core/tokens/strings/queries.js'
 import { TYPE_STRINGS } from '@core/tokens/strings/types.js'
 import { THEME } from '@core/tokens/theme/theme.js'
 import store from '@core/store.js'
 import router from '@core/router/router.js'
-import type { LangDialogEl, PrefModalEl } from './types.js'
+import type { LangDialogEl, PrefModalEl, SearchModalEl } from './types.js'
 import type { AppRoot } from '../App.js'
 import { ANIMATION_DURATIONS } from '@core/tokens/motion/animation.js'
 import { webglPool } from '@core/utils/canvas/webgl-pool.js'
@@ -103,6 +104,31 @@ export function mountAppShell(c: AppRoot): void {
   }
   c.addScopedListener(c, APP_EVENTS.OPEN_LANG_DIALOG, openLang)
   c.addScopedListener(window, APP_EVENTS.OPEN_LANG_DIALOG, openLang)
+
+  // Listen to open-search-modal from app-nav
+  const openSearch = () => {
+    import('@website/components/dialogs/SearchModal.js').then(() => {
+      const modal = c.$<SearchModalEl>(COMPONENT_TAGS.SEARCH_MODAL)
+      if (modal) modal.open = true
+    })
+  }
+  c.addScopedListener(c, APP_EVENTS.OPEN_SEARCH_MODAL, openSearch)
+  c.addScopedListener(window, APP_EVENTS.OPEN_SEARCH_MODAL, openSearch)
+
+  // `?q=` deep link — opens the search modal on routes that don't already
+  // host a search surface. The /search view and the 404 both carry their
+  // own <route-search> — there the query seeds those inputs instead of
+  // doubling the surface with the modal.
+  const bootRoute = router.currentRoute?.name
+
+  if (
+    typeof window !== TYPE_STRINGS.UNDEFINED &&
+    new URLSearchParams(window.location.search).get(QUERY_STRINGS.SEARCH_QUERY) &&
+    bootRoute !== ROUTE_NAMES.SEARCH &&
+    bootRoute !== ROUTE_NAMES.NOT_FOUND
+  ) {
+    openSearch()
+  }
 
   // Subscribe to router
   router.subscribe((to, from) => {

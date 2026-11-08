@@ -8,7 +8,7 @@
 function carouselOnNextClick(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:417
+Defined in: website/components/carousel/custom-carousel/nav.ts:418
 
 Next-arrow click — mirrors carouselOnPrevClick in the forward direction.
 

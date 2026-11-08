@@ -9,6 +9,10 @@ Playground share-capture contract — the bucket key
 
 ## Members
 
+### `SHARE_VIDEO_EXTS`
+
+Video extensions accepted into every share set — a recorded engine capture dropped under a set's share/ prefix joins the sitemap video tags and the JSON-LD VideoObject entries the same way screenshots join the image surfaces.
+
 ### `EARTH_SHARE`
 
 Earth Playground share-capture tokens. Sole declaration site — consumers
@@ -26,6 +30,10 @@ Site-served JSON manifest of the share set — emitted at build time, fetched la
 ### `IMAGE_EXTS`
 
 Image extensions accepted into the share set.
+
+### `VIDEO_EXTS`
+
+Video extensions accepted into the share set.
 
 ### `STAR_SHARE`
 
@@ -45,3 +53,7 @@ Site-served JSON manifest of the share set — emitted at build time, fetched la
 ### `IMAGE_EXTS`
 
 Image extensions accepted into the share set.
+
+### `VIDEO_EXTS`
+
+Video extensions accepted into the share set.

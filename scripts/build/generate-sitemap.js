@@ -12,15 +12,14 @@
  *   routes, `/earth-playground`, `/star-field-experiment`,
  *   `/portfolio/<slug>` plus a media-modal deep link for every labelled
  *   media item (matching `website/views/project/modal.ts`), every
- *   `/star-field-experiment/<body>` catalog deep link. The `/docs/**`
- *   surface is deliberately absent — it carries X-Robots-Tag: noindex
- *   (generated typedoc/coverage/source mirrors are agent/human docs,
- *   not indexable content), and a sitemap may only name indexable URLs.
+ *   `/star-field-experiment/<body>` catalog deep link, and every public
+ *   `/docs/**` manifest route.
  * - Per locale `/<loc>/…` — the locale's localized slugs for
  *   about/contact/legal/earthPlayground/starField, `/<loc>/portfolio/<slug>`
  *   project routes AND localized media-modal deep links, and localized
  *   star-field body deep links `/<loc>/<starField>/<body>`.
- * - Docs are English-only by design — `/<loc>/docs/…` never appears.
+ * - Docs are English-only by design — `/<loc>/docs/…` redirects while every
+ *   public docs manifest route is listed at its unprefixed canonical URL.
  * - Noncanonical aliases (legacy project slugs, `/space-playground`,
  *   English-segment routes under a locale prefix) are served as 301
  *   redirects by firebase.json — they never appear in a sitemap.
@@ -37,10 +36,13 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import * as sass from 'sass'
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
 import { LOCALE_TAGS } from '../../../core/tokens/locales.ts'
 import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
+import { _B_DOCS } from '../../../core/tokens/base.ts'
 import { EARTH_SHARE, STAR_SHARE } from '../../../core/tokens/playground/share.ts'
+import { scanManifest } from '../../build/docs/scan.mjs'
 import { mediaItemsOf, mediaRowsOf } from './route-media.mjs'
 import {
   fetchMediaManifest,
@@ -49,13 +51,23 @@ import {
   resolveMediaUrls,
   resolveCoverKey,
 } from './media-manifest.mjs'
-import { shareImageKeys, shareImageUrls, shareManifestDoc } from './playground-share.mjs'
+import {
+  shareImageKeys,
+  shareImageUrls,
+  shareManifestDoc,
+  shareVideoKeys,
+  shareVideoUrls,
+  probeShareDims,
+} from './playground-share.mjs'
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
 const VALID_LANGS = Object.keys(LANG_SLUGS)
 
 const CDN_BASE = 'https://storage.googleapis.com/luiskr.com/public/_v3/'
+
+/** Canonical public root used by the docs manifest routes. */
+const DOCS_PATH = `/${_B_DOCS}`
 
 /** XML namespaces emitted on every <urlset>. */
 const URLSET_XMLNS =
@@ -96,6 +108,18 @@ const encLoc = (u) => {
   }
 }
 
+/**
+ * Encodes a route path one segment at a time so sitemap URLs preserve
+ * separators while safely representing Unicode and reserved characters.
+ * @param {string} routePath Canonical path to encode.
+ * @returns {string} Percent-encoded route path.
+ */
+const encPath = (routePath) =>
+  routePath
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/')
+
 /** Truncates a media title to Google's 100-char video-title bound. */
 const titleOf = (label, max = 100) => {
   const t = String(label || '').trim()
@@ -121,6 +145,55 @@ const videoThemeTags = (themes) =>
     .slice(0, 32)
     .map((t) => `\n      <video:tag>${escXml(titleOf(t, 255))}</video:tag>`)
     .join('')
+
+/**
+ * `<image:license>` element — the locale's own license page; Google
+ * Images surfaces the "Licensable" badge when both image:license (or
+ * schema license metadata) and the page's ImageObject.license agree.
+ */
+const licenseUrlOf = (loc, base) =>
+  `${base}${loc === 'en' ? '' : `/${loc}`}/${(LANG_SLUGS[loc] || LANG_SLUGS.en).license}`
+
+const imageLicenseTag = (loc, base) =>
+  `\n      <image:license>${escXml(encLoc(licenseUrlOf(loc, base)))}</image:license>`
+
+/**
+ * Reads the `dims` map of a previously emitted share manifest from
+ * META_DIR — the offline path reuses the cached probe result so an
+ * LK_OFFLINE build doesn't strip intrinsic sizes the runtime wall
+ * already packs against. Missing/partial docs resolve to null.
+ * @param {string} metaDir meta output dir the manifest was written to
+ * @param {string} manifestUrl token MANIFEST_URL (basename resolves)
+ * @returns {Map<string, number[]>|null} capture URL → [w,h], or null
+ */
+const cachedShareDims = (metaDir, manifestUrl) => {
+  try {
+    const doc = JSON.parse(
+      fs.readFileSync(path.join(metaDir, manifestUrl.split('/').pop()), 'utf-8')
+    )
+
+    return doc?.dims && typeof doc.dims === 'object' ? new Map(Object.entries(doc.dims)) : null
+  } catch {
+    return null
+  }
+}
+
+/** `<video:video>` tags for one share set's clip list — a recorded
+ *  engine capture dropped under a set's share/ prefix lists on the
+ *  playground URLs with the set's first image as thumbnail (Google
+ *  requires a poster frame) and the page's localized search themes as
+ *  <video:tag>. */
+const shareVideoTags = (vidKeys, thumbKey, titleBase, themes, base) =>
+  vidKeys.map(
+    (key, i) =>
+      `    <video:video>\n      <video:thumbnail_loc>${escXml(encLoc(`${CDN_BASE}${thumbKey}`))}</video:thumbnail_loc>` +
+      `\n      <video:title>${escXml(titleOf(`${titleBase} ${i + 1}`))}</video:title>` +
+      `\n      <video:description>${escXml(titleOf(`${titleBase} ${i + 1}`, 2048))}</video:description>` +
+      `\n      <video:content_loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</video:content_loc>` +
+      `\n      <video:family_friendly>yes</video:family_friendly>` +
+      `\n      <video:requires_subscription>no</video:requires_subscription>` +
+      `\n      <video:uploader info="${escXml(base)}">Luis Krötz</video:uploader>${videoThemeTags(themes)}\n    </video:video>`
+  )
 
 async function run() {
   const base = 'https://luiskr.com'
@@ -164,7 +237,17 @@ async function run() {
 
   const enSlugs = LANG_SLUGS.en || {}
 
-  for (const key of ['about', 'contact', 'privacy', 'gdpr', 'terms', 'license', 'animations']) {
+  for (const key of [
+    'about',
+    'contact',
+    'privacy',
+    'gdpr',
+    'terms',
+    'license',
+    'animations',
+    'search',
+    'sitemap',
+  ]) {
     if (enSlugs[key]) urlSet.add(`/${enSlugs[key]}`)
   }
 
@@ -194,6 +277,8 @@ async function run() {
         'earthPlayground',
         'starField',
         'animations',
+        'search',
+        'sitemap',
       ]) {
         if (slugs[key]) urlSet.add(`/${lang}/${slugs[key]}`)
       }
@@ -259,7 +344,8 @@ async function run() {
       // be RFC-3986-encoded or the sitemap URLs are invalid.
       tags.push(
         `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</image:loc>` +
-          `\n      <image:title>${escXml(titleOf(item.label || item.image))}</image:title>${caption}\n    </image:image>`
+          `\n      <image:title>${escXml(titleOf(item.label || item.image))}</image:title>` +
+          `${imageLicenseTag(loc, base)}${caption}\n    </image:image>`
       )
     }
 
@@ -279,17 +365,31 @@ async function run() {
   // set with locale-localized titles + search-theme captions, so earth-
   // image searches in every language resolve to the portfolio.
   const shareKeys = shareImageKeys(manifest)
+  const shareVidKeys = shareVideoKeys(manifest)
 
-  if (shareKeys.length) {
+  if (shareKeys.length || shareVidKeys.length) {
+    const shareUrls = shareImageUrls(manifest, CDN_BASE)
+    const shareVidUrls = shareVideoUrls(manifest, CDN_BASE)
+
+    // Probed intrinsic dims — the runtime sitemap wall packs each card
+    // at the capture's real aspect. Offline runs reuse the dims committed
+    // in the previous manifest so probing is skipped without losing them.
+    const shareDims =
+      process.env.LK_OFFLINE === '1'
+        ? cachedShareDims(META_DIR, EARTH_SHARE.MANIFEST_URL)
+        : await probeShareDims(shareUrls, shareVidUrls, manifest, CDN_BASE, EARTH_SHARE)
+
     fs.writeFileSync(
       path.join(META_DIR, EARTH_SHARE.MANIFEST_URL.split('/').pop()),
-      `${JSON.stringify(shareManifestDoc(shareImageUrls(manifest, CDN_BASE), CDN_BASE), null, 2)}\n`,
+      `${JSON.stringify(shareManifestDoc(shareUrls, CDN_BASE, EARTH_SHARE, shareVidUrls, shareDims), null, 2)}\n`,
       'utf-8'
     )
   }
 
-  /** Localized <image:image> tags for the whole share set — titles and
-   *  captions carry the locale's own earth-image search themes. */
+  /** Localized <image:image> + <video:video> tags for the whole share
+   *  set — titles and captions carry the locale's own earth-image
+   *  search themes; recorded clips (when present under the share
+   *  prefix) ride the same per-locale vocabulary. */
   const epShareTagsFor = (loc) => {
     const page =
       translations[loc]?.pages?.['earth-playground'] ||
@@ -298,22 +398,29 @@ async function run() {
 
     const pageTitle = page.title || 'Earth Playground'
     const capture = page.shareCapture || 'Earth render'
-    const caption = escXml(
-      titleOf(
-        [
-          pageTitle,
-          ...(Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []),
-        ].join(' — '),
-        500
-      )
-    )
+    const themes = Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []
+    const caption = escXml(titleOf([pageTitle, ...themes].join(' — '), 500))
 
-    return shareKeys.map(
+    const images = shareKeys.map(
       (key, i) =>
         `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</image:loc>` +
         `\n      <image:title>${escXml(titleOf(`${pageTitle} — ${capture} ${i + 1}`))}</image:title>` +
+        `${imageLicenseTag(loc, base)}` +
         `\n      <image:caption>${caption}</image:caption>\n    </image:image>`
     )
+
+    const videos =
+      shareKeys.length && shareVidKeys.length
+        ? shareVideoTags(
+            shareVidKeys,
+            shareKeys[0],
+            `${pageTitle} — ${capture} video`,
+            themes,
+            base
+          )
+        : []
+
+    return [...images, ...videos]
   }
 
   if (shareKeys.length) {
@@ -336,39 +443,60 @@ async function run() {
   // localized titles + search-theme captions, so star/space searches in
   // every language resolve to the portfolio.
   const starShareKeys = shareImageKeys(manifest, STAR_SHARE)
+  const starShareVidKeys = shareVideoKeys(manifest, STAR_SHARE)
 
-  if (starShareKeys.length) {
+  if (starShareKeys.length || starShareVidKeys.length) {
+    const starShareUrls = shareImageUrls(manifest, CDN_BASE, STAR_SHARE)
+    const starShareVidUrls = shareVideoUrls(manifest, CDN_BASE, STAR_SHARE)
+
+    // Same dims contract as the earth set — the runtime wall packs each
+    // card at the capture's real aspect; offline reuses the committed
+    // manifest's dims.
+    const starDims =
+      process.env.LK_OFFLINE === '1'
+        ? cachedShareDims(META_DIR, STAR_SHARE.MANIFEST_URL)
+        : await probeShareDims(starShareUrls, starShareVidUrls, manifest, CDN_BASE, STAR_SHARE)
+
     fs.writeFileSync(
       path.join(META_DIR, STAR_SHARE.MANIFEST_URL.split('/').pop()),
-      `${JSON.stringify(shareManifestDoc(shareImageUrls(manifest, CDN_BASE, STAR_SHARE), CDN_BASE, STAR_SHARE), null, 2)}\n`,
+      `${JSON.stringify(shareManifestDoc(starShareUrls, CDN_BASE, STAR_SHARE, starShareVidUrls, starDims), null, 2)}\n`,
       'utf-8'
     )
   }
 
-  /** Localized <image:image> tags for the whole star share set — titles
-   *  and captions carry the locale's own star-image search themes. */
+  /** Localized <image:image> + <video:video> tags for the whole star
+   *  share set — titles and captions carry the locale's own star-image
+   *  search themes; recorded clips (when present under the share
+   *  prefix) ride the same per-locale vocabulary. */
   const sfShareTagsFor = (loc) => {
     const page =
       translations[loc]?.pages?.['star-field'] || translations.en?.pages?.['star-field'] || {}
 
     const pageTitle = page.title || 'Star Field'
     const capture = page.shareCapture || 'Star render'
-    const caption = escXml(
-      titleOf(
-        [
-          pageTitle,
-          ...(Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []),
-        ].join(' — '),
-        500
-      )
-    )
+    const themes = Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []
+    const caption = escXml(titleOf([pageTitle, ...themes].join(' — '), 500))
 
-    return starShareKeys.map(
+    const images = starShareKeys.map(
       (key, i) =>
         `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</image:loc>` +
         `\n      <image:title>${escXml(titleOf(`${pageTitle} — ${capture} ${i + 1}`))}</image:title>` +
+        `${imageLicenseTag(loc, base)}` +
         `\n      <image:caption>${caption}</image:caption>\n    </image:image>`
     )
+
+    const videos =
+      starShareKeys.length && starShareVidKeys.length
+        ? shareVideoTags(
+            starShareVidKeys,
+            starShareKeys[0],
+            `${pageTitle} — ${capture} video`,
+            themes,
+            base
+          )
+        : []
+
+    return [...images, ...videos]
   }
 
   if (starShareKeys.length) {
@@ -386,8 +514,9 @@ async function run() {
   // ── Portfolio routes, media deep links + per-URL media tags ─────────────
   /** XML media tags for one media item — image:image or video:video.
    *  `themes` is the parent page's localized searchThemes list: images
-   *  get it as <image:caption>, videos as <video:tag> elements. */
-  const mediaTagXml = (folder, m, label, projectTitle, themes = []) => {
+   *  get it as <image:caption>, videos as <video:tag> elements. `loc`
+   *  resolves the license page the <image:license> badge links. */
+  const mediaTagXml = (folder, m, label, projectTitle, themes = [], loc = 'en') => {
     const { source, thumb, isVideo } = resolveMediaUrls(folder, m, manifest)
 
     if (!source || (isVideo && !thumb)) return []
@@ -400,19 +529,23 @@ async function run() {
           `\n      <video:title>${title}</video:title>\n      <video:description>${escXml(
             titleOf(`${projectTitle} — ${label || projectTitle}`, 2048)
           )}</video:description>` +
-          `\n      <video:content_loc>${escXml(encLoc(`${CDN_BASE}${source}`))}</video:content_loc>${videoThemeTags(themes)}\n    </video:video>`,
+          `\n      <video:content_loc>${escXml(encLoc(`${CDN_BASE}${source}`))}</video:content_loc>` +
+          `\n      <video:family_friendly>yes</video:family_friendly>` +
+          `\n      <video:requires_subscription>no</video:requires_subscription>` +
+          `\n      <video:uploader info="${escXml(base)}">Luis Krötz</video:uploader>${videoThemeTags(themes)}\n    </video:video>`,
       ]
     }
 
     return [
       `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${source}`))}</image:loc>` +
-        `\n      <image:title>${title}</image:title>${themeCaption(themes)}\n    </image:image>`,
+        `\n      <image:title>${title}</image:title>${imageLicenseTag(loc, base)}${themeCaption(themes)}\n    </image:image>`,
     ]
   }
 
   /** Aggregated media tags for a project page — cover + every item,
-   * deduped by resolved asset URL. */
-  const projectPageTags = (folder, projectData, projectTitle) => {
+   * deduped by resolved asset URL. `loc` binds image:license to the
+   * locale's own license page. */
+  const projectPageTags = (folder, projectData, projectTitle, loc = 'en') => {
     const tags = []
     const seenSources = new Set()
     const themes = themesOf(projectData)
@@ -423,7 +556,7 @@ async function run() {
       if (!source || seenSources.has(source)) return
 
       seenSources.add(source)
-      tags.push(...mediaTagXml(folder, m, label || m?.label, projectTitle, themes))
+      tags.push(...mediaTagXml(folder, m, label || m?.label, projectTitle, themes, loc))
     }
 
     if (projectData?.cover) pushMediaTag(projectData.cover)
@@ -478,14 +611,14 @@ async function run() {
 
       addTags(
         `/${lang}/portfolio/${projectSlug}`,
-        projectPageTags(folder, { ...locNode, [SEARCH_THEMES_KEY]: locThemes }, projectTitle)
+        projectPageTags(folder, { ...locNode, [SEARCH_THEMES_KEY]: locThemes }, projectTitle, lang)
       )
 
       for (const { slug: mediaSlug, media: m } of mediaRowsOf(locNode)) {
         const locMedia = `/${lang}/portfolio/${projectSlug}/${mediaSlug}`
 
         urlSet.add(locMedia)
-        addTags(locMedia, mediaTagXml(folder, m, m.label, projectTitle, locThemes))
+        addTags(locMedia, mediaTagXml(folder, m, m.label, projectTitle, locThemes, lang))
       }
     }
   }
@@ -503,29 +636,129 @@ async function run() {
     }
   }
 
+  /** Star-field body dossier JSON for one locale — English fallback
+   *  (a missing locale file degrades to the canonical dossier, never a
+   *  gap). */
+  const readStarBody = (loc, bodyId) => {
+    for (const l of [loc, 'en']) {
+      try {
+        return JSON.parse(
+          fs.readFileSync(
+            path.join(
+              REPO_ROOT,
+              'experiments',
+              'star-field',
+              'public',
+              'data',
+              l,
+              `${bodyId}.json`
+            ),
+            'utf-8'
+          )
+        )
+      } catch {
+        // locale dossier missing → English
+      }
+    }
+
+    return null
+  }
+
+  /** Localized search-theme list for the star-field page — feeds
+   *  <image:caption>/<video:tag> on body deep links. */
+  const sfPageThemes = (loc) => {
+    const themes = themesOf(translations[loc]?.pages?.['star-field'])
+
+    return themes.length ? themes : themesOf(translations.en?.pages?.['star-field'])
+  }
+
+  /** Media tags for one star-field body deep link — the dossier's own
+   *  credited gallery (Blue Marble, the Orion Earthrise clip, …)
+   *  becomes the page's image/video surface so object-media searches
+   *  in every language resolve to the dossier itself, not only the
+   *  index. A video tag requires a thumbnail: the body's first
+   *  dossier image stands in (every video-bearing dossier ships one);
+   *  a body with no image emits no video tag rather than an invalid
+   *  one. */
+  const starBodyTagsFor = (loc, bodyId) => {
+    const b = readStarBody(loc, bodyId)
+
+    if (!b?.media) return []
+
+    const name = b.name || bodyId
+    const themes = [name, b.kind, ...sfPageThemes(loc)].filter(Boolean)
+    const thumb = (b.media.images || []).find((i) => i?.src)?.src
+    const tags = []
+
+    for (const img of b.media.images || []) {
+      if (!img?.src) continue
+
+      tags.push(
+        `    <image:image>\n      <image:loc>${escXml(encLoc(img.src))}</image:loc>` +
+          `\n      <image:title>${escXml(titleOf(img.caption || name))}</image:title>${themeCaption(themes)}\n    </image:image>`
+      )
+    }
+
+    for (const v of b.media.videos || []) {
+      const poster = v?.poster && /^https?:/.test(v.poster) ? v.poster : thumb
+
+      if (!v?.src || !poster) continue
+
+      tags.push(
+        `    <video:video>\n      <video:thumbnail_loc>${escXml(encLoc(poster))}</video:thumbnail_loc>` +
+          `\n      <video:title>${escXml(titleOf(v.caption || `${name} video`))}</video:title>` +
+          `\n      <video:description>${escXml(
+            titleOf(`${name} — ${v.caption || b.tagline || name}`, 2048)
+          )}</video:description>` +
+          `\n      <video:content_loc>${escXml(encLoc(v.src))}</video:content_loc>` +
+          `${videoThemeTags(themes)}\n    </video:video>`
+      )
+    }
+
+    return tags
+  }
+
   for (const body of starBodies) {
     urlSet.add(`/star-field-experiment/${body}`)
+    addTags(`/star-field-experiment/${body}`, starBodyTagsFor('en', body))
 
     for (const lang of VALID_LANGS) {
       if (lang === 'en') continue
 
       const sf = LANG_SLUGS[lang]?.starField
 
-      if (sf) urlSet.add(`/${lang}/${sf}/${body}`)
+      if (sf) {
+        urlSet.add(`/${lang}/${sf}/${body}`)
+        addTags(`/${lang}/${sf}/${body}`, starBodyTagsFor(lang, body))
+      }
     }
   }
 
-  // Docs portal — deliberately EXCLUDED from the crawl surface: the docs
-  // tree mirrors generated artifacts (typedoc, coverage reports, source
-  // viewers) whose only audience is humans/agents, not search indexes.
-  // /docs** carries X-Robots-Tag: noindex in firebase.json, so listing it
-  // here would advertise pages we explicitly do not want indexed — a
-  // sitemap must only ever name indexable canonical 200 routes.
+  // The docs page builder emits every scanner root, child, and directory
+  // listing, so register that same manifest as the English crawl surface.
+  const docsManifest = scanManifest(REPO_ROOT)
+
+  /**
+   * Recursively adds each manifest page and its directory descendants.
+   * @param {object} node Scanned docs manifest node.
+   */
+  const addDocsNode = (node) => {
+    urlSet.add(`${DOCS_PATH}/${node.path}`)
+
+    for (const child of node.children || []) addDocsNode(child)
+  }
+
+  urlSet.add(DOCS_PATH)
+
+  for (const root of docsManifest.roots) {
+    urlSet.add(`${DOCS_PATH}/${root.root}`)
+
+    for (const child of root.children) addDocsNode(child)
+  }
 
   const allUrls = Array.from(urlSet).sort()
   console.log('Total unique URLs:', allUrls.length)
 
-  const now = new Date().toISOString().split('T')[0] + 'T00:00:00+00:00'
   const priorityOf = (u) => {
     const segs = u.split('/').filter(Boolean)
 
@@ -543,10 +776,11 @@ async function run() {
   /** Emits one `<urlset>` document for `urls`, media tags included. */
   const sitemapDoc = (urls) => {
     const items = urls
-      .map(
-        (u) =>
-          `  <url>\n    <loc>${base}${u === '/' ? '/' : u}</loc>\n    <lastmod>${now}</lastmod>\n    <priority>${priorityOf(u)}</priority>${tagFor(u)}\n  </url>`
-      )
+      .map((u) => {
+        const routePath = u === '/' ? '/' : encPath(u)
+
+        return `  <url>\n    <loc>${base}${routePath}</loc>\n    <priority>${priorityOf(u)}</priority>${tagFor(u)}\n  </url>`
+      })
       .join('\n')
 
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset ${URLSET_XMLNS}>\n${items}\n</urlset>\n`
@@ -568,6 +802,8 @@ async function run() {
       'earthPlayground',
       'starField',
       'animations',
+      'search',
+      'sitemap',
     ]) {
       if (slugs[key]) own.push(`/${loc}/${slugs[key]}`)
     }
@@ -580,10 +816,9 @@ async function run() {
   }
 
   // ── Per-locale sitemaps + sitemap index ──────────────────────────────────
-  // English gets the unprefixed surface (/, /portfolio/*, /docs/* — the docs
-  // portal is English-only by design). Every other locale sitemap lists its
-  // own /<loc>/… routes PLUS the shared unprefixed surface, so every sitemap
-  // discovers ≥ the full English URL count.
+  // English gets the unprefixed surface, including the English-only docs
+  // portal. Every other locale sitemap adds its own routes to that shared
+  // surface so crawlers can discover all canonical content per locale.
   const enUrls = allUrls.filter((u) => u === '/' || !LOCALE_PREFIX_RE.test(u))
   const llmsTemplate = fs.readFileSync(path.join(META_DIR, 'llms.txt'), 'utf-8')
 
@@ -622,9 +857,7 @@ async function run() {
 
   fs.writeFileSync(path.join(META_DIR, 'sitemap-en.xml'), sitemapDoc(enUrls), 'utf-8')
 
-  const indexEntries = [
-    `  <sitemap>\n    <loc>${base}/sitemap-en.xml</loc>\n    <lastmod>${now}</lastmod>\n  </sitemap>`,
-  ]
+  const indexEntries = [`  <sitemap>\n    <loc>${base}/sitemap-en.xml</loc>\n  </sitemap>`]
 
   for (const loc of VALID_LANGS) {
     if (loc === 'en') continue
@@ -633,9 +866,7 @@ async function run() {
 
     fs.writeFileSync(path.join(META_DIR, `sitemap-${loc}.xml`), sitemapDoc(locUrls), 'utf-8')
 
-    indexEntries.push(
-      `  <sitemap>\n    <loc>${base}/sitemap-${loc}.xml</loc>\n    <lastmod>${now}</lastmod>\n  </sitemap>`
-    )
+    indexEntries.push(`  <sitemap>\n    <loc>${base}/sitemap-${loc}.xml</loc>\n  </sitemap>`)
 
     // Localized agent/agent-readable files — firebase maps /<loc>/x → /meta/<loc>/x.
     const locDir = path.join(META_DIR, loc)
@@ -648,7 +879,7 @@ async function run() {
     )
     fs.writeFileSync(
       path.join(locDir, 'urllist.txt'),
-      locUrls.map((u) => `${base}${u === '/' ? '/' : u}`).join('\n') + '\n',
+      locUrls.map((u) => `${base}${u === '/' ? '/' : encPath(u)}`).join('\n') + '\n',
       'utf-8'
     )
     fs.writeFileSync(path.join(locDir, 'llms.txt'), localizedLlms(loc), 'utf-8')
@@ -665,7 +896,7 @@ async function run() {
   fs.writeFileSync(path.join(META_DIR, 'robots.txt'), robotsDoc(`${base}/sitemap.xml`), 'utf-8')
   fs.writeFileSync(
     path.join(META_DIR, 'urllist.txt'),
-    allUrls.map((u) => `${base}${u === '/' ? '' : u}`).join('\n') + '\n',
+    allUrls.map((u) => `${base}${u === '/' ? '' : encPath(u)}`).join('\n') + '\n',
     'utf-8'
   )
 
@@ -673,6 +904,24 @@ async function run() {
   // /<loc>/feed.xml (and /feed.xml + /rss.xml for English) give RSS/Atom
   // consumers — readers, aggregators, Bing/Brave feed crawlers — the
   // localized surface with each project's cover attached as media:content.
+  // Every item also carries <dc:creator> and one <category> per localized
+  // searchTheme so readers/aggregators can facet the feed by the same
+  // vocabulary the sitemap captions and <meta name="keywords"> use.
+  // Browsers get an xml-stylesheet PI pointing at /feed.css — CSS PIs on
+  // XML documents remain supported after client-side XSLT's deprecation
+  // (Chrome removes XSLT transforms; `type="text/css"` is the surviving
+  // contract), so the raw feed elements render as a branded page wearing
+  // the compiled sheet below (firebase rewrites map it onto /meta/).
+
+  /** Feed item author — matches the Person entity in the page JSON-LD. */
+  const FEED_CREATOR = 'Luis Krötz'
+
+  /** Cap on <category> elements per item — keeps items compact while
+   *  covering every content-derived theme head (the shared identity
+   *  tail lands past the cap on long lists, which is intentional). */
+  const FEED_CATEGORY_CAP = 12
+
+  /** Strips CMS rich-text markup (tags, <br>, entities) to plain text. */
   const plain = (s) =>
     String(s || '')
       .replace(/<br\s*\/?>/gi, ' ')
@@ -682,6 +931,7 @@ async function run() {
       .replace(/\s+/g, ' ')
       .trim()
 
+  /** First plain-text string inside a nested project `sections` tree. */
   const firstSectionText = (node) => {
     if (typeof node === 'string') return node
 
@@ -701,8 +951,16 @@ async function run() {
     plain(translations[loc]?.pages?.about?.col1?.[0]) ||
     plain(translations.en?.pages?.about?.col1?.[0])
 
-  /** One RSS item with a valid image enclosure or video plus optional poster. */
-  const rssItem = ({ title, link, desc, media }) => {
+  /** `<category>` elements for one item — deduped, capped theme list. */
+  const feedCategories = (themes = []) =>
+    [...new Set(themes.map((t) => String(t || '').trim()).filter(Boolean))]
+      .slice(0, FEED_CATEGORY_CAP)
+      .map((t) => `\n    <category>${escXml(t)}</category>`)
+      .join('')
+
+  /** One RSS item with a valid image enclosure or video plus optional
+   *  poster, its author, and the owning page's searchThemes as categories. */
+  const rssItem = ({ title, link, desc, media, themes }) => {
     // Some videos have no bucket-backed poster; omitting it avoids an
     // empty media URL while preserving the source video enclosure.
     const m = media
@@ -714,8 +972,10 @@ async function run() {
 
     return (
       `  <item>\n    <title>${escXml(title)}</title>\n    <link>${escXml(link)}</link>` +
-      `\n    <guid>${escXml(link)}</guid>` +
-      `\n    <description>${escXml(titleOf(desc, 500))}</description>${m}\n  </item>`
+      `\n    <guid isPermaLink="true">${escXml(link)}</guid>` +
+      `\n    <dc:creator>${escXml(FEED_CREATOR)}</dc:creator>` +
+      `\n    <description>${escXml(titleOf(desc, 500))}</description>` +
+      `${feedCategories(themes)}${m}\n  </item>`
     )
   }
 
@@ -730,11 +990,19 @@ async function run() {
     const bio = bioOf(loc)
     const desc = (v) => plain(v) || bio
 
+    /** Localized searchThemes of one page node, English as fallback. */
+    const pageThemes = (key) => {
+      const own = themesOf(tr.pages?.[key])
+
+      return own.length ? own : themesOf(translations.en?.pages?.[key])
+    }
+
     const items = [
       rssItem({
         title: 'Luis Krötz — Portfolio',
         link: `${base}${prefix}/`,
         desc: bio,
+        themes: pageThemes('HOME'),
       }),
     ]
 
@@ -743,22 +1011,41 @@ async function run() {
     const legalDesc = (key) =>
       tr.pages?.[key]?.sections?.[0]?.content?.[0] || tr.pages?.[key]?.title
 
+    // Rows: [slug, title, description, CMS page key for searchThemes].
     const pageItems = [
-      [slugs.about, tr.APP?.about?.description, bio],
-      [slugs.contact, tr.APP?.contact, tr.components?.contact?.title],
-      [slugs.privacy, legal?.[1]?.page, legalDesc('privacy-policy')],
-      [slugs.gdpr, legal?.[2]?.page, legalDesc('GDPR')],
-      [slugs.terms, legal?.[3]?.page, legalDesc('terms-of-use')],
-      [slugs.license, tr.pages?.license?.title, legalDesc('license')],
-      [slugs.animations, tr.pages?.animations?.title, tr.pages?.animations?.description],
-      [slugs.earthPlayground, tr.APP?.earthPlayground, tr.pages?.['earth-playground']?.description],
-      [slugs.starField, tr.APP?.starField, tr.pages?.['star-field']?.overview],
+      [slugs.about, tr.APP?.about?.description, bio, 'about'],
+      [slugs.contact, tr.APP?.contact, tr.components?.contact?.title, 'contact'],
+      [slugs.privacy, legal?.[1]?.page, legalDesc('privacy-policy'), 'privacy-policy'],
+      [slugs.gdpr, legal?.[2]?.page, legalDesc('GDPR'), 'GDPR'],
+      [slugs.terms, legal?.[3]?.page, legalDesc('terms-of-use'), 'terms-of-use'],
+      [slugs.license, tr.pages?.license?.title, legalDesc('license'), 'license'],
+      [
+        slugs.animations,
+        tr.pages?.animations?.title,
+        tr.pages?.animations?.description,
+        'animations',
+      ],
+      [
+        slugs.earthPlayground,
+        tr.APP?.earthPlayground,
+        tr.pages?.['earth-playground']?.description,
+        'earth-playground',
+      ],
+      [slugs.starField, tr.APP?.starField, tr.pages?.['star-field']?.overview, 'star-field'],
+      [slugs.search, tr.pages?.search?.title, tr.pages?.search?.description, 'search'],
     ]
 
-    for (const [seg, name, d] of pageItems) {
+    for (const [seg, name, d, key] of pageItems) {
       if (!seg) continue
 
-      items.push(rssItem({ title: name || seg, link: `${base}${prefix}/${seg}`, desc: desc(d) }))
+      items.push(
+        rssItem({
+          title: name || seg,
+          link: `${base}${prefix}/${seg}`,
+          desc: desc(d),
+          themes: pageThemes(key),
+        })
+      )
     }
 
     // Projects — localized title + first text paragraph + cover media.
@@ -789,18 +1076,52 @@ async function run() {
               firstSectionText(data?.[projectSlug]?.sections)
           ),
           media,
+          themes: themesOf(locProject),
         })
       )
+    }
+
+    // Star-field dossiers — every authored body's localized deep link
+    // joins the feed with its first dossier media so feed-aware
+    // crawlers reach the same surface the sitemap's image/video tags
+    // expose.
+    if (slugs.starField) {
+      for (const bodyId of starBodies) {
+        const b = readStarBody(loc, bodyId)
+
+        if (!b?.name) continue
+
+        const img = (b.media?.images || []).find((i) => i?.src)
+        const vid = (b.media?.videos || []).find((v) => v?.src)
+        const poster = vid?.poster && /^https?:/.test(vid.poster) ? vid.poster : img?.src
+        const media = vid?.src
+          ? { source: vid.src, thumb: poster || null, isVideo: true }
+          : img?.src
+            ? { source: img.src, isVideo: false }
+            : null
+
+        items.push(
+          rssItem({
+            title: b.name,
+            link: `${base}${prefix}/${slugs.starField}/${bodyId}`,
+            desc: desc(b.tagline || b.history),
+            media,
+            themes: [b.name, b.kind, ...sfPageThemes(loc)],
+          })
+        )
+      }
     }
 
     const lastBuild = new Date().toUTCString()
 
     return (
       `<?xml version="1.0" encoding="UTF-8"?>\n` +
-      `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">\n` +
+      `<?xml-stylesheet type="text/css" href="/feed.css"?>\n` +
+      `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">\n` +
       `<channel>\n  <title>Luis Krötz</title>\n  <link>${base}${prefix}/</link>` +
       `\n  <atom:link href="${escXml(feedUrl)}" rel="self" type="application/rss+xml"/>` +
       `\n  <description>${escXml(bio)}</description>\n  <language>${LOCALE_TAGS[loc]?.bcp || loc}</language>` +
+      `\n  <copyright>${escXml(`© ${new Date().getFullYear()} ${FEED_CREATOR}`)}</copyright>` +
       `\n  <lastBuildDate>${lastBuild}</lastBuildDate>` +
       `\n  <image><url>${base}/assets/icons/share.png</url><title>Luis Krötz</title><link>${base}${prefix}/</link></image>` +
       `\n${items.join('\n')}\n</channel>\n</rss>\n`
@@ -814,6 +1135,19 @@ async function run() {
 
     fs.writeFileSync(path.join(META_DIR, loc, 'feed.xml'), rssDoc(loc), 'utf-8')
   }
+
+  // ── Feed presentation sheet ──────────────────────────────────────────────
+  // The PI above sends browsers to /feed.css — the compiled
+  // website/sass/feed.scss styles the raw XML document in place (no
+  // transform): channel/item elements lay out as the branded page.
+  // Compiling here keeps the sheet on the real token matrix: the file is a
+  // generated artifact like the feeds themselves, never a hand-edited copy.
+  const feedCss = sass.compile(path.join(REPO_ROOT, 'website', 'sass', 'feed.scss'), {
+    style: 'compressed',
+    silenceDeprecations: ['import', 'global-builtin', 'legacy-js-api'],
+  }).css
+
+  fs.writeFileSync(path.join(META_DIR, 'feed.css'), feedCss, 'utf-8')
 
   console.log(
     `Generated sitemap index + ${VALID_LANGS.length} locale sitemaps and localized meta files under ${META_DIR}/`

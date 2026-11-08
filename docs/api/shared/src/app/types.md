@@ -31,6 +31,10 @@ Shape of the translations/<locale>/APP dictionary node.
 
 ### (module scope)
 
+<search-modal> reached through the shell — only the open flag is driven.
+
+### (module scope)
+
 A mounted view element that may implement onRouteParamChange — the
 outlet calls it when a same-tag route updates params (project→project
 navigation reuses the element).

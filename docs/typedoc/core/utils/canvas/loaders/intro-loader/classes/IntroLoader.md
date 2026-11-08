@@ -159,7 +159,7 @@ Builds or adopts the overlay DOM + starts the progress sequence.
 buildOverlay(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:150
+Defined in: core/utils/canvas/loaders/intro-loader.ts:155
 
 Builds the overlay DOM from scratch — used when the document did not
 ship the static loader markup (dev server, non-prerendered shells).
@@ -176,7 +176,7 @@ ship the static loader markup (dev server, non-prerendered shells).
 runAnimation(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:228
+Defined in: core/utils/canvas/loaders/intro-loader.ts:233
 
 Steps percent + the localized stage line across the boot budget.
 
@@ -192,7 +192,7 @@ Steps percent + the localized stage line across the boot budget.
 finish(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:267
+Defined in: core/utils/canvas/loaders/intro-loader.ts:272
 
 Completes the loader: fades the overlay, retires it, calls onComplete.
 
@@ -208,7 +208,7 @@ Completes the loader: fades the overlay, retires it, calls onComplete.
 destroy(): void;
 ```
 
-Defined in: core/utils/canvas/loaders/intro-loader.ts:283
+Defined in: core/utils/canvas/loaders/intro-loader.ts:288
 
 Releases the rAF handle and retires the overlay (kept connected so a
 painted LQIP's LCP candidacy survives teardown — see retireVeil).

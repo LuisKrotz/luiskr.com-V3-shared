@@ -9,6 +9,10 @@ Shared frame scheduler — one requestAnimationFrame pump
 
 ## Members
 
+### (module scope)
+
+A per-frame callback — receives the pump's DOMHighResTimeStamp.
+
 ### `rethrowAsync`
 
 Reports a frame-callback failure the way native rAF would — as an

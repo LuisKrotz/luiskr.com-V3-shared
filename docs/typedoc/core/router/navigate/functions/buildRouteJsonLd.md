@@ -8,7 +8,7 @@
 function buildRouteJsonLd(to, canonicalOverride?, description?, image?): Record<string, unknown>[]
 ```
 
-Defined in: core/router/navigate.ts:164
+Defined in: core/router/navigate.ts:174
 
 Base JSON-LD entities for a resolved route — exported so views whose
 localized descriptions resolve post-navigation (home/about) can

@@ -1,8 +1,8 @@
 # `core\router\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/core\router\types.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\router\types.ts`                                |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -24,6 +24,10 @@ Canonical path override — normalizes alias/legacy URLs to their canonical slug
 ### (module scope)
 
 English-only docs portal — suppresses the language switcher.
+
+### (module scope)
+
+og:type for the resolved route class — SCHEMA_OG_* tokens ('article', 'profile', …).
 
 ### (module scope)
 

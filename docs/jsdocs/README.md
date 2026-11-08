@@ -619,6 +619,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`docs-schema-generatedocsschema.test.js`](core\tests\coverage\schema/docs-schema-generatedocsschema.test.md)         | Split from docs-schema.test.js — covers the "generateDocsSchema" describe.     |
 | [`docs-schema-updatejsonld-clear-arm.test.js`](core\tests\coverage\schema/docs-schema-updatejsonld-clear-arm.test.md) | Split from docs-schema.test.js — covers the "updateJsonLd clear arm" describe. |
 | [`schema-experiments-tails.test.js`](core\tests\coverage\schema/schema-experiments-tails.test.md)                     | Coverage tails for the experiment JSON-LD builders in                          |
+| [`schema-rich-results-tails.test.js`](core\tests\coverage\schema/schema-rich-results-tails.test.md)                   | Coverage tails for the rich-result fields added to                             |
 | [`schema-tails-test-js.test.js`](core\tests\coverage\schema/schema-tails-test-js.test.md)                             | Split from coverage-tails.test.js — covers the "schema tails" describe.        |
 | [`schema-tails.test.js`](core\tests\coverage\schema/schema-tails.test.md)                                             | Split from coverage-tails-4.test.js — covers the "schema tails" describe.      |
 
@@ -705,6 +706,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`npu-predict-tails-2.test.js`](core\tests\coverage\utils\gpu/npu-predict-tails-2.test.md)               | Split from coverage-tails-4.test.js — covers the "npu-predict tails 2" describe. |
 | [`npu-predict-tails.test.js`](core\tests\coverage\utils\gpu/npu-predict-tails.test.md)                   | Split from coverage-tails-2.test.js — covers the "npu-predict tails" describe.   |
 | [`orbit-controller-tails.test.js`](core\tests\coverage\utils\gpu/orbit-controller-tails.test.md)         | Coverage tail for utils/gpu/orbit-controller.ts — the                            |
+| [`ring-fill-tails.test.js`](core\tests\coverage\utils\gpu/ring-fill-tails.test.md)                       | Coverage tail for utils/gpu/ring-fill.ts — the                                   |
 | [`ring-sheen-tails.test.js`](core\tests\coverage\utils\gpu/ring-sheen-tails.test.md)                     | Coverage tail for utils/gpu/ring-sheen.ts — the                                  |
 | [`scene3d-tails.test.js`](core\tests\coverage\utils\gpu/scene3d-tails.test.md)                           | Coverage tail for utils/gpu/scene3d.ts — the JS facade                           |
 | [`webgpu-widget-env-tails.test.js`](core\tests\coverage\utils\gpu/webgpu-widget-env-tails.test.md)       | Coverage tail for utils/gpu/webgpu-widget.ts arms that                           |
@@ -738,6 +740,7 @@ _Shared primitives every surface builds on — no direct UI._
 | File                                                                                                        | What it does                                                                    |
 | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | [`bezier-tails.test.js`](core\tests\coverage\utils\motion/bezier-tails.test.md)                             | Coverage for core/utils/motion/bezier.ts — the                                  |
+| [`expand-spring-tails.test.js`](core\tests\coverage\utils\motion/expand-spring-tails.test.md)               | Coverage for core/utils/motion/expand-spring.ts — the                           |
 | [`frame-budget-tails.test.js`](core\tests\coverage\utils\motion/frame-budget-tails.test.md)                 | Coverage tails for core/tokens/motion/frame-budget.ts —                         |
 | [`genie-tails.test.js`](core\tests\coverage\utils\motion/genie-tails.test.md)                               | Split from coverage-tails.test.js — covers the "genie tails" describe.          |
 | [`intent-tails.test.js`](core\tests\coverage\utils\motion/intent-tails.test.md)                             | Coverage tails for core/utils/motion/intent.ts — intent                         |
@@ -769,6 +772,7 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                                                                                  | What it does                                                                             |
 | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [`nav-glyph-tails.test.js`](core\tests\coverage\utils\wasm/nav-glyph-tails.test.md)                                   | Coverage tail for utils/wasm/nav-glyph.ts — the nav glyph                                |
 | [`wasm-css-tails-test-js.test.js`](core\tests\coverage\utils\wasm/wasm-css-tails-test-js.test.md)                     | Split from coverage-tails.test.js — covers the "wasm-css tails" describe.                |
 | [`wasm-css-tails.test.js`](core\tests\coverage\utils\wasm/wasm-css-tails.test.md)                                     | Split from coverage-tails-4.test.js — covers the "wasm-css tails" describe.              |
 | [`wasm-diagram-tails-2.test.js`](core\tests\coverage\utils\wasm/wasm-diagram-tails-2.test.md)                         | Coverage tails for core/utils/wasm/wasm-diagram.ts,                                      |
@@ -781,6 +785,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`wasm-scroll-container-tails.test.js`](core\tests\coverage\utils\wasm/wasm-scroll-container-tails.test.md)           | Split from coverage-tails-5.test.js — covers the "wasm-scroll container tails" describe. |
 | [`wasm-scroll-tails-2.test.js`](core\tests\coverage\utils\wasm/wasm-scroll-tails-2.test.md)                           | Split from coverage-tails-5.test.js — covers the "wasm-scroll tails 2" describe.         |
 | [`wasm-scroll-tails.test.js`](core\tests\coverage\utils\wasm/wasm-scroll-tails.test.md)                               | Split from coverage-tails-2.test.js — covers the "wasm-scroll tails" describe.           |
+| [`wasm-search-tails.test.js`](core\tests\coverage\utils\wasm/wasm-search-tails.test.md)                               | Coverage tail for utils/wasm/wasm-search.ts — the                                        |
 
 ## Core engine
 
@@ -889,7 +894,7 @@ _Shared primitives every surface builds on — no direct UI._
 | File                                                                                                      | What it does                                                               |
 | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | [`constants.test.js`](core\tests\unit\tokens/constants.test.md)                                           | Verifies all values in core/constants.js match the original Vue source.    |
-| [`nav-css-tokens.test.js`](core\tests\unit\tokens/nav-css-tokens.test.md)                                 | Coverage tail for core/tokens/css/nav.ts — asserts every                   |
+| [`nav-css-tokens.test.js`](core\tests\unit\tokens/nav-css-tokens.test.md)                                 | Coverage tail for core/tokens/css/nav.ts — asserts the nav                 |
 | [`playground-control-groups.test.js`](core\tests\unit\tokens/playground-control-groups.test.md)           | Coverage tail for core/tokens/playground/control-groups.ts —               |
 | [`playground-share.test.js`](core\tests\unit\tokens/playground-share.test.md)                             | Coverage tail for core/tokens/playground/share.ts — the                    |
 | [`schema-shims-entry-shims.test.js`](core\tests\unit\tokens/schema-shims-entry-shims.test.md)             | Split from schema-shims.test.js — covers the "entry shims" describe.       |
@@ -962,6 +967,7 @@ _Shared primitives every surface builds on — no direct UI._
 | File                                         | What it does                                                 |
 | -------------------------------------------- | ------------------------------------------------------------ |
 | [`attrs.ts`](core\tokens/attrs.md)           | HTML attribute tokens — every `data-*` attribute, ARIA role, |
+| [`base.js`](core\tokens/base.md)             | Plain-node resolution shim — standalone build scripts        |
 | [`base.ts`](core\tokens/base.md)             | Internal shared composites for the token modules — the       |
 | [`classes.ts`](core\tokens/classes.md)       | The centralized BEM class-name registry — every CSS class a  |
 | [`css.ts`](core\tokens/css.md)               | CSS custom-property names set or read from JS — keep the JS  |
@@ -969,6 +975,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`elements.ts`](core\tokens/elements.md)     | DOM element tokens — custom-element tag names and native tag |
 | [`events.ts`](core\tokens/events.md)         | Event & state-mutation tokens — DOM event names, custom      |
 | [`ids.ts`](core\tokens/ids.md)               | Element id tokens — root mount points, dialog titles and the |
+| [`indexnow.ts`](core\tokens/indexnow.md)     | IndexNow protocol tokens — the Bing/IndexNow API key,        |
 | [`jsx.ts`](core\tokens/jsx.md)               | Centralized tokens and dictionaries for JSX compilation and  |
 | [`layout.ts`](core\tokens/layout.md)         | Spatial tokens — the Fibonacci spacing scale, responsive     |
 | [`locales.ts`](core\tokens/locales.md)       | Supported language locales for i18n routing and CMS data     |
@@ -1033,7 +1040,9 @@ _Shared primitives every surface builds on — no direct UI._
 | [`project.ts`](core\tokens\classes/project.md)                 | Project/internal page class tokens (`internal-*` block) —         |
 | [`reader.ts`](core\tokens\classes/reader.md)                   | Reader-mode content class tokens — the prerendered article        |
 | [`related.ts`](core\tokens\classes/related.md)                 | Related-projects mosaic class tokens — grouped subset of          |
+| [`route-search.ts`](core\tokens\classes/route-search.md)       | Route-search (404 autocomplete) class tokens — grouped subset     |
 | [`router.ts`](core\tokens\classes/router.md)                   | Router active-link class tokens — token group.                    |
+| [`search-modal.ts`](core\tokens\classes/search-modal.md)       | BEM class tokens for &lt;search-modal&gt; — the nav search        |
 | [`skeleton.ts`](core\tokens\classes/skeleton.md)               | Skeleton/shimmer placeholder class tokens — grouped subset of     |
 | [`starfield.ts`](core\tokens\classes/starfield.md)             | Star-field experiment class tokens (`sf-*` block) —               |
 | [`state.ts`](core\tokens\classes/state.md)                     | Global state modifier class tokens — grouped subset of            |
@@ -1050,7 +1059,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`cookies.ts`](core\tokens\css/cookies.md)     | Cookie-banner CSS custom-property names — grouped subset of |
 | [`genie.ts`](core\tokens\css/genie.md)         | Genie-transition origin CSS custom-property names — grouped |
 | [`menu.ts`](core\tokens\css/menu.md)           | Menu ink CSS custom-property names — grouped subset of      |
-| [`nav.ts`](core\tokens\css/nav.md)             | Nav gear SVG paint CSS custom-property names — the steel    |
+| [`nav.ts`](core\tokens\css/nav.md)             | Nav strip glyph paint CSS custom-property names — the       |
 | [`skeleton.ts`](core\tokens\css/skeleton.md)   | Skeleton-field palette CSS custom-property names — grouped  |
 | [`starfield.ts`](core\tokens\css/starfield.md) | Star-field CSS custom-property names set from JS — grouped  |
 | [`theme.ts`](core\tokens\css/theme.md)         | Theme/ink CSS custom-property names — grouped subset of     |
@@ -1066,6 +1075,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`component-keys.ts`](core\tokens\data/component-keys.md) | Dotted paths into translations/&lt;locale&gt;/components — grouped |
 | [`log.ts`](core\tokens\data/log.md)                       | Dev-log severity levels + the globalThis inspection key.           |
 | [`ml.ts`](core\tokens\data/ml.md)                         | ONNX Runtime Web / WebNN engine tokens — sole declaration          |
+| [`nav-glyph.ts`](core\tokens\data/nav-glyph.md)           | Nav glyph motion tokens — the wasm artifact URL, the emitter       |
 | [`notify.ts`](core\tokens\data/notify.md)                 | Toast severity levels — drives the `site-toast--&lt;type&gt;` BEM  |
 | [`search-themes.js`](core\tokens\data/search-themes.md)   | Shared CMS field key for localized search vocabulary.              |
 | [`storage.ts`](core\tokens\data/storage.md)               | localStorage/sessionStorage key tokens split by scope —            |
@@ -1134,6 +1144,7 @@ _Shared primitives every surface builds on — no direct UI._
 | ------------------------------------------------------ | ---------------------------------------------------------- |
 | [`budget.ts`](core\tokens\media/budget.md)             | Media spend-tier vocabulary — the values `mediaBudget()`   |
 | [`cache.ts`](core\tokens\media/cache.md)               | IndexedDB media disk-cache + network cache-mode tokens.    |
+| [`credits.ts`](core\tokens\media/credits.md)           | Explicit credit vocabulary for third-party dossier media   |
 | [`dimensions.ts`](core\tokens\media/dimensions.md)     | Canonical pixel dimensions + media timing tokens split per |
 | [`flag-texture.ts`](core\tokens\media/flag-texture.md) | Shared flag renderer texture-atlas size (power of two).    |
 | [`sizes.ts`](core\tokens\media/sizes.md)               | Responsive `sizes` attribute strings per media surface.    |
@@ -1148,6 +1159,7 @@ _Shared primitives every surface builds on — no direct UI._
 | ------------------------------------------------------- | ----------------------------------------------------------- |
 | [`animation.ts`](core\tokens\motion/animation.md)       | Easing curve + transition duration tokens — grouped subsets |
 | [`carousel.ts`](core\tokens\motion/carousel.md)         | Carousel timing/geometry tokens — grouped subsets of        |
+| [`expand.ts`](core\tokens\motion/expand.md)             | Constants for the px-space expansion spring —               |
 | [`frame-budget.ts`](core\tokens\motion/frame-budget.md) | Animation frame-budget constants — the per-frame work       |
 | [`genie.ts`](core\tokens\motion/genie.md)               | Expand-modal genie-warp tunables — the macOS-style liquid   |
 | [`gpu-widgets.ts`](core\tokens\motion/gpu-widgets.md)   | WebGPU widget discriminants + artifact registry — the       |
@@ -1163,6 +1175,7 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                            | What it does                                                  |
 | --------------------------------------------------------------- | ------------------------------------------------------------- |
+| [`about.ts`](core\tokens\playground/about.md)                   | JSON-LD `about` anchors for the experiment pages — the        |
 | [`actions.ts`](core\tokens\playground/actions.md)               | Toolbar/panel action names dispatched by the playground UI.   |
 | [`control-groups.ts`](core\tokens\playground/control-groups.md) | Declarative control-panel schema for the Earth Playground —   |
 | [`gui-post.ts`](core\tokens\playground/gui-post.md)             | Post-processing start values for the Earth Playground —       |
@@ -1181,6 +1194,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`aliases.ts`](core\tokens\routes/aliases.md)                   | Legacy project slug aliases — maps old URL slugs to canonical |
 | [`names.ts`](core\tokens\routes/names.md)                       | Route name + localized title-prefix tokens.                   |
 | [`paths.ts`](core\tokens\routes/paths.md)                       | Path tokens split by function — public URL routes, Firebase   |
+| [`search.ts`](core\tokens\routes/search.md)                     | Route-search vocabulary — the entry-kind discriminants the    |
 | [`translation-keys.ts`](core\tokens\routes/translation-keys.md) | Route meta translation keys — values used in                  |
 
 ## Core engine
@@ -1445,6 +1459,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`gpu-info.ts`](core\utils\gpu/gpu-info.md)                   | Shared GPU capability detection + WebGL context-option hints. |
 | [`npu-predict.ts`](core\utils\gpu/npu-predict.md)             | Hardware-tiered prefetch predictor: scores navigation         |
 | [`orbit-controller.ts`](core\utils\gpu/orbit-controller.md)   | —                                                             |
+| [`ring-fill.ts`](core\utils\gpu/ring-fill.md)                 | —                                                             |
 | [`ring-sheen.ts`](core\utils\gpu/ring-sheen.md)               | —                                                             |
 | [`scene3d.ts`](core\utils\gpu/scene3d.md)                     | —                                                             |
 | [`webgpu-widget.ts`](core\utils\gpu/webgpu-widget.md)         | Per-widget WebGPU/Rust bridge — the loader for the            |
@@ -1476,8 +1491,9 @@ _Shared primitives every surface builds on — no direct UI._
 | File                                                     | What it does                                                        |
 | -------------------------------------------------------- | ------------------------------------------------------------------- |
 | [`bezier.ts`](core\utils\motion/bezier.md)               | Cubic-bezier easing evaluator — the CSS `cubic-bezier(x1,y1,x2,y2)` |
+| [`expand-spring.ts`](core\utils\motion/expand-spring.md) | Height chase spring — drives an element's inline                    |
 | [`frame.ts`](core\utils\motion/frame.md)                 | Shared frame scheduler — one requestAnimationFrame pump             |
-| [`genie.ts`](core\utils\motion/genie.md)                 | "Genie" dialog transition shared by the preferences modal and       |
+| [`genie.ts`](core\utils\motion/genie.md)                 | "Genie" dialog transition shared by the preferences modal,          |
 | [`intent.ts`](core\utils\motion/intent.md)               | User-intent gate for warm-path work                                 |
 | [`route-warmer.ts`](core\utils\motion/route-warmer.md)   | Post-load route-chunk warming.                                      |
 | [`scroll-spring.ts`](core\utils\motion/scroll-spring.md) | Scroll-position chase spring — the shared driver both               |
@@ -1516,6 +1532,7 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                             | What it does                                                              |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [`nav-glyph.ts`](core\utils\wasm/nav-glyph.md)                   | Bridge for the nav glyph hover motion                                     |
 | [`wasm-css.ts`](core\utils\wasm/wasm-css.md)                     | Dynamic-CSS injector: owns the single &lt;style id="wasm-dynamic-css"&gt; |
 | [`wasm-diagram.ts`](core\utils\wasm/wasm-diagram.md)             | Lazy loader for the `rust/diagram` wasm engine — the                      |
 | [`wasm-image-decoder.ts`](core\utils\wasm/wasm-image-decoder.md) | Image decode pipeline: fetch → worker-side createImageBitmap              |
@@ -1523,6 +1540,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`wasm-media-threads.ts`](core\utils\wasm/wasm-media-threads.md) | Off-main-thread media pipeline built on the WASM worker pool:             |
 | [`wasm-pool.ts`](core\utils\wasm/wasm-pool.md)                   | Round-robin dispatcher over a lazily-spawned pool of                      |
 | [`wasm-scroll.ts`](core\utils\wasm/wasm-scroll.md)               | rAF-driven smooth scroller: animates window (or a container)              |
+| [`wasm-search.ts`](core\utils\wasm/wasm-search.md)               | Route-search scorer — the 404 autocomplete ranks its                      |
 
 ## Desktop shell
 
@@ -2080,24 +2098,26 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                                       | What it does                                                     |
-| -------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| [`browser-loader.js`](shared\scripts\build/browser-loader.md)              | Runtime bundle dispatcher, inlined into dist/index.html by       |
-| [`build-locale-pages.mjs`](shared\scripts\build/build-locale-pages.md)     | Emits per-locale, per-route static index.html files into         |
-| [`build-targets.mjs`](shared\scripts\build/build-targets.md)               | Multi-target build orchestrator.                                 |
-| [`build-wasm.js`](shared\scripts\build/build-wasm.md)                      | —                                                                |
-| [`build.mjs`](shared\scripts\build/build.md)                               | Production build orchestrator                                    |
-| [`compress-queue.mjs`](shared\scripts\build/compress-queue.md)             | Bounded-concurrency precompressed-sibling writer.                |
-| [`deploy-info.mjs`](shared\scripts\build/deploy-info.md)                   | Assembles `dist/deploy-info/` — the "last deploy" bundle the CMS |
-| [`fs-retry.mjs`](shared\scripts\build/fs-retry.md)                         | Bounded retry for fs operations that race Windows file locks.    |
-| [`gen-onnx-models.mjs`](shared\scripts\build/gen-onnx-models.md)           | Emits the site's tiny ONNX models into                           |
-| [`generate-llm-pages.mjs`](shared\scripts\build/generate-llm-pages.md)     | LLM/agent replica surface — emits a full-content Markdown        |
-| [`generate-sitemap.js`](shared\scripts\build/generate-sitemap.md)          | Emits the whole crawl surface under `website/public/meta/`:      |
-| [`media-manifest.mjs`](shared\scripts\build/media-manifest.md)             | CDN media inventory + best-variant resolution shared by the      |
-| [`playground-share.mjs`](shared\scripts\build/playground-share.md)         | Playground share-capture helpers shared by the build-time        |
-| [`predeploy.mjs`](shared\scripts\build/predeploy.md)                       | Firebase Hosting predeploy chain — the quality gate that a       |
-| [`route-media.mjs`](shared\scripts\build/route-media.md)                   | Route media helpers shared by the build-time generators          |
-| [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md) | Firebase `predeploy` step — stamps the AI-usage declaration      |
+| File                                                                         | What it does                                                     |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [`browser-loader.js`](shared\scripts\build/browser-loader.md)                | Runtime bundle dispatcher, inlined into dist/index.html by       |
+| [`build-locale-pages.mjs`](shared\scripts\build/build-locale-pages.md)       | Emits per-locale, per-route static index.html files into         |
+| [`build-targets.mjs`](shared\scripts\build/build-targets.md)                 | Multi-target build orchestrator.                                 |
+| [`build-wasm.js`](shared\scripts\build/build-wasm.md)                        | —                                                                |
+| [`build.mjs`](shared\scripts\build/build.md)                                 | Production build orchestrator                                    |
+| [`compress-queue.mjs`](shared\scripts\build/compress-queue.md)               | Bounded-concurrency precompressed-sibling writer.                |
+| [`deploy-info.mjs`](shared\scripts\build/deploy-info.md)                     | Assembles `dist/deploy-info/` — the "last deploy" bundle the CMS |
+| [`fs-retry.mjs`](shared\scripts\build/fs-retry.md)                           | Bounded retry for fs operations that race Windows file locks.    |
+| [`gen-onnx-models.mjs`](shared\scripts\build/gen-onnx-models.md)             | Emits the site's tiny ONNX models into                           |
+| [`generate-llm-pages.mjs`](shared\scripts\build/generate-llm-pages.md)       | LLM/agent replica surface — emits a full-content Markdown        |
+| [`generate-search-index.mjs`](shared\scripts\build/generate-search-index.md) | —                                                                |
+| [`generate-sitemap.js`](shared\scripts\build/generate-sitemap.md)            | Emits the whole crawl surface under `website/public/meta/`:      |
+| [`media-manifest.mjs`](shared\scripts\build/media-manifest.md)               | CDN media inventory + best-variant resolution shared by the      |
+| [`playground-share.mjs`](shared\scripts\build/playground-share.md)           | Playground share-capture helpers shared by the build-time        |
+| [`predeploy.mjs`](shared\scripts\build/predeploy.md)                         | Firebase Hosting predeploy chain — the quality gate that a       |
+| [`route-media.mjs`](shared\scripts\build/route-media.md)                     | Route media helpers shared by the build-time generators          |
+| [`stamp-content-signal.mjs`](shared\scripts\build/stamp-content-signal.md)   | Firebase `predeploy` step — stamps the AI-usage declaration      |
+| [`submit-indexnow.mjs`](shared\scripts\build/submit-indexnow.md)             | IndexNow submission — pushes the entire canonical crawl          |
 
 ## Entry points
 
@@ -2119,7 +2139,10 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`patch-all-pages-search-themes.js`](shared\scripts\i18n/patch-all-pages-search-themes.md)             | —                                                                               |
 | [`patch-animation-descriptions.js`](shared\scripts\i18n/patch-animation-descriptions.md)               | Seeds the animated-element accessibility descriptions into                      |
 | [`patch-earth-playground-share-themes.js`](shared\scripts\i18n/patch-earth-playground-share-themes.md) | —                                                                               |
+| [`patch-earth-playground-titles.js`](shared\scripts\i18n/patch-earth-playground-titles.md)             | —                                                                               |
 | [`patch-earth-playground-translations.js`](shared\scripts\i18n/patch-earth-playground-translations.md) | —                                                                               |
+| [`patch-rss-feed-label.js`](shared\scripts\i18n/patch-rss-feed-label.md)                               | —                                                                               |
+| [`patch-search-page-themes.js`](shared\scripts\i18n/patch-search-page-themes.md)                       | —                                                                               |
 | [`patch-star-field-share-themes.js`](shared\scripts\i18n/patch-star-field-share-themes.md)             | —                                                                               |
 | [`patch-ui-gaps-and-cyrillic.js`](shared\scripts\i18n/patch-ui-gaps-and-cyrillic.md)                   | —                                                                               |
 | [`seed-translations.js`](shared\scripts\i18n/seed-translations.md)                                     | —                                                                               |
@@ -2270,6 +2293,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | ------------------------------------------------------------------------ | --------------------------------------------------------------- |
 | [`LangDialog.tsx`](website\components\dialogs/LangDialog.md)             | &lt;lang-dialog&gt; — locale picker: a grid of language options |
 | [`PreferencesModal.tsx`](website\components\dialogs/PreferencesModal.md) | &lt;preferences-modal&gt; — settings dialog: theme slider       |
+| [`SearchModal.tsx`](website\components\dialogs/SearchModal.md)           | &lt;search-modal&gt; — the hamburger-menu search dialog: a      |
 
 ## Entry points
 
@@ -2437,15 +2461,18 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                | What it does                                                      |
-| --------------------------------------------------- | ----------------------------------------------------------------- |
-| [`AppNav.tsx`](website\components\nav/AppNav.md)    | &lt;app-nav&gt; — the persistent top navigation bar: logo, burger |
-| [`flag.tsx`](website\components\nav/flag.md)        | Locale flag rendering + FlagWebGL lifecycle for &lt;app-nav&gt;,  |
-| [`gear.tsx`](website\components\nav/gear.md)        | The settings gear glyph for &lt;app-nav&gt; — a parametric        |
-| [`handlers.ts`](website\components\nav/handlers.md) | —                                                                 |
-| [`menu.tsx`](website\components\nav/menu.md)        | Fullscreen menu overlay behavior for &lt;app-nav&gt;, extracted   |
-| [`render.tsx`](website\components\nav/render.md)    | JSX template for &lt;app-nav&gt;, extracted from AppNav.tsx —     |
-| [`scroll.ts`](website\components\nav/scroll.md)     | —                                                                 |
+| File                                                  | What it does                                                       |
+| ----------------------------------------------------- | ------------------------------------------------------------------ |
+| [`AppNav.tsx`](website\components\nav/AppNav.md)      | &lt;app-nav&gt; — the persistent top navigation bar: logo, burger  |
+| [`brush.tsx`](website\components\nav/brush.md)        | The neon paintbrush glyph for &lt;app-nav&gt;'s preferences chip — |
+| [`globe.tsx`](website\components\nav/globe.md)        | The language glyph for &lt;app-nav&gt;'s language chip — a neon    |
+| [`grid.tsx`](website\components\nav/grid.md)          | The menu glyph for &lt;app-nav&gt;'s menu button — four neon       |
+| [`handlers.ts`](website\components\nav/handlers.md)   | —                                                                  |
+| [`icon-aura.ts`](website\components\nav/icon-aura.md) | The WASM aura over &lt;app-nav&gt;'s strip chips — reuses          |
+| [`menu.tsx`](website\components\nav/menu.md)          | Fullscreen menu overlay behavior for &lt;app-nav&gt;, extracted    |
+| [`render.tsx`](website\components\nav/render.md)      | JSX template for &lt;app-nav&gt;, extracted from AppNav.tsx —      |
+| [`scroll.ts`](website\components\nav/scroll.md)       | —                                                                  |
+| [`search.tsx`](website\components\nav/search.md)      | The neon terminal glyph for &lt;app-nav&gt;'s search chip — a      |
 
 ## Entry points
 
@@ -2465,6 +2492,23 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`match.ts`](website\components\portfolio\related/match.md)    | —            |
 | [`render.tsx`](website\components\portfolio\related/render.md) | —            |
 | [`types.ts`](website\components\portfolio\related/types.md)    | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                          | What it does                                                |
+| ------------------------------------------------------------- | ----------------------------------------------------------- |
+| [`RouteSearch.tsx`](website\components\search/RouteSearch.md) | &lt;route-search&gt; — the 404 route autocomplete: a search |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                             | What it does |
+| ---------------------------------------------------------------- | ------------ |
+| [`data.ts`](website\components\search\route-search/data.md)      | —            |
+| [`render.tsx`](website\components\search\route-search/render.md) | —            |
 
 ## Entry points
 
@@ -2598,6 +2642,22 @@ _Boot surfaces: what the user sees first on each bundle._
 | File                                                                                         | What it does |
 | -------------------------------------------------------------------------------------------- | ------------ |
 | [`luiskr_menu_background.js`](website\public\wasm\menu-background/luiskr_menu_background.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                       | What it does |
+| -------------------------------------------------------------------------- | ------------ |
+| [`luiskr_nav_glyph.js`](website\public\wasm\nav-glyph/luiskr_nav_glyph.md) | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                       | What it does |
+| -------------------------------------------------------------------------- | ------------ |
+| [`luiskr_ring_fill.js`](website\public\wasm\ring-fill/luiskr_ring_fill.md) | —            |
 
 ## Entry points
 
@@ -2810,8 +2870,15 @@ _Boot surfaces: what the user sees first on each bundle._
 | File                                                                                | What it does                                                  |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------- |
 | [`nav-component.test.js`](website\tests\components\nav/nav-component.test.md)       | Deep tests for AppNav web component: render HTML, attributes, |
-| [`nav-gear.test.js`](website\tests\components\nav/nav-gear.test.md)                 | Coverage tail for nav/gear.tsx — renderNavGear builds the     |
 | [`nav-interactions.test.js`](website\tests\components\nav/nav-interactions.test.md) | Deep coverage for AppNav interaction branches: menu           |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                           | What it does                                               |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| [`route-search.test.js`](website\tests\components\search/route-search.test.md) | &lt;route-search&gt; — the 404 autocomplete: shell render, |
 
 ## Entry points
 
@@ -2835,11 +2902,13 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                                                                         | What it does                                                                        |
-| ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| [`lang-dialog-tails.test.js`](website\tests\coverage\components\dialogs/lang-dialog-tails.test.md)           | Coverage tails for components/dialogs/lang-dialog —                                 |
-| [`langdialog-tails.test.js`](website\tests\coverage\components\dialogs/langdialog-tails.test.md)             | Split from coverage-tails-3.test.js — covers the "LangDialog tails" describe.       |
-| [`preferencesmodal-tails.test.js`](website\tests\coverage\components\dialogs/preferencesmodal-tails.test.md) | Split from coverage-tails-3.test.js — covers the "PreferencesModal tails" describe. |
+| File                                                                                                                   | What it does                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [`lang-dialog-tails.test.js`](website\tests\coverage\components\dialogs/lang-dialog-tails.test.md)                     | Coverage tails for components/dialogs/lang-dialog —                                 |
+| [`langdialog-tails.test.js`](website\tests\coverage\components\dialogs/langdialog-tails.test.md)                       | Split from coverage-tails-3.test.js — covers the "LangDialog tails" describe.       |
+| [`preferencesmodal-tails.test.js`](website\tests\coverage\components\dialogs/preferencesmodal-tails.test.md)           | Split from coverage-tails-3.test.js — covers the "PreferencesModal tails" describe. |
+| [`search-modal-fallback-tails.test.js`](website\tests\coverage\components\dialogs/search-modal-fallback-tails.test.md) | &lt;search-modal&gt; fallback-path coverage — `appText`                             |
+| [`search-modal-tails.test.js`](website\tests\coverage\components\dialogs/search-modal-tails.test.md)                   | &lt;search-modal&gt; coverage tails — open/close state machine                      |
 
 ## Entry points
 
@@ -2858,6 +2927,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                    | What it does                                                                      |
 | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [`legal-footer-feed.test.js`](website\tests\coverage\components\footer/legal-footer-feed.test.md)       | &lt;legal-footer&gt; RSS feed link — locale feed URL builder, the                 |
 | [`legal-footer-tails-2.test.js`](website\tests\coverage\components\footer/legal-footer-tails-2.test.md) | Split from coverage-tails-6.test.js — covers the "legal Footer tails 2" describe. |
 | [`legal-footer-tails.test.js`](website\tests\coverage\components\footer/legal-footer-tails.test.md)     | Split from coverage-tails-3.test.js — covers the "legal Footer tails" describe.   |
 | [`related-note-tails.test.js`](website\tests\coverage\components\footer/related-note-tails.test.md)     | —                                                                                 |
@@ -2940,6 +3010,16 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
+| File                                                                                                                  | What it does                                                    |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [`route-search-fallback-tails.test.js`](website\tests\coverage\components\search/route-search-fallback-tails.test.md) | Coverage tail for route-search/data.ts — the                    |
+| [`route-search-tails.test.js`](website\tests\coverage\components\search/route-search-tails.test.md)                   | Coverage tail for components/search/route-search/data.ts —      |
+| [`route-search-viewport-tails.test.js`](website\tests\coverage\components\search/route-search-viewport-tails.test.md) | &lt;route-search&gt; viewport-fit coverage — the open listbox's |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
 | File                                                                                            | What it does                                                                   |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | [`animations-tails-2.test.js`](website\tests\coverage\pages/animations-tails-2.test.md)         | Coverage tails for website/views/animations — the data-miss                    |
@@ -2950,6 +3030,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`legal-tails-2.test.js`](website\tests\coverage\pages/legal-tails-2.test.md)                   | Split from coverage-tails-5.test.js — covers the "Legal tails 2" describe.     |
 | [`notfound-tails-test-js.test.js`](website\tests\coverage\pages/notfound-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "NotFound tails" describe.      |
 | [`notfound-tails.test.js`](website\tests\coverage\pages/notfound-tails.test.md)                 | Split from coverage-tails-4.test.js — covers the "NotFound tails" describe.    |
+| [`search-tails.test.js`](website\tests\coverage\pages/search-tails.test.md)                     | &lt;view-search&gt; coverage tails — element registration and the              |
 
 ## Entry points
 
@@ -3030,3 +3111,11 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`modal.ts`](website\views\project/modal.md)          | Auto-open logic for ViewProject — when the route slug matches a media item label, commits the expand-modal pay…       |
 | [`render.tsx`](website\views\project/render.md)       | JSX for ViewProject — title, cover figure, and the section list (text columns + media carousels) with per-sect…       |
 | [`types.ts`](website\views\project/types.md)          | Shared shapes for the &lt;view-project&gt; route: media items,                                                        |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                           | What it does                                           |
+| ---------------------------------------------- | ------------------------------------------------------ |
+| [`Search.tsx`](website\views\search/Search.md) | &lt;view-search&gt; — the standalone /search page: the |

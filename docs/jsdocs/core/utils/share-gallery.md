@@ -76,6 +76,7 @@ pages so the runtime graph carries the same crawlable gallery.
 - `@param` name localized gallery label
 - `@param` urls the full share set
 - `@param` bcp BCP-47 tag for inLanguage
+- `@param` lang locale code — resolves the license/acquireLicensePage targets
 - `@returns` ItemList JSON-LD entity
 
 ### `syncShare`
@@ -115,6 +116,24 @@ Cancels the share surface — bumps the sync sequence so an in-flight
 manifest fetch can never land on a newer route, and restores the
 default card image only when a rotation actually applied one (a direct
 landing on a media page keeps its emitted og:image).
+
+### `currentShareImage`
+
+Currently bound share capture — the og:image pick the last rotation
+applied (null when no rotation is active). Rich-route emitters read
+it so their own JSON-LD `screenshot` matches the card metas.
+
+- `@returns` the applied capture URL, or null
+
+### `shareImagesCached`
+
+Cached share URLs for one manifest — the set the last rotation
+loaded ([] until a manifest resolves). Rich-route emitters append
+the matching gallery ItemList so re-emitted graphs keep the capture
+set instead of dropping it when their own entities rebuild.
+
+- `@param` manifestUrl site-served share manifest URL
+- `@returns` the cached share-image URLs (empty when unavailable)
 
 ### `resetShareGallery`
 

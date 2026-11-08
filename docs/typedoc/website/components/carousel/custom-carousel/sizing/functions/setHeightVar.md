@@ -8,7 +8,7 @@
 function setHeightVar(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:362
+Defined in: website/components/carousel/custom-carousel/sizing.ts:361
 
 Publishes --carousel-item-height on the enclosing <section> and
 --carousel-media-height on the host: the aspect-corrected height

@@ -21,6 +21,7 @@ const ROUTE_NAMES: Readonly<{
   STAR_FIELD: 'Star Field'
   DOCS: 'In-depth project docs'
   ANIMATIONS: 'Animations Reference'
+  SEARCH: 'Search'
 }>
 ```
 

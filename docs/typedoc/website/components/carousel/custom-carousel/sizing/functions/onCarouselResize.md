@@ -8,7 +8,7 @@
 function onCarouselResize(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:191
+Defined in: website/components/carousel/custom-carousel/sizing.ts:190
 
 Window-resize handler — `isMobile` is a live getter so the resize path
 only re-publishes the slide height.

@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/autoplay](../README.md) / CarouselArrowLike
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:15
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:16
 
 Slice of CarouselArrowWebGL the autoplay engine drives.
 
@@ -16,7 +16,7 @@ Slice of CarouselArrowWebGL the autoplay engine drives.
 setPlaying(playing): void;
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:17
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:18
 
 Toggles the arrow's playing affordance (ring visible vs idle).
 
@@ -30,7 +30,7 @@ Toggles the arrow's playing affordance (ring visible vs idle).
 
 `void`
 
-***
+---
 
 ### setProgress()
 
@@ -38,7 +38,7 @@ Toggles the arrow's playing affordance (ring visible vs idle).
 setProgress(progress, running): void;
 ```
 
-Defined in: website/components/carousel/custom-carousel/autoplay.ts:19
+Defined in: website/components/carousel/custom-carousel/autoplay.ts:20
 
 Paints the 0–1 progress arc.
 

@@ -75,6 +75,8 @@ const MIME = {
   '.mjs': 'text/javascript',
   '.json': 'application/json',
   '.xml': 'application/xml',
+  '.xsl': 'text/xsl',
+  '.css': 'text/css',
   '.txt': 'text/plain',
   '.webmanifest': 'application/manifest+json',
   '.jpg': 'image/jpeg',

@@ -8,7 +8,7 @@
 function resetShareGallery(): void
 ```
 
-Defined in: core/utils/share-gallery.ts:244
+Defined in: core/utils/share-gallery.ts:277
 
 Test/state reset — clears the manifest caches, pick state and sequence
 guard so suites exercise loadShareImages branches in isolation without

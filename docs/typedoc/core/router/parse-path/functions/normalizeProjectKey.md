@@ -8,7 +8,7 @@
 function normalizeProjectKey(slug): string
 ```
 
-Defined in: core/router/parse-path.ts:36
+Defined in: core/router/parse-path.ts:37
 
 Maps legacy/alternate project URL slugs to canonical data keys via
 PROJECT_ALIASES; unknown slugs pass through unchanged.

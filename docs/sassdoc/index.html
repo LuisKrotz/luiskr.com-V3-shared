@@ -2244,18 +2244,19 @@
           cubic-bezier fallback declared alongside it at each callsite.
         </p>
       </article>
-      <article class="sd-item sd-item--variable" id="variable-ease-water">
+      <article class="sd-item sd-item--variable" id="variable-ease-fluid">
         <h3>
-          <code>ease-water</code>
+          <code>ease-fluid</code>
           <span class="sd-kind">variable</span>
         </h3>
-        <pre class="sd-sig"><code>$ease-water: linear(</code></pre>
+        <pre class="sd-sig"><code>$ease-fluid: cubic-bezier(0.45, 0, 0.2, 1);</code></pre>
         <p>
           Critically-damped spring easing (ζ=1, ωT=8) sampled at 4% intervals into a CSS linear()
           easing — the fastest possible settle with zero overshoot: value rises, decelerates, and
           lands exactly on target like water coming to rest. Used where motion should feel organic
           and fluid rather than bouncy (nav chip reveals, gear spin). Browsers without linear() keep
-          the cubic-bezier fallback declared alongside it at each callsite.
+          the cubic-bezier fallback declared alongside it at each callsite. Fluid ease-in-out for
+          nav chip reveals — gentle start, long even glide, soft landing (no punch).
         </p>
       </article>
     </section>

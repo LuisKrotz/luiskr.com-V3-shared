@@ -35,9 +35,12 @@ describe('cross-file CSS var value consistency', () => {
     expect(ic).toMatch(/layout-1024[\s\S]*?--mf-w:\s*var\(--space-6xl\)/)
     expect(chc).toMatch(/layout-1024[\s\S]*?--mf-w:\s*var\(--space-6xl\)/)
   })
-  test('both use $space-7xl at 1024px --mf-h', () => {
+  test('1024px --mf-h: internals keeps $space-7xl, carousel-host defers to the published height', () => {
+    // The light-DOM skeleton figure still needs its fixed fallback box;
+    // inside the carousel the slide self-sizes from intrinsic aspect
+    // when --carousel-media-height is unpublished (the wrong-height fix).
     expect(ic).toMatch(/layout-1024[\s\S]*?--mf-h:\s*var\(--space-7xl\)/)
-    expect(chc).toMatch(/layout-1024[\s\S]*?--mf-h:\s*var\(--space-7xl\)/)
+    expect(chc).toMatch(/layout-1024[\s\S]*?--mf-h:\s*var\(--carousel-media-height\)/)
   })
   test('both use $space-7xl at 1440px --mf-w', () => {
     expect(ic).toMatch(/layout-1440[\s\S]*?--mf-w:\s*var\(--space-7xl\)/)

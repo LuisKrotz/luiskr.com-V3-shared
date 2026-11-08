@@ -10,7 +10,7 @@ const NAV_DIMENSIONS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/media/dimensions.ts:82
+Defined in: core/tokens/media/dimensions.ts:95
 
 Frozen nav dimension map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the

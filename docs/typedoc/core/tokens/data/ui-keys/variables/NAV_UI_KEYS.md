@@ -8,6 +8,7 @@
 const NAV_UI_KEYS: Readonly<{
   SELECTED_WORK: 'featured'
   PREFERENCES: 'preferences'
+  SET_LANGUAGE: 'setLanguage'
   LANGUAGE: 'language'
   MENU: 'menu'
   CLOSE: 'close'
@@ -18,7 +19,7 @@ const NAV_UI_KEYS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/data/ui-keys.ts:42
+Defined in: core/tokens/data/ui-keys.ts:46
 
 Frozen nav ui key map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token

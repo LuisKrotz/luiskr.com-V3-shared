@@ -8,6 +8,6 @@
 const _K_RIGHTS: 'rights' = 'rights'
 ```
 
-Defined in: core/tokens/base.ts:484
+Defined in: core/tokens/base.ts:497
 
 Token key "k rights" — single source for the repeated literal.

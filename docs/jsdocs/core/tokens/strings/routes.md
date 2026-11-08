@@ -2,9 +2,9 @@
 
 Route/CMS name string tokens — token group.
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\strings\routes.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\strings\routes.ts`                       |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -14,3 +14,9 @@ Route/CMS name string tokens — token group.
 Frozen route/CMS name-string map — bare names (no slashes) used as title
 fragments, route names, and CMS keys. Composes `_B_*`/`_K_*` fragments
 from base.ts where the name doubles as a block/key token.
+
+### `SEARCH_BUSCA`
+
+Legacy pt-BR search slug — canonical moved to `pesquisar`; kept as a
+resolving alias so old `/br/busca` links still reach the route and
+canonicalize onto the current slug.

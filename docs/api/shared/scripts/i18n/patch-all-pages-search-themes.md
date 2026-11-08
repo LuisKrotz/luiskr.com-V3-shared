@@ -31,6 +31,10 @@ should rank for), not a generic boilerplate tail:
   labels (solar/milkyWay/nebulae/galaxies/catalog…).
 - earth-playground → existing hand-tuned list PRESERVED + localized
   control-group labels (camera/earth/postFx/engine…).
+- search → seed list from patch-search-page-themes.js PRESERVED
+  - the page's own UI copy and the localized names of the routes and
+    projects it links. Run the seed patch first so re-runs reset the
+    derived tail instead of accumulating stale terms.
 
 The lists feed <meta name="keywords"> (Yandex/Bing/DuckDuckGo still
 read it), the WebPage JSON-LD `keywords` property Google reads,

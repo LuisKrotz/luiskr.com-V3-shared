@@ -20,7 +20,7 @@ const DB_PATHS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/routes/paths.ts:47
+Defined in: core/tokens/routes/paths.ts:52
 
 Frozen db path map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token

@@ -8,7 +8,7 @@
 function destroyNavFlag(host): void
 ```
 
-Defined in: website/components/nav/flag.tsx:137
+Defined in: website/components/nav/flag.tsx:141
 
 Tears down the FlagWebGL instance.
 

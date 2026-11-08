@@ -8,7 +8,7 @@
 function generateBreadcrumbSchema(items?, id?): Record<string, unknown> | null
 ```
 
-Defined in: core/utils/schema.ts:309
+Defined in: core/utils/schema.ts:379
 
 BreadcrumbList entity from an ordered crumb trail — positions are
 1-based per the spec. Returns null for an empty/absent trail so

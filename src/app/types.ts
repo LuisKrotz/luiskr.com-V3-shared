@@ -32,6 +32,9 @@ export type PrefModalEl = HTMLElement & { pref: unknown; open: boolean }
 /** <lang-dialog> reached through the shell — only the open flag is driven. */
 export type LangDialogEl = HTMLElement & { open: boolean }
 
+/** <search-modal> reached through the shell — only the open flag is driven. */
+export type SearchModalEl = HTMLElement & { open: boolean }
+
 /**
  * A mounted view element that may implement onRouteParamChange — the
  * outlet calls it when a same-tag route updates params (project→project

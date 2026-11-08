@@ -14,6 +14,8 @@ const SECTION_UI_KEYS: Readonly<{
   NOT_FOUND: 'notFound'
   EARTH_PLAYGROUND: 'earthPlayground'
   LOADING: 'loading'
+  SEARCH: 'search'
+  RSS_FEED: 'rssFeed'
 }>
 ```
 

@@ -8,6 +8,6 @@
 const _K_ROUTER_LINK_EXACT_ACTIVE: 'router-link-exact-active' = 'router-link-exact-active'
 ```
 
-Defined in: core/tokens/base.ts:493
+Defined in: core/tokens/base.ts:506
 
 Token key "k router link exact active" — single source for the repeated literal.

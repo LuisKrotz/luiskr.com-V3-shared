@@ -13,7 +13,7 @@ const NAV_GEAR_IDS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/ids/app.ts:59
+Defined in: core/tokens/ids/app.ts:66
 
 Frozen nav-gear SVG gradient-id map — the defs↔url(#…) link ids inside
 the machined-gear glyph (nav gear.tsx). Sole declaration site; the

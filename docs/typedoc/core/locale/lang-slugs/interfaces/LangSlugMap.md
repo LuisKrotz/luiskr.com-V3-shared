@@ -97,3 +97,13 @@ animations: string
 ```
 
 Defined in: core/locale/lang-slugs.ts:24
+
+---
+
+### search
+
+```ts
+search: string
+```
+
+Defined in: core/locale/lang-slugs.ts:25

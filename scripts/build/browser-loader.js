@@ -182,7 +182,7 @@
       'font-family:sans-serif;max-width:32em;margin:20vh auto;padding:1em;text-align:center'
     )
     box.innerHTML =
-      '<h1>Luis Krötz</h1><p>This site needs a newer browser — please update Chrome, Edge, Firefox or Safari.</p>'
+      '<p><strong>Luis Krötz</strong></p><p>This site needs a newer browser — please update Chrome, Edge, Firefox or Safari.</p>'
     var app = document.getElementById('app') || document.body || document.documentElement
     app.appendChild(box)
   }

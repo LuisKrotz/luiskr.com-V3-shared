@@ -22,6 +22,7 @@ const ATTR_VALUES: Readonly<{
   TABINDEX_ZERO: '0'
   HTTP: 'http'
   LAZY: 'lazy'
+  OFF: 'off'
 }>
 ```
 

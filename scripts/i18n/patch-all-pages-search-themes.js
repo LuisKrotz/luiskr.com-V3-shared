@@ -30,6 +30,10 @@ const dbPath = path.join(rootDir, 'database.json')
  *     labels (solar/milkyWay/nebulae/galaxies/catalog…).
  *   - earth-playground → existing hand-tuned list PRESERVED + localized
  *     control-group labels (camera/earth/postFx/engine…).
+ *   - search     → seed list from patch-search-page-themes.js PRESERVED
+ *     + the page's own UI copy and the localized names of the routes and
+ *     projects it links. Run the seed patch first so re-runs reset the
+ *     derived tail instead of accumulating stale terms.
  *
  * The lists feed <meta name="keywords"> (Yandex/Bing/DuckDuckGo still
  * read it), the WebPage JSON-LD `keywords` property Google reads,
@@ -982,7 +986,13 @@ const PAGE_KEYS = [
   'not-found',
   'star-field',
   'earth-playground',
+  'search',
 ]
+
+// Pages whose existing hand-tuned list is kept at the head of the
+// rebuilt list — patch-*-share-themes.js / patch-search-page-themes.js
+// authored those seeds; this patch only appends content-derived terms.
+const PRESERVED_KEYS = new Set(['star-field', 'earth-playground', 'search'])
 
 // Regional-dialect fallbacks — same convention as the base patch scripts.
 SHARED.hrk = SHARED.de
@@ -1128,6 +1138,28 @@ const derivedPageTerms = (tr, key) => {
     case 'not-found':
       return [term(page.title, 60)]
 
+    case 'search': {
+      // The search page is a link hub — its own UI copy plus the
+      // localized names of every route and project it lists, so the
+      // keyword surface mirrors what a visitor can actually find there.
+      const app = tr.APP || {}
+      const projects = Object.values(tr.projects || {})
+        .map((p) => term(p?.title, 60))
+        .slice(0, 12)
+
+      return [
+        term(page.title, 60),
+        term(page.search?.label, 60),
+        term(page.search?.results, 60),
+        term(app.about?.description || app.about, 60),
+        term(app.contact, 60),
+        term(app.earthPlayground, 60),
+        term(app.starField, 60),
+        term(tr.pages?.animations?.title, 60),
+        ...projects,
+      ]
+    }
+
     default:
       return []
   }
@@ -1146,11 +1178,11 @@ for (const [locale, shared] of Object.entries(SHARED)) {
   const pageTerms = PAGE_TERMS[locale] || {}
 
   for (const key of PAGE_KEYS) {
-    // star-field/earth-playground keep their hand-tuned list first
-    // (patch-*-share-themes.js authored it); every other page's list
-    // is fully owned by this patch — rebuilt from scratch each run so
+    // star-field/earth-playground/search keep their hand-tuned list
+    // first (the seed patches authored it); every other page's list is
+    // fully owned by this patch — rebuilt from scratch each run so
     // re-runs stay idempotent.
-    const preserve = key === 'star-field' || key === 'earth-playground'
+    const preserve = PRESERVED_KEYS.has(key)
     const existing =
       preserve && Array.isArray(tr.pages[key]?.[SEARCH_THEMES_KEY])
         ? tr.pages[key][SEARCH_THEMES_KEY]

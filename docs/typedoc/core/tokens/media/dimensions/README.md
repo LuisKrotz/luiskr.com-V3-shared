@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / core/tokens/media/dimensions
 
@@ -10,6 +10,7 @@
 - [GENERIC\_DIMENSIONS](variables/GENERIC_DIMENSIONS.md)
 - [IMAGE\_DIMENSIONS](variables/IMAGE_DIMENSIONS.md)
 - [VIDEO\_DIMENSIONS](variables/VIDEO_DIMENSIONS.md)
+- [MEDIA\_OBSERVER\_THRESHOLDS](variables/MEDIA_OBSERVER_THRESHOLDS.md)
 - [FLAG\_DIMENSIONS](variables/FLAG_DIMENSIONS.md)
 - [NAV\_DIMENSIONS](variables/NAV_DIMENSIONS.md)
 - [MOSAIC\_DIMENSIONS](variables/MOSAIC_DIMENSIONS.md)

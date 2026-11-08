@@ -9,6 +9,24 @@ Mount lifecycle for MediaFigure — GPU-layer promotion, store subscription, exp
 
 ## Members
 
+### `handleVideoError`
+
+Releases the loading shimmer and removes a broken video poster.
+
+- `@param` c Media figure whose loading state changes.
+- `@param` event Error event from the video element.
+- `@returns` Nothing; the failed poster is removed when present.
+
+### `handleVideoKeydown`
+
+Applies the video's keyboard toggle contract when autoplay is disabled
+by preference but the viewer deliberately activates the control.
+
+- `@param` c Media figure that owns the video.
+- `@param` vid Video element whose source and playback state change.
+- `@param` event Keyboard event from the video control.
+- `@returns` Nothing; handled keys update playback and cancel their default.
+
 ### `mountMediaFigure`
 
 Mounts media figure.

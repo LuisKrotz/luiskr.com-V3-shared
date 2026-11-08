@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / website/components/nav/handlers
 
@@ -11,4 +11,5 @@
 - [handleAbout](functions/handleAbout.md)
 - [handleAction](functions/handleAction.md)
 - [handlePreferences](functions/handlePreferences.md)
+- [handleSearch](functions/handleSearch.md)
 - [handleLang](functions/handleLang.md)

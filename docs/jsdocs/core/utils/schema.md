@@ -51,15 +51,56 @@ Ordered crumbs ending at this page — emits BreadcrumbList when ≥2.
 
 ### (module scope)
 
+WebPage @type override — 'ProfilePage' on the about route.
+
+### (module scope)
+
+Localized comma-joined search themes — WebPage.keywords.
+
+### (module scope)
+
+Schema ref the page is about — `{'@id': '#person'}` on the profile page; playgrounds pass the shared Wikidata anchor list.
+
+### (module scope)
+
+mainEntity ref — project pages point at `#article`, watch pages at their media node.
+
+### (module scope)
+
 Media descriptor inside project `sections` (and the project cover).
 
 ### (module scope)
 
 Project translation slice the Article/VideoObject builders read — cover drives both image variants and the optional VideoObject.
 
+### (module scope)
+
+Content-derived localized query vocabulary for Article/WebPage keywords.
+
+### `PERSON_REF`
+
+Cross-reference to the site's Person entity — author/publisher/uploader/creator all resolve to the single `#person` node so Google's entity graph consolidates on one stable identity.
+
+### `licenseUrlFor`
+
+Absolute license-page URL for a locale — ImageObject.license /
+acquireLicensePage targets and the sitemap <image:license> all resolve
+to the locale's own legal page so Google Images can flag the asset as
+licensable and land the click on text the visitor reads.
+
+### `generatePersonSchema`
+
+Person entity — the site's sole author. Every page's graph carries it
+so Google consolidates `author`/`publisher`/`creator`/`uploader`
+references (all `{'@id': '#person'}`) onto one stable identity; the
+sameAs fan-out mirrors the Organization's and feeds entity
+reconciliation for a possible knowledge panel.
+
+- `@returns` Person JSON-LD entity
+
 ### `generateWebsiteSchema`
 
-Generates WebSite and Organization schema for the homepage.
+Generates WebSite, Person and Organization schema for the homepage.
 
 - `@returns` JSON-LD entities
 
@@ -86,9 +127,12 @@ Article/VideoObject descriptions match the emitted page text.
 
 ### `videoObjectFor`
 
-VideoObject entity for one media descriptor — contentUrl/embedUrl
-point at the CDN mp4 and thumbnailUrl at its jpg poster, the two
-URLs Google's video crawler needs to index the asset.
+VideoObject entity for one media descriptor — contentUrl points at
+the CDN mp4 and thumbnailUrl at its jpg poster, the two
+URLs Google's video crawler needs to index the asset. The eligibility
+flags (isFamilyFriendly / requiresSubscription / isAccessibleForFree)
+and the inLanguage/uploader fields feed the video rich-result
+classifiers so the clip stays indexable on every locale surface.
 
 ### `generateProjectArticleSchema`
 
@@ -148,6 +192,14 @@ Locale code — resolved to BCP-47 via LOCALE_TAGS.
 ### `features`
 
 Localized labels of every control group, row and action — WebApplication.featureList.
+
+### (module scope)
+
+Localized comma-joined search themes — WebPage.keywords (searchThemes when the page node carries it).
+
+### (module scope)
+
+Absolute share-capture URL — the app's live screenshot (rotation pick when one is bound).
 
 ### `generateEarthPlaygroundSchema`
 
@@ -247,18 +299,67 @@ Technical dossier facts — emitted as PropertyValue pairs on the object.
 
 ### (module scope)
 
+Dossier gallery media — only source-backed assets enter the graph.
+
+### (module scope)
+
 Locale code — resolved to BCP-47 via LOCALE_TAGS.
+
+### (module scope)
+
+One credited image or video asset attached to a star-body dossier.
+
+### (module scope)
+
+Public URL of the image, video, or optional video poster.
+
+### (module scope)
+
+Visible caption reused as the structured-data name.
+
+### (module scope)
+
+Source credit shown with the dossier's media.
+
+### (module scope)
+
+Absolute poster URL for a video, when one is supplied.
+
+### (module scope)
+
+Image and video collections rendered on one star-body dossier page.
+
+### (module scope)
+
+Dossier images, ordered as shown in the page gallery.
+
+### (module scope)
+
+Dossier videos, ordered as shown in the page gallery.
 
 ### `generateStarBodySchema`
 
 Star-field body JSON-LD graph — the route base (with a Home →
 Star Field → body crumb) plus an Article whose `about` Thing carries
-the dossier's technical facts as PropertyValue pairs. Mirrors the
-build-time body entity so hydrated dossier deep links keep the same
-structured data the static dossier pages serve.
+the dossier's technical facts as PropertyValue pairs. The credited
+image/video gallery is emitted as media entities and the first image
+anchors the WebPage and Article. Mirrors the build-time body entity so
+hydrated dossier deep links keep the same graph the static page serves.
 
-- `@param` options Body/index URLs, names, tagline, facts, locale.
+- `@param` options Body/index URLs, names, tagline, facts, media, locale.
 - `@returns` JSON-LD entities for updateJsonLd().
+
+### `resolveProjectMedia`
+
+Resolves a media deep-link slug to its sections descriptor plus the
+resolved CDN URLs — the same document-order slugging
+generateProjectSchema and the emitted /<p>/<media> pages use, so the
+runtime head sync can answer "which asset does this URL name" without
+duplicating the slug walk.
+
+- `@param` project Localized project translation node.
+- `@param` mediaSlug Deep-link segment from the route params.
+- `@returns` The matched media node + URLs, or null when unresolvable.
 
 ### `generateProjectSchema`
 

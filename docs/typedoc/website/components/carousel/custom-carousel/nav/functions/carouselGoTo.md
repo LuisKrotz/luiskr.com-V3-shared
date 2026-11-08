@@ -8,7 +8,7 @@
 function carouselGoTo(c, idx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:153
+Defined in: website/components/carousel/custom-carousel/nav.ts:154
 
 Navigate to slide idx — accepts out-of-range idx (idx<0 or idx≥len) by
 scrolling to the CLONE slide at that edge, then scheduling an instant

@@ -8,7 +8,7 @@
 function mountMediaFigure(c): void
 ```
 
-Defined in: website/components/media/figure/mount.ts:38
+Defined in: website/components/media/figure/mount.ts:80
 
 Mounts media figure.
 

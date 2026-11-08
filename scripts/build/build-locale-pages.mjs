@@ -44,9 +44,19 @@ import { Buffer } from 'node:buffer'
 import { fileURLToPath } from 'node:url'
 
 import { LANG_SLUGS } from '../../../core/locale/lang-slugs.ts'
+import { ANIMATION_DOCS, ANIMATION_DOCS_FALLBACK } from '../../../core/tokens/data/animation-ids.ts'
+import { DOCS_STRINGS } from '../../../core/tokens/strings/docs.ts'
+import { ROUTE_PATHS } from '../../../core/tokens/routes/paths.ts'
 import { PROJECT_ALIASES } from '../../../core/tokens/routes/aliases.ts'
 import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
-import { slugify, capSlug, mediaRowsOf, llmTreePaths } from './route-media.mjs'
+import { SCHEMA_STRINGS } from '../../../core/tokens/strings/schema.ts'
+import { CHAR_STRINGS } from '../../../core/tokens/strings/chars.ts'
+import {
+  creditLicenseUrlFor,
+  creditTextFor,
+  mediaProvenanceFields,
+} from '../../../core/tokens/media/credits.ts'
+import { slugify, capSlug, mediaRowsOf, mediaItemsOf, llmTreePaths } from './route-media.mjs'
 import { GENERIC_DIMENSIONS } from '../../../core/tokens/media/dimensions.ts'
 import { MEDIA } from '../../../core/tokens/media/suffixes.ts'
 import { MEDIA_ATTRS } from '../../../core/tokens/attrs/media.ts'
@@ -86,9 +96,15 @@ import {
   SP_FILM_GRAIN_DEFAULTS,
   SP_DEBUG_DEFAULTS,
 } from '../../../core/tokens/playground/gui-post.ts'
-import { loadMediaManifest, resolveMediaUrls, resolveCoverKey } from './media-manifest.mjs'
+import {
+  loadMediaManifest,
+  resolveMediaUrls,
+  resolveCoverKey,
+  probeImageDims,
+} from './media-manifest.mjs'
 import { STAR_SHARE } from '../../../core/tokens/playground/share.ts'
-import { shareImageUrls, shuffled } from './playground-share.mjs'
+import { shareImageUrls, shareVideoUrls, shuffled } from './playground-share.mjs'
+import { EP_ABOUT, SF_ABOUT } from '../../../core/tokens/playground/about.ts'
 import { withFsRetry } from './fs-retry.mjs'
 import { queueCompressedWrite, drainCompressedWrites } from './compress-queue.mjs'
 import { scanManifest } from '../../build/docs/scan.mjs'
@@ -280,7 +296,7 @@ const orgEntity = () => ({
   '@context': SCHEMA_CONTEXT,
   '@type': 'Organization',
   '@id': `${SITE_URL}#organization`,
-  legalName: 'Jacson Luis Krötz',
+  legalName: SCHEMA_STRINGS.SCHEMA_PERSON_ALT_NAME,
   name: BASE_TITLE,
   url: SITE_URL,
   logo: `${SITE_URL}/assets/icons/android-chrome-256x256.png`,
@@ -292,6 +308,35 @@ const orgEntity = () => ({
     'https://www.instagram.com/j_luiskrotz',
   ],
 })
+
+/**
+ * Person entity — build-time twin of core/utils/schema.ts
+ * generatePersonSchema(); author/publisher/uploader/creator refs across
+ * every emitted entity resolve to this single #person node.
+ */
+const personEntity = () => ({
+  '@context': SCHEMA_CONTEXT,
+  '@type': 'Person',
+  '@id': `${SITE_URL}#person`,
+  name: BASE_TITLE,
+  alternateName: SCHEMA_STRINGS.SCHEMA_PERSON_ALT_NAME,
+  url: SITE_URL,
+  image: SHARE_IMAGE,
+  jobTitle: SCHEMA_STRINGS.SCHEMA_PERSON_JOB_TITLE,
+  description: SCHEMA_STRINGS.SCHEMA_SITE_DESCRIPTION,
+  knowsAbout: SCHEMA_STRINGS.SCHEMA_PERSON_KNOWS_ABOUT.split(', '),
+  nationality: { '@type': 'Country', name: SCHEMA_STRINGS.SCHEMA_PERSON_NATIONALITY },
+  worksFor: { '@id': `${SITE_URL}#organization` },
+  sameAs: [
+    'https://api.whatsapp.com/send?phone=+5551982274782',
+    'https://github.com/LuisKrotz',
+    'https://www.linkedin.com/in/luis-kr%C3%B6tz/?locale=en_US',
+    'https://www.instagram.com/j_luiskrotz',
+  ],
+})
+
+/** Cross-reference to the site's Person entity — author/publisher/uploader/creator all resolve to `#person`. */
+const PERSON_REF = { '@id': `${SITE_URL}#person` }
 
 const websiteEntity = (bcp) => ({
   '@context': SCHEMA_CONTEXT,
@@ -319,8 +364,12 @@ const breadcrumbEntity = (items, id) => ({
   })),
 })
 
-/** VideoObject for one media descriptor — mp4 contentUrl + poster thumb. */
-const videoEntity = (folder, m, title, description, manifest) => {
+/**
+ * VideoObject for one media descriptor — mp4 contentUrl + poster thumb
+ * and eligibility flags. Unknown dates, duration, and player URLs stay
+ * absent instead of being fabricated from build time or a placeholder.
+ */
+const videoEntity = (folder, m, title, description, manifest, bcp = 'en') => {
   const { source, thumb } = mediaUrls(folder, m, manifest)
 
   return {
@@ -329,10 +378,12 @@ const videoEntity = (folder, m, title, description, manifest) => {
     name: m.label || `${title} Video`,
     description: description || `Showcase video for ${title}`,
     thumbnailUrl: [thumb],
-    uploadDate: '2021-01-01T00:00:00+00:00',
-    duration: 'PT1M00S',
     contentUrl: source,
-    embedUrl: source,
+    inLanguage: bcp,
+    isFamilyFriendly: true,
+    requiresSubscription: false,
+    isAccessibleForFree: true,
+    uploader: PERSON_REF,
   }
 }
 
@@ -604,6 +655,17 @@ export async function prefetchLcpThumbs(urls, manifest) {
  *   instead of being dropped
  * @param {string} [o.keywords] - localized comma-joined search themes for
  *   the <meta name="keywords"> tag (Yandex/Bing still read it)
+ * @param {string} [o.ogType] - og:type override ('article', 'video.other',
+ *   'profile') — project watch/detail pages and the about route declare
+ *   their card type; omitted keeps the shell's 'website'
+ * @param {{published?:string,modified?:string,section?:string,tags?:string[]}} [o.articleMeta]
+ *   - article:* metas for og:type=article pages; timestamps are emitted
+ *   only when the content has a verified source date
+ * @param {{url:string,type?:string,width?:number|string,height?:number|string}} [o.videoMeta]
+ *   - og:video player refs for video watch pages — url/secure_url/type
+ *   plus intrinsic dims when the media descriptor carries a size
+ * @param {{firstName:string,lastName:string,username:string}} [o.profileMeta]
+ *   - profile:* metas for og:type=profile pages (the about route)
  * @param {string} [o.feedUrl] - absolute RSS feed URL for this locale —
  *   advertised as <link rel="alternate" type="application/rss+xml"> so
  *   feed readers and feed-aware crawlers discover the channel
@@ -641,6 +703,10 @@ export function localize(
     extraImages,
     imageDims,
     keywords,
+    ogType,
+    articleMeta,
+    videoMeta,
+    profileMeta,
     feedUrl,
     noLcp,
     entities,
@@ -692,6 +758,65 @@ export function localize(
   out = out.replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${d}$2`)
   out = out.replace(/(<meta name="DC\.Description"\s+content=")[^"]*(")/, `$1${d}$2`)
   out = out.replace(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${d}$2`)
+  out = out.replace(/(<meta name="twitter:image:alt" content=")[^"]*(")/, `$1${d}$2`)
+
+  // og:type + article/video/profile metas — the route class decides the
+  // card type: portfolio pages are articles, video watch pages are
+  // video.other, and the about route is profile. Strip any prior run's
+  // injected block first so standalone re-runs stay idempotent.
+  if (ogType) {
+    out = out.replace(/(<meta property="og:type" content=")[^"]*(")/, `$1${esc(ogType)}$2`)
+  }
+
+  out = out.replace(/\s*<meta property="(?:article|og:video|profile):[^>]*>/g, '')
+
+  const ogExtras = [
+    ...(articleMeta
+      ? [
+          ...(articleMeta.published
+            ? [
+                `<meta property="${SCHEMA_STRINGS.SCHEMA_ARTICLE_PUBLISHED_TIME}" content="${esc(articleMeta.published)}">`,
+              ]
+            : []),
+          ...(articleMeta.modified
+            ? [
+                `<meta property="${SCHEMA_STRINGS.SCHEMA_ARTICLE_MODIFIED_TIME}" content="${esc(articleMeta.modified)}">`,
+              ]
+            : []),
+          ...(articleMeta.section
+            ? [`<meta property="article:section" content="${esc(articleMeta.section)}">`]
+            : []),
+          ...(articleMeta.tags || []).map(
+            (tag) => `<meta property="article:tag" content="${esc(tag)}">`
+          ),
+        ]
+      : []),
+    ...(videoMeta
+      ? [
+          `<meta property="og:video" content="${esc(videoMeta.url)}">`,
+          `<meta property="og:video:url" content="${esc(videoMeta.url)}">`,
+          `<meta property="og:video:secure_url" content="${esc(videoMeta.url)}">`,
+          `<meta property="og:video:type" content="${esc(videoMeta.type || 'video/mp4')}">`,
+          ...(videoMeta.width
+            ? [`<meta property="og:video:width" content="${videoMeta.width}">`]
+            : []),
+          ...(videoMeta.height
+            ? [`<meta property="og:video:height" content="${videoMeta.height}">`]
+            : []),
+        ]
+      : []),
+    ...(profileMeta
+      ? [
+          `<meta property="profile:first_name" content="${esc(profileMeta.firstName)}">`,
+          `<meta property="profile:last_name" content="${esc(profileMeta.lastName)}">`,
+          `<meta property="profile:username" content="${esc(profileMeta.username)}">`,
+        ]
+      : []),
+  ]
+
+  if (ogExtras.length) {
+    out = out.replace(/(<meta property="og:type"[^>]*>)/, `$1\n    ${ogExtras.join('\n    ')}`)
+  }
 
   // Route-specific search themes — Yandex/Bing still consume
   // <meta name="keywords">; Google ignores it but the JSON-LD keywords
@@ -749,7 +874,7 @@ export function localize(
   // Replacing the script body wholesale keeps re-runs idempotent.
   const graph = {
     '@context': SCHEMA_CONTEXT,
-    '@graph': [orgEntity(), websiteEntity(bcpLang), ...(entities || [])],
+    '@graph': [orgEntity(), personEntity(), websiteEntity(bcpLang), ...(entities || [])],
   }
 
   const graphJson = JSON.stringify(graph)
@@ -875,9 +1000,15 @@ export function localize(
     .replace(/^[ \t]*<link rel="preload" as="image"[^>]*>\n?/gm, '')
 
   if (lcpPaint) {
+    // The veil paints the first figure's own still, so it inherits that
+    // figure's alt (already escaped in the parked markup) — aria-hidden
+    // keeps it out of the a11y tree while the non-empty alt answers
+    // audit crawlers that flag alt="" as missing.
+    const lqipAlt = firstFigure.match(/<img[^>]* alt="([^"]*)"/)?.[1] || ''
+
     out = out.replace(
       /(<div class="intro-loader"[^>]*>)/,
-      `$1<img class="${lqipClass}" src="${esc(lcpPaint)}" fetchpriority="high" alt="" aria-hidden="true">`
+      `$1<img class="${lqipClass}" src="${esc(lcpPaint)}" fetchpriority="high" alt="${lqipAlt}" aria-hidden="true">`
     )
   }
 
@@ -912,9 +1043,12 @@ export function localize(
     .join('\n')
   const inject = [
     `  <meta property="og:locale" content="${ogLocale}">`,
-    ...alternates
-      .filter((a) => a.og !== ogLocale)
-      .map((a) => `  <meta property="og:locale:alternate" content="${a.og}">`),
+    // Deduped — dialect locales share og tags (hrk/tln collapse onto
+    // de/it), so mapping the raw alternate list would emit the same
+    // og:locale:alternate twice.
+    ...[...new Set(alternates.map((a) => a.og).filter((og) => og && og !== ogLocale))].map(
+      (og) => `  <meta property="og:locale:alternate" content="${og}">`
+    ),
     alt,
     `  <link rel="alternate" hreflang="x-default" href="${alternates[0].url}">`,
   ].join('\n')
@@ -1031,9 +1165,6 @@ export function localize(
  */
 const starMediaDims = new Map()
 
-/** Bytes fetched per image-dims probe — SOF/IHDR headers live in the head. */
-const DIMS_PROBE_BYTES = 64 * 1024
-
 /**
  * Per-request ceiling for every build-time prefetch (translations, dims
  * probes, LCP thumbs). Without a signal a stalled CDN connection hangs
@@ -1068,46 +1199,6 @@ const dimsAttr = (w, h) =>
   ` width="${w || GENERIC_DIMENSIONS.DEFAULT_WIDTH}" height="${h || GENERIC_DIMENSIONS.DEFAULT_HEIGHT}"`
 
 /**
- * Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
- * or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
- * are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
- * @param {Buffer} buf - head bytes of the image
- */
-const scanImageDims = (buf) => {
-  if (buf.length >= 24 && buf.readUInt32BE(0) === 0x89504e47) {
-    return [buf.readUInt32BE(16), buf.readUInt32BE(20)]
-  }
-
-  if (buf.length < 4 || buf.readUInt16BE(0) !== 0xffd8) return null
-
-  let off = 2
-
-  while (off + 9 < buf.length) {
-    if (buf[off] !== 0xff) {
-      off += 1
-
-      continue
-    }
-
-    const marker = buf[off + 1]
-
-    if (marker >= 0xd0 && marker <= 0xd9) {
-      off += 2
-
-      continue
-    }
-
-    if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
-      return [buf.readUInt16BE(off + 7), buf.readUInt16BE(off + 5)]
-    }
-
-    off += 2 + buf.readUInt16BE(off + 2)
-  }
-
-  return null
-}
-
-/**
  * Live `translations` node pulled from the RTDB by prefetchTranslations().
  * When set, buildLocalePages emits current per-locale CMS text instead of
  * the committed database.json snapshot (which lags behind content edits —
@@ -1138,24 +1229,9 @@ const shareMediaDims = new Map()
  * @param {string[]} urls - absolute CDN share-image URLs
  */
 export async function prefetchShareDims(urls) {
-  await Promise.all(
-    [...new Set(urls)].map(async (url) => {
-      try {
-        const res = await fetch(url, {
-          headers: { Range: `bytes=0-${DIMS_PROBE_BYTES - 1}` },
-          signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-        })
+  const probed = await probeImageDims(urls, FETCH_TIMEOUT_MS)
 
-        if (!res.ok) return
-
-        const dims = scanImageDims(Buffer.from(await res.arrayBuffer()))
-
-        if (dims) shareMediaDims.set(url, dims)
-      } catch {
-        /* unreachable host → attr-less dims, same as before */
-      }
-    })
-  )
+  for (const [url, dims] of probed) shareMediaDims.set(url, dims)
 }
 
 export async function prefetchTranslations() {
@@ -1286,24 +1362,9 @@ export async function prefetchStarMediaDims() {
     return
   }
 
-  await Promise.all(
-    [...srcs].map(async (url) => {
-      try {
-        const res = await fetch(url, {
-          headers: { Range: `bytes=0-${DIMS_PROBE_BYTES - 1}` },
-          signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-        })
+  const probed = await probeImageDims([...srcs], FETCH_TIMEOUT_MS)
 
-        if (!res.ok) return
-
-        const dims = scanImageDims(Buffer.from(await res.arrayBuffer()))
-
-        if (dims) starMediaDims.set(url, dimsAttr(dims[0], dims[1]))
-      } catch {
-        /* unreachable host → attr-less img, same as before */
-      }
-    })
-  )
+  for (const [url, dims] of probed) starMediaDims.set(url, dimsAttr(dims[0], dims[1]))
 }
 
 /**
@@ -1455,6 +1516,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const folder = project.folder || ''
     const cover = mediaUrls(folder, project.cover, mediaManifest)
 
+    const themes = Array.isArray(project[SEARCH_THEMES_KEY]) ? project[SEARCH_THEMES_KEY] : []
+
     const entities = [
       {
         '@context': SCHEMA_CONTEXT,
@@ -1470,12 +1533,13 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         headline: title,
         inLanguage: bcp,
         mainEntityOfPage: base,
-        datePublished: '2021-01-01T00:00:00+00:00',
-        dateModified: '2021-01-01T00:00:00+00:00',
-        author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
-        publisher: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+        articleSection: SCHEMA_STRINGS.SCHEMA_ARTICLE_SECTION,
+        isAccessibleForFree: true,
+        author: PERSON_REF,
+        publisher: PERSON_REF,
         image: [cover.source ? (cover.isVideo ? cover.thumb : cover.source) : SHARE_IMAGE],
         description,
+        ...(themes.length ? { keywords: themes.join(', ') } : {}),
       },
     ]
 
@@ -1484,7 +1548,10 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     // project's cover or sibling clips, so the single-video purpose
     // stays unambiguous to Google's classifier.
     if (!exclude && project.cover?.isVideo && project.cover.src) {
-      entities.push(videoEntity(folder, project.cover, title, description, mediaManifest))
+      entities.push({
+        ...videoEntity(folder, project.cover, title, description, mediaManifest, bcp),
+        ...mediaProvenanceOf(loc, undefined, undefined, title),
+      })
     }
 
     const media = [...walkMedia(project.sections)]
@@ -1528,7 +1595,10 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
     if (!exclude) {
       for (const m of media.filter((x) => x.isVideo && x.src)) {
-        entities.push(videoEntity(folder, m, title, description, mediaManifest))
+        entities.push({
+          ...videoEntity(folder, m, title, description, mediaManifest, bcp),
+          ...mediaProvenanceOf(loc, undefined, undefined, title),
+        })
       }
     }
 
@@ -1709,14 +1779,16 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
     const media = isVideo
       ? thumb
-        ? `<picture>${scaledPoster ? `<source media="${MOBILE_MEDIA}" srcset="${esc(scaledPoster)}">` : ''}${webpSibling(thumb) ? `<source srcset="${esc(webpSibling(thumb))}" type="image/webp">` : ''}<img src="${esc(thumb)}" alt="${esc(deepHref ? '' : label)}" loading="lazy" decoding="async"${wh}></picture>`
+        ? `<picture>${scaledPoster ? `<source media="${MOBILE_MEDIA}" srcset="${esc(scaledPoster)}">` : ''}${webpSibling(thumb) ? `<source srcset="${esc(webpSibling(thumb))}" type="image/webp">` : ''}<img src="${esc(thumb)}" alt="${label}" loading="lazy" decoding="async"${wh}></picture>`
         : ''
       : // Inside the labelled deep-link the image is decorative — the
-        // anchor's aria-label + figcaption already carry the name, so a
-        // repeated alt is redundant verbosity for screen readers.
+        // anchor's aria-label + figcaption already carry the name. The
+        // label alt still rides along (the parked article is aria-hidden,
+        // so no screen reader hears it) because audit crawlers report an
+        // empty alt="" as missing text.
         // <source> order matters: the media-scoped mobile tier leads so
         // ≤768px viewports pick it before the unscoped webp/original.
-        `<picture>${mobileSrc.webp ? `<source media="${MOBILE_MEDIA}" srcset="${esc(mobileSrc.webp)}" type="image/webp">` : ''}${mobileSrc.jpg ? `<source media="${MOBILE_MEDIA}" srcset="${esc(mobileSrc.jpg)}">` : ''}${webpSibling(source) ? `<source srcset="${esc(webpSibling(source))}" type="image/webp">` : ''}<img src="${esc(source)}" alt="${esc(deepHref ? '' : label)}" loading="lazy" decoding="async"${wh}></picture>`
+        `<picture>${mobileSrc.webp ? `<source media="${MOBILE_MEDIA}" srcset="${esc(mobileSrc.webp)}" type="image/webp">` : ''}${mobileSrc.jpg ? `<source media="${MOBILE_MEDIA}" srcset="${esc(mobileSrc.jpg)}">` : ''}${webpSibling(source) ? `<source srcset="${esc(webpSibling(source))}" type="image/webp">` : ''}<img src="${esc(source)}" alt="${label}" loading="lazy" decoding="async"${wh}></picture>`
 
     // The deep-link anchor wraps bare media — no text content — so it
     // carries the caption as its accessible name (axe link-name).
@@ -1761,11 +1833,13 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       ? enc(`${CDN_BASE}${coverKey.slice(0, -4)}.webp`)
       : ''
     const coverWh = dimsAttr(i.width?.[0], i.height?.[0])
-    // The card link's own text (h3 + caption) already names the image —
-    // a duplicate alt inside the anchor is redundant for screen readers.
+    // The card link's own text (h3 + caption) already names the image,
+    // but the parked article is aria-hidden so the label alt never
+    // reaches screen readers — it answers audit crawlers that report an
+    // empty alt="" as missing text.
     const coverMobile = coverSrc ? mobileTier(coverSrc) : { jpg: '', webp: '' }
     const img = coverSrc
-      ? `<figure><picture>${coverMobile.webp ? `<source media="${MOBILE_MEDIA}" srcset="${esc(coverMobile.webp)}" type="image/webp">` : ''}${coverMobile.jpg ? `<source media="${MOBILE_MEDIA}" srcset="${esc(coverMobile.jpg)}">` : ''}${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="" loading="lazy" decoding="async"${coverWh}></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
+      ? `<figure><picture>${coverMobile.webp ? `<source media="${MOBILE_MEDIA}" srcset="${esc(coverMobile.webp)}" type="image/webp">` : ''}${coverMobile.jpg ? `<source media="${MOBILE_MEDIA}" srcset="${esc(coverMobile.jpg)}">` : ''}${coverWebp ? `<source srcset="${esc(coverWebp)}" type="image/webp">` : ''}<img src="${esc(coverSrc)}" alt="${esc(i.label || '')}" loading="lazy" decoding="async"${coverWh}></picture><figcaption>${esc(i.label || '')}</figcaption></figure>`
       : ''
     const desc = i.description ? `<p>${i.description}</p>` : ''
 
@@ -2008,6 +2082,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   // parked-article gallery, and the JSON-LD ImageObject ItemList. Empty
   // when the manifest listing is unavailable — routes keep share.png.
   const shareImgs = shareImageUrls(mediaManifest, CDN_BASE)
+  const shareVids = shareVideoUrls(mediaManifest, CDN_BASE)
   const shareDeck = shuffled(shareImgs)
 
   let shareDeckIdx = 0
@@ -2023,6 +2098,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
   // gallery section, and the JSON-LD ImageObject ItemList. Empty when
   // the manifest listing is unavailable — routes keep share.png.
   const starShareImgs = shareImageUrls(mediaManifest, CDN_BASE, STAR_SHARE)
+  const starShareVids = shareVideoUrls(mediaManifest, CDN_BASE, STAR_SHARE)
   const starShareDeck = shuffled(starShareImgs)
 
   let starShareDeckIdx = 0
@@ -2038,26 +2114,112 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     return d ? dimsAttr(d[0], d[1]) : dimsAttr()
   }
 
-  /** Localized search-theme list for one locale's playground page. */
+  /** Localized search-theme list for one locale's playground page —
+   *  live RTDB wins; the committed snapshot covers nodes RTDB has not
+   *  been re-uploaded for yet (mirrors pageThemesOf's fallback so
+   *  keywords/captions never silently drop on live builds). */
   const epThemesOf = (loc) => {
     const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
+    const list = Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []
 
-    return Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []
+    return list.length ? list : snapshotThemes(loc, 'pages', 'earth-playground')
   }
 
-  /** Localized search-theme list for one locale's star-field page. */
+  /** Localized search-theme list for one locale's star-field page —
+   *  same live-then-snapshot contract as epThemesOf. */
   const sfThemesOf = (loc) => {
     const page = t(loc, (x) => x.pages?.['star-field']) || {}
+    const list = Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []
 
-    return Array.isArray(page[SEARCH_THEMES_KEY]) ? page[SEARCH_THEMES_KEY] : []
+    return list.length ? list : snapshotThemes(loc, 'pages', 'star-field')
   }
 
   /** Search-theme keywords for a star body page — the body's own
    *  name/kind lead the locale's star-field theme list so each dossier
-   *  ranks for its object, not only the experiment's generic terms. */
-  const sfBodyShareFields = (loc, body) => ({
-    keywords: [body?.name, body?.kind, ...sfThemesOf(loc)].filter(Boolean).join(', ') || undefined,
-  })
+   *  ranks for its object, not only the experiment's generic terms.
+   *  `image` binds the dossier's first gallery asset as og:image +
+   *  primaryImageOfPage so each body card-crawls with its own media,
+   *  not the generic share tile. */
+  const sfBodyShareFields = (loc, body) => {
+    const asset = (body?.media?.images || []).find((i) => i?.src)
+
+    return {
+      keywords:
+        [body?.name, body?.kind, ...sfThemesOf(loc)].filter(Boolean).join(', ') || undefined,
+      // imageCredit rides along so the WebPage's primaryImageOfPage
+      // resolves third-party provenance (source terms) instead of the
+      // site's license when the dossier cover is a credited asset.
+      ...(asset
+        ? { image: enc(asset.src), ...(asset.credit ? { imageCredit: asset.credit } : {}) }
+        : {}),
+    }
+  }
+
+  /** ImageObject + VideoObject entities for one body dossier's
+   *  credited gallery — the same assets the parked article renders,
+   *  declared so image/video searches bind the dossier page itself as
+   *  the watch/image host (credits ride creditText; NASA/ESA assets
+   *  never claim the portfolio's license). The dossier's first image
+   *  doubles as the video thumbnail when no explicit poster is supplied.
+   *  Unknown upload dates and durations are intentionally omitted. */
+  const starBodyMediaEntities = (loc, body, pageUrl) => {
+    const media = body?.media
+
+    if (!media) return []
+
+    const bcp = LOCALE_TAGS[loc].bcp
+    const name = body?.name || ''
+    const poster = (media.images || []).find((i) => i?.src)?.src
+    const out = []
+
+    for (const [i, img] of (media.images || []).entries()) {
+      if (!img?.src) continue
+
+      out.push({
+        '@context': SCHEMA_CONTEXT,
+        '@type': 'ImageObject',
+        '@id': `${pageUrl}#image-${i + 1}`,
+        url: enc(img.src),
+        contentUrl: enc(img.src),
+        name: img.caption || name,
+        inLanguage: bcp,
+        // Credited dossier media resolves to the SOURCE's licence page
+        // (NASA guidelines / Commons licensing) — never the site's MPL.
+        ...mediaProvenanceOf(loc, img.credit, name),
+        isPartOf: { '@id': `${pageUrl}#webpage` },
+        representativeOfPage: i === 0,
+      })
+    }
+
+    for (const [i, v] of (media.videos || []).entries()) {
+      if (!v?.src) continue
+
+      const posterUrl = v.poster && /^https?:/.test(v.poster) ? v.poster : poster
+
+      if (!posterUrl) continue
+
+      const url = enc(v.src)
+
+      out.push({
+        '@context': SCHEMA_CONTEXT,
+        '@type': 'VideoObject',
+        '@id': `${pageUrl}#video-${i + 1}`,
+        url,
+        contentUrl: url,
+        name: v.caption || `${name} video`,
+        description: `${name} — ${v.caption || body?.tagline || name}`,
+        thumbnailUrl: [enc(posterUrl)],
+        inLanguage: bcp,
+        isFamilyFriendly: true,
+        isAccessibleForFree: true,
+        requiresSubscription: false,
+        ...mediaProvenanceOf(loc, v.credit, name),
+        isPartOf: { '@id': `${pageUrl}#webpage` },
+      })
+    }
+
+    return out
+  }
 
   /** Localized search-theme list for one CMS page node — every page
    *  carries `searchThemes` (patch-all-pages-search-themes.js), the
@@ -2098,7 +2260,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
    * mediaFigure so each capture is also a first-class crawl target.
    */
   const shareGallerySection = (loc) => {
-    if (!shareImgs.length) return ''
+    if (!shareImgs.length && !shareVids.length) return ''
 
     const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
     const title = page.title || 'Earth Playground'
@@ -2113,9 +2275,18 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       })
       .join('')
 
+    // Recorded engine clips — same crawlable gallery surface; the
+    // first share image stands in as poster frame.
+    const vfigs = shareVids
+      .map(
+        (u, i) =>
+          `<figure><video src="${enc(u)}" controls preload="none" muted playsinline${shareImgs.length ? ` poster="${enc(shareImgs[0])}"` : ''}></video><figcaption>${esc(`${capture} video ${i + 1}`)}</figcaption></figure>`
+      )
+      .join('')
+
     return `<section id="share-gallery"><h2>${esc(page.shareGallery || 'Share captures')}</h2>${
       themes.length ? `<p>${esc(themes.join(', '))}</p>` : ''
-    }${figs}</section>`
+    }${figs}${vfigs}</section>`
   }
 
   /**
@@ -2126,7 +2297,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
    * first-class crawl target.
    */
   const starShareGallerySection = (loc) => {
-    if (!starShareImgs.length) return ''
+    if (!starShareImgs.length && !starShareVids.length) return ''
 
     const page = t(loc, (x) => x.pages?.['star-field']) || {}
     const title = page.title || 'Star Field'
@@ -2141,9 +2312,18 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       })
       .join('')
 
+    // Recorded engine clips — same crawlable gallery surface; the
+    // first share image stands in as poster frame.
+    const vfigs = starShareVids
+      .map(
+        (u, i) =>
+          `<figure><video src="${enc(u)}" controls preload="none" muted playsinline${starShareImgs.length ? ` poster="${enc(starShareImgs[0])}"` : ''}></video><figcaption>${esc(`${capture} video ${i + 1}`)}</figcaption></figure>`
+      )
+      .join('')
+
     return `<section id="share-gallery"><h2>${esc(page.shareGallery || 'Share captures')}</h2>${
       themes.length ? `<p>${esc(themes.join(', '))}</p>` : ''
-    }${figs}</section>`
+    }${figs}${vfigs}</section>`
   }
 
   /**
@@ -2154,13 +2334,15 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
    * representativeOfPage.
    */
   const earthShareEntities = (loc, pageUrl, pick) => {
-    if (!shareImgs.length) return []
+    if (!shareImgs.length && !shareVids.length) return []
 
     const page = t(loc, (x) => x.pages?.['earth-playground']) || {}
     const bcp = LOCALE_TAGS[loc].bcp
     const title = page.title || 'Earth Playground'
     const capture = page.shareCapture || 'Earth render'
     const keywords = epThemesOf(loc).join(', ')
+    const license = licenseUrlOf(loc)
+    const poster = shareImgs.length ? enc(shareImgs[0]) : null
 
     return [
       {
@@ -2169,30 +2351,67 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         '@id': `${pageUrl}#share-gallery`,
         name: page.shareGallery || 'Share captures',
         inLanguage: bcp,
-        numberOfItems: shareImgs.length,
-        itemListElement: shareImgs.map((u, i) => {
-          const url = enc(u)
-          const d = shareMediaDims.get(u)
+        numberOfItems: shareImgs.length + shareVids.length,
+        itemListElement: [
+          ...shareImgs.map((u, i) => {
+            const url = enc(u)
+            const d = shareMediaDims.get(u)
 
-          return {
-            '@type': 'ListItem',
-            position: i + 1,
-            item: {
-              '@type': 'ImageObject',
-              '@id': `${pageUrl}#share-${i + 1}`,
-              url,
-              contentUrl: url,
-              name: `${title} — ${capture} ${i + 1}`,
-              ...(keywords ? { caption: `${title}: ${keywords}`, keywords } : {}),
-              inLanguage: bcp,
-              ...(d ? { width: d[0], height: d[1] } : {}),
-              author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
-              creator: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
-              isPartOf: { '@id': `${pageUrl}#webpage` },
-              representativeOfPage: u === pick,
-            },
-          }
-        }),
+            return {
+              '@type': 'ListItem',
+              position: i + 1,
+              item: {
+                '@type': 'ImageObject',
+                '@id': `${pageUrl}#share-${i + 1}`,
+                url,
+                contentUrl: url,
+                name: `${title} — ${capture} ${i + 1}`,
+                ...(keywords ? { caption: `${title}: ${keywords}`, keywords } : {}),
+                inLanguage: bcp,
+                ...(d ? { width: d[0], height: d[1] } : {}),
+                author: PERSON_REF,
+                creator: PERSON_REF,
+                ...mediaProvenanceFields({
+                  licenseUrl: license,
+                  copyrightNotice: `${CHAR_STRINGS.COPYRIGHT} ${BASE_TITLE}`,
+                  creditText: BASE_TITLE,
+                }),
+                isPartOf: { '@id': `${pageUrl}#webpage` },
+                representativeOfPage: u === pick,
+              },
+            }
+          }),
+          ...shareVids.map((u, i) => {
+            const url = enc(u)
+
+            return {
+              '@type': 'ListItem',
+              position: shareImgs.length + i + 1,
+              item: {
+                '@type': 'VideoObject',
+                '@id': `${pageUrl}#share-video-${i + 1}`,
+                url,
+                contentUrl: url,
+                name: `${title} — ${capture} video ${i + 1}`,
+                ...(keywords ? { caption: `${title}: ${keywords}`, keywords } : {}),
+                ...(poster ? { thumbnailUrl: [poster] } : {}),
+                inLanguage: bcp,
+                isFamilyFriendly: true,
+                isAccessibleForFree: true,
+                requiresSubscription: false,
+                author: PERSON_REF,
+                creator: PERSON_REF,
+                ...mediaProvenanceFields({
+                  licenseUrl: license,
+                  copyrightNotice: `${CHAR_STRINGS.COPYRIGHT} ${BASE_TITLE}`,
+                  creditText: BASE_TITLE,
+                }),
+                isPartOf: { '@id': `${pageUrl}#webpage` },
+                representativeOfPage: false,
+              },
+            }
+          }),
+        ],
       },
     ]
   }
@@ -2205,13 +2424,15 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
    * marked representativeOfPage.
    */
   const starShareEntities = (loc, pageUrl, pick) => {
-    if (!starShareImgs.length) return []
+    if (!starShareImgs.length && !starShareVids.length) return []
 
     const page = t(loc, (x) => x.pages?.['star-field']) || {}
     const bcp = LOCALE_TAGS[loc].bcp
     const title = page.title || 'Star Field'
     const capture = page.shareCapture || 'Star render'
     const keywords = sfThemesOf(loc).join(', ')
+    const license = licenseUrlOf(loc)
+    const poster = starShareImgs.length ? enc(starShareImgs[0]) : null
 
     return [
       {
@@ -2220,49 +2441,310 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         '@id': `${pageUrl}#share-gallery`,
         name: page.shareGallery || 'Share captures',
         inLanguage: bcp,
-        numberOfItems: starShareImgs.length,
-        itemListElement: starShareImgs.map((u, i) => {
-          const url = enc(u)
-          const d = shareMediaDims.get(u)
+        numberOfItems: starShareImgs.length + starShareVids.length,
+        itemListElement: [
+          ...starShareImgs.map((u, i) => {
+            const url = enc(u)
+            const d = shareMediaDims.get(u)
 
-          return {
-            '@type': 'ListItem',
-            position: i + 1,
-            item: {
-              '@type': 'ImageObject',
-              '@id': `${pageUrl}#share-${i + 1}`,
-              url,
-              contentUrl: url,
-              name: `${title} — ${capture} ${i + 1}`,
-              ...(keywords ? { caption: `${title}: ${keywords}`, keywords } : {}),
-              inLanguage: bcp,
-              ...(d ? { width: d[0], height: d[1] } : {}),
-              author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
-              creator: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
-              isPartOf: { '@id': `${pageUrl}#webpage` },
-              representativeOfPage: u === pick,
-            },
-          }
-        }),
+            return {
+              '@type': 'ListItem',
+              position: i + 1,
+              item: {
+                '@type': 'ImageObject',
+                '@id': `${pageUrl}#share-${i + 1}`,
+                url,
+                contentUrl: url,
+                name: `${title} — ${capture} ${i + 1}`,
+                ...(keywords ? { caption: `${title}: ${keywords}`, keywords } : {}),
+                inLanguage: bcp,
+                ...(d ? { width: d[0], height: d[1] } : {}),
+                author: PERSON_REF,
+                creator: PERSON_REF,
+                ...mediaProvenanceFields({
+                  licenseUrl: license,
+                  copyrightNotice: `${CHAR_STRINGS.COPYRIGHT} ${BASE_TITLE}`,
+                  creditText: BASE_TITLE,
+                }),
+                isPartOf: { '@id': `${pageUrl}#webpage` },
+                representativeOfPage: u === pick,
+              },
+            }
+          }),
+          ...starShareVids.map((u, i) => {
+            const url = enc(u)
+
+            return {
+              '@type': 'ListItem',
+              position: starShareImgs.length + i + 1,
+              item: {
+                '@type': 'VideoObject',
+                '@id': `${pageUrl}#share-video-${i + 1}`,
+                url,
+                contentUrl: url,
+                name: `${title} — ${capture} video ${i + 1}`,
+                ...(keywords ? { caption: `${title}: ${keywords}`, keywords } : {}),
+                ...(poster ? { thumbnailUrl: [poster] } : {}),
+                inLanguage: bcp,
+                isFamilyFriendly: true,
+                isAccessibleForFree: true,
+                requiresSubscription: false,
+                author: PERSON_REF,
+                creator: PERSON_REF,
+                ...mediaProvenanceFields({
+                  licenseUrl: license,
+                  copyrightNotice: `${CHAR_STRINGS.COPYRIGHT} ${BASE_TITLE}`,
+                  creditText: BASE_TITLE,
+                }),
+                isPartOf: { '@id': `${pageUrl}#webpage` },
+                representativeOfPage: false,
+              },
+            }
+          }),
+        ],
       },
     ]
   }
 
-  /** Linked-data anchors for the playground WebPage — binds the page to
-   *  the Earth/Planet concepts so theme searches resolve through the
-   *  knowledge graph, not just the text. */
-  const EP_ABOUT = Object.freeze([
-    { '@type': 'Thing', name: 'Earth', sameAs: 'https://www.wikidata.org/wiki/Q2' },
-    { '@type': 'Thing', name: 'Planet', sameAs: 'https://www.wikidata.org/wiki/Q634' },
-  ])
+  /** Localized license-page URL — ImageObject/VideoObject
+   *  license + acquireLicensePage target so Google Images flags the
+   *  share captures as licensable and lands the click on the locale's
+   *  own legal page (mirrors schema.ts's licenseUrlFor). */
+  const licenseUrlOf = (loc) =>
+    `${SITE_URL}${locPrefixOf(loc)}/${(LANG_SLUGS[loc] || enSlugs).license}`
 
-  /** Linked-data anchors for the star-field WebPage — binds the page to
-   *  the Star/Galaxy concepts so star and space searches resolve through
-   *  the knowledge graph, not just the text. */
-  const SF_ABOUT = Object.freeze([
-    { '@type': 'Thing', name: 'Star', sameAs: 'https://www.wikidata.org/wiki/Q523' },
-    { '@type': 'Thing', name: 'Galaxy', sameAs: 'https://www.wikidata.org/wiki/Q321' },
-  ])
+  /**
+   * Provenance field bag for one media entity — mirrors
+   * core/utils/schema.ts mediaProvenanceFor: site-owned assets point
+   * license/acquireLicensePage at the locale's legal page under the
+   * owner copyright notice; credited third-party assets (star-field
+   * dossier media) point at the SOURCE's terms page with the raw
+   * credit as the notice, so the site's MPL grant never covers
+   * NASA/ESA imagery.
+   */
+  const mediaProvenanceOf = (loc, credit, subject, ownedCreditText = BASE_TITLE) => {
+    if (credit) {
+      return mediaProvenanceFields({
+        licenseUrl: creditLicenseUrlFor(credit),
+        copyrightNotice: credit,
+        creditText: creditTextFor(credit, subject || ''),
+      })
+    }
+
+    return mediaProvenanceFields({
+      licenseUrl: licenseUrlOf(loc),
+      copyrightNotice: `${CHAR_STRINGS.COPYRIGHT} ${BASE_TITLE}`,
+      creditText: ownedCreditText,
+    })
+  }
+
+  // Linked-data anchors for the playground/star-field WebPages are
+  // imported from core/tokens/playground/about.ts — the sole
+  // declaration site shared with the runtime schema builders.
+
+  /**
+   * Search page — a crawlable link surface: the static routes plus every
+   * portfolio project, ending at the machine-readable search index so
+   * agents can reach the full ~1.4k-entry catalog per locale.
+   */
+  const searchContent = (loc) => {
+    const page = t(loc, (x) => x.pages?.search) || {}
+    const prefix = locPrefixOf(loc)
+    const slugs = LANG_SLUGS[loc] || enSlugs
+    const legal = t(loc, (x) => x.components?.['legal-footer']?.links) || legalEn
+    const pageName = (i) => legal?.[i]?.page
+
+    const statics = [
+      [slugs.about, t(loc, (x) => x.APP?.about?.description) || t(loc, (x) => x.APP?.about)],
+      [slugs.contact, t(loc, (x) => x.APP?.contact)],
+      [slugs.privacy, pageName(1)],
+      [slugs.gdpr, pageName(2)],
+      [slugs.terms, pageName(3)],
+      [slugs.license, t(loc, (x) => x.pages?.license?.title) || 'License'],
+      [slugs.earthPlayground, t(loc, (x) => x.APP?.earthPlayground)],
+      [slugs.starField, t(loc, (x) => x.APP?.starField)],
+      [slugs.animations, t(loc, (x) => x.pages?.animations?.title)],
+    ]
+      .filter(([s, label]) => s && label)
+      .map(([s, label]) => `<li><a href="${prefix}/${s}">${esc(label)}</a></li>`)
+      .join('')
+
+    const projects = Object.keys(t(loc, (x) => x.projects) || {})
+      .map(
+        (slug) =>
+          `<li><a href="${prefix}/portfolio/${slug}">${esc(t(loc, (x) => x.projects?.[slug]?.title) || slug)}</a></li>`
+      )
+      .join('')
+
+    return (
+      `<main><h1>${esc(page.title || 'Search')}</h1>` +
+      `<p>${esc(page.description || '')}</p>` +
+      `<h2>Routes</h2><ul>${statics}</ul>` +
+      `<h2>Portfolio</h2><ul>${projects}</ul>` +
+      `<p><a href="/meta/search-index-${loc}.json">search-index-${loc}.json</a></p></main>`
+    )
+  }
+
+  /** Sitemap page — the full cross-locale link index (every page in
+   *  every language) as the prerendered DOM mirror of the runtime
+   *  <view-sitemap> tree: crawlers + reader mode read the same links
+   *  without running JavaScript. */
+  const sitemapContent = (loc) => {
+    const page = t(loc, (x) => x.pages?.sitemap) || {}
+    const prefix = locPrefixOf(loc)
+    const slugs = LANG_SLUGS[loc] || enSlugs
+    const groups = page.groups || {}
+    const legal = t(loc, (x) => x.components?.['legal-footer']?.links) || legalEn
+
+    const pageLinks = (rows) =>
+      rows
+        .filter(([s, label]) => s && label)
+        .map(([s, label]) => `<li><a href="${prefix}/${s}">${esc(label)}</a></li>`)
+        .join('')
+
+    const localeLinks = (tail) =>
+      VALID_LANGS.map((l) => {
+        const lSlugs = LANG_SLUGS[l] || enSlugs
+        const pre = l === 'en' ? '' : `/${l}`
+
+        return `<li><a href="${pre}/${tail(lSlugs)}" hreflang="${l}">${l.toUpperCase()}</a></li>`
+      }).join('')
+
+    const pageRow = (label, tail) =>
+      `<li><a href="${prefix}/${tail(slugs)}">${esc(label)}</a><ul>${localeLinks(tail)}</ul></li>`
+
+    const homeLabel = legal?.[0]?.page || 'Home'
+
+    const pages = [
+      pageRow(homeLabel, () => ''),
+      ...[
+        [slugs.about, t(loc, (x) => x.APP?.about?.description) || 'About'],
+        [slugs.contact, t(loc, (x) => x.APP?.contact) || 'Contact'],
+        [slugs.search, t(loc, (x) => x.pages?.search?.title) || 'Search'],
+        [slugs.animations, t(loc, (x) => x.pages?.animations?.title) || 'Animations'],
+        [slugs.sitemap, t(loc, (x) => x.pages?.sitemap?.title) || 'Sitemap'],
+      ]
+        .filter(([s]) => s)
+        .map(([s, label]) => {
+          const key = Object.keys(slugs).find((k) => slugs[k] === s)
+
+          return pageRow(label, (l) => l[key] || s)
+        }),
+    ].join('')
+
+    const legalPages = legal
+      .slice(1)
+      .filter((l) => l?.link && l?.page)
+      .map((l) => {
+        const tail = l.link.split('/').filter(Boolean).pop() || ''
+        const key = Object.keys(slugs).find((k) => slugs[k] === tail)
+
+        return pageRow(l.page, (l2) => l2[key] || tail)
+      })
+      .join('')
+
+    const portfolio = Object.keys(t(loc, (x) => x.projects) || {})
+      .map((slug) =>
+        pageRow(t(loc, (x) => x.projects?.[slug]?.title) || slug, () => `portfolio/${slug}`)
+      )
+      .join('')
+
+    // Media rows — the static mirror of the runtime media branch: one
+    // block per item (cover + section media) with a locale chip per
+    // language. Each leaf deep-links to the media in THAT locale
+    // (/<loc>/portfolio/<slug>/<media-slug> from that locale's
+    // translated labels — the same mediaSlugSeq convention the XML
+    // sitemap and the runtime modal use); non-addressable rows fall
+    // back to the localized project page.
+    const slugIndexOf = (items, coverCount) => {
+      const seen = new Map()
+
+      return items.map((m, i) => {
+        if (i < coverCount || !m.label) return ''
+
+        const base = capSlug(slugify(m.label))
+
+        if (!base) return ''
+
+        const n = seen.get(base) ?? 0
+
+        seen.set(base, n + 1)
+
+        return n ? `${base}-${n + 1}` : base
+      })
+    }
+
+    const media = Object.keys(t(loc, (x) => x.projects) || {})
+      .flatMap((slug) => {
+        const title = t(loc, (x) => x.projects?.[slug]?.title) || slug
+        const project = t(loc, (x) => x.projects?.[slug]) || {}
+        const coverCount = project.cover?.src ? 1 : 0
+        const items = [...(coverCount ? [project.cover] : []), ...mediaItemsOf(project)]
+
+        // Per-locale aligned lists + slug indexes — index-aligned to
+        // `items`, src-verified so a drifting locale falls back to the
+        // project page rather than emitting a wrong slug.
+        const byLocale = new Map(
+          VALID_LANGS.map((l) => {
+            const lp = t(l, (x) => x.projects?.[slug]) || {}
+            const lCover = lp.cover?.src ? 1 : 0
+            const lAll = [...(lCover ? [lp.cover] : []), ...mediaItemsOf(lp)]
+
+            return [l, { all: lAll, slugs: slugIndexOf(lAll, lCover) }]
+          })
+        )
+
+        return items.map((item, i) => {
+          const leaf = (l) => {
+            const entry = byLocale.get(l)
+            const locItem = entry?.all[i]
+            const s = entry && locItem?.src === item.src ? entry.slugs[i] : ''
+            const base = `${l === 'en' ? '' : `/${l}`}/portfolio/${slug}`
+
+            return { href: s ? `${base}/${s}` : base, label: locItem?.label, l }
+          }
+
+          const text =
+            item.label ||
+            `${(item.src || '').split('/').filter(Boolean).pop() || ''}${item.isVideo ? MEDIA.VIDEO_EXT : MEDIA.EXT}`
+
+          const label = text.startsWith(title) ? text : `${title}: ${text}`
+          const self = leaf(loc)
+
+          const chips = VALID_LANGS.map((l) => {
+            const c = leaf(l)
+
+            return `<li><a href="${c.href}" hreflang="${l}"${c.label ? ` title="${esc(c.label)}"` : ''}>${l.toUpperCase()}</a></li>`
+          }).join('')
+
+          return `<li><a href="${self.href}">${esc(label)}</a><ul>${chips}</ul></li>`
+        })
+      })
+      .join('')
+
+    const playground = [
+      [slugs.earthPlayground, t(loc, (x) => x.APP?.earthPlayground) || 'Earth Playground'],
+      [slugs.starField, t(loc, (x) => x.APP?.starField) || 'Star Field'],
+    ]
+      .filter(([s]) => s)
+      .map(([s, label]) => {
+        const key = Object.keys(slugs).find((k) => slugs[k] === s)
+
+        return pageRow(label, (l) => l[key] || s)
+      })
+      .join('')
+
+    return (
+      `<main><h1>${esc(page.title || 'Sitemap')}</h1>` +
+      `${page.intro ? `<p>${esc(page.intro)}</p>` : ''}` +
+      `<h2>${esc(groups.pages || 'Pages')}</h2><ul>${pages}</ul>` +
+      `<h2>${esc(groups.legal || 'Legal')}</h2><ul>${legalPages}</ul>` +
+      `<h2>${esc(groups.portfolio || 'Portfolio')}</h2><ul>${portfolio}</ul>` +
+      `<h2>${esc(groups.playground || 'Playground')}</h2><ul>${playground}</ul>` +
+      `<h2>${esc(groups.docs || 'Docs')}</h2><ul><li><a href="/docs" hreflang="en">In-depth project docs</a></li></ul>` +
+      `<h2>${esc(groups.media || 'Media')}</h2><ul>${media}</ul></main>`
+    )
+  }
 
   /** Animations-reference hub — title + intro + every animation record's
    *  alt/longdesc as a definition list. The static mirror of the runtime
@@ -2276,7 +2758,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const rows = Object.entries(records)
       .map(
         ([id, r]) =>
-          `<div id="${esc(id)}"><dt>${esc(r?.alt || id)}</dt><dd>${esc(r?.longdesc || '')}</dd></div>`
+          `<div id="${esc(id)}"><div><dt>${esc(r?.alt || id)}</dt><dd>${esc(r?.longdesc || '')}</dd><a href="${esc(`${ROUTE_PATHS.DOCS}/${ANIMATION_DOCS[id] || ANIMATION_DOCS_FALLBACK}`)}" hreflang="en">${esc(DOCS_STRINGS.TITLE)}</a></div><anim-demo animation="${esc(id)}"></anim-demo></div>`
       )
       .join('')
 
@@ -2319,6 +2801,20 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       })
       .join('')
 
+    // Dossier video gallery — the first image doubles as poster frame
+    // (the runtime dossier renders the same clips; crawlers and agents
+    // need the <video> element to bind the clip to this page).
+    const poster = (b.media?.images || []).find((i) => i?.src)?.src
+
+    const videos = (b.media?.videos || [])
+      .filter((v) => v?.src)
+      .map((v) => {
+        const posterUrl = v.poster && /^https?:/.test(v.poster) ? v.poster : poster
+
+        return `<figure><video src="${esc(enc(v.src))}" controls preload="none"${posterUrl ? ` poster="${esc(enc(posterUrl))}"` : ''}></video><figcaption>${esc(v.caption || '')}${v.credit ? ` — ${esc(v.credit)}` : ''}</figcaption></figure>`
+      })
+      .join('')
+
     const audio = (b.media?.audio || [])
       .map(
         (a) =>
@@ -2338,7 +2834,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       )
       .join('')
 
-    return `<main><h1>${esc(b.name || bodyId)}</h1><p><em>${esc(b.kind || '')}</em> — ${esc(b.tagline || '')}</p>${facts ? `<dl>${facts}</dl>` : ''}<p>${esc(b.history || '')}</p>${images}${audio}${b.source ? `<p>${esc(b.source)}</p>` : ''}${refs ? `<ul>${refs}</ul>` : ''}</main>`
+    return `<main><h1>${esc(b.name || bodyId)}</h1><p><em>${esc(b.kind || '')}</em> — ${esc(b.tagline || '')}</p>${facts ? `<dl>${facts}</dl>` : ''}<p>${esc(b.history || '')}</p>${images}${videos}${audio}${b.source ? `<p>${esc(b.source)}</p>` : ''}${refs ? `<ul>${refs}</ul>` : ''}</main>`
   }
 
   /** Star-field body kinds in index order — voyage-from-home ordering;
@@ -2553,8 +3049,15 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const legal = t(loc, (x) => x.components?.['legal-footer']?.links) || legalEn
     const pageName = (i) => legal?.[i]?.page
     const titleOf = (suffix) => (suffix ? `${BASE_TITLE} | ${suffix}` : BASE_TITLE)
+    // The page node's authored title leads (it carries the localized
+    // "earth simulation" phrasing the page is authored with); the APP
+    // nav label is the terse fallback.
     const pgTitle = () =>
-      `${t(loc, (x) => x.APP?.earthPlayground) || 'Earth Playground'} | ${BASE_TITLE}`
+      `${
+        t(loc, (x) => x.pages?.['earth-playground']?.title) ||
+        t(loc, (x) => x.APP?.earthPlayground) ||
+        'Earth Playground'
+      } | ${BASE_TITLE}`
     const sfTitle = () => `${t(loc, (x) => x.APP?.starField) || 'Star Field'} | ${BASE_TITLE}`
     const prefix = loc === 'en' ? '' : `${loc}/`
 
@@ -2635,6 +3138,18 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           alt: slugPath('about'),
           keywords: pageKeywords(loc, 'about'),
           content: homeContent(loc),
+          // ProfilePage — Google's profile rich-result contract: the page
+          // is ABOUT the site's Person entity and names it as mainEntity,
+          // and the og:type=profile card carries profile:* metas.
+          pageType: 'ProfilePage',
+          about: PERSON_REF,
+          mainEntity: PERSON_REF,
+          ogType: SCHEMA_STRINGS.SCHEMA_OG_PROFILE,
+          profileMeta: {
+            firstName: SCHEMA_STRINGS.SCHEMA_PROFILE_FIRST_NAME,
+            lastName: SCHEMA_STRINGS.SCHEMA_PROFILE_LAST_NAME,
+            username: SCHEMA_STRINGS.SCHEMA_PROFILE_USERNAME,
+          },
         },
         {
           path: `${prefix}${slugs.contact}`,
@@ -2701,14 +3216,36 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
                 name: t(loc, (x) => x.APP?.earthPlayground) || 'Earth Playground',
                 url: `${SITE_URL}${locPrefixOf(loc)}/${slugs.earthPlayground}`,
                 applicationCategory: 'MultimediaApplication',
+                applicationSubCategory: 'Earth simulation',
                 operatingSystem: 'Web browser',
                 browserRequirements: 'Requires WebGL; WebGPU preferred',
                 inLanguage: LOCALE_TAGS[loc].bcp,
                 isAccessibleForFree: true,
+                // Free-web-app Offer — the form Google's software-app
+                // rich result requires when no aggregateRating exists.
+                offers: {
+                  '@type': 'Offer',
+                  price: '0',
+                  priceCurrency: 'USD',
+                  availability: 'https://schema.org/InStock',
+                },
+                ...(share.image
+                  ? {
+                      screenshot: {
+                        '@type': 'ImageObject',
+                        url: share.image,
+                        // Share captures are site-owned — same provenance
+                        // bag as the gallery items so the app screenshot
+                        // is licensable.
+                        ...mediaProvenanceOf(loc),
+                        creator: PERSON_REF,
+                      },
+                    }
+                  : {}),
                 isPartOf: {
                   '@id': `${SITE_URL}${locPrefixOf(loc)}/${slugs.earthPlayground}#webpage`,
                 },
-                author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+                author: PERSON_REF,
                 featureList: SP_CONTROL_GROUPS.flatMap((g) => [
                   t(loc, (x) => x.pages?.['earth-playground']?.[g.label]) || g.label,
                   ...g.controls.map(
@@ -2775,6 +3312,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
                       description: t(loc, (x) => x.pages?.['star-field']?.[aboutKey]) || '',
                       creditText: credit,
                       isAccessibleForFree: true,
+                      license: licenseUrlOf(loc),
+                      creator: PERSON_REF,
                       distribution: [
                         {
                           '@type': 'DataDownload',
@@ -2796,6 +3335,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
                     description:
                       'Every registry record packed little-endian Float32 (x, y, z heliocentric light-years, apparent magnitude, B-V colour index, kind: 0 star / 1 exoplanet / 2 deep-sky object) behind a uint32 record-count header — the renderer-side form of the same catalog.',
                     isAccessibleForFree: true,
+                    license: licenseUrlOf(loc),
+                    creator: PERSON_REF,
                     distribution: [
                       {
                         '@type': 'DataDownload',
@@ -2817,6 +3358,21 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           alt: slugPath('animations'),
           keywords: pageKeywords(loc, 'animations'),
           content: animationsContent(loc),
+        },
+        {
+          path: `${prefix}${slugs.search}`,
+          title: titleOf(t(loc, (x) => x.pages?.search?.title)),
+          description: toDescription(t(loc, (x) => x.pages?.search?.description)),
+          alt: slugPath('search'),
+          keywords: pageKeywords(loc, 'search'),
+          content: searchContent(loc),
+        },
+        {
+          path: `${prefix}${slugs.sitemap}`,
+          title: titleOf(t(loc, (x) => x.pages?.sitemap?.title)),
+          description: toDescription(t(loc, (x) => x.pages?.sitemap?.description)),
+          alt: slugPath('sitemap'),
+          content: sitemapContent(loc),
         }
       )
 
@@ -2870,6 +3426,17 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
       const description = projectDescOf(loc, slug)
 
+      // Article card metas — the og:type=article declaration plus the
+      // section/tag rows mirror the JSON-LD Article. No publish/modified
+      // timestamp is emitted because the source has no verified date.
+      const projectCard = {
+        ogType: SCHEMA_STRINGS.SCHEMA_OG_ARTICLE,
+        articleMeta: {
+          section: SCHEMA_STRINGS.SCHEMA_ARTICLE_SECTION,
+          tags: t(loc, (x) => x.projects?.[slug]?.[SEARCH_THEMES_KEY]) || undefined,
+        },
+      }
+
       routes.push({
         path: `${prefix}portfolio/${slug}`,
         title,
@@ -2880,6 +3447,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         entities: projectEntities(loc, slug),
         alt: portfolioAlt(slug),
         content: projectContent(loc, slug),
+        mainEntity: { '@id': `${SITE_URL}${locPrefix}/portfolio/${slug}#article` },
+        ...projectCard,
       })
 
       if (loc === 'en') {
@@ -2896,6 +3465,8 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
               alt: portfolioAlt(slug),
               canonical: portfolioAlt(slug)('en'),
               content: projectContent(loc, slug),
+              mainEntity: { '@id': `${SITE_URL}/portfolio/${slug}#article` },
+              ...projectCard,
             })
           }
         }
@@ -2921,6 +3492,11 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         // description verbatim.
         const mediaDesc = toDescription(`${label} — ${description}`)
 
+        const mediaDims =
+          Array.isArray(media?.size) && media.size.length >= 2
+            ? { width: media.size[0], height: media.size[1] }
+            : null
+
         routes.push({
           path: `${prefix}portfolio/${slug}/${mediaSlug}`,
           emitAtPublicPath: loc !== 'en',
@@ -2933,12 +3509,42 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           // asset first, the project's theme set second.
           keywords: [label, projectKeywords(loc, slug)].filter(Boolean).join(', ') || undefined,
           content: mediaContent(loc, slug, label, mediaWatchFigure(project?.folder || '', media)),
+          // Watch pages declare the video card type + og:video player
+          // refs; stills keep the article card for the project.
+          ogType: isVideo ? SCHEMA_STRINGS.SCHEMA_OG_VIDEO : SCHEMA_STRINGS.SCHEMA_OG_ARTICLE,
+          ...(isVideo && source
+            ? {
+                videoMeta: {
+                  url: source,
+                  ...(mediaDims ? mediaDims : {}),
+                },
+              }
+            : {
+                articleMeta: {
+                  section: SCHEMA_STRINGS.SCHEMA_ARTICLE_SECTION,
+                  tags: [label],
+                },
+              }),
+          mainEntity: { '@id': `${mediaUrl}${isVideo ? '#video' : '#image'}` },
           // The media page carries the whole project graph plus its own
           // media entity (ImageObject for stills, VideoObject for clips)
           // so Google can index the specific asset at this URL.
           entities: [
             ...(isVideo
-              ? [videoEntity(project?.folder || '', media, pageName, mediaDesc, mediaManifest)]
+              ? [
+                  {
+                    ...videoEntity(
+                      project?.folder || '',
+                      media,
+                      pageName,
+                      mediaDesc,
+                      mediaManifest,
+                      LOCALE_TAGS[loc].bcp
+                    ),
+                    ...mediaProvenanceOf(loc, undefined, undefined, pageName),
+                    '@id': `${mediaUrl}#video`,
+                  },
+                ]
               : source
                 ? [
                     {
@@ -2948,6 +3554,13 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
                       url: source,
                       contentUrl: source,
                       name: label,
+                      // Licensable badge — Google Images marks the asset
+                      // and deep-links the locale's license page; the
+                      // page name stays the credit line under the owner
+                      // notice.
+                      ...mediaProvenanceOf(loc, undefined, undefined, pageName),
+                      creator: PERSON_REF,
+                      ...(mediaDims ? mediaDims : {}),
                     },
                   ]
                 : []),
@@ -2981,6 +3594,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           description: toDescription(body?.tagline || '') || sfDescOf(loc),
           content: starBodyContent(loc, bodyId),
           ...sfBodyShareFields(loc, body),
+          mainEntity: { '@id': `${bodyUrl}#article` },
           entities: [
             {
               '@context': SCHEMA_CONTEXT,
@@ -3004,8 +3618,12 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
               inLanguage: LOCALE_TAGS[loc].bcp,
               mainEntityOfPage: bodyUrl,
               isPartOf: { '@id': `${sfIndexUrl}#webpage` },
-              author: { '@type': 'Person', name: BASE_TITLE, url: SITE_URL },
+              author: PERSON_REF,
             },
+            // The dossier's credited gallery as first-class entities —
+            // the same assets the parked article renders, so image and
+            // video searches bind this page as their watch/image host.
+            ...starBodyMediaEntities(loc, body, bodyUrl),
           ],
           crumbs: [
             {
@@ -3034,27 +3652,46 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     name,
     description,
     bcp,
+    loc = 'en',
     image,
+    imageCredit,
     crumbs,
     keywords,
     about,
     mainEntity,
-  }) => ({
-    '@context': SCHEMA_CONTEXT,
-    '@type': 'WebPage',
-    '@id': `${url}#webpage`,
-    url,
-    name,
-    description,
-    inLanguage: bcp,
-    isPartOf: { '@id': `${SITE_URL}#website` },
-    publisher: { '@id': `${SITE_URL}#organization` },
-    primaryImageOfPage: { '@type': 'ImageObject', url: image || SHARE_IMAGE },
-    ...(crumbs ? { breadcrumb: { '@id': `${url}#breadcrumbs` } } : {}),
-    ...(keywords ? { keywords } : {}),
-    ...(about ? { about } : {}),
-    ...(mainEntity ? { mainEntity } : {}),
-  })
+    pageType,
+  }) => {
+    // The credit only describes `image` — the SHARE_IMAGE fallback is
+    // always site-owned, so an unpaired imageCredit never leaks onto it.
+    const pageImage = image || SHARE_IMAGE
+
+    const pageImageCredit = image ? imageCredit : undefined
+
+    return {
+      '@context': SCHEMA_CONTEXT,
+      '@type': pageType || 'WebPage',
+      '@id': `${url}#webpage`,
+      url,
+      name,
+      description,
+      inLanguage: bcp,
+      isPartOf: { '@id': `${SITE_URL}#website` },
+      publisher: { '@id': `${SITE_URL}#organization` },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: pageImage,
+        // Full provenance bag — licensable badge fields on every page's
+        // representative image; credited dossier covers resolve to the
+        // source's terms, never the site's license.
+        ...mediaProvenanceOf(loc, pageImageCredit, name),
+        ...(pageImageCredit ? {} : { creator: PERSON_REF }),
+      },
+      ...(crumbs ? { breadcrumb: { '@id': `${url}#breadcrumbs` } } : {}),
+      ...(keywords ? { keywords } : {}),
+      ...(about ? { about } : {}),
+      ...(mainEntity ? { mainEntity } : {}),
+    }
+  }
 
   // Prime the LQIP cache for the root document's early-LCP image.
   const enHome = homeContent('en')
@@ -3144,11 +3781,14 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           name: pageName,
           description,
           bcp: tags.bcp,
+          loc,
           image: route.image,
+          imageCredit: route.imageCredit,
           crumbs,
           keywords: route.keywords,
           about: route.about,
           mainEntity: route.mainEntity,
+          pageType: route.pageType,
         }),
         ...(crumbs ? [breadcrumbEntity(crumbs, `${pageUrl}#breadcrumbs`)] : []),
         ...(route.entities || []),
@@ -3170,6 +3810,10 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         extraImages: route.extraImages,
         imageDims: route.imageDims,
         keywords: route.keywords,
+        ogType: route.ogType,
+        articleMeta: route.articleMeta,
+        videoMeta: route.videoMeta,
+        profileMeta: route.profileMeta,
         feedUrl: loc === 'en' ? `${SITE_URL}/feed.xml` : `${SITE_URL}/${loc}/feed.xml`,
         noLcp: route.noLcp,
         entities,
@@ -3415,6 +4059,7 @@ export function syncFirebaseRewrites() {
       slugs.earthPlayground,
       slugs.starField,
       slugs.animations,
+      slugs.sitemap,
       'earth-playground',
       'space-playground',
       'star-field-experiment',
@@ -3491,11 +4136,14 @@ export function syncFirebaseRewrites() {
     addRedirect(`/${loc}/star-field-experiment`, sfTarget)
     addRedirect(`/${loc}/star-field-experiment/**`, `${sfTarget}/:splat`)
 
-    // English-segment animations alias → localized canonical slug.
+    // English-segment animations + sitemap aliases → localized
+    // canonical slugs.
     addRedirect(
       `/${loc}/${enSlugs.animations}`,
       `/${loc}/${slugs.animations || enSlugs.animations}`
     )
+
+    addRedirect(`/${loc}/${enSlugs.sitemap}`, `/${loc}/${slugs.sitemap || enSlugs.sitemap}`)
 
     // Docs are English-only — a locale-prefixed docs URL canonicalizes to
     // the unprefixed route, so it redirects rather than rendering.
@@ -3528,8 +4176,11 @@ const STATIC_REWRITES = Object.freeze([
   { source: '/ai-catalog.json', destination: '/meta/ai-catalog.json' },
   // RSS — the English feed answers both conventional paths; locales
   // resolve /<loc>/feed.xml → /meta/<loc>/feed.xml via META_FILE_REWRITES.
+  // /feed.css is the shared stylesheet every feed's text/css
+  // xml-stylesheet PI points at (CSS-on-XML survived the XSLT removal).
   { source: '/feed.xml', destination: '/meta/feed.xml' },
   { source: '/rss.xml', destination: '/meta/feed.xml' },
+  { source: '/feed.css', destination: '/meta/feed.css' },
   { source: '/.well-known/ai-catalog.json', destination: '/meta/.well-known/ai-catalog.json' },
   { source: '/.well-known/api-catalog', destination: '/meta/.well-known/api-catalog' },
   { source: '/openapi.json', destination: '/meta/openapi.json' },

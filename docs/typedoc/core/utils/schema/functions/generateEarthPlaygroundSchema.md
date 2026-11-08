@@ -8,7 +8,7 @@
 function generateEarthPlaygroundSchema(options): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:392
+Defined in: core/utils/schema.ts:470
 
 Earth Playground JSON-LD graph — the route base plus a WebApplication
 entity whose `featureList` enumerates the whole localized control

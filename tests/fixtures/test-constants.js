@@ -21,6 +21,7 @@ const readScss = (name) => readSassDeep(path.join(ROOT_DIR, name))
 
 export const SCSS = {
   about: readScss('core/sass/components/home/about.scss'),
+  animDemo: readScss('core/sass/components/media/anim-demo.scss'),
   animations: readScss('website/views/animations/animations.scss'),
   app: readScss('core/sass/components/shell/app.scss'),
   navShell: readScss('core/sass/components/shell/app/nav-shell.scss'),
@@ -33,8 +34,10 @@ export const SCSS = {
   drawText: readScss('core/sass/components/media/draw-text.scss'),
   fonts: readScss('core/sass/base/_fonts.scss'),
   homeMosaic: readScss('core/sass/components/home/home-mosaic.scss'),
+  cardStack: readScss('core/sass/components/home/card-stack.scss'),
   internals: readScss('core/sass/components/internals/internals.scss'),
   mediaFigure: readScss('core/sass/components/media/media-figure.scss'),
+  mentionsDeck: readScss('core/sass/components/carousel/mentions-deck.scss'),
   modal: readScss('core/sass/components/internals/modal.scss'),
   mixins: readScss('core/sass/base/_mixins.scss'),
   notFound: readScss('website/views/not-found/not-found.scss'),
@@ -63,7 +66,6 @@ export const SRC = {
   App: readJs('src/App.js'),
   AppNav: readJsTree(
     'website/components/nav/AppNav.js',
-    'website/components/nav/flag.js',
     'website/components/nav/menu.js',
     'website/components/nav/render.js',
     'website/components/nav/scroll.js',
@@ -73,8 +75,17 @@ export const SRC = {
   AwardsMentions: readJsTree(
     'website/components/home/AwardsMentions.js',
     'website/components/home/awards/data.js',
-    'website/components/home/awards/carousel.js',
     'website/components/home/awards/render.js'
+  ),
+  MentionsDeck: readJsTree(
+    'website/components/carousel/MentionsDeck.js',
+    'website/components/carousel/mentions-deck/deck.js',
+    'website/components/carousel/mentions-deck/gestures.js',
+    'website/components/carousel/mentions-deck/interactions.js',
+    'website/components/carousel/mentions-deck/autoplay.js',
+    'website/components/carousel/mentions-deck/observer.js',
+    'website/components/carousel/mentions-deck/events.js',
+    'website/components/carousel/mentions-deck/render.js'
   ),
   CustomCarousel: readJsTree(
     'website/components/carousel/CustomCarousel.js',
@@ -108,6 +119,14 @@ export const SRC = {
     'website/components/home/mosaic/interactions.js',
     'website/components/home/mosaic/events.js',
     'website/components/home/mosaic/render.js'
+  ),
+  CardStack: readJsTree(
+    'website/components/home/CardStack.js',
+    'website/components/home/cardstack/deck.js',
+    'website/components/home/cardstack/interactions.js',
+    'website/components/home/cardstack/gestures.js',
+    'website/components/home/cardstack/events.js',
+    'website/components/home/cardstack/render.js'
   ),
   LangDialog: readJsTree(
     'website/components/dialogs/LangDialog.js',

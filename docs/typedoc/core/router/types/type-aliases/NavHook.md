@@ -8,7 +8,7 @@
 type NavHook = (_to, from) => unknown
 ```
 
-Defined in: core/router/types.ts:46
+Defined in: core/router/types.ts:48
 
 Guard/hook signature — a returned string/{path} short-circuits into a redirect.
 

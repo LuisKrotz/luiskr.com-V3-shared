@@ -21,6 +21,16 @@ The hoisted <article> element (may hold stale content between navs).
 
 Monotonic counter so a slow earlier fetch never overwrites a newer one.
 
+### `demoteReaderH1`
+
+Demotes every <h1> inside the parked mirror to <h2>. Emitted markup
+ships a real <h1> for no-JS documents, crawlers and reader modes, but
+once JS mounts the routed view supplies the document's level-one
+heading — an <h1> left in the mirror would double it in the live DOM
+for every JS-rendering agent. Idempotent: a no-op when no <h1> remains.
+
+- `@param` root Element whose descendant <h1>s are rewritten in place.
+
 ### `ensureHolder`
 
 Locates or creates the offscreen article holder. Emitted pages hoist

@@ -215,6 +215,7 @@ export class AppRoot extends BaseComponent {
     const AppNav = COMPONENT_TAGS.APP_NAV
     const PreferencesModal = COMPONENT_TAGS.PREFERENCES_MODAL
     const LangDialog = COMPONENT_TAGS.LANG_DIALOG
+    const SearchModal = COMPONENT_TAGS.SEARCH_MODAL
     const CookieBanner = COMPONENT_TAGS.COOKIE_BANNER
     const StatsHud = COMPONENT_TAGS.STATS_HUD
     const CurrentView = this.currentViewTag
@@ -248,6 +249,7 @@ export class AppRoot extends BaseComponent {
 
         <PreferencesModal />
         <LangDialog />
+        <SearchModal />
 
         <main id={APP_IDS.MAIN_CONTENT} tabIndex={CHAR_STRINGS.MINUS_ONE}>
           <div id={APP_IDS.VIEW_OUTLET}>
