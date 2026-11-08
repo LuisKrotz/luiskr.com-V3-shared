@@ -79,6 +79,10 @@ Default language code — English is the canonical un-prefixed locale.
 
 `trigger` — DrawText trigger attribute name (viewport/manual).
 
+### `ANIMATION`
+
+`animation` — AnimDemo attribute naming the ANIMATION_IDS entry it demos.
+
 ### `ORDERED`
 
 `ordered` — DrawText queue flag: marks the element as part of the

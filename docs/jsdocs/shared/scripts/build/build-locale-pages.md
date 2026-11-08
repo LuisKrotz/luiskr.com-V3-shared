@@ -231,10 +231,6 @@ attribute fragment, seeded by `prefetchStarMediaDims` (dossier JSONs store
 no intrinsic size, so each unique CDN image is probed once via a small
 range request and shared across all 15 locales).
 
-### `DIMS_PROBE_BYTES`
-
-Bytes fetched per image-dims probe — SOF/IHDR headers live in the head.
-
 ### `FETCH_TIMEOUT_MS`
 
 Per-request ceiling for every build-time prefetch (translations, dims
@@ -262,14 +258,6 @@ metadata falls back to the runtime's own GENERIC_DIMENSIONS defaults
 
 - `@param` {number} [w] - intrinsic width when known
 - `@param` {number} [h] - intrinsic height when known
-
-### `scanImageDims`
-
-Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
-or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
-are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
-
-- `@param` {Buffer} buf - head bytes of the image
 
 ### `liveTranslations`
 
@@ -540,11 +528,28 @@ license + acquireLicensePage target so Google Images flags the
 share captures as licensable and lands the click on the locale's
 own legal page (mirrors schema.ts's licenseUrlFor).
 
+### `mediaProvenanceOf`
+
+Provenance field bag for one media entity — mirrors
+core/utils/schema.ts mediaProvenanceFor: site-owned assets point
+license/acquireLicensePage at the locale's legal page under the
+owner copyright notice; credited third-party assets (star-field
+dossier media) point at the SOURCE's terms page with the raw
+credit as the notice, so the site's MPL grant never covers
+NASA/ESA imagery.
+
 ### `searchContent`
 
 Search page — a crawlable link surface: the static routes plus every
 portfolio project, ending at the machine-readable search index so
 agents can reach the full ~1.4k-entry catalog per locale.
+
+### `sitemapContent`
+
+Sitemap page — the full cross-locale link index (every page in
+every language) as the prerendered DOM mirror of the runtime
+<view-sitemap> tree: crawlers + reader mode read the same links
+without running JavaScript.
 
 ### `animationsContent`
 
@@ -648,11 +653,14 @@ if (loc === 'en') continue
     addRedirect(`/${loc}/star-field-experiment`, sfTarget)
     addRedirect(`/${loc}/star-field-experiment/**`, `${sfTarget}/:splat`)
 
-    // English-segment animations alias → localized canonical slug.
+    // English-segment animations + sitemap aliases → localized
+    // canonical slugs.
     addRedirect(
       `/${loc}/${enSlugs.animations}`,
       `/${loc}/${slugs.animations || enSlugs.animations}`
     )
+
+    addRedirect(`/${loc}/${enSlugs.sitemap}`, `/${loc}/${slugs.sitemap || enSlugs.sitemap}`)
 
     // Docs are English-only — a locale-prefixed docs URL canonicalizes to
     // the unprefixed route, so it redirects rather than rendering.

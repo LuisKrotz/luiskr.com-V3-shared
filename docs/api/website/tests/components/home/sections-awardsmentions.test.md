@@ -1,6 +1,6 @@
 # `website\tests\components\home\sections-awardsmentions.test.js`
 
-Split from sections.test.js — covers the "AwardsMentions" describe.
+Split from sections.test.js — covers the "AwardsMentions"
 
 |                |                                                                     |
 | -------------- | ------------------------------------------------------------------- |

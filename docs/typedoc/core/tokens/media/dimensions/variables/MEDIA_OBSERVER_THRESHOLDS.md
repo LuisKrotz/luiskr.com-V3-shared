@@ -11,7 +11,7 @@ const MEDIA_OBSERVER_THRESHOLDS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/media/dimensions.ts:67
+Defined in: core/tokens/media/dimensions.ts:78
 
 Frozen IntersectionObserver visibility fractions for media figures —
 `VIDEO_OBSERVER_THRESHOLD` (0.15) is the share of the video box that

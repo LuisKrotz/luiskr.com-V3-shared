@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/search/RouteSearch](../README.md) / RouteSearch
 
-Defined in: website/components/search/RouteSearch.tsx:62
+Defined in: website/components/search/RouteSearch.tsx:74
 
 The RouteSearch — not-found autocomplete class.
 
@@ -20,7 +20,7 @@ The RouteSearch — not-found autocomplete class.
 new RouteSearch(): RouteSearch;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:88
+Defined in: website/components/search/RouteSearch.tsx:123
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 _catalog: RouteEntry[] = [];
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:64
+Defined in: website/components/search/RouteSearch.tsx:76
 
 Full route catalog (static pages + portfolio projects).
 
@@ -195,9 +195,9 @@ Full route catalog (static pages + portfolio projects).
 _hits: RouteEntry[] = [];
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:67
+Defined in: website/components/search/RouteSearch.tsx:79
 
-Currently rendered hits — a subset/order of `_catalog`.
+Currently rendered hits — the active page slice of `_ranked`.
 
 ---
 
@@ -207,7 +207,7 @@ Currently rendered hits — a subset/order of `_catalog`.
 _active: number = -1
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:70
+Defined in: website/components/search/RouteSearch.tsx:89
 
 Keyboard/hover active row index (-1 = none).
 
@@ -219,7 +219,7 @@ Keyboard/hover active row index (-1 = none).
 _strings: SearchStrings
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:73
+Defined in: website/components/search/RouteSearch.tsx:92
 
 Localized copy node — seeded from the English fallback at render.
 
@@ -231,7 +231,7 @@ Localized copy node — seeded from the English fallback at render.
 _debounce: number | null = null;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:76
+Defined in: website/components/search/RouteSearch.tsx:95
 
 Pending input debounce timer.
 
@@ -245,7 +245,7 @@ _ring:
   | null = null;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:79
+Defined in: website/components/search/RouteSearch.tsx:98
 
 Live WebGPU ring-fill session (null = SVG rings render).
 
@@ -257,7 +257,7 @@ Live WebGPU ring-fill session (null = SVG rings render).
 _seq: number = 0
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:82
+Defined in: website/components/search/RouteSearch.tsx:101
 
 Monotonic query id — stale worker replies can't overwrite newer hits.
 
@@ -4320,7 +4320,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get listEl(): HTMLElement | null;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:93
+Defined in: website/components/search/RouteSearch.tsx:128
 
 The results listbox element (persistent — never re-rendered).
 
@@ -4338,7 +4338,7 @@ The results listbox element (persistent — never re-rendered).
 get inputEl(): HTMLInputElement | null;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:98
+Defined in: website/components/search/RouteSearch.tsx:133
 
 The combobox input.
 
@@ -4889,7 +4889,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:103
+Defined in: website/components/search/RouteSearch.tsx:138
 
 Lifecycle: loads copy + catalog, wires events, mounts the ring.
 
@@ -4909,7 +4909,7 @@ Lifecycle: loads copy + catalog, wires events, mounts the ring.
 loadData(): void;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:111
+Defined in: website/components/search/RouteSearch.tsx:146
 
 Loads the copy node + catalog for the current locale via SWR.
 
@@ -4925,7 +4925,7 @@ Loads the copy node + catalog for the current locale via SWR.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:167
+Defined in: website/components/search/RouteSearch.tsx:240
 
 Store change → locale flips rebuild catalog + copy node.
 
@@ -4945,7 +4945,7 @@ Store change → locale flips rebuild catalog + copy node.
 focusInput(): void;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:235
+Defined in: website/components/search/RouteSearch.tsx:374
 
 Moves focus into the search input — hosts (search modal) call it on open.
 
@@ -4961,7 +4961,7 @@ Moves focus into the search input — hosts (search modal) call it on open.
 onDestroy(): void;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:553
+Defined in: website/components/search/RouteSearch.tsx:900
 
 Lifecycle teardown — debounce + ring session + height spring.
 
@@ -4981,7 +4981,7 @@ Lifecycle teardown — debounce + ring session + height spring.
 render(): HTMLElement;
 ```
 
-Defined in: website/components/search/RouteSearch.tsx:567
+Defined in: website/components/search/RouteSearch.tsx:914
 
 JSX template — the persistent shell (rendered once per mount).
 

@@ -8,6 +8,6 @@
 const _B_EXPAND_MODAL_CLOSE: 'expand-modal-close'
 ```
 
-Defined in: core/tokens/base.ts:278
+Defined in: core/tokens/base.ts:346
 
 BEM block fragment "b expand modal close" — composed by the token groups below into full class names.

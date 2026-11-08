@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/pack](../README.md) / packMosaicSkeleton
 
 ```ts
-function packMosaicSkeleton(vw): object;
+function packMosaicSkeleton(vw): object
 ```
 
-Defined in: website/components/home/mosaic/pack.ts:214
+Defined in: website/components/home/mosaic/pack.ts:236
 
 Skeleton variant: packs placeholder tiles (no items needed — featured
 count + aspect cycle come from SKELETON/LAYOUT tokens) so the loading
@@ -37,5 +37,5 @@ boxes: SkeletonBox[];
 ### height
 
 ```ts
-height: number;
+height: number
 ```

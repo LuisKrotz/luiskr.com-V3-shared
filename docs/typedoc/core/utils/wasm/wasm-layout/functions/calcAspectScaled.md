@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcAspectScaled
 
 ```ts
-function calcAspectScaled(
-   width, 
-   height, 
-   maxW?
-): number;
+function calcAspectScaled(width, height, maxW?): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:275
+Defined in: core/utils/wasm/wasm-layout.ts:288
 
 Height rescaled for a width capped at maxW, preserving aspect ratio:
 height·(maxW/width) — only shrinks; widths under maxW return height

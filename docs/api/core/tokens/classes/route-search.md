@@ -32,6 +32,22 @@ The search input itself.
 
 Visible label heading above the field.
 
+### `ROUTE_SEARCH_HEAD`
+
+Header row holding the label (left) and the result status (right).
+
+### `ROUTE_SEARCH_FOUND`
+
+Status line opposite the label — "N results found" / search dots.
+
+### `ROUTE_SEARCH_FOUND_TEXT`
+
+The status' text node (count copy) — swapped for dots while busy.
+
+### `ROUTE_SEARCH_FOUND_DOTS`
+
+Three-dot searching indicator inside the status.
+
 ### `ROUTE_SEARCH_SUBMIT`
 
 Circular submit button glued inside the field's right edge.
@@ -102,6 +118,30 @@ The SVG element inside the row arrow.
 
 Project cover thumbnail inside a result row.
 
+### `ROUTE_SEARCH_GROUP`
+
+In-list group header row separating the kind-ordered hit buckets.
+
+### `ROUTE_SEARCH_GROUP_LABEL`
+
+Text label inside the group header row.
+
+### `ROUTE_SEARCH_PAGER`
+
+Result pager — prev/status/next row under the listbox.
+
+### `ROUTE_SEARCH_PAGER_PREV`
+
+Previous-page pager button.
+
+### `ROUTE_SEARCH_PAGER_STATUS`
+
+"Page x / y" status text inside the pager.
+
+### `ROUTE_SEARCH_PAGER_NEXT`
+
+Next-page pager button.
+
 ### `ROUTE_SEARCH_EMPTY`
 
 No-results row.
@@ -122,6 +162,11 @@ BEM modifier on the root while the listbox is open.
 
 BEM modifier on the root while a scoring dispatch is in flight —
 the submit glyph spins so the wait reads as progress, not dead UI.
+
+### `ROUTE_SEARCH_HERO`
+
+BEM host marker — the standalone /search view mounts the surface
+as its page hero: the label takes the .ttl-xxl ramp.
 
 ### `SEARCH_VIEW`
 

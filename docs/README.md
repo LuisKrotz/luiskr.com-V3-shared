@@ -13,6 +13,9 @@ Three.js WebGPU/WebGL visuals, Vite (rolldown) build.
 | [routing.md](architecture/routing.md)                            | Hash-free SPA router, locale prefixes, route slugs, dynamic view loading  |
 | [translations-i18n.md](guides/translations-i18n.md)              | Translation DB schema, stale-while-revalidate, fallback chain, locales    |
 | [website.md](architecture/website.md)                            | Public site shell, components, Shadow DOM styling, skeletons, dialogs     |
+| [sizing.md](architecture/sizing.md)                              | Sizing system — token scales, channels, every component's box contract    |
+| [fitting.md](architecture/fitting.md)                            | Fitting rules — box-to-media, object-fit, aspect caps, text fit, ladders  |
+| [style-precedence.md](architecture/style-precedence.md)          | Precedence — value cascade, sheet/selector order, mode dispatch, z-index  |
 | [playground.md](architecture/playground.md)                      | Earth Playground view, WebGPU scene, loader contract, controls            |
 | [star-field.md](architecture/star-field.md)                      | Star Field exploration — catalog bodies, lazy dossiers, nav drawer        |
 | [webgl-canvas.md](architecture/webgl-canvas.md)                  | Shared WebGL/canvas utilities, context pool, lifecycle, CSS fallbacks     |

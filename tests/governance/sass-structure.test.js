@@ -213,11 +213,11 @@ describe('SASS/CSS Structure & Style Isolation', () => {
       }
     }
 
-    test('components import SASS files with ?inline flag', () => {
+    test('components import SASS files as compiled sheets', () => {
       const componentFiles = getJsFiles('website/components')
       const hasSassImport = componentFiles.some((f) => {
         try {
-          return readFileSync(f, 'utf-8').includes('?inline')
+          return /\?(?:inline|tiers|rcss)/.test(readFileSync(f, 'utf-8'))
         } catch {
           return false
         }
@@ -225,27 +225,27 @@ describe('SASS/CSS Structure & Style Isolation', () => {
       expect(hasSassImport).toBe(true)
     })
 
-    test('DrawText.js imports .scss?inline', () => {
+    test('DrawText.js imports a compiled .scss sheet', () => {
       const drawTextPath = [
         resolve(root, 'website/components/media/DrawText.js'),
         resolve(root, 'website/components/media/DrawText.tsx'),
       ].find((f) => existsSync(f))
       try {
         const content = readFileSync(drawTextPath, 'utf-8')
-        expect(content).toContain('scss?inline')
+        expect(content).toMatch(/scss\?(?:inline|tiers|rcss)/)
       } catch {
         expect(true).toBe(true) // skip if file not readable
       }
     })
 
-    test('AppNav.js imports .scss?inline', () => {
+    test('AppNav.js imports a compiled .scss sheet', () => {
       const navPath = [
         resolve(root, 'website/components/nav/AppNav.js'),
         resolve(root, 'website/components/nav/AppNav.tsx'),
       ].find((f) => existsSync(f))
       try {
         const content = readFileSync(navPath, 'utf-8')
-        expect(content).toContain('scss?inline')
+        expect(content).toMatch(/scss\?(?:inline|tiers|rcss)/)
       } catch {
         expect(true).toBe(true)
       }
@@ -258,9 +258,9 @@ describe('SASS/CSS Structure & Style Isolation', () => {
           const content = readFileSync(f, 'utf-8')
           const longCssRegex = /`[^`]{200 }(?:color|margin|padding|font|display)[\s\S]{100 }`/g
           const matches = content.match(longCssRegex)
-          expect(matches === null || matches.length === 0 || content.includes('scss?inline')).toBe(
-            true
-          )
+          expect(
+            matches === null || matches.length === 0 || /scss\?(?:inline|tiers|rcss)/.test(content)
+          ).toBe(true)
         } catch {
           /* skip */
         }

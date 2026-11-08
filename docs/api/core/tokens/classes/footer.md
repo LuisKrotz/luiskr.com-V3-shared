@@ -19,6 +19,10 @@ the token contract immutable at runtime.
 
 Docs-portal footer entry — link + localized English-only note.
 
+### `FOOTER_DOCS_ARROW`
+
+The '→' glyph span inside the docs link.
+
 ### `FOOTER_DIVIDER`
 
 Self-made credit + copyright block below the source row.

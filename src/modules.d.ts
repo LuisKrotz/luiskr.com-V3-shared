@@ -11,6 +11,19 @@ declare module '*.scss?inline' {
   export default css
 }
 
+declare module '*.scss?tiers' {
+  /**
+   * Breakpoint-split stylesheet module (shared/build/vite-scss-tiers.mjs):
+   * `base` is the embedded non-media css; `tiers` keys width classes to
+   * lazy loaders whose cumulative media css is fetched per viewport.
+   */
+  const styles: {
+    base: string
+    tiers: Record<string, () => Promise<{ default: string } | string>>
+  }
+  export default styles
+}
+
 declare module '*.css?inline' {
   const css: string
   export default css

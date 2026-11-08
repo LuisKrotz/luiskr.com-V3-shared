@@ -8,6 +8,6 @@
 const _B_LOADER: 'intro-loader' = 'intro-loader'
 ```
 
-Defined in: core/tokens/base.ts:116
+Defined in: core/tokens/base.ts:133
 
 BEM block fragment "b loader" — composed by the token groups below into full class names.

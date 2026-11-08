@@ -53,6 +53,8 @@ export const workerBudget = () => {
  * so tests exercise the real sibling sources.
  */
 export const moduleNameMapper = {
+  // `?tiers` first — its mock returns the {base, tiers} module shape, not a css string.
+  '\\.(scss|css)\\?tiers$': path.join(TESTS_DIR, '__mocks__/tieredStyleMock.js'),
   '\\.(scss|css)(\\?inline)?$': path.join(TESTS_DIR, '__mocks__/styleMock.js'),
   '^virtual:i18n-fallback$': path.join(TESTS_DIR, '__mocks__/i18nFallbackMock.js'),
   '^virtual:i18n-boot-index$': path.join(TESTS_DIR, '__mocks__/i18nBootIndexMock.js'),

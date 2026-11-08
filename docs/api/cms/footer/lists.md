@@ -26,7 +26,8 @@ controls per row. `prefix` namespaces every class (line1-_, legal-_,
 social-*) so bindListEvents can bind by convention; `labelField`
 picks which property holds the row label ('description' for contact
 channels, 'page' for legal links, 'network' for socials) — matching
-each DB shape exactly.
+each DB shape exactly. `extraField` adds an optional third input bound
+to that property (contact line-1 'caption').
 
 ### `bindListEvents`
 

@@ -1,11 +1,37 @@
+/**
+ * @file patch-earth-playground-translations.js
+ * @description One-shot migration that injects the earth/space
+ * playground UI dictionaries into the local database.json mirror for
+ * every supported locale.
+ *
+ * What it writes per locale:
+ *   APP.earthPlayground / APP.spacePlayground — nav labels (the short
+ *     title only — both experiments share the same dictionary).
+ *   pages/earth-playground / pages/space-playground — the full settings
+ *     panel copy (camera, engine, terrain, post-FX, debug groups).
+ *
+ * Regional dialects (hrk/cas/riv/gn/tln) are derived from their parent
+ * locales via spread + overrides — see the fallback block.
+ *
+ * The upload scripts (upload-earth-playground-firebase.js) then push
+ * the patched mirror to Firebase — this file only touches the local
+ * copy. Run: node shared/scripts/i18n/patch-earth-playground-translations.js
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place and written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
+// The authored dictionaries — one entry per base locale. Keys are the
+// GUI control ids the experiment template binds to; values are the
+// localized labels (kept short — the settings panel is narrow).
 const TRANSLATIONS_MAP = {
   en: {
     earthPlayground: 'Earth Playground',
@@ -303,24 +329,32 @@ const TRANSLATIONS_MAP = {
   },
 }
 
-// Fallbacks for regional dialects
+// Fallbacks for regional dialects — each inherits its parent locale's
+// full dictionary, then overrides only the terms the dialect actually
+// differs on (title/short name are the usual divergence points).
 TRANSLATIONS_MAP.hrk = {
   ...TRANSLATIONS_MAP.de,
   earthPlayground: 'Erd-Playground',
   title: 'Erd-Playground',
 }
+
 TRANSLATIONS_MAP.cas = { ...TRANSLATIONS_MAP.es }
+
 TRANSLATIONS_MAP.riv = { ...TRANSLATIONS_MAP.br }
+
 TRANSLATIONS_MAP.gn = {
   ...TRANSLATIONS_MAP.es,
   earthPlayground: 'Yvy Ñembosarái',
   title: 'Yvy Ñembosarái',
 }
+
 TRANSLATIONS_MAP.tln = { ...TRANSLATIONS_MAP.it }
 
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 
 for (const [locale, data] of Object.entries(TRANSLATIONS_MAP)) {
+  // Bootstrap the locale's node tree — a missing locale/APP/pages
+  // node must not crash the patch (fresh locales start empty).
   if (!db.translations[locale]) db.translations[locale] = {}
   if (!db.translations[locale].APP) db.translations[locale].APP = {}
   if (!db.translations[locale].pages) db.translations[locale].pages = {}
@@ -330,14 +364,19 @@ for (const [locale, data] of Object.entries(TRANSLATIONS_MAP)) {
   db.translations[locale].APP.spacePlayground = data.earthPlayground
 
   // 2. Add full dictionary to pages/earth-playground and pages/space-playground
+  // Copy first — the nav label key is not part of the page dictionary.
   const pageData = { ...data }
+
   delete pageData.earthPlayground
 
   db.translations[locale].pages['earth-playground'] = pageData
   db.translations[locale].pages['space-playground'] = pageData
 }
 
+// Write the mirror back — 2-space indent matches the file's existing
+// formatting so the diff stays one-node-per-line.
 fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8')
+
 console.log(
   '✅ database.json patched successfully with Earth Playground translations across all locales.'
 )

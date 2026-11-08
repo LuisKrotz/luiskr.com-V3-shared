@@ -1,8 +1,36 @@
+/**
+ * @file build-wasm.js
+ * @description Emits the runtime math engine as a hand-assembled WASM
+ * binary — no toolchain (wat2wasm/clang) needed at build time.
+ *
+ * The same bytes are written under two names (engine.wasm, layout.wasm):
+ * callers fetch whichever name their loader expects, and shipping one
+ * binary twice costs nothing because the module is ~200 bytes.
+ *
+ * Module contents (all f32 math, 8 exports):
+ *   calc_column_width          (i32 cols, f32 container, f32 gap)
+ *                              → (container − (cols−1)·gap) / cols
+ *   calc_card_height           (f32 w, f32 aspect, f32 pad) → w/aspect + pad
+ *   calc_carousel_ring_offset  (f32 a, f32 b, f32 c) → (a/b)·c
+ *   calc_carousel_scroll_target (i32 idx, f32 card, f32 gap) → idx·(card+gap)
+ *   calc_ease_out_cubic        (f32 t) → 1 − (1−t)³
+ *   calc_draw_text_delay       (i32 idx, f32 delay) → delay / max(idx, 1)
+ *   calc_draw_text_offset      (i32 idx, f32 a, f32 b) → a·b + idx·30
+ *   calc_media_scale           (f32 w,h, cw,ch) → min(cw/w, ch/h, 1)
+ *
+ * Byte layout below follows the WASM binary format spec verbatim:
+ * magic+version → type section (5 signatures) → function section
+ * (8 type refs) → export section (8 names) → code section (8 bodies).
+ * Opcode legend for the code section: 0x20 local.get, 0x22 local.tee,
+ * 0x43 f32.const, 0x92 add, 0x93 sub, 0x94 mul, 0x95 div, 0x96 min,
+ * 0x97 max, 0xb2 f32.convert_i32_s, 0x0b end.
+ */
 import fs from 'node:fs'
 import path from 'node:path'
 
 // High-Performance WebAssembly Binary Engine for Carousel, Grid Layout & Animation Math
 const wasmBytes = new Uint8Array([
+  // ── Module header: \0asm magic + version 1 ───────────────────────
   0x00,
   0x61,
   0x73,
@@ -11,6 +39,44 @@ const wasmBytes = new Uint8Array([
   0x00,
   0x00,
   0x00, // WASM Header
+
+  // ── Type section (id 0x01): 5 function signatures ────────────────
+  0x01,
+  0x22,
+  0x05,
+  0x60,
+  0x03,
+  0x7f,
+  0x7d,
+  0x7d,
+  0x01,
+  0x7d, // Sig 0: (i32, f32, f32) -> f32
+  0x60,
+  0x03,
+  0x7d,
+  0x7d,
+  0x7d,
+  0x01,
+  0x7d, // Sig 1: (f32, f32, f32) -> f32
+  0x60,
+  0x01,
+  0x7d,
+  0x01,
+  0x7d, // Sig 2: (f32) -> f32
+  0x60,
+  0x02,
+  0x7f,
+  0x7d,
+  0x01,
+  0x7d, // Sig 3: (i32, f32) -> f32
+  0x60,
+  0x04,
+  0x7d,
+  0x7d,
+  0x7d,
+  0x7d,
+  0x01,
+  0x7d, // Sig 4: (f32, f32, f32, f32) -> f32
 
   0x01,
   0x22,
@@ -49,6 +115,9 @@ const wasmBytes = new Uint8Array([
   0x01,
   0x7d, // Sig 4: (f32, f32, f32, f32) -> f32
 
+  // ── Function section (id 0x03): 8 funcs → type-sig indices ───────
+  // fn0→sig0, fn1→sig1, fn2→sig1, fn3→sig0, fn4→sig2, fn5→sig3,
+  // fn6→sig0, fn7→sig4.
   0x03,
   0x09,
   0x08,
@@ -61,6 +130,8 @@ const wasmBytes = new Uint8Array([
   0x00,
   0x04,
 
+  // ── Export section (id 0x07): 8 names → function indices ─────────
+  // Each entry = name length + utf8 bytes + kind 0x00 + func index.
   0x07,
   0xba,
   0x01,
@@ -251,6 +322,9 @@ const wasmBytes = new Uint8Array([
   0x00,
   0x07,
 
+  // ── Code section (id 0x0a): 8 function bodies ────────────────────
+  // fn0 calc_column_width: (p1 − (i0−1)·p2) / i0 — container minus
+  //   inter-column gaps, divided by the column count.
   0x0a,
   0x91,
   0x01,
@@ -277,6 +351,8 @@ const wasmBytes = new Uint8Array([
   0xb2,
   0x95,
   0x0b,
+
+  // fn1 calc_card_height: p0/p1 + p2 — width ÷ aspect + padding.
   0x0a,
   0x00,
   0x20,
@@ -288,6 +364,9 @@ const wasmBytes = new Uint8Array([
   0x02,
   0x92,
   0x0b,
+
+  // fn2 calc_carousel_ring_offset: (p0/p1)·p2 — normalized scroll
+  //   progress scaled to the ring's offset range.
   0x0a,
   0x00,
   0x20,
@@ -299,6 +378,9 @@ const wasmBytes = new Uint8Array([
   0x02,
   0x94,
   0x0b,
+
+  // fn3 calc_carousel_scroll_target: i0·(p1+p2) — index × card pitch
+  //   (card + gap) — the pixel offset that centers card i0.
   0x0b,
   0x00,
   0x20,
@@ -311,6 +393,9 @@ const wasmBytes = new Uint8Array([
   0x92,
   0x94,
   0x0b,
+
+  // fn4 calc_ease_out_cubic: 1 − (1−t)³ — local.tee spills t so the
+  //   (1−t) term is rebuilt three times for the cubic product.
   0x22,
   0x00,
   0x43,
@@ -346,6 +431,9 @@ const wasmBytes = new Uint8Array([
   0x94,
   0x93,
   0x0b,
+
+  // fn5 calc_draw_text_delay: p1 / max(i0, 1.0) — per-character delay
+  //   shrinks with index; the max guards a zero-index divide.
   0x0e,
   0x00,
   0x20,
@@ -361,6 +449,9 @@ const wasmBytes = new Uint8Array([
   0x97,
   0x95,
   0x0b,
+
+  // fn6 calc_draw_text_offset: p1·p2 + i0·30 — base offset plus a
+  //   30-unit per-character cascade.
   0x11,
   0x00,
   0x20,
@@ -379,6 +470,9 @@ const wasmBytes = new Uint8Array([
   0x94,
   0x92,
   0x0b,
+
+  // fn7 calc_media_scale: min(p2/p0, p3/p1, 1.0) — contain-fit scale,
+  //   capped at 1 so small media never upscales blurry.
   0x13,
   0x00,
   0x20,
@@ -401,11 +495,17 @@ const wasmBytes = new Uint8Array([
   0x0b,
 ])
 
+// Output dir inside the core module's public assets — served verbatim
+// by the static host, so the .wasm ships untouched by the bundler.
 const publicWasmDir = path.resolve('core/public/scripts/wasm')
+
 if (!fs.existsSync(publicWasmDir)) {
   fs.mkdirSync(publicWasmDir, { recursive: true })
 }
 
+// One module, two filenames — the carousel loader and the layout
+// engine each fetch their own name; both get the same 8 exports.
 fs.writeFileSync(path.join(publicWasmDir, 'engine.wasm'), wasmBytes)
 fs.writeFileSync(path.join(publicWasmDir, 'layout.wasm'), wasmBytes)
+
 console.log('Successfully generated WASM Engine binaries in core/public/scripts/wasm/')

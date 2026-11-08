@@ -13,6 +13,8 @@
 - [svgPlaceholder](functions/svgPlaceholder.md)
 - [isPlainClick](functions/isPlainClick.md)
 - [viewportWidth](functions/viewportWidth.md)
+- [viewportHeight](functions/viewportHeight.md)
 - [resetViewportCache](functions/resetViewportCache.md)
 - [isIntentionalFlush](functions/isIntentionalFlush.md)
+- [measureLayout](functions/measureLayout.md)
 - [flushLayout](functions/flushLayout.md)

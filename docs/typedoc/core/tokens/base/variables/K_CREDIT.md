@@ -8,6 +8,6 @@
 const _K_CREDIT: 'credit' = 'credit'
 ```
 
-Defined in: core/tokens/base.ts:493
+Defined in: core/tokens/base.ts:611
 
 Token key "k credit" — single source for the repeated literal.

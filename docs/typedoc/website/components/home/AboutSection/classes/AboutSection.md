@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/home/AboutSection](../README.md) / AboutSection
 
-Defined in: website/components/home/AboutSection.tsx:55
+Defined in: website/components/home/AboutSection.tsx:78
 
 The AboutSection — section class.
 
@@ -20,7 +20,7 @@ The AboutSection — section class.
 new AboutSection(): AboutSection;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:61
+Defined in: website/components/home/AboutSection.tsx:90
 
 #### Returns
 
@@ -185,9 +185,47 @@ _glitch:
   | null = null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:59
+Defined in: website/components/home/AboutSection.tsx:82
 
 Active TV-glitch session on the portrait — see about/glitch.ts.
+
+---
+
+### \_hud
+
+```ts
+_hud: HudSession | null = null;
+```
+
+Defined in: website/components/home/AboutSection.tsx:84
+
+Active location-HUD session on the portrait — see about/hud.ts.
+
+---
+
+### \_mesh
+
+```ts
+_mesh: MeshSession | null = null;
+```
+
+Defined in: website/components/home/AboutSection.tsx:86
+
+Active light-field mesh session on the portrait — see about/mesh.ts.
+
+---
+
+### \_titleFit
+
+```ts
+_titleFit:
+  | TitleFitSession
+  | null = null;
+```
+
+Defined in: website/components/home/AboutSection.tsx:88
+
+Active portrait-to-title fit session — see about/titlefit.ts.
 
 ---
 
@@ -4248,7 +4286,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get aboutTranslations(): AboutTranslations | null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:96
+Defined in: website/components/home/AboutSection.tsx:140
 
 ##### Returns
 
@@ -4260,7 +4298,7 @@ Defined in: website/components/home/AboutSection.tsx:96
 set aboutTranslations(val): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:91
+Defined in: website/components/home/AboutSection.tsx:135
 
 Setter/getter — the about-page translation node pushed by the parent view.
 
@@ -4284,7 +4322,7 @@ Setter/getter — the about-page translation node pushed by the parent view.
 get profilePicture(): string | null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:107
+Defined in: website/components/home/AboutSection.tsx:151
 
 ##### Returns
 
@@ -4296,7 +4334,7 @@ Defined in: website/components/home/AboutSection.tsx:107
 set profilePicture(val): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:102
+Defined in: website/components/home/AboutSection.tsx:146
 
 Setter/getter — raw Gravatar URL for the profile photo.
 
@@ -4320,7 +4358,7 @@ Setter/getter — raw Gravatar URL for the profile photo.
 get optimizedProfilePicture(): string;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:113
+Defined in: website/components/home/AboutSection.tsx:157
 
 CDN-resized Gravatar URL for the profile img.
 
@@ -4338,9 +4376,45 @@ CDN-resized Gravatar URL for the profile img.
 get profilePictureSrcset(): string;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:119
+Defined in: website/components/home/AboutSection.tsx:163
 
 Responsive srcset candidates for the profile photo.
+
+##### Returns
+
+`string`
+
+---
+
+### aboutLocations
+
+#### Get Signature
+
+```ts
+get aboutLocations(): AboutLocation[];
+```
+
+Defined in: website/components/home/AboutSection.tsx:169
+
+The `locations` array of the about node — drives the orbiting HUD.
+
+##### Returns
+
+[`AboutLocation`](../../about/hud/interfaces/AboutLocation.md)[]
+
+---
+
+### aboutSubtitle
+
+#### Get Signature
+
+```ts
+get aboutSubtitle(): string;
+```
+
+Defined in: website/components/home/AboutSection.tsx:184
+
+The `subtitle` tagline node — falls back to the bundled snapshot.
 
 ##### Returns
 
@@ -4356,14 +4430,14 @@ Responsive srcset candidates for the profile photo.
 get aboutDrawData(): DrawData;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:131
+Defined in: website/components/home/AboutSection.tsx:200
 
-Draw-timing plan for the two bio columns. Both columns share ONE
-1500ms animation budget: charDelay = 1500ms ÷ totalChars (both
-columns), and each paragraph's offset = cumulative chars before it
-× delay — so col2's first paragraph starts exactly when col1's last
-ends. The bio reads as a single continuous type-in flowing down the
-left column then continuing down the right.
+Draw-timing plan for the intro + bio column. The `frame` node is the
+hero statement (falling back to col1's lead paragraph); every remaining
+paragraph follows in one column. All items share ONE 1500ms animation
+budget: charDelay = 1500ms ÷ totalChars, and each paragraph's offset =
+cumulative chars before it × delay — the bio reads as a single
+continuous type-in flowing from the intro down the column.
 
 ##### Returns
 
@@ -4918,9 +4992,12 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:67
+Defined in: website/components/home/AboutSection.tsx:100
 
-Binds the portrait glitch handlers once the shadow root exists.
+Binds the portrait glitch handlers once the shadow root exists, then
+subscribes to the store and ensures the components dictionary (which
+carries contact.line1 for the links row) is loaded — same ensure-fetch
+<contact-section> performs; whichever section mounts first fires it.
 
 #### Returns
 
@@ -4938,7 +5015,7 @@ Binds the portrait glitch handlers once the shadow root exists.
 onDestroy(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:73
+Defined in: website/components/home/AboutSection.tsx:109
 
 Stops any running glitch loop when the element leaves the DOM.
 
@@ -4958,12 +5035,12 @@ Stops any running glitch loop when the element leaves the DOM.
 onUpdated(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:83
+Defined in: website/components/home/AboutSection.tsx:122
 
-Re-binds the bio's continuous type-in description — the two-column
-paragraph cascade is ONE coordinated animation (col2 starts as col1
-ends), so the text container carries the ABOUT_TEXT record on top
-of each <draw-text>'s own TEXT_DRAW binding.
+Re-binds the bio's continuous type-in description — the intro +
+paragraph cascade is ONE coordinated animation (each paragraph starts
+as the previous ends), so the text container carries the ABOUT_TEXT
+record on top of each <draw-text>'s own TEXT_DRAW binding.
 
 #### Returns
 
@@ -4981,7 +5058,7 @@ of each <draw-text>'s own TEXT_DRAW binding.
 render(): Element;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:155
+Defined in: website/components/home/AboutSection.tsx:232
 
 JSX template for the component's shadow DOM.
 

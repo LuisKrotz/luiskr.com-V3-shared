@@ -18,9 +18,6 @@ const CAROUSEL_SELECTORS: Readonly<{
   CAROUSEL_SLIDE_CLONE_FIRST: '.carousel-slide--clone-first'
   CAROUSEL_SLIDE_CLONE_LAST: '.carousel-slide--clone-last'
   CAROUSEL_SLIDES_NOT_CLONE: '.carousel-slide:not(.carousel-slide--clone)'
-  CAROUSEL_SLIDE_PATTERN: '.carousel-slide-pattern'
-  CAROUSEL_PATTERN_TOP: '.carousel-slide-pattern--top'
-  CAROUSEL_PATTERN_BOTTOM: '.carousel-slide-pattern--bottom'
 }>
 ```
 

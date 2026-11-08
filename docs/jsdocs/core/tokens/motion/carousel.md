@@ -2,9 +2,9 @@
 
 Carousel timing/geometry tokens — grouped subsets of
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\motion\carousel.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\motion\carousel.ts`                      |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -40,7 +40,7 @@ slightly elastic slide travel that replaced the browser's fixed
 on retarget). Integrated by `springStep` in `core/utils/motion` with
 px-space epsilons — same integrator the slider knobs run.
 
-  ωn = √96 ≈ 9.8 rad/s, ζ = 20/(2·√96) ≈ 1.02
+ωn = √96 ≈ 9.8 rad/s, ζ = 20/(2·√96) ≈ 1.02
 
 ζ≈1.02 is the critical-damping boundary — the slide travels fast and
 parks on the target with no visible swing-back (a measurable
@@ -124,6 +124,19 @@ IntersectionObserver ratio that counts as "visible enough" to autoplay (15%)
 
 px delta below which ResizeObserver width reports are ignored — sub-pixel RO noise must not trigger a re-fit storm
 
+### `DESKTOP_SCALE_STEPS`
+
+Desktop downscale ladder for carousel items — steps compound on the
+running width while each result still clears DESKTOP_SCALE_MIN_W;
+the first step that would drop it under the floor stops the walk
+(smaller render = denser pixels). Mobile (≤ CAROUSEL_MAX_W) is
+untouched.
+
+### `DESKTOP_SCALE_MIN_W`
+
+Width floor (px) the compounding ladder never crosses — the last
+step whose result stays above it is the one applied to height.
+
 ### `ITEM_GAP_PX`
 
 Approx flex gap (px) added per item in the side-by-side width projection
@@ -132,37 +145,17 @@ Approx flex gap (px) added per item in the side-by-side width projection
 
 Minimum slide media width (px) — tall media floor so a fixed strip height never yields slivers; mirrors min-width in media-figure.scss
 
-### `MEDIA_MIN_WIDTH_VW`
-
-Viewport width below which the media min-width floor is dropped — on sub-375px screens the floor would push media past the edges
-
 ### `ITEM_MARGIN_PX`
 
-Outer margin (px) applied to each slide item on desktop — media keeps padding + this margin of clearance on each side
+Outer margin (px) applied to each slide item on desktop — media keeps padding + this margin of clearance on each side; mirrors margin-inline: $space-md in carousel-host.scss
 
 ### `ITEM_MARGIN_VW`
 
 Viewport width at which the slide side margin kicks in — mirrors layout-1024 in carousel-host.scss / internals.scss
 
-### `STRIP_H_1024`
+### `ITEM_PAD_768`
 
-Strip height ladder (px) — mirrors --mf-h breakpoints in carousel-host.scss: below 1024 it is 70dvh minus a breakpoint pad, at/above these widths it is a fixed $space-* value
-
-### `STRIP_SUB_MOBILE`
-
-px subtracted from 70dvh for the sub-1024 strip heights — mirrors --mf-h's calc() at <768 / ≥768
-
-### `ITEM_PAD_DEFAULT`
-
-Horizontal item padding (both sides, px) per breakpoint — mirrors .internal-extra-item padding-inline ladder
-
-### `REG_CAP_SUB`
-
-px subtracted from the viewport for the regular-item desktop width cap — mirrors the --mf-max-w gutter fallback (2×space-3xl + 2×margin)
-
-### `LAND_CAP_SUB_1024`
-
-px subtracted from the viewport for landscape-item width caps — mirrors the landscape --mf-max-w ladder
+Horizontal item padding (both sides, px) — mirrors the ≥768 rung of the .internal-extra-item padding-inline ladder, the only rung the ≥960 side-by-side projection can reach
 
 ### `MAX_HEIGHT_FALLBACK`
 
@@ -179,6 +172,25 @@ Numeric 21:9 aspect ratio
 ### `RATIO_32_9`
 
 Numeric 32:9 aspect ratio
+
+### `HALF_NATURAL_MAX_VW`
+
+Viewport ceiling (px) for the half-natural render cap — the
+640/768/960/1024 mobile+tablet bands never upscale a slide past
+half its source pixels; mirrors the `(max-width: 1024px)` cap block
+in media-figure/_placeholder.scss.
+
+### `HALF_NATURAL_SCALE`
+
+Scale applied to source dims when projecting the half-capped strip height
+
+### `MULTI_FIT_MIN_VW`
+
+Minimum viewport (px) at which >2-item groups may also settle into
+the centered side-by-side row — on ≥3840 ultrawide a handful of
+slides can't fill the track, so when the whole set projects inside
+the host the controls-free row wins ("fewer items than the
+viewport" case).
 
 ### `ASPECT_RATIO_16_9`
 

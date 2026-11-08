@@ -4,9 +4,9 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/home/AwardsMentions](../README.md) / AwardsMentions
 
-Defined in: website/components/home/AwardsMentions.tsx:42
+Defined in: website/components/home/AwardsMentions.tsx:31
 
-The AwardsMentions — mentions class.
+The AwardsMentions — legal footer band class.
 
 ## Extends
 
@@ -20,7 +20,7 @@ The AwardsMentions — mentions class.
 new AwardsMentions(): AwardsMentions;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:52
+Defined in: website/components/home/AwardsMentions.tsx:36
 
 #### Returns
 
@@ -177,53 +177,13 @@ Reactive state bag — written only through setState() so updates always re-rend
 
 ---
 
-### \_title
-
-```ts
-_title: string
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:43
-
----
-
-### \_items
-
-```ts
-_items: unknown[] | null = null;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:46
-
----
-
 ### \_lastLocale
 
 ```ts
 _lastLocale: string | null = null;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:47
-
----
-
-### \_duration
-
-```ts
-_duration: number = 10000
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:48
-
----
-
-### \_autoplayEverStarted
-
-```ts
-_autoplayEverStarted: boolean = false
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:49
+Defined in: website/components/home/AwardsMentions.tsx:32
 
 ---
 
@@ -233,11 +193,21 @@ Defined in: website/components/home/AwardsMentions.tsx:49
 _dividerTeardowns: () => void[] = [];
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:50
+Defined in: website/components/home/AwardsMentions.tsx:33
 
 #### Returns
 
 `void`
+
+---
+
+### \_sepsTeardown
+
+```ts
+_sepsTeardown: (() => void) | null = null;
+```
+
+Defined in: website/components/home/AwardsMentions.tsx:34
 
 ---
 
@@ -3556,6 +3526,24 @@ The **`spellcheck`** property of the HTMLElement interface represents a boolean 
 
 ---
 
+### title
+
+```ts
+title: string
+```
+
+Defined in: node\_modules/typescript/lib/lib.dom.d.ts:17843
+
+The **`HTMLElement.title`** property represents the title of the element: the text usually displayed in a 'tooltip' popup when the mouse is over the node.
+
+[MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/title)
+
+#### Inherited from
+
+[`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`title`](../../../../../core/Component/classes/BaseComponent.md#title)
+
+---
+
 ### translate
 
 ```ts
@@ -4272,90 +4260,6 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 
 ## Accessors
 
-### title
-
-#### Get Signature
-
-```ts
-get title(): string;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:71
-
-The **`HTMLElement.title`** property represents the title of the element: the text usually displayed in a 'tooltip' popup when the mouse is over the node.
-
-[MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/title)
-
-##### Returns
-
-`string`
-
-#### Set Signature
-
-```ts
-set title(val): void;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:58
-
-Setter/getter — section heading text.
-
-##### Parameters
-
-###### val
-
-`string` \| `null` \| `undefined`
-
-##### Returns
-
-`void`
-
-The **`HTMLElement.title`** property represents the title of the element: the text usually displayed in a 'tooltip' popup when the mouse is over the node.
-
-[MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLElement/title)
-
-#### Overrides
-
-[`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`title`](../../../../../core/Component/classes/BaseComponent.md#title)
-
----
-
-### items
-
-#### Get Signature
-
-```ts
-get items(): unknown[] | null;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:95
-
-##### Returns
-
-`unknown`[] \| `null`
-
-#### Set Signature
-
-```ts
-set items(val): void;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:77
-
-Setter/getter — award/mention entries for the carousel.
-
-##### Parameters
-
-###### val
-
-`unknown`[] \| `null`
-
-##### Returns
-
-`void`
-
----
-
 ### legalLinks
 
 #### Get Signature
@@ -4364,13 +4268,13 @@ Setter/getter — award/mention entries for the carousel.
 get legalLinks(): LegalLink[];
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:101
+Defined in: website/components/home/AwardsMentions.tsx:42
 
 Legal-page links for the footer row (see awards/data.ts).
 
 ##### Returns
 
-[`LegalLink`](../../awards/data/interfaces/LegalLink.md)[]
+[`LegalLink`](../../../../../core/utils/data/legal-links/interfaces/LegalLink.md)[]
 
 ---
 
@@ -4897,7 +4801,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:105
+Defined in: website/components/home/AwardsMentions.tsx:46
 
 #### Returns
 
@@ -4915,7 +4819,7 @@ Defined in: website/components/home/AwardsMentions.tsx:105
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:117
+Defined in: website/components/home/AwardsMentions.tsx:56
 
 #### Returns
 
@@ -4933,7 +4837,7 @@ Defined in: website/components/home/AwardsMentions.tsx:117
 _ensureData(): void;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:131
+Defined in: website/components/home/AwardsMentions.tsx:68
 
 Loads the mentions + legal-links nodes when missing (SWR).
 
@@ -4949,7 +4853,7 @@ Loads the mentions + legal-links nodes when missing (SWR).
 onUpdated(): void;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:135
+Defined in: website/components/home/AwardsMentions.tsx:72
 
 #### Returns
 
@@ -4967,7 +4871,7 @@ Defined in: website/components/home/AwardsMentions.tsx:135
 _mountDividerSheen(): void;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:148
+Defined in: website/components/home/AwardsMentions.tsx:99
 
 Re-mounts the divider-sheen WebGPU widgets on the footer's `<hr>`
 divider — the node is recreated on every render, so each update
@@ -4987,7 +4891,7 @@ is a no-op and the CSS `::after` sweep stays the render path.
 onDestroy(): void;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:161
+Defined in: website/components/home/AwardsMentions.tsx:112
 
 Lifecycle: releases the divider mounts before the shadow root goes.
 
@@ -5001,77 +4905,13 @@ Lifecycle: releases the divider mounts before the shadow root goes.
 
 ---
 
-### \_setupCarousel()
-
-```ts
-_setupCarousel(): void;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:169
-
-Builds the auto-advance loop (see awards/carousel.ts).
-
-#### Returns
-
-`void`
-
----
-
-### \_showProgress()
-
-```ts
-_showProgress(): void;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:175
-
-Shows the circular progress indicator for the current slide.
-
-#### Returns
-
-`void`
-
----
-
-### \_hideProgress()
-
-```ts
-_hideProgress(): void;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:181
-
-Hides the progress arc (paused/hover).
-
-#### Returns
-
-`void`
-
----
-
-### \_restartProgressAnimation()
-
-```ts
-_restartProgressAnimation(): void;
-```
-
-Defined in: website/components/home/AwardsMentions.tsx:187
-
-Resets the SVG progress arc so the next slide's timer animates from zero.
-
-#### Returns
-
-`void`
-
----
-
 ### \_bindLinks()
 
 ```ts
 _bindLinks(): void;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:193
+Defined in: website/components/home/AwardsMentions.tsx:124
 
 Wires internal links through the SPA router.
 
@@ -5087,7 +4927,7 @@ Wires internal links through the SPA router.
 render(): Element;
 ```
 
-Defined in: website/components/home/AwardsMentions.tsx:220
+Defined in: website/components/home/AwardsMentions.tsx:144
 
 JSX template for the component's shadow DOM.
 

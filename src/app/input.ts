@@ -15,16 +15,22 @@ import type { AppRoot } from '../App.js'
  * @param c — the component
  */
 export function initAppInputListeners(c: AppRoot): void {
+  // Idempotent setters — every pointerdown fires them, but the commit
+  // is gated so an unchanged method writes nothing to the store (a
+  // redundant commit would re-render every subscriber per event).
   const setTouch = () => {
     if (store.getters.getInputMethod() !== INPUT_STRINGS.TOUCH)
       store.commit(UI_MUTATIONS.SET_INPUT_METHOD, INPUT_STRINGS.TOUCH)
   }
+
   const setPointer = () => {
     if (store.getters.getInputMethod() !== INPUT_STRINGS.POINTER)
       store.commit(UI_MUTATIONS.SET_INPUT_METHOD, INPUT_STRINGS.POINTER)
   }
 
   if (window.PointerEvent) {
+    // Unified pointer events — one listener classifies touch/mouse/pen
+    // from a single event stream.
     c.addScopedListener(
       window,
       POINTER_EVENTS.POINTERDOWN,
@@ -38,10 +44,15 @@ export function initAppInputListeners(c: AppRoot): void {
       { passive: true }
     )
   } else {
+    // Legacy fallback (old Safari): split touch/mouse start events —
+    // whichever fires first classifies the session.
     c.addScopedListener(window, TOUCH_EVENTS.TOUCHSTART, setTouch, { passive: true })
     c.addScopedListener(window, MOUSE_EVENTS.MOUSEDOWN, setPointer, { passive: true })
   }
 
+  // Portfolio imagery is licensed work — right-click save and
+  // drag-to-desktop are blocked on media elements only (text/links
+  // keep their native menus).
   c.addScopedListener(window, MOUSE_EVENTS.CONTEXTMENU, (e) => {
     if ((e.target as Element | null)?.closest?.(COMMON_SELECTORS.MEDIA_ELEMENTS)) {
       e.preventDefault()

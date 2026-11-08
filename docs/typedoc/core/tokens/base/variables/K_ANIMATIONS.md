@@ -8,7 +8,7 @@
 const _K_ANIMATIONS: 'animations' = 'animations'
 ```
 
-Defined in: core/tokens/base.ts:468
+Defined in: core/tokens/base.ts:586
 
 Shared key token `animations` — single source for the animations-reference
 dictionary key and the route's English segment (zero-hardcoding rule 5).

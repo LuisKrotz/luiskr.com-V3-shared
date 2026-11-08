@@ -8,7 +8,7 @@
 function searchStrings(node): SearchStrings
 ```
 
-Defined in: website/components/search/route-search/data.ts:88
+Defined in: website/components/search/route-search/data.ts:114
 
 The `search` copy node — live translation first, English fallback
 snapshot second. The node lives under `pages/search`:

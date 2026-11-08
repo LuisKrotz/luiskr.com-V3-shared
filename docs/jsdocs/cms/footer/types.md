@@ -1,8 +1,8 @@
 # `cms\footer\types.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms\footer\types.ts` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\footer\types.ts`                       |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
@@ -15,8 +15,12 @@ signature absorbs extra CMS fields without widening every schema bump.
 
 ### (module scope)
 
-The components/contact DB node — `title` plus two channel columns
-(`line1`/`line2`) rendered side by side in the footer.
+Optional muted caption under the link — line-1 rows.
+
+### (module scope)
+
+The components/contact DB node — `title` + `subtitle` plus two channel
+columns (`line1`/`line2`) rendered side by side in the footer.
 
 ### (module scope)
 

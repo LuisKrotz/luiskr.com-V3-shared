@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/data/legal-links](../README.md) / getFallbackLegalLinks
 
 ```ts
-function getFallbackLegalLinks(locale?): LegalLink[];
+function getFallbackLegalLinks(locale?): LegalLink[]
 ```
 
-Defined in: core/utils/data/legal-links.ts:30
+Defined in: core/utils/data/legal-links.ts:71
 
 Gets fallback legal links.
 

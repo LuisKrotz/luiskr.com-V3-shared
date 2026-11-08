@@ -1,17 +1,19 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/media/dimensions](../README.md) / GENERIC\_DIMENSIONS
 
 ```ts
 const GENERIC_DIMENSIONS: Readonly<{
-  DEFAULT_WIDTH: 800;
-  DEFAULT_HEIGHT: 450;
-  PROFILE_SIZE: 200;
-  AWARD_ICON_SIZE: 60;
-  ITEM_FALLBACK_HEIGHT: 1200;
-}>;
+  DEFAULT_WIDTH: 800
+  DEFAULT_HEIGHT: 450
+  PROFILE_SIZE: 200
+  AWARD_ICON_SIZE: 60
+  ITEM_FALLBACK_HEIGHT: 1200
+  MAX_NATURAL_HEIGHT: 2560
+  MAX_NATURAL_WIDTH: 2560
+}>
 ```
 
 Defined in: core/tokens/media/dimensions.ts:26

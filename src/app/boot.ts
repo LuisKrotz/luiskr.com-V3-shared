@@ -33,9 +33,14 @@ import { IntroLoader } from '@core/utils/canvas/loaders/intro-loader.js'
  * so the probe always reflects the live environment.
  */
 export function deferIdle(cb: () => void): void {
+  // requestIdleCallback exists only on the window (and only in some
+  // engines); both conditions probe per call so hot-swapped test
+  // environments resolve the right arm.
   if (typeof window !== TYPE_STRINGS.UNDEFINED && window.requestIdleCallback) {
     window.requestIdleCallback(cb)
   } else {
+    // Fallback — 100 ms approximates an idle slice without starving
+    // the work indefinitely on engines that lack the API.
     setTimeout(cb, 100)
   }
 }
@@ -45,9 +50,14 @@ export function deferIdle(cb: () => void): void {
  * @param c — the component
  */
 export function mountAppShell(c: AppRoot): void {
+  // Restore persisted preferences before first paint of the chrome —
+  // theme/reduced-motion/contrast must land before any child renders
+  // or the shell flashes the default palette.
   store.commit(PREF_MUTATIONS.INIT_THEME)
   store.commit(PREF_MUTATIONS.INIT_REDUCED_MOTION)
   store.commit(PREF_MUTATIONS.INIT_HIGH_CONTRAST)
+
+  // Pointer/touch detection + media context-menu guards (see input.ts).
   c.initInputListeners()
 
   // Warm the media-variant manifest at idle — it's ~430KB of bucket keys,
@@ -57,6 +67,8 @@ export function mountAppShell(c: AppRoot): void {
   // originals, which is always safe.
   deferIdle(() => void initMediaManifest())
 
+  // Kick the locale fetch — the shell renders its fallback text until
+  // the snapshot lands (SWR — stale-while-revalidate).
   c.loadData()
 
   // The ambient body::before glow (body-glow-drift) animates the
@@ -64,10 +76,14 @@ export function mountAppShell(c: AppRoot): void {
   // document root where every crawler reads it.
   applyAnimationDesc(document.body, ANIMATION_IDS.BODY_GLOW)
 
+  // Dev grid overlay — restored from the stored flag before the
+  // stylesheet's gate class is applied.
   if (store.getters.getShowGrid()) {
     document.documentElement.classList.add(STATE_CLASSES.SHOW_GRID)
   }
 
+  // Wire the store subscription — language/modal/preference commits
+  // now reach onStoreUpdate (see App.tsx).
   c.subscribe(store)
 
   // Cyrillic font surface — toggle Fira Sans on/off with the locale and
@@ -85,33 +101,46 @@ export function mountAppShell(c: AppRoot): void {
     import('@website/components/feedback/StatsHud.js')
   })
 
-  // Listen to open-preferences-modal from app-nav
+  // Listen to open-preferences-modal from app-nav — the element's
+  // chunk is lazy: import() ensures the custom element is DEFINED
+  // before open lands on it (the upgrade must exist or `open` sets a
+  // plain property on an unupgraded node).
   const openPref = () => {
     import('@website/components/dialogs/PreferencesModal.js').then(() => {
       const pref = c.$<PrefModalEl>(COMPONENT_TAGS.PREFERENCES_MODAL)
+
       if (pref) pref.open = true
     })
   }
+
+  // Both targets: nav fires on itself (inside this shadow tree) and
+  // window (events that escape the shadow boundary) — either arm can
+  // be the one that carries the gesture.
   c.addScopedListener(c, APP_EVENTS.OPEN_PREFERENCES_MODAL, openPref)
   c.addScopedListener(window, APP_EVENTS.OPEN_PREFERENCES_MODAL, openPref)
 
-  // Listen to open-lang-dialog from app-nav
+  // Listen to open-lang-dialog from app-nav — same lazy-import-then-open
+  // pattern as preferences.
   const openLang = () => {
     import('@website/components/dialogs/LangDialog.js').then(() => {
       const dialog = c.$<LangDialogEl>(COMPONENT_TAGS.LANG_DIALOG)
+
       if (dialog) dialog.open = true
     })
   }
+
   c.addScopedListener(c, APP_EVENTS.OPEN_LANG_DIALOG, openLang)
   c.addScopedListener(window, APP_EVENTS.OPEN_LANG_DIALOG, openLang)
 
-  // Listen to open-search-modal from app-nav
+  // Listen to open-search-modal from app-nav — same lazy pattern.
   const openSearch = () => {
     import('@website/components/dialogs/SearchModal.js').then(() => {
       const modal = c.$<SearchModalEl>(COMPONENT_TAGS.SEARCH_MODAL)
+
       if (modal) modal.open = true
     })
   }
+
   c.addScopedListener(c, APP_EVENTS.OPEN_SEARCH_MODAL, openSearch)
   c.addScopedListener(window, APP_EVENTS.OPEN_SEARCH_MODAL, openSearch)
 
@@ -121,6 +150,8 @@ export function mountAppShell(c: AppRoot): void {
   // doubling the surface with the modal.
   const bootRoute = router.currentRoute?.name
 
+  // Deep link present + not a route hosting its own search surface →
+  // open the modal so the query has somewhere to land.
   if (
     typeof window !== TYPE_STRINGS.UNDEFINED &&
     new URLSearchParams(window.location.search).get(QUERY_STRINGS.SEARCH_QUERY) &&
@@ -130,10 +161,13 @@ export function mountAppShell(c: AppRoot): void {
     openSearch()
   }
 
-  // Subscribe to router
+  // Subscribe to router — every navigation runs the progress-bar
+  // choreography, swaps the outlet view, and re-fetches route data.
   router.subscribe((to, from) => {
     c.routeLoading = true
+
     const pBar = c.$(`.${APP_CLASSES.PROGRESS_BAR}`)
+
     if (pBar) {
       // A stale --done from the previous navigation would pin the bar at
       // scaleX(1)/opacity:0 — clear it so the crawl restarts visibly.
@@ -163,8 +197,12 @@ export function mountAppShell(c: AppRoot): void {
       }
     }, ANIMATION_DURATIONS.ROUTE_DURATION)
 
+    // Commit the new view tag + swap the outlet — re-render replaces
+    // the <CurrentView> element with the incoming route's tag.
     c.currentViewTag = to.view
+
     c._updateViewContent(to, from)
+
     c.loadData()
 
     // Reader-mode content mirrors the route's prerendered page — keeps
@@ -176,9 +214,11 @@ export function mountAppShell(c: AppRoot): void {
     webglPool.scheduleFallbackRetry()
   })
 
-  // Initial view
+  // Initial view — no router event fires for the landing route (the
+  // subscription starts after init), so the first view resolves here.
   if (router.currentRoute) {
     c.currentViewTag = router.currentRoute.view
+
     c._updateViewContent()
   }
 
@@ -197,9 +237,14 @@ export function mountAppShell(c: AppRoot): void {
     window,
     WINDOW_EVENTS.SCROLL,
     () => {
+      // Burst coalescing: the first scroll event arms the rAF;
+      // subsequent events in the same frame see _scrollRaf nonzero
+      // and drop out — one layout read per painted frame, not per event.
       if (!c._scrollRaf) {
         c._scrollRaf = requestAnimationFrame(() => {
+          // Clear first so a scroll inside the rAF can re-arm.
           c._scrollRaf = 0
+
           c.checkScroll()
         })
       }
@@ -212,6 +257,8 @@ export function mountAppShell(c: AppRoot): void {
   // onBottom/activeSection stay stale and the --on-dark ink goes wrong
   // on first load. Observe the body box so any growth re-runs the check.
   if (typeof ResizeObserver !== TYPE_STRINGS.UNDEFINED) {
+    // Document growth re-measures — image loads and locale fan-outs
+    // push #contact further down after the initial measure.
     c._docObserver = new ResizeObserver(() => {
       c.updateSectionTops()
 
@@ -221,12 +268,17 @@ export function mountAppShell(c: AppRoot): void {
     c._docObserver.observe(document.body)
   }
 
+  // Window resize is debounced — resize storms fire per drag pixel;
+  // 150 ms waits for the gesture to settle before paying for the
+  // section re-measure + scroll check.
   let resizeTimer: ReturnType<typeof setTimeout> | undefined
+
   c.addScopedListener(
     window,
     WINDOW_EVENTS.RESIZE,
     () => {
       clearTimeout(resizeTimer)
+
       resizeTimer = setTimeout(() => {
         c.updateSectionTops()
         c.checkScroll()
@@ -236,6 +288,9 @@ export function mountAppShell(c: AppRoot): void {
   )
 
   if (window.matchMedia) {
+    // OS dark-scheme flips re-apply only under THEME.SYSTEM — an
+    // explicit user choice (light/dark) must not be overridden by
+    // the OS changing underneath it.
     c.addScopedListener(
       window.matchMedia(QUERY_STRINGS.DARK_SCHEME_QUERY),
       FORM_EVENTS.CHANGE,

@@ -23,6 +23,11 @@ token contract immutable at runtime.
 
 `rssFeed` — localized label of the footer's RSS feed link.
 
+### `SITEMAP`
+
+`sitemap` — localized label of the footer's sitemap link + the
+sitemap page's appText title key.
+
 ### `NAV_UI_KEYS`
 
 Frozen nav ui key map — sole declaration site for these tokens; consumers read members and

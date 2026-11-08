@@ -9,9 +9,13 @@ const COMPONENT_TAGS: Readonly<{
   MEDIA_EXPANDED: 'media-expanded'
   MEDIA_FIGURE: 'media-figure'
   DRAW_TEXT: 'draw-text'
+  ANIM_DEMO: 'anim-demo'
   CUSTOM_CAROUSEL: 'custom-carousel'
+  MEDIA_MOSAIC: 'media-mosaic'
   AWARDS_CAROUSEL: 'awards-carousel'
   HOME_MOSAIC: 'home-mosaic'
+  CARD_STACK: 'card-stack'
+  MENTIONS_DECK: 'mentions-deck'
   ABOUT_SECTION: 'about-section'
   CONTACT_SECTION: 'contact-section'
   AWARDS_MENTIONS: 'awards-mentions'
@@ -33,7 +37,7 @@ const COMPONENT_TAGS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/elements/components.ts:25
+Defined in: core/tokens/elements/components.ts:29
 
 Frozen component element tag-name map — sole declaration site for these tokens; consumers
 read members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze

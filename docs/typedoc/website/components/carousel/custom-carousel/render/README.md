@@ -11,7 +11,6 @@
 
 ## Functions
 
-- [resolveThumbUrl](functions/resolveThumbUrl.md)
 - [renderCarouselSlide](functions/renderCarouselSlide.md)
 - [renderArrowButton](functions/renderArrowButton.md)
 - [renderCarousel](functions/renderCarousel.md)

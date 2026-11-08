@@ -8,6 +8,6 @@
 const _B_FLUID_BG: 'fluid-background' = 'fluid-background'
 ```
 
-Defined in: core/tokens/base.ts:120
+Defined in: core/tokens/base.ts:137
 
 BEM block fragment "b fluid bg" — composed by the token groups below into full class names.

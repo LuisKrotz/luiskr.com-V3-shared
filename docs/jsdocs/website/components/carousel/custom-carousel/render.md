@@ -23,6 +23,10 @@ Intrinsic [w,h] for aspect-ratio layout (optional — falls back to GENERIC_DIME
 
 ### (module scope)
 
+Untouched source dims when `size` was downscaled through the desktop ladder — the expand modal stamps these (it never reduces).
+
+### (module scope)
+
 Accessible/visible caption.
 
 ### (module scope)
@@ -53,25 +57,16 @@ aria-label for the next arrow.
 
 Localized "of" joiner for the "N of M" counter.
 
-### `resolveThumbUrl`
-
-Resolves the preview/poster image URL for the repetition pattern.
-
-- `@param` item Slide descriptor.
-- `@param` folder CDN folder prefix.
-- `@returns` Fully-qualified thumbnail or poster URL.
-
 ### `renderCarouselSlide`
 
 One slide's inner content — a <media-figure> with the item's CDN src
 (folder + src), intrinsic size for aspect-ratio layout, and the
-expand/video/label flags. For mixed carousels on mobile, landscape slides
-include a mirrored repetition pattern backdrop to compensate for height.
+expand/video/label flags. Every figure cover-fills the shared strip
+height — a carousel never mixes item heights.
 Returns null for placeholder entries.
 
 - `@param` item Slide descriptor, or null for empty slots.
 - `@param` folder CDN folder prefix (e.g. 'projectslug/').
-- `@param` isMixed Whether the carousel contains both landscape and portrait items.
 
 ### `renderArrowButton`
 

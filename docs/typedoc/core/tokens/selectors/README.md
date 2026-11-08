@@ -6,6 +6,12 @@
 
 ## References
 
+### CARD\_STACK\_SELECTORS
+
+Re-exports [CARD_STACK_SELECTORS](card-stack/variables/CARD_STACK_SELECTORS.md)
+
+---
+
 ### CAROUSEL\_SELECTORS
 
 Re-exports [CAROUSEL_SELECTORS](carousel/variables/CAROUSEL_SELECTORS.md)
@@ -33,6 +39,12 @@ Re-exports [DRAW_TEXT_SELECTORS](draw-text/variables/DRAW_TEXT_SELECTORS.md)
 ### LOADER\_SELECTORS
 
 Re-exports [LOADER_SELECTORS](loader/variables/LOADER_SELECTORS.md)
+
+---
+
+### MENTIONS\_DECK\_SELECTORS
+
+Re-exports [MENTIONS_DECK_SELECTORS](mentions-deck/variables/MENTIONS_DECK_SELECTORS.md)
 
 ---
 

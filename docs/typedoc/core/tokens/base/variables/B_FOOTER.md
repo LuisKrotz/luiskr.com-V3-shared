@@ -8,7 +8,7 @@
 const _B_FOOTER: 'footer' = 'footer'
 ```
 
-Defined in: core/tokens/base.ts:134
+Defined in: core/tokens/base.ts:151
 
 BEM block fragment "b footer" — composed by the token groups below into full class names
 and dotted ui keys (e.g. `a11y.footer`).

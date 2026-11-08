@@ -8,12 +8,14 @@
 
 - [LegalFooter](classes/LegalFooter.md)
 
-## Functions
-
-- [feedHrefFor](functions/feedHrefFor.md)
-
 ## References
 
 ### getFallbackLegalLinks
 
 Re-exports [getFallbackLegalLinks](../../../../core/utils/data/legal-links/functions/getFallbackLegalLinks.md)
+
+---
+
+### feedHrefFor
+
+Re-exports [feedHrefFor](../../../../core/utils/data/footer-links/functions/feedHrefFor.md)

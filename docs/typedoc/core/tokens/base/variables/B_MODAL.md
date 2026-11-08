@@ -8,6 +8,6 @@
 const _B_MODAL: 'modal' = 'modal'
 ```
 
-Defined in: core/tokens/base.ts:94
+Defined in: core/tokens/base.ts:111
 
 BEM block fragment "b modal" — composed by the token groups below into full class names.

@@ -8,6 +8,6 @@
 const _B_AWC: 'aw-c' = 'aw-c'
 ```
 
-Defined in: core/tokens/base.ts:107
+Defined in: core/tokens/base.ts:124
 
 BEM block fragment "b awc" — composed by the token groups below into full class names.

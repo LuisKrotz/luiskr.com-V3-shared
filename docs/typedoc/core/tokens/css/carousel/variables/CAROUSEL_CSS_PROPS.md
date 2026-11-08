@@ -8,8 +8,7 @@
 const CAROUSEL_CSS_PROPS: Readonly<{
   CAROUSEL_ITEM_HEIGHT: '--carousel-item-height'
   CAROUSEL_MEDIA_HEIGHT: '--carousel-media-height'
-  CAROUSEL_LANDSCAPE_MEDIA_HEIGHT: '--carousel-landscape-media-height'
-  CAROUSEL_LANDSCAPE_MEDIA_WIDTH: '--carousel-landscape-media-width'
+  MENTIONS_DECK_FADE: '--mentions-deck-fade'
   RANGE_PCT: '--range-pct'
 }>
 ```

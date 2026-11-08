@@ -24,9 +24,9 @@ Re-exports [MENU_CSS_PROPS](menu/variables/MENU_CSS_PROPS.md)
 
 ---
 
-### NAV\_GEAR\_CSS\_PROPS
+### MOSAIC\_CSS\_PROPS
 
-Re-exports [NAV_GEAR_CSS_PROPS](nav/variables/NAV_GEAR_CSS_PROPS.md)
+Re-exports [MOSAIC_CSS_PROPS](mosaic/variables/MOSAIC_CSS_PROPS.md)
 
 ---
 

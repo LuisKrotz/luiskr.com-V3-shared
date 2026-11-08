@@ -29,9 +29,18 @@ const ANIMATION_IDS: Readonly<{
   CAROUSEL: 'carousel'
   ABOUT_TEXT: 'about-text'
   RELATED_TILE: 'related-tile'
-  NOTE_DOT: 'note-dot'
   BODY_GLOW: 'body-glow'
   PROGRESS_BAR: 'progress-bar'
+  NOTE_DOT: 'note-dot'
+  CARD_STACK: 'card-stack'
+  ABOUT_MESH: 'about-mesh'
+  NAV_ICON_AURA: 'nav-icon-aura'
+  VIEW_TRANSITION: 'view-transition'
+  ROUTE_SEARCH: 'route-search'
+  CUSTOM_CAROUSEL: 'custom-carousel'
+  MENTIONS_DECK: 'mentions-deck'
+  EXPAND_MODAL_LOADING: 'expand-modal-loading'
+  FOOTER_FEED_WAVE: 'footer-feed-wave'
 }>
 ```
 

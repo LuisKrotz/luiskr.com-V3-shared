@@ -23,6 +23,21 @@ Fallback intrinsic px for award-icon images when the CMS row omits width/height 
 
 Fallback intrinsic height for media items missing `size` — portrait-leaning so the aspect projection stays conservative
 
+### `MAX_NATURAL_HEIGHT`
+
+Natural-height ceiling for packed-card layout — full-page
+screenshots (4-6k px tall) would otherwise pack into multi-wall
+slivers; the pack treats taller sources as this height so the tile
+shows a top-anchored cover crop instead.
+
+### `MAX_NATURAL_WIDTH`
+
+Natural-width ceiling for packed-card layout — ultrawide captures
+(multi-monitor playground screenshots, 5-7k px wide) would
+otherwise clamp to a full-wall banner strip; the pack treats
+wider sources as this width so the tile packs inside the wall
+rhythm and cover-crops the sides.
+
 ### `IMAGE_DIMENSIONS`
 
 Image decode budgets shared by progressive media pipelines.

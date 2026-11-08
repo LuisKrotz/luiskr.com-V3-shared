@@ -25,11 +25,17 @@ Loaded module + its linear memory — null when the artifact is unavailable.
 
 A live glyph animation — destroy() detaches listeners, loop and wasm memory.
 
+### `loadGlueModule`
+
+Default glue loader — dynamic-imports the wasm-pack module from the
+public artifacts dir (never resolvable under jest).
+
 ### `loadRuntime`
 
 Loads the wasm glue once and resolves the shared runtime; any failure
 (missing artifact, blocked fetch) resolves null so callers stay on CSS.
 
+- `@param` load Injectable glue importer — tests substitute a stub so the
 - `@returns` the runtime, or null when wasm can't be loaded
 
 ### `mountNavGlyph`
@@ -42,4 +48,5 @@ from the icon's own computed neon tokens.
 - `@param` host the <nav-*-icon> element that owns the canvas
 - `@param` kind NAV_GLYPH.KIND_STREAK or NAV_GLYPH.KIND_SWOOSH
 - `@param` colorProps the two --nav-neon-* custom properties to paint with
+- `@param` loadModule Injectable glue importer — tests substitute a stub
 - `@returns` a session handle, or null when wasm, the canvas or reduced motion rule it out

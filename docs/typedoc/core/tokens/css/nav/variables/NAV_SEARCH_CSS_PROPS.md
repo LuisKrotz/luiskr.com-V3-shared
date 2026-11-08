@@ -21,6 +21,8 @@ const NAV_SEARCH_CSS_PROPS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/css/nav.ts:35
+Defined in: core/tokens/css/nav.ts:14
 
-CSS custom properties for the nav search magnifier SVG.
+CSS custom properties for the nav strip glyphs. Sole declaration site —
+consumers import members from this frozen map rather than re-declaring
+the literals (zero-hardcoding rule).

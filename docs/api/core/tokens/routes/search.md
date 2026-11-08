@@ -19,20 +19,24 @@ Statutory pages: privacy, GDPR, terms, license.
 
 ### `EXPERIMENT`
 
-Interactive surfaces: earth playground, star field, animations, docs.
+Interactive surfaces: earth playground, star field, animations.
 
 ### `PROJECT`
 
 Portfolio project detail pages joined from the portfoliolist.
 
+### `DOCS`
+
+Docs-portal pages — the English-only manifest corpus.
+
 ### `ROUTE_SEARCH_LIMITS`
 
-Frozen route-search limits — `MAX_HITS` caps how many ranked rows the
-listbox renders per query. The catalog holds thousands of entries; a
-one-letter query matched ~6.7k rows, all patched into the DOM each
-keystroke (≈600ms first paint, multi-hundred-ms long tasks). Ranking
-already puts the best matches first, so the tail is never browsed.
+Frozen route-search limits — `MAX_HITS` is the page size: how many
+ranked rows the listbox renders per results page. The catalog holds
+thousands of entries; a one-letter query matched ~6.7k rows, and
+patching them all into the DOM per keystroke cost ≈600ms first paint —
+the pager walks the full hit list one slice at a time instead.
 
 ### `MAX_HITS`
 
-Rows rendered per query — top-ranked hits only.
+Rows rendered per results page — one slice of the ranked hits.

@@ -8,7 +8,7 @@
 function projectHref(item): string
 ```
 
-Defined in: website/components/home/mosaic/interactions.ts:143
+Defined in: website/components/home/mosaic/interactions.ts:160
 
 Builds the localized destination URL for one mosaic project card.
 

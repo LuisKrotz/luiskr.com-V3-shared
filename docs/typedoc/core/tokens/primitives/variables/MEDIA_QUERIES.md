@@ -8,6 +8,7 @@
 const MEDIA_QUERIES: Readonly<{
   POINTER_FINE: '(pointer: fine)'
   POINTER_COARSE: '(pointer: coarse)'
+  HOVER_NONE: '(hover: none)'
   MAX_WIDTH_768: '(max-width: 768px)'
   MIN_WIDTH_1025: '(min-width: 1025px)'
   PREFERS_COLOR_DARK: '(prefers-color-scheme: dark)'

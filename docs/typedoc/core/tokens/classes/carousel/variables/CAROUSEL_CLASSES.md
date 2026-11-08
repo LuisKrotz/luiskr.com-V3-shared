@@ -39,10 +39,6 @@ const CAROUSEL_CLASSES: Readonly<{
   CAROUSEL_RATIO_21_9: 'carousel--ratio-21-9'
   CAROUSEL_RATIO_32_9: 'carousel--ratio-32-9'
   CAROUSEL_MIXED: 'carousel--mixed'
-  CAROUSEL_SLIDE_MIXED_LANDSCAPE: 'carousel-slide--mixed-landscape'
-  CAROUSEL_SLIDE_PATTERN: 'carousel-slide-pattern'
-  CAROUSEL_PATTERN_TOP: 'carousel-slide-pattern--top'
-  CAROUSEL_PATTERN_BOTTOM: 'carousel-slide-pattern--bottom'
 }>
 ```
 

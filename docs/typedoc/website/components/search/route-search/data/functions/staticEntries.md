@@ -8,7 +8,7 @@
 function staticEntries(lang): RouteEntry[]
 ```
 
-Defined in: website/components/search/route-search/data.ts:117
+Defined in: website/components/search/route-search/data.ts:175
 
 The static half of the catalog: home + section anchors + legal pages +
 experimental surfaces + the docs portal. Titles resolve through the

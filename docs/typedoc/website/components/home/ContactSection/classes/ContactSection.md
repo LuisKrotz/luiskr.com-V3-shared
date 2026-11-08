@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/home/ContactSection](../README.md) / ContactSection
 
-Defined in: website/components/home/ContactSection.tsx:47
+Defined in: website/components/home/ContactSection.tsx:78
 
 contacts section.
 
@@ -20,7 +20,7 @@ contacts section.
 new ContactSection(): ContactSection;
 ```
 
-Defined in: website/components/home/ContactSection.tsx:48
+Defined in: website/components/home/ContactSection.tsx:82
 
 #### Returns
 
@@ -174,6 +174,18 @@ Reactive state bag — written only through setState() so updates always re-rend
 #### Inherited from
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`state`](../../../../../core/Component/classes/BaseComponent.md#state)
+
+---
+
+### \_mentionsTranslations
+
+```ts
+_mentionsTranslations: unknown = null
+```
+
+Defined in: website/components/home/ContactSection.tsx:80
+
+pages/HOME translations forwarded into <mentions-deck> (deckHint).
 
 ---
 
@@ -4226,6 +4238,42 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 
 ## Accessors
 
+### mentionsTranslations
+
+#### Get Signature
+
+```ts
+get mentionsTranslations(): unknown;
+```
+
+Defined in: website/components/home/ContactSection.tsx:94
+
+##### Returns
+
+`unknown`
+
+#### Set Signature
+
+```ts
+set mentionsTranslations(val): void;
+```
+
+Defined in: website/components/home/ContactSection.tsx:88
+
+Setter/getter — the pages/HOME locale node the deck hint reads.
+
+##### Parameters
+
+###### val
+
+`unknown`
+
+##### Returns
+
+`void`
+
+---
+
 ### classList
 
 #### Get Signature
@@ -4413,24 +4461,6 @@ onInit → _renderInitial → onMounted → onUpdated.
 #### Inherited from
 
 [`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onInit`](../../../../../core/Component/classes/BaseComponent.md#oninit)
-
----
-
-### onUpdated()?
-
-```ts
-optional onUpdated(): void;
-```
-
-Defined in: core/Component.ts:115
-
-#### Returns
-
-`void`
-
-#### Inherited from
-
-[`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onUpdated`](../../../../../core/Component/classes/BaseComponent.md#onupdated)
 
 ---
 
@@ -4785,7 +4815,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/home/ContactSection.tsx:52
+Defined in: website/components/home/ContactSection.tsx:98
 
 #### Returns
 
@@ -4803,7 +4833,7 @@ Defined in: website/components/home/ContactSection.tsx:52
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/home/ContactSection.tsx:73
+Defined in: website/components/home/ContactSection.tsx:119
 
 #### Returns
 
@@ -4815,13 +4845,51 @@ Defined in: website/components/home/ContactSection.tsx:73
 
 ---
 
+### onUpdated()
+
+```ts
+onUpdated(): void;
+```
+
+Defined in: website/components/home/ContactSection.tsx:128
+
+Pushes the live mentions slice into the embedded <mentions-deck> —
+re-run after every render since the deck node is recreated per
+_updateDom (its setters guard identity so repeat pushes are cheap).
+
+#### Returns
+
+`void`
+
+#### Overrides
+
+[`BaseComponent`](../../../../../core/Component/classes/BaseComponent.md).[`onUpdated`](../../../../../core/Component/classes/BaseComponent.md#onupdated)
+
+---
+
+### \_syncMentionsDeck()
+
+```ts
+_syncMentionsDeck(): void;
+```
+
+Defined in: website/components/home/ContactSection.tsx:133
+
+Forwards mentions title/items + deck translations to the child element.
+
+#### Returns
+
+`void`
+
+---
+
 ### render()
 
 ```ts
 render(): Element;
 ```
 
-Defined in: website/components/home/ContactSection.tsx:79
+Defined in: website/components/home/ContactSection.tsx:149
 
 JSX template for the component's shadow DOM.
 

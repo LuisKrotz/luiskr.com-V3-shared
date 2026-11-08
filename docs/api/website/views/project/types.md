@@ -17,6 +17,10 @@ optional render modifiers. Index signature passes through extra CMS fields.
 
 ### (module scope)
 
+Original CMS `size` — set only when `size` was downscaled through the desktop ladder (the expand modal reads this; it never reduces).
+
+### (module scope)
+
 The project cover — like ProjectMediaItem but always present when the
 project has hero media; `size` [w,h] reserves the box so the skeleton shows the
 final aspect ratio before bytes arrive.

@@ -17,6 +17,7 @@ const VIEW_TAGS: Readonly<{
   VIEW_DOCS: 'view-docs'
   VIEW_ANIMATIONS: 'view-animations'
   VIEW_SEARCH: 'view-search'
+  VIEW_SITEMAP: 'view-sitemap'
 }>
 ```
 

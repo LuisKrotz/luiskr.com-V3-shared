@@ -25,7 +25,6 @@ const PREF_CLASSES: Readonly<{
   PREF_OPTION_BTN: 'pref-option-btn'
   PREF_OPTION_ICON: 'pref-option-icon'
   PREF_OPTION_LABEL: 'pref-option-label'
-  PREF_OPTION_SUB: 'pref-option-sub'
   PREF_STAT_CARD: 'pref-stat-card'
   PREF_FOOTER: 'pref-footer'
   PREF_DONE_BTN: 'pref-done-btn'

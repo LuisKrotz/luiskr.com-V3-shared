@@ -8,7 +8,7 @@
 function getSmallestPortraitRatio(items): number | null
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:317
+Defined in: website/components/carousel/custom-carousel/sizing.ts:309
 
 Calculates the smallest portrait aspect ratio (height / width) among portrait items.
 Used in mixed carousels to anchor the uniform carousel height on mobile to the

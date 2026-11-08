@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/layout](../README.md) / textOffset
 
 ```ts
-function textOffset(
-   c, 
-   items, 
-   idx
-): number;
+function textOffset(c, items, idx): number
 ```
 
-Defined in: website/views/project/layout.ts:71
+Defined in: website/views/project/layout.ts:88
 
 Start offset for the text run at index `idx`: cumulative real chars of
 the preceding items × the per-char delay, plus the per-index step — so

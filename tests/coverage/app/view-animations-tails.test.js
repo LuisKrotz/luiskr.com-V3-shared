@@ -36,4 +36,13 @@ describe('view animations tail', () => {
 
     article.remove()
   })
+
+  test('sitemap view chunk imports and instant-swaps on an empty outlet', async () => {
+    const outlet = document.createElement(HTML_TAGS.DIV)
+    const c = { _sectionsMeasured: true, currentViewTag: VIEW_TAGS.VIEW_SITEMAP }
+
+    await flipAppView(c, outlet)
+
+    expect(outlet.firstElementChild?.tagName.toLowerCase()).toBe(VIEW_TAGS.VIEW_SITEMAP)
+  })
 })

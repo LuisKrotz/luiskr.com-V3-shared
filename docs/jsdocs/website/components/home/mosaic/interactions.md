@@ -1,8 +1,8 @@
 # `website\components\home\mosaic\interactions.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website\components\home\mosaic\interactions.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\mosaic\interactions.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -10,6 +10,14 @@
 ### `PROVISIONAL_BOTTOM_H`
 
 Details-panel floor matching mosaic-layout's provisional height.
+
+### `BURN_CLASSES`
+
+The mosaic's class map under the burn's portable contract.
+
+### `CARD_SEL`
+
+Card lookup selector — matches the host's `$()` query contract.
 
 ### `DETAIL_H_PAD`
 
@@ -42,6 +50,7 @@ Pointer-leave: clears hover state.
 ### `projectHref`
 
 Builds the localized destination URL for one mosaic project card.
+
 - `@param` item project metadata containing the route slug
 - `@returns` localized portfolio URL, or an empty string without a slug
 
@@ -68,6 +77,7 @@ neighbors are resolved spatially from card centers, not DOM order.
 The direction must dominate (dx for left/right, dy for up/down) and
 the cross-axis distance is penalized 2× so ArrowDown prefers the card
 directly below over a far diagonal.
+
 - `@returns` The target card index, or null at the wall's edge.
 
 ### `onCardKeyDown`

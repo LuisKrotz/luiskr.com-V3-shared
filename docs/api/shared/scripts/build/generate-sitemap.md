@@ -60,6 +60,17 @@ the asset under the page's own query vocabulary.
 Images surfaces the "Licensable" badge when both image:license (or
 schema license metadata) and the page's ImageObject.license agree.
 
+### `cachedShareDims`
+
+Reads the `dims` map of a previously emitted share manifest from
+META_DIR — the offline path reuses the cached probe result so an
+LK_OFFLINE build doesn't strip intrinsic sizes the runtime wall
+already packs against. Missing/partial docs resolve to null.
+
+- `@param` {string} metaDir meta output dir the manifest was written to
+- `@param` {string} manifestUrl token MANIFEST_URL (basename resolves)
+- `@returns` {Map<string, number[]>|null} capture URL → [w,h], or null
+
 ### `shareVideoTags`
 
 `<video:video>` tags for one share set's clip list — a recorded

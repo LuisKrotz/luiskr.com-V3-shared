@@ -8,6 +8,6 @@
 const MEDIA_CREDIT_SEPARATOR: ' · ' = ' · '
 ```
 
-Defined in: core/tokens/media/credits.ts:35
+Defined in: core/tokens/media/credits.ts:43
 
 Separator between credit fields inside one creditText string.

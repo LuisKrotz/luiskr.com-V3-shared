@@ -46,7 +46,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `flag`: `string`;
 `cc2?`: `undefined`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"br"`;
@@ -54,7 +53,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `flag`: `string`;
 `cc2?`: `undefined`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"es"`;
@@ -62,7 +60,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `flag`: `string`;
 `cc2?`: `undefined`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"de"`;
@@ -70,7 +67,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `cc2`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"hrk"`;
@@ -78,7 +74,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `cc2`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"cas"`;
@@ -86,7 +81,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `cc2`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"riv"`;
@@ -94,7 +88,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `cc2`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"gn"`;
@@ -102,7 +95,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `flag`: `string`;
 `cc2?`: `undefined`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"it"`;
@@ -110,7 +102,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `flag`: `string`;
 `cc2?`: `undefined`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"ru"`;
@@ -118,7 +109,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `flag`: `string`;
 `cc2?`: `undefined`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"fr"`;
@@ -126,7 +116,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `flag`: `string`;
 `cc2?`: `undefined`;
-`short`: `string`;
 \}
 \| \{
 `code`: `"tln"`;
@@ -134,7 +123,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `cc`: `string`;
 `cc2`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 \| \{
 `cc2?`: `undefined`;
@@ -142,7 +130,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `label`: `string`;
 `cc`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 \| \{
 `cc2?`: `undefined`;
@@ -150,7 +137,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `label`: `string`;
 `cc`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 \| \{
 `cc2?`: `undefined`;
@@ -158,7 +144,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `label`: `string`;
 `cc`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 \| \{
 `cc2?`: `undefined`;
@@ -166,7 +151,6 @@ Defined in: core/utils/canvas/widgets/flag-webgl.ts:77
 `label`: `string`;
 `cc`: `string`;
 `flag`: `string`;
-`short`: `string`;
 \}
 
 #### Returns
@@ -195,7 +179,6 @@ lang:
   cc: string;
   flag: string;
   cc2?: undefined;
-  short: string;
 }
   | {
   code: "br";
@@ -203,7 +186,6 @@ lang:
   cc: string;
   flag: string;
   cc2?: undefined;
-  short: string;
 }
   | {
   code: "es";
@@ -211,7 +193,6 @@ lang:
   cc: string;
   flag: string;
   cc2?: undefined;
-  short: string;
 }
   | {
   code: "de";
@@ -219,7 +200,6 @@ lang:
   cc: string;
   cc2: string;
   flag: string;
-  short: string;
 }
   | {
   code: "hrk";
@@ -227,7 +207,6 @@ lang:
   cc: string;
   cc2: string;
   flag: string;
-  short: string;
 }
   | {
   code: "cas";
@@ -235,7 +214,6 @@ lang:
   cc: string;
   cc2: string;
   flag: string;
-  short: string;
 }
   | {
   code: "riv";
@@ -243,7 +221,6 @@ lang:
   cc: string;
   cc2: string;
   flag: string;
-  short: string;
 }
   | {
   code: "gn";
@@ -251,7 +228,6 @@ lang:
   cc: string;
   flag: string;
   cc2?: undefined;
-  short: string;
 }
   | {
   code: "it";
@@ -259,7 +235,6 @@ lang:
   cc: string;
   flag: string;
   cc2?: undefined;
-  short: string;
 }
   | {
   code: "ru";
@@ -267,7 +242,6 @@ lang:
   cc: string;
   flag: string;
   cc2?: undefined;
-  short: string;
 }
   | {
   code: "fr";
@@ -275,7 +249,6 @@ lang:
   cc: string;
   flag: string;
   cc2?: undefined;
-  short: string;
 }
   | {
   code: "tln";
@@ -283,7 +256,6 @@ lang:
   cc: string;
   cc2: string;
   flag: string;
-  short: string;
 }
   | {
   cc2?: undefined;
@@ -291,7 +263,6 @@ lang:
   label: string;
   cc: string;
   flag: string;
-  short: string;
 }
   | {
   cc2?: undefined;
@@ -299,7 +270,6 @@ lang:
   label: string;
   cc: string;
   flag: string;
-  short: string;
 }
   | {
   cc2?: undefined;
@@ -307,7 +277,6 @@ lang:
   label: string;
   cc: string;
   flag: string;
-  short: string;
 }
   | {
   cc2?: undefined;
@@ -315,7 +284,6 @@ lang:
   label: string;
   cc: string;
   flag: string;
-  short: string;
 };
 ```
 

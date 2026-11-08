@@ -20,6 +20,6 @@ const NAV_SEARCH_IDS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/ids/app.ts:78
+Defined in: core/tokens/ids/app.ts:65
 
 Gradient ids for the nav search magnifier SVG.

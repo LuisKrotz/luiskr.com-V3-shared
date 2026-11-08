@@ -18,6 +18,7 @@ const TRANSLATION_KEYS: Readonly<{
   DOCS: 'docs'
   ANIMATIONS: 'animations'
   SEARCH: 'search'
+  SITEMAP: 'sitemap'
 }>
 ```
 

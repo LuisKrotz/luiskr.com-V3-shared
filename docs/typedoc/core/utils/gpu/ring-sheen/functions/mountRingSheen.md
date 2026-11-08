@@ -21,7 +21,7 @@ IntersectionObserver, reduced motion) — the CSS rings stay.
 `HTMLElement`
 
 The positioned ancestor the canvas fills
-(`.home-mosaic` / `.related-mosaic`).
+(`.home-mosaic` / `.related-list`).
 
 ### tilesSelector
 

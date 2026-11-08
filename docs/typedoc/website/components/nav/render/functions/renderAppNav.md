@@ -8,7 +8,7 @@
 function renderAppNav(nav): '' | Element
 ```
 
-Defined in: website/components/nav/render.tsx:51
+Defined in: website/components/nav/render.tsx:52
 
 Renders the <app-nav> template: logo, burger strip, and the fullscreen
 menu overlay. Returns '' while the media-expand modal is open — an empty

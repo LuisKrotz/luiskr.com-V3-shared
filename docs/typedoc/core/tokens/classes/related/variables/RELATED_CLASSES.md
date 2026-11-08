@@ -6,20 +6,24 @@
 
 ```ts
 const RELATED_CLASSES: Readonly<{
-  RELATED_MOSAIC: 'related-mosaic'
-  RELATED_MOSAIC_ITEM: 'related-mosaic-item'
-  RELATED_MOSAIC_ITEM_FEATURED: 'related-mosaic-item--featured'
-  RELATED_MOSAIC_MEDIA: 'related-mosaic-media'
-  RELATED_MOSAIC_IMG: 'related-mosaic-img'
-  RELATED_MOSAIC_IMG_PLACEHOLDER: 'related-mosaic-img--placeholder'
-  RELATED_MOSAIC_IMG_THUMB: 'related-mosaic-img--thumb'
-  RELATED_MOSAIC_IMG_HIGH: 'related-mosaic-img--high'
-  RELATED_MOSAIC_IMG_LOADED: 'related-mosaic-img--loaded'
-  RELATED_MOSAIC_OVERLAY: 'related-mosaic-overlay'
-  RELATED_MOSAIC_INFO: 'related-mosaic-info'
-  RELATED_MOSAIC_TITLE: 'related-mosaic-title'
-  RELATED_MOSAIC_DESC: 'related-mosaic-desc'
-  RELATED_MOSAIC_RING_CANVAS: 'related-mosaic-ring-canvas'
+  RELATED_LIST: 'related-list'
+  RELATED_LIST_ITEM: 'related-list-item'
+  RELATED_LIST_ITEM_CLOSED: 'related-list-item--closed'
+  RELATED_LIST_INNER: 'related-list-inner'
+  RELATED_LIST_MEDIA: 'related-list-media'
+  RELATED_LIST_IMG: 'related-list-img'
+  RELATED_LIST_IMG_PLACEHOLDER: 'related-list-img--placeholder'
+  RELATED_LIST_IMG_THUMB: 'related-list-img--thumb'
+  RELATED_LIST_IMG_HIGH: 'related-list-img--high'
+  RELATED_LIST_IMG_LOADED: 'related-list-img--loaded'
+  RELATED_LIST_INFO: 'related-list-info'
+  RELATED_LIST_TITLE: 'related-list-title'
+  RELATED_LIST_DESC: 'related-list-desc'
+  RELATED_LIST_RING_CANVAS: 'related-list-ring-canvas'
+  RELATED_LIST_CONTROLS: 'related-list-controls'
+  RELATED_LIST_BTN: 'related-list-btn'
+  RELATED_LIST_BTN_PREV: 'related-list-btn--prev'
+  RELATED_LIST_BTN_NEXT: 'related-list-btn--next'
 }>
 ```
 

@@ -11,6 +11,14 @@
 
 Details-panel floor matching mosaic-layout's provisional height.
 
+### `BURN_CLASSES`
+
+The mosaic's class map under the burn's portable contract.
+
+### `CARD_SEL`
+
+Card lookup selector — matches the host's `$()` query contract.
+
 ### `DETAIL_H_PAD`
 
 Measured-height padding beyond the panel's scrollHeight.

@@ -101,10 +101,6 @@ About paragraphs — character-by-character reveal on scroll (JS-sequenced spans
 
 Related project tiles — hover lift/zoom spring + border sheen (CSS linear() springs).
 
-### `NOTE_DOT`
-
-Internals note marker — soft pulse (CSS).
-
 ### `BODY_GLOW`
 
 Document ambient glow — slow radial drift behind content (CSS).
@@ -113,9 +109,78 @@ Document ambient glow — slow radial drift behind content (CSS).
 
 Route progress bar — scaleX crawl to ~70% while a navigation is in flight, then sweep-to-100 + fade (CSS transitions).
 
+### `NOTE_DOT`
+
+Disclaimer note dots — pulsing <i> markers inside footer/disclaimer notes (CSS).
+
+### `CARD_STACK`
+
+Home project deck — deal-through card fan: drag/flick physics, inward
+rotateY faces, GL quadratic bend, hero scale boost (JS poses + three.js).
+
+### `ABOUT_MESH`
+
+About portrait halo — polar dot lattice displaced by a traveling
+radial wave + precessing guide lines (2D canvas rAF).
+
+### `NAV_ICON_AURA`
+
+Nav strip chips — comet-tail ring-fill sweeping the search/gear chip
+outlines on hover (WebGPU ring-fill + CSS trail fallback).
+
+### `VIEW_TRANSITION`
+
+Route change — #view-outlet cross-fade between outgoing/incoming
+views (JS class swap + CSS opacity transition).
+
+### `ROUTE_SEARCH`
+
+Route-search field — loading state: spinning submit glyph + bouncing
+found-dots while the scoring dispatch is in flight (CSS).
+
+### `CUSTOM_CAROUSEL`
+
+Project-page carousels — autoplay progress dash, momentum scroll,
+arrow nav (JS + CSS — distinct surface from the awards carousel).
+
+### `MENTIONS_DECK`
+
+Contact mentions deck — swipeable stacked cards, drag-to-dismiss,
+autoplay cycle (JS gestures + CSS keyframes).
+
+### `EXPAND_MODAL_LOADING`
+
+Expanded-media lightbox loading — shimmer wash + spinner while the
+full-size asset decodes (CSS).
+
+### `FOOTER_FEED_WAVE`
+
+Awards footer feed — opacity wave rippling across the source-feed
+link row (CSS keyframes).
+
 ### `ANIMATION_DESC_ID_PREFIX`
 
 Long-description node id prefix — the helper injects one
 `<span id="lk-anim-desc-<id>">` per animation id into each shadow
 root / document that hosts a described element, and points the
 element's `aria-describedby`/`longdesc` at it.
+
+### `ANIMATION_DOCS`
+
+Frozen animation-id → docs-manifest node path map — one in-depth docs
+page per animation record so the /animations listing deep-links into
+the docs portal (api reference with signatures + comments, or the
+module source for document-level CSS surfaces). Values are manifest
+`node.path` strings (`<root>/<rel>`) as served by the docs portal —
+`docs/…` roots address generated api/architecture pages under
+shared/docs, module roots (`core/…`) address live source files.
+Consumers prefix with ROUTE_PATHS.DOCS. Keys reuse ANIMATION_IDS
+members directly so the file stays import-free (the static locale-page
+generator loads it under plain-node type stripping) and no id string
+is retyped (zero-hardcoding).
+
+### `ANIMATION_DOCS_FALLBACK`
+
+Docs path for animation records missing from ANIMATION_DOCS — the
+animations deep-dive README dir, which the docs portal auto-opens
+into its index page.

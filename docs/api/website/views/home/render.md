@@ -1,6 +1,6 @@
 # `website\views\home\render.tsx`
 
-JSX template for &lt;view-home&gt; — the hero mosaic, about
+JSX template for &lt;view-home&gt; — the selected-work
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |

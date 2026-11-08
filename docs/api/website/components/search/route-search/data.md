@@ -37,7 +37,52 @@ Cover thumbnail URL (projects only; '' otherwise).
 
 ### (module scope)
 
+Group headers for the kind-ordered result buckets.
+
+### `pages`
+
+PAGE bucket header (home + static pages).
+
+### `portfolio`
+
+PROJECT bucket header (portfolio items).
+
+### `experiments`
+
+EXPERIMENT bucket header (playgrounds + references).
+
+### `legal`
+
+LEGAL bucket header (statutory pages).
+
+### (module scope)
+
 The localized UI copy node (pages/not-found.search).
+
+### `found`
+
+"N results found" template — `{n}` is the match count slot.
+
+### `groups`
+
+Per-kind group headers — the docs bucket carries its own
+English-only token instead (DOCS_STRINGS.SEARCH_GROUP_LABEL).
+
+### `pager`
+
+Pager region aria-label.
+
+### `prev`
+
+Previous-results-page button label.
+
+### `next`
+
+Next-results-page button label.
+
+### `page`
+
+"Page {a} of {b}" pager status template.
 
 ### (module scope)
 
@@ -64,6 +109,13 @@ snapshot second. The node lives under `pages/search`:
 ### `locPrefix`
 
 Locale prefix — '' for English, '/br' etc. for every other locale.
+
+### `loadCopy`
+
+`loadCopy` — the localized `pages/<loc>/search` copy node via the same
+SWR snapshot flow every other page uses. `done` receives the resolved
+node (null when the locale copy is absent) so the caller can re-template
+— mirroring `loadCatalog`'s callback contract.
 
 ### `staticEntries`
 
@@ -92,22 +144,85 @@ Normalizes the portfoliolist node — array or keyed object.
 
 ### (module scope)
 
-Wire entry shape in meta/search-index-<loc>.json — {p,t,d,k}.
+Wire entry shape in meta/search-index-*.json — {p,t,d,k,c,i,v}.
+
+### (module scope)
+
+ROUTE_SEARCH_KINDS discriminant — unknown/absent values land PAGE.
+
+### (module scope)
+
+Cover media src — the blur-up thumb variant is built from it.
+
+### (module scope)
+
+Video flag on the cover (1 = the thumb is the poster frame).
+
+### `KIND_SET`
+
+Every declared kind value — validates the wire `c` field.
+
+### `toEntry`
+
+Maps one wire index row to a catalog entry.
 
 ### `indexUrl`
 
 The generated search-index URL for a locale (public meta dir).
 
+### `docsIndexUrl`
+
+The shared docs catalog URL — one English-only artifact for all locales.
+
+### `docsRows`
+
+Docs catalog promise — the artifact is locale-independent and the
+corpus is English-only, so it resolves once and every locale switch
+reuses the same entries. A failed fetch clears the slot so the next
+catalog load retries instead of pinning the outage.
+
+### `loadDocsRows`
+
+`loadDocsRows` — fetches (once) the shared docs search index; resolves
+to the mapped entries. Only a non-empty artifact pins the slot —
+`!ok`, a non-array payload and a rejected fetch all resolve [] AND
+reset it, so the next catalog load retries instead of caching an
+outage for the rest of the session.
+
 ### `loadCatalog`
 
-`loadCatalog` — the full ~1100-route locale catalog comes from the
-generated `meta/search-index-<loc>.json` (the sitemap's URL set,
-enriched per locale). When the artifact is absent (dev without a
-build, offline test env) the embedded catalog — static pages plus
-the store/SWR portfoliolist — is the fallback.
+`loadCatalog` — the locale route catalog comes from the generated
+`meta/search-index-<loc>.json` (the sitemap's URL set, enriched per
+locale) merged with the shared docs index (English-only, fetched once
+and reused across locale switches). When the locale artifact is
+absent (dev without a build, offline test env) the embedded catalog —
+static pages plus the store/SWR portfoliolist — is the fallback.
 
 - `@param` lang Current locale code.
 - `@param` done Receives the complete catalog (never throws).
+
+### `orderByKind`
+
+`orderByKind` — partitions scored hits into kind buckets ordered by
+each bucket's best hit: the input arrives score-sorted, so a kind's
+first occurrence index IS its group rank. A weak page keyword hit can
+no longer outrank a strong project title match just because its kind
+used to render first. The sort is stable, so the scorer's ordering
+survives inside each bucket; undeclared kinds sort after every bucket.
+
+- `@param` entries Score-ordered hits from the matcher.
+- `@returns` The same hits partitioned into best-hit-ordered buckets.
+
+### `groupLabel`
+
+`groupLabel` — a kind's bucket header text. Localized labels come from
+the CMS search copy node; the docs bucket always resolves to the
+English-only DOCS_STRINGS.SEARCH_GROUP_LABEL token (the corpus exists
+only in English, so the label names that in every locale).
+
+- `@param` strings Resolved search copy node.
+- `@param` kind The entry kind whose header is needed.
+- `@returns` The group header text ('' for undeclared kinds).
 
 ### `embeddedFallback`
 

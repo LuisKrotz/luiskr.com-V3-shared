@@ -8,7 +8,7 @@
 const MEDIA_CREDIT_SOURCES: Record<string, MediaCreditSource>
 ```
 
-Defined in: core/tokens/media/credits.ts:44
+Defined in: core/tokens/media/credits.ts:52
 
 Registry credit string → source record. Keys match the `credit`
 values in experiments/star-field/public/data/<locale>/<body>.json

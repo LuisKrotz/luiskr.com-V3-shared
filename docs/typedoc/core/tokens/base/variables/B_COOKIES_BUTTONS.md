@@ -8,6 +8,6 @@
 const _B_COOKIES_BUTTONS: 'cookies-buttons'
 ```
 
-Defined in: core/tokens/base.ts:361
+Defined in: core/tokens/base.ts:429
 
 BEM block fragment "b cookies buttons" — composed by the token groups below into full class names.

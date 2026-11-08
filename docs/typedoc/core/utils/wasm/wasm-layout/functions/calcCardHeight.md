@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcCardHeight
 
 ```ts
-function calcCardHeight(
-   colWidth, 
-   aspectRatio, 
-   padding?
-): number;
+function calcCardHeight(colWidth, aspectRatio, padding?): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:81
+Defined in: core/utils/wasm/wasm-layout.ts:82
 
 Card height for a grid item: column width divided by aspect ratio, plus
 padding. A missing/zero ratio falls back to 16:9 so unsized CMS rows

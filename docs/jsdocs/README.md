@@ -635,6 +635,16 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
+| File                                                                           | What it does                                                |
+| ------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| [`last-arms-tails.test.js`](core\tests\coverage\sweep/last-arms-tails.test.md) | Final coverage arms: nav-glyph's default loader/canvas-null |
+| [`misc-arms-tails.test.js`](core\tests\coverage\sweep/misc-arms-tails.test.md) | Sweep coverage tails: ui.ts toggleSearchModal's             |
+| [`residual2-tails.test.js`](core\tests\coverage\sweep/residual2-tails.test.md) | Residual branch arms: schema.ts carousel targetUrl          |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
 | File                                                                                    | What it does                                                               |
 | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | [`cyrillic-font-tails.test.js`](core\tests\coverage\ui/cyrillic-font-tails.test.md)     | Covers core/locale/cyrillic-font.ts — the ru→Fira Sans                     |
@@ -686,9 +696,11 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                                                           | What it does                                           |
-| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| [`shared-observer-tails.test.js`](core\tests\coverage\utils\dom/shared-observer-tails.test.md) | Core-side coverage for the pooled IntersectionObserver |
+| File                                                                                           | What it does                                               |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [`joust-tails.test.js`](core\tests\coverage\utils\dom/joust-tails.test.md)                     | Coverage for core/utils/dom/joust.ts — the click-to-reveal |
+| [`orphan-seps-tails.test.js`](core\tests\coverage\utils\dom/orphan-seps-tails.test.md)         | Coverage for core/utils/dom/orphan-seps.ts — the footer    |
+| [`shared-observer-tails.test.js`](core\tests\coverage\utils\dom/shared-observer-tails.test.md) | Core-side coverage for the pooled IntersectionObserver     |
 
 ## Core engine
 
@@ -706,6 +718,7 @@ _Shared primitives every surface builds on — no direct UI._
 | [`npu-predict-tails-2.test.js`](core\tests\coverage\utils\gpu/npu-predict-tails-2.test.md)               | Split from coverage-tails-4.test.js — covers the "npu-predict tails 2" describe. |
 | [`npu-predict-tails.test.js`](core\tests\coverage\utils\gpu/npu-predict-tails.test.md)                   | Split from coverage-tails-2.test.js — covers the "npu-predict tails" describe.   |
 | [`orbit-controller-tails.test.js`](core\tests\coverage\utils\gpu/orbit-controller-tails.test.md)         | Coverage tail for utils/gpu/orbit-controller.ts — the                            |
+| [`ring-fill-live-tails.test.js`](core\tests\coverage\utils\gpu/ring-fill-live-tails.test.md)             | Coverage tails for utils/gpu/ring-fill.ts — the live                             |
 | [`ring-fill-tails.test.js`](core\tests\coverage\utils\gpu/ring-fill-tails.test.md)                       | Coverage tail for utils/gpu/ring-fill.ts — the                                   |
 | [`ring-sheen-tails.test.js`](core\tests\coverage\utils\gpu/ring-sheen-tails.test.md)                     | Coverage tail for utils/gpu/ring-sheen.ts — the                                  |
 | [`scene3d-tails.test.js`](core\tests\coverage\utils\gpu/scene3d-tails.test.md)                           | Coverage tail for utils/gpu/scene3d.ts — the JS facade                           |
@@ -772,6 +785,8 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                                                                                  | What it does                                                                             |
 | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [`nav-glyph-plain-tails.test.js`](core\tests\coverage\utils\wasm/nav-glyph-plain-tails.test.md)                       | Coverage tails for core/utils/wasm/nav-glyph.ts — the                                    |
+| [`nav-glyph-runtime-tails.test.js`](core\tests\coverage\utils\wasm/nav-glyph-runtime-tails.test.md)                   | Coverage tail for utils/wasm/nav-glyph.ts — the live                                     |
 | [`nav-glyph-tails.test.js`](core\tests\coverage\utils\wasm/nav-glyph-tails.test.md)                                   | Coverage tail for utils/wasm/nav-glyph.ts — the nav glyph                                |
 | [`wasm-css-tails-test-js.test.js`](core\tests\coverage\utils\wasm/wasm-css-tails-test-js.test.md)                     | Split from coverage-tails.test.js — covers the "wasm-css tails" describe.                |
 | [`wasm-css-tails.test.js`](core\tests\coverage\utils\wasm/wasm-css-tails.test.md)                                     | Split from coverage-tails-4.test.js — covers the "wasm-css tails" describe.              |
@@ -967,7 +982,6 @@ _Shared primitives every surface builds on — no direct UI._
 | File                                         | What it does                                                 |
 | -------------------------------------------- | ------------------------------------------------------------ |
 | [`attrs.ts`](core\tokens/attrs.md)           | HTML attribute tokens — every `data-*` attribute, ARIA role, |
-| [`base.js`](core\tokens/base.md)             | Plain-node resolution shim — standalone build scripts        |
 | [`base.ts`](core\tokens/base.md)             | Internal shared composites for the token modules — the       |
 | [`classes.ts`](core\tokens/classes.md)       | The centralized BEM class-name registry — every CSS class a  |
 | [`css.ts`](core\tokens/css.md)               | CSS custom-property names set or read from JS — keep the JS  |
@@ -1014,10 +1028,12 @@ _Shared primitives every surface builds on — no direct UI._
 | [`a11y.ts`](core\tokens\classes/a11y.md)                       | Accessibility-only class tokens — token group.                    |
 | [`about.ts`](core\tokens\classes/about.md)                     | About section class tokens — token group.                         |
 | [`admin.ts`](core\tokens\classes/admin.md)                     | Admin login view class tokens — token group.                      |
+| [`anim-demo.ts`](core\tokens\classes/anim-demo.md)             | Animations-demo stage class tokens — grouped subset of            |
 | [`animations.ts`](core\tokens\classes/animations.md)           | Animations-reference view class tokens — grouped subset of        |
 | [`app.ts`](core\tokens\classes/app.md)                         | App shell class tokens — progress bar + view outlet               |
 | [`awards-carousel.ts`](core\tokens\classes/awards-carousel.md) | Awards carousel (`aw-c-*` block) class tokens — grouped subset of |
 | [`awards.ts`](core\tokens\classes/awards.md)                   | Awards footer class tokens — token group.                         |
+| [`card-stack.ts`](core\tokens\classes/card-stack.md)           | Card-stack deck class tokens — token group.                       |
 | [`carousel.ts`](core\tokens\classes/carousel.md)               | Custom carousel class tokens (project/related carousels) —        |
 | [`cms.ts`](core\tokens\classes/cms.md)                         | CMS shell class tokens — token group.                             |
 | [`contact.ts`](core\tokens\classes/contact.md)                 | Contact section class tokens — token group.                       |
@@ -1027,10 +1043,13 @@ _Shared primitives every surface builds on — no direct UI._
 | [`effects.ts`](core\tokens\classes/effects.md)                 | Ambient effect canvas class tokens — fluid background,            |
 | [`flags.ts`](core\tokens\classes/flags.md)                     | Language flag class tokens — token group.                         |
 | [`footer.ts`](core\tokens\classes/footer.md)                   | Footer source-code row class tokens — grouped subset of           |
+| [`joust.ts`](core\tokens\classes/joust.md)                     | Joust class tokens — the shared click-to-reveal contract          |
 | [`lang.ts`](core\tokens\classes/lang.md)                       | Language dialog class tokens — token group.                       |
 | [`legal.ts`](core\tokens\classes/legal.md)                     | Legal pages + not-found view class tokens — grouped subset of     |
 | [`loader.ts`](core\tokens\classes/loader.md)                   | Intro loader class tokens — token group.                          |
+| [`media-mosaic.ts`](core\tokens\classes/media-mosaic.md)       | Internals media-mosaic wall class tokens — token group.           |
 | [`media.ts`](core\tokens\classes/media.md)                     | Media render/placeholder class tokens — grouped subset of         |
+| [`mentions-deck.ts`](core\tokens\classes/mentions-deck.md)     | Mentions-deck class tokens — token group.                         |
 | [`modal.ts`](core\tokens\classes/modal.md)                     | Generic modal + media expand-modal class tokens — grouped         |
 | [`mosaic.ts`](core\tokens\classes/mosaic.md)                   | Home mosaic grid class tokens — token group.                      |
 | [`nav.ts`](core\tokens\classes/nav.md)                         | Navigation class tokens — links, burger button and the            |
@@ -1039,10 +1058,11 @@ _Shared primitives every surface builds on — no direct UI._
 | [`print.ts`](core\tokens\classes/print.md)                     | Print-mode class tokens — injected by core/utils/print/print.ts   |
 | [`project.ts`](core\tokens\classes/project.md)                 | Project/internal page class tokens (`internal-*` block) —         |
 | [`reader.ts`](core\tokens\classes/reader.md)                   | Reader-mode content class tokens — the prerendered article        |
-| [`related.ts`](core\tokens\classes/related.md)                 | Related-projects mosaic class tokens — grouped subset of          |
+| [`related.ts`](core\tokens\classes/related.md)                 | Related-projects accordion-list class tokens — grouped            |
 | [`route-search.ts`](core\tokens\classes/route-search.md)       | Route-search (404 autocomplete) class tokens — grouped subset     |
 | [`router.ts`](core\tokens\classes/router.md)                   | Router active-link class tokens — token group.                    |
 | [`search-modal.ts`](core\tokens\classes/search-modal.md)       | BEM class tokens for &lt;search-modal&gt; — the nav search        |
+| [`sitemap.ts`](core\tokens\classes/sitemap.md)                 | Sitemap page class tokens — token group for the                   |
 | [`skeleton.ts`](core\tokens\classes/skeleton.md)               | Skeleton/shimmer placeholder class tokens — grouped subset of     |
 | [`starfield.ts`](core\tokens\classes/starfield.md)             | Star-field experiment class tokens (`sf-*` block) —               |
 | [`state.ts`](core\tokens\classes/state.md)                     | Global state modifier class tokens — grouped subset of            |
@@ -1053,16 +1073,20 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                           | What it does                                                |
-| ---------------------------------------------- | ----------------------------------------------------------- |
-| [`carousel.ts`](core\tokens\css/carousel.md)   | Carousel-related CSS custom-property names — grouped subset |
-| [`cookies.ts`](core\tokens\css/cookies.md)     | Cookie-banner CSS custom-property names — grouped subset of |
-| [`genie.ts`](core\tokens\css/genie.md)         | Genie-transition origin CSS custom-property names — grouped |
-| [`menu.ts`](core\tokens\css/menu.md)           | Menu ink CSS custom-property names — grouped subset of      |
-| [`nav.ts`](core\tokens\css/nav.md)             | Nav strip glyph paint CSS custom-property names — the       |
-| [`skeleton.ts`](core\tokens\css/skeleton.md)   | Skeleton-field palette CSS custom-property names — grouped  |
-| [`starfield.ts`](core\tokens\css/starfield.md) | Star-field CSS custom-property names set from JS — grouped  |
-| [`theme.ts`](core\tokens\css/theme.md)         | Theme/ink CSS custom-property names — grouped subset of     |
+| File                                                 | What it does                                                |
+| ---------------------------------------------------- | ----------------------------------------------------------- |
+| [`about.ts`](core\tokens\css/about.md)               | About-section CSS custom-property names — grouped subset    |
+| [`card-stack.ts`](core\tokens\css/card-stack.md)     | Card-stack CSS custom-property names — grouped subset       |
+| [`carousel.ts`](core\tokens\css/carousel.md)         | Carousel-related CSS custom-property names — grouped subset |
+| [`cookies.ts`](core\tokens\css/cookies.md)           | Cookie-banner CSS custom-property names — grouped subset of |
+| [`genie.ts`](core\tokens\css/genie.md)               | Genie-transition origin CSS custom-property names — grouped |
+| [`menu.ts`](core\tokens\css/menu.md)                 | Menu ink CSS custom-property names — grouped subset of      |
+| [`mosaic.ts`](core\tokens\css/mosaic.md)             | Mosaic-related CSS custom-property names — grouped subset   |
+| [`nav.ts`](core\tokens\css/nav.md)                   | Nav strip glyph paint CSS custom-property names — the       |
+| [`route-search.ts`](core\tokens\css/route-search.md) | Route-search CSS custom-property names — the host-tunable   |
+| [`skeleton.ts`](core\tokens\css/skeleton.md)         | Skeleton-field palette CSS custom-property names — grouped  |
+| [`starfield.ts`](core\tokens\css/starfield.md)       | Star-field CSS custom-property names set from JS — grouped  |
+| [`theme.ts`](core\tokens\css/theme.md)               | Theme/ink CSS custom-property names — grouped subset of     |
 
 ## Core engine
 
@@ -1155,19 +1179,23 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                    | What it does                                                |
-| ------------------------------------------------------- | ----------------------------------------------------------- |
-| [`animation.ts`](core\tokens\motion/animation.md)       | Easing curve + transition duration tokens — grouped subsets |
-| [`carousel.ts`](core\tokens\motion/carousel.md)         | Carousel timing/geometry tokens — grouped subsets of        |
-| [`expand.ts`](core\tokens\motion/expand.md)             | Constants for the px-space expansion spring —               |
-| [`frame-budget.ts`](core\tokens\motion/frame-budget.md) | Animation frame-budget constants — the per-frame work       |
-| [`genie.ts`](core\tokens\motion/genie.md)               | Expand-modal genie-warp tunables — the macOS-style liquid   |
-| [`gpu-widgets.ts`](core\tokens\motion/gpu-widgets.md)   | WebGPU widget discriminants + artifact registry — the       |
-| [`gpu.ts`](core\tokens\motion/gpu.md)                   | GPU detection & power-hint tokens — renderer-string         |
-| [`notify.ts`](core\tokens\motion/notify.md)             | Notification/toast runtime tuning tokens.                   |
-| [`prefetch.ts`](core\tokens\motion/prefetch.md)         | Predictive-prefetch tuning tokens.                          |
-| [`skeleton.ts`](core\tokens\motion/skeleton.md)         | WebGL skeleton-field configuration tokens — grouped subsets |
-| [`slider.ts`](core\tokens\motion/slider.md)             | —                                                           |
+| File                                                      | What it does                                                  |
+| --------------------------------------------------------- | ------------------------------------------------------------- |
+| [`animation.ts`](core\tokens\motion/animation.md)         | Easing curve + transition duration tokens — grouped subsets   |
+| [`card-stack.ts`](core\tokens\motion/card-stack.md)       | Card-stack coverflow geometry + timing tokens — grouped       |
+| [`carousel.ts`](core\tokens\motion/carousel.md)           | Carousel timing/geometry tokens — grouped subsets of          |
+| [`expand.ts`](core\tokens\motion/expand.md)               | Constants for the px-space expansion spring —                 |
+| [`frame-budget.ts`](core\tokens\motion/frame-budget.md)   | Animation frame-budget constants — the per-frame work         |
+| [`genie.ts`](core\tokens\motion/genie.md)                 | Expand-modal genie-warp tunables — the macOS-style liquid     |
+| [`gpu-widgets.ts`](core\tokens\motion/gpu-widgets.md)     | WebGPU widget discriminants + artifact registry — the         |
+| [`gpu.ts`](core\tokens\motion/gpu.md)                     | GPU detection & power-hint tokens — renderer-string           |
+| [`marquee.ts`](core\tokens\motion/marquee.md)             | Marquee motion tokens — the internals project-title ticker:   |
+| [`mentions-deck.ts`](core\tokens\motion/mentions-deck.md) | Mentions-deck strip geometry + timing tokens — grouped subset |
+| [`notify.ts`](core\tokens\motion/notify.md)               | Notification/toast runtime tuning tokens.                     |
+| [`prefetch.ts`](core\tokens\motion/prefetch.md)           | Predictive-prefetch tuning tokens.                            |
+| [`related.ts`](core\tokens\motion/related.md)             | Related-projects accordion-list timing/geometry tokens —      |
+| [`skeleton.ts`](core\tokens\motion/skeleton.md)           | WebGL skeleton-field configuration tokens — grouped subsets   |
+| [`slider.ts`](core\tokens\motion/slider.md)               | —                                                             |
 
 ## Core engine
 
@@ -1201,17 +1229,19 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                 | What it does                                             |
-| ---------------------------------------------------- | -------------------------------------------------------- |
-| [`carousel.ts`](core\tokens\selectors/carousel.md)   | Custom carousel selector tokens — grouped subset of      |
-| [`common.ts`](core\tokens\selectors/common.md)       | Generic/shared selector tokens — grouped subset of       |
-| [`cookies.ts`](core\tokens\selectors/cookies.md)     | Cookie banner selector tokens — token group.             |
-| [`docs.ts`](core\tokens\selectors/docs.md)           | Docs-portal query-selector tokens — grouped subset of    |
-| [`draw-text.ts`](core\tokens\selectors/draw-text.md) | DrawText selector tokens — token group.                  |
-| [`loader.ts`](core\tokens\selectors/loader.md)       | Intro loader selector tokens — grouped subset of         |
-| [`mosaic.ts`](core\tokens\selectors/mosaic.md)       | Home mosaic selector tokens — token group.               |
-| [`nav.ts`](core\tokens\selectors/nav.md)             | Navigation selector tokens — token group.                |
-| [`skeleton.ts`](core\tokens\selectors/skeleton.md)   | Skeleton placeholder selector tokens — grouped subset of |
+| File                                                         | What it does                                             |
+| ------------------------------------------------------------ | -------------------------------------------------------- |
+| [`card-stack.ts`](core\tokens\selectors/card-stack.md)       | Card-stack deck selector tokens — token group.           |
+| [`carousel.ts`](core\tokens\selectors/carousel.md)           | Custom carousel selector tokens — grouped subset of      |
+| [`common.ts`](core\tokens\selectors/common.md)               | Generic/shared selector tokens — grouped subset of       |
+| [`cookies.ts`](core\tokens\selectors/cookies.md)             | Cookie banner selector tokens — token group.             |
+| [`docs.ts`](core\tokens\selectors/docs.md)                   | Docs-portal query-selector tokens — grouped subset of    |
+| [`draw-text.ts`](core\tokens\selectors/draw-text.md)         | DrawText selector tokens — token group.                  |
+| [`loader.ts`](core\tokens\selectors/loader.md)               | Intro loader selector tokens — grouped subset of         |
+| [`mentions-deck.ts`](core\tokens\selectors/mentions-deck.md) | Mentions-deck selector tokens — token group.             |
+| [`mosaic.ts`](core\tokens\selectors/mosaic.md)               | Home mosaic selector tokens — token group.               |
+| [`nav.ts`](core\tokens\selectors/nav.md)                     | Navigation selector tokens — token group.                |
+| [`skeleton.ts`](core\tokens\selectors/skeleton.md)           | Skeleton placeholder selector tokens — grouped subset of |
 
 ## Core engine
 
@@ -1303,6 +1333,23 @@ _Shared primitives every surface builds on — no direct UI._
 | [`service-worker.ts`](core\utils/service-worker.md) | —                                                           |
 | [`share-gallery.ts`](core\utils/share-gallery.md)   | Runtime playground share-capture rotation                   |
 | [`string.ts`](core\utils/string.md)                 | Small pure string transforms — HTML stripping for           |
+
+## Core engine
+
+_Shared primitives every surface builds on — no direct UI._
+
+| File                                           | What it does |
+| ---------------------------------------------- | ------------ |
+| [`burn.ts`](core\utils\burn/burn.md)           | —            |
+| [`front.ts`](core\utils\burn/front.md)         | —            |
+| [`loop.ts`](core\utils\burn/loop.md)           | —            |
+| [`mount.ts`](core\utils\burn/mount.md)         | —            |
+| [`paper-fx.ts`](core\utils\burn/paper-fx.md)   | —            |
+| [`paper.ts`](core\utils\burn/paper.md)         | —            |
+| [`particles.ts`](core\utils\burn/particles.md) | —            |
+| [`tuning.ts`](core\utils\burn/tuning.md)       | —            |
+| [`types.ts`](core\utils\burn/types.md)         | —            |
+| [`wasm.ts`](core\utils\burn/wasm.md)           | —            |
 
 ## Core engine
 
@@ -1432,19 +1479,22 @@ _Shared primitives every surface builds on — no direct UI._
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                               | What it does                                                |
-| -------------------------------------------------- | ----------------------------------------------------------- |
-| [`db.ts`](core\utils\data/db.md)                   | SWR-style data layer over Firebase RTDB.                    |
-| [`legal-links.ts`](core\utils\data/legal-links.md) | Builds the bundled legal link list (home / privacy / GDPR / |
-| [`sanitize.ts`](core\utils\data/sanitize.md)       | —                                                           |
+| File                                                 | What it does                                                |
+| ---------------------------------------------------- | ----------------------------------------------------------- |
+| [`db.ts`](core\utils\data/db.md)                     | SWR-style data layer over Firebase RTDB.                    |
+| [`footer-links.ts`](core\utils\data/footer-links.md) | Shared footer-link helpers — the locale RSS feed URL +      |
+| [`legal-links.ts`](core\utils\data/legal-links.md)   | Builds the bundled legal link list (home / privacy / GDPR / |
+| [`sanitize.ts`](core\utils\data/sanitize.md)         | —                                                           |
 
 ## Core engine
 
 _Shared primitives every surface builds on — no direct UI._
 
-| File                                                      | What it does                                       |
-| --------------------------------------------------------- | -------------------------------------------------- |
-| [`shared-observer.ts`](core\utils\dom/shared-observer.md) | Shared IntersectionObserver pool for media figures |
+| File                                                      | What it does                                          |
+| --------------------------------------------------------- | ----------------------------------------------------- |
+| [`joust.ts`](core\utils\dom/joust.md)                     | "Joust" — the click-to-reveal contract for round icon |
+| [`orphan-seps.ts`](core\utils\dom/orphan-seps.md)         | Footer-nav orphan-separator suppression               |
+| [`shared-observer.ts`](core\utils\dom/shared-observer.md) | Shared IntersectionObserver pool for media figures    |
 
 ## Core engine
 
@@ -1470,6 +1520,7 @@ _Shared primitives every surface builds on — no direct UI._
 
 | File                                                            | What it does                                                |
 | --------------------------------------------------------------- | ----------------------------------------------------------- |
+| [`group.ts`](core\utils\media/group.md)                         | Media-group shape predicates shared by the project view and |
 | [`local-media-cache.ts`](core\utils\media/local-media-cache.md) | Three-tier media cache: in-memory Map (object URLs) →       |
 | [`manifest.ts`](core\utils\media/manifest.md)                   | Runtime knowledge of which CDN objects exist, backed by the |
 | [`policy.ts`](core\utils\media/policy.md)                       | Connection- and box-aware media budgets                     |
@@ -1762,6 +1813,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                                                | What it does                                                                          |
 | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [`schema-route-arms-tails.test.js`](experiments\earth-playground\tests\coverage\playground\space/schema-route-arms-tails.test.md)   | Coverage tails for space/schema.ts emitSpaceJsonLd —                                  |
 | [`space-boot-tails.test.js`](experiments\earth-playground\tests\coverage\playground\space/space-boot-tails.test.md)                 | Split from coverage-tails-7.test.js — covers the "space boot tails" describe.         |
 | [`space-panel-render-tails.test.js`](experiments\earth-playground\tests\coverage\playground\space/space-panel-render-tails.test.md) | Split from coverage-tails-7.test.js — covers the "space panel render tails" describe. |
 | [`space-schema-tails.test.js`](experiments\earth-playground\tests\coverage\playground\space/space-schema-tails.test.md)             | Coverage tails for space/schema.ts — emitSpaceJsonLd                                  |
@@ -2143,10 +2195,12 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`patch-earth-playground-translations.js`](shared\scripts\i18n/patch-earth-playground-translations.md) | —                                                                               |
 | [`patch-rss-feed-label.js`](shared\scripts\i18n/patch-rss-feed-label.md)                               | —                                                                               |
 | [`patch-search-page-themes.js`](shared\scripts\i18n/patch-search-page-themes.md)                       | —                                                                               |
+| [`patch-sitemap-page.js`](shared\scripts\i18n/patch-sitemap-page.md)                                   | —                                                                               |
 | [`patch-star-field-share-themes.js`](shared\scripts\i18n/patch-star-field-share-themes.md)             | —                                                                               |
 | [`patch-ui-gaps-and-cyrillic.js`](shared\scripts\i18n/patch-ui-gaps-and-cyrillic.md)                   | —                                                                               |
 | [`seed-translations.js`](shared\scripts\i18n/seed-translations.md)                                     | —                                                                               |
 | [`upload-earth-playground-firebase.js`](shared\scripts\i18n/upload-earth-playground-firebase.md)       | —                                                                               |
+| [`upload-missing-translations.js`](shared\scripts\i18n/upload-missing-translations.md)                 | —                                                                               |
 | [`upload-search-themes-firebase.js`](shared\scripts\i18n/upload-search-themes-firebase.md)             | —                                                                               |
 | [`upload-star-field-firebase.js`](shared\scripts\i18n/upload-star-field-firebase.md)                   | —                                                                               |
 
@@ -2258,6 +2312,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | --------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | [`AwardsCarousel.tsx`](website\components\carousel/AwardsCarousel.md) | &lt;awards-carousel&gt; — lightweight carousel used by the awards   |
 | [`CustomCarousel.tsx`](website\components\carousel/CustomCarousel.md) | &lt;custom-carousel&gt; — infinite-loop horizontal carousel used by |
+| [`MentionsDeck.tsx`](website\components\carousel/MentionsDeck.md)     | &lt;mentions-deck&gt; — the "Some mentions" card deck inside the    |
 
 ## Entry points
 
@@ -2284,6 +2339,21 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`nav.ts`](website\components\carousel\custom-carousel/nav.md)             | Navigation engine for CustomCarousel — goTo/prev/next/dot      |
 | [`render.tsx`](website\components\carousel\custom-carousel/render.md)      | Pure JSX render helpers for &lt;custom-carousel&gt;, extracted |
 | [`sizing.ts`](website\components\carousel\custom-carousel/sizing.md)       | Fit/height measurement for CustomCarousel — the                |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                           | What it does |
+| ------------------------------------------------------------------------------ | ------------ |
+| [`autoplay.ts`](website\components\carousel\mentions-deck/autoplay.md)         | —            |
+| [`deck.ts`](website\components\carousel\mentions-deck/deck.md)                 | —            |
+| [`events.ts`](website\components\carousel\mentions-deck/events.md)             | —            |
+| [`gestures.ts`](website\components\carousel\mentions-deck/gestures.md)         | —            |
+| [`interactions.ts`](website\components\carousel\mentions-deck/interactions.md) | —            |
+| [`observer.ts`](website\components\carousel\mentions-deck/observer.md)         | —            |
+| [`render.tsx`](website\components\carousel\mentions-deck/render.md)            | —            |
+| [`types.ts`](website\components\carousel\mentions-deck/types.md)               | —            |
 
 ## Entry points
 
@@ -2332,20 +2402,24 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                              | What it does                                                        |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------- |
-| [`AboutSection.tsx`](website\components\home/AboutSection.md)     | &lt;about-section&gt; — the home page's bio block: Gravatar profile |
-| [`AwardsMentions.tsx`](website\components\home/AwardsMentions.md) | &lt;awards-mentions&gt; — the footer band on internals/home: an     |
-| [`ContactSection.tsx`](website\components\home/ContactSection.md) | &lt;contact-section&gt; — the home page's contact footer: heading,  |
-| [`HomeMosaic.tsx`](website\components\home/HomeMosaic.md)         | &lt;home-mosaic&gt; — the masonry project grid on the home page:    |
+| File                                                              | What it does                                                       |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`AboutSection.tsx`](website\components\home/AboutSection.md)     | &lt;about-section&gt; — the home page's opening bio block: title,  |
+| [`AwardsMentions.tsx`](website\components\home/AwardsMentions.md) | &lt;awards-mentions&gt; — the legal footer band on home: the       |
+| [`CardStack.tsx`](website\components\home/CardStack.md)           | &lt;card-stack&gt; — the "Selected work" coverflow on the home     |
+| [`ContactSection.tsx`](website\components\home/ContactSection.md) | &lt;contact-section&gt; — the home page's contact footer: heading, |
+| [`HomeMosaic.tsx`](website\components\home/HomeMosaic.md)         | &lt;home-mosaic&gt; — the masonry project grid on the home page:   |
 
 ## Entry points
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                   | What it does |
-| ------------------------------------------------------ | ------------ |
-| [`glitch.ts`](website\components\home\about/glitch.md) | —            |
+| File                                                       | What it does |
+| ---------------------------------------------------------- | ------------ |
+| [`glitch.ts`](website\components\home\about/glitch.md)     | —            |
+| [`hud.ts`](website\components\home\about/hud.md)           | —            |
+| [`mesh.ts`](website\components\home\about/mesh.md)         | —            |
+| [`titlefit.ts`](website\components\home\about/titlefit.md) | —            |
 
 ## Entry points
 
@@ -2362,11 +2436,26 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                        | What it does                                                    |
-| ----------------------------------------------------------- | --------------------------------------------------------------- |
-| [`carousel.ts`](website\components\home\awards/carousel.md) | Carousel wiring for &lt;awards-mentions&gt;: configures the     |
-| [`data.ts`](website\components\home\awards/data.md)         | Data helpers for &lt;awards-mentions&gt;: the legal-links list  |
-| [`render.tsx`](website\components\home\awards/render.md)    | JSX template for &lt;awards-mentions&gt; — the footer band with |
+| File                                                     | What it does                                                      |
+| -------------------------------------------------------- | ----------------------------------------------------------------- |
+| [`data.ts`](website\components\home\awards/data.md)      | Data helpers for &lt;awards-mentions&gt;: the legal-links list    |
+| [`render.tsx`](website\components\home\awards/render.md) | JSX template for &lt;awards-mentions&gt; — the legal footer band: |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                   | What it does |
+| ---------------------------------------------------------------------- | ------------ |
+| [`autoplay.ts`](website\components\home\cardstack/autoplay.md)         | —            |
+| [`deck.ts`](website\components\home\cardstack/deck.md)                 | —            |
+| [`events.ts`](website\components\home\cardstack/events.md)             | —            |
+| [`gestures.ts`](website\components\home\cardstack/gestures.md)         | —            |
+| [`info.ts`](website\components\home\cardstack/info.md)                 | —            |
+| [`interactions.ts`](website\components\home\cardstack/interactions.md) | —            |
+| [`render.tsx`](website\components\home\cardstack/render.md)            | —            |
+| [`timer.ts`](website\components\home\cardstack/timer.md)               | —            |
+| [`types.ts`](website\components\home\cardstack/types.md)               | —            |
 
 ## Entry points
 
@@ -2374,7 +2463,6 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                | What it does                                                   |
 | ------------------------------------------------------------------- | -------------------------------------------------------------- |
-| [`burn.ts`](website\components\home\mosaic/burn.md)                 | —                                                              |
 | [`events.ts`](website\components\home\mosaic/events.md)             | —                                                              |
 | [`interactions.ts`](website\components\home\mosaic/interactions.md) | —                                                              |
 | [`layout.ts`](website\components\home\mosaic/layout.md)             | —                                                              |
@@ -2385,25 +2473,9 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                               | What it does |
-| ------------------------------------------------------------------ | ------------ |
-| [`front.ts`](website\components\home\mosaic\burn/front.md)         | —            |
-| [`loop.ts`](website\components\home\mosaic\burn/loop.md)           | —            |
-| [`mount.ts`](website\components\home\mosaic\burn/mount.md)         | —            |
-| [`paper-fx.ts`](website\components\home\mosaic\burn/paper-fx.md)   | —            |
-| [`paper.ts`](website\components\home\mosaic\burn/paper.md)         | —            |
-| [`particles.ts`](website\components\home\mosaic\burn/particles.md) | —            |
-| [`tuning.ts`](website\components\home\mosaic\burn/tuning.md)       | —            |
-| [`types.ts`](website\components\home\mosaic\burn/types.md)         | —            |
-| [`wasm.ts`](website\components\home\mosaic\burn/wasm.md)           | —            |
-
-## Entry points
-
-_Boot surfaces: what the user sees first on each bundle._
-
-| File                                               | What it does                                                    |
-| -------------------------------------------------- | --------------------------------------------------------------- |
-| [`Footer.tsx`](website\components\legal/Footer.md) | &lt;legal-footer&gt; — footer strip shared by internals and the |
+| File                                               | What it does                                                |
+| -------------------------------------------------- | ----------------------------------------------------------- |
+| [`Footer.tsx`](website\components\legal/Footer.md) | &lt;legal-footer&gt; — the single site footer shared by the |
 
 ## Entry points
 
@@ -2411,10 +2483,27 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                             | What it does                                                                   |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [`AnimDemo.tsx`](website\components\media/AnimDemo.md)           | &lt;anim-demo&gt; — the live preview stage mounted beside every                |
 | [`DrawText.tsx`](website\components\media/DrawText.md)           | &lt;draw-text&gt; — character-staggered text reveal: splits its                |
 | [`MediaExpanded.tsx`](website\components\media/MediaExpanded.md) | &lt;media-expanded&gt; — full-screen media viewer inside the                   |
 | [`MediaFigure.tsx`](website\components\media/MediaFigure.md)     | &lt;media-figure&gt; — the site's core media card: renders a                   |
+| [`MediaMosaic.tsx`](website\components\media/MediaMosaic.md)     | &lt;media-mosaic&gt; — the internals natural-size masonry wall:                |
 | [`modal-trigger.ts`](website\components\media/modal-trigger.md)  | Modal trigger-focus registry for &lt;media-figure&gt;/&lt;media-expanded&gt; — |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                            | What it does |
+| --------------------------------------------------------------- | ------------ |
+| [`canvas2d.ts`](website\components\media\anim-demo/canvas2d.md) | —            |
+| [`cycle.ts`](website\components\media\anim-demo/cycle.md)       | —            |
+| [`dom.ts`](website\components\media\anim-demo/dom.md)           | —            |
+| [`mounts.ts`](website\components\media\anim-demo/mounts.md)     | —            |
+| [`registry.ts`](website\components\media\anim-demo/registry.md) | —            |
+| [`stages.tsx`](website\components\media\anim-demo/stages.md)    | —            |
+| [`types.ts`](website\components\media\anim-demo/types.md)       | —            |
+| [`widgets.ts`](website\components\media\anim-demo/widgets.md)   | —            |
 
 ## Entry points
 
@@ -2461,6 +2550,18 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
+| File                                                      | What it does                                                    |
+| --------------------------------------------------------- | --------------------------------------------------------------- |
+| [`events.ts`](website\components\media\mosaic/events.md)  | Scoped listener bindings for &lt;media-mosaic&gt; — the         |
+| [`layout.ts`](website\components\media\mosaic/layout.md)  | Layout passes for &lt;media-mosaic&gt; — measures the wall (or  |
+| [`pack.ts`](website\components\media\mosaic/pack.md)      | Natural-size masonry packing engine for &lt;media-mosaic&gt;.   |
+| [`render.tsx`](website\components\media\mosaic/render.md) | JSX for &lt;media-mosaic&gt;: the packed tile wall (one         |
+| [`types.ts`](website\components\media\mosaic/types.md)    | Shared shapes for &lt;media-mosaic&gt;: the media item contract |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
 | File                                                  | What it does                                                       |
 | ----------------------------------------------------- | ------------------------------------------------------------------ |
 | [`AppNav.tsx`](website\components\nav/AppNav.md)      | &lt;app-nav&gt; — the persistent top navigation bar: logo, burger  |
@@ -2478,9 +2579,9 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                     | What it does                                                |
-| -------------------------------------------------------- | ----------------------------------------------------------- |
-| [`Related.tsx`](website\components\portfolio/Related.md) | &lt;portfolio-related&gt; — "related projects" strip at the |
+| File                                                     | What it does                                                   |
+| -------------------------------------------------------- | -------------------------------------------------------------- |
+| [`Related.tsx`](website\components\portfolio/Related.md) | &lt;portfolio-related&gt; — "related projects" conveyor at the |
 
 ## Entry points
 
@@ -2711,11 +2812,31 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
+| File                                                                     | What it does |
+| ------------------------------------------------------------------------ | ------------ |
+| [`block-navigation.js`](website\reports\cov-html-rs/block-navigation.md) | —            |
+| [`prettify.js`](website\reports\cov-html-rs/prettify.md)                 | —            |
+| [`sorter.js`](website\reports\cov-html-rs/sorter.md)                     | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
 | File                                                                      | What it does |
 | ------------------------------------------------------------------------- | ------------ |
 | [`block-navigation.js`](website\reports\coverage-run/block-navigation.md) | —            |
 | [`prettify.js`](website\reports\coverage-run/prettify.md)                 | —            |
 | [`sorter.js`](website\reports\coverage-run/sorter.md)                     | —            |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                  | What it does |
+| ------------------------------------------------------------------------------------- | ------------ |
+| [`block-navigation.js`](website\reports\coverage-run\lcov-report/block-navigation.md) | —            |
+| [`prettify.js`](website\reports\coverage-run\lcov-report/prettify.md)                 | —            |
+| [`sorter.js`](website\reports\coverage-run\lcov-report/sorter.md)                     | —            |
 
 ## Entry points
 
@@ -2796,6 +2917,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`custom-carousel-internals-customcarousel-internals.test.js`](website\tests\components\carousel/custom-carousel-internals-customcarousel-internals.test.md) | Split from custom-carousel-internals.test.js — covers the "CustomCarousel internals" describe. |
 | [`custom-carousel-internals-customcarousel-tails-2.test.js`](website\tests\components\carousel/custom-carousel-internals-customcarousel-tails-2.test.md)     | Split from custom-carousel-internals.test.js — covers the "CustomCarousel tails 2" describe.   |
 | [`custom-carousel-internals-customcarousel-tails.test.js`](website\tests\components\carousel/custom-carousel-internals-customcarousel-tails.test.md)         | Split from custom-carousel-internals.test.js — covers the "CustomCarousel tails" describe.     |
+| [`mentionsdeck.test.js`](website\tests\components\carousel/mentionsdeck.test.md)                                                                             | &lt;mentions-deck&gt; — the "Some mentions" strip in the contact                               |
 
 ## Entry points
 
@@ -2819,12 +2941,13 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                                                               | What it does                                                        |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| [`sections-aboutsection.test.js`](website\tests\components\home/sections-aboutsection.test.md)     | Split from sections.test.js — covers the "AboutSection" describe.   |
-| [`sections-awardsmentions.test.js`](website\tests\components\home/sections-awardsmentions.test.md) | Split from sections.test.js — covers the "AwardsMentions" describe. |
-| [`sections-contactsection.test.js`](website\tests\components\home/sections-contactsection.test.md) | Split from sections.test.js — covers the "ContactSection" describe. |
-| [`sections-cookiebanner.test.js`](website\tests\components\home/sections-cookiebanner.test.md)     | Split from sections.test.js — covers the "CookieBanner" describe.   |
+| File                                                                                               | What it does                                                      |
+| -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [`cardstack.test.js`](website\tests\components\home/cardstack.test.md)                             | &lt;card-stack&gt; — the stacked featured-project deck: fan       |
+| [`sections-aboutsection.test.js`](website\tests\components\home/sections-aboutsection.test.md)     | Split from sections.test.js — covers the "AboutSection" describe. |
+| [`sections-awardsmentions.test.js`](website\tests\components\home/sections-awardsmentions.test.md) | Split from sections.test.js — covers the "AwardsMentions"         |
+| [`sections-contactsection.test.js`](website\tests\components\home/sections-contactsection.test.md) | Split from sections.test.js — covers the "ContactSection"         |
+| [`sections-cookiebanner.test.js`](website\tests\components\home/sections-cookiebanner.test.md)     | Split from sections.test.js — covers the "CookieBanner" describe. |
 
 ## Entry points
 
@@ -2842,6 +2965,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                                                                                | What it does                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [`anim-demo.test.js`](website\tests\components\media/anim-demo.test.md)                                                                                             | Covers website/components/media/AnimDemo.js + its                                                       |
 | [`draw-text-component.test.js`](website\tests\components\media/draw-text-component.test.md)                                                                         | Tests for the DrawText web component: registration, render HTML,                                        |
 | [`drawtext.test.js`](website\tests\components\media/drawtext.test.md)                                                                                               | Covers website/components/media/DrawText.js — the shadow-DOM                                            |
 | [`media-expanded-app-js-internals.test.js`](website\tests\components\media/media-expanded-app-js-internals.test.md)                                                 | Split from media-expanded.test.js — covers the "App.js internals" describe.                             |
@@ -2884,19 +3008,19 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                                                                                                                                                    | What it does                                                                                            |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| [`awardscarousel-tails.test.js`](website\tests\coverage\components\carousel/awardscarousel-tails.test.md)                                                                               | Split from coverage-tails-3.test.js — covers the "AwardsCarousel tails" describe.                       |
-| [`delegate-tails-carousel-nav-counter-scroll-arms.test.js`](website\tests\coverage\components\carousel/delegate-tails-carousel-nav-counter-scroll-arms.test.md)                         | Split from delegate-tails.test.js — covers the "carousel nav — counter + scroll arms" describe.         |
-| [`delegate-tails-component-delegate-methods.test.js`](website\tests\coverage\components\carousel/delegate-tails-component-delegate-methods.test.md)                                     | Split from delegate-tails.test.js — covers the "component delegate methods" describe.                   |
-| [`delegate-tails-misc-attr-guard-arms.test.js`](website\tests\coverage\components\carousel/delegate-tails-misc-attr-guard-arms.test.md)                                                 | Split from delegate-tails.test.js — covers the "misc attr/guard arms" describe.                         |
-| [`delegate-tails-mosaic-draw-text-tails.test.js`](website\tests\coverage\components\carousel/delegate-tails-mosaic-draw-text-tails.test.md)                                             | Split from delegate-tails.test.js — covers the "mosaic + draw-text tails" describe.                     |
-| [`delegate-tails-spring-nav-tails.test.js`](website\tests\coverage\components\carousel/delegate-tails-spring-nav-tails.test.md)                                                         | Coverage tails for the scroll-spring navigation paths in                                                |
-| [`lifecycle-manifest-arrival-tails.test.js`](website\tests\coverage\components\carousel/lifecycle-manifest-arrival-tails.test.md)                                                       | Covers the media-manifest arrival arm in custom-carousel                                                |
-| [`nav-tails-carousel-scroll-gate.test.js`](website\tests\coverage\components\carousel/nav-tails-carousel-scroll-gate.test.md)                                                           | Coverage tails for the scroll-gate paths: observer entries                                              |
-| [`sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.md)   | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit guard tails" describe.  |
-| [`sizing-tails-custom-carousel-sizing-measurefit-ladder-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-measurefit-ladder-tails.test.md) | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit ladder tails" describe. |
-| [`sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.md)     | Coverage tails for custom-carousel/sizing — the mobile-src                                              |
+| File                                                                                                                                                                                            | What it does                                                                                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [`awardscarousel-tails.test.js`](website\tests\coverage\components\carousel/awardscarousel-tails.test.md)                                                                                       | Split from coverage-tails-3.test.js — covers the "AwardsCarousel tails" describe.                           |
+| [`delegate-tails-carousel-nav-counter-scroll-arms.test.js`](website\tests\coverage\components\carousel/delegate-tails-carousel-nav-counter-scroll-arms.test.md)                                 | Split from delegate-tails.test.js — covers the "carousel nav — counter + scroll arms" describe.             |
+| [`delegate-tails-component-delegate-methods.test.js`](website\tests\coverage\components\carousel/delegate-tails-component-delegate-methods.test.md)                                             | Split from delegate-tails.test.js — covers the "component delegate methods" describe.                       |
+| [`delegate-tails-misc-attr-guard-arms.test.js`](website\tests\coverage\components\carousel/delegate-tails-misc-attr-guard-arms.test.md)                                                         | Split from delegate-tails.test.js — covers the "misc attr/guard arms" describe.                             |
+| [`delegate-tails-mosaic-draw-text-tails.test.js`](website\tests\coverage\components\carousel/delegate-tails-mosaic-draw-text-tails.test.md)                                                     | Split from delegate-tails.test.js — covers the "mosaic + draw-text tails" describe.                         |
+| [`delegate-tails-spring-nav-tails.test.js`](website\tests\coverage\components\carousel/delegate-tails-spring-nav-tails.test.md)                                                                 | Coverage tails for the scroll-spring navigation paths in                                                    |
+| [`lifecycle-manifest-arrival-tails.test.js`](website\tests\coverage\components\carousel/lifecycle-manifest-arrival-tails.test.md)                                                               | Covers the media-manifest arrival arm in custom-carousel                                                    |
+| [`nav-tails-carousel-scroll-gate.test.js`](website\tests\coverage\components\carousel/nav-tails-carousel-scroll-gate.test.md)                                                                   | Coverage tails for the scroll-gate paths: observer entries                                                  |
+| [`sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-measurefit-guard-tails.test.md)           | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit guard tails" describe.      |
+| [`sizing-tails-custom-carousel-sizing-measurefit-projection-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-measurefit-projection-tails.test.md) | Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFit projection tails" describe. |
+| [`sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.js`](website\tests\coverage\components\carousel/sizing-tails-custom-carousel-sizing-ratio-heightvar-tails.test.md)             | Coverage tails for custom-carousel/sizing — the mobile-src                                                  |
 
 ## Entry points
 
@@ -2930,7 +3054,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`legal-footer-feed.test.js`](website\tests\coverage\components\footer/legal-footer-feed.test.md)       | &lt;legal-footer&gt; RSS feed link — locale feed URL builder, the                 |
 | [`legal-footer-tails-2.test.js`](website\tests\coverage\components\footer/legal-footer-tails-2.test.md) | Split from coverage-tails-6.test.js — covers the "legal Footer tails 2" describe. |
 | [`legal-footer-tails.test.js`](website\tests\coverage\components\footer/legal-footer-tails.test.md)     | Split from coverage-tails-3.test.js — covers the "legal Footer tails" describe.   |
-| [`related-note-tails.test.js`](website\tests\coverage\components\footer/related-note-tails.test.md)     | —                                                                                 |
+| [`sitemap-feed-links.test.js`](website\tests\coverage\components\footer/sitemap-feed-links.test.md)     | Footer link additions — the shared feed/sitemap href                              |
 
 ## Entry points
 
@@ -2941,12 +3065,14 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`about-glitch-crop.test.js`](website\tests\coverage\components\home/about-glitch-crop.test.md)                                     | Framing-fidelity tests for website/components/home/about/glitch.ts —                |
 | [`about-glitch-tails.test.js`](website\tests\coverage\components\home/about-glitch-tails.test.md)                                   | Coverage tails for website/components/home/about/glitch.ts —                        |
 | [`about-glitch-wasm-tails.test.js`](website\tests\coverage\components\home/about-glitch-wasm-tails.test.md)                         | Coverage tail for components/home/about/glitch/wasm.ts —                            |
+| [`about-titlefit-tails.test.js`](website\tests\coverage\components\home/about-titlefit-tails.test.md)                               | Coverage tails for about/titlefit.ts: the --about-picture-w                         |
 | [`aboutsection-reregister.test.js`](website\tests\coverage\components\home/aboutsection-reregister.test.md)                         | Covers the custom-elements registration guard's else arm —                          |
-| [`aboutsection-tails.test.js`](website\tests\coverage\components\home/aboutsection-tails.test.md)                                   | Coverage tails for AboutSection's side-info column:                                 |
+| [`aboutsection-tails.test.js`](website\tests\coverage\components\home/aboutsection-tails.test.md)                                   | Coverage tails for AboutSection: the intro/empty-fallback                           |
 | [`awards-desc-fallback-tails.test.js`](website\tests\coverage\components\home/awards-desc-fallback-tails.test.md)                   | Covers the `                                                                        |     | DOCS_STRINGS.DESC_FALLBACK` arm in the awards |
 | [`awards-render-tails.test.js`](website\tests\coverage\components\home/awards-render-tails.test.md)                                 | Coverage tails for components/home/awards/render.tsx +                              |
 | [`awardsmentions-tails-2.test.js`](website\tests\coverage\components\home/awardsmentions-tails-2.test.md)                           | Split from coverage-tails-6.test.js — covers the "AwardsMentions tails 2" describe. |
 | [`awardsmentions-tails.test.js`](website\tests\coverage\components\home/awardsmentions-tails.test.md)                               | Split from coverage-tails-3.test.js — covers the "AwardsMentions tails" describe.   |
+| [`cardstack-tails.test.js`](website\tests\coverage\components\home/cardstack-tails.test.md)                                         | Coverage tails for &lt;card-stack&gt;: manifest-loaded media                        |
 | [`contactsection-reregister.test.js`](website\tests\coverage\components\home/contactsection-reregister.test.md)                     | Covers the custom-elements registration guard's else arm —                          |
 | [`contactsection-tails-test-js.test.js`](website\tests\coverage\components\home/contactsection-tails-test-js.test.md)               | Split from coverage-tails.test.js — covers the "ContactSection tails" describe.     |
 | [`contactsection-tails.test.js`](website\tests\coverage\components\home/contactsection-tails.test.md)                               | Split from coverage-tails-4.test.js — covers the "ContactSection tails" describe.   |
@@ -2967,6 +3093,7 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                                               | What it does                                                                        |
 | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [`anim-demo-canvas2d-tails.test.js`](website\tests\coverage\components\media/anim-demo-canvas2d-tails.test.md)                     | Coverage tails for website/components/media/anim-demo/canvas2d.ts —                 |
 | [`draw-text-fit-tails.test.js`](website\tests\coverage\components\media/draw-text-fit-tails.test.md)                               | Coverage tails for draw-text/fit.ts — the opt-in `fit`                              |
 | [`draw-text-gpu-tails.test.js`](website\tests\coverage\components\media/draw-text-gpu-tails.test.md)                               | Coverage tail for components/media/draw-text/gpu.ts —                               |
 | [`draw-text-nested-tags.test.js`](website\tests\coverage\components\media/draw-text-nested-tags.test.md)                           | —                                                                                   |
@@ -2985,6 +3112,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`media-figure-warm-tails.test.js`](website\tests\coverage\components\media/media-figure-warm-tails.test.md)                       | Coverage tail for the CDN warm-up path — warmFirstRung's                            |
 | [`media-manifest-mobile-source-tails.test.js`](website\tests\coverage\components\media/media-manifest-mobile-source-tails.test.md) | Coverage tails for the mobile-tier &lt;source&gt; emission — the                    |
 | [`media-manifest-webp-source-tails.test.js`](website\tests\coverage\components\media/media-manifest-webp-source-tails.test.md)     | Coverage tail for the manifest-gated &lt;source&gt; emission —                      |
+| [`media-mosaic-pack.test.js`](website\tests\coverage\components\media/media-mosaic-pack.test.md)                                   | Unit coverage for the media-mosaic skyline packer                                   |
 | [`shared-observer-tails.test.js`](website\tests\coverage\components\media/shared-observer-tails.test.md)                           | Coverage tails for the pooled IntersectionObserver: pool                            |
 
 ## Entry points
@@ -2993,7 +3121,10 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                                                                                           | What it does                                                 |
 | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [`icon-aura-live-tails.test.js`](website\tests\coverage\components\nav/icon-aura-live-tails.test.md)           | Coverage tails for components/nav/icon-aura.ts — the         |
+| [`nav-gaps-tails.test.js`](website\tests\coverage\components\nav/nav-gaps-tails.test.md)                       | Coverage tails for the remaining nav/search gap arms:        |
 | [`nav-handlers-tails.test.js`](website\tests\coverage\components\nav/nav-handlers-tails.test.md)               | Coverage tails for components/nav/handlers.ts — the          |
+| [`nav-joust-tails.test.js`](website\tests\coverage\components\nav/nav-joust-tails.test.md)                     | Coverage tails for the joust gate wiring in                  |
 | [`nav-menu-render-tails.test.js`](website\tests\coverage\components\nav/nav-menu-render-tails.test.md)         | Coverage tails for components/nav/menu.tsx +                 |
 | [`nav-render-notfound-tails.test.js`](website\tests\coverage\components\nav/nav-render-notfound-tails.test.md) | Coverage tails for components/nav/render.tsx — the 404-route |
 
@@ -3010,27 +3141,46 @@ _Boot surfaces: what the user sees first on each bundle._
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                                                                                  | What it does                                                    |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| [`route-search-fallback-tails.test.js`](website\tests\coverage\components\search/route-search-fallback-tails.test.md) | Coverage tail for route-search/data.ts — the                    |
-| [`route-search-tails.test.js`](website\tests\coverage\components\search/route-search-tails.test.md)                   | Coverage tail for components/search/route-search/data.ts —      |
-| [`route-search-viewport-tails.test.js`](website\tests\coverage\components\search/route-search-viewport-tails.test.md) | &lt;route-search&gt; viewport-fit coverage — the open listbox's |
+| File                                                                                                                      | What it does                                                    |
+| ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [`route-search-defined-tails.test.js`](website\tests\coverage\components\search/route-search-defined-tails.test.md)       | Coverage tail for components/search/RouteSearch.tsx — the       |
+| [`route-search-docs-index-tails.test.js`](website\tests\coverage\components\search/route-search-docs-index-tails.test.md) | Coverage tails for the shared docs catalog in                   |
+| [`route-search-fallback-tails.test.js`](website\tests\coverage\components\search/route-search-fallback-tails.test.md)     | Coverage tail for route-search/data.ts — the                    |
+| [`route-search-live-tails.test.js`](website\tests\coverage\components\search/route-search-live-tails.test.md)             | Coverage tails for &lt;route-search&gt; — live-driver arms the  |
+| [`route-search-pager-tails.test.js`](website\tests\coverage\components\search/route-search-pager-tails.test.md)           | Coverage tails for &lt;route-search&gt; kind ordering + the     |
+| [`route-search-sync-tails.test.js`](website\tests\coverage\components\search/route-search-sync-tails.test.md)             | Coverage tails for components/search/RouteSearch.tsx — the      |
+| [`route-search-tails.test.js`](website\tests\coverage\components\search/route-search-tails.test.md)                       | Coverage tail for components/search/route-search/data.ts —      |
+| [`route-search-viewport-tails.test.js`](website\tests\coverage\components\search/route-search-viewport-tails.test.md)     | &lt;route-search&gt; viewport-fit coverage — the open listbox's |
 
 ## Entry points
 
 _Boot surfaces: what the user sees first on each bundle._
 
-| File                                                                                            | What it does                                                                   |
-| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [`animations-tails-2.test.js`](website\tests\coverage\pages/animations-tails-2.test.md)         | Coverage tails for website/views/animations — the data-miss                    |
-| [`animations-tails-3.test.js`](website\tests\coverage\pages/animations-tails-3.test.md)         | Coverage tail for the &lt;view-animations&gt; define guard — the               |
-| [`animations-tails.test.js`](website\tests\coverage\pages/animations-tails.test.md)             | Coverage tails for website/views/animations — the async                        |
-| [`home-route-tails.test.js`](website\tests\coverage\pages/home-route-tails.test.md)             | Split from coverage-tails-3.test.js — covers the "Home route tails" describe.  |
-| [`legal-route-tails.test.js`](website\tests\coverage\pages/legal-route-tails.test.md)           | Split from coverage-tails-3.test.js — covers the "Legal route tails" describe. |
-| [`legal-tails-2.test.js`](website\tests\coverage\pages/legal-tails-2.test.md)                   | Split from coverage-tails-5.test.js — covers the "Legal tails 2" describe.     |
-| [`notfound-tails-test-js.test.js`](website\tests\coverage\pages/notfound-tails-test-js.test.md) | Split from coverage-tails.test.js — covers the "NotFound tails" describe.      |
-| [`notfound-tails.test.js`](website\tests\coverage\pages/notfound-tails.test.md)                 | Split from coverage-tails-4.test.js — covers the "NotFound tails" describe.    |
-| [`search-tails.test.js`](website\tests\coverage\pages/search-tails.test.md)                     | &lt;view-search&gt; coverage tails — element registration and the              |
+| File                                                                                                          | What it does                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [`animations-tails-2.test.js`](website\tests\coverage\pages/animations-tails-2.test.md)                       | Coverage tails for website/views/animations — the data-miss                    |
+| [`animations-tails-3.test.js`](website\tests\coverage\pages/animations-tails-3.test.md)                       | Coverage tail for the &lt;view-animations&gt; define guard — the               |
+| [`animations-tails.test.js`](website\tests\coverage\pages/animations-tails.test.md)                           | Coverage tails for website/views/animations — the async                        |
+| [`home-route-tails.test.js`](website\tests\coverage\pages/home-route-tails.test.md)                           | Split from coverage-tails-3.test.js — covers the "Home route tails" describe.  |
+| [`legal-route-tails.test.js`](website\tests\coverage\pages/legal-route-tails.test.md)                         | Split from coverage-tails-3.test.js — covers the "Legal route tails" describe. |
+| [`legal-tails-2.test.js`](website\tests\coverage\pages/legal-tails-2.test.md)                                 | Split from coverage-tails-5.test.js — covers the "Legal tails 2" describe.     |
+| [`notfound-tails-test-js.test.js`](website\tests\coverage\pages/notfound-tails-test-js.test.md)               | Split from coverage-tails.test.js — covers the "NotFound tails" describe.      |
+| [`notfound-tails.test.js`](website\tests\coverage\pages/notfound-tails.test.md)                               | Split from coverage-tails-4.test.js — covers the "NotFound tails" describe.    |
+| [`project-description-fit-tails.test.js`](website\tests\coverage\pages/project-description-fit-tails.test.md) | Coverage tails for views/project/layout.ts — the                               |
+| [`search-tails.test.js`](website\tests\coverage\pages/search-tails.test.md)                                   | &lt;view-search&gt; coverage tails — element registration and the              |
+| [`sitemap-map-data-tails.test.js`](website\tests\coverage\pages/sitemap-map-data-tails.test.md)               | Coverage tail for views/sitemap/map-data — the sitemap                         |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                                                                              | What it does                                               |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [`appnav-close-tails.test.js`](website\tests\coverage\sweep/appnav-close-tails.test.md)           | Final arms: AppNav's menu-close settle callback (the       |
+| [`loadcatalog-modal-tails.test.js`](website\tests\coverage\sweep/loadcatalog-modal-tails.test.md) | Sweep tails: route-search/data.ts loadCatalog fetch arms   |
+| [`render-related-tails.test.js`](website\tests\coverage\sweep/render-related-tails.test.md)       | Sweep tails: nav render's onDark binary arms (bottom-of-   |
+| [`residual-arms-tails.test.js`](website\tests\coverage\sweep/residual-arms-tails.test.md)         | Last-arm sweep: SearchModal's pre-open render/setter arms, |
+| [`search-wip-tails.test.js`](website\tests\coverage\sweep/search-wip-tails.test.md)               | Sweep tails for the route-search WIP: route-search/data    |
 
 ## Entry points
 
@@ -3059,6 +3209,7 @@ _Boot surfaces: what the user sees first on each bundle._
 | [`views-viewlegal.test.js`](website\tests\views/views-viewlegal.test.md)                                     | Split from views.test.js — covers the "ViewLegal" describe.                     |
 | [`views-viewnotfound.test.js`](website\tests\views/views-viewnotfound.test.md)                               | Split from views.test.js — covers the "ViewNotFound" describe.                  |
 | [`views-viewproject.test.js`](website\tests\views/views-viewproject.test.md)                                 | Split from views.test.js — covers the "ViewProject" describe.                   |
+| [`views-viewsitemap.test.js`](website\tests\views/views-viewsitemap.test.md)                                 | &lt;view-sitemap&gt; coverage — the SWR fetches (sitemap page                   |
 
 ## Entry points
 
@@ -3074,10 +3225,10 @@ _Boot surfaces: what the user sees first on each bundle._
 
 | File                                            | What it does                                                     |
 | ----------------------------------------------- | ---------------------------------------------------------------- |
-| [`Home.tsx`](website\views\home/Home.md)        | &lt;view-home&gt; — the home page route: hero carousel, about    |
+| [`Home.tsx`](website\views\home/Home.md)        | &lt;view-home&gt; — the home page route: the selected-work       |
 | [`children.ts`](website\views\home/children.md) | Pushes loaded translations/items from &lt;view-home&gt; into its |
 | [`data.ts`](website\views\home/data.md)         | Data loading for &lt;view-home&gt;: three SWR sources fetched    |
-| [`render.tsx`](website\views\home/render.md)    | JSX template for &lt;view-home&gt; — the hero mosaic, about      |
+| [`render.tsx`](website\views\home/render.md)    | JSX template for &lt;view-home&gt; — the selected-work           |
 | [`scroll.ts`](website\views\home/scroll.md)     | Post-navigation scroll handling for &lt;view-home&gt;: same-view |
 | [`types.ts`](website\views\home/types.md)       | Shapes for the &lt;view-home&gt; route: the portfolio list item, |
 
@@ -3119,3 +3270,12 @@ _Boot surfaces: what the user sees first on each bundle._
 | File                                           | What it does                                           |
 | ---------------------------------------------- | ------------------------------------------------------ |
 | [`Search.tsx`](website\views\search/Search.md) | &lt;view-search&gt; — the standalone /search page: the |
+
+## Entry points
+
+_Boot surfaces: what the user sees first on each bundle._
+
+| File                                               | What it does                                                 |
+| -------------------------------------------------- | ------------------------------------------------------------ |
+| [`Sitemap.tsx`](website\views\sitemap/Sitemap.md)  | &lt;view-sitemap&gt; — the localized /sitemap page: the full |
+| [`map-data.ts`](website\views\sitemap/map-data.md) | Data model for &lt;view-sitemap&gt; — builds the site link   |

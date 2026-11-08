@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/portfolio/Related](../README.md) / PortfolioRelated
 
-Defined in: website/components/portfolio/Related.tsx:36
+Defined in: website/components/portfolio/Related.tsx:41
 
 The PortfolioRelated — related class.
 
@@ -20,7 +20,7 @@ The PortfolioRelated — related class.
 new PortfolioRelated(): PortfolioRelated;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:67
+Defined in: website/components/portfolio/Related.tsx:64
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 translations: RelatedTranslations = {}
 ```
 
-Defined in: website/components/portfolio/Related.tsx:37
+Defined in: website/components/portfolio/Related.tsx:42
 
 ---
 
@@ -193,7 +193,7 @@ Defined in: website/components/portfolio/Related.tsx:37
 homePortfolio: HomeItem[] = [];
 ```
 
-Defined in: website/components/portfolio/Related.tsx:39
+Defined in: website/components/portfolio/Related.tsx:44
 
 ---
 
@@ -203,7 +203,7 @@ Defined in: website/components/portfolio/Related.tsx:39
 _unsubRouter: (() => void) | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:41
+Defined in: website/components/portfolio/Related.tsx:46
 
 ---
 
@@ -213,91 +213,7 @@ Defined in: website/components/portfolio/Related.tsx:41
 _unsubManifest: (() => void) | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:43
-
----
-
-### \_noteOpen
-
-```ts
-_noteOpen: boolean = false
-```
-
-Defined in: website/components/portfolio/Related.tsx:45
-
----
-
-### \_noteTruncated
-
-```ts
-_noteTruncated: boolean = false
-```
-
-Defined in: website/components/portfolio/Related.tsx:47
-
----
-
-### \_noteEl
-
-```ts
-_noteEl: Element | null = null;
-```
-
-Defined in: website/components/portfolio/Related.tsx:49
-
----
-
-### \_noteSeen
-
-```ts
-_noteSeen: boolean = false
-```
-
-Defined in: website/components/portfolio/Related.tsx:51
-
----
-
-### \_noteIO
-
-```ts
-_noteIO: IntersectionObserver | null = null;
-```
-
-Defined in: website/components/portfolio/Related.tsx:53
-
----
-
-### \_noteRO
-
-```ts
-_noteRO: ResizeObserver | null = null;
-```
-
-Defined in: website/components/portfolio/Related.tsx:55
-
----
-
-### \_measureRaf
-
-```ts
-_measureRaf: number = 0
-```
-
-Defined in: website/components/portfolio/Related.tsx:57
-
----
-
-### \_dividerTeardowns
-
-```ts
-_dividerTeardowns: () => void[] = [];
-```
-
-Defined in: website/components/portfolio/Related.tsx:59
-
-#### Returns
-
-`void`
+Defined in: website/components/portfolio/Related.tsx:48
 
 ---
 
@@ -309,7 +225,7 @@ _ringSession:
   | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:61
+Defined in: website/components/portfolio/Related.tsx:50
 
 ---
 
@@ -319,7 +235,7 @@ Defined in: website/components/portfolio/Related.tsx:61
 _ringEl: Element | null = null;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:63
+Defined in: website/components/portfolio/Related.tsx:52
 
 ---
 
@@ -329,7 +245,47 @@ Defined in: website/components/portfolio/Related.tsx:63
 _loadedCovers: Map<string, string>
 ```
 
-Defined in: website/components/portfolio/Related.tsx:65
+Defined in: website/components/portfolio/Related.tsx:54
+
+---
+
+### \_listEl
+
+```ts
+_listEl: Element | null = null;
+```
+
+Defined in: website/components/portfolio/Related.tsx:56
+
+---
+
+### \_listReorderTimer
+
+```ts
+_listReorderTimer: number | null = null;
+```
+
+Defined in: website/components/portfolio/Related.tsx:58
+
+---
+
+### \_listReorderNode
+
+```ts
+_listReorderNode: Element | null = null;
+```
+
+Defined in: website/components/portfolio/Related.tsx:60
+
+---
+
+### \_listReorderContainer
+
+```ts
+_listReorderContainer: Element | null = null;
+```
+
+Defined in: website/components/portfolio/Related.tsx:62
 
 ---
 
@@ -4390,7 +4346,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get storage(): string;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:185
+Defined in: website/components/portfolio/Related.tsx:87
 
 CDN base URL for project media.
 
@@ -4408,7 +4364,7 @@ CDN base URL for project media.
 get projectsList(): RelatedCard[];
 ```
 
-Defined in: website/components/portfolio/Related.tsx:194
+Defined in: website/components/portfolio/Related.tsx:96
 
 Maps the DB `related.projects` rows into display-ready cards — see
 related/match.ts for the fuzzy link/image/title join against the
@@ -4937,15 +4893,23 @@ Render result from render().
 
 ---
 
-### \_toggleNote()
+### \_onListKeydown()
 
 ```ts
-_toggleNote(): void;
+_onListKeydown(e): void;
 ```
 
 Defined in: website/components/portfolio/Related.tsx:73
 
-Toggles the clamped footer disclaimer between one-line and full text.
+Arrow-key steps while focus sits inside the conveyor — ↓ advances,
+↑ rewinds. preventDefault stops the key from scrolling the page
+under the user's hand.
+
+#### Parameters
+
+##### e
+
+`Event`
 
 #### Returns
 
@@ -4953,19 +4917,20 @@ Toggles the clamped footer disclaimer between one-line and full text.
 
 ---
 
-### \_measureNote()
+### \_advanceList()
 
 ```ts
-_measureNote(): void;
+_advanceList(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:85
+Defined in: website/components/portfolio/Related.tsx:108
 
-Detects whether the clamped note actually overflows — CSS cannot
-detect line-clamp truncation, so scrollHeight vs clientHeight does
-it here. The flag drives the `is-truncated` class that reveals the
-pulsing "···" affordance; measured only while collapsed (open state
-is unclamped by definition, and the affordance hides anyway).
+One conveyor step: the first unfolded row folds (1fr→0fr + inert), the
+first folded row after the window unfolds. The DOM invariant is
+[unfolded window][folded tail…] — kept by appending each folded node
+to the tail once its collapse lands (zero height ⇒ invisible), so the
+wrap back to the first item lands through the same
+expand-from-collapsed accordion motion as every other step.
 
 #### Returns
 
@@ -4973,19 +4938,33 @@ is unclamped by definition, and the affordance hides anyway).
 
 ---
 
-### \_queueNoteMeasure()
+### \_scheduleListReorder()
 
 ```ts
-_queueNoteMeasure(): void;
+_scheduleListReorder(container, node): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:109
+Defined in: website/components/portfolio/Related.tsx:168
 
-Schedules a single truncation measure on the next animation frame.
-Reads inside rAF hit clean layout, so the scrollHeight query costs
-~0; running it synchronously on every onUpdated/RO tick forced a
-whole-document layout per call (the scroll-jank source profiles
-flagged). Bursts (render → RO fire → render) collapse into one read.
+Moves a just-folded node to the list tail once its 0fr collapse has
+finished (REORDER_DELAY is sized past the .6s fold). A second step
+landing before the watchdog — possible through back-to-back manual
+steps — flushes the pending move first, keeping the
+[open][closed…] invariant intact.
+
+#### Parameters
+
+##### container
+
+`Element`
+
+The .related-list node that owns the row.
+
+##### node
+
+`Element`
+
+The folded row to append to the tail.
 
 #### Returns
 
@@ -4993,18 +4972,81 @@ flagged). Bursts (render → RO fire → render) collapse into one read.
 
 ---
 
-### \_watchNoteTruncation()
+### \_stepList()
 
 ```ts
-_watchNoteTruncation(): void;
+_stepList(dir): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:124
+Defined in: website/components/portfolio/Related.tsx:191
 
-Binds a ResizeObserver to the note button so font loads, viewport
-resizes and locale swaps re-evaluate truncation. The element is
-recreated on every render, so the observer re-binds whenever the
-node identity changes instead of watching a detached element.
+One manual conveyor step: +1 runs _advanceList (top row folds, next
+unfolds); −1 runs _retreatList — the most recently folded row (the
+tail's end) moves to the top and unfolds while the window's bottom
+row folds in place — the bellows played backwards. A pending
+forward reorder flushes first so the [open][closed…] scan reads
+settled DOM. No tail-append is needed on rewind: the folding row
+already sits exactly where folded rows live (first slot after the
+window).
+
+#### Parameters
+
+##### dir
+
+`number`
+
+1 advances, −1 rewinds.
+
+#### Returns
+
+`void`
+
+---
+
+### \_retreatList()
+
+```ts
+_retreatList(): void;
+```
+
+Defined in: website/components/portfolio/Related.tsx:200
+
+The reverse fold — see _stepList.
+
+#### Returns
+
+`void`
+
+---
+
+### \_flushListReorder()
+
+```ts
+_flushListReorder(): void;
+```
+
+Defined in: website/components/portfolio/Related.tsx:240
+
+Lands the pending collapsed-node move (watchdog or early flush).
+
+#### Returns
+
+`void`
+
+---
+
+### \_syncList()
+
+```ts
+_syncList(): void;
+```
+
+Defined in: website/components/portfolio/Related.tsx:266
+
+Rebinds the conveyor key handler whenever a render recreates the
+list node — the plain bind dies with the detached node. A list that
+fits its window has no folded rows to step through, so no listener
+is bound there.
 
 #### Returns
 
@@ -5018,7 +5060,7 @@ node identity changes instead of watching a detached element.
 onMounted(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:204
+Defined in: website/components/portfolio/Related.tsx:288
 
 Lifecycle: seeds translations from the store (they may already be
 loaded by the view), kicks the SWR fetch for the two DB nodes it
@@ -5041,9 +5083,9 @@ re-runs the fuzzy match against the new page's related list.
 onDestroy(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:226
+Defined in: website/components/portfolio/Related.tsx:310
 
-Lifecycle: removes the router subscription + the note observer.
+Lifecycle: removes the router subscription + conveyor state.
 
 #### Returns
 
@@ -5061,7 +5103,7 @@ Lifecycle: removes the router subscription + the note observer.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:267
+Defined in: website/components/portfolio/Related.tsx:333
 
 #### Returns
 
@@ -5079,7 +5121,7 @@ Defined in: website/components/portfolio/Related.tsx:267
 onUpdated(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:275
+Defined in: website/components/portfolio/Related.tsx:341
 
 #### Returns
 
@@ -5097,14 +5139,13 @@ Defined in: website/components/portfolio/Related.tsx:275
 _syncAnimDescs(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:293
+Defined in: website/components/portfolio/Related.tsx:356
 
 Binds animation descriptions to the animated nodes the render just
-produced — every related tile's hover lift, and the disclaimer's
-pulsing note-dots. Must run post-render (never in the JSX): the
-desc node is injected per root, so applying on detached nodes
-would spawn duplicate `lk-anim-desc-*` ids — a WCAG failure.
-Re-rendered nodes are re-bound; idempotent on repeats.
+produced — every related row's hover lift. Must run post-render
+(never in the JSX): the desc node is injected per root, so applying
+on detached nodes would spawn duplicate `lk-anim-desc-*` ids — a
+WCAG failure. Re-rendered nodes are re-bound; idempotent on repeats.
 
 #### Returns
 
@@ -5118,32 +5159,12 @@ Re-rendered nodes are re-bound; idempotent on repeats.
 _syncRingSheen(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:309
+Defined in: website/components/portfolio/Related.tsx:368
 
 Keeps the instanced ring-sheen overlay bound to the live
-`.related-mosaic` node — renders recreate the strip, so a session
+`.related-list` node — renders recreate the strip, so a session
 mounted on a detached node is torn down and remounted. Without
 WebGPU the mount is a no-op and the CSS pseudo rings stay.
-
-#### Returns
-
-`void`
-
----
-
-### \_mountDividerSheen()
-
-```ts
-_mountDividerSheen(): void;
-```
-
-Defined in: website/components/portfolio/Related.tsx:340
-
-Re-mounts the divider-sheen WebGPU widgets on the footer's `<hr>`
-dividers — the nodes are recreated on every render, so each update
-disposes the stale mounts first (canvas + IO + rAF + widget).
-Without `navigator.gpu` or under reduced-motion the mount helper
-is a no-op and the CSS `::after` sweep stays the render path.
 
 #### Returns
 
@@ -5157,7 +5178,7 @@ is a no-op and the CSS `::after` sweep stays the render path.
 fetchData(): void;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:357
+Defined in: website/components/portfolio/Related.tsx:397
 
 Fires two SWR reads in parallel: the home page node (for the
 portfoliolist join table) and the components/related node — see
@@ -5175,7 +5196,7 @@ related/data.ts.
 render(): Element;
 ```
 
-Defined in: website/components/portfolio/Related.tsx:363
+Defined in: website/components/portfolio/Related.tsx:403
 
 JSX template for the component's shadow DOM.
 

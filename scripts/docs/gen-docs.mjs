@@ -167,71 +167,106 @@ const areaMeta = (dir) => {
 }
 
 const files = SRC_DIRS.flatMap((d) => walk(d)).sort()
+
+// dir (root-relative) → [{rel, header, members}] — the grouping that
+// drives both the per-dir page folders and the index sections.
 const areas = new Map()
 
 for (const file of files) {
   const rel = relative(ROOT, file)
+
+  // '' for root-level files so they group under the Entry-points area.
   const dir = dirname(rel) === '.' ? '' : dirname(rel)
+
   const src = readFileSync(file, 'utf8')
+
   const blocks = jsdocBlocks(src)
 
   // First block is the @file header when it carries @file or @description.
   let header = null
+
   let memberBlocks = blocks
 
   if (blocks.length && /@(file|description)/.test(blocks[0].doc)) {
     const p = parseDoc(blocks[0].doc)
+
     header = {
       name: p.tags.find((t) => t.tag === 'file')?.text || basename(file),
       desc: p.tags.find((t) => t.tag === 'description')?.text || p.desc,
     }
+
     memberBlocks = blocks.slice(1)
   }
 
+  // Every remaining block → a member record; blocks with neither
+  // description nor tags are dropped (undocumented constructs).
   const members = memberBlocks
     .map((b) => ({ name: memberName(b.code), ...parseDoc(b.doc) }))
     .filter((m) => m.desc || m.tags.length)
 
   if (!areas.has(dir)) areas.set(dir, [])
+
   areas.get(dir).push({ rel, header, members })
 }
 
 // ── Emit per-file pages ──────────────────────────────────────────────────────
+// Full wipe first — stale pages from renamed/deleted sources must
+// not survive into the next generated tree.
 if (existsSync(OUT)) rmSync(OUT, { recursive: true })
 
 for (const [dir, entries] of areas) {
   const areaDir = join(OUT, dir)
+
   mkdirSync(areaDir, { recursive: true })
 
   for (const { rel, header, members } of entries) {
+    // Page name mirrors the source filename minus its extension.
     const page = basename(rel).replace(/\.(ts|tsx|js|mjs)$/, '') + '.md'
+
     const lines = []
 
     lines.push(`# \`${rel}\``)
+
     lines.push('')
+
     if (header?.desc) {
       lines.push(esc(header.desc))
+
       lines.push('')
     }
+
+    // The meta table — source link + which UX surface the file drives.
     lines.push('| | |')
+
     lines.push('|---|---|')
+
     lines.push(`| **Source** | \`src/${rel}\` |`)
+
     const meta = areaMeta(dir)
+
     lines.push(`| **UX surface** | ${meta.ux} |`)
+
     lines.push('')
 
     if (members.length) {
       lines.push('## Members')
+
       lines.push('')
+
       for (const m of members) {
+        // Nameless docs (module-scope comments) get a placeholder heading.
         lines.push(m.name ? `### \`${m.name}\`` : '### (module scope)')
+
         lines.push('')
+
         if (m.desc) lines.push(m.desc)
+
         for (const t of m.tags) {
           if (t.tag === 'private') lines.push('`@private`')
           else if (t.tag === 'param' || t.tag === 'returns') lines.push(`- \`@${t.tag}\` ${t.text}`)
           else if (t.tag === 'file' || t.tag === 'description') continue
         }
+
         lines.push('')
       }
     }
@@ -270,25 +305,39 @@ idx.push(' /earth-playground ──► experiments/earth-playground/SpacePlaygro
 idx.push('```')
 idx.push('')
 
+// One index section per area — title, UX note, and a file table
+// linking into that area's generated pages.
 for (const [dir, entries] of areas) {
   const meta = areaMeta(dir)
+
   idx.push(`## ${meta.title}`)
+
   idx.push('')
+
   idx.push(`*${meta.ux}*`)
+
   idx.push('')
+
   idx.push('| File | What it does |')
+
   idx.push('|---|---|')
+
   for (const { rel, header } of entries) {
+    // Link path is relative to the index — dir/ prefix when nested.
     const page = `${dir ? `${dir}/` : ''}${basename(rel).replace(/\.(ts|tsx|js|mjs)$/, '')}.md`
+
     idx.push(`| [\`${basename(rel)}\`](${page}) | ${esc(short(header?.desc || '—'))} |`)
   }
+
   idx.push('')
 }
 
 writeFileSync(join(OUT, 'README.md'), idx.join('\n'))
 
 const total = files.length
+
 const pages = [...areas.values()].reduce((n, a) => n + a.length, 0)
+
 console.log(
   `gen-docs: ${pages} pages generated from ${total} source files → ${relative(ROOT, OUT)}/`
 )

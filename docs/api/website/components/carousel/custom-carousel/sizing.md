@@ -26,18 +26,19 @@ Decides whether the items fit side-by-side (no carousel chrome) or need
 the scroll track. Side-by-side requires: ≤2 items, viewport
 ≥ SIDE_BY_SIDE_BREAKPOINT, and projected total width ≤ host width.
 The projection mirrors the shadow-DOM contract in media-figure.scss +
-carousel-host.scss exactly: strip height is --mf-h (70dvh minus a pad
-under 1024, fixed $space-* steps above) clamped to the file's natural
-height, media width is aspect-driven and capped by the regular gutter
-cap, the landscape --mf-max-w ladder, AND the natural pixel width
-(calcMediaBox — WASM-backed, never upscales), floored at
-min(MEDIA_MIN_WIDTH, naturalW) on ≥375px viewports; each item adds its
-breakpoint padding + desktop side margin. Items missing intrinsic
-sizes use GENERIC_DIMENSIONS defaults (conservative portrait) so a
-partial CMS row can't silently flip to scroll mode.
+carousel-host.scss exactly: the strip height is the same value
+setHeightVar publishes to --carousel-media-height — the tallest item
+rendered into hostW × 70dvh (calcMediaBox — WASM-backed, never
+upscales); every slide's box is that strip height × the source's own
+ratio (width: auto, no max-width cap in carousel context), floored at
+min(MEDIA_MIN_WIDTH, naturalW); each item adds its breakpoint padding
 
-- `@param` c The CustomCarousel element.
-- `@param` observedWidth Fresh RO width when known — avoids a layout read.
+- desktop side margin. Items missing intrinsic sizes use
+  GENERIC_DIMENSIONS defaults (conservative portrait) so a partial CMS
+  row can't silently flip to scroll mode.
+
+* `@param` c The CustomCarousel element.
+* `@param` observedWidth Fresh RO width when known — avoids a layout read.
 
 ### `onCarouselResize`
 
@@ -96,10 +97,22 @@ shortest portrait item.
 
 Publishes --carousel-item-height on the enclosing <section> and
 --carousel-media-height on the host: the aspect-corrected height
-ensuring all slides share one uniform height. In mixed carousels on
-mobile, the uniform height anchors to the shortest portrait item.
-The published height is also capped at the smallest natural item
-height — the strip may be _less_ tall than the projection, but no
-slide may ever render taller than its source file's real pixels.
+ensuring all slides share one uniform height. The uniform height is
+the TALLEST rendered item — the max height each sized source reaches
+when fit to the strip width and the viewport cap. Every slide's box is
+the strip height × its own aspect (the media-figure sheet drops the
+natural-size caps in carousel context), so the media fills with zero
+crop and zero distortion; a short source covers the taller box.
+In mixed carousels on mobile, the uniform height anchors to the
+shortest portrait item.
 
 - `@param` c The CustomCarousel element.
+
+### `publishStripHeight`
+
+Publishes the uniform strip height on the host (--carousel-media-height)
+and the enclosing section (--carousel-item-height), skipping no-op
+writes so repeat calls never touch the style declaration twice.
+
+- `@param` c The CustomCarousel element.
+- `@param` finalH Strip height in px.

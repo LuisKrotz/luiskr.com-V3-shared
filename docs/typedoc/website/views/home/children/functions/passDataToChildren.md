@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/home/children](../README.md) / passDataToChildren
 
 ```ts
-function passDataToChildren(view): void;
+function passDataToChildren(view): void
 ```
 
-Defined in: website/views/home/children.ts:14
+Defined in: website/views/home/children.ts:13
 
 Distributes loaded translations/items to the mosaic, about and contact children.
 

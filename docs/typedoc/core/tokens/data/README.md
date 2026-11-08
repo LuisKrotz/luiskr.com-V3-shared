@@ -18,6 +18,18 @@ Re-exports [ANIMATION_DESC_ID_PREFIX](animation-ids/variables/ANIMATION_DESC_ID_
 
 ---
 
+### ANIMATION\_DOCS
+
+Re-exports [ANIMATION_DOCS](animation-ids/variables/ANIMATION_DOCS.md)
+
+---
+
+### ANIMATION\_DOCS\_FALLBACK
+
+Re-exports [ANIMATION_DOCS_FALLBACK](animation-ids/variables/ANIMATION_DOCS_FALLBACK.md)
+
+---
+
 ### CMS\_KEYS
 
 Re-exports [CMS_KEYS](cms-keys/variables/CMS_KEYS.md)

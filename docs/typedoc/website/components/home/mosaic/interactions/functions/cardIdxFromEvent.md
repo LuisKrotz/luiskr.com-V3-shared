@@ -1,19 +1,17 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/interactions](../README.md) / cardIdxFromEvent
 
 ```ts
-function cardIdxFromEvent(e): 
-  | {
-  itemEl: Element;
-  idx: number;
-}
-  | null;
+function cardIdxFromEvent(e): {
+  itemEl: Element
+  idx: number
+} | null
 ```
 
-Defined in: website/components/home/mosaic/interactions.ts:34
+Defined in: website/components/home/mosaic/interactions.ts:51
 
 Resolves the mosaic card element + its data-index from a DOM event.
 
@@ -25,8 +23,8 @@ Resolves the mosaic card element + its data-index from a DOM event.
 
 ## Returns
 
-  \| \{
-  `itemEl`: `Element`;
-  `idx`: `number`;
+\| \{
+`itemEl`: `Element`;
+`idx`: `number`;
 \}
-  \| `null`
+\| `null`

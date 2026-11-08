@@ -111,3 +111,9 @@ Re-exports [CDN_URLS](urls/variables/CDN_URLS.md)
 ### SOCIAL\_URLS
 
 Re-exports [SOCIAL_URLS](urls/variables/SOCIAL_URLS.md)
+
+---
+
+### URL\_MARKERS
+
+Re-exports [URL_MARKERS](urls/variables/URL_MARKERS.md)

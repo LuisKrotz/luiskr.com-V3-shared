@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/search/route-search/data](../README.md) / RouteEntry
 
-Defined in: website/components/search/route-search/data.ts:31
+Defined in: website/components/search/route-search/data.ts:32
 
 One catalog row — the fields the scorer and the row renderer read.
 
@@ -16,7 +16,7 @@ One catalog row — the fields the scorer and the row renderer read.
 path: string
 ```
 
-Defined in: website/components/search/route-search/data.ts:33
+Defined in: website/components/search/route-search/data.ts:34
 
 Canonical localized URL to push on activate.
 
@@ -28,7 +28,7 @@ Canonical localized URL to push on activate.
 title: string
 ```
 
-Defined in: website/components/search/route-search/data.ts:35
+Defined in: website/components/search/route-search/data.ts:36
 
 Row title.
 
@@ -40,7 +40,7 @@ Row title.
 preview: string
 ```
 
-Defined in: website/components/search/route-search/data.ts:37
+Defined in: website/components/search/route-search/data.ts:38
 
 One-line "what's inside" preview.
 
@@ -52,7 +52,7 @@ One-line "what's inside" preview.
 keywords: string[];
 ```
 
-Defined in: website/components/search/route-search/data.ts:39
+Defined in: website/components/search/route-search/data.ts:40
 
 Match keywords (searchThemes + slug + title words).
 
@@ -64,7 +64,7 @@ Match keywords (searchThemes + slug + title words).
 kind: string
 ```
 
-Defined in: website/components/search/route-search/data.ts:41
+Defined in: website/components/search/route-search/data.ts:42
 
 ROUTE_SEARCH_KINDS discriminant.
 
@@ -76,6 +76,6 @@ ROUTE_SEARCH_KINDS discriminant.
 thumb: string
 ```
 
-Defined in: website/components/search/route-search/data.ts:43
+Defined in: website/components/search/route-search/data.ts:44
 
 Cover thumbnail URL (projects only; '' otherwise).

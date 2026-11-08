@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/carousels](../README.md) / bindProjectCarousels
 
 ```ts
-function bindProjectCarousels(view): void;
+function bindProjectCarousels(view): void
 ```
 
-Defined in: website/views/project/carousels.ts:18
+Defined in: website/views/project/carousels.ts:58
 
 Binds project carousels.
 

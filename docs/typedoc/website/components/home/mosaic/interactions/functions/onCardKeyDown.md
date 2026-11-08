@@ -8,7 +8,7 @@
 function onCardKeyDown(host, e): void
 ```
 
-Defined in: website/components/home/mosaic/interactions.ts:279
+Defined in: website/components/home/mosaic/interactions.ts:296
 
 Arrow-key navigation — moves focus to the nearest card in the arrow
 direction (roving focus over the card anchors; the focusin handler

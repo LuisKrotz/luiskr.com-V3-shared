@@ -8,7 +8,7 @@
 const _K_EARTH_PLAYGROUND: 'earthPlayground' = 'earthPlayground'
 ```
 
-Defined in: core/tokens/base.ts:458
+Defined in: core/tokens/base.ts:576
 
 Shared key token `earthPlayground` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

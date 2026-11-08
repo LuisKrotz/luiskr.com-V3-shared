@@ -9,9 +9,10 @@ const LABEL_TEXT: Readonly<{
   LOADING: 'Loading'
   LOGOUT: 'Logout'
   INSTRUCTIONS: 'Instructions'
+  LEGEND: 'Legend'
 }>
 ```
 
-Defined in: core/tokens/strings/text.ts:25
+Defined in: core/tokens/strings/text.ts:29
 
 labels text.

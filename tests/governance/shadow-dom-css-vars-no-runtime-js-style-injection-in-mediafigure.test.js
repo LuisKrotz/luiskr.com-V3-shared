@@ -28,11 +28,13 @@ describe('no runtime JS style injection in MediaFigure', () => {
     mfJS = fs.readFileSync(path.join(ROOT_DIR, 'website/components/media/MediaFigure.tsx'), 'utf8')
   })
 
-  test('imports media-figure.scss?inline', () => {
-    expect(mfJS).toMatch(/import mediaFigureStyles from ['"].*media-figure\.scss\?inline['"]/)
+  test('imports media-figure.scss as a compiled sheet', () => {
+    expect(mfJS).toMatch(
+      /import mediaFigureStyles from ['"].*media-figure\.scss\?(?:inline|tiers|rcss)['"]/
+    )
   })
   test('passes mediaFigureStyles to super()', () => {
-    expect(mfJS).toMatch(/super\(`.*mediaFigureStyles/)
+    expect(mfJS).toMatch(/super\([\s\S]*?mediaFigureStyles/)
   })
   test('does not inject width pixel strings', () => {
     expect(mfJS).not.toMatch(/\.style\.width\s*=\s*['"][0-9]+px['"]/)

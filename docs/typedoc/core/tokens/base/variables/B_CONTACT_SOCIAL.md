@@ -8,6 +8,6 @@
 const _B_CONTACT_SOCIAL: 'contact-social'
 ```
 
-Defined in: core/tokens/base.ts:261
+Defined in: core/tokens/base.ts:313
 
 BEM block fragment "b contact social" — composed by the token groups below into full class names.

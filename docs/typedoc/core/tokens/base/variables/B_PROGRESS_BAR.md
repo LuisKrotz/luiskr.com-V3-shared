@@ -8,7 +8,7 @@
 const _B_PROGRESS_BAR: 'progress-bar' = 'progress-bar'
 ```
 
-Defined in: core/tokens/base.ts:73
+Defined in: core/tokens/base.ts:90
 
 BEM block fragment `progress-bar` — declared once here; every domain class token composes
 from this fragment (zero-hardcoding rule 9).

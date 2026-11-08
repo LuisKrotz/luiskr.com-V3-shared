@@ -22,7 +22,7 @@ const DRAW_TIMINGS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/media/dimensions.ts:148
+Defined in: core/tokens/media/dimensions.ts:159
 
 Frozen draw-text timing map (ms + observer fraction) — caps and defaults
 for the per-character staggered reveal: `EXTRA_MS` is the slack after the

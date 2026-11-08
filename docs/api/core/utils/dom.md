@@ -132,10 +132,26 @@ of N reads down to a single possible reflow at the batch head.
 
 - `@returns` viewport width in px, or 0 without a window (SSR/tests).
 
+### `cachedVH`
+
+Cached `window.innerHeight` — same single-task memoization as
+cachedVW: innerHeight is equally layout-forcing after style writes,
+and a viewport's height can only change on resize, which never lands
+mid-task.
+
+### `viewportHeight`
+
+Returns `window.innerHeight`, memoized within the current task. The
+first call takes the (layout-forcing) hit; every subsequent caller in
+the same task reuses the number.
+
+- `@returns` viewport height in px, or 0 without a window (SSR/tests).
+
 ### `resetViewportCache`
 
-Test/invalidate hook — clears the memoized width. Test suites call it
-between cases since jsdom/happy-dom innerWidth is mutable mid-test.
+Test/invalidate hook — clears the memoized viewport readings. Test
+suites call it between cases since jsdom/happy-dom innerWidth and
+innerHeight are mutable mid-test.
 
 ### `inIntentionalFlush`
 
@@ -144,6 +160,17 @@ Set while flushLayout runs — the reflow test allowlists this window.
 ### `isIntentionalFlush`
 
 True only inside flushLayout() — used by the forced-reflow governance test.
+
+### `measureLayout`
+
+Deliberate layout measurement inside the sanctioned flush window —
+the general form of flushLayout for reads that MUST see post-write
+layout (measure-then-mutate). One wrapped read still forces layout,
+but the reflow gate recognizes it as deliberate rather than
+accidental thrash.
+
+- `@param` read The layout read to run inside the flush window.
+- `@returns` whatever `read` returns.
 
 ### `flushLayout`
 

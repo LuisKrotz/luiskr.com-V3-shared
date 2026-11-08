@@ -8,6 +8,6 @@
 const _B_SITE_TOAST: 'site-toast' = 'site-toast'
 ```
 
-Defined in: core/tokens/base.ts:90
+Defined in: core/tokens/base.ts:107
 
 BEM block fragment "b site toast" — composed by the token groups below into full class names.

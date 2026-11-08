@@ -8,7 +8,7 @@
 function flushLayout(el): number
 ```
 
-Defined in: core/utils/dom.ts:258
+Defined in: core/utils/dom.ts:307
 
 Deliberate synchronous layout flush — the ONE sanctioned forced reflow.
 Used by the transition-restart pattern: write classes/styles, force

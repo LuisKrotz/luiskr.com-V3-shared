@@ -96,6 +96,19 @@ stays roughly level instead of column-by-column fill.
 - `@param` span Columns the tile covers.
 - `@returns` The best column index + its top y.
 
+### `centerOffset`
+
+Horizontal centering shift for a packed wall. When the tiles don't
+reach the last column(s) (few items / wide viewports) the trailing
+empty columns would leave dead space on the right; this returns half
+of that unused span so the wall sits centered in the content box.
+usedCols = 1 + index of the rightmost column holding any tile
+offset = ⌊(N − usedCols)·(colW + gap) / 2⌋ — 0 when every column is used
+
+- `@param` colH Per-column occupied heights after packing (0 = empty column).
+- `@param` colW Pixel column width.
+- `@returns` The px offset to add to every tile's left edge.
+
 ### `tileStyles`
 
 Style objects for one placed tile — the card shell gets the absolute

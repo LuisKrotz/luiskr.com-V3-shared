@@ -26,7 +26,6 @@ const QUERY_STRINGS: Readonly<{
   META_OG_TYPE: 'meta[property="og:type"]'
   META_TW_IMAGE_ALT: 'meta[name="twitter:image:alt"]'
   ROOT_MARGIN_600: '600px 0px'
-  ROOT_MARGIN_200: '200px 0px'
   ROOT_MARGIN_100: '100px 0px'
   ROOT_MARGIN_50: '50px 0px'
   DARK_SCHEME_QUERY: '(prefers-color-scheme: dark)'

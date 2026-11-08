@@ -8,6 +8,7 @@
 const DOCS_STRINGS: Readonly<{
   TITLE: 'In-depth project docs'
   DESC_FALLBACK: 'Available only in English'
+  SEARCH_GROUP_LABEL: 'In depth docs (available only in English)'
   COPY_TOAST_FALLBACK: "This page doesn't allow copy, please refer to github to download the sourcecode or contact the page admin."
   CMS_COMPONENT: 'docs-portal'
   ASSET_BASE: '/docs-content/'

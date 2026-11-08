@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../README.md) / [core/i18n](../README.md) / LangSlugMap
 
-Defined in: core/i18n.ts:73
+Defined in: core/i18n.ts:67
 
 Localized route slugs for one locale — every navigable page key maps to
 its translated path segment (`about` → 'sobre'/'ueber', …).
@@ -17,7 +17,7 @@ its translated path segment (`about` → 'sobre'/'ueber', …).
 about: string
 ```
 
-Defined in: core/i18n.ts:75
+Defined in: core/i18n.ts:69
 
 '/<loc>/about' segment.
 
@@ -29,7 +29,7 @@ Defined in: core/i18n.ts:75
 contact: string
 ```
 
-Defined in: core/i18n.ts:77
+Defined in: core/i18n.ts:71
 
 Contact page segment.
 
@@ -41,7 +41,7 @@ Contact page segment.
 privacy: string
 ```
 
-Defined in: core/i18n.ts:79
+Defined in: core/i18n.ts:73
 
 Privacy-policy page segment.
 
@@ -53,7 +53,7 @@ Privacy-policy page segment.
 gdpr: string
 ```
 
-Defined in: core/i18n.ts:81
+Defined in: core/i18n.ts:75
 
 GDPR page segment.
 
@@ -65,7 +65,7 @@ GDPR page segment.
 terms: string
 ```
 
-Defined in: core/i18n.ts:83
+Defined in: core/i18n.ts:77
 
 Terms-of-use page segment.
 
@@ -77,7 +77,7 @@ Terms-of-use page segment.
 license: string
 ```
 
-Defined in: core/i18n.ts:85
+Defined in: core/i18n.ts:79
 
 License page segment.
 
@@ -89,7 +89,7 @@ License page segment.
 search: string
 ```
 
-Defined in: core/i18n.ts:87
+Defined in: core/i18n.ts:81
 
 Search page segment.
 
@@ -101,7 +101,7 @@ Search page segment.
 earthPlayground: string
 ```
 
-Defined in: core/i18n.ts:89
+Defined in: core/i18n.ts:83
 
 Earth playground segment.
 
@@ -113,7 +113,7 @@ Earth playground segment.
 starField: string
 ```
 
-Defined in: core/i18n.ts:91
+Defined in: core/i18n.ts:85
 
 Star-field experiment segment.
 
@@ -125,6 +125,18 @@ Star-field experiment segment.
 animations: string
 ```
 
-Defined in: core/i18n.ts:93
+Defined in: core/i18n.ts:87
 
 Animations-reference segment.
+
+---
+
+### sitemap
+
+```ts
+sitemap: string
+```
+
+Defined in: core/i18n.ts:89
+
+Sitemap page segment.

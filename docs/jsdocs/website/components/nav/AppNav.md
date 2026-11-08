@@ -238,7 +238,7 @@ Canvas JSX for the WebGL menu background.
 
 ### `_toggleMenu`
 
-Opens/closes the fullscreen menu overlay.
+Opens/closes the fullscreen menu overlay — passes the click event through so toggleNavMenu's joust gate can read currentTarget/detail.
 
 ### `_openMenu`
 

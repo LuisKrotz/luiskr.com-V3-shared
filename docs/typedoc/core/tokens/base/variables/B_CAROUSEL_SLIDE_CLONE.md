@@ -8,6 +8,6 @@
 const _B_CAROUSEL_SLIDE_CLONE: 'carousel-slide--clone'
 ```
 
-Defined in: core/tokens/base.ts:222
+Defined in: core/tokens/base.ts:246
 
 BEM block fragment "b carousel slide clone" — composed by the token groups below into full class names.

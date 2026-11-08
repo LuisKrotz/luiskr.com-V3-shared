@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcEaseOutCubic
 
 ```ts
-function calcEaseOutCubic(t): number;
+function calcEaseOutCubic(t): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:126
+Defined in: core/utils/wasm/wasm-layout.ts:127
 
 easeOutCubic easing — 1−(1−t)³: fast start, decelerating stop. Used for
 menu/carousel transitions where motion should settle, not bounce.

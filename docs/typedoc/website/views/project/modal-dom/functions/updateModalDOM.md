@@ -8,7 +8,7 @@
 function updateModalDOM(view): void
 ```
 
-Defined in: website/views/project/modal-dom.tsx:22
+Defined in: website/views/project/modal-dom.tsx:23
 
 Store → DOM modal sync (open: showModal + mount media; close: release).
 

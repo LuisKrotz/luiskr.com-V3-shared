@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/awards/data](../README.md) / ensureAwardsData
 
 ```ts
-function ensureAwardsData(_el): void;
+function ensureAwardsData(_el): void
 ```
 
-Defined in: website/components/home/awards/data.ts:73
+Defined in: website/components/home/awards/data.ts:37
 
 Loads the components dictionary node for the current locale when missing
 (stale-while-revalidate) — commits SET_COMPONENT_LANG so the footer

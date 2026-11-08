@@ -2596,12 +2596,6 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const groups = page.groups || {}
     const legal = t(loc, (x) => x.components?.['legal-footer']?.links) || legalEn
 
-    const pageLinks = (rows) =>
-      rows
-        .filter(([s, label]) => s && label)
-        .map(([s, label]) => `<li><a href="${prefix}/${s}">${esc(label)}</a></li>`)
-        .join('')
-
     const localeLinks = (tail) =>
       VALID_LANGS.map((l) => {
         const lSlugs = LANG_SLUGS[l] || enSlugs

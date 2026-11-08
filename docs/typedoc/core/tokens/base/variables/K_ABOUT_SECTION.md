@@ -8,6 +8,6 @@
 const _K_ABOUT_SECTION: 'about-section' = 'about-section'
 ```
 
-Defined in: core/tokens/base.ts:472
+Defined in: core/tokens/base.ts:590
 
 Token key "k about section" — single source for the repeated literal.

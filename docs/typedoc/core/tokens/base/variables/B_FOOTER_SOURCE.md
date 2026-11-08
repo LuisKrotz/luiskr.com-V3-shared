@@ -8,6 +8,6 @@
 const _B_FOOTER_SOURCE: 'footer-source'
 ```
 
-Defined in: core/tokens/base.ts:138
+Defined in: core/tokens/base.ts:155
 
 BEM block fragment "b footer source" — composed by the token groups below into full class names.

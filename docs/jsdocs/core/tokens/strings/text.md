@@ -2,9 +2,9 @@
 
 Non-localized UI text tokens (units, dev-facing labels) —
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\strings\text.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\strings\text.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -12,6 +12,10 @@ Non-localized UI text tokens (units, dev-facing labels) —
 ### `LABEL_TEXT`
 
 labels text.
+
+### `LEGEND`
+
+The sitemap locale-decoder fieldset's <legend> label.
 
 ### `UNIT_TEXT`
 

@@ -8,7 +8,7 @@
 function shareImagesCached(manifestUrl): string[]
 ```
 
-Defined in: core/utils/share-gallery.ts:269
+Defined in: core/utils/share-gallery.ts:268
 
 Cached share URLs for one manifest — the set the last rotation
 loaded ([] until a manifest resolves). Rich-route emitters append

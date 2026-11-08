@@ -8,7 +8,7 @@
 function generateStarBodySchema(options): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:659
+Defined in: core/utils/schema.ts:739
 
 Star-field body JSON-LD graph — the route base (with a Home →
 Star Field → body crumb) plus an Article whose `about` Thing carries

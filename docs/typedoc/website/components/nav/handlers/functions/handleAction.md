@@ -8,7 +8,7 @@
 function handleAction(host, e?): void
 ```
 
-Defined in: website/components/nav/handlers.ts:95
+Defined in: website/components/nav/handlers.ts:96
 
 Contact/CTA click: near the document bottom the entry becomes "selected
 work" — home scrolls back to the mosaic (top), internals navigate to the

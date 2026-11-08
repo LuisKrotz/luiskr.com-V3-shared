@@ -1,21 +1,23 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/layout](../README.md) / sectionItemHeight
 
 ```ts
-function sectionItemHeight(c, section): string;
+function sectionItemHeight(c, section): string
 ```
 
-Defined in: website/views/project/layout.ts:26
+Defined in: website/views/project/layout.ts:38
 
-Per-section CSS height: the FIRST media item's intrinsic ratio applied
-to the viewport width — min(100vw·h/w, SKELETON_ITEM_HEIGHT). Emitting
-the height before decode means the section never reflows when media
-arrives. Sections without a sized media array fall back to the fixed
-skeleton height. `toFixed(4)` keeps the calc string compact while
-preserving sub-pixel accuracy.
+Per-section CSS height: the TALLEST media item's intrinsic ratio
+applied to the viewport width — min(100vw·h/w, SKELETON_ITEM_HEIGHT) —
+mirroring the runtime strip, which sizes every slide to the tallest
+rendered item. Emitting the height before decode means the section
+never reflows when media arrives; over-reserving (never under) keeps
+the correction direction downward-only. Sections without any sized
+media fall back to the fixed skeleton height. `toFixed(4)` keeps the
+calc string compact while preserving sub-pixel accuracy.
 
 ## Parameters
 

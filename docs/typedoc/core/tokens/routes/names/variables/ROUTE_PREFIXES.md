@@ -16,6 +16,6 @@ const ROUTE_PREFIXES: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/routes/names.ts:33
+Defined in: core/tokens/routes/names.ts:34
 
 routes prefixes.

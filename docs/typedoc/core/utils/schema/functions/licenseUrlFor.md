@@ -8,7 +8,7 @@
 function licenseUrlFor(lang?): string
 ```
 
-Defined in: core/utils/schema.ts:100
+Defined in: core/utils/schema.ts:109
 
 Absolute license-page URL for a locale — ImageObject.license /
 acquireLicensePage targets and the sitemap <image:license> all resolve

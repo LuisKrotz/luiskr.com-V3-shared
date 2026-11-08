@@ -29,7 +29,19 @@
         </li>
         <li>
           <a href="#file-core-sass-base-_variables-scss">core\sass\base\_variables.scss</a>
-          (198)
+          (209)
+        </li>
+        <li>
+          <a href="#file-core-sass-base-structure-_dark-mode-scss">
+            core\sass\base\structure\_dark-mode.scss
+          </a>
+          (1)
+        </li>
+        <li>
+          <a href="#file-core-sass-base-structure-_high-contrast-scss">
+            core\sass\base\structure\_high-contrast.scss
+          </a>
+          (2)
         </li>
         <li>
           <a href="#file-core-sass-components-carousel-_dot-nav-scss">
@@ -786,6 +798,56 @@
         </h3>
         <pre class="sd-sig"><code>$cms-accent-contrast: #0f8a84;</code></pre>
         <p>CMS admin-chrome token — compile-time only (dark panel theme)</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-neon-teal-light">
+        <h3>
+          <code>neon-teal-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$neon-teal-light: $cms-accent-contrast;</code></pre>
+        <p>
+          Light theme — deep teal glyph ink; shares the light control accent (3.25:1 on the disc).
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-neon-green-light">
+        <h3>
+          <code>neon-green-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$neon-green-light: #15803d;</code></pre>
+        <p>Light theme — deep green glyph ink (3.87:1 on the disc).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-neon-violet-light">
+        <h3>
+          <code>neon-violet-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$neon-violet-light: #7a28e0;</code></pre>
+        <p>Light theme — deep violet glyph ink (5.05:1 on the disc).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-neon-magenta-light">
+        <h3>
+          <code>neon-magenta-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$neon-magenta-light: #d0008f;</code></pre>
+        <p>Light theme — deep magenta glyph ink (3.97:1 on the disc).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-neon-orange-light">
+        <h3>
+          <code>neon-orange-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$neon-orange-light: #cc5500;</code></pre>
+        <p>Light theme — burnt-orange glyph ink (3.33:1 on the disc).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-neon-chrome-light">
+        <h3>
+          <code>neon-chrome-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$neon-chrome-light: #64748b;</code></pre>
+        <p>Light theme — steel-slate ferrule ink (3.67:1 on the disc).</p>
       </article>
       <article class="sd-item sd-item--variable" id="variable-cms-badge-warn">
         <h3>
@@ -1758,6 +1820,14 @@
         <pre class="sd-sig"><code>$space-10xl: 1597;</code></pre>
         <p>Fib(17) — 1597px, ultra-wide layout slots</p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-space-deck-lift">
+        <h3>
+          <code>space-deck-lift</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$space-deck-lift: 160;</code></pre>
+        <p>Desktop card-deck lift — the fan rides 160px above its grid row.</p>
+      </article>
       <article class="sd-item sd-item--variable" id="variable-cov-low-strong">
         <h3>
           <code>cov-low-strong</code>
@@ -2223,13 +2293,65 @@
         <pre class="sd-sig"><code>$z-top: 9999;</code></pre>
         <p>Top-level elements (dialogs)</p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-font-sans">
+        <h3>
+          <code>font-sans</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$font-sans:</code></pre>
+        <p>
+          Primary sans stack — Poiret One (Google Fonts, hand-rolled @font-face + preloads in
+          index.html), with system sans fallbacks so text paints before or without the webfont.
+        </p>
+      </article>
       <article class="sd-item sd-item--variable" id="variable-font-mono">
         <h3>
           <code>font-mono</code>
           <span class="sd-kind">variable</span>
         </h3>
         <pre class="sd-sig"><code>$font-mono:</code></pre>
-        <p>Monospace stack — system fonts only, so no webfont download blocks paint.</p>
+        <p>
+          Monospace stack — Fira Code (Google Fonts, stylesheet link in index.html) leading the
+          system mono ladder, which stays as the fallback on surfaces that never load the webfont
+          (experiment dev entries ship no font links).
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-font-serif">
+        <h3>
+          <code>font-serif</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre
+          class="sd-sig"
+        ><code>$font-serif: &#39;Zilla Slab&#39;, Georgia, &#39;Times New Roman&#39;, Times, serif;</code></pre>
+        <p>
+          Editorial serif stack — Zilla Slab (Google Fonts, stylesheet link in index.html), with
+          system serif fallbacks so text paints before or without the webfont.
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-font-ui">
+        <h3>
+          <code>font-ui</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$font-ui: &#39;Oswald&#39;, var(--font-primary);</code></pre>
+        <p>
+          Interface-label stack — Oswald (Google Fonts, stylesheet link in index.html): the
+          condensed sans for deck chrome — counters, nav, hints and index captions. Same
+          --font-primary tail.
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-font-desc">
+        <h3>
+          <code>font-desc</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$font-desc: &#39;Jost&#39;, var(--font-primary);</code></pre>
+        <p>
+          Body-copy stack — Jost (Google Fonts, stylesheet link in index.html): the geometric sans
+          for card descriptions, mention copy, CTAs, preference descriptions and footer chrome. Same
+          --font-primary tail.
+        </p>
       </article>
       <article class="sd-item sd-item--variable" id="variable-ease-spring">
         <h3>
@@ -2257,6 +2379,47 @@
           and fluid rather than bouncy (nav chip reveals, gear spin). Browsers without linear() keep
           the cubic-bezier fallback declared alongside it at each callsite. Fluid ease-in-out for
           nav chip reveals — gentle start, long even glide, soft landing (no punch).
+        </p>
+      </article>
+    </section>
+    <section id="file-core-sass-base-structure-_dark-mode-scss">
+      <h2>core\sass\base\structure\_dark-mode.scss</h2>
+      <article class="sd-item sd-item--mixin" id="mixin-dark-mode-tokens">
+        <h3>
+          <code>dark-mode-tokens</code>
+          <span class="sd-kind">mixin</span>
+        </h3>
+        <pre class="sd-sig"><code>@mixin dark-mode-tokens {</code></pre>
+        <p>
+          Emits the full dark-theme token override set — --bg-*/--text-*/--menu-*/
+          --skel-*/*-neon-*/burn/shadow palette plus `color-scheme: dark` and the zeroed light-mode
+          font-weight lift. Applied under `html.dark-mode` for the app and under
+          `prefers-color-scheme` by surfaces that cannot carry the class.
+        </p>
+      </article>
+    </section>
+    <section id="file-core-sass-base-structure-_high-contrast-scss">
+      <h2>core\sass\base\structure\_high-contrast.scss</h2>
+      <article class="sd-item sd-item--mixin" id="mixin-high-contrast-light-tokens">
+        <h3>
+          <code>high-contrast-light-tokens</code>
+          <span class="sd-kind">mixin</span>
+        </h3>
+        <pre class="sd-sig"><code>@mixin high-contrast-light-tokens {</code></pre>
+        <p>
+          Emits the high-contrast LIGHT token overrides — pure white field, pitch-black opaque inks,
+          ring shadows, no ambient wash.
+        </p>
+      </article>
+      <article class="sd-item sd-item--mixin" id="mixin-high-contrast-dark-tokens">
+        <h3>
+          <code>high-contrast-dark-tokens</code>
+          <span class="sd-kind">mixin</span>
+        </h3>
+        <pre class="sd-sig"><code>@mixin high-contrast-dark-tokens {</code></pre>
+        <p>
+          Emits the high-contrast DARK token overrides — layered on top of the dark theme, same
+          collapse-to-extremes policy as the light HC set.
         </p>
       </article>
     </section>

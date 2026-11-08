@@ -48,7 +48,7 @@ import { ANIMATION_IDS } from '@core/tokens/data/animation-ids.js'
 
 // Route depth: home = 0, all other views = 1
 
-import appStyles from '@core/sass/components/shell/app.scss?inline'
+import appStyles from '@core/sass/components/shell/app.scss?tiers'
 import '@website/components/nav/AppNav.js'
 import '@website/components/feedback/CookieBanner.js'
 
@@ -126,6 +126,9 @@ export class AppRoot extends BaseComponent {
   override onStoreUpdate() {
     const currentLocale = store.getters.getLang()
 
+    // A locale swap invalidates every cached translation — refetch the
+    // new locale's nodes. The _loadedLang guard skips the first store
+    // fire (before loadData has ever run — nothing to invalidate).
     if (this._loadedLang && this._loadedLang !== currentLocale) {
       this.loadData()
     }
@@ -211,13 +214,21 @@ export class AppRoot extends BaseComponent {
    * dynamic component (CurrentView = this.currentViewTag).
    */
   override render() {
+    // The open modal's modifier class lands on the wrapper (empty when
+    // no modal is open — the CSS gate keys off its presence).
     const modalClass = this.modal?.class || CHAR_STRINGS.EMPTY
+
+    // Tag-name constants bound to locals — the JSX transform emits
+    // createElement(tag) so each custom element reads as a component.
     const AppNav = COMPONENT_TAGS.APP_NAV
     const PreferencesModal = COMPONENT_TAGS.PREFERENCES_MODAL
     const LangDialog = COMPONENT_TAGS.LANG_DIALOG
     const SearchModal = COMPONENT_TAGS.SEARCH_MODAL
     const CookieBanner = COMPONENT_TAGS.COOKIE_BANNER
     const StatsHud = COMPONENT_TAGS.STATS_HUD
+
+    // The routed view — a dynamic tag name (e.g. 'view-home') resolved
+    // per render, so route changes re-render to a different element.
     const CurrentView = this.currentViewTag
 
     return (
@@ -265,14 +276,24 @@ export class AppRoot extends BaseComponent {
 
   /** Lifecycle: after each re-render, re-pushes translations and modal state into children. */
   override onUpdated() {
+    // Push the loaded locale dictionary into each chrome child — the
+    // children hold no fetch of their own; the shell owns the data.
     const nav = this.$<AppNavEl>(COMPONENT_TAGS.APP_NAV)
+
     if (nav) nav.translations = this.translations
+
     const cookie = this.$<CookieBannerEl>(COMPONENT_TAGS.COOKIE_BANNER)
+
     if (cookie) cookie.translations = this.translations
+
+    // The preferences modal takes only its own sub-tree of the dict.
     const pref = this.$<PrefModalEl>(COMPONENT_TAGS.PREFERENCES_MODAL)
+
     if (pref) {
       pref.pref = this.translations?.pref
     }
+
+    // Re-apply the modal open/close side effects against the fresh DOM.
     this._updateModalState()
 
     // The route progress bar is recreated per render — re-bind its
@@ -282,6 +303,9 @@ export class AppRoot extends BaseComponent {
   }
 }
 
+// Register <app-root> — the registry guard tolerates double-evaluation
+// (HMR, duplicated chunk inclusion) by skipping a re-define, which
+// would throw InvalidStateError on the same tag name.
 if (!customElements.get(COMPONENT_TAGS.APP_ROOT)) {
   customElements.define(COMPONENT_TAGS.APP_ROOT, AppRoot)
 }

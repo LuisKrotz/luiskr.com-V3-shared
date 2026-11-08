@@ -8,6 +8,6 @@
 const _B_DISTORT: 'image-distort' = 'image-distort'
 ```
 
-Defined in: core/tokens/base.ts:129
+Defined in: core/tokens/base.ts:146
 
 BEM block fragment "b distort" — composed by the token groups below into full class names.

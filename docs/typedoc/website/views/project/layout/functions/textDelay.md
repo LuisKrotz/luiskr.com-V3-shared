@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/layout](../README.md) / textDelay
 
 ```ts
-function textDelay(c, items): number;
+function textDelay(c, items): number
 ```
 
-Defined in: website/views/project/layout.ts:49
+Defined in: website/views/project/layout.ts:66
 
 Per-char draw delay for a section's text run: counts REAL characters
 (HTML stripped — tags don't consume stagger time), then sizes the

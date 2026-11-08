@@ -8,7 +8,7 @@
 const _B_EXPAND_MODAL: 'expand-modal' = 'expand-modal'
 ```
 
-Defined in: core/tokens/base.ts:270
+Defined in: core/tokens/base.ts:338
 
 BEM block fragment `expand-modal` — declared once here; every domain class token composes
 from this fragment (zero-hardcoding rule 9).

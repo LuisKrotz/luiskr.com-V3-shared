@@ -48,6 +48,12 @@ Re-exports [AWARDS_CLASSES](awards/variables/AWARDS_CLASSES.md)
 
 ---
 
+### CARD\_STACK\_CLASSES
+
+Re-exports [CARD_STACK_CLASSES](card-stack/variables/CARD_STACK_CLASSES.md)
+
+---
+
 ### CAROUSEL\_CLASSES
 
 Re-exports [CAROUSEL_CLASSES](carousel/variables/CAROUSEL_CLASSES.md)
@@ -108,6 +114,12 @@ Re-exports [FOOTER_CLASSES](footer/variables/FOOTER_CLASSES.md)
 
 ---
 
+### JOUST\_CLASSES
+
+Re-exports [JOUST_CLASSES](joust/variables/JOUST_CLASSES.md)
+
+---
+
 ### LANG\_CLASSES
 
 Re-exports [LANG_CLASSES](lang/variables/LANG_CLASSES.md)
@@ -132,9 +144,21 @@ Re-exports [LOADER_CLASSES](loader/variables/LOADER_CLASSES.md)
 
 ---
 
+### MEDIA\_MOSAIC\_CLASSES
+
+Re-exports [MEDIA_MOSAIC_CLASSES](media-mosaic/variables/MEDIA_MOSAIC_CLASSES.md)
+
+---
+
 ### MEDIA\_CLASSES
 
 Re-exports [MEDIA_CLASSES](media/variables/MEDIA_CLASSES.md)
+
+---
+
+### MENTIONS\_DECK\_CLASSES
+
+Re-exports [MENTIONS_DECK_CLASSES](mentions-deck/variables/MENTIONS_DECK_CLASSES.md)
 
 ---
 

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/views/animations/Animations](../README.md) / ViewAnimations
 
-Defined in: website/views/animations/Animations.tsx:53
+Defined in: website/views/animations/Animations.tsx:60
 
 The ViewAnimations — animations class.
 
@@ -20,7 +20,7 @@ The ViewAnimations — animations class.
 new ViewAnimations(): ViewAnimations;
 ```
 
-Defined in: website/views/animations/Animations.tsx:57
+Defined in: website/views/animations/Animations.tsx:64
 
 #### Returns
 
@@ -183,7 +183,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 translations: AnimationsPage | null = null;
 ```
 
-Defined in: website/views/animations/Animations.tsx:54
+Defined in: website/views/animations/Animations.tsx:61
 
 ---
 
@@ -4795,7 +4795,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/views/animations/Animations.tsx:63
+Defined in: website/views/animations/Animations.tsx:70
 
 Lifecycle: kicks off document loading.
 
@@ -4815,7 +4815,7 @@ Lifecycle: kicks off document loading.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/views/animations/Animations.tsx:75
+Defined in: website/views/animations/Animations.tsx:82
 
 Reloads when the locale changes.
 
@@ -4835,7 +4835,7 @@ Reloads when the locale changes.
 loadData(): void;
 ```
 
-Defined in: website/views/animations/Animations.tsx:90
+Defined in: website/views/animations/Animations.tsx:97
 
 Fetches the animations page chrome node (title + description) for the
 current locale — the record list itself streams from the components
@@ -4855,7 +4855,7 @@ text, not the booted shell's.
 render(): Element;
 ```
 
-Defined in: website/views/animations/Animations.tsx:124
+Defined in: website/views/animations/Animations.tsx:131
 
 JSX template — two states: loaded renders the title, intro paragraph and
 one definition-list row per animation record (alt = term, longdesc =

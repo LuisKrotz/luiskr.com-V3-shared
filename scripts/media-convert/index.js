@@ -23,31 +23,58 @@ import { convertFile, isSupported, detectTools } from './pipeline.js'
 import { toolsReport, installTools } from './install.js'
 import { buildZip } from './zip.js'
 
+// Mount path — every route below is dispatched relative to it.
 const PREFIX = '/api/media-convert'
+
+// Job workspaces live in the OS temp dir — nothing under the repo.
 const ROOT = path.join(os.tmpdir(), 'luiskr-media-convert')
+
+// Abandoned job dirs are reaped after one hour.
 const JOB_TTL_MS = 60 * 60 * 1000
+
+// id → job record; the in-memory registry the endpoints read/update.
 const jobs = new Map()
 
+/** `json` — the one JSON response shape every endpoint shares. */
 const json = (res, code, obj) => {
   res.statusCode = code
+
   res.setHeader('content-type', 'application/json')
+
   res.end(JSON.stringify(obj))
 }
 
+/**
+ * `safeJoin` — resolves `rel` under `root` and returns null on any
+ * path that escapes (the upload endpoint's traversal guard: a
+ * client-supplied x-file-path must never write outside in/).
+ */
 const safeJoin = (root, rel) => {
   const p = path.normalize(path.join(root, rel))
+
+  // The resolved path must stay strictly inside root — prefix-match
+  // against root-with-separator so 'in-evil' doesn't pass.
   if (!p.startsWith(path.normalize(root + path.sep))) return null
+
   return p
 }
 
+/**
+ * `pruneStaleJobs` — removes job dirs older than JOB_TTL_MS at
+ * plugin mount, so dead conversions can't fill the temp dir across
+ * dev-server restarts.
+ */
 async function pruneStaleJobs() {
   try {
     await fsp.mkdir(ROOT, { recursive: true })
     const now = Date.now()
     for (const entry of await fsp.readdir(ROOT)) {
       const dir = path.join(ROOT, entry)
+
       try {
         const stat = await fsp.stat(dir)
+
+        // Older than the TTL → recursive-delete the whole workspace.
         if (now - stat.mtimeMs > JOB_TTL_MS) await fsp.rm(dir, { recursive: true, force: true })
       } catch {
         /* ignore individual dir errors */
@@ -58,29 +85,49 @@ async function pruneStaleJobs() {
   }
 }
 
+/**
+ * `runJob` — the async conversion loop: walks the job's input tree,
+ * converts each supported file into the mirrored output dir, and
+ * keeps the job record's progress fields live for the status poll.
+ * Per-file failures are recorded, not fatal — one bad input doesn't
+ * kill the batch.
+ */
 async function runJob(job) {
   job.status = 'running'
+
   // Non-media litter (desktop.ini, .DS_Store, Thumbs.db…) dropped inside
   // folders is skipped outright — never counted, converted or reported.
   const files = (await walk(job.inDir)).filter((f) => isSupported(f))
+
   job.total = files.length
+
   job.done = 0
+
   job.results = []
 
   for (const abs of files) {
+    // Input-relative path — the output tree mirrors the input layout
+    // so nested uploads keep their folder structure.
     const rel = path.relative(job.inDir, abs)
+
     job.current = rel
+
     const relDir = path.join(job.outDir, path.dirname(rel))
+
     await fsp.mkdir(relDir, { recursive: true })
 
     try {
       const outs = await convertFile(abs, relDir)
+
       job.results.push({
         in: rel,
         ok: true,
+        // Output names are relative to their dir — re-root them the
+        // same way the input path is reported.
         outs: outs.map((o) => path.join(path.dirname(rel), o)),
       })
     } catch (err) {
+      // Record the failure (message capped at 300 chars) and move on.
       job.results.push({
         in: rel,
         ok: false,
@@ -92,28 +139,52 @@ async function runJob(job) {
     job.done++
   }
 
+  // Terminal state — 'done' if at least one file converted; 'error'
+  // when every attempt failed.
   job.current = null
+
   job.status = job.results.some((r) => r.ok) ? 'done' : 'error'
+
   job.finishedAt = Date.now()
 }
 
+/**
+ * `walkGen` — recursive generator yielding every file path under
+ * `dir` (the project's traversal convention: yield* recursion, no
+ * hand-rolled stack).
+ */
 async function* walkGen(dir) {
   for (const e of await fsp.readdir(dir, { withFileTypes: true })) {
     const p = path.join(dir, e.name)
+
     if (e.isDirectory()) yield* walkGen(p)
     else if (e.isFile()) yield p
   }
 }
 
+/** `walk` — drains the generator into a flat array. */
 async function walk(dir) {
   const out = []
+
   for await (const p of walkGen(dir)) out.push(p)
+
   return out
 }
 
+/**
+ * `handle` — the single middleware behind every route. Dispatches on
+ * (method, sub-path) to the endpoint table documented in the header;
+ * falls through to `next()` for anything that isn't ours.
+ */
 async function handle(req, res, next) {
+  // Parse the request URL — the dummy base only satisfies the URL
+  // constructor (req.url is path+query only on a middleware).
   const url = new URL(req.url, 'http://localhost')
+
+  // Path under the mount prefix, and its non-empty segments for
+  // /jobs/:id/…-style matching.
   const sub = url.pathname.replace(PREFIX, '') || '/'
+
   const seg = sub.split('/').filter(Boolean)
 
   try {
@@ -151,8 +222,13 @@ async function handle(req, res, next) {
       return json(res, 201, { id })
     }
 
+    // Everything below is /jobs/:id[/action] — anything else isn't ours.
     if (seg[0] !== 'jobs' || !seg[1]) return next()
+
     const job = jobs.get(seg[1])
+
+    // The registry AND the disk dir must both exist — a job can
+    // outlive its temp dir after a TTL prune.
     if (!job || !fs.existsSync(job.dir)) return json(res, 404, { error: 'job not found' })
 
     // PUT /jobs/:id/files — stream one file into the job's input tree
@@ -223,8 +299,15 @@ async function handle(req, res, next) {
   }
 }
 
+/**
+ * `mediaConvertPlugin` — the Vite plugin factory. Mounts the API on
+ * both the dev server and `vite preview` so the converter works while
+ * reviewing a built bundle locally; it never ships in dist output.
+ */
 export function mediaConvertPlugin() {
   const mount = (middlewares) => {
+    // Probe the host's media tools once and announce what's usable —
+    // the GUI calls /tools for the same data on demand.
     detectTools()
       .then((t) =>
         console.log(
@@ -233,9 +316,13 @@ export function mediaConvertPlugin() {
         )
       )
       .catch((e) => console.warn(`[media-convert] ${e.message}`))
+
+    // Reap abandoned workspaces before accepting new jobs.
     pruneStaleJobs()
+
     middlewares.use(PREFIX, handle)
   }
+
   return {
     name: 'luiskr-media-convert',
     configureServer(server) {

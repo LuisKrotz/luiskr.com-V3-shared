@@ -8,7 +8,7 @@
 const _B_MEDIA_AUDIO_NOTE: 'media-audio-note' = 'media-audio-note'
 ```
 
-Defined in: core/tokens/base.ts:64
+Defined in: core/tokens/base.ts:81
 
 BEM block fragment "b media audio note" — the figcaption strip noting the
 video's audio language; composed by the token groups below (rule 9).

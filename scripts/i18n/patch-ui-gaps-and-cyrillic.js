@@ -1,9 +1,27 @@
+/**
+ * @file patch-ui-gaps-and-cyrillic.js
+ * @description One-shot migration: fills the last English-holding
+ * leaves across all locales (legal-footer links, featured labels,
+ * docs-portal strings, pref labels, the OFF toggle, tln's star-field
+ * vocabulary) and transliterates every proper name/label to Cyrillic
+ * under `ru` per the "all names in Cyrillic" directive.
+ *
+ * Unlike the page-scoped patch scripts this one writes arbitrary
+ * dot-paths — see `setPath` for the path grammar.
+ *
+ * Run: node shared/scripts/i18n/patch-ui-gaps-and-cyrillic.js
+ * (patches the local mirror only).
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place, written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
 /**
@@ -246,39 +264,65 @@ const PATCH = {
   },
 }
 
-/** Sets `obj`'s leaf at a dot-path, creating intermediate containers. */
+/**
+ * Sets `obj`'s leaf at a dot-path, creating intermediate containers.
+ * Numeric path segments index arrays (legal-footer.links.0.page);
+ * a missing intermediate node is created as [] or {} depending on
+ * whether the NEXT segment is numeric — the JSON tree's arrays vs
+ * objects must be inferred because the paths name both.
+ *
+ * @param obj Root object to write into.
+ * @param dotPath Dotted path ('components.legal-footer.links.0.page').
+ * @param value Leaf value to assign.
+ */
 const setPath = (obj, dotPath, value) => {
   const keys = dotPath.split('.')
+
+  // The leaf key — handled after the container walk.
   const last = keys.pop()
 
+  // Walk/create each intermediate node down to the leaf's parent.
   const node = keys.reduce((acc, k) => {
+    // Numeric segments are array indices, not object keys.
     const key = /^\d+$/.test(k) ? Number(k) : k
 
+    // Create the container if absent — an array when the NEXT path
+    // segment is numeric, an object otherwise.
     if (acc[key] === undefined) acc[key] = /^\d+$/.test(String(keys[keys.indexOf(k) + 1])) ? [] : {}
 
     return acc[key]
   }, obj)
 
+  // Write the leaf — numeric key → array index, else object property.
   node[/^\d+$/.test(last) ? Number(last) : last] = value
 }
 
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
+
+// Running count of written leaves for the summary line.
 let patched = 0
 
 for (const [locale, map] of Object.entries(PATCH)) {
+  // Skip locales missing their translations node entirely — a warn
+  // is loud enough for the operator without aborting the run.
   if (!db.translations[locale]) {
     console.warn(`skipping ${locale} — no translations node`)
 
     continue
   }
 
+  // Apply each leaf patch — setPath creates intermediate containers
+  // so paths into previously-absent subtrees land cleanly.
   for (const [dotPath, value] of Object.entries(map)) {
     setPath(db.translations[locale], dotPath, value)
+
     patched++
   }
 }
 
+// Write the mirror back — 2-space indent matches the file's format.
 fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8')
+
 console.log(
   `✅ database.json patched — ${patched} leaves across ${Object.keys(PATCH).length} locales.`
 )

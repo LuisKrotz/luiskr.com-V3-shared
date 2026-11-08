@@ -8,13 +8,14 @@
 function loadCatalog(lang, done): void
 ```
 
-Defined in: website/components/search/route-search/data.ts:293
+Defined in: website/components/search/route-search/data.ts:418
 
-`loadCatalog` — the full ~1100-route locale catalog comes from the
-generated `meta/search-index-<loc>.json` (the sitemap's URL set,
-enriched per locale). When the artifact is absent (dev without a
-build, offline test env) the embedded catalog — static pages plus
-the store/SWR portfoliolist — is the fallback.
+`loadCatalog` — the locale route catalog comes from the generated
+`meta/search-index-<loc>.json` (the sitemap's URL set, enriched per
+locale) merged with the shared docs index (English-only, fetched once
+and reused across locale switches). When the locale artifact is
+absent (dev without a build, offline test env) the embedded catalog —
+static pages plus the store/SWR portfoliolist — is the fallback.
 
 ## Parameters
 

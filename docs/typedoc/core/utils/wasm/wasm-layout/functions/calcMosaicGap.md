@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcMosaicGap
 
 ```ts
-function calcMosaicGap(vw): number;
+function calcMosaicGap(vw): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:252
+Defined in: core/utils/wasm/wasm-layout.ts:253
 
 Mosaic gutter in px — 0 below the gap breakpoint (edge-to-edge tiles on
 phones), MOSAIC_GAP above.

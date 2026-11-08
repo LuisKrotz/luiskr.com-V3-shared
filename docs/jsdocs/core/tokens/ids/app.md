@@ -81,6 +81,12 @@ app-root shadow tree): identical ids across trees are legal, but
 DOM-wide uniqueness checkers count the composed tree. At runtime a
 delegated handler re-aims the link at the shadow #main-content.
 
+### `SITEMAP_GROUP_PREFIX`
+
+Sitemap collapsible-group region id PREFIX — the toggle's
+aria-controls points at `<prefix><group-key>` (the wall container
+that mounts the group's children on first open).
+
 ### `NAV_SEARCH_IDS`
 
 Gradient ids for the nav search magnifier SVG.

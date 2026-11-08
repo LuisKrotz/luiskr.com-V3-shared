@@ -8,7 +8,7 @@
 function projectEntries(items, lang): RouteEntry[]
 ```
 
-Defined in: website/components/search/route-search/data.ts:236
+Defined in: website/components/search/route-search/data.ts:294
 
 The portfolio half — one `/portfolio/<link>` entry per row in the home
 portfoliolist, hydrated with the row's label/description/cover.

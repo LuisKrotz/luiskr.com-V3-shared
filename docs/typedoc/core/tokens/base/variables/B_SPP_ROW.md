@@ -8,7 +8,7 @@
 const _B_SPP_ROW: 'sp-panel-row'
 ```
 
-Defined in: core/tokens/base.ts:418
+Defined in: core/tokens/base.ts:493
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

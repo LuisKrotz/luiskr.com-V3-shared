@@ -1,9 +1,23 @@
+/**
+ * @file patch-earth-playground-titles.js
+ * @description One-shot migration: rewrites each locale's
+ * earth-playground page title + description to carry that locale's
+ * own "earth simulation" phrasing — the page's strongest on-page
+ * signal for the query the experiment is meant to rank for.
+ *
+ * Run: node shared/scripts/i18n/patch-earth-playground-titles.js
+ * (patches the local mirror only — the upload-* scripts push live).
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place, written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
 /**
@@ -102,18 +116,26 @@ const TRANSLATIONS_MAP = {
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 
 for (const [locale, data] of Object.entries(TRANSLATIONS_MAP)) {
+  // The locale's earth-playground page node — absent locales warn
+  // rather than silently bootstrap a page the CMS hasn't created.
   const page = db.translations?.[locale]?.pages?.['earth-playground']
 
   if (!page) {
     console.warn(`⚠ ${locale}: no earth-playground page node — skipped`)
+
     continue
   }
 
+  // Title feeds <title>/h1/breadcrumbs/WebPage.name; description
+  // feeds the meta description — both carry the query-aligned phrase.
   page.title = data.title
+
   page.description = data.description
 }
 
+// Write the mirror back — 2-space indent matches the file's format.
 fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8')
+
 console.log(
   '✅ database.json patched with query-aligned Earth Playground titles/descriptions across all locales.'
 )

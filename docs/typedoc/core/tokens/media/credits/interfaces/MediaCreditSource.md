@@ -43,3 +43,19 @@ license: string
 Defined in: core/tokens/media/credits.ts:23
 
 Licence posture as published by the source.
+
+---
+
+### licenseUrl
+
+```ts
+licenseUrl: string
+```
+
+Defined in: core/tokens/media/credits.ts:31
+
+Canonical page stating the source's licence terms — emitted as
+ImageObject/VideoObject `license` + `acquireLicensePage` for credited
+assets so the licensable badge lands on the real terms page, never
+the site's own legal page (the site's MPL grant does not cover
+third-party imagery).

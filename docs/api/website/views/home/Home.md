@@ -1,6 +1,6 @@
 # `website\views\home\Home.tsx`
 
-&lt;view-home&gt; — the home page route: hero carousel, about
+&lt;view-home&gt; — the home page route: the selected-work
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |

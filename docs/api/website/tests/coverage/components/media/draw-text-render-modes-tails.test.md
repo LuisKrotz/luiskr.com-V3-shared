@@ -9,6 +9,10 @@ Coverage tails for the draw-text render modes — the 'plain'
 
 ## Members
 
+### `plainDom`
+
+Mounts plain-mode HTML into a scratch container for assertions.
+
 ### `mount`
 
 Mounts a <draw-text> with the given attributes and returns the host.

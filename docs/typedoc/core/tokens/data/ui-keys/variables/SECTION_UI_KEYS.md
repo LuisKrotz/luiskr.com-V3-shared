@@ -16,6 +16,7 @@ const SECTION_UI_KEYS: Readonly<{
   LOADING: 'loading'
   SEARCH: 'search'
   RSS_FEED: 'rssFeed'
+  SITEMAP: 'sitemap'
 }>
 ```
 

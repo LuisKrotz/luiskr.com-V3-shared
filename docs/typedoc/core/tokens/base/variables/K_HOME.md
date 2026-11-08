@@ -8,6 +8,6 @@
 const _K_HOME: 'HOME' = 'HOME'
 ```
 
-Defined in: core/tokens/base.ts:432
+Defined in: core/tokens/base.ts:550
 
 Token key "k home" — single source for the repeated literal.

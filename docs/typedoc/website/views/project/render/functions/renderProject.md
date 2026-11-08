@@ -8,7 +8,7 @@
 function renderProject(c): Element
 ```
 
-Defined in: website/views/project/render.tsx:55
+Defined in: website/views/project/render.tsx:57
 
 Renders project.
 

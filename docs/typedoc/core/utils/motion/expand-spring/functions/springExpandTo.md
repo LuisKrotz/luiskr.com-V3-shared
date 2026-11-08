@@ -8,7 +8,7 @@
 function springExpandTo(el, target, onSettle?, instant?, write?, from?): void
 ```
 
-Defined in: core/utils/motion/expand-spring.ts:114
+Defined in: core/utils/motion/expand-spring.ts:123
 
 Spring-drives `el`'s height toward `target` px. Mid-flight retargets
 preserve velocity — a result list that grows again before settling

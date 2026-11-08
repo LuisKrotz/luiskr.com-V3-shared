@@ -38,8 +38,12 @@ const run = promisify(execFile)
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
+// The CDN bucket prefix every object key hangs off — sources read
+// and siblings write inside this one prefix.
 const BUCKET = 'gs://luiskr.com/public/_v3/'
 
+// Per-run scratch space in the OS temp dir — each file lands, is
+// transcoded, and is deleted inside it.
 const WORK_DIR = path.join(os.tmpdir(), 'webp-webm-convert')
 
 /** Source extensions → target extension + mime type. */
@@ -57,8 +61,17 @@ const VIDEO_MAX_BYTES = 1024 * 1024 * 1024
 const IMAGE_MAX_BYTES = 64 * 1024 * 1024
 
 const args = process.argv.slice(2)
+
+// --dry transcodes locally but skips the upload — measures what
+// WOULD be gained without touching the bucket.
 const DRY = args.includes('--dry')
+
+// --keys <file> restricts the run to a newline-separated key list —
+// used for retrying just the failures from a prior log.
 const keysFile = args[args.indexOf('--keys') + 1]
+
+// Concurrency clamped 1..12 — beyond ~12 ffmpeg processes the disk
+// and gsutil round-trips, not CPU, become the bottleneck.
 const workers = Math.max(
   1,
   Math.min(parseInt(args[args.indexOf('--workers') + 1] || '4', 10) || 4, 12)
@@ -116,16 +129,28 @@ const ffmpegArgs = (src, dst, srcExt) =>
 /** Downloads one key, transcodes, uploads the sibling, returns a status. */
 const convertOne = async (key, spec) => {
   const srcExt = path.extname(key).toLowerCase()
+
+  // Sibling key — same path, new extension.
   const target = key.slice(0, -srcExt.length) + spec.ext
+
+  // Collision-proof local names: keys share basenames across dirs,
+  // so a content hash of the full key disambiguates the tmp file.
   const hash = createHash('sha256').update(key).digest('base64url').slice(0, 16)
+
   const safe = `${path.basename(key).replace(/[^\w.-]+/g, '_')}_${hash}`
+
   const localSrc = path.join(WORK_DIR, `in_${safe}${srcExt}`)
+
   const localDst = path.join(WORK_DIR, `out_${safe}${spec.ext}`)
 
   try {
+    // Pull the source object down for transcoding.
     await run('gsutil', ['cp', `${BUCKET}${key}`, localSrc], { maxBuffer: 1 << 24 })
 
+    // Cap per media kind — heavier originals keep standing alone
+    // rather than spending minutes on a marginal sibling.
     const sizeCap = srcExt === '.mp4' ? VIDEO_MAX_BYTES : IMAGE_MAX_BYTES
+
     const { size } = fs.statSync(localSrc)
 
     if (size > sizeCap) return [key, 'skipped-oversize']
@@ -134,9 +159,15 @@ const convertOne = async (key, spec) => {
 
     const outSize = fs.statSync(localDst).size
 
+    // The "too big" escape hatch — a compressed variant that isn't
+    // smaller is deleted, and the runtime's if-exists check simply
+    // keeps serving the original.
     if (outSize >= size) return [key, 'skipped-not-smaller']
 
     if (!DRY) {
+      // Upload the sibling with its real mime and an immutable
+      // year-long cache header — hashed-free names are content-
+      // addressed by the if-exists contract so they never change.
       await run(
         'gsutil',
         [
@@ -191,10 +222,17 @@ const convertOne = async (key, spec) => {
   }
 }
 
-/** Bounded worker pool over the key list. */
+/**
+ * `main` — job planning + the bounded worker pool: list the bucket,
+ * diff out keys whose sibling already exists (the resume contract),
+ * convert the rest N-at-a-time, then merge statuses into the
+ * persistent log.
+ */
 const main = async () => {
   fs.mkdirSync(WORK_DIR, { recursive: true })
 
+  // Full bucket listing — the source of both the work list and the
+  // already-converted sibling set.
   const manifest = await fetchMediaManifest()
 
   if (!manifest) {
@@ -203,13 +241,17 @@ const main = async () => {
     process.exit(1)
   }
 
+  // --keys filter — when present only listed keys are considered.
   const only = keysFile
     ? new Set(fs.readFileSync(keysFile, 'utf-8').split('\n').filter(Boolean))
     : null
 
+  // Work list: convertible source ext AND target sibling absent —
+  // that's what makes a re-run free instead of duplicating work.
   const jobs = [...manifest]
     .map((key) => {
       const srcExt = path.extname(key).toLowerCase()
+
       const spec = CONVERT[srcExt]
 
       if (!spec) return null
@@ -223,7 +265,11 @@ const main = async () => {
   console.log(`[webp-webm] ${jobs.length} conversions pending (${workers} workers)`)
 
   const results = []
+
+  // Shared cursor — each worker takes the next index atomically
+  // (single-threaded JS: the increment can't race).
   let cursor = 0
+
   let done = 0
 
   const worker = async () => {
@@ -234,13 +280,17 @@ const main = async () => {
 
       done++
 
+      // Progress heartbeat every 25 files — long runs stay observable.
       if (done % 25 === 0) console.log(`[webp-webm] ${done}/${jobs.length}`)
     }
   }
 
   await Promise.all(Array.from({ length: workers }, worker))
 
+  // ── Persistent status log — merged over the prior run's entries
+  // so re-runs accumulate one canonical record per key.
   const logPath = path.join(ROOT, 'website', 'public', 'meta', 'media-convert-log.json')
+
   const merged = new Map()
 
   try {
@@ -251,12 +301,15 @@ const main = async () => {
     // no prior log — this run is the whole record
   }
 
+  // This run's statuses overwrite any stale entries for the same key.
   for (const [k, s] of results) merged.set(k, s)
 
   const summary = { generated: new Date().toISOString(), results: [...merged] }
 
   fs.writeFileSync(logPath, `${JSON.stringify(summary, null, 1)}\n`, 'utf-8')
 
+  // Terminal tally by status verb — 'converted', 'skipped-*',
+  // 'error', 'dry-run' each count once per key.
   const tally = {}
 
   for (const [, status] of results) {

@@ -11,6 +11,7 @@ const FOOTER_CLASSES: Readonly<{
   FOOTER_DOCS: 'footer-source-docs'
   FOOTER_DOCS_LINK: 'footer-source-docs-link'
   FOOTER_DOCS_DESC: 'footer-source-docs-desc'
+  FOOTER_DOCS_ARROW: 'footer-source-docs-arrow'
   FOOTER_DIVIDER: 'footer-source-divider'
   FOOTER_DIVIDER_CANVAS: 'footer-source-divider-canvas'
   FOOTER_CREDIT: 'footer-source-credit'

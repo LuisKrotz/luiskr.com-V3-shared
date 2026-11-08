@@ -4494,6 +4494,47 @@ Declared media height attribute.
 
 ---
 
+### naturalWidth
+
+#### Get Signature
+
+```ts
+get naturalWidth(): number;
+```
+
+Defined in: website/components/media/MediaFigure.tsx:118
+
+Intrinsic file width for the expand modal — the untouched CMS size.
+Carousel figures carry `natural-width` when `width` was downscaled
+through the desktop ladder; everything else falls back to
+`mediaWidth`. The modal stamps this value — it never reduces.
+
+##### Returns
+
+`number`
+
+---
+
+### naturalHeight
+
+#### Get Signature
+
+```ts
+get naturalHeight(): number;
+```
+
+Defined in: website/components/media/MediaFigure.tsx:128
+
+Intrinsic file height for the expand modal — pairs with
+`naturalWidth`; falls back to `mediaHeight` when no ladder
+downscale was recorded.
+
+##### Returns
+
+`number`
+
+---
+
 ### label
 
 #### Get Signature
@@ -4502,7 +4543,7 @@ Declared media height attribute.
 get label(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:113
+Defined in: website/components/media/MediaFigure.tsx:134
 
 Caption label.
 
@@ -4520,7 +4561,7 @@ Caption label.
 get mediaSrc(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:119
+Defined in: website/components/media/MediaFigure.tsx:140
 
 Base media path on the CDN.
 
@@ -4538,7 +4579,7 @@ Base media path on the CDN.
 get classes(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:125
+Defined in: website/components/media/MediaFigure.tsx:146
 
 Extra host classes passed through the attribute.
 
@@ -4556,7 +4597,7 @@ Extra host classes passed through the attribute.
 get displayWidth(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:135
+Defined in: website/components/media/MediaFigure.tsx:156
 
 Rendered display width. Videos are capped at FHD_WIDTH (1920): the
 player can't visually exceed 1080p, so decode/GPU budgets stay
@@ -4577,7 +4618,7 @@ the CDN serves the right variant instead.
 get displayHeight(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:148
+Defined in: website/components/media/MediaFigure.tsx:169
 
 Rendered display height — pairs with displayWidth's FHD cap:
 aspect-preserving downscale via calcAspectScaled (h·(MAX/w)) so the
@@ -4597,7 +4638,7 @@ layout box never stretches when the video is >1080p.
 get videoSrcMain(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:158
+Defined in: website/components/media/MediaFigure.tsx:179
 
 Primary video source URL.
 
@@ -4615,7 +4656,7 @@ Primary video source URL.
 get videoSrcFallback(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:164
+Defined in: website/components/media/MediaFigure.tsx:185
 
 Fallback (scaled) video source for constrained devices.
 
@@ -4633,7 +4674,7 @@ Fallback (scaled) video source for constrained devices.
 get videoSrcWebmMain(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:170
+Defined in: website/components/media/MediaFigure.tsx:191
 
 Primary webm video source — emitted first in the <source> list.
 
@@ -4651,7 +4692,7 @@ Primary webm video source — emitted first in the <source> list.
 get videoSrcWebmFallback(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:176
+Defined in: website/components/media/MediaFigure.tsx:197
 
 Scaled webm fallback for constrained devices.
 
@@ -5180,7 +5221,7 @@ Render result from render().
 onInit(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:180
+Defined in: website/components/media/MediaFigure.tsx:201
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -5202,7 +5243,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 onMounted(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:184
+Defined in: website/components/media/MediaFigure.tsx:205
 
 #### Returns
 
@@ -5220,7 +5261,7 @@ Defined in: website/components/media/MediaFigure.tsx:184
 _ensureVideoSource(vid): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:190
+Defined in: website/components/media/MediaFigure.tsx:211
 
 Sets the <source> src on a video element when it becomes playable.
 
@@ -5242,7 +5283,7 @@ Sets the <source> src on a video element when it becomes playable.
 onDestroy(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:194
+Defined in: website/components/media/MediaFigure.tsx:215
 
 #### Returns
 
@@ -5260,7 +5301,7 @@ Defined in: website/components/media/MediaFigure.tsx:194
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:220
+Defined in: website/components/media/MediaFigure.tsx:241
 
 #### Returns
 
@@ -5278,7 +5319,7 @@ Defined in: website/components/media/MediaFigure.tsx:220
 playVideo(target): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:226
+Defined in: website/components/media/MediaFigure.tsx:247
 
 Starts muted playback honoring reduced-motion/autoplay prefs.
 
@@ -5300,7 +5341,7 @@ Starts muted playback honoring reduced-motion/autoplay prefs.
 pauseVideo(target): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:232
+Defined in: website/components/media/MediaFigure.tsx:253
 
 Pauses playback (offscreen or pref change).
 
@@ -5322,7 +5363,7 @@ Pauses playback (offscreen or pref change).
 placeholder(w, h): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:238
+Defined in: website/components/media/MediaFigure.tsx:259
 
 Zero-CLS SVG placeholder data-URI at the media's aspect (see media-load.ts).
 
@@ -5348,7 +5389,7 @@ Zero-CLS SVG placeholder data-URI at the media's aspect (see media-load.ts).
 loadHighRes(): Promise<void>;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:244
+Defined in: website/components/media/MediaFigure.tsx:265
 
 Thumb → high-res preload swap (see media-load.ts).
 
@@ -5364,7 +5405,7 @@ Thumb → high-res preload swap (see media-load.ts).
 slugify(text): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:250
+Defined in: website/components/media/MediaFigure.tsx:271
 
 Slugifies a caption for the alt/ARIA text.
 
@@ -5386,7 +5427,7 @@ Slugifies a caption for the alt/ARIA text.
 openModal(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:256
+Defined in: website/components/media/MediaFigure.tsx:277
 
 Opens the expand modal with this media's descriptor via the store.
 
@@ -5402,7 +5443,7 @@ Opens the expand modal with this media's descriptor via the store.
 render(): Element;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:269
+Defined in: website/components/media/MediaFigure.tsx:290
 
 JSX template — a layered stack the CSS crossfades:
 

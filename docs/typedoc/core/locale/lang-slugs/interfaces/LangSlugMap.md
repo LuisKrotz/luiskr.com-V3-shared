@@ -107,3 +107,13 @@ search: string
 ```
 
 Defined in: core/locale/lang-slugs.ts:25
+
+---
+
+### sitemap
+
+```ts
+sitemap: string
+```
+
+Defined in: core/locale/lang-slugs.ts:26

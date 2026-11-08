@@ -8,7 +8,7 @@
 const _B_COOKIES: 'cookies' = 'cookies'
 ```
 
-Defined in: core/tokens/base.ts:86
+Defined in: core/tokens/base.ts:103
 
 BEM block fragment `cookies` — declared once here; every domain class token composes from
 this fragment (zero-hardcoding rule 9).

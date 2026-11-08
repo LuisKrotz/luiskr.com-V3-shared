@@ -8,7 +8,7 @@
 function mountMediaExpanded(el): void
 ```
 
-Defined in: website/components/media/expanded/mount.ts:110
+Defined in: website/components/media/expanded/mount.ts:109
 
 Mount lifecycle: listeners, close button, telemetry, media pipeline.
 

@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/pack](../README.md) / MosaicItem
 
-Defined in: website/components/home/mosaic/pack.ts:35
+Defined in: website/components/home/mosaic/pack.ts:38
 
 One project tile as consumed by the packer.
 
@@ -16,11 +16,11 @@ One project tile as consumed by the packer.
 optional link?: string;
 ```
 
-Defined in: website/components/home/mosaic/pack.ts:37
+Defined in: website/components/home/mosaic/pack.ts:40
 
 Route the card links to.
 
-***
+---
 
 ### image?
 
@@ -28,11 +28,11 @@ Route the card links to.
 optional image?: string;
 ```
 
-Defined in: website/components/home/mosaic/pack.ts:39
+Defined in: website/components/home/mosaic/pack.ts:42
 
 Cover image stem.
 
-***
+---
 
 ### label?
 
@@ -40,11 +40,11 @@ Cover image stem.
 optional label?: string;
 ```
 
-Defined in: website/components/home/mosaic/pack.ts:41
+Defined in: website/components/home/mosaic/pack.ts:44
 
 Accessible label.
 
-***
+---
 
 ### title?
 
@@ -52,11 +52,11 @@ Accessible label.
 optional title?: string;
 ```
 
-Defined in: website/components/home/mosaic/pack.ts:43
+Defined in: website/components/home/mosaic/pack.ts:46
 
 Card heading.
 
-***
+---
 
 ### description?
 
@@ -64,11 +64,11 @@ Card heading.
 optional description?: string;
 ```
 
-Defined in: website/components/home/mosaic/pack.ts:45
+Defined in: website/components/home/mosaic/pack.ts:48
 
 Expanded-panel text.
 
-***
+---
 
 ### featured?
 
@@ -76,6 +76,6 @@ Expanded-panel text.
 optional featured?: boolean;
 ```
 
-Defined in: website/components/home/mosaic/pack.ts:47
+Defined in: website/components/home/mosaic/pack.ts:50
 
 Featured tiles span 2 columns (on multi-column layouts).

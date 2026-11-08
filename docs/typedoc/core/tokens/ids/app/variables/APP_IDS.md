@@ -26,6 +26,7 @@ const APP_IDS: Readonly<{
   SEARCH_MODAL_TITLE: 'search-modal-title'
   ROUTE_SEARCH_OPTION_PREFIX: 'route-search-option-'
   READER_CONTENT: 'reader-content'
+  SITEMAP_GROUP_PREFIX: 'sitemap-group-'
 }>
 ```
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/footer/data](../README.md) / syncSocialsToAllLangs
 
 ```ts
-function syncSocialsToAllLangs(host): Promise<void>;
+function syncSocialsToAllLangs(host): Promise<void>
 ```
 
-Defined in: cms/footer/data.ts:130
+Defined in: cms/footer/data.ts:131
 
 Propagates the social-channel list to every locale.
 

@@ -8,7 +8,7 @@
 function renderAwards(el): Element
 ```
 
-Defined in: website/components/home/awards/render.tsx:68
+Defined in: website/components/home/awards/render.tsx:56
 
 Renders awards.
 

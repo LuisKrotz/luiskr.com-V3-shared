@@ -8,7 +8,7 @@
 function handleSearch(host, e?): void
 ```
 
-Defined in: website/components/nav/handlers.ts:129
+Defined in: website/components/nav/handlers.ts:134
 
 Opens the search modal — the menu closes first, then the dialog mounts
 its <route-search> surface. Plain clicks only; modifier clicks fall

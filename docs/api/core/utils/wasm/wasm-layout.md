@@ -158,6 +158,16 @@ padding grows with screen real estate so content never hugs wide edges.
 - `@param` vw Viewport width in px.
 - `@returns` Padding in px.
 
+### `calcGridGutter`
+
+Content-grid gutter per viewport breakpoint — the GRID_GAP step table
+($gap-* / %MAXAREA contract) resolved by the same floor lookup. JS
+layout math that must match the CSS grid (mosaic wall estimates) uses
+this instead of the smaller RESPONSIVE_PADDING ladder.
+
+- `@param` vw Viewport width in px.
+- `@returns` Gutter px on each side of the content column.
+
 ### `calcAspectScaled`
 
 Height rescaled for a width capped at maxW, preserving aspect ratio:

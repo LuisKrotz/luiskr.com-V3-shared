@@ -8,6 +8,6 @@
 const _K_SOURCE_CODE: 'source-code' = 'source-code'
 ```
 
-Defined in: core/tokens/base.ts:489
+Defined in: core/tokens/base.ts:607
 
 Token key "k source code" — single source for the repeated literal.

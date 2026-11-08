@@ -53,6 +53,33 @@ at emission time through their own `enc`/`encLoc` helpers).
 - `@param` {object} [share] share-set token map (EARTH_SHARE default)
 - `@returns` {string[]} absolute share-video URLs
 
+### `shareVideoStem`
+
+Extensionless manifest key of a share-video key — `…/clip.mp4` →
+`…/clip`, matching the stem the runtime's <media-figure> variant
+grammar resolves posters/sources against. Non-video extensions pass
+through untouched.
+
+- `@param` {string} key manifest-relative share key
+- `@param` {object} [share] share-set token map (EARTH_SHARE default)
+- `@returns` {string} extensionless stem key
+
+### (module scope)
+
+Probes intrinsic dims for a whole share set — image captures scan
+their own head bytes; video clips take their poster sibling's dims
+(a frame grab shares the clip's box) resolved through the bucket
+manifest so only proven thumb variants are requested. A clip with no
+poster on the bucket — and any capture that fails to probe — simply
+carries no entry; the runtime falls back to the generic media box.
+
+- `@param` {string[]} imageUrls absolute share-image URLs
+- `@param` {string[]} videoUrls absolute share-video URLs
+- `@param` {Set<string>|null} manifest bucket key set for poster resolution
+- `@param` {string} cdnBase CDN base URL the keys resolve against
+- `@param` {object} [share] share-set token map (EARTH_SHARE default)
+- `@returns` {Promise<Map<string, number[]>>} capture URL → [w, h]
+
 ### `shareManifestDoc`
 
 The runtime share manifest payload — emitted to the set's
@@ -60,12 +87,15 @@ The runtime share manifest payload — emitted to the set's
 og:image through the whole set without knowing the bucket listing.
 `videos` lists any recorded engine clips under the same prefix — the
 runtime reads `images` today, the extra key is additive for the
-sitemap/video-entity consumers.
+sitemap/video-entity consumers. `dims` maps each capture URL to its
+probed intrinsic [w, h] — the sitemap's media wall packs cards at the
+real aspect instead of the generic fallback box.
 
 - `@param` {string[]} urls absolute share-image URLs
 - `@param` {string} cdnBase CDN base URL
 - `@param` {object} [share] share-set token map (EARTH_SHARE default)
 - `@param` {string[]} [videoUrls] absolute share-video URLs
+- `@param` {Map<string, number[]>} [dims] probed capture dims (URL → [w,h])
 - `@returns` {object} serializable manifest document
 
 ### `shuffled`

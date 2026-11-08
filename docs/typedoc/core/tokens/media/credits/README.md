@@ -7,6 +7,7 @@
 ## Interfaces
 
 - [MediaCreditSource](interfaces/MediaCreditSource.md)
+- [MediaProvenanceFields](interfaces/MediaProvenanceFields.md)
 
 ## Variables
 
@@ -17,3 +18,5 @@
 ## Functions
 
 - [creditTextFor](functions/creditTextFor.md)
+- [creditLicenseUrlFor](functions/creditLicenseUrlFor.md)
+- [mediaProvenanceFields](functions/mediaProvenanceFields.md)

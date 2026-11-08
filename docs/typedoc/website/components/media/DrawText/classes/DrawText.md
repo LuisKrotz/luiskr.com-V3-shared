@@ -4941,7 +4941,7 @@ Defined in: website/components/media/DrawText.tsx:134
 get _needsCharSpans(): boolean;
 ```
 
-Defined in: website/components/media/DrawText.tsx:214
+Defined in: website/components/media/DrawText.tsx:229
 
 Per-character spans only exist while the animation runs. Before the
 element enters the viewport and after the animation has finished the
@@ -4963,7 +4963,7 @@ spans permanently.
 get _rootEl(): HTMLSpanElement | null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:227
+Defined in: website/components/media/DrawText.tsx:242
 
 The animated content element inside the shadow root — cached by _applyContent so repeated queries are free.
 
@@ -5215,7 +5215,7 @@ Defined in: website/components/media/DrawText.tsx:175
 _updateDom(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:220
+Defined in: website/components/media/DrawText.tsx:235
 
 Re-renders the shadow DOM for current props.
 
@@ -5231,7 +5231,7 @@ Re-renders the shadow DOM for current props.
 trigger(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:233
+Defined in: website/components/media/DrawText.tsx:248
 
 Starts the animation externally (manual trigger mode).
 
@@ -5247,7 +5247,7 @@ Starts the animation externally (manual trigger mode).
 reset(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:239
+Defined in: website/components/media/DrawText.tsx:254
 
 Returns characters to the hidden start state so the animation can replay.
 
@@ -5263,7 +5263,7 @@ Returns characters to the hidden start state so the animation can replay.
 _setupTrigger(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:267
+Defined in: website/components/media/DrawText.tsx:282
 
 Wires the active trigger mode (delegate — ./draw-text/trigger.ts).
 
@@ -5279,7 +5279,7 @@ Wires the active trigger mode (delegate — ./draw-text/trigger.ts).
 _setupFit(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:273
+Defined in: website/components/media/DrawText.tsx:288
 
 Installs the fit-to-width pipeline (delegate — ./draw-text/fit.ts).
 
@@ -5295,7 +5295,7 @@ Installs the fit-to-width pipeline (delegate — ./draw-text/fit.ts).
 _startAnimation(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:279
+Defined in: website/components/media/DrawText.tsx:294
 
 Runs the reveal sequence (delegate — ./draw-text/trigger.ts).
 
@@ -5311,7 +5311,7 @@ Runs the reveal sequence (delegate — ./draw-text/trigger.ts).
 _parseTokens(text): DrawToken[];
 ```
 
-Defined in: website/components/media/DrawText.tsx:285
+Defined in: website/components/media/DrawText.tsx:300
 
 Tokenizes the text into word/space/br/inline-tag chunks (delegate).
 
@@ -5333,7 +5333,7 @@ Tokenizes the text into word/space/br/inline-tag chunks (delegate).
 _renderContent(withChars?): string;
 ```
 
-Defined in: website/components/media/DrawText.tsx:291
+Defined in: website/components/media/DrawText.tsx:306
 
 Builds the animated span tree (delegate — ./draw-text/render.ts).
 

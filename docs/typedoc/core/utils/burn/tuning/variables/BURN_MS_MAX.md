@@ -1,0 +1,13 @@
+[**luiskr.com**](../../../../../README.md)
+
+---
+
+[luiskr.com](../../../../../README.md) / [core/utils/burn/tuning](../README.md) / \_BURN\_MS\_MAX
+
+```ts
+const _BURN_MS_MAX: 2400 = 2400
+```
+
+Defined in: core/utils/burn/tuning.ts:46
+
+Burn duration ceiling — long descriptions cap here, never run on.

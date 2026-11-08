@@ -4,13 +4,13 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/nav/AppNav](../README.md) / AppNav
 
-Defined in: website/components/nav/AppNav.tsx:108
+Defined in: website/components/nav/AppNav.tsx:107
 
-<app-nav> — persistent top bar (logo, burger, locale flag, preferences
-trigger) plus the fullscreen menu overlay. Owns four WebGL widgets
-(burger, menu background, menu close, locale flag) on persistent
-canvases that are never re-created by re-renders — one GL context per
-widget for the element's lifetime.
+<app-nav> — persistent top bar (logo, burger, language/search/preferences
+chips) plus the fullscreen menu overlay. Owns the burger and menu
+background WebGL widgets on persistent canvases that are never
+re-created by re-renders — one GL context per widget for the element's
+lifetime.
 
 ## Extends
 
@@ -24,7 +24,7 @@ widget for the element's lifetime.
 new AppNav(): AppNav;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:169
+Defined in: website/components/nav/AppNav.tsx:163
 
 #### Returns
 
@@ -187,7 +187,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 _translations: AppNavTranslations | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:110
+Defined in: website/components/nav/AppNav.tsx:109
 
 APP dictionary pushed by <app-root>; null until first fetch lands.
 
@@ -199,7 +199,7 @@ APP dictionary pushed by <app-root>; null until first fetch lands.
 _translationsLocale: string | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:112
+Defined in: website/components/nav/AppNav.tsx:111
 
 Locale the pushed `_translations` were fetched for — the getter returns null on mismatch so stale copy never renders mid-switch.
 
@@ -211,7 +211,7 @@ Locale the pushed `_translations` were fetched for — the getter returns null o
 activeSection: string = SECTIONS.HOME
 ```
 
-Defined in: website/components/nav/AppNav.tsx:114
+Defined in: website/components/nav/AppNav.tsx:113
 
 Home anchor the scroll position sits in — drives nav-active styles.
 
@@ -223,21 +223,9 @@ Home anchor the scroll position sits in — drives nav-active styles.
 onBottom: boolean = false
 ```
 
-Defined in: website/components/nav/AppNav.tsx:116
+Defined in: website/components/nav/AppNav.tsx:115
 
 Within 200px of document bottom — flips CTA to "selected work".
-
----
-
-### \_navFlags
-
-```ts
-_navFlags: FlagWebGL[] = [];
-```
-
-Defined in: website/components/nav/AppNav.tsx:118
-
-Live FlagWebGL widgets (currently max one — the menu flag).
 
 ---
 
@@ -249,7 +237,7 @@ _navIconAura:
   | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:121
+Defined in: website/components/nav/AppNav.tsx:118
 
 Live ring-fill aura session on the strip chips (null without WebGPU).
 
@@ -261,7 +249,7 @@ Live ring-fill aura session on the strip chips (null without WebGPU).
 _onDark: boolean = false
 ```
 
-Defined in: website/components/nav/AppNav.tsx:123
+Defined in: website/components/nav/AppNav.tsx:120
 
 True while the nav floats over a dark section — drives the --on-dark variant for contrast inversion.
 
@@ -273,7 +261,7 @@ True while the nav floats over a dark section — drives the --on-dark variant f
 _menuOpen: boolean = false
 ```
 
-Defined in: website/components/nav/AppNav.tsx:129
+Defined in: website/components/nav/AppNav.tsx:126
 
 Menu overlay is open.
 
@@ -285,7 +273,7 @@ Menu overlay is open.
 _menuOpenedAt: number = 0
 ```
 
-Defined in: website/components/nav/AppNav.tsx:131
+Defined in: website/components/nav/AppNav.tsx:128
 
 performance.now() of the open transition — feeds the residual-input guard.
 
@@ -297,7 +285,7 @@ performance.now() of the open transition — feeds the residual-input guard.
 _menuClosing: boolean = false
 ```
 
-Defined in: website/components/nav/AppNav.tsx:133
+Defined in: website/components/nav/AppNav.tsx:130
 
 Close animation in flight — blocks re-entry/double-close.
 
@@ -309,7 +297,7 @@ Close animation in flight — blocks re-entry/double-close.
 _menuSettled: boolean = false
 ```
 
-Defined in: website/components/nav/AppNav.tsx:135
+Defined in: website/components/nav/AppNav.tsx:132
 
 Open animation completed — entrance animations settle to final state.
 
@@ -321,7 +309,7 @@ Open animation completed — entrance animations settle to final state.
 _menuSettleTimer: number | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:137
+Defined in: website/components/nav/AppNav.tsx:134
 
 Handle for the settle delay; cleared on destroy so no timer outlives the element.
 
@@ -335,7 +323,7 @@ _menuBg:
   | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:140
+Defined in: website/components/nav/AppNav.tsx:137
 
 MenuBackgroundWebGL instance — owns the fullscreen contour canvas.
 
@@ -349,7 +337,7 @@ _burgerBtn:
   | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:142
+Defined in: website/components/nav/AppNav.tsx:139
 
 BurgerButtonWebGL on the persistent burger canvas — morphs into the close control while the menu is open.
 
@@ -361,7 +349,7 @@ BurgerButtonWebGL on the persistent burger canvas — morphs into the close cont
 _burgerCanvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:147
+Defined in: website/components/nav/AppNav.tsx:144
 
 Burger button canvas host.
 
@@ -373,31 +361,9 @@ Burger button canvas host.
 _menuCanvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:149
+Defined in: website/components/nav/AppNav.tsx:146
 
 Fullscreen menu background canvas host.
-
----
-
-### \_menuFlagCanvasEl
-
-```ts
-_menuFlagCanvasEl: HTMLCanvasElement | null = null;
-```
-
-Defined in: website/components/nav/AppNav.tsx:151
-
-Menu flag canvas + the locale it was built for (rebuilt on change).
-
----
-
-### \_menuFlagLang
-
-```ts
-_menuFlagLang: string | null = null;
-```
-
-Defined in: website/components/nav/AppNav.tsx:152
 
 ---
 
@@ -416,7 +382,7 @@ _navStoreSig:
   | null = null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:160
+Defined in: website/components/nav/AppNav.tsx:154
 
 Snapshot of the store inputs the template actually consumes —
 compared in onStoreUpdate so unrelated commits (dialog open/close,
@@ -4482,7 +4448,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get translations(): AppNavTranslations | null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:183
+Defined in: website/components/nav/AppNav.tsx:177
 
 ##### Returns
 
@@ -4494,7 +4460,7 @@ Defined in: website/components/nav/AppNav.tsx:183
 set translations(val): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:175
+Defined in: website/components/nav/AppNav.tsx:169
 
 Setter/getter — the APP translation dictionary pushed by <app-root>.
 
@@ -4520,7 +4486,7 @@ get currentRoute():
   | null;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:193
+Defined in: website/components/nav/AppNav.tsx:187
 
 The router's active route descriptor.
 
@@ -4539,7 +4505,7 @@ The router's active route descriptor.
 get isHomePage(): boolean;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:199
+Defined in: website/components/nav/AppNav.tsx:193
 
 True on home/about/contact routes (nav shows section links).
 
@@ -4557,7 +4523,7 @@ True on home/about/contact routes (nav shows section links).
 get isPlaygroundPage(): boolean;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:216
+Defined in: website/components/nav/AppNav.tsx:210
 
 True on the playground route (nav renders in its alternate variant).
 Three checks, in order: the resolved route name (fast path), the raw
@@ -4579,7 +4545,7 @@ before the first navigation resolves), and the precomputed set of all
 get isEarthPlaygroundPage(): boolean;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:226
+Defined in: website/components/nav/AppNav.tsx:220
 
 True on the earth-playground route — checks the resolved route name
 first (the URL may not have resolved when the getter first fires),
@@ -4600,7 +4566,7 @@ slugs.
 get isStarFieldPage(): boolean;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:241
+Defined in: website/components/nav/AppNav.tsx:235
 
 True on the star-field experiment route — same resolution order.
 
@@ -4618,7 +4584,7 @@ True on the star-field experiment route — same resolution order.
 get _lastPathSegment(): string;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:252
+Defined in: website/components/nav/AppNav.tsx:246
 
 Last non-empty URL path segment — shared by the playground checks.
 
@@ -4636,302 +4602,9 @@ Last non-empty URL path segment — shared by the playground checks.
 get locale(): string;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:263
+Defined in: website/components/nav/AppNav.tsx:257
 
 Active locale code.
-
-##### Returns
-
-`string`
-
----
-
-### currentLang
-
-#### Get Signature
-
-```ts
-get currentLang():
-  | {
-  code: "en";
-  label: string;
-  cc: string;
-  flag: string;
-  cc2?: undefined;
-  short: string;
-}
-  | {
-  code: "br";
-  label: string;
-  cc: string;
-  flag: string;
-  cc2?: undefined;
-  short: string;
-}
-  | {
-  code: "es";
-  label: string;
-  cc: string;
-  flag: string;
-  cc2?: undefined;
-  short: string;
-}
-  | {
-  code: "de";
-  label: string;
-  cc: string;
-  cc2: string;
-  flag: string;
-  short: string;
-}
-  | {
-  code: "hrk";
-  label: string;
-  cc: string;
-  cc2: string;
-  flag: string;
-  short: string;
-}
-  | {
-  code: "cas";
-  label: string;
-  cc: string;
-  cc2: string;
-  flag: string;
-  short: string;
-}
-  | {
-  code: "riv";
-  label: string;
-  cc: string;
-  cc2: string;
-  flag: string;
-  short: string;
-}
-  | {
-  code: "gn";
-  label: string;
-  cc: string;
-  flag: string;
-  cc2?: undefined;
-  short: string;
-}
-  | {
-  code: "it";
-  label: string;
-  cc: string;
-  flag: string;
-  cc2?: undefined;
-  short: string;
-}
-  | {
-  code: "ru";
-  label: string;
-  cc: string;
-  flag: string;
-  cc2?: undefined;
-  short: string;
-}
-  | {
-  code: "fr";
-  label: string;
-  cc: string;
-  flag: string;
-  cc2?: undefined;
-  short: string;
-}
-  | {
-  code: "tln";
-  label: string;
-  cc: string;
-  cc2: string;
-  flag: string;
-  short: string;
-}
-  | {
-  cc2?: undefined;
-  code: "gl";
-  label: string;
-  cc: string;
-  flag: string;
-  short: string;
-}
-  | {
-  cc2?: undefined;
-  code: "ca";
-  label: string;
-  cc: string;
-  flag: string;
-  short: string;
-}
-  | {
-  cc2?: undefined;
-  code: "nl";
-  label: string;
-  cc: string;
-  flag: string;
-  short: string;
-}
-  | {
-  cc2?: undefined;
-  code: "ga";
-  label: string;
-  cc: string;
-  flag: string;
-  short: string;
-}
-  | null;
-```
-
-Defined in: website/components/nav/AppNav.tsx:269
-
-The active LANG_OPTIONS entry (code + label + flag).
-
-##### Returns
-
-\| \{
-`code`: `"en"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`cc2?`: `undefined`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"br"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`cc2?`: `undefined`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"es"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`cc2?`: `undefined`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"de"`;
-`label`: `string`;
-`cc`: `string`;
-`cc2`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"hrk"`;
-`label`: `string`;
-`cc`: `string`;
-`cc2`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"cas"`;
-`label`: `string`;
-`cc`: `string`;
-`cc2`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"riv"`;
-`label`: `string`;
-`cc`: `string`;
-`cc2`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"gn"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`cc2?`: `undefined`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"it"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`cc2?`: `undefined`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"ru"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`cc2?`: `undefined`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"fr"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`cc2?`: `undefined`;
-`short`: `string`;
-\}
-\| \{
-`code`: `"tln"`;
-`label`: `string`;
-`cc`: `string`;
-`cc2`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| \{
-`cc2?`: `undefined`;
-`code`: `"gl"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| \{
-`cc2?`: `undefined`;
-`code`: `"ca"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| \{
-`cc2?`: `undefined`;
-`code`: `"nl"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| \{
-`cc2?`: `undefined`;
-`code`: `"ga"`;
-`label`: `string`;
-`cc`: `string`;
-`flag`: `string`;
-`short`: `string`;
-\}
-\| `null`
-
----
-
-### currentLangLabel
-
-#### Get Signature
-
-```ts
-get currentLangLabel(): string;
-```
-
-Defined in: website/components/nav/AppNav.tsx:275
-
-Display label for the active locale in the flag button.
 
 ##### Returns
 
@@ -5456,50 +5129,13 @@ Render result from render().
 
 ---
 
-### \_flagCanvas()
-
-```ts
-_flagCanvas(): HTMLCanvasElement;
-```
-
-Defined in: website/components/nav/AppNav.tsx:285
-
-Returns the persistent flag canvas for the current locale, rebuilding
-it only when the locale changed. The element survives re-renders so
-the WebGL context is created once per language, not per render.
-
-#### Returns
-
-`HTMLCanvasElement`
-
----
-
-### renderLocaleFlag()
-
-```ts
-renderLocaleFlag():
-  | string
-  | Element;
-```
-
-Defined in: website/components/nav/AppNav.tsx:291
-
-Mounts the FlagWebGL widget onto the nav flag button (theme + reduced-motion aware).
-
-#### Returns
-
-\| `string`
-\| [`Element`](../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
-
----
-
 ### onMounted()
 
 ```ts
 onMounted(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:297
+Defined in: website/components/nav/AppNav.tsx:263
 
 Lifecycle: wires store subscription, scroll/nav event listeners, router subscription and mounts the WebGL nav widgets.
 
@@ -5519,7 +5155,7 @@ Lifecycle: wires store subscription, scroll/nav event listeners, router subscrip
 onUpdated(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:317
+Defined in: website/components/nav/AppNav.tsx:281
 
 Lifecycle: after re-render, re-mounts WebGL widgets that the new DOM replaced.
 
@@ -5539,9 +5175,9 @@ Lifecycle: after re-render, re-mounts WebGL widgets that the new DOM replaced.
 onDestroy(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:331
+Defined in: website/components/nav/AppNav.tsx:293
 
-Lifecycle: destroys the burger/menu/flag GL widgets and unbinds listeners.
+Lifecycle: destroys the burger/menu GL widgets + chip aura and unbinds listeners.
 
 #### Returns
 
@@ -5553,45 +5189,13 @@ Lifecycle: destroys the burger/menu/flag GL widgets and unbinds listeners.
 
 ---
 
-### \_mountNavFlag()
-
-```ts
-_mountNavFlag(): void;
-```
-
-Defined in: website/components/nav/AppNav.tsx:363
-
-Creates the FlagWebGL instance on the flag button's canvas.
-
-#### Returns
-
-`void`
-
----
-
-### \_destroyNavFlag()
-
-```ts
-_destroyNavFlag(): void;
-```
-
-Defined in: website/components/nav/AppNav.tsx:369
-
-Tears down the FlagWebGL instance.
-
-#### Returns
-
-`void`
-
----
-
 ### \_destroyNavIconAura()
 
 ```ts
 _destroyNavIconAura(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:375
+Defined in: website/components/nav/AppNav.tsx:327
 
 Tears down the icon-aura session.
 
@@ -5607,7 +5211,7 @@ Tears down the icon-aura session.
 subscribeRouter(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:381
+Defined in: website/components/nav/AppNav.tsx:333
 
 Subscribes to route changes so nav state/links refresh per page.
 
@@ -5623,7 +5227,7 @@ Subscribes to route changes so nav state/links refresh per page.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:401
+Defined in: website/components/nav/AppNav.tsx:349
 
 Store change → re-render only when a value the template consumes
 actually moved: the locale, the live dictionaries `appText` resolves
@@ -5633,8 +5237,6 @@ empty behind it) and reduced-motion. Dialog open/close, modal-origin
 and other commits leave the DOM alone — critically, while the menu
 is open behind a dialog this keeps every <draw-text> label mounted
 and already-drawn instead of replaying the letter animation.
-Reduced-motion still reaches live flag widgets on every commit so
-they freeze without waiting for a rebuild.
 
 #### Returns
 
@@ -5652,7 +5254,7 @@ they freeze without waiting for a rebuild.
 updateScrollState(activeSection, onBottom): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:438
+Defined in: website/components/nav/AppNav.tsx:382
 
 Receives active-section + near-bottom flags from <app-root>'s scroll tracker and toggles the --on-dark variant.
 
@@ -5678,7 +5280,7 @@ Receives active-section + near-bottom flags from <app-root>'s scroll tracker and
 _bindEvents(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:454
+Defined in: website/components/nav/AppNav.tsx:396
 
 Binds click/scroll/menu-toggle handlers inside the shadow root.
 
@@ -5694,7 +5296,7 @@ Binds click/scroll/menu-toggle handlers inside the shadow root.
 scrollToTop(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:475
+Defined in: website/components/nav/AppNav.tsx:417
 
 Smooth-scrolls the window back to the top.
 
@@ -5710,7 +5312,7 @@ Smooth-scrolls the window back to the top.
 goToAbout(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:481
+Defined in: website/components/nav/AppNav.tsx:423
 
 Navigates to (or scrolls to) the about section — route-aware.
 
@@ -5726,7 +5328,7 @@ Navigates to (or scrolls to) the about section — route-aware.
 scrollToContact(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:487
+Defined in: website/components/nav/AppNav.tsx:429
 
 Navigates to (or scrolls to) the contact footer — route-aware.
 
@@ -5742,7 +5344,7 @@ Navigates to (or scrolls to) the contact footer — route-aware.
 handleLogo(e?): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:493
+Defined in: website/components/nav/AppNav.tsx:435
 
 Logo click: navigates home, or scrolls top when already on home.
 
@@ -5764,7 +5366,7 @@ Logo click: navigates home, or scrolls top when already on home.
 handleAbout(e?): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:499
+Defined in: website/components/nav/AppNav.tsx:441
 
 About link click: routes to the localized about slug.
 
@@ -5786,7 +5388,7 @@ About link click: routes to the localized about slug.
 handleAction(e?): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:505
+Defined in: website/components/nav/AppNav.tsx:447
 
 Contact/CTA click: routes to the localized contact slug.
 
@@ -5808,7 +5410,7 @@ Contact/CTA click: routes to the localized contact slug.
 _captureOrigin(e?): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:514
+Defined in: website/components/nav/AppNav.tsx:456
 
 Records the clicked button's center point in store.modalOrigin — the
 preferences/lang dialogs read it to zoom their "genie" open animation
@@ -5832,7 +5434,7 @@ out from the trigger instead of from screen center.
 handlePreferences(e?): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:520
+Defined in: website/components/nav/AppNav.tsx:462
 
 Opens the preferences modal (fires open-preferences-modal after capturing origin).
 
@@ -5854,7 +5456,7 @@ Opens the preferences modal (fires open-preferences-modal after capturing origin
 handleLang(e?): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:526
+Defined in: website/components/nav/AppNav.tsx:468
 
 Opens the language dialog (fires open-lang-dialog after capturing origin).
 
@@ -5876,7 +5478,7 @@ Opens the language dialog (fires open-lang-dialog after capturing origin).
 handleSearch(e?): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:532
+Defined in: website/components/nav/AppNav.tsx:474
 
 Opens the search modal (fires open-search-modal; plain clicks only).
 
@@ -5900,7 +5502,7 @@ render():
   | Element;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:540
+Defined in: website/components/nav/AppNav.tsx:482
 
 JSX template: logo button, burger, and the fullscreen menu overlay —
 the markup lives in nav-render.tsx; this delegates with `this`.
@@ -5922,7 +5524,7 @@ the markup lives in nav-render.tsx; this delegates with `this`.
 _burgerCanvas(label): HTMLCanvasElement;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:545
+Defined in: website/components/nav/AppNav.tsx:487
 
 Persistent burger canvas (aria-labeled) — created once, survives re-renders so its GL context does.
 
@@ -5944,7 +5546,7 @@ Persistent burger canvas (aria-labeled) — created once, survives re-renders so
 _menuCanvas(): HTMLCanvasElement;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:551
+Defined in: website/components/nav/AppNav.tsx:493
 
 Canvas JSX for the WebGL menu background.
 
@@ -5957,12 +5559,18 @@ Canvas JSX for the WebGL menu background.
 ### \_toggleMenu()
 
 ```ts
-_toggleMenu(): void;
+_toggleMenu(e?): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:557
+Defined in: website/components/nav/AppNav.tsx:499
 
-Opens/closes the fullscreen menu overlay.
+Opens/closes the fullscreen menu overlay — passes the click event through so toggleNavMenu's joust gate can read currentTarget/detail.
+
+#### Parameters
+
+##### e?
+
+`Event`
 
 #### Returns
 
@@ -5976,7 +5584,7 @@ Opens/closes the fullscreen menu overlay.
 _openMenu(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:563
+Defined in: website/components/nav/AppNav.tsx:505
 
 Opens the menu (see nav-menu.ts for the state machine).
 
@@ -5992,7 +5600,7 @@ Opens the menu (see nav-menu.ts for the state machine).
 _mountMenuWebGL(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:569
+Defined in: website/components/nav/AppNav.tsx:511
 
 Binds the WebGL layers to the persistent menu canvases.
 
@@ -6008,7 +5616,7 @@ Binds the WebGL layers to the persistent menu canvases.
 _mountBurgerWebGL(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:575
+Defined in: website/components/nav/AppNav.tsx:517
 
 Attaches BurgerButtonWebGL to the persistent burger canvas.
 
@@ -6024,7 +5632,7 @@ Attaches BurgerButtonWebGL to the persistent burger canvas.
 _closeMenu(): void;
 ```
 
-Defined in: website/components/nav/AppNav.tsx:584
+Defined in: website/components/nav/AppNav.tsx:526
 
 Closes the menu through the full dissolve cycle (see nav-menu.ts).
 The _menuClosing guard makes double-close (Esc + click) a no-op.

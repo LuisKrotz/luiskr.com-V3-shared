@@ -8,7 +8,7 @@
 function currentShareImage(): string | null
 ```
 
-Defined in: core/utils/share-gallery.ts:259
+Defined in: core/utils/share-gallery.ts:258
 
 Currently bound share capture — the og:image pick the last rotation
 applied (null when no rotation is active). Rich-route emitters read

@@ -29,7 +29,9 @@ const ROUTE_PATHS: Readonly<{
   DOCS_SEGMENT: 'docs'
   ANIMATIONS_SEGMENT: 'animations'
   SEARCH_SEGMENT: 'search'
+  SITEMAP_SEGMENT: 'sitemap'
   FEED_FILE: 'feed.xml'
+  FEED_CSS_FILE: 'feed.css'
 }>
 ```
 

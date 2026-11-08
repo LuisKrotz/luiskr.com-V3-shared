@@ -21,6 +21,12 @@ const SRC_DIRS = ['shared/src', 'core', 'website', 'cms', 'experiments'].map((d)
   path.resolve(ROOT, d)
 )
 
+/**
+ * `scanDirectory` — recursive .js/.jsx collector over a source root.
+ * Skips node_modules and compiled wasm dirs; also skips the
+ * constants/token modules, which ARE the string dictionary —
+ * scanning them would report every token as a "repeated string".
+ */
 function scanDirectory(dir, fileList = []) {
   const entries = fs.readdirSync(dir, { withFileTypes: true })
 
@@ -28,6 +34,7 @@ function scanDirectory(dir, fileList = []) {
     const fullPath = path.join(dir, entry.name)
 
     if (entry.isDirectory()) {
+      // Dependencies and emitted artifacts aren't authored source.
       if (entry.name !== 'node_modules' && entry.name !== 'wasm') {
         scanDirectory(fullPath, fileList)
       }
@@ -43,12 +50,20 @@ function scanDirectory(dir, fileList = []) {
   return fileList
 }
 
+/**
+ * `extractStrings` — the report body: scans every file, walks each
+ * AST for StringLiteral nodes, buckets them by literal value, then
+ * prints the top repeated strings and writes the full inventory JSON.
+ */
 function extractStrings() {
   const files = SRC_DIRS.flatMap((d) => scanDirectory(d))
+
+  // literal value → [{file, line}…] occurrence list.
   const stringOccurrences = new Map()
 
   for (const file of files) {
     const code = fs.readFileSync(file, 'utf-8')
+
     let ast
 
     try {
@@ -57,13 +72,17 @@ function extractStrings() {
         plugins: ['jsx'],
       })
     } catch (err) {
+      // A file that won't parse (syntax drift, non-standard grammar)
+      // warns and skips rather than aborting the whole sweep.
       console.warn(`[AST] Skipping ${file}: ${err.message}`)
+
       continue
     }
 
     const relPath = path.relative(ROOT, file)
 
-    // Simple AST walker
+    // Simple AST walker — visits every node generically (no visitor
+    // registry) since only StringLiteral matters.
     function walk(node, parent) {
       if (!node || typeof node !== 'object') return
 
@@ -81,15 +100,23 @@ function extractStrings() {
         const val = node.value
 
         if (typeof val === 'string') {
+          // Append the occurrence — same literal across many files
+          // is exactly the duplication this report hunts.
           const list = stringOccurrences.get(val) || []
+
           list.push({ file: relPath, line: node.loc?.start?.line })
+
           stringOccurrences.set(val, list)
         }
       }
 
+      // Recurse every object/array property except the location
+      // metadata — Babel nodes are plain objects so a generic walk
+      // reaches everything.
       for (const key of Object.keys(node)) {
         if (key !== 'loc' && key !== 'range') {
           const child = node[key]
+
           if (Array.isArray(child)) {
             for (const c of child) walk(c, node)
           } else if (child && typeof child === 'object') {
@@ -102,8 +129,10 @@ function extractStrings() {
     walk(ast, null)
   }
 
-  // Filter repeated strings (frequency >= 2)
+  // Split into repeated (frequency >= 2 — the token candidates) and
+  // single-use literals (kept for the count, not reported).
   const repeated = []
+
   const single = []
 
   for (const [str, locations] of stringOccurrences.entries()) {
@@ -114,6 +143,7 @@ function extractStrings() {
     }
   }
 
+  // Most-duplicated first — the console's top-15 is the work list.
   repeated.sort((a, b) => b.count - a.count)
 
   console.log('='.repeat(70))
@@ -124,15 +154,21 @@ function extractStrings() {
   console.log('='.repeat(70))
 
   console.log('\nTop Repeated Strings (Candidates for Core Constants or Locale Chunks):')
+
   repeated.slice(0, 15).forEach((item, i) => {
     console.log(` ${i + 1}. "${item.string}" (${item.count}x) across:`)
+
+    // File list deduped — a literal used 4× in one file shows once.
     const uniqueFiles = [...new Set(item.locations.map((l) => l.file))]
+
     uniqueFiles.slice(0, 3).forEach((f) => console.log(`    - ${f}`))
+
     if (uniqueFiles.length > 3) console.log(`    - ...and ${uniqueFiles.length - 3} more files`)
   })
 
   // Ensure output directory exists for chunk manifests
   const outDir = path.resolve(ROOT, 'core/locale')
+
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true })
   }

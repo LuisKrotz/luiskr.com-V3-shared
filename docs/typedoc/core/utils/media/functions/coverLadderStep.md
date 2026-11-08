@@ -5,10 +5,18 @@
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / coverLadderStep
 
 ```ts
-function coverLadderStep(registry, coverKey, img, rungs, loadedClass, mobileRungs?): void
+function coverLadderStep(
+  registry,
+  coverKey,
+  img,
+  rungs,
+  loadedClass,
+  mobileRungs?,
+  boxWidthCssPx?
+): void
 ```
 
-Defined in: core/utils/media.ts:178
+Defined in: core/utils/media.ts:183
 
 `load` step on a progressive cover's high layer — the ladder walker.
 Records the painted URL in the host registry (re-renders rebuild the
@@ -66,6 +74,16 @@ when the rendered box is ≤768 CSS px and the manifest proves mobile
 tiers exist, this ladder replaces `rungs` wholesale: every mobile
 rung is a fraction of its full-width twin's bytes and the box cannot
 resolve the difference anyway.
+
+### boxWidthCssPx?
+
+`number`
+
+The layout box the ceiling judges — defaults to
+the rendered img width. Hero surfaces pass a layout context (e.g.
+the viewport width) instead: a coverflow card renders ~300 CSS px
+wide inside a desktop section, but it IS the presentation — the
+small-box ceiling would cap its climb at a visibly soft rung.
 
 ## Returns
 

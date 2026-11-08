@@ -1,10 +1,24 @@
+/**
+ * @file patch-star-field-share-themes.js
+ * @description One-shot migration: injects the share-capture labels
+ * (shareGallery/shareCapture) and localized searchThemes keyword
+ * arrays into each locale's star-field page node in the local
+ * database.json mirror. Sibling of patch-earth-playground-share-themes.js.
+ *
+ * Run: node shared/scripts/i18n/patch-star-field-share-themes.js
+ * (patches the local mirror only — the upload-* scripts push live).
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place, written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
 /**
@@ -304,14 +318,22 @@ STAR_MAP.tln = { ...STAR_MAP.it }
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 
 for (const [locale, data] of Object.entries(STAR_MAP)) {
+  // The locale's star-field page node — missing nodes skip silently
+  // (a locale without the page must not silently gain one).
   const page = db.translations[locale]?.pages?.['star-field']
 
   if (!page) continue
 
+  // Inject the three fields — gallery heading, singular capture
+  // noun, and the keyword array under the shared token key.
   page.shareGallery = data.shareGallery
+
   page.shareCapture = data.shareCapture
+
   page[SEARCH_THEMES_KEY] = data[SEARCH_THEMES_KEY]
 }
 
+// Write the mirror back — 2-space indent matches the file's format.
 fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8')
+
 console.log('✅ database.json patched with Star Field share themes across all locales.')

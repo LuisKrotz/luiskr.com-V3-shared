@@ -9,8 +9,10 @@ const ANIMATIONS_CLASSES: Readonly<{
   ANIMATIONS: 'animations'
   ANIMATIONS_LIST: 'animations-list'
   ANIMATIONS_RECORD: 'animations-record'
+  ANIMATIONS_TEXT: 'animations-text'
   ANIMATIONS_TERM: 'animations-term'
   ANIMATIONS_DESC: 'animations-desc'
+  ANIMATIONS_DOCS: 'animations-docs'
 }>
 ```
 

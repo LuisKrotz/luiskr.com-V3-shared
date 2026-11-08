@@ -8,15 +8,18 @@
 function setHeightVar(c): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:361
+Defined in: website/components/carousel/custom-carousel/sizing.ts:356
 
 Publishes --carousel-item-height on the enclosing <section> and
 --carousel-media-height on the host: the aspect-corrected height
-ensuring all slides share one uniform height. In mixed carousels on
-mobile, the uniform height anchors to the shortest portrait item.
-The published height is also capped at the smallest natural item
-height — the strip may be _less_ tall than the projection, but no
-slide may ever render taller than its source file's real pixels.
+ensuring all slides share one uniform height. The uniform height is
+the TALLEST rendered item — the max height each sized source reaches
+when fit to the strip width and the viewport cap. Every slide's box is
+the strip height × its own aspect (the media-figure sheet drops the
+natural-size caps in carousel context), so the media fills with zero
+crop and zero distortion; a short source covers the taller box.
+In mixed carousels on mobile, the uniform height anchors to the
+shortest portrait item.
 
 ## Parameters
 

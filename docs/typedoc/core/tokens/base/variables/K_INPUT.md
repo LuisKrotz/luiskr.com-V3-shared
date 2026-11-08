@@ -8,7 +8,7 @@
 const _K_INPUT: 'input' = 'input'
 ```
 
-Defined in: core/tokens/base.ts:515
+Defined in: core/tokens/base.ts:633
 
 Shared key token `input` — single source for a literal repeated across modules
 (zero-hardcoding rule 5).

@@ -22,6 +22,7 @@ const ROUTE_NAMES: Readonly<{
   DOCS: 'In-depth project docs'
   ANIMATIONS: 'Animations Reference'
   SEARCH: 'Search'
+  SITEMAP: 'Sitemap'
 }>
 ```
 

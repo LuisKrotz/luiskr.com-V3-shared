@@ -8,7 +8,7 @@
 const ANIMATION_DESC_ID_PREFIX: 'lk-anim-desc-' = 'lk-anim-desc-'
 ```
 
-Defined in: core/tokens/data/animation-ids.ts:83
+Defined in: core/tokens/data/animation-ids.ts:110
 
 Long-description node id prefix — the helper injects one
 `<span id="lk-anim-desc-<id>">` per animation id into each shadow

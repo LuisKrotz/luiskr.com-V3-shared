@@ -15,6 +15,11 @@ Frozen net string map — sole declaration site for these tokens; consumers read
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
 
+### `SCHEME_MAILTO`
+
+URI scheme prefixes on contact-channel hrefs — the mail block is the
+row whose link carries the mailto scheme.
+
 ### `MIME_RSS`
 
 RSS 2.0 media type — `type` hint on links to the locale feed.

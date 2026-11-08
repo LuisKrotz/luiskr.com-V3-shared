@@ -8,7 +8,7 @@
 function cancelShare(): void
 ```
 
-Defined in: core/utils/share-gallery.ts:243
+Defined in: core/utils/share-gallery.ts:242
 
 Cancels the share surface — bumps the sync sequence so an in-flight
 manifest fetch can never land on a newer route, and restores the

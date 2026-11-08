@@ -108,6 +108,7 @@ frame ever paints empty.
 - `@param` rungs Ascending proven tiers from coverVariants — last is top.
 - `@param` loadedClass Class token that turns the layer's opacity on.
 - `@param` mobileRungs Ascending rungs on the `{stem}-mobile` ladder —
+- `@param` boxWidthCssPx The layout box the ceiling judges — defaults to
 
 ### `advance`
 

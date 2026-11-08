@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcDrawTextOrderedOffset
 
 ```ts
-function calcDrawTextOrderedOffset(idx, scheduledMs): number;
+function calcDrawTextOrderedOffset(idx, scheduledMs): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:195
+Defined in: core/utils/wasm/wasm-layout.ts:196
 
 Ordered-queue offset for document-wide cascades: `scheduledMs` is the
 cumulative reveal duration of every item that precedes this one across

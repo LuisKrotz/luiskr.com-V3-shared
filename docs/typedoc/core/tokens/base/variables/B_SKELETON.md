@@ -8,6 +8,6 @@
 const _B_SKELETON: 'skeleton' = 'skeleton'
 ```
 
-Defined in: core/tokens/base.ts:77
+Defined in: core/tokens/base.ts:94
 
 BEM block fragment "b skeleton" — composed by the token groups below into full class names.

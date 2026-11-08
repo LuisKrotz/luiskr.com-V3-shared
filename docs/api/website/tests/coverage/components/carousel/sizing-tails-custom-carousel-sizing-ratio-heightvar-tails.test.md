@@ -9,6 +9,14 @@ Coverage tails for custom-carousel/sizing — the mobile-src
 
 ## Members
 
+### `STUB_HOST_W`
+
+hostW stub feeds every unsized fallback projection below.
+
+### `FALLBACK_PX`
+
+Expected uniform fallback height: hostW projected through 16:9, rounded.
+
 ### `stubEl`
 
 Minimal element stub — setHeightVar only touches $/items/flags/style/closest.

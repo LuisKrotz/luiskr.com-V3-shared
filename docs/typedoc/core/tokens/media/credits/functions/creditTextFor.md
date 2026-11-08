@@ -8,7 +8,7 @@
 function creditTextFor(credit, subject): string
 ```
 
-Defined in: core/tokens/media/credits.ts:71
+Defined in: core/tokens/media/credits.ts:82
 
 Expands a registry credit into structured creditText — source, original
 host, licence and current usage (the dossier page it appears on). Credits

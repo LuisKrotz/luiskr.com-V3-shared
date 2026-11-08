@@ -8,7 +8,7 @@
 function renderLangDialog(host): Element | null
 ```
 
-Defined in: website/components/dialogs/lang-dialog/render.tsx:83
+Defined in: website/components/dialogs/lang-dialog/render.tsx:82
 
 JSX template.
 

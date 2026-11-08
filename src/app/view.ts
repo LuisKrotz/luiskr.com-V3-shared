@@ -34,22 +34,33 @@ export function updateAppViewContent(
   _from?: RouteDescriptor | null
 ): void {
   const outlet = c.$(`#${APP_IDS.VIEW_OUTLET}`)
+
+  // No outlet yet (pre-render frame) — nothing to reconcile.
   if (!outlet) return
 
   const current = outlet.firstElementChild
+
   const targetTag = c.currentViewTag.toLowerCase()
+
+  // Same-tag reuse requires the element be actually UPGRADED — an
+  // unupgraded tag match (chunk still fetching) has no
+  // onRouteParamChange to delegate to, so it counts as a real swap.
   const isDefined =
     typeof customElements !== TYPE_STRINGS.UNDEFINED && !!customElements.get(c.currentViewTag)
 
   if (current && current.tagName.toLowerCase() === targetTag && isDefined) {
     const routable = current as RoutableView
 
+    // Delegate instead of remount — same-tag navigations keep their
+    // canvas/state alive (project→project must not tear down GL).
     if (typeof routable.onRouteParamChange === TYPE_STRINGS.FUNCTION) {
       routable.onRouteParamChange?.(to || router.currentRoute)
     }
+
     return
   }
 
+  // Different tag (or unupgraded element) → full view swap.
   c._flipToView(outlet, to)
 }
 
@@ -59,6 +70,7 @@ export function updateAppViewContent(
  * content counts as early FCP/LCP. Idempotent — safe on every swap.
  */
 const parkReaderArticle = (): void => {
+  // Optional chain — no-JS/prerendered documents may lack the article.
   document
     .querySelector(`article.${READER_CLASSES.CONTENT}`)
     ?.classList.add(READER_CLASSES.OFFSCREEN)
@@ -83,7 +95,10 @@ export async function flipAppView(
   // New view = new section markers; re-measure lazily via checkScroll.
   c._sectionsMeasured = false
 
+  // Reduced-motion users take the instant path — no cross-fade.
   const reduced = store.getters.getReducedMotion()
+
+  // The incoming view's tag name (view-home, view-project, …).
   const toTag = c.currentViewTag
 
   try {
@@ -119,21 +134,30 @@ export async function flipAppView(
   }
 
   if (reduced || !outlet.firstElementChild) {
-    // Instant swap — no animation
+    // Instant swap — reduced motion, or an empty outlet (first mount)
+    // where there is nothing to fade out from.
     outlet.replaceChildren(document.createElement(toTag))
+
     parkReaderArticle()
+
     return
   }
 
   const outgoing = outlet.firstElementChild
 
+  // Leg one: fade the outgoing view. The swap itself waits
+  // PAGE_FADE_HALF so the out-leg finishes before the DOM changes.
   outgoing.classList.add(STATE_CLASSES.PAGE_FADE_OUT)
 
   setTimeout(() => {
     const incoming = document.createElement(toTag)
 
+    // Mount hidden via the fade-in class, reveal by removing it —
+    // the CSS transition paints the in-leg.
     incoming.classList.add(STATE_CLASSES.PAGE_FADE_IN)
+
     outlet.replaceChildren(incoming)
+
     parkReaderArticle()
 
     // Intentional transition-restart flush — committed styles are needed

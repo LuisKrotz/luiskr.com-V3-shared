@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/types](../README.md) / ProjectTranslations
 
-Defined in: website/views/project/types.ts:46
+Defined in: website/views/project/types.ts:48
 
 The project's translation node — `title`, `noindex` SEO flag,
 `folder` CDN prefix, `cover`, and `sections` (array of SectionChild arrays).
@@ -24,9 +24,9 @@ Index signature preserves CMS fields the view doesn't consume.
 optional title?: string;
 ```
 
-Defined in: website/views/project/types.ts:47
+Defined in: website/views/project/types.ts:49
 
-***
+---
 
 ### noindex?
 
@@ -34,9 +34,9 @@ Defined in: website/views/project/types.ts:47
 optional noindex?: boolean;
 ```
 
-Defined in: website/views/project/types.ts:48
+Defined in: website/views/project/types.ts:50
 
-***
+---
 
 ### folder?
 
@@ -44,9 +44,9 @@ Defined in: website/views/project/types.ts:48
 optional folder?: string;
 ```
 
-Defined in: website/views/project/types.ts:49
+Defined in: website/views/project/types.ts:51
 
-***
+---
 
 ### cover?
 
@@ -54,9 +54,9 @@ Defined in: website/views/project/types.ts:49
 optional cover?: CoverMedia;
 ```
 
-Defined in: website/views/project/types.ts:50
+Defined in: website/views/project/types.ts:52
 
-***
+---
 
 ### sections?
 
@@ -64,4 +64,4 @@ Defined in: website/views/project/types.ts:50
 optional sections?: SectionChild[][];
 ```
 
-Defined in: website/views/project/types.ts:51
+Defined in: website/views/project/types.ts:53

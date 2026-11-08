@@ -70,6 +70,6 @@ const DOCS_UNITS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/strings/docs.ts:134
+Defined in: core/tokens/strings/docs.ts:138
 
 Unit tokens used by docs layout/scene math.

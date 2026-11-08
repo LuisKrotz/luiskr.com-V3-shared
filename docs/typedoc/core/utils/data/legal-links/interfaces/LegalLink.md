@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/data/legal-links](../README.md) / LegalLink
 
-Defined in: core/utils/data/legal-links.ts:20
+Defined in: core/utils/data/legal-links.ts:22
 
 A legal footer entry: localized path + human label.
 
@@ -13,17 +13,17 @@ A legal footer entry: localized path + human label.
 ### link
 
 ```ts
-link: string;
+link: string
 ```
 
-Defined in: core/utils/data/legal-links.ts:21
+Defined in: core/utils/data/legal-links.ts:23
 
-***
+---
 
 ### page
 
 ```ts
-page: string;
+page: string
 ```
 
-Defined in: core/utils/data/legal-links.ts:22
+Defined in: core/utils/data/legal-links.ts:24

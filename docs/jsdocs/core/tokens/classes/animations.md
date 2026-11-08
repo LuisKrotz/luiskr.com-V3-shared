@@ -2,9 +2,9 @@
 
 Animations-reference view class tokens — grouped subset of
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\classes\animations.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\animations.ts`                   |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -15,3 +15,11 @@ Frozen animations-reference class-name map — sole declaration site for
 these tokens; consumers read members and never re-declare the strings
 (zero-hardcoding rules 4–5). Object.freeze makes the token contract
 immutable at runtime.
+
+### `ANIMATIONS_TEXT`
+
+Text column inside a record (term + description, demo sits beside).
+
+### `ANIMATIONS_DOCS`
+
+Per-record deep link into the docs portal.

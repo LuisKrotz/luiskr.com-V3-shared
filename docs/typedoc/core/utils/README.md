@@ -54,6 +54,12 @@ Re-exports [viewportWidth](dom/functions/viewportWidth.md)
 
 ---
 
+### viewportHeight
+
+Re-exports [viewportHeight](dom/functions/viewportHeight.md)
+
+---
+
 ### resetViewportCache
 
 Re-exports [resetViewportCache](dom/functions/resetViewportCache.md)
@@ -63,6 +69,12 @@ Re-exports [resetViewportCache](dom/functions/resetViewportCache.md)
 ### isIntentionalFlush
 
 Re-exports [isIntentionalFlush](dom/functions/isIntentionalFlush.md)
+
+---
+
+### measureLayout
+
+Re-exports [measureLayout](dom/functions/measureLayout.md)
 
 ---
 

@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcCarouselScrollTarget
 
 ```ts
-function calcCarouselScrollTarget(
-   idx, 
-   slideWidth, 
-   gap?
-): number;
+function calcCarouselScrollTarget(idx, slideWidth, gap?): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:116
+Defined in: core/utils/wasm/wasm-layout.ts:117
 
 Scroll offset that brings slide `idx` into view, counting per-slide
 width + gap: idx·(slideWidth+gap).

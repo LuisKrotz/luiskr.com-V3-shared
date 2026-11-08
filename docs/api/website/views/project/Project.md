@@ -81,6 +81,26 @@ one continuous type-in across <h3>/<p> boundaries.
 
 Whether a media group renders in landscape layout.
 
+### `isMosaicGroup`
+
+Whether a media group's height variation swaps it to the mosaic wall.
+
+### `sectionMosaicHeight`
+
+Mosaic-wall height estimate for a section — published on the section
+wrapper as --media-mosaic-height so a deferred <media-mosaic> reserves
+its final packed box (zero-CLS, same skyline math the component runs).
+
+### `_syncTitleMarquee`
+
+Post-render/resize pass: fits the title repetitions to the viewport and sizes the marquee duration.
+
+### `_fitDescriptionSizes`
+
+Post-render/resize/reveal pass: stamps the single-paragraph
+description promotions (--xl one-liner / --md longer) from measured
+line counts. See project/layout.ts.
+
 ### `checkAutoOpenModal`
 
 Deep-link opener: /portfolio/<project>/<media-slug> URLs (written by

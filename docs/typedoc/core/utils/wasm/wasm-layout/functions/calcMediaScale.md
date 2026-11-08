@@ -8,7 +8,7 @@
 function calcMediaScale(naturalW, naturalH, boundW, boundH): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:300
+Defined in: core/utils/wasm/wasm-layout.ts:313
 
 Contain-fit scale for media inside a bounding box, clamped to 1:
 min(boundW/naturalW, boundH/naturalH, 1) — the media may shrink to fit

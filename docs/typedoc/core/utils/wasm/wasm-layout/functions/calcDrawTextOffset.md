@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcDrawTextOffset
 
 ```ts
-function calcDrawTextOffset(
-   idx, 
-   charsBefore, 
-   delay
-): number;
+function calcDrawTextOffset(idx, charsBefore, delay): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:176
+Defined in: core/utils/wasm/wasm-layout.ts:177
 
 Start-time offset for character `idx`: charsBefore·delay staggers it
 after the preceding run, plus idx·DRAW_INDEX_STEP_MS so later items in

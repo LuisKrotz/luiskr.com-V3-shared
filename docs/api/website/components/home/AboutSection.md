@@ -1,6 +1,6 @@
 # `website\components\home\AboutSection.tsx`
 
-&lt;about-section&gt; — the home page's bio block: Gravatar profile
+&lt;about-section&gt; — the home page's opening bio block: title,
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
@@ -17,9 +17,24 @@ The AboutSection — section class.
 
 Active TV-glitch session on the portrait — see about/glitch.ts.
 
+### `_hud`
+
+Active location-HUD session on the portrait — see about/hud.ts.
+
+### `_mesh`
+
+Active light-field mesh session on the portrait — see about/mesh.ts.
+
+### `_titleFit`
+
+Active portrait-to-title fit session — see about/titlefit.ts.
+
 ### (module scope)
 
-Binds the portrait glitch handlers once the shadow root exists.
+Binds the portrait glitch handlers once the shadow root exists, then
+subscribes to the store and ensures the components dictionary (which
+carries contact.line1 for the links row) is loaded — same ensure-fetch
+<contact-section> performs; whichever section mounts first fires it.
 
 ### (module scope)
 
@@ -27,10 +42,10 @@ Stops any running glitch loop when the element leaves the DOM.
 
 ### (module scope)
 
-Re-binds the bio's continuous type-in description — the two-column
-paragraph cascade is ONE coordinated animation (col2 starts as col1
-ends), so the text container carries the ABOUT_TEXT record on top
-of each <draw-text>'s own TEXT_DRAW binding.
+Re-binds the bio's continuous type-in description — the intro +
+paragraph cascade is ONE coordinated animation (each paragraph starts
+as the previous ends), so the text container carries the ABOUT_TEXT
+record on top of each <draw-text>'s own TEXT_DRAW binding.
 
 ### `aboutTranslations`
 
@@ -48,14 +63,22 @@ CDN-resized Gravatar URL for the profile img.
 
 Responsive srcset candidates for the profile photo.
 
+### `aboutLocations`
+
+The `locations` array of the about node — drives the orbiting HUD.
+
+### `aboutSubtitle`
+
+The `subtitle` tagline node — falls back to the bundled snapshot.
+
 ### `aboutDrawData`
 
-Draw-timing plan for the two bio columns. Both columns share ONE
-1500ms animation budget: charDelay = 1500ms ÷ totalChars (both
-columns), and each paragraph's offset = cumulative chars before it
-× delay — so col2's first paragraph starts exactly when col1's last
-ends. The bio reads as a single continuous type-in flowing down the
-left column then continuing down the right.
+Draw-timing plan for the intro + bio column. The `frame` node is the
+hero statement (falling back to col1's lead paragraph); every remaining
+paragraph follows in one column. All items share ONE 1500ms animation
+budget: charDelay = 1500ms ÷ totalChars, and each paragraph's offset =
+cumulative chars before it × delay — the bio reads as a single
+continuous type-in flowing from the intro down the column.
 
 ### (module scope)
 

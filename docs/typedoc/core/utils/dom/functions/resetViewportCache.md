@@ -8,10 +8,11 @@
 function resetViewportCache(): void
 ```
 
-Defined in: core/utils/dom.ts:239
+Defined in: core/utils/dom.ts:268
 
-Test/invalidate hook — clears the memoized width. Test suites call it
-between cases since jsdom/happy-dom innerWidth is mutable mid-test.
+Test/invalidate hook — clears the memoized viewport readings. Test
+suites call it between cases since jsdom/happy-dom innerWidth and
+innerHeight are mutable mid-test.
 
 ## Returns
 

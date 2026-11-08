@@ -1,6 +1,6 @@
 # `website\components\legal\Footer.tsx`
 
-&lt;legal-footer&gt; — footer strip shared by internals and the
+&lt;legal-footer&gt; — the single site footer shared by the
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
@@ -9,20 +9,18 @@
 
 ## Members
 
-### `feedHrefFor`
+### (module scope)
 
-Locale RSS feed URL — `/feed.xml` for English, `/<loc>/feed.xml`
-otherwise; both are firebase rewrites onto the generated meta feeds.
+A social-channel row from the components/related CMS node — `link`
+the destination (mailto:/tel:/https:) and `network` the label.
 
-- `@param` locale active locale code
-- `@returns` root-relative feed path for that locale
+### (module scope)
 
-### `feedGlyph`
+Destination URL — external, mailto: or tel:.
 
-Inline RSS glyph — decorative (`aria-hidden`, the anchor's visible text
-carries the accessible name). Paints in currentColor so it inherits the
-link ink in every theme; the arcs carry the wave class that pulses them
-outward on hover/focus (internals `_internal.scss`, reduced-motion aware).
+### (module scope)
+
+Visible channel name (Mail, Phone, Linkedin, Github…).
 
 ### `LegalFooter`
 

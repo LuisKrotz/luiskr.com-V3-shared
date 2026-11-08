@@ -79,7 +79,15 @@ Canvas JSX for the WebGL menu background.
 
 ### `toggleNavMenu`
 
-Opens/closes the fullscreen menu overlay.
+Opens/closes the fullscreen menu overlay. The joust gate applies to the
+closed → open edge only: on hover-less input the first pointer tap on a
+collapsed chip pours the menu label out instead of opening the overlay,
+and the second tap opens it. While the menu is already open the close
+path stays single-tap — the gate is skipped entirely.
+
+- `@param` host AppNav instance.
+- `@param` e The click event from the fallback button or label span (absent
+- `@param` chip Explicit gate element for event-less callers — the burger
 
 ### `openNavMenu`
 

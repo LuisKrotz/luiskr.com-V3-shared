@@ -28,11 +28,21 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'snyk-report.json')
 const EXCEPTIONS_FILE = path.join(ROOT, 'security-exceptions.json')
 const FAIL_SEVERITIES = new Set(['high', 'critical'])
 
+/**
+ * `loadExceptions` — the accepted-risk list from
+ * security-exceptions.json; absent file means no exceptions.
+ */
 const loadExceptions = () => {
   if (!fs.existsSync(EXCEPTIONS_FILE)) return []
+
   return JSON.parse(fs.readFileSync(EXCEPTIONS_FILE, 'utf-8')).exceptions || []
 }
 
+/**
+ * `isExcepted` — does this vuln match an accepted-risk entry?
+ * Wildcards ('*') match any package/advisory; a vuln with no
+ * advisoryId can only be matched by a '*' advisory exception.
+ */
 const isExcepted = (vuln, exceptions) =>
   exceptions.some(
     (e) =>
@@ -61,6 +71,11 @@ const runSnyk = () => {
   }
 }
 
+/**
+ * `normalizeSnyk` — maps the raw `snyk test --json` shape onto the
+ * report's uniform vuln shape (same fields yarn audit fills below,
+ * so downstream code never cares which engine ran).
+ */
 const normalizeSnyk = (data) => ({
   scanner: `snyk@${process.env.SNYK_VERSION || 'cli'}`,
   vulnerabilities: (data.vulnerabilities || []).map((v) => ({
@@ -140,19 +155,33 @@ const normalizeYarnAudit = (ndjson) => {
   }
 }
 
+/** `tally` — severity histogram for the report's `totals` block. */
 const tally = (vulns) => {
   const t = { critical: 0, high: 0, moderate: 0, low: 0, info: 0, total: vulns.length }
+
   for (const v of vulns) if (t[v.severity] !== undefined) t[v.severity] += 1
+
   return t
 }
 
+/**
+ * `main` — the scan pipeline: pick an engine (snyk when the token
+ * exists, yarn audit otherwise), normalize, tag accepted risks,
+ * write the report, and gate the process on actionable findings.
+ */
 const main = async () => {
   const exceptions = loadExceptions()
+
+  // The engine's normalized output — whichever branch fills it.
   let report
 
   if (process.env.SNYK_TOKEN) {
     const snyk = runSnyk()
+
     report = snyk ? normalizeSnyk(snyk) : null
+
+    // A token that didn't yield a report (auth expired, network,
+    // CLI missing) drops to the fallback rather than failing blind.
     if (!report) {
       console.warn('⚠  snyk test failed — falling back to yarn audit')
     }
@@ -162,6 +191,7 @@ const main = async () => {
 
   if (!report) {
     let ndjson
+
     try {
       // yarn audit exits non-zero when vulns exist — stdout still carries NDJSON
       ndjson = execFileSync('yarn', ['audit', '--json'], {
@@ -171,16 +201,22 @@ const main = async () => {
         maxBuffer: 32 * 1024 * 1024,
       })
     } catch (err) {
+      // The non-zero exit IS the report — take stdout from the error.
       ndjson = err.stdout?.toString?.() || ''
     }
+
     report = normalizeYarnAudit(ndjson)
   }
 
+  // Tag every vuln with its exception status — the report shows
+  // accepted risks instead of hiding them.
   const withStatus = report.vulnerabilities.map((v) => ({
     ...v,
     acceptedRisk: isExcepted(v, exceptions),
   }))
 
+  // Gate set: fail-severity AND not excepted — everything else is
+  // informational.
   const actionable = withStatus.filter((v) => FAIL_SEVERITIES.has(v.severity) && !v.acceptedRisk)
 
   const reportDoc = {
@@ -194,19 +230,25 @@ const main = async () => {
   }
 
   fs.mkdirSync(REPORTS_DIR, { recursive: true })
+
   fs.writeFileSync(REPORT_FILE, JSON.stringify(reportDoc, null, 2))
 
   const t = reportDoc.totals
+
   console.log(
     `🔒 ${reportDoc.scanner}: ${t.total} vulns (critical ${t.critical}, high ${t.high}, moderate ${t.moderate}, low ${t.low}) — ${withStatus.filter((v) => v.acceptedRisk).length} accepted-risk`
   )
 
   if (actionable.length) {
+    // List each actionable vuln, then fail the gate.
     console.error(`\n✗ ${actionable.length} actionable high/critical vulnerabilities:`)
+
     for (const v of actionable) {
       console.error(`  [${v.severity}] ${v.packageName} — ${v.title} (fix: ${v.fixedIn || 'none'})`)
     }
+
     console.error(`\nReport: ${path.relative(ROOT, REPORT_FILE)}`)
+
     process.exit(1)
   }
 
@@ -214,6 +256,9 @@ const main = async () => {
 }
 
 main().catch((err) => {
+  // Any unexpected failure also fails the gate — a scan that didn't
+  // run to completion must not read as a pass.
   console.error('security-scan failed:', err)
+
   process.exit(1)
 })

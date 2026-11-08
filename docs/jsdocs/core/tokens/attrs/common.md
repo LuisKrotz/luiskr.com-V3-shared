@@ -2,9 +2,9 @@
 
 Generic DOM attribute + attribute-value tokens — the
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\attrs\common.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\attrs\common.ts`                         |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -78,6 +78,10 @@ Default language code — English is the canonical un-prefixed locale.
 ### `TRIGGER`
 
 `trigger` — DrawText trigger attribute name (viewport/manual).
+
+### `ANIMATION`
+
+`animation` — AnimDemo attribute naming the ANIMATION_IDS entry it demos.
 
 ### `ORDERED`
 

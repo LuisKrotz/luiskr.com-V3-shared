@@ -14,7 +14,7 @@ const MEDIA_UI_KEYS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/data/ui-keys.ts:139
+Defined in: core/tokens/data/ui-keys.ts:142
 
 Frozen media ui key map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the

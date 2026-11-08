@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/interactions](../README.md) / onHover
 
 ```ts
-function onHover(host, i): void;
+function onHover(host, i): void
 ```
 
-Defined in: website/components/home/mosaic/interactions.ts:65
+Defined in: website/components/home/mosaic/interactions.ts:82
 
 Pointer-enter: expands the card's details region. Two-pass flow —
 first layout() with a 130px provisional bottom, then after one frame

@@ -24,6 +24,12 @@ Page + footer link title — English-only by product spec.
 
 English fallback for the CMS-provided description + toast copy.
 
+### `SEARCH_GROUP_LABEL`
+
+Route-search group header for docs hits — English-only by product
+spec: the docs corpus exists only in English, so the label names
+that explicitly in every locale (never localized, never CMS-fed).
+
 ### `CMS_COMPONENT`
 
 database.json component node: translations/<locale>/components/<key>.

@@ -1,6 +1,6 @@
 # `website\tests\coverage\components\home\aboutsection-tails.test.js`
 
-Coverage tails for AboutSection's side-info column:
+Coverage tails for AboutSection: the intro/empty-fallback
 
 |                |                                                                         |
 | -------------- | ----------------------------------------------------------------------- |

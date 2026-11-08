@@ -21,6 +21,14 @@ Original host the asset is published on.
 
 Licence posture as published by the source.
 
+### `licenseUrl`
+
+Canonical page stating the source's licence terms — emitted as
+ImageObject/VideoObject `license` + `acquireLicensePage` for credited
+assets so the licensable badge lands on the real terms page, never
+the site's own legal page (the site's MPL grant does not cover
+third-party imagery).
+
 ### `MEDIA_CREDIT_LABELS`
 
 Labels for each credit field, kept as tokens so the expansion stays literal-free.
@@ -47,3 +55,45 @@ credit while the map is being extended.
 - `@param` credit Raw registry credit string (e.g. 'NASA').
 - `@param` subject Display name of the body the asset illustrates.
 - `@returns` Structured creditText, or the raw credit when no source record exists.
+
+### `creditLicenseUrlFor`
+
+Resolves the canonical licence-terms URL for a registry credit — the
+SOURCE's page (NASA media guidelines, Commons licensing), never the
+site's. Returns undefined for credits without a source record so
+emitters omit the licence pair rather than misattribute the asset.
+
+- `@param` credit Raw registry credit string (e.g. 'NASA').
+- `@returns` Absolute licence URL, or undefined when the credit is unmapped.
+
+### (module scope)
+
+Inputs for the shared media-provenance field bag.
+
+### (module scope)
+
+Absolute licence URL — the locale's legal page for site-owned
+assets, the source's terms page for credited third-party assets.
+Undefined omits both licence properties.
+
+### (module scope)
+
+Copyright/attribution notice — '© owner' for owned assets, the raw
+credit for third-party ones.
+
+### (module scope)
+
+Structured credit line — owner name or `creditTextFor` output.
+
+### `mediaProvenanceFields`
+
+Assembles the Schema.org provenance properties every media entity
+(ImageObject/VideoObject) carries — `license` + `acquireLicensePage`
+always resolve to the same target so Google Images can flag the asset
+as licensable and land the click on the terms page. The property
+names are declared once here for every emitter (runtime schema.ts,
+share-gallery.ts, build-locale-pages.mjs) so the JSON-LD vocabulary
+cannot drift between surfaces.
+
+- `@param` fields Resolved licence URL, notice and credit line.
+- `@returns` Field bag to spread into the entity literal.

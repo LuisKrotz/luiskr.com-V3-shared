@@ -18,6 +18,7 @@
 - [calcMosaicCols](functions/calcMosaicCols.md)
 - [calcMosaicGap](functions/calcMosaicGap.md)
 - [calcResponsivePadding](functions/calcResponsivePadding.md)
+- [calcGridGutter](functions/calcGridGutter.md)
 - [calcAspectScaled](functions/calcAspectScaled.md)
 - [calcMediaScale](functions/calcMediaScale.md)
 - [calcMediaBox](functions/calcMediaBox.md)

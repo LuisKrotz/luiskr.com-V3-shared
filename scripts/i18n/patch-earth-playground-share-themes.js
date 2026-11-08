@@ -1,10 +1,25 @@
+/**
+ * @file patch-earth-playground-share-themes.js
+ * @description One-shot migration: injects the share-capture labels
+ * (shareGallery/shareCapture) and the localized searchThemes keyword
+ * arrays into the earth-playground AND space-playground page nodes of
+ * the local database.json mirror — the two experiment routes share
+ * the same authored vocabulary.
+ *
+ * Run: node shared/scripts/i18n/patch-earth-playground-share-themes.js
+ * (patches the local mirror only — the upload-* scripts push live).
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place, written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
 /**
@@ -314,18 +329,29 @@ TRANSLATIONS_MAP.tln = { ...TRANSLATIONS_MAP.it }
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 
 for (const [locale, data] of Object.entries(TRANSLATIONS_MAP)) {
+  // Skip locales with no pages node at all — never bootstrap a
+  // locale the CMS hasn't created.
   if (!db.translations[locale]?.pages) continue
 
+  // Both experiment routes receive the same vocabulary — they share
+  // one authored dictionary (the space route reuses earth's copy).
   for (const pageKey of ['earth-playground', 'space-playground']) {
     const page = db.translations[locale].pages[pageKey]
 
+    // Missing page node → skip silently (locale has no such page).
     if (!page) continue
 
+    // Inject the three fields — gallery heading, singular capture
+    // noun, and the keyword array under the shared token key.
     page.shareGallery = data.shareGallery
+
     page.shareCapture = data.shareCapture
+
     page[SEARCH_THEMES_KEY] = data[SEARCH_THEMES_KEY]
   }
 }
 
+// Write the mirror back — 2-space indent matches the file's format.
 fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8')
+
 console.log('✅ database.json patched with Earth Playground share themes across all locales.')

@@ -8,6 +8,6 @@
 const _B_AWC_SLIDE: 'aw-c-slide'
 ```
 
-Defined in: core/tokens/base.ts:383
+Defined in: core/tokens/base.ts:458
 
 BEM block fragment "b awc slide" — composed by the token groups below into full class names.

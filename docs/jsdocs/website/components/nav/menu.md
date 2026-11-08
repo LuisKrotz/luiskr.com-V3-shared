@@ -2,9 +2,9 @@
 
 Fullscreen menu overlay behavior for &lt;app-nav&gt;, extracted
 
-| | |
-|---|---|
-| **Source** | `src/website\components\nav\menu.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\nav\menu.tsx`                   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -68,6 +68,7 @@ the component's lifetime so its WebGL context is never churned by
 re-renders (canvas recreation would force a fresh GL context). Each
 call also re-syncs the on-dark class and aria-label/expanded since
 those change without recreating the element.
+
 - `@param` host AppNav instance.
 - `@param` label aria-label for the burger (localized "menu").
 - `@returns` The persistent canvas element.
@@ -78,7 +79,15 @@ Canvas JSX for the WebGL menu background.
 
 ### `toggleNavMenu`
 
-Opens/closes the fullscreen menu overlay.
+Opens/closes the fullscreen menu overlay. The joust gate applies to the
+closed → open edge only: on hover-less input the first pointer tap on a
+collapsed chip pours the menu label out instead of opening the overlay,
+and the second tap opens it. While the menu is already open the close
+path stays single-tap — the gate is skipped entirely.
+
+- `@param` host AppNav instance.
+- `@param` e The click event from the fallback button or label span (absent
+- `@param` chip Explicit gate element for event-less callers — the burger
 
 ### `openNavMenu`
 

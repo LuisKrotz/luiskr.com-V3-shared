@@ -5,15 +5,15 @@
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/render](../README.md) / renderCarouselSlide
 
 ```ts
-function renderCarouselSlide(item, folder, isMixed?): Element | null
+function renderCarouselSlide(item, folder): Element | null
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:89
+Defined in: website/components/carousel/custom-carousel/render.tsx:62
 
 One slide's inner content — a <media-figure> with the item's CDN src
 (folder + src), intrinsic size for aspect-ratio layout, and the
-expand/video/label flags. For mixed carousels on mobile, landscape slides
-include a mirrored repetition pattern backdrop to compensate for height.
+expand/video/label flags. Every figure cover-fills the shared strip
+height — a carousel never mixes item heights.
 Returns null for placeholder entries.
 
 ## Parameters
@@ -29,12 +29,6 @@ Slide descriptor, or null for empty slots.
 `string`
 
 CDN folder prefix (e.g. 'projectslug/').
-
-### isMixed?
-
-`boolean` = `false`
-
-Whether the carousel contains both landscape and portrait items.
 
 ## Returns
 

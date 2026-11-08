@@ -125,16 +125,17 @@ describe('Component portability (self-contained folders)', () => {
   })
 
   test('every component module has a discoverable style entry or is a pure delegate', () => {
-    // Component entry points import an inline .scss; leaf delegates (render/
-    // data/nav helpers) legitimately have none. Assert at folder granularity:
-    // each feature folder that defines an element must contain ≥1 .scss import.
+    // Component entry points import a compiled .scss sheet (?inline, ?tiers,
+    // or ?rcss specifier); leaf delegates (render/data/nav helpers) have
+    // none. Assert at folder granularity: each feature folder that defines
+    // an element must contain ≥1 .scss import.
     const folderScss = new Map()
 
     for (const f of files) {
       const owner = ownerOf(f)
       const src = readFileSync(f, 'utf8')
 
-      if (/\.scss\?inline['"]/.test(src) || /\.scss['"]/.test(src)) {
+      if (/\.scss\?(?:inline|tiers|rcss)['"]/.test(src) || /\.scss['"]/.test(src)) {
         folderScss.set(owner, true)
       }
     }

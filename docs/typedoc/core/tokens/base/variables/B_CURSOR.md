@@ -8,7 +8,7 @@
 const _B_CURSOR: 'magnetic-cursor' = 'magnetic-cursor'
 ```
 
-Defined in: core/tokens/base.ts:125
+Defined in: core/tokens/base.ts:142
 
 BEM block fragment `magnetic-cursor` — declared once here; every domain class token
 composes from this fragment (zero-hardcoding rule 9).

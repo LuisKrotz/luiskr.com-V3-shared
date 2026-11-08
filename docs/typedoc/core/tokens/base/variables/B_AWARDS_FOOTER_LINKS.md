@@ -8,7 +8,7 @@
 const _B_AWARDS_FOOTER_LINKS: 'awards-footer-links'
 ```
 
-Defined in: core/tokens/base.ts:257
+Defined in: core/tokens/base.ts:309
 
 BEM block fragment `…` — declared once here; every domain class token composes from this
 fragment (zero-hardcoding rule 9).

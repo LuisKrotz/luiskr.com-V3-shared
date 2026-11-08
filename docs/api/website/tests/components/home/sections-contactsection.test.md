@@ -1,6 +1,6 @@
 # `website\tests\components\home\sections-contactsection.test.js`
 
-Split from sections.test.js — covers the "ContactSection" describe.
+Split from sections.test.js — covers the "ContactSection"
 
 |                |                                                                     |
 | -------------- | ------------------------------------------------------------------- |

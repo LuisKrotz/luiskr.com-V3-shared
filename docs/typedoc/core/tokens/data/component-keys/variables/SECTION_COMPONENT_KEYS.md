@@ -8,6 +8,7 @@
 const SECTION_COMPONENT_KEYS: Readonly<{
   RELATED_TITLE: 'related.title'
   CONTACT_TITLE: 'contact.title'
+  CONTACT_SUBTITLE: 'contact.subtitle'
 }>
 ```
 

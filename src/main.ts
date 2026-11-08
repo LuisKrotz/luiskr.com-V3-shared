@@ -134,17 +134,25 @@ const warmCriticalPath = (
 let warmReady: Promise<unknown> = Promise.resolve()
 
 if (typeof window !== TYPE_STRINGS.UNDEFINED) {
+  // Browser env only — the module also evaluates under jsdom/SSR where
+  // window may be absent; the warm chain stays a resolved noop there.
   const locale = detectLangFromPath(window.location.pathname)
 
+  // Pathname → route segments: split on '/', drop empties (leading
+  // slash + double slashes), drop the locale prefix itself — what
+  // remains is the route the warm-up should guess at.
   const segments = window.location.pathname
     .split(CHAR_STRINGS.SLASH)
     .filter(Boolean)
     .filter((seg) => seg !== locale)
 
+  // Localized slugs for the home-view guess — /about and /contact are
+  // home routes, so their segments warm the home chunk too.
   const slugs = LANG_SLUGS[locale] || LANG_SLUGS.en
   const aboutSlug = slugs.about
   const contactSlug = slugs.contact
 
+  // Defer the fetches until first paint (see warmCriticalPath's doc).
   warmReady = afterFirstPaint(() => warmCriticalPath(locale, segments, aboutSlug, contactSlug))
 }
 
@@ -257,15 +265,23 @@ const start = async () => {
 
     // Mount custom element root
     if (typeof document !== TYPE_STRINGS.UNDEFINED) {
+      // First attempt — #app exists already on any sane document.
       if (!mount()) {
+        // Parse-order edge: the module ran before #app. Re-try on
+        // DOMContentLoaded…
         document.addEventListener(WINDOW_EVENTS.DOM_CONTENT_LOADED, mount, { once: true })
 
+        // …and on a 20 ms poll — DCL can already have fired by the
+        // time this listener lands (defer/async edge cases). The poll
+        // self-clears on the first successful mount.
         const retryTimer = setInterval(() => {
           if (mount()) {
             clearInterval(retryTimer)
           }
         }, 20)
 
+        // Bounded: 3 s of polling covers pathological parse stalls —
+        // after that #app is genuinely absent and retrying is waste.
         setTimeout(() => clearInterval(retryTimer), 3000)
       }
     }

@@ -8,7 +8,7 @@
 function handleLang(host, e?): void
 ```
 
-Defined in: website/components/nav/handlers.ts:158
+Defined in: website/components/nav/handlers.ts:166
 
 Opens the language dialog (fires open-lang-dialog after capturing origin).
 

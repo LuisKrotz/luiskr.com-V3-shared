@@ -21,10 +21,22 @@ read unambiguously by intent.
 
 English search-page segment — other locales use their LANG_SLUGS entry.
 
+### `SITEMAP_SEGMENT`
+
+English sitemap-page segment — other locales use their LANG_SLUGS entry.
+
 ### `FEED_FILE`
 
 Locale RSS feed file — `/feed.xml` (en) or `/<loc>/feed.xml`; both
 are firebase rewrites onto the generated `/meta/…/feed.xml`.
+
+### `FEED_CSS_FILE`
+
+Compiled feed sheet — `/feed.css` rewrites onto `/meta/feed.css`,
+which generate-sitemap.js emits from website/sass/feed.scss; every
+feed's `type="text/css"` xml-stylesheet PI points here so the raw
+XML renders branded instead of as a raw element tree (the CSS PI
+survives client-side XSLT's removal from browsers).
 
 ### `DB_PATHS`
 

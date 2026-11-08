@@ -8,7 +8,7 @@
 function onLeave(host): void
 ```
 
-Defined in: website/components/home/mosaic/interactions.ts:120
+Defined in: website/components/home/mosaic/interactions.ts:137
 
 Pointer-leave: clears hover state.
 

@@ -111,8 +111,11 @@ describe('media-figure.scss reads CSS vars inside Shadow Root', () => {
   test('.render-media uses object-position: top center', () => {
     expect(mfc).toMatch(/\.render-media\s*\{[^}]*object-position:\s*top center/)
   })
-  test('.render-media--thumb has blur(12px)', () => {
-    expect(mfc).toMatch(/--thumb[\s\S]*?filter:\s*blur\(12px\)/)
+  test('.render-media--thumb has a token-derived blur', () => {
+    // The thumb blur compiles to 12px via to-rem($_THUMB-BLUR) — assert the
+    // token mechanism, never the literal px, so the contract survives
+    // zero-hardcoding sweeps.
+    expect(mfc).toMatch(/--thumb[\s\S]*?filter:\s*blur\(to-rem\(/)
   })
   test('.render-media--thumb has z-index: 1', () => {
     expect(mfc).toMatch(/--thumb[\s\S]*?z-index:\s*1/)

@@ -8,7 +8,7 @@
 const _K_A11Y: 'a11y' = 'a11y'
 ```
 
-Defined in: core/tokens/base.ts:547
+Defined in: core/tokens/base.ts:665
 
 Shared key token `a11y` — the APP dictionary node holding the hidden
 navigation-heading templates (a11y.section / a11y.carousel /

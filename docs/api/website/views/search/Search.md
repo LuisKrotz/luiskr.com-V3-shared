@@ -15,4 +15,4 @@ The Search — route-search page class.
 
 ### (module scope)
 
-JSX template — the centered route-search surface.
+JSX template — the centered route-search surface + the footer.

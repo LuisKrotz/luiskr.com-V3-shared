@@ -1,9 +1,23 @@
+/**
+ * @file patch-sitemap-page.js
+ * @description One-shot migration: seeds the sitemap page's copy into
+ * every locale of the local database.json mirror — the footer link
+ * label (APP.sitemap) and the full page node (pages.sitemap: title,
+ * description, intro, and the six group names the tree renders).
+ *
+ * Run: node shared/scripts/i18n/patch-sitemap-page.js
+ * (patches the local mirror only — upload to Firebase separately).
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place, written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
 /**
@@ -197,15 +211,23 @@ for (const [locale, label] of Object.entries(LABELS)) {
 
   const app = tr?.APP
 
+  // A locale without an APP node is an incomplete locale — warn
+  // rather than half-seed (the footer label would land but the page
+  // tree would still be missing its siblings).
   if (!app) {
     console.warn(`⚠ ${locale}: no APP node — skipped`)
+
     continue
   }
 
+  // The footer link label — SECTION_UI_KEYS.SITEMAP reads this.
   app.sitemap = label
 
+  // Bootstrap the pages node if the locale somehow lacks it.
   const pages = tr.pages || (tr.pages = {})
 
+  // The full page node — description doubles as the intro line
+  // (the sitemap page's lede is exactly its meta description).
   pages.sitemap = {
     title: label,
     description: DESCRIPTIONS[locale],
@@ -214,7 +236,10 @@ for (const [locale, label] of Object.entries(LABELS)) {
   }
 }
 
+// Write the mirror back — trailing newline matches the file's
+// existing final-newline convention.
 fs.writeFileSync(dbPath, `${JSON.stringify(db, null, 2)}\n`, 'utf8')
+
 console.log(
   `✅ database.json patched — APP.sitemap + pages.sitemap in ${Object.keys(LABELS).length} locales.`
 )

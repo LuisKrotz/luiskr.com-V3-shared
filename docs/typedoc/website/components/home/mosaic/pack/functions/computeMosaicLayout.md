@@ -1,23 +1,21 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/mosaic/pack](../README.md) / computeMosaicLayout
 
 ```ts
 function computeMosaicLayout(
-   vw, 
-   items, 
-   bottomHFor
-): 
-  | {
-  cards: MosaicCardStyle[];
-  height: number;
-}
-  | null;
+  vw,
+  items,
+  bottomHFor
+): {
+  cards: MosaicCardStyle[]
+  height: number
+} | null
 ```
 
-Defined in: website/components/home/mosaic/pack.ts:173
+Defined in: website/components/home/mosaic/pack.ts:193
 
 Full packing pass: returns per-card style objects + packed height.
 `bottomHFor(i)` supplies the expanded details height (0 when closed) —
@@ -47,10 +45,10 @@ Expanded-bottom height lookup per index.
 
 ## Returns
 
-  \| \{
-  `cards`: [`MosaicCardStyle`](../interfaces/MosaicCardStyle.md)[];
-  `height`: `number`;
+\| \{
+`cards`: [`MosaicCardStyle`](../interfaces/MosaicCardStyle.md)[];
+`height`: `number`;
 \}
-  \| `null`
+\| `null`
 
 or null for empty/degenerate grids.

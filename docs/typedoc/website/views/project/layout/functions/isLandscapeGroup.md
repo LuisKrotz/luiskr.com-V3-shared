@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/layout](../README.md) / isLandscapeGroup
 
 ```ts
-function isLandscapeGroup(c, group): boolean;
+function isLandscapeGroup(c, group): boolean
 ```
 
-Defined in: website/views/project/layout.ts:94
+Defined in: website/views/project/layout.ts:111
 
 Whether a media group is all-landscape — those can't pair side-by-side
 in the two-up layout, so they force the carousel into scroll mode.

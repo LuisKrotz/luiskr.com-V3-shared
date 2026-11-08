@@ -15,6 +15,10 @@ Frozen media media-query map — sole declaration site for these tokens; consume
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes
 the token contract immutable at runtime.
 
+### `HOVER_NONE`
+
+Primary input cannot hold :hover — the joust (tap-to-reveal) trigger.
+
 ### `MIN_WIDTH_1025`
 
 Architecture-map visibility bound — the docs map column only exists at $vw-1024+1.

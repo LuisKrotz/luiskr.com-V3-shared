@@ -8,7 +8,7 @@
 const _B_FLAG: 'flag' = 'flag'
 ```
 
-Defined in: core/tokens/base.ts:112
+Defined in: core/tokens/base.ts:129
 
 BEM block fragment `flag` — declared once here; every domain class token composes from
 this fragment (zero-hardcoding rule 9).

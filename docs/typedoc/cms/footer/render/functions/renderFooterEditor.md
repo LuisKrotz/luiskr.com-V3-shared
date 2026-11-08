@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/footer/render](../README.md) / renderFooterEditor
 
 ```ts
-function renderFooterEditor(host): HTMLElement | DocumentFragment | SVGElement;
+function renderFooterEditor(host): HTMLElement | DocumentFragment | SVGElement
 ```
 
-Defined in: cms/footer/render.tsx:56
+Defined in: cms/footer/render.tsx:57
 
 JSX template.
 

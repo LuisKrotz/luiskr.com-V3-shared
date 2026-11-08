@@ -2,9 +2,9 @@
 
 CDN media inventory + best-variant resolution shared by the
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\build\media-manifest.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\build\media-manifest.mjs`           |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -67,3 +67,26 @@ matching the runtime URL builders in `core/utils/media.ts`.
 ### `resolveCoverKey`
 
 Resolves a home-mosaic cover image to its best indexable key.
+
+### `DIMS_PROBE_BYTES`
+
+Bytes fetched per image-dims probe — SOF/IHDR headers live in the head.
+
+### `scanImageDims`
+
+Scans an image header for intrinsic dims — PNG IHDR (8-byte signature)
+or JPEG SOFn marker walk (FFD8 + length-prefixed segments; SOF markers
+are C0–CF except DHT/DAC/RST: C4, C8, CC). Returns [w, h] or null.
+
+- `@param` {Buffer} buf - head bytes of the image
+
+### (module scope)
+
+Probes a set of absolute image URLs for intrinsic dims — one 64 KB
+range request per unique URL (the IHDR/SOF headers sit in the head).
+Failures are silent: an unreachable or unparseable asset simply has
+no entry in the returned map.
+
+- `@param` {string[]} urls absolute image URLs to probe
+- `@param` {number} timeoutMs per-request ceiling
+- `@returns` {Promise<Map<string, number[]>>} URL → [w, h]

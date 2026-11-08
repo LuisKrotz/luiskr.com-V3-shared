@@ -8,7 +8,7 @@
 function onProjectStoreUpdate(view): void
 ```
 
-Defined in: website/views/project/modal-dom.tsx:67
+Defined in: website/views/project/modal-dom.tsx:68
 
 Store change → reload on locale switch, otherwise sync modal DOM.
 

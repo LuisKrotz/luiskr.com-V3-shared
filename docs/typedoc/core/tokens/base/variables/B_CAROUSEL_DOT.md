@@ -8,6 +8,6 @@
 const _B_CAROUSEL_DOT: 'carousel-dot'
 ```
 
-Defined in: core/tokens/base.ts:213
+Defined in: core/tokens/base.ts:237
 
 BEM block fragment "b carousel dot" — composed by the token groups below into full class names.

@@ -8,7 +8,7 @@
 function isIntentionalFlush(): boolean
 ```
 
-Defined in: core/utils/dom.ts:247
+Defined in: core/utils/dom.ts:277
 
 True only inside flushLayout() — used by the forced-reflow governance test.
 

@@ -8,7 +8,7 @@
 const _B_INTERNAL: 'internal' = 'internal'
 ```
 
-Defined in: core/tokens/base.ts:99
+Defined in: core/tokens/base.ts:116
 
 BEM block fragment `internal` — declared once here; every domain class token composes from
 this fragment (zero-hardcoding rule 9).

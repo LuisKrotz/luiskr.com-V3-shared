@@ -8,7 +8,7 @@
 function localePath(key, lang?): string
 ```
 
-Defined in: core/i18n.ts:133
+Defined in: core/i18n.ts:129
 
 Builds a localized URL for a route key ('about', 'privacy', …).
 English paths stay un-prefixed (/about); other locales get

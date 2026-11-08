@@ -1,23 +1,29 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/classes/awards](../README.md) / AWARDS\_CLASSES
 
 ```ts
 const AWARDS_CLASSES: Readonly<{
-  AWARDS_FOOTER: "awards-footer";
-  AWARDS_FOOTER_TITLE: "awards-footer-title";
-  AWARDS_FOOTER_HEADER: "awards-footer-header";
-  AWARDS_FOOTER_PROGRESS: "awards-footer-progress";
-  AWARDS_FOOTER_PROGRESS_FILL: "awards-footer-progress-fill";
-  AWARDS_FOOTER_PROGRESS_FILL_RUNNING: "awards-footer-progress-fill--running";
-  AWARDS_FOOTER_PROGRESS_HIDDEN: "awards-footer-progress--hidden";
-  AWARDS_FOOTER_LINKS: "awards-footer-links";
-  AWARDS_FOOTER_ITEM: "awards-footer-links-item";
-  AWARDS_FOOTER_SEP: "awards-footer-links-sep";
-  AWARDS_FOOTER_SKEL: "awards-footer-skel";
-}>;
+  AWARDS_FOOTER: 'awards-footer'
+  AWARDS_FOOTER_TOP: 'awards-footer-top'
+  AWARDS_FOOTER_TITLE: 'awards-footer-title'
+  AWARDS_FOOTER_HEADER: 'awards-footer-header'
+  AWARDS_FOOTER_PROGRESS: 'awards-footer-progress'
+  AWARDS_FOOTER_PROGRESS_FILL: 'awards-footer-progress-fill'
+  AWARDS_FOOTER_PROGRESS_FILL_RUNNING: 'awards-footer-progress-fill--running'
+  AWARDS_FOOTER_PROGRESS_HIDDEN: 'awards-footer-progress--hidden'
+  AWARDS_FOOTER_LINKS: 'awards-footer-links'
+  AWARDS_FOOTER_ITEM: 'awards-footer-links-item'
+  AWARDS_FOOTER_SEP: 'awards-footer-links-sep'
+  AWARDS_FOOTER_PAIR: 'awards-footer-links-pair'
+  AWARDS_FOOTER_PAIR_LEAD: 'awards-footer-links-pair--lead'
+  AWARDS_FOOTER_FEED: 'awards-footer-links-feed'
+  AWARDS_FOOTER_FEED_ICON: 'awards-footer-links-feed-icon'
+  AWARDS_FOOTER_FEED_WAVE: 'awards-footer-links-feed-wave'
+  AWARDS_FOOTER_SKEL: 'awards-footer-skel'
+}>
 ```
 
 Defined in: core/tokens/classes/awards.ts:18

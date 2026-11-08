@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/footer/types](../README.md) / RelatedFooter
 
-Defined in: cms/footer/types.ts:35
+Defined in: cms/footer/types.ts:38
 
 The components/related DB node — `title`/`note` copy plus the
 `socials` channel list the related-projects footer renders.
@@ -14,22 +14,22 @@ The components/related DB node — `title`/`note` copy plus the
 ### title
 
 ```ts
-title: string;
+title: string
 ```
 
-Defined in: cms/footer/types.ts:36
+Defined in: cms/footer/types.ts:39
 
-***
+---
 
 ### note
 
 ```ts
-note: string;
+note: string
 ```
 
-Defined in: cms/footer/types.ts:37
+Defined in: cms/footer/types.ts:40
 
-***
+---
 
 ### socials
 
@@ -37,4 +37,4 @@ Defined in: cms/footer/types.ts:37
 socials: FooterChannel[];
 ```
 
-Defined in: cms/footer/types.ts:38
+Defined in: cms/footer/types.ts:41

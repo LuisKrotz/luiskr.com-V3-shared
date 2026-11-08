@@ -8,6 +8,6 @@
 const _B_CAROUSEL: 'carousel' = 'carousel'
 ```
 
-Defined in: core/tokens/base.ts:81
+Defined in: core/tokens/base.ts:98
 
 BEM block fragment "b carousel" — composed by the token groups below into full class names.

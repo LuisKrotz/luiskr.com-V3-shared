@@ -8,6 +8,6 @@
 const _B_LANG_DIALOG: 'lang-dialog' = 'lang-dialog'
 ```
 
-Defined in: core/tokens/base.ts:68
+Defined in: core/tokens/base.ts:85
 
 BEM block fragment "b lang dialog" — composed by the token groups below into full class names.

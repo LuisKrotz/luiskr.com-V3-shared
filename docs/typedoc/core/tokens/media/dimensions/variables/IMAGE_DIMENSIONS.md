@@ -11,6 +11,6 @@ const IMAGE_DIMENSIONS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/media/dimensions.ts:37
+Defined in: core/tokens/media/dimensions.ts:48
 
 Image decode budgets shared by progressive media pipelines.

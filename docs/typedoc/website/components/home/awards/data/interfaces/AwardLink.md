@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/awards/data](../README.md) / AwardLink
 
-Defined in: website/components/home/awards/data.ts:21
+Defined in: website/components/home/awards/data.ts:20
 
 A CMS-stored link row — both fields optional at the data boundary.
 
@@ -16,11 +16,11 @@ A CMS-stored link row — both fields optional at the data boundary.
 optional link?: string;
 ```
 
-Defined in: website/components/home/awards/data.ts:23
+Defined in: website/components/home/awards/data.ts:22
 
 Destination URL/path.
 
-***
+---
 
 ### page?
 
@@ -28,6 +28,6 @@ Destination URL/path.
 optional page?: string;
 ```
 
-Defined in: website/components/home/awards/data.ts:25
+Defined in: website/components/home/awards/data.ts:24
 
 Page name the link points at (used for the visible label).

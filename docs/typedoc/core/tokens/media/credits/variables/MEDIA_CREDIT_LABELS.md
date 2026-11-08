@@ -8,7 +8,7 @@
 const MEDIA_CREDIT_LABELS: object
 ```
 
-Defined in: core/tokens/media/credits.ts:27
+Defined in: core/tokens/media/credits.ts:35
 
 Labels for each credit field, kept as tokens so the expansion stays literal-free.
 

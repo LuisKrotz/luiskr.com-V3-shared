@@ -165,12 +165,116 @@
     })
   }
 
-  /** Appends the tier stylesheet to <head>. */
+  /** Appends the tier stylesheet to <head>; returns the node for upgrades. */
   function injectCss(href) {
     var l = document.createElement('link')
     l.rel = 'stylesheet'
     l.href = href
     document.head.appendChild(l)
+    return l
+  }
+
+  /**
+   * Width-class gates, evaluated widest → narrowest against
+   * `matchMedia('(min-width:Npx)')`. The manifest's tier.css map is
+   * cumulative — `tablet` contains base + mobile + tablet blocks — so the
+   * FIRST matching gate names the only sheet the viewport needs; a
+   * viewport too narrow for every gate still gets `mobile` (the minimal
+   * file carrying base).
+   * Gates mirror shared/build/css-classes.mjs WIDTH_CLASSES.gate.
+   */
+  var CSS_GATES = [
+    ['wide', '(min-width:2559px)'],
+    ['desktop', '(min-width:1279px)'],
+    ['tablet', '(min-width:767px)'],
+  ]
+
+  /** Picks the cumulative sheet name for the current viewport class. */
+  function pickCssName() {
+    var i
+
+    if (!window.matchMedia) return 'wide'
+    for (i = 0; i < CSS_GATES.length; i++) {
+      if (window.matchMedia(CSS_GATES[i][1]).matches) return CSS_GATES[i][0]
+    }
+
+    return 'mobile'
+  }
+
+  /**
+   * Watches the gates ABOVE the served class: on an upward cross the
+   * cumulative superset sheet is appended (cumulative files are nested
+   * supersets, so relative order between them never matters) and, once it
+   * is live, every still-present NARROWER link drops — no unstyled gap.
+   * Wider links are never removed: a shrink leaves their now-inert media
+   * blocks in place, so a re-grow needs no refetch.
+   */
+  function watchCssGrowth(css, link) {
+    var gates = {
+      tablet: '(min-width:767px)',
+      desktop: '(min-width:1279px)',
+      wide: '(min-width:2559px)',
+    }
+    var rank = { mobile: 0, tablet: 1, desktop: 2, wide: 3 }
+    var links = {}
+    var k
+
+    // matchMedia-less engines already got the wide sheet — nothing to grow into.
+    if (!window.matchMedia) return
+
+    links[link._lkClass] = link
+
+    function arm(name) {
+      var mql = window.matchMedia(gates[name])
+
+      function detach() {
+        if (mql.removeEventListener) mql.removeEventListener('change', on)
+        else if (mql.removeListener) mql.removeListener(on)
+      }
+
+      function on() {
+        var node, k2
+
+        if (!mql.matches) return
+        detach()
+
+        node = document.createElement('link')
+        node.rel = 'stylesheet'
+        node.href = css[name]
+        node._lkClass = name
+        node.onload = function () {
+          for (k2 in links) {
+            if (rank[k2] < rank[name] && links[k2].parentNode) {
+              links[k2].parentNode.removeChild(links[k2])
+            }
+          }
+        }
+        document.head.appendChild(node)
+        links[name] = node
+      }
+
+      if (mql.addEventListener) mql.addEventListener('change', on)
+      else if (mql.addListener) mql.addListener(on)
+    }
+
+    for (k in gates) if (rank[k] > rank[link._lkClass]) arm(k)
+  }
+
+  /** Injects the viewport's cumulative sheet and arms its grow watchers. */
+  function bootCss(css) {
+    var name
+
+    if (!css) return
+    if (typeof css === 'string') {
+      injectCss(css)
+      return
+    }
+
+    name = pickCssName()
+
+    var link = injectCss(css[name] || css.mobile)
+    link._lkClass = name
+    watchCssGrowth(css, link)
   }
 
   /** Graceful notice — reached by engines that fail every tier probe
@@ -192,9 +296,12 @@
     // Stamp the picked tier so the app can gate modern-only enhancements
     // (ML/NPU inference) without re-probing: read by core/utils/ml/ort-engine.
     window.__LK_TIER = tier.name
-    // The default tier's stylesheet is already in <head> (static lazy-load);
-    // older tiers need theirs injected (and it wins the cascade by order).
-    if (!tier.default) injectCss(tier.css)
+    // The stylesheet is always loader-injected now: the manifest's css map
+    // is cumulative width-class files (index-mobile/tablet/desktop/wide) —
+    // pickCssName serves the single file covering the current viewport and
+    // watchCssGrowth upgrades it on upward breakpoint crosses. String-form
+    // css (legacy manifest) still gets a plain single link.
+    bootCss(tier.css)
     var s = document.createElement('script')
     if (tier.module) {
       s.type = 'module'

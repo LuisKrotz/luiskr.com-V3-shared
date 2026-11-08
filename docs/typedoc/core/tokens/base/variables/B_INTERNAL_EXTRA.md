@@ -8,6 +8,6 @@
 const _B_INTERNAL_EXTRA: 'internal-extra'
 ```
 
-Defined in: core/tokens/base.ts:309
+Defined in: core/tokens/base.ts:377
 
 BEM block fragment "b internal extra" — composed by the token groups below into full class names.

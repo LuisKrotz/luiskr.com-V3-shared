@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcColsForWidth
 
 ```ts
-function calcColsForWidth(vw): number;
+function calcColsForWidth(vw): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:232
+Defined in: core/utils/wasm/wasm-layout.ts:233
 
 Home-mosaic column count for a viewport width — the legacy stepped
 table (1–7 columns); kept alongside MOSAIC_COLS which callers should

@@ -8,7 +8,7 @@
 function renderShell(strings): HTMLElement
 ```
 
-Defined in: website/components/search/route-search/render.tsx:26
+Defined in: website/components/search/route-search/render.tsx:27
 
 `renderShell` — the one-time skeleton: field pill + input combobox,
 an empty results listbox, and the no-match row. Per-render state

@@ -13,6 +13,10 @@ Non-localized UI text tokens (units, dev-facing labels) —
 
 labels text.
 
+### `LEGEND`
+
+The sitemap locale-decoder fieldset's <legend> label.
+
 ### `UNIT_TEXT`
 
 Frozen unit UI text map — sole declaration site for these tokens; consumers read members

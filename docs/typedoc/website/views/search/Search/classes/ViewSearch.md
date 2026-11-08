@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/views/search/Search](../README.md) / ViewSearch
 
-Defined in: website/views/search/Search.tsx:18
+Defined in: website/views/search/Search.tsx:22
 
 The Search — route-search page class.
 
@@ -20,7 +20,7 @@ The Search — route-search page class.
 new ViewSearch(): ViewSearch;
 ```
 
-Defined in: website/views/search/Search.tsx:19
+Defined in: website/views/search/Search.tsx:23
 
 #### Returns
 
@@ -4827,9 +4827,9 @@ Render result from render().
 render(): Element;
 ```
 
-Defined in: website/views/search/Search.tsx:24
+Defined in: website/views/search/Search.tsx:28
 
-JSX template — the centered route-search surface.
+JSX template — the centered route-search surface + the footer.
 
 #### Returns
 

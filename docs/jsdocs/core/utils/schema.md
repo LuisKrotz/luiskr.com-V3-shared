@@ -47,6 +47,12 @@ primaryImageOfPage URL; defaults to the global share image.
 
 ### (module scope)
 
+Registry credit of `image` when it is a third-party asset (star-body
+dossiers) — switches the ImageObject provenance to the source's
+terms instead of the site's license.
+
+### (module scope)
+
 Ordered crumbs ending at this page — emits BreadcrumbList when ≥2.
 
 ### (module scope)
@@ -87,6 +93,22 @@ Absolute license-page URL for a locale — ImageObject.license /
 acquireLicensePage targets and the sitemap <image:license> all resolve
 to the locale's own legal page so Google Images can flag the asset as
 licensable and land the click on text the visitor reads.
+
+### `mediaProvenanceFor`
+
+Provenance field bag for one media entity — site-owned assets point
+`license`/`acquireLicensePage` at the locale's legal page under the
+owner copyright notice; credited third-party assets (star-field
+dossier media) point at the SOURCE's terms page with the raw credit
+as the notice instead, so the site's MPL grant never covers NASA/ESA
+imagery. `ownedCreditText` lets project media keep their project
+title as the credit line while still carrying the owner notice.
+
+- `@param` lang Locale code — resolves the owned-asset license URL.
+- `@param` credit Registry credit string; present ⇒ third-party asset.
+- `@param` subject Display name embedded in the expanded creditText.
+- `@param` ownedCreditText Credit line for owned assets (default BASE_TITLE).
+- `@returns` Field bag to spread into the entity literal.
 
 ### `generatePersonSchema`
 

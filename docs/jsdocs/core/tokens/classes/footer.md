@@ -2,9 +2,9 @@
 
 Footer source-code row class tokens — grouped subset of
 
-| | |
-|---|---|
-| **Source** | `src/core\tokens\classes\footer.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tokens\classes\footer.ts`                       |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -18,6 +18,10 @@ the token contract immutable at runtime.
 ### `FOOTER_DOCS`
 
 Docs-portal footer entry — link + localized English-only note.
+
+### `FOOTER_DOCS_ARROW`
+
+The '→' glyph span inside the docs link.
 
 ### `FOOTER_DIVIDER`
 

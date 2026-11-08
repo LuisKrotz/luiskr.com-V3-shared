@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/types](../README.md) / ProjectMediaItem
 
@@ -21,12 +21,12 @@ optional render modifiers. Index signature passes through extra CMS fields.
 ### src
 
 ```ts
-src: string;
+src: string
 ```
 
 Defined in: website/views/project/types.ts:15
 
-***
+---
 
 ### size
 
@@ -36,7 +36,19 @@ size: number[];
 
 Defined in: website/views/project/types.ts:16
 
-***
+---
+
+### naturalSize?
+
+```ts
+optional naturalSize?: number[];
+```
+
+Defined in: website/views/project/types.ts:18
+
+Original CMS `size` — set only when `size` was downscaled through the desktop ladder (the expand modal reads this; it never reduces).
+
+---
 
 ### label?
 
@@ -44,9 +56,9 @@ Defined in: website/views/project/types.ts:16
 optional label?: string;
 ```
 
-Defined in: website/views/project/types.ts:17
+Defined in: website/views/project/types.ts:19
 
-***
+---
 
 ### class?
 
@@ -54,9 +66,9 @@ Defined in: website/views/project/types.ts:17
 optional class?: string;
 ```
 
-Defined in: website/views/project/types.ts:18
+Defined in: website/views/project/types.ts:20
 
-***
+---
 
 ### isVideo?
 
@@ -64,4 +76,4 @@ Defined in: website/views/project/types.ts:18
 optional isVideo?: boolean;
 ```
 
-Defined in: website/views/project/types.ts:19
+Defined in: website/views/project/types.ts:21

@@ -18,35 +18,56 @@ import { dropStaleServiceWorkers, registerSiteServiceWorker } from '@core/utils/
  */
 export const registerServiceWorker = (env: { PROD?: boolean; BASE_URL?: string }): void => {
   if (!env?.PROD) {
+    // Non-prod builds actively UNregister — a stale dev SW would
+    // otherwise keep serving old chunks long after the source moved.
     dropStaleServiceWorkers()
 
     return
   }
 
+  // Deferred to window.load — registration fetches + caches must never
+  // compete with the critical request graph during first paint.
   window.addEventListener(WINDOW_EVENTS.LOAD, () => {
     void registerSiteServiceWorker(`${env.BASE_URL}service-worker.js`, {
+      // First activation completes — the page is now cache-served.
       ready() {
         devInfo(
           'App is being served from cache by a service worker.\n' +
             'For more details, visit https://goo.gl/AFskqB'
         )
       },
+
+      // Registration succeeded (pre-activation).
       registered() {
         devInfo('Service worker has been registered.')
       },
+
+      // Precache payload finished writing.
       cached() {
         devInfo('Content has been cached for offline use.')
       },
+
+      // A new SW version was found and is downloading its assets.
       updatefound() {
         devInfo('New content is downloading.')
       },
+
+      // The new SW activated — hard-reload so the app shell can never
+      // mix an old shell with new hashed assets.
       updated() {
         devInfo('New content is available; refreshing page.')
+
         window.location.reload()
       },
+
+      // Connectivity dropped — informational only; the cache keeps
+      // the site functional.
       offline() {
         devInfo('No internet connection found. App is running in offline mode.')
       },
+
+      // Registration/install threw — logged, never fatal (the site
+      // works online without a SW).
       error(error) {
         devError('Error during service worker registration:', error)
       },

@@ -17,7 +17,7 @@ const FLAG_DIMENSIONS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/media/dimensions.ts:79
+Defined in: core/tokens/media/dimensions.ts:90
 
 Frozen flag-icon geometry map — flag images are drawn at small pixel
 sizes where every px counts: NAV (18×13) for the locale picker, DIALOG

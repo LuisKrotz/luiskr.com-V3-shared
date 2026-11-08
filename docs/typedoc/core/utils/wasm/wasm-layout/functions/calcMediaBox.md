@@ -8,7 +8,7 @@
 function calcMediaBox(naturalW, naturalH, boundW, boundH): object
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:326
+Defined in: core/utils/wasm/wasm-layout.ts:339
 
 Capped media box in px: natural dims multiplied by calcMediaScale —
 the largest box that both fits the bounds and never exceeds the

@@ -103,8 +103,9 @@ describe('browser-loader — tier + polyfill selection', () => {
     const script = head.find((n) => n.src === '/v/es2026/app.js')
 
     expect(script.type).toBe('module')
-    // default tier → css already in <head>, nothing injected
-    expect(head.filter((n) => n.rel === 'stylesheet')).toHaveLength(0)
+    // The document no longer ships a static stylesheet link — the loader
+    // injects the viewport-class css for every tier, default included.
+    expect(head.find((n) => n.href === '/v/es2026/app.css')).toBeTruthy()
   })
 
   test('skips module tiers entirely when type=module is unsupported', () => {

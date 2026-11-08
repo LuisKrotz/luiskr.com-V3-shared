@@ -32,6 +32,8 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { ES_TARGETS, POLYFILLS, POLYFILL_ORDER, BROWSERS } from '../../build/es-targets.mjs'
+import { WIDTH_CLASS_NAMES, lightningcssTargets } from '../../build/css-classes.mjs'
+import { splitDocumentSheet } from '../../build/css-split.mjs'
 import {
   buildLocalePages,
   prefetchStarMediaDims,
@@ -218,23 +220,7 @@ const polyManifest = POLYFILLS.map((p) => ({
 // Any tier whose vite build produced no css/ asset (rolldown emits none when
 // code-splitting is off) gets the global sheet compiled directly:
 // sass → lightningcss with the tier's prefix target.
-const cssTargetMap = (cssTarget) => {
-  if (cssTarget === 'esnext') return undefined
-  const m = cssTarget.match(/^([a-z]+)(\d+)$/)
-  if (!m) return undefined
-  const version = parseInt(m[2], 10) << 16
-  const map = {
-    chrome: 'chrome',
-    firefox: 'firefox',
-    safari: 'safari',
-    edge: 'edge',
-    ie: 'ie',
-    samsung: 'samsung',
-    opera: 'opera',
-  }
-  const engine = map[m[1]]
-  return engine ? { [engine]: version } : undefined
-}
+const cssTargetMap = lightningcssTargets
 
 /**
  * Lazily-cached sass compilation of the global sheet — the input file and
@@ -259,15 +245,19 @@ const compiledSheet = async () => {
   return compiledCssSheet
 }
 
-const emitCss = async (t, prefix = 'index-') => {
+/**
+ * Lightningcss transform of the compiled global sheet for one tier —
+ * extracted so both emitCss (monolith emit) and emitCssSplits (cumulative
+ * width-class emit) share the same minify/prefix pipeline.
+ * @param {object} t ES_TARGETS entry
+ * @returns {Promise<{code:Buffer, map:Buffer}>} transformed sheet + map
+ */
+const transformSheet = async (t) => {
   const { transform } = await import('lightningcss')
 
   const compiled = await compiledSheet()
 
-  const outDir = path.join(DIST, 'v', t.name, 'assets', 'css')
-  withFsRetry(() => fs.mkdirSync(outDir, { recursive: true }))
-
-  const { code, map } = transform({
+  return transform({
     filename: 'app.css',
     code: Buffer.from(compiled.css),
     minify: true,
@@ -276,6 +266,57 @@ const emitCss = async (t, prefix = 'index-') => {
     sourceMap: true,
     inputSourceMap: JSON.stringify(compiled.sourceMap),
   })
+}
+
+/**
+ * Emits the tier's document stylesheet as cumulative width-class files —
+ * `index-mobile-<hash>.css` carries base+mobile blocks, `index-tablet-*`
+ * adds tablet blocks, and so on; `index-wide-*` is the full sheet and also
+ * keeps the sourcemap. The loader injects exactly one of them per viewport
+ * class, so a phone never downloads desktop/wide rules.
+ * @param {object} t ES_TARGETS entry
+ * @returns {Promise<Record<string,string>>} {cls → emitted file name}
+ */
+const emitCssSplits = async (t) => {
+  const { code, map } = await transformSheet(t)
+
+  const outDir = path.join(DIST, 'v', t.name, 'assets', 'css')
+  withFsRetry(() => fs.mkdirSync(outDir, { recursive: true }))
+
+  const sheets = splitDocumentSheet(code.toString())
+  const names = {}
+
+  for (const cls of WIDTH_CLASS_NAMES) {
+    const text = sheets[cls]
+    const hash = crypto.createHash('md5').update(text).digest('hex').slice(0, 8)
+    const name = `index-${cls}-${hash}.css`
+
+    // queueCompressedWrite performs the sync plain-file write itself and
+    // defers only the .br/.gz siblings to the shared compression queue.
+    queueCompressedWrite(path.join(outDir, name), Buffer.from(text))
+    names[cls] = name
+  }
+
+  // The wide variant is byte-identical to the transformed monolith, so the
+  // sass→lightningcss map stays valid for it — repo-relative sources kept.
+  const parsedMap = JSON.parse(map.toString())
+
+  parsedMap.sources = parsedMap.sources.map((s) =>
+    s.replace(/^.*?(?=src[/\\]sass)/, '').replace(/\\/g, '/')
+  )
+
+  withFsRetry(() =>
+    fs.writeFileSync(path.join(outDir, `${names.wide}.map`), JSON.stringify(parsedMap))
+  )
+
+  return names
+}
+
+const emitCss = async (t, prefix = 'index-') => {
+  const { code, map } = await transformSheet(t)
+
+  const outDir = path.join(DIST, 'v', t.name, 'assets', 'css')
+  withFsRetry(() => fs.mkdirSync(outDir, { recursive: true }))
 
   const hash = crypto.createHash('md5').update(code).digest('hex').slice(0, 8)
   const name = `${prefix}${hash}.css`
@@ -319,16 +360,32 @@ for (const t of ES_TARGETS) {
 
   const cssFiles = fs.existsSync(cssDir) ? fs.readdirSync(cssDir) : []
 
-  let css = cssFiles.filter((f) => f.startsWith('index-') && f.endsWith('.css'))
+  // Only the emitCss monolith matches `index-<hex>.css` — the cumulative
+  // `index-<cls>-<hash>.css` splits carry dashes and are excluded on purpose
+  // so incremental re-runs never pick a split file as the source sheet.
+  let css = cssFiles.filter((f) => /^index-[a-z0-9]+\.css$/.test(f))
+  let cssMap
 
   if (!css.length) {
-    const emitted = await emitCss(t)
-    css = [emitted]
-    console.log(`  css emitted for ${t.name}: ${emitted}`)
+    cssMap = await emitCssSplits(t)
+    console.log(`  css splits emitted for ${t.name}: ${cssMap.mobile} …`)
   } else {
-    // rolldown-vite doesn't emit sourcemaps for code-split CSS assets yet —
-    // ship the sass→lightningcss mapped global sheet alongside so every
-    // tier carries a .css.map that resolves back to real .scss lines.
+    // A vite-emitted monolith exists — split it into the same cumulative
+    // files instead of shipping it whole. The sourcemap-capable sass→lc
+    // copy still lands alongside for debugging.
+    const srcText = fs.readFileSync(path.join(cssDir, css[0]), 'utf8')
+    const sheets = splitDocumentSheet(srcText)
+
+    cssMap = {}
+
+    for (const cls of WIDTH_CLASS_NAMES) {
+      const hash = crypto.createHash('md5').update(sheets[cls]).digest('hex').slice(0, 8)
+      const name = `index-${cls}-${hash}.css`
+
+      queueCompressedWrite(path.join(cssDir, name), Buffer.from(sheets[cls]))
+      cssMap[cls] = name
+    }
+
     const dbg = await emitCss(t, 'app-')
     console.log(`  css sourcemap emitted for ${t.name}: ${dbg}.map`)
   }
@@ -336,14 +393,14 @@ for (const t of ES_TARGETS) {
   tierManifest.push({
     name: t.name,
     js: `/v/${t.name}/assets/js/${js}`,
-    css: css[0],
+    css: Object.fromEntries(
+      Object.entries(cssMap).map(([cls, f]) => [cls, `/v/${t.name}/assets/css/${f}`])
+    ),
     module: t.format === 'module',
     default: t.name === 'es2026',
     tests: t.test,
   })
 }
-
-for (const t of tierManifest) t.css = `/v/${t.name}/assets/css/${t.css}`
 
 // ── 5. Chunk-size gate — every emitted JS ≤ 50KiB / CSS ≤ 5KiB minified ────
 // Runs while dist/ holds the fresh chunks but before the expensive
@@ -389,6 +446,23 @@ const defaultEntry = match[1]
 const loaderTag = `<link rel="modulepreload" crossorigin href="${defaultEntry}"><script>${loaderMin.trim()}</script>`
 
 html = html.replace(match[0], loaderTag)
+
+// The static lazy stylesheet link is replaced by loader-driven injection:
+// the loader picks ONE cumulative sheet for the viewport class (mobile →
+// index-mobile-*, desktop → index-desktop-*) and upgrades on upward
+// breakpoint crosses, so no viewport ever downloads a wider sheet than it
+// needs. The <noscript> keeps the full (wide) sheet for JS-less engines.
+const defaultTierCss = tierManifest.find((t) => t.default)?.css?.wide
+
+if (defaultTierCss) {
+  const lazySheetRe =
+    /<link\s+rel="preload"\s+as="style"\s+href="\/v\/es2026\/assets\/css\/[^"]+\.css"[^>]*>\s*<noscript><link\s+rel="stylesheet"\s+href="\/v\/es2026\/assets\/css\/[^"]+\.css"[^>]*><\/noscript>/i
+
+  html = html.replace(
+    lazySheetRe,
+    `<noscript><link rel="stylesheet" href="${defaultTierCss}"></noscript>`
+  )
+}
 
 // Star-field dossier images store no dims — probe each unique CDN image
 // once so emitted <img> tags carry real width/height attrs (cached for

@@ -10,6 +10,7 @@ const ROUTE_SEARCH_KINDS: Readonly<{
   LEGAL: 'legal'
   EXPERIMENT: 'experiment'
   PROJECT: 'project'
+  DOCS: 'docs'
 }>
 ```
 

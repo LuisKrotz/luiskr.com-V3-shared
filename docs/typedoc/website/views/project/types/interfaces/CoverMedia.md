@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [website/views/project/types](../README.md) / CoverMedia
 
-Defined in: website/views/project/types.ts:28
+Defined in: website/views/project/types.ts:30
 
 The project cover — like ProjectMediaItem but always present when the
 project has hero media; `size` [w,h] reserves the box so the skeleton shows the
@@ -15,12 +15,12 @@ final aspect ratio before bytes arrive.
 ### src
 
 ```ts
-src: string;
+src: string
 ```
 
-Defined in: website/views/project/types.ts:29
+Defined in: website/views/project/types.ts:31
 
-***
+---
 
 ### size
 
@@ -28,9 +28,9 @@ Defined in: website/views/project/types.ts:29
 size: number[];
 ```
 
-Defined in: website/views/project/types.ts:30
+Defined in: website/views/project/types.ts:32
 
-***
+---
 
 ### isVideo?
 
@@ -38,9 +38,9 @@ Defined in: website/views/project/types.ts:30
 optional isVideo?: boolean;
 ```
 
-Defined in: website/views/project/types.ts:31
+Defined in: website/views/project/types.ts:33
 
-***
+---
 
 ### label?
 
@@ -48,4 +48,4 @@ Defined in: website/views/project/types.ts:31
 optional label?: string;
 ```
 
-Defined in: website/views/project/types.ts:32
+Defined in: website/views/project/types.ts:34

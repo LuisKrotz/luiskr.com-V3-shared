@@ -33,6 +33,19 @@ Declared media width attribute.
 
 Declared media height attribute.
 
+### `naturalWidth`
+
+Intrinsic file width for the expand modal — the untouched CMS size.
+Carousel figures carry `natural-width` when `width` was downscaled
+through the desktop ladder; everything else falls back to
+`mediaWidth`. The modal stamps this value — it never reduces.
+
+### `naturalHeight`
+
+Intrinsic file height for the expand modal — pairs with
+`naturalWidth`; falls back to `mediaHeight` when no ladder
+downscale was recorded.
+
 ### `label`
 
 Caption label.

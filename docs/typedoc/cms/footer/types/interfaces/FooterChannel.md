@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/footer/types](../README.md) / FooterChannel
 
@@ -26,7 +26,7 @@ optional description?: string;
 
 Defined in: cms/footer/types.ts:14
 
-***
+---
 
 ### page?
 
@@ -36,7 +36,7 @@ optional page?: string;
 
 Defined in: cms/footer/types.ts:15
 
-***
+---
 
 ### network?
 
@@ -46,7 +46,7 @@ optional network?: string;
 
 Defined in: cms/footer/types.ts:16
 
-***
+---
 
 ### link?
 
@@ -55,3 +55,15 @@ optional link?: string;
 ```
 
 Defined in: cms/footer/types.ts:17
+
+---
+
+### caption?
+
+```ts
+optional caption?: string;
+```
+
+Defined in: cms/footer/types.ts:19
+
+Optional muted caption under the link — line-1 rows.

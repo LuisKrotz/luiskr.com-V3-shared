@@ -1,10 +1,28 @@
+/**
+ * @file patch-search-page-themes.js
+ * @description One-shot migration: injects a localized `searchThemes`
+ * keyword array into each locale's `pages/search` node in the local
+ * database.json mirror.
+ *
+ * Why: the seo-indexation gate requires every CMS page node to carry
+ * the keyword vocabulary its route surface advertises — the /search
+ * page was the last one missing it. The theme lists double as the
+ * search page's suggested-term seeds.
+ *
+ * Run: node shared/scripts/i18n/patch-search-page-themes.js
+ * (patches the local mirror only — the upload-* scripts push live).
+ */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { SEARCH_THEMES_KEY } from '../../../core/tokens/data/search-themes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Repo root — script lives three levels down (shared/scripts/i18n).
 const rootDir = path.resolve(__dirname, '..', '..', '..')
+
+// The local RTDB mirror — patched in place, written back at end.
 const dbPath = path.join(rootDir, 'database.json')
 
 /**
@@ -211,15 +229,23 @@ const TRANSLATIONS_MAP = {
 const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
 
 for (const [locale, themes] of Object.entries(TRANSLATIONS_MAP)) {
+  // The locale's search-page node — absent locales are warned, not
+  // created: a locale without a search page must not silently gain
+  // one (the page list is the CMS's contract, not this script's).
   const page = db.translations?.[locale]?.pages?.search
 
   if (!page) {
     console.warn(`⚠ ${locale}: no search page node — skipped`)
+
     continue
   }
 
+  // Inject the keyword array under the shared token key — the key
+  // name lives in core/tokens so template + patch can never drift.
   page[SEARCH_THEMES_KEY] = themes
 }
 
+// Write the mirror back — 2-space indent matches the file's format.
 fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8')
+
 console.log('✅ database.json patched with Search page themes across all locales.')

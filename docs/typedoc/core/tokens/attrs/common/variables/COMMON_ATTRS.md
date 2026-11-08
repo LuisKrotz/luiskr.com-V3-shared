@@ -22,6 +22,7 @@ const COMMON_ATTRS: Readonly<{
   OFFSET: 'offset'
   CLASSES: 'classes'
   TRIGGER: 'trigger'
+  ANIMATION: 'animation'
   ORDERED: 'ordered'
   TRIGGER_VIEWPORT: 'viewport'
   TOUCH: 'touch'

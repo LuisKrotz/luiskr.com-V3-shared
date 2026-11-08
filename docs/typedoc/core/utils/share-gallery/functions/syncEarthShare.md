@@ -8,7 +8,7 @@
 function syncEarthShare(to, canonicalUrl, baseGraphOf): Promise<void>
 ```
 
-Defined in: core/utils/share-gallery.ts:218
+Defined in: core/utils/share-gallery.ts:217
 
 Earth Playground share sync — binds the generic rotation to the earth
 set's manifest.

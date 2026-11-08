@@ -2,9 +2,9 @@
 
 Shared shapes for the &lt;view-project&gt; route: media items,
 
-| | |
-|---|---|
-| **Source** | `src/website\views\project\types.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\views\project\types.ts`                    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -14,6 +14,10 @@ Shared shapes for the &lt;view-project&gt; route: media items,
 A media row inside a project section — `src` is the extensionless CDN
 stem, `size` the intrinsic [w,h] for aspect layout, `label`/`class`/`isVideo` the
 optional render modifiers. Index signature passes through extra CMS fields.
+
+### (module scope)
+
+Original CMS `size` — set only when `size` was downscaled through the desktop ladder (the expand modal reads this; it never reduces).
 
 ### (module scope)
 

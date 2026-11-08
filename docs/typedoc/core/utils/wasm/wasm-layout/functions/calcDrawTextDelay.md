@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/wasm/wasm-layout](../README.md) / calcDrawTextDelay
 
 ```ts
-function calcDrawTextDelay(totalChars, targetDurationMs?): number;
+function calcDrawTextDelay(totalChars, targetDurationMs?): number
 ```
 
-Defined in: core/utils/wasm/wasm-layout.ts:146
+Defined in: core/utils/wasm/wasm-layout.ts:147
 
 Per-character draw interval sized so the whole text finishes within
 targetDurationMs — targetDurationMs/totalChars, clamped between

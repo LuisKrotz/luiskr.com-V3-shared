@@ -15,9 +15,8 @@ Debounce window per keystroke — one scoring dispatch per pause.
 
 ### `LIST_VIEWPORT_GAP`
 
-Viewport breathing room kept under the open listbox (px) — the
-measured height cap leaves this gap at the screen edge so the panel
-reads as a dropdown, not a page edge.
+Fallback breathing room (px) when the stylesheet's --rs-list-gap
+custom property can't be parsed — the SCSS token is authoritative.
 
 ### `RouteSearch`
 
@@ -29,7 +28,16 @@ Full route catalog (static pages + portfolio projects).
 
 ### `_hits`
 
-Currently rendered hits — a subset/order of `_catalog`.
+Currently rendered hits — the active page slice of `_ranked`.
+
+### (module scope)
+
+All ranked hits for the current query, partitioned into kind
+buckets ordered by each bucket's best hit — the pager slices it.
+
+### (module scope)
+
+Current results page — indexes `_ranked` in MAX_HITS slices.
 
 ### `_active`
 
@@ -66,6 +74,16 @@ query (worker reply, catalog merge) keeps the active row.
 Keyboard owns the active row until the pointer actually moves —
 rows scrolling under a resting cursor fire pointerover too.
 
+### (module scope)
+
+Whether a scoring round-trip is in flight — mirrors the
+--loading root modifier so the status line can swap to dots.
+
+### (module scope)
+
+Total ranked matches for the current query (not the rendered cap)
+— feeds the "N results found" status line.
+
 ### `listEl`
 
 The results listbox element (persistent — never re-rendered).
@@ -88,7 +106,14 @@ The `?q=` parameter of the current URL ('' when absent).
 
 ### (module scope)
 
-Writes the query back to `?q=` on every surface hosting the field.
+The `?p=` results-page parameter as a 0-based index (0 absent/bad).
+
+### (module scope)
+
+Writes the query back to `?q=` — the param belongs to the search
+page, so a live query also retargets the URL at the localized
+/search route (a reload lands on the real surface, not a modal
+ghosting the host page). Clearing keeps whatever path is live.
 
 ### (module scope)
 
@@ -143,13 +168,50 @@ scoring dispatch is pending (catalog fetch + worker latency).
 
 ### (module scope)
 
-Patches the listbox with ranked entries and opens it. A new query
-resets the active row to the top hit; a re-rank of the same query
-(instant JS paint → worker reply, catalog merge) keeps the row the
-user arrowed to, so a late reply can't snap the selection back.
+Paints the status line opposite the label: the animated dots while
+a scoring dispatch is in flight (the --loading root modifier shows
+the dot trio and hides the text), otherwise the localized
+"N results found" template with the total match count — blank while
+the field is empty. `aria-live` on the span announces the update.
+
+### (module scope)
+
+Patches the listbox with ranked entries and opens it. Hits first
+partition into kind buckets ordered by each bucket's best hit
+(a strong project title match outranks a weak page keyword hit),
+then the current page slice renders. A new query resets page + active row to the top
+hit; a re-rank of the same query (instant JS paint → worker reply,
+catalog merge) keeps the row the user arrowed to, so a late reply
+can't snap the selection back.
 
 - `@param` entries Ranked entries for `q`.
 - `@param` q The query the entries were ranked for.
+
+### (module scope)
+
+Last page index into `_ranked` (0 when nothing is ranked).
+
+### (module scope)
+
+Turns the results page — slices the new MAX_HITS window out of
+`_ranked`, scrolls the listbox back to its top edge, and seeds the
+active row (first row forward, last row backward) so keyboard users
+land on a real option, not a dead selection. Out-of-range turns
+are no-ops.
+
+- `@param` delta Page direction (+1 next, -1 previous).
+- `@param` toEnd Seed the last row instead of the first.
+
+### (module scope)
+
+The option rows rendered in the listbox (group headers excluded).
+
+### (module scope)
+
+Paints the pager row under the listbox: hidden while the hit list
+fits on one page, otherwise the "Page x of y" status with prev/next
+buttons disabled at the range ends. Called on every re-render so a
+locale flip re-templates the status text too.
 
 ### (module scope)
 

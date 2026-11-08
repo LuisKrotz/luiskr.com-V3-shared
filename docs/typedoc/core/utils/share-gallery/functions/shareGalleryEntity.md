@@ -8,7 +8,7 @@
 function shareGalleryEntity(pageUrl, name, urls, bcp, lang?): Record<string, unknown>
 ```
 
-Defined in: core/utils/share-gallery.ts:134
+Defined in: core/utils/share-gallery.ts:135
 
 ImageObject ItemList covering the whole share set — mirrors the
 build-time share entities emitted into the static playground
