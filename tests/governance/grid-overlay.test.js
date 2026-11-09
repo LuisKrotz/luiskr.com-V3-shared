@@ -85,20 +85,30 @@ describe('Grid overlay — compiled parity with %MAXAREA gutters', () => {
     }
   })
 
-  test('overlay gutter equals %MAXAREA padding at every breakpoint', () => {
+  test('overlay gutter equals %MAXAREA gutter at every breakpoint', () => {
+    // %MAXAREA routes the gutter through --grid-gutter: the padding
+    // shorthand consumes the var once in base, and each rung re-declares
+    // only the var. The ?tiers split moves pure-media rungs into tier
+    // sheets adopted after base — a re-emitted padding shorthand there
+    // would re-zero every extender's own top/bottom + column-indents.
     const baseGutter = propValue(overlay.base, '--_grid-gutter')
+    const baseVar = propValue(layout.base, '--grid-gutter')
     const basePad = propValue(layout.base, 'padding')
 
-    // padding shorthand: "0 <gutter> 0" — middle term is the gutter.
-    expect(basePad.split(/\s+/)[1]).toBe(baseGutter)
+    expect(baseVar).toBe(baseGutter)
+    // The shorthand must reference the var — a literal here would mean
+    // the rungs re-enter the padding cascade.
+    expect(basePad.split(/\s+/)[1]).toBe('var(--grid-gutter)')
 
     for (const s of steps.filter((x) => x > 272)) {
       const mq = String(s - 1)
       const gutter = propValue(overlay[mq], '--_grid-gutter')
-      const pad = propValue(layout[mq], 'padding')
+      const rung = propValue(layout[mq], '--grid-gutter')
 
       expect(gutter).toBeTruthy()
-      expect(pad.split(/\s+/)[1]).toBe(gutter)
+      expect(rung).toBe(gutter)
+      // And no rung may carry a padding declaration of any kind.
+      expect(propValue(layout[mq], 'padding')).toBeNull()
     }
   })
 

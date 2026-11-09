@@ -71,20 +71,16 @@ describe('internals.scss CSS var declarations on media-figure', () => {
   test('2560px --mf-h is $space-9xl', () => {
     expect(ic).toMatch(/layout-2560[\s\S]*?--mf-h:\s*var\(--space-9xl\)/)
   })
-  test('landscape variant sets --mf-w vw cap at 1024px', () => {
-    expect(ic).toMatch(/landscape media-figure[\s\S]*?--mf-w:\s*calc\(100vw/)
+  test('landscape variant caps --mf-w at the grid column via grid-steps', () => {
+    expect(ic).toMatch(/landscape media-figure[\s\S]*?grid-steps[\s\S]*?--mf-w:\s*min\(calc\(100vw/)
   })
-  test('landscape variant sets --mf-max-w at 1024px', () => {
-    expect(ic).toMatch(/landscape media-figure[\s\S]*?--mf-max-w:\s*calc\(100vw/)
+  test('landscape variant sets --mf-max-w to the step max-area', () => {
+    expect(ic).toMatch(
+      /landscape media-figure[\s\S]*?--mf-max-w:\s*#\{to-rem\(\$step - \$gap \* 2\)\}/
+    )
   })
-  test('landscape variant has 1280px --mf-max-w', () => {
-    expect(ic).toMatch(/landscape media-figure[\s\S]*?layout-1280[\s\S]*?--mf-max-w/)
-  })
-  test('landscape variant has 1440px --mf-max-w', () => {
-    expect(ic).toMatch(/landscape media-figure[\s\S]*?layout-1440[\s\S]*?--mf-max-w/)
-  })
-  test('landscape variant has 1920px --mf-max-w', () => {
-    expect(ic).toMatch(/landscape media-figure[\s\S]*?layout-1920[\s\S]*?--mf-max-w/)
+  test('landscape column caps only emit at ≥1024', () => {
+    expect(ic).toMatch(/landscape media-figure[\s\S]*?\$step >= 1024[\s\S]*?--mf-w/)
   })
   test('small variant --mf-w at 1440px is $space-6xl', () => {
     expect(ic).toMatch(/small media-figure[\s\S]*?layout-1440[\s\S]*?--mf-w:\s*var\(--space-6xl\)/)

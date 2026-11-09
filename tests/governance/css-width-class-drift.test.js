@@ -19,7 +19,7 @@ import {
 } from '@core/tokens/layout/css-classes.js'
 import { DB_PATHS } from '@core/tokens/routes/paths.js'
 import { splitComponentSheet } from '@build/css-split.mjs'
-import sass from 'sass'
+import * as sass from 'sass'
 
 describe('css width-class registries stay in sync', () => {
   test('runtime class names match the build table in order', () => {

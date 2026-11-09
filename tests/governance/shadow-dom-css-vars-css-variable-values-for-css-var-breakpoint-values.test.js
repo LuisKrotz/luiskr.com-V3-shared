@@ -67,22 +67,20 @@ describe('CSS variable values for CSS var breakpoint values', () => {
   test('small.2560px --mf-h uses $space-9xl', () => {
     expect(ic).toMatch(/small media-figure[\s\S]*?layout-2560[\s\S]*?--mf-h:\s*var\(--space-9xl\)/)
   })
-  test('landscape.1024px --mf-w is the vw gutter cap', () => {
-    expect(ic).toMatch(/landscape media-figure[\s\S]*?layout-1024[\s\S]*?--mf-w:\s*calc\(100vw/)
-  })
-  test('landscape.1024px --mf-max-w uses $space-3xl', () => {
+  test('landscape --mf-w is bounded by the grid column via grid-steps', () => {
     expect(ic).toMatch(
-      /landscape media-figure[\s\S]*?--mf-max-w:\s*calc\(100vw\s*-\s*var\(--space-3xl\)/
+      /landscape media-figure[\s\S]*?grid-steps\(\) using \(\$step, \$gap, \$cols\)[\s\S]*?--mf-w:\s*min\(calc\(100vw/
     )
   })
-  test('landscape.1440px --mf-max-w uses $space-7xl', () => {
+  test('landscape --mf-w ceiling is the step max-area', () => {
     expect(ic).toMatch(
-      /landscape media-figure[\s\S]*?layout-1440[\s\S]*?--mf-max-w:\s*calc\(100vw\s*-\s*var\(--space-7xl\)/
+      /--mf-w:\s*min\(calc\(100vw - #\{to-rem\(\$gap \* 2\)\}\), #\{to-rem\(\$step - \$gap \* 2\)\}\)/
     )
   })
-  test('landscape.1920px --mf-max-w uses $space-6xl', () => {
-    expect(ic).toMatch(
-      /landscape media-figure[\s\S]*?layout-1920[\s\S]*?--mf-max-w:\s*calc\(100vw\s*-\s*var\(--space-6xl\)/
-    )
+  test('landscape --mf-max-w carries the step max-area', () => {
+    expect(ic).toMatch(/--mf-max-w:\s*#\{to-rem\(\$step - \$gap \* 2\)\}/)
+  })
+  test('landscape column caps only emit at ≥1024', () => {
+    expect(ic).toMatch(/landscape media-figure[\s\S]*?\$step >= 1024[\s\S]*?--mf-w/)
   })
 })

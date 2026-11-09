@@ -2752,7 +2752,10 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
 
     const records = t(loc, (x) => x.components?.animations) || {}
 
+    // Ids without a docs entry describe retired surfaces — the runtime
+    // view applies the same filter so stale CMS records can't list.
     const rows = Object.entries(records)
+      .filter(([id]) => ANIMATION_DOCS[id])
       .map(
         ([id, r]) =>
           `<div id="${esc(id)}"><div><dt>${esc(r?.alt || id)}</dt><dd>${esc(r?.longdesc || '')}</dd><a href="${esc(`${ROUTE_PATHS.DOCS}/${ANIMATION_DOCS[id] || ANIMATION_DOCS_FALLBACK}`)}" hreflang="en">${esc(DOCS_STRINGS.TITLE)}</a></div><anim-demo animation="${esc(id)}"></anim-demo></div>`

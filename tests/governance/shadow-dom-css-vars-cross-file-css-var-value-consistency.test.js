@@ -61,20 +61,20 @@ describe('cross-file CSS var value consistency', () => {
     expect(ic).toMatch(/layout-2560[\s\S]*?--mf-h:\s*var\(--space-9xl\)/)
     expect(chc).toMatch(/layout-2560[\s\S]*?--mf-h:\s*var\(--space-9xl\)/)
   })
-  test('both use $space-3xl for landscape max-w at 1024px', () => {
+  test('both cap landscape --mf-w at the grid column via grid-steps', () => {
     expect(ic).toMatch(
-      /landscape[\s\S]*?media-figure[\s\S]*?--mf-max-w:\s*calc\(100vw\s*-\s*var\(--space-3xl\)/
+      /landscape[\s\S]*?media-figure[\s\S]*?--mf-w:\s*min\(calc\(100vw - #\{to-rem\(\$gap \* 2\)\}\), #\{to-rem\(\$step - \$gap \* 2\)\}\)/
     )
     expect(chc).toMatch(
-      /landscape[\s\S]*?media-figure[\s\S]*?--mf-max-w:\s*calc\(100vw\s*-\s*var\(--space-3xl\)/
+      /landscape[\s\S]*?media-figure[\s\S]*?--mf-w:\s*min\(calc\(100vw - #\{to-rem\(\$gap \* 2\)\}\), #\{to-rem\(\$step - \$gap \* 2\)\}\)/
     )
   })
-  test('both use $space-4xl for landscape max-w at 1280px', () => {
+  test('both set landscape --mf-max-w to the step max-area', () => {
     expect(ic).toMatch(
-      /landscape[\s\S]*?media-figure[\s\S]*?layout-1280[\s\S]*?--mf-max-w:\s*calc\(100vw\s*-\s*var\(--space-4xl\)/
+      /landscape[\s\S]*?media-figure[\s\S]*?--mf-max-w:\s*#\{to-rem\(\$step - \$gap \* 2\)\}/
     )
     expect(chc).toMatch(
-      /landscape[\s\S]*?media-figure[\s\S]*?layout-1280[\s\S]*?--mf-max-w:\s*calc\(100vw\s*-\s*var\(--space-4xl\)/
+      /landscape[\s\S]*?media-figure[\s\S]*?--mf-max-w:\s*#\{to-rem\(\$step - \$gap \* 2\)\}/
     )
   })
   test('media-figure.scss --mf-w fallback equals internals default formula', () => {
@@ -90,6 +90,6 @@ describe('cross-file CSS var value consistency', () => {
   })
   test('media-figure.scss --mf-max-w carries a vw-cap fallback for landscape', () => {
     expect(mfc).toMatch(/var\(--mf-max-w,\s*calc\(100vw/)
-    expect(ic).toMatch(/--mf-max-w:\s*calc\(100vw/)
+    expect(ic).toMatch(/--mf-max-w:\s*#\{to-rem\(\$step/)
   })
 })

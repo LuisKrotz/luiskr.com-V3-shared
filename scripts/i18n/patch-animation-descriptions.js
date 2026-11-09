@@ -81,14 +81,9 @@ const DESCS = {
         'The small notification toast that appears in a screen corner for events like copy confirmations and cookie actions. Animation: slides in from the edge while fading up (site-toast-in), holds, then exits by sliding back and fading out. Trigger: dispatched by app events (copy, storage notice, test notification). Tech: CSS keyframes on enter and a --closing modifier on exit. Purpose: draws the eye to a transient message without blocking interaction.',
     },
     'mosaic-burn': {
-      alt: 'Portfolio tile title burning away in embers and reassembling',
+      alt: 'Project name letters combusting to ash and knitting back in',
       longdesc:
-        "The title text on portfolio mosaic tiles in the featured-work wall. Animation: on hover the title's letters combust — erode edges, scorch trails and glowing ember particles consume the glyphs column by column, then the letters rebuild bottom-up through the same burn field when the pointer leaves or the hover retargets. Trigger: pointer hover enter/leave on the tile. Tech: a Rust/WASM particle simulation (mosaic-burn crate) running the erode/scorch/ember model on a canvas; a 2D-canvas path renders the same field when the GPU route is off, and both share one deterministic simulation. Purpose: turns the plain hover state into the site's signature fire effect.",
-    },
-    'mosaic-tile': {
-      alt: 'Portfolio tile sliding to a new slot on a spring + border sheen',
-      longdesc:
-        "The project cards in the featured-work mosaic wall. Animation: when one card expands on hover, displaced neighbors slide to their repacked slots on a damped spring — an organic overshoot-settle curve (CSS linear() synthesized spring) rather than a linear glide; a light sheen periodically travels each tile's border. Trigger: hover-driven repack animates the displaced tiles; the border sheen loops gently. Tech: JS masonry pack + CSS transition on transform; the sheen is a canvas ring pass. Purpose: keeps the wall feeling liquid and alive as it rearranges.",
+        "The project name on the home card-stack — the large title on the front card and the info-panel heading beside the deck. Animation: when the deck deals a new front card, the outgoing name's letters combust — eroded edges, scorch trails and glowing ember particles consume the glyphs column by column — and the next project's name knits back in bottom-up through the same burn field. Trigger: fires on every deal-through (drag, flick, arrows or autoplay). Tech: a Rust/WASM particle simulation (mosaic-burn crate) running the erode/scorch/ember model on a canvas; a 2D-canvas path renders the same field when the GPU route is off, and both share one deterministic simulation. Purpose: turns each card swap into the site's signature fire transition.",
     },
     'media-progressive': {
       alt: 'Media image morphing from blurry low-quality to sharp high-quality',
@@ -150,6 +145,51 @@ const DESCS = {
       longdesc:
         'The ambient background glow behind the page content. Animation: a large soft radial gradient drifts slowly across the document, shifting position and intensity in a long loop. Trigger: runs continuously on every page. Tech: a CSS keyframe (body-glow-drift) animating a fixed background layer — zero JavaScript. Purpose: gives the dark theme atmosphere and depth instead of a flat background.',
     },
+    'card-stack': {
+      alt: 'Selected work card deck dealing with drag physics and a border-light countdown',
+      longdesc:
+        "The featured-projects card deck on the home page. Animation: cards deal through a 3D pile/fan — side sheets angle inward with progressive dimming while the active card scales up; a lit arc travels the active card's hairline border over a ten-second countdown mirrored on the play/pause transport, and the project title paper-burns out and knits back in on navigation or when the section scrolls into view. Trigger: drag/swipe gestures, prev/next and index controls, the autoplay timer and scroll entry. Tech: JS-computed poses on CSS 3D transforms, a conic-gradient custom property painted per frame and the shared canvas paper-burn. Purpose: makes featured projects feel like a physical deck you fan, deal and shuffle.",
+    },
+    'about-mesh': {
+      alt: 'About portrait halo of dots rippling in a traveling radial wave',
+      longdesc:
+        "The dotted halo orbiting the About portrait. Animation: a polar lattice of dots displaces outward as a radial wave travels through it, while precessing guide lines rotate slowly behind. Trigger: runs continuously while the About section is on screen. Tech: a 2D canvas rAF loop positions each dot from polar coordinates. Purpose: gives the portrait a living orbital field echoing the site's motion language.",
+    },
+    'nav-icon-aura': {
+      alt: 'Nav chip outlines sweeping with a comet-tail ring on hover',
+      longdesc:
+        'The search and settings chips in the nav strip. Animation: a ring-fill with a comet tail sweeps around the chip outline on hover. Trigger: pointer hover or focus on each chip. Tech: a WebGPU ring-fill pass with a CSS trail fallback. Purpose: signals the chips are interactive without stealing attention from the menu.',
+    },
+    'view-transition': {
+      alt: 'Route outlet cross-fading between outgoing and incoming views',
+      longdesc:
+        'The view outlet container on every route change. Animation: the outgoing view fades out while the incoming view fades in — a clean cross-dissolve. Trigger: each router navigation. Tech: a JS class swap driving a CSS opacity transition. Purpose: makes page changes feel continuous instead of a hard cut.',
+    },
+    'route-search': {
+      alt: 'Route-search field spinning its submit glyph while scoring runs',
+      longdesc:
+        "The route-search field's loading state. Animation: the submit glyph spins and a row of found-dots bounces while the scoring dispatch is in flight. Trigger: typing a query that starts a search pass. Tech: pure CSS keyframes on the field chrome. Purpose: communicates in-flight work so the search feels responsive.",
+    },
+    'custom-carousel': {
+      alt: 'Project carousels scrolling with momentum and an autoplay progress dash',
+      longdesc:
+        'The media carousels on project pages. Animation: the strip scrolls with momentum, arrow nav slides between items and an autoplay progress dash fills along the transport. Trigger: arrow presses, autoplay ticks and drag gestures. Tech: JS-driven scroll positions with CSS transitions — a distinct surface from the awards carousel. Purpose: keeps long media sets explorable at a glance.',
+    },
+    'mentions-deck': {
+      alt: 'Contact mentions deck cycling swipeable stacked cards',
+      longdesc:
+        'The stacked mentions deck on the contact page. Animation: cards cycle on autoplay, respond to drag and flick gestures and dismiss off the stack. Trigger: the autoplay timer plus pointer swipes. Tech: JS gesture handling over CSS keyframes. Purpose: makes endorsements feel like a physical deck you can shuffle.',
+    },
+    'expand-modal-loading': {
+      alt: 'Expanded-media lightbox shimmering while the full asset decodes',
+      longdesc:
+        'The loading state of the expanded-media lightbox. Animation: a shimmer wash travels across the stage while a spinner marks decode progress. Trigger: opening any media item in the lightbox. Tech: pure CSS keyframes. Purpose: keeps the modal feeling instant while full-size assets stream in.',
+    },
+    'footer-feed-wave': {
+      alt: 'Awards footer feed links rippling an opacity wave',
+      longdesc:
+        'The source-feed link row in the awards footer. Animation: an opacity wave ripples across the links in a slow loop. Trigger: runs continuously while the footer is visible. Tech: CSS keyframes staggered per link. Purpose: gives the otherwise static feed row a subtle pulse of life.',
+    },
   },
   br: {
     'progress-bar': {
@@ -208,14 +248,9 @@ const DESCS = {
         'O pequeno toast de notificação que aparece num canto da tela para eventos como confirmações de cópia e ações de cookies. Animação: desliza da borda enquanto esmaece para cima (site-toast-in), segura e sai deslizando de volta com fade. Gatilho: disparado por eventos do app (cópia, aviso de armazenamento, notificação de teste). Tecnologia: keyframes CSS na entrada e um modificador --closing na saída. Propósito: chamar o olho para uma mensagem transitória sem bloquear a interação.',
     },
     'mosaic-burn': {
-      alt: 'Título do tile de portfólio queimando em brasas e remontando',
+      alt: 'Nome do projeto queimando em brasas e se reconstituindo no baralho',
       longdesc:
-        'O texto do título nos tiles do mosaico de trabalhos em destaque. Animação: no hover as letras do título entram em combustão — bordas erodidas, trilhas de queima e partículas de brasa incandescente consomem os glifos coluna a coluna, e as letras se reconstroem de baixo para cima pelo mesmo campo de fogo quando o ponteiro sai ou o hover muda de alvo. Gatilho: hover com o ponteiro no tile. Tecnologia: simulação de partículas em Rust/WASM (crate mosaic-burn) rodando o modelo erode/scorch/ember num canvas; um caminho 2D-canvas renderiza o mesmo campo quando a rota GPU está desligada — ambos compartilham uma simulação determinística. Propósito: transformar o hover simples no efeito de fogo assinatura do site.',
-    },
-    'mosaic-tile': {
-      alt: 'Tile de portfólio deslizando para novo slot com mola + brilho na borda',
-      longdesc:
-        'Os cards de projeto no mosaico de trabalhos em destaque. Animação: quando um card expande no hover, os vizinhos deslocados deslizam para seus novos slots com uma mola amortecida — uma curva orgânica de overshoot e assentamento (mola sintetizada em CSS linear()) em vez de um deslize linear; um brilho percorre periodicamente a borda de cada tile. Gatilho: o repack por hover anima os tiles deslocados; o brilho da borda faz loop suave. Tecnologia: pack masonry em JS + transição CSS em transform; o brilho é uma passada de anel em canvas. Propósito: manter a parede líquida e viva enquanto se rearranja.',
+        'O nome do projeto no card-stack da home — o título grande no card da frente e o cabeçalho do painel de info ao lado do baralho. Animação: quando o baralho vira um novo card da frente, as letras do nome anterior entram em combustão — bordas erodidas, trilhas de queima e partículas de brasa incandescente consomem os glifos coluna a coluna — e o nome do próximo projeto se reconstitui de baixo para cima pelo mesmo campo de fogo. Gatilho: dispara a cada troca de card (arraste, toque, setas ou autoplay). Tecnologia: simulação de partículas em Rust/WASM (crate mosaic-burn) rodando o modelo erode/scorch/ember num canvas; um caminho 2D-canvas renderiza o mesmo campo quando a rota GPU está desligada — ambos compartilham uma simulação determinística. Propósito: transformar cada troca de card na transição de fogo assinatura do site.',
     },
     'media-progressive': {
       alt: 'Imagem de mídia indo de borrada em baixa qualidade para nítida em alta',
@@ -277,6 +312,51 @@ const DESCS = {
       longdesc:
         'O brilho de fundo ambiente atrás do conteúdo da página. Animação: um grande gradiente radial suave drifta lentamente pelo documento, mudando posição e intensidade num loop longo. Gatilho: roda continuamente em todas as páginas. Tecnologia: um keyframe CSS (body-glow-drift) animando uma camada de fundo fixa — zero JavaScript. Propósito: dar atmosfera e profundidade ao tema escuro em vez de um fundo chapado.',
     },
+    'card-stack': {
+      alt: 'Baralho de trabalhos selecionados com física de arrasto e contagem na borda iluminada',
+      longdesc:
+        'O baralho de projetos em destaque da página inicial. Animação: as cartas distribuem-se num leque/pilha 3D — as folhas laterais inclinam-se para dentro com esmaecimento progressivo enquanto a carta ativa cresce; um arco luminoso percorre a borda fina da carta ativa numa contagem de dez segundos espelhada no botão play/pausa, e o título do projeto queima e se recompõe a cada navegação ou quando a seção entra na tela. Gatilho: gestos de arrastar/deslizar, controles anterior/próximo e índice, o temporizador de autoplay e a entrada por rolagem. Técnica: poses calculadas em JS sobre transforms 3D de CSS, uma propriedade customizada de conic-gradient pintada por frame e o paper-burn em canvas compartilhado. Propósito: fazer os projetos em destaque parecerem um baralho físico que você abre, distribui e embaralha.',
+    },
+    'about-mesh': {
+      alt: 'Halo de pontos do retrato do Sobre ondulando numa onda radial que viaja',
+      longdesc:
+        'O halo pontilhado orbitando o retrato do Sobre. Animação: uma malha polar de pontos desloca para fora enquanto uma onda radial a atravessa, com linhas-guia precessionando lentamente atrás. Disparo: roda continuamente enquanto a seção Sobre está na tela. Técnica: um loop rAF em canvas 2D posiciona cada ponto por coordenadas polares. Propósito: dá ao retrato um campo orbital vivo que ecoa a linguagem de movimento do site.',
+    },
+    'nav-icon-aura': {
+      alt: 'Contornos dos chips da nav varridos por um anel com cauda de cometa no hover',
+      longdesc:
+        'Os chips de busca e ajustes da faixa de navegação. Animação: um preenchimento de anel com cauda de cometa varre o contorno do chip ao passar o cursor. Disparo: hover ou foco do ponteiro em cada chip. Técnica: passe de ring-fill em WebGPU com fallback de trilha em CSS. Propósito: sinaliza que os chips são interativos sem roubar atenção do menu.',
+    },
+    'view-transition': {
+      alt: 'Outlet de rota em cross-fade entre a view que sai e a que chega',
+      longdesc:
+        'O contêiner view outlet em cada troca de rota. Animação: a view que sai esmaece enquanto a que chega aparece — um cross-dissolve limpo. Disparo: cada navegação do roteador. Técnica: troca de classe em JS conduzindo uma transição de opacidade em CSS. Propósito: faz as mudanças de página parecerem contínuas em vez de um corte seco.',
+    },
+    'route-search': {
+      alt: 'Campo de busca de rotas girando o glifo de envio enquanto a pontuação corre',
+      longdesc:
+        'O estado de carregamento do campo de busca de rotas. Animação: o glifo de envio gira e uma fileira de pontos encontrados quica enquanto a rodada de pontuação está no ar. Disparo: digitar uma consulta que inicia uma busca. Técnica: keyframes CSS puros no cromado do campo. Propósito: comunica o trabalho em voo para a busca parecer responsiva.',
+    },
+    'custom-carousel': {
+      alt: 'Carrosséis de projeto rolando com momentum e um traço de progresso do autoplay',
+      longdesc:
+        'Os carrosséis de mídia das páginas de projeto. Animação: a faixa rola com momentum, as setas deslizam entre itens e um traço de progresso do autoplay se preenche no transporte. Disparo: toques nas setas, ticks do autoplay e gestos de arraste. Técnica: posições de rolagem via JS com transições CSS — superfície distinta do carrossel de prêmios. Propósito: mantém conjuntos longos de mídia exploráveis num relance.',
+    },
+    'mentions-deck': {
+      alt: 'Baralho de menções do contato ciclando cartas empilhadas e deslizáveis',
+      longdesc:
+        'O baralho empilhado de menções na página de contato. Animação: as cartas ciclam no autoplay, respondem a arrastes e sacudidas e saem da pilha ao descarte. Disparo: o timer do autoplay mais deslizes do ponteiro. Técnica: gestos em JS sobre keyframes CSS. Propósito: faz as recomendações parecerem um baralho físico que dá para embaralhar.',
+    },
+    'expand-modal-loading': {
+      alt: 'Lightbox de mídia expandida cintilando enquanto o asset integral decodifica',
+      longdesc:
+        'O estado de carregamento do lightbox de mídia expandida. Animação: uma onda de shimmer atravessa o palco enquanto um spinner marca o progresso da decodificação. Disparo: abrir qualquer item de mídia no lightbox. Técnica: keyframes CSS puros. Propósito: mantém o modal com sensação de instantâneo enquanto os assets em tamanho real chegam.',
+    },
+    'footer-feed-wave': {
+      alt: 'Links do feed do rodapé de prêmios ondulando uma onda de opacidade',
+      longdesc:
+        'A fileira de links do feed de fontes no rodapé de prêmios. Animação: uma onda de opacidade percorre os links em loop lento. Disparo: roda continuamente enquanto o rodapé está visível. Técnica: keyframes CSS defasados por link. Propósito: dá à fileira estática de feeds um pulso sutil de vida.',
+    },
   },
   es: {
     'progress-bar': {
@@ -335,14 +415,9 @@ const DESCS = {
         'El pequeño toast de notificación que aparece en una esquina de la pantalla para eventos como confirmaciones de copia y acciones de cookies. Animación: se desliza desde el borde mientras sube con fade (site-toast-in), se sostiene y sale deslizándose de vuelta con fade. Disparador: disparado por eventos de la app (copia, aviso de almacenamiento, notificación de prueba). Tecnología: keyframes CSS en la entrada y un modificador --closing en la salida. Propósito: atraer la vista a un mensaje transitorio sin bloquear la interacción.',
     },
     'mosaic-burn': {
-      alt: 'Título del tile de portafolio quemándose en brasas y rearmándose',
+      alt: 'Nombre del proyecto quemándose en brasas y retejiéndose en el mazo',
       longdesc:
-        'El texto del título en los tiles del mosaico de trabajos destacados. Animación: en hover las letras del título entran en combustión — bordes erosionados, estelas de quemado y partículas de brasa incandescente consumen los glifos columna a columna, y las letras se reconstruyen de abajo hacia arriba por el mismo campo de fuego cuando el puntero sale o el hover cambia de objetivo. Disparador: hover del puntero en el tile. Tecnología: simulación de partículas en Rust/WASM (crate mosaic-burn) corriendo el modelo erode/scorch/ember en un canvas; un camino 2D-canvas renderiza el mismo campo cuando la ruta GPU está apagada — ambos comparten una simulación determinística. Propósito: convertir el hover simple en el efecto de fuego insignia del sitio.',
-    },
-    'mosaic-tile': {
-      alt: 'Tile de portafolio deslizándose a nuevo slot con resorte + brillo en el borde',
-      longdesc:
-        'Las tarjetas de proyecto en el mosaico de trabajos destacados. Animación: cuando una tarjeta se expande en hover, los vecinos desplazados se deslizan a sus nuevos slots con un resorte amortiguado — una curva orgánica de overshoot y asentamiento (resorte sintetizado en CSS linear()) en vez de un deslizamiento lineal; un brillo recorre periódicamente el borde de cada tile. Disparador: el repack por hover anima los tiles desplazados; el brillo del borde hace loop suave. Tecnología: pack masonry en JS + transición CSS en transform; el brillo es una pasada de anillo en canvas. Propósito: mantener la pared líquida y viva mientras se reordena.',
+        'El nombre del proyecto en el card-stack de la home — el título grande en la carta frontal y el encabezado del panel de info junto al mazo. Animación: cuando el mazo reparte una nueva carta frontal, las letras del nombre saliente entran en combustión — bordes erosionados, estelas de quemado y partículas de brasa incandescente consumen los glifos columna a columna — y el nombre del siguiente proyecto se reteje de abajo hacia arriba por el mismo campo de fuego. Disparador: se dispara en cada reparto (arrastre, toque, flechas o autoplay). Tecnología: simulación de partículas en Rust/WASM (crate mosaic-burn) corriendo el modelo erode/scorch/ember en un canvas; un camino 2D-canvas renderiza el mismo campo cuando la ruta GPU está apagada — ambos comparten una simulación determinística. Propósito: convertir cada cambio de carta en la transición de fuego insignia del sitio.',
     },
     'media-progressive': {
       alt: 'Imagen de medios pasando de borrosa en baja calidad a nítida en alta',
@@ -404,6 +479,51 @@ const DESCS = {
       longdesc:
         'El brillo de fondo ambiente detrás del contenido de la página. Animación: un gran gradiente radial suave deriva lentamente por el documento, cambiando posición e intensidad en un loop largo. Disparador: corre continuamente en todas las páginas. Tecnología: un keyframe CSS (body-glow-drift) animando una capa de fondo fija — cero JavaScript. Propósito: dar atmósfera y profundidad al tema oscuro en lugar de un fondo plano.',
     },
+    'card-stack': {
+      alt: 'Baraja de trabajos seleccionados con física de arrastre y cuenta atrás en el borde iluminado',
+      longdesc:
+        'La baraja de proyectos destacados de la página principal. Animación: las cartas se reparten en una pila/abanico 3D — las hojas laterales se inclinan hacia dentro con atenuación progresiva mientras la carta activa crece; un arco luminoso recorre el borde fino de la carta activa durante una cuenta atrás de diez segundos reflejada en el botón play/pausa, y el título del proyecto se quema y se reteje en cada navegación o cuando la sección entra en pantalla. Disparador: gestos de arrastrar/deslizar, controles anterior/siguiente e índice, el temporizador de autoplay y la entrada al hacer scroll. Técnica: poses calculadas en JS sobre transforms 3D de CSS, una propiedad personalizada de conic-gradient pintada por frame y el paper-burn en canvas compartido. Propósito: que los proyectos destacados se sientan como una baraja física que abres, repartes y barajas.',
+    },
+    'about-mesh': {
+      alt: 'Halo de puntos del retrato de Sobre mí ondulando en una onda radial viajera',
+      longdesc:
+        'El halo punteado que orbita el retrato de Sobre mí. Animación: una red polar de puntos se desplaza hacia afuera mientras una onda radial la recorre, con líneas guía precesando lentamente detrás. Disparador: corre continuamente mientras la sección está en pantalla. Técnica: un bucle rAF en canvas 2D posiciona cada punto en coordenadas polares. Propósito: da al retrato un campo orbital vivo que hace eco del lenguaje de movimiento del sitio.',
+    },
+    'nav-icon-aura': {
+      alt: 'Contornos de los chips de la nav barridos por un anillo con cola de cometa al hover',
+      longdesc:
+        'Los chips de búsqueda y ajustes de la barra de navegación. Animación: un relleno de anillo con cola de cometa barre el contorno del chip al pasar el cursor. Disparador: hover o foco del puntero en cada chip. Técnica: pasada de ring-fill en WebGPU con fallback de estela en CSS. Propósito: señala que los chips son interactivos sin robar atención al menú.',
+    },
+    'view-transition': {
+      alt: 'Outlet de ruta en cross-fade entre la vista que sale y la que entra',
+      longdesc:
+        'El contenedor view outlet en cada cambio de ruta. Animación: la vista saliente se desvanece mientras la entrante aparece — un cross-dissolve limpio. Disparador: cada navegación del router. Técnica: un cambio de clase en JS que dirige una transición de opacidad CSS. Propósito: hace que los cambios de página se sientan continuos en vez de un corte seco.',
+    },
+    'route-search': {
+      alt: 'Campo de búsqueda de rutas girando el glifo de envío mientras corre la puntuación',
+      longdesc:
+        'El estado de carga del campo de búsqueda de rutas. Animación: el glifo de envío gira y una fila de puntos encontrados rebota mientras el reparto de puntuación está en vuelo. Disparador: escribir una consulta que inicia una pasada de búsqueda. Técnica: keyframes CSS puros en el cromado del campo. Propósito: comunica el trabajo en curso para que la búsqueda se sienta receptiva.',
+    },
+    'custom-carousel': {
+      alt: 'Carruseles de proyecto deslizando con momentum y un trazo de progreso del autoplay',
+      longdesc:
+        'Los carruseles de medios de las páginas de proyecto. Animación: la tira se desplaza con momentum, las flechas navegan entre ítems y un trazo de progreso del autoplay se rellena en el transporte. Disparador: pulsaciones de flechas, ticks del autoplay y gestos de arrastre. Técnica: posiciones de scroll por JS con transiciones CSS — superficie distinta del carrusel de premios. Propósito: mantiene los conjuntos largos de medios explorables de un vistazo.',
+    },
+    'mentions-deck': {
+      alt: 'Mazo de menciones del contacto ciclando cartas apiladas y deslizables',
+      longdesc:
+        'El mazo apilado de menciones en la página de contacto. Animación: las cartas ciclan en autoplay, responden a gestos de arrastre y sacudida y se descartan fuera de la pila. Disparador: el temporizador del autoplay más deslizamientos del puntero. Técnica: gestos en JS sobre keyframes CSS. Propósito: hace que las recomendaciones se sientan como un mazo físico barajable.',
+    },
+    'expand-modal-loading': {
+      alt: 'Lightbox de medio expandido brillando mientras decodifica el asset completo',
+      longdesc:
+        'El estado de carga del lightbox de medio expandido. Animación: una onda de shimmer recorre el escenario mientras un spinner marca el progreso de decodificación. Disparador: abrir cualquier elemento de medio en el lightbox. Técnica: keyframes CSS puros. Propósito: mantiene el modal con sensación instantánea mientras llegan los assets a tamaño real.',
+    },
+    'footer-feed-wave': {
+      alt: 'Enlaces del feed del pie de premios ondeando una ola de opacidad',
+      longdesc:
+        'La fila de enlaces del feed de fuentes en el pie de premios. Animación: una ola de opacidad recorre los enlaces en un bucle lento. Disparador: corre continuamente mientras el pie está visible. Técnica: keyframes CSS escalonados por enlace. Propósito: da a la fila estática de feeds un pulso sutil de vida.',
+    },
   },
   de: {
     'progress-bar': {
@@ -462,14 +582,9 @@ const DESCS = {
         'Der kleine Benachrichtigungs-Toast, der in einer Bildschirmecke erscheint — etwa für Kopierbestätigungen und Cookie-Aktionen. Animation: gleitet vom Rand herein und fadet hoch (site-toast-in), hält, dann gleitet er zurück und fadet aus. Auslöser: durch App-Ereignisse ausgelöst (Kopieren, Speicherhinweis, Test-Benachrichtigung). Technik: CSS-Keyframes beim Eintritt und ein --closing-Modifikator beim Austritt. Zweck: lenkt den Blick auf eine kurze Meldung, ohne die Interaktion zu blockieren.',
     },
     'mosaic-burn': {
-      alt: 'Portfolio-Kacheltitel, der in Glut verbrennt und sich neu aufbaut',
+      alt: 'Projektname, der im Kartenstapel in Glut verbrennt und sich neu einstrickt',
       longdesc:
-        'Der Titeltext auf den Portfolio-Kacheln der Featured-Work-Wand. Animation: bei Hover verbrennen die Buchstaben des Titels — erodierte Kanten, Versengungsspuren und glühende Funkenpartikel verzehren die Glyphen Spalte für Spalte; danach bauen sich die Buchstaben von unten nach oben durch dasselbe Feuerfeld wieder auf, wenn der Zeiger weggeht oder der Hover das Ziel wechselt. Auslöser: Zeiger-Hover auf der Kachel. Technik: Rust/WASM-Partikelsimulation (mosaic-burn-Crate) mit dem Erode/Scorch/Ember-Modell auf Canvas; ein 2D-Canvas-Pfad rendert dasselbe Feld bei deaktivierter GPU-Route — beide teilen eine deterministische Simulation. Zweck: macht aus dem schlichten Hover den markanten Feuereffekt der Site.',
-    },
-    'mosaic-tile': {
-      alt: 'Portfolio-Kachel gleitet per Feder in neuen Slot + Randschimmer',
-      longdesc:
-        'Die Projektkarten in der Featured-Work-Mosaikwand. Animation: wenn eine Karte bei Hover expandiert, gleiten verschobene Nachbarn auf einer gedämpften Feder in ihre neuen Slots — eine organische Overshoot-Settle-Kurve (in CSS linear() synthetisierte Feder) statt eines linearen Gleitens; ein Schimmer wandert periodisch über den Rand jeder Kachel. Auslöser: das Hover-Repack animiert die verschobenen Kacheln; der Randschimmer läuft sanft im Loop. Technik: JS-Masonry-Pack + CSS-Transition auf transform; der Schimmer ist ein Canvas-Ring-Pass. Zweck: hält die Wand flüssig und lebendig, während sie sich neu ordnet.',
+        'Der Projektname auf dem Home-Card-Stack — der große Titel auf der vorderen Karte und die Überschrift des Info-Panels neben dem Stapel. Animation: sobald der Stapel eine neue vordere Karte austeilt, verbrennen die Buchstaben des alten Namens — erodierte Kanten, Versengungsspuren und glühende Funkenpartikel verzehren die Glyphen Spalte für Spalte — und der Name des nächsten Projekts strickt sich von unten nach oben durch dasselbe Feuerfeld wieder ein. Auslöser: feuert bei jedem Austeilen (Ziehen, Wischen, Pfeile oder Autoplay). Technik: Rust/WASM-Partikelsimulation (mosaic-burn-Crate) mit dem Erode/Scorch/Ember-Modell auf Canvas; ein 2D-Canvas-Pfad rendert dasselbe Feld bei deaktivierter GPU-Route — beide teilen eine deterministische Simulation. Zweck: macht aus jedem Kartenwechsel den markanten Feuerübergang der Site.',
     },
     'media-progressive': {
       alt: 'Medienbild morpht von verschwommener Niedrig- zu scharfer Hochqualität',
@@ -531,6 +646,51 @@ const DESCS = {
       longdesc:
         'Das Umgebungs-Hintergrundglühen hinter dem Seiteninhalt. Animation: ein großer weicher Radialgradient driftet langsam über das Dokument und verschiebt Position und Intensität in langer Schleife. Auslöser: läuft kontinuierlich auf jeder Seite. Technik: ein CSS-Keyframe (body-glow-drift) animiert eine fixe Hintergrundschicht — null JavaScript. Zweck: gibt dem dunklen Theme Atmosphäre und Tiefe statt eines flachen Hintergrunds.',
     },
+    'card-stack': {
+      alt: 'Kartenstapel ausgewählter Arbeiten mit Drag-Physik und Countdown am leuchtenden Rand',
+      longdesc:
+        'Der Kartenstapel der ausgewählten Projekte auf der Startseite. Animation: Karten wandern durch einen 3D-Stapel/Fächer — seitliche Blätter kippen nach innen und dimmen progressiv, während die aktive Karte größer wird; ein leuchtender Bogen wandert in einem Zehn-Sekunden-Countdown über den feinen Rand der aktiven Karte, gespiegelt am Play/Pause-Button, und der Projekttitel verbrennt und webt sich bei jeder Navigation oder beim Hereinscrollen der Sektion neu. Auslöser: Zieh-/Wischgesten, Zurück/Weiter- und Index-Steuerung, der Autoplay-Timer und das Hereinscrollen. Technik: JS-berechnete Posen auf CSS-3D-Transforms, eine pro Frame gemalte conic-gradient-Custom-Property und das geteilte Canvas-Paper-Burn. Zweck: lässt die ausgewählten Projekte wie ein physisches Kartendeck wirken, das man fächert, austeilt und mischt.',
+    },
+    'about-mesh': {
+      alt: 'Punkt-Halo des About-Porträts, der in einer wandernden Radialwelle kräuselt',
+      longdesc:
+        'Der gepunktete Halo, der das About-Porträt umkreist. Animation: ein polares Punktgitter wird nach außen verdrängt, während eine radiale Welle hindurchläuft, mit langsam präzedierenden Führungslinien dahinter. Auslöser: läuft kontinuierlich, solange der About-Bereich sichtbar ist. Technik: eine 2D-Canvas-rAF-Schleife positioniert jeden Punkt über Polarkoordinaten. Zweck: verleiht dem Porträt ein lebendiges Orbitfeld im Bewegungsvokabular der Seite.',
+    },
+    'nav-icon-aura': {
+      alt: 'Nav-Chip-Umrisse, die bei Hover von einem Ring mit Kometenschweif überstrichen werden',
+      longdesc:
+        'Die Such- und Einstellungs-Chips in der Nav-Leiste. Animation: eine Ringfüllung mit Kometenschweif streicht bei Hover um den Chip-Umriss. Auslöser: Zeiger-Hover oder Fokus auf jedem Chip. Technik: ein WebGPU-Ring-Fill-Pass mit CSS-Schweif-Fallback. Zweck: signalisiert Interaktivität, ohne dem Menü die Aufmerksamkeit zu nehmen.',
+    },
+    'view-transition': {
+      alt: 'Route-Outlet mit Cross-Fade zwischen aus- und eingehender Ansicht',
+      longdesc:
+        'Der View-Outlet-Container bei jedem Routenwechsel. Animation: die ausgehende Ansicht blendet aus, während die eingehende einblendet — eine saubere Überblendung. Auslöser: jede Router-Navigation. Technik: ein JS-Klassenwechsel, der eine CSS-Opacity-Transition steuert. Zweck: lässt Seitenwechsel fließend wirken statt wie einen harten Schnitt.',
+    },
+    'route-search': {
+      alt: 'Routen-Suchfeld dreht sein Absende-Glyphen, während die Bewertung läuft',
+      longdesc:
+        'Der Ladezustand des Routen-Suchfelds. Animation: der Absende-Glyph dreht sich und eine Reihe Trefferpunkte hüpft, solange der Scoring-Dispatch unterwegs ist. Auslöser: eine Eingabe, die einen Suchdurchlauf startet. Technik: reine CSS-Keyframes am Feld-Chrome. Zweck: zeigt laufende Arbeit, damit die Suche reaktionsschnell wirkt.',
+    },
+    'custom-carousel': {
+      alt: 'Projekt-Karussells scrollen mit Momentum und einem Autoplay-Fortschrittsstrich',
+      longdesc:
+        'Die Medien-Karussells auf Projektseiten. Animation: der Streifen scrollt mit Momentum, die Pfeile wechseln zwischen Items und ein Autoplay-Fortschrittsstrich füllt sich am Transport. Auslöser: Pfeiltasten, Autoplay-Ticks und Wischgesten. Technik: JS-gesteuerte Scrollpositionen mit CSS-Transitionen — eine eigene Oberfläche neben dem Awards-Karussell. Zweck: hält lange Mediensets auf einen Blick erkundbar.',
+    },
+    'mentions-deck': {
+      alt: 'Kontakt-Mentions-Stapel rotiert wischbare gestapelte Karten',
+      longdesc:
+        'Der gestapelte Mentions-Stapel auf der Kontaktseite. Animation: Karten rotieren per Autoplay, reagieren auf Zieh- und Schnippgesten und werden vom Stapel verworfen. Auslöser: der Autoplay-Timer plus Zeiger-Wischer. Technik: JS-Gestensteuerung über CSS-Keyframes. Zweck: lässt Empfehlungen wie ein physisches, mischbares Kartendeck wirken.',
+    },
+    'expand-modal-loading': {
+      alt: 'Erweiterte Media-Lightbox schimmert, während das volle Asset dekodiert',
+      longdesc:
+        'Der Ladezustand der erweiterten Media-Lightbox. Animation: ein Schimmerschleier wandert über die Bühne, während ein Spinner den Dekodier-Fortschritt markiert. Auslöser: das Öffnen eines beliebigen Media-Items in der Lightbox. Technik: reine CSS-Keyframes. Zweck: lässt das Modal sofort wirken, während die Fullsize-Assets einströmen.',
+    },
+    'footer-feed-wave': {
+      alt: 'Feed-Links des Awards-Footers wogen in einer Opacity-Welle',
+      longdesc:
+        'Die Quell-Feed-Linkzeile im Awards-Footer. Animation: eine Opacity-Welle läuft in langsamer Schleife über die Links. Auslöser: läuft kontinuierlich, solange der Footer sichtbar ist. Technik: pro Link gestaffelte CSS-Keyframes. Zweck: gibt der sonst statischen Feed-Zeile einen feinen Lebenspuls.',
+    },
   },
   hrk: {
     'progress-bar': {
@@ -589,14 +749,9 @@ const DESCS = {
         'Der kleine Benachrichtigungs-Toast, der in ere Bildschirmeck erscheint — etwa für Kopierbestätigunge un Cookie-Aktioone. Animatsioon: gleitet vom Rand herein un fadet hoch (site-toast-in), hält, dann gleitet er zurück un fadet uss. Usslöser: durch App-Ereignisse ussglöst (Kopiere, Speicherhinweis, Test-Benachrichtigung). Technik: CSS-Keyframes beim Eintritt un en --closing-Modifikator beim Ustritt. Zweck: lenkt der Blick uf e kurze Meldung, ohne die Interaktion zu blockiere.',
     },
     'mosaic-burn': {
-      alt: 'Portfolio-Kacheltitel, der in Glut verbrennt un sich neu uffbaut',
+      alt: 'Projektname, der im Kartestappel in Glut verbrennt un sich neu enstrickt',
       longdesc:
-        'Der Titeltext uf de Portfolio-Kachle von der Featured-Work-Wand. Animatsioon: bei Hover verbrenne die Buchstawe vom Titel — erodierte Kanten, Versengungsspure un glühende Funkepartikel verzehre die Glyphe Spalt für Spalt; danach baue sich die Buchstawe von unne nae uewe durch desselbe Feierfeld widder uff, wenn der Zeiger weckgeht oder der Hover des Ziel wechselt. Usslöser: Zeiger-Hover uf der Kachel. Technik: Rust/WASM-Partikelsimulatsioon (mosaic-burn-Crate) mit em Erode/Scorch/Ember-Modell uf Canvas; en 2D-Canvas-Pfad rendert desselbe Feld bei deaktivierter GPU-Rout — beede teile e deterministische Simulatsioon. Zweck: macht uss em schlichte Hover der markante Feiereffekt von der Site.',
-    },
-    'mosaic-tile': {
-      alt: 'Portfolio-Kachel gleitet per Feier in neuen Slot + Randschimmer',
-      longdesc:
-        'Die Projektkarte in der Featured-Work-Mosaikwand. Animatsioon: wenn e Kart bei Hover expandiert, gleite verschowene Naebers uf ener gedämpfte Feier in ihre neue Slots — e organische Overshoot-Settle-Kurv (in CSS linear() synthetisiarte Feier) statt von em lineare Gleite; e Schimmer wandert periodisch über der Rand von jedere Kachel. Usslöser: des Hover-Repack animiert die verschowene Kachle; der Randschimmer lääft sanft im Loop. Technik: JS-Masonry-Pack + CSS-Transition uf transform; der Schimmer is en Canvas-Ring-Pass. Zweck: hält die Wand flissig un lewendig, während se sich neu ornnet.',
+        'Der Projektname uf em Home-Card-Stack — der große Titel uf der vordern Kart un die Üwwerschrift vom Info-Panel newe em Stappel. Animatsioon: sobald der Stappel e neie vordere Kart ussdeelt, verbrenne die Buchstawe vom alde Name — erodierte Kanten, Versengungsspure un glühende Funkepartikel verzehre die Glyphe Spalt für Spalt — un der Name vom nägschte Projekt strickt sich von unne nae uewe durch desselbe Feierfeld widder en. Usslöser: feiert bei jedem Ussdeele (Ziehe, Wische, Pfeile oder Autoplay). Technik: Rust/WASM-Partikelsimulatsioon (mosaic-burn-Crate) mit em Erode/Scorch/Ember-Modell uf Canvas; en 2D-Canvas-Pfad rendert desselbe Feld bei deaktivierter GPU-Rout — beede teile e deterministische Simulatsioon. Zweck: macht uss jedem Kartewechsel der markante Feierübergang von der Site.',
     },
     'media-progressive': {
       alt: 'Mediebild morpht von verschwommener Niedrig- zu scharfer Hochqualität',
@@ -658,6 +813,51 @@ const DESCS = {
       longdesc:
         'Des Umgebungs-Hintergrundglühe hinner em Seiteinhalt. Animatsioon: e grosser weicher Radialgradient driftet langsom über des Dokument un verschiebt Positsioon un Intensität in langer Schleif. Usslöser: lääft kontinuierlich uf jedere Seit. Technik: e CSS-Keyframe (body-glow-drift) animiert e fixe Hintergrundschicht — null JavaScript. Zweck: git em dunkle Theme Atmosphäre un Tief statt von em flache Hintergrund.',
     },
+    'card-stack': {
+      alt: 'Kartestappel usgewählte Arbeite mit Drag-Physik un Countdown am leuchtend Rand',
+      longdesc:
+        "Der Kartestappel vun de usgewählte Projekte uff de Startseit. Animation: Karte wandere durch en 3D-Stappel/Fächer — seitliche Blätter kippe noch inner un dimme progressiv, während de aktive Kart größer wird; en leuchtende Booge wandert in en Zehn-Sekunde-Countdown über de feine Rand vun de aktive Kart, gespiegelt am Play/Pause-Knopp, un de Projekt-Titel verbrennt un webbt sich bei jeder Navigation oder beim Hereinscrolle vun de Sektion nei. Auslöser: Zieh-/Wischgeste, Zurück/Weiter- un Index-Steuerung, de Autoplay-Timer un's Hereinscrolle. Technik: JS-berechnete Pose uff CSS-3D-Transforms, en pro Frame gemolte conic-gradient-Custom-Property un's geteilte Canvas-Paper-Burn. Zweck: losst de usgewählte Projekte wie en physisches Kartedeck wirke, das mer fächert, austteilt un mischt.",
+    },
+    'about-mesh': {
+      alt: 'Punkt-Halo des About-Porträts kräuselt in wandernder Radialwelle',
+      longdesc:
+        'Des gepunktete Halo, wat des About-Porträt umkreiset. Animatsioon: e polares Punktgitter verschiebt noch ussen, während e radiale Welle dorchlöff, mit langsom präzedierenden Führungslinien dahinner. Usslöser: löff kontinuierlich, solang der About-Bereich sichtbor is. Technik: e 2D-Canvas-rAF-Schleif positiooniert jeden Punkt über Polarkoordinaten. Zweck: gifft dem Porträt e lebendiges Orbitfeld im Bewegungsvokabular der Seite.',
+    },
+    'nav-icon-aura': {
+      alt: 'Nav-Chip-Umrisse, bei Hover vun Ring mit Kometenschweif överstrichen',
+      longdesc:
+        'De Such- un Einstellungs-Chips in der Nav-Leiste. Animatsioon: e Ringfüllung mit Kometenschweif streichet bei Hover um den Chip-Umriss. Usslöser: Zeiger-Hover of Fokus up jeden Chip. Technik: e WebGPU-Ring-Fill-Pass mit CSS-Schweif-Fallback. Zweck: signaalisiert Interaktivität ohn dem Menü de Opmärksomheit to nehmen.',
+    },
+    'view-transition': {
+      alt: 'Route-Outlet mit Cross-Fade twüschen uss- un ingehender Ansicht',
+      longdesc:
+        'De View-Outlet-Container bi jeden Routenwessel. Animatsioon: de ussgehende Ansicht blendet ut, während de ingehende inblendet — e suvere Överblendung. Usslöser: jede Router-Navigatsioon. Technik: e JS-Klassenwessel, de e CSS-Opacity-Transition stüert. Zweck: lett Seitenwessel fleeßend wirken statt as e harten Schnitt.',
+    },
+    'route-search': {
+      alt: 'Routen-Suchfeld dreiht sin Absende-Glyphen, während de Bewärtung löff',
+      longdesc:
+        'De Ladetoestand des Routen-Suchfelds. Animatsioon: de Absende-Glyph dreiht sik un e Reeg Trefferpunkte hüppet, solang de Scoring-Dispatch ünnerwegens is. Usslöser: e Ingaav, de e Suchdörchlöff startet. Technik: reine CSS-Keyframes am Feld-Chrome. Zweck: wiest löpende Arbeit, sodat de Sook reaktivoonswärd wirkt.',
+    },
+    'custom-carousel': {
+      alt: 'Projekt-Karussells skrollen mit Momentum un e Autoplay-Fortschrittsstreek',
+      longdesc:
+        'De Medien-Karussells up Projektseiten. Animatsioon: de Streek skrollet mit Momentum, de Pfeile wesselt twüschen Items un e Autoplay-Fortschrittsstreek füllt sik am Transport. Usslöser: Pfeiltasten, Autoplay-Ticks un Wischgesten. Technik: JS-stüerte Skrollpositsioonen mit CSS-Transitionen — e egene Bovenfläk neven des Awards-Karussell. Zweck: hollt lange Mediensets up e Blikk erkundbor.',
+    },
+    'mentions-deck': {
+      alt: 'Kontakt-Mentions-Stapel roteert wischbore gestapelte Korten',
+      longdesc:
+        'De gestapelte Mentions-Stapel up de Kontaktseite. Animatsioon: Korten roteert per Autoplay, reageert up Tög- un Schnippgesten un warrt vum Stapel verworpen. Usslöser: de Autoplay-Timer plus Zeiger-Wischer. Technik: JS-Gestenstüerung över CSS-Keyframes. Zweck: lett Empfehlungen as e füüsisch, mischbor Kartendeck wirken.',
+    },
+    'expand-modal-loading': {
+      alt: 'Verbreedte Media-Lightbox schimmert, während des vulle Asset dekodeert',
+      longdesc:
+        'De Ladetoestand der verbreedten Media-Lightbox. Animatsioon: e Schimmerslöör wandert över de Bühne, während e Spinner den Dekodeer-Fortschritt markeert. Usslöser: des Öffnen eens Media-Items in de Lightbox. Technik: reine CSS-Keyframes. Zweck: lett des Modal sofort wirken, während de Fullsize-Assets instroomen.',
+    },
+    'footer-feed-wave': {
+      alt: 'Feed-Links des Awards-Footers wogen in e Opacity-Welle',
+      longdesc:
+        'De Quell-Feed-Linkreeg im Awards-Footer. Animatsioon: e Opacity-Welle löff in langsomer Schleif över de Links. Usslöser: löff kontinuierlich, solang de Footer sichtbor is. Technik: per Link staffelte CSS-Keyframes. Zweck: gifft der sunst statischen Feed-Reeg e feen Levenspuls.',
+    },
   },
   cas: {
     'progress-bar': {
@@ -716,15 +916,11 @@ const DESCS = {
         'El pequeño toast de notificación que aparece en una esquina de la pantalla para eventos como confirmaciones de copia y acciones de cookies. Animación: se desliza desde el borde mientras sube con fade (site-toast-in), se sostiene y sale deslizándose de vuelta con fade. Disparador: disparado por eventos de la app (copia, aviso de almacenamiento, notificación de prueba). Tecnología: keyframes CSS en la entrada y un modificador --closing en la salida. Propósito: atraer la vista a un mensaje transitorio sin bloquear la interacción.',
     },
     'mosaic-burn': {
-      alt: 'Título del tile de portafolio quemándose en brasas y rearmándose',
+      alt: 'Nombre del proyecto quemándose en brasas y retejiéndose en el mazo',
       longdesc:
-        'El texto del título en los tiles del mosaico de trabajos destacados. Animación: en hover las letras del título entran en combustión — bordes erosionados, estelas de quemado y partículas de brasa incandescente consumen los glifos columna por columna, y las letras se reconstruyen de abajo para arriba por el mismo campo de fuego cuando el puntero sale o el hover cambia de objetivo. Disparador: hover del puntero en el tile. Tecnología: simulación de partículas en Rust/WASM (crate mosaic-burn) corriendo el modelo erode/scorch/ember en un canvas; un camino 2D-canvas renderiza el mismo campo cuando la ruta GPU está apagada — los dos comparten una simulación determinística. Propósito: convertir el hover simple en el efecto de fuego insignia del sitio.',
+        'El nombre del proyecto en el card-stack de la home — el título grande en la carta frontal y el encabezado del panel de info junto al mazo. Animación: cuando el mazo reparte una nueva carta frontal, las letras del nombre saliente entran en combustión — bordes erosionados, estelas de quemado y partículas de brasa incandescente consumen los glifos columna por columna — y el nombre del siguiente proyecto se reteje de abajo para arriba por el mismo campo de fuego. Disparador: se dispara en cada reparto (arrastre, toque, flechas o autoplay). Tecnología: simulación de partículas en Rust/WASM (crate mosaic-burn) corriendo el modelo erode/scorch/ember en un canvas; un camino 2D-canvas renderiza el mismo campo cuando la ruta GPU está apagada — los dos comparten una simulación determinística. Propósito: convertir cada cambio de carta en la transición de fuego insignia del sitio.',
     },
-    'mosaic-tile': {
-      alt: 'Tile de portafolio deslizándose a nuevo slot con resorte + brillo en el borde',
-      longdesc:
-        'Las tarjetas de proyecto en el mosaico de trabajos destacados. Animación: cuando una tarjeta se expande en hover, los vecinos desplazados se deslizan a sus nuevos slots con un resorte amortiguado — una curva orgánica de overshoot y asentamiento (resorte sintetizado en CSS linear()) en vez de un deslizamiento lineal; un brillo recorre periódicamente el borde de cada tile. Disparador: el repack por hover anima los tiles desplazados; el brillo del borde hace loop suave. Tecnología: pack masonry en JS + transición CSS en transform; el brillo es una pasada de anillo en canvas. Propósito: mantener la pared líquida y viva mientras se reordena.',
-    },
+
     'media-progressive': {
       alt: 'Imagen de medios pasando de borrosa en baja calidad a nítida en alta',
       longdesc:
@@ -785,6 +981,51 @@ const DESCS = {
       longdesc:
         'El brillo de fondo ambiente atrás del contenido de la página. Animación: un gran gradiente radial suave deriva lentamente por el documento, cambiando posición e intensidad en un loop largo. Disparador: corre continuamente en todas las páginas. Tecnología: un keyframe CSS (body-glow-drift) animando una capa de fondo fija — cero JavaScript. Propósito: darle atmósfera y profundidad al tema oscuro en lugar de un fondo plano.',
     },
+    'card-stack': {
+      alt: 'Mazo de trabajos seleccionados con física de arrastre y cuenta regresiva en el borde iluminado',
+      longdesc:
+        'El mazo de proyectos destacados de la página principal. Animación: las cartas se reparten en una pila/abanico 3D — las hojas laterales se inclinan hacia adentro con atenuación progresiva mientras la carta activa crece; un arco luminoso recorre el borde fino de la carta activa durante una cuenta regresiva de diez segundos reflejada en el botón play/pausa, y el título del proyecto se quema y se reteje en cada navegación o cuando la sección entra en pantalla. Disparador: gestos de arrastrar/deslizar, controles anterior/siguiente e índice, el temporizador de autoplay y la entrada al scrollear. Técnica: poses calculadas en JS sobre transforms 3D de CSS, una propiedad personalizada de conic-gradient pintada por frame y el paper-burn en canvas compartido. Propósito: que los proyectos destacados se sientan como un mazo físico que abrís, repartís y barajás.',
+    },
+    'about-mesh': {
+      alt: 'Halo de puntos del retrato de Sobre mí ondulando en una onda radial viajera',
+      longdesc:
+        'El halo punteado que orbita el retrato de Sobre mí. Animación: una red polar de puntos se desplaza hacia afuera mientras una onda radial la recorre, con líneas guía precesando lentamente detrás. Disparador: corre continuamente mientras la sección está en pantalla. Técnica: un bucle rAF en canvas 2D posiciona cada punto en coordenadas polares. Propósito: da al retrato un campo orbital vivo que hace eco del lenguaje de movimiento del sitio.',
+    },
+    'nav-icon-aura': {
+      alt: 'Contornos de los chips de la nav barridos por un anillo con cola de cometa al hover',
+      longdesc:
+        'Los chips de búsqueda y ajustes de la barra de navegación. Animación: un relleno de anillo con cola de cometa barre el contorno del chip al pasar el cursor. Disparador: hover o foco del puntero en cada chip. Técnica: pasada de ring-fill en WebGPU con fallback de estela en CSS. Propósito: señala que los chips son interactivos sin robar atención al menú.',
+    },
+    'view-transition': {
+      alt: 'Outlet de ruta en cross-fade entre la vista que sale y la que entra',
+      longdesc:
+        'El contenedor view outlet en cada cambio de ruta. Animación: la vista saliente se desvanece mientras la entrante aparece — un cross-dissolve limpio. Disparador: cada navegación del router. Técnica: un cambio de clase en JS que dirige una transición de opacidad CSS. Propósito: hace que los cambios de página se sientan continuos en vez de un corte seco.',
+    },
+    'route-search': {
+      alt: 'Campo de búsqueda de rutas girando el glifo de envío mientras corre la puntuación',
+      longdesc:
+        'El estado de carga del campo de búsqueda de rutas. Animación: el glifo de envío gira y una fila de puntos encontrados rebota mientras el reparto de puntuación está en vuelo. Disparador: escribir una consulta que inicia una pasada de búsqueda. Técnica: keyframes CSS puros en el cromado del campo. Propósito: comunica el trabajo en curso para que la búsqueda se sienta receptiva.',
+    },
+    'custom-carousel': {
+      alt: 'Carruseles de proyecto deslizando con momentum y un trazo de progreso del autoplay',
+      longdesc:
+        'Los carruseles de medios de las páginas de proyecto. Animación: la tira se desplaza con momentum, las flechas navegan entre ítems y un trazo de progreso del autoplay se rellena en el transporte. Disparador: pulsaciones de flechas, ticks del autoplay y gestos de arrastre. Técnica: posiciones de scroll por JS con transiciones CSS — superficie distinta del carrusel de premios. Propósito: mantiene los conjuntos largos de medios explorables de un vistazo.',
+    },
+    'mentions-deck': {
+      alt: 'Mazo de menciones del contacto ciclando cartas apiladas y deslizables',
+      longdesc:
+        'El mazo apilado de menciones en la página de contacto. Animación: las cartas ciclan en autoplay, responden a gestos de arrastre y sacudida y se descartan fuera de la pila. Disparador: el temporizador del autoplay más deslizamientos del puntero. Técnica: gestos en JS sobre keyframes CSS. Propósito: hace que las recomendaciones se sientan como un mazo físico barajable.',
+    },
+    'expand-modal-loading': {
+      alt: 'Lightbox de medio expandido brillando mientras decodifica el asset completo',
+      longdesc:
+        'El estado de carga del lightbox de medio expandido. Animación: una onda de shimmer recorre el escenario mientras un spinner marca el progreso de decodificación. Disparador: abrir cualquier elemento de medio en el lightbox. Técnica: keyframes CSS puros. Propósito: mantiene el modal con sensación instantánea mientras llegan los assets a tamaño real.',
+    },
+    'footer-feed-wave': {
+      alt: 'Enlaces del feed del pie de premios ondeando una ola de opacidad',
+      longdesc:
+        'La fila de enlaces del feed de fuentes en el pie de premios. Animación: una ola de opacidad recorre los enlaces en un bucle lento. Disparador: corre continuamente mientras el pie está visible. Técnica: keyframes CSS escalonados por enlace. Propósito: da a la fila estática de feeds un pulso sutil de vida.',
+    },
   },
   riv: {
     'progress-bar': {
@@ -843,15 +1084,11 @@ const DESCS = {
         'El pequeño toast de notificación que aparece en un rincón de la pantalla para eventos como confirmaciones de copia y acciones de cookies. Animación: se desliza desde el borde mientras sube con fade (site-toast-in), aguanta y sale deslizándose de vuelta con fade. Disparador: disparado por eventos de la app (copia, aviso de almacenamiento, notificación de prueba). Tecnología: keyframes CSS en la entrada y un modificador --closing en la salida. Propósito: atraer el ojo a un mensaje transitorio sin bloquear la interacción.',
     },
     'mosaic-burn': {
-      alt: 'Título del tile de portafolio quemándose en brasas y rearmándose',
+      alt: 'Nombre del proyecto quemándose en brasas y retejiéndose en el mazo',
       longdesc:
-        'El texto del título en los tiles del mosaico de trabajos destacados. Animación: en hover las letras del título entran en combustión — bordes erosionados, estelas de quemado y partículas de brasa incandescente consumen los glifos columna por columna, y las letras se reconstruyen de abajo para arriba por el mismo campo de fuego cuando el puntero sale o el hover cambia de objetivo. Disparador: hover del puntero en el tile. Tecnología: simulación de partículas en Rust/WASM (crate mosaic-burn) corriendo el modelo erode/scorch/ember en un canvas; un camino 2D-canvas renderiza el mismo campo cuando la ruta GPU está apagada — los dos comparten una simulación determinística. Propósito: transformar el hover simple en el efecto de fuego insignia del sitio.',
+        'El nombre del proyecto en el card-stack de la home — el título grande en la carta frontal y el encabezado del panel de info junto al mazo. Animación: cuando el mazo reparte una nueva carta frontal, las letras del nombre saliente entran en combustión — bordes erosionados, estelas de quemado y partículas de brasa incandescente consumen los glifos columna por columna — y el nombre del siguiente proyecto se reteje de abajo para arriba por el mismo campo de fuego. Disparador: se dispara en cada reparto (arrastre, toque, flechas o autoplay). Tecnología: simulación de partículas en Rust/WASM (crate mosaic-burn) corriendo el modelo erode/scorch/ember en un canvas; un camino 2D-canvas renderiza el mismo campo cuando la ruta GPU está apagada — los dos comparten una simulación determinística. Propósito: transformar cada cambio de carta en la transición de fuego insignia del sitio.',
     },
-    'mosaic-tile': {
-      alt: 'Tile de portafolio deslizándose a nuevo slot con resorte + brillo en el borde',
-      longdesc:
-        'Las tarjetas de proyecto en el mosaico de trabajos destacados. Animación: cuando una tarjeta se expande en hover, los vecinos desplazados se deslizan a sus nuevos slots con un resorte amortiguado — una curva orgánica de overshoot y asentamiento (resorte sintetizado en CSS linear()) en vez de un deslizamiento lineal; un brillo recorre periódicamente el borde de cada tile. Disparador: el repack por hover anima los tiles desplazados; el brillo del borde hace loop suave. Tecnología: pack masonry en JS + transición CSS en transform; el brillo es una pasada de anillo en canvas. Propósito: mantener la pared líquida y viva mientras se reordena.',
-    },
+
     'media-progressive': {
       alt: 'Imagen de medios pasando de borrosa en baja calidad a nítida en alta',
       longdesc:
@@ -912,6 +1149,51 @@ const DESCS = {
       longdesc:
         'El brillo de fondo ambiente atrás del contenido de la página. Animación: un gran gradiente radial suave deriva lentamente por el documento, cambiando posición e intensidad en un loop largo. Disparador: corre continuamente en todas las páginas. Tecnología: un keyframe CSS (body-glow-drift) animando una capa de fondo fija — cero JavaScript. Propósito: darle atmósfera y profundidad al tema oscuro en lugar de un fondo plano.',
     },
+    'card-stack': {
+      alt: 'Baralho de trabalhos selecionados con física de arrasto y contagem na borda iluminada',
+      longdesc:
+        'O baralho de projetos em destaque de la página inicial. Animação: as cartas repartem-se num leque/pilha 3D — as folhas laterais inclinam-se para dentro con esmaecimento progressivo mientras la carta ativa cresce; un arco luminoso percorre a borda fina de la carta ativa en una contagem de dez segundos espelhada en el botón play/pausa, y el título del proyecto queima y se recompone a cada navegação o cuando la sección entra en la tela. Gatilho: gestos de arrastar/deslizar, controles anterior/próximo e índice, el temporizador de autoplay y la entrada por rolagem. Técnica: poses calculadas en JS sobre transforms 3D de CSS, una propiedad customizada de conic-gradient pintada por frame y el paper-burn en canvas compartilhado. Propósito: hacer los proyectos em destaque parecerem un baralho físico que se abre, reparte y embaralha.',
+    },
+    'about-mesh': {
+      alt: 'Halo de puntos del retrato de Sobre mí ondulando en una onda radial viajera',
+      longdesc:
+        'El halo punteado que orbita el retrato de Sobre mí. Animación: una red polar de puntos se desplaza hacia afuera mientras una onda radial la recorre, con líneas guía precesando lentamente detrás. Disparador: corre continuamente mientras la sección está en pantalla. Técnica: un bucle rAF en canvas 2D posiciona cada punto en coordenadas polares. Propósito: da al retrato un campo orbital vivo que hace eco del lenguaje de movimiento del sitio.',
+    },
+    'nav-icon-aura': {
+      alt: 'Contornos de los chips de la nav barridos por un anillo con cola de cometa al hover',
+      longdesc:
+        'Los chips de búsqueda y ajustes de la barra de navegación. Animación: un relleno de anillo con cola de cometa barre el contorno del chip al pasar el cursor. Disparador: hover o foco del puntero en cada chip. Técnica: pasada de ring-fill en WebGPU con fallback de estela en CSS. Propósito: señala que los chips son interactivos sin robar atención al menú.',
+    },
+    'view-transition': {
+      alt: 'Outlet de ruta en cross-fade entre la vista que sale y la que entra',
+      longdesc:
+        'El contenedor view outlet en cada cambio de ruta. Animación: la vista saliente se desvanece mientras la entrante aparece — un cross-dissolve limpio. Disparador: cada navegación del router. Técnica: un cambio de clase en JS que dirige una transición de opacidad CSS. Propósito: hace que los cambios de página se sientan continuos en vez de un corte seco.',
+    },
+    'route-search': {
+      alt: 'Campo de búsqueda de rutas girando el glifo de envío mientras corre la puntuación',
+      longdesc:
+        'El estado de carga del campo de búsqueda de rutas. Animación: el glifo de envío gira y una fila de puntos encontrados rebota mientras el reparto de puntuación está en vuelo. Disparador: escribir una consulta que inicia una pasada de búsqueda. Técnica: keyframes CSS puros en el cromado del campo. Propósito: comunica el trabajo en curso para que la búsqueda se sienta receptiva.',
+    },
+    'custom-carousel': {
+      alt: 'Carruseles de proyecto deslizando con momentum y un trazo de progreso del autoplay',
+      longdesc:
+        'Los carruseles de medios de las páginas de proyecto. Animación: la tira se desplaza con momentum, las flechas navegan entre ítems y un trazo de progreso del autoplay se rellena en el transporte. Disparador: pulsaciones de flechas, ticks del autoplay y gestos de arrastre. Técnica: posiciones de scroll por JS con transiciones CSS — superficie distinta del carrusel de premios. Propósito: mantiene los conjuntos largos de medios explorables de un vistazo.',
+    },
+    'mentions-deck': {
+      alt: 'Mazo de menciones del contacto ciclando cartas apiladas y deslizables',
+      longdesc:
+        'El mazo apilado de menciones en la página de contacto. Animación: las cartas ciclan en autoplay, responden a gestos de arrastre y sacudida y se descartan fuera de la pila. Disparador: el temporizador del autoplay más deslizamientos del puntero. Técnica: gestos en JS sobre keyframes CSS. Propósito: hace que las recomendaciones se sientan como un mazo físico barajable.',
+    },
+    'expand-modal-loading': {
+      alt: 'Lightbox de medio expandido brillando mientras decodifica el asset completo',
+      longdesc:
+        'El estado de carga del lightbox de medio expandido. Animación: una onda de shimmer recorre el escenario mientras un spinner marca el progreso de decodificación. Disparador: abrir cualquier elemento de medio en el lightbox. Técnica: keyframes CSS puros. Propósito: mantiene el modal con sensación instantánea mientras llegan los assets a tamaño real.',
+    },
+    'footer-feed-wave': {
+      alt: 'Enlaces del feed del pie de premios ondeando una ola de opacidad',
+      longdesc:
+        'La fila de enlaces del feed de fuentes en el pie de premios. Animación: una ola de opacidad recorre los enlaces en un bucle lento. Disparador: corre continuamente mientras el pie está visible. Técnica: keyframes CSS escalonados por enlace. Propósito: da a la fila estática de feeds un pulso sutil de vida.',
+    },
   },
   it: {
     'progress-bar': {
@@ -970,14 +1252,9 @@ const DESCS = {
         "Il piccolo toast di notifica che appare in un angolo dello schermo per eventi come conferme di copia e azioni sui cookie. Animazione: scivola dal bordo mentre sfuma in alto (site-toast-in), tiene, poi esce scivolando indietro con fade. Trigger: innescato da eventi dell'app (copia, avviso storage, notifica di test). Tecnologia: keyframe CSS in entrata e un modificatore --closing in uscita. Scopo: attirare l'occhio su un messaggio transitorio senza bloccare l'interazione.",
     },
     'mosaic-burn': {
-      alt: 'Titolo del tile portfolio che brucia in braci e si ricompone',
+      alt: 'Nome del progetto che brucia in braci e si ritaglia nel mazzo',
       longdesc:
-        "Il testo del titolo sui tile del mosaico dei lavori in evidenza. Animazione: in hover le lettere del titolo entrano in combustione — bordi erosi, scie di bruciatura e particelle di brace incandescente consumano i glifi colonna per colonna, e le lettere si ricostruiscono dal basso verso l'alto attraverso lo stesso campo di fuoco quando il puntatore esce o l'hover cambia bersaglio. Trigger: hover del puntatore sul tile. Tecnologia: simulazione particellare in Rust/WASM (crate mosaic-burn) che esegue il modello erode/scorch/ember su canvas; un percorso 2D-canvas renderizza lo stesso campo quando la rotta GPU è spenta — entrambi condividono una simulazione deterministica. Scopo: trasformare il semplice hover nell'effetto fuoco firma del sito.",
-    },
-    'mosaic-tile': {
-      alt: 'Tile portfolio che scivola in nuovo slot a molla + bagliore sul bordo',
-      longdesc:
-        'Le card di progetto nel mosaico dei lavori in evidenza. Animazione: quando una card si espande in hover, i vicini spostati scivolano nei nuovi slot con una molla smorzata — una curva organica di overshoot e assestamento (molla sintetizzata in CSS linear()) invece di uno scivolo lineare; un bagliore percorre periodicamente il bordo di ogni tile. Trigger: il repack da hover anima i tile spostati; il bagliore del bordo gira in loop lieve. Tecnologia: pack masonry in JS + transizione CSS su transform; il bagliore è un passaggio ad anello su canvas. Scopo: mantenere la parete liquida e viva mentre si riordina.',
+        "Il nome del progetto sul card-stack della home — il titolo grande sulla carta frontale e l'intestazione del pannello info accanto al mazzo. Animazione: quando il mazzo distribuisce una nuova carta frontale, le lettere del nome uscente entrano in combustione — bordi erosi, scie di bruciatura e particelle di brace incandescente consumano i glifi colonna per colonna — e il nome del progetto successivo si ricostruisce dal basso verso l'alto attraverso lo stesso campo di fuoco. Trigger: scatta a ogni distribuzione (trascinamento, flick, frecce o autoplay). Tecnologia: simulazione particellare in Rust/WASM (crate mosaic-burn) che esegue il modello erode/scorch/ember su canvas; un percorso 2D-canvas renderizza lo stesso campo quando la rotta GPU è spenta — entrambi condividono una simulazione deterministica. Scopo: trasformare ogni scambio di carta nella transizione di fuoco firma del sito.",
     },
     'media-progressive': {
       alt: 'Immagine media che passa da sfocata a bassa qualità a nitida in alta',
@@ -1039,6 +1316,51 @@ const DESCS = {
       longdesc:
         'Il bagliore di sfondo ambientale dietro il contenuto della pagina. Animazione: un grande gradiente radiale morbido deriva lentamente attraverso il documento, cambiando posizione e intensità in un loop lungo. Trigger: gira continuamente su ogni pagina. Tecnologia: un keyframe CSS (body-glow-drift) che anima un layer di sfondo fisso — zero JavaScript. Scopo: dare atmosfera e profondità al tema scuro invece di uno sfondo piatto.',
     },
+    'card-stack': {
+      alt: 'Mazzo di lavori selezionati con fisica di trascinamento e countdown sul bordo luminoso',
+      longdesc:
+        "Il mazzo dei progetti in evidenza della home page. Animazione: le carte si distribuiscono in una pila/ventaglio 3D — i fogli laterali si inclinano verso l'interno con oscuramento progressivo mentre la carta attiva cresce; un arco luminoso percorre il bordo sottile della carta attiva in un countdown di dieci secondi riflesso sul pulsante play/pausa, e il titolo del progetto brucia e si ritesse a ogni navigazione o quando la sezione entra in vista. Trigger: gesture di trascinamento/swipe, controlli precedente/successivo e indice, il timer di autoplay e l'ingresso con lo scroll. Tecnica: pose calcolate in JS su transform 3D CSS, una custom property conic-gradient dipinta a ogni frame e il paper-burn su canvas condiviso. Scopo: far sembrare i progetti in evidenza un mazzo fisico che si sfoglia, si distribuisce e si mescola.",
+    },
+    'about-mesh': {
+      alt: "Aureola di punti del ritratto About che increspa in un'onda radiale viaggiante",
+      longdesc:
+        "L'aureola punteggiata che orbita il ritratto About. Animazione: un reticolo polare di punti si sposta verso l'esterno mentre un'onda radiale lo attraversa, con linee guida in precessione lenta dietro. Trigger: gira continuamente finché la sezione About è a schermo. Tecnica: un loop rAF su canvas 2D posiziona ogni punto in coordinate polari. Scopo: dà al ritratto un campo orbitale vivo che riecheggia il linguaggio di movimento del sito.",
+    },
+    'nav-icon-aura': {
+      alt: "Contorni dei chip della nav spazzati da un anello con coda di cometa all'hover",
+      longdesc:
+        "I chip di ricerca e impostazioni nella barra di navigazione. Animazione: un riempimento ad anello con coda di cometa spazza il contorno del chip all'hover. Trigger: hover o focus del puntatore su ogni chip. Tecnica: passata ring-fill WebGPU con fallback di scia in CSS. Scopo: segnala che i chip sono interattivi senza sottrarre attenzione al menu.",
+    },
+    'view-transition': {
+      alt: 'Outlet di rotta in cross-fade tra vista uscente ed entrante',
+      longdesc:
+        'Il contenitore view outlet a ogni cambio di rotta. Animazione: la vista uscente sfuma mentre quella entrante appare — un cross-dissolve pulito. Trigger: ogni navigazione del router. Tecnica: uno scambio di classe JS che pilota una transizione di opacità CSS. Scopo: rende i cambi pagina continui invece di uno stacco secco.',
+    },
+    'route-search': {
+      alt: 'Il campo di ricerca rotte fa girare il glifo di invio mentre lo scoring è in corso',
+      longdesc:
+        'Lo stato di caricamento del campo di ricerca rotte. Animazione: il glifo di invio ruota e una fila di punti trovati rimbalza mentre il dispatch di scoring è in volo. Trigger: la digitazione di una query che avvia una passata di ricerca. Tecnica: keyframes CSS puri sul chrome del campo. Scopo: comunica il lavoro in corso perché la ricerca risulti reattiva.',
+    },
+    'custom-carousel': {
+      alt: "I caroselli di progetto scorrono con momentum e un trattino di avanzamento dell'autoplay",
+      longdesc:
+        "I caroselli multimediali delle pagine di progetto. Animazione: la striscia scorre con momentum, le frecce navigano tra gli item e un trattino di avanzamento dell'autoplay si riempie sul trasporto. Trigger: pressioni delle frecce, tick dell'autoplay e gesti di trascinamento. Tecnica: posizioni di scroll via JS con transizioni CSS — superficie distinta dal carosello premi. Scopo: mantiene i lunghi set di media esplorabili a colpo d'occhio.",
+    },
+    'mentions-deck': {
+      alt: 'Il mazzo di menzioni del contatto cicla carte impilate e scorrevoli',
+      longdesc:
+        "Il mazzo impilato di menzioni nella pagina contatti. Animazione: le carte ciclando in autoplay, rispondono a trascinamenti e flick e escono dal mazzo. Trigger: il timer dell'autoplay più gli swipe del puntatore. Tecnica: gestione dei gesti in JS su keyframes CSS. Scopo: rende le raccomandazioni un mazzo fisico da mescolare.",
+    },
+    'expand-modal-loading': {
+      alt: "La lightbox del media espanso luccica mentre decodifica l'asset completo",
+      longdesc:
+        "Lo stato di caricamento della lightbox del media espanso. Animazione: un'onda di shimmer attraversa la scena mentre uno spinner segna il progresso della decodifica. Trigger: l'apertura di qualsiasi item media nella lightbox. Tecnica: keyframes CSS puri. Scopo: mantiene la modale istantanea mentre gli asset a piena dimensione arrivano.",
+    },
+    'footer-feed-wave': {
+      alt: "I link del feed del footer premi ondeggiano in un'onda di opacità",
+      longdesc:
+        "La fila di link del feed delle fonti nel footer dei premi. Animazione: un'onda di opacità percorre i link in un loop lento. Trigger: gira continuamente finché il footer è visibile. Tecnica: keyframes CSS sfalsati per link. Scopo: dà alla fila statica dei feed un sottile impulso di vita.",
+    },
   },
   fr: {
     'progress-bar': {
@@ -1097,14 +1419,9 @@ const DESCS = {
         "Le petit toast de notification qui apparaît dans un coin de l'écran pour des événements comme les confirmations de copie et les actions de cookies. Animation : glisse depuis le bord en s'estompant vers le haut (site-toast-in), tient, puis ressort en glissant avec un fade. Déclencheur : déclenché par les événements de l'app (copie, avis de stockage, notification de test). Technologie : keyframes CSS à l'entrée et un modificateur --closing à la sortie. Objectif : attirer le regard sur un message transitoire sans bloquer l'interaction.",
     },
     'mosaic-burn': {
-      alt: 'Titre de tuile portfolio brûlant en braises et se reformant',
+      alt: 'Le nom du projet brûlant en braises et se retricotant dans le paquet',
       longdesc:
-        "Le texte du titre sur les tuiles du mosaïque des travaux en vedette. Animation : au survol les lettres du titre s'embrasent — bords érodés, traînées de brûlure et particules de braise incandescente consomment les glyphes colonne par colonne, puis les lettres se reconstruisent de bas en haut à travers le même champ de feu quand le pointeur sort ou que le survol change de cible. Déclencheur : survol du pointeur sur la tuile. Technologie : simulation de particules en Rust/WASM (crate mosaic-burn) exécutant le modèle erode/scorch/ember sur canvas ; un chemin 2D-canvas rend le même champ quand la route GPU est coupée — les deux partagent une simulation déterministe. Objectif : transformer le simple survol en l'effet de feu signature du site.",
-    },
-    'mosaic-tile': {
-      alt: 'Tuile portfolio glissant vers un nouveau slot à ressort + reflet sur le bord',
-      longdesc:
-        "Les cartes de projet dans le mosaïque des travaux en vedette. Animation : quand une carte s'agrandit au survol, les voisines déplacées glissent vers leurs nouveaux slots sur un ressort amorti — une courbe organique d'overshoot et d'établissement (ressort synthétisé en CSS linear()) plutôt qu'une glissade linéaire ; un reflet parcourt périodiquement le bord de chaque tuile. Déclencheur : le repack par survol anime les tuiles déplacées ; le reflet du bord boucle doucement. Technologie : pack masonry en JS + transition CSS sur transform ; le reflet est une passe en anneau sur canvas. Objectif : garder le mur liquide et vivant pendant qu'il se réarrange.",
+        "Le nom du projet sur le card-stack de l'accueil — le grand titre sur la carte frontale et l'en-tête du panneau d'info à côté du paquet. Animation : quand le paquet distribue une nouvelle carte frontale, les lettres de l'ancien nom s'embrasent — bords érodés, traînées de brûlure et particules de braise incandescente consomment les glyphes colonne par colonne — et le nom du projet suivant se retricote de bas en haut à travers le même champ de feu. Déclencheur : se déclenche à chaque distribution (glisser, flick, flèches ou autoplay). Technologie : simulation de particules en Rust/WASM (crate mosaic-burn) exécutant le modèle erode/scorch/ember sur canvas ; un chemin 2D-canvas rend le même champ quand la route GPU est coupée — les deux partagent une simulation déterministe. Objectif : transformer chaque échange de carte en la transition de feu signature du site.",
     },
     'media-progressive': {
       alt: 'Image média passant de floue en basse qualité à nette en haute',
@@ -1166,6 +1483,51 @@ const DESCS = {
       longdesc:
         "La lueur de fond ambiante derrière le contenu de la page. Animation : un grand dégradé radial doux dérive lentement à travers le document, changeant de position et d'intensité en une longue boucle. Déclencheur : tourne en continu sur chaque page. Technologie : un keyframe CSS (body-glow-drift) animant un calque de fond fixe — zéro JavaScript. Objectif : donner atmosphère et profondeur au thème sombre plutôt qu'un fond plat.",
     },
+    'card-stack': {
+      alt: 'Jeu de cartes des travaux sélectionnés avec physique de glisser et compte à rebours lumineux sur le bord',
+      longdesc:
+        "Le jeu de cartes des projets sélectionnés de la page d'accueil. Animation : les cartes se distribuent dans une pile/éventail 3D — les feuillets latéraux basculent vers l'intérieur avec un assombrissement progressif pendant que la carte active grandit ; un arc lumineux parcourt le bord fin de la carte active pendant un compte à rebours de dix secondes reflété sur le bouton lecture/pause, et le titre du projet se consume et se retisse à chaque navigation ou quand la section entre dans l'écran. Déclencheur : gestes glisser/défiler, contrôles précédent/suivant et index, le minuteur autoplay et l'entrée au scroll. Technique : poses calculées en JS sur transforms 3D CSS, une propriété custom conic-gradient peinte à chaque frame et le paper-burn canvas partagé. But : donner aux projets sélectionnés l'allure d'un jeu de cartes physique qu'on éventaille, distribue et mélange.",
+    },
+    'about-mesh': {
+      alt: 'Halo de points du portrait About ondulant dans une onde radiale voyageuse',
+      longdesc:
+        "Le halo pointillé qui orbite le portrait About. Animation : un treillis polaire de points se déplace vers l'extérieur tandis qu'une onde radiale le traverse, avec des lignes guides en précession lente derrière. Déclencheur : tourne en continu tant que la section About est à l'écran. Technique : une boucle rAF en canvas 2D positionne chaque point en coordonnées polaires. Objectif : donne au portrait un champ orbital vivant dans le langage de mouvement du site.",
+    },
+    'nav-icon-aura': {
+      alt: 'Contours des puces de la nav balayés par un anneau à queue de comète au survol',
+      longdesc:
+        "Les puces de recherche et de réglages de la barre de navigation. Animation : un remplissage en anneau à queue de comète balaie le contour de la puce au survol. Déclencheur : survol du pointeur ou focus sur chaque puce. Technique : passe ring-fill WebGPU avec repli de traînée CSS. Objectif : signale l'interactivité des puces sans voler l'attention du menu.",
+    },
+    'view-transition': {
+      alt: 'Outlet de route en fondu enchaîné entre la vue sortante et la vue entrante',
+      longdesc:
+        "Le conteneur view outlet à chaque changement de route. Animation : la vue sortante s'estompe pendant que l'entrante apparaît — un fondu enchaîné propre. Déclencheur : chaque navigation du routeur. Technique : un échange de classe JS pilotant une transition d'opacité CSS. Objectif : rend les changements de page continus plutôt qu'en coupe franche.",
+    },
+    'route-search': {
+      alt: "Le champ de recherche de routes fait tourner son glyphe d'envoi pendant le scoring",
+      longdesc:
+        "L'état de chargement du champ de recherche de routes. Animation : le glyphe d'envoi tourne et une rangée de points trouvés rebondit pendant le dispatch de scoring. Déclencheur : une saisie qui lance une passe de recherche. Technique : keyframes CSS pures sur le chrome du champ. Objectif : signale le travail en vol pour que la recherche paraisse réactive.",
+    },
+    'custom-carousel': {
+      alt: "Carrousels de projet défilant avec momentum et un tiret de progression d'autoplay",
+      longdesc:
+        "Les carrousels de médias des pages projet. Animation : la bande défile avec momentum, les flèches naviguent entre les items et un tiret de progression d'autoplay se remplit le long du transport. Déclencheur : flèches, ticks d'autoplay et gestes de glisser. Technique : positions de scroll pilotées en JS avec transitions CSS — surface distincte du carrousel de récompenses. Objectif : garde les longs ensembles de médias explorables d'un coup d'œil.",
+    },
+    'mentions-deck': {
+      alt: 'Le deck de mentions du contact fait cycler des cartes empilées et glissables',
+      longdesc:
+        "Le deck empilé de mentions sur la page contact. Animation : les cartes cyclent en autoplay, répondent aux gestes de glisser et de chiquenaude et quittent la pile. Déclencheur : le minuteur d'autoplay plus les glissés du pointeur. Technique : gestion de gestes JS sur des keyframes CSS. Objectif : donne aux recommandations l'air d'un deck physique qu'on peut battre.",
+    },
+    'expand-modal-loading': {
+      alt: "La lightbox de média agrandi scintille pendant le décodage de l'asset complet",
+      longdesc:
+        "L'état de chargement de la lightbox de média agrandi. Animation : une vague de shimmer traverse la scène pendant qu'un spinner marque le progrès du décodage. Déclencheur : l'ouverture de tout item média dans la lightbox. Technique : keyframes CSS pures. Objectif : garde la modale instantanée pendant que les assets pleine taille arrivent.",
+    },
+    'footer-feed-wave': {
+      alt: "Les liens du feed du footer de récompenses ondulent en vague d'opacité",
+      longdesc:
+        "La rangée de liens du feed de sources dans le footer de récompenses. Animation : une vague d'opacité parcourt les liens en boucle lente. Déclencheur : tourne en continu tant que le footer est visible. Technique : keyframes CSS décalées par lien. Objectif : donne à la rangée statique de feeds un léger pouls de vie.",
+    },
   },
   nl: {
     'progress-bar': {
@@ -1224,14 +1586,9 @@ const DESCS = {
         'De kleine notificatie-toast die in een schermhoek verschijnt voor gebeurtenissen zoals kopieerbevestigingen en cookie-acties. Animatie: schuift vanaf de rand binnen terwijl die omhoog fadet (site-toast-in), blijft staan en gaat terug schuivend met fade weg. Trigger: afgestuurd door app-events (kopiëren, opslagmelding, testnotificatie). Technologie: CSS-keyframes bij binnenkomst en een --closing-modifier bij uitgang. Doel: trekt het oog naar een tijdelijke boodschap zonder interactie te blokkeren.',
     },
     'mosaic-burn': {
-      alt: 'Portfolio-tegeltitel die in gloed wegbrandt en zich heropbouwt',
+      alt: 'Projectnaam die in gloed wegbrandt en zich weer in het deck weeft',
       longdesc:
-        'De titeltekst op de portfolio-tegels van de featured-work-wand. Animatie: bij hover verbranden de letters van de titel — geërodeerde randen, verschroeiingssporen en gloeiende emberdeeltjes consumeren de glyfen kolom voor kolom; daarna herbouwen de letters van onder naar boven door hetzelfde vuurveld als de pointer weggaat of de hover van doel wisselt. Trigger: pointer-hover op de tegel. Technologie: Rust/WASM-deeltjessimulatie (mosaic-burn-crate) die het erode/scorch/ember-model op canvas draait; een 2D-canvas-pad rendert hetzelfde veld als de GPU-route uitstaat — beide delen één deterministische simulatie. Doel: maakt van de simpele hover het kenmerkende vuureffect van de site.',
-    },
-    'mosaic-tile': {
-      alt: 'Portfolio-tegel schuift op een veer naar nieuw slot + randschimmer',
-      longdesc:
-        'De projectkaarten in de featured-work-mozaïekwand. Animatie: als een kaart bij hover expandeert, schuiven verplaatste buren op een gedempte veer naar hun nieuwe slots — een organische overshoot-settle-curve (in CSS linear() gesynthetiseerde veer) in plaats van een lineaire glijder; een schimmer trekt periodiek over de rand van elke tegel. Trigger: de hover-repack animeert de verplaatste tegels; de randschimmer loopt zachtjes. Technologie: JS-masonry-pack + CSS-transition op transform; de schimmer is een canvas-ringpass. Doel: houdt de wand vloeibaar en levend terwijl die herschikt.',
+        'De projectnaam op de home-card-stack — de grote titel op de voorste kaart en de info-paneel-titel naast het deck. Animatie: zodra het deck een nieuwe voorste kaart deelt, verbranden de letters van de oude naam — geërodeerde randen, verschroeiingssporen en gloeiende emberdeeltjes consumeren de glyfen kolom voor kolom — en de naam van het volgende project weeft zich van onder naar boven terug door hetzelfde vuurveld. Trigger: vuurt bij elke deal (slepen, flick, pijlen of autoplay). Technologie: Rust/WASM-deeltjessimulatie (mosaic-burn-crate) die het erode/scorch/ember-model op canvas draait; een 2D-canvas-pad rendert hetzelfde veld als de GPU-route uitstaat — beide delen één deterministische simulatie. Doel: maakt van elke kaartwissel de kenmerkende vuurtransitie van de site.',
     },
     'media-progressive': {
       alt: 'Mediabeeld morft van wazige lage naar scherpe hoge kwaliteit',
@@ -1293,6 +1650,51 @@ const DESCS = {
       longdesc:
         'De omgevings-achtergrondgloed achter de pagina-inhoud. Animatie: een grote zachte radiale gradiënt drijft traag over het document en verschuift positie en intensiteit in een lange loop. Trigger: loopt continu op elke pagina. Technologie: een CSS-keyframe (body-glow-drift) animeert een vaste achtergrondlaag — nul JavaScript. Doel: geeft het donkere thema sfeer en diepte in plaats van een vlakke achtergrond.',
     },
+    'card-stack': {
+      alt: 'Kaartspel van geselecteerd werk met sleepfysica en aftellen op de verlichte rand',
+      longdesc:
+        'Het kaartspel van uitgelichte projecten op de homepage. Animatie: kaarten worden gedeeld door een 3D-stapel/waaier — zijbladen kantelen naar binnen met progressieve dimming terwijl de actieve kaart groeit; een verlichte boog loopt over de fijne rand van de actieve kaart in een tien-seconden aftelling die op de play/pauze-knop wordt gespiegeld, en de projecttitel verbrandt en weeft zich opnieuw bij elke navigatie of wanneer de sectie in beeld scrollt. Trigger: sleep-/veeggebaren, vorige/volgende- en indexknoppen, de autoplay-timer en het inscrolven. Techniek: in JS berekende poses op CSS 3D-transforms, een per frame geschilderde conic-gradient custom property en de gedeelde canvas paper-burn. Doel: laat de uitgelichte projecten aanvoelen als een fysiek kaartspel dat je waaieren, deelt en schudt.',
+    },
+    'about-mesh': {
+      alt: 'Puntenhalo van het About-portret die rimpelt in een reizende radiale golf',
+      longdesc:
+        'De gestippelde halo die het About-portret omringt. Animatie: een polair raster van punten verplaatst naar buiten terwijl een radiale golf erdoorheen loopt, met langzaam precesserende hulplijnen erachter. Trigger: draait continu zolang de About-sectie zichtbaar is. Techniek: een 2D-canvas-rAF-loop positioneert elk punt uit poolcoördinaten. Doel: geeft het portret een levend orbitaal veld in de bewegingstaal van de site.',
+    },
+    'nav-icon-aura': {
+      alt: 'Nav-chipcontouren vegen met een komeetstaart-ring bij hover',
+      longdesc:
+        'De zoek- en instellingenchips in de navigatiebalk. Animatie: een ringvulling met komeetstaart veegt bij hover rond de chipcontour. Trigger: aanwijzer-hover of focus op elke chip. Techniek: een WebGPU-ring-fill-pass met een CSS-spoor-fallback. Doel: signaleert dat de chips interactief zijn zonder de aandacht van het menu te stelen.',
+    },
+    'view-transition': {
+      alt: 'Route-outlet in cross-fade tussen uit- en inkomende view',
+      longdesc:
+        'De view-outlet-container bij elke routewissel. Animatie: de uitgaande view vervaagt terwijl de inkomende verschijnt — een nette cross-dissolve. Trigger: elke routernavigatie. Techniek: een JS-klassenwissel die een CSS-opaciteitstransitie stuurt. Doel: laat paginawissels vloeiend aanvoelen in plaats van een harde cut.',
+    },
+    'route-search': {
+      alt: 'Routekzoekveld draait zijn verzendglyph terwijl de scoring loopt',
+      longdesc:
+        'De laadstatus van het routekzoekveld. Animatie: de verzendglyph draait en een rij gevonden-punten stuitert terwijl de scoring-dispatch onderweg is. Trigger: een query typen die een zoekronde start. Techniek: pure CSS-keyframes op het veldchrome. Doel: communiceert lopend werk zodat de zoekopdracht responsief aanvoelt.',
+    },
+    'custom-carousel': {
+      alt: 'Projectcarrousels scrollen met momentum en een autoplay-voortgangsstreep',
+      longdesc:
+        "De mediacarrousels op projectpagina's. Animatie: de strook scrollt met momentum, de pijlen navigeren tussen items en een autoplay-voortgangsstreep vult langs het transport. Trigger: pijltoetsen, autoplay-ticks en sleepgebaren. Techniek: JS-gestuurde scrollposities met CSS-transities — een eigen oppervlak naast de awardscarrousel. Doel: houdt lange mediasets in één oogopslag verkenbaar.",
+    },
+    'mentions-deck': {
+      alt: 'Het contact-mentions-deck cyclet veegbare gestapelde kaarten',
+      longdesc:
+        'Het gestapelde mentions-deck op de contactpagina. Animatie: kaarten cyclen op autoplay, reageren op sleep- en swipegebaren en verdwijnen van de stapel. Trigger: de autoplay-timer plus aanwijzer-vegen. Techniek: JS-gebaarafhandeling over CSS-keyframes. Doel: maakt aanbevelingen aanvoelen als een fysiek deck dat je schudt.',
+    },
+    'expand-modal-loading': {
+      alt: 'Uitgebreide-media-lightbox schimmert terwijl het volle asset decodeert',
+      longdesc:
+        'De laadstatus van de uitgebreide-media-lightbox. Animatie: een shimmer-golf trekt over het podium terwijl een spinner de decodeervooruitgang markeert. Trigger: het openen van elk media-item in de lightbox. Techniek: pure CSS-keyframes. Doel: laat de modal direct aanvoelen terwijl fullsize assets binnenstromen.',
+    },
+    'footer-feed-wave': {
+      alt: 'Feed-links van de awards-footer golven in een opaciteitsgolf',
+      longdesc:
+        'De bron-feed-linkrij in de awards-footer. Animatie: een opaciteitsgolf golft in een trage loop over de links. Trigger: draait continu zolang de footer zichtbaar is. Techniek: per link gespreide CSS-keyframes. Doel: geeft de verder statische feedrij een subtiele levenspuls.',
+    },
   },
   ru: {
     'progress-bar': {
@@ -1351,14 +1753,9 @@ const DESCS = {
         'Небольшой тост-уведомление, появляющийся в углу экрана для событий вроде подтверждений копирования и действий с cookies. Анимация: выскальзывает от края, проявляясь вверх (site-toast-in), держится, затем уходит обратным скольжением с затуханием. Триггер: вызывается событиями приложения (копирование, уведомление о хранилище, тест-уведомление). Технология: CSS-кейфреймы на входе и модификатор --closing на выходе. Назначение: привлекает взгляд к краткому сообщению, не блокируя взаимодействие.',
     },
     'mosaic-burn': {
-      alt: 'Заголовок плитки портфолио сгорает в углях и собирается заново',
+      alt: 'Имя проекта сгорает в углях и сплетается заново в колоде',
       longdesc:
-        'Текст заголовка на плитках мозаики избранных работ. Анимация: при ховере буквы заголовка вспыхивают — эродированные края, следы обжига и светящиеся частицы углей пожирают глифы колонка за колонкой, затем буквы пересобираются снизу вверх тем же полем огня, когда указатель уходит или ховер меняет цель. Триггер: ховер указателя на плитке. Технология: симуляция частиц на Rust/WASM (крейт mosaic-burn) с моделью erode/scorch/ember на канвасе; 2D-canvas-путь рендерит то же поле при выключенном GPU-маршруте — оба делят одну детерминированную симуляцию. Назначение: превращает простой ховер в фирменный эффект огня сайта.',
-    },
-    'mosaic-tile': {
-      alt: 'Плитка портфолио скользит на пружине в новый слот + блик по краю',
-      longdesc:
-        'Карточки проектов в мозаичной стене избранных работ. Анимация: когда карточка расширяется при ховере, смещённые соседи скользят в новые слоты на затухающей пружине — органическая кривая перелёта и установки (пружина, синтезированная в CSS linear()) вместо линейного скольжения; блик периодически пробегает по краю каждой плитки. Триггер: перепаковка по ховеру анимирует смещённые плитки; блик края мягко крутится. Технология: masonry-раскладка на JS + CSS-транзиция на transform; блик — кольцевой проход на канвасе. Назначение: держит стену текучей и живой во время перестройки.',
+        'Имя проекта на домашнем card-stack — крупный заголовок на передней карте и заголовок инфо-панели рядом с колодой. Анимация: когда колода сдаёт новую переднюю карту, буквы прежнего имени вспыхивают — эродированные края, следы обжига и светящиеся частицы углей пожирают глифы колонка за колонкой — и имя следующего проекта сплетается снизу вверх тем же полем огня. Триггер: срабатывает при каждой сдаче (драг, свайп, стрелки или автоплей). Технология: симуляция частиц на Rust/WASM (крейт mosaic-burn) с моделью erode/scorch/ember на канвасе; 2D-canvas-путь рендерит то же поле при выключенном GPU-маршруте — оба делят одну детерминированную симуляцию. Назначение: превращает каждую смену карты в фирменный огненный переход сайта.',
     },
     'media-progressive': {
       alt: 'Медиаизображение морфит из размытого низкого в чёткое высокое качество',
@@ -1420,6 +1817,51 @@ const DESCS = {
       longdesc:
         'Окружающее фоновое свечение за содержимым страницы. Анимация: большой мягкий радиальный градиент медленно дрейфует по документу, меняя позицию и интенсивность в длинном цикле. Триггер: работает непрерывно на каждой странице. Технология: один CSS-кейфрейм (body-glow-drift) анимирует фиксированный фоновый слой — ноль JavaScript. Назначение: придаёт тёмной теме атмосферу и глубину вместо плоского фона.',
     },
+    'card-stack': {
+      alt: 'Колода избранных работ с физикой перетаскивания и светящимся обратным отсчётом по краю',
+      longdesc:
+        'Колода избранных проектов на главной странице. Анимация: карты раздаются по 3D-колоде/вееру — боковые листы наклоняются внутрь с прогрессивным затемнением, пока активная карта увеличивается; светящаяся дуга проходит по тонкой рамке активной карты за десять секунд обратного отсчёта, отражаясь на кнопке play/пауза, а название проекта сгорает и сотканется заново при каждой навигации или при появлении секции в окне. Триггер: жесты перетаскивания/свайпа, элементы назад/вперёд и индекс, таймер автопрокрутки и появление при скролле. Техника: позы, вычисляемые на JS поверх CSS 3D-transforms, conic-gradient custom property, рисуемая каждый кадр, и общий canvas paper-burn. Цель: сделать избранные проекты похожими на физическую колоду, которую раскрывают веером, раздают и тасуют.',
+    },
+    'about-mesh': {
+      alt: 'Точечный ореол портрета в разделе «Обо мне», рябящий бегущей радиальной волной',
+      longdesc:
+        'Точечный ореол, облетающий портрет в разделе «Обо мне». Анимация: полярная решётка точек расходится наружу, пока сквозь неё проходит радиальная волна, а направляющие линии медленно прецессируют позади. Триггер: работает непрерывно, пока раздел на экране. Техника: цикл rAF на 2D-канве располагает каждую точку по полярным координатам. Назначение: придаёт портрету живое орбитальное поле в духе моушн-языка сайта.',
+    },
+    'nav-icon-aura': {
+      alt: 'Контуры чипов навигации, обводимые кольцом с кометным хвостом при наведении',
+      longdesc:
+        'Чипы поиска и настроек в панели навигации. Анимация: кольцевая заливка с кометным хвостом обводит контур чипа при наведении. Триггер: наведение указателя или фокус на каждом чипе. Техника: проход ring-fill на WebGPU с CSS-фолбэком шлейфа. Назначение: показывает интерактивность чипов, не отвлекая от меню.',
+    },
+    'view-transition': {
+      alt: 'Кросс-фейд контейнера вида между уходящим и входящим экраном',
+      longdesc:
+        'Контейнер view outlet при каждой смене маршрута. Анимация: уходящий вид затухает, а входящий проявляется — чистый кросс-диссольв. Триггер: каждая навигация роутера. Техника: смена класса в JS, управляющая CSS-переходом прозрачности. Назначение: делает переходы между страницами непрерывными, а не резкой сменой кадра.',
+    },
+    'route-search': {
+      alt: 'Поле поиска маршрутов вращает глиф отправки, пока идёт подсчёт',
+      longdesc:
+        'Состояние загрузки поля поиска маршрутов. Анимация: глиф отправки вращается, а ряд точек-результатов подпрыгивает, пока выполняется подсчёт. Триггер: ввод запроса, запускающий проход поиска. Техника: чистые CSS-кейфреймы на обвязке поля. Назначение: показывает идущую работу, чтобы поиск ощущался отзывчивым.',
+    },
+    'custom-carousel': {
+      alt: 'Проектные карусели с инерционной прокруткой и индикатором автоплея',
+      longdesc:
+        'Медиа-карусели на страницах проектов. Анимация: лента прокручивается с инерцией, стрелки листают элементы, а пунктирный индикатор автоплея заполняется на транспорте. Триггер: нажатия стрелок, тики автоплея и жесты перетаскивания. Техника: JS-позиции прокрутки с CSS-переходами — отдельная поверхность от карусели наград. Назначение: держит длинные наборы медиа обозримыми.',
+    },
+    'mentions-deck': {
+      alt: 'Колода упоминаний на странице контактов циклит свайпабельные карточки',
+      longdesc:
+        'Стопка упоминаний на странице контактов. Анимация: карточки циклятся автоплеем, реагируют на перетаскивание и смахивание и уходят со стопки. Триггер: таймер автоплея плюс свайпы указателем. Техника: JS-обработка жестов поверх CSS-кейфреймов. Назначение: делает рекомендации ощутимыми как физическую колоду.',
+    },
+    'expand-modal-loading': {
+      alt: 'Лайтбокс развёрнутого медиа мерцает, пока декодируется полный ассет',
+      longdesc:
+        'Состояние загрузки лайтбокса развёрнутого медиа. Анимация: волна шиммера проходит по сцене, пока спиннер отмечает прогресс декодирования. Триггер: открытие любого медиа-элемента в лайтбоксе. Техника: чистые CSS-кейфреймы. Назначение: сохраняет ощущение мгновенности, пока подгружаются полноразмерные ассеты.',
+    },
+    'footer-feed-wave': {
+      alt: 'Ссылки фида в футере наград колышутся волной прозрачности',
+      longdesc:
+        'Ряд ссылок фида источников в футере наград. Анимация: волна прозрачности медленно пробегает по ссылкам в цикле. Триггер: работает непрерывно, пока футер виден. Техника: CSS-кейфреймы со сдвигом на каждую ссылку. Назначение: придаёт статичной строке фида лёгкий живой пульс.',
+    },
   },
   gl: {
     'progress-bar': {
@@ -1478,14 +1920,9 @@ const DESCS = {
         'O pequeno toast de notificación que aparece nun canto da pantalla para eventos como confirmacións de copia e accións de cookies. Animación: deslízase desde o bordo mentres sobe con fade (site-toast-in), aguanta e sae deslizándose de volta con fade. Disparador: disparado por eventos da app (copia, aviso de almacenamento, notificación de proba). Tecnoloxía: keyframes CSS na entrada e un modificador --closing na saída. Propósito: atraer a vista a unha mensaxe transitoria sen bloquear a interacción.',
     },
     'mosaic-burn': {
-      alt: 'Título do tile de portafolio queimándose en brasa e rearmándose',
+      alt: 'Nome do proxecto queimándose en brasa e retecéndose na baralla',
       longdesc:
-        'O texto do título nos tiles do mosaico de traballos destacados. Animación: en hover as letras do título entran en combustión — bordes erosionados, pegadas de queimado e partículas de brasa incandescente consomen os glifos columna por columna, e as letras reconstrúense de abaixo arriba polo mesmo campo de lume cando o punteiro sae ou o hover cambia de obxectivo. Disparador: hover do punteiro no tile. Tecnoloxía: simulación de partículas en Rust/WASM (crate mosaic-burn) correndo o modelo erode/scorch/ember nun canvas; un camiño 2D-canvas renderiza o mesmo campo cando a ruta GPU está apagada — os dous comparten unha simulación determinística. Propósito: converter o hover simple no efecto de lume insignia do sitio.',
-    },
-    'mosaic-tile': {
-      alt: 'Tile de portafolio deslizándose a novo slot con resorte + brillo no bordo',
-      longdesc:
-        'As tarxetas de proxecto no mosaico de traballos destacados. Animación: cando unha tarxeta se expande en hover, os veciños desprazados deslízanse aos seus novos slots cun resorte amortecido — unha curva orgánica de overshoot e asentamento (resorte sintetizado en CSS linear()) en vez dun deslizamento lineal; un brillo percorre periodicamente o bordo de cada tile. Disparador: o repack por hover anima os tiles desprazados; o brillo do bordo fai loop suave. Tecnoloxía: pack masonry en JS + transición CSS en transform; o brillo é unha pasada de anel en canvas. Propósito: manter a parede líquida e viva mentres se reordena.',
+        'O nome do proxecto no card-stack da portada — o título grande na carta frontal e o encabezado do panel de info xunto á baralla. Animación: cando a baralla reparte unha nova carta frontal, as letras do nome saínte entran en combustión — bordes erosionados, pegadas de queimado e partículas de brasa incandescente consomen os glifos columna por columna — e o nome do seguinte proxecto retecése de abaixo arriba polo mesmo campo de lume. Disparador: dispara en cada reparto (arrastre, toque, frechas ou autoplay). Tecnoloxía: simulación de partículas en Rust/WASM (crate mosaic-burn) correndo o modelo erode/scorch/ember nun canvas; un camiño 2D-canvas renderiza o mesmo campo cando a ruta GPU está apagada — os dous comparten unha simulación determinística. Propósito: converter cada cambio de carta na transición de lume insignia do sitio.',
     },
     'media-progressive': {
       alt: 'Imaxe de medios pasando de borrosa en baixa calidade a nítida en alta',
@@ -1547,6 +1984,51 @@ const DESCS = {
       longdesc:
         'O brillo de fondo ambiente detrás do contido da páxina. Animación: un gran gradiente radial suave deriva lentamente polo documento, cambiando posición e intensidade nun loop longo. Disparador: corre continuamente en todas as páxinas. Tecnoloxía: un keyframe CSS (body-glow-drift) animando unha capa de fondo fixa — cero JavaScript. Propósito: dar atmosfera e profundidade ao tema escuro no canto dun fondo chá.',
     },
+    'card-stack': {
+      alt: 'Baralla de traballos seleccionados con física de arrastre e conta atrás no bordo iluminado',
+      longdesc:
+        'A baralla de proxectos destacados da páxina principal. Animación: as cartas repártense nunha pila/abano 3D — as follas laterais inclínanse cara dentro con esvaecimento progresivo mentres a carta activa crece; un arco luminoso percorre o bordo fino da carta activa durante unha conta atrás de dez segundos reflectida no botón play/pausa, e o título do proxecto queima e recompónse en cada navegación ou cando a sección entra en pantalla. Disparador: xestos de arrastrar/deslizar, controis anterior/seguinte e índice, o temporizador de autoplay e a entrada ao facer scroll. Técnica: poses calculadas en JS sobre transforms 3D de CSS, unha propiedade personalizada de conic-gradient pintada por frame e o paper-burn en canvas compartido. Propósito: que os proxectos destacados parezan unha baralla física que abres, repartes e barallas.',
+    },
+    'about-mesh': {
+      alt: 'Halo de puntos do retrato de Sobre min ondulando nunha onda radial viaxeira',
+      longdesc:
+        'O halo punteado que orbita o retrato de Sobre min. Animación: unha rede polar de puntos desprázase cara a fóra mentres unha onda radial a percorre, con liñas guía precesando lentamente detrás. Disparador: corre continuamente mentres a sección está en pantalla. Técnica: un bucle rAF en canvas 2D posiciona cada punto en coordenadas polares. Propósito: dá ao retrato un campo orbital vivo que fai eco da linguaxe de movemento do sitio.',
+    },
+    'nav-icon-aura': {
+      alt: 'Contornos dos chips da nav varridos por un anel con cola de cometa ao hover',
+      longdesc:
+        'Os chips de busca e axustes da barra de navegación. Animación: un recheo de anel con cola de cometa varre o contorno do chip ao pasar o cursor. Disparador: hover ou foco do punteiro en cada chip. Técnica: pasada de ring-fill en WebGPU con fallback de estela en CSS. Propósito: sinala que os chips son interactivos sen roubar atención ao menú.',
+    },
+    'view-transition': {
+      alt: 'Outlet de ruta en cross-fade entre a vista que sae e a que entra',
+      longdesc:
+        'O contedor view outlet en cada cambio de ruta. Animación: a vista saínte esvaece mentres a entrante aparece — un cross-dissolve limpo. Disparador: cada navegación do router. Técnica: un cambio de clase en JS que guía unha transición de opacidade CSS. Propósito: fai que os cambios de páxina se sintan continuos en vez dun corte seco.',
+    },
+    'route-search': {
+      alt: 'O campo de busca de rutas fai xirar o glifo de envío mentres corre a puntuación',
+      longdesc:
+        'O estado de carga do campo de busca de rutas. Animación: o glifo de envío xira e unha fila de puntos atopados rebotan mentres o reparto de puntuación está en voo. Disparador: escribir unha consulta que inicia unha pasada de busca. Técnica: keyframes CSS puros no cromado do campo. Propósito: comunica o traballo en curso para que a busca se sinta receptiva.',
+    },
+    'custom-carousel': {
+      alt: 'Carruseis de proxecto desprazando con momentum e un trazo de progreso do autoplay',
+      longdesc:
+        'Os carruseis de medios das páxinas de proxecto. Animación: a tira desprázase con momentum, as frechas navegan entre elementos e un trazo de progreso do autoplay enche no transporte. Disparador: pulsacións de frechas, ticks do autoplay e xestos de arrastre. Técnica: posicións de scroll por JS con transicións CSS — superficie distinta do carrusel de premios. Propósito: mantén os conxuntos longos de medios explorables dunha ollada.',
+    },
+    'mentions-deck': {
+      alt: 'A baralla de mencións do contacto cicla cartas apiladas e deslizables',
+      longdesc:
+        'A baralla apilada de mencións na páxina de contacto. Animación: as cartas ciclan en autoplay, responden a xestos de arrastre e sacudida e saen da pila. Disparador: o temporizador do autoplay máis os deslizamentos do punteiro. Técnica: xestos en JS sobre keyframes CSS. Propósito: fai que as recomendacións se sintan como unha baralla física barallable.',
+    },
+    'expand-modal-loading': {
+      alt: 'O lightbox do medio expandido brilloa mentres decodifica o asset completo',
+      longdesc:
+        'O estado de carga do lightbox do medio expandido. Animación: unha onda de shimmer percorre o escenario mentres un spinner marca o progreso da decodificación. Disparador: abrir calquera elemento de medio no lightbox. Técnica: keyframes CSS puros. Propósito: mantén o modal con sensación instantánea mentres chegan os assets a tamaño real.',
+    },
+    'footer-feed-wave': {
+      alt: 'As ligazóns do feed do pé de premios ondean nunha onda de opacidade',
+      longdesc:
+        'A fila de ligazóns do feed de fontes no pé de premios. Animación: unha onda de opacidade percorre as ligazóns nun bucle lento. Disparador: corre continuamente mentres o pé está visíbel. Técnica: keyframes CSS escalonados por ligazón. Propósito: dá á fila estática de feeds un pulso sutil de vida.',
+    },
   },
   ca: {
     'progress-bar': {
@@ -1605,14 +2087,9 @@ const DESCS = {
         "El petit toast de notificació que apareix en una cantonada de la pantalla per esdeveniments com confirmacions de còpia i accions de cookies. Animació: es llisca des de la vora mentre puja amb fade (site-toast-in), aguanta i surt lliscant-se de tornada amb fade. Disparador: disparat per esdeveniments de l'app (còpia, avís d'emmagatzematge, notificació de prova). Tecnologia: keyframes CSS a l'entrada i un modificador --closing a la sortida. Propòsit: atreure la vista a un missatge transitori sense blocar la interacció.",
     },
     'mosaic-burn': {
-      alt: 'Títol del tile de portafoli cremant-se en brases i rearmant-se',
+      alt: 'Nom del projecte cremant-se en brases i reteixint-se a la baralla',
       longdesc:
-        "El text del títol als tiles del mosaic de treballs destacats. Animació: en hover les lletres del títol entren en combustió — vores erosionades, estelades de cremada i partícules de brasa incandescent consumeixen els glifs columna per columna, i les lletres es reconstrueixen de baix a dalt pel mateix camp de foc quan el punter surt o el hover canvia d'objectiu. Disparador: hover del punter al tile. Tecnologia: simulació de partícules en Rust/WASM (crate mosaic-burn) corrent el model erode/scorch/ember en un canvas; un camí 2D-canvas renderitza el mateix camp quan la ruta GPU està apagada — tots dos comparteixen una simulació determinística. Propòsit: convertir el hover simple en l'efecte de foc insígnia del lloc.",
-    },
-    'mosaic-tile': {
-      alt: 'Tile de portafoli lliscant a nou slot amb ressort + brillantor a la vora',
-      longdesc:
-        "Les targetes de projecte al mosaic de treballs destacats. Animació: quan una targeta s'expandeix en hover, els veins desplaçats es llisquen als seus nous slots amb un ressort amortit — una corba orgànica d'overshoot i assentament (ressort sintetitzat en CSS linear()) en lloc d'un lliscament lineal; una brillantor recorre periòdicament la vora de cada tile. Disparador: el repack per hover anima els tiles desplaçats; la brillantor de la vora fa loop suaument. Tecnologia: pack masonry en JS + transició CSS en transform; la brillantor és una passada d'anell en canvas. Propòsit: mantenir la paret líquida i viva mentre es reordena.",
+        "El nom del projecte al card-stack de la portada — el títol gran a la carta frontal i l'encapçalament del panell d'info al costat de la baralla. Animació: quan la baralla reparteix una nova carta frontal, les lletres del nom sortint entren en combustió — vores erosionades, estelades de cremada i partícules de brasa incandescent consumeixen els glifs columna per columna — i el nom del projecte següent es reteix de baix a dalt pel mateix camp de foc. Disparador: es dispara a cada repartiment (arrossegament, gest, fletxes o autoplay). Tecnologia: simulació de partícules en Rust/WASM (crate mosaic-burn) corrent el model erode/scorch/ember en un canvas; un camí 2D-canvas renderitza el mateix camp quan la ruta GPU està apagada — tots dos comparteixen una simulació determinística. Propòsit: convertir cada canvi de carta en la transició de foc insígnia del lloc.",
     },
     'media-progressive': {
       alt: 'Imatge de mitjans passant de borrosa en baixa qualitat a nítida en alta',
@@ -1674,6 +2151,51 @@ const DESCS = {
       longdesc:
         "La brillantor de fons ambient darrere el contingut de la pàgina. Animació: un gran degradat radial suau deriva lentament pel document, canviant posició i intensitat en un loop llarg. Disparador: corre contínuament a totes les pàgines. Tecnologia: un keyframe CSS (body-glow-drift) animant una capa de fons fixa — zero JavaScript. Propòsit: donar atmosfera i profunditat al tema fosc en lloc d'un fons pla.",
     },
+    'card-stack': {
+      alt: "Baralla de treballs seleccionats amb física d'arrossegament i compte enrere a la vora il·luminada",
+      longdesc:
+        "La baralla de projectes destacats de la pàgina principal. Animació: les cartes es reparteixen en una pila/ventall 3D — els fulls laterals s'inclinen cap endins amb esmorteïment progressiu mentre la carta activa creix; un arc lluminós recorre la vora fina de la carta activa durant un compte enrere de deu segons reflectit al botó play/pausa, i el títol del projecte crema i es reteix a cada navegació o quan la secció entra a la pantalla. Disparador: gestos d'arrossegar/lliscar, controls anterior/següent i índex, el temporitzador d'autoplay i l'entrada en fer scroll. Tècnica: poses calculades en JS sobre transforms 3D de CSS, una propietat personalitzada de conic-gradient pintada per frame i el paper-burn en canvas compartit. Propòsit: fer que els projectes destacats semblin una baralla física que s'obre, es reparteix i es barreja.",
+    },
+    'about-mesh': {
+      alt: "Halo de punts del retrat d'About onejant en una ona radial viatgera",
+      longdesc:
+        "L'halo puntejat que orbita el retrat d'About. Animació: una xarxa polar de punts es desplaça cap a fora mentre una ona radial la travessa, amb línies guia precessionant lentament al darrere. Disparador: corre contínuament mentre la secció és a pantalla. Tècnica: un bucle rAF en canvas 2D posiciona cada punt en coordenades polars. Propòsit: dóna al retrat un camp orbital viu que fa ressò del llenguatge de moviment del lloc.",
+    },
+    'nav-icon-aura': {
+      alt: "Contorns dels xips de la nav escombrats per un anell amb cua de cometa a l'hover",
+      longdesc:
+        "Els xips de cerca i ajustos de la barra de navegació. Animació: un emplenament d'anell amb cua de cometa escombra el contorn del xip en passar el cursor. Disparador: hover o focus del punter sobre cada xip. Tècnica: passada de ring-fill en WebGPU amb fallback d'estela en CSS. Propòsit: senyala que els xips són interactius sense robar atenció al menú.",
+    },
+    'view-transition': {
+      alt: 'Outlet de ruta en cross-fade entre la vista que surt i la que entra',
+      longdesc:
+        "El contenidor view outlet a cada canvi de ruta. Animació: la vista sortint s'esvaeix mentre l'entrant apareix — un cross-dissolve net. Disparador: cada navegació del router. Tècnica: un intercanvi de classe JS que condueix una transició d'opacitat CSS. Propòsit: fa que els canvis de pàgina se sentin continus en lloc d'un tall sec.",
+    },
+    'route-search': {
+      alt: "El camp de cerca de rutes fa girar el glif d'enviament mentre corre la puntuació",
+      longdesc:
+        "L'estat de càrrega del camp de cerca de rutes. Animació: el glif d'enviament gira i una filera de punts trobats reboten mentre el repartiment de puntuació és en vol. Disparador: escriure una consulta que inicia una passada de cerca. Tècnica: keyframes CSS purs al cromat del camp. Propòsit: comunica la feina en vol perquè la cerca se senti responsiva.",
+    },
+    'custom-carousel': {
+      alt: "Carrusels de projecte desplaçant amb momentum i un traç de progrés de l'autoplay",
+      longdesc:
+        "Els carrusels de mitjans de les pàgines de projecte. Animació: la tira es desplaça amb momentum, les fletxes naveguen entre ítems i un traç de progrés de l'autoplay s'omple al transport. Disparador: pulsacions de fletxes, ticks de l'autoplay i gestos d'arrossegament. Tècnica: posicions de scroll per JS amb transicions CSS — superfície diferent del carrusel de premis. Propòsit: manté els conjunts llargs de mitjans explorables d'un cop d'ull.",
+    },
+    'mentions-deck': {
+      alt: 'La baralla de mencions del contacte cicla cartes apilades i desplaçables',
+      longdesc:
+        "La baralla apilada de mencions a la pàgina de contacte. Animació: les cartes ciclant en autoplay, responen a gestos d'arrossegada i de cop i surten de la pila. Disparador: el temporitzador de l'autoplay més els lliscaments del punter. Tècnica: gestió de gestos JS sobre keyframes CSS. Propòsit: fa que les recomanacions semblin una baralla física que es pot barrejar.",
+    },
+    'expand-modal-loading': {
+      alt: "El lightbox del medi expandit brillora mentre decodifica l'asset complet",
+      longdesc:
+        "L'estat de càrrega del lightbox del medi expandit. Animació: una ona de shimmer travessa l'escenari mentre un spinner marca el progrés de la decodificació. Disparador: obrir qualsevol element de medi al lightbox. Tècnica: keyframes CSS purs. Propòsit: manté el modal amb sensació instantània mentre arriben els assets a mida real.",
+    },
+    'footer-feed-wave': {
+      alt: "Els enllaços del feed del peu de premis onegen en una ona d'opacitat",
+      longdesc:
+        "La filera d'enllaços del feed de fonts al peu de premis. Animació: una ona d'opacitat recorre els enllaços en un bucle lent. Disparador: corre contínuament mentre el peu és visible. Tècnica: keyframes CSS esglaonats per enllaç. Propòsit: dóna a la filera estàtica de feeds un pols subtil de vida.",
+    },
   },
   tln: {
     'progress-bar': {
@@ -1732,14 +2254,9 @@ const DESCS = {
         "El picenin toast de notifega che el comparisse in un canton dello schermo par eventi come conferme de copia e assioni sui cookie. Animassion: el licà dal bordo mentre el sfunia in alto (site-toast-in), el tien, po el ese licando indrio co fade. Trigger: scatenà da eventi de l'app (copia, avixo storage, notifega de test). Tecnologia: keyframe CSS in entrata e un modificador --closing in essita. Scopo: tirar l'ocio su un mesagio transitorio sensa blocar l'interassion.",
     },
     'mosaic-burn': {
-      alt: 'Titolo del tile portfolio che el brusa in brase e el se ricompone',
+      alt: 'El nome del projeto che el brusa in brase e el se retess inte el masso',
       longdesc:
-        "El testo del titolo sui tile del mosaico dei laori in evidensa. Animassion: in hover le letere del titolo le entra in combustión — bordi erosi, scie de brusadura e particèle de brasa incandescente le consuma i glifi colona par colona, e le letere le se ricostruisse dal basso a l'alto travers el stesso canpo de fogo quando el puntador el ese o l'hover el canbia bersagio. Trigger: hover del puntador sul tile. Tecnologia: simulassion particelare in Rust/WASM (crate mosaic-burn) che la eseguisse el modelo erode/scorch/ember su canvas; un percorso 2D-canvas el rende el stesso canpo quando la rota GPU la xe smorta — tuti do i condivide na simulassion deterministica. Scopo: trasformar el semplice hover inte l'efeto fogo firma del sito.",
-    },
-    'mosaic-tile': {
-      alt: 'Tile portfolio che el licà in novo slot a moła + sbarluso sul bordo',
-      longdesc:
-        'Le card de progeto inte el mosaico dei laori in evidensa. Animassion: quando na card la se espande in hover, i vesini spostadi i licà intei novi slot co na moła smorsada — na curva orgànica de overshoot e assestamento (moła sintetissada in CSS linear()) invesse de una licada lineare; un sbarluso el percorre periodicamente el bordo de ogni tile. Trigger: el repack da hover el anima i tile spostadi; el sbarluso del bordo el gira in loop lieve. Tecnologia: pack masonry in JS + transission CSS su transform; el sbarluso el xe un passagio a anelo su canvas. Scopo: tener la paré liquida e viva mentre la se riórdena.',
+        "El nome del projeto sul card-stack de la home — el titolo grando sulla carta frontale e l'intestassion del panèl info tacà al masso. Animassion: quando el masso el distribuise na nova carta frontale, le letere del nome uscente le entra in combustión — bordi erosi, scie de brusadura e particèle de brasa incandescente le consuma i glifi colona par colona — e el nome del projeto sucesivo el se retess dal basso a l'alto travers el stesso canpo de fogo. Trigger: el scata a ogni distribuision (strasinamento, flick, frecie o autoplay). Tecnologia: simulassion particelare in Rust/WASM (crate mosaic-burn) che la eseguisse el modelo erode/scorch/ember su canvas; un percorso 2D-canvas el rende el stesso canpo quando la rota GPU la xe smorta — tuti do i condivide na simulassion deterministica. Scopo: trasformar ogni scànbio de carta inte la transission de fogo firma del sito.",
     },
     'media-progressive': {
       alt: 'Imagine media che la pasa da sfocada in basa qualità a nitida in alta',
@@ -1801,6 +2318,51 @@ const DESCS = {
       longdesc:
         'El sbarluso de sfondo anbientale drìo el contenuto de la pàgina. Animassion: un gran gradiente radiale morbido el deriva lentamente travers el documento, canbiando posission e intensità in un loop longo. Trigger: el gira continuamente su ogni pàgina. Tecnologia: un keyframe CSS (body-glow-drift) che el anima un layer de sfondo fiso — zero JavaScript. Scopo: dar atmosfera e profondità al tema scuro invesse de un sfondo piato.',
     },
+    'card-stack': {
+      alt: 'Maso de łavori sełesionà co fìxica de strassinamento e countdown sol bordo luminoso',
+      longdesc:
+        "El maso dei projeti sełesionà de ła pàxena prinsipałe. Animasion: łe schede se distribuise in na piła/vintajo 3D — i fogi łaterałi se inclina verso drento co oscuramento progresivo mentre ła scheda ativa cresse; un arco luminoso score el bordo sotiłe de ła scheda ativa in un countdown de diexe segondi riłesso sol boton play/pausa, e el tìtoło del projeto brusa e se retesse a ogni navigasion o cuando ła sesion entra in vista. Trigger: xesti de strassinar/scórer, controłi prima/dopo e index, el timer de l'autoplay e l'entrada co lo scroll. Tecnica: pose calcułà in JS su transform 3D CSS, na custom property conic-gradient depenta a ogni frame e el paper-burn su canvas condiviso. Fin: far parer i projeti sełesionà un maso fìxego che se verxe, se distribuise e se mésoła.",
+    },
+    'about-mesh': {
+      alt: "Aureola de punti del retrato About che increspa in un'onda radiale viaggiante",
+      longdesc:
+        "L'aureola puntegiada che orbita el retrato About. Animassion: un reticolo polare de punti el se sposta verso fora mentre un'onda radiale la traversa, con linee guida in precession lenta drìo. Trigger: la gira continuamente finche la session About la xe a schermo. Tecnica: un loop rAF su canvas 2D el posissiona ogni punto in coordinate polari. Scopo: el dà al retrato un campo orbitale vivo che riecheggia el linguaggio de movimento del sito.",
+    },
+    'nav-icon-aura': {
+      alt: "Contorni dei chip de la nav spazzà da un anelo co coa de cometa a l'hover",
+      longdesc:
+        "I chip de riserca e inpostassioni de la bara de navigassion. Animassion: un inpinimento a anelo co coa de cometa el spazza el contorno del chip a l'hover. Trigger: hover o focus del puntatore su ogni chip. Tecnica: passata ring-fill WebGPU con fallback de scia in CSS. Scopo: el segnała che i chip i xe interativi sensa tor via atension al menù.",
+    },
+    'view-transition': {
+      alt: 'Outlet de rota in cross-fade tra la vista che esce e quela che entra',
+      longdesc:
+        'El contenitore view outlet a ogni canbio de rota. Animassion: la vista che esce la sfuma mentre quela che entra la aparisse — un cross-dissolve pulito. Trigger: ogni navigassion del router. Tecnica: un scambio de classe JS che el guida una transission de opasità CSS. Scopo: el fa i canbi pàgina continui invece de un staco seco.',
+    },
+    'route-search': {
+      alt: 'El canpo de riserca de le rote el fa zirar el glifo de invio mentre el scoring el xe in corso',
+      longdesc:
+        'El stato de cargamento del canpo de riserca de le rote. Animassion: el glifo de invio el zira e una fiła de punti catà i rimbalza mentre el dispatch de scoring el xe in voło. Trigger: la digitassion de na query che la invia na passata de riserca. Tecnica: keyframes CSS puri sul chrome del canpo. Scopo: el comunica el laoro in corso parché la riserca la paria reativa.',
+    },
+    'custom-carousel': {
+      alt: "I carosei de progetto i score co momentum e un tratin de avansamento de l'autoplay",
+      longdesc:
+        "I carosei multimediałi de le pàxene de progetto. Animassion: la strissa la score co momentum, le freece le naviga tra i item e un tratin de avansamento de l'autoplay el se inpinisse sul trasporto. Trigger: pressioni de le freece, tick de l'autoplay e gesti de strissinamento. Tecnica: posissioni de scroll via JS con transissioni CSS — superficie distinta dal caroselo premi. Scopo: el tien i set łonghi de media esplorabiłi a colpo d'ocio.",
+    },
+    'mentions-deck': {
+      alt: 'El masso de mensiòn del contato el sicła carte inpieà e scorìvołi',
+      longdesc:
+        "El masso inpieà de mensiòn teła pàgina contati. Animassion: le carte le sicła in autoplay, le risponde a strissinamenti e flick e le esce dal masso. Trigger: el timer de l'autoplay pì i swipe del puntatore. Tecnica: gestion dei gesti in JS su keyframes CSS. Scopo: el fa le racomandassion un masso fìsico da mesołar.",
+    },
+    'expand-modal-loading': {
+      alt: "La lightbox del media espanso la lusica mentre la decodifica l'asset conpleto",
+      longdesc:
+        "El stato de cargamento de la lightbox del media espanso. Animassion: n'onda de shimmer la traversa la sena mentre un spinner el segna el progresso de ła decodifica. Trigger: l'avero de qualsiasi item media teła lightbox. Tecnica: keyframes CSS puri. Scopo: el tien ła modałe istantanea mentre i asset a piena dimension i riva.",
+    },
+    'footer-feed-wave': {
+      alt: "I link del feed del footer premi i ondeggia in n'onda de opasità",
+      longdesc:
+        "La fiła de link del feed de le fonti tel footer dei premi. Animassion: n'onda de opasità ła traversa i link in un loop lento. Trigger: ła gira continuamente finche el footer el xe visìbiłe. Tecnica: keyframes CSS sfasałi per link. Scopo: el dà a ła fiła statìca dei feed un sotil impulso de vita.",
+    },
   },
   gn: {
     'progress-bar': {
@@ -1859,14 +2421,9 @@ const DESCS = {
         "Notificación toast michĩ osẽkuaa pantalla esquinápe copia confirmación ha cookie acción rehegua. Ñemongue'e: oñemosẽ borde guive osẽ fade rehegua (site-toast-in), oĩ ha osẽ oñemosẽ jevy fade rehegua. Trigger: ojejeg̃ua app evento rupi (copia, almacenamiento aviso, test notificación). Tembiporenda: CSS keyframes oikekuaa-pe ha --closing modificador osẽkuaa-pe. Haguã: omoĩ ojapóva mensaje transitorio ñemongu'e ñemongu'e'ỹ rehegua.",
     },
     'mosaic-burn': {
-      alt: "Portfolio tile título oka'y tatápe ha ojapo jey",
+      alt: "Proyecto réra oka'y tatápe ha ojapo jey card-stack-pe",
       longdesc:
-        "Título texto portfolio tile-pe mosaico trabajo destacado rehegua. Ñemongue'e: hover jave título letra oka'y — borda erosionado, quemado estela ha tatasũ partícula incandescente ojepo glifo columna ha columna, ha letra ojapo jey guýpe yvate gotyo itatá campo rupi puntero osẽ'ỹvo térã hover omoambuévo objetivo. Trigger: puntero hover tile rehe. Tembiporenda: Rust/WASM partícula simulación (mosaic-burn crate) omboguatareháva erode/scorch/ember modelo canvas-pe; 2D-canvas tape ojapo upe campo GPU tape ojejoko'ỹvo jave — mokõive oguereko peteĩ simulación determinística. Haguã: omoambue hover simple sitio tata efecto insignia-pe.",
-    },
-    'mosaic-tile': {
-      alt: "Portfolio tile oñemosẽ slot pyahu muelle + borda tesa'ỹi rehegua",
-      longdesc:
-        "Proyecto tarjeta mosaico trabajo destacado ruguápe. Ñemongue'e: tarjeta oñembotuichávo hover jave, vecino oñemomovéva oñemosẽ slot pyahu muelle amortiguado rehegua — curva orgánica overshoot ha asentamiento rehegua (muelle sintetizado CSS linear()-pe) licada lineal rã; tesa'ỹi ohasa tile borda periódicamente. Trigger: hover repack ojapo tile oñemomovéva rehegua; borda tesa'ỹi oñembo'ajevýva mimbu\u1e7fpe. Tembiporenda: masonry pack JS-pe + CSS transición transform-pe; tesa'ỹi ha'e anillo pasada canvas-pe. Haguã: oĩ rugua líquido ha ikove ojapo jey aja.",
+        "Proyecto réra card-stack-pe — título guasu kuárata renondépe ha info-panel che'ỹha kuárata atýra yke. Ñemongue'e: kuárata atýra ome'ê jave kuárata renó pyahu, umi letra réra itujávagui oka'y — borda erosionado, quemado estela ha tatasũ partícula incandescente ojepo glifo columna ha columna — ha umi proyecto réra ojapo jey guýpe yvate gotyo itatá campo rupi. Trigger: ojehni kuárata atýra jave (drag, flick, flecha térã autoplay). Tembiporenda: Rust/WASM partícula simulación (mosaic-burn crate) omboguatareháva erode/scorch/ember modelo canvas-pe; 2D-canvas tape ojapo upe campo GPU tape ojejoko'ỹvo jave — mokõive oguereko peteĩ simulación determinística. Haguã: omoambue kuárata jojopa peteĩ tata transición insignia sitio-pe.",
     },
     'media-progressive': {
       alt: "Media imagen ohasa ojehecha'ỹ baja calidad gui nitida alta calidad-pe",
@@ -1928,6 +2485,51 @@ const DESCS = {
       longdesc:
         "Tesa'ỹi fondo ambiente kuatiarogue contenido rupã. Ñemongue'e: radial gradiente tuicha mimbu\u1e7f oñemyasãi mbegue documento rupi, omoambue posición ha intensidad loop ipukúva. Trigger: omba'apo tapere'ỹ opa kuatiaroguépe. Tembiporenda: peteĩ CSS keyframe (body-glow-drift) ojapo fondo capa fijo ñemongue'e — JavaScript zero. Haguã: ome'ẽ tema pytũ atmósfera ha hũgua fondo peteĩha rã.",
     },
+    'card-stack': {
+      alt: "Ku'éraa'õ mba'apopy poravopyre ñemongu'e fisica ha morosã ku'éraa'õ ija rehegua",
+      longdesc:
+        "Ku'éraa'õ mba'apopy poravopyre kuatiarogue ñepyrũha-pe. Ñemongue'e: ku'éraa'õ oñemosẽ peteĩ 3D mbojoaju'i/pepa'ũ rupi — yke kuatiarogue oke interior-pe progressive ñemomichĩ rehegua ku'éraa'õ hekoava oñembotuichávo; arco morosã oho ku'éraa'õ hekoava ija'i'i rehegua pa'ũm aravo'ỹ ñe'ẽkane'õ play/pause botón-pe, ha mba'apopy téra ojeiporu ha ojejapo jey peteĩteĩ ñembohape térã sección ojeiporávo. Trigger: arrastre/deslizar gesto, mboyve/upeigua ha índice contro, autoplay timer ha scroll ñepyrũ. Tembiporenda: JS pose CSS 3D transform rehegua, conic-gradient propiedad peteĩteĩ frame-pe ojepéhagué, ha canvas paper-burn oñemosãoporãvéva. Haguã: mba'apopy poravopyre oñeikuaa ku'éraa'õ física emyja, emosẽ ha emojoaju ichaháicha.",
+    },
+    'about-mesh': {
+      alt: 'Punto halo About retrato rupã ondula onda radial oñemyasãiva',
+      longdesc:
+        "Punto halo oñembyatýva About retrato jeré. Ñemongue'e: polar punto red osẽ okape gotyo onda radial ohóvo hóvo rupi, guía línea ojojogua mbegue atrás. Trigger: omba'apo tapere'ỹ About sección jehecharamónte. Tech: 2D canvas rAF loop omoĩ peteĩ punto polar coordenada rupi. Purpose: ome'ẽ retrato pe orbital campo oikóva sitio ñemongue'e ñe'ẽnga rehegua.",
+    },
+    'nav-icon-aura': {
+      alt: 'Nav chip contorno ojogua anillo cometa ípua rehe hover pe',
+      longdesc:
+        "Jeheka ha jajopy chip nav bandeja pegua. Ñemongue'e: anillo myenoihague cometa ípua rehegua ohóvo chip contorno ári hover pe. Trigger: puntero hover térã foco peteĩ chip ári. Tech: WebGPU ring-fill pase CSS ípua fallback rehegua. Purpose: ohechauka chip omba'apokuaa mba'e ndojoguaíri menú ñema'ẽ.",
+    },
+    'view-transition': {
+      alt: "Vista outlet cross-fade osẽva ha oĩvéva mba'ejoajúgui",
+      longdesc:
+        "View outlet contenedor peteĩteĩ ruta moambue. Ñemongue'e: vista osẽva oñemondýi ha oĩvéva ojehecha — cross-dissolve iporãva. Trigger: peteĩteĩ router ñemboveve. Tech: JS clase moambue CSS opasidad transición oguia. Purpose: ojajogua página moambue tapere'ỹ korte re'ỹgui.",
+    },
+    'route-search': {
+      alt: "Jeheka campo ojopiro'y envío glifo scoring omba'apóvo",
+      longdesc:
+        "Jeheka campo ñemyenyhẽ rekávo. Ñemongue'e: envío glifo ojopiro'y ha punto juhu jokopy ojumpa scoring ohóvo ári. Trigger: consulta ojehai jeheka oñepyrũvo. Tech: CSS keyframes año campo chrome ári. Purpose: ohechauka mba'e omboguata jeheka omboajúvo.",
+    },
+    'custom-carousel': {
+      alt: 'Proyecto carrusel oñemomýi momentum ha autoplay progreso trazo rehegua',
+      longdesc:
+        "Proyecto kuatiarogue pegua medios carrusel. Ñemongue'e: tira oñemomýi momentum, myasãi ohasa ítem apytépe ha autoplay progreso trazo omyenyhẽ transporte ári. Trigger: myasãi ñeporã, autoplay tick ha drag ñemomýi. Tech: JS scroll posición CSS transición rehegua — premi carrusel-gui ambuéva. Purpose: ojoguerahaa medios aty pukúva ojehecha pya'e.",
+    },
+    'mentions-deck': {
+      alt: 'Contacto menciones mazo ojogua carta apilada ha deslizáble',
+      longdesc:
+        "Mazo apiláva menciones contacto kuatiarogue. Ñemongue'e: carta ojogua autoplay rupi, ombo'e drag ha flick ñemomýi ha osẽ mazo gui. Trigger: autoplay tiempo ha puntero deslizamiento. Tech: JS gesto CSS keyframes ári. Purpose: ojajogua recomendación mazo físico rehásecha.",
+    },
+    'expand-modal-loading': {
+      alt: 'Expand-media lightbox ojehusáma full asset odecode hóvo ári',
+      longdesc:
+        "Expand-media lightbox ñemyenyhẽ rekávo. Ñemongue'e: shimmer onda ohasa escenario rupi spinner decode progreso ohechaukávo. Trigger: ojepe'a peteĩ media ítem lightbox pe. Tech: CSS keyframes año. Purpose: ojoguerahaa modal pya'e ojehúvo full-size asset.",
+    },
+    'footer-feed-wave': {
+      alt: 'Premio footer feed enlace ojogua opasidad onda rehegua',
+      longdesc:
+        "Fuente feed enlace jokopy premio footer pegua. Ñemongue'e: opasidad onda ohasa enlace ári loop imbeguéva. Trigger: omba'apo tapere'ỹ footer jehecharamónte. Tech: CSS keyframes peteĩ enlace ñemoñe'ẽ. Purpose: ome'ẽ feed jokopy tĩmbu'ỹva hó mborayhu michĩmíva.",
+    },
   },
   ga: {
     'progress-bar': {
@@ -1986,14 +2588,9 @@ const DESCS = {
         "An tósta fógra beag a thagann chun cinn i gcoirnéal an scáileáin d'imeachtaí mar dhearbhuithe cóipe agus gníomhartha fianán. Beochan: sleamhnaíonn sé isteach ón imeall ag éiri suas le fade (site-toast-in), coinníonn, ansin éiríonn sé amach ag sleamhnú ar ais le fade. Spreagthóir: seoltar é ag imeachtaí an aip (cóip, fógra stórála, fógra tástála). Teicneolaíocht: keyframes CSS ar an iontráil agus mionathraitheoir --closing ar an imeacht. Cuspóir: súil a tharraingt chuig teachtaireacht shealadach gan an idirghníomhaíocht a chosc.",
     },
     'mosaic-burn': {
-      alt: 'Teideal tíle phunainne ag dó in eibhlí agus ag athfhoirmiú',
+      alt: 'Ainm an tionscadail ag dó in eibhlí agus á fhí arís sa phaca',
       longdesc:
-        'Téacs an teidil ar thíleanna mósáic na n-oibreacha sainiúla. Beochan: ar hover dódh litreacha an teidil — itheann imeall creimthe, rianta loiscnithe agus cáithníní eibhlí gealaithe na glifí colún ar cholún, ansin athfhoirmíonn na litreacha ó bhun go barr tríd an réimse tine céanna nuair a fhágann an pointeoir nó nuair a athraíonn an hover sprioc. Spreagthóir: hover an pointeora ar an tíl. Teicneolaíocht: insamhaltas cáithníní in Rust/WASM (crate mosaic-burn) ag rith an tsamhail erode/scorch/ember ar chanabhas; rindreálann cosán 2D-canabhais an réimse céanna nuair atá an bealach GPU múchta — roinneann an dá cheann insamhaltas cinntitheach amháin. Cuspóir: an hover simplí a iompú isteach san éifeacht dóiteáin shainithe an tsuímh.',
-    },
-    'mosaic-tile': {
-      alt: 'Tíle phunainne ag sleamhnú go sliotán nua ar sprionga + loinnir ar an imeall',
-      longdesc:
-        'Na cártaí tionscadail sa bhalla mósáic na n-oibreacha sainiúla. Beochan: nuair a leathnaíonn cárta ar hover, sleamhnaíonn na comharsana aistrithe chuig a sliotáin nua ar sprionga maolaithe — cuar orgánach ró-theacht agus suímh (sprionga sintéisithe in CSS linear()) in ionad sleamhnú líneach; trasnaíonn loinnir go tréimhsiúil imeall gach tíle. Spreagthóir: beochan repack hover na tíleanna aistrithe; ritheann loinnir an imeall go bog. Teicneolaíocht: pacáil masonry in JS + aistriú CSS ar transform; is é an loinnir pas fáinne ar chanabhas. Cuspóir: an bhalla a choinneáil leachtach agus beo fad atá sé ag atheagrú.',
+        'Ainm an tionscadail ar chairt-charn na baile — an teideal mór ar an gcárta tosaigh agus teideal an phainéil eolais in aice leis an bpaca. Beochan: nuair a dhéileálann an paca cárta tosaigh nua, dódh litreacha an ainm a bhí ann — itheann imeall creimthe, rianta loiscnithe agus cáithníní eibhlí gealaithe na glifí colún ar cholún — agus fíonn ainm an chéad tionscadail eile ó bhun go barr tríd an réimse tine céanna. Spreagthóir: spreagtar é gach uair a dhéileáltar cárta (tarraingt, flick, saighdeanna nó uathsheinm). Teicneolaíocht: insamhaltas cáithníní in Rust/WASM (crate mosaic-burn) ag rith an tsamhail erode/scorch/ember ar chanabhas; rindreálann cosán 2D-canabhais an réimse céanna nuair atá an bealach GPU múchta — roinneann an dá cheann insamhaltas cinntitheach amháin. Cuspóir: gach malartú cárta a iompú ina aistriú tine shainithe an tsuímh.',
     },
     'media-progressive': {
       alt: 'Íomhá meáin ag morphú ó dhofa ísealchaighdeáin go géar ardchaighdeán',
@@ -2054,6 +2651,51 @@ const DESCS = {
       alt: 'Loinnir chomhthimpeallach an leathanaigh ag sreabhadh taobh thiar den ábhar',
       longdesc:
         "An loinnir chúlra chomhthimpeallach taobh thiar d'ábhar an leathanaigh. Beochan: sreabhann grádán radacha mór bog go mall trasna an doiciméid, ag athrú suímh agus déine i lúb fhada. Spreagthóir: ritheann go leanúnach ar gach leathanach. Teicneolaíocht: keyframe CSS amháin (body-glow-drift) ag beochan ciseal chúlra sheasta — nialas JavaScript. Cuspóir: atmaisféar agus doimhneacht a thabhairt don téama dorcha in ionad cúlra álainn.",
+    },
+    'card-stack': {
+      alt: 'Bearta cártaí saothair roghnaithe le fisic tarraingthe agus comhaireamh síos ar an imeall lonrach',
+      longdesc:
+        'An bearta cártaí de thionscadail roghnaithe ar an leathanach baile. Beochan: déileáiltear cártaí trí chruach/lúchair 3T — claonann na bileoga taobh isteach le maolú forchéimnitheach agus an cárta gníomhach ag fás; taistealaíonn stua lonrach thar imeall tanaí an chárta ghníomhaigh le linn comhaireamh síos deich soicind a chaitear ar an gcnaipe seinn/sos, agus loisceann agus fíonn teideal an tionscadail arís ar gach nascleanúint nó nuair a scrollaíonn an rannóg isteach sa radharc. Spreagtha: comharthaí tarraingthe/svae, rialuithe siar/ar aghaidh agus innéacs, an t-amadóir uathsheinm agus an iontráil scrollaithe. Teicneolaíocht: suímh ríofa in JS ar transforms 3T CSS, airí saincheaptha conic-gradient péinteáilte in aghaidh an fhráma agus an paper-burn canvas comhroinnte. Cuspóir: déanann sé go mbraitheann tionscadail roghnaithe cosúil le bearta cártaí fisiceach a lúchaireann, a dhéileálann agus a mheascann tú.',
+    },
+    'about-mesh': {
+      alt: 'Halo pointí an phortráid About ag crith i dtonn radaíoch taistil',
+      longdesc:
+        'An halo poncaithe a thimpeallaíonn portráid About. Beochain: díshuíonn laitis pholach de phointí amach de réir mar a théann tonn radaíoch tríd, le línte treorach ag réamhchaslann go mall taobh thiar. Spreagthóir: ritheann go leanúnach fad is atá an rannán About ar an scáileán. Teicneolaíocht: cuimsitheoir rAF chanbhás 2D a shuíomhann gach pointe as comhordanáidí polacha. Cuspóir: tugann sé réimse fithiseach beo don phortráid a léiríonn teanga ghluaisne an tsuímh.',
+    },
+    'nav-icon-aura': {
+      alt: 'Imlínte shlatanna na loingseoireachta á scuabadh ag fáinne eireaball choméid ar hover',
+      longdesc:
+        'Na slata cuardaigh agus socruithe i stiall na loingseoireachta. Beochain: scuabann líonadh fáinne le heireaball coméad timpeall imlíne na slata ar hover. Spreagthóir: hover nó fócas an chonsora ar gach slat. Teicneolaíocht: pas ring-fill WebGPU le cúlchaint rian CSS. Cuspóir: léiríonn sé go bhfuil na slata idirghníomhach gan aird a ghoid den roghchlár.',
+    },
+    'view-transition': {
+      alt: 'Asraon bealaigh ag cros-dhíothú idir an radharc amach agus an radharc isteach',
+      longdesc:
+        'Coimeádán view outlet ar gach athrú bealaigh. Beochain: ciallaíonn an radharc amach amach fad is a thagann an radharc isteach chun solais — cros-dhíscaoileadh glan. Spreagthóir: gach loingseoireacht ródaire. Teicneolaíocht: malartú aicme JS a threoraíonn aistriú teimhneachta CSS. Cuspóir: cuireann sé athruithe leathanaigh go leanúnach in ionad gearradh crua.',
+    },
+    'route-search': {
+      alt: 'Réimse cuardaigh bealaigh ag rothlú a ghlaife sheolta fad a ritheann an scóráil',
+      longdesc:
+        'Stádas luchtaithe réimse cuardaigh na mbealaí. Beochain: rothlaíonn an ghaife sheolta agus preabann sraith pointí aimsithe fad is atá an seoladh scórála ar siúl. Spreagthóir: iontráil a thosaíonn pas cuardaigh. Teicneolaíocht: eochairfhrámaí CSS amháin ar chróim an réimse. Cuspóir: insíonn sé an t-obair atá ar siúl ionas go mbraitheann an cuardach freagrach.',
+    },
+    'custom-carousel': {
+      alt: 'Meall tionscadal ag scrollú le móiminteam agus dais dul chun cinn uathsheinnte',
+      longdesc:
+        'Na meall meán ar leathanaigh thionscadal. Beochain: scrollaíonn an stiall le móiminteam, bogann na saigheada idir míreanna agus líontar dais dul chun cinn uathsheinnte feadh an iompair. Spreagthóir: brú saigheada, tic uathsheinnte agus gothaí tarraingthe. Teicneolaíocht: suímh scrollaithe JS le haistrithe CSS — dromchla ar leith ó mheall na ngradam. Cuspóir: coinníonn sé tacair fhada meán in-iniúchta in amharc amháin.',
+    },
+    'mentions-deck': {
+      alt: 'Tá deic tagairtí an teagmhála ag timthriallú cártaí cruachta inscuabtha',
+      longdesc:
+        'An deic cruachta tagairtí ar an leathanach teagmhála. Beochain: timthriallaíonn cártaí ar uathsheinnteoireacht, freagraíonn siad do tharraingt agus do phreabadh agus díbrithear ón gcrú iad. Spreagthóir: an t-amadóir uathsheinnte móide scuabtha consora. Teicneolaíocht: láimhseáil gothaí JS thar eochairfhrámaí CSS. Cuspóir: déanann sé moltaí a bhraitheann mar dheic fisiciúil is féidir a chasadh.',
+    },
+    'expand-modal-loading': {
+      alt: 'Bosca solais na meán leathnaithe ag lonradh fad is a dhíchódaítear an tsócmhainn iomlán',
+      longdesc:
+        'Stádas luchtaithe bhosca solais na meán leathnaithe. Beochain: taistealaíonn niamhras ar fud an stáitse fad is a mharcálann sníomhaire dul chun cinn an díchódaithe. Spreagthóir: aon mhír mheán a oscailt sa bhosca solais. Teicneolaíocht: eochairfhrámaí CSS amháin. Cuspóir: coinníonn sé an mhodail meandarach fad is a shreabhann sócmhainní lánmhéide isteach.',
+    },
+    'footer-feed-wave': {
+      alt: 'Naisc fotha bharraíos na ngradam ag tonntú ina dtonn teimhneachta',
+      longdesc:
+        'Sraith naisc fotha na bhfoinsí i mbarraíos na ngradam. Beochain: taistealaíonn tonn teimhneachta thar na naisc in lúb mhall. Spreagthóir: ritheann go leanúnach fad is atá an barraíos le feiceáil. Teicneolaíocht: eochairfhrámaí CSS idirscartha in aghaidh naisc. Cuspóir: tugann sé béal beo fainne don tsraith fotha statach.',
     },
   },
 }
@@ -2229,10 +2871,16 @@ for (const [locale, animations] of Object.entries(DESCS)) {
   setPath(db.translations[locale], 'components.animations', animations)
 
   // Hub chrome — nav label + page node + slug-override default for the
-  // animations-reference route.
+  // animations-reference route. The page node is written leaf-by-leaf:
+  // sibling fields (searchThemes from patch-all-pages-search-themes.js)
+  // belong to other patchers, so a whole-node set would clobber them.
   setPath(db.translations[locale], 'APP.animations', APP_LABELS[locale] || APP_LABELS.en)
 
-  setPath(db.translations[locale], 'pages.animations', PAGES[locale] || PAGES.en)
+  const page = PAGES[locale] || PAGES.en
+
+  setPath(db.translations[locale], 'pages.animations.title', page.title)
+
+  setPath(db.translations[locale], 'pages.animations.description', page.description)
 
   setPath(db.translations[locale], 'slugs.animations', SLUGS[locale] || SLUGS.en)
 
@@ -2282,7 +2930,10 @@ if (process.argv.includes('--push')) {
 
     await rtdb.ref(`translations/${locale}/APP/animations`).set(APP_LABELS[locale] || APP_LABELS.en)
 
-    await rtdb.ref(`translations/${locale}/pages/animations`).set(PAGES[locale] || PAGES.en)
+    // .update() merges the page chrome leaves — a .set() would wipe the
+    // sibling searchThemes list another patcher owns (seo-indexation
+    // requires every page node to carry one).
+    await rtdb.ref(`translations/${locale}/pages/animations`).update(PAGES[locale] || PAGES.en)
 
     await rtdb.ref(`translations/${locale}/slugs/animations`).set(SLUGS[locale] || SLUGS.en)
 

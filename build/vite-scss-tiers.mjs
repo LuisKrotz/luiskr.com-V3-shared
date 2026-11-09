@@ -94,6 +94,32 @@ export const scssTiersPlugin = () => {
     // import into the \0lk-tiers: virtual namespace on both dev and build.
     enforce: 'pre',
 
+    // Dev invalidation — the per-file compile cache lives for the whole
+    // process; without a watcher hook every .scss edit (entry or shared
+    // @import partial) stayed frozen until a server restart. Any scss
+    // change clears ALL entries (partials are shared across sheets, so
+    // per-file dependency tracking would miss importers), evicts the
+    // \0lk-tiers: virtual modules from the module graph (their ids are
+    // virtual paths, so vite's default file→module mapping never flags
+    // them — load() results would stay cached even through the reload),
+    // and forces a full reload — the ?tiers virtual modules are JS-side
+    // adopted sheets, so css hot-swap can't apply anyway.
+    configureServer(server) {
+      server.watcher.on('change', (file) => {
+        if (!file.endsWith('.scss')) return
+
+        cache.clear()
+
+        for (const mod of server.moduleGraph.idToModuleMap.values()) {
+          if (mod.id?.startsWith(NS)) {
+            server.moduleGraph.invalidateModule(mod)
+          }
+        }
+
+        server.ws.send({ type: 'full-reload' })
+      })
+    },
+
     async configResolved(config) {
       env.minify = config.command === 'build' && config.build.cssMinify !== false
       env.targets = lightningcssTargets(config.build.cssTarget)
