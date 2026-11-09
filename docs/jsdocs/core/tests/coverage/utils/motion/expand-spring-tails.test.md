@@ -9,6 +9,10 @@ Coverage for core/utils/motion/expand-spring.ts — the
 
 ## Members
 
+### `realRaf`
+
+Original rAF/cAF — tests swap in the manual queue then restore.
+
 ### `rafQueue`
 
 Pending rAF callbacks — index is the returned handle minus 1.

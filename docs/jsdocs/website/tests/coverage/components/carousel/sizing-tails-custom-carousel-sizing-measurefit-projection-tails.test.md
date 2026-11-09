@@ -9,9 +9,22 @@ Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFi
 
 ## Members
 
+### `SLIDE`
+
+Slide fixtures spanning the aspect-ratio arms measureFit projects —
+normal, landscape, portrait, extreme-sliver, and size-missing.
+
 ### `stubEl`
 
 Fresh element stub — measureFit only reads the fields below.
+
+### `savedWidth`
+
+Original innerWidth/innerHeight descriptors — restored after each test.
+
+### `setViewport`
+
+Viewport stub — redefines innerWidth/Height so fit math sees a real size.
 
 ### `OVERHEAD_DESKTOP`
 

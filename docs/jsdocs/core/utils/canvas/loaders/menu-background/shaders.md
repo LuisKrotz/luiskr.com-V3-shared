@@ -2,12 +2,16 @@
 
 GLSL sources for MenuBackgroundWebGL, extracted from
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\loaders\menu-background\shaders.ts` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                            |
+| -------------- | ---------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\loaders\menu-background\shaders.ts` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.  |
 
 ## Members
+
+### `MENU_BG_DERIV_PRELUDE`
+
+Extension prelude enabling pixel-space isoline AA (WebGL1 only).
 
 ### `MENU_BG_VS`
 

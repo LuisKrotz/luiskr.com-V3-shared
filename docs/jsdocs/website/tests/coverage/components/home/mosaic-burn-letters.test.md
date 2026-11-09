@@ -2,12 +2,32 @@
 
 Per-letter combustion tests for website/components/home/mosaic/burn.ts —
 
-| | |
-|---|---|
-| **Source** | `src/website\tests\coverage\components\home\mosaic-burn-letters.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                          |
+| -------------- | ------------------------------------------------------------------------ |
+| **Source**     | `src/website\tests\coverage\components\home\mosaic-burn-letters.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.                  |
 
 ## Members
+
+### `BURN_CLASSES`
+
+Class-name bundle the raw burn helpers expect — mirrors the production map.
+
+### `armCardBurn`
+
+Partial-applied wrapper — binds the class/selector bundles so tests call with just (host, index).
+
+### `TITLE_COLOR`
+
+Expected fillStyle values the recording 2D ctx snapshots — title ink vs cleared pixels.
+
+### `ITEMS`
+
+Single-card fixture — the burn helpers only need one item to act on.
+
+### `flush`
+
+Generous flush — mounted render queues need real timers past microtasks.
 
 ### `createRecording2D`
 

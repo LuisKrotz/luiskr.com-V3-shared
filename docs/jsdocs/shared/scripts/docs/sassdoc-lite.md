@@ -2,9 +2,9 @@
 
 Security-focused replacement for the unmaintained `sassdoc`
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\docs\sassdoc-lite.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\docs\sassdoc-lite.mjs`              |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -35,3 +35,8 @@ Parses one .scss file into its documented item list.
 ### `renderItem`
 
 Renders one documented item as an escaped definition block.
+
+### `main`
+
+Entry point — scans every module source dir, parses /// blocks into
+items, and emits one escaped index.html with a per-file TOC.

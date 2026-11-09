@@ -2,16 +2,21 @@
 
 CMS projects editor: full case-study editing — project
 
-| | |
-|---|---|
-| **Source** | `src/cms\projects\CmsProjectsList.tsx` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\projects\CmsProjectsList.tsx`          |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
 ### `CmsProjectsList`
 
-The CmsProjectsList — projects list class.
+<cms-projects-list> — the element facade for the projects editor:
+holds the state (locale, project key list, selected slug, normalized
+`currentProject`, saving flag) and delegates to `data.ts` (Firebase
+CRUD), `sections.ts` (model normalization + mutations), `events.ts`
+(wiring), `render.tsx`/`section-render.tsx` (JSX). Methods are thin
+pass-throughs so test spies share the delegated call path.
 
 ### (module scope)
 

@@ -9,6 +9,10 @@ GLSL sources for CloseButtonWebGL, extracted from
 
 ## Members
 
+### `CLOSE_BUTTON_VS`
+
+Fullscreen quad vertex shader — passes a_pos through as v_uv 0..1.
+
 ### `CLOSE_PAINT_GLSL`
 
 GLSL helper library for the close-button look — shared between

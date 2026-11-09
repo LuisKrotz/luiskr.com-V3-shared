@@ -2,24 +2,27 @@
 
 &lt;view-cms-dashboard&gt; — the authenticated CMS shell: header
 
-| | |
-|---|---|
-| **Source** | `src/cms\routes\CmsDashboard.tsx` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\routes\CmsDashboard.tsx`               |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
 
 ### `ViewCmsDashboard`
 
-The ViewCmsDashboard — cms dashboard class.
+<view-cms-dashboard> — the authenticated CMS shell: header with
+brand/avatar/logout, the tab strip routing between editors, and the
+toast surface that child editors notify via `cms-notification`
+events (bound on `this` so they bubble up through the shadow tree).
 
 ### (module scope)
 
-Lifecycle: verifies auth session and binds tab/navigation events.
+Wires events, subscribes to auth state, and listens for child toasts.
 
 ### (module scope)
 
-Lifecycle: unbinds listeners.
+Unsubscribes auth + clears the pending toast timer on unmount.
 
 ### `handleLogout`
 
@@ -34,7 +37,7 @@ timer instead of stacking toasts.
 
 ### (module scope)
 
-Wires tab clicks, logout and cms-notification events.
+Tab clicks, logout, and the brand-back-to-site navigation.
 
 ### `renderTabComponent`
 

@@ -2,12 +2,16 @@
 
 Carousel-hosted media overrides — isCarouselHosted shadow-host
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\unit\browser\safari-patch-safari-patch-carouselmedia-patch.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                                     |
+| -------------- | ----------------------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\unit\browser\safari-patch-safari-patch-carouselmedia-patch.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.                           |
 
 ## Members
+
+### `cls`
+
+Looks up a registered custom element class by tag name.
 
 ### `shadowHostedEl`
 

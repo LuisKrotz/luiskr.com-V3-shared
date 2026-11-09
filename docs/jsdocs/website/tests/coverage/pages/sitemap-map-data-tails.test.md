@@ -9,6 +9,10 @@ Coverage tail for views/sitemap/map-data — the sitemap
 
 ## Members
 
+### `S`
+
+Slash char alias — path literals below stay readable without escapes.
+
 ### `projectUrl`
 
 Portfolio URL builder — `/portfolio/<slug>` under EN, `/<loc>/…` else.
@@ -18,6 +22,14 @@ Portfolio URL builder — `/portfolio/<slug>` under EN, `/<loc>/…` else.
 Minimal two-locale projects fixture — the BR labels differ so
 per-locale media slugs exercise the translation path; media srcs are
 identical so the index-alignment check passes.
+
+### `BR_PROJECT`
+
+Portuguese project fixture — media rows cover the unlabeled/video arms.
+
+### `projectsByLocale`
+
+Per-locale project maps — the sitemap builder iterates locales over these.
 
 ### `mediaGroup`
 

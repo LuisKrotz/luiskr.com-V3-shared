@@ -2,16 +2,21 @@
 
 &lt;cms-playground-editor&gt; — playground + slugs editor:
 
-| | |
-|---|---|
-| **Source** | `src/cms\playground-editor\CmsPlaygroundEditor.tsx` |
-| **UX surface** | Admin bundle — editors for every database node. |
+|                |                                                     |
+| -------------- | --------------------------------------------------- |
+| **Source**     | `src/cms\playground-editor\CmsPlaygroundEditor.tsx` |
+| **UX surface** | Admin bundle — editors for every database node.     |
 
 ## Members
 
 ### `CmsPlaygroundEditor`
 
-The CmsPlaygroundEditor — playground editor class.
+<cms-playground-editor> — the element facade for the playground/slugs
+editor: holds the three data slices (ordered label keys + values, the
+typed `epDefaults` control-seed map, per-locale `slugs`) and delegates
+to `data.ts` (Firebase load/save/key CRUD), `events.ts` (wiring),
+and `render.tsx` (JSX). Methods are thin pass-throughs for the same
+shared call path the tests spy on.
 
 ### (module scope)
 

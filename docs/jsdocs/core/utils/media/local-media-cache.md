@@ -2,12 +2,20 @@
 
 Three-tier media cache: in-memory Map (object URLs) →
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\media\local-media-cache.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\media\local-media-cache.ts`               |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### (module scope)
+
+IDB token destructuring — local aliases keep the call sites short.
+
+### (module scope)
+
+Introspection result — memory-hit count + whether IndexedDB is usable.
 
 ### `LocalMediaCache`
 

@@ -2,12 +2,24 @@
 
 Global "is the window currently scrolling" flag plus an
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\motion\scroll-state.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\motion\scroll-state.ts`                   |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### `isWindowScrolling`
+
+Live scroll flag — true while the user is actively scrolling the window.
+
+### `scrollStopTimer`
+
+Debounce handle — reset on every scroll event so it fires only on stop.
+
+### `scrollStopCallbacks`
+
+Subscribers invoked once per scroll-settle, then cleared.
 
 ### `handleScrollStop`
 

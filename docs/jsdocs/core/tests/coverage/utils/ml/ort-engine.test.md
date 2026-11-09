@@ -2,9 +2,9 @@
 
 Coverage for core/utils/ml/ort-engine.ts — lazy runtime
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\utils\ml\ort-engine.test.js` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\utils\ml\ort-engine.test.js`     |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -12,3 +12,7 @@ Coverage for core/utils/ml/ort-engine.ts — lazy runtime
 ### `makeOrt`
 
 Builds a recording ORT stub — no jest mapper needed.
+
+### `loaderOf`
+
+Wraps a module as an async loader — the engine's import seam shape.

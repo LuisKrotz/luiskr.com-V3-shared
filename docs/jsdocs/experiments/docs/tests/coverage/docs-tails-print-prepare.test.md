@@ -9,6 +9,14 @@ Coverage tails for ViewDocs._onPrintPrepare — the printprepare
 
 ## Members
 
+### `docsRoute`
+
+Route-record factory for the docs portal — params.docsPath carries the sub-path.
+
+### `firePrepare`
+
+Dispatches the print-prepare event the view listens for — exercises the pre-print mirror build.
+
 ### `mkArticle`
 
 Builds a reader mirror with a sentinel child the assertions diff on.

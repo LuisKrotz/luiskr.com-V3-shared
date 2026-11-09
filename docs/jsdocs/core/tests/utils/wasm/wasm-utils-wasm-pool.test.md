@@ -2,7 +2,13 @@
 
 Split from wasm-utils.test.js — covers the "wasm-pool" describe.
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\utils\wasm\wasm-utils-wasm-pool.test.js` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tests\utils\wasm\wasm-utils-wasm-pool.test.js`  |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
+
+## Members
+
+### `_installTimedRaf`
+
+Replaces rAF with a setTimeout shim — drives frame-based code through real timers.

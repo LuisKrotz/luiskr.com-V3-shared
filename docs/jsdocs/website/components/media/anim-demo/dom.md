@@ -7,6 +7,10 @@
 
 ## Members
 
+### `_AURA_TILES`
+
+Tile selector the real aura session rings — the nav's two strip chips.
+
 ### `_LOADER_STEPS`
 
 Loader counter steps the demo writes into the readout (percent text).
@@ -37,15 +41,6 @@ notification item plays.
 
 - `@param` ctx The demo context (stage owns the toast item).
 - `@returns` Teardown — stops the in/out cycle.
-
-### `mountTileSpringDemo`
-
-Mosaic-tile spring demo — toggles the hover modifier on the spring
-tile so the transform transition replays the real tile's overshoot
-ease (the displaced lift is a CSS var the class animates).
-
-- `@param` ctx The demo context (stage owns the spring tile).
-- `@returns` Teardown — stops the hover cycle.
 
 ### `mountRelatedTilesDemo`
 
@@ -88,13 +83,6 @@ skeleton classes whose shimmer sweeps in CSS; no JS state to drive.
 
 - `@param` _ctx The demo context — unused.
 
-### `mountCarouselDemo`
-
-Carousel demo — the staged track marquees + progress rail sweeps in
-CSS keyframes; no JS state to drive.
-
-- `@param` _ctx The demo context — unused.
-
 ### `mountMediaDemo`
 
 Media-progressive demo — the real <media-figure> mounts its own
@@ -102,24 +90,17 @@ decode/progressive lifecycle; no JS state to drive.
 
 - `@param` _ctx The demo context — unused.
 
-### `mountFanDemo`
-
-Card-stack demo — walks each staged card's slot one step per beat so
-the fanned cards deal through the front slot (data-index −2…2 maps to
-the SCSS transform/z-index ladder; the wrap-around card slides to the
-far end the way the real deck recycles a dealt card).
-
-- `@param` ctx The demo context (stage owns the fanned cards).
-- `@returns` Teardown — stops the deal cycle.
-
 ### `mountAuraDemo`
 
-Nav icon-aura demo — alternates the armed modifier across the two
-staged chips so the comet-trail ring-fill sweeps each outline in turn,
-the hover path the real chips play.
+Nav icon-aura demo — mounts the real `mountRingFill` WebGPU session
+on the stage's strip and cycles `setProgress` across the two chips
+(the real hover path, automated). Where the widget layer is off the
+session is null and the fallback alternates the armed modifier so the
+static SVG comet-trail cue still sweeps — the production appearance
+every non-WebGPU viewer sees.
 
-- `@param` ctx The demo context (stage owns the chip row).
-- `@returns` Teardown — stops the aura cycle.
+- `@param` ctx The demo context (stage owns the strip + chips).
+- `@returns` Teardown — stops the cycle, destroys the aura session.
 
 ### `mountTransitionDemo`
 
@@ -138,15 +119,6 @@ alternates idle ↔ scoring-in-flight (spinning glyph + bouncing dots).
 - `@param` ctx The demo context (stage owns the field).
 - `@returns` Teardown — stops the loading cycle.
 
-### `mountDeckDemo`
-
-Mentions-deck demo — two-phase swipe: the front card (slot 0) flies
-out on the first beat, then re-seats at the back while the next card
-slides to front — the drag-dismiss + autoplay cycle in miniature.
-
-- `@param` ctx The demo context (stage owns the deck cards).
-- `@returns` Teardown — stops the swipe cycle.
-
 ### `mountModalLoadingDemo`
 
 Expand-modal loading demo — toggles the ready modifier so the staged
@@ -158,7 +130,8 @@ the real lightbox plays while the full-size asset decodes.
 
 ### `mountFeedWaveDemo`
 
-Footer feed-wave demo — the staged link row ripples entirely in CSS
-(per-item animation-delay staggers the opacity wave); no JS state.
+Footer feed-wave demo — prepends the real `feedGlyph` svg (dot +
+two wave arcs) into the staged feed link and points it at the locale
+feed URL; the arcs' opacity pulse itself ripples in CSS.
 
-- `@param` _ctx The demo context — unused.
+- `@param` ctx The demo context (stage owns the feed link).

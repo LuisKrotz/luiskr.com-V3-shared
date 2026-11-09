@@ -2,12 +2,16 @@
 
 Coverage for core/utils/a11y/animation-desc.ts — the
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\utils\a11y\animation-desc-tails.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                   |
+| -------------- | ----------------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\utils\a11y\animation-desc-tails.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.         |
 
 ## Members
+
+### `TEST_ID`
+
+The animation id under test + the desc-element id it maps to.
 
 ### `liveRecord`
 

@@ -9,6 +9,10 @@ Coverage tail for utils/wasm/nav-glyph.ts — the nav glyph
 
 ## Members
 
+### `COLORS`
+
+Two neon palette vars — enough to cover the multi-color arm.
+
 ### `makeHost`
 
 Builds an icon-like host inside a chip button, with the glyph canvas in its

@@ -9,6 +9,10 @@ Covers website/components/media/AnimDemo.js + its
 
 ## Members
 
+### `C`
+
+Class-name alias — the demo-surface selectors below stay readable.
+
 ### `_fake2d`
 
 A no-throw 2D-context stub — happy-dom canvases have no real 2D backend;

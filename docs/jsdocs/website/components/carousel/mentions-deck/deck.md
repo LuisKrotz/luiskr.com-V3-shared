@@ -66,10 +66,6 @@ viewportWidth().
 
 - `@param` host The MentionsDeck element.
 
-### `padNum`
-
-Zero-padded ordinal — "01", "08" — printed in each card's top corner.
-
 ### `applyPoses`
 
 Writes every card's pose for the current virtual front `f` — derived

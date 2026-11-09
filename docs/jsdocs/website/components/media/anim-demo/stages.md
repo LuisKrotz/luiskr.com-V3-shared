@@ -19,10 +19,6 @@ Demo menu item count — mirrors the real nav's four primary routes.
 
 Demo ring-sheen tile count — a row small enough to read the traveling sheen.
 
-### `_CAROUSEL_SLIDES`
-
-Demo carousel slide count — enough slides for the track to overhang the strip.
-
 ### `demoCanvas`
 
 A decorative demo canvas — every animated surface the stage mounts is

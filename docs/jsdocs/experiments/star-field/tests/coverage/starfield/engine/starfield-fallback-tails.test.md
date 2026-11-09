@@ -2,13 +2,17 @@
 
 Coverage tails for the no-WebGL fallback surface —
 
-| | |
-|---|---|
-| **Source** | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-fallback-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                                               |
+| -------------- | --------------------------------------------------------------------------------------------- |
+| **Source**     | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-fallback-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.                                       |
 
 ## Members
 
 ### `fake2d`
 
 Fake 2d context covering every call the painter issues.
+
+### `makeCanvas`
+
+Canvas stub with stubbed clientWidth/Height — happy-dom reports 0s, and the fallback painter needs real extents.

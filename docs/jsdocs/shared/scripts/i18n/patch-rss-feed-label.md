@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\patch-rss-feed-label.js`
 
+One-shot migration: seeds `APP.rssFeed` — the legal
+
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\patch-rss-feed-label.js`       |

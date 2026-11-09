@@ -12,3 +12,11 @@ Coverage tail for components/search/route-search/data.ts —
 ### `dbReply`
 
 Per-test control over the SWR snapshot the loader consumes.
+
+### `dbThrow`
+
+When set, the db mock rejects with this error instead of replying.
+
+### `wait`
+
+Fixed 40ms wait — the SWR loader resolves within one timer pass.

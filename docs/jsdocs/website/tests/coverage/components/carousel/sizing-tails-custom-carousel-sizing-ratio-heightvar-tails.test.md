@@ -17,6 +17,10 @@ hostW stub feeds every unsized fallback projection below.
 
 Expected uniform fallback height: hostW projected through 16:9, rounded.
 
+### `savedWidth`
+
+Original innerWidth/innerHeight descriptors — restored after each test.
+
 ### `stubEl`
 
 Minimal element stub — setHeightVar only touches $/items/flags/style/closest.

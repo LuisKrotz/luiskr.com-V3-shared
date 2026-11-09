@@ -13,6 +13,10 @@ Coverage for core/utils/dom/orphan-seps.ts — the footer
 
 Captured RO instance + callback for refire tests.
 
+### `lastRo`
+
+The most recent stub RO — tests refire its callback directly.
+
 ### `MockRO`
 
 Minimal ResizeObserver stub recording observe/disconnect.

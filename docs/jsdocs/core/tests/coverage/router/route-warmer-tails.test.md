@@ -2,7 +2,13 @@
 
 Split from coverage-tails-7.test.js — covers the "route-warmer tails" describe.
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\router\route-warmer-tails.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                             |
+| -------------- | ----------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\router\route-warmer-tails.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.   |
+
+## Members
+
+### `flush`
+
+Generous flush — route-warmer idle windows need real timers.

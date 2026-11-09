@@ -2,9 +2,9 @@
 
 Scoped quality-gate runner for the module workspace. Git
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\verify\scope-gates.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\verify\scope-gates.mjs`             |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -13,12 +13,12 @@ Scoped quality-gate runner for the module workspace. Git
 
 Scope registry: module dirs, the per-module tsconfig and jest config,
 and policy flags.
-  dirs     — source roots eslint/stylelint scan.
-  tsconfig — scoped compilation target.
-  jest     — the module's own Jest config (its tests live inside it).
-  governance — also run the cross-cutting scan suite in shared/tests.
-  a11y     — include axe-scan + contrast-aaa in that governance run.
-  lighthouse — the scope is eligible for Lighthouse performance checks.
+dirs — source roots eslint/stylelint scan.
+tsconfig — scoped compilation target.
+jest — the module's own Jest config (its tests live inside it).
+governance — also run the cross-cutting scan suite in shared/tests.
+a11y — include axe-scan + contrast-aaa in that governance run.
+lighthouse — the scope is eligible for Lighthouse performance checks.
 
 ### `SCOPE_ROOTS`
 
@@ -60,6 +60,16 @@ Lists files changed in a diff range (or the index for --staged). The
 truncated a ~21k-file push and produced an empty list. A diff failure
 is fatal, not skippable: returning [] would push with zero gates.
 
+### `exists`
+
+`exists` — repo-relative path check for optional scope inputs.
+
+### `run`
+
+`run` — synchronous step runner with inherited stdio (serial steps
+like the links fallback print straight through; a non-zero exit
+throws and aborts the caller).
+
 ### `runAsync`
 
 Async counterpart for parallel gate steps — spawns the check with piped
@@ -67,6 +77,7 @@ stdio so concurrently-running children can't interleave their report
 blocks; the captured output is replayed under the step's banner on exit.
 `extraEnv` carries per-step overrides (e.g. a split JEST_MAX_WORKERS
 budget when two jest pools run side by side).
+
 - `@param` {string} label banner prefix
 - `@param` {string} cmd executable
 - `@param` {string[]} args argv
@@ -79,6 +90,7 @@ Total jest-worker budget for a gate run — mirrors jest.preset's
 RAM-derived cap (2GiB/worker, cores−1) so two concurrent jest pools
 (module suite + governance) split the same ceiling instead of each
 claiming it whole.
+
 - `@param` {number} share fraction of the budget this pool gets
 - `@returns` {string} JEST_MAX_WORKERS value
 
@@ -122,38 +134,38 @@ lets the rest finish their buffered output before the error surfaces.
 ### `runLink`
 
 /*.scss`),
-        '--max-warnings=0',
-      ])
-    )
-  }
+'--max-warnings=0',
+])
+)
+}
 
-  const runJest = exists(def.jest)
-  const runGov = def.governance
+const runJest = exists(def.jest)
+const runGov = def.governance
 
-  // Two concurrent jest pools split the worker budget 50/50; a lone pool
-  // keeps the full share.
-  const jestShare = runJest && runGov ? 0.5 : 1
+// Two concurrent jest pools split the worker budget 50/50; a lone pool
+// keeps the full share.
+const jestShare = runJest && runGov ? 0.5 : 1
 
-  if (runJest) {
-    checks.push('jest')
-    tasks.push(
-      runAsync(`${scope} jest`, 'node', [...JEST, '--config', def.jest], {
-        JEST_MAX_WORKERS: jestWorkerShare(jestShare),
-      })
-    )
-  }
+if (runJest) {
+checks.push('jest')
+tasks.push(
+runAsync(`${scope} jest`, 'node', [...JEST, '--config', def.jest], {
+JEST_MAX_WORKERS: jestWorkerShare(jestShare),
+})
+)
+}
 
-  if (runGov) {
-    checks.push('governance')
-    tasks.push(runGovernance(scope, def.a11y, { JEST_MAX_WORKERS: jestWorkerShare(jestShare) }))
-  }
+if (runGov) {
+checks.push('governance')
+tasks.push(runGovernance(scope, def.a11y, { JEST_MAX_WORKERS: jestWorkerShare(jestShare) }))
+}
 
-  const results = await Promise.allSettled(tasks)
-  const failed = results.find((r) => r.status === 'rejected')
+const results = await Promise.allSettled(tasks)
+const failed = results.find((r) => r.status === 'rejected')
 
-  if (failed) throw failed.reason
+if (failed) throw failed.reason
 
-  stamp(scope, checks)
+stamp(scope, checks)
 }
 
 /**

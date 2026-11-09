@@ -282,6 +282,12 @@ silent: a missing probe emits attr-less dims, same as before.
 
 - `@param` {string[]} urls - absolute CDN share-image URLs
 
+### (module scope)
+
+Fetches live translations from RTDB before prerendering — retries with
+timeout per attempt, since this fetch decides whether pages carry live
+CMS copy or the stale snapshot.
+
 ### `loadTranslations`
 
 Resolves the translations map for build-time generators — the live

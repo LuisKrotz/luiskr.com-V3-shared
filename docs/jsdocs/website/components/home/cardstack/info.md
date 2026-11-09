@@ -22,6 +22,27 @@ rides in front of /portfolio/<slug> on every non-English locale.
 - `@param` item Project metadata containing the route slug.
 - `@returns` Localized portfolio URL, or an empty string without a slug.
 
+### `SUMMARY_CUT`
+
+The first-sentence cut for the in-card summary — a sentence ender
+(`.`, `!`, `?`) followed by whitespace/markup/end-of-string, or a
+`<br>`/newline break. CMS descriptions lead with a one-line project
+brief, so the first sentence IS the mobile summary.
+
+### `mobileSummary`
+
+The stacked-card summary of a CMS description — the text up to the
+first sentence ender (the ender kept) or the first markup break.
+The full description stays mounted in the desktop text column on
+every tier (visually hidden on stacked layouts but present in the
+DOM), so search engines index the long-form copy as the canonical
+description while the card copy reads as its summary — same content
+at two lengths, both valid. A description with no sentence break
+passes through whole (the ≤4-line CSS clamp bounds the visual box).
+
+- `@param` body The full CMS description (may carry `<br>` markup).
+- `@returns` The leading-sentence summary, or the input unchanged when
+
 ### `cardInfo`
 
 Everything the text column shows for one item.

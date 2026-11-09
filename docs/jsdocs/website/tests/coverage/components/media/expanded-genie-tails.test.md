@@ -2,10 +2,10 @@
 
 Coverage for website/components/media/expanded/genie.ts +
 
-| | |
-|---|---|
-| **Source** | `src/website\tests\coverage\components\media\expanded-genie-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                            |
+| -------------- | -------------------------------------------------------------------------- |
+| **Source**     | `src/website\tests\coverage\components\media\expanded-genie-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.                    |
 
 ## Members
 
@@ -53,6 +53,22 @@ A counting 2D-context stub — every method is a no-op, canvas backref.
 
 Manual rAF queue — the spring clock steps only when tests pump it.
 
+### `rafSeq`
+
+Next rAF id + the manual clock — pump() advances nowMs and fires queued callbacks.
+
+### `pump`
+
+Steps the manual clock by `dt` ms per frame and drains the rAF queue each step.
+
 ### `flushAsync`
 
 Flush pending microtasks — the reject path crosses extra awaits.
+
+### `RECT`
+
+Source rect in x/y/w/h form — the genie math inputs.
+
+### `rectOf`
+
+Converts the x/y/w/h rect into the DOMRect shape the code under test expects.

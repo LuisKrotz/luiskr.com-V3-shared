@@ -39,6 +39,15 @@ YAML/TOML/INI/ENV: keys → typ, values → str/lit, comments → com.
 
 HTML/XML: tags, attributes, comments, doctype, text.
 
+### `markTag`
+
+Tokenizes inside a single `<…>` slice — the tag name lands on `kwd`,
+attribute names on `typ`, `=` on `pun`, values on `str`, and the
+angle brackets on `pun`. Malformed tails pass through escaped.
+
+- `@param` {string} tag raw `<…>` source slice
+- `@returns` {string} highlighted tag HTML
+
 ### `scanCss`
 
 CSS/SCSS: comments, strings, at-rules, props, values, colors.

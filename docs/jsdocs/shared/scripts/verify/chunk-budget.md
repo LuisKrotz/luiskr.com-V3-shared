@@ -13,11 +13,20 @@ Minified chunk-size gate. Scans dist/v/&lt;tier&gt;/assets/{js,css}
 
 Hard caps on emitted file size (bytes).
 
+### `loadExceptions`
+
+Reads the justified-exceptions list; [] when the file is absent.
+
 ### `nameKey`
 
 Exception patterns are regex strings matched against the emitted file's
 name-without-hash (e.g. `three.webgpu` matches `three.webgpu-CkO-_Y2V.js`
 across every tier).
+
+### `isExcepted`
+
+Tests one emitted file name against the exception table — a `kind: '*'`
+entry covers both extensions.
 
 ### `collectFiles`
 

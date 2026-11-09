@@ -2,9 +2,9 @@
 
 &lt;home-mosaic&gt; — the masonry project grid on the home page:
 
-| | |
-|---|---|
-| **Source** | `src/website\components\home\HomeMosaic.tsx` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\HomeMosaic.tsx`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -80,13 +80,6 @@ Style object for one skeleton placeholder box.
 ### (module scope)
 
 JSX template for the component's shadow DOM.
-
-### `_syncAnimDescs`
-
-Binds the mosaic-tile description to every card — each tile's
-hover/press/displacement spring is the animated surface. Runs
-post-render so the shared desc node lands in the shadow root
-(detached-node application would mint duplicate ids).
 
 ### `_syncRingSheen`
 

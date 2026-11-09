@@ -2,9 +2,9 @@
 
 &lt;view-admin-login&gt; — the CMS gate: a single Google OAuth
 
-| | |
-|---|---|
-| **Source** | `src/cms\routes\AdminLogin.tsx` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\routes\AdminLogin.tsx`                 |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
@@ -15,12 +15,18 @@ Unwraps a Firebase error's real cause: auth/internal-error embeds the
 backend rejection as a JSON string inside `message` (the App-Check 401
 from createAuthUri), so the inner `error.message` is what actually
 names the failure. Returns the raw text when it isn't wrapped JSON.
+
 - `@param` raw The SDK error message (possibly a JSON-encoded API error).
 - `@returns` The innermost human-readable message.
 
 ### `ViewAdminLogin`
 
-The ViewAdminLogin — admin login class.
+<view-admin-login> — the CMS auth gate: a single Google OAuth card.
+`connectedCallback` replays any OAuth failure persisted across the
+redirect (storage-partitioned sessions and App-Check rejections get
+tailored messages instead of a silent loop); `handleGoogleLogin`
+re-fires the popup with a re-entrancy guard and suppresses the
+user-cancelled codes.
 
 ### (module scope)
 

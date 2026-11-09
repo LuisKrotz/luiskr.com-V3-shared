@@ -13,6 +13,10 @@
 
 The ViewHome — home class.
 
+### `_parallax`
+
+Live scroll-parallax session — see home/parallax.ts.
+
 ### `storage`
 
 CDN base URL for project media.
@@ -35,7 +39,12 @@ Same-view navigations re-scroll instead of remounting (see home/scroll.ts).
 
 ### (module scope)
 
-Lifecycle: kicks off data loading and subscribes to the store.
+Lifecycle: kicks off data loading, subscribes to the store, and
+arms the desktop scroll-parallax session.
+
+### (module scope)
+
+Lifecycle: tears down the parallax session when the view leaves.
 
 ### (module scope)
 
@@ -55,4 +64,5 @@ JSX template for the view's shadow DOM.
 
 ### (module scope)
 
-Lifecycle: re-syncs children after each re-render.
+Lifecycle: re-syncs children after each re-render, then re-gates
+the parallax session so freshly rendered layer nodes re-bind.

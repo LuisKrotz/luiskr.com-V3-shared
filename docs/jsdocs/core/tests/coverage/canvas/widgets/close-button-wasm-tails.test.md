@@ -32,3 +32,7 @@ Imports the class under test AFTER the mock is registered.
 ### `flush`
 
 Flushes the mount promise + a couple of frames.
+
+### `makeCanvas`
+
+Canvas stub — canned rect + null ctx drive the wasm-mount arms.

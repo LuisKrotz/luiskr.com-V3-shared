@@ -2,7 +2,13 @@
 
 Comprehensive tests for router route metadata — page titles,
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\router\router-meta.test.js` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\tests\router\router-meta.test.js`               |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
+
+## Members
+
+### `LANGS`
+
+Locale lists the meta writer iterates — all langs, then non-EN only.

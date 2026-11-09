@@ -51,11 +51,7 @@ Notification toast — slide/fade entrance + exit (CSS).
 
 ### `MOSAIC_BURN`
 
-Mosaic title letter combustion → rebuild (Rust/WASM particles + 2D raster).
-
-### `MOSAIC_TILE`
-
-Mosaic tile — spring displacement + traveling border sheen (JS spring + canvas).
+Card-stack project-name letter combustion → rebuild (Rust/WASM particles + 2D raster).
 
 ### `MEDIA_PROGRESSIVE`
 
@@ -108,10 +104,6 @@ Document ambient glow — slow radial drift behind content (CSS).
 ### `PROGRESS_BAR`
 
 Route progress bar — scaleX crawl to ~70% while a navigation is in flight, then sweep-to-100 + fade (CSS transitions).
-
-### `NOTE_DOT`
-
-Disclaimer note dots — pulsing <i> markers inside footer/disclaimer notes (CSS).
 
 ### `CARD_STACK`
 

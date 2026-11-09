@@ -6,3 +6,9 @@ Final arms: AppNav's menu-close settle callback (the
 | -------------- | ------------------------------------------------------------- |
 | **Source**     | `src/website\tests\coverage\sweep\appnav-close-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.       |
+
+## Members
+
+### `flush`
+
+Very generous flush — nav close animations take multiple frames.

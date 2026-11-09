@@ -2,16 +2,20 @@
 
 Coverage tails for the photographic bodies layer —
 
-| | |
-|---|---|
-| **Source** | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-bodies-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                                             |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| **Source**     | `src/experiments\star-field\tests\coverage\starfield\engine\starfield-bodies-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.                                     |
 
 ## Members
 
 ### `NODE_DEPS`
 
 TSL namespace + node-material ctor bundle injected into body makers.
+
+### `ctxProto`
+
+Canvas prototype accessor — for installing getContext stubs per test.
 
 ### `fake2d`
 

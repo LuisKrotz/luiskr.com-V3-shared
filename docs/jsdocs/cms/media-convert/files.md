@@ -1,8 +1,8 @@
 # `cms\media-convert\files.ts`
 
-| | |
-|---|---|
-| **Source** | `src/cms\media-convert\files.ts` |
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Source**     | `src/cms\media-convert\files.ts`                |
 | **UX surface** | Admin bundle — editors for every database node. |
 
 ## Members
@@ -21,10 +21,17 @@ Humanizes a byte count — MB above 1MB (1 decimal), KB below (min 1KB so 0-byte
 
 ### (module scope)
 
-collects drop.
+Collects a drag-drop payload into the queue — prefers the
+`webkitGetAsEntry` path so a dropped folder recursively yields
+`{file, rel}` per descendant (preserving the tree the server rebuilds
+inside the ZIP); falls back to flat `dataTransfer.files` when entries
+aren't available. `isMediaPath` filters out non-media files.
 
 ### `collectInput`
 
-collects input.
-- `@param` host — the host component
-- `@param` input — the value
+Collects a `<input type=file>` selection — `webkitRelativePath`
+preserves subfolder structure when the picker was given a directory;
+otherwise the bare filename is the rel path. Same `isMediaPath` filter.
+
+- `@param` host — the host component whose `queue` receives the items
+- `@param` input — the file input element that fired change

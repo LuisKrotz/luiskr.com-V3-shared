@@ -12,3 +12,7 @@ Coverage tail for docs render.tsx — the index-streaming
 ### `FIXTURE`
 
 INDEX_CHUNK+ rows so the first slice leaves a pending continuation.
+
+### `flush`
+
+Timer flush — mounted render queues need real timers past microtasks.

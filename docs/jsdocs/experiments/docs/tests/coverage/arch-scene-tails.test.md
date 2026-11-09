@@ -9,6 +9,18 @@ Coverage tails for the docs architecture scene — mounts
 
 ## Members
 
+### `router`
+
+Shared router singleton — scene navigation calls push() on it.
+
+### `ROOTS`
+
+Docs-tree fixture — two roots with nested dir/file children for scene walks.
+
+### `flush`
+
+Timer flush — mounted scene queues need real timers past microtasks.
+
 ### `glyphTiers`
 
 The two instanced glyph FILL tiers — dir first, file second, in

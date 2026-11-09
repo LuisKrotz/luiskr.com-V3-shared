@@ -2,7 +2,17 @@
 
 Split from widget-tails.test.js — covers the "FlagWebGL — unbind else-arms" describe.
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\canvas\widgets\widget-tails-flagwebgl-unbind-else-arms.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                                          |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\canvas\widgets\widget-tails-flagwebgl-unbind-else-arms.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.                                |
+
+## Members
+
+### `makeCanvas`
+
+Bare canvas — the unbind arms only need the element handle.
+
+### `lang`
+
+Lang-row factory — code + one or two country variants per row.

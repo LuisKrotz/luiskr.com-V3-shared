@@ -15,6 +15,25 @@ Live mesh session parked on the host.
 
 Re-measures the canvas box and re-stamps the backing store.
 
+### `_SEL`
+
+Lattice tunables — picture-wrapper selector, dot rows, radial spoke
+count, and the dotted guide-line angles (radians) the mesh draws over.
+
+### `_ink`
+
+Cached dot ink (`r,g,b` string) + the theme flag it resolved under.
+
+### `meshInk`
+
+Dot ink — the lattice paints in `--text-muted` so the mesh reads on
+whatever theme field sits behind the portrait (the old fixed mid-grey
+vanished on the light aurora wash: "animation is not visible"). The
+palette re-samples on a theme flip only — per-frame paints read the
+cached channel string, so the loop never pays a getComputedStyle.
+
+- `@returns` `r,g,b` channel string for rgba() composition.
+
 ### `hash`
 
 Deterministic hash → pseudo-random 0..1 per lattice site — the static

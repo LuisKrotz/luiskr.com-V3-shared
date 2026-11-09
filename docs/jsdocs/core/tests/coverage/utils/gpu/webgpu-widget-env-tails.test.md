@@ -2,10 +2,10 @@
 
 Coverage tail for utils/gpu/webgpu-widget.ts arms that
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\utils\gpu\webgpu-widget-env-tails.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                     |
+| -------------- | ------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\utils\gpu\webgpu-widget-env-tails.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.           |
 
 ## Members
 
@@ -25,3 +25,7 @@ Canvas double whose transferToOffscreen yields a stub offscreen.
 ### `deadLoader`
 
 Artifact loader that always rejects — drives every in-page fallback.
+
+### `WorkerSaved`
+
+Saved globals + window descriptor — env stubs redefine then restore.

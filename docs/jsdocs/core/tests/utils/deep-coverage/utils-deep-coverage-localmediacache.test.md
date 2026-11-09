@@ -2,7 +2,13 @@
 
 Split from utils-deep-coverage.test.js — covers the "localMediaCache" describe.
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\utils\deep-coverage\utils-deep-coverage-localmediacache.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                                  |
+| -------------- | -------------------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\utils\deep-coverage\utils-deep-coverage-localmediacache.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.                        |
+
+## Members
+
+### `_flush`
+
+Zero-ms flush — cache promises resolve within one macrotask.

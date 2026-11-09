@@ -25,6 +25,11 @@ Loaded module + its linear memory — null when the artifact is unavailable.
 
 A live glyph animation — destroy() detaches listeners, loop and wasm memory.
 
+### `runtime`
+
+Cached runtime-load promise — null until first glyph mount, resolves
+once so concurrent mounts share a single wasm instantiation.
+
 ### `loadGlueModule`
 
 Default glue loader — dynamic-imports the wasm-pack module from the

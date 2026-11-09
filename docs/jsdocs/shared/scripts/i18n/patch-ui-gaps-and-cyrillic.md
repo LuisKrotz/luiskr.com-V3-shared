@@ -1,8 +1,10 @@
 # `shared\scripts\i18n\patch-ui-gaps-and-cyrillic.js`
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\i18n\patch-ui-gaps-and-cyrillic.js` |
+One-shot migration: fills the last English-holding
+
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\i18n\patch-ui-gaps-and-cyrillic.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -24,3 +26,11 @@ intentionally absent.
 ### `setPath`
 
 Sets `obj`'s leaf at a dot-path, creating intermediate containers.
+Numeric path segments index arrays (legal-footer.links.0.page);
+a missing intermediate node is created as [] or {} depending on
+whether the NEXT segment is numeric — the JSON tree's arrays vs
+objects must be inferred because the paths name both.
+
+- `@param` obj Root object to write into.
+- `@param` dotPath Dotted path ('components.legal-footer.links.0.page').
+- `@param` value Leaf value to assign.

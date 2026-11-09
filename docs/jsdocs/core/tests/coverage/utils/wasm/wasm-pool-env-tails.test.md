@@ -2,7 +2,13 @@
 
 Coverage for core/utils/wasm/wasm-pool.ts module-evaluation
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\utils\wasm\wasm-pool-env-tails.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                  |
+| -------------- | ---------------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\utils\wasm\wasm-pool-env-tails.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.        |
+
+## Members
+
+### `uaDesc`
+
+Saved property descriptors — env stubs redefine then restore per test.

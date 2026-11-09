@@ -2,12 +2,16 @@
 
 Split from site-toast.test.js — covers the "SiteToast placement contract" describe.
 
-| | |
-|---|---|
-| **Source** | `src/website\tests\components\feedback\site-toast-sitetoast-placement-contract.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------- |
+| **Source**     | `src/website\tests\components\feedback\site-toast-sitetoast-placement-contract.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.                                 |
 
 ## Members
+
+### `_flush`
+
+Zero-ms flush — toast queue drains within one macrotask.
 
 ### `_loadNotify`
 
@@ -16,3 +20,7 @@ Fresh notify module (fresh _seen/_toastEl/_globalBound state) per call.
 ### `_mountToast`
 
 Mounts a toast element, returning it.
+
+### `_items`
+
+Lists the toast item elements inside the component's shadow root.

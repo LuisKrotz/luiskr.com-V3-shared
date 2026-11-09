@@ -9,6 +9,14 @@ Coverage tails for views/project/layout.ts — the
 
 ## Members
 
+### `ORIG_RO`
+
+Originals captured for restore — ResizeObserver/getComputedStyle/fonts are stubbed per test.
+
+### `DESC`
+
+Class-name aliases for the description block's size-tier classes.
+
 ### `descBlock`
 
 Builds a detached description block holding `count` paragraphs.

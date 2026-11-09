@@ -2,10 +2,10 @@
 
 Coverage tail for the WebGPU/wasm switch slider path —
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\canvas\widgets\switch-slider-wasm-tails.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                           |
+| -------------- | ------------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\canvas\widgets\switch-slider-wasm-tails.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.                 |
 
 ## Members
 
@@ -28,3 +28,7 @@ Imports the class under test AFTER the mock is registered.
 ### `flush`
 
 Flushes the mount promise + a couple of frames.
+
+### `makeCanvas`
+
+Bare canvas — the wasm mount only needs the element handle.

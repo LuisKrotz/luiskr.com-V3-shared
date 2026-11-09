@@ -117,6 +117,18 @@ a page standing inside the folder.
 - `@param` bot Bottom edge — occluded by the front flap's opaque fill.
 - `@returns` SVG path data.
 
+### `paperSheet`
+
+Draws one paper-sheet glyph inside a stack icon — seeded jitter varies
+each sheet's tilt/shape so stacks of docs look hand-placed, not stamped.
+
+- `@param` seed Deterministic seed (per-sheet identity).
+- `@param` i Sheet index in the stack (0 = back).
+- `@param` open True when the stack's lid sheet is drawn lifted.
+- `@param` top True for the front sheet (receives the wordmark text).
+- `@param` count Total sheets in the stack.
+- `@returns` The sheet's SVG group element.
+
 ### (module scope)
 
 macOS/Windows-style folder silhouette — the raised left tab and the

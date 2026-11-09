@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\patch-star-field-share-themes.js`
 
+One-shot migration: injects the share-capture labels
+
 |                |                                                            |
 | -------------- | ---------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\patch-star-field-share-themes.js` |

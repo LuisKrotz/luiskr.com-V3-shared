@@ -48,6 +48,10 @@ allocates nothing per frame.
 - `@param` s The element's spring state.
 - `@param` ts rAF timestamp (ms).
 
+### `tickSpring`
+
+Per-frame spring step — integrates position toward target and writes height.
+
 ### `springExpandTo`
 
 Spring-drives `el`'s height toward `target` px. Mid-flight retargets

@@ -2,7 +2,13 @@
 
 Split from scroll-and-predict.test.js — covers the "route-warmer" describe.
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\utils\motion\scroll-and-predict-route-warmer.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                       |
+| -------------- | --------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\utils\motion\scroll-and-predict-route-warmer.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.             |
+
+## Members
+
+### `flush`
+
+Long flush — route-warmer idle windows are ~150ms wide.

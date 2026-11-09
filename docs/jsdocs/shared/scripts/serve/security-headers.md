@@ -9,6 +9,26 @@ Cross-origin isolation headers shared by every site-facing
 
 ## Members
 
+### `COEP`
+
+Header name for the embedder policy — mirrors COOP above.
+
+### `SITE_COOP_VALUE`
+
+COOP for all site routes — isolates the browsing context group.
+
+### `SITE_COEP_VALUE`
+
+COEP for site routes — enables crossOriginIsolated (SAB/threaded WASM).
+
+### `CMS_COOP_VALUE`
+
+COOP for /cms — allow-popups keeps the Firebase auth popup flow working.
+
+### `CMS_COEP_VALUE`
+
+COEP for /cms — CMS iframes third-party auth UIs it cannot declare.
+
 ### `CMS_PATH_RE`
 
 Routes that must stay non-isolated (CMS auth iframes + popups).

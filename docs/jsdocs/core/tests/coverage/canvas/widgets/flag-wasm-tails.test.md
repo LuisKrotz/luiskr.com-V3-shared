@@ -2,10 +2,10 @@
 
 Coverage tail for the WebGPU/wasm flag path — init's
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\canvas\widgets\flag-wasm-tails.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                  |
+| -------------- | ---------------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\canvas\widgets\flag-wasm-tails.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.        |
 
 ## Members
 
@@ -36,3 +36,11 @@ Imports the class + anim/loop modules AFTER the mocks are registered.
 ### `flush`
 
 Flushes the mount + decode promises and a couple of frames.
+
+### `makeCanvas`
+
+Canvas with a stubbed rect — flag sizing math reads real boxes.
+
+### `lang`
+
+Lang-row factory — code + one or two country variants per row.

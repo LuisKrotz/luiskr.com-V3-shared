@@ -2,7 +2,17 @@
 
 Coverage tails for the intro-loader fallback arms: a loader
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\canvas\loaders\intro-loader-tails-3.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                       |
+| -------------- | --------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\canvas\loaders\intro-loader-tails-3.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.             |
+
+## Members
+
+### `actual`
+
+Real fallback module — the mock re-exports parts while stubbing others.
+
+### `flush`
+
+Generous flush — loader steps settle within a few macrotasks.

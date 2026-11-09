@@ -2,12 +2,16 @@
 
 GLSL sources for the GPUAccelerator passthrough program —
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\gpu\gpu-accel-shaders.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\gpu\gpu-accel-shaders.ts`                 |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### `GPU_ACCEL_VS`
+
+Fullscreen-quad vertex shader emitting flipped-normalized UVs.
 
 ### `GPU_ACCEL_FS`
 

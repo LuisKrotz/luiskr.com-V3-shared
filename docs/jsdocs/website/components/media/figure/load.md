@@ -36,6 +36,15 @@ ascends serially, so warming the top rung early would fight the low
 rung's fetch for bandwidth and warm a resource that may never publish.
 Never publishes, never marks loaded — pure network warm.
 
+### `releaseDomBlobs`
+
+Releases every display-sized object URL a figure still holds — called
+from onDestroy so the blob store can't grow across route changes. An
+img that already consumed its blob keeps the decoded bitmap (revocation
+only blocks new fetches), so painted layers are unaffected.
+
+- `@param` fig The figure being torn down.
+
 ### `ladderBoxWidth`
 
 The figure's rendered box width for stem/ladder picks — read once and
@@ -79,6 +88,24 @@ shimmer forever.
 
 Highest confirmed probe — the bitmap handed to the GPU at chain end.
 
+### `domSizedSrc`
+
+Display-bound DOM bitmap — the CDN rungs are quality-compressed but
+FULL-dimensioned, so a 1920×5654 page capture painted into a ~365px
+slide still decodes ~11MP per mounted layer and keeps that raster
+live for the strip's life (the tall-image scroll freeze). The probe
+already fetched the bytes, so the HTTP-cached blob re-decodes once
+into a box-covering bitmap through createImageBitmap's decode-time
+resize, re-encodes to a small jpeg, and the img mounts the object
+URL — the same rendered pixels at a fraction of the decoded memory.
+Every failure arm returns the CDN URL so the mount degrades to the
+plain full-dimension path unchanged.
+
+- `@param` url Confirmed rung URL whose probe supplies the source dims.
+- `@param` srcW The rung's intrinsic width (its probe's naturalWidth).
+- `@param` srcH The rung's intrinsic height.
+- `@returns` An object URL bounded to the rendered box, or `url`.
+
 ### `publishDom`
 
 Publishes a confirmed tier into the visible high layer — the probe
@@ -101,7 +128,7 @@ the timeout covers reduced-motion/no-transition environments
 where the event never lands. Index order is recomputed at
 retire time so a newer layer mounted above is never pruned.
 
-### `publish`
+### `pendingUrl`
 
 Scroll-gesture park for the DOM swap — clone/insert/transition churn
 mid-fling spends the frame budget the scroll itself needs (scroll-fps
@@ -109,9 +136,15 @@ gate floors: 120fps mobile / 240fps desktop). Probes keep fetching and
 decoding off the gesture path; only the visible layer swap waits for
 scroll-idle, and the painted thumb already owns the box so nothing
 blanks. onScrollStop fires immediately when the window isn't
-scrolling, so a static viewport sees no added latency. Parked calls
-fire in registration order — the climb confirms rungs serially, so
-the LAST publish is always the highest proven tier.
+scrolling, so a static viewport sees no added latency.
+
+Parked calls COALESCE to the latest confirmed rung: without it a
+3-rung climb taken mid-scroll queues three clone+insert+fade+retire
+cycles that all detonate in one task at scroll-stop (the post-fling
+freeze) — and every early tier paints pixels its successor replaces
+a frame later. One queued callback per climb mounts only the highest
+proven tier; rungs confirming after it drains re-queue normally, so
+the idle-path progressive upgrade is unchanged.
 
 - `@param` url Confirmed rung URL ready to paint.
 

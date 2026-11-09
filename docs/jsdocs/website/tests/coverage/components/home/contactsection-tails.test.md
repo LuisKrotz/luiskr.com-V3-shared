@@ -2,7 +2,13 @@
 
 Split from coverage-tails-4.test.js — covers the "ContactSection tails" describe.
 
-| | |
-|---|---|
-| **Source** | `src/website\tests\coverage\components\home\contactsection-tails.test.js` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                                           |
+| -------------- | ------------------------------------------------------------------------- |
+| **Source**     | `src/website\tests\coverage\components\home\contactsection-tails.test.js` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.                   |
+
+## Members
+
+### `flush`
+
+Generous flush — mounted render queues need real timers past microtasks.

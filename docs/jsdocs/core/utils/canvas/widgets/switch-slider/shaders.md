@@ -2,12 +2,16 @@
 
 GLSL sources for SwitchSliderWebGL's animated toggle scene,
 
-| | |
-|---|---|
-| **Source** | `src/core\utils\canvas\widgets\switch-slider\shaders.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\utils\canvas\widgets\switch-slider\shaders.ts`  |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
+
+### `SWITCH_SLIDER_VS`
+
+Fullscreen-quad vertex shader: a_pos in clip space, v_uv 0–1.
 
 ### `SWITCH_SLIDER_FS`
 

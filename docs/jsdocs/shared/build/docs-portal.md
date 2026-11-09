@@ -2,9 +2,9 @@
 
 Docs portal pipeline plugin — `virtual:docs-manifest` carries
 
-| | |
-|---|---|
-| **Source** | `src/shared\build\docs-portal.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\build\docs-portal.mjs`                      |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -12,7 +12,15 @@ Docs portal pipeline plugin — `virtual:docs-manifest` carries
 ### `docsPortalPlugin`
 
 Builds the docs-portal vite plugin.
+
 - `@param` {object} opts Options.
 - `@param` {string} opts.root Repo root the manifest scan resolves against.
 - `@param` {boolean} [opts.emitAssets] Emit `docs-content/*.json` payloads into
 - `@returns` {import('vite').Plugin} The plugin instance.
+
+### `payloadFor`
+
+`payloadFor` — builds one file's publishable payload: media under
+the inline limit ships as a data-URI, text content renders to
+HTML through renderFile, source passes through redactSource.
+Returns null when the id doesn't resolve under root.

@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\patch-all-pages-search-themes.js`
 
+One-shot migration: rebuilds every page node's and
+
 |                |                                                            |
 | -------------- | ---------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\patch-all-pages-search-themes.js` |
@@ -47,6 +49,10 @@ node only carries searchThemes for the /contact route.
 
 Dialect fallbacks mirror the base patch scripts:
 hrk → de, cas → es, riv → es, tln → it; gn keeps authored terms.
+
+### `dedupe`
+
+Lowercases + trims + dedupes a candidate list, dropping empties.
 
 ### `stripHtml`
 

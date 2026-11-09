@@ -2,9 +2,9 @@
 
 Validates every media `size` declared in `database.json`
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\media\validate-media-sizes.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\media\validate-media-sizes.mjs`     |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -29,7 +29,7 @@ embedded thumbnail APP1 segments before the frame header.
 
 ### `IMAGE_DIM_VARIANTS`
 
-Image variants usable for *dimensions* — same-source derivative passes
+Image variants usable for _dimensions_ — same-source derivative passes
 only. The kodak MSSIM thumb is excluded deliberately: it is a downscaled
 blur-up placeholder and would record the wrong intrinsic size.
 
@@ -75,6 +75,18 @@ is the live object reference so `--fix` updates every language at once,
 and `path` is the RTDB location (`translations/<loc>/projects/…`) so
 `--push` can write the same leaf remotely.
 
+### `collect`
+
+`collect` — walks one project's tree: a node carrying
+{src: string, size: array} is a media record; everything else
+recurses by key.
+
+### `visit`
+
+`visit` — finds the `projects` node under any tree position and
+collects each project with its folder prefix; recurses past the
+locale layer.
+
 ### `pickObject`
 
 Picks the first bucket object whose suffix marks a source-fidelity variant.
@@ -82,6 +94,13 @@ Picks the first bucket object whose suffix marks a source-fidelity variant.
 ### `getManifest`
 
 Loads the live bucket listing, falling back to the persisted manifest.
+
+### `main`
+
+`main` — the audit pipeline: collect dedupe'd media entries →
+resolve each to a bucket object → probe dimensions N-at-a-time →
+report diffs/errors → optionally --fix the mirror, --push live,
+and --json a report. Exit 1 on drift (unless --fix healed it).
 
 ### `RTDB_URL`
 

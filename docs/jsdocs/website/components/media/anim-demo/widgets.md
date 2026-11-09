@@ -9,7 +9,7 @@
 
 ### `_THEME_STOPS`
 
-Theme stops the slider demo walks (dark → system → light, production order).
+Theme stops the demo walks — the production order (dark → system → light).
 
 ### `stageCanvas`
 

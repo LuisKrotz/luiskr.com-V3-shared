@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\patch-sitemap-page.js`
 
+One-shot migration: seeds the sitemap page's copy into
+
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\patch-sitemap-page.js`         |

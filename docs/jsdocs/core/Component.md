@@ -2,9 +2,9 @@
 
 BaseComponent — Custom Element base class with Shadow DOM encapsulation,
 
-| | |
-|---|---|
-| **Source** | `src/core\Component.ts` |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/core\Component.ts`                                   |
 | **UX surface** | Shared primitives every surface builds on — no direct UI. |
 
 ## Members
@@ -34,17 +34,49 @@ pass a stub without importing the full singleton graph.
 
 Base class every view/component extends. Owns the four things the app
 relies on being uniform:
- 1. Shadow root + one stylesheet injection strategy (adoptedStyleSheets
+
+1.  Shadow root + one stylesheet injection strategy (adoptedStyleSheets
     with a shared-sheet cache, `<style>` fallback on old engines);
- 2. `setState → render → _updateDom` reactive cycle;
- 3. automatic teardown — scoped listeners, store subs, and the WebGL
+2.  `setState → render → _updateDom` reactive cycle;
+3.  automatic teardown — scoped listeners, store subs, and the WebGL
     skeleton layer are released in disconnectedCallback;
- 4. lifecycle hooks subclasses implement: render(), onInit, onMounted,
+4.  lifecycle hooks subclasses implement: render(), onInit, onMounted,
     onUpdated, onStoreUpdate(store), onDestroy.
 
 ### (module scope)
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
+
+### (module scope)
+
+Width-class key of the media tier currently adopted — gates both
+duplicate adoption and the grow-watcher upgrade path.
+
+### (module scope)
+
+Tier key whose lazy import is in flight — dedupes concurrent loads.
+
+### (module scope)
+
+The adopted cumulative tier sheet (constructable path) — spliced in
+place when a wider tier supersedes it so equal-specificity media
+rules keep source order.
+
+### (module scope)
+
+Resolved base css — the `?tiers` module's base or the plain `?inline`
+string — computed once per _renderInitial and reused by the legacy
+<style> rebuild when a cumulative tier lands.
+
+### (module scope)
+
+Tier css text currently appended to the legacy <style> node.
+
+### (module scope)
+
+Shared grow-watcher unsubscribe — set while mounted with tiers.
 
 ### (module scope)
 
@@ -93,7 +125,7 @@ Attach an open shadow root and stash the component's `?inline` CSS text.
 `mode: 'open'` keeps `element.shadowRoot` readable — the codebase and the
 happy-dom tests both rely on that handle for assertions and scoped
 queries; 'closed' would break both without buying real encapsulation.
-- `@param` styles Component-local CSS text (Vite `?inline` import).
+- `@param` styles Component-local CSS — `?inline` text or a `?tiers` module.
 
 ### `setState`
 
@@ -163,6 +195,26 @@ Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
 root retains children from the previous mount, so both style and content
 paths reuse existing nodes instead of duplicating them.
+
+### (module scope)
+
+Loads and adopts the cumulative media tier covering `cls` — the
+highest defined tier key at or below the viewport class. Called at
+mount with the current class and again from the grow-watcher on
+upward crossings; a newer pending load never blocks an already-
+resolving narrower tier (cumulative sheets are nested supersets, so
+adopting mobile→desktop in any arrival order stays correct).
+- `@param` cls viewport width class to cover.
+- `@param` tiered the component's `?tiers` module.
+
+### (module scope)
+
+Adopts an already-downloaded cumulative tier css — constructable path
+shares one parsed sheet per text via `_sharedSheets` and splices it in
+at the old tier's position (never dropping sheets a subclass added);
+the legacy path rewrites the `<style>` node, where the new cumulative
+text replaces the served one outright since it is a strict superset.
+- `@param` css cumulative tier css text.
 
 ### `_updateDom`
 

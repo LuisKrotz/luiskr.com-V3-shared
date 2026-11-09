@@ -103,11 +103,7 @@ Flick velocity (px/ms) that carries a short drag to the next card.
 
 px tolerance for "offset ≈ front" — class/ARIA front detection.
 
-### `PAD`
-
-Zero-pad width for the card ordinals ('01', '08').
-
 ### `AUTOPLAY_MS`
 
-Autoplay dwell per front card (ms) — 10s matches the retired footer
-carousel's ambient pace; gated on ≥50% visibility + reduced-motion.
+Autoplay dwell per front card (ms) — 2s keeps the strip in motion;
+gated on ≥50% visibility + reduced-motion, frozen by hover/drag.

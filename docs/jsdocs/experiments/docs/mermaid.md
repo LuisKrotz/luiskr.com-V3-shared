@@ -18,6 +18,18 @@ Default font size when the computed style is unparsable.
 Cheap source scanners feeding the diagram-cost model — counts of each
 structural feature, not a parse (the wasm engine still does that).
 
+### `NODE_RE`
+
+Node-shape opener — any `[`, `(`, or `{` begins a node declaration.
+
+### `NEST_RE`
+
+Nested subgraph keyword — bumps the bracket-depth heuristic.
+
+### `SELF_RE`
+
+Self-edge — `A -> A` adds visual noise the layout already implies.
+
 ### `countMatches`
 
 Counts regex matches without allocating a match array.

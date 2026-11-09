@@ -2,12 +2,16 @@
 
 Scans every .ts/.tsx/.js file under src/ for console usage. Policy:
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\verify\console-scan.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\verify\console-scan.mjs`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
+
+### `listSrcFiles`
+
+Recursive .ts/.tsx/.js collector honoring the SKIP_DIRS set.
 
 ### `scanLines`
 

@@ -12,3 +12,15 @@ Coverage tails for the shared docs catalog in
 ### `state`
 
 Per-test docs-index reply — swapped before every loadCatalog call.
+
+### `localeRows`
+
+Minimal row the locale catalog returns — only the shape fields matter.
+
+### `docsCalls`
+
+Counts fetch calls against the docs index — the '-docs' URL marks them.
+
+### `catalog`
+
+Promise-wraps the callback-style loadCatalog so tests can await it.

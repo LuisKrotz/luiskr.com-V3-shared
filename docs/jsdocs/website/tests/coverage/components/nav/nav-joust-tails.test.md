@@ -24,3 +24,7 @@ Dispatches a real pointer click so `e.currentTarget` + `detail` are live.
 ### `menuHost`
 
 Minimal NavMenuHost surface for toggleNavMenu/openNavMenu.
+
+### `handlerHost`
+
+Fake `this` for the nav handlers — jest fns record every internal call.

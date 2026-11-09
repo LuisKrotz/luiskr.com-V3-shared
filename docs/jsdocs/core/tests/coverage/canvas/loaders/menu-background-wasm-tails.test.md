@@ -2,10 +2,10 @@
 
 Coverage tail for the WebGPU/wasm menu-background path —
 
-| | |
-|---|---|
-| **Source** | `src/core\tests\coverage\canvas\loaders\menu-background-wasm-tails.test.js` |
-| **UX surface** | Shared primitives every surface builds on — no direct UI. |
+|                |                                                                             |
+| -------------- | --------------------------------------------------------------------------- |
+| **Source**     | `src/core\tests\coverage\canvas\loaders\menu-background-wasm-tails.test.js` |
+| **UX surface** | Shared primitives every surface builds on — no direct UI.                   |
 
 ## Members
 
@@ -28,3 +28,7 @@ Imports the class under test AFTER the mock is registered.
 ### `flush`
 
 Flushes the mount promise + a couple of frames.
+
+### `makeCanvas`
+
+Canvas inside a stub-rect parent — the loader reads real boxes.

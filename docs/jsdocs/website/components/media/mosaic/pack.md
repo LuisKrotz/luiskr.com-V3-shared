@@ -78,11 +78,13 @@ the segment list stays small (O(segs) per placement).
 ### `bestSpot`
 
 One tile's lowest legal spot on the current skyline: candidates are
-every segment start AND every right-aligned end (seg.x+seg.w−s.w) —
-the second set lets narrow tiles pack flush against taller right
-edges instead of stranding a gutter. Lowest top wins; ties take the
-leftmost candidate. A tile too wide for every segment falls back to
-the full-width floor (its clamps already bound it to the wall).
+every segment start. Lowest top wins; ties take the leftmost
+candidate. (Right-aligned ends were considered and dropped: inside
+its own segment a right-align always ties seg.x and loses on
+leftmost, and landing inside an earlier segment its span covers a
+superset of that segment's tail — it can never produce a strictly
+lower top, so the set was dead candidates.) Tiles clamp to ≤ wallW
+and the x=0 segment always exists, so a candidate always lands.
 
 Pocket shrink-fit: a segment narrower than the tile still gets a
 candidate — the tile downscales (aspect kept) to the segment's width
