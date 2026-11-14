@@ -5,13 +5,17 @@
  * custom props) — and asserts they emit the same gutter at every breakpoint.
  * The overlay was historically a hand-synced subset of breakpoints and
  * drifted from the layout; the shared $grid-steps map + grid-steps mixin
- * make drift impossible, and this test locks that invariant in.
+ * make drift impossible, and this test locks that invariant in. A second
+ * invariant guards paper: the guides ride html::before/::after, which the
+ * print sheet must hide explicitly while the pref is on or the columns
+ * leak into every PDF.
  */
 
 import path from 'path'
 import { fileURLToPath } from 'url'
 import * as sass from 'sass'
 import fs from 'fs'
+import { readSassDeep } from '@tests/fixtures/sass-resolve.js'
 
 // Base-sass dir — the compiled grid/mixin sheets the overlay asserts on.
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -126,5 +130,28 @@ describe('Grid overlay — compiled parity with %MAXAREA gutters', () => {
     })
 
     for (let i = 1; i < seq.length; i++) expect(seq[i]).toBeGreaterThanOrEqual(seq[i - 1])
+  })
+
+  test('overlay chrome is hidden on paper — column guides never reach print', () => {
+    // The guides ride html::before/::after, which the print sheet's
+    // pseudo-element hide list does not cover generically: with the pref
+    // on, the columns would paint into every PDF. The sheet must hide
+    // them explicitly inside @media print.
+    const printSrc = readSassDeep(path.join(SASS_BASE, 'structure', '_print.scss'))
+      .replace(/\/\/[^\n]*/g, '')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+
+    const mediaIdx = printSrc.indexOf('@media print')
+
+    expect(mediaIdx).toBeGreaterThanOrEqual(0)
+
+    const hideRules = printSrc.slice(mediaIdx).matchAll(/([^{}@]+)\{\s*display:\s*none\s*;?\s*\}/g)
+    const covered = [...hideRules].some((m) => {
+      const sels = m[1]
+
+      return sels.includes('html.show-grid::before') && sels.includes('html.show-grid::after')
+    })
+
+    expect(covered).toBe(true)
   })
 })

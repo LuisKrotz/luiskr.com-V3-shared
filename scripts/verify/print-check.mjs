@@ -197,7 +197,12 @@ function serveDist() {
     }
     if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html')
     if (!fs.existsSync(file) && fs.existsSync(`${file}.html`)) file = `${file}.html`
+    // Mirrors firebase.json's rewrite ladder: a real 404 page wins when
+    // the build emits one, else the `** → /index.html` SPA fallback —
+    // an unmatched route boots the app and the router renders NotFound,
+    // which is what production prints for /404.
     if (!fs.existsSync(file)) file = path.join(DIST_DIR, '404', 'index.html')
+    if (!fs.existsSync(file)) file = path.join(DIST_DIR, 'index.html')
     if (!fs.existsSync(file)) {
       res.writeHead(404)
       res.end('not found')
@@ -300,8 +305,88 @@ try {
       // of print.ts's exit() restore.
       await page.evaluateOnNewDocument(() => {
         window.__printShot = null
+        // Chrome classes the print sheet always display:nones — an img
+        // under one paints nothing, loaded or not. The doc-mode flags
+        // resolve lazily inside __walk: evaluateOnNewDocument fires
+        // before <html> exists, and the stamped classes only land at
+        // commit time anyway.
+        window.__PRINT_HIDDEN = [
+          'intro-loader',
+          'intro-loader--retired',
+          'print-veil',
+          'app-nav',
+          'search-modal',
+          'preferences-modal',
+          'lang-dialog',
+          'expand-modal',
+          'media-expanded',
+          'site-toast',
+          'cookie-banner',
+          'stats-hud',
+          'skip-link',
+          'print-src',
+        ]
         window.__walk = (root, out = []) => {
+          // Doc-mode contract the print sheet enforces — mirrored here so
+          // the walk can tell a paintable img from chrome that happens to
+          // still sit in the committed DOM. @media print hides don't apply
+          // to live-screen layout queries, so "is it hidden on paper" must
+          // be decided structurally, by ancestor.
+          const __html = document.documentElement.className
+          const docHide = __html.includes('print-cover-only') || __html.includes('print-doc')
+          const plateDoc = __html.includes('print-plate-doc')
+          const mirror = __html.includes('print-doc')
+
           for (const el of root.querySelectorAll('img, video, canvas')) {
+            // Painted = NOT under a print-hidden ancestor. The climb
+            // pierces shadow roots so plated shadow cards resolve their
+            // hiding ancestor: #app under cover-only/doc, non-plate #app
+            // children under plate-doc, a parked .reader-content under
+            // anything but print-doc, or chrome classes from the sheet's
+            // own hide list.
+            let painted = true
+            let beforeApp = null
+
+            for (
+              let n = el;
+              n;
+              n =
+                n.parentElement ??
+                (n.getRootNode?.() instanceof ShadowRoot ? n.getRootNode().host : null)
+            ) {
+              const cl = n.classList
+
+              if (cl) {
+                if (cl.contains('reader-content') && !mirror) {
+                  painted = false
+                  break
+                }
+
+                for (const c of window.__PRINT_HIDDEN) {
+                  if (cl.contains(c)) {
+                    painted = false
+                    break
+                  }
+                }
+
+                if (!painted) break
+              }
+
+              if (n.id === 'app') {
+                // plate-doc hides #app's non-plate DIRECT children —
+                // a .print-plate deeper inside a hidden child stays
+                // hidden, so the test lands on the child itself.
+                if (docHide) painted = false
+                else if (plateDoc && !beforeApp?.classList?.contains('print-plate')) {
+                  painted = false
+                }
+
+                break
+              }
+
+              beforeApp = n
+            }
+
             out.push({
               tag: el.tagName,
               cls: typeof el.className === 'string' ? el.className : '',
@@ -318,6 +403,7 @@ try {
               i: out.length,
               complete: el.complete,
               nw: el.naturalWidth,
+              painted,
               w: Math.round(el.getBoundingClientRect?.().width || 0),
             })
           }
@@ -442,8 +528,13 @@ try {
       // beforeprint rides refreshMedia on the live job; diffing the two
       // shots shows whether refresh re-broke a decoded layer for a cold one.
       const preShot = await page.evaluate(() => window.__commitShot || null)
+      // Painted-media predicate — only an img inside a print surface can
+      // blank a printed box; display:none app stragglers (cover-only hides
+      // the whole host) still report screen-rect widths, so `w` cannot
+      // discriminate and the surface climb does it instead.
       const pendingCount = (preShot || []).filter(
-        (m) => m.tag === 'IMG' && !m.cls.includes('print-src') && !(m.complete && m.nw > 0)
+        (m) =>
+          m.tag === 'IMG' && !m.cls.includes('print-src') && m.painted && !(m.complete && m.nw > 0)
       ).length
       const settled = preShot !== null && pendingCount === 0
 
@@ -466,7 +557,11 @@ try {
         bad = true
       } else {
         const unloaded = shot.media.filter(
-          (m) => m.tag === 'IMG' && !m.cls.includes('print-src') && !(m.complete && m.nw > 0)
+          (m) =>
+            m.tag === 'IMG' &&
+            !m.cls.includes('print-src') &&
+            m.painted &&
+            !(m.complete && m.nw > 0)
         )
         if (unloaded.length) {
           fail(

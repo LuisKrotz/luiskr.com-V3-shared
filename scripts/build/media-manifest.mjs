@@ -78,6 +78,83 @@ const pickVariant = (base, variants, manifest) => {
 }
 
 /**
+ * Retention-locked stale video-poster webp keys — emitted by an older
+ * poster pass that captured each clip's t=0 loading slate (gray splash,
+ * black title card, or language gate). The `.mp4.jpg` poster families
+ * were regenerated mid-clip and re-uploaded, but these `.webp` objects
+ * sit under the bucket's locked 31-day retention window and cannot be
+ * overwritten until it lapses. Keeping them out of the manifest drops
+ * `webpIfExists()` offers back to the fresh `.jpg` posters instead of
+ * serving the stale frames. Remove each entry once its object is
+ * re-emitted and verified — verification walks `media-manifest.json`
+ * pixel-variance, not filename presence.
+ */
+const STALE_MEDIA_KEYS = Object.freeze([
+  'aboutmarco/home/aboutmarco.com-2020-full-page-home-tour.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'aboutmarco/home/aboutmarco.com-2020-full-page-home-tour.mp4-scaledown-2x.mp4.webp',
+  'aboutmarco/home/aboutmarco.com-2020-full-page-home-tour.mp4.jpg-thumb.webp',
+  'aboutmarco/home/aboutmarco.com-2020-full-page-home-tour.mp4.webp',
+  'brazilian leather/forum-cicb/2020/cicb.org.br-forum2020.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'brazilian leather/forum-cicb/2020/cicb.org.br-forum2020.mp4-scaledown-2x.mp4.webp',
+  'brazilian leather/forum-cicb/2020/cicb.org.br-forum2020.mp4-scaledown-4x.mp4.jpg-thumb.webp',
+  'brazilian leather/forum-cicb/2020/cicb.org.br-forum2020.mp4-scaledown-4x.mp4.webp',
+  'brazilian leather/forum-cicb/2020/cicb.org.br-forum2020.mp4.jpg-thumb.webp',
+  'brazilian leather/forum-cicb/2020/cicb.org.br-forum2020.mp4.webp',
+  'brazilian leather/forum-cicb/2021/forum-cicb-2021-tour.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'brazilian leather/forum-cicb/2021/forum-cicb-2021-tour.mp4-scaledown-2x.mp4.webp',
+  'brazilian leather/forum-cicb/2021/forum-cicb-2021-tour.mp4.jpg-thumb.webp',
+  'brazilian leather/forum-cicb/2021/forum-cicb-2021-tour.mp4.webp',
+  'melissa/collabs/development/rider/melissa-collab-rider-tour.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'melissa/collabs/development/rider/melissa-collab-rider-tour.mp4-scaledown-2x.mp4.webp',
+  'melissa/collabs/development/rider/melissa-collab-rider-tour.mp4-scaledown-4x.mp4.jpg-thumb.webp',
+  'melissa/collabs/development/rider/melissa-collab-rider-tour.mp4-scaledown-4x.mp4.webp',
+  'melissa/collabs/development/rider/melissa-collab-rider-tour.mp4.jpg-thumb.webp',
+  'melissa/collabs/development/rider/melissa.com.br-collabs-rider-31-03-19-1-mobile.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'melissa/collabs/development/rider/melissa.com.br-collabs-rider-31-03-19-1-mobile.mp4-scaledown-4x.mp4.jpg-thumb.webp',
+  'melissa/collabs/development/rider/melissa.com.br-collabs-rider-31-03-19-1-mobile.mp4-scaledown-4x.mp4.webp',
+  'melissa/collabs/development/rider/melissa.com.br-collabs-rider-31-03-19-1-mobile.mp4.jpg-thumb.webp',
+  'metcha/cms/cms.metcha.com-adding-dynamic-content-from-youtube.jpg-thumb.webp',
+  'metcha/cms/cms.metcha.com-adding-dynamic-content-from-youtube.mp4.jpg-thumb.webp',
+  'metcha/cms/cms.metcha.com-adding-dynamic-content-from-youtube.mp4.webp',
+  'metcha/cms/cms.metcha.com-adding-dynamic-content-from-youtube.webp',
+  'transainc/website-2022/transa-screenrecording-case-brazilian-leather.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-brazilian-leather.mp4-scaledown-2x.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-brazilian-leather.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-brazilian-leather.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-coza.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-coza.mp4-scaledown-2x.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-coza.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-coza.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-melissa.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-melissa.mp4-scaledown-2x.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-melissa.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-melissa.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-metcha.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-metcha.mp4-scaledown-2x.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-metcha.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-metcha.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-mor.mp4-scaledown-2x.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-mor.mp4-scaledown-2x.mp4.webp',
+  'transainc/website-2022/transa-screenrecording-case-mor.mp4.jpg-thumb.webp',
+  'transainc/website-2022/transa-screenrecording-case-mor.mp4.webp',
+])
+
+/**
+ * Drops the retention-locked stale keys from a manifest key set so
+ * nothing downstream (runtime webpIfExists, build-time variant picking)
+ * can offer a stale sibling. Applied on both the fetch and the persisted
+ * load paths — a stale JSON artifact predating the filter must not
+ * resurrect the keys.
+ * @param keys Mutable Set of manifest keys relative to MEDIA_PREFIX.
+ * @returns The same set, minus every stale key.
+ */
+const dropStaleMediaKeys = (keys) => {
+  for (const stale of STALE_MEDIA_KEYS) keys.delete(stale)
+
+  return keys
+}
+
+/**
  * Lists every object key under MEDIA_PREFIX → Set of names relative to the
  * prefix (`metcha/feed/x.jpg`). Returns `null` when the listing fails so
  * callers can fall back to the historic naming convention.
@@ -113,7 +190,7 @@ export async function fetchMediaManifest() {
       pageToken = body.nextPageToken
     }
 
-    return keys
+    return dropStaleMediaKeys(keys)
   } catch {
     // Network/parse failure → null so callers fall back to convention.
     return null
@@ -137,7 +214,7 @@ export function loadMediaManifest(metaDir) {
   try {
     const raw = JSON.parse(fs.readFileSync(`${metaDir}/media-manifest.json`, 'utf-8'))
 
-    return new Set(raw)
+    return dropStaleMediaKeys(new Set(raw))
   } catch {
     return null
   }
