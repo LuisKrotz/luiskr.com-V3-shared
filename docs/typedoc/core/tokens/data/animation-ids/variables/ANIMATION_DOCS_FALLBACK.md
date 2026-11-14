@@ -8,7 +8,7 @@
 const ANIMATION_DOCS_FALLBACK: 'docs/animations' = 'docs/animations'
 ```
 
-Defined in: core/tokens/data/animation-ids.ts:169
+Defined in: core/tokens/data/animation-ids.ts:187
 
 Docs path for animation records missing from ANIMATION_DOCS — the
 animations deep-dive README dir, which the docs portal auto-opens

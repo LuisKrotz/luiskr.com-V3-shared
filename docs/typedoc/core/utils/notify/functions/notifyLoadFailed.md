@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/notify](../README.md) / notifyLoadFailed
 
 ```ts
-function notifyLoadFailed(opts?): Promise<false | "native" | "toast">;
+function notifyLoadFailed(opts?): Promise<false | 'native' | 'toast'>
 ```
 
-Defined in: core/utils/notify.ts:198
+Defined in: core/utils/notify.ts:199
 
 Resource/section load failure shortcut.
 

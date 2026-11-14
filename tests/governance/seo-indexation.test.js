@@ -240,6 +240,101 @@ describe('SEO indexation contract', () => {
     expect(schema).toContain('SCHEMA_STRINGS.NOINDEX_NOFOLLOW')
   })
 
+  test('every route declares its print-optimized alternate in the head', () => {
+    const indexHtml = read(path.join(ROOT_DIR, 'index.html'))
+    const pageBuilder = read(
+      path.join(ROOT_DIR, 'shared', 'scripts', 'build', 'build-locale-pages.mjs')
+    )
+    const navigate = read(path.join(ROOT_DIR, 'core', 'router', 'navigate.ts'))
+
+    // The shell declares the print form on the canonical URL itself —
+    // rel=alternate + media="print" is the head-level signal that the
+    // same URL renders an optimized paper representation (lazy rcss
+    // print tier + print DOM adapter).
+    expect(indexHtml).toMatch(/<link rel="alternate" media="print" href="[^"]+" \/>/)
+
+    // Static localized documents rebind the link to their own canonical.
+    expect(pageBuilder).toContain('<link rel="alternate" media="print" href="')
+
+    // Runtime navigations keep it on the active canonical — a stale
+    // href would point crawlers at the wrong route's print form.
+    expect(navigate).toContain('QUERY_STRINGS.LINK_PRINT')
+    expect(navigate).toContain('MEDIA_QUERIES.PRINT')
+  })
+
+  test('Google News sitemap exists, is discovered, and stays within the 48h window', () => {
+    const index = read(path.join(META_DIR, 'sitemap.xml'))
+    const news = read(path.join(META_DIR, 'sitemap-news.xml'))
+    const generator = read(path.join(ROOT_DIR, 'shared', 'scripts', 'build', 'generate-sitemap.js'))
+
+    // Discovery — the sitemap index, robots.txt and the firebase rewrite
+    // all surface the file so Google News can subscribe to it.
+    expect(index).toContain(`${SITE}/sitemap-news.xml`)
+    expect(robots).toContain(`Sitemap: ${SITE}/sitemap-news.xml`)
+
+    const newsRewrite = (firebase.hosting?.rewrites || []).find(
+      (r) => r.source === '/sitemap-news.xml'
+    )
+
+    expect(newsRewrite?.destination).toBe('/meta/sitemap-news.xml')
+
+    // The document speaks the news schema and only lists articles inside
+    // the 48-hour window — the generator enforces the window at build
+    // time, and only the git-derived date can legitimize an entry.
+    expect(news).toContain('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')
+    expect(generator).toContain('NEWS_WINDOW_MS')
+    expect(generator).toContain('news:publication_date')
+
+    // Every listed entry is a canonical portfolio URL in a real language.
+    for (const m of news.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      expect(m[1]).toMatch(new RegExp(`^${SITE}(?:/[a-z]{2,3})?/portfolio/[^/]+$`))
+    }
+
+    for (const m of news.matchAll(/<news:language>([^<]+)<\/news:language>/g)) {
+      expect(m[1].length).toBeGreaterThan(1)
+      expect(m[1]).not.toContain('-')
+    }
+  })
+
+  test('project articles ship verified publication dates on every surface', () => {
+    const db = JSON.parse(read(path.join(ROOT_DIR, 'database.json')))
+    const schema = read(path.join(ROOT_DIR, 'core', 'utils', 'schema.ts'))
+    const pageBuilder = read(
+      path.join(ROOT_DIR, 'shared', 'scripts', 'build', 'build-locale-pages.mjs')
+    )
+    const feed = read(path.join(META_DIR, 'feed.xml'))
+
+    // The git-derived stamp exists on every English project — the
+    // verified source the NewsArticle/OG/RSS surfaces read from.
+    const projects = db.translations?.en?.projects || {}
+
+    expect(Object.keys(projects).length).toBeGreaterThan(0)
+
+    for (const node of Object.values(projects)) {
+      expect(node.date).toBeTruthy()
+      expect(() => new Date(node.date)).not.toThrow()
+      expect(Number.isNaN(+new Date(node.date))).toBe(false)
+    }
+
+    // NewsArticle — the dated type Google News/Discover index off —
+    // wired once through the shared token in both emitters, with the
+    // stamps gated on the node fields (never invented).
+    expect(schema).toContain('SCHEMA_STRINGS.SCHEMA_ARTICLE_TYPE')
+    expect(schema).toContain('datePublished')
+    expect(schema).toContain('dateModified')
+    expect(pageBuilder).toContain('SCHEMA_STRINGS.SCHEMA_ARTICLE_TYPE')
+    expect(pageBuilder).toContain('SCHEMA_ARTICLE_PUBLISHED_TIME')
+
+    // Open Graph mirror — both timestamp metas emit when the node is
+    // dated, plus a visible <time> matching Google's date-trust guidance.
+    expect(pageBuilder).toContain('articleMeta.published')
+    expect(pageBuilder).toContain('articleMeta.modified')
+    expect(pageBuilder).toContain('<time datetime=')
+
+    // RSS items carry the publication stamp as RFC-822 pubDate.
+    expect(feed).toMatch(/<pubDate>[^<]+<\/pubDate>/)
+  })
+
   test('IndexNow key file is hosted and postdeploy submits the whole surface', () => {
     const submitScript = 'submit-indexnow.mjs'
 

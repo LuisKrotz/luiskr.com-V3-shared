@@ -8,7 +8,7 @@
 function fileSeamVerts(): Float32Array
 ```
 
-Defined in: experiments/docs/arch-scene.ts:743
+Defined in: experiments/docs/arch-scene.ts:751
 
 File seam segments — the silhouette outline on both faces, rim
 struts, the dog-ear crease and two text rules: the detail a filled

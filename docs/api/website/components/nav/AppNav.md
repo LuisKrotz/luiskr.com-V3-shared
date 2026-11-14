@@ -9,19 +9,6 @@
 
 ## Members
 
-### `_PLAYGROUND_SLUGS`
-
-Pre-computed set of every locale's localized earth-playground slug —
-`isPlaygroundPage` needs O(1) membership tests on the last URL segment
-(the route resolver may not have run yet when the getter first fires),
-so all 16 locales' `earthPlayground` values are flattened once at module
-load rather than re-built per check.
-
-### `_STAR_FIELD_SLUGS`
-
-Same slug set for the star-field experiment — separate `starField` key so
-each playground page suppresses only its own menu item.
-
 ### (module scope)
 
 The slice of the APP translation dictionary the nav template reads —
@@ -118,25 +105,17 @@ True on home/about/contact routes (nav shows section links).
 ### `isPlaygroundPage`
 
 True on the playground route (nav renders in its alternate variant).
-Three checks, in order: the resolved route name (fast path), the raw
-last URL segment vs the canonical English segments (covers the window
-before the first navigation resolves), and the precomputed set of all
-16 locales' localized playground slugs.
+The shared router/playground predicates do the checking: resolved
+route name first, then the last URL segment against canonical and
+localized slugs.
 
 ### `isEarthPlaygroundPage`
 
-True on the earth-playground route — checks the resolved route name
-first (the URL may not have resolved when the getter first fires),
-then falls back to a last-segment scan against canonical and localized
-slugs.
+True on the earth-playground route (or its space-playground alias).
 
 ### `isStarFieldPage`
 
 True on the star-field experiment route — same resolution order.
-
-### `_lastPathSegment`
-
-Last non-empty URL path segment — shared by the playground checks.
 
 ### `locale`
 
@@ -230,7 +209,7 @@ the markup lives in nav-render.tsx; this delegates with `this`.
 
 ### `_burgerCanvas`
 
-Persistent burger canvas (aria-labeled) — created once, survives re-renders so its GL context does.
+Persistent burger canvas (pointer overlay) — created once, survives re-renders so its GL context does.
 
 ### `_menuCanvas`
 

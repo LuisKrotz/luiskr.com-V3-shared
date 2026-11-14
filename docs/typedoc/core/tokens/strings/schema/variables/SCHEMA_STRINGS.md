@@ -26,6 +26,7 @@ const SCHEMA_STRINGS: Readonly<{
   SCHEMA_PROFILE_LAST_NAME: 'Krötz'
   SCHEMA_PROFILE_USERNAME: 'LuisKr1906'
   SCHEMA_ARTICLE_SECTION: 'Portfolio'
+  SCHEMA_ARTICLE_TYPE: 'NewsArticle'
   SCHEMA_ARTICLE_PUBLISHED_TIME: 'article:published_time'
   SCHEMA_ARTICLE_MODIFIED_TIME: 'article:modified_time'
 }>

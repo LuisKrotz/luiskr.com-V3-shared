@@ -8,9 +8,11 @@
 function updateDim(item, prop, idx, val): void
 ```
 
-Defined in: cms/portfolio/model.ts:31
+Defined in: cms/portfolio/model.ts:36
 
-Updates dim.
+Writes one dimension cell into an item's `[desktop, mobile]` pair —
+legacy items missing the array get it created with the sibling slot
+defaulted to the matching token (mobile width or desktop width).
 
 ## Parameters
 
@@ -18,25 +20,25 @@ Updates dim.
 
 [`PortfolioItem`](../../types/interfaces/PortfolioItem.md)
 
-— the item
+— the portfolio item to mutate
 
 ### prop
 
 `string`
 
-— the value
+— `'width'` or `'height'`
 
 ### idx
 
 `number`
 
-— the index
+— 0 = desktop slot, 1 = mobile slot
 
 ### val
 
 `string`
 
-— the value
+— the input's raw string value
 
 ## Returns
 

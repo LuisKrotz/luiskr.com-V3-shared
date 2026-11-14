@@ -6,3 +6,9 @@ Split from coverage-tails-2.test.js — covers the "checkbox-webgl tails" descri
 | -------------- | -------------------------------------------------------------------------------------- |
 | **Source**     | `src/experiments\earth-playground\tests\coverage\widgets\checkbox-webgl-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                                |
+
+## Members
+
+### `flush`
+
+Timer flush — mounted widget queues need real timers past microtasks.

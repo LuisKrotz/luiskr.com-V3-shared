@@ -8,7 +8,7 @@
 function stopAutoplay(host): void
 ```
 
-Defined in: website/components/home/cardstack/autoplay.ts:207
+Defined in: website/components/home/cardstack/autoplay.ts:209
 
 Kills autoplay entirely — the manual-nav response (prev/next/dots,
 card click, committed drag, view-all). The light hides and the bank

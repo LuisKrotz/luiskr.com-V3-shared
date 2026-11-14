@@ -1,6 +1,6 @@
 # `website\components\nav\globe.tsx`
 
-The language glyph for &lt;app-nav&gt;'s language chip — a neon
+The language glyph for &lt;app-nav&gt;'s language chip — a silver
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
@@ -11,7 +11,7 @@ The language glyph for &lt;app-nav&gt;'s language chip — a neon
 
 ### `stop`
 
-`stop` bound to a --nav-neon-* CSS prop — presentation attributes can't
+`stop` bound to a --nav-metal-* CSS prop — presentation attributes can't
 resolve custom properties, so the value rides inline style.
 
 ### `ref`
@@ -20,6 +20,6 @@ resolve custom properties, so the value rides inline style.
 
 ### `NavGlobeIcon`
 
-The <nav-globe-icon> element — neon globe with a speech bubble. The
+The <nav-globe-icon> element — silver globe with a speech bubble. The
 stroke gradient runs teal to green so the sphere reads as a single lit
 wire frame, the bubble sharing the same ramp.

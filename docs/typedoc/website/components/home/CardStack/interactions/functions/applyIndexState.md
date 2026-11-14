@@ -8,11 +8,13 @@
 function applyIndexState(host): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:115
+Defined in: website/components/home/cardstack/interactions.ts:126
 
 Publishes indexOpen into the DOM without a re-render — the --index-open
 class on the section drives the deck dim + panel reveal, the panel's
-aria-hidden and the toggle's aria-expanded track the state for AT.
+aria-hidden + inert and the toggle's aria-expanded track the state for
+AT and tab order (aria-hidden alone leaves the panel's buttons/links
+focusable inside a hidden subtree).
 
 ## Parameters
 

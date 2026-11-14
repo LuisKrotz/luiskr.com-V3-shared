@@ -78,10 +78,40 @@ verbatim-redundant copies ever leave the sheet, never reordered rules.
 Splits the document (<link>-delivered) stylesheet into cumulative sheets
 per width class. `tablet` = base + mobile + tablet blocks — the original
 text with only future-class media blocks dropped in place, preserving
-rule order exactly.
+rule order exactly. `@media print`/`@page` parts leave the width-class
+files entirely — they join `print`, which the loader serves on its own
+`media="print"` link so screen sessions never parse them. `wide` stays
+byte-identical to the source sheet (sourcemap validity + the noscript
+document that gets no second link).
 
 - `@param` {string} css compiled stylesheet text.
-- `@returns` {Record<string,string>} {mobile,tablet,desktop,wide} sheets.
+- `@returns` {Record<string,string>} {mobile,tablet,desktop,wide,print} sheets.
+
+### `isPrintPart`
+
+A part that only applies to paper output — `@page` blocks and pure
+`@media print` blocks (compound print queries stay put, like compound
+min-width queries: class membership is ambiguous and their byte share
+is small).
+
+- `@param` {{kind:string, query:string}} p top-level sheet part.
+- `@returns` {boolean} true when the part belongs in the lazy print sheet.
+
+### `laterKeptText`
+
+Later-sheet text a moved part could reorder against. For width parts
+that is everything staying in base (non-media parts and media that is
+neither a moved min-width block nor a print part — a later print part
+still adopts after every width tier, so source order holds). For print
+parts every later non-print part hazards: base text and width-tier
+blocks alike adopt before the print sheet, while the print block
+originally sat earlier — a shared selector would flip the tie on paper
+(min-width rules can match the page box).
+
+- `@param` {Array} parts top-level sheet parts.
+- `@param` {number} i index of the part being tested.
+- `@param` {'width'|'print'} bucket which moved bucket `parts[i]` joins.
+- `@returns` {string} joined text of every later part not sharing the bucket.
 
 ### `splitComponentSheet`
 
@@ -92,7 +122,9 @@ of moved media blocks up to that class — adopted after the base sheet,
 so the only relocation hazard is a later KEPT part sharing a selector:
 those blocks stay in base. Tiers whose cumulative content adds nothing
 over the previous class are omitted (the runtime falls back to the
-highest defined lower tier).
+highest defined lower tier). `@media print`/`@page` parts move into
+`print` — fetched and adopted only for paper output — under the same
+selector guard.
 
 - `@param` {string} css compiled component stylesheet text.
-- `@returns` {{base:string, tiers:Record<string,string>, guarded:string[]}}
+- `@returns` {{base:string, tiers:Record<string,string>, print:string, guarded:string[]}}

@@ -8,7 +8,7 @@
 function mountRingSheenDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/mounts.ts:104
+Defined in: website/components/media/anim-demo/mounts.ts:113
 
 Tile ring sheen — real tiles carrying the authored ring CSS plus the
 WebGPU instanced overlay attempt on the row container.

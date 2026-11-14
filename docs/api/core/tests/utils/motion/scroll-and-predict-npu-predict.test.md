@@ -6,3 +6,9 @@ Split from scroll-and-predict.test.js — covers the "npu-predict" describe.
 | -------------- | -------------------------------------------------------------------- |
 | **Source**     | `src/core\tests\utils\motion\scroll-and-predict-npu-predict.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.            |
+
+## Members
+
+### `flush`
+
+Long flush — npu-predict settle windows are ~150ms wide.

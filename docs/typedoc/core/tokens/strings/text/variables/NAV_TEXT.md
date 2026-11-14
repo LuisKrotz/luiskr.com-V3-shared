@@ -17,6 +17,7 @@ const NAV_TEXT: Readonly<{
   LONGITUDE: 'Longitude'
   ALTITUDE: 'Altitude'
   SOME_MENTIONS: 'Some mentions'
+  CONTENTS: 'Contents'
 }>
 ```
 

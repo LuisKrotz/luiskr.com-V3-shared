@@ -10,6 +10,10 @@
 - [GenieRenderer](interfaces/GenieRenderer.md)
 - [GenieSession](interfaces/GenieSession.md)
 
+## Variables
+
+- [GENIE\_DPR\_CAP](variables/GENIE_DPR_CAP.md)
+
 ## Functions
 
 - [startGenieOpen](functions/startGenieOpen.md)

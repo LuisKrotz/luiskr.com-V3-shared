@@ -13,6 +13,10 @@ Coverage tail for utils/service-worker.ts — the local
 
 Stashed property descriptors restored after each test.
 
+### `saveKey`
+
+Snapshots a global key so a test can stub then restore it safely.
+
 ### `stubSw`
 
 Installs a fake navigator.serviceWorker + hostname for one test.

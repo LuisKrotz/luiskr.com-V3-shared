@@ -11,7 +11,7 @@ function computePositions(placed): Promise<{
 }>
 ```
 
-Defined in: experiments/docs/arch-scene.ts:481
+Defined in: experiments/docs/arch-scene.ts:489
 
 Batch position compute — wasm worker first, local math on failure. The
 worker replies with a transferable Float32Array; `structuredClone` of

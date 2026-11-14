@@ -8,7 +8,7 @@
 function mediaItemHeightRatio(item): number | null
 ```
 
-Defined in: core/utils/media/group.ts:30
+Defined in: core/utils/media/group.ts:32
 
 Height ratio (h/w) of one media item — the rendered height the media
 would take at a common width, which is exactly the axis a uniform

@@ -9,6 +9,10 @@ Coverage tails for `fillField` — the chunked multi-worker
 
 ## Members
 
+### `dispatch`
+
+wasm-pool dispatch spy — aliased once so tests can reset/re-impl it.
+
 ### `reply`
 
 Builds a flat fill reply (`results.pos`/`results.col` triplets).

@@ -8,7 +8,7 @@
 function mountLoaderDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:27
+Defined in: website/components/media/anim-demo/dom.ts:37
 
 Intro-loader demo — the percent readout counts 0→100 on coarse
 beats while the staged rings/fill sweep in CSS (keyframes own the

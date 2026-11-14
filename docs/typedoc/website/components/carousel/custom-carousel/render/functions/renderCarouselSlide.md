@@ -8,7 +8,7 @@
 function renderCarouselSlide(item, folder): Element | null
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:62
+Defined in: website/components/carousel/custom-carousel/render.tsx:63
 
 One slide's inner content — a <media-figure> with the item's CDN src
 (folder + src), intrinsic size for aspect-ratio layout, and the

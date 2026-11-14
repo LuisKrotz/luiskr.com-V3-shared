@@ -8,7 +8,7 @@
 function toggleAutoplay(host): void
 ```
 
-Defined in: website/components/home/cardstack/autoplay.ts:175
+Defined in: website/components/home/cardstack/autoplay.ts:177
 
 The play/pause transport: running → pause (banks the in-flight span,
 the light freezes mid-orbit); paused → resume (the light continues

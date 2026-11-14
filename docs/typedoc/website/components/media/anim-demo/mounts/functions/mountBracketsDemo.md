@@ -8,7 +8,7 @@
 function mountBracketsDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/mounts.ts:120
+Defined in: website/components/media/anim-demo/mounts.ts:129
 
 Action-button corner brackets — the authored ::before/::after L-brackets
 expanding on the hover modifier (the production fallback path), plus the

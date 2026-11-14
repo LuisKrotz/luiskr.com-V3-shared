@@ -1,4 +1,4 @@
-# luiskr.com V3 — Documentation
+# luiskr.com — Documentation
 
 Personal portfolio of Luis Krötz. Strict TypeScript, custom elements with
 Shadow DOM, a custom JSX runtime, Firebase Realtime Database as CMS backend,

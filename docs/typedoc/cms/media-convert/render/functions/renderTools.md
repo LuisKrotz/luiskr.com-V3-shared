@@ -1,16 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/render](../README.md) / renderTools
 
 ```ts
-function renderTools(host): 
-  | Element
-  | null;
+function renderTools(host): Element | null
 ```
 
-Defined in: cms/media-convert/render.tsx:214
+Defined in: cms/media-convert/render.tsx:219
 
 Renders the guided toolchain-setup panel — hidden while the report is
 unfetched or every tool is present. Required tools (ffmpeg/ffprobe)
@@ -30,5 +28,5 @@ Install button only appears when the plan can run without a root shell
 
 ## Returns
 
-  \| [`Element`](../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
-  \| `null`
+\| [`Element`](../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+\| `null`

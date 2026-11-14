@@ -1,16 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/sections](../README.md) / removeSection
 
 ```ts
-function removeSection(host, sIdx): void;
+function removeSection(host, sIdx): void
 ```
 
-Defined in: cms/projects/sections.ts:55
+Defined in: cms/projects/sections.ts:63
 
-Removes section.
+Deletes a section after a numbered confirm — the splice reindexes
+later sections, so the render+rebind refreshes every `data-idx`.
 
 ## Parameters
 
@@ -18,13 +19,13 @@ Removes section.
 
 [`CmsProjectsList`](../../CmsProjectsList/classes/CmsProjectsList.md)
 
-— the host component
+— the host component holding `currentProject`
 
 ### sIdx
 
 `number`
 
-— the value
+— zero-based section index
 
 ## Returns
 

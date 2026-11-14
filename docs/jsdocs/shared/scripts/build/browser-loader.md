@@ -57,6 +57,13 @@ Chains polyfill scripts so each executes before the next is fetched.
 
 Appends the tier stylesheet to <head>; returns the node for upgrades.
 
+### `injectPrintCss`
+
+Appends the extracted print sheet — `media="print"` makes it inert to
+the screen cascade, so browsers fetch it at the lowest priority and it
+never joins render-blocking CSSOM construction. It is positioned after
+the screen sheet, matching the source order where print rules sat last.
+
 ### `CSS_GATES`
 
 Width-class gates, evaluated widest → narrowest against

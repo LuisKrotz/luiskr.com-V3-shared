@@ -9,6 +9,19 @@ Coverage tail for utils/gpu/ring-sheen.ts — the
 
 ## Members
 
+### `mockGpu`
+
+Mutable GPU-mock state — the webgpu-widget mock below reads these per-call,
+so tests steer capability/mount-result/call-count/latency branches.
+
+### `flush`
+
+Short flush — widget mount/event steps settle within ~30ms.
+
 ### `widget`
 
 The recording fake widget.
+
+### `makeWidget`
+
+Widget harness — records the calls the binding layer forwards.

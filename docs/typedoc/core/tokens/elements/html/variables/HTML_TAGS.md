@@ -32,6 +32,7 @@ const HTML_TAGS: Readonly<{
   H3: 'h3'
   NAV: 'nav'
   ASIDE: 'aside'
+  FOOTER: 'footer'
   HEADER: 'header'
   MAIN: 'main'
   DIALOG: 'dialog'

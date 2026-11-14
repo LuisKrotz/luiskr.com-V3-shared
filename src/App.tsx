@@ -35,6 +35,7 @@ import { BaseComponent } from '@core/Component.js'
 import store from '@core/store.js'
 import router from '@core/router/router.js'
 import type { IntroLoader } from '@core/utils/canvas/loaders/intro-loader.js'
+import type { PageBackdropWebGL } from '@core/utils/canvas/loaders/page-backdrop-webgl.js'
 import { mountAppShell } from './app/boot.js'
 import { loadAppData } from './app/data.js'
 import { initAppInputListeners } from './app/input.js'
@@ -77,10 +78,19 @@ export class AppRoot extends BaseComponent {
   _scrollH = 0
   _loadedLang: string | null = null
   _introLoader: IntroLoader | null = null
+  /** Dithered WebGL lobe field behind every route — null until boot mounts it. */
+  _pageBackdrop: PageBackdropWebGL | null = null
   /** Watches document height so onBottom/activeSection never go stale. */
   _docObserver: ResizeObserver | null = null
   /** Pending rAF coalescing burst scroll events into one checkScroll per frame. */
   _scrollRaf = 0
+  /**
+   * Singleton-scope subscription disposers armed by mountAppShell —
+   * router.subscribe and the cyrillic-font store subscriber live on
+   * module singletons, so their unsubscribe handles must be drained on
+   * disconnect or every dead AppRoot stays reachable through them.
+   */
+  _bootCleanups: Array<() => void> = []
 
   constructor() {
     super(appStyles)
@@ -106,11 +116,19 @@ export class AppRoot extends BaseComponent {
     mountAppShell(this)
   }
 
-  /** Lifecycle: releases the intro loader + document observer when the element disconnects. */
+  /** Lifecycle: releases the intro loader, page backdrop + document observer when the element disconnects. */
   override onDestroy() {
     this._introLoader?.destroy()
 
+    this._pageBackdrop?.destroy()
+
+    this._pageBackdrop = null
+
     this._docObserver?.disconnect()
+
+    this._bootCleanups.forEach((dispose) => dispose())
+
+    this._bootCleanups = []
 
     if (this._scrollRaf) {
       cancelAnimationFrame(this._scrollRaf)

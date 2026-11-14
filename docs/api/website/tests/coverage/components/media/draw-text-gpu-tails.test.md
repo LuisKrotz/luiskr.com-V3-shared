@@ -9,9 +9,18 @@ Coverage tail for components/media/draw-text/gpu.ts —
 
 ## Members
 
+### `mockGpu`
+
+Mutable mock-state flags — the module mocks below read these per-call,
+so tests flip them to steer GPU-present/mount-result/bitmap/device/ctx branches.
+
 ### `makeDevice`
 
 A fake shared GPUDevice serving the verifyOverlay readback.
+
+### `flush`
+
+Timer flush — mounted render queues need real timers past microtasks.
 
 ### `until`
 
@@ -26,6 +35,18 @@ assertion, which fails exactly as before.
 ### `mounted`
 
 Settled = the mount was kept (_gpuHandle) or disarmed (destroy).
+
+### `destroyed`
+
+Settled = the mounted handle's destroy() was invoked (disarm path).
+
+### `RECT`
+
+Fixed getBoundingClientRect stub — the overlay math needs a real rect.
+
+### `imgDataThrows`
+
+Flag — tests set it so the 2d ctx's getImageData throws (probe-fail arm).
 
 ### `measuringCtx`
 

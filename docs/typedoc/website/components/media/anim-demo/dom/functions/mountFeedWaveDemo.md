@@ -5,21 +5,22 @@
 [luiskr.com](../../../../../../README.md) / [website/components/media/anim-demo/dom](../README.md) / mountFeedWaveDemo
 
 ```ts
-function mountFeedWaveDemo(_ctx): void
+function mountFeedWaveDemo(ctx): void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:377
+Defined in: website/components/media/anim-demo/dom.ts:333
 
-Footer feed-wave demo — the staged link row ripples entirely in CSS
-(per-item animation-delay staggers the opacity wave); no JS state.
+Footer feed-wave demo — prepends the real `feedGlyph` svg (dot +
+two wave arcs) into the staged feed link and points it at the locale
+feed URL; the arcs' opacity pulse itself ripples in CSS.
 
 ## Parameters
 
-### \_ctx
+### ctx
 
 [`DemoContext`](../../types/interfaces/DemoContext.md)
 
-The demo context — unused.
+The demo context (stage owns the feed link).
 
 ## Returns
 

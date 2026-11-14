@@ -1,6 +1,6 @@
 # Animations
 
-Every animation system in luiskr.com V3 — what moves, who computes it,
+Every animation system in luiskr.com — what moves, who computes it,
 and where the math lives. The physics-heavy sims (orbits, differential
 rotation, solar wind, pulsation, climate cycles, fly-to easing) have
 their own deep-dive folder: [physics-simulations/](physics-simulations/README.md).

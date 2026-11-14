@@ -8,7 +8,7 @@
 function setRobotsMeta(noindex): void
 ```
 
-Defined in: core/utils/schema.ts:1172
+Defined in: core/utils/schema.ts:1184
 
 Single authority for the document's `<meta name="robots">` — sets
 `noindex, nofollow` when `noindex` is true and the index-rich directive

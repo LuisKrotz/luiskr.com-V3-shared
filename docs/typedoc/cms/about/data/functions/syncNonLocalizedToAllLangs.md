@@ -1,16 +1,18 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/about/data](../README.md) / syncNonLocalizedToAllLangs
 
 ```ts
-function syncNonLocalizedToAllLangs(host): Promise<void>;
+function syncNonLocalizedToAllLangs(host): Promise<void>
 ```
 
-Defined in: cms/about/data.ts:99
+Defined in: cms/about/data.ts:106
 
-Syncs non localized to all langs.
+Propagates the non-localized fields (profile picture, mentions title,
+mention items) to every other locale — each target's node is read
+first so localized `title`/`col1`/`col2` survive the merge.
 
 ## Parameters
 
@@ -18,7 +20,7 @@ Syncs non localized to all langs.
 
 [`CmsAboutEditor`](../../CmsAboutEditor/classes/CmsAboutEditor.md)
 
-— the host component
+— the host component holding the source `aboutData`
 
 ## Returns
 

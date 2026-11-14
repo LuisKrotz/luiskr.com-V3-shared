@@ -15,6 +15,10 @@ Options accepted by `notify`/`notifyError`/`notifyLoadFailed`.
 
 ### (module scope)
 
+One queued toast — payload fields mirror the notify() options shape.
+
+### (module scope)
+
 The <site-toast> element once its chunk has upgraded it.
 
 ### `_toastEl`

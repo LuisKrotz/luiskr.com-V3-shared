@@ -8,7 +8,7 @@
 function applyPoses(host): void
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:448
+Defined in: website/components/home/cardstack/deck.ts:452
 
 Writes every card's pose for the current virtual front `f` — derived
 from `activeIdx - _dragX/_step`, so a live drag slides the whole

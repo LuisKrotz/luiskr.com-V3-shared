@@ -8,7 +8,7 @@
 function newMediaSlot(): CmsMediaItem
 ```
 
-Defined in: cms/projects/types.ts:64
+Defined in: cms/projects/types.ts:77
 
 Default section media slot dimensions.
 

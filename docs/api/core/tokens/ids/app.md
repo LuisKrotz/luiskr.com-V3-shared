@@ -15,6 +15,10 @@ Frozen app element-id map — sole declaration site for these tokens; consumers 
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the
 token contract immutable at runtime.
 
+### `PAGE_BACKDROP`
+
+Fullscreen WebGL field canvas parked behind #app (body's first child).
+
 ### `SF_NAV_PANEL`
 
 Star-field navigator drawer — aria-controls target for its toggle.
@@ -105,7 +109,7 @@ Linear handle ramp — the machined grip's edge shading.
 
 ### `CHEV`
 
-Prompt chevron neon gradient (search glyph).
+Prompt chevron silver gradient (search glyph).
 
 ### `STREAK`
 

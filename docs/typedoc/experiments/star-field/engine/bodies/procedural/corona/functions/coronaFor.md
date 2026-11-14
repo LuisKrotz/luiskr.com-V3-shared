@@ -8,7 +8,7 @@
 function coronaFor(THREE, def): Texture<unknown, TextureEventMap> | undefined
 ```
 
-Defined in: experiments/star-field/engine/bodies/procedural/corona.ts:88
+Defined in: experiments/star-field/engine/bodies/procedural/corona.ts:97
 
 Generates a seeded star-corona sprite — the "alive" layer that turns
 a lit disc into a sun: a warm photosphere glow, seeded radial

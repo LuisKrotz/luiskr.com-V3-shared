@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [shared/src/App](../README.md) / AppRoot
 
-Defined in: shared/src/App.tsx:59
+Defined in: shared/src/App.tsx:60
 
 Application shell element. Extends the shared BaseComponent (shadow DOM,
 scoped listeners, store subscription, _updateDom re-render pipeline).
@@ -21,7 +21,7 @@ scoped listeners, store subscription, _updateDom re-render pipeline).
 new AppRoot(): AppRoot;
 ```
 
-Defined in: shared/src/App.tsx:85
+Defined in: shared/src/App.tsx:95
 
 #### Returns
 
@@ -36,12 +36,16 @@ Defined in: shared/src/App.tsx:85
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -55,7 +59,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -77,7 +81,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -98,7 +102,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -116,7 +120,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -132,7 +136,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -152,7 +156,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -168,7 +172,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -186,7 +190,7 @@ translations:
   | null = null;
 ```
 
-Defined in: shared/src/App.tsx:61
+Defined in: shared/src/App.tsx:62
 
 ---
 
@@ -196,7 +200,7 @@ Defined in: shared/src/App.tsx:61
 routeLoading: boolean = false
 ```
 
-Defined in: shared/src/App.tsx:63
+Defined in: shared/src/App.tsx:64
 
 ---
 
@@ -206,7 +210,7 @@ Defined in: shared/src/App.tsx:63
 activeSection: string = SECTIONS.HOME
 ```
 
-Defined in: shared/src/App.tsx:65
+Defined in: shared/src/App.tsx:66
 
 ---
 
@@ -216,7 +220,7 @@ Defined in: shared/src/App.tsx:65
 onBottom: boolean = false
 ```
 
-Defined in: shared/src/App.tsx:67
+Defined in: shared/src/App.tsx:68
 
 ---
 
@@ -226,7 +230,7 @@ Defined in: shared/src/App.tsx:67
 currentViewTag: string
 ```
 
-Defined in: shared/src/App.tsx:69
+Defined in: shared/src/App.tsx:70
 
 ---
 
@@ -236,7 +240,7 @@ Defined in: shared/src/App.tsx:69
 _aboutTop: number = 600
 ```
 
-Defined in: shared/src/App.tsx:72
+Defined in: shared/src/App.tsx:73
 
 ---
 
@@ -246,7 +250,7 @@ Defined in: shared/src/App.tsx:72
 _contactTop: number = 1500
 ```
 
-Defined in: shared/src/App.tsx:73
+Defined in: shared/src/App.tsx:74
 
 ---
 
@@ -256,7 +260,7 @@ Defined in: shared/src/App.tsx:73
 _sectionsMeasured: boolean = false
 ```
 
-Defined in: shared/src/App.tsx:74
+Defined in: shared/src/App.tsx:75
 
 ---
 
@@ -266,7 +270,7 @@ Defined in: shared/src/App.tsx:74
 _lastMeasureAttempt: number = 0
 ```
 
-Defined in: shared/src/App.tsx:75
+Defined in: shared/src/App.tsx:76
 
 ---
 
@@ -276,7 +280,7 @@ Defined in: shared/src/App.tsx:75
 _scrollH: number = 0
 ```
 
-Defined in: shared/src/App.tsx:77
+Defined in: shared/src/App.tsx:78
 
 Cached document height — refreshed by updateSectionTops on body resize.
 
@@ -288,7 +292,7 @@ Cached document height — refreshed by updateSectionTops on body resize.
 _loadedLang: string | null = null;
 ```
 
-Defined in: shared/src/App.tsx:78
+Defined in: shared/src/App.tsx:79
 
 ---
 
@@ -300,7 +304,21 @@ _introLoader:
   | null = null;
 ```
 
-Defined in: shared/src/App.tsx:79
+Defined in: shared/src/App.tsx:80
+
+---
+
+### \_pageBackdrop
+
+```ts
+_pageBackdrop:
+  | PageBackdropWebGL
+  | null = null;
+```
+
+Defined in: shared/src/App.tsx:82
+
+Dithered WebGL lobe field behind every route — null until boot mounts it.
 
 ---
 
@@ -310,7 +328,7 @@ Defined in: shared/src/App.tsx:79
 _docObserver: ResizeObserver | null = null;
 ```
 
-Defined in: shared/src/App.tsx:81
+Defined in: shared/src/App.tsx:84
 
 Watches document height so onBottom/activeSection never go stale.
 
@@ -322,9 +340,28 @@ Watches document height so onBottom/activeSection never go stale.
 _scrollRaf: number = 0
 ```
 
-Defined in: shared/src/App.tsx:83
+Defined in: shared/src/App.tsx:86
 
 Pending rAF coalescing burst scroll events into one checkScroll per frame.
+
+---
+
+### \_bootCleanups
+
+```ts
+_bootCleanups: () => void[] = [];
+```
+
+Defined in: shared/src/App.tsx:93
+
+Singleton-scope subscription disposers armed by mountAppShell —
+router.subscribe and the cyrillic-font store subscriber live on
+module singletons, so their unsubscribe handles must be drained on
+disconnect or every dead AppRoot stays reachable through them.
+
+#### Returns
+
+`void`
 
 ---
 
@@ -4385,7 +4422,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get modal(): ModalObject;
 ```
 
-Defined in: shared/src/App.tsx:90
+Defined in: shared/src/App.tsx:100
 
 Current modal descriptor from the store ({ open, class, transform }).
 
@@ -4403,7 +4440,7 @@ Current modal descriptor from the store ({ open, class, transform }).
 get locale(): string;
 ```
 
-Defined in: shared/src/App.tsx:95
+Defined in: shared/src/App.tsx:105
 
 Active locale code (en, pt, gl, …).
 
@@ -4587,7 +4624,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: core/Component.ts:113
+Defined in: core/Component.ts:185
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4609,7 +4646,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4643,7 +4680,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4668,7 +4705,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4692,7 +4729,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4729,7 +4766,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4772,7 +4809,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4822,7 +4859,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4853,7 +4890,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4876,7 +4913,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4901,7 +4938,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4936,7 +4973,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: shared/src/App.tsx:105
+Defined in: shared/src/App.tsx:115
 
 Lifecycle: runs once when <app-root> connects to the DOM.
 Applies persisted preferences, boots data loading, wires the router
@@ -4959,9 +4996,9 @@ modal/dialog/HUD chunks so they aren't on the critical path.
 onDestroy(): void;
 ```
 
-Defined in: shared/src/App.tsx:110
+Defined in: shared/src/App.tsx:120
 
-Lifecycle: releases the intro loader + document observer when the element disconnects.
+Lifecycle: releases the intro loader, page backdrop + document observer when the element disconnects.
 
 #### Returns
 
@@ -4979,7 +5016,7 @@ Lifecycle: releases the intro loader + document observer when the element discon
 onStoreUpdate(): void;
 ```
 
-Defined in: shared/src/App.tsx:126
+Defined in: shared/src/App.tsx:144
 
 Store-subscription callback: reloads locale data when the language
 changes and re-applies modal open/close state to the shell.
@@ -5000,7 +5037,7 @@ changes and re-applies modal open/close state to the shell.
 _updateModalState(): void;
 ```
 
-Defined in: shared/src/App.tsx:145
+Defined in: shared/src/App.tsx:166
 
 Syncs modal state into the DOM without a full re-render:
 
@@ -5022,7 +5059,7 @@ Syncs modal state into the DOM without a full re-render:
 initInputListeners(): void;
 ```
 
-Defined in: shared/src/App.tsx:156
+Defined in: shared/src/App.tsx:177
 
 Tracks the input method ('pointer' vs 'touch') in the store so styles
 can suppress sticky hover states on touch devices. Prefers the unified
@@ -5042,7 +5079,7 @@ imagery shouldn't be right-click-saved or dragged).
 loadData(): void;
 ```
 
-Defined in: shared/src/App.tsx:165
+Defined in: shared/src/App.tsx:186
 
 Loads the locale's translation nodes (APP, slugs, components) via the
 static-first SWR layer and pushes them into the store + already-mounted
@@ -5060,7 +5097,7 @@ children. Skips nodes already cached for the current locale.
 updateSectionTops(): void;
 ```
 
-Defined in: shared/src/App.tsx:175
+Defined in: shared/src/App.tsx:196
 
 Measures the document offsets of the #about and #contact section markers
 inside the home view's shadow DOM (deepQuerySelector pierces it) and
@@ -5079,7 +5116,7 @@ _sectionsMeasured false so checkScroll retries lazily.
 checkScroll(): void;
 ```
 
-Defined in: shared/src/App.tsx:185
+Defined in: shared/src/App.tsx:206
 
 Scroll handler: computes near-bottom state and the active home section
 (home/about/contact) from measured tops, then pushes both to <app-nav>
@@ -5098,7 +5135,7 @@ No-ops on non-home routes except still feeding the nav its state.
 _updateViewContent(to?, _from?): void;
 ```
 
-Defined in: shared/src/App.tsx:194
+Defined in: shared/src/App.tsx:215
 
 Reconciles #view-outlet with the target route's view tag. If the same
 view type is already mounted (e.g. project→project), delegates to its
@@ -5127,7 +5164,7 @@ onRouteParamChange instead of remounting; otherwise flips the view.
 _flipToView(outlet, _to?): Promise<void>;
 ```
 
-Defined in: shared/src/App.tsx:205
+Defined in: shared/src/App.tsx:226
 
 Swaps the outlet's child for a new route view element. Dynamically
 imports the route chunk first (each route is a separate lazy chunk),
@@ -5157,7 +5194,7 @@ first-mount take the instant-swap path.
 render(): Element;
 ```
 
-Defined in: shared/src/App.tsx:213
+Defined in: shared/src/App.tsx:234
 
 JSX template: persistent chrome + routed outlet. The view tag is a
 dynamic component (CurrentView = this.currentViewTag).
@@ -5178,7 +5215,7 @@ dynamic component (CurrentView = this.currentViewTag).
 onUpdated(): void;
 ```
 
-Defined in: shared/src/App.tsx:267
+Defined in: shared/src/App.tsx:296
 
 Lifecycle: after each re-render, re-pushes translations and modal state into children.
 

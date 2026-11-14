@@ -127,6 +127,16 @@ const titleOf = (label, max = 100) => {
   return t.length <= max ? t : `${t.slice(0, max - 1).trimEnd()}…`
 }
 
+/** Strips CMS rich-text markup (tags, <br>, entities) to plain text. */
+const plain = (s) =>
+  String(s || '')
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/\s+/g, ' ')
+    .trim()
+
 /** Localized search-theme list for one CMS node — every page/project
  *  carries `searchThemes` (patch-all-pages-search-themes.js); the list
  *  feeds <image:caption> and <video:tag> so image/video search indexes
@@ -352,10 +362,55 @@ async function run() {
     return tags
   }
 
-  addTags('/', coverTagsFor('en'))
+  // ── Award/mention thumbnails ─────────────────────────────────────────
+  // The mentions deck renders on the home, about and contact surfaces —
+  // each badge thumbnail indexes under those routes so image search
+  // resolves the award strip with its own title + longdesc caption.
+  // `media.path` is the raw bucket key; tags emit only for keys the
+  // manifest actually lists, so a missing upload can't poison the map.
+  const awardTagsFor = (loc) => {
+    const items = translations[loc]?.pages?.about?.mention_items || []
+    const themes = themesOf(translations[loc]?.pages?.about)
+    const tags = []
+
+    for (const m of items) {
+      const key = m?.media?.path
+
+      if (!key || !manifest.has(key)) continue
+
+      const html = String(m?.description || '')
+      const title = plain(html.split(/<span\b/i)[0]) || key
+      const longdesc = plain(html.match(/<span[^>]*>([\s\S]*?)<\/span>/i)?.[1])
+
+      const caption = longdesc
+        ? `\n      <image:caption>${escXml(titleOf(longdesc, 500))}</image:caption>`
+        : themeCaption(themes)
+
+      tags.push(
+        `    <image:image>\n      <image:loc>${escXml(encLoc(`${CDN_BASE}${key}`))}</image:loc>` +
+          `\n      <image:title>${escXml(titleOf(title))}</image:title>` +
+          `${imageLicenseTag(loc, base)}${caption}\n    </image:image>`
+      )
+    }
+
+    return tags
+  }
+
+  addTags('/', [...coverTagsFor('en'), ...awardTagsFor('en')])
+  addTags(`/${enSlugs.about}`, awardTagsFor('en'))
+  addTags(`/${enSlugs.contact}`, awardTagsFor('en'))
 
   for (const lang of VALID_LANGS) {
-    if (lang !== 'en') addTags(`/${lang}`, coverTagsFor(lang))
+    if (lang === 'en') continue
+
+    addTags(`/${lang}`, [...coverTagsFor(lang), ...awardTagsFor(lang)])
+
+    // about/contact carry the same mentions <ul> in the parked markup —
+    // the badge thumbs index under each locale's canonical slug.
+    const locSlugs = LANG_SLUGS[lang]
+
+    if (locSlugs?.about) addTags(`/${lang}/${locSlugs.about}`, awardTagsFor(lang))
+    if (locSlugs?.contact) addTags(`/${lang}/${locSlugs.contact}`, awardTagsFor(lang))
   }
 
   // ── Earth Playground share captures ──────────────────────────────────
@@ -568,9 +623,24 @@ async function run() {
 
   const projectSlugs = []
 
+  // slug → git-derived { date, modified } — the verified stamps that
+  // legitimize <lastmod>, RSS pubDate and the Google News sitemap. Live
+  // Firebase may lag the mirror, so the snapshot is the fallback source.
+  const projectStamps = new Map()
+
   for (const [projectSlug, projectData] of Object.entries(data || {})) {
     urlSet.add(`/portfolio/${projectSlug}`)
     projectSlugs.push(projectSlug)
+
+    const enNode = translations.en?.projects?.[projectSlug]
+    const stamp = projectData?.date || enNode?.date
+
+    if (stamp) {
+      projectStamps.set(projectSlug, {
+        date: stamp,
+        modified: projectData?.modified || enNode?.modified || stamp,
+      })
+    }
 
     const folder = projectData?.folder || ''
     const projectTitle = projectData?.title || projectSlug
@@ -773,13 +843,26 @@ async function run() {
     return '0.8'
   }
 
+  /** Verified <lastmod> for a portfolio URL — the owning project's
+   *  git-derived modified stamp (or its publication date when the node
+   *  never changed). Non-portfolio routes keep no lastmod: only project
+   *  URLs carry a provable change date, everything else stays undated
+   *  rather than stamped with a build-time guess. */
+  const lastmodFor = (u) => {
+    const m = u.match(/^\/(?:[a-z]{2,3}\/)?portfolio\/([^/]+)/)
+    const stamp = m && projectStamps.get(m[1])
+
+    return stamp ? stamp.modified : ''
+  }
+
   /** Emits one `<urlset>` document for `urls`, media tags included. */
   const sitemapDoc = (urls) => {
     const items = urls
       .map((u) => {
         const routePath = u === '/' ? '/' : encPath(u)
+        const lastmod = lastmodFor(u)
 
-        return `  <url>\n    <loc>${base}${routePath}</loc>\n    <priority>${priorityOf(u)}</priority>${tagFor(u)}\n  </url>`
+        return `  <url>\n    <loc>${base}${routePath}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ''}\n    <priority>${priorityOf(u)}</priority>${tagFor(u)}\n  </url>`
       })
       .join('\n')
 
@@ -851,9 +934,9 @@ async function run() {
     }
   }
 
-  /** Emits root or localized crawl policy with its sitemap discovery URL. */
-  const robotsDoc = (sitemapUrl) =>
-    `User-agent: *\nDisallow: /cms\nDisallow: /admin\nDisallow: /langs/\nDisallow: /docs-content/\nDisallow: /deploy-info/\nDisallow: /meta/\n\nSitemap: ${sitemapUrl}\n`
+  /** Emits root or localized crawl policy with its sitemap discovery URLs. */
+  const robotsDoc = (sitemapUrl, extraUrls = []) =>
+    `User-agent: *\nDisallow: /cms\nDisallow: /admin\nDisallow: /langs/\nDisallow: /docs-content/\nDisallow: /deploy-info/\nDisallow: /meta/\n\nSitemap: ${sitemapUrl}${extraUrls.map((u) => `\nSitemap: ${u}`).join('')}\n`
 
   fs.writeFileSync(path.join(META_DIR, 'sitemap-en.xml'), sitemapDoc(enUrls), 'utf-8')
 
@@ -890,10 +973,20 @@ async function run() {
     )
   }
 
+  // Google News sitemap sits beside the locale set in the index — Google
+  // News only honors articles published in the last 48 hours, so the
+  // file regenerates each build and an empty urlset is a valid "nothing
+  // fresh" answer.
+  indexEntries.push(`  <sitemap>\n    <loc>${base}/sitemap-news.xml</loc>\n  </sitemap>`)
+
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexEntries.join('\n')}\n</sitemapindex>\n`
 
   fs.writeFileSync(path.join(META_DIR, 'sitemap.xml'), sitemapIndex, 'utf-8')
-  fs.writeFileSync(path.join(META_DIR, 'robots.txt'), robotsDoc(`${base}/sitemap.xml`), 'utf-8')
+  fs.writeFileSync(
+    path.join(META_DIR, 'robots.txt'),
+    robotsDoc(`${base}/sitemap.xml`, [`${base}/sitemap-news.xml`]),
+    'utf-8'
+  )
   fs.writeFileSync(
     path.join(META_DIR, 'urllist.txt'),
     allUrls.map((u) => `${base}${u === '/' ? '' : encPath(u)}`).join('\n') + '\n',
@@ -921,15 +1014,46 @@ async function run() {
    *  tail lands past the cap on long lists, which is intentional). */
   const FEED_CATEGORY_CAP = 12
 
-  /** Strips CMS rich-text markup (tags, <br>, entities) to plain text. */
-  const plain = (s) =>
-    String(s || '')
-      .replace(/<br\s*\/?>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/&nbsp;/gi, ' ')
-      .replace(/&amp;/gi, '&')
-      .replace(/\s+/g, ' ')
-      .trim()
+  // ── Google News sitemap — articles ≤48h old per the spec; an empty
+  // urlset is a valid "nothing fresh" answer, and each build re-scans so
+  // a newly published project appears automatically. One entry per
+  // locale's canonical project URL, language taken from the locale's
+  // BCP-47 primary subtag.
+  const NEWS_WINDOW_MS = 48 * 60 * 60 * 1000
+  const newsUrls = []
+  const newsNow = Date.now()
+
+  for (const loc of VALID_LANGS) {
+    const prefix = loc === 'en' ? '' : `/${loc}`
+    const language = (LOCALE_TAGS[loc]?.bcp || loc).split('-')[0]
+
+    for (const projectSlug of projectSlugs) {
+      const stamp = projectStamps.get(projectSlug)
+
+      if (!stamp) continue
+
+      const published = Date.parse(stamp.date)
+
+      if (Number.isNaN(published) || newsNow - published > NEWS_WINDOW_MS) continue
+
+      const title =
+        translations[loc]?.projects?.[projectSlug]?.title ||
+        translations.en?.projects?.[projectSlug]?.title ||
+        projectSlug
+
+      newsUrls.push(
+        `  <url>\n    <loc>${base}${prefix}/portfolio/${projectSlug}</loc>\n` +
+          `    <news:news>\n      <news:publication>\n        <news:name>${escXml(FEED_CREATOR)}</news:name>\n        <news:language>${language}</news:language>\n      </news:publication>\n` +
+          `      <news:publication_date>${escXml(stamp.date)}</news:publication_date>\n      <news:title>${escXml(plain(title))}</news:title>\n    </news:news>\n  </url>`
+      )
+    }
+  }
+
+  fs.writeFileSync(
+    path.join(META_DIR, 'sitemap-news.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n${newsUrls.join('\n')}\n</urlset>\n`,
+    'utf-8'
+  )
 
   /** First plain-text string inside a nested project `sections` tree. */
   const firstSectionText = (node) => {
@@ -959,8 +1083,10 @@ async function run() {
       .join('')
 
   /** One RSS item with a valid image enclosure or video plus optional
-   *  poster, its author, and the owning page's searchThemes as categories. */
-  const rssItem = ({ title, link, desc, media, themes }) => {
+   *  poster, its author, the owning page's searchThemes as categories,
+   *  and — for dated articles — an RFC-822 pubDate (feeds Google News
+   *  freshness readers; gated so undated pages never invent one). */
+  const rssItem = ({ title, link, desc, media, themes, date }) => {
     // Some videos have no bucket-backed poster; omitting it avoids an
     // empty media URL while preserving the source video enclosure.
     const m = media
@@ -970,10 +1096,13 @@ async function run() {
         : `\n    <media:content url="${escXml(encLoc(media.source))}" medium="image"/>`
       : ''
 
+    const pub = date && !Number.isNaN(+new Date(date)) ? new Date(date).toUTCString() : ''
+
     return (
       `  <item>\n    <title>${escXml(title)}</title>\n    <link>${escXml(link)}</link>` +
       `\n    <guid isPermaLink="true">${escXml(link)}</guid>` +
       `\n    <dc:creator>${escXml(FEED_CREATOR)}</dc:creator>` +
+      `${pub ? `\n    <pubDate>${pub}</pubDate>` : ''}` +
       `\n    <description>${escXml(titleOf(desc, 500))}</description>` +
       `${feedCategories(themes)}${m}\n  </item>`
     )
@@ -1077,6 +1206,7 @@ async function run() {
           ),
           media,
           themes: themesOf(locProject),
+          date: locProject?.date || data?.[projectSlug]?.date,
         })
       )
     }

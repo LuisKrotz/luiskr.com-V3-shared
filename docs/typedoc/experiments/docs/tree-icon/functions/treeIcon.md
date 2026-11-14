@@ -8,7 +8,7 @@
 function treeIcon(node, open): SVGElement
 ```
 
-Defined in: experiments/docs/tree-icon.tsx:1419
+Defined in: experiments/docs/tree-icon.tsx:1429
 
 The row icon for one manifest node — directories get the stateful
 paper-stack folder, files the kind-keyed pack glyph.

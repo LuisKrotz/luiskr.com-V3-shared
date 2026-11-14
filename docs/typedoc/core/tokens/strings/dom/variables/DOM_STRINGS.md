@@ -17,6 +17,7 @@ const DOM_STRINGS: Readonly<{
   VALUE: 'value'
   REL: 'rel'
   REL_CANONICAL: 'canonical'
+  REL_ALTERNATE: 'alternate'
   REL_PREFETCH: 'prefetch'
   REL_PRELOAD: 'preload'
   REL_STYLESHEET: 'stylesheet'

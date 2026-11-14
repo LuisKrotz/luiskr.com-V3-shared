@@ -8,7 +8,7 @@
 function bindSafariImageLoad(el, fig, isHero): void
 ```
 
-Defined in: core/safari/patches/media-figure/image-load.ts:90
+Defined in: core/safari/patches/media-figure/image-load.ts:93
 
 Lazy-thumbnail + img-observer wiring for non-hero images: the thumb
 defers via loading=lazy and the Q50 swap triggers once the figure

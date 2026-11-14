@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / ModalRect
 
-Defined in: core/store/state.ts:77
+Defined in: core/store/state.ts:80
 
 Viewport-space rectangle the expand-modal genie transition warps
 from/to — the clicked figure's `getBoundingClientRect()` snapshot.
@@ -20,7 +20,7 @@ resolves the figure at mount time instead).
 x: number
 ```
 
-Defined in: core/store/state.ts:78
+Defined in: core/store/state.ts:81
 
 ---
 
@@ -30,7 +30,7 @@ Defined in: core/store/state.ts:78
 y: number
 ```
 
-Defined in: core/store/state.ts:79
+Defined in: core/store/state.ts:82
 
 ---
 
@@ -40,7 +40,7 @@ Defined in: core/store/state.ts:79
 w: number
 ```
 
-Defined in: core/store/state.ts:80
+Defined in: core/store/state.ts:83
 
 ---
 
@@ -50,4 +50,4 @@ Defined in: core/store/state.ts:80
 h: number
 ```
 
-Defined in: core/store/state.ts:81
+Defined in: core/store/state.ts:84

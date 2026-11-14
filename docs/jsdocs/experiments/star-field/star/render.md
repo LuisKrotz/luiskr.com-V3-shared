@@ -37,6 +37,9 @@ Renders the dossier facts list — one row per {label,value} pair. A
 malformed dossier payload renders the rest of the panel instead of
 crashing the whole view.
 
+- `@param` dossier The resolved body dossier.
+- `@returns` The facts `<dl>` element.
+
 ### `mediaUrl`
 
 Resolves a dossier media `src` — absolute http(s) URLs (remote NASA /
@@ -59,11 +62,18 @@ Renders the dossier's named prose sections — deep-history bodies carry
 titled subsections (formation, exploration, geology…) between the
 summary paragraph and the media gallery.
 
+- `@param` dossier The resolved body dossier.
+- `@returns` The sections wrapper, or null when none exist.
+
 ### `renderSignature`
 
 Renders the provenance signature — acquisition and translation ISO
 dates from the dossier `meta` block, so readers can audit when the
 data was pulled and this locale's text produced.
+
+- `@param` dossier The resolved body dossier.
+- `@param` t Locale label map (acquired/translated keys).
+- `@returns` The signature line, or null without a meta block.
 
 ### `RegistryRow`
 

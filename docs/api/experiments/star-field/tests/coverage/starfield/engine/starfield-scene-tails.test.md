@@ -13,6 +13,10 @@ Coverage tails for the engine internals that need a
 
 TSL namespace + node-material ctor bundle injected into body makers.
 
+### `flush`
+
+Timer flush — drains the engine's queued promises between actions.
+
 ### `packCloud`
 
 Encodes a fake deep-field binary: uint32 count + stride-6 float records.

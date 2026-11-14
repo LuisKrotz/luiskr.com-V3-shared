@@ -9,6 +9,10 @@ Coverage for core/utils/a11y/animation-desc.ts — the
 
 ## Members
 
+### `TEST_ID`
+
+The animation id under test + the desc-element id it maps to.
+
 ### `liveRecord`
 
 Injects a live components dictionary carrying one animation record.

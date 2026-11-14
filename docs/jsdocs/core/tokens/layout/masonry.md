@@ -99,3 +99,21 @@ Viewport width (px) at/below which the wall swaps back to the
 regular <custom-carousel> — phones and tablets through 1024: the
 max-area is too tight for a natural-size wall, so it runs the
 same scrolling strip as mobile.
+
+### `FILL_MIN_W`
+
+Void-fill width floor (px) — uncovered slabs narrower than this are
+gutter texture, not dead pockets (~1.5× GAP keeps ordinary
+inter-tile spacing out of the fill pass).
+
+### `FILL_MIN_H`
+
+Void-fill depth floor (px) — pockets shallower than this read as the
+wall's natural ragged texture; deeper ones paint the dead-black
+margin canyons (≈4× GAP).
+
+### `FILL_GROW_MAX`
+
+Max linear grow factor for the void fill — the grown tile box must
+stay under the natural source: ÷3 × 1.5 ≈ ÷2, always denser than
+the DIVISOR_SMALL rung the ladder already paints.

@@ -16,7 +16,7 @@ function coverLadderStep(
 ): void
 ```
 
-Defined in: core/utils/media.ts:183
+Defined in: core/utils/media.ts:184
 
 `load` step on a progressive cover's high layer — the ladder walker.
 Records the painted URL in the host registry (re-renders rebuild the

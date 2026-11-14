@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/render](../README.md) / renderConverting
 
 ```ts
-function renderConverting(host): Element;
+function renderConverting(host): Element
 ```
 
-Defined in: cms/media-convert/render.tsx:110
+Defined in: cms/media-convert/render.tsx:112
 
 Renders converting.
 

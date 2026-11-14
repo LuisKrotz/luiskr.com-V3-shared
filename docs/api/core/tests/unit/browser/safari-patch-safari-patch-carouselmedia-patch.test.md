@@ -9,6 +9,10 @@ Carousel-hosted media overrides — isCarouselHosted shadow-host
 
 ## Members
 
+### `cls`
+
+Looks up a registered custom element class by tag name.
+
 ### `shadowHostedEl`
 
 Hosts a stub element inside `tag`'s own shadow root — the carousel context.

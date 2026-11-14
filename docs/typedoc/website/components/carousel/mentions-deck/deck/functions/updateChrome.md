@@ -8,7 +8,7 @@
 function updateChrome(host): void
 ```
 
-Defined in: website/components/carousel/mentions-deck/deck.ts:279
+Defined in: website/components/carousel/mentions-deck/deck.ts:282
 
 Refreshes the non-pose chrome after a nav — the dot --active flags and
 each card's aria-hidden/tabindex so off-strip cards leave the tab order

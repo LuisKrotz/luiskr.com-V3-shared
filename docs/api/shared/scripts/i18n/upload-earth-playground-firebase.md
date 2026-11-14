@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\upload-earth-playground-firebase.js`
 
+One-shot migration: pushes the earth-playground page
+
 |                |                                                               |
 | -------------- | ------------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\upload-earth-playground-firebase.js` |

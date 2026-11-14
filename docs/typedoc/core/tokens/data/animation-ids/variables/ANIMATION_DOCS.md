@@ -8,7 +8,7 @@
 const ANIMATION_DOCS: Readonly<Record<string, string>>
 ```
 
-Defined in: core/tokens/data/animation-ids.ts:125
+Defined in: core/tokens/data/animation-ids.ts:146
 
 Frozen animation-id → docs-manifest node path map — one in-depth docs
 page per animation record so the /animations listing deep-links into

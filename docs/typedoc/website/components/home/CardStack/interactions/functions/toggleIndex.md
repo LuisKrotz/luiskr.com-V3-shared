@@ -8,7 +8,7 @@
 function toggleIndex(host): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:154
+Defined in: website/components/home/cardstack/interactions.ts:168
 
 Toggles the all-projects index overlay; the view-all interaction kills autoplay.
 

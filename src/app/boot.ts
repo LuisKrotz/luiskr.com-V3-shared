@@ -26,6 +26,7 @@ import { initMediaManifest } from '@core/utils/media/manifest.js'
 import { applyAnimationDesc } from '@core/utils/a11y/animation-desc.js'
 import { ANIMATION_IDS } from '@core/tokens/data/animation-ids.js'
 import { IntroLoader } from '@core/utils/canvas/loaders/intro-loader.js'
+import { PageBackdropWebGL } from '@core/utils/canvas/loaders/page-backdrop-webgl.js'
 
 /**
  * Schedules non-urgent work during idle time; falls back to a short
@@ -76,6 +77,11 @@ export function mountAppShell(c: AppRoot): void {
   // document root where every crawler reads it.
   applyAnimationDesc(document.body, ANIMATION_IDS.BODY_GLOW)
 
+  // Dithered WebGL render of the same lobe field — mounts its canvas
+  // under #app and pins the CSS glow layers off while it paints; without
+  // WebGL (or under reduced motion) the CSS layers stay authoritative.
+  c._pageBackdrop = new PageBackdropWebGL(document.body)
+
   // Dev grid overlay — restored from the stored flag before the
   // stylesheet's gate class is applied.
   if (store.getters.getShowGrid()) {
@@ -86,10 +92,17 @@ export function mountAppShell(c: AppRoot): void {
   // now reach onStoreUpdate (see App.tsx).
   c.subscribe(store)
 
+  // Singleton-scope subscription disposers drained by onDestroy —
+  // stubs mounting the shell in tests may lack the field, so it is
+  // initialised defensively rather than assumed.
+  const bootCleanups = (c._bootCleanups ??= [])
+
   // Cyrillic font surface — toggle Fira Sans on/off with the locale and
-  // keep <html lang> truthful; subscribed so locale commits re-sync.
+  // keep <html lang> truthful; subscribed so locale commits re-sync. The
+  // subscriber lives on the store singleton — its unsubscribe handle goes
+  // to _bootCleanups so disconnect doesn't leak the callback.
   syncCyrillicFont(store.getters.getLang())
-  store.subscribe(() => syncCyrillicFont(store.getters.getLang()))
+  bootCleanups.push(store.subscribe(() => syncCyrillicFont(store.getters.getLang())))
 
   // Lazy-load heavy global components on the first interaction signal —
   // they only render in answer to user actions, so warming at idle pays
@@ -162,57 +175,66 @@ export function mountAppShell(c: AppRoot): void {
   }
 
   // Subscribe to router — every navigation runs the progress-bar
-  // choreography, swaps the outlet view, and re-fetches route data.
-  router.subscribe((to, from) => {
-    c.routeLoading = true
+  // choreography, swaps the outlet view, and re-fetches route data. The
+  // closure captures `c`; the unsubscribe handle goes to _bootCleanups
+  // so a detached <app-root> (and its whole shadow tree) stays collectable.
+  bootCleanups.push(
+    router.subscribe((to, from) => {
+      c.routeLoading = true
 
-    const pBar = c.$(`.${APP_CLASSES.PROGRESS_BAR}`)
+      const pBar = c.$(`.${APP_CLASSES.PROGRESS_BAR}`)
 
-    if (pBar) {
-      // A stale --done from the previous navigation would pin the bar at
-      // scaleX(1)/opacity:0 — clear it so the crawl restarts visibly.
-      pBar.classList.remove(APP_CLASSES.PROGRESS_BAR_DONE)
-      pBar.classList.add(APP_CLASSES.PROGRESS_BAR_ACTIVE)
-    }
-
-    // Completion is scheduled BEFORE the view swap + data fan-out so a throw
-    // downstream can never strand the bar mid-crawl (notify swallows listener
-    // errors). The timeout re-queries the node because a re-render between
-    // now and then may have replaced the captured element.
-    setTimeout(() => {
-      c.routeLoading = false
-      const liveBar = c.$(`.${APP_CLASSES.PROGRESS_BAR}`)
-
-      if (liveBar) {
-        // Swap crawl for done: the bar completes to 100% and fades in
-        // place instead of retracting to 0. The reset timeout removes
-        // --done once the fade finished so the next navigation starts
-        // clean (transform reset lands while opacity is still 0).
-        liveBar.classList.remove(APP_CLASSES.PROGRESS_BAR_ACTIVE)
-        liveBar.classList.add(APP_CLASSES.PROGRESS_BAR_DONE)
-
-        setTimeout(() => {
-          liveBar.classList.remove(APP_CLASSES.PROGRESS_BAR_DONE)
-        }, ANIMATION_DURATIONS.PROGRESS_BAR_RESET)
+      if (pBar) {
+        // A stale --done from the previous navigation would pin the bar at
+        // scaleX(1)/opacity:0 — clear it so the crawl restarts visibly.
+        pBar.classList.remove(APP_CLASSES.PROGRESS_BAR_DONE)
+        pBar.classList.add(APP_CLASSES.PROGRESS_BAR_ACTIVE)
       }
-    }, ANIMATION_DURATIONS.ROUTE_DURATION)
 
-    // Commit the new view tag + swap the outlet — re-render replaces
-    // the <CurrentView> element with the incoming route's tag.
-    c.currentViewTag = to.view
+      // Completion is scheduled BEFORE the view swap + data fan-out so a throw
+      // downstream can never strand the bar mid-crawl (notify swallows listener
+      // errors). The timeout re-queries the node because a re-render between
+      // now and then may have replaced the captured element.
+      setTimeout(() => {
+        c.routeLoading = false
+        const liveBar = c.$(`.${APP_CLASSES.PROGRESS_BAR}`)
 
-    c._updateViewContent(to, from)
+        if (liveBar) {
+          // Swap crawl for done: the bar completes to 100% and fades in
+          // place instead of retracting to 0. The reset timeout removes
+          // --done once the fade finished so the next navigation starts
+          // clean (transform reset lands while opacity is still 0).
+          liveBar.classList.remove(APP_CLASSES.PROGRESS_BAR_ACTIVE)
+          liveBar.classList.add(APP_CLASSES.PROGRESS_BAR_DONE)
 
-    c.loadData()
+          setTimeout(() => {
+            liveBar.classList.remove(APP_CLASSES.PROGRESS_BAR_DONE)
+          }, ANIMATION_DURATIONS.PROGRESS_BAR_RESET)
+        }
+      }, ANIMATION_DURATIONS.ROUTE_DURATION)
 
-    // Reader-mode content mirrors the route's prerendered page — keeps
-    // the parked <article> truthful for reader mode + AI agents.
-    updateReaderContent(window.location.pathname)
+      // Commit the new view tag + swap the outlet — re-render replaces
+      // the <CurrentView> element with the incoming route's tag.
+      c.currentViewTag = to.view
 
-    // Programmatic/history navigation may not originate from a click. Retry
-    // visible fallback widgets after the new view has mounted.
-    webglPool.scheduleFallbackRetry()
-  })
+      // Experiment routes (earth-playground, star-field) are dark-only —
+      // re-resolve the theme on every navigation so entering one forces
+      // dark and leaving restores the stored preference.
+      store.commit(PREF_MUTATIONS.APPLY_THEME)
+
+      c._updateViewContent(to, from)
+
+      c.loadData()
+
+      // Reader-mode content mirrors the route's prerendered page — keeps
+      // the parked <article> truthful for reader mode + AI agents.
+      updateReaderContent(window.location.pathname)
+
+      // Programmatic/history navigation may not originate from a click. Retry
+      // visible fallback widgets after the new view has mounted.
+      webglPool.scheduleFallbackRetry()
+    })
+  )
 
   // Initial view — no router event fires for the landing route (the
   // subscription starts after init), so the first view resolves here.

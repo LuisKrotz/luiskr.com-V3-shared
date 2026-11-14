@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/earth-playground/SpacePlayground](../README.md) / SpacePlayground
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:64
+Defined in: experiments/earth-playground/SpacePlayground.tsx:65
 
 The SpacePlayground — playground class.
 
@@ -20,7 +20,7 @@ The SpacePlayground — playground class.
 new SpacePlayground(): SpacePlayground;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:82
+Defined in: experiments/earth-playground/SpacePlayground.tsx:84
 
 #### Returns
 
@@ -35,12 +35,16 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:82
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -54,7 +58,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +80,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +101,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +119,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +135,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +155,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +171,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -185,7 +189,7 @@ _earthBg:
   | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:65
+Defined in: experiments/earth-playground/SpacePlayground.tsx:66
 
 ---
 
@@ -195,7 +199,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:65
 _panelOpen: boolean = true
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:66
+Defined in: experiments/earth-playground/SpacePlayground.tsx:67
 
 ---
 
@@ -205,7 +209,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:66
 _isDark: boolean = true
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:67
+Defined in: experiments/earth-playground/SpacePlayground.tsx:68
 
 ---
 
@@ -215,7 +219,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:67
 _lastLocale: string | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:68
+Defined in: experiments/earth-playground/SpacePlayground.tsx:69
 
 ---
 
@@ -225,7 +229,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:68
 translations: Record<string, unknown> | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:69
+Defined in: experiments/earth-playground/SpacePlayground.tsx:70
 
 ---
 
@@ -235,7 +239,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:69
 _collapsedMap: Record<string, boolean> = {}
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:70
+Defined in: experiments/earth-playground/SpacePlayground.tsx:71
 
 ---
 
@@ -245,7 +249,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:70
 _savedSettings: SpSavedSettings = {}
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:71
+Defined in: experiments/earth-playground/SpacePlayground.tsx:72
 
 ---
 
@@ -255,7 +259,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:71
 _posRafId: number | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:72
+Defined in: experiments/earth-playground/SpacePlayground.tsx:73
 
 ---
 
@@ -270,7 +274,7 @@ _posEls:
   | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:73
+Defined in: experiments/earth-playground/SpacePlayground.tsx:74
 
 ---
 
@@ -280,7 +284,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:73
 _posLast: [number, number, number, number, number, number] | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:74
+Defined in: experiments/earth-playground/SpacePlayground.tsx:75
 
 ---
 
@@ -290,7 +294,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:74
 _checkboxes: Record<string, CheckboxWebGL> = {}
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:75
+Defined in: experiments/earth-playground/SpacePlayground.tsx:76
 
 ---
 
@@ -300,7 +304,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:75
 _canvasEl: HTMLCanvasElement | null = null;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:76
+Defined in: experiments/earth-playground/SpacePlayground.tsx:77
 
 ---
 
@@ -310,7 +314,17 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:76
 _isInitializingEarth: boolean = false
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:77
+Defined in: experiments/earth-playground/SpacePlayground.tsx:78
+
+---
+
+### \_printDispose
+
+```ts
+_printDispose: (() => void) | null = null;
+```
+
+Defined in: experiments/earth-playground/SpacePlayground.tsx:79
 
 ---
 
@@ -320,7 +334,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:77
 _earthReady: boolean = false
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:78
+Defined in: experiments/earth-playground/SpacePlayground.tsx:80
 
 ---
 
@@ -330,7 +344,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:78
 _earthFailed: boolean = false
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:79
+Defined in: experiments/earth-playground/SpacePlayground.tsx:81
 
 ---
 
@@ -340,7 +354,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:79
 _keyboardExpandedGroups: WeakSet<Element>
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:80
+Defined in: experiments/earth-playground/SpacePlayground.tsx:82
 
 ---
 
@@ -4567,7 +4581,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: core/Component.ts:113
+Defined in: core/Component.ts:185
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4589,7 +4603,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4623,7 +4637,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4648,7 +4662,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4672,7 +4686,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4709,7 +4723,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4752,7 +4766,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4802,7 +4816,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4833,7 +4847,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4856,7 +4870,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4881,7 +4895,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4916,7 +4930,7 @@ Render result from render().
 _getCanvasEl(): HTMLCanvasElement;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:88
+Defined in: experiments/earth-playground/SpacePlayground.tsx:90
 
 The WebGL canvas the EarthBackground engine renders into.
 
@@ -4932,7 +4946,7 @@ The WebGL canvas the EarthBackground engine renders into.
 onMounted(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:102
+Defined in: experiments/earth-playground/SpacePlayground.tsx:108
 
 Lifecycle: loads translations, binds controls, boots the Earth engine.
 
@@ -4952,7 +4966,7 @@ Lifecycle: loads translations, binds controls, boots the Earth engine.
 onUpdated(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:145
+Defined in: experiments/earth-playground/SpacePlayground.tsx:153
 
 Lifecycle: re-mounts checkbox canvases after re-render.
 
@@ -4972,7 +4986,7 @@ Lifecycle: re-mounts checkbox canvases after re-render.
 onDestroy(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:163
+Defined in: experiments/earth-playground/SpacePlayground.tsx:171
 
 Lifecycle: destroys the Earth engine + checkbox widgets.
 
@@ -4992,7 +5006,7 @@ Lifecycle: destroys the Earth engine + checkbox widgets.
 onStoreUpdate(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:189
+Defined in: experiments/earth-playground/SpacePlayground.tsx:201
 
 Re-syncs settings on store changes.
 
@@ -5012,7 +5026,7 @@ Re-syncs settings on store changes.
 _loadTranslations(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:205
+Defined in: experiments/earth-playground/SpacePlayground.tsx:217
 
 Loads the playground label translations via SWR.
 
@@ -5028,7 +5042,7 @@ Loads the playground label translations via SWR.
 _updateLoader(msg, pct): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:242
+Defined in: experiments/earth-playground/SpacePlayground.tsx:254
 
 Mirrors engine bootstrap progress into the loader overlay — each node is
 optional because the loader can already be dismissed or re-rendered away.
@@ -5059,7 +5073,7 @@ progress label
 _initEarth(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:248
+Defined in: experiments/earth-playground/SpacePlayground.tsx:260
 
 Creates the EarthBackground engine with ready/progress callbacks.
 
@@ -5075,7 +5089,7 @@ Creates the EarthBackground engine with ready/progress callbacks.
 _dismissLoader(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:254
+Defined in: experiments/earth-playground/SpacePlayground.tsx:266
 
 Hides the loading overlay after the first usable frame.
 
@@ -5091,7 +5105,7 @@ Hides the loading overlay after the first usable frame.
 _applyPersistedSettings(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:260
+Defined in: experiments/earth-playground/SpacePlayground.tsx:272
 
 Replays saved localStorage settings onto the panel + engine.
 
@@ -5107,7 +5121,7 @@ Replays saved localStorage settings onto the panel + engine.
 _bindControls(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:266
+Defined in: experiments/earth-playground/SpacePlayground.tsx:278
 
 Wires sliders, checkboxes and action buttons.
 
@@ -5123,7 +5137,7 @@ Wires sliders, checkboxes and action buttons.
 _startPositionLoop(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:272
+Defined in: experiments/earth-playground/SpacePlayground.tsx:284
 
 Periodically reports camera position for the HUD/persistence.
 
@@ -5139,7 +5153,7 @@ Periodically reports camera position for the HUD/persistence.
 _handleAction(action, btn): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:278
+Defined in: experiments/earth-playground/SpacePlayground.tsx:290
 
 Runs a button action (screenshot, reset, music toggle).
 
@@ -5165,7 +5179,7 @@ Runs a button action (screenshot, reset, music toggle).
 _handleInput(input): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:284
+Defined in: experiments/earth-playground/SpacePlayground.tsx:296
 
 Applies a slider/checkbox input to the engine and persists it.
 
@@ -5187,7 +5201,7 @@ Applies a slider/checkbox input to the engine and persists it.
 _persistParam(param, val): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:290
+Defined in: experiments/earth-playground/SpacePlayground.tsx:302
 
 Writes one param value into the persisted settings.
 
@@ -5213,7 +5227,7 @@ Writes one param value into the persisted settings.
 _syncPanel(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:296
+Defined in: experiments/earth-playground/SpacePlayground.tsx:308
 
 Pushes engine state back into the panel controls.
 
@@ -5229,7 +5243,7 @@ Pushes engine state back into the panel controls.
 _mountCheckboxCanvases(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:302
+Defined in: experiments/earth-playground/SpacePlayground.tsx:314
 
 Mounts CheckboxWebGL widgets onto the panel checkboxes.
 
@@ -5245,7 +5259,7 @@ Mounts CheckboxWebGL widgets onto the panel checkboxes.
 _destroyCheckboxCanvases(): void;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:308
+Defined in: experiments/earth-playground/SpacePlayground.tsx:320
 
 Tears down the checkbox widgets.
 
@@ -5261,7 +5275,7 @@ Tears down the checkbox widgets.
 _renderControl(ctrl, t): Element;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:313
+Defined in: experiments/earth-playground/SpacePlayground.tsx:325
 
 #### Parameters
 
@@ -5285,7 +5299,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:313
 _renderAction(act, t): Element;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:317
+Defined in: experiments/earth-playground/SpacePlayground.tsx:329
 
 #### Parameters
 
@@ -5309,7 +5323,7 @@ Defined in: experiments/earth-playground/SpacePlayground.tsx:317
 render(): Element;
 ```
 
-Defined in: experiments/earth-playground/SpacePlayground.tsx:321
+Defined in: experiments/earth-playground/SpacePlayground.tsx:333
 
 Subclasses render() to return a JSX DOM Node or HTML string for the content area.
 The base implementation returns an empty string so instantiating the base

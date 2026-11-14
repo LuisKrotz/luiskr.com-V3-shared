@@ -8,7 +8,7 @@
 function mountModalLoadingDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:362
+Defined in: website/components/media/anim-demo/dom.ts:317
 
 Expand-modal loading demo — toggles the ready modifier so the staged
 lightbox alternates spinner ↔ shimmer-sweep, the loading lifecycle

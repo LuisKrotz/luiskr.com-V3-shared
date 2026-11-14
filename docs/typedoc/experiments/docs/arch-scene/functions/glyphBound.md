@@ -8,7 +8,7 @@
 function glyphBound(verts): number
 ```
 
-Defined in: experiments/docs/arch-scene.ts:779
+Defined in: experiments/docs/arch-scene.ts:787
 
 Bounding radius of a glyph vert list — the invisible pick-sphere
 radius (instanced BufferGeometry isn't on three's raycast path, so

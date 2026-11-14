@@ -97,7 +97,8 @@ straight to the page: the close-direction "blink".
 
 Overlay device-pixel cap — a fullscreen transition canvas at raw
 devicePixelRatio triples fill cost on dpr-3 phones; 2 keeps the warp
-crisp without exceeding the frame budget.
+crisp without exceeding the frame budget. Exported so the /animations
+genie demo caps its stage overlay at the same ceiling.
 
 ### `fallbackOrigin`
 

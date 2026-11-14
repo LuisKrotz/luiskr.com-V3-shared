@@ -39,7 +39,14 @@ const runAsync = (argv) =>
     execFile(argv[0], argv.slice(1), inherited, (err) => (err ? reject(err) : resolve()))
   )
 
+// Version stamp: --sync mirrors package.json#version into .env's
+// VITE_APP_VERSION before the tier builds inline it; --bump then consumes
+// the build id (patch++ on VITE_BUILD_ID) so the next build counts up.
+runNode('shared/scripts/build/stamp-version.mjs', ['--sync'])
+
 runNode('shared/scripts/build/build-targets.mjs')
+
+runNode('shared/scripts/build/stamp-version.mjs', ['--bump'])
 
 // deploy-info reads dist/reports, jsdocs scans sources — independent of
 // each other, so they run concurrently.

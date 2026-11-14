@@ -8,6 +8,7 @@
 
 - [projectHref](functions/projectHref.md)
 - [cardInfo](functions/cardInfo.md)
+- [armOutgoingTitleBurn](functions/armOutgoingTitleBurn.md)
 - [burnCardTitles](functions/burnCardTitles.md)
 - [holdBurns](functions/holdBurns.md)
 - [writeInfo](functions/writeInfo.md)

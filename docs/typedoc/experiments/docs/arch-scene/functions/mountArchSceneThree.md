@@ -8,7 +8,7 @@
 function mountArchSceneThree(canvas, roots, onPick, onLost?, onReady?): ArchSceneHandle | null
 ```
 
-Defined in: experiments/docs/arch-scene.ts:1197
+Defined in: experiments/docs/arch-scene.ts:1221
 
 The three.js/WebGL arm of the architecture scene — the original
 renderer, kept as the synchronous fallback for every device without

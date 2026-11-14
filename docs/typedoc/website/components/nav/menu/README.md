@@ -17,3 +17,5 @@
 - [mountNavMenuWebGL](functions/mountNavMenuWebGL.md)
 - [mountNavBurgerWebGL](functions/mountNavBurgerWebGL.md)
 - [closeNavMenu](functions/closeNavMenu.md)
+- [focusNavMenuItem](functions/focusNavMenuItem.md)
+- [navMenuKeyDown](functions/navMenuKeyDown.md)

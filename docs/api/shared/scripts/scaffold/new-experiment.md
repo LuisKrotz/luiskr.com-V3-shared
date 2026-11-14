@@ -13,7 +13,12 @@ Scaffolds a new experiment workspace under experiments/&lt;name&gt;/
 
 ",
 "**/components/**"
-]
+],
+"scripts": {
+"version:patch": "yarn version --patch --no-git-tag-version",
+"version:minor": "yarn version --minor --no-git-tag-version",
+"version:major": "yarn version --major --no-git-tag-version"
+}
 }
 `,
   'tsconfig.json': `{

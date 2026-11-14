@@ -1,6 +1,6 @@
 # `website\components\nav\grid.tsx`
 
-The menu glyph for &lt;app-nav&gt;'s menu button — four neon
+The menu glyph for &lt;app-nav&gt;'s menu button — four silver
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
@@ -11,7 +11,7 @@ The menu glyph for &lt;app-nav&gt;'s menu button — four neon
 
 ### `stop`
 
-`stop` bound to a --nav-neon-* CSS prop — presentation attributes can't
+`stop` bound to a --nav-metal-* CSS prop — presentation attributes can't
 resolve custom properties, so the value rides inline style.
 
 ### `ref`
@@ -20,6 +20,6 @@ resolve custom properties, so the value rides inline style.
 
 ### `NavGridIcon`
 
-The <nav-grid-icon> element — four rounded neon squares. The stroke
+The <nav-grid-icon> element — four rounded silver squares. The stroke
 gradient runs teal at the top-left to violet at the bottom-right so the
 grid reads as one lit outline.

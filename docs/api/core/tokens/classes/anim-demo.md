@@ -142,10 +142,6 @@ One demo tile.
 
 Hover-state modifier driving the lift/zoom spring.
 
-### `TILE_SPRING`
-
-Taller variant carrying the spring displacement demo.
-
 ### `DIVIDER`
 
 The <hr> the sheen travels.
@@ -194,25 +190,20 @@ In-flight crawl state (scaleX → ~70%).
 
 Completion state (sweep to 100% + fade).
 
-### `ORIGIN`
+### `GENIE_FIGURE`
 
-The trigger origin dot the dialog zooms from.
+The origin card the funnel flies out of / sucks back into — the
+clicked-figure twin on the page chrome.
 
-### `BACKDROP`
+### `GENIE_MODAL`
 
-Backdrop carrying the enter/leave modifiers.
+The mini lightbox content — also carries the real
+`expand-modal-content` token (buildGenieSheet resolves it); this
+class only frames the box on the stage.
 
-### `BACKDROP_ENTER`
+### `GENIE_MODAL_FIGURE`
 
-Enter modifier — collapsed start state.
-
-### `BACKDROP_LEAVE`
-
-Leave modifier — collapse-back state.
-
-### `DIALOG`
-
-Dialog panel the genie transforms.
+The media box inside the mini lightbox — the sheet's warp rect.
 
 ### `SKEL`
 
@@ -222,6 +213,17 @@ Content block holding the skeleton placeholders.
 
 Flag widget canvas (waving flag, natural aspect).
 
+### `FLAGS`
+
+Flex row listing every locale's flag — the record's "list them all"
+contract (one `.anim-demo-flag` canvas per LANG_OPTIONS entry).
+
+### `FLAG_CELL`
+
+One flag slot — pairs the canvas with its `flag-img`/`flag-split`
+<img> fallback twin (the lang dialog's own no-GL contract, so a
+dead surface still lists every flag).
+
 ### `SWITCH`
 
 Switch slider widget canvas (54×28 pill).
@@ -230,13 +232,25 @@ Switch slider widget canvas (54×28 pill).
 
 Theme slider widget canvas (280×64 track).
 
+### `MENUBG`
+
+Menu-background canvas variant — distinguishes the fullscreen
+contour field from the scene-3d canvas pair when `:has()` scopes
+the CSS fallback paint.
+
+### `ICON_BURGER`
+
+Burger icon canvas mark — scopes the CSS-drawn fallback squares
+on the shared icon wrapper.
+
+### `ICON_CLOSE`
+
+Close icon canvas mark — scopes the CSS-drawn fallback X on the
+shared icon wrapper.
+
 ### `TILE_INNER`
 
 Inner face of a demo tile (the sheen masks sit on the tile itself).
-
-### `DIALOG_TEXT`
-
-Placeholder line inside the genie dialog panel.
 
 ### `DRAW`
 
@@ -245,14 +259,6 @@ The <draw-text> replay element inside a demo stage.
 ### `FIGURE`
 
 The <media-figure> sizing wrapper.
-
-### `NOTES`
-
-The disclaimer-note line the dots pulse inside.
-
-### `DOT`
-
-One pulsing note-dot marker.
 
 ### `FAN`
 
@@ -293,6 +299,10 @@ The search field bar.
 ### `SEARCH_ICON`
 
 The submit glyph — spins while loading.
+
+### `SEARCH_TEXT`
+
+The typed-query text bar inside the field.
 
 ### `SEARCH_DOTS`
 
@@ -340,19 +350,12 @@ Ready modifier — loading visuals hand off to the sheen.
 
 ### `FEED`
 
-The feed link row the wave ripples across.
+The staged feed anchor — carries the real feedGlyph the driver
+prepends; the wave arcs pulse in CSS.
 
-### `FEED_ITEM`
+### `ELEMENT`
 
-One feed link — nth-child delay staggers the wave.
-
-### `ANIM_DEMO_CSS_PROPS`
-
-Frozen anim-demo CSS custom-property names — the mosaic-tile spring
-displacement writes `--anim-demo-lift` (px length), read by the tile's
-transform. Sole declaration site — consumers import the token, never
-retype the literal (zero-hardcoding rule).
-
-### `LIFT`
-
-Spring displacement length on the mosaic-tile demo (px).
+Host class on a mounted production element (card-stack,
+mentions-deck, awards-carousel, custom-carousel, about-section) —
+the element owns its internals; the class only frames the host
+box inside the stage.

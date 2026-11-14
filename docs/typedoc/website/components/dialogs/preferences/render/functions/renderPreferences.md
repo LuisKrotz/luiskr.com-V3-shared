@@ -1,16 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/dialogs/preferences/render](../README.md) / renderPreferences
 
 ```ts
-function renderPreferences(host): 
-  | Element
-  | null;
+function renderPreferences(host): Element | null
 ```
 
-Defined in: website/components/dialogs/preferences/render.tsx:86
+Defined in: website/components/dialogs/preferences/render.tsx:89
 
 JSX template.
 
@@ -22,5 +20,5 @@ JSX template.
 
 ## Returns
 
-  \| [`Element`](../../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
-  \| `null`
+\| [`Element`](../../../../../../shared/src/globals/namespaces/JSX/type-aliases/Element.md)
+\| `null`

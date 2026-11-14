@@ -8,7 +8,7 @@
 function fetchDocsFile(id): Promise<DocsFilePayload | null>
 ```
 
-Defined in: experiments/docs/manifest.ts:336
+Defined in: experiments/docs/manifest.ts:337
 
 Lazily fetches one rendered file payload. Ids come straight from the
 manifest, so the URL is encoded segment-wise — never user-derived.

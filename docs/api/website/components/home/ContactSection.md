@@ -9,12 +9,6 @@
 
 ## Members
 
-### `FALLBACK_CAPTIONS`
-
-Build-time map of canonical channel link to fallback caption so live
-Firebase RTDB payloads that predate the caption field still render
-the English fallback's caption under the secondary links.
-
 ### `FALLBACK_CONTACT_TITLE`
 
 Bundled post-redesign contact heading ("Contact / Get in Touch") used when

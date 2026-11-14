@@ -1,16 +1,18 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/render](../README.md) / renderDone
 
 ```ts
-function renderDone(host): Element;
+function renderDone(host): Element
 ```
 
-Defined in: cms/media-convert/render.tsx:120
+Defined in: cms/media-convert/render.tsx:124
 
-Renders done.
+Done-phase template — download/reset actions, the per-input output
+tree (source filename → each emitted derivative), and a separate
+error block for rows whose conversion failed.
 
 ## Parameters
 
@@ -18,7 +20,7 @@ Renders done.
 
 [`CmsMediaConverter`](../../CmsMediaConverter/classes/CmsMediaConverter.md)
 
-— the host component
+— the host component holding `status.results`
 
 ## Returns
 

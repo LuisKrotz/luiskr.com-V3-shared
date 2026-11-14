@@ -8,7 +8,7 @@
 function scrollIndexRail(host, dir): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:139
+Defined in: website/components/home/cardstack/interactions.ts:153
 
 `scrollIndexRail` — the index list is a horizontal rail on desktop and
 a vertical sheet on mobile, so the arrows scroll whichever axis is

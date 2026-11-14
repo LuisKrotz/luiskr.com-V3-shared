@@ -8,7 +8,7 @@
 function generateStarIndexSchema(options): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:638
+Defined in: core/utils/schema.ts:652
 
 Star-field index JSON-LD graph — the route base plus an ItemList that
 enumerates every authored body deep link and a DataCatalog whose

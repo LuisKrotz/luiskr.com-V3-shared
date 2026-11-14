@@ -1,15 +1,16 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/tokens/attrs/link](../README.md) / LINK\_ATTRS
 
 ```ts
 const LINK_ATTRS: Readonly<{
-  HREF: "href";
-  TARGET: "target";
-  REL: "rel";
-}>;
+  HREF: 'href'
+  TARGET: 'target'
+  REL: 'rel'
+  MEDIA: 'media'
+}>
 ```
 
 Defined in: core/tokens/attrs/link.ts:14

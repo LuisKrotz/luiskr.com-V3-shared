@@ -8,14 +8,14 @@
 function measureFit(c, observedWidth?): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:69
+Defined in: website/components/carousel/custom-carousel/sizing.ts:76
 
 Decides whether the items fit side-by-side (no carousel chrome) or need
-the scroll track. Side-by-side requires: ≤2 items, viewport
+the scroll track. Side-by-side requires: ≥2 items (any count), viewport
 ≥ SIDE_BY_SIDE_BREAKPOINT, and projected total width ≤ host width.
 The projection mirrors the shadow-DOM contract in media-figure.scss +
 carousel-host.scss exactly: the strip height is the same value
-setHeightVar publishes to --carousel-media-height — the tallest item
+setHeightVar publishes to --carousel-media-height — the smallest item
 rendered into hostW × 70dvh (calcMediaBox — WASM-backed, never
 upscales); every slide's box is that strip height × the source's own
 ratio (width: auto, no max-width cap in carousel context), floored at

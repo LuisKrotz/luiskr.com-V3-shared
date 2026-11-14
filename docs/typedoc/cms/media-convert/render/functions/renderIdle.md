@@ -1,16 +1,18 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/render](../README.md) / renderIdle
 
 ```ts
-function renderIdle(host): Element;
+function renderIdle(host): Element
 ```
 
-Defined in: cms/media-convert/render.tsx:24
+Defined in: cms/media-convert/render.tsx:26
 
-Renders idle.
+Idle-phase template — the drop-zone (folder/file drag target + hidden
+Browse input) plus, once files are queued, the queue list (relative
+path + size per row) and the "Convert all" trigger.
 
 ## Parameters
 
@@ -18,7 +20,7 @@ Renders idle.
 
 [`CmsMediaConverter`](../../CmsMediaConverter/classes/CmsMediaConverter.md)
 
-— the host component
+— the host component holding `queue`
 
 ## Returns
 

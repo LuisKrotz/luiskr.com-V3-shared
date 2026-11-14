@@ -8,7 +8,7 @@
 function mountSkeletonDemo(_ctx): void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:218
+Defined in: website/components/media/anim-demo/dom.ts:217
 
 Skeleton-shimmer demo — the staged placeholders carry the shared
 skeleton classes whose shimmer sweeps in CSS; no JS state to drive.

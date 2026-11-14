@@ -8,7 +8,7 @@
 function mountDrawDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:156
+Defined in: website/components/media/anim-demo/dom.ts:155
 
 DrawText demo — resets then re-triggers the element so the
 letter-drawing replay loop mirrors the real heading's reveal.

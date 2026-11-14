@@ -8,7 +8,7 @@
 function generatePersonSchema(): Record<string, unknown>
 ```
 
-Defined in: core/utils/schema.ts:160
+Defined in: core/utils/schema.ts:169
 
 Person entity — the site's sole author. Every page's graph carries it
 so Google consolidates `author`/`publisher`/`creator`/`uploader`

@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/consts](../README.md) / ToolsReport
 
-Defined in: cms/media-convert/consts.ts:56
+Defined in: cms/media-convert/consts.ts:60
 
 Server payload from GET /api/media-convert/tools (shared/scripts/media-convert/install.js).
 
@@ -16,11 +16,11 @@ Server payload from GET /api/media-convert/tools (shared/scripts/media-convert/i
 optional platform?: string;
 ```
 
-Defined in: cms/media-convert/consts.ts:58
+Defined in: cms/media-convert/consts.ts:62
 
 OS the dev server runs on ('linux'|'darwin'|'win32').
 
-***
+---
 
 ### tools?
 
@@ -28,11 +28,11 @@ OS the dev server runs on ('linux'|'darwin'|'win32').
 optional tools?: Record<string, boolean>;
 ```
 
-Defined in: cms/media-convert/consts.ts:60
+Defined in: cms/media-convert/consts.ts:64
 
 Per-binary presence flags keyed by executable name.
 
-***
+---
 
 ### missing?
 
@@ -40,11 +40,11 @@ Per-binary presence flags keyed by executable name.
 optional missing?: Record<string, boolean>;
 ```
 
-Defined in: cms/media-convert/consts.ts:62
+Defined in: cms/media-convert/consts.ts:66
 
 Missing-tool groups (ffmpeg, imagemagick, cjpeg).
 
-***
+---
 
 ### manager?
 
@@ -52,11 +52,11 @@ Missing-tool groups (ffmpeg, imagemagick, cjpeg).
 optional manager?: string | null;
 ```
 
-Defined in: cms/media-convert/consts.ts:64
+Defined in: cms/media-convert/consts.ts:68
 
 Detected package manager (or null when none found).
 
-***
+---
 
 ### plan?
 
@@ -64,7 +64,7 @@ Detected package manager (or null when none found).
 optional plan?: object;
 ```
 
-Defined in: cms/media-convert/consts.ts:66
+Defined in: cms/media-convert/consts.ts:70
 
 Install plan — runnable commands vs. manual guidance.
 

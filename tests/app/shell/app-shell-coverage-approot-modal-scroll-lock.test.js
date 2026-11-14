@@ -2,7 +2,7 @@
  * @file app-shell-coverage-approot-modal-scroll-lock.test.js
  * @description Split from app-shell-coverage.test.js — covers the "AppRoot — modal scroll lock" describe.
  */
-import { describe, test, expect, jest, beforeEach, afterEach } from '@jest/globals'
+import { describe, test, expect, jest, beforeEach, afterEach, afterAll } from '@jest/globals'
 import { AppRoot } from '@/App.js'
 import store from '@core/store.js'
 import router from '@core/router/router.js'
@@ -31,6 +31,14 @@ beforeEach(() => {
 afterEach(() => {
   cleanups.forEach((c) => c())
   cleanups = []
+})
+
+afterAll(async () => {
+  // Drain armed onUserIntent registrations — every booted shell holds a
+  // 20s fallback timer whose lazy import()s must resolve while the jest
+  // environment is still alive.
+  window.dispatchEvent(new Event(KEYBOARD_EVENTS.KEYDOWN))
+  await flush(300)
 })
 
 /**
@@ -96,6 +104,28 @@ describe('AppRoot — modal scroll lock', () => {
 
     expect(document.documentElement.classList.contains(MODAL_CLASSES.MODAL_OPEN)).toBe(false)
     expect(document.body.classList.contains(MODAL_CLASSES.MODAL_OPEN)).toBe(false)
+
+    globalThis.fetch = origFetch
+  })
+
+  test('state sync skips the document class toggles when document is absent', async () => {
+    const origFetch = stableFetch()
+
+    const el = new AppRoot()
+    cleanups.push(mount(el))
+
+    await flush(60)
+
+    // SSR/pre-window arm — the typeof guard must skip the root-class
+    // toggles entirely; the wrapper copy still resolves on the element.
+    const d = globalThis.document
+
+    delete globalThis.document
+    try {
+      el._updateModalState()
+    } finally {
+      globalThis.document = d
+    }
 
     globalThis.fetch = origFetch
   })

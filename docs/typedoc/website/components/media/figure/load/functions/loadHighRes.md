@@ -8,7 +8,7 @@
 function loadHighRes(fig): Promise<void>
 ```
 
-Defined in: website/components/media/figure/load.ts:184
+Defined in: website/components/media/figure/load.ts:331
 
 Thumb → high-res quality ladder. Detached Image probes climb the
 manifest-proven rungs (q50 → q75 → raw original → uncompressed) — webp

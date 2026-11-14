@@ -8,7 +8,7 @@
 function checkAppScroll(c): void
 ```
 
-Defined in: shared/src/app/scroll.ts:43
+Defined in: shared/src/app/scroll.ts:54
 
 Checks app scroll.
 

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [experiments/earth-playground/earth/setup/bootstrap](../README.md) / warmUpShaders
 
 ```ts
-function warmUpShaders(renderer, s): Promise<void>;
+function warmUpShaders(renderer, s): Promise<void>
 ```
 
-Defined in: experiments/earth-playground/earth/setup/bootstrap.ts:33
+Defined in: experiments/earth-playground/earth/setup/bootstrap.ts:36
 
 Pre-compiles the scene's shader programs so the first visible frame doesn't
 hitch on JIT. compileAsync failures (driver hiccups, lost device) are

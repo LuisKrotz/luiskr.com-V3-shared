@@ -8,7 +8,7 @@
 function onStoreUpdate(host): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/lifecycle.ts:54
+Defined in: website/components/carousel/custom-carousel/lifecycle.ts:59
 
 Store change → propagate reduced-motion to both arrows and gate
 autoplay on reduced-motion / any open overlay (expand modal, nav

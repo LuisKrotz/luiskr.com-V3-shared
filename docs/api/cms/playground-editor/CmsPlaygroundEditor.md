@@ -11,7 +11,12 @@
 
 ### `CmsPlaygroundEditor`
 
-The CmsPlaygroundEditor — playground editor class.
+<cms-playground-editor> — the element facade for the playground/slugs
+editor: holds the three data slices (ordered label keys + values, the
+typed `epDefaults` control-seed map, per-locale `slugs`) and delegates
+to `data.ts` (Firebase load/save/key CRUD), `events.ts` (wiring),
+and `render.tsx` (JSX). Methods are thin pass-throughs for the same
+shared call path the tests spy on.
 
 ### (module scope)
 

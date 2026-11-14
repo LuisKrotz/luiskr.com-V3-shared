@@ -8,7 +8,7 @@
 function mountDividerDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/mounts.ts:90
+Defined in: website/components/media/anim-demo/mounts.ts:99
 
 Footer divider sheen — the real `<hr>` fallback paint (authored in
 anim-demo.scss) plus the WebGPU overlay attempt; the mount no-ops

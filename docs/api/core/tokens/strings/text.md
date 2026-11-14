@@ -9,6 +9,10 @@ Non-localized UI text tokens (units, dev-facing labels) —
 
 ## Members
 
+### `CONTENTS`
+
+Print contents page masthead.
+
 ### `LABEL_TEXT`
 
 labels text.

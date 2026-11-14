@@ -14,7 +14,7 @@ function resolveProjectMedia(
 } | null
 ```
 
-Defined in: core/utils/schema.ts:850
+Defined in: core/utils/schema.ts:864
 
 Resolves a media deep-link slug to its sections descriptor plus the
 resolved CDN URLs — the same document-order slugging

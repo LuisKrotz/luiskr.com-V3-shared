@@ -6,3 +6,9 @@ Split from coverage-tails-7.test.js — covers the "earth updates tails" describ
 | -------------- | ---------------------------------------------------------------------------------------------- |
 | **Source**     | `src/experiments\earth-playground\tests\coverage\playground\earth\earth-updates-tails.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                                        |
+
+## Members
+
+### `uni`
+
+three.js uniform stub — updaters only mutate `.value`, so a plain box suffices.

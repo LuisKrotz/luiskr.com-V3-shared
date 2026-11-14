@@ -18,6 +18,59 @@ properties are absent (older stylesheet, non-themed host).
 
 ### (module scope)
 
+The title's anchor + box in the overlay's local LAYOUT space —
+transform-immune by construction. `getBoundingClientRect` reports the
+transformed box, and hosts that animate the overlay's ancestor
+transform during the session (the card-stack deck eases every card's
+translate3d/rotateY/scale on each deal; the mosaic card scales on
+hover) would otherwise feed projected deltas into
+`canvas.style.top/left`: the raster then slid in Y as the transform
+eased and caught the card's scale on top of its own (the "burn drifts
+vertically and loses its shape on mobile" defect). The offsetParent
+chain walks the same coordinate space the canvas's absolute position
+writes into, so the raster rides the host's transform exactly like the
+hidden DOM title does.
+
+- `@param` titleEl The title element being burned.
+- `@param` overlayEl The overlay the session canvas is positioned inside.
+- `@returns` Layout-space anchor + dims, or null when the overlay isn't on
+
+### `x`
+
+Title's left edge inside the overlay's border box, layout px.
+
+### `y`
+
+Title's top edge inside the overlay's border box, layout px.
+
+### `w`
+
+Title box width in layout px.
+
+### `h`
+
+Title box height in layout px.
+
+### `ow`
+
+Overlay box width in layout px — the degenerate-overlay guard.
+
+### `layoutBox`
+
+Accumulates `offsetTop`/`offsetLeft` from the title up to the overlay.
+`offsetParent` never sees ancestor transforms, so the sum is the
+title's layout offset inside the overlay's padding box. Each
+`offsetTop` step counts from the parent's PADDING edge, so every
+positioned ancestor's `clientTop`/`clientLeft` (border widths) is
+added back — the result equals the border-box delta
+`box.top - oBox.top` the rect path produced.
+
+- `@param` titleEl The title element being burned.
+- `@param` overlayEl The overlay the session canvas is positioned inside.
+- `@returns` The layout-space geometry, or null for the rect fallback.
+
+### (module scope)
+
 Word box for DOM-faithful rasterization — the word's position inside the
 title element in CSS px (`y` is the word fragment's bottom edge; the
 caller subtracts the descent to land on the baseline).
@@ -108,14 +161,24 @@ string still track.
 
 ### `syncPaper`
 
-Anchors the canvas once at arm size, then tracks POSITION only. The
+Anchors the canvas once at arm size AND arm position — the raster
+burns exactly where the glyphs stood when they caught fire. The
 card's expand ease animates the h2's `cqw` font-size for ~0.42s after
 hover; re-measuring the box every step baked that shrink into the
-raster, so the burning glyphs visibly collapsed with the DOM font (the
-reported font-reduction bug). Freezing the raster keeps the title the
-size it was when it caught fire — only the canvas slides along the
-moving box. `lastBox`/`lastPos` signatures skip all work when nothing
-moved.
+raster, so the burning glyphs visibly collapsed with the DOM font
+(the reported font-reduction bug). Freezing the raster keeps the
+title the size it was when it caught fire.
+
+Position stays frozen too: hosts ease layout during the session —
+the dealt pile's heights grow with the front card's typing and the
+bottom-anchored copy columns slide — and chasing those boxes made
+the raster visibly drift (the "burn moves in Y on mobile" defect).
+The DOM ink is hidden the whole session, so the only correct anchor
+is where the title stood at arm time. Hosts that publish
+`cls.ITEM_BURNED` opt into live position tracking — their CSS
+relocates the title box at the consume beat and the same session
+replays the consume front in reverse at the new anchor.
+`lastBox`/`lastPos` signatures skip all work when nothing moved.
 
 Knit sessions (dir −1) get one exception: the SAME font transition
 means an arm-time raster freezes mid-transition letterforms, and the

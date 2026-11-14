@@ -8,7 +8,7 @@
 function measure(host): void
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:307
+Defined in: website/components/home/cardstack/deck.ts:305
 
 Measures the deck region and publishes the card box + tier: the card
 width is the tier's CARD_SHARE of the deck width, capped so its height

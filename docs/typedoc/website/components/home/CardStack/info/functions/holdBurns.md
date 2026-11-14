@@ -8,7 +8,7 @@
 function holdBurns(host, held): void
 ```
 
-Defined in: website/components/home/cardstack/info.ts:334
+Defined in: website/components/home/cardstack/info.ts:410
 
 Scroll-visibility hold for every burn session the deck owns — the
 in-card title knits/consumes AND the text column's burn swap. The

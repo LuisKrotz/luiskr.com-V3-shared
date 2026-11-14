@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / PagePos
 
-Defined in: core/store/state.ts:102
+Defined in: core/store/state.ts:105
 
 Last known pointer position in page coordinates — feeds the magnetic
 cursor follower and the modal-origin calculation.
@@ -17,7 +17,7 @@ cursor follower and the modal-origin calculation.
 left: number
 ```
 
-Defined in: core/store/state.ts:103
+Defined in: core/store/state.ts:106
 
 ---
 
@@ -27,4 +27,4 @@ Defined in: core/store/state.ts:103
 top: number
 ```
 
-Defined in: core/store/state.ts:104
+Defined in: core/store/state.ts:107

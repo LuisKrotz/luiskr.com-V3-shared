@@ -37,4 +37,7 @@ Downloads one key, transcodes, uploads the sibling, returns a status.
 
 ### `main`
 
-Bounded worker pool over the key list.
+`main` — job planning + the bounded worker pool: list the bucket,
+diff out keys whose sibling already exists (the resume contract),
+convert the rest N-at-a-time, then merge statuses into the
+persistent log.

@@ -32,6 +32,13 @@ so the highest fetchTime per url is the latest representative run.
 
 - `@returns` {Array} Synthesized manifest entries.
 
+### `collectLighthouse`
+
+`collectLighthouse` — representative-run summary (per-URL scores +
+failing audits) from the manifest when it exists, else the lhr-*
+file scan. ALSO prunes .lighthouseci/ to just those artifacts —
+the side effect the header names.
+
 ### `fileSize`
 
 Byte size of a file, or null when absent.
@@ -88,3 +95,9 @@ breakdown, the per-crate wasm table, and HTML grouped by top-level
 directory (the prerendered locale trees).
 
 - `@returns` {object|null} The bundle-stats report, or null without dist/.
+
+### `main`
+
+`main` — collector fan-in: each collector returns null when its
+source is absent, so the bundle only ships sections that exist.
+`files` is the manifest map index.json publishes.

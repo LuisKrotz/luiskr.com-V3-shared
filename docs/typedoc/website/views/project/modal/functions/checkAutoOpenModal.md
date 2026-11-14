@@ -8,7 +8,7 @@
 function checkAutoOpenModal(c): void
 ```
 
-Defined in: website/views/project/modal.ts:60
+Defined in: website/views/project/modal.ts:63
 
 Checks auto open modal.
 

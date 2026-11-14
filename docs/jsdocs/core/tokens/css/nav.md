@@ -33,6 +33,6 @@ Dark rim — ring edge underside.
 
 Specular glint — the orbiting lens flare.
 
-### `NEON_TEAL`
+### `METAL_SILVER`
 
-Neon palette — published from the token sheet.
+Silver palette — published from the token sheet.

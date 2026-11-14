@@ -41,6 +41,10 @@ Mobile-class user agent — deprioritizes GPU pinning regardless of chip.
 
 Worth pinning GPU work to — desktop discrete or Apple Silicon.
 
+### `_info`
+
+Cached probe result — the adapter/device query runs once per session.
+
 ### `_probeRenderer`
 
 Reads the real GPU renderer string via WEBGL_debug_renderer_info —

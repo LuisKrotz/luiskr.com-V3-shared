@@ -184,6 +184,21 @@
   }
 
   /**
+   * Appends the extracted print sheet — `media="print"` makes it inert to
+   * the screen cascade, so browsers fetch it at the lowest priority and it
+   * never joins render-blocking CSSOM construction. It is positioned after
+   * the screen sheet, matching the source order where print rules sat last.
+   */
+  function injectPrintCss(href) {
+    var l = document.createElement('link')
+    l.rel = 'stylesheet'
+    l.media = 'print'
+    l.href = href
+    document.head.appendChild(l)
+    return l
+  }
+
+  /**
    * Width-class gates, evaluated widest → narrowest against
    * `matchMedia('(min-width:Npx)')`. The manifest's tier.css map is
    * cumulative — `tablet` contains base + mobile + tablet blocks — so the
@@ -284,6 +299,10 @@
     var link = injectCss(css[name] || css.mobile)
     link._lkClass = name
     watchCssGrowth(css, link)
+
+    // Print rules ship as their own manifest entry — the media-gated link
+    // stays out of the width-class selection path entirely.
+    if (css.print) injectPrintCss(css.print)
   }
 
   /** Graceful notice — reached by engines that fail every tier probe

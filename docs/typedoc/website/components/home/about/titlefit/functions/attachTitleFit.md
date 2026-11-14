@@ -8,7 +8,7 @@
 function attachTitleFit(host): void
 ```
 
-Defined in: website/components/home/about/titlefit.ts:113
+Defined in: website/components/home/about/titlefit.ts:115
 
 Arms the fit session: seeds the parked session, (re)targets the h2
 observer — the node is re-created on every render — and wires the

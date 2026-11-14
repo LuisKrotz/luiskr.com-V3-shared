@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/exts](../README.md) / isMediaPath
 
 ```ts
-function isMediaPath(name): boolean;
+function isMediaPath(name): boolean
 ```
 
-Defined in: cms/media-convert/exts.ts:56
+Defined in: cms/media-convert/exts.ts:62
 
 Reports whether a file name/path carries a supported media extension.
 Extension check is case-insensitive; names with no dot, dotfiles
@@ -27,4 +27,4 @@ dropped folders never reaches the queue.
 
 `boolean`
 
-true when the extension is a known image or video format
+true when the extension is a known image, video or document format

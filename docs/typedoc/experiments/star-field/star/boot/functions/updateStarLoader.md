@@ -1,18 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [experiments/star-field/star/boot](../README.md) / updateStarLoader
 
 ```ts
-function updateStarLoader(
-   c, 
-   msg, 
-   pct
-): void;
+function updateStarLoader(c, msg, pct): void
 ```
 
-Defined in: experiments/star-field/star/boot.ts:42
+Defined in: experiments/star-field/star/boot.ts:43
 
 Mirrors an engine progress event into the loader overlay — message,
 rounded percent text, and the bar fill width. Nodes are optional-chained

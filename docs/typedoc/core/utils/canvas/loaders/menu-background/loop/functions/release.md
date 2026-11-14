@@ -8,7 +8,7 @@
 function release(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:71
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:73
 
 Eases the reveal back to 0 — used when the menu closes so the field
 dissolves instead of cutting out. Rendering continues until stop()

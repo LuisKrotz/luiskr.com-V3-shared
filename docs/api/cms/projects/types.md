@@ -55,6 +55,19 @@ Cover media shown in mosaics/cards.
 
 Ordered content sections.
 
+### (module scope)
+
+ISO 8601 publication timestamp (git-derived in database.json) —
+preserved verbatim through load/save; feeds NewsArticle
+datePublished, article:published_time, RSS pubDate and the news
+sitemap. Optional: legacy nodes may lack it.
+
+### (module scope)
+
+ISO 8601 last-modified timestamp — stamped by saveProjectData on
+every write; feeds dateModified, article:modified_time and sitemap
+<lastmod>.
+
 ### `gcs`
 
 Builds the CDN URL for a media filename the same way the public site

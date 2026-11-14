@@ -12,3 +12,7 @@ Coverage tails for the no-WebGL fallback surface —
 ### `fake2d`
 
 Fake 2d context covering every call the painter issues.
+
+### `makeCanvas`
+
+Canvas stub with stubbed clientWidth/Height — happy-dom reports 0s, and the fallback painter needs real extents.

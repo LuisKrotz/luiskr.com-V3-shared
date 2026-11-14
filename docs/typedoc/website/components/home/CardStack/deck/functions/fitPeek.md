@@ -8,7 +8,7 @@
 function fitPeek(deckW, w, tier): number
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:281
+Defined in: website/components/home/cardstack/deck.ts:279
 
 Visible cards per side — the deepest offset (≤ tier.PEEK) whose
 projected outer edge stays inside the deck half-width × EDGE_ROOM,

@@ -6,3 +6,13 @@ Split from safari-patch.test.js — covers the "safari-patch — MediaExpanded o
 | -------------- | ----------------------------------------------------------------------------------------------------------- |
 | **Source**     | `src/core\tests\unit\browser\safari-patch-safari-patch-mediaexpanded-onmounted-patch-real-elements.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.                                                   |
+
+## Members
+
+### `_cls`
+
+Looks up a registered custom element class by tag name.
+
+### `tick`
+
+~20ms flush — Safari-patch timers + microtasks settle within a tick.

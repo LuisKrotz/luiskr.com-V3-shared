@@ -8,7 +8,7 @@
 function kindFor(name): string
 ```
 
-Defined in: experiments/docs/tree-icon.tsx:1363
+Defined in: experiments/docs/tree-icon.tsx:1373
 
 The icon kind for a file name — index pages first (webpage glyph),
 test/spec compound names, then the extension map, then bare-name

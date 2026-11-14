@@ -8,7 +8,7 @@
 function createInitialState(): StoreState
 ```
 
-Defined in: core/store/state.ts:206
+Defined in: core/store/state.ts:209
 
 Builds the initial StoreState — device/localStorage probing lives here.
 

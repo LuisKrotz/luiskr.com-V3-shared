@@ -8,7 +8,7 @@
 function gcs(filename, isVideo?): string
 ```
 
-Defined in: cms/projects/types.ts:47
+Defined in: cms/projects/types.ts:60
 
 Builds the CDN URL for a media filename the same way the public site
 does — videos resolve to their poster frame, images to the mozjpeg

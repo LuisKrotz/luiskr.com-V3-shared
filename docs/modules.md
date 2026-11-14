@@ -1,6 +1,6 @@
 # The modules — how the whole thing fits
 
-luiskr.com V3 is a monorepo of eight workspace modules — each a git submodule
+luiskr.com is a monorepo of eight workspace modules — each a git submodule
 with its own repository, package.json, tsconfig, vite config and Jest suite.
 This page is the map of the whole: what each module is for, how a request
 travels through them, and how the codebase documents itself.

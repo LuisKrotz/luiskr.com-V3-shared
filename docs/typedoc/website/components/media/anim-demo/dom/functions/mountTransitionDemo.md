@@ -8,7 +8,7 @@
 function mountTransitionDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:288
+Defined in: website/components/media/anim-demo/dom.ts:276
 
 View-transition demo — alternates the gone modifier between the two
 staged panes so the outgoing "page" fades out as the incoming one

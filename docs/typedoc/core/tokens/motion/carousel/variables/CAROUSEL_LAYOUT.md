@@ -16,7 +16,7 @@ const CAROUSEL_LAYOUT: Readonly<{
   VISIBILITY_RATIO: 0.15
   FIT_EPS_PX: 4
   DESKTOP_SCALE_STEPS: number[]
-  DESKTOP_SCALE_MIN_W: 320
+  DESKTOP_SCALE_MIN_W: 280
   ITEM_GAP_PX: 32
   MEDIA_MIN_WIDTH: 280
   ITEM_MARGIN_PX: 8
@@ -28,14 +28,13 @@ const CAROUSEL_LAYOUT: Readonly<{
   RATIO_32_9: number
   HALF_NATURAL_MAX_VW: 1024
   HALF_NATURAL_SCALE: 0.5
-  MULTI_FIT_MIN_VW: 3840
   ASPECT_RATIO_16_9: '16:9'
   ASPECT_RATIO_21_9: '21:9'
   ASPECT_RATIO_32_9: '32:9'
 }>
 ```
 
-Defined in: core/tokens/motion/carousel.ts:75
+Defined in: core/tokens/motion/carousel.ts:77
 
 Frozen carousel map — sole declaration site for these tokens; consumers read members and
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token

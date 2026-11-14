@@ -190,25 +190,20 @@ In-flight crawl state (scaleX → ~70%).
 
 Completion state (sweep to 100% + fade).
 
-### `ORIGIN`
+### `GENIE_FIGURE`
 
-The trigger origin dot the dialog zooms from.
+The origin card the funnel flies out of / sucks back into — the
+clicked-figure twin on the page chrome.
 
-### `BACKDROP`
+### `GENIE_MODAL`
 
-Backdrop carrying the enter/leave modifiers.
+The mini lightbox content — also carries the real
+`expand-modal-content` token (buildGenieSheet resolves it); this
+class only frames the box on the stage.
 
-### `BACKDROP_ENTER`
+### `GENIE_MODAL_FIGURE`
 
-Enter modifier — collapsed start state.
-
-### `BACKDROP_LEAVE`
-
-Leave modifier — collapse-back state.
-
-### `DIALOG`
-
-Dialog panel the genie transforms.
+The media box inside the mini lightbox — the sheet's warp rect.
 
 ### `SKEL`
 
@@ -218,6 +213,17 @@ Content block holding the skeleton placeholders.
 
 Flag widget canvas (waving flag, natural aspect).
 
+### `FLAGS`
+
+Flex row listing every locale's flag — the record's "list them all"
+contract (one `.anim-demo-flag` canvas per LANG_OPTIONS entry).
+
+### `FLAG_CELL`
+
+One flag slot — pairs the canvas with its `flag-img`/`flag-split`
+<img> fallback twin (the lang dialog's own no-GL contract, so a
+dead surface still lists every flag).
+
 ### `SWITCH`
 
 Switch slider widget canvas (54×28 pill).
@@ -226,13 +232,25 @@ Switch slider widget canvas (54×28 pill).
 
 Theme slider widget canvas (280×64 track).
 
+### `MENUBG`
+
+Menu-background canvas variant — distinguishes the fullscreen
+contour field from the scene-3d canvas pair when `:has()` scopes
+the CSS fallback paint.
+
+### `ICON_BURGER`
+
+Burger icon canvas mark — scopes the CSS-drawn fallback squares
+on the shared icon wrapper.
+
+### `ICON_CLOSE`
+
+Close icon canvas mark — scopes the CSS-drawn fallback X on the
+shared icon wrapper.
+
 ### `TILE_INNER`
 
 Inner face of a demo tile (the sheen masks sit on the tile itself).
-
-### `DIALOG_TEXT`
-
-Placeholder line inside the genie dialog panel.
 
 ### `DRAW`
 

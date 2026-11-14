@@ -9,6 +9,14 @@ Coverage tails for the procedural imagery layer —
 
 ## Members
 
+### `NODE_DEPS`
+
+Dependency bundle the node-material paths expect — TSL fns + material class.
+
+### `ctxProto`
+
+Canvas prototype accessor — for installing getContext stubs per test.
+
 ### `fake2d`
 
 Fake 2d context covering every call the generators make.

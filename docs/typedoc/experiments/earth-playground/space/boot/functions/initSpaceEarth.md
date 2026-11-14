@@ -8,14 +8,16 @@
 function initSpaceEarth(c): void
 ```
 
-Defined in: experiments/earth-playground/space/boot.ts:49
+Defined in: experiments/earth-playground/space/boot.ts:52
 
 Constructs the EarthBackground engine on the persistent canvas and
 wires its lifecycle: progress → loader overlay, ready → apply persisted
 settings + reduced-motion flag + dismiss. The `_isInitializingEarth`
 latch prevents double-init while init() is still awaiting. A failed
 init still marks `_earthReady` and dismisses the loader so the page
-isn't stuck behind a broken overlay.
+isn't stuck behind a broken overlay. The init promise is registered
+as a pending print job so a print request landing mid-boot waits for
+the first painted frame before the media walk captures the canvas.
 
 ## Parameters
 

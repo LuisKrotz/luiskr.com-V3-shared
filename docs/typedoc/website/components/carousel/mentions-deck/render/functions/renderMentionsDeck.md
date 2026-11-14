@@ -8,7 +8,7 @@
 function renderMentionsDeck(host): Element
 ```
 
-Defined in: website/components/carousel/mentions-deck/render.tsx:136
+Defined in: website/components/carousel/mentions-deck/render.tsx:145
 
 JSX template for the component's shadow DOM — the section title, the
 absolutely-positioned strip cards, then the hint + dot nav chrome. An

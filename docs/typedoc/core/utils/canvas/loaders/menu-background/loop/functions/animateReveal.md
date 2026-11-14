@@ -8,7 +8,7 @@
 function animateReveal(host, target, dur): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:80
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:82
 
 Starts (or restarts mid-flight) a timed reveal ease. Capturing the
 current value as `_revealFrom` means an open→close→open sequence

@@ -9,6 +9,10 @@ Covers core/locale/reader-content.ts — holder creation and
 
 ## Members
 
+### `pathA`
+
+Four project paths — distinct slugs cover each route-match arm.
+
 ### `pageOf`
 
 Minimal Response stand-in for the module's ok/text surface.

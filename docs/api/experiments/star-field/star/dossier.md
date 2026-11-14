@@ -13,6 +13,12 @@ Lazy dossier loader for star-field bodies — fetches
 
 In-flight + resolved dossier cache — `locale:id` → dossier (or promise).
 
+### `_resolved`
+
+Resolved-value mirror of `_cache` — sync readers (print prep) can't
+await the promise bag, so each landed dossier registers here under
+the same `locale:id` key.
+
 ### (module scope)
 
 Locale body-name table — `byId` feeds the navigator rows, hover
@@ -140,3 +146,15 @@ Approach path — warms the cache without touching the panel; the select
 path later resolves instantly from `_cache`.
 
 - `@param` id Approached body id.
+
+### `syncDossier`
+
+Synchronous read of the dossier cache — the promise bag `_cache` maps
+to resolved values only through `.then`, which is too late for the
+synchronous beforeprint walk. `loadDossier`'s own resolved value is
+mirrored here so a print fired while a body is selected can compose
+its plate without a fetch at all.
+
+- `@param` c The StarField component.
+- `@param` id Body id to look up.
+- `@returns` The resolved dossier, or null when nothing is loaded for it.

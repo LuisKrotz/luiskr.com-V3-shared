@@ -1,16 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/sections](../README.md) / addSectionMedia
 
 ```ts
-function addSectionMedia(host, sIdx): void;
+function addSectionMedia(host, sIdx): void
 ```
 
-Defined in: cms/projects/sections.ts:110
+Defined in: cms/projects/sections.ts:121
 
-Adds section media.
+Pushes a fresh media slot (`newMediaSlot` — empty src/label, default
+dimensions, image type) into the media half (`[1]`) of a section.
 
 ## Parameters
 
@@ -18,13 +19,13 @@ Adds section media.
 
 [`CmsProjectsList`](../../CmsProjectsList/classes/CmsProjectsList.md)
 
-— the host component
+— the host component holding `currentProject`
 
 ### sIdx
 
 `number`
 
-— the value
+— zero-based section index
 
 ## Returns
 

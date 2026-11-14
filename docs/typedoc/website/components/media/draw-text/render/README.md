@@ -4,6 +4,10 @@
 
 [luiskr.com](../../../../../README.md) / website/components/media/draw-text/render
 
+## Interfaces
+
+- [DrawRenderCtx](interfaces/DrawRenderCtx.md)
+
 ## Type Aliases
 
 - [DrawRenderMode](type-aliases/DrawRenderMode.md)

@@ -8,12 +8,12 @@
 function mountNavGlyph(host, kind, colorProps, loadModule?): Promise<NavGlyphSession | null>
 ```
 
-Defined in: core/utils/wasm/nav-glyph.ts:85
+Defined in: core/utils/wasm/nav-glyph.ts:87
 
 Mounts the animated glyph on an icon element: finds its canvas in the
 shadow root, wakes the emitter on the owning chip's pointer/focus, and
 paints the wasm particle records each frame in the two palette colors read
-from the icon's own computed neon tokens.
+from the icon's own computed metal tokens.
 
 ## Parameters
 
@@ -33,7 +33,7 @@ NAV_GLYPH.KIND_STREAK or NAV_GLYPH.KIND_SWOOSH
 
 \[`string`, `string`\]
 
-the two --nav-neon-* custom properties to paint with
+the two --nav-metal-* custom properties to paint with
 
 ### loadModule?
 

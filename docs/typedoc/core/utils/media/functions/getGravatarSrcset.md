@@ -8,7 +8,7 @@
 function getGravatarSrcset(urlStr): string
 ```
 
-Defined in: core/utils/media.ts:76
+Defined in: core/utils/media.ts:77
 
 Builds responsive Gravatar srcset with 1x, 2x, 3x density descriptors —
 200/300/400 px variants chosen by GRAVATAR_SIZE_*. Any existing `size=`

@@ -9,6 +9,14 @@ Three-tier media cache: in-memory Map (object URLs) →
 
 ## Members
 
+### (module scope)
+
+IDB token destructuring — local aliases keep the call sites short.
+
+### (module scope)
+
+Introspection result — memory-hit count + whether IndexedDB is usable.
+
 ### `LocalMediaCache`
 
 Two-tier media cache — an in-memory Map for the current session plus

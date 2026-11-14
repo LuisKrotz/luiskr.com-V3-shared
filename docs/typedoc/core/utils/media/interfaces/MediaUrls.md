@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/utils/media](../README.md) / MediaUrls
 
-Defined in: core/utils/media.ts:34
+Defined in: core/utils/media.ts:35
 
 Resolved media URL triple — the full-quality `source`, the progressive
 `thumb` (mozjpeg small variant or video poster frame), and the `isVideo`
@@ -18,7 +18,7 @@ discriminator echoed back so consumers don't re-inspect the item.
 source: string
 ```
 
-Defined in: core/utils/media.ts:35
+Defined in: core/utils/media.ts:36
 
 ---
 
@@ -28,7 +28,7 @@ Defined in: core/utils/media.ts:35
 thumb: string
 ```
 
-Defined in: core/utils/media.ts:36
+Defined in: core/utils/media.ts:37
 
 ---
 
@@ -38,4 +38,4 @@ Defined in: core/utils/media.ts:36
 isVideo: boolean
 ```
 
-Defined in: core/utils/media.ts:37
+Defined in: core/utils/media.ts:38

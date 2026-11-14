@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/utils/canvas/css-color](../README.md) / parseCssColor
 
 ```ts
-function parseCssColor(str): number[] | null;
+function parseCssColor(str): number[] | null
 ```
 
-Defined in: core/utils/canvas/css-color.ts:19
+Defined in: core/utils/canvas/css-color.ts:22
 
 Parses a CSS color string into a [r, g, b] 0–1 triple, or null.
 

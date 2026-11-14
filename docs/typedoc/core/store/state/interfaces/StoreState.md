@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / StoreState
 
-Defined in: core/store/state.ts:113
+Defined in: core/store/state.ts:116
 
 The whole reactive state bag. Field naming follows the shape the legacy
 CMS data already uses (clickortap, marqueeamount, portfoliolist are
@@ -19,7 +19,7 @@ the translation payload contract).
 clickortap: string
 ```
 
-Defined in: core/store/state.ts:114
+Defined in: core/store/state.ts:117
 
 ---
 
@@ -29,7 +29,7 @@ Defined in: core/store/state.ts:114
 inputMethod: string
 ```
 
-Defined in: core/store/state.ts:115
+Defined in: core/store/state.ts:118
 
 ---
 
@@ -39,7 +39,7 @@ Defined in: core/store/state.ts:115
 actionTextMap: ActionTextMap
 ```
 
-Defined in: core/store/state.ts:116
+Defined in: core/store/state.ts:119
 
 ---
 
@@ -49,7 +49,7 @@ Defined in: core/store/state.ts:116
 has_touch: boolean
 ```
 
-Defined in: core/store/state.ts:117
+Defined in: core/store/state.ts:120
 
 ---
 
@@ -59,7 +59,7 @@ Defined in: core/store/state.ts:117
 lang: LangState
 ```
 
-Defined in: core/store/state.ts:118
+Defined in: core/store/state.ts:121
 
 ---
 
@@ -69,7 +69,7 @@ Defined in: core/store/state.ts:118
 mentions: MentionsState
 ```
 
-Defined in: core/store/state.ts:119
+Defined in: core/store/state.ts:122
 
 ---
 
@@ -79,7 +79,7 @@ Defined in: core/store/state.ts:119
 marqueeamount: number
 ```
 
-Defined in: core/store/state.ts:120
+Defined in: core/store/state.ts:123
 
 ---
 
@@ -89,7 +89,7 @@ Defined in: core/store/state.ts:120
 modalObject: ModalObject
 ```
 
-Defined in: core/store/state.ts:121
+Defined in: core/store/state.ts:124
 
 ---
 
@@ -99,7 +99,7 @@ Defined in: core/store/state.ts:121
 origin: string
 ```
 
-Defined in: core/store/state.ts:122
+Defined in: core/store/state.ts:125
 
 ---
 
@@ -109,7 +109,7 @@ Defined in: core/store/state.ts:122
 page: PagePos
 ```
 
-Defined in: core/store/state.ts:123
+Defined in: core/store/state.ts:126
 
 ---
 
@@ -119,7 +119,7 @@ Defined in: core/store/state.ts:123
 showhover: boolean
 ```
 
-Defined in: core/store/state.ts:124
+Defined in: core/store/state.ts:127
 
 ---
 
@@ -129,7 +129,7 @@ Defined in: core/store/state.ts:124
 storage: string
 ```
 
-Defined in: core/store/state.ts:125
+Defined in: core/store/state.ts:128
 
 ---
 
@@ -139,7 +139,7 @@ Defined in: core/store/state.ts:125
 reducedMotion: boolean
 ```
 
-Defined in: core/store/state.ts:126
+Defined in: core/store/state.ts:129
 
 ---
 
@@ -149,7 +149,7 @@ Defined in: core/store/state.ts:126
 highContrast: boolean
 ```
 
-Defined in: core/store/state.ts:127
+Defined in: core/store/state.ts:130
 
 ---
 
@@ -159,7 +159,7 @@ Defined in: core/store/state.ts:127
 theme: string
 ```
 
-Defined in: core/store/state.ts:128
+Defined in: core/store/state.ts:131
 
 ---
 
@@ -169,7 +169,7 @@ Defined in: core/store/state.ts:128
 showStatsForNerds: boolean
 ```
 
-Defined in: core/store/state.ts:129
+Defined in: core/store/state.ts:132
 
 ---
 
@@ -179,7 +179,7 @@ Defined in: core/store/state.ts:129
 showGrid: boolean
 ```
 
-Defined in: core/store/state.ts:130
+Defined in: core/store/state.ts:133
 
 ---
 
@@ -189,7 +189,7 @@ Defined in: core/store/state.ts:130
 videoAutoplay: boolean
 ```
 
-Defined in: core/store/state.ts:131
+Defined in: core/store/state.ts:134
 
 ---
 
@@ -199,7 +199,7 @@ Defined in: core/store/state.ts:131
 effectiveTheme: string
 ```
 
-Defined in: core/store/state.ts:132
+Defined in: core/store/state.ts:135
 
 ---
 
@@ -209,7 +209,7 @@ Defined in: core/store/state.ts:132
 preferencesOpen: boolean
 ```
 
-Defined in: core/store/state.ts:133
+Defined in: core/store/state.ts:136
 
 ---
 
@@ -219,7 +219,7 @@ Defined in: core/store/state.ts:133
 langDialogOpen: boolean
 ```
 
-Defined in: core/store/state.ts:134
+Defined in: core/store/state.ts:137
 
 ---
 
@@ -229,7 +229,7 @@ Defined in: core/store/state.ts:134
 navMenuOpen: boolean
 ```
 
-Defined in: core/store/state.ts:135
+Defined in: core/store/state.ts:138
 
 ---
 
@@ -239,7 +239,7 @@ Defined in: core/store/state.ts:135
 searchModalOpen: boolean
 ```
 
-Defined in: core/store/state.ts:136
+Defined in: core/store/state.ts:139
 
 ---
 
@@ -254,7 +254,7 @@ modalOrigin:
   | null;
 ```
 
-Defined in: core/store/state.ts:137
+Defined in: core/store/state.ts:140
 
 ---
 
@@ -264,4 +264,4 @@ Defined in: core/store/state.ts:137
 portfoliolist: unknown[];
 ```
 
-Defined in: core/store/state.ts:138
+Defined in: core/store/state.ts:141

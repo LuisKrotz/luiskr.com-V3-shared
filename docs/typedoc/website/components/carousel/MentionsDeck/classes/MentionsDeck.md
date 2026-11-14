@@ -25,7 +25,7 @@ holder + custom-element facade.
 new MentionsDeck(): MentionsDeck;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:120
+Defined in: website/components/carousel/MentionsDeck.tsx:124
 
 #### Returns
 
@@ -40,12 +40,16 @@ Defined in: website/components/carousel/MentionsDeck.tsx:120
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -59,7 +63,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -81,7 +85,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -102,7 +106,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -120,7 +124,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -136,7 +140,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -156,7 +160,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -172,7 +176,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -446,13 +450,27 @@ Defined in: website/components/carousel/MentionsDeck.tsx:104
 
 ---
 
+### \_printing
+
+```ts
+_printing: boolean = false
+```
+
+Defined in: website/components/carousel/MentionsDeck.tsx:108
+
+Print job in flight — gates measure/applyPoses so the live posers
+can't rewrite the inline fan geometry print.ts stripped for the
+flat paper list.
+
+---
+
 ### isEnteredViewport
 
 ```ts
 isEnteredViewport: boolean = false
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:106
+Defined in: website/components/carousel/MentionsDeck.tsx:110
 
 Any viewport visibility ever observed.
 
@@ -464,7 +482,7 @@ Any viewport visibility ever observed.
 isFullyVisible: boolean = false
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:108
+Defined in: website/components/carousel/MentionsDeck.tsx:112
 
 ≥50% visible — the autoplay gate.
 
@@ -476,7 +494,7 @@ Defined in: website/components/carousel/MentionsDeck.tsx:108
 autoplayRunning: boolean = false
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:110
+Defined in: website/components/carousel/MentionsDeck.tsx:114
 
 RAF cycle active flag.
 
@@ -488,7 +506,7 @@ RAF cycle active flag.
 autoplayStart: number | null = null;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:112
+Defined in: website/components/carousel/MentionsDeck.tsx:116
 
 performance.now() at cycle start.
 
@@ -500,7 +518,7 @@ performance.now() at cycle start.
 autoplayElapsed: number = 0
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:114
+Defined in: website/components/carousel/MentionsDeck.tsx:118
 
 Accumulated pause→resume offset so dwell survives interruptions.
 
@@ -512,7 +530,7 @@ Accumulated pause→resume offset so dwell survives interruptions.
 autoplayRafId: number | null = null;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:116
+Defined in: website/components/carousel/MentionsDeck.tsx:120
 
 Autoplay RAF handle.
 
@@ -524,7 +542,7 @@ Autoplay RAF handle.
 observer: IntersectionObserver | null = null;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:118
+Defined in: website/components/carousel/MentionsDeck.tsx:122
 
 IntersectionObserver handle driving the visibility flags.
 
@@ -4569,7 +4587,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get items(): MentionItem[];
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:156
+Defined in: website/components/carousel/MentionsDeck.tsx:160
 
 ##### Returns
 
@@ -4581,7 +4599,7 @@ Defined in: website/components/carousel/MentionsDeck.tsx:156
 set items(val): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:135
+Defined in: website/components/carousel/MentionsDeck.tsx:139
 
 Setter/getter — mention rows pushed by the host (identity-guarded
 so repeat pushes with identical data don't restart autoplay).
@@ -4610,7 +4628,7 @@ get translations():
   | null;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:172
+Defined in: website/components/carousel/MentionsDeck.tsx:176
 
 ##### Returns
 
@@ -4623,7 +4641,7 @@ Defined in: website/components/carousel/MentionsDeck.tsx:172
 set translations(val): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:162
+Defined in: website/components/carousel/MentionsDeck.tsx:166
 
 Setter/getter — locale strings for the deck chrome.
 
@@ -4648,7 +4666,7 @@ Setter/getter — locale strings for the deck chrome.
 get title(): string;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:188
+Defined in: website/components/carousel/MentionsDeck.tsx:192
 
 The **`HTMLElement.title`** property represents the title of the element: the text usually displayed in a 'tooltip' popup when the mouse is over the node.
 
@@ -4664,7 +4682,7 @@ The **`HTMLElement.title`** property represents the title of the element: the te
 set title(val): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:178
+Defined in: website/components/carousel/MentionsDeck.tsx:182
 
 Setter/getter — section heading text.
 
@@ -4696,7 +4714,7 @@ The **`HTMLElement.title`** property represents the title of the element: the te
 get _t(): Required<MentionsDeckTranslations>;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:195
+Defined in: website/components/carousel/MentionsDeck.tsx:199
 
 Resolved copy — live translations over the build-time English
 snapshot, so the hint renders text before Firebase resolves.
@@ -4881,7 +4899,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: core/Component.ts:113
+Defined in: core/Component.ts:185
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4903,7 +4921,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4937,7 +4955,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4962,7 +4980,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4986,7 +5004,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -5023,7 +5041,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -5066,7 +5084,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -5116,7 +5134,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -5147,7 +5165,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -5170,7 +5188,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5195,7 +5213,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -5230,7 +5248,7 @@ Render result from render().
 _dragTick(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:126
+Defined in: website/components/carousel/MentionsDeck.tsx:130
 
 The one-rAF-per-frame pose write armed by the drag path — a bound
 field so the gesture loop allocates zero closures per frame.
@@ -5247,7 +5265,7 @@ field so the gesture loop allocates zero closures per frame.
 onMounted(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:202
+Defined in: website/components/carousel/MentionsDeck.tsx:206
 
 Mount: wire events/observer, subscribe to the store for reduced-motion/overlay.
 
@@ -5267,7 +5285,7 @@ Mount: wire events/observer, subscribe to the store for reduced-motion/overlay.
 onUpdated(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:217
+Defined in: website/components/carousel/MentionsDeck.tsx:221
 
 Re-caches card nodes + re-measures after every render, then republishes
 poses/chrome against the fresh DOM.
@@ -5288,7 +5306,7 @@ poses/chrome against the fresh DOM.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:236
+Defined in: website/components/carousel/MentionsDeck.tsx:240
 
 Pref commits → kill autoplay immediately (no residual RAF); an
 overlay closing resumes a stopped cycle only when the deck is still
@@ -5312,7 +5330,7 @@ re-base the dwell clock on every commit.
 onDestroy(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:245
+Defined in: website/components/carousel/MentionsDeck.tsx:249
 
 Teardown: stop RAF + observer — every async handle is released so nothing fires after disconnect.
 
@@ -5332,7 +5350,7 @@ Teardown: stop RAF + observer — every async handle is released so nothing fire
 measure(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:263
+Defined in: website/components/carousel/MentionsDeck.tsx:267
 
 Deck measurement — see mentions-deck/deck.ts.
 
@@ -5348,7 +5366,7 @@ Deck measurement — see mentions-deck/deck.ts.
 applyPoses(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:267
+Defined in: website/components/carousel/MentionsDeck.tsx:271
 
 Strip pose write — see mentions-deck/deck.ts.
 
@@ -5364,7 +5382,7 @@ Strip pose write — see mentions-deck/deck.ts.
 updateChrome(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:271
+Defined in: website/components/carousel/MentionsDeck.tsx:275
 
 Dots/a11y refresh — see mentions-deck/deck.ts.
 
@@ -5380,7 +5398,7 @@ Dots/a11y refresh — see mentions-deck/deck.ts.
 goTo(idx): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:275
+Defined in: website/components/carousel/MentionsDeck.tsx:279
 
 Navigate the strip to a deck index — see mentions-deck/interactions.ts.
 
@@ -5402,7 +5420,7 @@ Navigate the strip to a deck index — see mentions-deck/interactions.ts.
 onDotClick(idx): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:279
+Defined in: website/components/carousel/MentionsDeck.tsx:283
 
 Dot-nav click.
 
@@ -5424,7 +5442,7 @@ Dot-nav click.
 onCardClick(item, idx): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:283
+Defined in: website/components/carousel/MentionsDeck.tsx:287
 
 Card activation — side cards reposition, front card navigates.
 
@@ -5450,7 +5468,7 @@ Card activation — side cards reposition, front card navigates.
 onKeyDown(e): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:287
+Defined in: website/components/carousel/MentionsDeck.tsx:291
 
 Delegated keydown — arrows step the strip.
 
@@ -5477,7 +5495,7 @@ cardIdxFromEvent(e):
   | null;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:291
+Defined in: website/components/carousel/MentionsDeck.tsx:295
 
 Card/index resolution for the click path — see interactions.ts.
 
@@ -5503,7 +5521,7 @@ Card/index resolution for the click path — see interactions.ts.
 onPointerDown(e): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:295
+Defined in: website/components/carousel/MentionsDeck.tsx:299
 
 Pointer-down drag arm — see mentions-deck/gestures.ts.
 
@@ -5525,7 +5543,7 @@ Pointer-down drag arm — see mentions-deck/gestures.ts.
 onPointerMove(e): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:299
+Defined in: website/components/carousel/MentionsDeck.tsx:303
 
 Pointer-move drag tracking — see mentions-deck/gestures.ts.
 
@@ -5547,7 +5565,7 @@ Pointer-move drag tracking — see mentions-deck/gestures.ts.
 onPointerEnd(e): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:303
+Defined in: website/components/carousel/MentionsDeck.tsx:307
 
 Pointer-up/cancel settle — see mentions-deck/gestures.ts.
 
@@ -5569,7 +5587,7 @@ Pointer-up/cancel settle — see mentions-deck/gestures.ts.
 _startAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:307
+Defined in: website/components/carousel/MentionsDeck.tsx:311
 
 Starts the autoplay RAF cycle (gated by visibility + reduced-motion).
 
@@ -5585,7 +5603,7 @@ Starts the autoplay RAF cycle (gated by visibility + reduced-motion).
 _stopAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:311
+Defined in: website/components/carousel/MentionsDeck.tsx:315
 
 Stops the autoplay RAF cycle.
 
@@ -5601,7 +5619,7 @@ Stops the autoplay RAF cycle.
 _pauseAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:315
+Defined in: website/components/carousel/MentionsDeck.tsx:319
 
 Freezes the dwell clock (hover, committed drag).
 
@@ -5617,7 +5635,7 @@ Freezes the dwell clock (hover, committed drag).
 _resumeAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:319
+Defined in: website/components/carousel/MentionsDeck.tsx:323
 
 Re-arms the dwell clock after a pause.
 
@@ -5633,7 +5651,7 @@ Re-arms the dwell clock after a pause.
 _tickAutoplay(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:323
+Defined in: website/components/carousel/MentionsDeck.tsx:327
 
 One autoplay frame — advances when dwell elapsed, then self-schedules.
 
@@ -5649,7 +5667,7 @@ One autoplay frame — advances when dwell elapsed, then self-schedules.
 _setupObserver(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:327
+Defined in: website/components/carousel/MentionsDeck.tsx:331
 
 Creates the IntersectionObserver driving isEnteredViewport/isFullyVisible.
 
@@ -5665,7 +5683,7 @@ Creates the IntersectionObserver driving isEnteredViewport/isFullyVisible.
 _onResize(): void;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:331
+Defined in: website/components/carousel/MentionsDeck.tsx:335
 
 Resize handler — remeasures card geometry and re-poses.
 
@@ -5681,7 +5699,7 @@ Resize handler — remeasures card geometry and re-poses.
 render(): Element;
 ```
 
-Defined in: website/components/carousel/MentionsDeck.tsx:337
+Defined in: website/components/carousel/MentionsDeck.tsx:341
 
 JSX template (delegate — ./mentions-deck/render.tsx).
 

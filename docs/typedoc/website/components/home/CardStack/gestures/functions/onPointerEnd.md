@@ -8,7 +8,7 @@
 function onPointerEnd(host, e): void
 ```
 
-Defined in: website/components/home/cardstack/gestures.ts:155
+Defined in: website/components/home/cardstack/gestures.ts:161
 
 Pointer-up/cancel — settles the gesture. Drag fraction + flick velocity
 decide: advance one card in the drag direction or snap the fan back to

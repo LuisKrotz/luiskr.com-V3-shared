@@ -8,7 +8,7 @@
 function mountToastDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:75
+Defined in: website/components/media/anim-demo/dom.ts:95
 
 Site-toast demo — alternates the staged pill between the slide/fade
 entrance and the exit states, the same choreography a real

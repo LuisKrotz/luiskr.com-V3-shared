@@ -1,16 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/sections](../README.md) / addSection
 
 ```ts
-function addSection(host): void;
+function addSection(host): void
 ```
 
-Defined in: cms/projects/sections.ts:42
+Defined in: cms/projects/sections.ts:49
 
-Adds section.
+Appends a fresh section — `[[''], []]` seeds one empty paragraph so
+the card opens with an editable row instead of blank space.
 
 ## Parameters
 
@@ -18,7 +19,7 @@ Adds section.
 
 [`CmsProjectsList`](../../CmsProjectsList/classes/CmsProjectsList.md)
 
-— the host component
+— the host component holding `currentProject`
 
 ## Returns
 

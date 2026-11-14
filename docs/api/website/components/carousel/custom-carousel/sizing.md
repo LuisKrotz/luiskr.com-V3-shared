@@ -23,11 +23,11 @@ one-shot window-resize path.
 ### `measureFit`
 
 Decides whether the items fit side-by-side (no carousel chrome) or need
-the scroll track. Side-by-side requires: ≤2 items, viewport
+the scroll track. Side-by-side requires: ≥2 items (any count), viewport
 ≥ SIDE_BY_SIDE_BREAKPOINT, and projected total width ≤ host width.
 The projection mirrors the shadow-DOM contract in media-figure.scss +
 carousel-host.scss exactly: the strip height is the same value
-setHeightVar publishes to --carousel-media-height — the tallest item
+setHeightVar publishes to --carousel-media-height — the smallest item
 rendered into hostW × 70dvh (calcMediaBox — WASM-backed, never
 upscales); every slide's box is that strip height × the source's own
 ratio (width: auto, no max-width cap in carousel context), floored at
@@ -98,13 +98,18 @@ shortest portrait item.
 Publishes --carousel-item-height on the enclosing <section> and
 --carousel-media-height on the host: the aspect-corrected height
 ensuring all slides share one uniform height. The uniform height is
-the TALLEST rendered item — the max height each sized source reaches
-when fit to the strip width and the viewport cap. Every slide's box is
-the strip height × its own aspect (the media-figure sheet drops the
-natural-size caps in carousel context), so the media fills with zero
-crop and zero distortion; a short source covers the taller box.
-In mixed carousels on mobile, the uniform height anchors to the
-shortest portrait item.
+the SMALLEST rendered item — the min height each sized source reaches
+when fit to the strip width and the viewport cap — so siblings shrink
+to it and no source upscales. The only upscale the contract allows is
+the floor correction: when a source is natively narrower than
+MEDIA_MIN_WIDTH, the strip lifts just enough for that smallest-width
+slide to reach the floor (equal heights wins). Sources taller than
+TALL_ITEM_H keep their own sliver/floor rule and stay out of the
+width driver. Every slide's box is the strip height ×
+its own aspect (the media-figure sheet drops the natural-size caps in
+carousel context), so the media fills with zero crop and zero
+distortion. In mixed carousels on mobile, the uniform height anchors
+to the shortest portrait item.
 
 - `@param` c The CustomCarousel element.
 

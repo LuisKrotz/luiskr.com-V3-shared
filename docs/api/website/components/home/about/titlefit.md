@@ -19,6 +19,11 @@ Observer on the h2 — re-targeted every render pass.
 
 One-shot guard — the fonts-ready re-sync is wired once per session.
 
+### `_TITLE_SEL`
+
+Title + picture selectors — resolved fresh each fit so re-renders
+inside the shadow root never read a detached element.
+
 ### `_LAST_TEXT_W`
 
 Last measured title width per host — also the "already read this

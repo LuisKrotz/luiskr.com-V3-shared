@@ -8,7 +8,7 @@
 function renderMediaFigure(c): Element
 ```
 
-Defined in: website/components/media/figure/render.tsx:30
+Defined in: website/components/media/figure/render.tsx:32
 
 Renders media figure.
 

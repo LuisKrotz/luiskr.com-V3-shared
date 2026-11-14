@@ -8,7 +8,7 @@
 function mountTheme(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/widgets.ts:144
+Defined in: website/components/media/anim-demo/widgets.ts:251
 
 Theme slider — the real ThemeSliderWebGL walking the dark → system →
 light stops via its own setTheme() spring. The onThemeChange callback

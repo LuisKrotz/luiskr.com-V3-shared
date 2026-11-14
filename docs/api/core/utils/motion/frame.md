@@ -35,6 +35,10 @@ Virtual id sequence — monotonic so a stale id can never alias a live slot.
 
 Parallel arrays: virtual ids and their callbacks (null = cancelled, pending compaction).
 
+### `cbs`
+
+Callback slot per virtual id — null marks a cancelled subscription.
+
 ### `rafId`
 
 The single armed rAF handle — 0 when the pump is idle or mid-drain.

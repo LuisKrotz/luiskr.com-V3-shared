@@ -8,7 +8,7 @@
 function mountSearchDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:312
+Defined in: website/components/media/anim-demo/dom.ts:300
 
 Route-search demo — toggles the loading modifier so the staged field
 alternates idle ↔ scoring-in-flight (spinning glyph + bouncing dots).

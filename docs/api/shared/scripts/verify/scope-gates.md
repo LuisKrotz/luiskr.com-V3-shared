@@ -60,6 +60,16 @@ Lists files changed in a diff range (or the index for --staged). The
 truncated a ~21k-file push and produced an empty list. A diff failure
 is fatal, not skippable: returning [] would push with zero gates.
 
+### `exists`
+
+`exists` — repo-relative path check for optional scope inputs.
+
+### `run`
+
+`run` — synchronous step runner with inherited stdio (serial steps
+like the links fallback print straight through; a non-zero exit
+throws and aborts the caller).
+
 ### `runAsync`
 
 Async counterpart for parallel gate steps — spawns the check with piped

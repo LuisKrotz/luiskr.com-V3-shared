@@ -8,7 +8,7 @@
 function bindEvents(host): void
 ```
 
-Defined in: website/components/home/cardstack/events.ts:165
+Defined in: website/components/home/cardstack/events.ts:169
 
 Binds every listener the deck needs — shadowRoot delegation covers
 re-renders (nodes swap per _updateDom, listeners don't); the pointer

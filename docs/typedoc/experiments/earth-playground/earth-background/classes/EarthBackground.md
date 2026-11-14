@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/earth-playground/earth-background](../README.md) / EarthBackground
 
-Defined in: experiments/earth-playground/earth-background.ts:62
+Defined in: experiments/earth-playground/earth-background.ts:63
 
 Owns the full WebGPU/WebGL Earth scene: renderer, camera rig, sun+moon
 lighting, the textured Earth group (surface/clouds/atmosphere shells), and
@@ -19,7 +19,7 @@ grade → vignette → film grain).
 new EarthBackground(canvas, __namedParameters?): EarthBackground;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:66
+Defined in: experiments/earth-playground/earth-background.ts:67
 
 #### Parameters
 
@@ -51,7 +51,7 @@ Defined in: experiments/earth-playground/earth-background.ts:66
 get failed(): boolean;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:103
+Defined in: experiments/earth-playground/earth-background.ts:112
 
 True when bootstrap bailed or threw before the scene assembled — hosts
 should swap in the CSS fallback surface instead of a dead canvas.
@@ -70,7 +70,7 @@ should swap in the CSS fallback surface instead of a dead canvas.
 get settings(): object;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:196
+Defined in: experiments/earth-playground/earth-background.ts:214
 
 Snapshot of every tunable, shaped exactly like DEFAULT_SP_GUI so the
 playground control panel can render sliders without knowing which
@@ -590,7 +590,7 @@ INCLINATION: number
 init(): Promise<void>;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:81
+Defined in: experiments/earth-playground/earth-background.ts:82
 
 #### Returns
 
@@ -604,7 +604,7 @@ Defined in: experiments/earth-playground/earth-background.ts:81
 setReducedMotion(reduced): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:112
+Defined in: experiments/earth-playground/earth-background.ts:121
 
 Pause/resume the render loop for prefers-reduced-motion. The last frame
 stays on screen (preserveDrawingBuffer), so pausing never blanks the
@@ -628,7 +628,7 @@ background — motion just stops.
 setTheme(isDark): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:131
+Defined in: experiments/earth-playground/earth-background.ts:140
 
 Store the UI theme for the sun-rotation theme feature (not yet wired
 into the scene — kept as public API for the playground controls).
@@ -651,7 +651,7 @@ into the scene — kept as public API for the playground controls).
 setVisible(visible): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:140
+Defined in: experiments/earth-playground/earth-background.ts:149
 
 Show/hide the canvas and stop the loop while hidden — the playground
 page is the only consumer, so hiding releases GPU work entirely.
@@ -674,7 +674,7 @@ page is the only consumer, so hiding releases GPU work entirely.
 takeScreenshot(): Promise<void>;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:161
+Defined in: experiments/earth-playground/earth-background.ts:170
 
 Renders one frame at 2× resolutionScale and downloads it as PNG.
 Temporarily bumps pixel ratio → resize → render → capture → restore,
@@ -692,7 +692,7 @@ so the saved image is sharper than the live viewport.
 destroy(): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:171
+Defined in: experiments/earth-playground/earth-background.ts:180
 
 Tears down the engine: stops RAF, unbinds resize, releases the
 renderer's GPU context and the controls' DOM listeners. Idempotent —
@@ -711,7 +711,7 @@ disposed after each await and bail).
 updateBloom(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:220
+Defined in: experiments/earth-playground/earth-background.ts:238
 
 #### Parameters
 
@@ -745,7 +745,7 @@ Defined in: experiments/earth-playground/earth-background.ts:220
 updateColorGrading(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:226
+Defined in: experiments/earth-playground/earth-background.ts:244
 
 #### Parameters
 
@@ -779,7 +779,7 @@ Defined in: experiments/earth-playground/earth-background.ts:226
 updateCamera(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:232
+Defined in: experiments/earth-playground/earth-background.ts:250
 
 #### Parameters
 
@@ -809,7 +809,7 @@ Defined in: experiments/earth-playground/earth-background.ts:232
 updateEarth(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:236
+Defined in: experiments/earth-playground/earth-background.ts:254
 
 #### Parameters
 
@@ -835,7 +835,7 @@ Defined in: experiments/earth-playground/earth-background.ts:236
 updateEarthMaterial(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:240
+Defined in: experiments/earth-playground/earth-background.ts:258
 
 #### Parameters
 
@@ -873,7 +873,7 @@ Defined in: experiments/earth-playground/earth-background.ts:240
 updateVignette(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:252
+Defined in: experiments/earth-playground/earth-background.ts:270
 
 #### Parameters
 
@@ -903,7 +903,7 @@ Defined in: experiments/earth-playground/earth-background.ts:252
 updateChromatic(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:256
+Defined in: experiments/earth-playground/earth-background.ts:274
 
 #### Parameters
 
@@ -933,7 +933,7 @@ Defined in: experiments/earth-playground/earth-background.ts:256
 updateRender(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:260
+Defined in: experiments/earth-playground/earth-background.ts:278
 
 #### Parameters
 
@@ -955,7 +955,7 @@ Defined in: experiments/earth-playground/earth-background.ts:260
 updateFilm(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:264
+Defined in: experiments/earth-playground/earth-background.ts:282
 
 #### Parameters
 
@@ -981,7 +981,7 @@ Defined in: experiments/earth-playground/earth-background.ts:264
 updateSun(o?): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:268
+Defined in: experiments/earth-playground/earth-background.ts:286
 
 #### Parameters
 
@@ -1024,7 +1024,7 @@ getCameraState():
   | null;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:276
+Defined in: experiments/earth-playground/earth-background.ts:294
 
 Current camera position + orbit target, rounded to 2 decimals — used
 to persist/restore the view in the playground's settings snapshot.
@@ -1053,7 +1053,7 @@ to persist/restore the view in the playground's settings snapshot.
 resetView(): void;
 ```
 
-Defined in: experiments/earth-playground/earth-background.ts:285
+Defined in: experiments/earth-playground/earth-background.ts:303
 
 Restore the default framing: OrbitControls.reset() replays saveState()
 (captured at bootstrap), then fov/position/target are pinned to

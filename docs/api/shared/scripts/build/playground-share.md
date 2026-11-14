@@ -16,9 +16,17 @@ relative to the media manifest root (`experiments/…`), matching
 media-manifest.mjs's convention. Returns [] when the manifest listing
 is absent so callers keep their pre-share-set behaviour.
 
+One capture may ship several encodings under a shared stem — the
+canonical `.png` upload plus a same-resolution `.jpg`/`.webp` delivery
+sibling emitted so the media wall doesn't pull a multi-megabyte PNG for
+a card-size tile. Stems dedupe against `DELIVERY_IMAGE_EXTS`: the first
+preference present wins, so surfaces mount one card per capture at the
+smallest encoding the bucket actually holds (a capture with no delivery
+sibling keeps mounting its `.png`, unchanged).
+
 - `@param` {Set<string>|null} manifest bucket key set (or null)
 - `@param` {object} [share] share-set token map (EARTH_SHARE default)
-- `@returns` {string[]} sorted share-capture keys
+- `@returns` {string[]} sorted share-capture keys, one per capture stem
 
 ### `shareImageUrls`
 

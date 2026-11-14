@@ -90,6 +90,12 @@ token contract immutable at runtime.
 
 Notifies ui keys.
 
+### `NOTHING_TO_PRINT`
+
+`notify.nothingToPrint` — the toast shown when a print-ineligible
+route (/search, the 404) tries to print; carries the {route}
+placeholder resolved to the localized page name.
+
 ### `A11Y_UI_KEYS`
 
 Frozen a11y ui key map — sole declaration site for these tokens; consumers read members

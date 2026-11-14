@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/home/AboutSection](../README.md) / AboutSection
 
-Defined in: website/components/home/AboutSection.tsx:78
+Defined in: website/components/home/AboutSection.tsx:81
 
 The AboutSection — section class.
 
@@ -20,7 +20,7 @@ The AboutSection — section class.
 new AboutSection(): AboutSection;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:90
+Defined in: website/components/home/AboutSection.tsx:93
 
 #### Returns
 
@@ -35,12 +35,16 @@ Defined in: website/components/home/AboutSection.tsx:90
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -54,7 +58,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +80,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +101,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +119,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +135,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +155,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +171,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -185,7 +189,7 @@ _glitch:
   | null = null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:82
+Defined in: website/components/home/AboutSection.tsx:85
 
 Active TV-glitch session on the portrait — see about/glitch.ts.
 
@@ -197,7 +201,7 @@ Active TV-glitch session on the portrait — see about/glitch.ts.
 _hud: HudSession | null = null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:84
+Defined in: website/components/home/AboutSection.tsx:87
 
 Active location-HUD session on the portrait — see about/hud.ts.
 
@@ -209,7 +213,7 @@ Active location-HUD session on the portrait — see about/hud.ts.
 _mesh: MeshSession | null = null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:86
+Defined in: website/components/home/AboutSection.tsx:89
 
 Active light-field mesh session on the portrait — see about/mesh.ts.
 
@@ -223,7 +227,7 @@ _titleFit:
   | null = null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:88
+Defined in: website/components/home/AboutSection.tsx:91
 
 Active portrait-to-title fit session — see about/titlefit.ts.
 
@@ -4286,7 +4290,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get aboutTranslations(): AboutTranslations | null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:140
+Defined in: website/components/home/AboutSection.tsx:166
 
 ##### Returns
 
@@ -4298,7 +4302,7 @@ Defined in: website/components/home/AboutSection.tsx:140
 set aboutTranslations(val): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:135
+Defined in: website/components/home/AboutSection.tsx:161
 
 Setter/getter — the about-page translation node pushed by the parent view.
 
@@ -4322,7 +4326,7 @@ Setter/getter — the about-page translation node pushed by the parent view.
 get profilePicture(): string | null;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:151
+Defined in: website/components/home/AboutSection.tsx:177
 
 ##### Returns
 
@@ -4334,7 +4338,7 @@ Defined in: website/components/home/AboutSection.tsx:151
 set profilePicture(val): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:146
+Defined in: website/components/home/AboutSection.tsx:172
 
 Setter/getter — raw Gravatar URL for the profile photo.
 
@@ -4358,7 +4362,7 @@ Setter/getter — raw Gravatar URL for the profile photo.
 get optimizedProfilePicture(): string;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:157
+Defined in: website/components/home/AboutSection.tsx:183
 
 CDN-resized Gravatar URL for the profile img.
 
@@ -4376,7 +4380,7 @@ CDN-resized Gravatar URL for the profile img.
 get profilePictureSrcset(): string;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:163
+Defined in: website/components/home/AboutSection.tsx:189
 
 Responsive srcset candidates for the profile photo.
 
@@ -4394,7 +4398,7 @@ Responsive srcset candidates for the profile photo.
 get aboutLocations(): AboutLocation[];
 ```
 
-Defined in: website/components/home/AboutSection.tsx:169
+Defined in: website/components/home/AboutSection.tsx:195
 
 The `locations` array of the about node — drives the orbiting HUD.
 
@@ -4412,7 +4416,7 @@ The `locations` array of the about node — drives the orbiting HUD.
 get aboutSubtitle(): string;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:184
+Defined in: website/components/home/AboutSection.tsx:210
 
 The `subtitle` tagline node — falls back to the bundled snapshot.
 
@@ -4430,7 +4434,7 @@ The `subtitle` tagline node — falls back to the bundled snapshot.
 get aboutDrawData(): DrawData;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:200
+Defined in: website/components/home/AboutSection.tsx:226
 
 Draw-timing plan for the intro + bio column. The `frame` node is the
 hero statement (falling back to col1's lead paragraph); every remaining
@@ -4619,7 +4623,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: core/Component.ts:113
+Defined in: core/Component.ts:185
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4641,7 +4645,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: core/Component.ts:116
+Defined in: core/Component.ts:188
 
 #### Parameters
 
@@ -4665,7 +4669,7 @@ Defined in: core/Component.ts:116
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4699,7 +4703,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4724,7 +4728,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4748,7 +4752,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4785,7 +4789,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4828,7 +4832,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4878,7 +4882,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4909,7 +4913,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4932,7 +4936,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4957,7 +4961,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4992,7 +4996,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:100
+Defined in: website/components/home/AboutSection.tsx:103
 
 Binds the portrait glitch handlers once the shadow root exists, then
 subscribes to the store and ensures the components dictionary (which
@@ -5015,7 +5019,7 @@ carries contact.line1 for the links row) is loaded — same ensure-fetch
 onDestroy(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:109
+Defined in: website/components/home/AboutSection.tsx:131
 
 Stops any running glitch loop when the element leaves the DOM.
 
@@ -5035,7 +5039,7 @@ Stops any running glitch loop when the element leaves the DOM.
 onUpdated(): void;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:122
+Defined in: website/components/home/AboutSection.tsx:148
 
 Re-binds the bio's continuous type-in description — the intro +
 paragraph cascade is ONE coordinated animation (each paragraph starts
@@ -5058,7 +5062,7 @@ record on top of each <draw-text>'s own TEXT_DRAW binding.
 render(): Element;
 ```
 
-Defined in: website/components/home/AboutSection.tsx:232
+Defined in: website/components/home/AboutSection.tsx:258
 
 JSX template for the component's shadow DOM.
 

@@ -15,6 +15,14 @@ Frozen aria attribute-name map — sole declaration site for these tokens; consu
 members and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes
 the token contract immutable at runtime.
 
+### `ARIA_ORIENTATION`
+
+Slider/range introspection — orientation + the value quartet.
+
+### `ROLE_SLIDER`
+
+`slider` — a draggable/range input (the prefs theme canvas track).
+
 ### `ROLE_TREE`
 
 `tree`/`treeitem`/`none` — the ARIA treeview contract for the docs nav.

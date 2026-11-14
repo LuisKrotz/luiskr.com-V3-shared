@@ -11,7 +11,7 @@ function cardIdxFromEvent(e): {
 } | null
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:31
+Defined in: website/components/home/cardstack/interactions.ts:33
 
 Resolves the deck card element + its deck index from a DOM event, or
 null when the event didn't land on a card.

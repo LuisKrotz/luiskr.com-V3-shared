@@ -8,7 +8,7 @@
 function graphFit(placed): GraphFit
 ```
 
-Defined in: experiments/docs/arch-scene.ts:1155
+Defined in: experiments/docs/arch-scene.ts:1179
 
 Fit the camera to the real graph radius — the sphere layout spreads
 clusters along parent orbits, so the bound is the longest orbit

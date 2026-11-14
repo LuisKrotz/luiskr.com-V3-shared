@@ -8,7 +8,7 @@
 type DrawRenderMode = 'plain' | 'words' | 'chars'
 ```
 
-Defined in: website/components/media/draw-text/render.ts:37
+Defined in: website/components/media/draw-text/render.ts:39
 
 Render modes for the shadow content:
 'plain' — pending/done states: contiguous word/space/br runs collapse

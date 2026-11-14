@@ -6,10 +6,18 @@
  * handler returns before preventDefault/focus.
  */
 
+import { jest } from '@jest/globals'
 import { A11Y_CLASSES } from '@core/tokens/classes/a11y.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { MOUSE_EVENTS, WINDOW_EVENTS } from '@core/tokens/events/dom.js'
+
+// The intent-gated warm work (lazy dialog chunks + the route-warm chain)
+// arms a 20s fallback timer nothing here awaits — its dynamic imports
+// would land after the jest environment tears down.
+jest.unstable_mockModule('@core/utils/motion/intent.js', () => ({
+  onUserIntent: () => {},
+}))
 
 describe('main.js skip-link early-return arm', () => {
   test('a .skip-link click with no shadow #main-content returns early', async () => {

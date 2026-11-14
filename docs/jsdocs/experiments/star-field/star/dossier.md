@@ -2,9 +2,9 @@
 
 Lazy dossier loader for star-field bodies — fetches
 
-| | |
-|---|---|
-| **Source** | `src/experiments\star-field\star\dossier.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\star-field\star\dossier.ts`            |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -12,6 +12,12 @@ Lazy dossier loader for star-field bodies — fetches
 ### `_cache`
 
 In-flight + resolved dossier cache — `locale:id` → dossier (or promise).
+
+### `_resolved`
+
+Resolved-value mirror of `_cache` — sync readers (print prep) can't
+await the promise bag, so each landed dossier registers here under
+the same `locale:id` key.
 
 ### (module scope)
 
@@ -36,6 +42,7 @@ In-flight + resolved names cache — locale → parsed name table.
 
 Legacy locale aliases — pt/hrx/tli URLs map onto the modern codes
 whose dossier folders hold the translations.
+
 - `@param` locale Active locale code (may be null/undefined).
 - `@returns` The dossier folder code to fetch.
 
@@ -43,6 +50,7 @@ whose dossier folders hold the translations.
 
 One dossier GET — resolves null on HTTP/parse failure (the panel
 falls back to the catalog name) rather than throwing.
+
 - `@param` url Dossier URL under `SF_DATA_BASE`.
 - `@param` id Body id for diagnostics.
 - `@returns` The parsed dossier or null.
@@ -55,6 +63,7 @@ localized route segment (`…/via-lactea`) resolves to its catalog id.
 Slug collisions keep the first id — dossier names are unique within a
 locale by contract, but a degenerate duplicate must not clobber the
 catalog body that legitimately owns the segment.
+
 - `@param` raw Parsed `{ id: name }` object.
 - `@returns` The paired lookup maps.
 
@@ -62,6 +71,7 @@ catalog body that legitimately owns the segment.
 
 One names-file GET — resolves null on HTTP/parse failure (the UI
 falls back to catalog names + raw ids) rather than throwing.
+
 - `@param` url Names-file URL under `SF_DATA_BASE`.
 - `@param` code Locale folder for diagnostics.
 - `@returns` The parsed `{ id: name }` map or null.
@@ -73,6 +83,7 @@ with the canonical English file as fallback. One ~6 KB document per
 locale, cached per locale code: the navigator renders localized rows
 and the router reads/writes translated body segments without pulling
 all 143 dossier files.
+
 - `@param` locale Active locale code — defaults to the store's current.
 - `@returns` The names table, or null when both fetches fail.
 
@@ -81,6 +92,7 @@ all 143 dossier files.
 Distance label for a registry record — light-years under a million,
 "Mly" above, so far-field NGC galaxies read "52 Mly" instead of
 "52 000 000 ly". Units are universal abbreviations (no translation).
+
 - `@param` ly Heliocentric distance in light-years.
 - `@returns` Formatted distance string.
 
@@ -92,6 +104,7 @@ shows the real catalogue fields (designation, magnitude, distance,
 spectral/type, coordinates, provenance) under the locale's label
 set. `history` carries the dataset description; `meta` signs the
 acquisition date so the provenance contract matches authored files.
+
 - `@param` rec The decoded shard record.
 - `@param` kind Registry kind (`star`/`exoplanet`/`dso`).
 - `@param` t Locale label map (pages/star-field node + English defaults).
@@ -104,6 +117,7 @@ canonical English file as fallback so a not-yet-translated body still
 shows real data instead of an empty panel. Registry ids skip the JSON
 path entirely: their record comes from the sharded catalogue index
 and the panel is synthesized with the locale's field labels.
+
 - `@param` id Body id matching `public/data/<locale>/<id>.json`, or a
 - `@param` locale Active locale code — defaults to the store's current.
 - `@param` labels Optional label map for registry synthesis (component's
@@ -114,6 +128,7 @@ and the panel is synthesized with the locale's field labels.
 Re-derives the panel dossier for the current locale — called on store
 locale changes so the open panel swaps language; cached files resolve
 instantly, new locales fetch just the one body's file.
+
 - `@param` c The StarField component.
 
 ### `loadDossier`
@@ -121,6 +136,7 @@ instantly, new locales fetch just the one body's file.
 Selection path — marks the panel loading, prefetches, then assigns the
 resolved dossier only when the selection is still current (a fast
 second select must not have a slow first response overwrite it).
+
 - `@param` c The StarField component.
 - `@param` id Selected body id.
 
@@ -128,4 +144,17 @@ second select must not have a slow first response overwrite it).
 
 Approach path — warms the cache without touching the panel; the select
 path later resolves instantly from `_cache`.
+
 - `@param` id Approached body id.
+
+### `syncDossier`
+
+Synchronous read of the dossier cache — the promise bag `_cache` maps
+to resolved values only through `.then`, which is too late for the
+synchronous beforeprint walk. `loadDossier`'s own resolved value is
+mirrored here so a print fired while a body is selected can compose
+its plate without a fetch at all.
+
+- `@param` c The StarField component.
+- `@param` id Body id to look up.
+- `@returns` The resolved dossier, or null when nothing is loaded for it.

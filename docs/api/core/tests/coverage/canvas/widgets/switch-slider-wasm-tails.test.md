@@ -28,3 +28,7 @@ Imports the class under test AFTER the mock is registered.
 ### `flush`
 
 Flushes the mount promise + a couple of frames.
+
+### `makeCanvas`
+
+Bare canvas — the wasm mount only needs the element handle.

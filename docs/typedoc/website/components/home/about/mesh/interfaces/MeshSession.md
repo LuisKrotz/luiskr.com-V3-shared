@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/home/about/mesh](../README.md) / MeshSession
 
-Defined in: website/components/home/about/mesh.ts:24
+Defined in: website/components/home/about/mesh.ts:29
 
 Live mesh session parked on the host.
 
@@ -16,7 +16,7 @@ Live mesh session parked on the host.
 canvas: HTMLCanvasElement
 ```
 
-Defined in: website/components/home/about/mesh.ts:25
+Defined in: website/components/home/about/mesh.ts:30
 
 ---
 
@@ -26,7 +26,7 @@ Defined in: website/components/home/about/mesh.ts:25
 ctx: CanvasRenderingContext2D
 ```
 
-Defined in: website/components/home/about/mesh.ts:26
+Defined in: website/components/home/about/mesh.ts:31
 
 ---
 
@@ -36,7 +36,7 @@ Defined in: website/components/home/about/mesh.ts:26
 raf: number
 ```
 
-Defined in: website/components/home/about/mesh.ts:27
+Defined in: website/components/home/about/mesh.ts:32
 
 ---
 
@@ -46,7 +46,42 @@ Defined in: website/components/home/about/mesh.ts:27
 ro: ResizeObserver | null
 ```
 
-Defined in: website/components/home/about/mesh.ts:28
+Defined in: website/components/home/about/mesh.ts:33
+
+---
+
+### io
+
+```ts
+io: IntersectionObserver | null
+```
+
+Defined in: website/components/home/about/mesh.ts:34
+
+---
+
+### visible
+
+```ts
+visible: boolean
+```
+
+Defined in: website/components/home/about/mesh.ts:37
+
+True only while the canvas intersects the viewport — the loop parks
+offscreen instead of burning a ~3k-dot raster nobody can see.
+
+---
+
+### lastPaint
+
+```ts
+lastPaint: number
+```
+
+Defined in: website/components/home/about/mesh.ts:39
+
+rAF timestamp of the last painted frame — the 60 Hz paint cap.
 
 ---
 
@@ -56,7 +91,7 @@ Defined in: website/components/home/about/mesh.ts:28
 w: number
 ```
 
-Defined in: website/components/home/about/mesh.ts:29
+Defined in: website/components/home/about/mesh.ts:40
 
 ---
 
@@ -66,7 +101,7 @@ Defined in: website/components/home/about/mesh.ts:29
 h: number
 ```
 
-Defined in: website/components/home/about/mesh.ts:30
+Defined in: website/components/home/about/mesh.ts:41
 
 ---
 
@@ -76,7 +111,7 @@ Defined in: website/components/home/about/mesh.ts:30
 t0: number
 ```
 
-Defined in: website/components/home/about/mesh.ts:31
+Defined in: website/components/home/about/mesh.ts:42
 
 ---
 
@@ -86,7 +121,7 @@ Defined in: website/components/home/about/mesh.ts:31
 size: () => void;
 ```
 
-Defined in: website/components/home/about/mesh.ts:33
+Defined in: website/components/home/about/mesh.ts:44
 
 Re-measures the canvas box and re-stamps the backing store.
 

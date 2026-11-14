@@ -8,7 +8,7 @@
 function goTo(host, idx): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:54
+Defined in: website/components/home/cardstack/interactions.ts:56
 
 Moves the fan's virtual front to `idx` — ring-normalized, so out-of-range
 indices wrap like the carousel's clone loop does. The pose write runs

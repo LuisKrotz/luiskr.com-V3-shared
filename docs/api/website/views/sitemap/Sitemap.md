@@ -98,9 +98,27 @@ only when the wall width or the item count actually changed.
 
 Host ResizeObserver driving repacks on real width changes.
 
+### `_openBeforePrint`
+
+Pre-print `_openGroups` snapshot — afterprint restores the user's
+disclosure state so the print prep's expand-all doesn't leak into
+the live screen session.
+
 ### (module scope)
 
-Lifecycle: releases the wall ResizeObserver.
+Lifecycle: releases the wall ResizeObserver + the print hooks.
+
+### (module scope)
+
+Print-prepare answer — the adapter's walk runs right after this
+event, so every collapsible media group must be open NOW: closed
+groups mount no children at all, which would print an empty media
+branch. The user's open set is snapshotted for afterprint, then the
+full tree re-renders with every group expanded.
+
+### (module scope)
+
+Restores the user's disclosure state after the print sheet closes.
 
 ### (module scope)
 

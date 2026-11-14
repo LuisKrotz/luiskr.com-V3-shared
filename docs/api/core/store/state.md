@@ -34,6 +34,11 @@ the box before the asset lands), and the video discriminator.
 
 ### (module scope)
 
+Extensionless CDN stem (storage+folder+src) the a11y siblings
+(`.vtt` description tracks, `_longdesc.txt`) derive from.
+
+### (module scope)
+
 Viewport-space rectangle the expand-modal genie transition warps
 from/to — the clicked figure's `getBoundingClientRect()` snapshot.
 Kept on the descriptor (not the media item) because it's transition

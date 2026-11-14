@@ -2,9 +2,9 @@
 
 Scaffolds a new experiment workspace under experiments/&lt;name&gt;/
 
-| | |
-|---|---|
-| **Source** | `src/shared\scripts\scaffold\new-experiment.mjs` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/shared\scripts\scaffold\new-experiment.mjs`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -12,28 +12,30 @@ Scaffolds a new experiment workspace under experiments/&lt;name&gt;/
 ### (module scope)
 
 ",
-    "**/components/**"
-  ]
+"**/components/**"
+],
+"scripts": {
+"version:patch": "yarn version --patch --no-git-tag-version",
+"version:minor": "yarn version --minor --no-git-tag-version",
+"version:major": "yarn version --major --no-git-tag-version"
+}
 }
 `,
   'tsconfig.json': `{
-  "extends": "../../tsconfig.json",
-  "include": [
-    "./**/*.ts",
-    "./**/*.tsx",
-    "../../shared/src/globals.d.ts",
-    "../../shared/src/modules.d.ts"
-  ],
-  "exclude": ["./tests", "./dist", "./reports", "./node_modules"]
+"extends": "../../tsconfig.json",
+"include": [
+"./**/\*.ts",
+"./**/*.tsx",
+"../../shared/src/globals.d.ts",
+"../../shared/src/modules.d.ts"
+],
+"exclude": ["./tests", "./dist", "./reports", "./node_modules"]
 }
 `,
   'vite.config.js': `/**
 
 ### (module scope)
 
-
 ### (module scope)
 
-
 ### `describe`
-

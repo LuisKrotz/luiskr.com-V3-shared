@@ -8,7 +8,7 @@
 function stripPose(s, len, w, step, edge?, fadeSpan?): MentionPose
 ```
 
-Defined in: website/components/carousel/mentions-deck/deck.ts:71
+Defined in: website/components/carousel/mentions-deck/deck.ts:70
 
 The strip pose for signed offset `s` — a flat, centered row: every card
 sits at s·step px from the deck-center anchor, aligned on one baseline

@@ -8,7 +8,7 @@
 function mountSwitch(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/widgets.ts:120
+Defined in: website/components/media/anim-demo/widgets.ts:218
 
 Preference switch — the real SwitchWebGL ('stats' context, the ECG
 variant) toggling itself on the cycle the preferences panel's pointer

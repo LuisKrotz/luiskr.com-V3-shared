@@ -8,7 +8,7 @@
 function cancelGenie(el): void
 ```
 
-Defined in: website/components/media/expanded/genie.ts:676
+Defined in: website/components/media/expanded/genie.ts:677
 
 Cancels a live session — the overlay drops and the content unveils
 immediately; `done` does NOT run (the caller keeps control).

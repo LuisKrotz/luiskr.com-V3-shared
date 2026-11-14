@@ -111,3 +111,10 @@ Description under the grid toggle.
 
 Build-time English copy for the dialog — used until the locale node
 resolves so the UI never renders empty labels.
+
+### `prefThemeLabel`
+
+Localized option label for a theme value — feeds the slider canvas's
+`aria-valuetext` so AT announces "Dark"/"System"/"Light" instead of
+the raw 0–2 track position. Falls back to the raw value if a locale
+ever ships an unknown theme key.

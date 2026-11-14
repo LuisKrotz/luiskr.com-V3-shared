@@ -13,13 +13,13 @@ Canvas/GLSL paint-color tokens — sole declaration site
 
 Neutral disc background (non-HC).
 
-### `TURQUOISE_DEEP`
+### `SILVER_DEEP`
 
-Liquid body — the deep end of the turquoise pour ramp.
+Liquid body — the deep end of the mercury pour ramp.
 
-### `TURQUOISE_TOP`
+### `SILVER_TOP`
 
-Liquid surface — `$neon-teal` #66fcf1, the awards-bar accent.
+Liquid surface — the metal palette's specular pole.
 
 ### `FOAM_CREST`
 
@@ -233,9 +233,9 @@ Split-flag dividing line — near-black hairline (`vec4` w/ alpha).
 
 CSS hex strings — 2D-context fallbacks (ctx.strokeStyle/fillStyle).
 
-### `NEON_TEAL`
+### `METAL_STEEL`
 
-`$neon-teal`/`$cms-accent` — the site accent (TURQUOISE_TOP's hex).
+`$metal-steel` — the site accent (SILVER_TOP's fallback cut).
 
 ### `MESH_GREY`
 

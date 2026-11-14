@@ -6,6 +6,7 @@
 
 ## Functions
 
+- [armPrintCapture](functions/armPrintCapture.md)
 - [mountBurger](functions/mountBurger.md)
 - [mountMenuBackground](functions/mountMenuBackground.md)
 - [mountFlag](functions/mountFlag.md)

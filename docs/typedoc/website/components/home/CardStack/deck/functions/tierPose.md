@@ -8,7 +8,7 @@
 function tierPose(tier, s, len, w, h, peek): CardPose
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:230
+Defined in: website/components/home/cardstack/deck.ts:228
 
 Pose dispatcher — the STACKED tiers' down-right cascade or the fan
 tiers' left/right coverflow. Single routing site for applyPoses and

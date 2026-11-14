@@ -8,7 +8,7 @@
 function layoutNodes(nodes, depth?, from?, to?, parent?, acc?): PlacedNode[]
 ```
 
-Defined in: experiments/docs/arch-scene.ts:241
+Defined in: experiments/docs/arch-scene.ts:249
 
 Flattens the manifest tree into positioned node descriptors: depth sets
 the ring radius, sibling order spreads the angle. Sectors split

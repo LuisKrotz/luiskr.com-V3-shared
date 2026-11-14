@@ -65,6 +65,12 @@ Card width/height writes pending after a measure().
 
 Live drag offset px — the strip's virtual front is activeIdx - _dragX/_step.
 
+### `_printing`
+
+Print job in flight — gates measure/applyPoses so the live posers
+can't rewrite the inline fan geometry print.ts stripped for the
+flat paper list.
+
 ### `isEnteredViewport`
 
 Any viewport visibility ever observed.

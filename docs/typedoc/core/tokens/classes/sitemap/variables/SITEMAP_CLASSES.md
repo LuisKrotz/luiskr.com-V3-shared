@@ -22,6 +22,7 @@ const SITEMAP_CLASSES: Readonly<{
   SITEMAP_CARD: 'sitemap-card'
   SITEMAP_CARD_TITLE: 'sitemap-card-title'
   SITEMAP_CARD_LOCALES: 'sitemap-card-locales'
+  SITEMAP_CARD_DESC: 'sitemap-card-desc'
   SITEMAP_CARD_FIGURE: 'sitemap-card-figure'
   SITEMAP_CARD_IMG: 'sitemap-card-img'
   SITEMAP_PAGE: 'sitemap-page'

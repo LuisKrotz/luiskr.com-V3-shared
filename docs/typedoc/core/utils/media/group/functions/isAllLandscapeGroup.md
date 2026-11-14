@@ -8,7 +8,7 @@
 function isAllLandscapeGroup(group): boolean
 ```
 
-Defined in: core/utils/media/group.ts:46
+Defined in: core/utils/media/group.ts:48
 
 Whether every item in the group is flagged landscape — all-landscape
 groups can't pair side-by-side in the two-up carousel layout, so they

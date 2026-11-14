@@ -8,7 +8,7 @@
 function navigateTo(host, item): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:40
+Defined in: website/components/home/cardstack/interactions.ts:42
 
 SPA-navigates to a card's project route — no-op without a slug.
 

@@ -97,12 +97,32 @@ result = p + off — bob + place
 +N aggregates); `aAlpha`/`aActive` are the highlight-pass streams —
 all instanced, written only when the graph or highlight changes.
 
+### `glyphVertexTransform`
+
+Vertex-stage patch: billboards each glyph to the camera basis, applies
+the shared pulse/active scale and the per-phase bob, then forwards
+per-instance color/alpha to the fragment varyings.
+
+### `glyphFragmentPreamble`
+
+Fragment preamble — declares the varyings the vertex stage feeds.
+
+### `glyphFragmentInk`
+
+Fragment ink patch — overwrites three's diffuse with the per-instance
+color and folds the per-instance alpha into the blended output.
+
 ### `edgeVertexPreamble`
 
 Edge shader contract — each endpoint vertex carries its node's bob
 phase in `aPhase`, so the parent→child link endpoints ride the exact
 same sine the glyph centers do and links stay glued while the
 network floats. No per-frame CPU rewrites of edge buffers.
+
+### `edgeVertexBob`
+
+Edge vertex patch — offsets Y by the same phase-locked sine the glyph
+centers ride, keeping link endpoints glued to their floating nodes.
 
 ### `patchGlyphMaterial`
 
@@ -353,6 +373,16 @@ so the scene still mounts label-free.
 - `@param` name Folder name drawn on the label.
 - `@param` ink Theme ink color resolved from the canvas' computed style.
 
+### `makeLabel`
+
+Wraps a rendered label canvas into a THREE.Sprite + material pair —
+returns null when the sprite/texture classes (or a 2d context) are
+unavailable so the scene skips labels rather than crashing.
+
+- `@param` name Label text (drawn centered in the sprite).
+- `@param` ink Fill color for the label glyphs.
+- `@returns` The sprite/material pair, or null when unsupported.
+
 ### (module scope)
 
 Persisted camera pose across scene remounts.
@@ -387,6 +417,16 @@ aggregate leaf. Recursive per the self-similar-traversal rule.
 
 - `@param` node Subtree root.
 - `@returns` Total descendant count.
+
+### `capSceneLeaves`
+
+Depth-caps a docs tree for the scene: beyond the cap, children collapse
+into a single "+N" aggregate leaf so the 3d map stays legible at
+~7k nodes instead of degenerating into a wall of sprites.
+
+- `@param` node Tree node to prune.
+- `@param` depth Current depth (1-based; deeper levels aggregate).
+- `@returns` The pruned node (children replaced by an aggregate leaf).
 
 ### `placeRoots`
 

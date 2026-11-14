@@ -1,6 +1,6 @@
 # `website\components\nav\brush.tsx`
 
-The neon paintbrush glyph for &lt;app-nav&gt;'s preferences chip —
+The silver paintbrush glyph for &lt;app-nav&gt;'s preferences chip —
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
@@ -11,7 +11,7 @@ The neon paintbrush glyph for &lt;app-nav&gt;'s preferences chip —
 
 ### `stop`
 
-`stop` bound to a --nav-neon-* CSS prop — presentation attributes can't
+`stop` bound to a --nav-metal-* CSS prop — presentation attributes can't
 resolve custom properties, so the value rides inline style.
 
 ### `ref`
@@ -30,7 +30,7 @@ curves pinched through the center give the thin twinkle shape.
 
 ### `NavBrushIcon`
 
-The <nav-brush-icon> element — the neon paintbrush. Shaft runs violet to
+The <nav-brush-icon> element — the silver paintbrush. Shaft runs violet to
 orange along its length; the bristle tip runs magenta to orange; the
 swoosh carries the full violet-magenta-orange sweep the reference uses.
 

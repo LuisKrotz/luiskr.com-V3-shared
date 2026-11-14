@@ -8,7 +8,7 @@
 function onDotClick(host, idx): void
 ```
 
-Defined in: website/components/carousel/awards-carousel/nav.ts:241
+Defined in: website/components/carousel/awards-carousel/nav.ts:260
 
 Jumps to the slide matching the clicked dot — a manual choice stops
 autoplay (user intent overrides the ambient cycle).

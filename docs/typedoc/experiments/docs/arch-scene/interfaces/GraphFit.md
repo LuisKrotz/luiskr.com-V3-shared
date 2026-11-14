@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [experiments/docs/arch-scene](../README.md) / GraphFit
 
-Defined in: experiments/docs/arch-scene.ts:1138
+Defined in: experiments/docs/arch-scene.ts:1162
 
 Camera-fit numbers for a placed tree — shared by both arms.
 
@@ -16,7 +16,7 @@ Camera-fit numbers for a placed tree — shared by both arms.
 graphR: number
 ```
 
-Defined in: experiments/docs/arch-scene.ts:1140
+Defined in: experiments/docs/arch-scene.ts:1164
 
 Outer ring radius of the deepest node.
 
@@ -28,7 +28,7 @@ Outer ring radius of the deepest node.
 camDist: number
 ```
 
-Defined in: experiments/docs/arch-scene.ts:1142
+Defined in: experiments/docs/arch-scene.ts:1166
 
 Eye distance that frames the whole graph with ~20% margin.
 
@@ -40,6 +40,6 @@ Eye distance that frames the whole graph with ~20% margin.
 far: number
 ```
 
-Defined in: experiments/docs/arch-scene.ts:1144
+Defined in: experiments/docs/arch-scene.ts:1168
 
 Far plane — clears the opposite rim at this distance.

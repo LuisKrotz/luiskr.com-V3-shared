@@ -8,7 +8,7 @@
 function mountSceneDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/canvas2d.ts:229
+Defined in: website/components/media/anim-demo/canvas2d.ts:78
 
 Space-scene demo — a depth-projected starfield: preallocated stars
 recycle through a z range while the projection (perspective divide,

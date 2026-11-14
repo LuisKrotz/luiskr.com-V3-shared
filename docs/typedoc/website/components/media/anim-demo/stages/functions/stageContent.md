@@ -8,7 +8,7 @@
 function stageContent(id): Node | null
 ```
 
-Defined in: website/components/media/anim-demo/stages.tsx:66
+Defined in: website/components/media/anim-demo/stages.tsx:101
 
 The staged DOM for one ANIMATION_IDS entry — the element(s) the
 matching driver mounts its animation onto. Unknown ids get an empty

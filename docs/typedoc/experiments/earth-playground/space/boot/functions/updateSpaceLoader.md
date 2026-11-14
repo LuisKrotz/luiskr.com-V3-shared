@@ -8,7 +8,7 @@
 function updateSpaceLoader(c, msg, pct): void
 ```
 
-Defined in: experiments/earth-playground/space/boot.ts:30
+Defined in: experiments/earth-playground/space/boot.ts:31
 
 Mirrors an engine progress event into the loader overlay — message,
 rounded percent text, and the bar's width style. All three nodes are

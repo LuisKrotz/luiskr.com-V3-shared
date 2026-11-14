@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/consts](../README.md) / JobResult
 
-Defined in: cms/media-convert/consts.ts:75
+Defined in: cms/media-convert/consts.ts:79
 
 Per-file outcome reported by the conversion server.
 
@@ -13,14 +13,14 @@ Per-file outcome reported by the conversion server.
 ### ok
 
 ```ts
-ok: boolean;
+ok: boolean
 ```
 
-Defined in: cms/media-convert/consts.ts:77
+Defined in: cms/media-convert/consts.ts:81
 
 Whether this file converted successfully.
 
-***
+---
 
 ### in
 
@@ -28,11 +28,11 @@ Whether this file converted successfully.
 in: string;
 ```
 
-Defined in: cms/media-convert/consts.ts:79
+Defined in: cms/media-convert/consts.ts:83
 
 The input path the result corresponds to.
 
-***
+---
 
 ### outs?
 
@@ -40,11 +40,11 @@ The input path the result corresponds to.
 optional outs?: string[];
 ```
 
-Defined in: cms/media-convert/consts.ts:81
+Defined in: cms/media-convert/consts.ts:85
 
 Output artifact paths when ok.
 
-***
+---
 
 ### error?
 
@@ -52,6 +52,6 @@ Output artifact paths when ok.
 optional error?: string;
 ```
 
-Defined in: cms/media-convert/consts.ts:83
+Defined in: cms/media-convert/consts.ts:87
 
 Error message when !ok.

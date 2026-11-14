@@ -314,9 +314,12 @@ describe('main.js branch warm-ups', () => {
 
     await jest.advanceTimersByTimeAsync(900)
 
-    globalThis.document = savedDoc
-
+    // Await the deferred callback while document is still absent — the
+    // mount guard sits behind an awaited dynamic import, so restoring
+    // first would let it see the document again.
     await boot
+
+    globalThis.document = savedDoc
 
     jest.useRealTimers()
 

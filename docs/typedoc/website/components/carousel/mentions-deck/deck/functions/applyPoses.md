@@ -8,7 +8,7 @@
 function applyPoses(host): void
 ```
 
-Defined in: website/components/carousel/mentions-deck/deck.ts:189
+Defined in: website/components/carousel/mentions-deck/deck.ts:188
 
 Writes every card's pose for the current virtual front `f` — derived
 from `activeIdx - _dragX/_step`, so a live drag slides the whole strip

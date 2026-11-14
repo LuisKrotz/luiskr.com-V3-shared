@@ -9,9 +9,17 @@ Split from firebase.test.js — covers the "firebase — bootstrap & lazy loader
 
 ## Members
 
+### `mockAuth`
+
+Fake auth/db instances — markers let tests identify which mock was used.
+
 ### `fetchMock`
 
 probeAuthBackend re-issues the createAuthUri REST call after an opaque
 auth/internal-error — stub fetch globally so tests never hit the
 network. The default ok:true response makes the probe return empty
 (no server message → the redirect fallback stays eligible).
+
+### `firebase`
+
+Fresh firebase module import — bound after the mocks are installed.

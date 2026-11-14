@@ -8,7 +8,7 @@
 function navMenuCanvas(host): HTMLCanvasElement
 ```
 
-Defined in: website/components/nav/menu.tsx:94
+Defined in: website/components/nav/menu.tsx:89
 
 Canvas JSX for the WebGL menu background.
 

@@ -2,9 +2,9 @@
 
 Earth engine bootstrap for SpacePlayground — creates the
 
-| | |
-|---|---|
-| **Source** | `src/experiments\earth-playground\space\boot.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\space\boot.ts`        |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -14,6 +14,7 @@ Earth engine bootstrap for SpacePlayground — creates the
 Mirrors an engine progress event into the loader overlay — message,
 rounded percent text, and the bar's width style. All three nodes are
 optional-chained so a partial loader render can't throw mid-boot.
+
 - `@param` c The SpacePlayground element.
 - `@param` msg Stage message from the engine ('loading textures', …).
 - `@param` pct Progress 0–100.
@@ -25,7 +26,10 @@ wires its lifecycle: progress → loader overlay, ready → apply persisted
 settings + reduced-motion flag + dismiss. The `_isInitializingEarth`
 latch prevents double-init while init() is still awaiting. A failed
 init still marks `_earthReady` and dismisses the loader so the page
-isn't stuck behind a broken overlay.
+isn't stuck behind a broken overlay. The init promise is registered
+as a pending print job so a print request landing mid-boot waits for
+the first painted frame before the media walk captures the canvas.
+
 - `@param` c The SpacePlayground element.
 
 ### `dismissSpaceLoader`
@@ -33,6 +37,7 @@ isn't stuck behind a broken overlay.
 Fades the loader overlay to transparent, then removes it after the CSS
 transition completes — removing earlier would clip the fade, removing
 never would leave an invisible overlay intercepting pointer events.
+
 - `@param` c The SpacePlayground element.
 
 ### `applyPersistedSettings`
@@ -41,4 +46,5 @@ Replays the persisted settings object onto the live engine and panel:
 each saved param runs through PARAM_HANDLERS (the same dispatch live
 edits use), then the matching DOM input's value/checked + slider
 track-fill + row label are synced so the panel reflects restored state.
+
 - `@param` c The SpacePlayground element.

@@ -12,3 +12,4 @@
 - [routeSlugs](functions/routeSlugs.md)
 - [rightsText](functions/rightsText.md)
 - [rightsParts](functions/rightsParts.md)
+- [versionStamp](functions/versionStamp.md)

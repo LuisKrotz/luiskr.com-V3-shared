@@ -81,3 +81,18 @@ Compressed image extension — webp sibling of every .jpg asset
 ### `WEBM_EXT`
 
 Compressed video extension — webm sibling of every .mp4 asset
+
+### `VTT_EXT`
+
+WebVTT descriptions track extension — `<stem>.vtt` is the canonical
+(English) descriptions file; localized variants insert the locale
+code before it (`<stem>.<locale>.vtt`). Co-located with the video.
+
+### `LONGDESC_SUFFIX`
+
+Image long-description marker appended to the media stem — the
+`<stem>_longdesc.txt` sibling that <img longdesc> links to.
+
+### `LONGDESC_EXT`
+
+Long-description file extension — raw UTF-8 text per the a11y spec.

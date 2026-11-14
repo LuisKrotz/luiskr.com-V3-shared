@@ -8,7 +8,7 @@
 function estimateMosaicHeight(items, wallW): number
 ```
 
-Defined in: website/components/media/mosaic/pack.ts:378
+Defined in: website/components/media/mosaic/pack.ts:643
 
 Pre-render height estimate — the packed wall height at a predicted
 width (the view's section wrapper publishes it as --media-mosaic-height

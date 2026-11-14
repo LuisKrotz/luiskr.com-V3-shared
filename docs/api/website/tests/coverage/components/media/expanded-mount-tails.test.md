@@ -9,6 +9,14 @@ Coverage tails for components/media/expanded/mount.ts —
 
 ## Members
 
+### `flush`
+
+Generous flush — mounted render queues need real timers past microtasks.
+
+### `CONTENT_SEL`
+
+Selector constants for the expand-modal DOM the assertions query.
+
 ### `makeEl`
 
 Real elements give getComputedStyle/classList semantics for free.

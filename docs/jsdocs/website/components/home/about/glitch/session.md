@@ -1,8 +1,8 @@
 # `website\components\home\about\glitch\session.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website\components\home\about\glitch\session.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\home\about\glitch\session.ts`   |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -21,6 +21,7 @@ Watches the picture wrapper for geometry changes: the session's device-px
 canvas is pinned to `width:100%`, so it must be re-rastered whenever the
 CSS box moves (resize, grid reflow, sibling expand) — otherwise the stale
 raster stretches into a zoomed/cropped portrait. Skips no-op callbacks.
+
 - `@param` s Live glitch session (rebuilds cover crop + channel ghosts).
 - `@param` wrap The wrapper element to observe.
 - `@returns` The armed observer, or null where RO isn't available.
@@ -41,6 +42,7 @@ mode, so the 2D claim is deferred until the wasm arm fails). Bails
 quietly when the image isn't decoded, the wrapper is zero-size, or
 motion is reduced — the <img> remains as the static fallback.
 Idempotent — returns true when a session is already running.
+
 - `@param` host The <about-section> component the session parks on.
 - `@param` wrap The live picture wrapper element.
 
@@ -50,6 +52,7 @@ Claims the 2D backend on the session canvas and rebuilds the channel
 ghosts + scanline tile against the already-measured cover rect. Called
 directly when WebGPU is absent and by the wasm arm on mount/upload
 failure — the painter pipeline is the permanent fallback.
+
 - `@param` s Live session (geometry already measured).
 - `@returns` false when the context claim fails — the session is unusable.
 
@@ -59,6 +62,7 @@ Tears a session down in place — stops the loop, destroys the wasm
 widget, disconnects the observer, removes the overlay and un-parks it
 from the host. Used by the wasm arm when every backend failed and by
 disarmGlitch for normal teardown.
+
 - `@param` host The component the session was parked on.
 - `@param` s The session to kill.
 
@@ -70,11 +74,13 @@ geometry + channel ghosts are rebuilt against the new image node.
 
 ### `tick`
 
-Self-maintaining tick — always running while mounted:
-  no session      → retry the arm at ~4 Hz (covers lazy image decode
-                    and the first render landing before data).
-  session detached→ heal against the fresh wrapper/img (re-render-safe).
-  healthy session → draw the frame.
+Self-maintaining tick — always running while mounted (queued through
+framePool, so the whole chain starves during scroll flings and resumes
+on settle):
+no session → retry the arm at ~4 Hz (covers lazy image decode
+and the first render landing before data).
+session detached→ heal against the fresh wrapper/img (re-render-safe).
+healthy session → draw the frame.
 
 ### `poll`
 

@@ -8,7 +8,7 @@
 function renderMediaExpanded(el): Element
 ```
 
-Defined in: website/components/media/expanded/render.tsx:31
+Defined in: website/components/media/expanded/render.tsx:32
 
 Renders media expanded.
 

@@ -39,6 +39,10 @@ separators while safely representing Unicode and reserved characters.
 
 Truncates a media title to Google's 100-char video-title bound.
 
+### `plain`
+
+Strips CMS rich-text markup (tags, <br>, entities) to plain text.
+
 ### `themesOf`
 
 Localized search-theme list for one CMS node — every page/project
@@ -134,6 +138,14 @@ Recursively adds each manifest page and its directory descendants.
 
 - `@param` {object} node Scanned docs manifest node.
 
+### `lastmodFor`
+
+Verified <lastmod> for a portfolio URL — the owning project's
+git-derived modified stamp (or its publication date when the node
+never changed). Non-portfolio routes keep no lastmod: only project
+URLs carry a provable change date, everything else stays undated
+rather than stamped with a build-time guess.
+
 ### `sitemapDoc`
 
 Emits one `<urlset>` document for `urls`, media tags included.
@@ -153,7 +165,7 @@ Localized ai-catalog — entry URLs get the /<loc> prefix (docs stay EN).
 
 ### `robotsDoc`
 
-Emits root or localized crawl policy with its sitemap discovery URL.
+Emits root or localized crawl policy with its sitemap discovery URLs.
 
 ### `FEED_CREATOR`
 
@@ -164,10 +176,6 @@ Feed item author — matches the Person entity in the page JSON-LD.
 Cap on <category> elements per item — keeps items compact while
 covering every content-derived theme head (the shared identity
 tail lands past the cap on long lists, which is intentional).
-
-### `plain`
-
-Strips CMS rich-text markup (tags, <br>, entities) to plain text.
 
 ### `firstSectionText`
 
@@ -184,7 +192,9 @@ Localized channel description — the locale's about bio, else en.
 ### `rssItem`
 
 One RSS item with a valid image enclosure or video plus optional
-poster, its author, and the owning page's searchThemes as categories.
+poster, its author, the owning page's searchThemes as categories,
+and — for dated articles — an RFC-822 pubDate (feeds Google News
+freshness readers; gated so undated pages never invent one).
 
 ### `rssDoc`
 

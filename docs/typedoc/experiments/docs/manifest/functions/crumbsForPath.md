@@ -8,7 +8,7 @@
 function crumbsForPath(docsPath): object[]
 ```
 
-Defined in: experiments/docs/manifest.ts:318
+Defined in: experiments/docs/manifest.ts:319
 
 Breadcrumb segments for a resolved docs path — [{label, path}] from the
 portal root down to the node.

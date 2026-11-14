@@ -18,6 +18,15 @@ sheet is shared across every component instance through
 sheet per component class (not per element) is the intended ratio. The Map
 also makes re-mounts free: the same key hits the same cached sheet.
 
+### `_scheduleIdle`
+
+Runs `cb` at the next idle slice — requestIdleCallback bounded by the
+shared prefetch timeout when available, a short setTimeout fallback
+otherwise. Mirrors the route-warmer/predictive-loader schedule contract
+so print-tier fetches never compete with mount-time frame work.
+
+- `@param` cb work to run in the next idle gap.
+
 ### (module scope)
 
 Component state bag — keys are declared per-component and narrowed by
@@ -45,7 +54,49 @@ relies on being uniform:
 
 ### (module scope)
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
+
+### (module scope)
+
+Width-class key of the media tier currently adopted — gates both
+duplicate adoption and the grow-watcher upgrade path.
+
+### (module scope)
+
+Tier key whose lazy import is in flight — dedupes concurrent loads.
+
+### (module scope)
+
+The adopted cumulative tier sheet (constructable path) — spliced in
+place when a wider tier supersedes it so equal-specificity media
+rules keep source order.
+
+### (module scope)
+
+Resolved base css — the `?tiers` module's base or the plain `?inline`
+string — computed once per _renderInitial and reused by the legacy
+<style> rebuild when a cumulative tier lands.
+
+### (module scope)
+
+Tier css text currently appended to the legacy <style> node.
+
+### (module scope)
+
+Resolved print-tier css — adopted onto the root as soon as the lazy
+`rcss-print` chunk lands (the rules only match under print media, so
+the sheet is inert on screen and stays adopted permanently). Also
+stashes the text for legacy <style> rebuilds and re-mount re-adopts.
+
+### (module scope)
+
+Print-tier load in flight — dedupes mount/idle re-entry.
+
+### (module scope)
+
+Shared grow-watcher unsubscribe — set while mounted with tiers.
 
 ### (module scope)
 
@@ -88,14 +139,22 @@ Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
 onInit → _renderInitial → onMounted → onUpdated.
 
+### `onDestroy`
+
+Teardown hook — invoked once per disconnect by the base
+`disconnectedCallback`. Declared as a concrete no-op (unlike the
+mount hooks above) so the callback can call it unconditionally:
+subclasses override for engine/audio/observer cleanup, and
+`el.onDestroy = fn` own-property patches still shadow the prototype
+method.
+
 ### `constructor`
 
 Attach an open shadow root and stash the component's `?inline` CSS text.
 `mode: 'open'` keeps `element.shadowRoot` readable — the codebase and the
 happy-dom tests both rely on that handle for assertions and scoped
 queries; 'closed' would break both without buying real encapsulation.
-
-- `@param` styles Component-local CSS text (Vite `?inline` import).
+- `@param` styles Component-local CSS — `?inline` text or a `?tiers` module.
 
 ### `setState`
 
@@ -105,7 +164,6 @@ required when the next state derives from the previous state, since
 reads of `this.state` outside the updater can race with queued renders.
 The merge is a shallow spread: keys not present in `next` survive, which
 lets components update one field without re-sending the whole bag.
-
 - `@param` updater Partial state patch, or (prevState) => patch.
 
 ### `connectedCallback`
@@ -129,7 +187,6 @@ subscribe() rather than rendering into a disconnecting root.
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
-
 - `@param` selector CSS selector evaluated against this.shadowRoot.
 - `@returns` First matching element or null.
 
@@ -138,7 +195,6 @@ throwing when the shadow root is absent (detached construction in tests).
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
 iteration methods on older engines).
-
 - `@param` selector CSS selector evaluated against this.shadowRoot.
 - `@returns` Array of matching elements (never null).
 
@@ -149,7 +205,6 @@ Prevents duplicate listeners: the DOM itself dedupes identical
 (type, listener, capture) tuples per MDN addEventListener semantics, and
 every registration is mirrored into _eventDisposers so disconnect removes
 it even when the listener captured instance state.
-
 - `@param` target EventTarget to listen on (null → no-op).
 - `@param` event Event type token.
 - `@param` handler Listener callback or listener object.
@@ -161,7 +216,6 @@ Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
 (mid-move or already removed) is dropped instead of rendering into a
 dead shadow root — the next connectedCallback renders fresh state anyway.
-
 - `@param` store Store-like object exposing subscribe(); null/invalid → no-op.
 
 ### (module scope)
@@ -170,6 +224,44 @@ Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
 root retains children from the previous mount, so both style and content
 paths reuse existing nodes instead of duplicating them.
+
+### (module scope)
+
+Loads and adopts the cumulative media tier covering `cls` — the
+highest defined tier key at or below the viewport class. Called at
+mount with the current class and again from the grow-watcher on
+upward crossings; a newer pending load never blocks an already-
+resolving narrower tier (cumulative sheets are nested supersets, so
+adopting mobile→desktop in any arrival order stays correct).
+- `@param` cls viewport width class to cover.
+- `@param` tiered the component's `?tiers` module.
+
+### (module scope)
+
+Adopts an already-downloaded cumulative tier css — constructable path
+shares one parsed sheet per text via `_sharedSheets` and splices it in
+at the old tier's position (never dropping sheets a subclass added);
+the legacy path rewrites the `<style>` node, where the new cumulative
+text replaces the served one outright since it is a strict superset.
+- `@param` css cumulative tier css text.
+
+### (module scope)
+
+Schedules the component's print-tier adoption. `?tiers` sheets keep
+their `@media print`/`@page` blocks out of `base` behind a lazy
+`rcss-print` chunk — importing during idle keeps paper rules off the
+mount path while landing them long before a real print snapshot. The
+adopted sheet is permanent: print rules match nothing on screen, so
+neither unmount nor tier growth ever removes them.
+- `@param` tiered the component's `?tiers` module.
+
+### (module scope)
+
+Adopts resolved print css — constructable path shares one parsed sheet
+per text via `_sharedSheets` and appends it after every adopted sheet,
+matching the source order where print blocks sat at file end; the
+legacy path re-appends the text to the rebuilt `<style>` composition.
+- `@param` css print-tier css text from the resolved module.
 
 ### `_updateDom`
 
@@ -184,12 +276,11 @@ tracked element on every state change).
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
-
-- Node → `replaceChildren(node)` — the JSX fast path, keeps DOM identity.
-- Array → `replaceChildren(...filtered)` — fragment-style multi-root
-  render; nullish entries are filtered so conditional JSX slots can just
-  return null.
-- string/nullish → `innerHTML` — legacy string templates; '' clears.
+ - Node → `replaceChildren(node)` — the JSX fast path, keeps DOM identity.
+ - Array → `replaceChildren(...filtered)` — fragment-style multi-root
+   render; nullish entries are filtered so conditional JSX slots can just
+   return null.
+ - string/nullish → `innerHTML` — legacy string templates; '' clears.
 - `@param` output Render result from render().
 
 ### `render`
@@ -197,5 +288,4 @@ Three accepted shapes, resolved in priority order:
 Subclasses render() to return a JSX DOM Node or HTML string for the content area.
 The base implementation returns an empty string so instantiating the base
 class directly (tests, scaffolding) produces an empty-but-valid shadow root.
-
 - `@returns` DOM output for _applyRenderOutput.

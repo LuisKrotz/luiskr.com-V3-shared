@@ -8,9 +8,11 @@
 function removeItem(host, idx): void
 ```
 
-Defined in: cms/portfolio/model.ts:68
+Defined in: cms/portfolio/model.ts:77
 
-Removes item.
+Deletes the item at `idx` after a label-named confirm — the splice
+rewrites indices, so the render+rebind pair refreshes every row's
+`data-idx` bindings.
 
 ## Parameters
 
@@ -18,13 +20,13 @@ Removes item.
 
 [`CmsPortfolioList`](../../CmsPortfolioList/classes/CmsPortfolioList.md)
 
-— the host component
+— the host component holding `items`
 
 ### idx
 
 `number`
 
-— the index
+— zero-based list index
 
 ## Returns
 

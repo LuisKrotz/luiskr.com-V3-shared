@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/burn/types](../README.md) / BurnInk
 
-Defined in: core/utils/burn/types.ts:179
+Defined in: core/utils/burn/types.ts:189
 
 Combustion ink ramp — resolved from `--burn-*` CSS custom properties
 (dark theme: cyan-blue plasma fire on the accent ramp; light theme:
@@ -19,7 +19,7 @@ lacks the custom properties.
 core: string
 ```
 
-Defined in: core/utils/burn/types.ts:180
+Defined in: core/utils/burn/types.ts:190
 
 ---
 
@@ -29,7 +29,7 @@ Defined in: core/utils/burn/types.ts:180
 mid: string
 ```
 
-Defined in: core/utils/burn/types.ts:181
+Defined in: core/utils/burn/types.ts:191
 
 ---
 
@@ -39,7 +39,7 @@ Defined in: core/utils/burn/types.ts:181
 edge: string
 ```
 
-Defined in: core/utils/burn/types.ts:182
+Defined in: core/utils/burn/types.ts:192
 
 ---
 
@@ -49,7 +49,7 @@ Defined in: core/utils/burn/types.ts:182
 scorch: string
 ```
 
-Defined in: core/utils/burn/types.ts:183
+Defined in: core/utils/burn/types.ts:193
 
 ---
 
@@ -59,6 +59,6 @@ Defined in: core/utils/burn/types.ts:183
 smoke: string
 ```
 
-Defined in: core/utils/burn/types.ts:185
+Defined in: core/utils/burn/types.ts:195
 
 Smoke-puff tint — the rising ash column behind the embers.

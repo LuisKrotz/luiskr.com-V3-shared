@@ -8,7 +8,7 @@
 function mountNavMenuWebGL(host): void
 ```
 
-Defined in: website/components/nav/menu.tsx:170
+Defined in: website/components/nav/menu.tsx:171
 
 Binds the WebGL layers to the persistent menu canvases. Because the
 canvas elements survive re-renders, each context is created once per

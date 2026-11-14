@@ -11,13 +11,17 @@
 
 ### `IS_LOCALHOST`
 
-Returns whether localhost.
-
-- `@param` localhost — the value
+Dev-server gate — the `/api/media-convert` routes only exist on vite's
+dev/preview server, so on the deployed site this regex fails and the
+component renders its "localhost only" notice instead of the tool.
 
 ### `CmsMediaConverter`
 
-The CmsMediaConverter component.
+<cms-media-converter> — the element facade for the media converter:
+holds the phase machine (idle → uploading → converting → done/error),
+the queue, the server job handle + poll timer, and the toolchain
+report state — delegating to `files.ts` (input collection),
+`job.ts` (HTTP + polling), `events.ts` (wiring), `render.tsx` (JSX).
 
 ### (module scope)
 

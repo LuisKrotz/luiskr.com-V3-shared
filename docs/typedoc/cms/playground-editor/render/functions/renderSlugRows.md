@@ -1,16 +1,18 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/playground-editor/render](../README.md) / renderSlugRows
 
 ```ts
-function renderSlugRows(ed): HTMLElement | DocumentFragment | SVGElement;
+function renderSlugRows(ed): HTMLElement | DocumentFragment | SVGElement
 ```
 
-Defined in: cms/playground-editor/render.tsx:120
+Defined in: cms/playground-editor/render.tsx:134
 
-JSX for the per-locale slug editor rows.
+Per-locale route-slug rows — one input per `SLUG_KEYS` entry; empty
+means "keep the code default". The router and language switcher read
+these at `translations/<locale>/slugs`.
 
 ## Parameters
 

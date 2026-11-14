@@ -8,7 +8,7 @@
 function cancelExpandSpring(el): void
 ```
 
-Defined in: core/utils/motion/expand-spring.ts:185
+Defined in: core/utils/motion/expand-spring.ts:186
 
 Cancels a live expansion — the element stays wherever the spring left
 it and the caller's onSettle is dropped (a cancelled open must not

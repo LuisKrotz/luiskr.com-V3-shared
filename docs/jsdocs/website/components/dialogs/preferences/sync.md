@@ -1,8 +1,8 @@
 # `website\components\dialogs\preferences\sync.ts`
 
-| | |
-|---|---|
-| **Source** | `src/website\components\dialogs\preferences\sync.ts` |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| **Source**     | `src/website\components\dialogs\preferences\sync.ts`    |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle. |
 
 ## Members
@@ -13,7 +13,7 @@ Reflects the open flag into DOM/classes (widget teardown on close).
 
 ### `updateThemeUI`
 
-Syncs the theme option buttons with the store's theme.
+Syncs the theme option buttons + the slider canvas's value ARIA with the store's theme.
 
 ### `syncSwitchButton`
 

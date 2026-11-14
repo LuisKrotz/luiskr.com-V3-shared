@@ -67,6 +67,11 @@ dangling at the previous line's end.
 Modifier toggled on a pair that leads a wrapped line — its
 separator hides so the line opens on the label, not a dot.
 
+### `INTERNAL_FOOTER_ITEMS_VERSION`
+
+Release stamp under the copyright line — package version + rolling
+build id baked in by stamp-version.mjs at build time.
+
 ### `INTERNAL_FOOTER_ITEMS_FEED`
 
 RSS row under the legal links — wraps the locale feed anchor.

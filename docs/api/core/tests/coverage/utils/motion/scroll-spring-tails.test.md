@@ -9,6 +9,14 @@ Coverage for core/utils/motion/scroll-spring.ts — the
 
 ## Members
 
+### `ANIM`
+
+The animating-class token — assertions read the same class the code sets.
+
+### `realRaf`
+
+Original rAF/cAF — tests swap in the manual queue then restore.
+
 ### `rafQueue`
 
 Pending rAF callbacks — index is the returned handle minus 1.

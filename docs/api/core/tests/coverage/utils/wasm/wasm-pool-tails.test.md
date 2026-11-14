@@ -9,6 +9,10 @@ Coverage for core/utils/wasm/wasm-pool.ts — the worker
 
 ## Members
 
+### `WorkerSaved`
+
+Saved Worker global — tests swap in the stub then restore it.
+
 ### `makeWorkerStub`
 
 Minimal Worker stand-in — postMessage never replies unless a reply is

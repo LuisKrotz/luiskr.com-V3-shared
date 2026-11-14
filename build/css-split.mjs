@@ -16,13 +16,16 @@
  *     for the <link>-delivered document CSS. Each variant is the original
  *     text with future-class media blocks dropped in place, so rule order
  *     is fully preserved — zero cascade risk by construction.
- *   - `splitComponentSheet(css)` → {base, tiers:{cls→css}} for ?tiers
- *     component modules: base keeps every non-bucketed part; each tier
- *     holds the source-ordered media blocks up to its class and is
+ *   - `splitComponentSheet(css)` → {base, tiers:{cls→css}, print} for
+ *     ?tiers component modules: base keeps every non-bucketed part; each
+ *     tier holds the source-ordered media blocks up to its class and is
  *     adopted AFTER the base sheet. A moved block whose selectors
  *     reappear in a later kept part stays in base — that is the only
  *     position where reordered adoption could flip a same-specificity
- *     tie, so it is the conservative extraction boundary.
+ *     tie, so it is the conservative extraction boundary. `@media print`
+ *     and `@page` parts join `print` — a lazily-fetched sheet adopted
+ *     only when paper output is imminent, under the same selector
+ *     guard.
  */
 import { WIDTH_CLASSES, classForMinWidth } from './css-classes.mjs'
 
@@ -88,10 +91,12 @@ const topLevelParts = (css) => {
       continue
     }
 
-    if (depth === 0 && c === '@' && css.startsWith('@media', i)) {
+    if (depth === 0 && c === '@' && (css.startsWith('@media', i) || css.startsWith('@page', i))) {
       if (i > start) parts.push({ kind: 'other', query: '', text: css.slice(start, i), body: '' })
 
-      let j = i + 6
+      const isPage = css.startsWith('@page', i)
+
+      let j = i + (isPage ? 5 : 6)
 
       while (j < n && css[j] !== '{') j++
 
@@ -115,7 +120,12 @@ const topLevelParts = (css) => {
         k++
       } while (d > 0 && k < n)
 
-      parts.push({ kind: 'media', query, text: css.slice(i, k), body: css.slice(j, k) })
+      parts.push({
+        kind: isPage ? 'page' : 'media',
+        query,
+        text: css.slice(i, k),
+        body: css.slice(j, k),
+      })
       start = i = k
       continue
     }
@@ -307,9 +317,13 @@ const dedupeMediaRules = (css) => {
  * Splits the document (<link>-delivered) stylesheet into cumulative sheets
  * per width class. `tablet` = base + mobile + tablet blocks — the original
  * text with only future-class media blocks dropped in place, preserving
- * rule order exactly.
+ * rule order exactly. `@media print`/`@page` parts leave the width-class
+ * files entirely — they join `print`, which the loader serves on its own
+ * `media="print"` link so screen sessions never parse them. `wide` stays
+ * byte-identical to the source sheet (sourcemap validity + the noscript
+ * document that gets no second link).
  * @param {string} css compiled stylesheet text.
- * @returns {Record<string,string>} {mobile,tablet,desktop,wide} sheets.
+ * @returns {Record<string,string>} {mobile,tablet,desktop,wide,print} sheets.
  */
 export const splitDocumentSheet = (css) => {
   const parts = topLevelParts(dedupeMediaRules(css))
@@ -318,6 +332,8 @@ export const splitDocumentSheet = (css) => {
   for (const cls of WIDTH_CLASSES) {
     out[cls.name] = parts
       .filter((p) => {
+        if (isPrintPart(p)) return cls.name === 'wide'
+
         if (p.kind !== 'media') return true
 
         const px = minWidthOf(p.query)
@@ -328,8 +344,48 @@ export const splitDocumentSheet = (css) => {
       .join('')
   }
 
+  out.print = parts
+    .filter(isPrintPart)
+    .map((p) => p.text)
+    .join('')
+
   return out
 }
+
+/**
+ * A part that only applies to paper output — `@page` blocks and pure
+ * `@media print` blocks (compound print queries stay put, like compound
+ * min-width queries: class membership is ambiguous and their byte share
+ * is small).
+ * @param {{kind:string, query:string}} p top-level sheet part.
+ * @returns {boolean} true when the part belongs in the lazy print sheet.
+ */
+const isPrintPart = (p) => p.kind === 'page' || (p.kind === 'media' && p.query === 'print')
+
+/**
+ * Later-sheet text a moved part could reorder against. For width parts
+ * that is everything staying in base (non-media parts and media that is
+ * neither a moved min-width block nor a print part — a later print part
+ * still adopts after every width tier, so source order holds). For print
+ * parts every later non-print part hazards: base text and width-tier
+ * blocks alike adopt before the print sheet, while the print block
+ * originally sat earlier — a shared selector would flip the tie on paper
+ * (min-width rules can match the page box).
+ * @param {Array} parts top-level sheet parts.
+ * @param {number} i index of the part being tested.
+ * @param {'width'|'print'} bucket which moved bucket `parts[i]` joins.
+ * @returns {string} joined text of every later part not sharing the bucket.
+ */
+const laterKeptText = (parts, i, bucket) =>
+  parts
+    .slice(i + 1)
+    .filter((q) => {
+      if (bucket === 'print') return !isPrintPart(q)
+      if (q.kind !== 'media') return true
+      return minWidthOf(q.query) === null && q.query !== 'print'
+    })
+    .map((q) => q.text)
+    .join('')
 
 /**
  * Splits a component `?inline`-style sheet into an embedded base plus
@@ -339,19 +395,35 @@ export const splitDocumentSheet = (css) => {
  * so the only relocation hazard is a later KEPT part sharing a selector:
  * those blocks stay in base. Tiers whose cumulative content adds nothing
  * over the previous class are omitted (the runtime falls back to the
- * highest defined lower tier).
+ * highest defined lower tier). `@media print`/`@page` parts move into
+ * `print` — fetched and adopted only for paper output — under the same
+ * selector guard.
  * @param {string} css compiled component stylesheet text.
- * @returns {{base:string, tiers:Record<string,string>, guarded:string[]}}
+ * @returns {{base:string, tiers:Record<string,string>, print:string, guarded:string[]}}
  */
 export const splitComponentSheet = (css) => {
   const parts = topLevelParts(css)
   const kept = []
   const moved = []
+  const printParts = []
   const guarded = []
 
   for (let i = 0; i < parts.length; i++) {
     const p = parts[i]
     const px = p.kind === 'media' ? minWidthOf(p.query) : null
+
+    if (isPrintPart(p)) {
+      const later = laterKeptText(parts, i, 'print')
+
+      if (later && innerSelectors(p.body).some((sel) => sel && later.includes(sel))) {
+        guarded.push(p.query || '@page')
+        kept.push(p.text)
+        continue
+      }
+
+      printParts.push(p.text)
+      continue
+    }
 
     if (px === null) {
       kept.push(p.text)
@@ -361,11 +433,7 @@ export const splitComponentSheet = (css) => {
     // Later parts that deterministically stay in base ('other' parts and
     // non-pure media) — a moved block lands after all of them at adoption
     // time, so a shared selector means the tie flips and the block stays.
-    const later = parts
-      .slice(i + 1)
-      .filter((q) => q.kind !== 'media' || minWidthOf(q.query) === null)
-      .map((q) => q.text)
-      .join('')
+    const later = laterKeptText(parts, i, 'width')
 
     if (later && innerSelectors(p.body).some((sel) => sel && later.includes(sel))) {
       guarded.push(p.query)
@@ -394,5 +462,5 @@ export const splitComponentSheet = (css) => {
     }
   })
 
-  return { base: kept.join(''), tiers, guarded }
+  return { base: kept.join(''), tiers, print: printParts.join(''), guarded }
 }

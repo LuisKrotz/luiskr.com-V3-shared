@@ -14,7 +14,7 @@ const UNIT_TEXT: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/strings/text.ts:42
+Defined in: core/tokens/strings/text.ts:44
 
 Frozen unit UI text map — sole declaration site for these tokens; consumers read members
 and never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the

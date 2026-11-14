@@ -6,3 +6,13 @@ Split from slider-internals.test.js — covers the "SwitchWebGL internals" descr
 | -------------- | ------------------------------------------------------------------------------------------- |
 | **Source**     | `src/website\tests\components\canvas\slider\slider-internals-switchwebgl-internals.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                                     |
+
+## Members
+
+### `makeCanvas`
+
+Canvas with a stubbed getBoundingClientRect — widget sizing reads real boxes.
+
+### `flushFrames`
+
+Frame-tick flush — widget rAF steps need real timers past microtasks.

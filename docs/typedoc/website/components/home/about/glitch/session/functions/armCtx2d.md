@@ -8,7 +8,7 @@
 function armCtx2d(s): boolean
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:196
+Defined in: website/components/home/about/glitch/session.ts:198
 
 Claims the 2D backend on the session canvas and rebuilds the channel
 ghosts + scanline tile against the already-measured cover rect. Called

@@ -111,8 +111,8 @@ can't queue competing jumps.
 
 ### `scrollToSlide`
 
-Smooth-centers real-slide idx — `children[idx + 1]` because a clone of
-the last slide is prepended to the track (index 0 is the clone).
+Smooth-centers real-slide idx — queries the :not(--clone) slide list so
+the count of viewport-sized edge clones never shifts the indexing.
 
 - `@param` c The CustomCarousel element.
 - `@param` idx Real-slide index.
@@ -167,6 +167,20 @@ dot clicks are deliberate picks, not ambient browsing.
 
 - `@param` c The CustomCarousel element.
 - `@param` idx Dot index → real-slide index.
+
+### `carouselOnTrackClick`
+
+Delegated clone-slide click — clones are `inert`, so hit-testing skips
+their whole subtree and a click on one lands on the track itself. When
+that happens, rect-test the clone children for the slide under the
+pointer, map its track position to the real twin's index (same modulo
+the wrap detector uses), and forward to the twin figure's openModal —
+the identical contract a real slide's own figure click binding has.
+Clicks on real slides target inside their subtree (not the track) so
+they're ignored; clicks on bare track gaps find no clone and no-op.
+
+- `@param` c The CustomCarousel element.
+- `@param` e The delegated click event.
 
 ### `setupIntersectionObserver`
 

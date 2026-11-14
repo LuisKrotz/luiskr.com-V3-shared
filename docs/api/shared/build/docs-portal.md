@@ -17,3 +17,10 @@ Builds the docs-portal vite plugin.
 - `@param` {string} opts.root Repo root the manifest scan resolves against.
 - `@param` {boolean} [opts.emitAssets] Emit `docs-content/*.json` payloads into
 - `@returns` {import('vite').Plugin} The plugin instance.
+
+### `payloadFor`
+
+`payloadFor` — builds one file's publishable payload: media under
+the inline limit ships as a data-URI, text content renders to
+HTML through renderFile, source passes through redactSource.
+Returns null when the id doesn't resolve under root.

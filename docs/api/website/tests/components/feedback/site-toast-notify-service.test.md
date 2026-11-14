@@ -9,6 +9,10 @@ Split from site-toast.test.js — covers the "notify service" describe.
 
 ## Members
 
+### `flush`
+
+Zero-ms flush — toast queue drains within one macrotask.
+
 ### `loadNotify`
 
 Fresh notify module (fresh _seen/_toastEl/_globalBound state) per call.
@@ -16,3 +20,7 @@ Fresh notify module (fresh _seen/_toastEl/_globalBound state) per call.
 ### `mountToast`
 
 Mounts a toast element, returning it.
+
+### `_items`
+
+Lists the toast item elements inside the component's shadow root.

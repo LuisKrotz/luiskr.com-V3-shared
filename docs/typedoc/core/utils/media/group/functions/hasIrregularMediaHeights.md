@@ -8,7 +8,7 @@
 function hasIrregularMediaHeights(items): boolean
 ```
 
-Defined in: core/utils/media/group.ts:67
+Defined in: core/utils/media/group.ts:93
 
 Irregular-heights detector: reports "mosaic" on the spread signal —
 (a) any sized item whose natural height exceeds TALL_ITEM_H disqualifies

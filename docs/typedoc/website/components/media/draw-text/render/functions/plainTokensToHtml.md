@@ -8,7 +8,7 @@
 function plainTokensToHtml(tokens, insideTag?): string
 ```
 
-Defined in: website/components/media/draw-text/render.ts:310
+Defined in: website/components/media/draw-text/render.ts:380
 
 Plain-mode assembly — consecutive word/space/br tokens collapse into
 ONE aria-hidden span per run (a run can hold an entire paragraph), and

@@ -33,6 +33,14 @@ const DATA_ATTRS: Readonly<{
   DATA_WIRED: 'data-wired'
   DATA_ANIM_LABEL: 'data-anim-label'
   DATA_ANIM_DESC: 'data-anim-desc'
+  PRINT_CAPTURE: 'data-print-capture'
+  PRINT_SKIP: 'data-print-skip'
+  PRINT_LINK: 'data-print-link'
+  PRINT_DOC: 'data-print-doc'
+  PRINT_LANDSCAPE: 'data-print-landscape'
+  PRINT_NO_CAPTION: 'data-print-no-caption'
+  DOCS_MERMAID_SRC: 'data-mermaid-src'
+  PRINT_ROTATE: 'data-print-rotate'
 }>
 ```
 

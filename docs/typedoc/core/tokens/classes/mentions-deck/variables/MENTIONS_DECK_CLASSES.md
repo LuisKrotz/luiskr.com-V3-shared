@@ -13,7 +13,6 @@ const MENTIONS_DECK_CLASSES: Readonly<{
   MENTIONS_DECK_CARD: 'mentions-deck-card'
   MENTIONS_DECK_CARD_ACTIVE: 'mentions-deck-card--active'
   MENTIONS_DECK_CARD_LINK: 'mentions-deck-card-link'
-  MENTIONS_DECK_CARD_NUM: 'mentions-deck-card-num'
   MENTIONS_DECK_CARD_MEDIA: 'mentions-deck-card-media'
   MENTIONS_DECK_CARD_IMG: 'mentions-deck-card-img'
   MENTIONS_DECK_CARD_ICON: 'mentions-deck-card-icon'

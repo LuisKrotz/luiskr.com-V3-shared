@@ -37,7 +37,16 @@ Frozen keys key map — sole declaration site for these tokens; consumers read m
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
 
+### `HOME`
+
+List boundaries — first/last item jumps in roving-focus widgets.
+
 ### `SLASH`
 
 Printable single-key shortcuts — matched case-folded, never with
 Ctrl/Meta/Alt held so browser/system chords pass through.
+
+### `KEY_P`
+
+'p' — the Ctrl/Cmd chord the print gate intercepts on
+print-ineligible routes (matched case-folded).

@@ -6,3 +6,9 @@ Split from utils-deep-coverage.test.js — covers the "scroll-state" describe.
 | -------------- | ----------------------------------------------------------------------------- |
 | **Source**     | `src/core\tests\utils\deep-coverage\utils-deep-coverage-scroll-state.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.                     |
+
+## Members
+
+### `flush`
+
+Zero-ms flush — scroll-state callbacks fire within one macrotask.

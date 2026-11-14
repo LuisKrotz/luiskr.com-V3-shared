@@ -6,3 +6,9 @@ Split from docs-tails.test.js — covers the "docs GL strip" describe.
 | -------------- | ---------------------------------------------------------------------- |
 | **Source**     | `src/experiments\docs\tests\coverage\docs-tails-docs-gl-strip.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                |
+
+## Members
+
+### `flush`
+
+Timer flush — mounted render queues need real timers past microtasks.

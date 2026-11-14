@@ -8,7 +8,7 @@
 function onPrevClick(host): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:71
+Defined in: website/components/home/cardstack/interactions.ts:80
 
 Prev control — one step back along the ring; a manual step kills autoplay.
 

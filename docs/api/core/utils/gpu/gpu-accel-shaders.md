@@ -9,6 +9,10 @@ GLSL sources for the GPUAccelerator passthrough program —
 
 ## Members
 
+### `GPU_ACCEL_VS`
+
+Fullscreen-quad vertex shader emitting flipped-normalized UVs.
+
 ### `GPU_ACCEL_FS`
 
 Single-sampler fragment shader — blits the bound texture.

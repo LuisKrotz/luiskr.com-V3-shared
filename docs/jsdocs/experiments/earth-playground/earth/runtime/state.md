@@ -2,10 +2,10 @@
 
 Mutable engine state for EarthBackground, extracted from
 
-| | |
-|---|---|
-| **Source** | `src/experiments\earth-playground\earth\runtime\state.ts` |
-| **UX surface** | Boot surfaces: what the user sees first on each bundle. |
+|                |                                                           |
+| -------------- | --------------------------------------------------------- |
+| **Source**     | `src/experiments\earth-playground\earth\runtime\state.ts` |
+| **UX surface** | Boot surfaces: what the user sees first on each bundle.   |
 
 ## Members
 
@@ -13,6 +13,7 @@ Mutable engine state for EarthBackground, extracted from
 
 Progress callback signature — label + percent so the loader UI can show
 which asset is streaming and how far along the whole boot is.
+
 - `@param` _label Asset label for the loader text.
 - `@param` percent 0–100 progress through the boot sequence.
 
@@ -161,7 +162,7 @@ RAF handle for the render loop; null while paused/reduced-motion.
 ### `disposed`
 
 Set by destroy(); checked after every await so a mid-load dispose
- aborts scene assembly without touching the GPU again.
+aborts scene assembly without touching the GPU again.
 
 ### `reduced`
 
@@ -170,7 +171,7 @@ Mirrors the store's reduced-motion flag; freezes the loop.
 ### `failed`
 
 Set when bootstrap threw or bailed before the scene assembled — the
- host swaps in the CSS fallback surface instead of a dead canvas.
+host swaps in the CSS fallback surface instead of a dead canvas.
 
 ### `isDarkTheme`
 
@@ -192,11 +193,17 @@ Last quality applied to the renderer — dedupes setPixelRatio.
 
 Stable resize-listener identity so destroy() can removeEventListener.
 
+### `onPrintCapture`
+
+Stable printcapture-listener identity — answers the print adapter's
+frame request with a PNG data URL; removed on destroy.
+
 ### `createEarthState`
 
 Builds the initial null-everything state bag — every GPU handle starts
 null so bootstrap can fill them in any order and dispose can skip
 whatever never got created.
+
 - `@param` canvas The target canvas element.
 - `@param` onReady Callback once the scene is first rendered.
 - `@param` onProgress Boot progress reporter.

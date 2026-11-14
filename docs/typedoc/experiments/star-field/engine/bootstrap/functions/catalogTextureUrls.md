@@ -8,7 +8,7 @@
 function catalogTextureUrls(defs): Set<string>
 ```
 
-Defined in: experiments/star-field/engine/bootstrap.ts:38
+Defined in: experiments/star-field/engine/bootstrap.ts:41
 
 Collects every texture URL a catalog slice + the skybox needs — all
 six body texture slots plus each companion satellite's own photo

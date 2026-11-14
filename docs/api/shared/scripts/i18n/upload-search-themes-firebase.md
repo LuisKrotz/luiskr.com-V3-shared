@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\upload-search-themes-firebase.js`
 
+One-shot push: uploads ONLY the `searchThemes` key of
+
 |                |                                                            |
 | -------------- | ---------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\upload-search-themes-firebase.js` |
@@ -21,4 +23,6 @@ upload-star-field-firebase.js — `firebase database:set <path> <file> -f`).
 
 ### `push`
 
-Writes `data` to `rtdbPath` via the Firebase CLI, through a temp file.
+Writes `data` to `rtdbPath` via the Firebase CLI, through a temp
+file (database:set takes a file path, not stdin). `tag` names the
+scratch file so concurrent pushes can't collide.

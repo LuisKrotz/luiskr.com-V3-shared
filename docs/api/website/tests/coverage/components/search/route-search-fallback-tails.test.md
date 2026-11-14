@@ -16,3 +16,7 @@ db.js replies — exists:false drives the no-snapshot arm.
 ### (module scope)
 
 The fallback snapshot WITHOUT the search node — `fb.x ?? EMPTY` arms.
+
+### `waitFor`
+
+Polls `fn` until it returns truthy — async UI has no fixed settle tick.

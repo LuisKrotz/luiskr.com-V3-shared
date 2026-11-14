@@ -25,3 +25,7 @@ Canvas double whose transferToOffscreen yields a stub offscreen.
 ### `deadLoader`
 
 Artifact loader that always rejects — drives every in-page fallback.
+
+### `WorkerSaved`
+
+Saved globals + window descriptor — env stubs redefine then restore.

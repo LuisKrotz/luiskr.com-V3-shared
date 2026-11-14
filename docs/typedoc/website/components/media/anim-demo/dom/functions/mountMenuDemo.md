@@ -8,7 +8,7 @@
 function mountMenuDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:54
+Defined in: website/components/media/anim-demo/dom.ts:74
 
 Nav menu demo — toggles the open modifier so the staged items play
 the real menu's staggered rise/fade entrance and exit.

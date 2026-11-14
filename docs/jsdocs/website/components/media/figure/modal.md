@@ -27,3 +27,4 @@ a reload would never match an item and reopen the modal.
 Opens media modal.
 
 - `@param` c — the component
+- `@param` originFigure — optional figure the genie measures instead of

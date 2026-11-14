@@ -9,6 +9,10 @@ GLSL sources for SwitchSliderWebGL's animated toggle scene,
 
 ## Members
 
+### `SWITCH_SLIDER_VS`
+
+Fullscreen-quad vertex shader: a_pos in clip space, v_uv 0–1.
+
 ### `SWITCH_SLIDER_FS`
 
 Toggle fragment shader: pill track, knob, per-context accents.

@@ -75,6 +75,18 @@ is the live object reference so `--fix` updates every language at once,
 and `path` is the RTDB location (`translations/<loc>/projects/…`) so
 `--push` can write the same leaf remotely.
 
+### `collect`
+
+`collect` — walks one project's tree: a node carrying
+{src: string, size: array} is a media record; everything else
+recurses by key.
+
+### `visit`
+
+`visit` — finds the `projects` node under any tree position and
+collects each project with its folder prefix; recurses past the
+locale layer.
+
 ### `pickObject`
 
 Picks the first bucket object whose suffix marks a source-fidelity variant.
@@ -82,6 +94,13 @@ Picks the first bucket object whose suffix marks a source-fidelity variant.
 ### `getManifest`
 
 Loads the live bucket listing, falling back to the persisted manifest.
+
+### `main`
+
+`main` — the audit pipeline: collect dedupe'd media entries →
+resolve each to a bucket object → probe dimensions N-at-a-time →
+report diffs/errors → optionally --fix the mirror, --push live,
+and --json a report. Exit 1 on drift (unless --fix healed it).
 
 ### `RTDB_URL`
 

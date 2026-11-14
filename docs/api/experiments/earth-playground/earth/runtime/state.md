@@ -193,6 +193,11 @@ Last quality applied to the renderer — dedupes setPixelRatio.
 
 Stable resize-listener identity so destroy() can removeEventListener.
 
+### `onPrintCapture`
+
+Stable printcapture-listener identity — answers the print adapter's
+frame request with a PNG data URL; removed on destroy.
+
 ### `createEarthState`
 
 Builds the initial null-everything state bag — every GPU handle starts

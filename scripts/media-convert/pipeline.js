@@ -52,6 +52,13 @@ const PDF_DPI = 150
 // ImageMagick's -thumbnail shrink-only, never upscaling small pages.
 const PDF_THUMB_GEOMETRY = '512x512>'
 
+// Poster frame pick — a quarter into the clip (capped at 2s) lands past
+// the fade-in/title-card head most screen recordings open with, where
+// the literal first frame (t=0) is often a blank or near-white page.
+// Clips shorter than 4s still seek inside their own duration.
+const POSTER_SEEK_FRACTION = 0.25
+const POSTER_SEEK_MAX_S = 2
+
 /**
  * `run` — promise wrapper around spawn for one-shot tool calls:
  * stderr is buffered so a non-zero exit surfaces its tail in the
@@ -107,6 +114,53 @@ const probeVideo = async (file) => {
   const [codec = '', w = '', pixFmt = ''] = out.trim().split(',')
 
   return { codec: codec.trim(), width: parseInt(w, 10) || 0, pixFmt: pixFmt.trim() }
+}
+
+/**
+ * `probeDuration` — container duration in seconds for the poster seek
+ * pick. 0 when the probe can't read it — the seek simply stays at the
+ * head and the first-frame fallback still applies.
+ */
+const probeDuration = async (file) => {
+  const p = spawn(
+    'ffprobe',
+    ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', file],
+    { stdio: ['ignore', 'pipe', 'ignore'] }
+  )
+
+  let out = ''
+
+  p.stdout.on('data', (d) => {
+    out += d
+  })
+
+  await new Promise((res) => p.on('close', res))
+
+  return parseFloat(out.trim()) || 0
+}
+
+/**
+ * `grabPoster` — writes `out` as the video's poster frame. Seeks to a
+ * quarter of the clip (capped at POSTER_SEEK_MAX_S) so recordings that
+ * open on a blank/fade-in frame get a poster with real content. If the
+ * seek lands past EOF or yields an empty file — very short clips — the
+ * literal first frame runs as the fallback so a poster always ships.
+ */
+const grabPoster = async (video, out) => {
+  const duration = await probeDuration(video)
+  const seek = Math.min(duration * POSTER_SEEK_FRACTION, POSTER_SEEK_MAX_S)
+
+  if (seek > 0) {
+    try {
+      await run('ffmpeg', ['-y', '-ss', seek.toFixed(2), '-i', video, '-frames:v', '1', out])
+    } catch {
+      /* fall through to the t=0 grab */
+    }
+  }
+
+  if (seek <= 0 || !existsSync(out)) {
+    await run('ffmpeg', ['-y', '-i', video, '-frames:v', '1', out])
+  }
 }
 
 /**
@@ -461,11 +515,12 @@ export async function convertVideo(inFile, outDir, baseName) {
 
   if (webmScaledName) results.push(webmScaledName)
 
-  // create-thumb.sh — first-frame posters of both videos
+  // create-thumb.sh — posters of both videos, captured a quarter into
+  // the clip (capped) so fade-in heads don't ship a blank first frame
   const poster = `${mp4}.jpg`
   const posterScaled = `${scaled}.jpg`
-  await run('ffmpeg', ['-y', '-i', mp4, '-frames:v', '1', poster])
-  await run('ffmpeg', ['-y', '-i', scaled, '-frames:v', '1', posterScaled])
+  await grabPoster(mp4, poster)
+  await grabPoster(scaled, posterScaled)
   results.push(path.basename(poster), path.basename(posterScaled))
 
   // mozjpg-25+blur.sh — blurred low-quality thumbs of both posters

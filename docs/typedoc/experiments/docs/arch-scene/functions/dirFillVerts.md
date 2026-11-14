@@ -8,7 +8,7 @@
 function dirFillVerts(): Float32Array
 ```
 
-Defined in: experiments/docs/arch-scene.ts:622
+Defined in: experiments/docs/arch-scene.ts:630
 
 Filled folder glyph — the classic filled-icon silhouette (rect body
 

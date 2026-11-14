@@ -8,7 +8,7 @@
 function closeIndex(host): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:163
+Defined in: website/components/home/cardstack/interactions.ts:177
 
 Closes the index overlay — a no-op when already closed.
 

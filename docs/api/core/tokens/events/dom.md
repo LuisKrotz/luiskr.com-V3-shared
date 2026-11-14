@@ -112,6 +112,10 @@ Dispatched on a canvas before toDataURL — engines re-render then set detail.da
 
 Dispatched on window before the print walk — views sync printable DOM first.
 
+### `COMMIT`
+
+Dispatched on window when the committed print DOM becomes final — snapshot-ready.
+
 ### `SW_EVENTS`
 
 Frozen service-worker event/state map — registration lifecycle

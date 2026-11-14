@@ -8,7 +8,7 @@
 function deckItems(host): CardStackItem[]
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:47
+Defined in: website/components/home/cardstack/deck.ts:45
 
 Every pushed item fans in the deck — the full portfolio list in order
 (the featured flag is decorative only; no filtering applies).

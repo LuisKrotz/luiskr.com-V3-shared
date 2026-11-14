@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / experiments/star-field/engine/registry
 
@@ -14,6 +14,7 @@
 - [isRegistryId](functions/isRegistryId.md)
 - [parseRegistryId](functions/parseRegistryId.md)
 - [ensureRegistryManifest](functions/ensureRegistryManifest.md)
+- [syncRegistryManifest](functions/syncRegistryManifest.md)
 - [loadRegistryShard](functions/loadRegistryShard.md)
 - [loadRegistryRecord](functions/loadRegistryRecord.md)
 - [streamRegistryShards](functions/streamRegistryShards.md)

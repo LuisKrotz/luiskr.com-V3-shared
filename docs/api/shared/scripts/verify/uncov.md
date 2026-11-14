@@ -1,5 +1,7 @@
 # `shared\scripts\verify\uncov.mjs`
 
+Coverage-gap reporter: for each source file passed on
+
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\verify\uncov.mjs`                   |

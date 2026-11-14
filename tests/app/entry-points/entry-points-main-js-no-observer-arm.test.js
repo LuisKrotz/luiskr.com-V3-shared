@@ -10,6 +10,13 @@ import { describe, test, expect, jest } from '@jest/globals'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { APP_IDS } from '@core/tokens/ids/app.js'
 
+// The intent-gated warm work (lazy dialog chunks + the route-warm chain)
+// arms a 20s fallback timer nothing here awaits — its dynamic imports
+// would land after the jest environment tears down.
+jest.unstable_mockModule('@core/utils/motion/intent.js', () => ({
+  onUserIntent: () => {},
+}))
+
 describe('main.js afterFirstPaint no-observer arm', () => {
   test('absent PerformanceObserver skips straight to the rAF chain', async () => {
     jest.resetModules()

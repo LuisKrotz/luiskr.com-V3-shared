@@ -8,7 +8,7 @@
 function burgerFsSource(hasDeriv): string
 ```
 
-Defined in: core/utils/canvas/widgets/burger-button/shaders.ts:212
+Defined in: core/utils/canvas/widgets/burger-button/shaders.ts:210
 
 Full FS source for the current GL capability set.
 

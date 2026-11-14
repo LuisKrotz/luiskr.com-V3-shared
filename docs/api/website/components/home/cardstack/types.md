@@ -93,6 +93,11 @@ Project name — the paper-burn's raster source.
 
 Full CMS description (`<br>` markup kept for <draw-text>).
 
+### `summary`
+
+First-sentence summary of `body` — the stacked cards' ≤4-line
+mobile description (the desktop column keeps the full text).
+
 ### `href`
 
 Localized project route ('' without a slug).

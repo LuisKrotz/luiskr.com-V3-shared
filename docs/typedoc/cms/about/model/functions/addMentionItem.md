@@ -1,16 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/about/model](../README.md) / addMentionItem
 
 ```ts
-function addMentionItem(host): void;
+function addMentionItem(host): void
 ```
 
-Defined in: cms/about/model.ts:73
+Defined in: cms/about/model.ts:80
 
-Adds mention item.
+Appends a blank mention (description/link/icon) — the three-field row
+renders from these keys via `data-field` binding.
 
 ## Parameters
 
@@ -18,7 +19,7 @@ Adds mention item.
 
 [`CmsAboutEditor`](../../CmsAboutEditor/classes/CmsAboutEditor.md)
 
-— the host component
+— the host component holding `aboutData.mention_items`
 
 ## Returns
 

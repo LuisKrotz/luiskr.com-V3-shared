@@ -335,8 +335,11 @@ const personEntity = () => ({
   ],
 })
 
-/** Cross-reference to the site's Person entity — author/publisher/uploader/creator all resolve to `#person`. */
+/** Cross-reference to the site's Person entity — author/uploader/creator all resolve to `#person`. */
 const PERSON_REF = { '@id': `${SITE_URL}#person` }
+
+/** Cross-reference to the site's Organization entity — Article/WebSite publishers resolve to `#organization` so Google News reads a publisher org. */
+const ORG_REF = { '@id': `${SITE_URL}#organization` }
 
 const websiteEntity = (bcp) => ({
   '@context': SCHEMA_CONTEXT,
@@ -348,7 +351,7 @@ const websiteEntity = (bcp) => ({
     'Front-End Software Engineer specializing in performance, design systems, and animations.',
   image: SHARE_IMAGE,
   inLanguage: bcp,
-  publisher: { '@id': `${SITE_URL}#organization` },
+  publisher: ORG_REF,
 })
 
 /** Ordered crumbs → BreadcrumbList entity (positions are 1-based per spec). */
@@ -747,6 +750,10 @@ export function localize(
   // Canonical + social URLs — attribute-targeted so share.png and JSON-LD
   // image/logo URLs are never rewritten.
   out = out.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${canon}$2`)
+  // Print alternate — the canonical URL carries the print-optimized
+  // form (lazy rcss print tier + print DOM adapter); every localized
+  // document declares the same medium on its own canonical.
+  out = out.replace(/(<link rel="alternate" media="print" href=")[^"]*(")/, `$1${canon}$2`)
   out = out.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${canon}$2`)
   out = out.replace(/(<meta name="twitter:url" content=")[^"]*(")/, `$1${canon}$2`)
 
@@ -1524,7 +1531,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const entities = [
       {
         '@context': SCHEMA_CONTEXT,
-        '@type': 'Article',
+        '@type': SCHEMA_STRINGS.SCHEMA_ARTICLE_TYPE,
         '@id': `${base}#article`,
         isPartOf: {
           '@type': 'WebPage',
@@ -1539,9 +1546,13 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         articleSection: SCHEMA_STRINGS.SCHEMA_ARTICLE_SECTION,
         isAccessibleForFree: true,
         author: PERSON_REF,
-        publisher: PERSON_REF,
+        publisher: ORG_REF,
         image: [cover.source ? (cover.isVideo ? cover.thumb : cover.source) : SHARE_IMAGE],
         description,
+        // Git-derived stamps — NewsArticle's Google News/Discover hooks;
+        // gated on presence so undated legacy nodes never invent one.
+        ...(project.date ? { datePublished: project.date } : {}),
+        ...(project.modified ? { dateModified: project.modified } : {}),
         ...(themes.length ? { keywords: themes.join(', ') } : {}),
       },
     ]
@@ -1631,6 +1642,43 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
         url: `${base}/portfolio/${i.link || i.slug}`,
         name: i.label || i.title || `Item ${idx + 1}`,
         ...(i.image ? { image: enc(`${CDN_BASE}covers/${i.image}.jpg`) } : {}),
+      }))
+
+    return [
+      ...(element.length
+        ? [{ '@context': SCHEMA_CONTEXT, '@type': 'ItemList', itemListElement: element }]
+        : []),
+      ...awardEntities(loc),
+    ]
+  }
+
+  /**
+   * Awards/mentions ItemList — mirrors runtime emitHomeJsonLd so the
+   * static graph carries the same carousel semantics as the rendered
+   * <mentions-deck> strip. `url` is the outbound award link (PDF or
+   * press page), `image` the CDN badge thumbnail, `name` the visible
+   * "date: title" text and `description` the hidden longdesc.
+   */
+  const awardEntities = (loc) => {
+    const items = t(loc, (x) => x.pages?.about?.mention_items) || []
+
+    const visibleOf = (m) => toDescription(String(m?.description || '').split(/<span\b/i)[0], 200)
+
+    const longdescOf = (m) => {
+      const match = String(m?.description || '').match(/<span[^>]*>([\s\S]*?)<\/span>/i)
+
+      return toDescription(match?.[1] || m?.description || '', 500)
+    }
+
+    const element = items
+      .filter((m) => m && m.link)
+      .map((m, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        url: m.link,
+        name: visibleOf(m) || `Item ${idx + 1}`,
+        ...(m.media?.path ? { image: enc(`${CDN_BASE}${m.media.path}`) } : {}),
+        ...(longdescOf(m) ? { description: longdescOf(m) } : {}),
       }))
 
     return element.length
@@ -1930,7 +1978,17 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       .join('')
 
     const mentions = (about.mention_items || [])
-      .map((m) => `<li><a href="${esc(m.link || '#')}">${m.description || ''}</a></li>`)
+      .map((m) => {
+        // Badge thumbnail — the parked mirror of the deck card image so
+        // Google Images and AI agents see the asset alongside the row's
+        // text (alt = the visible date+title, longdesc stays in the
+        // sr-only span inside m.description markup).
+        const img = m.media?.path
+          ? `<img src="${esc(enc(`${CDN_BASE}${m.media.path}`))}" alt="${esc(toDescription(String(m.description || '').split(/<span\b/i)[0], 200))}" loading="lazy" decoding="async"${dimsAttr(m.media.width, m.media.height)}>`
+          : ''
+
+        return `<li><a href="${esc(m.link || '#')}">${img}${m.description || ''}</a></li>`
+      })
       .join('')
 
     const mentionsBlock = about.mentions
@@ -1960,6 +2018,16 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
     const folder = project.folder || ''
     const prefix = locPrefixOf(loc)
     const parts = [`<main><h1>${esc(project.title || slug)}</h1>`]
+
+    // Visible publication stamp — Google's date-trust guidance asks the
+    // declared datePublished to appear on the page itself; the <time>
+    // machine-readable datetime carries the git-derived ISO the
+    // NewsArticle + article:published_time metas declare.
+    if (project.date) {
+      const day = String(project.date).slice(0, 10)
+
+      parts.push(`<p><time datetime="${esc(String(project.date))}">${esc(day)}</time></p>`)
+    }
 
     if (project.cover?.src) parts.push(mediaFigure(folder, project.cover, ''))
 
@@ -3138,6 +3206,9 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           alt: slugPath('about'),
           keywords: pageKeywords(loc, 'about'),
           content: homeContent(loc),
+          // The parked mentions <ul> below gets a matching ItemList so
+          // the awards surface reads as a list to Google's parser.
+          entities: awardEntities(loc),
           // ProfilePage — Google's profile rich-result contract: the page
           // is ABOUT the site's Person entity and names it as mainEntity,
           // and the og:type=profile card carries profile:* metas.
@@ -3158,6 +3229,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
           alt: slugPath('contact'),
           keywords: pageKeywords(loc, 'contact') || pageKeywords(loc, 'about'),
           content: homeContent(loc),
+          entities: awardEntities(loc),
         },
         {
           path: `${prefix}${slugs.privacy}`,
@@ -3427,13 +3499,18 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       const description = projectDescOf(loc, slug)
 
       // Article card metas — the og:type=article declaration plus the
-      // section/tag rows mirror the JSON-LD Article. No publish/modified
-      // timestamp is emitted because the source has no verified date.
+      // section/tag rows mirror the JSON-LD NewsArticle, and the
+      // git-derived stamps emit article:published_time/modified_time so
+      // the Open Graph mirror carries the same verified date set.
+      const projectNode = t(loc, (x) => x.projects?.[slug]) || {}
+
       const projectCard = {
         ogType: SCHEMA_STRINGS.SCHEMA_OG_ARTICLE,
         articleMeta: {
           section: SCHEMA_STRINGS.SCHEMA_ARTICLE_SECTION,
-          tags: t(loc, (x) => x.projects?.[slug]?.[SEARCH_THEMES_KEY]) || undefined,
+          tags: projectNode[SEARCH_THEMES_KEY] || undefined,
+          published: projectNode.date || undefined,
+          modified: projectNode.modified || undefined,
         },
       }
 
@@ -3676,7 +3753,7 @@ export async function buildLocalePages(distDir = path.join(ROOT, 'dist'), templa
       description,
       inLanguage: bcp,
       isPartOf: { '@id': `${SITE_URL}#website` },
-      publisher: { '@id': `${SITE_URL}#organization` },
+      publisher: ORG_REF,
       primaryImageOfPage: {
         '@type': 'ImageObject',
         url: pageImage,
@@ -4171,6 +4248,8 @@ const META_FILE_REWRITES = Object.freeze([
 const STATIC_REWRITES = Object.freeze([
   { source: '/robots.txt', destination: '/meta/robots.txt' },
   { source: '/sitemap.xml', destination: '/meta/sitemap.xml' },
+  // Google News sitemap — fresh (≤48h) project articles only.
+  { source: '/sitemap-news.xml', destination: '/meta/sitemap-news.xml' },
   { source: '/urllist.txt', destination: '/meta/urllist.txt' },
   { source: '/llms.txt', destination: '/meta/llms.txt' },
   { source: '/ai-catalog.json', destination: '/meta/ai-catalog.json' },

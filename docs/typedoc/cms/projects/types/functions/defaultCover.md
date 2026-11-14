@@ -8,7 +8,7 @@
 function defaultCover(label?): CmsMediaItem
 ```
 
-Defined in: cms/projects/types.ts:56
+Defined in: cms/projects/types.ts:69
 
 Default cover placeholder used by new/legacy projects.
 

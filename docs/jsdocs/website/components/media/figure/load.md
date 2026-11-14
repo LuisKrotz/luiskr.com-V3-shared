@@ -16,6 +16,18 @@ for videos (full size + VIDEO_SCALE'd fallback — the browser walks the
 <source> list until one resolves, so webm-first means "use webm when it
 exists, mp4 otherwise"), or the thumb URL for images.
 
+### `refreshManifestMedia`
+
+Re-resolves the media's URL matrix once the bucket manifest lands and
+patches the LIVE shadow DOM — never a wholesale _updateDom, which would
+replace the video element and orphan its scoped listeners, pooled
+viewport observer, and already-attached <source> children. Proven
+description tracks + poster attach directly onto the live video; the
+image thumb swaps to its manifest-proven URL when the in-flight pass
+had fallen back to the source original.
+
+- `@param` fig The mounted media figure.
+
 ### `mediaPlaceholder`
 
 Inline SVG placeholder — a URL-encoded empty <svg> carrying the media's
@@ -105,6 +117,15 @@ plain full-dimension path unchanged.
 - `@param` srcW The rung's intrinsic width (its probe's naturalWidth).
 - `@param` srcH The rung's intrinsic height.
 - `@returns` An object URL bounded to the rendered box, or `url`.
+
+### `sweepDomBlobs`
+
+Releases every tracked object URL no live high layer still
+references. Revoking a blob whose <img> fetch is still in flight
+hard-fails it (ERR_FILE_NOT_FOUND in the console audit), so a blob
+only dies once its layer retired — already-painted imgs keep their
+decoded bitmap either way (revocation blocks new fetches, not the
+rendered frame).
 
 ### `publishDom`
 

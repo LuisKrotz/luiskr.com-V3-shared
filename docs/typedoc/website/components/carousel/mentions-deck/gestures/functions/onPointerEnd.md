@@ -8,7 +8,7 @@
 function onPointerEnd(host, e): void
 ```
 
-Defined in: website/components/carousel/mentions-deck/gestures.ts:154
+Defined in: website/components/carousel/mentions-deck/gestures.ts:166
 
 Pointer-up/cancel — settles the gesture. Drag fraction + flick velocity
 decide: advance one card in the drag direction or snap the strip back to

@@ -75,3 +75,9 @@ fails. Every other status is final and recorded.
 Param form — pings every URL through the GET param endpoint.
 The concurrency pool is intentionally iterative, not a traversal:
 it drains a flat inventory in bounded batches (legitimate per rule 20).
+
+### (module scope)
+
+`run` — the submission pipeline: resolve flags → load inventory →
+verify the key file → run the selected form(s) → write the report.
+No flag = both forms (json AND param for every route).

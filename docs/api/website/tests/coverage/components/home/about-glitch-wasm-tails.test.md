@@ -9,6 +9,15 @@ Coverage tail for components/home/about/glitch/wasm.ts —
 
 ## Members
 
+### `mockGpu`
+
+Mutable mock-state flags — the module mocks below read these per-call,
+so tests flip them to steer GPU-present/mount-result/decode branches.
+
+### `flush`
+
+Timer flush — mounted render queues need real timers past microtasks.
+
 ### `makeSession`
 
 Builds a minimal live session + host pair.

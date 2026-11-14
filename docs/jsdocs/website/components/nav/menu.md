@@ -53,9 +53,17 @@ Persistent menu background canvas.
 
 True while the nav floats over a dark band (contrast variant).
 
+### (module scope)
+
+The shadow root — read for the focused element during close-restore.
+
 ### `$`
 
 Shadow-scoped querySelector.
+
+### (module scope)
+
+Shadow-scoped querySelectorAll (live menu item list) — absent on minimal stub hosts, treated as no items.
 
 ### `_updateDom`
 
@@ -65,12 +73,15 @@ Triggers a template re-render.
 
 The burger icon's canvas element — lazily created once and kept for
 the component's lifetime so its WebGL context is never churned by
-re-renders (canvas recreation would force a fresh GL context). Each
-call also re-syncs the on-dark class and aria-label/expanded since
-those change without recreating the element.
+re-renders (canvas recreation would force a fresh GL context).
+Purely presentational: pointer presses reach its widget click
+listener, but keyboard focus and the a11y tree belong to the real
+<button> layered under it — a focusable overlay over a focusable
+button gave the chip two tab stops, and the canvas's opacity-0 rest
+state painted a ring around nothing. Each call still re-syncs the
+on-dark class since it changes without recreating the element.
 
 - `@param` host AppNav instance.
-- `@param` label aria-label for the burger (localized "menu").
 - `@returns` The persistent canvas element.
 
 ### `navMenuCanvas`
@@ -114,3 +125,27 @@ class (CSS plays the item fade-out), releases the contour field so it
 dissolves back to center, then after MENU_CLOSE_DURATION destroys
 all three GL widgets + their canvases and re-renders the closed nav.
 The _menuClosing guard makes double-close (Esc + click) a no-op.
+
+### `navMenuItems`
+
+Live menu item anchors inside the open overlay (empty while closed).
+
+### `focusNavMenuItem`
+
+Moves focus to a menu item by index, wrapping past the ends. No-op
+while the overlay is closed — the items only exist in the open
+render, so an empty list is the whole guard.
+
+- `@param` host AppNav instance.
+- `@param` idx Target item index (negative/over-length values wrap).
+
+### `navMenuKeyDown`
+
+Arrow/Home/End roving inside the open overlay — Up/Left step back,
+Down/Right step forward (both wrap), Home/End jump to the ends. The
+anchor currently holding focus is the step origin; focus anywhere
+else (burger, document body) starts the wrap from the edges.
+
+- `@param` host AppNav instance.
+- `@param` e The keydown event routed by the component's window listener.
+- `@returns` True when the key was consumed — callers preventDefault only

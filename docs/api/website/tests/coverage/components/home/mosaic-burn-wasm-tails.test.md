@@ -25,6 +25,22 @@ The fake wasm widget — records every kind-specific setter call.
 
 Mutable particle count the fake sim reports.
 
+### `BURN_SEL`
+
+Selector for the burn-overlay element the assertions query.
+
+### `BURN_CLASSES`
+
+Class-name bundle the raw burn helpers expect — mirrors the production map.
+
+### `ITEMS`
+
+Single-card fixture — the burn helpers only need one item to act on.
+
+### `flush`
+
+Generous flush — mounted render queues need real timers past microtasks.
+
 ### `seedSessionData`
 
 Seeds a glyph + ink column so packLetters/set_ink run their arms.

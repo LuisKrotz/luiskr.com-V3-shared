@@ -403,13 +403,26 @@ Resize listener to detach on destroy.
 
 ---
 
+### onPrintCapture
+
+```ts
+onPrintCapture: ((e) => void) | null;
+```
+
+Defined in: experiments/star-field/engine/types.ts:571
+
+printcapture listener — answers the print adapter's frame request
+with a PNG data URL; detached on destroy.
+
+---
+
 ### onPointerDown
 
 ```ts
 onPointerDown: ((e) => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:570
+Defined in: experiments/star-field/engine/types.ts:573
 
 Pointer listeners to detach on destroy.
 
@@ -421,7 +434,7 @@ Pointer listeners to detach on destroy.
 onPointerMove: ((e) => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:571
+Defined in: experiments/star-field/engine/types.ts:574
 
 ---
 
@@ -431,7 +444,7 @@ Defined in: experiments/star-field/engine/types.ts:571
 onPointerUp: ((e) => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:572
+Defined in: experiments/star-field/engine/types.ts:575
 
 ---
 
@@ -441,7 +454,7 @@ Defined in: experiments/star-field/engine/types.ts:572
 onWheel: ((e) => void) | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:573
+Defined in: experiments/star-field/engine/types.ts:576
 
 ---
 
@@ -456,7 +469,7 @@ downXY:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:575
+Defined in: experiments/star-field/engine/types.ts:578
 
 last pointer-down position for click-vs-drag discrimination.
 
@@ -468,7 +481,7 @@ last pointer-down position for click-vs-drag discrimination.
 pickX: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:582
+Defined in: experiments/star-field/engine/types.ts:585
 
 Pending hover-pick position — the freshest coalesced pointer sample.
 High-rate mice (1000Hz+) fire several pointermoves per frame; the
@@ -483,7 +496,7 @@ frame against the latest pair, never once per event.
 pickY: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:583
+Defined in: experiments/star-field/engine/types.ts:586
 
 ---
 
@@ -493,7 +506,7 @@ Defined in: experiments/star-field/engine/types.ts:583
 pickRaf: number | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:585
+Defined in: experiments/star-field/engine/types.ts:588
 
 Non-null while a per-frame pick tick is queued — dedupes rAF arms.
 
@@ -505,7 +518,7 @@ Non-null while a per-frame pick tick is queued — dedupes rAF arms.
 viewW: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:594
+Defined in: experiments/star-field/engine/types.ts:597
 
 Cached canvas box in CSS px — refreshed by `handleStarResize`. The
 per-frame projection (`anchorScreenPos`/`worldScreenPos`) and
@@ -522,7 +535,7 @@ back to a one-time live read).
 viewH: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:595
+Defined in: experiments/star-field/engine/types.ts:598
 
 ---
 
@@ -532,7 +545,7 @@ Defined in: experiments/star-field/engine/types.ts:595
 lastT: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:597
+Defined in: experiments/star-field/engine/types.ts:600
 
 Last tick timestamp for dt-based animation.
 
@@ -544,7 +557,7 @@ Last tick timestamp for dt-based animation.
 t: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:599
+Defined in: experiments/star-field/engine/types.ts:602
 
 Elapsed scene time (seconds) — drives orbits/spins.
 
@@ -558,7 +571,7 @@ predictor:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:601
+Defined in: experiments/star-field/engine/types.ts:604
 
 ML frame-time predictor — drives adaptive pixel-ratio quality.
 
@@ -570,7 +583,7 @@ ML frame-time predictor — drives adaptive pixel-ratio quality.
 appliedQuality: number
 ```
 
-Defined in: experiments/star-field/engine/types.ts:603
+Defined in: experiments/star-field/engine/types.ts:606
 
 Last quality applied to the renderer — dedupes setPixelRatio calls.
 
@@ -582,7 +595,7 @@ Last quality applied to the renderer — dedupes setPixelRatio calls.
 hoverId: string | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:605
+Defined in: experiments/star-field/engine/types.ts:608
 
 Camera hover state — last picked body id for the HUD.
 
@@ -601,7 +614,7 @@ hint:
   | null;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:616
+Defined in: experiments/star-field/engine/types.ts:619
 
 Navigator-hover position hint — while the pointer (or focus) rests
 on a catalog row the engine reports the body's projected screen
@@ -620,7 +633,7 @@ frame). Null when no nav row is hovered; takes precedence over
 selectedId: string | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:622
+Defined in: experiments/star-field/engine/types.ts:625
 
 Selected body id (panel open).
 
@@ -632,7 +645,7 @@ Selected body id (panel open).
 followId: string | null
 ```
 
-Defined in: experiments/star-field/engine/types.ts:630
+Defined in: experiments/star-field/engine/types.ts:633
 
 Camera-follow anchor — which catalog id the camera rides with when
 no fly tween runs. Selections set it to the picked body; the solar
@@ -648,7 +661,7 @@ dossier selection. Null = free camera.
 optional onReady?: () => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:632
+Defined in: experiments/star-field/engine/types.ts:635
 
 Lifecycle callbacks from the host.
 
@@ -664,7 +677,7 @@ Lifecycle callbacks from the host.
 optional onProgress?: SFProgressFn;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:633
+Defined in: experiments/star-field/engine/types.ts:636
 
 ---
 
@@ -674,7 +687,7 @@ Defined in: experiments/star-field/engine/types.ts:633
 optional onSelect?: SFBodyFn;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:634
+Defined in: experiments/star-field/engine/types.ts:637
 
 ---
 
@@ -684,7 +697,7 @@ Defined in: experiments/star-field/engine/types.ts:634
 optional onApproach?: SFBodyFn;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:635
+Defined in: experiments/star-field/engine/types.ts:638
 
 ---
 
@@ -694,7 +707,7 @@ Defined in: experiments/star-field/engine/types.ts:635
 optional onHover?: (bodyId) => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:636
+Defined in: experiments/star-field/engine/types.ts:639
 
 #### Parameters
 
@@ -714,7 +727,7 @@ Defined in: experiments/star-field/engine/types.ts:636
 optional onHoverMove?: (bodyId, x, y, edge?, angle?) => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:645
+Defined in: experiments/star-field/engine/types.ts:648
 
 Per-frame hover tracking — fires every tick while a body is hovered
 with its projected canvas-space pixel position, so the tooltip and
@@ -757,7 +770,7 @@ degrees for the leader-line arrow.
 optional onLost?: () => void;
 ```
 
-Defined in: experiments/star-field/engine/types.ts:647
+Defined in: experiments/star-field/engine/types.ts:650
 
 Fires once when a frame throws — host swaps to the 2D fallback.
 

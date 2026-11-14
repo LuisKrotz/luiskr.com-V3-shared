@@ -8,7 +8,7 @@
 function attachMesh(host): boolean
 ```
 
-Defined in: website/components/home/about/mesh.ts:125
+Defined in: website/components/home/about/mesh.ts:180
 
 Arms the mesh on the portrait wrapper: creates the canvas, sizes it to
 the wrapper box (×1.9 bleed for the outer ring + lines), and starts the

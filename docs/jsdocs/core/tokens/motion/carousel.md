@@ -17,8 +17,10 @@ Autoplay interval in milliseconds before advancing to next slide
 
 Clone→real teleport watchdog (ms). The scroll spring's settle
 callback normally fires the invisible clone→twin jump; this timer
-only covers rAF starvation (hidden tab) — sized past the spring's
-typical settle so a slow frame cadence can't pop mid-flight.
+is the last-resort cover for a dead rAF loop (hidden tab) — sized
+past CAROUSEL_SPRING.MAX_MS so a merely-slow frame cadence lets the
+spring's own force-settle fire the teleport instead of cutting the
+flight mid-travel (a visible snap across the strip).
 
 ### `NAVIGATION_SETTLE_DELAY`
 
@@ -126,11 +128,12 @@ px delta below which ResizeObserver width reports are ignored — sub-pixel RO n
 
 ### `DESKTOP_SCALE_STEPS`
 
-Desktop downscale ladder for carousel items — steps compound on the
-running width while each result still clears DESKTOP_SCALE_MIN_W;
-the first step that would drop it under the floor stops the walk
-(smaller render = denser pixels). Mobile (≤ CAROUSEL_MAX_W) is
-untouched.
+Desktop downscale ladder for carousel items — ÷2 always applies
+(retina density), then ÷3 → ÷4 → ÷5 compound on the running width
+only while the slide is still at least viewport-wide; the first
+step that would drop it under DESKTOP_SCALE_MIN_W also stops the
+walk. A 3840px source lands ~640 wide at 1920px viewport, a 1920px
+source ~960. Mobile (≤ CAROUSEL_MAX_W) is untouched.
 
 ### `DESKTOP_SCALE_MIN_W`
 
@@ -183,14 +186,6 @@ in media-figure/_placeholder.scss.
 ### `HALF_NATURAL_SCALE`
 
 Scale applied to source dims when projecting the half-capped strip height
-
-### `MULTI_FIT_MIN_VW`
-
-Minimum viewport (px) at which >2-item groups may also settle into
-the centered side-by-side row — on ≥3840 ultrawide a handful of
-slides can't fill the track, so when the whole set projects inside
-the host the controls-free row wins ("fewer items than the
-viewport" case).
 
 ### `ASPECT_RATIO_16_9`
 

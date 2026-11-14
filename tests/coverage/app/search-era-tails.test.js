@@ -5,14 +5,23 @@
  * open-preferences-modal listener's pref-null/pref-present branches in
  * boot.ts.
  */
-import { jest } from '@jest/globals'
+import { afterEach, jest } from '@jest/globals'
 import { VIEW_TAGS } from '@core/tokens/elements/views.js'
 import { HTML_TAGS } from '@core/tokens/elements/html.js'
 import { APP_EVENTS } from '@core/tokens/events/app.js'
 import { COMPONENT_TAGS } from '@core/tokens/elements/components.js'
+import { POINTER_EVENTS } from '@core/tokens/events/dom.js'
 
 const { flipAppView } = await import('@/app/view.js')
 const { mountAppShell } = await import('@/app/boot.js')
+
+afterEach(async () => {
+  // mountAppShell arms intent-gated lazy component imports — release the
+  // gate so they land inside this suite instead of racing a later file's
+  // module registry or the quiet-window timer.
+  window.dispatchEvent(new window.Event(POINTER_EVENTS.POINTERDOWN))
+  await new Promise((r) => setTimeout(r, 10))
+})
 
 describe('view search tail', () => {
   test('search view chunk imports and instant-swaps on an empty outlet', async () => {

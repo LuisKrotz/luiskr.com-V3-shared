@@ -29,6 +29,11 @@ profile:* meta values for the about route's og:type=profile card.
 
 Article.articleSection + article:section for every portfolio page.
 
+### `SCHEMA_ARTICLE_TYPE`
+
+JSON-LD @type for portfolio project articles — NewsArticle carries the
+git-derived date set that makes them Google News/Discover-eligible.
+
 ### `SCHEMA_ARTICLE_PUBLISHED_TIME`
 
 Open Graph article timestamp metadata keys (used only with verified dates).

@@ -1,10 +1,10 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/consts](../README.md) / JobStatus
 
-Defined in: cms/media-convert/consts.ts:87
+Defined in: cms/media-convert/consts.ts:91
 
 Job-status payload polled from GET /jobs/:id.
 
@@ -16,11 +16,11 @@ Job-status payload polled from GET /jobs/:id.
 optional status?: string;
 ```
 
-Defined in: cms/media-convert/consts.ts:89
+Defined in: cms/media-convert/consts.ts:93
 
 Server phase string ('running'|'uploading'|terminal).
 
-***
+---
 
 ### error?
 
@@ -28,11 +28,11 @@ Server phase string ('running'|'uploading'|terminal).
 optional error?: string;
 ```
 
-Defined in: cms/media-convert/consts.ts:91
+Defined in: cms/media-convert/consts.ts:95
 
 Server-side error message when failed.
 
-***
+---
 
 ### current?
 
@@ -40,11 +40,11 @@ Server-side error message when failed.
 optional current?: string;
 ```
 
-Defined in: cms/media-convert/consts.ts:93
+Defined in: cms/media-convert/consts.ts:97
 
 Currently-processing file path (progress display).
 
-***
+---
 
 ### done?
 
@@ -52,11 +52,11 @@ Currently-processing file path (progress display).
 optional done?: number;
 ```
 
-Defined in: cms/media-convert/consts.ts:95
+Defined in: cms/media-convert/consts.ts:99
 
 Files completed so far.
 
-***
+---
 
 ### total?
 
@@ -64,11 +64,11 @@ Files completed so far.
 optional total?: number;
 ```
 
-Defined in: cms/media-convert/consts.ts:97
+Defined in: cms/media-convert/consts.ts:101
 
 Total files in the job.
 
-***
+---
 
 ### results?
 
@@ -76,6 +76,6 @@ Total files in the job.
 optional results?: JobResult[];
 ```
 
-Defined in: cms/media-convert/consts.ts:99
+Defined in: cms/media-convert/consts.ts:103
 
 Per-file results once the job settles.

@@ -8,7 +8,7 @@
 function syncDocumentHead(to): void
 ```
 
-Defined in: core/router/navigate.ts:89
+Defined in: core/router/navigate.ts:90
 
 document.title + canonical <link> sync for the resolved route — extended
 to the social/url mirrors (og:title, twitter:title, DC.Title, og:url,

@@ -421,13 +421,38 @@ describe('SEO route parity', () => {
     }
   })
 
-  test('sitemaps omit synthetic modification dates and unknown video facts', () => {
+  test('sitemaps carry only verified modification dates and no unknown video facts', () => {
+    // The legitimate <lastmod> set — every value must be the git-derived
+    // stamp written onto the slug's database.json node (modified, or
+    // date when the project never changed). Synthetic dates stay banned.
+    const db = JSON.parse(read(path.join(ROOT_DIR, 'database.json')))
+    const stamps = new Map(
+      Object.entries(db.translations?.en?.projects || {}).map(([slug, node]) => [
+        slug,
+        node?.modified || node?.date,
+      ])
+    )
+
     for (const locale of ['en', ...NON_EN]) {
       const sitemap = read(path.join(META_DIR, `sitemap-${locale}.xml`))
 
-      expect(sitemap).not.toMatch(/<lastmod>/)
       expect(sitemap).not.toMatch(/<video:duration>/)
       expect(sitemap).not.toMatch(/<video:publication_date>/)
+
+      // Every lastmod must sit on a portfolio URL whose slug carries the
+      // exact stamp — a dated non-portfolio route or a mismatched value
+      // means an invented date leaked in.
+      let dated = 0
+
+      for (const m of sitemap.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)) {
+        const slug = m[1].match(/\/portfolio\/([^/<]+)/)?.[1]
+
+        dated += 1
+        expect(slug).toBeTruthy()
+        expect(m[2]).toBe(stamps.get(slug))
+      }
+
+      expect(dated).toBeGreaterThan(0)
     }
 
     expect(read(path.join(META_DIR, 'sitemap.xml'))).not.toMatch(/<lastmod>/)

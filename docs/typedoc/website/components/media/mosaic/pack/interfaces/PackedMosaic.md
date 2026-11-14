@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/mosaic/pack](../README.md) / PackedMosaic
 
-Defined in: website/components/media/mosaic/pack.ts:45
+Defined in: website/components/media/mosaic/pack.ts:57
 
 Packed wall result — per-tile style objects plus the wall height (px).
 
@@ -16,7 +16,7 @@ Packed wall result — per-tile style objects plus the wall height (px).
 tiles: MosaicTileStyle[];
 ```
 
-Defined in: website/components/media/mosaic/pack.ts:46
+Defined in: website/components/media/mosaic/pack.ts:58
 
 ---
 
@@ -26,4 +26,4 @@ Defined in: website/components/media/mosaic/pack.ts:46
 height: number
 ```
 
-Defined in: website/components/media/mosaic/pack.ts:47
+Defined in: website/components/media/mosaic/pack.ts:59

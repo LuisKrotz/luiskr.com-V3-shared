@@ -8,7 +8,7 @@
 function mountArchScene(canvas, roots, onPick, onLost?, onReady?): ArchSceneHandle | null
 ```
 
-Defined in: experiments/docs/arch-scene.ts:2157
+Defined in: experiments/docs/arch-scene.ts:2181
 
 Dual-path mount — the scene3d (rust/WebGPU) engine takes the scene
 on capable hardware and the three.js arm remains the fallback for

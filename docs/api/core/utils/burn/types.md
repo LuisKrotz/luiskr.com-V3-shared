@@ -106,6 +106,14 @@ Pre-rasterized "paper" — the title text as a drawable image.
 
 Canvas box in device px.
 
+### `dpr`
+
+Device-pixel ratio the raster was laid out at (capped by _DPR_CAP).
+Particle sizes are authored in device px but must read as a fixed
+CSS-px size on screen — drawParticles multiplies by this so an
+ember is ~2 CSS px on a dpr-1 desktop AND a dpr-3 phone instead of
+shrinking to an invisible sub-pixel speck on high-density screens.
+
 ### `paperX`
 
 Paper (title box) offset inside the canvas — the pad bleeds embers.
@@ -166,12 +174,14 @@ compositing never collides with particles.
 
 ### `titleEl`
 
-Live DOM nodes — re-measured every frame. The card's expand ease
-animates the h2's `cqw` font-size and flex-end position for ~0.42s;
-rasterizing once at arm time froze a mid-transition font into the
-paper, which rendered as "the effect changed the font size". The
-paper re-rasterizes whenever the DOM box moves so the burning copy
-is always pixel-identical to what the DOM would show.
+Live DOM nodes — measured in layout space at arm time, then only
+for the knit font signature (dir −1 re-rasters while the expand
+ease still settles letterforms). The canvas anchors once: hosts
+reflow around the burn (dealt-pile heights, typing-grown fronts)
+and a chasing anchor reads as the title sliding — the DOM ink is
+hidden anyway, so the raster stays where the glyphs caught fire.
+`ITEM_BURNED` hosts opt out of the freeze — their CSS relocates
+the title box at the consume beat and the canvas follows.
 
 ### `ink`
 

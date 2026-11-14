@@ -74,7 +74,9 @@ geometry + channel ghosts are rebuilt against the new image node.
 
 ### `tick`
 
-Self-maintaining tick — always running while mounted:
+Self-maintaining tick — always running while mounted (queued through
+framePool, so the whole chain starves during scroll flings and resumes
+on settle):
 no session → retry the arm at ~4 Hz (covers lazy image decode
 and the first render landing before data).
 session detached→ heal against the fresh wrapper/img (re-render-safe).

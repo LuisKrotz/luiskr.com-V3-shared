@@ -14,6 +14,6 @@ const SW_STRINGS: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/events/dom.ts:202
+Defined in: core/tokens/events/dom.ts:204
 
 ServiceWorker state strings + registration plumbing constants.

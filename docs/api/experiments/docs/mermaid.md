@@ -13,10 +13,28 @@ Diagram rendering for docs payloads — markdown
 
 Default font size when the computed style is unparsable.
 
+### `PRINT_ROTATE_RATIO`
+
+Aspect ratio (w/h) at which a print diagram earns the rotated slot —
+anything wider reads better quarter-turned to full page height than
+shrunk to the portrait content width.
+
 ### `EDGE_RE`
 
 Cheap source scanners feeding the diagram-cost model — counts of each
 structural feature, not a parse (the wasm engine still does that).
+
+### `NODE_RE`
+
+Node-shape opener — any `[`, `(`, or `{` begins a node declaration.
+
+### `NEST_RE`
+
+Nested subgraph keyword — bumps the bracket-depth heuristic.
+
+### `SELF_RE`
+
+Self-edge — `A -> A` adds visual noise the layout already implies.
 
 ### `countMatches`
 
@@ -63,3 +81,27 @@ nodes are marked (`data-processed`), so later payloads don't
 re-render earlier diagrams.
 
 - `@param` container The docs-content box holding rendered payload HTML.
+
+### `printThemeJson`
+
+Paper-palette theme JSON for `render_diagram` — the print mirror's
+diagrams must read as press ink on paper, not the screen's
+dark-on-dark scheme: foreground and lines go `--print-ink`, node
+fills go `--print-paper`, and the accent stays the project accent
+so colored highlights survive in grayscale-optional output. Colors
+resolve from `documentElement` (the print vars are root-level token
+declarations, resolvable outside print media).
+
+- `@param` style Computed style of the block — carries the doc's font.
+- `@returns` JSON string for the wasm theme argument.
+
+### `renderMermaidBlocksForPrint`
+
+Re-renders every `.docs-mermaid` block inside the print mirror with
+the paper theme — the mirror clone carries either the screen-palette
+SVG (processed blocks, source stashed in `data-mermaid-src`) or the
+raw source text (a print fired mid-render), and neither belongs on
+paper as-is. Blocks whose source can't render keep whatever they
+cloned — the escaped source text still reads as documentation.
+
+- `@param` container The `article.reader-content` mirror (or clone) to

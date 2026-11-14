@@ -8,9 +8,11 @@
 function tick(host): void
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:265
+Defined in: website/components/home/about/glitch/session.ts:269
 
-Self-maintaining tick — always running while mounted:
+Self-maintaining tick — always running while mounted (queued through
+framePool, so the whole chain starves during scroll flings and resumes
+on settle):
 no session → retry the arm at ~4 Hz (covers lazy image decode
 and the first render landing before data).
 session detached→ heal against the fresh wrapper/img (re-render-safe).

@@ -18,3 +18,9 @@ the token contract immutable at runtime.
 ### `CAROUSEL_DOT_NUM`
 
 Visible slide number inside each dot — IBM input_label_visible.
+
+### `CAROUSEL_SLIDE_CLONE_MARK`
+
+Bare clone modifier — classList.contains() probe for "is this child
+a clone" in the wrap detector (the _\_CLONE_ tokens above are
+multi-class className strings, not single classes).

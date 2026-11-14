@@ -21,7 +21,12 @@ names the failure. Returns the raw text when it isn't wrapped JSON.
 
 ### `ViewAdminLogin`
 
-The ViewAdminLogin — admin login class.
+<view-admin-login> — the CMS auth gate: a single Google OAuth card.
+`connectedCallback` replays any OAuth failure persisted across the
+redirect (storage-partitioned sessions and App-Check rejections get
+tailored messages instead of a silent loop); `handleGoogleLogin`
+re-fires the popup with a re-entrancy guard and suppresses the
+user-cancelled codes.
 
 ### (module scope)
 

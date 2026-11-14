@@ -8,7 +8,7 @@
 function dropSession(host, s): void
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:216
+Defined in: website/components/home/about/glitch/session.ts:218
 
 Tears a session down in place — stops the loop, destroys the wasm
 widget, disconnects the observer, removes the overlay and un-parks it

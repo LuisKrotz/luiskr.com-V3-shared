@@ -8,6 +8,7 @@
 const PRINT_EVENTS: Readonly<{
   CAPTURE: 'printcapture'
   PREPARE: 'printprepare'
+  COMMIT: 'printcommit'
 }>
 ```
 

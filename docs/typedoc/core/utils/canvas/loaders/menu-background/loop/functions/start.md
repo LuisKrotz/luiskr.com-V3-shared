@@ -8,7 +8,7 @@
 function start(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:32
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:34
 
 Begins the render loop on menu open: resamples theme inks, sizes the
 buffer, attaches the ResizeObserver, and either starts RAF or — under

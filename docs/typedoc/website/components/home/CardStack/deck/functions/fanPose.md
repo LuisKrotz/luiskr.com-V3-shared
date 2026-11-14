@@ -8,7 +8,7 @@
 function fanPose(s, len, w, tier, peek?): CardPose
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:109
+Defined in: website/components/home/cardstack/deck.ts:107
 
 The coverflow pose for signed offset `s` (see CardStackTier for the
 full model). With a = |s|, the near term min(a,1) carries the big

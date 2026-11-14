@@ -8,7 +8,7 @@
 function mountProgressBarDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:181
+Defined in: website/components/media/anim-demo/dom.ts:180
 
 Route progress-bar demo — walks the staged bar through the real
 nprogress choreography: crawl (active) → complete (done) → reset,

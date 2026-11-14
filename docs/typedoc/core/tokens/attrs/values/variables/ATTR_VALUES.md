@@ -23,6 +23,10 @@ const ATTR_VALUES: Readonly<{
   HTTP: 'http'
   LAZY: 'lazy'
   OFF: 'off'
+  HORIZONTAL: 'horizontal'
+  CURRENT_COLOR: 'currentColor'
+  COVER: 'cover'
+  SCALE_DOWN: 'scale-down'
 }>
 ```
 

@@ -8,7 +8,7 @@
 function renderMediaMosaic(host): Element
 ```
 
-Defined in: website/components/media/mosaic/render.tsx:71
+Defined in: website/components/media/mosaic/render.tsx:77
 
 JSX template. Compact (≤640px) renders the carousel exactly as the
 internals strip does today — the element is configured by the facade

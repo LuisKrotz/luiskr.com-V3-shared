@@ -606,6 +606,11 @@ Reduced-motion flag — pauses the RAF loop.
 
 Resize listener to detach on destroy.
 
+### `onPrintCapture`
+
+printcapture listener — answers the print adapter's frame request
+with a PNG data URL; detached on destroy.
+
 ### `onPointerDown`
 
 Pointer listeners to detach on destroy.

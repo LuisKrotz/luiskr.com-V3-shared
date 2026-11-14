@@ -94,6 +94,12 @@ Frozen gravatar map — sole declaration site for these tokens; consumers read m
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
 
+### `GRAVATAR_COVER`
+
+Cover-star rung — the printed issue's portrait plate re-requests the
+about photo at Gravatar's service ceiling (2048px) so the full-width
+plate holds print density on an A4 sheet.
+
 ### `SCROLL_TIMINGS`
 
 Frozen scroll-timing map (ms) — `SCROLL_DURATION_FULL` paces animated

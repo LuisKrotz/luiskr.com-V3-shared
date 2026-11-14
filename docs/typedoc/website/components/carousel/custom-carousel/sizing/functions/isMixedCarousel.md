@@ -8,7 +8,7 @@
 function isMixedCarousel(items): boolean
 ```
 
-Defined in: website/components/carousel/custom-carousel/sizing.ts:226
+Defined in: website/components/carousel/custom-carousel/sizing.ts:288
 
 Evaluates whether the carousel contains a mix of both landscape and portrait items.
 

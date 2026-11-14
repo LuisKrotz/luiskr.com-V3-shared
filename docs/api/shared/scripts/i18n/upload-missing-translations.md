@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\upload-missing-translations.js`
 
+Reconciliation push: fills keys the local
+
 |                |                                                          |
 | -------------- | -------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\upload-missing-translations.js` |
@@ -7,7 +9,7 @@
 
 ## Members
 
-### `DRY_RUN`
+### (module scope)
 
 upload-missing-translations.js — fills every key that exists in the
 build-time `database.json` snapshot but is absent from live Firebase RTDB,
@@ -30,7 +32,9 @@ GETs a public RTDB node as JSON (translations are world-readable).
 
 ### `push`
 
-Writes `data` to `rtdbPath` via the Firebase CLI, through a temp file.
+Writes `data` to `rtdbPath` via the Firebase CLI, through a temp
+file (database:set takes a file path, not stdin). `tag` names the
+scratch file so per-locale pushes can't collide.
 
 ### `diff`
 

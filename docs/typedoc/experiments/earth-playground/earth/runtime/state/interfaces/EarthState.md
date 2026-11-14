@@ -427,3 +427,16 @@ onResize: (() => void) | null;
 Defined in: experiments/earth-playground/earth/runtime/state.ts:168
 
 Stable resize-listener identity so destroy() can removeEventListener.
+
+---
+
+### onPrintCapture
+
+```ts
+onPrintCapture: ((e) => void) | null;
+```
+
+Defined in: experiments/earth-playground/earth/runtime/state.ts:171
+
+Stable printcapture-listener identity — answers the print adapter's
+frame request with a PNG data URL; removed on destroy.

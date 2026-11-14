@@ -8,7 +8,7 @@
 function packMediaMosaic(items, wallW): PackedMosaic | null
 ```
 
-Defined in: website/components/media/mosaic/pack.ts:311
+Defined in: website/components/media/mosaic/pack.ts:563
 
 Full packing pass: each step evaluates every remaining tile's lowest
 legal spot and places the one whose top is the global minimum — ties

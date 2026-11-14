@@ -8,7 +8,7 @@
 function disarmTitleFit(host): void
 ```
 
-Defined in: website/components/home/about/titlefit.ts:146
+Defined in: website/components/home/about/titlefit.ts:148
 
 Stops the observer and drops the session — the element is leaving the
 DOM, so the next mount re-arms from scratch.

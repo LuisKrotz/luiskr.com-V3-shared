@@ -8,7 +8,7 @@
 function isSourceRoot(rootName): boolean
 ```
 
-Defined in: experiments/docs/manifest.ts:254
+Defined in: experiments/docs/manifest.ts:255
 
 Whether a manifest root name ('src', 'core', …) is a protected source
 bucket — source roots get the copy-guard and never auto-open index.html.

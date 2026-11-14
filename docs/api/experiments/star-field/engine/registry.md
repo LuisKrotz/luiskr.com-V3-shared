@@ -45,6 +45,11 @@ light-years, `i` registry id.
 
 Cached manifest promise — one fetch per session.
 
+### `_manifestResolved`
+
+Resolved-value mirror of `_manifest` — sync readers (print prep)
+can't await the promise bag, so each landed manifest registers here.
+
 ### `_shards`
 
 Resolved shard cache — `index/<kind>-NNN.json` → parsed records.
@@ -74,6 +79,15 @@ it for the per-kind counts and shard lists; selection paths don't
 (ids self-decode to their shard).
 
 - `@returns` The parsed manifest, or null on fetch/parse failure.
+
+### `syncRegistryManifest`
+
+Synchronous read of the registry manifest — the promise bag resolves
+too late for the synchronous beforeprint walk, so the landed manifest
+mirrors here for print composition (the deep-catalog index page reads
+per-kind counts from it). Returns null until the first fetch lands.
+
+- `@returns` The resolved manifest, or null.
 
 ### `loadRegistryShard`
 

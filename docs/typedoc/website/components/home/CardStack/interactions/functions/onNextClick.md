@@ -8,7 +8,7 @@
 function onNextClick(host): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:78
+Defined in: website/components/home/cardstack/interactions.ts:87
 
 Next control — one step forward along the ring; a manual step kills autoplay.
 

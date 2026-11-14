@@ -6,6 +6,4 @@
 
 ## Functions
 
-- [mountGlitchDemo](functions/mountGlitchDemo.md)
 - [mountSceneDemo](functions/mountSceneDemo.md)
-- [mountMeshDemo](functions/mountMeshDemo.md)

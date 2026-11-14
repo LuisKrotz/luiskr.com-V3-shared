@@ -8,10 +8,10 @@
 function scrollToSlide(c, idx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:281
+Defined in: website/components/carousel/custom-carousel/nav.ts:300
 
-Smooth-centers real-slide idx — `children[idx + 1]` because a clone of
-the last slide is prepended to the track (index 0 is the clone).
+Smooth-centers real-slide idx — queries the :not(--clone) slide list so
+the count of viewport-sized edge clones never shifts the indexing.
 
 ## Parameters
 

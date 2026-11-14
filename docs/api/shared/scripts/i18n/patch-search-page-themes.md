@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\patch-search-page-themes.js`
 
+One-shot migration: injects a localized `searchThemes`
+
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\patch-search-page-themes.js`   |

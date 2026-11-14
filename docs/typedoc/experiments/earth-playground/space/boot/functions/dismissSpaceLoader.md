@@ -8,7 +8,7 @@
 function dismissSpaceLoader(c): void
 ```
 
-Defined in: experiments/earth-playground/space/boot.ts:102
+Defined in: experiments/earth-playground/space/boot.ts:113
 
 Fades the loader overlay to transparent, then removes it after the CSS
 transition completes — removing earlier would clip the fade, removing

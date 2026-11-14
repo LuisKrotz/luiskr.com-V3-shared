@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../../README.md) / [website/components/carousel/custom-carousel/render](../README.md) / CarouselItem
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:26
+Defined in: website/components/carousel/custom-carousel/render.tsx:27
 
 Slide descriptor consumed by the carousel.
 
@@ -16,7 +16,7 @@ Slide descriptor consumed by the carousel.
 src: string
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:28
+Defined in: website/components/carousel/custom-carousel/render.tsx:29
 
 Extensionless CDN stem — the media-figure resolves the real filename.
 
@@ -28,7 +28,7 @@ Extensionless CDN stem — the media-figure resolves the real filename.
 optional size?: number[];
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:30
+Defined in: website/components/carousel/custom-carousel/render.tsx:31
 
 Intrinsic [w,h] for aspect-ratio layout (optional — falls back to GENERIC_DIMENSIONS).
 
@@ -40,7 +40,7 @@ Intrinsic [w,h] for aspect-ratio layout (optional — falls back to GENERIC_DIME
 optional naturalSize?: number[];
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:32
+Defined in: website/components/carousel/custom-carousel/render.tsx:33
 
 Untouched source dims when `size` was downscaled through the desktop ladder — the expand modal stamps these (it never reduces).
 
@@ -52,7 +52,7 @@ Untouched source dims when `size` was downscaled through the desktop ladder — 
 optional label?: string;
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:34
+Defined in: website/components/carousel/custom-carousel/render.tsx:35
 
 Accessible/visible caption.
 
@@ -64,7 +64,7 @@ Accessible/visible caption.
 optional class?: string;
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:36
+Defined in: website/components/carousel/custom-carousel/render.tsx:37
 
 Extra layout class (e.g. 'landscape') forwarded to the item wrapper.
 
@@ -76,7 +76,7 @@ Extra layout class (e.g. 'landscape') forwarded to the item wrapper.
 optional isVideo?: boolean;
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:38
+Defined in: website/components/carousel/custom-carousel/render.tsx:39
 
 Video slide flag — routes to the mp4 grammar + video element.
 
@@ -88,6 +88,6 @@ Video slide flag — routes to the mp4 grammar + video element.
 optional canExpand?: boolean;
 ```
 
-Defined in: website/components/carousel/custom-carousel/render.tsx:40
+Defined in: website/components/carousel/custom-carousel/render.tsx:41
 
 Whether the slide can open the fullscreen expand modal.

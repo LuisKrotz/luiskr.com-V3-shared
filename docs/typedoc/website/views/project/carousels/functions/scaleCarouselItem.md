@@ -8,15 +8,19 @@
 function scaleCarouselItem(item): ProjectMediaItem
 ```
 
-Defined in: website/views/project/carousels.ts:30
+Defined in: website/views/project/carousels.ts:34
 
 Desktop downscale for one carousel item — the division calc is for
-WIDTH, not height: each ladder step (÷2 → ÷1.5 → ÷1.75) compounds on
-the running width while the result still clears DESKTOP_SCALE_MIN_W;
-once the media falls under the width check (the next step would drop
-it below the floor), the accumulated divisor is applied to height —
-aspect preserved. A 1980px item lands ~377px wide, a 997px item
-~332px; small items below the first step stay natural.
+WIDTH, not height: ÷2 always applies (the retina-density cap), then
+each further ladder step (÷3 → ÷4 → ÷5) compounds on the running
+width ONLY while the slide is still at least viewport-wide — "if
+needed" in the spec: once it fits inside the window it already is
+the max-area render with neighbour peeks, so the ladder stops.
+The DESKTOP_SCALE_MIN_W floor is the backstop — the next step never
+drops the media under it; the accumulated divisor then applies to
+height — aspect preserved. A 3840px item lands ~640px wide at
+1920px viewport (1920 → 640), a 1920px item ~960px; small items
+below the first step stay natural.
 `naturalSize` keeps the untouched CMS dims — the expand modal stamps
 those (the modal never reduces) while `size` stays the display
 contract for the carousel's dense-pixel render.

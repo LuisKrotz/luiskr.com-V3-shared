@@ -8,7 +8,7 @@
 function pickTier(vw, vh): CardStackTier
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:76
+Defined in: website/components/home/cardstack/deck.ts:74
 
 The coverflow tier for a viewport — the first (widest) tier whose
 MIN_VW the width meets; the portrait tablet tier also requires a

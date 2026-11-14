@@ -8,7 +8,7 @@
 function isGravatarUrl(urlStr): boolean
 ```
 
-Defined in: core/utils/media.ts:49
+Defined in: core/utils/media.ts:50
 
 Checks if a given URL belongs to gravatar.com (exact host or any
 subdomain like `secure.gravatar.com`). Non-Gravatar URLs must not get

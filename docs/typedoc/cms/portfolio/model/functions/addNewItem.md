@@ -8,9 +8,11 @@
 function addNewItem(host): void
 ```
 
-Defined in: cms/portfolio/model.ts:46
+Defined in: cms/portfolio/model.ts:53
 
-Adds new item.
+Appends a placeholder portfolio item with sensible defaults —
+`featured: false`, the token default dimension pairs, and a
+`default-cover` image the editor can replace in place.
 
 ## Parameters
 
@@ -18,7 +20,7 @@ Adds new item.
 
 [`CmsPortfolioList`](../../CmsPortfolioList/classes/CmsPortfolioList.md)
 
-— the host component
+— the host component holding `items`
 
 ## Returns
 

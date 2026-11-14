@@ -8,7 +8,7 @@
 function ringSigned(d, len): number
 ```
 
-Defined in: website/components/carousel/mentions-deck/deck.ts:38
+Defined in: website/components/carousel/mentions-deck/deck.ts:37
 
 Signed ring distance of `d` modulo `len`, normalized into (-len/2, len/2]
 so the shortest strip direction wins — fractional `d` (mid-drag) passes

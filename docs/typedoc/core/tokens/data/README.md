@@ -72,6 +72,12 @@ Re-exports [A11Y_INDEX_TOKEN](component-keys/variables/A11Y_INDEX_TOKEN.md)
 
 ---
 
+### ROUTE\_TOKEN
+
+Re-exports [ROUTE_TOKEN](component-keys/variables/ROUTE_TOKEN.md)
+
+---
+
 ### SECTION\_COMPONENT\_KEYS
 
 Re-exports [SECTION_COMPONENT_KEYS](component-keys/variables/SECTION_COMPONENT_KEYS.md)

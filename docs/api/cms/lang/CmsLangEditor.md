@@ -11,7 +11,10 @@
 
 ### `CmsLangEditor`
 
-The CmsLangEditor — lang editor class.
+<cms-lang-editor> — the raw-JSON escape hatch: locale + node pickers
+select a translations subtree, the textarea edits it as pretty-printed
+JSON, and save parses-then-writes so a syntax error aborts before any
+malformed blob reaches the site.
 
 ### (module scope)
 
@@ -29,8 +32,8 @@ editor surfaces the syntax error and keeps the stored copy intact.
 
 ### (module scope)
 
-Wires inputs + save button.
+Save/lang/node/textarea bindings — scoped so re-render re-binds cleanly.
 
 ### (module scope)
 
-JSX template.
+Header + save, two pickers (locale, node), and the JSON textarea card.

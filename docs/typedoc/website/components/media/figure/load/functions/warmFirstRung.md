@@ -8,7 +8,7 @@
 function warmFirstRung(fig): void
 ```
 
-Defined in: website/components/media/figure/load.ts:104
+Defined in: website/components/media/figure/load.ts:236
 
 CDN warm ordering — fires a detached fetch of the FIRST ladder rung
 while the figure is still ~600px outside the viewport. The request

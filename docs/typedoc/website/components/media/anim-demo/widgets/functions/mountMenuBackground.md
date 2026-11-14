@@ -8,7 +8,7 @@
 function mountMenuBackground(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/widgets.ts:65
+Defined in: website/components/media/anim-demo/widgets.ts:134
 
 Nav menu backdrop — the real MenuBackgroundWebGL contour field:
 start() reveals it exactly like menu-open; release() dissolves it.

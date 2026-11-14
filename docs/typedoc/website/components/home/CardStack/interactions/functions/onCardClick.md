@@ -8,7 +8,7 @@
 function onCardClick(host, item, idx): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:95
+Defined in: website/components/home/cardstack/interactions.ts:104
 
 Card activation — a side card click brings it to the front (the fan
 affordance), the front card navigates to its project route.

@@ -10,7 +10,7 @@
     />
   </head>
   <body>
-    <h1>Sass API — luiskr.com 0.2.0</h1>
+    <h1>Sass API — luiskr.com 5.1.0</h1>
     <p>
       Generated from
       <code>///</code>
@@ -21,7 +21,7 @@
       <ul>
         <li>
           <a href="#file-core-sass-base-_mixins-scss">core\sass\base\_mixins.scss</a>
-          (30)
+          (31)
         </li>
         <li>
           <a href="#file-core-sass-base-_placeholders-scss">core\sass\base\_placeholders.scss</a>
@@ -29,7 +29,7 @@
         </li>
         <li>
           <a href="#file-core-sass-base-_variables-scss">core\sass\base\_variables.scss</a>
-          (209)
+          (226)
         </li>
         <li>
           <a href="#file-core-sass-base-structure-_dark-mode-scss">
@@ -71,7 +71,37 @@
           <a href="#file-core-sass-components-carousel-carousel-scss">
             core\sass\components\carousel\carousel.scss
           </a>
-          (6)
+          (8)
+        </li>
+        <li>
+          <a href="#file-core-sass-components-dialogs-preferences-_flag-options-scss">
+            core\sass\components\dialogs\preferences\_flag-options.scss
+          </a>
+          (2)
+        </li>
+        <li>
+          <a href="#file-core-sass-components-dialogs-preferences-_switch-scss">
+            core\sass\components\dialogs\preferences\_switch.scss
+          </a>
+          (4)
+        </li>
+        <li>
+          <a href="#file-core-sass-components-internals-internals-_related-scss">
+            core\sass\components\internals\internals\_related.scss
+          </a>
+          (2)
+        </li>
+        <li>
+          <a href="#file-core-sass-components-media-media-figure-_media-scss">
+            core\sass\components\media\media-figure\_media.scss
+          </a>
+          (2)
+        </li>
+        <li>
+          <a href="#file-core-sass-components-media-media-figure-_placeholder-scss">
+            core\sass\components\media\media-figure\_placeholder.scss
+          </a>
+          (2)
         </li>
       </ul>
     </nav>
@@ -605,6 +635,29 @@
           pull this in because document-level focus rules never pierce shadow DOM.
         </p>
       </article>
+      <article class="sd-item sd-item--mixin" id="mixin-control-arrow">
+        <h3>
+          <code>control-arrow</code>
+          <span class="sd-kind">mixin</span>
+        </h3>
+        <pre class="sd-sig"><code>@mixin control-arrow($arrow) {</code></pre>
+        <p>
+          Emits the arrow glyph&#39;s base display/transition plus the three interactive states,
+          nested under the control (`&#38;`). `--arrow-dir` on the control steers the nudge (-1
+          backward / +1 forward — unset defaults to +1); the press transform compounds
+          translate+scale so the arrow keeps its offset instead of snapping back to centre. Reduced
+          motion clears the whole affordance. Composited transform only. caller since each block
+          names its own element (e.g. &#39;.foo-arrow&#39;).
+        </p>
+        <h4>Parameters</h4>
+        <ul>
+          <li>
+            <code>$arrow</code>
+            <span class="sd-type">String</span>
+            — the arrow glyph&#39;s selector, resolved by the
+          </li>
+        </ul>
+      </article>
     </section>
     <section id="file-core-sass-base-_placeholders-scss">
       <h2>core\sass\base\_placeholders.scss</h2>
@@ -711,6 +764,18 @@
         <pre class="sd-sig"><code>$color-blue: #006ca6;</code></pre>
         <p>Raw palette color — published as a --color-blue-raw CSS var by _structure.scss</p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-print-gold">
+        <h3>
+          <code>print-gold</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$print-gold: #c9a52a;</code></pre>
+        <p>
+          Print-only metallic gold — the title-cover masthead ink. Published as --print-gold and
+          consumed only inside @media print rules; a warm single-pass yellow-black that home CMYK
+          drivers render richly without the washed-out look of pure-Y process yellow.
+        </p>
+      </article>
       <article class="sd-item sd-item--variable" id="variable-cms-bg-darkest">
         <h3>
           <code>cms-bg-darkest</code>
@@ -783,6 +848,54 @@
         <pre class="sd-sig"><code>$cms-accent: #66fcf1;</code></pre>
         <p>CMS admin-chrome token — compile-time only (dark panel theme)</p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-silver">
+        <h3>
+          <code>metal-silver</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-silver: #e9eef5;</code></pre>
+        <p>Nav glyph ink — bright specular silver (icon cores).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-steel">
+        <h3>
+          <code>metal-steel</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-steel: #96a5b8;</code></pre>
+        <p>Nav glyph ink — brushed steel mid-tone.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-platinum">
+        <h3>
+          <code>metal-platinum</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-platinum: #cdd7e4;</code></pre>
+        <p>Nav glyph ink — platinum sheen.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-pearl">
+        <h3>
+          <code>metal-pearl</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-pearl: #b8c4d4;</code></pre>
+        <p>Nav glyph ink — pearl-silver.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-titanium">
+        <h3>
+          <code>metal-titanium</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-titanium: #8a99ad;</code></pre>
+        <p>Nav glyph ink — titanium grey.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-chrome">
+        <h3>
+          <code>metal-chrome</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-chrome: #d5dde8;</code></pre>
+        <p>Nav glyph ink — mirror chrome highlight.</p>
+      </article>
       <article class="sd-item sd-item--variable" id="variable-cms-accent-hover">
         <h3>
           <code>cms-accent-hover</code>
@@ -799,55 +912,120 @@
         <pre class="sd-sig"><code>$cms-accent-contrast: #0f8a84;</code></pre>
         <p>CMS admin-chrome token — compile-time only (dark panel theme)</p>
       </article>
-      <article class="sd-item sd-item--variable" id="variable-neon-teal-light">
+      <article class="sd-item sd-item--variable" id="variable-metal-silver-light">
         <h3>
-          <code>neon-teal-light</code>
+          <code>metal-silver-light</code>
           <span class="sd-kind">variable</span>
         </h3>
-        <pre class="sd-sig"><code>$neon-teal-light: $cms-accent-contrast;</code></pre>
+        <pre class="sd-sig"><code>$metal-silver-light: #3e3b37;</code></pre>
+        <p>Light theme — gray-black silver glyph ink.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-steel-light">
+        <h3>
+          <code>metal-steel-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-steel-light: #343230;</code></pre>
+        <p>Light theme — deep gray steel glyph ink.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-platinum-light">
+        <h3>
+          <code>metal-platinum-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-platinum-light: #454341;</code></pre>
+        <p>Light theme — dark gray platinum glyph ink.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-pearl-light">
+        <h3>
+          <code>metal-pearl-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-pearl-light: #494745;</code></pre>
+        <p>Light theme — soft black pearl glyph ink.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-titanium-light">
+        <h3>
+          <code>metal-titanium-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-titanium-light: #2e2c29;</code></pre>
+        <p>Light theme — carbon-black titanium glyph ink.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-metal-chrome-light">
+        <h3>
+          <code>metal-chrome-light</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$metal-chrome-light: #403e3b;</code></pre>
+        <p>Light theme — gray-black chrome ferrule ink.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-field-cream">
+        <h3>
+          <code>field-cream</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$field-cream: #ecebe4;</code></pre>
+        <p>Field hue — newsprint ash, the dominant paper band (upper-left lobe).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-field-sand">
+        <h3>
+          <code>field-sand</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$field-sand: #e2dfd4;</code></pre>
+        <p>Field hue — cool mist edge (low washes).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-field-bone">
+        <h3>
+          <code>field-bone</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$field-bone: #f1f0ea;</code></pre>
+        <p>Field hue — bone-white sheet note (upper-right lobe).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-field-parchment">
+        <h3>
+          <code>field-parchment</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$field-parchment: #dcdad0;</code></pre>
+        <p>Field hue — newsprint mid-tone (lower-right lobe).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-field-ochre">
+        <h3>
+          <code>field-ochre</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$field-ochre: #cfcabb;</code></pre>
+        <p>Field hue — light taupe for the dim washes and the burn edge.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-field-canvas">
+        <h3>
+          <code>field-canvas</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$field-canvas: #e9e7de;</code></pre>
+        <p>Field hue — press-paper fog fringe.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-field-umber">
+        <h3>
+          <code>field-umber</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$field-umber: #bfbbae;</code></pre>
+        <p>Field hue — cold greige, the deepest paper tone in the ramp.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-field-ink">
+        <h3>
+          <code>field-ink</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$field-ink: #1f1e1a;</code></pre>
         <p>
-          Light theme — deep teal glyph ink; shares the light control accent (3.25:1 on the disc).
+          Field ink — neutral near-black newsprint ink; the light theme&#39;s darkest text pole and
+          the tint source for shadows/fills via color-mix.
         </p>
-      </article>
-      <article class="sd-item sd-item--variable" id="variable-neon-green-light">
-        <h3>
-          <code>neon-green-light</code>
-          <span class="sd-kind">variable</span>
-        </h3>
-        <pre class="sd-sig"><code>$neon-green-light: #15803d;</code></pre>
-        <p>Light theme — deep green glyph ink (3.87:1 on the disc).</p>
-      </article>
-      <article class="sd-item sd-item--variable" id="variable-neon-violet-light">
-        <h3>
-          <code>neon-violet-light</code>
-          <span class="sd-kind">variable</span>
-        </h3>
-        <pre class="sd-sig"><code>$neon-violet-light: #7a28e0;</code></pre>
-        <p>Light theme — deep violet glyph ink (5.05:1 on the disc).</p>
-      </article>
-      <article class="sd-item sd-item--variable" id="variable-neon-magenta-light">
-        <h3>
-          <code>neon-magenta-light</code>
-          <span class="sd-kind">variable</span>
-        </h3>
-        <pre class="sd-sig"><code>$neon-magenta-light: #d0008f;</code></pre>
-        <p>Light theme — deep magenta glyph ink (3.97:1 on the disc).</p>
-      </article>
-      <article class="sd-item sd-item--variable" id="variable-neon-orange-light">
-        <h3>
-          <code>neon-orange-light</code>
-          <span class="sd-kind">variable</span>
-        </h3>
-        <pre class="sd-sig"><code>$neon-orange-light: #cc5500;</code></pre>
-        <p>Light theme — burnt-orange glyph ink (3.33:1 on the disc).</p>
-      </article>
-      <article class="sd-item sd-item--variable" id="variable-neon-chrome-light">
-        <h3>
-          <code>neon-chrome-light</code>
-          <span class="sd-kind">variable</span>
-        </h3>
-        <pre class="sd-sig"><code>$neon-chrome-light: #64748b;</code></pre>
-        <p>Light theme — steel-slate ferrule ink (3.67:1 on the disc).</p>
       </article>
       <article class="sd-item sd-item--variable" id="variable-cms-badge-warn">
         <h3>
@@ -2293,6 +2471,17 @@
         <pre class="sd-sig"><code>$z-top: 9999;</code></pre>
         <p>Top-level elements (dialogs)</p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-z-print-veil">
+        <h3>
+          <code>z-print-veil</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$z-print-veil: 100001;</code></pre>
+        <p>
+          Print gate veil — above the intro loader (100000) so the cover holds even when a print
+          fires mid-boot
+        </p>
+      </article>
       <article class="sd-item sd-item--variable" id="variable-font-sans">
         <h3>
           <code>font-sans</code>
@@ -2366,6 +2555,18 @@
           cubic-bezier fallback declared alongside it at each callsite.
         </p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-ease-out">
+        <h3>
+          <code>ease-out</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$ease-out: cubic-bezier(0.22, 1, 0.36, 1);</code></pre>
+        <p>
+          Fast-out micro-interaction easing (easeOutQuint) — the snappy curve behind hover/press
+          affordances: control-arrow nudges, dot morphs, tile lifts. Declared once so the ~50
+          callsites share one curve and can never drift apart.
+        </p>
+      </article>
       <article class="sd-item sd-item--variable" id="variable-ease-fluid">
         <h3>
           <code>ease-fluid</code>
@@ -2392,7 +2593,7 @@
         <pre class="sd-sig"><code>@mixin dark-mode-tokens {</code></pre>
         <p>
           Emits the full dark-theme token override set — --bg-*/--text-*/--menu-*/
-          --skel-*/*-neon-*/burn/shadow palette plus `color-scheme: dark` and the zeroed light-mode
+          --skel-*/*-metal-*/burn/shadow palette plus `color-scheme: dark` and the zeroed light-mode
           font-weight lift. Applied under `html.dark-mode` for the app and under
           `prefers-color-scheme` by surfaces that cannot carry the class.
         </p>
@@ -2546,13 +2747,31 @@
           declared exactly once (DRY selector rule).
         </p>
       </article>
+      <article class="sd-item sd-item--variable" id="variable-carousel-btn-size-md">
+        <h3>
+          <code>carousel-btn-size-md</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre
+          class="sd-sig"
+        ><code>$carousel-btn-size-md: to-rem($space-sm * $space-md + $space-md);</code></pre>
+        <p>Arrow-button hit area (square) — the compact 48px rung.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-carousel-btn-size-sm">
+        <h3>
+          <code>carousel-btn-size-sm</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$carousel-btn-size-sm: to-rem($space-sm * $space-md);</code></pre>
+        <p>Arrow-button hit area — the mobile 40px rung under 1024.</p>
+      </article>
       <article class="sd-item sd-item--variable" id="variable-carousel-btn-size">
         <h3>
           <code>carousel-btn-size</code>
           <span class="sd-kind">variable</span>
         </h3>
         <pre class="sd-sig"><code>$carousel-btn-size: to-rem($space-3xl);</code></pre>
-        <p>Arrow-button hit area (square).</p>
+        <p>Arrow-button hit area (square) — the 55px rung at ≥1440.</p>
       </article>
       <article class="sd-item sd-item--variable" id="variable-carousel-dot-size">
         <h3>
@@ -2591,8 +2810,149 @@
           <code>ring-stroke</code>
           <span class="sd-kind">variable</span>
         </h3>
-        <pre class="sd-sig"><code>$ring-stroke: to-rem(2.5);</code></pre>
+        <pre class="sd-sig"><code>$ring-stroke: to-rem(math.div($space-sm, 2));</code></pre>
         <p>Progress-ring stroke width around the arrow buttons.</p>
+      </article>
+    </section>
+    <section id="file-core-sass-components-dialogs-preferences-_flag-options-scss">
+      <h2>core\sass\components\dialogs\preferences\_flag-options.scss</h2>
+      <article class="sd-item sd-item--variable" id="variable-_FLAG_H">
+        <h3>
+          <code>_FLAG_H</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre
+          class="sd-sig"
+        ><code>$_FLAG_H: to-rem($space-2xl + $space-md + $space-2xs);</code></pre>
+        <p>
+          Flag row height — 44px keeps the 4:3 SVG ratio crisp at the row&#39;s rendered size
+          ($space-2xl + $space-md + $space-2xs).
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-_FLAG_W">
+        <h3>
+          <code>_FLAG_W</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_FLAG_W: to-rem($space-2xl - $space-3xs);</code></pre>
+        <p>
+          Half-flag width inside a split pair — 33px so two crops share the 44px-high row evenly
+          ($space-2xl - $space-3xs).
+        </p>
+      </article>
+    </section>
+    <section id="file-core-sass-components-dialogs-preferences-_switch-scss">
+      <h2>core\sass\components\dialogs\preferences\_switch.scss</h2>
+      <article class="sd-item sd-item--variable" id="variable-_SW_W">
+        <h3>
+          <code>_SW_W</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_SW_W: $space-2xl + $space-lg + $space-sm;</code></pre>
+        <p>Switch pill width — 52px iOS-proportioned track.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-_SW_H">
+        <h3>
+          <code>_SW_H</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_SW_H: $space-xl + $space-sm + $space-2xs;</code></pre>
+        <p>Switch pill height — 28px keeps the knob + pad proportion.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-_SW_KNOB">
+        <h3>
+          <code>_SW_KNOB</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_SW_KNOB: $space-xl + $space-3xs;</code></pre>
+        <p>Knob diameter — 22px inside the 28px track.</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-_SW_PAD">
+        <h3>
+          <code>_SW_PAD</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_SW_PAD: $space-xs;</code></pre>
+        <p>Padding inside the pill — knob offset from the track edge.</p>
+      </article>
+    </section>
+    <section id="file-core-sass-components-internals-internals-_related-scss">
+      <h2>core\sass\components\internals\internals\_related.scss</h2>
+      <article class="sd-item sd-item--variable" id="variable-_MEDIA-W-SM">
+        <h3>
+          <code>_MEDIA-W-SM</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_MEDIA-W-SM: to-rem($space-5xl - $space-2xs * 2);</code></pre>
+        <p>
+          Media-column flex basis per breakpoint — a 140px square thumb on phones, widening to
+          260/320px 16:10 crops on larger grids.
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-_MEDIA-H-MD">
+        <h3>
+          <code>_MEDIA-H-MD</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre
+          class="sd-sig"
+        ><code>$_MEDIA-H-MD: to-rem($space-5xl + $space-xl - $space-2xs);</code></pre>
+        <p>
+          Skeleton row heights — reserve the media column&#39;s rendered height (basis × the active
+          aspect ratio) so :empty shimmers the same box the loaded row will occupy. Mobile mirrors
+          the square basis.
+        </p>
+      </article>
+    </section>
+    <section id="file-core-sass-components-media-media-figure-_media-scss">
+      <h2>core\sass\components\media\media-figure\_media.scss</h2>
+      <article class="sd-item sd-item--variable" id="variable-_B_MEDIA_FIGURE">
+        <h3>
+          <code>_B_MEDIA_FIGURE</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_B_MEDIA_FIGURE: &#39;media-figure&#39;;</code></pre>
+        <p>Figure modifier block — mirrors MEDIA_CLASSES.MEDIA_FIGURE_* (base.ts).</p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-_B_EXPAND_MODAL">
+        <h3>
+          <code>_B_EXPAND_MODAL</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre class="sd-sig"><code>$_B_EXPAND_MODAL: &#39;expand-modal&#39;;</code></pre>
+        <p>
+          Expand-modal trigger block — mirrors EXPAND_MODAL_CLASSES.EXPAND_MODAL_OPEN_* (modal.ts):
+          open-1 is the styled corner trigger, open-2 the invisible full-figure overlay.
+        </p>
+      </article>
+    </section>
+    <section id="file-core-sass-components-media-media-figure-_placeholder-scss">
+      <h2>core\sass\components\media\media-figure\_placeholder.scss</h2>
+      <article class="sd-item sd-item--variable" id="variable-_MF-MIN-W">
+        <h3>
+          <code>_MF-MIN-W</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre
+          class="sd-sig"
+        ><code>$_MF-MIN-W: to-rem($space-md * ($space-2xl + $space-3xs));</code></pre>
+        <p>
+          Touch-target floor — the narrowest usable slide box at ≥375px viewports, always capped by
+          --mf-natural-w so small sources keep their native box (8px × 35 = 280px).
+        </p>
+      </article>
+      <article class="sd-item sd-item--variable" id="variable-_MF-CHROME">
+        <h3>
+          <code>_MF-CHROME</code>
+          <span class="sd-kind">variable</span>
+        </h3>
+        <pre
+          class="sd-sig"
+        ><code>$_MF-CHROME: to-rem($space-md * ($space-sm + $space-3xs));</code></pre>
+        <p>
+          Side-chrome reservation inside the --mf-max-w fallback — the item padding + neighbour
+          margins a figure never grows into (8px × 6 = 48px).
+        </p>
       </article>
     </section>
   </body>

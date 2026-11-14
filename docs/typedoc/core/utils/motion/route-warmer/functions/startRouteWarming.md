@@ -8,7 +8,7 @@
 function startRouteWarming(): void
 ```
 
-Defined in: core/utils/motion/route-warmer.ts:76
+Defined in: core/utils/motion/route-warmer.ts:77
 
 Arms warming on the first interaction signal (or the long quiet-window
 bound) — each chunk still resolves inside an idle slice once released.

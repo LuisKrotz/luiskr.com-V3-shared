@@ -8,6 +8,6 @@
 const DEMO_COVER_STEM: string
 ```
 
-Defined in: website/components/media/anim-demo/stages.tsx:37
+Defined in: website/components/media/anim-demo/stages.tsx:48
 
 The demo cover-image stem (bucket path, extensionless — the ladder composes rungs).

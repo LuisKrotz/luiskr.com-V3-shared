@@ -15,7 +15,10 @@ Slide fixtures spanning the aspect-ratio arms measureFit guards on.
 
 ### `stubEl`
 
-Fresh element stub — measureFit only reads the fields below.
+Fresh element stub — measureFit only reads the fields below. The
+_edgeClones* presets match what the SLIDE fixtures project (one ~840px
+slide already covers half of the 800px host) so the clone recount
+doesn't mask the layout-mode arm under test.
 
 ### `savedWidth`
 

@@ -9,7 +9,7 @@ Seeded star-corona sprite — the "alive" layer that turns
 
 ## Members
 
-### `_CORONA_HALO_R`
+### (module scope)
 
 Corona recipe — all sprite-space fractions of the half-edge. Light,
 not geometry: stroked lines and wedges read as drawn rays no matter
@@ -24,11 +24,27 @@ radial gradient — nothing with a hard edge survives to crayon).
 Halo/photosphere shade factors — low values keep the body's own tint
 saturated; shading far toward white washed coronas into gray fog.
 
+### `_CORONA_CORE_R`
+
+Photosphere knot — hot core radius, alpha, and its stronger shade
+toward white (the brightest point of the sprite).
+
 ### `_CORONA_FRINGE_R`
 
 Chromatic limb wash — refracted blue light spread through a broad,
 shallow gradient (no distinct ring — a thin annulus renders as a
 rainbow eye at small sprite sizes).
+
+### `_CORONA_KNOT_MIN`
+
+Flare knots — count base/variance, limb distance base/variance,
+blob size base/variance, alpha base/variance (seeded random ranges).
+
+### `_CORONA_WISP_MIN`
+
+Prominence wisps — count base/variance, limb start-radius
+base/variance, magnetic-loop bend amplitude, reach off the limb,
+and per-blob alpha.
 
 ### `_CORONA_WISP_STEPS`
 

@@ -217,4 +217,61 @@ describe('browser-loader — viewport css class selection', () => {
     expect(sheets).toHaveLength(1)
     expect(sheets[0].href).toBe(CSS_MAP.tablet)
   })
+
+  test('a manifest css.print entry injects a media-gated link after the screen sheet', () => {
+    const manifest = mkManifest()
+
+    manifest.targets[0].css = { ...CSS_MAP, print: '/v/es2026/assets/css/index-print-p9.css' }
+
+    const head = []
+    const docEl = {
+      attrs: {},
+      setAttribute(k, v) {
+        this.attrs[k] = v
+      },
+    }
+    const document = {
+      documentElement: docEl,
+      head: { appendChild: (c) => head.push(c) },
+      body: { appendChild: () => {} },
+      getElementById: () => null,
+      createElement: (tag) => {
+        const el = {
+          attrs: {},
+          setAttribute(k, v) {
+            this.attrs[k] = v
+          },
+          appendChild() {},
+        }
+
+        if (tag === 'script') el.noModule = true
+
+        return el
+      },
+    }
+
+    new Function('window', 'document', 'navigator', LOADER)(
+      { __LK: manifest, matchMedia: undefined },
+      document,
+      { userAgent: TEST_UA.CHROME }
+    )
+
+    const print = head.find((n) => n.media === 'print')
+
+    expect(print).toBeTruthy()
+    expect(print.href).toBe('/v/es2026/assets/css/index-print-p9.css')
+    expect(print.rel).toBe('stylesheet')
+
+    // Inert to the screen cascade — it seats after the screen sheet,
+    // matching the source order where print rules came last.
+    const screen = head.find((n) => n.rel === 'stylesheet' && n.media !== 'print')
+
+    expect(head.indexOf(print)).toBeGreaterThan(head.indexOf(screen))
+  })
+
+  test('no css.print entry — no media-gated link is injected', () => {
+    const { head } = runLoader()
+
+    expect(head.find((n) => n.media === 'print')).toBeFalsy()
+  })
 })

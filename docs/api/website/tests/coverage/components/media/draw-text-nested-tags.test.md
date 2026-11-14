@@ -10,3 +10,7 @@
 ### `mountHtml`
 
 Mounts rendered draw-text HTML and returns the host for DOM assertions.
+
+### `usesQTag`
+
+True when the emitted markup carries a real <q> element.

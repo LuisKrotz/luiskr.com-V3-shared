@@ -9,6 +9,10 @@ Coverage tails for draw-text/fit.ts — the opt-in `fit`
 
 ## Members
 
+### `ORIG_GCS`
+
+Original browser globals — tests replace then restore them per case.
+
 ### `mount`
 
 Mounts a fitted draw-text inside a wrapper div (the sizing parent).

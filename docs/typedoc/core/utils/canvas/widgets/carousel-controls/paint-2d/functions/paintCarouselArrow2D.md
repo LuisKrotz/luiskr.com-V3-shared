@@ -8,7 +8,7 @@
 function paintCarouselArrow2D(ctx, state, now): void
 ```
 
-Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:68
+Defined in: core/utils/canvas/widgets/carousel-controls/paint-2d.ts:84
 
 paints carousel arrow2 d.
 

@@ -108,8 +108,8 @@ yarn global add firebase-tools
 sudo snap install google-cloud-cli --classic   # or google's apt repo
 
 # Clone and run
-git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com-V3.git
-cd luiskr.com-V3
+git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com.git
+cd luiskr.com
 yarn setup
 yarn dev
 ```
@@ -133,8 +133,8 @@ yarn global add firebase-tools
 sudo snap install google-cloud-cli --classic   # or google's yum repo
 
 # Clone and run
-git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com-V3.git
-cd luiskr.com-V3
+git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com.git
+cd luiskr.com
 yarn setup
 yarn dev
 ```
@@ -160,8 +160,8 @@ echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Clone and run
-git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com-V3.git
-cd luiskr.com-V3
+git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com.git
+cd luiskr.com
 yarn setup
 yarn dev
 ```
@@ -192,8 +192,8 @@ winget install -e --id Google.CloudSDK
 yarn global add firebase-tools
 
 # Clone and run (in a regular terminal, PowerShell or CMD)
-git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com-V3.git
-cd luiskr.com-V3
+git clone --recurse-submodules git@github.com:LuisKrotz/luiskr.com.git
+cd luiskr.com
 yarn setup
 yarn dev
 ```

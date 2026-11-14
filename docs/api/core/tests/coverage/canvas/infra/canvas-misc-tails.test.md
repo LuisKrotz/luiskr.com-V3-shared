@@ -6,3 +6,13 @@ Split from coverage-tails-7.test.js — covers the "canvas misc tails" describe.
 | -------------- | ---------------------------------------------------------------- |
 | **Source**     | `src/core\tests\coverage\canvas\infra\canvas-misc-tails.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.        |
+
+## Members
+
+### `flush`
+
+Generous flush — canvas helpers settle within a few macrotasks.
+
+### `makeCanvas`
+
+Bare canvas — these misc helpers only need the element handle.

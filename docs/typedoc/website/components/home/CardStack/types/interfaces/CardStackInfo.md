@@ -34,12 +34,25 @@ Full CMS description (`<br>` markup kept for <draw-text>).
 
 ---
 
+### summary
+
+```ts
+summary: string
+```
+
+Defined in: website/components/home/cardstack/types.ts:69
+
+First-sentence summary of `body` — the stacked cards' ≤4-line
+mobile description (the desktop column keeps the full text).
+
+---
+
 ### href
 
 ```ts
 href: string
 ```
 
-Defined in: website/components/home/cardstack/types.ts:68
+Defined in: website/components/home/cardstack/types.ts:71
 
 Localized project route ('' without a slug).

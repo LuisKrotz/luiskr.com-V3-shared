@@ -9,6 +9,10 @@ Split from site-toast.test.js — covers the "SiteToast placement contract" desc
 
 ## Members
 
+### `_flush`
+
+Zero-ms flush — toast queue drains within one macrotask.
+
 ### `_loadNotify`
 
 Fresh notify module (fresh _seen/_toastEl/_globalBound state) per call.
@@ -16,3 +20,7 @@ Fresh notify module (fresh _seen/_toastEl/_globalBound state) per call.
 ### `_mountToast`
 
 Mounts a toast element, returning it.
+
+### `_items`
+
+Lists the toast item elements inside the component's shadow root.

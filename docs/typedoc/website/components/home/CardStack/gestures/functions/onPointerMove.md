@@ -8,7 +8,7 @@
 function onPointerMove(host, e): void
 ```
 
-Defined in: website/components/home/cardstack/gestures.ts:78
+Defined in: website/components/home/cardstack/gestures.ts:84
 
 Pointer-move — consumes the coalesced sample stream (1000–8000Hz mice
 deliver several per frame; only the last position matters). Before the

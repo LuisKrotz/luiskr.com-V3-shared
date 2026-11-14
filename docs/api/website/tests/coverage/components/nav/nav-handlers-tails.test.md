@@ -12,3 +12,7 @@ Coverage tails for components/nav/handlers.ts — the
 ### `middleClick`
 
 Middle-click event stub — isPlainClick rejects button !== 0.
+
+### `hostStub`
+
+Fake `this` for the nav handlers — jest fns record every internal call.

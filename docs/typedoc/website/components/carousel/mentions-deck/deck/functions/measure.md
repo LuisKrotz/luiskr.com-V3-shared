@@ -8,7 +8,7 @@
 function measure(host): void
 ```
 
-Defined in: website/components/carousel/mentions-deck/deck.ts:118
+Defined in: website/components/carousel/mentions-deck/deck.ts:117
 
 Measures the deck region and publishes `_cardW/_cardH/_step/_anchor`
 and `_fadeSpan` — the card box is the fill-fit when the whole ring

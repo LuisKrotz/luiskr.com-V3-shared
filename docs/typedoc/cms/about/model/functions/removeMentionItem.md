@@ -1,16 +1,16 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/about/model](../README.md) / removeMentionItem
 
 ```ts
-function removeMentionItem(host, idx): void;
+function removeMentionItem(host, idx): void
 ```
 
-Defined in: cms/about/model.ts:86
+Defined in: cms/about/model.ts:93
 
-Removes mention item.
+Drops the mention at `idx` from the awards list and re-renders.
 
 ## Parameters
 
@@ -18,13 +18,13 @@ Removes mention item.
 
 [`CmsAboutEditor`](../../CmsAboutEditor/classes/CmsAboutEditor.md)
 
-— the host component
+— the host component holding `aboutData.mention_items`
 
 ### idx
 
 `number`
 
-— the index
+— zero-based mention index
 
 ## Returns
 

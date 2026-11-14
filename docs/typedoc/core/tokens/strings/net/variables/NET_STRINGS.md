@@ -12,6 +12,7 @@ const NET_STRINGS: Readonly<{
   GRAVATAR_HOSTNAME_SUFFIX: '.gravatar.com'
   HTTP_LOCALHOST: 'http://localhost'
   BLOB_COLON: 'blob:'
+  DATA_COLON: 'data:'
   SCHEME_MAILTO: 'mailto:'
   SCHEME_TEL: 'tel:'
   IMAGE_PNG: 'image/png'

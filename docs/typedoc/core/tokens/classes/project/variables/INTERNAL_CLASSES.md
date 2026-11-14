@@ -37,6 +37,7 @@ const INTERNAL_CLASSES: Readonly<{
   INTERNAL_FOOTER_ITEMS_NOTE_TEXT: 'internal-footer-items-note-text'
   INTERNAL_FOOTER_ITEMS_CREDIT: 'internal-footer-items-credit'
   INTERNAL_FOOTER_ITEMS_RIGHTS: 'internal-footer-items-rights'
+  INTERNAL_FOOTER_ITEMS_VERSION: 'internal-footer-items-version'
   INTERNAL_FOOTER_ITEMS_HOME: 'internal-footer-items-home'
   INTERNAL_FOOTER_ITEMS_FEED: 'internal-footer-items-feed'
   INTERNAL_FOOTER_ITEMS_FEED_LINK: 'internal-footer-items-feed-link'

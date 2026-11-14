@@ -8,7 +8,7 @@
 function onDotClick(host, idx): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:85
+Defined in: website/components/home/cardstack/interactions.ts:94
 
 Dot-nav click — jumps straight to the picked card; a manual pick kills autoplay.
 

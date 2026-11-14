@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/home/HomeMosaic](../README.md) / HomeMosaic
 
-Defined in: website/components/home/HomeMosaic.tsx:55
+Defined in: website/components/home/HomeMosaic.tsx:53
 
 The HomeMosaic — mosaic class.
 
@@ -20,7 +20,7 @@ The HomeMosaic — mosaic class.
 new HomeMosaic(): HomeMosaic;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:71
+Defined in: website/components/home/HomeMosaic.tsx:69
 
 #### Returns
 
@@ -35,12 +35,16 @@ Defined in: website/components/home/HomeMosaic.tsx:71
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -54,7 +58,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +80,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +101,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +119,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +135,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +155,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +171,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +187,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 _processedItems: MosaicItem[] = [];
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:56
+Defined in: website/components/home/HomeMosaic.tsx:54
 
 ---
 
@@ -193,7 +197,7 @@ Defined in: website/components/home/HomeMosaic.tsx:56
 _translations: MosaicTranslations | null = null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:57
+Defined in: website/components/home/HomeMosaic.tsx:55
 
 ---
 
@@ -203,7 +207,7 @@ Defined in: website/components/home/HomeMosaic.tsx:57
 hoveredIdx: number | null = null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:58
+Defined in: website/components/home/HomeMosaic.tsx:56
 
 ---
 
@@ -213,7 +217,7 @@ Defined in: website/components/home/HomeMosaic.tsx:58
 touchIdx: number | null = null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:59
+Defined in: website/components/home/HomeMosaic.tsx:57
 
 ---
 
@@ -223,7 +227,7 @@ Defined in: website/components/home/HomeMosaic.tsx:59
 cards: MosaicCardStyle[] = [];
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:60
+Defined in: website/components/home/HomeMosaic.tsx:58
 
 ---
 
@@ -233,7 +237,7 @@ Defined in: website/components/home/HomeMosaic.tsx:60
 containerH: string
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:61
+Defined in: website/components/home/HomeMosaic.tsx:59
 
 ---
 
@@ -243,7 +247,7 @@ Defined in: website/components/home/HomeMosaic.tsx:61
 bottomHMap: Record<number, number> = {}
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:62
+Defined in: website/components/home/HomeMosaic.tsx:60
 
 ---
 
@@ -253,7 +257,7 @@ Defined in: website/components/home/HomeMosaic.tsx:62
 ext: string = MEDIA.EXT
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:63
+Defined in: website/components/home/HomeMosaic.tsx:61
 
 ---
 
@@ -263,7 +267,7 @@ Defined in: website/components/home/HomeMosaic.tsx:63
 _rafId: number | null = null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:64
+Defined in: website/components/home/HomeMosaic.tsx:62
 
 ---
 
@@ -273,7 +277,7 @@ Defined in: website/components/home/HomeMosaic.tsx:64
 _bracketTeardown: (() => void) | null = null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:65
+Defined in: website/components/home/HomeMosaic.tsx:63
 
 ---
 
@@ -285,7 +289,7 @@ _ringSession:
   | null = null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:66
+Defined in: website/components/home/HomeMosaic.tsx:64
 
 ---
 
@@ -295,7 +299,7 @@ Defined in: website/components/home/HomeMosaic.tsx:66
 _ringEl: Element | null = null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:67
+Defined in: website/components/home/HomeMosaic.tsx:65
 
 ---
 
@@ -305,7 +309,7 @@ Defined in: website/components/home/HomeMosaic.tsx:67
 _loadedCovers: Map<string, string>
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:68
+Defined in: website/components/home/HomeMosaic.tsx:66
 
 ---
 
@@ -315,7 +319,7 @@ Defined in: website/components/home/HomeMosaic.tsx:68
 _unsubManifest: (() => void) | null = null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:69
+Defined in: website/components/home/HomeMosaic.tsx:67
 
 ---
 
@@ -4376,7 +4380,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get processedItems(): MosaicItem[];
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:86
+Defined in: website/components/home/HomeMosaic.tsx:84
 
 ##### Returns
 
@@ -4388,7 +4392,7 @@ Defined in: website/components/home/HomeMosaic.tsx:86
 set processedItems(val): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:77
+Defined in: website/components/home/HomeMosaic.tsx:75
 
 Setter/getter — layout-ready project items pushed by the view.
 
@@ -4412,7 +4416,7 @@ Setter/getter — layout-ready project items pushed by the view.
 get translations(): MosaicTranslations | null;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:100
+Defined in: website/components/home/HomeMosaic.tsx:98
 
 ##### Returns
 
@@ -4424,7 +4428,7 @@ Defined in: website/components/home/HomeMosaic.tsx:100
 set translations(val): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:92
+Defined in: website/components/home/HomeMosaic.tsx:90
 
 Setter/getter — locale strings for card labels.
 
@@ -4448,7 +4452,7 @@ Setter/getter — locale strings for card labels.
 get hasTouch(): boolean;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:106
+Defined in: website/components/home/HomeMosaic.tsx:104
 
 Whether the session is touch-input (disables hover previews).
 
@@ -4466,7 +4470,7 @@ Whether the session is touch-input (disables hover previews).
 get storage(): string;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:112
+Defined in: website/components/home/HomeMosaic.tsx:110
 
 CDN base URL for card media.
 
@@ -4484,7 +4488,7 @@ CDN base URL for card media.
 get skeletonH(): string;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:131
+Defined in: website/components/home/HomeMosaic.tsx:129
 
 Height of the skeleton placeholder area.
 
@@ -4668,7 +4672,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: core/Component.ts:113
+Defined in: core/Component.ts:185
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4690,7 +4694,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: core/Component.ts:116
+Defined in: core/Component.ts:188
 
 #### Parameters
 
@@ -4714,7 +4718,7 @@ Defined in: core/Component.ts:116
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4748,7 +4752,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4773,7 +4777,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4797,7 +4801,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4834,7 +4838,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4877,7 +4881,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4927,7 +4931,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4958,7 +4962,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4981,7 +4985,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5006,7 +5010,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -5041,7 +5045,7 @@ Render result from render().
 _packSkeleton(): object;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:123
+Defined in: website/components/home/HomeMosaic.tsx:121
 
 Packs skeleton tiles with the same lowest-column algorithm as
 quickLayout(), using the real featured pattern (first
@@ -5073,7 +5077,7 @@ height: number
 onMounted(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:135
+Defined in: website/components/home/HomeMosaic.tsx:133
 
 #### Returns
 
@@ -5091,7 +5095,14 @@ Defined in: website/components/home/HomeMosaic.tsx:135
 onDestroy(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:146
+Defined in: website/components/home/HomeMosaic.tsx:144
+
+Teardown hook — invoked once per disconnect by the base
+`disconnectedCallback`. Declared as a concrete no-op (unlike the
+mount hooks above) so the callback can call it unconditionally:
+subclasses override for engine/audio/observer cleanup, and
+`el.onDestroy = fn` own-property patches still shadow the prototype
+method.
 
 #### Returns
 
@@ -5109,7 +5120,7 @@ Defined in: website/components/home/HomeMosaic.tsx:146
 scheduleLayout(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:165
+Defined in: website/components/home/HomeMosaic.tsx:163
 
 Debounced re-layout (resize/data changes).
 
@@ -5125,7 +5136,7 @@ Debounced re-layout (resize/data changes).
 quickLayout(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:174
+Defined in: website/components/home/HomeMosaic.tsx:172
 
 Synchronous layout pass for urgent repaints (data arrival, resize,
 hover expansion). Same packing math as layout() but skips the WASM
@@ -5143,7 +5154,7 @@ round-trip so the DOM never waits on a worker.
 layout(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:180
+Defined in: website/components/home/HomeMosaic.tsx:178
 
 Full masonry pass: measures, assigns columns, positions cards via WASM math.
 
@@ -5159,7 +5170,7 @@ Full masonry pass: measures, assigns columns, positions cards via WASM math.
 _applyCardStyles(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:186
+Defined in: website/components/home/HomeMosaic.tsx:184
 
 Writes computed card positions/sizes into DOM styles.
 
@@ -5175,7 +5186,7 @@ Writes computed card positions/sizes into DOM styles.
 onHover(i): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:197
+Defined in: website/components/home/HomeMosaic.tsx:195
 
 Pointer-enter: expands the card's details region — see
 mosaic-interactions.ts for the two-pass measurement flow.
@@ -5198,7 +5209,7 @@ mosaic-interactions.ts for the two-pass measurement flow.
 onLeave(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:203
+Defined in: website/components/home/HomeMosaic.tsx:201
 
 Pointer-leave: clears hover state.
 
@@ -5218,7 +5229,7 @@ onClick(
 ): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:211
+Defined in: website/components/home/HomeMosaic.tsx:209
 
 Card activation — see mosaic-interactions.ts for the desktop-nav /
 two-tap-on-touch split.
@@ -5249,7 +5260,7 @@ two-tap-on-touch split.
 skeletonStyle(box): string;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:217
+Defined in: website/components/home/HomeMosaic.tsx:215
 
 Style object for one skeleton placeholder box.
 
@@ -5271,7 +5282,7 @@ Style object for one skeleton placeholder box.
 render(): Element;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:223
+Defined in: website/components/home/HomeMosaic.tsx:221
 
 JSX template for the component's shadow DOM.
 
@@ -5291,7 +5302,7 @@ JSX template for the component's shadow DOM.
 onUpdated(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:227
+Defined in: website/components/home/HomeMosaic.tsx:225
 
 #### Returns
 
@@ -5303,32 +5314,13 @@ Defined in: website/components/home/HomeMosaic.tsx:227
 
 ---
 
-### \_syncAnimDescs()
-
-```ts
-_syncAnimDescs(): void;
-```
-
-Defined in: website/components/home/HomeMosaic.tsx:245
-
-Binds the mosaic-tile description to every card — each tile's
-hover/press/displacement spring is the animated surface. Runs
-post-render so the shared desc node lands in the shadow root
-(detached-node application would mint duplicate ids).
-
-#### Returns
-
-`void`
-
----
-
 ### \_syncRingSheen()
 
 ```ts
 _syncRingSheen(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:257
+Defined in: website/components/home/HomeMosaic.tsx:241
 
 Keeps the instanced ring-sheen overlay bound to the live
 `.home-mosaic` wall — renders recreate the container, so a session
@@ -5347,7 +5339,7 @@ gets a dirty-mark (the layout pass may have moved tiles).
 _syncBrackets(): void;
 ```
 
-Defined in: website/components/home/HomeMosaic.tsx:287
+Defined in: website/components/home/HomeMosaic.tsx:271
 
 Mounts the corner-brackets WebGPU widget on each card CTA —
 re-queries every update so a repacked/re-rendered card wall drops

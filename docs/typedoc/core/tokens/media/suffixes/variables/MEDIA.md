@@ -24,6 +24,9 @@ const MEDIA: Readonly<{
   THUMB_WEBP_EXT: '.jpg-thumb.webp'
   WEBP_EXT: '.webp'
   WEBM_EXT: '.webm'
+  VTT_EXT: '.vtt'
+  LONGDESC_SUFFIX: '_longdesc'
+  LONGDESC_EXT: '.txt'
 }>
 ```
 

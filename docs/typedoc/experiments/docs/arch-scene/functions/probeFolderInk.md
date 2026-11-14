@@ -8,7 +8,7 @@
 function probeFolderInk(host): number[] | null
 ```
 
-Defined in: experiments/docs/arch-scene.ts:886
+Defined in: experiments/docs/arch-scene.ts:894
 
 Folder-ink probe — directory glyphs wear the treeview folder's own
 `color` (the reference pack's gold), sampled off a `--folder` probe

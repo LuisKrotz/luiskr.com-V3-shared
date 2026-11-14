@@ -2,7 +2,7 @@
  * @file app-shell-coverage-approot-mount-loaddata.test.js
  * @description Split from app-shell-coverage.test.js — covers the "AppRoot — mount + loadData" describe.
  */
-import { describe, test, expect, jest, beforeEach, afterEach } from '@jest/globals'
+import { describe, test, expect, jest, beforeEach, afterEach, afterAll } from '@jest/globals'
 import { AppRoot } from '@/App.js'
 import store from '@core/store.js'
 import router from '@core/router/router.js'
@@ -28,6 +28,14 @@ beforeEach(() => {
 afterEach(() => {
   cleanups.forEach((c) => c())
   cleanups = []
+})
+
+afterAll(async () => {
+  // Drain armed onUserIntent registrations — every booted shell holds a
+  // 20s fallback timer whose lazy import()s must resolve while the jest
+  // environment is still alive.
+  window.dispatchEvent(new Event(KEYBOARD_EVENTS.KEYDOWN))
+  await flush(300)
 })
 
 /**

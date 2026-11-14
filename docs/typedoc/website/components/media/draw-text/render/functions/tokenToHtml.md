@@ -5,10 +5,10 @@
 [luiskr.com](../../../../../../README.md) / [website/components/media/draw-text/render](../README.md) / tokenToHtml
 
 ```ts
-function tokenToHtml(token, renderWord): string
+function tokenToHtml(token, renderWord, ctx?): string
 ```
 
-Defined in: website/components/media/draw-text/render.ts:210
+Defined in: website/components/media/draw-text/render.ts:276
 
 Top-level token → HTML: <br> and space become aria-hidden layout
 nodes (the space gets a span so the flex/grid layout sees a real box),
@@ -28,6 +28,10 @@ The parsed token.
 `RenderWord`
 
 Word renderer bound to the current delay/offset.
+
+### ctx?
+
+[`DrawRenderCtx`](../interfaces/DrawRenderCtx.md)
 
 ## Returns
 

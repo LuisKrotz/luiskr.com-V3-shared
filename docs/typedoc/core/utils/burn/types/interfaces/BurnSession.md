@@ -133,13 +133,29 @@ Defined in: core/utils/burn/types.ts:86
 
 ---
 
+### dpr
+
+```ts
+dpr: number
+```
+
+Defined in: core/utils/burn/types.ts:94
+
+Device-pixel ratio the raster was laid out at (capped by _DPR_CAP).
+Particle sizes are authored in device px but must read as a fixed
+CSS-px size on screen — drawParticles multiplies by this so an
+ember is ~2 CSS px on a dpr-1 desktop AND a dpr-3 phone instead of
+shrinking to an invisible sub-pixel speck on high-density screens.
+
+---
+
 ### paperX
 
 ```ts
 paperX: number
 ```
 
-Defined in: core/utils/burn/types.ts:88
+Defined in: core/utils/burn/types.ts:96
 
 Paper (title box) offset inside the canvas — the pad bleeds embers.
 
@@ -151,7 +167,7 @@ Paper (title box) offset inside the canvas — the pad bleeds embers.
 paperY: number
 ```
 
-Defined in: core/utils/burn/types.ts:89
+Defined in: core/utils/burn/types.ts:97
 
 ---
 
@@ -161,7 +177,7 @@ Defined in: core/utils/burn/types.ts:89
 paperW: number
 ```
 
-Defined in: core/utils/burn/types.ts:90
+Defined in: core/utils/burn/types.ts:98
 
 ---
 
@@ -171,7 +187,7 @@ Defined in: core/utils/burn/types.ts:90
 paperH: number
 ```
 
-Defined in: core/utils/burn/types.ts:91
+Defined in: core/utils/burn/types.ts:99
 
 ---
 
@@ -181,7 +197,7 @@ Defined in: core/utils/burn/types.ts:91
 t: number
 ```
 
-Defined in: core/utils/burn/types.ts:93
+Defined in: core/utils/burn/types.ts:101
 
 Seconds elapsed — noise/particle clock (forward progress derives from it).
 
@@ -193,7 +209,7 @@ Seconds elapsed — noise/particle clock (forward progress derives from it).
 dur: number
 ```
 
-Defined in: core/utils/burn/types.ts:94
+Defined in: core/utils/burn/types.ts:102
 
 ---
 
@@ -203,7 +219,7 @@ Defined in: core/utils/burn/types.ts:94
 prog: number
 ```
 
-Defined in: core/utils/burn/types.ts:101
+Defined in: core/utils/burn/types.ts:109
 
 Burn progress 0..1 while rebuilding — captured from the forward clock
 at disarm, then counted down; burnPaper re-derives the raster from
@@ -218,7 +234,7 @@ glyphs (a true time-reverse of the consume front).
 dir: number
 ```
 
-Defined in: core/utils/burn/types.ts:103
+Defined in: core/utils/burn/types.ts:111
 
 Direction: 1 combusts forward, −1 un-burns back to whole text.
 
@@ -230,7 +246,7 @@ Direction: 1 combusts forward, −1 un-burns back to whole text.
 onBurned: (() => void) | null;
 ```
 
-Defined in: core/utils/burn/types.ts:112
+Defined in: core/utils/burn/types.ts:120
 
 Fired once when the forward pass consumes the title (the ITEM_BURNED
 publish) — hosts stage their next beat off it (card-stack starts the
@@ -247,7 +263,7 @@ self-clears after firing so settle frames never re-fire it.
 lastT: number
 ```
 
-Defined in: core/utils/burn/types.ts:113
+Defined in: core/utils/burn/types.ts:121
 
 ---
 
@@ -257,7 +273,7 @@ Defined in: core/utils/burn/types.ts:113
 raf: number
 ```
 
-Defined in: core/utils/burn/types.ts:114
+Defined in: core/utils/burn/types.ts:122
 
 ---
 
@@ -267,7 +283,7 @@ Defined in: core/utils/burn/types.ts:114
 active: boolean
 ```
 
-Defined in: core/utils/burn/types.ts:115
+Defined in: core/utils/burn/types.ts:123
 
 ---
 
@@ -277,7 +293,7 @@ Defined in: core/utils/burn/types.ts:115
 cardEl: Element
 ```
 
-Defined in: core/utils/burn/types.ts:117
+Defined in: core/utils/burn/types.ts:125
 
 Owning card — teardown restores its classes and removes the slot.
 
@@ -289,7 +305,7 @@ Owning card — teardown restores its classes and removes the slot.
 particles: BurnParticle[];
 ```
 
-Defined in: core/utils/burn/types.ts:119
+Defined in: core/utils/burn/types.ts:127
 
 Live particles (embers + char flecks).
 
@@ -301,7 +317,7 @@ Live particles (embers + char flecks).
 letters: LetterBurn[];
 ```
 
-Defined in: core/utils/burn/types.ts:127
+Defined in: core/utils/burn/types.ts:135
 
 Per-glyph burn units — detected as ink column-runs in the rasterized
 paper (a space's gap splits runs, so each bucket IS a letter, not a
@@ -317,7 +333,7 @@ stand untouched — the effect consumes the text letter by letter.
 colLetter: Int16Array
 ```
 
-Defined in: core/utils/burn/types.ts:129
+Defined in: core/utils/burn/types.ts:137
 
 Paper-x → owning letter index (nearest letter for gap columns).
 
@@ -329,7 +345,7 @@ Paper-x → owning letter index (nearest letter for gap columns).
 colInk: Uint8Array
 ```
 
-Defined in: core/utils/burn/types.ts:131
+Defined in: core/utils/burn/types.ts:139
 
 Paper-x → ink coverage flag (0/1) — embers only spawn on glyph ink.
 
@@ -341,7 +357,7 @@ Paper-x → ink coverage flag (0/1) — embers only spawn on glyph ink.
 work: HTMLCanvasElement
 ```
 
-Defined in: core/utils/burn/types.ts:137
+Defined in: core/utils/burn/types.ts:145
 
 Working raster — every frame rebuilds the burned text here (paper →
 char-darken → erode), then blits into the display canvas so the
@@ -355,7 +371,7 @@ compositing never collides with particles.
 workCtx: CanvasRenderingContext2D
 ```
 
-Defined in: core/utils/burn/types.ts:138
+Defined in: core/utils/burn/types.ts:146
 
 ---
 
@@ -365,14 +381,16 @@ Defined in: core/utils/burn/types.ts:138
 titleEl: HTMLElement
 ```
 
-Defined in: core/utils/burn/types.ts:147
+Defined in: core/utils/burn/types.ts:157
 
-Live DOM nodes — re-measured every frame. The card's expand ease
-animates the h2's `cqw` font-size and flex-end position for ~0.42s;
-rasterizing once at arm time froze a mid-transition font into the
-paper, which rendered as "the effect changed the font size". The
-paper re-rasterizes whenever the DOM box moves so the burning copy
-is always pixel-identical to what the DOM would show.
+Live DOM nodes — measured in layout space at arm time, then only
+for the knit font signature (dir −1 re-rasters while the expand
+ease still settles letterforms). The canvas anchors once: hosts
+reflow around the burn (dealt-pile heights, typing-grown fronts)
+and a chasing anchor reads as the title sliding — the DOM ink is
+hidden anyway, so the raster stays where the glyphs caught fire.
+`ITEM_BURNED` hosts opt out of the freeze — their CSS relocates
+the title box at the consume beat and the canvas follows.
 
 ---
 
@@ -382,7 +400,7 @@ is always pixel-identical to what the DOM would show.
 overlayEl: HTMLElement
 ```
 
-Defined in: core/utils/burn/types.ts:148
+Defined in: core/utils/burn/types.ts:158
 
 ---
 
@@ -392,7 +410,7 @@ Defined in: core/utils/burn/types.ts:148
 ink: BurnInk
 ```
 
-Defined in: core/utils/burn/types.ts:150
+Defined in: core/utils/burn/types.ts:160
 
 Theme-resolved inks — read once from the CSS burn palette.
 
@@ -404,7 +422,7 @@ Theme-resolved inks — read once from the CSS burn palette.
 inkColor: string
 ```
 
-Defined in: core/utils/burn/types.ts:157
+Defined in: core/utils/burn/types.ts:167
 
 The title's resolved ink color captured BEFORE the DOM glyphs hide —
 the `burning` class sets `color: transparent`, so any re-raster after
@@ -419,7 +437,7 @@ vanishes" bug).
 lastBox: string
 ```
 
-Defined in: core/utils/burn/types.ts:159
+Defined in: core/utils/burn/types.ts:169
 
 Arm-time title-box signature — set once; a truthy value freezes the raster.
 
@@ -431,7 +449,7 @@ Arm-time title-box signature — set once; a truthy value freezes the raster.
 lastPos: string
 ```
 
-Defined in: core/utils/burn/types.ts:161
+Defined in: core/utils/burn/types.ts:171
 
 Last tracked canvas-space position — position-only drift detector.
 
@@ -443,7 +461,7 @@ Last tracked canvas-space position — position-only drift detector.
 lastFont: string
 ```
 
-Defined in: core/utils/burn/types.ts:170
+Defined in: core/utils/burn/types.ts:180
 
 Computed-font signature of the current raster — knit sessions
 (dir −1) compare it every frame: the card's expand/`--fw-lift` font

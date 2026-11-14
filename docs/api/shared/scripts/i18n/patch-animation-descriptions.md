@@ -28,3 +28,9 @@ slug-override table carries the full key set.
 ### `setPath`
 
 Sets `obj`'s leaf at a dot-path, creating intermediate containers.
+Simpler than the sibling scripts' version — every path here is
+object-only (no numeric array indexes), so intermediates are {}.
+
+- `@param` obj Root object to write into (the locale's translations node).
+- `@param` dotPath Dotted path ('components.animations', 'APP.animations').
+- `@param` value Leaf value to assign.

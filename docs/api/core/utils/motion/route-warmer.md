@@ -13,6 +13,10 @@ Post-load route-chunk warming.
 
 Small route chunks safe to warm during idle time.
 
+### `_started`
+
+Lifecycle flags — started arms the idle warm, stopped un-arms it permanently.
+
 ### `_schedule`
 
 Runs `cb` at the next idle slice — requestIdleCallback with a bounded

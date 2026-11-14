@@ -8,7 +8,7 @@
 function fileFillVerts(): Float32Array
 ```
 
-Defined in: experiments/docs/arch-scene.ts:658
+Defined in: experiments/docs/arch-scene.ts:666
 
 Filled document glyph — the folded-corner page as a thin extruded
 pentagon prism (the cut corner reads as the fold; the card thickness

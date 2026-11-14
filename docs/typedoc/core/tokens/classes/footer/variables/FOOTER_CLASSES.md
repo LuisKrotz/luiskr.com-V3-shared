@@ -16,6 +16,7 @@ const FOOTER_CLASSES: Readonly<{
   FOOTER_DIVIDER_CANVAS: 'footer-source-divider-canvas'
   FOOTER_CREDIT: 'footer-source-credit'
   FOOTER_RIGHTS: 'footer-source-rights'
+  FOOTER_VERSION: 'footer-source-version'
 }>
 ```
 

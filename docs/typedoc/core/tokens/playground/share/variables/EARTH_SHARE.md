@@ -10,10 +10,11 @@ const EARTH_SHARE: Readonly<{
   MANIFEST_URL: '/meta/earth-playground-share.json'
   IMAGE_EXTS: readonly string[]
   VIDEO_EXTS: readonly string[]
+  DELIVERY_IMAGE_EXTS: readonly string[]
 }>
 ```
 
-Defined in: core/tokens/playground/share.ts:23
+Defined in: core/tokens/playground/share.ts:34
 
 Earth Playground share-capture tokens. Sole declaration site — consumers
 (build generators, runtime share rotation) import members from this

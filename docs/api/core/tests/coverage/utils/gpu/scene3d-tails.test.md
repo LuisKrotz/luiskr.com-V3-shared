@@ -9,6 +9,11 @@ Coverage tail for utils/gpu/scene3d.ts — the JS facade
 
 ## Members
 
+### `mockGpu`
+
+Mutable GPU/decode mock state — the module mocks below read these
+per-call so tests steer capability/device/decode branches.
+
 ### `makeSurface`
 
 Records surface calls on a fake Surface3d.

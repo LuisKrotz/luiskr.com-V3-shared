@@ -8,7 +8,7 @@
 function projectedEdge(a, w, tier): number
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:255
+Defined in: website/components/home/cardstack/deck.ts:253
 
 Screen-space x (px from the deck centre) of the outer edge of the card
 at offset `a` on the right side, after the perspective divide.

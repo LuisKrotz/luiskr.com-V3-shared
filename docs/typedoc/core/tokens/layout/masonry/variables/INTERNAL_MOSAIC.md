@@ -17,6 +17,9 @@ const INTERNAL_MOSAIC: Readonly<{
   MIN_TILE_W: 144
   MIN_TILE_H: 89
   CAROUSEL_MAX_W: 1024
+  FILL_MIN_W: 24
+  FILL_MIN_H: 64
+  FILL_GROW_MAX: 1.5
 }>
 ```
 

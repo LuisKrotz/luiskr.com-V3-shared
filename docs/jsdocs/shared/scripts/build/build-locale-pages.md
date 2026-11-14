@@ -79,7 +79,11 @@ every emitted entity resolve to this single #person node.
 
 ### `PERSON_REF`
 
-Cross-reference to the site's Person entity — author/publisher/uploader/creator all resolve to `#person`.
+Cross-reference to the site's Person entity — author/uploader/creator all resolve to `#person`.
+
+### `ORG_REF`
+
+Cross-reference to the site's Organization entity — Article/WebSite publishers resolve to `#organization` so Google News reads a publisher org.
 
 ### `breadcrumbEntity`
 
@@ -347,6 +351,14 @@ Cover share-image for a project — uncompressed jpg or video poster.
 ### `homeEntities`
 
 Carousel ItemList for locale home pages — portfolio tiles → covers.
+
+### `awardEntities`
+
+Awards/mentions ItemList — mirrors runtime emitHomeJsonLd so the
+static graph carries the same carousel semantics as the rendered
+<mentions-deck> strip. `url` is the outbound award link (PDF or
+press page), `image` the CDN badge thumbnail, `name` the visible
+"date: title" text and `description` the hidden longdesc.
 
 ### `richParagraphs`
 

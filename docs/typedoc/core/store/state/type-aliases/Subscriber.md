@@ -8,7 +8,7 @@
 type Subscriber = (_state) => void
 ```
 
-Defined in: core/store/state.ts:157
+Defined in: core/store/state.ts:160
 
 Subscriber callback — invoked by notify() with the state bag after every
 commit that didn't suppress notification.

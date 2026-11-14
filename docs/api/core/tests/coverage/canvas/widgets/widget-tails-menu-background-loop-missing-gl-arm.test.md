@@ -6,3 +6,13 @@ Split from widget-tails.test.js — covers the "menu-background loop — missing
 | -------------- | ------------------------------------------------------------------------------------------------- |
 | **Source**     | `src/core\tests\coverage\canvas\widgets\widget-tails-menu-background-loop-missing-gl-arm.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.                                         |
+
+## Members
+
+### `makeCanvas`
+
+Bare canvas — the loop guard only needs the element handle here.
+
+### `_lang`
+
+Lang-row factory — code + one or two country variants per row.

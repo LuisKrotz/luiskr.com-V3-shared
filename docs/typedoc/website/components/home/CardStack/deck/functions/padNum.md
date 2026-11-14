@@ -8,7 +8,7 @@
 function padNum(n): string
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:434
+Defined in: website/components/home/cardstack/deck.ts:438
 
 Zero-padded counter/index number — "01", "08" — shared by the deck
 counter and the index rows.

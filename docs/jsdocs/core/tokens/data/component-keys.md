@@ -45,6 +45,13 @@ Placeholder inside the `a11y.*` heading templates — renderers swap it for
 the 1-based ordinal so translators may position the number freely
 ('Section {index}' vs '{index}. Bölüm').
 
+### `ROUTE_TOKEN`
+
+Placeholder inside the `notify.nothingToPrint` toast template — the print
+gate swaps it for the localized route name so translators may position
+the name freely ('Nothing to print in {route}' vs '{route} tem nada
+para imprimir').
+
 ### `SECTION_COMPONENT_KEYS`
 
 Frozen section component key map — sole declaration site for these tokens; consumers read

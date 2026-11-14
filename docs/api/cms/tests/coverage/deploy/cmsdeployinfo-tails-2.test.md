@@ -6,3 +6,9 @@ Split from coverage-tails-6.test.js — covers the "CmsDeployInfo tails 2" descr
 | -------------- | ------------------------------------------------------------- |
 | **Source**     | `src/cms\tests\coverage\deploy\cmsdeployinfo-tails-2.test.js` |
 | **UX surface** | Admin bundle — editors for every database node.               |
+
+## Members
+
+### `flush`
+
+Generous flush — mounted render queues need real timers past microtasks.

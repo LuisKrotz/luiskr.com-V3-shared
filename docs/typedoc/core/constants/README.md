@@ -360,6 +360,18 @@ Re-exports [CAROUSEL_CSS_PROPS](../tokens/css/carousel/variables/CAROUSEL_CSS_PR
 
 ---
 
+### FIELD\_CSS\_PROPS
+
+Re-exports [FIELD_CSS_PROPS](../tokens/css/field/variables/FIELD_CSS_PROPS.md)
+
+---
+
+### FIELD\_CSS\_PROP\_LIST
+
+Re-exports [FIELD_CSS_PROP_LIST](../tokens/css/field/variables/FIELD_CSS_PROP_LIST.md)
+
+---
+
 ### GENIE\_CSS\_PROPS
 
 Re-exports [GENIE_CSS_PROPS](../tokens/css/genie/variables/GENIE_CSS_PROPS.md)
@@ -381,6 +393,12 @@ Re-exports [MOSAIC_CSS_PROPS](../tokens/css/mosaic/variables/MOSAIC_CSS_PROPS.md
 ### NAV\_SEARCH\_CSS\_PROPS
 
 Re-exports [NAV_SEARCH_CSS_PROPS](../tokens/css/nav/variables/NAV_SEARCH_CSS_PROPS.md)
+
+---
+
+### PARALLAX\_CSS\_PROPS
+
+Re-exports [PARALLAX_CSS_PROPS](../tokens/css/parallax/variables/PARALLAX_CSS_PROPS.md)
 
 ---
 
@@ -465,6 +483,12 @@ Re-exports [SOURCE_YEAR_TOKEN](../tokens/data/component-keys/variables/SOURCE_YE
 ### A11Y\_INDEX\_TOKEN
 
 Re-exports [A11Y_INDEX_TOKEN](../tokens/data/component-keys/variables/A11Y_INDEX_TOKEN.md)
+
+---
+
+### ROUTE\_TOKEN
+
+Re-exports [ROUTE_TOKEN](../tokens/data/component-keys/variables/ROUTE_TOKEN.md)
 
 ---
 
@@ -1089,6 +1113,18 @@ Re-exports [MENTIONS_DECK_LAYOUT](../tokens/motion/mentions-deck/variables/MENTI
 ### NOTIFY
 
 Re-exports [NOTIFY](../tokens/motion/notify/variables/NOTIFY.md)
+
+---
+
+### PAGE\_BACKDROP
+
+Re-exports [PAGE_BACKDROP](../tokens/motion/page-backdrop/variables/PAGE_BACKDROP.md)
+
+---
+
+### PARALLAX
+
+Re-exports [PARALLAX](../tokens/motion/parallax/variables/PARALLAX.md)
 
 ---
 

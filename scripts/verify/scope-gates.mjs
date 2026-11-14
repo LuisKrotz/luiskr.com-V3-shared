@@ -520,6 +520,8 @@ if (mode === 'areas') {
   // result for the commit its gitlink records, plus a coverage summary
   // the coverage-gate can read. Missing pieces run the module's suite
   // with coverage (the stored results CI/fresh checkouts can't have).
+  let ranSuites = false
+
   for (const modulePath of Object.keys(LINK_SCOPES)) {
     const scope = LINK_SCOPES[modulePath]
 
@@ -558,7 +560,18 @@ if (mode === 'areas') {
       modulePath === 'shared' ? 'shared' : path.basename(modulePath),
     ])
 
+    ranSuites = true
+
     stamp(scope, ['jest', 'coverage'])
+  }
+
+  // Coverage is cross-cutting — a module's report unions hits from every
+  // suite that touched its files. Each fallback run merges against the raw
+  // maps present at that moment, so a module whose suite ran first can
+  // miss coverage contributed by a module re-run later. One final union
+  // re-emits every report against the complete raw-map set.
+  if (ranSuites) {
+    run('coverage merge', 'node', ['shared/scripts/test/merge-coverage.mjs'])
   }
 } else if (mode === 'run') {
   const scopes = args.includes('--all') ? Object.keys(SCOPES) : expand(new Set(args))

@@ -18,6 +18,15 @@ sheet is shared across every component instance through
 sheet per component class (not per element) is the intended ratio. The Map
 also makes re-mounts free: the same key hits the same cached sheet.
 
+### `_scheduleIdle`
+
+Runs `cb` at the next idle slice — requestIdleCallback bounded by the
+shared prefetch timeout when available, a short setTimeout fallback
+otherwise. Mirrors the route-warmer/predictive-loader schedule contract
+so print-tier fetches never compete with mount-time frame work.
+
+- `@param` cb work to run in the next idle gap.
+
 ### (module scope)
 
 Component state bag — keys are declared per-component and narrowed by
@@ -76,6 +85,17 @@ Tier css text currently appended to the legacy <style> node.
 
 ### (module scope)
 
+Resolved print-tier css — adopted onto the root as soon as the lazy
+`rcss-print` chunk lands (the rules only match under print media, so
+the sheet is inert on screen and stays adopted permanently). Also
+stashes the text for legacy <style> rebuilds and re-mount re-adopts.
+
+### (module scope)
+
+Print-tier load in flight — dedupes mount/idle re-entry.
+
+### (module scope)
+
 Shared grow-watcher unsubscribe — set while mounted with tiers.
 
 ### (module scope)
@@ -118,6 +138,15 @@ Reactive state bag — written only through setState() so updates always re-rend
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
 onInit → _renderInitial → onMounted → onUpdated.
+
+### `onDestroy`
+
+Teardown hook — invoked once per disconnect by the base
+`disconnectedCallback`. Declared as a concrete no-op (unlike the
+mount hooks above) so the callback can call it unconditionally:
+subclasses override for engine/audio/observer cleanup, and
+`el.onDestroy = fn` own-property patches still shadow the prototype
+method.
 
 ### `constructor`
 
@@ -215,6 +244,24 @@ at the old tier's position (never dropping sheets a subclass added);
 the legacy path rewrites the `<style>` node, where the new cumulative
 text replaces the served one outright since it is a strict superset.
 - `@param` css cumulative tier css text.
+
+### (module scope)
+
+Schedules the component's print-tier adoption. `?tiers` sheets keep
+their `@media print`/`@page` blocks out of `base` behind a lazy
+`rcss-print` chunk — importing during idle keeps paper rules off the
+mount path while landing them long before a real print snapshot. The
+adopted sheet is permanent: print rules match nothing on screen, so
+neither unmount nor tier growth ever removes them.
+- `@param` tiered the component's `?tiers` module.
+
+### (module scope)
+
+Adopts resolved print css — constructable path shares one parsed sheet
+per text via `_sharedSheets` and appends it after every adopted sheet,
+matching the source order where print blocks sat at file end; the
+legacy path re-appends the text to the rebuilt `<style>` composition.
+- `@param` css print-tier css text from the resolved module.
 
 ### `_updateDom`
 

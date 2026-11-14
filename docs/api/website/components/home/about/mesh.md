@@ -11,9 +11,45 @@
 
 Live mesh session parked on the host.
 
+### `visible`
+
+True only while the canvas intersects the viewport — the loop parks
+offscreen instead of burning a ~3k-dot raster nobody can see.
+
+### `lastPaint`
+
+rAF timestamp of the last painted frame — the 60 Hz paint cap.
+
 ### `size`
 
 Re-measures the canvas box and re-stamps the backing store.
+
+### `_SEL`
+
+Lattice tunables — picture-wrapper selector, dot rows, radial spoke
+count, and the dotted guide-line angles (radians) the mesh draws over.
+
+### `_PAINT_HZ`
+
+Paint-rate ceiling (Hz). The lattice's fastest component is the traveling
+wave at 1.4 rad/s (~0.22 cycles/s) — far below 60 Hz, so capping paints
+here is visually identical to a full-rate loop while spending a quarter
+of the raster on a 240 Hz timeline. Uncapped, ~2,860 `fillRect`s per
+frame pushed the desktop scroll-fps p95 over its 8.33 ms ceiling.
+
+### `_ink`
+
+Cached dot ink (`r,g,b` string) + the theme flag it resolved under.
+
+### `meshInk`
+
+Dot ink — the lattice paints in `--text-muted` so the mesh reads on
+whatever theme field sits behind the portrait (the old fixed mid-grey
+vanished on the light paper wash: "animation is not visible"). The
+palette re-samples on a theme flip only — per-frame paints read the
+cached channel string, so the loop never pays a getComputedStyle.
+
+- `@returns` `r,g,b` channel string for rgba() composition.
 
 ### `hash`
 

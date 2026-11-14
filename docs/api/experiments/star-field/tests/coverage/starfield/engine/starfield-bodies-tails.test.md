@@ -13,6 +13,10 @@ Coverage tails for the photographic bodies layer —
 
 TSL namespace + node-material ctor bundle injected into body makers.
 
+### `ctxProto`
+
+Canvas prototype accessor — for installing getContext stubs per test.
+
 ### `fake2d`
 
 Fake 2d context surface covering every call maskPhotoTexture makes.

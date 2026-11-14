@@ -9,6 +9,7 @@ const QUERY_STRINGS: Readonly<{
   SELECTOR_LINKS: 'a[href^="/"], [data-route]'
   SEARCH_QUERY: 'q'
   LINK_CANONICAL: 'link[rel="canonical"]'
+  LINK_PRINT: 'link[rel="alternate"][media="print"]'
   META_ROBOTS: 'meta[name="robots"]'
   META_DESCRIPTION: 'meta[name="description"]'
   META_OG_TITLE: 'meta[property="og:title"]'

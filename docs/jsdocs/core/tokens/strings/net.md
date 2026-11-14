@@ -15,6 +15,10 @@ Frozen net string map — sole declaration site for these tokens; consumers read
 never re-declare the strings (zero-hardcoding rules 4–5). Object.freeze makes the token
 contract immutable at runtime.
 
+### `DATA_COLON`
+
+`data:` URI scheme prefix — inline svg placeholders, canvas stills.
+
 ### `SCHEME_MAILTO`
 
 URI scheme prefixes on contact-channel hrefs — the mail block is the

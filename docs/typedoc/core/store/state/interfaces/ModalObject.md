@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../README.md) / [core/store/state](../README.md) / ModalObject
 
-Defined in: core/store/state.ts:90
+Defined in: core/store/state.ts:93
 
 Expand-modal descriptor written by MediaExpanded and read by the modal
 component: `open` drives mount/visibility, `class` carries the figure's
@@ -19,7 +19,7 @@ the carousel translateX offset at open time.
 transform: number
 ```
 
-Defined in: core/store/state.ts:91
+Defined in: core/store/state.ts:94
 
 ---
 
@@ -29,7 +29,7 @@ Defined in: core/store/state.ts:91
 class: string;
 ```
 
-Defined in: core/store/state.ts:92
+Defined in: core/store/state.ts:95
 
 ---
 
@@ -39,7 +39,7 @@ Defined in: core/store/state.ts:92
 open: boolean
 ```
 
-Defined in: core/store/state.ts:93
+Defined in: core/store/state.ts:96
 
 ---
 
@@ -49,7 +49,7 @@ Defined in: core/store/state.ts:93
 media: ModalMedia | null
 ```
 
-Defined in: core/store/state.ts:94
+Defined in: core/store/state.ts:97
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: core/store/state.ts:94
 origin: ModalRect | null
 ```
 
-Defined in: core/store/state.ts:95
+Defined in: core/store/state.ts:98

@@ -8,7 +8,7 @@
 function fetchDossier(id, locale?, labels?): Promise<SFDossier | null>
 ```
 
-Defined in: experiments/star-field/star/dossier.ts:265
+Defined in: experiments/star-field/star/dossier.ts:270
 
 Fetches one locale dossier JSON — `data/<locale>/<id>.json`, with the
 canonical English file as fallback so a not-yet-translated body still

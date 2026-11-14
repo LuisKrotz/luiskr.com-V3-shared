@@ -13,6 +13,10 @@ CDN media inventory + best-variant resolution shared by the
 
 Object-name prefix every public media asset lives under on the bucket.
 
+### `MEDIA_BUCKET`
+
+Media bucket name — sole declaration site for gs:// + API endpoints.
+
 ### `LIST_ENDPOINT`
 
 Anonymous `storage.objects.list` endpoint — the bucket is public.

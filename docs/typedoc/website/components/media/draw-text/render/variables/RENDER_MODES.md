@@ -12,6 +12,6 @@ const RENDER_MODES: Readonly<{
 }>
 ```
 
-Defined in: website/components/media/draw-text/render.ts:40
+Defined in: website/components/media/draw-text/render.ts:42
 
 Frozen render-mode token map — sole declaration site for the mode literals.

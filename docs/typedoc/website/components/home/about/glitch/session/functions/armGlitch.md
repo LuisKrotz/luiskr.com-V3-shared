@@ -8,7 +8,7 @@
 function armGlitch(host, wrap): boolean
 ```
 
-Defined in: website/components/home/about/glitch/session.ts:117
+Defined in: website/components/home/about/glitch/session.ts:118
 
 Arms the session: builds the overlay canvas against the live wrapper,
 then races the two render backends — the rust/glitch WebGPU widget

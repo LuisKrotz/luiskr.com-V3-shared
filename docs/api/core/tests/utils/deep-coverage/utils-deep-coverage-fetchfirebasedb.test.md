@@ -6,3 +6,9 @@ Split from utils-deep-coverage.test.js — covers the "fetchFirebaseDb" describe
 | -------------- | -------------------------------------------------------------------------------- |
 | **Source**     | `src/core\tests\utils\deep-coverage\utils-deep-coverage-fetchfirebasedb.test.js` |
 | **UX surface** | Shared primitives every surface builds on — no direct UI.                        |
+
+## Members
+
+### `flush`
+
+Zero-ms flush — fetch promises resolve within one macrotask.

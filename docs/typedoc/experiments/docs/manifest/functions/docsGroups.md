@@ -8,7 +8,7 @@
 function docsGroups(): DocsGroup[]
 ```
 
-Defined in: experiments/docs/manifest.ts:214
+Defined in: experiments/docs/manifest.ts:215
 
 The four section nodes that parent the flat manifest roots in the
 treeview and the portal-root grid. Built once — the manifest never

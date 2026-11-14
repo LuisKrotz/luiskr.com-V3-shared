@@ -54,6 +54,29 @@ whole stagger lives in CSS and JS only writes integers.
 Words are aria-hidden single units + the host keeps the real text —
 screen readers read the whole string once instead of char-by-char.
 
+### (module scope)
+
+Per-mount render context — the delay/offset pair bound into every
+char's stagger vars, threaded through the token→HTML walkers so tag
+wrappers can emit vars that must agree with them (a <q>'s generated
+quote marks animate on the adjacent chars' delays — see tagToHtml).
+
+### `delay`
+
+Per-char stagger ms — the value each char writes to `--char-delay`.
+
+### `offset`
+
+Base ms before any char starts — the value each char writes to `--offset`.
+
+### `edgeCharCi`
+
+Char index at a chunk-list edge — recursive: the edge char of a list is
+the edge char of its first (or last) chunk that yields one, and a tag's
+edge char lives inside its own chunk list. Returns -1 for char-free
+runs (pure space/br tokens) where no adjacent char exists for a
+decoration to sync with.
+
 ### `chunkToHtml`
 
 Renders one non-tag token to HTML — word tokens become animated spans via

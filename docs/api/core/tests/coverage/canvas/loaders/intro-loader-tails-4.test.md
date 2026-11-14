@@ -9,6 +9,10 @@ Covers the static-markup adoption paths — emitted pages
 
 ## Members
 
+### `flush`
+
+Generous flush — loader steps settle within a few macrotasks.
+
 ### `mountStaticLoader`
 
 Mounts the same markup index.html emits statically (mirrors LOADER_CLASSES).

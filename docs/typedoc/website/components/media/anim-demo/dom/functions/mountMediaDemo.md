@@ -8,7 +8,7 @@
 function mountMediaDemo(_ctx): void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:230
+Defined in: website/components/media/anim-demo/dom.ts:223
 
 Media-progressive demo — the real <media-figure> mounts its own
 decode/progressive lifecycle; no JS state to drive.

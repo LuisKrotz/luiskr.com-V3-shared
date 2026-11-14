@@ -307,6 +307,17 @@ const emitCssSplits = async (t) => {
     names[cls] = name
   }
 
+  // Print rules leave every width-class sheet and land on their own file —
+  // the loader serves it on a `media="print"` link so screen sessions never
+  // parse paper-only css.
+  if (sheets.print) {
+    const hash = crypto.createHash('md5').update(sheets.print).digest('hex').slice(0, 8)
+    const name = `index-print-${hash}.css`
+
+    queueCompressedWrite(path.join(outDir, name), Buffer.from(sheets.print))
+    names.print = name
+  }
+
   // The wide variant is byte-identical to the transformed monolith, so the
   // sass→lightningcss map stays valid for it — repo-relative sources kept.
   const parsedMap = JSON.parse(map.toString())
@@ -403,6 +414,16 @@ for (const t of ES_TARGETS) {
 
       queueCompressedWrite(path.join(cssDir, name), Buffer.from(sheets[cls]))
       cssMap[cls] = name
+    }
+
+    // Same print-sheet extraction as the direct-splits path — one
+    // `media="print"` link per manifest entry, never part of screen css.
+    if (sheets.print) {
+      const hash = crypto.createHash('md5').update(sheets.print).digest('hex').slice(0, 8)
+      const name = `index-print-${hash}.css`
+
+      queueCompressedWrite(path.join(cssDir, name), Buffer.from(sheets.print))
+      cssMap.print = name
     }
 
     const dbg = await emitCss(t, 'app-')

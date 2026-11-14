@@ -8,7 +8,7 @@
 function clipEdge(a, b, rA, rB): Float32Array<ArrayBufferLike> | null
 ```
 
-Defined in: experiments/docs/arch-scene.ts:805
+Defined in: experiments/docs/arch-scene.ts:813
 
 Trims an edge so it stops clear of BOTH glyph faces it connects —
 the reference's links aim at node surfaces, not centers. Each end

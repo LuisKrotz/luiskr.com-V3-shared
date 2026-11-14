@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/media/MediaExpanded](../README.md) / MediaExpanded
 
-Defined in: website/components/media/MediaExpanded.tsx:30
+Defined in: website/components/media/MediaExpanded.tsx:32
 
 The MediaExpanded — expanded class.
 
@@ -20,7 +20,7 @@ The MediaExpanded — expanded class.
 new MediaExpanded(): MediaExpanded;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:64
+Defined in: website/components/media/MediaExpanded.tsx:68
 
 #### Returns
 
@@ -35,12 +35,16 @@ Defined in: website/components/media/MediaExpanded.tsx:64
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -54,7 +58,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +80,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +101,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +119,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +135,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +155,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +171,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +187,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 isClosing: boolean = false
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:31
+Defined in: website/components/media/MediaExpanded.tsx:33
 
 ---
 
@@ -193,7 +197,7 @@ Defined in: website/components/media/MediaExpanded.tsx:31
 currentSrc: string = ATTR_VALUES.EMPTY
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:32
+Defined in: website/components/media/MediaExpanded.tsx:34
 
 ---
 
@@ -207,7 +211,7 @@ _closeBtn:
   | null = null;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:33
+Defined in: website/components/media/MediaExpanded.tsx:35
 
 ---
 
@@ -217,7 +221,7 @@ Defined in: website/components/media/MediaExpanded.tsx:33
 _brackets: (() => void) | null = null;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:34
+Defined in: website/components/media/MediaExpanded.tsx:36
 
 ---
 
@@ -229,7 +233,17 @@ _genie:
   | null = null;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:35
+Defined in: website/components/media/MediaExpanded.tsx:37
+
+---
+
+### \_closeTimer
+
+```ts
+_closeTimer: number | null = null;
+```
+
+Defined in: website/components/media/MediaExpanded.tsx:38
 
 ---
 
@@ -248,7 +262,7 @@ _genieSheet:
   | null = null;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:44
+Defined in: website/components/media/MediaExpanded.tsx:47
 
 Baked warp sheet reused across this modal's open→close pair — keyed
 on (content, dpr, viewport, theme): any of those changing rebakes.
@@ -4316,7 +4330,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get static observedAttributes(): string[];
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:53
+Defined in: website/components/media/MediaExpanded.tsx:56
 
 ##### Returns
 
@@ -4332,7 +4346,7 @@ Defined in: website/components/media/MediaExpanded.tsx:53
 get source(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:70
+Defined in: website/components/media/MediaExpanded.tsx:74
 
 Full-res media URL (from the source attribute).
 
@@ -4350,11 +4364,11 @@ Full-res media URL (from the source attribute).
 get sourceWebm(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:78
+Defined in: website/components/media/MediaExpanded.tsx:82
 
-Webm sibling of an .mp4 source — first <source> when it exists
-(manifest-known absent ⇒ '', same doomed-request gate as the
-figure's resolveMediaSources).
+Webm sibling of an .mp4 source — first <source> when the manifest
+proves it ('' otherwise — an unproven sibling is a doomed request,
+same gate as the figure's resolveMediaSources).
 
 ##### Returns
 
@@ -4370,9 +4384,14 @@ figure's resolveMediaSources).
 get thumb(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:86
+Defined in: website/components/media/MediaExpanded.tsx:95
 
 Low-res thumbnail URL shown while the full asset loads.
+The stamped variant is offered only when the manifest proves it —
+an unproven layer would 404 into a transparent img (flat letterbox
+bands — the "missing blur" bug). Images fall back to the full
+source — always present, invisible under cover+blur; videos
+withhold the layer entirely since an mp4 can't be an <img> src.
 
 ##### Returns
 
@@ -4388,9 +4407,65 @@ Low-res thumbnail URL shown while the full asset loads.
 get alt(): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:92
+Defined in: website/components/media/MediaExpanded.tsx:105
 
 Alt text for the media.
+
+##### Returns
+
+`string`
+
+---
+
+### stem
+
+#### Get Signature
+
+```ts
+get stem(): string;
+```
+
+Defined in: website/components/media/MediaExpanded.tsx:112
+
+Extensionless CDN stem the a11y siblings (.vtt / _longdesc.txt)
+derive from — stamped by the modal openers alongside `source`.
+
+##### Returns
+
+`string`
+
+---
+
+### a11yTracks
+
+#### Get Signature
+
+```ts
+get a11yTracks(): DescriptionTrack[];
+```
+
+Defined in: website/components/media/MediaExpanded.tsx:119
+
+Manifest-gated description tracks for the expanded video — same
+16-locale set the owning <media-figure> emits.
+
+##### Returns
+
+[`DescriptionTrack`](../../../../../core/utils/media/accessibility/interfaces/DescriptionTrack.md)[]
+
+---
+
+### longdesc
+
+#### Get Signature
+
+```ts
+get longdesc(): string;
+```
+
+Defined in: website/components/media/MediaExpanded.tsx:125
+
+Localized longdesc URL for the expanded image ('' when ungenerated).
 
 ##### Returns
 
@@ -4406,7 +4481,7 @@ Alt text for the media.
 get mediaWidth(): number;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:98
+Defined in: website/components/media/MediaExpanded.tsx:131
 
 Natural media width attribute.
 
@@ -4424,7 +4499,7 @@ Natural media width attribute.
 get mediaHeight(): number;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:107
+Defined in: website/components/media/MediaExpanded.tsx:140
 
 Natural media height attribute.
 
@@ -4442,7 +4517,7 @@ Natural media height attribute.
 get isVideo(): boolean;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:116
+Defined in: website/components/media/MediaExpanded.tsx:149
 
 Whether the source is a video.
 
@@ -4626,7 +4701,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onUpdated(): void;
 ```
 
-Defined in: core/Component.ts:115
+Defined in: core/Component.ts:187
 
 #### Returns
 
@@ -4644,7 +4719,7 @@ Defined in: core/Component.ts:115
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: core/Component.ts:116
+Defined in: core/Component.ts:188
 
 #### Parameters
 
@@ -4668,7 +4743,7 @@ Defined in: core/Component.ts:116
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4702,7 +4777,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4727,7 +4802,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4751,7 +4826,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4788,7 +4863,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4831,7 +4906,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4881,7 +4956,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4912,7 +4987,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4935,7 +5010,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4960,7 +5035,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4995,7 +5070,7 @@ Render result from render().
 onInit(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:123
+Defined in: website/components/media/MediaExpanded.tsx:156
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -5017,7 +5092,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 onMounted(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:127
+Defined in: website/components/media/MediaExpanded.tsx:160
 
 #### Returns
 
@@ -5035,7 +5110,7 @@ Defined in: website/components/media/MediaExpanded.tsx:127
 placeholder(width, height): string;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:133
+Defined in: website/components/media/MediaExpanded.tsx:166
 
 Placeholder box style while the full asset loads.
 
@@ -5061,7 +5136,7 @@ Placeholder box style while the full asset loads.
 startClose(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:139
+Defined in: website/components/media/MediaExpanded.tsx:172
 
 Dismissal sequence — CSS zoom-out, then URL/dialog/scroll teardown (see expanded-close.ts).
 
@@ -5077,7 +5152,14 @@ Dismissal sequence — CSS zoom-out, then URL/dialog/scroll teardown (see expand
 onDestroy(): void;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:143
+Defined in: website/components/media/MediaExpanded.tsx:176
+
+Teardown hook — invoked once per disconnect by the base
+`disconnectedCallback`. Declared as a concrete no-op (unlike the
+mount hooks above) so the callback can call it unconditionally:
+subclasses override for engine/audio/observer cleanup, and
+`el.onDestroy = fn` own-property patches still shadow the prototype
+method.
 
 #### Returns
 
@@ -5095,7 +5177,7 @@ Defined in: website/components/media/MediaExpanded.tsx:143
 render(): Element;
 ```
 
-Defined in: website/components/media/MediaExpanded.tsx:168
+Defined in: website/components/media/MediaExpanded.tsx:207
 
 JSX template (see expanded-render.tsx).
 

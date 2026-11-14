@@ -1,16 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/about/data](../README.md) / saveAboutData
 
 ```ts
-function saveAboutData(host): Promise<void>;
+function saveAboutData(host): Promise<void>
 ```
 
-Defined in: cms/about/data.ts:49
+Defined in: cms/about/data.ts:52
 
-Saves about data.
+Writes the whole `aboutData` model back to `pages/about` — the editor
+owns the complete node shape so a single `set` replaces it atomically.
 
 ## Parameters
 
@@ -18,7 +19,7 @@ Saves about data.
 
 [`CmsAboutEditor`](../../CmsAboutEditor/classes/CmsAboutEditor.md)
 
-— the host component
+— the host component holding `aboutData`/`selectedLang`
 
 ## Returns
 

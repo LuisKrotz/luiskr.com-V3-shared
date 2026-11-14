@@ -26,6 +26,11 @@ so repeated intersection entries never re-fire a mount.
 
 Viewport-proximity watcher — drivers mount on approach, die on exit.
 
+### `_printMounted`
+
+Marks a driver print force-mounted — afterprint tears it back down
+so off-screen demos never keep a live WebGL context/loop.
+
 ### `attributeChangedCallback`
 
 `animation` attr swaps re-render the stage and re-mount the matching
@@ -50,6 +55,18 @@ Post-mount — resolves + mounts the driver for the attr's id.
 ### (module scope)
 
 Disconnect — runs the driver's teardown (widgets, GPU, loops).
+
+### `_onPrintPrepare`
+
+Print entry force-mounts the driver so the stage canvas paints a real
+frame before the print walk captures it — off-screen demos otherwise
+stay unmounted (the IO gate) and would serialize as blank stills.
+
+### `_onAfterPrint`
+
+Print exit releases only the print-mounted driver — a driver the IO
+mounted itself stays live (the observer will not re-fire for an
+element that never left the viewport).
 
 ### `_mountDemo`
 

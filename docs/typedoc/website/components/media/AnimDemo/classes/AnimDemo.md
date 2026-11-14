@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/media/AnimDemo](../README.md) / AnimDemo
 
-Defined in: website/components/media/AnimDemo.tsx:40
+Defined in: website/components/media/AnimDemo.tsx:41
 
 The <anim-demo> host element — one live preview stage per record.
 
@@ -20,7 +20,7 @@ The <anim-demo> host element — one live preview stage per record.
 new AnimDemo(): AnimDemo;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:55
+Defined in: website/components/media/AnimDemo.tsx:60
 
 #### Returns
 
@@ -35,12 +35,16 @@ Defined in: website/components/media/AnimDemo.tsx:55
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -54,7 +58,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +80,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +101,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +119,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +135,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +155,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +171,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +187,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 _teardown: (() => void) | null = null;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:42
+Defined in: website/components/media/AnimDemo.tsx:43
 
 Live driver teardown — widget destroy / mount teardown / loop stop.
 
@@ -195,7 +199,7 @@ Live driver teardown — widget destroy / mount teardown / loop stop.
 _mounted: boolean = false
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:46
+Defined in: website/components/media/AnimDemo.tsx:47
 
 Mounted flag — set even for teardown-less drivers (pure-CSS stages),
 so repeated intersection entries never re-fire a mount.
@@ -208,9 +212,22 @@ so repeated intersection entries never re-fire a mount.
 _io: IntersectionObserver | null = null;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:49
+Defined in: website/components/media/AnimDemo.tsx:50
 
 Viewport-proximity watcher — drivers mount on approach, die on exit.
+
+---
+
+### \_printMounted
+
+```ts
+_printMounted: boolean = false
+```
+
+Defined in: website/components/media/AnimDemo.tsx:54
+
+Marks a driver print force-mounted — afterprint tears it back down
+so off-screen demos never keep a live WebGL context/loop.
 
 ---
 
@@ -4271,7 +4288,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:35365
 get static observedAttributes(): "animation"[];
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:51
+Defined in: website/components/media/AnimDemo.tsx:56
 
 ##### Returns
 
@@ -4453,7 +4470,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: core/Component.ts:113
+Defined in: core/Component.ts:185
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4475,7 +4492,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onUpdated(): void;
 ```
 
-Defined in: core/Component.ts:115
+Defined in: core/Component.ts:187
 
 #### Returns
 
@@ -4493,7 +4510,7 @@ Defined in: core/Component.ts:115
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: core/Component.ts:116
+Defined in: core/Component.ts:188
 
 #### Parameters
 
@@ -4517,7 +4534,7 @@ Defined in: core/Component.ts:116
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4551,7 +4568,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4576,7 +4593,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4600,7 +4617,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4637,7 +4654,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4680,7 +4697,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4730,7 +4747,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4761,7 +4778,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4784,7 +4801,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4809,7 +4826,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4848,7 +4865,7 @@ attributeChangedCallback(
 ): void;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:68
+Defined in: website/components/media/AnimDemo.tsx:73
 
 `animation` attr swaps re-render the stage and re-mount the matching
 driver — the teardown always precedes the swap so the previous id's
@@ -4887,7 +4904,7 @@ New value (unused).
 render(): Element;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:80
+Defined in: website/components/media/AnimDemo.tsx:85
 
 JSX template — the framed stage root plus the id's staged content.
 
@@ -4909,7 +4926,7 @@ The stage wrapper node.
 onMounted(): void;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:87
+Defined in: website/components/media/AnimDemo.tsx:92
 
 Post-mount — resolves + mounts the driver for the attr's id.
 
@@ -4929,7 +4946,7 @@ Post-mount — resolves + mounts the driver for the attr's id.
 onDestroy(): void;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:92
+Defined in: website/components/media/AnimDemo.tsx:100
 
 Disconnect — runs the driver's teardown (widgets, GPU, loops).
 
@@ -4943,13 +4960,49 @@ Disconnect — runs the driver's teardown (widgets, GPU, loops).
 
 ---
 
+### \_onPrintPrepare()
+
+```ts
+_onPrintPrepare(): void;
+```
+
+Defined in: website/components/media/AnimDemo.tsx:112
+
+Print entry force-mounts the driver so the stage canvas paints a real
+frame before the print walk captures it — off-screen demos otherwise
+stay unmounted (the IO gate) and would serialize as blank stills.
+
+#### Returns
+
+`void`
+
+---
+
+### \_onAfterPrint()
+
+```ts
+_onAfterPrint(): void;
+```
+
+Defined in: website/components/media/AnimDemo.tsx:129
+
+Print exit releases only the print-mounted driver — a driver the IO
+mounted itself stays live (the observer will not re-fire for an
+element that never left the viewport).
+
+#### Returns
+
+`void`
+
+---
+
 ### \_mountDemo()
 
 ```ts
 _mountDemo(): void;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:107
+Defined in: website/components/media/AnimDemo.tsx:147
 
 Mounts the demo for the current `animation` id — gated on viewport
 proximity rather than mounted unconditionally: a page-wide record
@@ -4973,7 +5026,7 @@ Without IntersectionObserver the mount runs eagerly (old engines).
 _runMount(id, stage): void;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:158
+Defined in: website/components/media/AnimDemo.tsx:198
 
 Runs the resolved driver for the id — idempotent against repeated
 intersection entries (a still-live mount is not re-run).
@@ -5004,7 +5057,7 @@ The stage root element.
 _stopDriver(): void;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:174
+Defined in: website/components/media/AnimDemo.tsx:214
 
 Runs + clears the live driver teardown — idempotent.
 
@@ -5020,7 +5073,7 @@ Runs + clears the live driver teardown — idempotent.
 _destroyDemo(): void;
 ```
 
-Defined in: website/components/media/AnimDemo.tsx:185
+Defined in: website/components/media/AnimDemo.tsx:225
 
 Disconnects the observer and runs the live teardown — idempotent
 (destroy can land before mount finished, or twice across attr swap

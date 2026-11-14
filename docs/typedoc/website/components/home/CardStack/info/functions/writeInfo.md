@@ -8,7 +8,7 @@
 function writeInfo(host): void
 ```
 
-Defined in: website/components/home/cardstack/info.ts:391
+Defined in: website/components/home/cardstack/info.ts:467
 
 Publishes the front card's copy into the text column without a
 re-render — the title burns out/in, the description writer re-types,

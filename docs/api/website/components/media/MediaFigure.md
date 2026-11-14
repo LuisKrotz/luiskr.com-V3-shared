@@ -115,6 +115,8 @@ Slugifies a caption for the alt/ARIA text.
 
 Opens the expand modal with this media's descriptor via the store.
 
+- `@param` originFigure — genie-measure override (clone clicks measure
+
 ### (module scope)
 
 JSX template — a layered stack the CSS crossfades:

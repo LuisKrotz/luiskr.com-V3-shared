@@ -35,6 +35,7 @@ const CAROUSEL_CLASSES: Readonly<{
   CAROUSEL_SLIDE_CLONE: 'carousel-slide carousel-slide--clone'
   CAROUSEL_SLIDE_CLONE_LAST: 'carousel-slide carousel-slide--clone carousel-slide--clone-last'
   CAROUSEL_SLIDE_CLONE_FIRST: 'carousel-slide carousel-slide--clone carousel-slide--clone-first'
+  CAROUSEL_SLIDE_CLONE_MARK: 'carousel-slide--clone'
   CAROUSEL_RATIO_16_9: 'carousel--ratio-16-9'
   CAROUSEL_RATIO_21_9: 'carousel--ratio-21-9'
   CAROUSEL_RATIO_32_9: 'carousel--ratio-32-9'

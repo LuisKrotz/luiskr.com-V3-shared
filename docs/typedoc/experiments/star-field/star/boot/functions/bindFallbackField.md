@@ -8,7 +8,7 @@
 function bindFallbackField(c): void
 ```
 
-Defined in: experiments/star-field/star/boot.ts:26
+Defined in: experiments/star-field/star/boot.ts:27
 
 Paints the 2D fallback starfield onto the freshly-rendered `.sf-fallback`
 canvas (must run after `_updateDom` has mounted it). Stores the disposer

@@ -8,7 +8,7 @@
 function mountGlowDemo(_ctx): void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:212
+Defined in: website/components/media/anim-demo/dom.ts:211
 
 Body-glow demo — the staged glow surface drifts entirely in CSS
 (the ::before wash mirrors the document-level glow); mounted for

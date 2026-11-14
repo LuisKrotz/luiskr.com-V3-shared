@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [core/utils/notify](../README.md) / notify
 
 ```ts
-function notify(message, opts?): Promise<false | "native" | "toast">;
+function notify(message, opts?): Promise<false | 'native' | 'toast'>
 ```
 
-Defined in: core/utils/notify.ts:151
+Defined in: core/utils/notify.ts:152
 
 Surfaces a message to the user — native notification when allowed, the
 in-page toast otherwise.

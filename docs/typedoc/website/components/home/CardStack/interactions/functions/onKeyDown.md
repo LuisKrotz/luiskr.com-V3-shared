@@ -8,7 +8,7 @@
 function onKeyDown(host, e): void
 ```
 
-Defined in: website/components/home/cardstack/interactions.ts:178
+Defined in: website/components/home/cardstack/interactions.ts:192
 
 ArrowLeft/ArrowRight step the fan; Escape dismisses the index overlay.
 Other keys pass through — Enter lands on the card anchors as a native

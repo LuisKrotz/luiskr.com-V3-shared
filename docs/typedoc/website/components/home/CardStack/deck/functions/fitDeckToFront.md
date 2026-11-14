@@ -8,7 +8,7 @@
 function fitDeckToFront(host): void
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:687
+Defined in: website/components/home/cardstack/deck.ts:702
 
 Re-fits the stacked deck's min-height to the FRONT card's rendered
 height — applyPoses lets the front card auto-grow past the ratio

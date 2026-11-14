@@ -134,7 +134,9 @@ zone drifting down gently, then _FLECK_G accelerates the fall.
 
 ### `_EMBER_SIZE`
 
-Particle size bounds in device px.
+Particle size bounds — the draw scales them by the session dpr, so
+they read as ~1–4 CSS px on any density (pre-dpr-scaling they were
+raw device px: ~1 CSS px specks on a dpr-3 phone — invisible).
 
 ### `_FLECK_SIZE`
 

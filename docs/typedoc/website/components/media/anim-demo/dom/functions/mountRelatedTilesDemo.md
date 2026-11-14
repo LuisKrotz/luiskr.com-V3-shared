@@ -8,7 +8,7 @@
 function mountRelatedTilesDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:126
+Defined in: website/components/media/anim-demo/dom.ts:125
 
 Related-tile reveal demo — walks the staged tiles' hover modifier
 one index per beat so the lift rises tile-by-tile like the related

@@ -11,7 +11,12 @@ CMS footer editor: credit/source lines and the social/other
 
 ### `CmsFooterEditor`
 
-The CmsFooterEditor — footer editor class.
+<cms-footer-editor> — the element facade for the footer editor: holds
+the three data slices (contactData, legalLinks, relatedFooter +
+relatedExtra round-trip bag) and delegates to `data.ts` (Firebase),
+`lists.ts` (channel-list render/binding), `events.ts` (wiring), and
+`render.tsx` (JSX). `_`-prefixed methods are the internal call surface
+the templates and tests use.
 
 ### (module scope)
 

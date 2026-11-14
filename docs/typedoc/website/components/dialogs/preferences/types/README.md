@@ -1,6 +1,6 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / website/components/dialogs/preferences/types
 
@@ -12,3 +12,7 @@
 ## Variables
 
 - [PREF\_DEFAULTS](variables/PREF_DEFAULTS.md)
+
+## Functions
+
+- [prefThemeLabel](functions/prefThemeLabel.md)

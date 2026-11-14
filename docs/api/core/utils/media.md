@@ -123,6 +123,17 @@ On `error` the successor removes itself and the painted rung stands.
 The clone carries no listeners (cloneNode doesn't copy them), so the
 climb continues through the explicit re-entry below.
 
+Scroll-gesture park — the mount itself plus the retire/re-entry it
+schedules are DOM writes, so callers queue advance behind
+onScrollStop the same way loadHighRes parks its layer swap: a rung
+confirming mid-fling must not spend gesture frame budget on layer
+churn (the post-fling freeze), and the painted rung underneath
+already owns the box so nothing blanks while parked. Probes keep
+fetching and decoding off the gesture path — only the visible
+writes wait for idle, and onScrollStop fires synchronously when the
+window isn't scrolling so a static viewport sees no added
+latency.
+
 ### `buildMediaUrls`
 
 Constructs media URLs for images and videos following the project's

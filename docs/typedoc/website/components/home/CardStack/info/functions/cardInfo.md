@@ -8,7 +8,7 @@
 function cardInfo(item): CardStackInfo
 ```
 
-Defined in: website/components/home/cardstack/info.ts:68
+Defined in: website/components/home/cardstack/info.ts:99
 
 Everything the text column shows for one item.
 

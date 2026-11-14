@@ -88,6 +88,11 @@ Card title link — the top caption overlay (DOM-first, before media).
 
 Card locale-chip row — the bottom caption overlay.
 
+### `SITEMAP_CARD_DESC`
+
+Card description — the media caption text; `hidden` on screen and
+revealed as the under-media description line on paper.
+
 ### `SITEMAP_CARD_FIGURE`
 
 <media-figure> host class inside a card (classes attr passthrough).

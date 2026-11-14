@@ -8,7 +8,7 @@
 function holdAutoplay(host, held): void
 ```
 
-Defined in: website/components/home/cardstack/autoplay.ts:236
+Defined in: website/components/home/cardstack/autoplay.ts:238
 
 The visibility hold — the section IO and the document's
 visibilitychange freeze a running countdown while the deck can't be

@@ -10,6 +10,7 @@ const NOTIFY_UI_KEYS: Readonly<{
   NOTIFY_LOAD_FAILED: 'notify.loadFailed'
   NOTIFY_TITLE: 'notify.title'
   NOTIFY_DISMISS: 'notify.dismiss'
+  NOTHING_TO_PRINT: 'notify.nothingToPrint'
 }>
 ```
 

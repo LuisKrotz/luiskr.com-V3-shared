@@ -25,7 +25,10 @@ import { MEDIA } from '../../../core/tokens/media/suffixes.ts'
 /** Object-name prefix every public media asset lives under on the bucket. */
 export const MEDIA_PREFIX = 'public/_v3/'
 
-const BUCKET = 'luiskr.com'
+/** Media bucket name — sole declaration site for gs:// + API endpoints. */
+export const MEDIA_BUCKET = 'luiskr.com'
+
+const BUCKET = MEDIA_BUCKET
 
 /** Anonymous `storage.objects.list` endpoint — the bucket is public. */
 const LIST_ENDPOINT = `https://storage.googleapis.com/storage/v1/b/${BUCKET}/o`

@@ -1,6 +1,6 @@
 # `website\components\nav\search.tsx`
 
-The neon terminal glyph for &lt;app-nav&gt;'s search chip — a
+The silver terminal glyph for &lt;app-nav&gt;'s search chip — a
 
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
@@ -11,7 +11,7 @@ The neon terminal glyph for &lt;app-nav&gt;'s search chip — a
 
 ### `stop`
 
-`stop` bound to a --nav-neon-* CSS prop — presentation attributes can't
+`stop` bound to a --nav-metal-* CSS prop — presentation attributes can't
 resolve custom properties, so the value rides inline style.
 
 ### `ref`
@@ -20,7 +20,7 @@ resolve custom properties, so the value rides inline style.
 
 ### `NavSearchIcon`
 
-The <nav-search-icon> element — the neon `>_` prompt. The chevron
+The <nav-search-icon> element — the silver `>_` prompt. The chevron
 gradient runs green (tip) to teal (tail); the streak gradient fades
 teal into green so each speed line reads as light leaving the prompt.
 

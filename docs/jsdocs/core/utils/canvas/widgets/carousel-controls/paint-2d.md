@@ -23,7 +23,7 @@ Arrow glyph ink — `--text-primary` (dark on light disc, white on dark).
 
 ### `accent`
 
-Ring/glow accent — `--color-accent-contrast` (deep teal on light discs, the neon signature on dark).
+Ring/glow accent — `--color-accent-contrast` (deep gunmetal on light discs, the silver signature on dark).
 
 ### `accentRgb`
 
@@ -41,8 +41,8 @@ The cached palette — invalidated whenever _palKey's theme flag changes.
 
 Samples `--bg-primary`/`--text-primary`/`--color-accent-contrast` once per
 theme so the disc, arrow and progress ring flip with the site palette —
-light mode paints the deep-teal accent (the neon signature is unreadable
-on light glass), dark mode keeps the neon (the contrast token re-pins it).
+light mode paints the deep-gunmetal accent (the bright silver signature is
+unreadable on light glass), dark mode keeps the silver (the contrast token re-pins it).
 Re-samples on a theme flip.
 
 - `@returns` The resolved disc + glyph inks.

@@ -12,3 +12,7 @@ Coverage for core/utils/ml/ort-engine.ts — lazy runtime
 ### `makeOrt`
 
 Builds a recording ORT stub — no jest mapper needed.
+
+### `loaderOf`
+
+Wraps a module as an async loader — the engine's import seam shape.

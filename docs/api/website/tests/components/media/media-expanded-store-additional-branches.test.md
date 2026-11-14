@@ -6,3 +6,9 @@ Split from media-expanded.test.js — covers the "store additional branches" des
 | -------------- | ------------------------------------------------------------------------------------- |
 | **Source**     | `src/website\tests\components\media\media-expanded-store-additional-branches.test.js` |
 | **UX surface** | Boot surfaces: what the user sees first on each bundle.                               |
+
+## Members
+
+### `_flush`
+
+Generous flush — store-subscription renders need real timers.

@@ -86,6 +86,12 @@ Bound change handler for _mapMq — removed in onDestroy.
 
 Document-level istanbul key-nav disposer while a report is open.
 
+### (module scope)
+
+`true` while the print mirror was created on demand (dev sessions
+ship no prerendered `article.reader-content`) — the afterprint pass
+removes it so no stray parked article outlives the print pass.
+
 ### `_docsReady`
 
 Boot-loader lifecycle — the overlay stays up until the portal's first
@@ -242,12 +248,32 @@ Lifecycle: store sub + path resolution + guards.
 
 ### (module scope)
 
+The printable mirror — the prerendered `article.reader-content` in
+production, created on demand in dev. A created mirror is flagged so
+the unprepared pass removes the element instead of just emptying it.
+
+### (module scope)
+
+Returns the mirror to its unprepared state: a created (dev) article
+leaves the DOM outright; a prerendered one drops the prepared marker
+and its cloned content so the `:empty` rule parks it again and #app
+prints the live view on the next pass.
+
+### (module scope)
+
 Print-prepare answer — the print adapter fires `printprepare` before
-its media walk so generated DOM reaches the readable mirror: the
-payload box's rendered form (mermaid SVG diagrams, istanbul tables)
-replaces the article's static copy. Cloned canvases are dead buffers
-and get stripped — the live canvases inject their own captured
-stills during the walk.
+its media walk so the selected page's rendered form (mermaid SVG
+diagrams, istanbul tables) lands in the reader mirror, which the
+print sheet then treats as the document: `data-print-doc` marks it
+authoritative and #app steps aside. With no page open the mirror is
+left unprepared — the portal's light card grid prints instead.
+Cloned canvases are dead buffers and get stripped — the live
+canvases inject their own captured stills during the walk.
+
+### (module scope)
+
+Afterprint answer — unprepared the mirror so the next print (on any
+view) never reads a stale docs document.
 
 ### (module scope)
 

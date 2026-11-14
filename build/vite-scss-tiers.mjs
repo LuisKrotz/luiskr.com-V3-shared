@@ -13,11 +13,14 @@
  *     the generated code lazy-imports — rolldown emits these as their own
  *     chunks (grouped `rcss-<cls>` per entry set by codeSplitting.groups),
  *     so a viewport only downloads the cumulative media css matching its
- *     class.
+ *     class;
+ *   - `@media print`/`@page` blocks become `virtual:rcss/print/<file>` —
+ *     an `rcss-print` chunk adopted only when paper output is imminent.
  *
  * Generated module shape:
  *   export const base = "<css>"
- *   export default { base, tiers: { tablet: () => import("virtual:rcss/tablet/<id>"), … } }
+ *   export default { base, tiers: { tablet: () => import("virtual:rcss/tablet/<id>"), … },
+ *                    print: () => import("virtual:rcss/print/<id>") }
  */
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -35,8 +38,15 @@ const SASS_LOAD_PATHS = [path.join(ROOT, 'core', 'sass')]
 /** Public prefix for lazily-delivered tier modules (the rcss chunk group tests it). */
 export const RCSS_PREFIX = 'virtual:rcss/'
 
-/** The import query this plugin owns — `styles.scss?tiers`. */
-const TIERS_SUFFIX = '?tiers'
+/**
+ * The import query this plugin owns — `styles.scss?tiers`, as a query
+ * FLAG rather than a suffix: vite's dev import-analysis stamps its own
+ * params into re-served specifiers (`file.scss?t=<ts>&tiers` once an HMR
+ * invalidation rewrites the importer), so ownership is decided by flag
+ * presence, not position — otherwise the css pipeline claims the file
+ * and serves an inject-style module with no `default` export.
+ */
+const TIERS_RE = /[?&]tiers(?=[&=]|$)/
 
 /** Internal module namespace — both `?tiers` modules and `virtual:rcss/` ids live under it. */
 const NS = '\0lk-tiers:'
@@ -124,10 +134,7 @@ export const scssTiersPlugin = () => {
       env.minify = config.command === 'build' && config.build.cssMinify !== false
       env.targets = lightningcssTargets(config.build.cssTarget)
 
-      const [{ default: sass }, { transform }] = await Promise.all([
-        import('sass'),
-        import('lightningcss'),
-      ])
+      const [sass, { transform }] = await Promise.all([import('sass'), import('lightningcss')])
 
       env.sass = sass
       env.transform = transform
@@ -136,12 +143,15 @@ export const scssTiersPlugin = () => {
     async resolveId(id, importer) {
       if (id.startsWith(RCSS_PREFIX)) return `${NS}${id}${VIRTUAL_SUFFIX}`
 
-      if (!id.endsWith(TIERS_SUFFIX)) return null
+      if (!TIERS_RE.test(id)) return null
 
-      const spec = id.slice(0, -TIERS_SUFFIX.length)
+      // The sheet path is the specifier minus its whole query — a
+      // stamped specifier (`?t=<ts>&tiers`) resolves to the same file.
+      const q = id.indexOf('?')
+      const spec = q < 0 ? id : id.slice(0, q)
       const r = await this.resolve(spec, importer, { skipSelf: true })
 
-      return r ? `${NS}${r.id}${VIRTUAL_SUFFIX}` : null
+      return r ? `${NS}${r.id.split('?')[0]}${VIRTUAL_SUFFIX}` : null
     },
 
     async load(id) {
@@ -150,14 +160,18 @@ export const scssTiersPlugin = () => {
       const inner = id.slice(NS.length).replace(/\.tiers\.js$/, '')
 
       if (inner.startsWith(RCSS_PREFIX)) {
-        // virtual:rcss/<cls>/<encoded file> → the tier's cumulative css text
+        // virtual:rcss/<cls>/<encoded file> → the tier's cumulative css
+        // text ('print' maps to the extracted print bucket, not a width class)
         const rest = inner.slice(RCSS_PREFIX.length)
         const slash = rest.indexOf('/')
-        const file = decodeURIComponent(rest.slice(slash + 1))
+        // `?t=` stamps ride the same specifiers — strip before sass sees
+        // the path (an encoded `?` in the name arrives as %3F, so a
+        // literal `?` is always the query boundary).
+        const file = decodeURIComponent(rest.slice(slash + 1)).split('?')[0]
 
         const parts = await compileSheet(file, env)
         const cls = rest.slice(0, slash)
-        const text = parts.tiers[cls] ?? ''
+        const text = cls === 'print' ? (parts.print ?? '') : (parts.tiers[cls] ?? '')
 
         return `export default ${JSON.stringify(text)}`
       }
@@ -174,9 +188,15 @@ export const scssTiersPlugin = () => {
         )
         .join(',')
 
+      // Sheets without print blocks get no `print` key — the runtime
+      // checks for the loader before scheduling its import.
+      const print = parts.print
+        ? `,print:()=>import(${JSON.stringify(`${RCSS_PREFIX}print/${encodeURIComponent(file)}`)})`
+        : ''
+
       return (
         `export const base=${JSON.stringify(parts.base)};` +
-        `export default{base,tiers:{${loaders}}};`
+        `export default{base,tiers:{${loaders}}${print}};`
       )
     },
   }

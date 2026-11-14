@@ -8,7 +8,7 @@
 function scheduleTeleport(c, targetIdx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:259
+Defined in: website/components/carousel/custom-carousel/nav.ts:278
 
 Arms the clone→real teleport: `pendingTeleport` is the normal path —
 the scroll spring's settle fires it through `settleNav` the frame the

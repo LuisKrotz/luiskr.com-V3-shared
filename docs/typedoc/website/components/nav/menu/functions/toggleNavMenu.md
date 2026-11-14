@@ -8,7 +8,7 @@
 function toggleNavMenu(host, e?, chip?): void
 ```
 
-Defined in: website/components/nav/menu.tsx:117
+Defined in: website/components/nav/menu.tsx:112
 
 Opens/closes the fullscreen menu overlay. The joust gate applies to the
 closed → open edge only: on hover-less input the first pointer tap on a

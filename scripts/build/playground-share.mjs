@@ -29,21 +29,39 @@ import { probeImageDims, resolveMediaUrls } from './media-manifest.mjs'
  * relative to the media manifest root (`experiments/…`), matching
  * media-manifest.mjs's convention. Returns [] when the manifest listing
  * is absent so callers keep their pre-share-set behaviour.
+ *
+ * One capture may ship several encodings under a shared stem — the
+ * canonical `.png` upload plus a same-resolution `.jpg`/`.webp` delivery
+ * sibling emitted so the media wall doesn't pull a multi-megabyte PNG for
+ * a card-size tile. Stems dedupe against `DELIVERY_IMAGE_EXTS`: the first
+ * preference present wins, so surfaces mount one card per capture at the
+ * smallest encoding the bucket actually holds (a capture with no delivery
+ * sibling keeps mounting its `.png`, unchanged).
  * @param {Set<string>|null} manifest bucket key set (or null)
  * @param {object} [share] share-set token map (EARTH_SHARE default)
- * @returns {string[]} sorted share-capture keys
+ * @returns {string[]} sorted share-capture keys, one per capture stem
  */
 export const shareImageKeys = (manifest, share = EARTH_SHARE) => {
   if (!manifest) return []
 
-  return [...manifest]
-    .filter(
-      (k) =>
-        typeof k === 'string' &&
-        k.startsWith(share.PREFIX) &&
-        share.IMAGE_EXTS.some((ext) => k.toLowerCase().endsWith(ext))
-    )
-    .sort()
+  const delivery = share.DELIVERY_IMAGE_EXTS || share.IMAGE_EXTS
+  const best = new Map()
+
+  for (const key of manifest) {
+    if (typeof key !== 'string' || !key.startsWith(share.PREFIX)) continue
+
+    const ext = share.IMAGE_EXTS.find((e) => key.toLowerCase().endsWith(e))
+
+    if (!ext) continue
+
+    const stem = key.slice(0, key.length - ext.length)
+    const pref = delivery.indexOf(ext)
+    const cur = best.get(stem)
+
+    if (!cur || pref < cur.pref) best.set(stem, { key, pref })
+  }
+
+  return [...best.values()].map((pick) => pick.key).sort()
 }
 
 /**

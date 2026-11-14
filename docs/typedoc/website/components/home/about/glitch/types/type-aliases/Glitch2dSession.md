@@ -8,7 +8,7 @@
 type Glitch2dSession = GlitchSession & object
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:138
+Defined in: website/components/home/about/glitch/types.ts:141
 
 Narrowed view of the session for the 2D painters — `frame()` guards on
 `s.ctx` once and passes this type down, so every painter keeps a

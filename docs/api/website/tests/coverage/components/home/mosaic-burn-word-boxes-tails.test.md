@@ -9,6 +9,10 @@ Coverage tails for mosaic/burn/paper.js — the DOM Range
 
 ## Members
 
+### `savedCreateRange`
+
+Original document.createRange — stubbed per test, restored after.
+
 ### `recCtx`
 
 Recording 2d ctx — tracks fillText/measureText calls, swallows the rest.

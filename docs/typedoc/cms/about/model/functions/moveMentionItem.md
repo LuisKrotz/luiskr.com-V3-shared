@@ -1,20 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/about/model](../README.md) / moveMentionItem
 
 ```ts
-function moveMentionItem(
-   host, 
-   idx, 
-   dir
-): void;
+function moveMentionItem(host, idx, dir): void
 ```
 
-Defined in: cms/about/model.ts:97
+Defined in: cms/about/model.ts:105
 
-Moves mention item.
+Swaps a mention with its neighbor — `dir` is -1 (up) or +1 (down);
+out-of-bounds targets return early.
 
 ## Parameters
 
@@ -22,19 +19,19 @@ Moves mention item.
 
 [`CmsAboutEditor`](../../CmsAboutEditor/classes/CmsAboutEditor.md)
 
-— the host component
+— the host component holding `aboutData.mention_items`
 
 ### idx
 
 `number`
 
-— the index
+— zero-based mention index
 
 ### dir
 
 `number`
 
-— the value
+— -1 or +1
 
 ## Returns
 

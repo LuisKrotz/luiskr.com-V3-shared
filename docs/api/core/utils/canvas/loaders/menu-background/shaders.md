@@ -9,6 +9,10 @@ GLSL sources for MenuBackgroundWebGL, extracted from
 
 ## Members
 
+### `MENU_BG_DERIV_PRELUDE`
+
+Extension prelude enabling pixel-space isoline AA (WebGL1 only).
+
 ### `MENU_BG_VS`
 
 Shared fullscreen-quad vertex shader.

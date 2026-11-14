@@ -8,7 +8,7 @@
 function probeIconInks(host, kinds): Map<string, number[] | null>
 ```
 
-Defined in: experiments/docs/arch-scene.ts:848
+Defined in: experiments/docs/arch-scene.ts:856
 
 Per-kind ink probe — the map colors file nodes with the EXACT ink
 the treeview icon pack paints that extension's glyph, sampled off

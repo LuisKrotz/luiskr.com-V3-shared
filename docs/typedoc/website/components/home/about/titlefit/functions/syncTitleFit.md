@@ -8,7 +8,7 @@
 function syncTitleFit(host): void
 ```
 
-Defined in: website/components/home/about/titlefit.ts:59
+Defined in: website/components/home/about/titlefit.ts:61
 
 Measures the title's rendered text width and writes it to the portrait
 wrapper's --about-picture-w. Reads the h2's first element child — the

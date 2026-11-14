@@ -16,7 +16,7 @@ Reveal durations: slow bloom on open, quicker dissolve on close.
 Line alpha per theme — the field is a background texture, not content:
 dark mode keeps a touch more since white hairlines on black blend
 harder than deep blue on foam. The light-theme wash carries saturated
-aurora lobes now, so the threads need ~3.2× ink to stay visible
+paper lobes now, so the threads need ~3.2× ink to stay visible
 through the colour variation behind them.
 
 ### `start`

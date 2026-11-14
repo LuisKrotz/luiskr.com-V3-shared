@@ -8,9 +8,10 @@
 function moveDown(host, idx): void
 ```
 
-Defined in: cms/portfolio/model.ts:94
+Defined in: cms/portfolio/model.ts:105
 
-Moves down.
+Moves an item one slot later — splice-remove + splice-insert at
+`idx + 1`; last-position index returns early.
 
 ## Parameters
 
@@ -18,13 +19,13 @@ Moves down.
 
 [`CmsPortfolioList`](../../CmsPortfolioList/classes/CmsPortfolioList.md)
 
-— the host component
+— the host component holding `items`
 
 ### idx
 
 `number`
 
-— the index
+— current index
 
 ## Returns
 

@@ -8,9 +8,12 @@
 function getImagePreview(imgName): string
 ```
 
-Defined in: cms/portfolio/model.ts:18
+Defined in: cms/portfolio/model.ts:21
 
-Gets image preview.
+Resolves a portfolio item's `image` field to a previewable URL —
+absolute URLs pass through (already-hosted assets), bare filenames
+compose against the CDN covers prefix + `.jpg` and run through
+`encodeMediaUrl` for the media worker's token format.
 
 ## Parameters
 
@@ -18,10 +21,10 @@ Gets image preview.
 
 `string` \| `undefined`
 
-— the value
+— stored filename or absolute URL, may be undefined
 
 ## Returns
 
 `string`
 
-string
+preview URL, or empty string when nothing is set

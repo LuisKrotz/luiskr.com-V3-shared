@@ -8,7 +8,7 @@
 function bindMediaMosaicEvents(host): void
 ```
 
-Defined in: website/components/media/mosaic/events.ts:24
+Defined in: website/components/media/mosaic/events.ts:25
 
 Binds the mosaic's runtime listeners: (1) the ≤1024px media query whose
 flips re-render between the carousel and the packed wall (repack forced

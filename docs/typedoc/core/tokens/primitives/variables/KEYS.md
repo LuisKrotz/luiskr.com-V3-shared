@@ -13,10 +13,13 @@ const KEYS: Readonly<{
   ARROW_RIGHT: 'ArrowRight'
   ARROW_UP: 'ArrowUp'
   ARROW_DOWN: 'ArrowDown'
+  HOME: 'Home'
+  END: 'End'
   SLASH: '/'
   KEY_I: 'i'
   KEY_N: 'n'
   KEY_O: 'o'
+  KEY_P: 'p'
   KEY_S: 's'
 }>
 ```

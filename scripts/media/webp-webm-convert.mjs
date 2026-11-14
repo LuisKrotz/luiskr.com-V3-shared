@@ -23,7 +23,7 @@
  * Usage: node shared/scripts/media/webp-webm-convert.mjs [--workers N] [--dry]
  */
 
-import { execFile } from 'node:child_process'
+import { execFile, spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import os from 'node:os'
@@ -65,6 +65,11 @@ const args = process.argv.slice(2)
 // --dry transcodes locally but skips the upload — measures what
 // WOULD be gained without touching the bucket.
 const DRY = args.includes('--dry')
+
+// --no-a11y skips the accessibility sweep that follows every real
+// conversion pass — the "upload → captions/longdesc automatically"
+// requirement is wired through it.
+const SKIP_A11Y = args.includes('--no-a11y')
 
 // --keys <file> restricts the run to a newline-separated key list —
 // used for retrying just the failures from a prior log.
@@ -322,3 +327,26 @@ const main = async () => {
 }
 
 await main()
+
+// ── Chained accessibility sweep — every media object the bucket just
+// gained (upload → this derivative pass) now gets its .vtt description
+// tracks and _longdesc siblings in the same sweep. Dry runs produced no
+// new objects so there is nothing to describe.
+if (!DRY && !SKIP_A11Y) {
+  console.log('[webp-webm] chaining accessibility sweep…')
+
+  await new Promise((resolve, reject) =>
+    spawn(
+      process.execPath,
+      [
+        '--experimental-strip-types',
+        path.join(ROOT, 'shared', 'scripts', 'media', 'a11y', 'run.mjs'),
+      ],
+      { stdio: 'inherit' }
+    )
+      .on('error', reject)
+      .on('exit', (code) =>
+        code === 0 ? resolve() : reject(new Error(`a11y sweep exited ${code}`))
+      )
+  )
+}

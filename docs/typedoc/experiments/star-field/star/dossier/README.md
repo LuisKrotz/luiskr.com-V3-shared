@@ -16,3 +16,4 @@
 - [applyDossierLocale](functions/applyDossierLocale.md)
 - [loadDossier](functions/loadDossier.md)
 - [prefetchDossier](functions/prefetchDossier.md)
+- [syncDossier](functions/syncDossier.md)

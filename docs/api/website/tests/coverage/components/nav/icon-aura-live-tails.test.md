@@ -9,6 +9,10 @@ Coverage tails for components/nav/icon-aura.ts — the
 
 ## Members
 
+### `session`
+
+Fake aura session — jest fns record the lifecycle calls under test.
+
 ### `auraHost`
 
 Host with a strip containing the search + gear chip buttons.

@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../README.md) / [core/store/mutations/theme](../README.md) / themeMutations
 
 ```ts
-function themeMutations(store): MutationMap;
+function themeMutations(store): MutationMap
 ```
 
-Defined in: core/store/mutations/theme.ts:19
+Defined in: core/store/mutations/theme.ts:20
 
 Theme + reduced-motion mutation group.
 

@@ -52,6 +52,20 @@ rejection (ffmpeg progress lives on stderr).
 codec, pixel width and pix_fmt (the three facts the convertVideo
 branch conditions on). csv=p=0 gives a clean comma row.
 
+### `probeDuration`
+
+`probeDuration` — container duration in seconds for the poster seek
+pick. 0 when the probe can't read it — the seek simply stays at the
+head and the first-frame fallback still applies.
+
+### `grabPoster`
+
+`grabPoster` — writes `out` as the video's poster frame. Seeks to a
+quarter of the clip (capped at POSTER_SEEK_MAX_S) so recordings that
+open on a blank/fade-in frame get a poster with real content. If the
+seek lands past EOF or yields an empty file — very short clips — the
+literal first frame runs as the fallback so a poster always ships.
+
 ### `hasTool`
 
 Probes whether a CLI tool exists by running `cmd -version`. Every tool

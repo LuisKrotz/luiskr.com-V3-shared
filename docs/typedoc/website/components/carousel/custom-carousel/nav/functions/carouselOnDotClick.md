@@ -8,7 +8,7 @@
 function carouselOnDotClick(c, idx): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/nav.ts:432
+Defined in: website/components/carousel/custom-carousel/nav.ts:456
 
 Dot-nav click — jumps straight to idx and permanently stops autoplay;
 dot clicks are deliberate picks, not ambient browsing.

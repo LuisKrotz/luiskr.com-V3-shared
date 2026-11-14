@@ -8,7 +8,7 @@
 function docsGroupParent(path): string | undefined
 ```
 
-Defined in: experiments/docs/manifest.ts:229
+Defined in: experiments/docs/manifest.ts:230
 
 The section-group path containing a manifest path — walks ancestors so
 deep paths ('docs/sassdoc/index.html') resolve through their section

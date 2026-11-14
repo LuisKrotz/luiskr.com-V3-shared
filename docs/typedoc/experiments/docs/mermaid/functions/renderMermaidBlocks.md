@@ -8,7 +8,7 @@
 function renderMermaidBlocks(container): Promise<void>
 ```
 
-Defined in: experiments/docs/mermaid.ts:117
+Defined in: experiments/docs/mermaid.ts:129
 
 Renders every unprocessed `.docs-mermaid` block inside `container`
 into an inline SVG diagram. Safe to call repeatedly — processed

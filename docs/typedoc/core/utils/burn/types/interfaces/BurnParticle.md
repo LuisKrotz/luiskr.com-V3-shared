@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [core/utils/burn/types](../README.md) / BurnParticle
 
-Defined in: core/utils/burn/types.ts:209
+Defined in: core/utils/burn/types.ts:219
 
 One combustion particle — an ember (bright, rises) or fleck (dark, curls).
 
@@ -16,7 +16,7 @@ One combustion particle — an ember (bright, rises) or fleck (dark, curls).
 x: number
 ```
 
-Defined in: core/utils/burn/types.ts:210
+Defined in: core/utils/burn/types.ts:220
 
 ---
 
@@ -26,7 +26,7 @@ Defined in: core/utils/burn/types.ts:210
 y: number
 ```
 
-Defined in: core/utils/burn/types.ts:211
+Defined in: core/utils/burn/types.ts:221
 
 ---
 
@@ -36,7 +36,7 @@ Defined in: core/utils/burn/types.ts:211
 vx: number
 ```
 
-Defined in: core/utils/burn/types.ts:212
+Defined in: core/utils/burn/types.ts:222
 
 ---
 
@@ -46,7 +46,7 @@ Defined in: core/utils/burn/types.ts:212
 vy: number
 ```
 
-Defined in: core/utils/burn/types.ts:213
+Defined in: core/utils/burn/types.ts:223
 
 ---
 
@@ -56,7 +56,7 @@ Defined in: core/utils/burn/types.ts:213
 life: number
 ```
 
-Defined in: core/utils/burn/types.ts:214
+Defined in: core/utils/burn/types.ts:224
 
 ---
 
@@ -66,7 +66,7 @@ Defined in: core/utils/burn/types.ts:214
 maxLife: number
 ```
 
-Defined in: core/utils/burn/types.ts:215
+Defined in: core/utils/burn/types.ts:225
 
 ---
 
@@ -76,7 +76,7 @@ Defined in: core/utils/burn/types.ts:215
 size: number
 ```
 
-Defined in: core/utils/burn/types.ts:216
+Defined in: core/utils/burn/types.ts:226
 
 ---
 
@@ -86,7 +86,7 @@ Defined in: core/utils/burn/types.ts:216
 kind: number
 ```
 
-Defined in: core/utils/burn/types.ts:218
+Defined in: core/utils/burn/types.ts:228
 
 0 = ember, 1 = char fleck.
 
@@ -98,7 +98,7 @@ Defined in: core/utils/burn/types.ts:218
 rot: number
 ```
 
-Defined in: core/utils/burn/types.ts:220
+Defined in: core/utils/burn/types.ts:230
 
 Rotation for flecks (radians) + tumble speed.
 
@@ -110,7 +110,7 @@ Rotation for flecks (radians) + tumble speed.
 spin: number
 ```
 
-Defined in: core/utils/burn/types.ts:221
+Defined in: core/utils/burn/types.ts:231
 
 ---
 
@@ -120,7 +120,7 @@ Defined in: core/utils/burn/types.ts:221
 phase: number
 ```
 
-Defined in: core/utils/burn/types.ts:223
+Defined in: core/utils/burn/types.ts:233
 
 Per-particle noise phase — keeps flicker/wobble desynced.
 
@@ -132,7 +132,7 @@ Per-particle noise phase — keeps flicker/wobble desynced.
 optional L?: LetterBurn;
 ```
 
-Defined in: core/utils/burn/types.ts:228
+Defined in: core/utils/burn/types.ts:238
 
 Rebuild deposits only — the letter whose front this particle rains
 onto. Undefined for burn particles, which simply rise and die.

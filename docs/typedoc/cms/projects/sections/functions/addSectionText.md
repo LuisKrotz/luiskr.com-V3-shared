@@ -1,16 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/sections](../README.md) / addSectionText
 
 ```ts
-function addSectionText(host, sIdx): void;
+function addSectionText(host, sIdx): void
 ```
 
-Defined in: cms/projects/sections.ts:84
+Defined in: cms/projects/sections.ts:94
 
-Adds section text.
+Pushes an empty paragraph into the text half (`[0]`) of a section —
+`ensureSectionShape` first normalizes any legacy object form.
 
 ## Parameters
 
@@ -18,13 +19,13 @@ Adds section text.
 
 [`CmsProjectsList`](../../CmsProjectsList/classes/CmsProjectsList.md)
 
-— the host component
+— the host component holding `currentProject`
 
 ### sIdx
 
 `number`
 
-— the value
+— zero-based section index
 
 ## Returns
 

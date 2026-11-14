@@ -7,6 +7,7 @@
 ```ts
 const APP_IDS: Readonly<{
   APP: 'app'
+  PAGE_BACKDROP: 'page-backdrop'
   MAIN: 'main'
   MAIN_CONTENT: 'main-content'
   VIEW_OUTLET: 'view-outlet'

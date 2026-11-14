@@ -8,7 +8,7 @@
 function renderContent(text, delay, offset, mode?): string
 ```
 
-Defined in: website/components/media/draw-text/render.ts:357
+Defined in: website/components/media/draw-text/render.ts:427
 
 Full pipeline: text → tokens → HTML string. The `wi` closure counter
 assigns each rendered word a sequential index so the word-level

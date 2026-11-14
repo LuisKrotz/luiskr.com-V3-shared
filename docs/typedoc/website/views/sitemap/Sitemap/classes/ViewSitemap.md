@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/views/sitemap/Sitemap](../README.md) / ViewSitemap
 
-Defined in: website/views/sitemap/Sitemap.tsx:78
+Defined in: website/views/sitemap/Sitemap.tsx:81
 
 The ViewSitemap — sitemap page class.
 
@@ -20,7 +20,7 @@ The ViewSitemap — sitemap page class.
 new ViewSitemap(): ViewSitemap;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:127
+Defined in: website/views/sitemap/Sitemap.tsx:135
 
 #### Returns
 
@@ -35,12 +35,16 @@ Defined in: website/views/sitemap/Sitemap.tsx:127
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -54,7 +58,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +80,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +101,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +119,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +135,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +155,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +171,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -185,7 +189,7 @@ _page:
   | null = null;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:80
+Defined in: website/views/sitemap/Sitemap.tsx:83
 
 Fetched pages.sitemap node (title/intro/group labels).
 
@@ -197,7 +201,7 @@ Fetched pages.sitemap node (title/intro/group labels).
 _projects: SitemapProjectsByLocale = {}
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:85
+Defined in: website/views/sitemap/Sitemap.tsx:88
 
 Fetched translations/<loc>/projects maps, one per locale —
 portfolio titles come from the display locale's map; media leaf
@@ -211,7 +215,7 @@ slugs need every locale's translated labels.
 _projectsLoaded: boolean = false
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:90
+Defined in: website/views/sitemap/Sitemap.tsx:93
 
 Whether the all-locales projects fetch already ran — unlike the
 page node it covers every language, so it loads once, not per
@@ -225,7 +229,7 @@ locale switch.
 _shareManifests: object = {}
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:93
+Defined in: website/views/sitemap/Sitemap.tsx:96
 
 Fetched share manifests — locale-free, loaded once.
 
@@ -249,7 +253,7 @@ optional star?: ShareManifest;
 _sharesLoaded: boolean = false
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:96
+Defined in: website/views/sitemap/Sitemap.tsx:99
 
 Whether the two share-manifest fetches already ran.
 
@@ -261,7 +265,7 @@ Whether the two share-manifest fetches already ran.
 _playPages: object = {}
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:100
+Defined in: website/views/sitemap/Sitemap.tsx:103
 
 Fetched playground page nodes — refetched per locale for the
 localized shareCapture labels.
@@ -286,7 +290,7 @@ optional star?: PlaygroundPageNode;
 _lastLocale: string | null = null;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:103
+Defined in: website/views/sitemap/Sitemap.tsx:106
 
 Locale the page node was fetched for — refetched on switches.
 
@@ -298,7 +302,7 @@ Locale the page node was fetched for — refetched on switches.
 _openGroups: Set<string>
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:108
+Defined in: website/views/sitemap/Sitemap.tsx:111
 
 Open collapsible groups, keyed by their stable SitemapGroupKey —
 media branches start closed so hundreds of media cards mount only
@@ -312,7 +316,7 @@ on first open.
 _spinKey: string | null = null;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:115
+Defined in: website/views/sitemap/Sitemap.tsx:118
 
 Group key the user just toggled — its chevron stamps the one-shot
 spin class on the very next render (the view re-creates nodes per
@@ -328,7 +332,7 @@ rerender doesn't restamp the animation.
 _wallW: number = 0
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:118
+Defined in: website/views/sitemap/Sitemap.tsx:121
 
 Measured wall width the packs were computed at — repack trigger.
 
@@ -340,7 +344,7 @@ Measured wall width the packs were computed at — repack trigger.
 _packedCache: Map<string, PackedMosaic | null>
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:122
+Defined in: website/views/sitemap/Sitemap.tsx:125
 
 Packed-wall memo per group signature (key|width|count) — repacks
 only when the wall width or the item count actually changed.
@@ -353,9 +357,23 @@ only when the wall width or the item count actually changed.
 _ro: ResizeObserver | null = null;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:125
+Defined in: website/views/sitemap/Sitemap.tsx:128
 
 Host ResizeObserver driving repacks on real width changes.
+
+---
+
+### \_openBeforePrint
+
+```ts
+_openBeforePrint: Set<string> | null = null;
+```
+
+Defined in: website/views/sitemap/Sitemap.tsx:133
+
+Pre-print `_openGroups` snapshot — afterprint restores the user's
+disclosure state so the print prep's expand-all doesn't leak into
+the live screen session.
 
 ---
 
@@ -4582,7 +4600,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onInit(): void;
 ```
 
-Defined in: core/Component.ts:113
+Defined in: core/Component.ts:185
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4604,7 +4622,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onUpdated(): void;
 ```
 
-Defined in: core/Component.ts:115
+Defined in: core/Component.ts:187
 
 #### Returns
 
@@ -4622,7 +4640,7 @@ Defined in: core/Component.ts:115
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4656,7 +4674,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4681,7 +4699,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4705,7 +4723,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4742,7 +4760,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -4785,7 +4803,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -4835,7 +4853,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -4866,7 +4884,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -4889,7 +4907,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -4914,7 +4932,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -4949,7 +4967,7 @@ Render result from render().
 onMounted(): void;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:131
+Defined in: website/views/sitemap/Sitemap.tsx:139
 
 #### Returns
 
@@ -4967,9 +4985,9 @@ Defined in: website/views/sitemap/Sitemap.tsx:131
 onDestroy(): void;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:147
+Defined in: website/views/sitemap/Sitemap.tsx:158
 
-Lifecycle: releases the wall ResizeObserver.
+Lifecycle: releases the wall ResizeObserver + the print hooks.
 
 #### Returns
 
@@ -4987,7 +5005,7 @@ Lifecycle: releases the wall ResizeObserver.
 onStoreUpdate(): void;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:155
+Defined in: website/views/sitemap/Sitemap.tsx:203
 
 Reloads the sitemap page node + projects on locale switch.
 
@@ -5007,7 +5025,7 @@ Reloads the sitemap page node + projects on locale switch.
 render(): Element;
 ```
 
-Defined in: website/views/sitemap/Sitemap.tsx:430
+Defined in: website/views/sitemap/Sitemap.tsx:509
 
 JSX template — h1 + intro, then the DOM link index: nested groups →
 pages → locale/media chips, every anchor SPA-routed on plain clicks.

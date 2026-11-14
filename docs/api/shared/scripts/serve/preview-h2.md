@@ -94,3 +94,9 @@ foreign listener there (e.g. a plaintext `vite preview`) otherwise turns
 Lighthouse's TLS handshake into CHROME_INTERSTITIAL_ERROR on every run,
 far removed from the actual cause. The marker header distinguishes this
 instance even from another preview-h2 bound on a different alias.
+
+### `server`
+
+Boots the h2 secure server: certs, security headers, clean-URL 301s,
+precompressed-sibling serving, dynamic compress for sibling-less text,
+and the SPA fallback — the Firebase Hosting shape, locally.

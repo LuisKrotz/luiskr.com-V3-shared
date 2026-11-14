@@ -8,7 +8,7 @@
 function makeLabelCanvas(name, ink): HTMLCanvasElement | null
 ```
 
-Defined in: experiments/docs/arch-scene.ts:917
+Defined in: experiments/docs/arch-scene.ts:925
 
 Draws a dir-name label onto a fresh 2d canvas — shared by the
 three.js sprite arm (CanvasTexture) and the scene3d arm

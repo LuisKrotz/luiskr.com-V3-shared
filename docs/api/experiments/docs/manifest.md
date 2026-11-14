@@ -73,6 +73,10 @@ cheap accessor.
 - `@param` wire Compact manifest from virtual:docs-manifest.
 - `@returns` The full DocsManifest the portal consumes.
 
+### `_manifest`
+
+Hydrated manifest singleton — decoded once at module load, shared by every lookup below.
+
 ### `getDocsManifest`
 
 The scanned manifest — the vite plugin + jest stub always emit one.

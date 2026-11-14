@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/dialogs/preferences/sync](../README.md) / syncOpenState
 
 ```ts
-function syncOpenState(host): void;
+function syncOpenState(host): void
 ```
 
-Defined in: website/components/dialogs/preferences/sync.ts:18
+Defined in: website/components/dialogs/preferences/sync.ts:20
 
 Reflects the open flag into DOM/classes (widget teardown on close).
 

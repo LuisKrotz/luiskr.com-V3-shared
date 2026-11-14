@@ -11,6 +11,7 @@ const ABOUT_CLASSES: Readonly<{
   ABOUT_TITLE: 'about-title'
   ABOUT_SUBTITLE: 'about-subtitle'
   ABOUT_INTRO: 'about-intro'
+  ABOUT_INTRO_LEAD: 'about-intro-lead'
   ABOUT_PROFILE_SECTION: 'about-profile-section'
   ABOUT_PROFILE_MEDIA: 'about-profile-media'
   ABOUT_PROFILE_NAME: 'about-profile-name'

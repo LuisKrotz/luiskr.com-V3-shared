@@ -11,7 +11,7 @@ Coverage tail for utils/wasm/nav-glyph.ts — the live
 
 ### `COLORS`
 
-Two neon palette vars — enough to cover the multi-color arm.
+Two metal palette vars — enough to cover the multi-color arm.
 
 ### `fakeCtx`
 

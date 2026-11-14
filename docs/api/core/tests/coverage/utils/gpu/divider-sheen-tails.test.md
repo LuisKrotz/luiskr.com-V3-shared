@@ -9,6 +9,18 @@ Coverage tail for utils/gpu/divider-sheen.ts — the
 
 ## Members
 
+### `mockGpu`
+
+Mutable GPU-mock state — the webgpu-widget mock below reads these per-call.
+
+### `flush`
+
+Short flush — widget mount/event steps settle within ~30ms.
+
 ### `widget`
 
 Records the fake widget's setter calls.
+
+### `makeWidget`
+
+Widget harness — records the calls the binding layer forwards.

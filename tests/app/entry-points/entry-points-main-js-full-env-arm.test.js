@@ -13,6 +13,13 @@ import { READER_CLASSES } from '@core/tokens/classes/reader.js'
 import { A11Y_CLASSES } from '@core/tokens/classes/a11y.js'
 import { MOUSE_EVENTS, WINDOW_EVENTS } from '@core/tokens/events/dom.js'
 
+// The intent-gated warm work (lazy dialog chunks + the route-warm chain)
+// arms a 20s fallback timer nothing here awaits — its dynamic imports
+// would land after the jest environment tears down.
+jest.unstable_mockModule('@core/utils/motion/intent.js', () => ({
+  onUserIntent: () => {},
+}))
+
 describe('main.js full-env warm block', () => {
   test('warm block + mount path under a normal window', async () => {
     jest.resetModules()

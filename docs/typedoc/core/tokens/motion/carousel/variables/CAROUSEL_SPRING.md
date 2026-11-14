@@ -17,7 +17,7 @@ const CAROUSEL_SPRING: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/motion/carousel.ts:45
+Defined in: core/tokens/motion/carousel.ts:47
 
 Px-space chase-spring for the programmatic slide scroll — the organic,
 slightly elastic slide travel that replaced the browser's fixed

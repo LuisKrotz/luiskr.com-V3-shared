@@ -33,10 +33,6 @@ transitions so transforms track the pointer 1:1.
 
 Front-card modifier — the light surface + enabled link state.
 
-### `MENTIONS_DECK_CARD_NUM`
-
-Zero-padded ordinal in the card's top corner ('01').
-
 ### `MENTIONS_DECK_CARD_TEXT`
 
 Award/mention copy block (CMS description markup).

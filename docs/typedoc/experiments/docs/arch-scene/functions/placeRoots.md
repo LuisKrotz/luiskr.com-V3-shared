@@ -8,7 +8,7 @@
 function placeRoots(roots): PlacedNode[]
 ```
 
-Defined in: experiments/docs/arch-scene.ts:1082
+Defined in: experiments/docs/arch-scene.ts:1106
 
 The manifest buckets hang off a synthetic center node — the portal
 root level IS the tree root, so the scene reads as one rooted graph

@@ -28,3 +28,7 @@ Imports the class under test AFTER the mock is registered.
 ### `flush`
 
 Flushes the mount promise + a couple of frames.
+
+### `makeCanvas`
+
+Canvas with a stubbed rect — the wasm path reads real boxes for sizing.

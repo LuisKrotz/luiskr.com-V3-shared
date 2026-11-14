@@ -25,7 +25,13 @@ Package managers probed per platform, in preference order.
 
 Tool → package names per manager. `ffmpeg` bundles `ffprobe` on every
 platform; ImageMagick ships as `magick`/`convert`; `cjpeg` comes from
-mozjpeg (brew/pacman) or libjpeg-turbo's utils package elsewhere.
+mozjpeg (brew/pacman) or libjpeg-turbo's utils package elsewhere;
+`pdftoppm` comes from poppler — `poppler-utils` on deb/rpm/alpine,
+`poppler-tools` on SUSE, plain `poppler` on brew/pacman/choco.
+
+### `WIN_POPPLER_ID`
+
+winget id for poppler — no short name; installed via --id like ffmpeg/IM.
 
 ### `WIN_CJPEG_HINT`
 
@@ -44,7 +50,7 @@ explicitly: `cmd /d /s /c yarn global add mozjpeg`.
 
 ### `needs`
 
-Maps the raw tool map onto the three installable groups.
+Maps the raw tool map onto the four installable groups.
 
 ### (module scope)
 

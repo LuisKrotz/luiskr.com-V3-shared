@@ -183,6 +183,13 @@ the route in its locale index.
 
 Home mosaic media — the same covers the sitemap's image tags list.
 
+### `mentionItemsOf`
+
+Award/mention rows → replica records — name is the visible
+"date: title" text, description the hidden longdesc, image the CDN
+badge thumbnail. Shared by the home + about replicas: the deck
+renders on both surfaces, so both lists carry the full inventory.
+
 ### `emitEarthPlayground`
 
 Earth Playground replica — page copy plus the whole canvas-rendered

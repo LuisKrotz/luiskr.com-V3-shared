@@ -21,6 +21,19 @@ The fetch mock — re-seeded per test via _queue.
 
 Scene mount result — re-seeded per test to drive ok/null/reject arms.
 
+### `_fake2d`
+
+A no-throw 2D-context stub — happy-dom canvases have no real 2D backend;
+the stub stands in so the genie warp driver exercises its attach/frame
+paths exactly as it would on a real canvas.
+
+### `makeGenieStage`
+
+A staged mini lightbox — the real expand-modal classes the sheet bake
+and veil query resolve on, plus the origin card the funnel flies to.
+
+- `@returns` The stage carrying content + media figure + origin card.
+
 ### `makeStage`
 
 A stage element optionally carrying one child tag.

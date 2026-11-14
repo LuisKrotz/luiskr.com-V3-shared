@@ -13,13 +13,16 @@ function generateProjectArticleSchema(
 ): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:355
+Defined in: core/utils/schema.ts:367
 
-Generates an Article and cover VideoObject graph for a project detail
-page. The Article `image` carries the real CDN asset — the full
-uncompressed mozjpg for image covers, the video poster for video
+Generates a NewsArticle and cover VideoObject graph for a project
+detail page. The NewsArticle `image` carries the real CDN asset — the
+full uncompressed mozjpg for image covers, the video poster for video
 covers — since the hypothetical aspect-ratio variants (-16x9/-4x3/
--1x1) never existed on the bucket and 404'd for crawlers.
+-1x1) never existed on the bucket and 404'd for crawlers. The
+NewsArticle type plus the git-derived `date`/`modified` stamps on the
+project node are what Google News and Discover index off; legacy
+nodes without stamps stay undated rather than inventing one.
 
 ## Parameters
 

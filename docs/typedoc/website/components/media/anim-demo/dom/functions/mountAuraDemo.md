@@ -8,11 +8,14 @@
 function mountAuraDemo(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/dom.ts:263
+Defined in: website/components/media/anim-demo/dom.ts:234
 
-Nav icon-aura demo — alternates the armed modifier across the two
-staged chips so the comet-trail ring-fill sweeps each outline in turn,
-the hover path the real chips play.
+Nav icon-aura demo — mounts the real `mountRingFill` WebGPU session
+on the stage's strip and cycles `setProgress` across the two chips
+(the real hover path, automated). Where the widget layer is off the
+session is null and the fallback alternates the armed modifier so the
+static SVG comet-trail cue still sweeps — the production appearance
+every non-WebGPU viewer sees.
 
 ## Parameters
 
@@ -20,10 +23,10 @@ the hover path the real chips play.
 
 [`DemoContext`](../../types/interfaces/DemoContext.md)
 
-The demo context (stage owns the chip row).
+The demo context (stage owns the strip + chips).
 
 ## Returns
 
-Teardown — stops the aura cycle.
+Teardown — stops the cycle, destroys the aura session.
 
 () => `void`

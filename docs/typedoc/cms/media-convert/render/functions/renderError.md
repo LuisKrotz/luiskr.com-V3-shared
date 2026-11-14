@@ -1,16 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/media-convert/render](../README.md) / renderError
 
 ```ts
-function renderError(host): Element;
+function renderError(host): Element
 ```
 
-Defined in: cms/media-convert/render.tsx:178
+Defined in: cms/media-convert/render.tsx:183
 
-Renders error.
+Error-phase template — the failure message plus either a partial-ZIP
+download (when some rows still succeeded) or a plain restart button.
 
 ## Parameters
 
@@ -18,7 +19,7 @@ Renders error.
 
 [`CmsMediaConverter`](../../CmsMediaConverter/classes/CmsMediaConverter.md)
 
-— the host component
+— the host component holding `error` + `status`
 
 ## Returns
 

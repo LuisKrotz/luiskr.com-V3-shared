@@ -8,7 +8,7 @@
 function handleResize(host): void
 ```
 
-Defined in: core/utils/canvas/loaders/menu-background/loop.ts:130
+Defined in: core/utils/canvas/loaders/menu-background/loop.ts:132
 
 Syncs buffer size + u_res uniform with the viewport.
 

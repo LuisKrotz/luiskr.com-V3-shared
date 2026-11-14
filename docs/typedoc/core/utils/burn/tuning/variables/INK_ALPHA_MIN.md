@@ -8,6 +8,6 @@
 const _INK_ALPHA_MIN: 32 = 32
 ```
 
-Defined in: core/utils/burn/tuning.ts:89
+Defined in: core/utils/burn/tuning.ts:93
 
 Alpha floor for "has ink" — anti-aliased feather below ~12% is ignored.

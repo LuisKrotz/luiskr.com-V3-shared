@@ -21,9 +21,14 @@ Sass load path so component sheets resolve @core/sass partials like vite's css p
 
 Public prefix for lazily-delivered tier modules (the rcss chunk group tests it).
 
-### `TIERS_SUFFIX`
+### `TIERS_RE`
 
-The import query this plugin owns — `styles.scss?tiers`.
+The import query this plugin owns — `styles.scss?tiers`, as a query
+FLAG rather than a suffix: vite's dev import-analysis stamps its own
+params into re-served specifiers (`file.scss?t=<ts>&tiers` once an HMR
+invalidation rewrites the importer), so ownership is decided by flag
+presence, not position — otherwise the css pipeline claims the file
+and serves an inject-style module with no `default` export.
 
 ### `NS`
 

@@ -35,3 +35,8 @@ Parses one .scss file into its documented item list.
 ### `renderItem`
 
 Renders one documented item as an escaped definition block.
+
+### `main`
+
+Entry point — scans every module source dir, parses /// blocks into
+items, and emits one escaped index.html with a per-file TOC.

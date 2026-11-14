@@ -1,20 +1,16 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/sections](../README.md) / removeSectionText
 
 ```ts
-function removeSectionText(
-   host, 
-   sIdx, 
-   tIdx
-): void;
+function removeSectionText(host, sIdx, tIdx): void
 ```
 
-Defined in: cms/projects/sections.ts:98
+Defined in: cms/projects/sections.ts:108
 
-Removes section text.
+Drops paragraph `tIdx` from a section's text half and re-renders.
 
 ## Parameters
 
@@ -22,19 +18,19 @@ Removes section text.
 
 [`CmsProjectsList`](../../CmsProjectsList/classes/CmsProjectsList.md)
 
-— the host component
+— the host component holding `currentProject`
 
 ### sIdx
 
 `number`
 
-— the value
+— zero-based section index
 
 ### tIdx
 
 `number`
 
-— the value
+— zero-based text index inside the section
 
 ## Returns
 

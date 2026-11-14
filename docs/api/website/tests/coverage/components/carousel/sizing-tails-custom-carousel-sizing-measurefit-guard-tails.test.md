@@ -9,6 +9,21 @@ Split from sizing-tails.test.js — covers the "custom-carousel sizing measureFi
 
 ## Members
 
+### `SLIDE`
+
+Slide fixtures spanning the aspect-ratio arms measureFit guards on.
+
 ### `stubEl`
 
-Fresh element stub — measureFit only reads the fields below.
+Fresh element stub — measureFit only reads the fields below. The
+_edgeClones* presets match what the SLIDE fixtures project (one ~840px
+slide already covers half of the 800px host) so the clone recount
+doesn't mask the layout-mode arm under test.
+
+### `savedWidth`
+
+Original innerWidth/innerHeight descriptors — restored after each test.
+
+### `setViewport`
+
+Viewport stub — redefines innerWidth/Height so fit math sees a real size.

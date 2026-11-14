@@ -8,7 +8,7 @@
 const SOCIAL_URLS: Readonly<{
   SITE: 'https://luiskr.com'
   GITHUB: 'https://github.com/LuisKrotz'
-  GITHUB_REPO: 'https://github.com/LuisKrotz/luiskr.com-V3'
+  GITHUB_REPO: 'https://github.com/LuisKrotz/luiskr.com'
   LINKEDIN: 'https://www.linkedin.com/in/luis-kr%C3%B6tz/?locale=en_US'
   WHATSAPP: 'https://api.whatsapp.com/send?phone=+5551982274782'
   INSTAGRAM: 'https://www.instagram.com/j_luiskrotz'

@@ -4,7 +4,7 @@
 
 [luiskr.com](../../../../../README.md) / [website/components/media/MediaFigure](../README.md) / MediaFigure
 
-Defined in: website/components/media/MediaFigure.tsx:33
+Defined in: website/components/media/MediaFigure.tsx:42
 
 The MediaFigure — figure class.
 
@@ -20,7 +20,7 @@ The MediaFigure — figure class.
 new MediaFigure(): MediaFigure;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:62
+Defined in: website/components/media/MediaFigure.tsx:75
 
 #### Returns
 
@@ -35,12 +35,16 @@ Defined in: website/components/media/MediaFigure.tsx:62
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -54,7 +58,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -76,7 +80,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -97,7 +101,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -115,7 +119,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -131,7 +135,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -151,7 +155,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -167,7 +171,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -183,7 +187,7 @@ Reactive state bag — written only through setState() so updates always re-rend
 thumbSrc: string = ATTR_VALUES.EMPTY
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:47
+Defined in: website/components/media/MediaFigure.tsx:56
 
 ---
 
@@ -193,7 +197,7 @@ Defined in: website/components/media/MediaFigure.tsx:47
 highResSrc: string = ATTR_VALUES.EMPTY
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:48
+Defined in: website/components/media/MediaFigure.tsx:57
 
 ---
 
@@ -203,7 +207,7 @@ Defined in: website/components/media/MediaFigure.tsx:48
 isLoaded: boolean = false
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:49
+Defined in: website/components/media/MediaFigure.tsx:58
 
 ---
 
@@ -213,7 +217,7 @@ Defined in: website/components/media/MediaFigure.tsx:49
 poster: string[] = [];
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:50
+Defined in: website/components/media/MediaFigure.tsx:59
 
 ---
 
@@ -223,7 +227,7 @@ Defined in: website/components/media/MediaFigure.tsx:50
 video: string[] = [];
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:51
+Defined in: website/components/media/MediaFigure.tsx:60
 
 ---
 
@@ -233,7 +237,27 @@ Defined in: website/components/media/MediaFigure.tsx:51
 videoWebm: string[] = [];
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:52
+Defined in: website/components/media/MediaFigure.tsx:61
+
+---
+
+### descriptionTracks
+
+```ts
+descriptionTracks: DescriptionTrack[] = [];
+```
+
+Defined in: website/components/media/MediaFigure.tsx:62
+
+---
+
+### longdescUrl
+
+```ts
+longdescUrl: string = ATTR_VALUES.EMPTY
+```
+
+Defined in: website/components/media/MediaFigure.tsx:63
 
 ---
 
@@ -245,7 +269,7 @@ observer:
   | null = null;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:53
+Defined in: website/components/media/MediaFigure.tsx:64
 
 ---
 
@@ -257,7 +281,7 @@ imgObserver:
   | null = null;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:54
+Defined in: website/components/media/MediaFigure.tsx:65
 
 ---
 
@@ -269,7 +293,7 @@ warmObserver:
   | null = null;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:55
+Defined in: website/components/media/MediaFigure.tsx:66
 
 ---
 
@@ -279,7 +303,7 @@ Defined in: website/components/media/MediaFigure.tsx:55
 warmed: boolean = false
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:56
+Defined in: website/components/media/MediaFigure.tsx:67
 
 ---
 
@@ -289,7 +313,7 @@ Defined in: website/components/media/MediaFigure.tsx:56
 _scaledVideo: boolean | undefined = undefined;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:57
+Defined in: website/components/media/MediaFigure.tsx:68
 
 ---
 
@@ -299,7 +323,17 @@ Defined in: website/components/media/MediaFigure.tsx:57
 _ladderBox: number = -1
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:58
+Defined in: website/components/media/MediaFigure.tsx:69
+
+---
+
+### \_domBlobs
+
+```ts
+_domBlobs: Set<string>
+```
+
+Defined in: website/components/media/MediaFigure.tsx:70
 
 ---
 
@@ -309,7 +343,17 @@ Defined in: website/components/media/MediaFigure.tsx:58
 _expandBrackets: (() => void) | null = null;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:59
+Defined in: website/components/media/MediaFigure.tsx:71
+
+---
+
+### \_unsubManifest
+
+```ts
+_unsubManifest: (() => void) | null = null;
+```
+
+Defined in: website/components/media/MediaFigure.tsx:72
 
 ---
 
@@ -319,7 +363,7 @@ Defined in: website/components/media/MediaFigure.tsx:59
 isIntersecting: boolean = false
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:60
+Defined in: website/components/media/MediaFigure.tsx:73
 
 ---
 
@@ -4388,7 +4432,7 @@ get static observedAttributes(): (
   | "auto-play")[];
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:34
+Defined in: website/components/media/MediaFigure.tsx:43
 
 ##### Returns
 
@@ -4412,7 +4456,7 @@ Defined in: website/components/media/MediaFigure.tsx:34
 get canExpand(): boolean;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:68
+Defined in: website/components/media/MediaFigure.tsx:81
 
 Whether the figure may open the expand modal.
 
@@ -4430,7 +4474,7 @@ Whether the figure may open the expand modal.
 get isVideo(): boolean;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:77
+Defined in: website/components/media/MediaFigure.tsx:90
 
 Whether the media is a video.
 
@@ -4448,7 +4492,7 @@ Whether the media is a video.
 get autoPlay(): boolean;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:86
+Defined in: website/components/media/MediaFigure.tsx:99
 
 Whether the video should autoplay.
 
@@ -4466,7 +4510,7 @@ Whether the video should autoplay.
 get mediaWidth(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:95
+Defined in: website/components/media/MediaFigure.tsx:108
 
 Declared media width attribute.
 
@@ -4484,7 +4528,7 @@ Declared media width attribute.
 get mediaHeight(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:104
+Defined in: website/components/media/MediaFigure.tsx:117
 
 Declared media height attribute.
 
@@ -4502,7 +4546,7 @@ Declared media height attribute.
 get naturalWidth(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:118
+Defined in: website/components/media/MediaFigure.tsx:131
 
 Intrinsic file width for the expand modal — the untouched CMS size.
 Carousel figures carry `natural-width` when `width` was downscaled
@@ -4523,7 +4567,7 @@ through the desktop ladder; everything else falls back to
 get naturalHeight(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:128
+Defined in: website/components/media/MediaFigure.tsx:141
 
 Intrinsic file height for the expand modal — pairs with
 `naturalWidth`; falls back to `mediaHeight` when no ladder
@@ -4543,7 +4587,7 @@ downscale was recorded.
 get label(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:134
+Defined in: website/components/media/MediaFigure.tsx:147
 
 Caption label.
 
@@ -4561,7 +4605,7 @@ Caption label.
 get mediaSrc(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:140
+Defined in: website/components/media/MediaFigure.tsx:153
 
 Base media path on the CDN.
 
@@ -4579,7 +4623,7 @@ Base media path on the CDN.
 get classes(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:146
+Defined in: website/components/media/MediaFigure.tsx:159
 
 Extra host classes passed through the attribute.
 
@@ -4597,7 +4641,7 @@ Extra host classes passed through the attribute.
 get displayWidth(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:156
+Defined in: website/components/media/MediaFigure.tsx:169
 
 Rendered display width. Videos are capped at FHD_WIDTH (1920): the
 player can't visually exceed 1080p, so decode/GPU budgets stay
@@ -4618,7 +4662,7 @@ the CDN serves the right variant instead.
 get displayHeight(): number;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:169
+Defined in: website/components/media/MediaFigure.tsx:182
 
 Rendered display height — pairs with displayWidth's FHD cap:
 aspect-preserving downscale via calcAspectScaled (h·(MAX/w)) so the
@@ -4638,7 +4682,7 @@ layout box never stretches when the video is >1080p.
 get videoSrcMain(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:179
+Defined in: website/components/media/MediaFigure.tsx:192
 
 Primary video source URL.
 
@@ -4656,7 +4700,7 @@ Primary video source URL.
 get videoSrcFallback(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:185
+Defined in: website/components/media/MediaFigure.tsx:198
 
 Fallback (scaled) video source for constrained devices.
 
@@ -4674,7 +4718,7 @@ Fallback (scaled) video source for constrained devices.
 get videoSrcWebmMain(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:191
+Defined in: website/components/media/MediaFigure.tsx:204
 
 Primary webm video source — emitted first in the <source> list.
 
@@ -4692,7 +4736,7 @@ Primary webm video source — emitted first in the <source> list.
 get videoSrcWebmFallback(): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:197
+Defined in: website/components/media/MediaFigure.tsx:210
 
 Scaled webm fallback for constrained devices.
 
@@ -4876,7 +4920,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 optional onUpdated(): void;
 ```
 
-Defined in: core/Component.ts:115
+Defined in: core/Component.ts:187
 
 #### Returns
 
@@ -4894,7 +4938,7 @@ Defined in: core/Component.ts:115
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4928,7 +4972,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4953,7 +4997,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4977,7 +5021,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -5014,7 +5058,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -5057,7 +5101,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -5107,7 +5151,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -5138,7 +5182,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -5161,7 +5205,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5186,7 +5230,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:
@@ -5221,7 +5265,7 @@ Render result from render().
 onInit(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:201
+Defined in: website/components/media/MediaFigure.tsx:214
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -5243,7 +5287,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 onMounted(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:205
+Defined in: website/components/media/MediaFigure.tsx:218
 
 #### Returns
 
@@ -5261,7 +5305,7 @@ Defined in: website/components/media/MediaFigure.tsx:205
 _ensureVideoSource(vid): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:211
+Defined in: website/components/media/MediaFigure.tsx:233
 
 Sets the <source> src on a video element when it becomes playable.
 
@@ -5283,7 +5327,14 @@ Sets the <source> src on a video element when it becomes playable.
 onDestroy(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:215
+Defined in: website/components/media/MediaFigure.tsx:237
+
+Teardown hook — invoked once per disconnect by the base
+`disconnectedCallback`. Declared as a concrete no-op (unlike the
+mount hooks above) so the callback can call it unconditionally:
+subclasses override for engine/audio/observer cleanup, and
+`el.onDestroy = fn` own-property patches still shadow the prototype
+method.
 
 #### Returns
 
@@ -5301,7 +5352,7 @@ Defined in: website/components/media/MediaFigure.tsx:215
 onStoreUpdate(): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:241
+Defined in: website/components/media/MediaFigure.tsx:271
 
 #### Returns
 
@@ -5319,7 +5370,7 @@ Defined in: website/components/media/MediaFigure.tsx:241
 playVideo(target): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:247
+Defined in: website/components/media/MediaFigure.tsx:277
 
 Starts muted playback honoring reduced-motion/autoplay prefs.
 
@@ -5341,7 +5392,7 @@ Starts muted playback honoring reduced-motion/autoplay prefs.
 pauseVideo(target): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:253
+Defined in: website/components/media/MediaFigure.tsx:283
 
 Pauses playback (offscreen or pref change).
 
@@ -5363,7 +5414,7 @@ Pauses playback (offscreen or pref change).
 placeholder(w, h): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:259
+Defined in: website/components/media/MediaFigure.tsx:289
 
 Zero-CLS SVG placeholder data-URI at the media's aspect (see media-load.ts).
 
@@ -5389,7 +5440,7 @@ Zero-CLS SVG placeholder data-URI at the media's aspect (see media-load.ts).
 loadHighRes(): Promise<void>;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:265
+Defined in: website/components/media/MediaFigure.tsx:295
 
 Thumb → high-res preload swap (see media-load.ts).
 
@@ -5405,7 +5456,7 @@ Thumb → high-res preload swap (see media-load.ts).
 slugify(text): string;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:271
+Defined in: website/components/media/MediaFigure.tsx:301
 
 Slugifies a caption for the alt/ARIA text.
 
@@ -5424,12 +5475,21 @@ Slugifies a caption for the alt/ARIA text.
 ### openModal()
 
 ```ts
-openModal(): void;
+openModal(originFigure?): void;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:277
+Defined in: website/components/media/MediaFigure.tsx:309
 
 Opens the expand modal with this media's descriptor via the store.
+
+#### Parameters
+
+##### originFigure?
+
+`MediaFigure`
+
+— genie-measure override (clone clicks measure
+the clicked clone's rect; the twin is the modal's media owner).
 
 #### Returns
 
@@ -5443,7 +5503,7 @@ Opens the expand modal with this media's descriptor via the store.
 render(): Element;
 ```
 
-Defined in: website/components/media/MediaFigure.tsx:290
+Defined in: website/components/media/MediaFigure.tsx:322
 
 JSX template — a layered stack the CSS crossfades:
 

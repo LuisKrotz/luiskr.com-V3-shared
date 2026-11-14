@@ -8,7 +8,7 @@
 function mountClose(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/widgets.ts:168
+Defined in: website/components/media/anim-demo/widgets.ts:293
 
 Modal close ✕ — the real CloseButtonWebGL cycling hover-fill (+ the
 occasional click shockwave) exactly like a pointer would.

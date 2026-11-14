@@ -372,8 +372,20 @@ const main = async () => {
       const label = route === '/' ? 'index' : route.replaceAll('/', '_')
       const url = `${base}${route}`
 
-      try {
-        await page.goto(url, { waitUntil: 'networkidle2', timeout: 45000 })
+      // Load+settle sequence, factored so the bare-document guard and the
+      // navigation retry can re-run it. Two failure shapes it must absorb:
+      // heavy pages (coverage tables, media walls) can blow the goto window
+      // under 10-way CPU contention, and a service-worker activation or
+      // lazy-chunk recovery can swap the document mid-settle — scanning the
+      // post-swap stub fabricates page-level violations on `<html><body>`.
+      const load = async () => {
+        // domcontentloaded — never networkidle: heavy routes (coverage
+        // tables, docs manifest streams, media walls) keep ≥3 requests
+        // in flight indefinitely, so an idle threshold can literally
+        // never arrive under contention. DCL fires once the deferred
+        // module bundle has parsed+executed; every app-boot delay after
+        // that is covered by the settle waits below.
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 })
 
         // Settle: the boot veil lifts when the app finishes mounting —
         // that is the state a real user (and Readability) sees. Bounded
@@ -549,6 +561,36 @@ const main = async () => {
         // and a char sampled mid-mount reports a bogus low-contrast
         // violation on a transition state no reader ever sees.
         await page.evaluate(settleAnimations)
+      }
+
+      try {
+        // Bounded retry: one re-load covers both failure shapes — a goto
+        // timeout under contention and a mid-settle document swap. The
+        // stub probe checks the real mounted page (title + app shell
+        // markup), not just element count — an about:blank-grade stub
+        // passes a naive "has elements" test too.
+        for (let attempt = 0; attempt < 2; attempt++) {
+          try {
+            await load()
+          } catch (e) {
+            if (attempt === 0) continue
+
+            throw e
+          }
+
+          const mounted = await page
+            .evaluate(
+              () =>
+                document.title.length > 0 &&
+                document.documentElement.hasAttribute('lang') &&
+                document.querySelectorAll('body *').length > 20
+            )
+            .catch(() => false)
+
+          if (mounted) break
+
+          if (attempt === 1) throw new Error('page did not mount (document stub after reload)')
+        }
 
         const { report } = await getCompliance(page, label)
         const results = report?.results || []
@@ -649,8 +691,10 @@ const main = async () => {
     // and must always be fixed, never baselined. The write UNIONS into
     // the existing baseline rather than replacing it — a reviewed rule
     // doesn't become un-reviewed because a later run happened to render
-    // less dynamic content; each run only ADDS newly-seen rules.
-    const out = {}
+    // less dynamic content; each run only ADDS newly-seen rules. Seed
+    // with the prior file so a scoped --paths run can't drop unscanned
+    // routes — union must never shrink the review surface.
+    const out = { ...baseline }
 
     for (const p of pages) {
       const routeMap = {

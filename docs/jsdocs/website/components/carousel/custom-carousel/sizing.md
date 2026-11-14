@@ -23,7 +23,7 @@ one-shot window-resize path.
 ### `measureFit`
 
 Decides whether the items fit side-by-side (no carousel chrome) or need
-the scroll track. Side-by-side requires: ≤2 items, viewport
+the scroll track. Side-by-side requires: ≥2 items (any count), viewport
 ≥ SIDE_BY_SIDE_BREAKPOINT, and projected total width ≤ host width.
 The projection mirrors the shadow-DOM contract in media-figure.scss +
 carousel-host.scss exactly: the strip height is the same value

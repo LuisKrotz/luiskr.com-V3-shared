@@ -134,6 +134,18 @@ Last width the fit observer saw — dedups sub-pixel RO noise.
 
 Latched by any user interaction — autoplay never resumes after.
 
+### `_edgeClonesBefore`
+
+Leading clone count — viewport-calculated in measureFit (enough cyclic
+tail items to cover half the host width so the wrap strip never shows
+empty run-out pad). The last one is always the --clone-last teleport
+twin; 2 is the pre-measure default.
+
+### `_edgeClonesAfter`
+
+Trailing clone count — same contract mirrored; the first one is the
+--clone-first teleport twin.
+
 ### `_isRegressing`
 
 Ring regress animation in flight (drains progress on stop).
@@ -302,6 +314,10 @@ Next-arrow click.
 ### `onDotClick`
 
 Dot-navigation click to a specific slide.
+
+### `onTrackClick`
+
+Track click — forwards clone-slide clicks (inert, untargetable) to the real twin's modal.
 
 ### `_setupIntersectionObserver`
 

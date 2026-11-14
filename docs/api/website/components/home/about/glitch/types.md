@@ -185,7 +185,12 @@ Elapsed seconds — drives the rolling bar.
 
 ### `raf`
 
-Pending rAF handle.
+Pending frame-pool handle.
+
+### `onFrame`
+
+Stable per-session frame callback — allocated once at arm so the
+pooled loop re-arms without a per-frame closure allocation.
 
 ### `active`
 

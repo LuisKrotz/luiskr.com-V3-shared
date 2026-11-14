@@ -8,7 +8,7 @@
 function onUnmounted(host): void
 ```
 
-Defined in: website/components/carousel/custom-carousel/lifecycle.ts:39
+Defined in: website/components/carousel/custom-carousel/lifecycle.ts:44
 
 Disconnects the ResizeObserver tracking the host width.
 

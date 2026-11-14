@@ -8,7 +8,7 @@
 function ringSigned(d, len): number
 ```
 
-Defined in: website/components/home/cardstack/deck.ts:59
+Defined in: website/components/home/cardstack/deck.ts:57
 
 Signed ring distance of `d` modulo `len`, normalized into (-len/2, len/2]
 so the shortest fan direction wins — fractional `d` (mid-drag) passes

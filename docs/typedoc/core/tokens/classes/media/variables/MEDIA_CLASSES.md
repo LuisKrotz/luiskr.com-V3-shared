@@ -15,6 +15,7 @@ const MEDIA_CLASSES: Readonly<{
   RENDER_PLACEHOLDER_FIGURE: 'render-placeholder-figure'
   MEDIA_FIGURE: 'media-figure'
   MEDIA_FIGURE_LOADED: 'media-figure--loaded'
+  MEDIA_FIGURE_TALL: 'media-figure--tall'
   MEDIA_FIGURE_TOGGLE: 'media-figure__toggle'
   MEDIA_FIGURE_TOGGLE_PLAY: 'media-figure__toggle-play'
   MEDIA_FIGURE_TOGGLE_PAUSE: 'media-figure__toggle-pause'

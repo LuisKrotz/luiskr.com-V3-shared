@@ -28,3 +28,11 @@ Imports the class under test AFTER the mock is registered.
 ### `flush`
 
 Flushes the mount promise + a frame.
+
+### `makeHost`
+
+Mounted host trio (host/root/content) with a stubbed outer rect.
+
+### `makeSkel`
+
+Skeleton element with a canned class + rect the wasm loader measures.

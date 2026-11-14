@@ -8,7 +8,7 @@
 function mountBurger(ctx): () => void
 ```
 
-Defined in: website/components/media/anim-demo/widgets.ts:42
+Defined in: website/components/media/anim-demo/widgets.ts:96
 
 Nav burger → ✕ liquid morph — the real BurgerButtonWebGL, cycling
 hover-pool → open morph → calm-X → close, the four beats the nav

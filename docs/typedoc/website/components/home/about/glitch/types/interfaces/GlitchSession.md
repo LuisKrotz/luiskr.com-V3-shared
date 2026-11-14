@@ -200,7 +200,24 @@ raf: number
 
 Defined in: website/components/home/about/glitch/types.ts:116
 
-Pending rAF handle.
+Pending frame-pool handle.
+
+---
+
+### onFrame
+
+```ts
+onFrame: () => void;
+```
+
+Defined in: website/components/home/about/glitch/types.ts:119
+
+Stable per-session frame callback — allocated once at arm so the
+pooled loop re-arms without a per-frame closure allocation.
+
+#### Returns
+
+`void`
 
 ---
 
@@ -210,7 +227,7 @@ Pending rAF handle.
 active: boolean
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:118
+Defined in: website/components/home/about/glitch/types.ts:121
 
 True while the loop should keep running.
 
@@ -222,7 +239,7 @@ True while the loop should keep running.
 hover: boolean
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:120
+Defined in: website/components/home/about/glitch/types.ts:123
 
 Intensity — idle ambient or full VHS under hover.
 
@@ -234,7 +251,7 @@ Intensity — idle ambient or full VHS under hover.
 tick: number
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:122
+Defined in: website/components/home/about/glitch/types.ts:125
 
 Frame counter — paces un-armed retry polls.
 
@@ -246,7 +263,7 @@ Frame counter — paces un-armed retry polls.
 ro: ResizeObserver | null
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:126
+Defined in: website/components/home/about/glitch/types.ts:129
 
 Wrapper ResizeObserver — the CSS canvas is width:100%, so any post-arm
 layout change (resize, grid reflow, mosaic expand above) would stretch
@@ -262,7 +279,7 @@ wasm:
   | null;
 ```
 
-Defined in: website/components/home/about/glitch/types.ts:129
+Defined in: website/components/home/about/glitch/types.ts:132
 
 Live rust/glitch widget — the WebGPU render backend. Null while the
 mount is in flight or after it fails (the 2D painters run instead).

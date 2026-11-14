@@ -17,7 +17,10 @@ A lazily-imported tier module — resolves to the tier's css text.
 
 The `?tiers` module shape: embedded base text plus cumulative tier
 loaders keyed by the highest class they cover (sparse — the runtime
-resolves the viewport class to the highest defined tier ≤ it).
+resolves the viewport class to the highest defined tier ≤ it). `print`
+carries the sheet's `@media print`/`@page` blocks behind the same lazy
+loader contract — adopted onto the shadow root during idle, inert on
+screen, live for paper output only.
 
 ### `isTieredStyles`
 
@@ -70,5 +73,10 @@ cumulative tier, whose higher blocks just stop matching.
 
 Merges several `?tiers` imports into one TieredStyles — the multi-sheet
 equivalent of the old `` `${a}\n${b}` `` concat (MediaFigure). Bases are
-joined in order; tier loaders resolve all declared sheets for the key
-and join their cumulative css, preserving per-sheet order.
+joined in order; each merged tier resolves PER SHEET to the highest
+defined tier at or below the class — the splitter omits a class whose
+cumulative content equals the previous tier's ("the runtime falls back
+to the highest defined lower tier"), so a sheet with only mobile/tablet
+content must still contribute at desktop. Keying merged loaders by the
+exact class alone orphaned those sheets — their narrower cumulative
+rules would never be adopted once a wider tier existed on any sibling.

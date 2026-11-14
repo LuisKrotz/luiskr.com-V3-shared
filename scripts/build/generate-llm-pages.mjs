@@ -580,10 +580,39 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         height: i.height?.[0] ? Number(i.height[0]) : undefined,
       }))
 
+  /**
+   * Award/mention rows → replica records — name is the visible
+   * "date: title" text, description the hidden longdesc, image the CDN
+   * badge thumbnail. Shared by the home + about replicas: the deck
+   * renders on both surfaces, so both lists carry the full inventory.
+   */
+  const mentionItemsOf = (loc) => {
+    const about = t(loc, (x) => x.pages?.about) || {}
+
+    const items = (about.mention_items || [])
+      .filter((m) => m && m.link)
+      .map((m) => {
+        const html = String(m.description || '')
+
+        return {
+          name: toDescription(html.split(/<span\b/i)[0].replace(/<br\s*\/?>/gi, ' '), 200),
+          link: m.link,
+          image: m.media?.path ? `${CDN_BASE}${m.media.path}` : undefined,
+          description:
+            toDescription(html.match(/<span[^>]*>([\s\S]*?)<\/span>/i)?.[1] || html, 300) ||
+            undefined,
+        }
+      })
+
+    return { title: about.mentions, items }
+  }
+
   const emitHome = (loc) => {
     const home = t(loc, (x) => x.pages?.HOME) || {}
     const list = home.portfoliolist || []
     const bio = toDescription(t(loc, (x) => x.pages?.about?.col1?.[0]) || '')
+
+    const mentions = mentionItemsOf(loc)
 
     const items = list.map((item) => {
       const projectRoute = `${loc === 'en' ? '' : `/${loc}`}/portfolio/${item.link || item.image}`
@@ -611,6 +640,19 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
       '',
       `- ${home.archive || 'Archive'}: ${SITE_URL}`,
       `- Machine index: ${SITE_URL}${LLM_TREE_ROOT}/index.json`,
+      ...(mentions.items.length
+        ? [
+            '',
+            `## ${mentions.title || 'Awards & mentions'}`,
+            '',
+            ...mentions.items.map(
+              (m) =>
+                `- [${m.name || m.link}](${m.link})${m.description ? ` — ${m.description}` : ''}${
+                  m.image ? `\n  ![${m.name || m.link}](${m.image})` : ''
+                }`
+            ),
+          ]
+        : []),
     ].join('\n')
 
     const projects = items.map((i) => ({
@@ -631,6 +673,7 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
           bio,
           featured: home.featured || home.message,
           projects,
+          mentions,
           [SEARCH_THEMES_KEY]: themesOr(home, loc, 'pages', 'HOME'),
         },
         media: homeMedia(loc),
@@ -643,6 +686,19 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
     const title = `${t(loc, (x) => x.APP?.about?.description) || 'About'} | ${BASE_TITLE}`
     const paras = [...(about.col1 || []), ...(about.col2 || [])].map(htmlToMd).filter(Boolean)
 
+    const mentions = mentionItemsOf(loc)
+
+    const mentionsMd = mentions.items.length
+      ? `\n\n## ${mentions.title || 'Awards & mentions'}\n\n${mentions.items
+          .map(
+            (m) =>
+              `- [${m.name || m.link}](${m.link})${m.description ? ` — ${m.description}` : ''}${
+                m.image ? `\n  ![${m.name || m.link}](${m.image})` : ''
+              }`
+          )
+          .join('\n')}`
+      : ''
+
     emit(
       shellFor({
         type: 'about',
@@ -651,12 +707,13 @@ export async function buildLlmPages(distDir = path.join(ROOT, 'dist')) {
         route: slugRoute('about')(loc),
         locale: loc,
         alternates: replicaAlternates(slugRoute('about')),
-        body: paras.join('\n\n'),
+        body: paras.join('\n\n') + mentionsMd,
         content: {
           columns: {
             col1: (about.col1 || []).map(htmlToMd),
             col2: (about.col2 || []).map(htmlToMd),
           },
+          mentions,
           [SEARCH_THEMES_KEY]: themesOr(about, loc, 'pages', 'about'),
         },
       })

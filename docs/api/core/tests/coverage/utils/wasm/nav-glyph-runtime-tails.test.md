@@ -9,6 +9,10 @@ Coverage tail for utils/wasm/nav-glyph.ts — the live
 
 ## Members
 
+### `COLORS`
+
+Two metal palette vars — enough to cover the multi-color arm.
+
 ### `fakeCtx`
 
 Spy-backed 2d context — every call the painter makes.

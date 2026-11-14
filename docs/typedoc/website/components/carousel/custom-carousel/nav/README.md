@@ -19,4 +19,5 @@
 - [carouselOnPrevClick](functions/carouselOnPrevClick.md)
 - [carouselOnNextClick](functions/carouselOnNextClick.md)
 - [carouselOnDotClick](functions/carouselOnDotClick.md)
+- [carouselOnTrackClick](functions/carouselOnTrackClick.md)
 - [setupIntersectionObserver](functions/setupIntersectionObserver.md)

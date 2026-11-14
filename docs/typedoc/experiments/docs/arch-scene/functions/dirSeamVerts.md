@@ -8,7 +8,7 @@
 function dirSeamVerts(): Float32Array
 ```
 
-Defined in: experiments/docs/arch-scene.ts:715
+Defined in: experiments/docs/arch-scene.ts:723
 
 Folder seam segments — the detail strokes a filled icon pack prints
 on the card: the silhouette outline on both faces, rim struts, and

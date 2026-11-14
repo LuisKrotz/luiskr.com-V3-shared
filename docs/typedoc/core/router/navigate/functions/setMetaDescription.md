@@ -8,7 +8,7 @@
 function setMetaDescription(text): void
 ```
 
-Defined in: core/router/navigate.ts:66
+Defined in: core/router/navigate.ts:67
 
 Pushes a resolved description into every description-bearing head meta —
 description, og:description, twitter:description, DC.Description and

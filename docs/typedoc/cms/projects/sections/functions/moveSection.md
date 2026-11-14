@@ -1,20 +1,17 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/sections](../README.md) / moveSection
 
 ```ts
-function moveSection(
-   host, 
-   sIdx, 
-   dir
-): void;
+function moveSection(host, sIdx, dir): void
 ```
 
-Defined in: cms/projects/sections.ts:69
+Defined in: cms/projects/sections.ts:78
 
-Moves section.
+Swaps a section with its neighbor — `dir` is -1 (up) or +1 (down);
+out-of-bounds targets return early so the edge buttons are safe.
 
 ## Parameters
 
@@ -22,19 +19,19 @@ Moves section.
 
 [`CmsProjectsList`](../../CmsProjectsList/classes/CmsProjectsList.md)
 
-— the host component
+— the host component holding `currentProject`
 
 ### sIdx
 
 `number`
 
-— the value
+— zero-based section index
 
 ### dir
 
 `number`
 
-— the value
+— -1 or +1
 
 ## Returns
 

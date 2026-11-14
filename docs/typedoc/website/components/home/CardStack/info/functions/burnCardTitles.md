@@ -8,7 +8,7 @@
 function burnCardTitles(host): void
 ```
 
-Defined in: website/components/home/cardstack/info.ts:233
+Defined in: website/components/home/cardstack/info.ts:375
 
 The in-card paper-burn on stacked tiers — the front card's title
 knits IN (the loop runs dir −1 from prog 1: deposit motes rebuild

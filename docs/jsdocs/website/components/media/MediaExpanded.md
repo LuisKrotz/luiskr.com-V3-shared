@@ -28,17 +28,36 @@ Full-res media URL (from the source attribute).
 
 ### `sourceWebm`
 
-Webm sibling of an .mp4 source — first <source> when it exists
-(manifest-known absent ⇒ '', same doomed-request gate as the
-figure's resolveMediaSources).
+Webm sibling of an .mp4 source — first <source> when the manifest
+proves it ('' otherwise — an unproven sibling is a doomed request,
+same gate as the figure's resolveMediaSources).
 
 ### `thumb`
 
 Low-res thumbnail URL shown while the full asset loads.
+The stamped variant is offered only when the manifest proves it —
+an unproven layer would 404 into a transparent img (flat letterbox
+bands — the "missing blur" bug). Images fall back to the full
+source — always present, invisible under cover+blur; videos
+withhold the layer entirely since an mp4 can't be an <img> src.
 
 ### `alt`
 
 Alt text for the media.
+
+### `stem`
+
+Extensionless CDN stem the a11y siblings (.vtt / _longdesc.txt)
+derive from — stamped by the modal openers alongside `source`.
+
+### `a11yTracks`
+
+Manifest-gated description tracks for the expanded video — same
+16-locale set the owning <media-figure> emits.
+
+### `longdesc`
+
+Localized longdesc URL for the expanded image ('' when ungenerated).
 
 ### `mediaWidth`
 

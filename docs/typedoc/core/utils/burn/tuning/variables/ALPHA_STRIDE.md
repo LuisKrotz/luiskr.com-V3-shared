@@ -8,6 +8,6 @@
 const _ALPHA_STRIDE: 3 = 3
 ```
 
-Defined in: core/utils/burn/tuning.ts:87
+Defined in: core/utils/burn/tuning.ts:91
 
 Byte offset of the alpha channel inside a getImageData pixel quad.

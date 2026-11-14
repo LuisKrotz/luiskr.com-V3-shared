@@ -35,6 +35,24 @@ project binder and the mosaic's mobile carousel fallback).
 - `@param` group A media item array (shape-checked, not trusted).
 - `@returns` true when every item is landscape and the group is non-empty.
 
+### `HERO_SLOT_CLASSES`
+
+Hero-slot class tokens — `internal-main-item` and `ztf-video` are
+view-stamped contracts for the project cover only.
+
+### `stripHeroSlotClasses`
+
+The CMS `class` list minus the hero-slot tokens. A slide or mosaic tile
+built from the cover media inherits the item's raw class string
+unchanged — forwarded onto its <media-figure>, `internal-main-item` /
+`ztf-video` re-trigger the 0,3,0 hero selectors (they outrank every
+slide rule, inflating the laddered box to the 70dvh/175dvh hero caps —
+the blown-out landscape slide bug). The slide WRAPPER keeps the full
+class list for context/variant selectors; only the figure is scrubbed.
+
+- `@param` itemClass The item's raw CMS class string.
+- `@returns` The class string safe to forward onto a slide/tile figure.
+
 ### `hasIrregularMediaHeights`
 
 Irregular-heights detector: reports "mosaic" on the spread signal —

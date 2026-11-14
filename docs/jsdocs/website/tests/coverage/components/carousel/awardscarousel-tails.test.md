@@ -12,3 +12,7 @@ Split from coverage-tails-3.test.js — covers the "AwardsCarousel tails" descri
 ### `flush`
 
 Generous flush — mounted render queues need real timers past microtasks.
+
+### `goToHost`
+
+Minimal goTo host — track + slide mocks satisfy the centering math.

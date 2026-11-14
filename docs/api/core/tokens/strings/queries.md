@@ -13,6 +13,11 @@ Selector/media-query/rootMargin string tokens — grouped
 
 `?q=` — the search query parameter (deep links, SearchAction target).
 
+### `LINK_PRINT`
+
+Print alternate — declares the same URL carries a print-optimized
+form; syncDocumentHead keeps its href on the active canonical.
+
 ### `META_DESCRIPTION`
 
 Head-sync selectors — the meta tags syncDocumentHead/setMetaDescription rewrite per route.

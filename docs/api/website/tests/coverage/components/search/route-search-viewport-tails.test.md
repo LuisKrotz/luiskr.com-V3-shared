@@ -9,6 +9,14 @@
 
 ## Members
 
+### `flush`
+
+Generous flush — mounted render queues need real timers past microtasks.
+
+### `mountSearch`
+
+Mounts a <route-search> element and waits out its first render pass.
+
 ### `openList`
 
 Arms the open-list preconditions (hits + a typed query).

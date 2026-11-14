@@ -20,3 +20,7 @@ Anchor/link attribute tokens — token group. The `href`
 ### `REL`
 
 `rel` — link relationship (`noopener`/`noreferrer` on external links per MDN: window.opener exposure otherwise).
+
+### `MEDIA`
+
+`media` — target medium on <link> (e.g. `media="print"` on rel=alternate).

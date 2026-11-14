@@ -1,5 +1,7 @@
 # `shared\scripts\i18n\patch-earth-playground-titles.js`
 
+One-shot migration: rewrites each locale's
+
 |                |                                                            |
 | -------------- | ---------------------------------------------------------- |
 | **Source**     | `src/shared\scripts\i18n\patch-earth-playground-titles.js` |

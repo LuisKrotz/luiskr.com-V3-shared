@@ -8,7 +8,7 @@
 function fileIdRoot(id): string
 ```
 
-Defined in: experiments/docs/manifest.ts:262
+Defined in: experiments/docs/manifest.ts:263
 
 Extracts the root namespace from a manifest file id ('<root>:<rel>').
 

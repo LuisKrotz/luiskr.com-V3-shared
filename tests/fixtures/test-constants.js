@@ -254,10 +254,44 @@ export const TEST_PROJECTS = {
   SLUG_NATHALIA_BOND: 'clinica-de-desenvolvimento-nathalia-bond',
 }
 
+export const TEST_VERSION = {
+  APP: '5.0.0',
+  BUILD: 'rc-1.0.0',
+}
+
 export const TEST_AWARDS = {
   FWA_OF_THE_DAY: 'FWA of the Day',
   AWWWARDS_SOTD: 'Awwwards Site of the Day',
+  AI_READY_DOCS: 'Making Our Documentation AI-Ready',
+  AI_READY_DOCS_LINK_FRAGMENT: 'Making%20Our%20Documentation',
+  AI_READY_MEDIA_PATH: 'awards/making-our-documentation-ai-ready-2026.png',
 }
+
+/** Schema.org JSON-LD vocabulary keys — kept as fixtures so suites never
+ *  re-declare the literals schema.ts writes into the emitted graph. */
+export const TEST_SCHEMA = Object.freeze({
+  GRAPH: '@graph',
+  TYPE: '@type',
+  ITEM_LIST: 'ItemList',
+})
+
+/**
+ * Crafted mention_items rows driving awardSchemaItems' empty-field arms:
+ * the null row hits every optional chain's null side, the span-less row
+ * falls the longdesc match back to '' (and description back to the
+ * visible text), the media-without-path row leaves src undefined, and
+ * the link-only row leaves label/description empty.
+ */
+export const TEST_MENTION_ROWS = Object.freeze([
+  null,
+  { description: 'Plain date:<br>Plain Award' },
+  {
+    description: 'T:<br>N<span class="sr-only">Long</span>',
+    link: 'https://example.test/award',
+    media: {},
+  },
+  { link: 'https://example.test/only-link' },
+])
 
 // Computed-style fixtures for canvas widgets sampling theme CSS vars —
 // INK parses via parseCssColor, INVALID drives the null-ink fallback arm.

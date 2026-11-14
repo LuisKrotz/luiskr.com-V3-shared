@@ -136,12 +136,81 @@ surface itself.
 - `@param` ctx The demo context (stage owns the element).
 - `@returns` Teardown — blocks the late data write.
 
+### `_SCENE_STARS`
+
+Star count in the engine mini-scene — a compact cloud that still
+reads as the playground's star field at the demo's small box.
+
+### `_SCENE_RADIUS`
+
+Star-cloud radius in world units — the disc the camera orbits.
+
+### `_SCENE_DIST`
+
+Orbit distance — the camera stands back far enough to frame the
+whole cloud inside the demo's ~4:3 box.
+
+### `_SCENE_FOV`
+
+Vertical field of view, degrees — the engines' standard lens.
+
+### `_CLIP_NEAR`
+
+Camera near clip — inside the cloud's inner edge.
+
+### `_CLIP_FAR`
+
+Camera far clip — past the cloud's outer edge.
+
+### `_POINT_SIZE`
+
+Point-sprite diameter in world units.
+
+### `_SCENE_DRIFT`
+
+Star-cloud yaw drift (rad/s) — a slow turn, not a spin.
+
+### `_SCENE_SWAY`
+
+Orbit yaw sway amplitude (rad) — a gentle camera bob.
+
+### `_SCENE_SWAY_RATE`
+
+Orbit sway rate (rad/s).
+
+### `_SCENE_PITCH`
+
+Resting orbit pitch (rad) — lifted so the cloud reads as a disc,
+not a line.
+
+### `_SIDE_FRONT`
+
+set_material_flags slots — front faces, additive blending (stars
+accumulate light; the API takes the enum's numeric index).
+
+### `seedScene`
+
+Seeds the mounted scene3d surface with a mini star field — a flat
+point cloud in an additive material on a slowly orbiting camera, the
+same vocabulary the real playground scene speaks (points, orbit rig,
+one rAF-driven `frame()`). Runs the engine's own API so the demo is
+a real scene, not a canned recording; under reduced motion it paints
+one settled frame and stops.
+
+- `@param` canvas The GPU canvas (computed-style anchor for the ink).
+- `@param` surface The live engine handle's surface.
+- `@returns` The rAF id to cancel on teardown (0 when settled/mocked).
+
 ### `mountScene3dDemo`
 
-3D-scene demo — mounts the real mountScene3d WebGPU surface on the
-stage canvas; where WebGPU/the wasm artifact is unavailable (the
-common headless/fallback case) the 2D approximation driver keeps the
-stage alive with the same motion vocabulary.
+3D-scene demo — the stage carries two stacked full-size canvases:
+the first always paints the 2D starfield approximation (it is also
+the fallback surface); the real scene3d engine mounts on the last
+one and, where WebGPU is available, composites its own seeded mini
+scene over the field. Splitting the surfaces keeps the fallback's
+2D context alive — a shared canvas can't re-bind '2d' once the
+engine claims it for WebGPU, which is how the single-canvas version
+stranded the stage on a transparent blank.
 
-- `@param` ctx The demo context (stage owns the canvas).
-- `@returns` Teardown — destroys whichever surface mounted.
+- `@param` ctx The demo context (stage owns the canvas pair).
+- `@returns` Teardown — destroys whichever surfaces mounted.

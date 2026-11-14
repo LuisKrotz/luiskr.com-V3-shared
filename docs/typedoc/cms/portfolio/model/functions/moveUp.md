@@ -8,9 +8,10 @@
 function moveUp(host, idx): void
 ```
 
-Defined in: cms/portfolio/model.ts:81
+Defined in: cms/portfolio/model.ts:91
 
-Moves up.
+Moves an item one slot earlier — splice-remove + splice-insert keeps
+identity so the re-render lands on the same object in a new position.
 
 ## Parameters
 
@@ -18,13 +19,13 @@ Moves up.
 
 [`CmsPortfolioList`](../../CmsPortfolioList/classes/CmsPortfolioList.md)
 
-— the host component
+— the host component holding `items`
 
 ### idx
 
 `number`
 
-— the index
+— current index; 0 returns early (already first)
 
 ## Returns
 

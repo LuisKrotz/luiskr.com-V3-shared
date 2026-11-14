@@ -51,11 +51,7 @@ Notification toast — slide/fade entrance + exit (CSS).
 
 ### `MOSAIC_BURN`
 
-Mosaic title letter combustion → rebuild (Rust/WASM particles + 2D raster).
-
-### `MOSAIC_TILE`
-
-Mosaic tile — spring displacement + traveling border sheen (JS spring + canvas).
+Card-stack project-name letter combustion → rebuild (Rust/WASM particles + 2D raster).
 
 ### `MEDIA_PROGRESSIVE`
 
@@ -109,10 +105,6 @@ Document ambient glow — slow radial drift behind content (CSS).
 
 Route progress bar — scaleX crawl to ~70% while a navigation is in flight, then sweep-to-100 + fade (CSS transitions).
 
-### `NOTE_DOT`
-
-Disclaimer note dots — pulsing <i> markers inside footer/disclaimer notes (CSS).
-
 ### `CARD_STACK`
 
 Home project deck — deal-through card fan: drag/flick physics, inward
@@ -164,6 +156,35 @@ Long-description node id prefix — the helper injects one
 `<span id="lk-anim-desc-<id>">` per animation id into each shadow
 root / document that hosts a described element, and points the
 element's `aria-describedby`/`longdesc` at it.
+
+### `_ANIM_DOC`
+
+Docs-manifest path roots shared by ANIMATION_DOCS values — declared
+once so every record composes `<root><leaf>` without retyping the
+prefix (zero-hardcoding). `docs/…` roots address generated
+api/architecture pages under shared/docs; module roots (`core/…`,
+`website/…`) address live source files. Kept module-local — the file
+stays import-free for the plain-node locale-page generator.
+
+### `_ANIM_DOC_CANVAS`
+
+Docs root for canvas utility pages (`core/utils/canvas/…`).
+
+### `_ANIM_DOC_COMPONENTS`
+
+Docs root for website component pages (`website/components/…`).
+
+### `_ANIM_DOC_GPU`
+
+Docs root for GPU utility pages (`core/utils/gpu/…`).
+
+### `_ANIM_SRC_COMPONENTS`
+
+Live-source root for website component files (`website/components/…`).
+
+### `_ANIM_SRC_SASS`
+
+Live-source root for core stylesheet files (`core/sass/…`).
 
 ### `ANIMATION_DOCS`
 

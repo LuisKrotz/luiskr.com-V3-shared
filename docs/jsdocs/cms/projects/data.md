@@ -46,7 +46,12 @@ list so the selector lands on a valid entry.
 ### (module scope)
 
 Writes the current project back to its locale node — the whole record
-(title/folder/seo/cover/sections) is replaced atomically since the
-editor owns the complete shape.
+(title/folder/seo/cover/sections + the publication stamps) is replaced
+atomically since the editor owns the complete shape. `date` passes
+through untouched (it is the git-derived publication stamp, not an
+editable field) — a record that lacks one (CMS-created project, never
+committed to git) gets its first save stamped as the publication
+moment; `modified` is stamped fresh on every save so
+dateModified/<lastmod> consumers always see the last real edit.
 
 - `@param` host — the host component holding `currentProject`

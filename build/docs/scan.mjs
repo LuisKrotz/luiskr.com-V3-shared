@@ -165,15 +165,20 @@ const FORMAT_BY_EXT = Object.freeze({
 
 /** Directory entries never published, whatever the format. `tests` and
  * per-module `reports`/`coverage` trees are reached through their own
- * dedicated roots instead of leaking into a source bucket. `coverage-run`
- * is the transient raw-map staging dir jest writes before merge-coverage
- * promotes it — publishable output lives under `coverage/` only. */
+ * dedicated roots instead of leaking into a source bucket. `test` is
+ * the vendored/tooling singular (`local-modules/<pkg>/test`,
+ * `shared/scripts/test`) — CI-only material that belongs to the CMS
+ * surface, never to a public docs route or its `.md` replica.
+ * `coverage-run` is the transient raw-map staging dir jest writes
+ * before merge-coverage promotes it — publishable output lives under
+ * `coverage/` only. */
 const SKIP_DIRS = new Set([
   'node_modules',
   '.git',
   'coverage',
   'coverage-run',
   'dist',
+  'test',
   'tests',
   'reports',
 ])

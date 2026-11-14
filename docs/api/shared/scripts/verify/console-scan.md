@@ -9,6 +9,10 @@ Scans every .ts/.tsx/.js file under src/ for console usage. Policy:
 
 ## Members
 
+### `listSrcFiles`
+
+Recursive .ts/.tsx/.js collector honoring the SKIP_DIRS set.
+
 ### `scanLines`
 
 Per-line scanner: tracks block-comment state across lines (multi-line

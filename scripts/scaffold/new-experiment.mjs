@@ -5,7 +5,10 @@
  * following the established module pattern (see experiments/earth-playground):
  *
  *   experiments/<name>/
- *     package.json      @luiskr/<name>, ESM, exports ./index.ts
+ *     package.json      @luiskr/<name>, ESM, exports ./index.ts, starts
+ *                       at 0.0.0 with the version:{patch,minor,major}
+ *                       auto-bump scripts — `version:major` on 0.x lands
+ *                       1.0.0, the release cut
  *     tsconfig.json     extends the root config, tests/dist excluded
  *     vite.config.js    library build via shared/build/vite-lib.mjs
  *     jest.config.mjs   module suite via shared/tests/jest.preset.mjs
@@ -55,7 +58,12 @@ const FILES = {
     "**/*.scss",
     "**/views/**",
     "**/components/**"
-  ]
+  ],
+  "scripts": {
+    "version:patch": "yarn version --patch --no-git-tag-version",
+    "version:minor": "yarn version --minor --no-git-tag-version",
+    "version:major": "yarn version --major --no-git-tag-version"
+  }
 }
 `,
   'tsconfig.json': `{
@@ -118,6 +126,8 @@ Experiment module — scaffolded via \`shared/scripts/scaffold/new-experiment.mj
 - Source: \`index.ts\` + feature folders (strict TypeScript).
 - Tests: \`tests/\` (JavaScript, Jest via the shared preset — 100% coverage gate).
 - Build: \`vite build -c vite.config.js\` → \`dist/${name}.js\`.
+- Version: starts at \`0.0.0\` — \`yarn version:{patch,minor,major}\` auto-bumps
+  (no git tags); \`version:major\` on 0.x lands \`1.0.0\`, the release cut.
 
 Self-registered: runs in \`yarn test\`, covered by \`coverage-gate\` and
 \`merge-coverage\` automatically (module discovery in \`shared/scripts/modules.mjs\`).

@@ -8,7 +8,7 @@
 function bindEvents(host): void
 ```
 
-Defined in: website/components/carousel/mentions-deck/events.ts:76
+Defined in: website/components/carousel/mentions-deck/events.ts:81
 
 Binds every listener the deck needs — shadowRoot delegation covers
 re-renders (nodes swap per _updateDom, listeners don't); the pointer

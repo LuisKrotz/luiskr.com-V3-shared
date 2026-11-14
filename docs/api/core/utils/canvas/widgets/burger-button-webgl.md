@@ -91,6 +91,13 @@ Seconds since startTime of the last press — drives the click shockwave.
 
 Previous frame's t — the approach easings consume dt, not absolutes.
 
+### `_focusHost`
+
+Element the focusin/out hover listeners were bound to — the canvas's
+parent (the chip wrap) when one exists, since the canvas itself is
+presentational and keyboard focus lands on the real button under it;
+the canvas is the fallback for parent-less mounts.
+
 ### `_settleStreak`
 
 Consecutive frames with every eased scalar converged and no live

@@ -8,7 +8,7 @@
 function getOptimizedGravatar(urlStr, size?): string
 ```
 
-Defined in: core/utils/media.ts:94
+Defined in: core/utils/media.ts:95
 
 Replaces the `size=` parameter on a Gravatar URL. Non-Gravatar URLs pass
 through unchanged (the param is meaningless off-domain), and a URL with

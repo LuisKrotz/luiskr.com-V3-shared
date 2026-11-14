@@ -4,9 +4,14 @@
 
 [luiskr.com](../../../../README.md) / [cms/footer/CmsFooterEditor](../README.md) / CmsFooterEditor
 
-Defined in: cms/footer/CmsFooterEditor.tsx:26
+Defined in: cms/footer/CmsFooterEditor.tsx:31
 
-The CmsFooterEditor — footer editor class.
+<cms-footer-editor> — the element facade for the footer editor: holds
+the three data slices (contactData, legalLinks, relatedFooter +
+relatedExtra round-trip bag) and delegates to `data.ts` (Firebase),
+`lists.ts` (channel-list render/binding), `events.ts` (wiring), and
+`render.tsx` (JSX). `_`-prefixed methods are the internal call surface
+the templates and tests use.
 
 ## Extends
 
@@ -20,7 +25,7 @@ The CmsFooterEditor — footer editor class.
 new CmsFooterEditor(): CmsFooterEditor;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:51
+Defined in: cms/footer/CmsFooterEditor.tsx:56
 
 #### Returns
 
@@ -38,7 +43,7 @@ Defined in: cms/footer/CmsFooterEditor.tsx:51
 languages: readonly string[] = VALID_LANGS;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:27
+Defined in: cms/footer/CmsFooterEditor.tsx:32
 
 ---
 
@@ -48,7 +53,7 @@ Defined in: cms/footer/CmsFooterEditor.tsx:27
 selectedLang: string = LOCALES.EN
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:28
+Defined in: cms/footer/CmsFooterEditor.tsx:33
 
 ---
 
@@ -58,7 +63,7 @@ Defined in: cms/footer/CmsFooterEditor.tsx:28
 saving: boolean = false
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:29
+Defined in: cms/footer/CmsFooterEditor.tsx:34
 
 ---
 
@@ -68,7 +73,7 @@ Defined in: cms/footer/CmsFooterEditor.tsx:29
 syncing: boolean = false
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:30
+Defined in: cms/footer/CmsFooterEditor.tsx:35
 
 ---
 
@@ -78,7 +83,7 @@ Defined in: cms/footer/CmsFooterEditor.tsx:30
 contactData: ContactData
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:34
+Defined in: cms/footer/CmsFooterEditor.tsx:39
 
 ---
 
@@ -88,7 +93,7 @@ Defined in: cms/footer/CmsFooterEditor.tsx:34
 legalLinks: FooterChannel[] = [];
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:42
+Defined in: cms/footer/CmsFooterEditor.tsx:47
 
 ---
 
@@ -98,7 +103,7 @@ Defined in: cms/footer/CmsFooterEditor.tsx:42
 relatedFooter: RelatedFooter
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:45
+Defined in: cms/footer/CmsFooterEditor.tsx:50
 
 ---
 
@@ -108,19 +113,23 @@ Defined in: cms/footer/CmsFooterEditor.tsx:45
 relatedExtra: Record<string, unknown> = {}
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:49
+Defined in: cms/footer/CmsFooterEditor.tsx:54
 
 ---
 
 ### \_componentStyles
 
 ```ts
-protected _componentStyles: string;
+protected _componentStyles:
+  | string
+  | TieredStyles;
 ```
 
-Defined in: core/Component.ts:70
+Defined in: core/Component.ts:102
 
-`?inline` SCSS text injected once per shadow root.
+Component-local SCSS — either the `?inline` css text or a `?tiers`
+{base, tiers} module whose base is adopted synchronously while the
+viewport's cumulative media tier loads lazily.
 
 #### Inherited from
 
@@ -134,7 +143,7 @@ Defined in: core/Component.ts:70
 protected _eventDisposers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:77
+Defined in: core/Component.ts:149
 
 Disposers for listeners added via addScopedListener(). Drained in
 disconnectedCallback so elements never leak listeners across mounts —
@@ -156,7 +165,7 @@ critical for elements that move in the DOM (carousel reorder, route swap).
 protected _storeUnsubscribers: () => void[] = [];
 ```
 
-Defined in: core/Component.ts:83
+Defined in: core/Component.ts:155
 
 Unsubscribe callbacks from store.subscribe(). Drained on disconnect so a
 detached element stops receiving store pushes and can be GC'd.
@@ -177,7 +186,7 @@ detached element stops receiving store pushes and can be GC'd.
 _isMounted: boolean = false
 ```
 
-Defined in: core/Component.ts:90
+Defined in: core/Component.ts:162
 
 Whether the element is currently connected. Read by the store-subscription
 wrapper to skip onStoreUpdate on detached elements (a store push arriving
@@ -195,7 +204,7 @@ between disconnect and GC must not re-render into a dead shadow root).
 protected _styleNode: Element | HTMLStyleElement | null = null;
 ```
 
-Defined in: core/Component.ts:93
+Defined in: core/Component.ts:165
 
 The `<style>` fallback node, only populated on engines without constructable stylesheets.
 
@@ -211,7 +220,7 @@ The `<style>` fallback node, only populated on engines without constructable sty
 _contentNode: Element | HTMLElement | null = null;
 ```
 
-Defined in: core/Component.ts:100
+Defined in: core/Component.ts:172
 
 Persistent content wrapper inside the shadow root. _updateDom swaps only
 this node's children — the style mechanism stays untouched (see file
@@ -231,7 +240,7 @@ _skeletonLayer:
   | null = null;
 ```
 
-Defined in: core/Component.ts:103
+Defined in: core/Component.ts:175
 
 Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 
@@ -247,7 +256,7 @@ Live WebGL skeleton layer, owned by syncSkeletonLayer()/destroySkeletonLayer().
 state: ComponentState = {}
 ```
 
-Defined in: core/Component.ts:106
+Defined in: core/Component.ts:178
 
 Reactive state bag — written only through setState() so updates always re-render.
 
@@ -4480,7 +4489,7 @@ Defined in: node\_modules/typescript/lib/lib.dom.d.ts:13931
 onMounted(): void;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:57
+Defined in: cms/footer/CmsFooterEditor.tsx:62
 
 Lifecycle: loads footer data.
 
@@ -4500,7 +4509,7 @@ Lifecycle: loads footer data.
 onUpdated(): void;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:63
+Defined in: cms/footer/CmsFooterEditor.tsx:68
 
 Lifecycle: re-binds after render.
 
@@ -4520,7 +4529,7 @@ Lifecycle: re-binds after render.
 loadAllData(): Promise<void>;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:69
+Defined in: cms/footer/CmsFooterEditor.tsx:74
 
 Reads the footer nodes for the selected locale.
 
@@ -4536,7 +4545,7 @@ Reads the footer nodes for the selected locale.
 saveAll(): Promise<void>;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:75
+Defined in: cms/footer/CmsFooterEditor.tsx:80
 
 Writes the footer model back to Firebase.
 
@@ -4552,7 +4561,7 @@ Writes the footer model back to Firebase.
 syncLine1ToAllLangs(): Promise<void>;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:81
+Defined in: cms/footer/CmsFooterEditor.tsx:86
 
 Propagates the source/credit line to every locale.
 
@@ -4568,7 +4577,7 @@ Propagates the source/credit line to every locale.
 syncSocialsToAllLangs(): Promise<void>;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:87
+Defined in: cms/footer/CmsFooterEditor.tsx:92
 
 Propagates the social-channel list to every locale.
 
@@ -4584,7 +4593,7 @@ Propagates the social-channel list to every locale.
 _addItem(arr, item): void;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:93
+Defined in: cms/footer/CmsFooterEditor.tsx:98
 
 Appends an item to a channel list and re-renders.
 
@@ -4610,7 +4619,7 @@ Appends an item to a channel list and re-renders.
 _removeItem(arr, idx): void;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:99
+Defined in: cms/footer/CmsFooterEditor.tsx:104
 
 Removes an item by index and re-renders.
 
@@ -4640,7 +4649,7 @@ _moveItem(
 ): void;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:105
+Defined in: cms/footer/CmsFooterEditor.tsx:110
 
 Moves an item up/down within its list.
 
@@ -4670,7 +4679,7 @@ Moves an item up/down within its list.
 _notify(msg): void;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:111
+Defined in: cms/footer/CmsFooterEditor.tsx:116
 
 Fires a cms-notification toast.
 
@@ -4698,7 +4707,7 @@ _renderChannelList(
 ): HTMLElement | DocumentFragment | SVGElement;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:121
+Defined in: cms/footer/CmsFooterEditor.tsx:126
 
 One editable channel list — see footer/lists.ts for the
 prefix-namespaced row markup.
@@ -4742,7 +4751,7 @@ _bindListEvents(
 ): void;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:133
+Defined in: cms/footer/CmsFooterEditor.tsx:138
 
 Wires add/remove/move/input handlers for a rendered list.
 
@@ -4776,7 +4785,7 @@ Wires add/remove/move/input handlers for a rendered list.
 _bindEvents(): void;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:144
+Defined in: cms/footer/CmsFooterEditor.tsx:149
 
 Wires the whole form.
 
@@ -4792,7 +4801,7 @@ Wires the whole form.
 render(): HTMLElement | DocumentFragment | SVGElement;
 ```
 
-Defined in: cms/footer/CmsFooterEditor.tsx:150
+Defined in: cms/footer/CmsFooterEditor.tsx:155
 
 JSX template.
 
@@ -4812,7 +4821,7 @@ JSX template.
 optional onInit(): void;
 ```
 
-Defined in: core/Component.ts:113
+Defined in: core/Component.ts:185
 
 Lifecycle hooks — declared on the base so `?.()` calls are type-safe and
 subclasses get a documented override point. Order on first connect:
@@ -4834,7 +4843,7 @@ onInit → _renderInitial → onMounted → onUpdated.
 optional onStoreUpdate(_store): void;
 ```
 
-Defined in: core/Component.ts:116
+Defined in: core/Component.ts:188
 
 #### Parameters
 
@@ -4852,13 +4861,20 @@ Defined in: core/Component.ts:116
 
 ---
 
-### onDestroy()?
+### onDestroy()
 
 ```ts
-optional onDestroy(): void;
+onDestroy(): void;
 ```
 
-Defined in: core/Component.ts:117
+Defined in: core/Component.ts:198
+
+Teardown hook — invoked once per disconnect by the base
+`disconnectedCallback`. Declared as a concrete no-op (unlike the
+mount hooks above) so the callback can call it unconditionally:
+subclasses override for engine/audio/observer cleanup, and
+`el.onDestroy = fn` own-property patches still shadow the prototype
+method.
 
 #### Returns
 
@@ -4876,7 +4892,7 @@ Defined in: core/Component.ts:117
 setState(updater): void;
 ```
 
-Defined in: core/Component.ts:142
+Defined in: core/Component.ts:228
 
 Set partial state and re-render content (NOT styles). Accepts either a
 patch object or a React-style updater function — the function form is
@@ -4910,7 +4926,7 @@ Partial state patch, or (prevState) => patch.
 connectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:160
+Defined in: core/Component.ts:246
 
 DOM insertion — runs onInit (data setup), the one-time style/content
 build (_renderInitial), then onMounted + onUpdated so a first render is
@@ -4935,7 +4951,7 @@ every branch below is written to be idempotent on re-mount.
 disconnectedCallback(): void;
 ```
 
-Defined in: core/Component.ts:176
+Defined in: core/Component.ts:262
 
 DOM removal — tears down in reverse order: scoped listeners, store
 subscriptions, the WebGL skeleton layer for this element, then the
@@ -4959,7 +4975,7 @@ subscribe() rather than rendering into a disconnecting root.
 $<T>(selector): T | null;
 ```
 
-Defined in: core/Component.ts:192
+Defined in: core/Component.ts:284
 
 Safe scoped querySelector inside Shadow Root. Returns null instead of
 throwing when the shadow root is absent (detached construction in tests).
@@ -4996,7 +5012,7 @@ First matching element or null.
 $$<T>(selector): T[];
 ```
 
-Defined in: core/Component.ts:203
+Defined in: core/Component.ts:295
 
 Safe scoped querySelectorAll inside Shadow Root — materialized into a
 real Array so callers get .map/.filter/forEach (NodeList lacks some
@@ -5039,7 +5055,7 @@ addScopedListener(
 ): void;
 ```
 
-Defined in: core/Component.ts:218
+Defined in: core/Component.ts:310
 
 Scoped event listener with automatic lifecycle cleanup.
 Prevents duplicate listeners: the DOM itself dedupes identical
@@ -5089,7 +5105,7 @@ Passive/capture/once options forwarded verbatim.
 subscribe(store): void;
 ```
 
-Defined in: core/Component.ts:239
+Defined in: core/Component.ts:331
 
 Subscribe to store changes with automatic lifecycle cleanup. The wrapper
 gates on _isMounted: a store push landing while the element is detached
@@ -5120,7 +5136,7 @@ Store-like object exposing subscribe(); null/invalid → no-op.
 protected _renderInitial(): void;
 ```
 
-Defined in: core/Component.ts:257
+Defined in: core/Component.ts:362
 
 Initial render: injects styles ONCE and creates the content node.
 Called exactly once from connectedCallback() — but on re-mount the shadow
@@ -5143,7 +5159,7 @@ paths reuse existing nodes instead of duplicating them.
 _updateDom(): void;
 ```
 
-Defined in: core/Component.ts:324
+Defined in: core/Component.ts:620
 
 Update content without touching the style node.
 Only the content wrapper is replaced — the <style> node
@@ -5168,7 +5184,7 @@ tracked element on every state change).
 protected _applyRenderOutput(output): void;
 ```
 
-Defined in: core/Component.ts:351
+Defined in: core/Component.ts:647
 
 Applies the render output (DOM Node, DocumentFragment, or HTML string) to the content wrapper.
 Three accepted shapes, resolved in priority order:

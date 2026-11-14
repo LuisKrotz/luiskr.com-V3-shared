@@ -18,6 +18,10 @@ scoped listeners, store subscription, _updateDom re-render pipeline).
 
 Cached document height — refreshed by updateSectionTops on body resize.
 
+### `_pageBackdrop`
+
+Dithered WebGL lobe field behind every route — null until boot mounts it.
+
 ### `_docObserver`
 
 Watches document height so onBottom/activeSection never go stale.
@@ -25,6 +29,13 @@ Watches document height so onBottom/activeSection never go stale.
 ### `_scrollRaf`
 
 Pending rAF coalescing burst scroll events into one checkScroll per frame.
+
+### `_bootCleanups`
+
+Singleton-scope subscription disposers armed by mountAppShell —
+router.subscribe and the cyrillic-font store subscriber live on
+module singletons, so their unsubscribe handles must be drained on
+disconnect or every dead AppRoot stays reachable through them.
 
 ### `modal`
 
@@ -43,7 +54,7 @@ modal/dialog/HUD chunks so they aren't on the critical path.
 
 ### (module scope)
 
-Lifecycle: releases the intro loader + document observer when the element disconnects.
+Lifecycle: releases the intro loader, page backdrop + document observer when the element disconnects.
 
 ### (module scope)
 

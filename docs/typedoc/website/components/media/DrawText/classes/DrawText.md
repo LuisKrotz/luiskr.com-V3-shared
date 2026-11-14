@@ -20,7 +20,7 @@ Draws text.
 new DrawText(): DrawText;
 ```
 
-Defined in: website/components/media/DrawText.tsx:66
+Defined in: website/components/media/DrawText.tsx:67
 
 #### Returns
 
@@ -94,13 +94,23 @@ Defined in: website/components/media/DrawText.tsx:44
 
 ---
 
+### \_printStyleOff
+
+```ts
+_printStyleOff: (() => void) | null = null;
+```
+
+Defined in: website/components/media/DrawText.tsx:45
+
+---
+
 ### \_contentEl
 
 ```ts
 _contentEl: HTMLSpanElement | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:45
+Defined in: website/components/media/DrawText.tsx:46
 
 ---
 
@@ -110,7 +120,7 @@ Defined in: website/components/media/DrawText.tsx:45
 _srEl: HTMLSpanElement | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:46
+Defined in: website/components/media/DrawText.tsx:47
 
 ---
 
@@ -120,7 +130,7 @@ Defined in: website/components/media/DrawText.tsx:46
 _fitObserver: ResizeObserver | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:47
+Defined in: website/components/media/DrawText.tsx:48
 
 ---
 
@@ -130,7 +140,7 @@ Defined in: website/components/media/DrawText.tsx:47
 _effectiveOffset: number | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:48
+Defined in: website/components/media/DrawText.tsx:49
 
 ---
 
@@ -144,7 +154,7 @@ _gpuHandle:
   | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:49
+Defined in: website/components/media/DrawText.tsx:50
 
 ---
 
@@ -154,7 +164,7 @@ Defined in: website/components/media/DrawText.tsx:49
 _gpuPending: boolean = false
 ```
 
-Defined in: website/components/media/DrawText.tsx:50
+Defined in: website/components/media/DrawText.tsx:51
 
 ---
 
@@ -164,7 +174,7 @@ Defined in: website/components/media/DrawText.tsx:50
 _gpuRaf: number = 0
 ```
 
-Defined in: website/components/media/DrawText.tsx:51
+Defined in: website/components/media/DrawText.tsx:52
 
 ---
 
@@ -174,7 +184,7 @@ Defined in: website/components/media/DrawText.tsx:51
 _gpuCanvas: HTMLCanvasElement | null = null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:52
+Defined in: website/components/media/DrawText.tsx:53
 
 ---
 
@@ -4725,7 +4735,7 @@ HTMLElement.assignedSlot
 get static observedAttributes(): ("visible" | "delay" | "offset" | "trigger" | "ordered" | "fit" | "text")[];
 ```
 
-Defined in: website/components/media/DrawText.tsx:54
+Defined in: website/components/media/DrawText.tsx:55
 
 ##### Returns
 
@@ -4741,7 +4751,7 @@ Defined in: website/components/media/DrawText.tsx:54
 get text(): string;
 ```
 
-Defined in: website/components/media/DrawText.tsx:74
+Defined in: website/components/media/DrawText.tsx:75
 
 Setter/getter — the text content to animate.
 
@@ -4755,7 +4765,7 @@ Setter/getter — the text content to animate.
 set text(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:78
+Defined in: website/components/media/DrawText.tsx:79
 
 ##### Parameters
 
@@ -4777,7 +4787,7 @@ Defined in: website/components/media/DrawText.tsx:78
 get delay(): number;
 ```
 
-Defined in: website/components/media/DrawText.tsx:84
+Defined in: website/components/media/DrawText.tsx:85
 
 Setter/getter — per-character animation delay in ms.
 
@@ -4791,7 +4801,7 @@ Setter/getter — per-character animation delay in ms.
 set delay(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:91
+Defined in: website/components/media/DrawText.tsx:92
 
 ##### Parameters
 
@@ -4813,7 +4823,7 @@ Defined in: website/components/media/DrawText.tsx:91
 get offset(): number;
 ```
 
-Defined in: website/components/media/DrawText.tsx:97
+Defined in: website/components/media/DrawText.tsx:98
 
 Setter/getter — start-time offset before the first character.
 
@@ -4827,7 +4837,7 @@ Setter/getter — start-time offset before the first character.
 set offset(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:101
+Defined in: website/components/media/DrawText.tsx:102
 
 ##### Parameters
 
@@ -4849,7 +4859,7 @@ Defined in: website/components/media/DrawText.tsx:101
 get triggerMode(): string;
 ```
 
-Defined in: website/components/media/DrawText.tsx:107
+Defined in: website/components/media/DrawText.tsx:108
 
 Setter/getter — how the animation starts (visible/manual/hover).
 
@@ -4863,7 +4873,7 @@ Setter/getter — how the animation starts (visible/manual/hover).
 set triggerMode(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:111
+Defined in: website/components/media/DrawText.tsx:112
 
 ##### Parameters
 
@@ -4885,7 +4895,7 @@ Defined in: website/components/media/DrawText.tsx:111
 get ordered(): boolean;
 ```
 
-Defined in: website/components/media/DrawText.tsx:121
+Defined in: website/components/media/DrawText.tsx:122
 
 Ordered-queue flag — when set, `offset` is a scheduled start on the
 shared session clock (document-order cascade) rather than a delay
@@ -4905,7 +4915,7 @@ after this element's own trigger.
 get visible(): boolean;
 ```
 
-Defined in: website/components/media/DrawText.tsx:127
+Defined in: website/components/media/DrawText.tsx:128
 
 Setter/getter — visibility flag used by the auto trigger.
 
@@ -4919,7 +4929,7 @@ Setter/getter — visibility flag used by the auto trigger.
 set visible(val): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:134
+Defined in: website/components/media/DrawText.tsx:135
 
 ##### Parameters
 
@@ -4941,7 +4951,7 @@ Defined in: website/components/media/DrawText.tsx:134
 get _needsCharSpans(): boolean;
 ```
 
-Defined in: website/components/media/DrawText.tsx:229
+Defined in: website/components/media/DrawText.tsx:236
 
 Per-character spans only exist while the animation runs. Before the
 element enters the viewport and after the animation has finished the
@@ -4963,7 +4973,7 @@ spans permanently.
 get _rootEl(): HTMLSpanElement | null;
 ```
 
-Defined in: website/components/media/DrawText.tsx:242
+Defined in: website/components/media/DrawText.tsx:249
 
 The animated content element inside the shadow root — cached by _applyContent so repeated queries are free.
 
@@ -5155,7 +5165,7 @@ HTMLElement.style
 connectedCallback(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:139
+Defined in: website/components/media/DrawText.tsx:140
 
 #### Returns
 
@@ -5169,7 +5179,7 @@ Defined in: website/components/media/DrawText.tsx:139
 disconnectedCallback(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:153
+Defined in: website/components/media/DrawText.tsx:154
 
 #### Returns
 
@@ -5187,7 +5197,7 @@ attributeChangedCallback(
 ): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:175
+Defined in: website/components/media/DrawText.tsx:182
 
 #### Parameters
 
@@ -5215,7 +5225,7 @@ Defined in: website/components/media/DrawText.tsx:175
 _updateDom(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:235
+Defined in: website/components/media/DrawText.tsx:242
 
 Re-renders the shadow DOM for current props.
 
@@ -5231,7 +5241,7 @@ Re-renders the shadow DOM for current props.
 trigger(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:248
+Defined in: website/components/media/DrawText.tsx:255
 
 Starts the animation externally (manual trigger mode).
 
@@ -5247,7 +5257,7 @@ Starts the animation externally (manual trigger mode).
 reset(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:254
+Defined in: website/components/media/DrawText.tsx:261
 
 Returns characters to the hidden start state so the animation can replay.
 
@@ -5263,7 +5273,7 @@ Returns characters to the hidden start state so the animation can replay.
 _setupTrigger(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:282
+Defined in: website/components/media/DrawText.tsx:289
 
 Wires the active trigger mode (delegate — ./draw-text/trigger.ts).
 
@@ -5279,7 +5289,7 @@ Wires the active trigger mode (delegate — ./draw-text/trigger.ts).
 _setupFit(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:288
+Defined in: website/components/media/DrawText.tsx:295
 
 Installs the fit-to-width pipeline (delegate — ./draw-text/fit.ts).
 
@@ -5295,7 +5305,7 @@ Installs the fit-to-width pipeline (delegate — ./draw-text/fit.ts).
 _startAnimation(): void;
 ```
 
-Defined in: website/components/media/DrawText.tsx:294
+Defined in: website/components/media/DrawText.tsx:301
 
 Runs the reveal sequence (delegate — ./draw-text/trigger.ts).
 
@@ -5311,7 +5321,7 @@ Runs the reveal sequence (delegate — ./draw-text/trigger.ts).
 _parseTokens(text): DrawToken[];
 ```
 
-Defined in: website/components/media/DrawText.tsx:300
+Defined in: website/components/media/DrawText.tsx:307
 
 Tokenizes the text into word/space/br/inline-tag chunks (delegate).
 
@@ -5333,7 +5343,7 @@ Tokenizes the text into word/space/br/inline-tag chunks (delegate).
 _renderContent(withChars?): string;
 ```
 
-Defined in: website/components/media/DrawText.tsx:306
+Defined in: website/components/media/DrawText.tsx:313
 
 Builds the animated span tree (delegate — ./draw-text/render.ts).
 

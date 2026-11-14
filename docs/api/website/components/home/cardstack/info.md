@@ -22,6 +22,27 @@ rides in front of /portfolio/<slug> on every non-English locale.
 - `@param` item Project metadata containing the route slug.
 - `@returns` Localized portfolio URL, or an empty string without a slug.
 
+### `SUMMARY_CUT`
+
+The first-sentence cut for the in-card summary — a sentence ender
+(`.`, `!`, `?`) followed by whitespace/markup/end-of-string, or a
+`<br>`/newline break. CMS descriptions lead with a one-line project
+brief, so the first sentence IS the mobile summary.
+
+### `mobileSummary`
+
+The stacked-card summary of a CMS description — the text up to the
+first sentence ender (the ender kept) or the first markup break.
+The full description stays mounted in the desktop text column on
+every tier (visually hidden on stacked layouts but present in the
+DOM), so search engines index the long-form copy as the canonical
+description while the card copy reads as its summary — same content
+at two lengths, both valid. A description with no sentence break
+passes through whole (the ≤4-line CSS clamp bounds the visual box).
+
+- `@param` body The full CMS description (may carry `<br>` markup).
+- `@returns` The leading-sentence summary, or the input unchanged when
+
 ### `cardInfo`
 
 Everything the text column shows for one item.
@@ -71,6 +92,36 @@ fixed text, so the burn only knits in / consumes — never swaps.
 The card element that held the front on the previous chrome pass —
 the card whose in-card title burns OUT on the next nav. Keyed by host
 so a re-rendered deck resets the baseline.
+
+### `spinCardBurn`
+
+Mounts or re-arms one card's in-card title burn toward `want` (1 =
+consume, −1 = knit). A live session flips direction in place — a card
+mid-knit that loses the front re-consumes from the knit point, and a
+consumed session knits back when its card returns. A mount taken
+while the section is held off-screen gets banked immediately so the
+draw-in waits for the re-entry release. Reduced motion or a
+degenerate box leaves the title's plain ink.
+
+- `@param` host The CardStack element.
+- `@param` cardEl The card whose title burns.
+- `@param` want Direction — 1 consume, −1 knit.
+- `@param` cards The deck's cached card list (item index lookup).
+
+### `armOutgoingTitleBurn`
+
+Arms the outgoing front's burn-out BEFORE the pose pass drops
+--active — goTo calls it ahead of applyPoses. The flip bottom-anchors
+the card's info column instantly (in-flow → absolute bottom:0), so a
+post-flip mount records the RELOCATED box ~130px above where the
+title visibly stood — the raster then combusts the name on top of
+the card's cover image and the burn reads as displaced. Mounting
+pre-flip freezes the anchor at the last-lit in-flow geometry: the
+burn plays where the title stood and rides the card's deal transform
+out, glued. Live sessions just re-aim — a card mid-knit re-consumes
+from the knit point.
+
+- `@param` host The CardStack element.
 
 ### `burnCardTitles`
 

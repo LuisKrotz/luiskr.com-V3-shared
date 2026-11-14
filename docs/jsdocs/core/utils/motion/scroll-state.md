@@ -9,6 +9,10 @@ Global "is the window currently scrolling" flag plus an
 
 ## Members
 
+### `SETTLE_MS`
+
+Settle window — a gap this long with no scroll/scrollend ends the gesture.
+
 ### `isWindowScrolling`
 
 Live scroll flag — true while the user is actively scrolling the window.
@@ -27,7 +31,15 @@ Fires when scrolling settles: clears the flag and drains pending callbacks.
 
 ### `handleScroll`
 
-Marks scrolling as active and arms the 120ms debounce fallback for scrollend.
+Marks scrolling as active and arms the settle debounce for the gesture.
+
+### `handleScrollEnd`
+
+scrollend only re-arms the settle debounce — it can never end the gesture
+by itself. A real gesture's tail (last scroll → scrollend) settles
+SETTLE_MS later; a per-write scrollend inside a programmatic scroll stream
+gets absorbed when the next scroll event re-arms the same timer first.
+An orphan scrollend while idle is a no-op — it never latches the flag.
 
 ### `isScrolling`
 

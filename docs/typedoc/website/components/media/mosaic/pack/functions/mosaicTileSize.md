@@ -8,7 +8,7 @@
 function mosaicTileSize(natW, natH, wallW): object
 ```
 
-Defined in: website/components/media/mosaic/pack.ts:89
+Defined in: website/components/media/mosaic/pack.ts:101
 
 The tile box for one media item inside a `wallW`-wide wall. Ladder:
 ÷3 for quality (display < source), ÷4 when ÷3 still overflows the wall,

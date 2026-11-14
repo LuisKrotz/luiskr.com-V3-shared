@@ -8,7 +8,7 @@
 function generateWebsiteSchema(): Record<string, unknown>[]
 ```
 
-Defined in: core/utils/schema.ts:180
+Defined in: core/utils/schema.ts:189
 
 Generates WebSite, Person and Organization schema for the homepage.
 

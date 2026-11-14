@@ -8,7 +8,7 @@
 function startGenieOpen(el, done): boolean
 ```
 
-Defined in: website/components/media/expanded/genie.ts:658
+Defined in: website/components/media/expanded/genie.ts:659
 
 Open transition — warps the media from the clicked figure's rect
 into the modal's media box.

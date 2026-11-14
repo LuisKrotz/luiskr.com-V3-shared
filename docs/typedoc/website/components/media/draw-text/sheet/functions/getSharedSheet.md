@@ -1,14 +1,14 @@
 [**luiskr.com**](../../../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../../../README.md) / [website/components/media/draw-text/sheet](../README.md) / getSharedSheet
 
 ```ts
-function getSharedSheet(): CSSStyleSheet | null;
+function getSharedSheet(): CSSStyleSheet | null
 ```
 
-Defined in: website/components/media/draw-text/sheet.ts:15
+Defined in: website/components/media/draw-text/sheet.ts:215
 
 Gets shared sheet.
 

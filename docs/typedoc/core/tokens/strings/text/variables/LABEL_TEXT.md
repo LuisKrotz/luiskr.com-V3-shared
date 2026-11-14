@@ -13,6 +13,6 @@ const LABEL_TEXT: Readonly<{
 }>
 ```
 
-Defined in: core/tokens/strings/text.ts:29
+Defined in: core/tokens/strings/text.ts:31
 
 labels text.

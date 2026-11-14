@@ -1,20 +1,16 @@
 [**luiskr.com**](../../../../README.md)
 
-***
+---
 
 [luiskr.com](../../../../README.md) / [cms/projects/sections](../README.md) / removeSectionMedia
 
 ```ts
-function removeSectionMedia(
-   host, 
-   sIdx, 
-   mIdx
-): void;
+function removeSectionMedia(host, sIdx, mIdx): void
 ```
 
-Defined in: cms/projects/sections.ts:124
+Defined in: cms/projects/sections.ts:135
 
-Removes section media.
+Drops media item `mIdx` from a section's media half and re-renders.
 
 ## Parameters
 
@@ -22,19 +18,19 @@ Removes section media.
 
 [`CmsProjectsList`](../../CmsProjectsList/classes/CmsProjectsList.md)
 
-— the host component
+— the host component holding `currentProject`
 
 ### sIdx
 
 `number`
 
-— the value
+— zero-based section index
 
 ### mIdx
 
 `number`
 
-— the value
+— zero-based media index inside the section
 
 ## Returns
 

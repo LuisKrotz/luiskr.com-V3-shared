@@ -8,7 +8,7 @@
 function startGenieClose(el, done): boolean
 ```
 
-Defined in: website/components/media/expanded/genie.ts:668
+Defined in: website/components/media/expanded/genie.ts:669
 
 Close transition — collapses the media from the modal box back into
 the origin figure.

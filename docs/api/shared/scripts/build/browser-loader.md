@@ -55,7 +55,41 @@ Chains polyfill scripts so each executes before the next is fetched.
 
 ### `injectCss`
 
-Appends the tier stylesheet to <head>.
+Appends the tier stylesheet to <head>; returns the node for upgrades.
+
+### `injectPrintCss`
+
+Appends the extracted print sheet — `media="print"` makes it inert to
+the screen cascade, so browsers fetch it at the lowest priority and it
+never joins render-blocking CSSOM construction. It is positioned after
+the screen sheet, matching the source order where print rules sat last.
+
+### `CSS_GATES`
+
+Width-class gates, evaluated widest → narrowest against
+`matchMedia('(min-width:Npx)')`. The manifest's tier.css map is
+cumulative — `tablet` contains base + mobile + tablet blocks — so the
+FIRST matching gate names the only sheet the viewport needs; a
+viewport too narrow for every gate still gets `mobile` (the minimal
+file carrying base).
+Gates mirror shared/build/css-classes.mjs WIDTH_CLASSES.gate.
+
+### `pickCssName`
+
+Picks the cumulative sheet name for the current viewport class.
+
+### `watchCssGrowth`
+
+Watches the gates ABOVE the served class: on an upward cross the
+cumulative superset sheet is appended (cumulative files are nested
+supersets, so relative order between them never matters) and, once it
+is live, every still-present NARROWER link drops — no unstyled gap.
+Wider links are never removed: a shrink leaves their now-inert media
+blocks in place, so a re-grow needs no refetch.
+
+### `bootCss`
+
+Injects the viewport's cumulative sheet and arms its grow watchers.
 
 ### `showFallback`
 

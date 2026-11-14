@@ -13,6 +13,16 @@ Playground share-capture contract — the bucket key
 
 Video extensions accepted into every share set — a recorded engine capture dropped under a set's share/ prefix joins the sitemap video tags and the JSON-LD VideoObject entries the same way screenshots join the image surfaces.
 
+### `SHARE_DELIVERY_IMAGE_EXTS`
+
+Delivery preference across a capture's encodings — when one screenshot
+ships several extensions under a shared stem (`x.png` + a same-resolution
+`x.jpg` delivery sibling) the wall/feed/JSON-LD surfaces resolve ONE card
+per capture at the smallest bandwidth-friendly encoding, while the `.png`
+upload stays the canonical lossless source on the bucket. Order is most
+preferred first; `.png` sits last so an un-siblinged capture still mounts
+exactly what it always did.
+
 ### `EARTH_SHARE`
 
 Earth Playground share-capture tokens. Sole declaration site — consumers
@@ -34,6 +44,10 @@ Image extensions accepted into the share set.
 ### `VIDEO_EXTS`
 
 Video extensions accepted into the share set.
+
+### `DELIVERY_IMAGE_EXTS`
+
+Per-stem encoding preference — one card per capture, smallest delivery format first.
 
 ### `STAR_SHARE`
 
@@ -57,3 +71,7 @@ Image extensions accepted into the share set.
 ### `VIDEO_EXTS`
 
 Video extensions accepted into the share set.
+
+### `DELIVERY_IMAGE_EXTS`
+
+Per-stem encoding preference — one card per capture, smallest delivery format first.

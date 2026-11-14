@@ -15,11 +15,14 @@ declare module '*.scss?tiers' {
   /**
    * Breakpoint-split stylesheet module (shared/build/vite-scss-tiers.mjs):
    * `base` is the embedded non-media css; `tiers` keys width classes to
-   * lazy loaders whose cumulative media css is fetched per viewport.
+   * lazy loaders whose cumulative media css is fetched per viewport;
+   * `print` lazily fetches the sheet's `@media print`/`@page` blocks when
+   * the splitter extracted any (absent on print-free sheets).
    */
   const styles: {
     base: string
     tiers: Record<string, () => Promise<{ default: string } | string>>
+    print?: () => Promise<{ default: string } | string>
   }
   export default styles
 }
