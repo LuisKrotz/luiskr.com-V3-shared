@@ -43,6 +43,30 @@ Image thumb/poster priority for previews (og:image, video posters).
 
 First `base`-suffixed key from `variants` that exists in `manifest`.
 
+### `STALE_MEDIA_KEYS`
+
+Retention-locked stale video-poster webp keys — emitted by an older
+poster pass that captured each clip's t=0 loading slate (gray splash,
+black title card, or language gate). The `.mp4.jpg` poster families
+were regenerated mid-clip and re-uploaded, but these `.webp` objects
+sit under the bucket's locked 31-day retention window and cannot be
+overwritten until it lapses. Keeping them out of the manifest drops
+`webpIfExists()` offers back to the fresh `.jpg` posters instead of
+serving the stale frames. Remove each entry once its object is
+re-emitted and verified — verification walks `media-manifest.json`
+pixel-variance, not filename presence.
+
+### `dropStaleMediaKeys`
+
+Drops the retention-locked stale keys from a manifest key set so
+nothing downstream (runtime webpIfExists, build-time variant picking)
+can offer a stale sibling. Applied on both the fetch and the persisted
+load paths — a stale JSON artifact predating the filter must not
+resurrect the keys.
+
+- `@param` keys Mutable Set of manifest keys relative to MEDIA_PREFIX.
+- `@returns` The same set, minus every stale key.
+
 ### (module scope)
 
 Lists every object key under MEDIA_PREFIX → Set of names relative to the
